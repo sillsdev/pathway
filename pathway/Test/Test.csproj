@@ -487,17 +487,17 @@
     <Copy SourceFiles="@(AllBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
     <Copy SourceFiles="@(BteBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TestBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'$(OutputPath)\Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'$(OutputPath)\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'$(OutputPath)\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'$(OutputPath)\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'$(OutputPath)\localizations\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
-    <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'$(OutputPath)\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(DicStyles)" DestinationFiles="$(OutputPath)\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(ScrStyles)" DestinationFiles="$(OutputPath)\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="$(OutputPath)\Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(Hyphenation)" DestinationFiles="$(OutputPath)\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(Icons)" DestinationFiles="$(OutputPath)\Icons\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(Graphic)" DestinationFiles="$(OutputPath)\Graphic\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(Loc)" DestinationFiles="$(OutputPath)\localizations\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(OS)' == 'Linux' " />
+    <Copy SourceFiles="@(Preprocessing)" DestinationFiles="$(OutputPath)\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)" />
     <Copy SourceFiles="@(FwVersion)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
+    <Copy SourceFiles="@(BteHelp)" DestinationFiles="$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(SeHelp)" DestinationFiles="$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(BteStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(SeStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(Readme)" DestinationFolder="Files\ConfigurationTool" />
@@ -511,21 +511,21 @@
     <Copy SourceFiles="..\ThirdParty\sqlite3.dll" DestinationFiles="$(OutputPath)\sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'$(OutputPath)\Samples\Dictionary\%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'$(OutputPath)\Samples\Scripture\%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'$(OutputPath)\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'$(OutputPath)\TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'$(OutputPath)\Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing'" />
-    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(AllSamples)" DestinationFiles="$(OutputPath)\Samples\Dictionary\%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(BteSamples)" DestinationFiles="$(OutputPath)\Samples\Scripture\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="$(OutputPath)\Copyrights\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(epubFiles)" DestinationFiles="$(OutputPath)\epub\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="$(OutputPath)\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="$(OutputPath)\GoBible\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="$(OutputPath)\TheWord\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="$(OutputPath)\Sword\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing'" />
+    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="$(OutputPath)\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'$(OutputPath)\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'$(OutputPath)\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'$(OutputPath)\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="$(OutputPath)\Wordpress\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="$(OutputPath)\xetexExe\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="$(OutputPath)\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
   </Target>
   <Target Name="AfterBuild" />
   <ItemGroup>
