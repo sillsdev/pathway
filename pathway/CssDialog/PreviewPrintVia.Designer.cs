@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PreviewPrintVia));
+			this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
             this.BtnOk = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnHelp = new System.Windows.Forms.Button();
@@ -38,15 +40,25 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
+			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+			// 
+			// l10NSharpExtender1
+			// 
+			this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
+			this.l10NSharpExtender1.PrefixForNewItems = "PreviewPrintVia";
             // 
             // BtnOk
             // 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.BtnOk, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.BtnOk, null);
+			this.l10NSharpExtender1.SetLocalizationPriority(this.BtnOk, L10NSharp.LocalizationPriority.High);
+			this.l10NSharpExtender1.SetLocalizingId(this.BtnOk, "PreviewPrintVia.btnOK");
             this.BtnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnOk.Location = new System.Drawing.Point(535, 518);
-            this.BtnOk.Name = "BtnOk";
+			this.BtnOk.Name = "BtnOk";
             this.BtnOk.Size = new System.Drawing.Size(75, 23);
             this.BtnOk.TabIndex = 2;
             this.BtnOk.Text = "OK";
@@ -55,6 +67,10 @@
             // 
             // BtnCancel
             // 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.BtnCancel, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.BtnCancel, null);
+			this.l10NSharpExtender1.SetLocalizationPriority(this.BtnCancel, L10NSharp.LocalizationPriority.High);
+			this.l10NSharpExtender1.SetLocalizingId(this.BtnCancel, "PreviewPrintVia.BtnCancel");
             this.BtnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnCancel.Location = new System.Drawing.Point(616, 518);
             this.BtnCancel.Name = "BtnCancel";
@@ -66,6 +82,10 @@
             // 
             // BtnHelp
             // 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.BtnHelp, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.BtnHelp, null);
+			this.l10NSharpExtender1.SetLocalizationPriority(this.BtnHelp, L10NSharp.LocalizationPriority.High);
+			this.l10NSharpExtender1.SetLocalizingId(this.BtnHelp, "PreviewPrintVia.BtnHelp");
             this.BtnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnHelp.Location = new System.Drawing.Point(697, 518);
             this.BtnHelp.Name = "BtnHelp";
@@ -81,12 +101,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPreview.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblPreview, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.lblPreview, null);
+			this.l10NSharpExtender1.SetLocalizationPriority(this.lblPreview, L10NSharp.LocalizationPriority.High);
+			this.l10NSharpExtender1.SetLocalizingId(this.lblPreview, "PreviewPrintVia.lblPreview");
             this.lblPreview.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPreview.Location = new System.Drawing.Point(414, 21);
             this.lblPreview.Name = "lblPreview";
-            this.lblPreview.Size = new System.Drawing.Size(157, 13);
+			this.lblPreview.Size = new System.Drawing.Size(157, 13);
             this.lblPreview.TabIndex = 6;
-            this.lblPreview.Text = "Sample data in this layout:";
+            //this.lblPreview.Text = "Sample data in this layout:";
             // 
             // grid
             // 
@@ -146,9 +170,13 @@
             // 
             // btnEdit
             // 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.btnEdit, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.btnEdit, null);
+			this.l10NSharpExtender1.SetLocalizationPriority(this.btnEdit, L10NSharp.LocalizationPriority.High);
+			this.l10NSharpExtender1.SetLocalizingId(this.btnEdit, "PreviewPrintVia.btnEdit");
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEdit.Location = new System.Drawing.Point(12, 518);
-            this.btnEdit.Name = "btnEdit";
+			this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 13;
             this.btnEdit.Text = "Edit Layout";
@@ -171,12 +199,16 @@
             this.Controls.Add(this.BtnOk);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this, null);
+			this.l10NSharpExtender1.SetLocalizingId(this, "PreviewPrintVia.WindowTitle");
             this.Name = "PreviewPrintVia";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Select Layout";
             this.Load += new System.EventHandler(this.PreviewPrintVia_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PreviewPrintVia_KeyUp);
+			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -186,6 +218,7 @@
 
         #endregion
 
+		private L10NSharp.UI.L10NSharpExtender l10NSharpExtender1;
         private System.Windows.Forms.Button BtnOk;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button BtnHelp;

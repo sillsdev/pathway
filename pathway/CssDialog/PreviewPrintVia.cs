@@ -317,7 +317,7 @@ namespace SIL.PublishingSolution
 		{
 			if (File.Exists(preview))
 			{
-				lblPreview.Text = "Sample data in this layout:";
+				lblPreview.Text = LocalizationManager.GetString("PreviewPrintVia.lblPreview", "Sample data in this layout:", "");
 				pictureBox1.Visible = true;
 				pictureBox1.Image = Image.FromFile(preview);
 			}
