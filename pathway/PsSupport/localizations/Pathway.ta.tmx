@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tmx version="1.4">
-  <header srclang="ta" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.17.0" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
-    <prop type="x-appversion">1.9.1.4065</prop>
+  <header srclang="ta" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.39.0" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
+    <prop type="x-appversion">1.13.2.4473</prop>
     <prop type="x-hardlinebreakreplacement">\n</prop>
   </header>
   <body>
@@ -21,12 +21,20 @@
         <seg>GNU GPL v3</seg>
       </tuv>
     </tu>
+    <tu tuid="AboutPw.AboutPw.lnkProj">
+      <tuv xml:lang="en">
+        <seg>http://pathway.sil.org</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>http://pathway.sil.org</seg>
+      </tuv>
+    </tu>
     <tu tuid="AboutPw.WindowTitle">
       <tuv xml:lang="en">
         <seg>About Pathway Configuration Tool</seg>
       </tuv>
       <tuv xml:lang="ta">
-        <seg>பற்றி Pathway உள்ளமைவு கருவி</seg>
+        <seg>செயலாக்கத்தில் ஏற்றுமதி</seg>
       </tuv>
     </tu>
     <tu tuid="AboutPw.btnOk">
@@ -51,14 +59,6 @@
       </tuv>
       <tuv xml:lang="ta">
         <seg>உள்ளமைவு கருவி</seg>
-      </tuv>
-    </tu>
-    <tu tuid="AboutPw.label2">
-      <tuv xml:lang="en">
-        <seg>(C) 2008 - 2015 SIL International  </seg>
-      </tuv>
-      <tuv xml:lang="ta">
-        <seg>(இ) 2008-வாக்கில் SIL சர்வதேச</seg>
       </tuv>
     </tu>
     <tu tuid="AboutPw.lblCompany">
@@ -450,7 +450,7 @@
         <seg>Stylesheets</seg>
       </tuv>
       <tuv xml:lang="ta">
-        <seg>ஸ்டைல்</seg>
+        <seg>(இ) 2008-வாக்கில் SIL சர்வதேச</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.label20">
@@ -695,7 +695,7 @@
     </tu>
     <tu tuid="ConfigurationTool.lblNonSILFont">
       <tuv xml:lang="en">
-        <seg>If restricted:</seg>
+        <seg>If font is non-SIL:</seg>
       </tuv>
       <tuv xml:lang="ta">
         <seg>வரையறுக்கப்பட்டது இருந்தால்:</seg>
@@ -1445,6 +1445,14 @@
         <seg>மேலே</seg>
       </tuv>
     </tu>
+    <tu tuid="ConfigurationToolBL.MessageBoxCaption.projectname">
+      <tuv xml:lang="en">
+        <seg>Pathway Configuration Tool</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway Configuration Tool</seg>
+      </tuv>
+    </tu>
     <tu tuid="ConfigurationToolBL.NameValidate.Message">
       <tuv xml:lang="en">
         <seg>Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'</seg>
@@ -1455,7 +1463,7 @@
     </tu>
     <tu tuid="ConfigurationToolBL.NoDuplicateStyleName.Message">
       <tuv xml:lang="en">
-        <seg>Stylesheet Name [{0}] already exists</seg>
+        <seg>Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'</seg>
       </tuv>
       <tuv xml:lang="ta">
         <seg>பாணிதாள் பெயர் [{0}] ஏற்கனவே உள்ளது</seg>
@@ -1515,6 +1523,86 @@
       </tuv>
       <tuv xml:lang="ta">
         <seg>{0} பாணி பெயரில் தயவுசெய்து தவிர்க்கவும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CopySettingsFile.MessageBoxCaption.Caption">
+      <tuv xml:lang="en">
+        <seg>Information</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>தகவல்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Abort">
+      <tuv xml:lang="en">
+        <seg>Abort</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கைவிடு</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Cancel">
+      <tuv xml:lang="en">
+        <seg>Cancel</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ரத்து</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Ignore">
+      <tuv xml:lang="en">
+        <seg>Ignore</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>புறக்கணி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இல்லை</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.OK">
+      <tuv xml:lang="en">
+        <seg>OK</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>சரி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Retry">
+      <tuv xml:lang="en">
+        <seg>Retry</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மீண்டும் முயற்சி செய்ய</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>ஆம்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.ValidateAndDisplay.Caption">
+      <tuv xml:lang="en">
+        <seg>Export Complete</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>முழுமையான ஏற்றுமதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.ValidateAndDisplay.Message">
+      <tuv xml:lang="en">
+        <seg>\nDo you want to Validate ePub file?</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>\nநீங்கள் ஈபப் கோப்புகளை உறுதிப்படுத்துமாறு விரும்புகிறீர்களா?</seg>
       </tuv>
     </tu>
     <tu tuid="EpubExportTypeDlg.WindowTitle">
@@ -1599,10 +1687,138 @@
     </tu>
     <tu tuid="EpubValidateTypeDlg.lblMessage">
       <tuv xml:lang="en">
-        <seg>Do you want select the Epub validate type ?</seg>
+        <seg>Do you want to select the Epub validate type?</seg>
       </tuv>
       <tuv xml:lang="ta">
         <seg>வேண்டுமா தேர்ந்தெடுத்து, Epub வகையை நேர்மையானது?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportDictionaryForMIDs.ExportClick.Caption">
+      <tuv xml:lang="en">
+        <seg>Report: Failure</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>அறிக்கை: தோல்வி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportDictionaryForMIDs.ExportClick.Message">
+      <tuv xml:lang="en">
+        <seg>{0} Display partial results?</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>{0} பகுதி முடிவுகளை காட்ட?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportDictionaryForMIDs.ReportResults.Message">
+      <tuv xml:lang="en">
+        <seg>Dictionary for Mid output successfully created in {0}. Display output files?</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மத்திய வெளியீடு அகராதி வெற்றிகரமாக {0} ல் உருவாக்கப்பட்டது. காட்சி வெளியீடு கோப்புகளை?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportGoBible.ExportClick.Caption">
+      <tuv xml:lang="en">
+        <seg>Go Bible Export</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>பைபிள் ஏற்றுமதி போய்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportGoBible.ExportClick.Message1">
+      <tuv xml:lang="en">
+        <seg>Please copy the file {0} to your phone.\n\nDo you want to open the folder?</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உங்கள் தொலைபேசிக்கு கோப்பு {0} நகல் ஆகும். \ N \ n நீங்கள் அடைவை திறக்க வேண்டும்?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportGoBible.ExportClick.Message2">
+      <tuv xml:lang="en">
+        <seg>Failed Exporting GoBible Process.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>GoBible செயல்முறை ஏற்றுமதி தோல்வியுற்றது.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportSword.ExportClick.Message">
+      <tuv xml:lang="en">
+        <seg>Dictionary for Mid output successfully created in {0}. Display output?</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>மத்திய வெளியீடு அகராதி வெற்றிகரமாக {0} ல் உருவாக்கப்பட்டது. காட்சி வெளியீடு இல்லை?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.DisplayMessageReport.Message">
+      <tuv xml:lang="en">
+        <seg>Display issues encountered during conversion?</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>காட்சி பிரச்சினைகள் மாற்றத்தின் போது எதிர்கொண்டது?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportFailure.Caption">
+      <tuv xml:lang="en">
+        <seg>theWord Export</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>theWord ஏற்றுமதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportFailure.Message">
+      <tuv xml:lang="en">
+        <seg>Please run the References basic check.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>குறிப்புகள் அடிப்படை காசோலை இயக்க கொள்ளவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportResults.Caption">
+      <tuv xml:lang="en">
+        <seg>theWord Export</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>theWord ஏற்றுமதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportResults.Message">
+      <tuv xml:lang="en">
+        <seg>Failed Exporting TheWord Process.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>TheWord செயல்முறை ஏற்றுமதி தோல்வியுற்றது.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportWhenTheWordInstalled.Message">
+      <tuv xml:lang="en">
+        <seg>Do you want to start theWord?\n\n● Click Yes.\n\nThe program will copy the "{0}" file to {1} and start theWord. \n\n● Click No. \n\nThe folder with the "{0}" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file "{3}" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n● Click Cancel to do neither of the above.\n</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நீங்கள் theWord? \ N \ n தொடங்க விரும்புகிறீர்களா? கிளிக் செய்யவும் ஆம். \ N \ n theWord {1} வேண்டும் "{0}" கோப்பு நகல் மற்றும் ஆரம்பிக்கும் திட்டம். \ n \ n N? "{0}" கோப்பு எண் \ n \ n கோப்புறையை கிளிக் செய்யவும் ({2}) நீங்கள் கைமுறையாக {1}. \ N \ n MySword கோப்பு "{3}" நீங்கள் இருக்கிறார்கள்கடவுளே படியேடுக்கலாம் அதனால் திறக்கும் உங்கள் Android சாதனத்தில், அதை நகலெடுக்க அல்லது பதிவேற்ற pathway@sil.org அனுப்ப முடியும். \ n \ n N? மேலே எந்த செய்ய கிளிக் செய்க. \ N</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportWhenTheWordNotInstalled.Caption">
+      <tuv xml:lang="en">
+        <seg>theWord Export</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>theWord ஏற்றுமதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportWhenTheWordNotInstalled.Message">
+      <tuv xml:lang="en">
+        <seg>Do you want to open the folder with the results?\n\n● Click Yes.\n\nThe folder with the "{0}" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file "{3}" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n● Click Cancel to do neither of the above.\n</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>நீங்கள் முடிவு அடைவை திறக்க விரும்புகிறீர்களா? \ N \ n N? ஆமாம் கிளிக் செய்யவும். \ "{0}" கோப்பு \ n அடைவு N ({2}) நீங்கள் கைமுறையாக {1}. \ N \ n MySword கோப்பு படியேடுக்கலாம் அதனால் திறக்கும் "{3}" நீங்கள் இருக்கிறார்கள்கடவுளே உங்கள் Android சாதனத்தில், அதை நகலெடுக்க அல்லது பதிவேற்ற pathway@sil.org அனுப்ப முடியும். \ n \ n N? மேலே எந்த செய்ய கிளிக் செய்க. \ N</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.Title">
+      <tuv xml:lang="en">
+        <seg>theWord Export</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>theWord ஏற்றுமதி</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.CoverImageClick.Message">
@@ -1613,12 +1829,37 @@
         <seg>தேர்ந்தெடுக்கப்பட்ட உருவம் மிகவும் பெரிதாக உள்ளது. இதைவிட 1000 x 1000 படப்புள்ளிகள் ஒரு உருவத்தை தயவுசெய்து தேர்ந்தெடுக்கவும்.</seg>
       </tuv>
     </tu>
+    <tu tuid="ExportThroughPathway.Dialog">
+      <tuv xml:lang="en">
+        <seg>Set Defaults</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இயல்புநிலைகளை அமைக்கவும்</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.ExportThroughPathway.btnBrowseSaveInFolder">
+      <prop type="x-nolongerused">true</prop>
+      <tuv xml:lang="en">
+        <seg>...</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.ExportThroughPathway.txtSaveInFolder">
+      <tuv xml:lang="en">
+        <seg>C:\Users\brommerse\Documents\Publications\Nkonya\Scripture</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>C:\Users\brommerse\Documents\Publications\Nkonya\Scripture</seg>
+      </tuv>
+    </tu>
     <tu tuid="ExportThroughPathway.ExportThroughPathwayLoad.Message">
       <tuv xml:lang="en">
         <seg>Please download and install a Pathway version compatible with your software</seg>
       </tuv>
       <tuv xml:lang="ta">
-        <seg>தயவுசெய்து பதிவிறக்கம் செய்து உங்கள் மென்பொருளை கூடியவை Pathway பதிப்பை நிறுவ</seg>
+        <seg>Please download and install a Pathway version compatible with your software</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.LoadAvailFormat.Message">
@@ -1627,6 +1868,22 @@
       </tuv>
       <tuv xml:lang="ta">
         <seg>Pathway ஆல் எந்த ஏற்றுமதி வடிவமைப்புகள் கண்டுபிடிக்க இயலவில்லை. இந்த பிழை சரி செய்ய Pathway மீண்டும் நிறுவவும்.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.MessageBoxCaption.ProjectName">
+      <tuv xml:lang="en">
+        <seg>Pathway</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.MessageBoxCaption.projectname">
+      <tuv xml:lang="en">
+        <seg>Pathway</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.OkButtonClick.Message">
@@ -1965,9 +2222,41 @@
         <seg>சொல் பிரிவை</seg>
       </tuv>
     </tu>
+    <tu tuid="ExportXelatex.CallXelatex.Message">
+      <tuv xml:lang="en">
+        <seg>Please install the Xelatex application.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இயல்புநிலைகளை அமைக்கவும்...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportXelatex.OpenXelatexOutput.Message">
+      <tuv xml:lang="en">
+        <seg>The output has been save in {0}.\n Please install the Xelatex application.</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>{0}. \ N Xelatex பயன்பாட்டை நிறுவ தயவு சேமி வருகிறது.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Exportepub.InProcessWindow.Title">
+      <tuv xml:lang="en">
+        <seg>Exporting .epub file</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>கோப்பு .epub ஏற்றுமதி</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Exportepub.ValidateMsgBox">
+      <tuv xml:lang="en">
+        <seg>\n Do you want to Validate ePub files?</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>\ n நீங்கள் ஈபப் கோப்புகளை உறுதிப்படுத்துமாறு விரும்புகிறீர்களா?</seg>
+      </tuv>
+    </tu>
     <tu tuid="FontWarningDlg.WindowTitle">
       <tuv xml:lang="en">
-        <seg>FontWarningDlg</seg>
+        <seg>Font Warning Dialog</seg>
       </tuv>
       <tuv xml:lang="ta">
         <seg>FontWarningDlg</seg>
@@ -1990,6 +2279,7 @@
       </tuv>
     </tu>
     <tu tuid="FontWarningDlg.chkRepeatAction">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>chkRepeatAction</seg>
       </tuv>
@@ -1998,6 +2288,7 @@
       </tuv>
     </tu>
     <tu tuid="FontWarningDlg.grpOptions">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>grpOptions</seg>
       </tuv>
@@ -2006,19 +2297,12 @@
       </tuv>
     </tu>
     <tu tuid="FontWarningDlg.lblSubstituteSILFont">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>lblSubstituteSILFont</seg>
       </tuv>
       <tuv xml:lang="ta">
         <seg>lblSubstituteSILFont</seg>
-      </tuv>
-    </tu>
-    <tu tuid="InProcess.WindowTitle">
-      <tuv xml:lang="en">
-        <seg>Export In Process</seg>
-      </tuv>
-      <tuv xml:lang="ta">
-        <seg>செயலாக்கத்தில் ஏற்றுமதி</seg>
       </tuv>
     </tu>
     <tu tuid="MainWindow.MoreMenuItem">
@@ -2054,12 +2338,20 @@
         <seg>உங்கள் நிறுவன என்ற பெயரில் தட்டச்சு செய்யவும்:</seg>
       </tuv>
     </tu>
+    <tu tuid="PreviewPrintVia.CreatePreviewFile.Caption">
+      <tuv xml:lang="en">
+        <seg>Select Layout</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Select Layout</seg>
+      </tuv>
+    </tu>
     <tu tuid="PreviewPrintVia.CreatePreviewFile.Message">
       <tuv xml:lang="en">
         <seg>Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.</seg>
       </tuv>
       <tuv xml:lang="ta">
-        <seg>மன்னிக்கவும், இந்த பாணிதாள் முன்னோட்டம் கிடைக்கப்பெறவில்லை. PrinceXML அல்லது LibreOffice உள்ள முன்னோட்டப் செயல்படுத்த நிறுவவும்.</seg>
+        <seg>லேஅவுட் தேர்ந்தெடுக்கவும்</seg>
       </tuv>
     </tu>
     <tu tuid="PrintVia.LoadBackEnds.Message">
@@ -2070,6 +2362,14 @@
         <seg>தயவுசெய்து கூடுதல் Backends நிறுவ</seg>
       </tuv>
     </tu>
+    <tu tuid="PrintVia.LoadBackEnds.projectname">
+      <tuv xml:lang="en">
+        <seg>Pathway</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway</seg>
+      </tuv>
+    </tu>
     <tu tuid="PrintVia.OkButtonClick.Message">
       <tuv xml:lang="en">
         <seg>Please select a folder for which you have creation permission</seg>
@@ -2078,12 +2378,36 @@
         <seg>தயவுகூர்ந்து உருவாக்க அனுமதி உங்களுக்கு கோப்புறை தேர்ந்தெடு</seg>
       </tuv>
     </tu>
+    <tu tuid="PrintVia.OkButtonClick.projectname">
+      <tuv xml:lang="en">
+        <seg>Pathway</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>Pathway</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.PrintViaLoad.Caption">
+      <tuv xml:lang="en">
+        <seg>Incompatible Pathway Version</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>இணக்கமற்ற பாதை பதிப்பு</seg>
+      </tuv>
+    </tu>
     <tu tuid="PrintVia.PrintViaLoad.Message">
       <tuv xml:lang="en">
         <seg>Please download and install a Pathway version compatible with your software</seg>
       </tuv>
       <tuv xml:lang="ta">
         <seg>தயவுசெய்து பதிவிறக்கம் செய்து உங்கள் மென்பொருளை கூடியவை Pathway பதிப்பை நிறுவ</seg>
+      </tuv>
+    </tu>
+    <tu tuid="SelectOrganizationDialog.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Select Your Organization</seg>
+      </tuv>
+      <tuv xml:lang="ta">
+        <seg>உங்கள் அமைப்பு தேர்ந்தெடுக்கவும்</seg>
       </tuv>
     </tu>
     <tu tuid="SelectOrganizationDialog.btnCancel">
@@ -2255,6 +2579,7 @@
       </tuv>
     </tu>
     <tu tuid="frmResults.linkLabel1">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>http://code.google.com/p/epubcheck/wiki/Errors</seg>
       </tuv>
@@ -2284,14 +2609,6 @@
       </tuv>
       <tuv xml:lang="ta">
         <seg>உள்ளமைவு கருவி</seg>
-      </tuv>
-    </tu>
-    <tu tuid="frmSplash.label2">
-      <tuv xml:lang="en">
-        <seg>(C) 2008 - 2015 SIL International</seg>
-      </tuv>
-      <tuv xml:lang="ta">
-        <seg>(இ) 2008-வாக்கில் SIL சர்வதேச</seg>
       </tuv>
     </tu>
     <tu tuid="frmSplash.label3">
