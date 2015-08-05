@@ -593,7 +593,7 @@ namespace SIL.PublishingSolution
                 string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
                 if (CoverPageImagePath.Trim() != "")
                 {
-                    if (CoverPageImagePath != destinctionPath)
+					if (CoverPageImagePath != destinctionPath && Directory.Exists(xeLaTexInstallationPath))
                         File.Copy(CoverPageImagePath, destinctionPath, true);
 
                     tableOfContent += "\\color{black} \r\n";
@@ -697,7 +697,9 @@ namespace SIL.PublishingSolution
                                 File.Copy(copyRightFilePath, logoTitleFileName, true);
                                 File.Copy(copyRightFilePath, Common.PathCombine(_projectPath, logoFileName), true);
 
-                                File.Copy(copyRightFilePath, Common.PathCombine(xeLaTexInstallationPath, logoFileName), true);
+								if (Directory.Exists(xeLaTexInstallationPath))
+									File.Copy(copyRightFilePath, Common.PathCombine(xeLaTexInstallationPath, logoFileName), true);
+
                             }
                         }
                     }

@@ -1063,7 +1063,7 @@ namespace Test.PsExport
             var tests = new ArrayList
             {
                new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\uFEFF" +Common.ConvertUnicodeToString("\\201c") + "This is a sample text,"),
-                new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1\u20112\u00A0"),
+                new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1‑2﻿"),
                 
             };
 

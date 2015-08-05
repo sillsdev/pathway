@@ -568,9 +568,12 @@ namespace SIL.PublishingSolution
             var systemFontList = FontFamily.Families;
             if (systemFontList.Length != XeLaTexInstallation.GetXeLaTexFontCount())
             {
+				var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
+	            if (!Directory.Exists(xelatexPath))
+		            return;
+
                 using (var p2 = new Process())
                 {
-                    var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
                     if (!Common.IsUnixOS())
                     {
                         xelatexPath = Common.PathCombine(xelatexPath, "bin");
@@ -588,6 +591,11 @@ namespace SIL.PublishingSolution
 
         public void CallXeLaTex(PublicationInformation projInfo, string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
+			if(Common.Testing)
+			{
+				return;
+			}
+
             string originalDirectory = Directory.GetCurrentDirectory();
             string[] pdfFiles = Directory.GetFiles(Path.GetDirectoryName(xeLatexFullFile), "*.pdf");
             foreach (string pdfFile in pdfFiles)

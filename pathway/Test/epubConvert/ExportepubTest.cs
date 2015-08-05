@@ -620,7 +620,7 @@ namespace Test.epubConvert
             foreach (var fileName in filesList)
             {
                 var info = new FileInfo(fileName);
-                if (info.Extension == ".xhtml")
+				if (info.Extension == ".xhtml" && !info.Name.Contains("File2Cpy"))
                 {
                     FileCompare("NkontTestCase/OEBPS/" + info.Name, "NkontTestCaseExpected/OEBPS/" + info.Name);
                 }
