@@ -20,41 +20,65 @@ namespace epubConvert
        {
 	       Common.SetupLocalization();
 	       InitializeComponent();
+		   Common.L10NMngr.AddString("EpubExportTypeDlg.lblMessage.Part1",
+				MessageBuilder.ToString(), "", "", "");
+		   Common.L10NMngr.AddString("EpubExportTypeDlg.lblMessage.Part2",
+				MessageBuilder1.ToString(), "", "", "");
        }
 
         private void EpubExportTypeDlg_Load(object sender, EventArgs e)
         {
             IcnInfo.Image = SystemIcons.Information.ToBitmap();
-            StringBuilder messageBuilder = new StringBuilder(300);
-
-            messageBuilder.Append("The export process is finished. There is a separate file for\n");
-            messageBuilder.Append("Epub2, Epub3 and HTML5.");
-            messageBuilder.Append(Environment.NewLine);
-            messageBuilder.Append(Environment.NewLine);
-
-            messageBuilder.Append("Click a button below to open the desired Epub file in your\n");
-            messageBuilder.Append("default reader. Alternatively, click");
-
-            StringBuilder messageBuilder1 = new StringBuilder(300);
-            messageBuilder1.Append("to open the folder\n");
-            messageBuilder1.Append("that contains both Epub files and the HTML5. You can\n");
-            messageBuilder1.Append("display the HTML files in your internet browser.\n");
-
-            messageBuilder1.Append(Environment.NewLine);
-
-            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
-			lblMessage.SelectedText = LocalizationManager.GetString("EpubExportTypeDlg.EpubFileType.Message", messageBuilder.ToString(), "");
-            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Bold);
-            lblMessage.SelectedText = " Folder ";
-            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
-            lblMessage.SelectedText = messageBuilder1.ToString();
-
-            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Bold);
-            lblMessage.SelectedText = "Note: ";
-            lblMessage.SelectionFont = new Font("Charis SIL", 12, FontStyle.Regular);
-            lblMessage.SelectedText = "Some readers cannot display Epub3 files correctly.";
+			var msg = "<html style='font-family:Charis SIL;font-size:100%;'><body><div>";
+			msg += @"<span style='font-family:Charis SIL;font-size:100%;'>";
+			msg = msg + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Part1",
+		        MessageBuilder.ToString());
+			msg = msg + @"</span>";
+			msg = msg + @"<span style='font-family:Charis SIL;font-size:100%;font-weight:bold'>";
+			msg = msg + @" " + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Folder", "Folder") +
+	                                  @" ";
+	        msg = msg + @"</span>";
+			msg += @"<span style='font-family:Charis SIL;font-size:100%;'>";
+			msg = msg + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Part2",
+				MessageBuilder1.ToString());
+			msg = msg + @"</span>";
+			msg = msg + @"<span style='font-family:Charis SIL;font-size:100%;font-weight:bold'>";
+			msg = msg + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.NoteCaption", "Note:") + @" ";
+			msg = msg + @"</span>";
+			msg = msg + @"<span style='font-family:Charis SIL;font-size:100%;'>";
+			msg = msg + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.NoteMsg", "Some readers cannot display Epub3 files correctly.");
+			msg = msg + @"</span>";
+			msg = msg + "</div></body></html>";
+	        lblMessage.DocumentText = msg;
+	        
         }
-       private void ValidateAndDisplayResult(string outputFolder, string fileName, string outputPathWithFileName)
+
+	    private static StringBuilder MessageBuilder1
+	    {
+		    get
+		    {
+			    var messageBuilder1 = new StringBuilder(300);
+			    messageBuilder1.Append("to open the folder that contains both Epub files and the HTML5. You can display the HTML files in your internet browser.");
+			    messageBuilder1.Append("<br/>");
+				messageBuilder1.Append("<br/>");
+			    return messageBuilder1;
+		    }
+	    }
+
+	    private static StringBuilder MessageBuilder
+	    {
+		    get
+		    {
+			    var messageBuilder = new StringBuilder(300);
+			    messageBuilder.Append("The export process is finished. There are separate files for Epub2, Epub3 and HTML5.");
+				messageBuilder.Append("<br/>");
+			    messageBuilder.Append("<br/>");
+			    messageBuilder.Append("Click a button below to open the desired Epub file in your default reader. Alternatively, click");
+			    return messageBuilder;
+		    }
+	    }
+
+	    private void ValidateAndDisplayResult(string outputFolder, string fileName, string outputPathWithFileName)
         {
             // Postscript - validate the file using our epubcheck wrapper
             if (Common.Testing)
@@ -125,5 +149,17 @@ namespace epubConvert
             Close();
         }
 
+		private void lblMessage_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+		{
+			var htmlDocument = lblMessage.Document;
+			if ((htmlDocument != null) && (htmlDocument.Body != null))
+			{
+				if (htmlDocument.Body.ScrollRectangle.Height >= lblMessage.Height)
+				{
+					this.ClientSize = new Size(ClientSize.Width, ClientSize.Height + (htmlDocument.Body.ScrollRectangle.Height - lblMessage.ClientSize.Height));
+					lblMessage.ClientSize = new Size(lblMessage.Size.Width, htmlDocument.Body.ScrollRectangle.Height);
+				}
+			}
+		}
     }
 }
