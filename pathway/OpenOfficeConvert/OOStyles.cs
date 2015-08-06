@@ -92,7 +92,7 @@ namespace SIL.PublishingSolution
                         _guidewordLength = Convert.ToInt16(IdAllClass["guidewordLength"]["guideword-length"]);
                     }
                 }
-                _guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
+                //_guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
             }
         }
 
@@ -774,7 +774,6 @@ namespace SIL.PublishingSolution
             CreatePageFirstPage();
             if (_guidewordLength == 0 && _projInfo.ProjectInputType.ToLower() == "dictionary") return;
             CreateHeaderFooter();
-            
         }
 
         private void CreatePageFirstPage()
