@@ -123,18 +123,20 @@ namespace SIL.PublishingSolution
 			this.lblJustified = new System.Windows.Forms.Label();
 			this.ddlJustified = new System.Windows.Forms.ComboBox();
 			this.tabMobile = new System.Windows.Forms.TabPage();
+			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+			this.label1 = new System.Windows.Forms.Label();
+			this.mobileIcon = new System.Windows.Forms.PictureBox();
+			this.btnBrowse = new System.Windows.Forms.Button();
 			this.ddlLanguage = new System.Windows.Forms.ComboBox();
+			this.label8 = new System.Windows.Forms.Label();
 			this.label20 = new System.Windows.Forms.Label();
+			this.ddlFiles = new System.Windows.Forms.ComboBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.ddlRedLetter = new System.Windows.Forms.ComboBox();
 			this.lblMobileOptionsSection = new System.Windows.Forms.Label();
 			this.lblGoBibleDescription = new System.Windows.Forms.Label();
-			this.btnBrowse = new System.Windows.Forms.Button();
-			this.label1 = new System.Windows.Forms.Label();
-			this.ddlRedLetter = new System.Windows.Forms.ComboBox();
-			this.label7 = new System.Windows.Forms.Label();
-			this.ddlFiles = new System.Windows.Forms.ComboBox();
-			this.label8 = new System.Windows.Forms.Label();
 			this.pictureBox4 = new System.Windows.Forms.PictureBox();
-			this.mobileIcon = new System.Windows.Forms.PictureBox();
 			this.tabOthers = new System.Windows.Forms.TabPage();
 			this.chkPageBreaks = new System.Windows.Forms.CheckBox();
 			this.chkIncludeImage = new System.Windows.Forms.CheckBox();
@@ -171,34 +173,37 @@ namespace SIL.PublishingSolution
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.tabWeb = new System.Windows.Forms.TabPage();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.label19 = new System.Windows.Forms.Label();
-			this.txtWebFtpFldrNme = new System.Windows.Forms.TextBox();
-			this.txtWebEmailID = new System.Windows.Forms.TextBox();
-			this.label18 = new System.Windows.Forms.Label();
-			this.txtWebAdminSiteNme = new System.Windows.Forms.TextBox();
-			this.label14 = new System.Windows.Forms.Label();
-			this.txtWebAdminPwd = new System.Windows.Forms.TextBox();
-			this.label15 = new System.Windows.Forms.Label();
-			this.txtWebAdminUsrNme = new System.Windows.Forms.TextBox();
-			this.label16 = new System.Windows.Forms.Label();
+			this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
 			this.txtWebUrl = new System.Windows.Forms.TextBox();
 			this.label17 = new System.Windows.Forms.Label();
+			this.txtWebFtpFldrNme = new System.Windows.Forms.TextBox();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label16 = new System.Windows.Forms.Label();
+			this.txtWebEmailID = new System.Windows.Forms.TextBox();
+			this.txtWebAdminUsrNme = new System.Windows.Forms.TextBox();
+			this.label18 = new System.Windows.Forms.Label();
+			this.label15 = new System.Windows.Forms.Label();
+			this.txtWebAdminSiteNme = new System.Windows.Forms.TextBox();
+			this.txtWebAdminPwd = new System.Windows.Forms.TextBox();
+			this.label14 = new System.Windows.Forms.Label();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.txtFtpPassword = new System.Windows.Forms.TextBox();
+			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.lblTargetFileLocation = new System.Windows.Forms.Label();
 			this.txtFtpFileLocation = new System.Windows.Forms.TextBox();
+			this.txtFtpPassword = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.txtFtpUsername = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.txtSqlPassword = new System.Windows.Forms.TextBox();
-			this.label10 = new System.Windows.Forms.Label();
-			this.txtSqlUsername = new System.Windows.Forms.TextBox();
-			this.label11 = new System.Windows.Forms.Label();
-			this.txtSqlDBName = new System.Windows.Forms.TextBox();
-			this.label12 = new System.Windows.Forms.Label();
+			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.txtSqlServerName = new System.Windows.Forms.TextBox();
 			this.label13 = new System.Windows.Forms.Label();
+			this.txtSqlPassword = new System.Windows.Forms.TextBox();
+			this.label10 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.txtSqlUsername = new System.Windows.Forms.TextBox();
+			this.txtSqlDBName = new System.Windows.Forms.TextBox();
+			this.label11 = new System.Windows.Forms.Label();
 			this.tabDict4Mids = new System.Windows.Forms.TabPage();
 			this.tabPreview = new System.Windows.Forms.TabPage();
 			this.btnPrevious = new System.Windows.Forms.Button();
@@ -238,11 +243,6 @@ namespace SIL.PublishingSolution
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
-			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-			this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).BeginInit();
 			this.toolStripMain.SuspendLayout();
 			this.tabControl1.SuspendLayout();
@@ -257,16 +257,21 @@ namespace SIL.PublishingSolution
 			this.tblPnlRefFormat.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.tabMobile.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+			this.tableLayoutPanel3.SuspendLayout();
+			this.flowLayoutPanel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
 			this.tabOthers.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picFonts)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.tabWeb.SuspendLayout();
 			this.groupBox3.SuspendLayout();
+			this.tableLayoutPanel6.SuspendLayout();
 			this.groupBox2.SuspendLayout();
+			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
+			this.tableLayoutPanel5.SuspendLayout();
 			this.tabPreview.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picPreview)).BeginInit();
 			this.tabPicture.SuspendLayout();
@@ -281,11 +286,6 @@ namespace SIL.PublishingSolution
 			this.panel3.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
-			this.tableLayoutPanel3.SuspendLayout();
-			this.flowLayoutPanel2.SuspendLayout();
-			this.tableLayoutPanel4.SuspendLayout();
-			this.tableLayoutPanel5.SuspendLayout();
-			this.tableLayoutPanel6.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tsNew
@@ -340,7 +340,7 @@ namespace SIL.PublishingSolution
 			this.stylesGrid.RowHeadersVisible = false;
 			this.stylesGrid.RowTemplate.Height = 24;
 			this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.stylesGrid.Size = new System.Drawing.Size(423, 525);
+			this.stylesGrid.Size = new System.Drawing.Size(422, 525);
 			this.stylesGrid.TabIndex = 0;
 			this.stylesGrid.TabStop = false;
 			this.stylesGrid.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.stylesGrid_ColumnWidthChanged);
@@ -1711,6 +1711,81 @@ namespace SIL.PublishingSolution
 			this.tabMobile.Text = "Properties";
 			this.tabMobile.UseVisualStyleBackColor = true;
 			// 
+			// tableLayoutPanel3
+			// 
+			this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.tableLayoutPanel3.ColumnCount = 2;
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.12621F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.87379F));
+			this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel2, 0, 2);
+			this.tableLayoutPanel3.Controls.Add(this.ddlLanguage, 1, 3);
+			this.tableLayoutPanel3.Controls.Add(this.label8, 0, 0);
+			this.tableLayoutPanel3.Controls.Add(this.label20, 0, 3);
+			this.tableLayoutPanel3.Controls.Add(this.ddlFiles, 1, 0);
+			this.tableLayoutPanel3.Controls.Add(this.label7, 0, 1);
+			this.tableLayoutPanel3.Controls.Add(this.ddlRedLetter, 1, 1);
+			this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 78);
+			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+			this.tableLayoutPanel3.RowCount = 4;
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(309, 122);
+			this.tableLayoutPanel3.TabIndex = 71;
+			// 
+			// flowLayoutPanel2
+			// 
+			this.flowLayoutPanel2.AutoSize = true;
+			this.tableLayoutPanel3.SetColumnSpan(this.flowLayoutPanel2, 2);
+			this.flowLayoutPanel2.Controls.Add(this.label1);
+			this.flowLayoutPanel2.Controls.Add(this.mobileIcon);
+			this.flowLayoutPanel2.Controls.Add(this.btnBrowse);
+			this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 57);
+			this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+			this.flowLayoutPanel2.Size = new System.Drawing.Size(183, 29);
+			this.flowLayoutPanel2.TabIndex = 72;
+			// 
+			// label1
+			// 
+			this.label1.AccessibleName = "lblPageColumn";
+			this.label1.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label1, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label1, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label1, "ConfigurationTool.label1");
+			this.label1.Location = new System.Drawing.Point(3, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(77, 13);
+			this.label1.TabIndex = 9;
+			this.label1.Text = "Icon for Phone";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// mobileIcon
+			// 
+			this.mobileIcon.Image = ((System.Drawing.Image)(resources.GetObject("mobileIcon.Image")));
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.mobileIcon, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.mobileIcon, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.mobileIcon, "ConfigurationTool.mobileIcon");
+			this.mobileIcon.Location = new System.Drawing.Point(86, 3);
+			this.mobileIcon.Name = "mobileIcon";
+			this.mobileIcon.Size = new System.Drawing.Size(20, 20);
+			this.mobileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.mobileIcon.TabIndex = 65;
+			this.mobileIcon.TabStop = false;
+			// 
+			// btnBrowse
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.btnBrowse, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.btnBrowse, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.btnBrowse, "ConfigurationTool.btnBrowse");
+			this.btnBrowse.Location = new System.Drawing.Point(112, 3);
+			this.btnBrowse.Name = "btnBrowse";
+			this.btnBrowse.Size = new System.Drawing.Size(68, 23);
+			this.btnBrowse.TabIndex = 10;
+			this.btnBrowse.Text = "Browse...";
+			this.btnBrowse.UseVisualStyleBackColor = true;
+			this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+			// 
 			// ddlLanguage
 			// 
 			this.ddlLanguage.AccessibleName = "";
@@ -1727,6 +1802,20 @@ namespace SIL.PublishingSolution
 			this.ddlLanguage.TabIndex = 70;
 			this.ddlLanguage.SelectedIndexChanged += new System.EventHandler(this.ddlLanguage_SelectedIndexChanged);
 			// 
+			// label8
+			// 
+			this.label8.AccessibleName = "lblPageColumn";
+			this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label8, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label8, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label8, "ConfigurationTool.label8");
+			this.label8.Location = new System.Drawing.Point(3, 7);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(83, 13);
+			this.label8.TabIndex = 1;
+			this.label8.Text = "Files Produced";
+			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// label20
 			// 
 			this.label20.AccessibleName = "lblLanguage";
@@ -1739,6 +1828,52 @@ namespace SIL.PublishingSolution
 			this.label20.TabIndex = 69;
 			this.label20.Text = "Language";
 			this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// ddlFiles
+			// 
+			this.ddlFiles.AccessibleName = "";
+			this.ddlFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ddlFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.ddlFiles.FormattingEnabled = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlFiles, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.ddlFiles, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.ddlFiles, "ConfigurationTool.ddlFiles");
+			this.ddlFiles.Location = new System.Drawing.Point(92, 3);
+			this.ddlFiles.Name = "ddlFiles";
+			this.ddlFiles.Size = new System.Drawing.Size(214, 21);
+			this.ddlFiles.TabIndex = 2;
+			this.ddlFiles.SelectedIndexChanged += new System.EventHandler(this.ddlFiles_SelectedIndexChanged);
+			// 
+			// label7
+			// 
+			this.label7.AccessibleName = "lblPageColumn";
+			this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label7, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label7, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label7, "ConfigurationTool.label7");
+			this.label7.Location = new System.Drawing.Point(3, 34);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(83, 13);
+			this.label7.TabIndex = 3;
+			this.label7.Text = "Red Letter";
+			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// ddlRedLetter
+			// 
+			this.ddlRedLetter.AccessibleName = "";
+			this.ddlRedLetter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ddlRedLetter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.ddlRedLetter.FormattingEnabled = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlRedLetter, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.ddlRedLetter, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.ddlRedLetter, "ConfigurationTool.ddlRedLetter");
+			this.ddlRedLetter.Location = new System.Drawing.Point(92, 30);
+			this.ddlRedLetter.Name = "ddlRedLetter";
+			this.ddlRedLetter.Size = new System.Drawing.Size(214, 21);
+			this.ddlRedLetter.TabIndex = 4;
+			this.ddlRedLetter.SelectedIndexChanged += new System.EventHandler(this.ddlRedLetter_SelectedIndexChanged);
 			// 
 			// lblMobileOptionsSection
 			// 
@@ -1769,93 +1904,6 @@ namespace SIL.PublishingSolution
 			this.lblGoBibleDescription.TabIndex = 66;
 			this.lblGoBibleDescription.Text = "Change the settings for mobile content.";
 			// 
-			// btnBrowse
-			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.btnBrowse, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.btnBrowse, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.btnBrowse, "ConfigurationTool.btnBrowse");
-			this.btnBrowse.Location = new System.Drawing.Point(112, 3);
-			this.btnBrowse.Name = "btnBrowse";
-			this.btnBrowse.Size = new System.Drawing.Size(68, 23);
-			this.btnBrowse.TabIndex = 10;
-			this.btnBrowse.Text = "Browse...";
-			this.btnBrowse.UseVisualStyleBackColor = true;
-			this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-			// 
-			// label1
-			// 
-			this.label1.AccessibleName = "lblPageColumn";
-			this.label1.AutoSize = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label1, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label1, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label1, "ConfigurationTool.label1");
-			this.label1.Location = new System.Drawing.Point(3, 0);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(77, 13);
-			this.label1.TabIndex = 9;
-			this.label1.Text = "Icon for Phone";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// ddlRedLetter
-			// 
-			this.ddlRedLetter.AccessibleName = "";
-			this.ddlRedLetter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ddlRedLetter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.ddlRedLetter.FormattingEnabled = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlRedLetter, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.ddlRedLetter, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.ddlRedLetter, "ConfigurationTool.ddlRedLetter");
-			this.ddlRedLetter.Location = new System.Drawing.Point(92, 30);
-			this.ddlRedLetter.Name = "ddlRedLetter";
-			this.ddlRedLetter.Size = new System.Drawing.Size(214, 21);
-			this.ddlRedLetter.TabIndex = 4;
-			this.ddlRedLetter.SelectedIndexChanged += new System.EventHandler(this.ddlRedLetter_SelectedIndexChanged);
-			// 
-			// label7
-			// 
-			this.label7.AccessibleName = "lblPageColumn";
-			this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label7, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label7, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label7, "ConfigurationTool.label7");
-			this.label7.Location = new System.Drawing.Point(3, 34);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(83, 13);
-			this.label7.TabIndex = 3;
-			this.label7.Text = "Red Letter";
-			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// ddlFiles
-			// 
-			this.ddlFiles.AccessibleName = "";
-			this.ddlFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.ddlFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.ddlFiles.FormattingEnabled = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlFiles, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.ddlFiles, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.ddlFiles, "ConfigurationTool.ddlFiles");
-			this.ddlFiles.Location = new System.Drawing.Point(92, 3);
-			this.ddlFiles.Name = "ddlFiles";
-			this.ddlFiles.Size = new System.Drawing.Size(214, 21);
-			this.ddlFiles.TabIndex = 2;
-			this.ddlFiles.SelectedIndexChanged += new System.EventHandler(this.ddlFiles_SelectedIndexChanged);
-			// 
-			// label8
-			// 
-			this.label8.AccessibleName = "lblPageColumn";
-			this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label8, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label8, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label8, "ConfigurationTool.label8");
-			this.label8.Location = new System.Drawing.Point(3, 7);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(83, 13);
-			this.label8.TabIndex = 1;
-			this.label8.Text = "Files Produced";
-			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// pictureBox4
 			// 
 			this.pictureBox4.BackgroundImage = global::SIL.PublishingSolution.Properties.Resources.cell;
@@ -1868,19 +1916,6 @@ namespace SIL.PublishingSolution
 			this.pictureBox4.Size = new System.Drawing.Size(32, 35);
 			this.pictureBox4.TabIndex = 67;
 			this.pictureBox4.TabStop = false;
-			// 
-			// mobileIcon
-			// 
-			this.mobileIcon.Image = ((System.Drawing.Image)(resources.GetObject("mobileIcon.Image")));
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.mobileIcon, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.mobileIcon, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.mobileIcon, "ConfigurationTool.mobileIcon");
-			this.mobileIcon.Location = new System.Drawing.Point(86, 3);
-			this.mobileIcon.Name = "mobileIcon";
-			this.mobileIcon.Size = new System.Drawing.Size(20, 20);
-			this.mobileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.mobileIcon.TabIndex = 65;
-			this.mobileIcon.TabStop = false;
 			// 
 			// tabOthers
 			// 
@@ -2396,135 +2431,43 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.groupBox3, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.groupBox3, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.groupBox3, "ConfigurationTool.groupBox3");
-			this.groupBox3.Location = new System.Drawing.Point(7, 287);
+			this.groupBox3.Location = new System.Drawing.Point(7, 308);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(289, 217);
+			this.groupBox3.Size = new System.Drawing.Size(286, 217);
 			this.groupBox3.TabIndex = 2;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Website Details";
 			// 
-			// label19
+			// tableLayoutPanel6
 			// 
-			this.label19.AutoSize = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label19, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label19, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label19, "ConfigurationTool.label19");
-			this.label19.Location = new System.Drawing.Point(3, 143);
-			this.label19.Name = "label19";
-			this.label19.Size = new System.Drawing.Size(85, 13);
-			this.label19.TabIndex = 10;
-			this.label19.Text = "Ftp Folder Name";
-			// 
-			// txtWebFtpFldrNme
-			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebFtpFldrNme, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebFtpFldrNme, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.txtWebFtpFldrNme, "ConfigurationTool.txtWebFtpFldrNme");
-			this.txtWebFtpFldrNme.Location = new System.Drawing.Point(97, 146);
-			this.txtWebFtpFldrNme.MaxLength = 50;
-			this.txtWebFtpFldrNme.Name = "txtWebFtpFldrNme";
-			this.txtWebFtpFldrNme.Size = new System.Drawing.Size(174, 20);
-			this.txtWebFtpFldrNme.TabIndex = 11;
-			// 
-			// txtWebEmailID
-			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebEmailID, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebEmailID, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.txtWebEmailID, "ConfigurationTool.txtWebEmailID");
-			this.txtWebEmailID.Location = new System.Drawing.Point(97, 120);
-			this.txtWebEmailID.MaxLength = 50;
-			this.txtWebEmailID.Name = "txtWebEmailID";
-			this.txtWebEmailID.Size = new System.Drawing.Size(174, 20);
-			this.txtWebEmailID.TabIndex = 9;
-			this.txtWebEmailID.Validated += new System.EventHandler(this.txtWebEmailID_Validated);
-			// 
-			// label18
-			// 
-			this.label18.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label18.AutoSize = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label18, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label18, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label18, "ConfigurationTool.label18");
-			this.label18.Location = new System.Drawing.Point(3, 123);
-			this.label18.Name = "label18";
-			this.label18.Size = new System.Drawing.Size(46, 13);
-			this.label18.TabIndex = 8;
-			this.label18.Text = "Email ID";
-			// 
-			// txtWebAdminSiteNme
-			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebAdminSiteNme, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebAdminSiteNme, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.txtWebAdminSiteNme, "ConfigurationTool.txtWebAdminSiteNme");
-			this.txtWebAdminSiteNme.Location = new System.Drawing.Point(97, 94);
-			this.txtWebAdminSiteNme.MaxLength = 50;
-			this.txtWebAdminSiteNme.Name = "txtWebAdminSiteNme";
-			this.txtWebAdminSiteNme.Size = new System.Drawing.Size(174, 20);
-			this.txtWebAdminSiteNme.TabIndex = 7;
-			// 
-			// label14
-			// 
-			this.label14.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label14.AutoSize = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label14, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label14, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label14, "ConfigurationTool.label14");
-			this.label14.Location = new System.Drawing.Point(3, 97);
-			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(48, 13);
-			this.label14.TabIndex = 6;
-			this.label14.Text = "Site Title";
-			// 
-			// txtWebAdminPwd
-			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebAdminPwd, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebAdminPwd, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.txtWebAdminPwd, "ConfigurationTool.txtWebAdminPwd");
-			this.txtWebAdminPwd.Location = new System.Drawing.Point(97, 68);
-			this.txtWebAdminPwd.MaxLength = 25;
-			this.txtWebAdminPwd.Name = "txtWebAdminPwd";
-			this.txtWebAdminPwd.PasswordChar = '*';
-			this.txtWebAdminPwd.Size = new System.Drawing.Size(174, 20);
-			this.txtWebAdminPwd.TabIndex = 5;
-			this.txtWebAdminPwd.Validated += new System.EventHandler(this.txtWebAdminPwd_Validated);
-			// 
-			// label15
-			// 
-			this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label15.AutoSize = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label15, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label15, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label15, "ConfigurationTool.label15");
-			this.label15.Location = new System.Drawing.Point(3, 71);
-			this.label15.Name = "label15";
-			this.label15.Size = new System.Drawing.Size(85, 13);
-			this.label15.TabIndex = 4;
-			this.label15.Text = "Admin Password";
-			// 
-			// txtWebAdminUsrNme
-			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebAdminUsrNme, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebAdminUsrNme, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.txtWebAdminUsrNme, "ConfigurationTool.txtWebAdminUsrNme");
-			this.txtWebAdminUsrNme.Location = new System.Drawing.Point(97, 42);
-			this.txtWebAdminUsrNme.MaxLength = 25;
-			this.txtWebAdminUsrNme.Name = "txtWebAdminUsrNme";
-			this.txtWebAdminUsrNme.Size = new System.Drawing.Size(174, 20);
-			this.txtWebAdminUsrNme.TabIndex = 3;
-			this.txtWebAdminUsrNme.Validated += new System.EventHandler(this.txtWebAdminUsrNme_Validated);
-			// 
-			// label16
-			// 
-			this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label16.AutoSize = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label16, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label16, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label16, "ConfigurationTool.label16");
-			this.label16.Location = new System.Drawing.Point(3, 45);
-			this.label16.Name = "label16";
-			this.label16.Size = new System.Drawing.Size(87, 13);
-			this.label16.TabIndex = 2;
-			this.label16.Text = "Admin Username";
+			this.tableLayoutPanel6.AutoSize = true;
+			this.tableLayoutPanel6.ColumnCount = 2;
+			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.45196F));
+			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.54804F));
+			this.tableLayoutPanel6.Controls.Add(this.label17, 0, 0);
+			this.tableLayoutPanel6.Controls.Add(this.txtWebFtpFldrNme, 1, 6);
+			this.tableLayoutPanel6.Controls.Add(this.label19, 0, 6);
+			this.tableLayoutPanel6.Controls.Add(this.txtWebUrl, 0, 1);
+			this.tableLayoutPanel6.Controls.Add(this.label16, 0, 2);
+			this.tableLayoutPanel6.Controls.Add(this.txtWebEmailID, 1, 5);
+			this.tableLayoutPanel6.Controls.Add(this.txtWebAdminUsrNme, 1, 2);
+			this.tableLayoutPanel6.Controls.Add(this.label18, 0, 5);
+			this.tableLayoutPanel6.Controls.Add(this.label15, 0, 3);
+			this.tableLayoutPanel6.Controls.Add(this.txtWebAdminSiteNme, 1, 4);
+			this.tableLayoutPanel6.Controls.Add(this.txtWebAdminPwd, 1, 3);
+			this.tableLayoutPanel6.Controls.Add(this.label14, 0, 4);
+			this.tableLayoutPanel6.Location = new System.Drawing.Point(2, 23);
+			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+			this.tableLayoutPanel6.RowCount = 7;
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel6.Size = new System.Drawing.Size(278, 175);
+			this.tableLayoutPanel6.TabIndex = 12;
 			// 
 			// txtWebUrl
 			// 
@@ -2552,6 +2495,129 @@ namespace SIL.PublishingSolution
 			this.label17.TabIndex = 0;
 			this.label17.Text = "Website url";
 			// 
+			// txtWebFtpFldrNme
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebFtpFldrNme, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebFtpFldrNme, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.txtWebFtpFldrNme, "ConfigurationTool.txtWebFtpFldrNme");
+			this.txtWebFtpFldrNme.Location = new System.Drawing.Point(95, 146);
+			this.txtWebFtpFldrNme.MaxLength = 50;
+			this.txtWebFtpFldrNme.Name = "txtWebFtpFldrNme";
+			this.txtWebFtpFldrNme.Size = new System.Drawing.Size(174, 20);
+			this.txtWebFtpFldrNme.TabIndex = 11;
+			// 
+			// label19
+			// 
+			this.label19.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label19, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label19, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label19, "ConfigurationTool.label19");
+			this.label19.Location = new System.Drawing.Point(3, 143);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(85, 13);
+			this.label19.TabIndex = 10;
+			this.label19.Text = "Ftp Folder Name";
+			// 
+			// label16
+			// 
+			this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.label16.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label16, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label16, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label16, "ConfigurationTool.label16");
+			this.label16.Location = new System.Drawing.Point(3, 39);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(55, 26);
+			this.label16.TabIndex = 2;
+			this.label16.Text = "Admin Username";
+			// 
+			// txtWebEmailID
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebEmailID, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebEmailID, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.txtWebEmailID, "ConfigurationTool.txtWebEmailID");
+			this.txtWebEmailID.Location = new System.Drawing.Point(95, 120);
+			this.txtWebEmailID.MaxLength = 50;
+			this.txtWebEmailID.Name = "txtWebEmailID";
+			this.txtWebEmailID.Size = new System.Drawing.Size(174, 20);
+			this.txtWebEmailID.TabIndex = 9;
+			this.txtWebEmailID.Validated += new System.EventHandler(this.txtWebEmailID_Validated);
+			// 
+			// txtWebAdminUsrNme
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebAdminUsrNme, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebAdminUsrNme, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.txtWebAdminUsrNme, "ConfigurationTool.txtWebAdminUsrNme");
+			this.txtWebAdminUsrNme.Location = new System.Drawing.Point(95, 42);
+			this.txtWebAdminUsrNme.MaxLength = 25;
+			this.txtWebAdminUsrNme.Name = "txtWebAdminUsrNme";
+			this.txtWebAdminUsrNme.Size = new System.Drawing.Size(174, 20);
+			this.txtWebAdminUsrNme.TabIndex = 3;
+			this.txtWebAdminUsrNme.Validated += new System.EventHandler(this.txtWebAdminUsrNme_Validated);
+			// 
+			// label18
+			// 
+			this.label18.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.label18.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label18, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label18, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label18, "ConfigurationTool.label18");
+			this.label18.Location = new System.Drawing.Point(3, 123);
+			this.label18.Name = "label18";
+			this.label18.Size = new System.Drawing.Size(46, 13);
+			this.label18.TabIndex = 8;
+			this.label18.Text = "Email ID";
+			// 
+			// label15
+			// 
+			this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.label15.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label15, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label15, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label15, "ConfigurationTool.label15");
+			this.label15.Location = new System.Drawing.Point(3, 71);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(85, 13);
+			this.label15.TabIndex = 4;
+			this.label15.Text = "Admin Password";
+			// 
+			// txtWebAdminSiteNme
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebAdminSiteNme, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebAdminSiteNme, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.txtWebAdminSiteNme, "ConfigurationTool.txtWebAdminSiteNme");
+			this.txtWebAdminSiteNme.Location = new System.Drawing.Point(95, 94);
+			this.txtWebAdminSiteNme.MaxLength = 50;
+			this.txtWebAdminSiteNme.Name = "txtWebAdminSiteNme";
+			this.txtWebAdminSiteNme.Size = new System.Drawing.Size(174, 20);
+			this.txtWebAdminSiteNme.TabIndex = 7;
+			// 
+			// txtWebAdminPwd
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtWebAdminPwd, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.txtWebAdminPwd, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.txtWebAdminPwd, "ConfigurationTool.txtWebAdminPwd");
+			this.txtWebAdminPwd.Location = new System.Drawing.Point(95, 68);
+			this.txtWebAdminPwd.MaxLength = 25;
+			this.txtWebAdminPwd.Name = "txtWebAdminPwd";
+			this.txtWebAdminPwd.PasswordChar = '*';
+			this.txtWebAdminPwd.Size = new System.Drawing.Size(174, 20);
+			this.txtWebAdminPwd.TabIndex = 5;
+			this.txtWebAdminPwd.Validated += new System.EventHandler(this.txtWebAdminPwd_Validated);
+			// 
+			// label14
+			// 
+			this.label14.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.label14.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label14, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label14, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label14, "ConfigurationTool.label14");
+			this.label14.Location = new System.Drawing.Point(3, 97);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(48, 13);
+			this.label14.TabIndex = 6;
+			this.label14.Text = "Site Title";
+			// 
 			// groupBox2
 			// 
 			this.groupBox2.AutoSize = true;
@@ -2561,23 +2627,33 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.groupBox2, "ConfigurationTool.groupBox2");
 			this.groupBox2.Location = new System.Drawing.Point(7, 4);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(287, 136);
+			this.groupBox2.Size = new System.Drawing.Size(294, 136);
 			this.groupBox2.TabIndex = 0;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "FTP Details";
 			// 
-			// txtFtpPassword
+			// tableLayoutPanel4
 			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtFtpPassword, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.txtFtpPassword, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.txtFtpPassword, "ConfigurationTool.txtFtpPassword");
-			this.txtFtpPassword.Location = new System.Drawing.Point(96, 68);
-			this.txtFtpPassword.MaxLength = 50;
-			this.txtFtpPassword.Name = "txtFtpPassword";
-			this.txtFtpPassword.PasswordChar = '*';
-			this.txtFtpPassword.Size = new System.Drawing.Size(176, 20);
-			this.txtFtpPassword.TabIndex = 5;
-			this.txtFtpPassword.Validated += new System.EventHandler(this.txtFtpPassword_Validated);
+			this.tableLayoutPanel4.AutoSize = true;
+			this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.tableLayoutPanel4.ColumnCount = 2;
+			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+			this.tableLayoutPanel4.Controls.Add(this.lblTargetFileLocation, 0, 0);
+			this.tableLayoutPanel4.Controls.Add(this.txtFtpPassword, 1, 3);
+			this.tableLayoutPanel4.Controls.Add(this.txtFtpFileLocation, 0, 1);
+			this.tableLayoutPanel4.Controls.Add(this.label3, 0, 3);
+			this.tableLayoutPanel4.Controls.Add(this.label6, 0, 2);
+			this.tableLayoutPanel4.Controls.Add(this.txtFtpUsername, 1, 2);
+			this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 22);
+			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+			this.tableLayoutPanel4.RowCount = 4;
+			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(288, 91);
+			this.tableLayoutPanel4.TabIndex = 6;
 			// 
 			// lblTargetFileLocation
 			// 
@@ -2605,6 +2681,19 @@ namespace SIL.PublishingSolution
 			this.txtFtpFileLocation.TabIndex = 1;
 			this.txtFtpFileLocation.Validated += new System.EventHandler(this.txtFtpFileLocation_Validated);
 			// 
+			// txtFtpPassword
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtFtpPassword, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.txtFtpPassword, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.txtFtpPassword, "ConfigurationTool.txtFtpPassword");
+			this.txtFtpPassword.Location = new System.Drawing.Point(99, 68);
+			this.txtFtpPassword.MaxLength = 50;
+			this.txtFtpPassword.Name = "txtFtpPassword";
+			this.txtFtpPassword.PasswordChar = '*';
+			this.txtFtpPassword.Size = new System.Drawing.Size(176, 20);
+			this.txtFtpPassword.TabIndex = 5;
+			this.txtFtpPassword.Validated += new System.EventHandler(this.txtFtpPassword_Validated);
+			// 
 			// label3
 			// 
 			this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -2612,7 +2701,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.label3, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.label3, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.label3, "ConfigurationTool.label3");
-			this.label3.Location = new System.Drawing.Point(3, 73);
+			this.label3.Location = new System.Drawing.Point(3, 71);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(76, 13);
 			this.label3.TabIndex = 4;
@@ -2638,7 +2727,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtFtpUsername, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.txtFtpUsername, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.txtFtpUsername, "ConfigurationTool.txtFtpUsername");
-			this.txtFtpUsername.Location = new System.Drawing.Point(96, 42);
+			this.txtFtpUsername.Location = new System.Drawing.Point(99, 42);
 			this.txtFtpUsername.MaxLength = 1000;
 			this.txtFtpUsername.Name = "txtFtpUsername";
 			this.txtFtpUsername.Size = new System.Drawing.Size(177, 20);
@@ -2652,87 +2741,38 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.groupBox1, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.groupBox1, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.groupBox1, "ConfigurationTool.groupBox1");
-			this.groupBox1.Location = new System.Drawing.Point(7, 135);
+			this.groupBox1.Location = new System.Drawing.Point(7, 143);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(287, 163);
+			this.groupBox1.Size = new System.Drawing.Size(286, 163);
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "MySql Database Details";
 			// 
-			// txtSqlPassword
+			// tableLayoutPanel5
 			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtSqlPassword, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.txtSqlPassword, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.txtSqlPassword, "ConfigurationTool.txtSqlPassword");
-			this.txtSqlPassword.Location = new System.Drawing.Point(99, 94);
-			this.txtSqlPassword.MaxLength = 50;
-			this.txtSqlPassword.Name = "txtSqlPassword";
-			this.txtSqlPassword.PasswordChar = '*';
-			this.txtSqlPassword.Size = new System.Drawing.Size(174, 20);
-			this.txtSqlPassword.TabIndex = 7;
-			this.txtSqlPassword.Validated += new System.EventHandler(this.txtSqlPassword_Validated);
-			// 
-			// label10
-			// 
-			this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label10.AutoSize = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label10, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label10, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label10, "ConfigurationTool.label10");
-			this.label10.Location = new System.Drawing.Point(3, 98);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(53, 13);
-			this.label10.TabIndex = 6;
-			this.label10.Text = "Password";
-			// 
-			// txtSqlUsername
-			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtSqlUsername, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.txtSqlUsername, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.txtSqlUsername, "ConfigurationTool.txtSqlUsername");
-			this.txtSqlUsername.Location = new System.Drawing.Point(99, 68);
-			this.txtSqlUsername.MaxLength = 25;
-			this.txtSqlUsername.Name = "txtSqlUsername";
-			this.txtSqlUsername.Size = new System.Drawing.Size(174, 20);
-			this.txtSqlUsername.TabIndex = 5;
-			this.txtSqlUsername.Validated += new System.EventHandler(this.txtSqlUsername_Validated);
-			// 
-			// label11
-			// 
-			this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label11.AutoSize = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label11, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label11, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label11, "ConfigurationTool.label11");
-			this.label11.Location = new System.Drawing.Point(3, 71);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(60, 13);
-			this.label11.TabIndex = 4;
-			this.label11.Text = "User Name";
-			// 
-			// txtSqlDBName
-			// 
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtSqlDBName, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.txtSqlDBName, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.txtSqlDBName, "ConfigurationTool.txtSqlDBName");
-			this.txtSqlDBName.Location = new System.Drawing.Point(99, 42);
-			this.txtSqlDBName.MaxLength = 25;
-			this.txtSqlDBName.Name = "txtSqlDBName";
-			this.txtSqlDBName.Size = new System.Drawing.Size(174, 20);
-			this.txtSqlDBName.TabIndex = 3;
-			// 
-			// label12
-			// 
-			this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.label12.AutoSize = true;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.label12, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.label12, null);
-			this.l10NSharpExtender1.SetLocalizingId(this.label12, "ConfigurationTool.label12");
-			this.label12.Location = new System.Drawing.Point(3, 45);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(84, 13);
-			this.label12.TabIndex = 2;
-			this.label12.Text = "Database Name";
+			this.tableLayoutPanel5.AutoSize = true;
+			this.tableLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.tableLayoutPanel5.ColumnCount = 2;
+			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.375F));
+			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.625F));
+			this.tableLayoutPanel5.Controls.Add(this.label13, 0, 0);
+			this.tableLayoutPanel5.Controls.Add(this.txtSqlPassword, 1, 4);
+			this.tableLayoutPanel5.Controls.Add(this.txtSqlServerName, 0, 1);
+			this.tableLayoutPanel5.Controls.Add(this.label10, 0, 4);
+			this.tableLayoutPanel5.Controls.Add(this.label12, 0, 2);
+			this.tableLayoutPanel5.Controls.Add(this.txtSqlUsername, 1, 3);
+			this.tableLayoutPanel5.Controls.Add(this.txtSqlDBName, 1, 2);
+			this.tableLayoutPanel5.Controls.Add(this.label11, 0, 3);
+			this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 25);
+			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+			this.tableLayoutPanel5.RowCount = 5;
+			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel5.Size = new System.Drawing.Size(280, 117);
+			this.tableLayoutPanel5.TabIndex = 8;
 			// 
 			// txtSqlServerName
 			// 
@@ -2758,6 +2798,81 @@ namespace SIL.PublishingSolution
 			this.label13.Size = new System.Drawing.Size(161, 13);
 			this.label13.TabIndex = 0;
 			this.label13.Text = "MySql Server name / IP Address";
+			// 
+			// txtSqlPassword
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtSqlPassword, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.txtSqlPassword, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.txtSqlPassword, "ConfigurationTool.txtSqlPassword");
+			this.txtSqlPassword.Location = new System.Drawing.Point(99, 94);
+			this.txtSqlPassword.MaxLength = 50;
+			this.txtSqlPassword.Name = "txtSqlPassword";
+			this.txtSqlPassword.PasswordChar = '*';
+			this.txtSqlPassword.Size = new System.Drawing.Size(174, 20);
+			this.txtSqlPassword.TabIndex = 7;
+			this.txtSqlPassword.Validated += new System.EventHandler(this.txtSqlPassword_Validated);
+			// 
+			// label10
+			// 
+			this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.label10.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label10, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label10, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label10, "ConfigurationTool.label10");
+			this.label10.Location = new System.Drawing.Point(3, 97);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(53, 13);
+			this.label10.TabIndex = 6;
+			this.label10.Text = "Password";
+			// 
+			// label12
+			// 
+			this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.label12.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label12, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label12, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label12, "ConfigurationTool.label12");
+			this.label12.Location = new System.Drawing.Point(3, 45);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(84, 13);
+			this.label12.TabIndex = 2;
+			this.label12.Text = "Database Name";
+			// 
+			// txtSqlUsername
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtSqlUsername, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.txtSqlUsername, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.txtSqlUsername, "ConfigurationTool.txtSqlUsername");
+			this.txtSqlUsername.Location = new System.Drawing.Point(99, 68);
+			this.txtSqlUsername.MaxLength = 25;
+			this.txtSqlUsername.Name = "txtSqlUsername";
+			this.txtSqlUsername.Size = new System.Drawing.Size(174, 20);
+			this.txtSqlUsername.TabIndex = 5;
+			this.txtSqlUsername.Validated += new System.EventHandler(this.txtSqlUsername_Validated);
+			// 
+			// txtSqlDBName
+			// 
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtSqlDBName, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.txtSqlDBName, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.txtSqlDBName, "ConfigurationTool.txtSqlDBName");
+			this.txtSqlDBName.Location = new System.Drawing.Point(99, 42);
+			this.txtSqlDBName.MaxLength = 25;
+			this.txtSqlDBName.Name = "txtSqlDBName";
+			this.txtSqlDBName.Size = new System.Drawing.Size(174, 20);
+			this.txtSqlDBName.TabIndex = 3;
+			// 
+			// label11
+			// 
+			this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.label11.AutoSize = true;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.label11, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.label11, null);
+			this.l10NSharpExtender1.SetLocalizingId(this.label11, "ConfigurationTool.label11");
+			this.label11.Location = new System.Drawing.Point(3, 71);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(60, 13);
+			this.label11.TabIndex = 4;
+			this.label11.Text = "User Name";
 			// 
 			// tabDict4Mids
 			// 
@@ -3025,7 +3140,7 @@ namespace SIL.PublishingSolution
 			this.label2.Location = new System.Drawing.Point(94, 1);
 			this.label2.Margin = new System.Windows.Forms.Padding(0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(432, 23);
+			this.label2.Size = new System.Drawing.Size(431, 23);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Stylesheets";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3038,7 +3153,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblInfoCaption, "ConfigurationTool.lblInfoCaption");
-			this.lblInfoCaption.Location = new System.Drawing.Point(527, 1);
+			this.lblInfoCaption.Location = new System.Drawing.Point(526, 1);
 			this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
 			this.lblInfoCaption.Name = "lblInfoCaption";
 			this.lblInfoCaption.Size = new System.Drawing.Size(341, 23);
@@ -3067,7 +3182,7 @@ namespace SIL.PublishingSolution
 			this.TLPanelOuter.ColumnCount = 3;
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 348F));
+			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
 			this.TLPanelOuter.Controls.Add(this.label2, 1, 0);
 			this.TLPanelOuter.Controls.Add(this.TLPanel1, 0, 1);
 			this.TLPanelOuter.Controls.Add(this.lblInfoCaption, 2, 0);
@@ -3244,7 +3359,7 @@ namespace SIL.PublishingSolution
 			this.TLPanel2.RowCount = 1;
 			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 525F));
-			this.TLPanel2.Size = new System.Drawing.Size(426, 525);
+			this.TLPanel2.Size = new System.Drawing.Size(425, 525);
 			this.TLPanel2.TabIndex = 4;
 			// 
 			// TLPanel3
@@ -3256,14 +3371,14 @@ namespace SIL.PublishingSolution
 			this.TLPanel3.Controls.Add(this.panel3, 0, 1);
 			this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
 			this.TLPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TLPanel3.Location = new System.Drawing.Point(530, 28);
+			this.TLPanel3.Location = new System.Drawing.Point(529, 28);
 			this.TLPanel3.MinimumSize = new System.Drawing.Size(331, 0);
 			this.TLPanel3.Name = "TLPanel3";
 			this.TLPanel3.RowCount = 2;
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLPanel3.Size = new System.Drawing.Size(342, 525);
+			this.TLPanel3.Size = new System.Drawing.Size(343, 525);
 			this.TLPanel3.TabIndex = 5;
 			// 
 			// panel3
@@ -3317,116 +3432,6 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.LocalizationManagerId = "Pathway";
 			this.l10NSharpExtender1.PrefixForNewItems = "ConfigurationTool";
 			// 
-			// tableLayoutPanel3
-			// 
-			this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel3.ColumnCount = 2;
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.12621F));
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.87379F));
-			this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel2, 0, 2);
-			this.tableLayoutPanel3.Controls.Add(this.ddlLanguage, 1, 3);
-			this.tableLayoutPanel3.Controls.Add(this.label8, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.label20, 0, 3);
-			this.tableLayoutPanel3.Controls.Add(this.ddlFiles, 1, 0);
-			this.tableLayoutPanel3.Controls.Add(this.label7, 0, 1);
-			this.tableLayoutPanel3.Controls.Add(this.ddlRedLetter, 1, 1);
-			this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 78);
-			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-			this.tableLayoutPanel3.RowCount = 4;
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(309, 122);
-			this.tableLayoutPanel3.TabIndex = 71;
-			// 
-			// flowLayoutPanel2
-			// 
-			this.flowLayoutPanel2.AutoSize = true;
-			this.tableLayoutPanel3.SetColumnSpan(this.flowLayoutPanel2, 2);
-			this.flowLayoutPanel2.Controls.Add(this.label1);
-			this.flowLayoutPanel2.Controls.Add(this.mobileIcon);
-			this.flowLayoutPanel2.Controls.Add(this.btnBrowse);
-			this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 57);
-			this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-			this.flowLayoutPanel2.Size = new System.Drawing.Size(183, 29);
-			this.flowLayoutPanel2.TabIndex = 72;
-			// 
-			// tableLayoutPanel4
-			// 
-			this.tableLayoutPanel4.ColumnCount = 2;
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-			this.tableLayoutPanel4.Controls.Add(this.lblTargetFileLocation, 0, 0);
-			this.tableLayoutPanel4.Controls.Add(this.txtFtpPassword, 1, 3);
-			this.tableLayoutPanel4.Controls.Add(this.txtFtpFileLocation, 0, 1);
-			this.tableLayoutPanel4.Controls.Add(this.label3, 0, 3);
-			this.tableLayoutPanel4.Controls.Add(this.label6, 0, 2);
-			this.tableLayoutPanel4.Controls.Add(this.txtFtpUsername, 1, 2);
-			this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 22);
-			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-			this.tableLayoutPanel4.RowCount = 4;
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(281, 95);
-			this.tableLayoutPanel4.TabIndex = 6;
-			// 
-			// tableLayoutPanel5
-			// 
-			this.tableLayoutPanel5.ColumnCount = 2;
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.375F));
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.625F));
-			this.tableLayoutPanel5.Controls.Add(this.label13, 0, 0);
-			this.tableLayoutPanel5.Controls.Add(this.txtSqlPassword, 1, 4);
-			this.tableLayoutPanel5.Controls.Add(this.txtSqlServerName, 0, 1);
-			this.tableLayoutPanel5.Controls.Add(this.label10, 0, 4);
-			this.tableLayoutPanel5.Controls.Add(this.label12, 0, 2);
-			this.tableLayoutPanel5.Controls.Add(this.txtSqlUsername, 1, 3);
-			this.tableLayoutPanel5.Controls.Add(this.txtSqlDBName, 1, 2);
-			this.tableLayoutPanel5.Controls.Add(this.label11, 0, 3);
-			this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 25);
-			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-			this.tableLayoutPanel5.RowCount = 5;
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel5.Size = new System.Drawing.Size(281, 119);
-			this.tableLayoutPanel5.TabIndex = 8;
-			// 
-			// tableLayoutPanel6
-			// 
-			this.tableLayoutPanel6.ColumnCount = 2;
-			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.45196F));
-			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.54804F));
-			this.tableLayoutPanel6.Controls.Add(this.label17, 0, 0);
-			this.tableLayoutPanel6.Controls.Add(this.txtWebFtpFldrNme, 1, 6);
-			this.tableLayoutPanel6.Controls.Add(this.label19, 0, 6);
-			this.tableLayoutPanel6.Controls.Add(this.txtWebUrl, 0, 1);
-			this.tableLayoutPanel6.Controls.Add(this.label16, 0, 2);
-			this.tableLayoutPanel6.Controls.Add(this.txtWebEmailID, 1, 5);
-			this.tableLayoutPanel6.Controls.Add(this.txtWebAdminUsrNme, 1, 2);
-			this.tableLayoutPanel6.Controls.Add(this.label18, 0, 5);
-			this.tableLayoutPanel6.Controls.Add(this.label15, 0, 3);
-			this.tableLayoutPanel6.Controls.Add(this.txtWebAdminSiteNme, 1, 4);
-			this.tableLayoutPanel6.Controls.Add(this.txtWebAdminPwd, 1, 3);
-			this.tableLayoutPanel6.Controls.Add(this.label14, 0, 4);
-			this.tableLayoutPanel6.Location = new System.Drawing.Point(2, 23);
-			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-			this.tableLayoutPanel6.RowCount = 7;
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel6.Size = new System.Drawing.Size(281, 175);
-			this.tableLayoutPanel6.TabIndex = 12;
-			// 
 			// ConfigurationTool
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3470,8 +3475,12 @@ namespace SIL.PublishingSolution
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.flowLayoutPanel1.PerformLayout();
 			this.tabMobile.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+			this.tableLayoutPanel3.ResumeLayout(false);
+			this.tableLayoutPanel3.PerformLayout();
+			this.flowLayoutPanel2.ResumeLayout(false);
+			this.flowLayoutPanel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.mobileIcon)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
 			this.tabOthers.ResumeLayout(false);
 			this.tabOthers.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picFonts)).EndInit();
@@ -3480,8 +3489,17 @@ namespace SIL.PublishingSolution
 			this.tabWeb.ResumeLayout(false);
 			this.tabWeb.PerformLayout();
 			this.groupBox3.ResumeLayout(false);
+			this.groupBox3.PerformLayout();
+			this.tableLayoutPanel6.ResumeLayout(false);
+			this.tableLayoutPanel6.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
+			this.tableLayoutPanel4.ResumeLayout(false);
+			this.tableLayoutPanel4.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
+			this.tableLayoutPanel5.ResumeLayout(false);
+			this.tableLayoutPanel5.PerformLayout();
 			this.tabPreview.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.picPreview)).EndInit();
 			this.tabPicture.ResumeLayout(false);
@@ -3500,16 +3518,6 @@ namespace SIL.PublishingSolution
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
-			this.tableLayoutPanel3.ResumeLayout(false);
-			this.tableLayoutPanel3.PerformLayout();
-			this.flowLayoutPanel2.ResumeLayout(false);
-			this.flowLayoutPanel2.PerformLayout();
-			this.tableLayoutPanel4.ResumeLayout(false);
-			this.tableLayoutPanel4.PerformLayout();
-			this.tableLayoutPanel5.ResumeLayout(false);
-			this.tableLayoutPanel5.PerformLayout();
-			this.tableLayoutPanel6.ResumeLayout(false);
-			this.tableLayoutPanel6.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
