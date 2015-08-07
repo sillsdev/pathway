@@ -182,18 +182,21 @@ namespace SIL.PublishingSolution
 			pageDict.Add("@page-bottom-right", "Bottom Right Margin");
 			pageDict.Add("@page-bottom-left", "Bottom Left Margin");
 			pageDict.Add("@page-bottom-center", "Bottom Center");
-			Common.SetupLocalization();
 			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
-			ColumnHeaderAllLocalization();
+			ColumnHeaderAddLocalization();
 		}
 
-		private static void ColumnHeaderAllLocalization()
+		private static void ColumnHeaderAddLocalization()
 		{
-			Common.L10NMngr.AddString("ConfigurationTool.Column.Name", "Name", "", "", "");
-			Common.L10NMngr.AddString("ConfigurationTool.Column.Description", "Description", "", "", "");
-			Common.L10NMngr.AddString("ConfigurationTool.Column.Comment", "Comment", "", "", "");
-			Common.L10NMngr.AddString("ConfigurationTool.Column.Type", "Type", "", "", "");
-			Common.L10NMngr.AddString("ConfigurationTool.Column.Shown", "Shown", "", "", "");
+			if (!Common.Testing)
+			{
+				Common.SetupLocalization();
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Name", "Name", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Description", "Description", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Comment", "Comment", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Type", "Type", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Shown", "Shown", "", "", "");
+			}
 		}
 
 		#endregion
