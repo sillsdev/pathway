@@ -182,9 +182,20 @@ namespace SIL.PublishingSolution
 			pageDict.Add("@page-bottom-right", "Bottom Right Margin");
 			pageDict.Add("@page-bottom-left", "Bottom Left Margin");
 			pageDict.Add("@page-bottom-center", "Bottom Center");
-
+			Common.SetupLocalization();
 			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
+			ColumnHeaderAllLocalization();
 		}
+
+		private static void ColumnHeaderAllLocalization()
+		{
+			Common.L10NMngr.AddString("ConfigurationTool.Column.Name", "Name", "", "", "");
+			Common.L10NMngr.AddString("ConfigurationTool.Column.Description", "Description", "", "", "");
+			Common.L10NMngr.AddString("ConfigurationTool.Column.Comment", "Comment", "", "", "");
+			Common.L10NMngr.AddString("ConfigurationTool.Column.Type", "Type", "", "", "");
+			Common.L10NMngr.AddString("ConfigurationTool.Column.Shown", "Shown", "", "", "");
+		}
+
 		#endregion
 
 		#region Properties
@@ -2935,6 +2946,7 @@ namespace SIL.PublishingSolution
 				grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
 			}
 
+			ColumnHeaderLocalization(grid);
 			if (grid.Columns.Count > 0)
 			{
 				grid.Columns[5].Visible = false; // Hiding the ApprovedBy column
@@ -2957,6 +2969,17 @@ namespace SIL.PublishingSolution
 					ShowInfoValue();
 				}
 			}
+		}
+
+		private static void ColumnHeaderLocalization(DataGridView grid)
+		{
+			grid.Columns[0].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Name", grid.Columns[0].HeaderText);
+			grid.Columns[1].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Description",
+				grid.Columns[1].HeaderText);
+			grid.Columns[2].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Comment",
+				grid.Columns[2].HeaderText);
+			grid.Columns[3].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Type", grid.Columns[3].HeaderText);
+			grid.Columns[4].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Shown", grid.Columns[4].HeaderText);
 		}
 
 		public bool CopyCustomStyleToSend(string folderPath)
