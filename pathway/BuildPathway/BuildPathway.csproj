@@ -338,7 +338,7 @@
     <UpdateReadme Readme="$(ProjectDir)ReadMePw.rtf" License="$(ProjectDir)License.rtf" Template="$(ProjectDir)UserInterface-tpl.wxs" />
     <ZeroCheck />
     <FileComponents FilesTemplate="Files$(ConfTag)-tpl.wxs" FeaturesTemplate="Features$(ConfTag)-tpl.wxs" />
-    <Copy SourceFiles="@(WixSoftware)" DestinationFiles="Wix\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(WixSoftware)" DestinationFiles="@(WixSoftware->'Wix\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="candle -nologo Features.wxs" WorkingDirectory="Wix" />
     <Exec Command="candle -nologo Install$(ConfTag)$(Edition).wxs " WorkingDirectory="Wix" />
     <Exec Command="candle -nologo UserInterface.wxs" WorkingDirectory="Wix" />
@@ -364,17 +364,17 @@
     <Copy SourceFiles="..\ThirdParty\sqlite3.dll" DestinationFiles="Files\ConfigurationTool\sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TestBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
     <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
-    <Copy SourceFiles="@(DicStyles)" DestinationFiles="Files\ConfigurationTool\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(ScrStyles)" DestinationFiles="Files\ConfigurationTool\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
-    <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="Files\ConfigurationTool\Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(Hyphenation)" DestinationFiles="Files\ConfigurationTool\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(Icons)" DestinationFiles="Files\ConfigurationTool\Icons\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(Graphic)" DestinationFiles="Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(Local)" DestinationFiles="Files\ConfigurationTool\localizations\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(EngLocal)" DestinationFiles="Files\ConfigurationTool\localizations\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(OS)' == 'Linux' " />
-    <Copy SourceFiles="@(Preprocessing)" DestinationFiles="Files\ConfigurationTool\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(BteHelp)" DestinationFiles="Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
-    <Copy SourceFiles="@(SeHelp)" DestinationFiles="Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'SE' " />
+    <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'Files\ConfigurationTool\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'Files\ConfigurationTool\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
+    <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'Files\ConfigurationTool\Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'Files\ConfigurationTool\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'Files\ConfigurationTool\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'Files\ConfigurationTool\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Local)" DestinationFiles="@(Local->'Files\ConfigurationTool\localizations\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EngLocal)" DestinationFiles="@(EngLocal->'Files\ConfigurationTool\localizations\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
+    <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'Files\ConfigurationTool\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
+    <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'Files\ConfigurationTool\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(BteStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(SeStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(Readme)" DestinationFolder="Files\ConfigurationTool" />
@@ -384,25 +384,25 @@
     <Copy SourceFiles="@(BteSettings)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
-    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' != 'EPUB'" />
-    <Copy SourceFiles="@(AllSamples)" DestinationFiles="Files\ConfigurationTool\Samples\Dictionary\%(RecursiveDir)\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(BteSamples)" DestinationFiles="Files\ConfigurationTool\Samples\Scripture\%(RecursiveDir)\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(epubFiles)" DestinationFiles="Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="Files\ConfigurationTool\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(PdfLicenseManager)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(ApplyPdfLicense)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(PdfLicense)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="Files\ConfigurationTool\TheWord\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
-    <!--Copy SourceFiles="@(SwordFiles)" DestinationFiles="Files\ConfigurationTool\Sword\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing' " /-->
-    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Edition)' != 'EPUB'" />
+    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'Files\ConfigurationTool\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
+    <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'Files\ConfigurationTool\Samples\Dictionary\%(RecursiveDir)\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'Files\ConfigurationTool\Samples\Scripture\%(RecursiveDir)\%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'Files\ConfigurationTool\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'Files\ConfigurationTool\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'Files\ConfigurationTool\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(PdfLicenseManager)" DestinationFiles="@(PdfLicenseManager->'Files\ConfigurationTool\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ApplyPdfLicense)" DestinationFiles="@(ApplyPdfLicense->'Files\ConfigurationTool\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(PdfLicense)" DestinationFiles="@(PdfLicense->'Files\ConfigurationTool\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'Files\ConfigurationTool\TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <!--Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'Files\ConfigurationTool\Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing' " /-->
+    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="Files\ConfigurationTool\Paratexmf\%(RecursiveDir)%(Filename)%(Extension)" Condition=" '$(OS)' == 'Linux' " />
-    <Copy SourceFiles="@(InstallTex)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(OS)' == 'Linux' " />
+    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'Files\ConfigurationTool\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'Files\ConfigurationTool\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\ConfigurationTool\Paratexmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
+    <Copy SourceFiles="@(InstallTex)" DestinationFiles="@(InstallTex->'Files\ConfigurationTool\%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
     <!-- Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'Files\ConfigurationTool\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " / -->
   </Target>
   <Target Name="AfterBuild">
@@ -499,17 +499,17 @@
     <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
-    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="Files\pwtex\bin\win32\%(Filename)%(Extension)" Condition="$(OS) != 'Linux'" />
-    <Copy SourceFiles="@(XeLaTexLinBin)" DestinationFiles="Files\pwtex\bin\i386-linux\%(Filename)%(Extension)" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
-    <Copy SourceFiles="@(XeLaTexLinBin64)" DestinationFiles="Files\pwtex\bin\x86_64-linux\%(Filename)%(Extension)" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
+    <Copy SourceFiles="@(XeLaTexLinBin)" DestinationFiles="@(XeLaTexLinBin->'Files\pwtex\bin\i386-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Copy SourceFiles="@(XeLaTexLinBin64)" DestinationFiles="@(XeLaTexLinBin64->'Files\pwtex\bin\x86_64-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
     <MakeDir Directories="Files\pwtex\temp" />
     <Exec Command="echo This file is a place holder&gt;Files\pwtex\temp\readme.txt" />
     <Delete Files="@(XeLaTexCache)" />
-    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <Exec Command="mktexlsr ..\..\texmf-dist" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="i386-linux" Condition="$(Platform) == 'x86'">
@@ -570,7 +570,7 @@
     <Delete Files="Files\ConfigurationTool\Lame\styles\CVS\Entries.Old" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />
   </Target>
   <Target Name="YouVersionBeforeBuild">
-    <Copy SourceFiles="@(YouVersion)" DestinationFiles="Files\PwYouVersion\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(YouVersion)" DestinationFiles="@(YouVersion->'Files\PwYouVersion\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <ItemGroup>
     <YouVersion Include="..\YouVersionConvert\PwYouVer\**\*.*" />

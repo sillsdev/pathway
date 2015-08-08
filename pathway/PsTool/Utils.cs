@@ -12,7 +12,9 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+#if !__MonoCS__
 using System.Management;
+#endif
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
