@@ -946,7 +946,7 @@ namespace SIL.PublishingSolution
 			key = ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value;
 			WriteAtImport(writeCss, attribute, key);
 
-			if (inputTypeBL.ToLower() == "scripture")
+			if (inputTypeBL.ToLower() == "scripture" && cTool.DdlReferenceFormat.SelectedItem != null)
 			{
 				attribute = "Reference Format";
 				key = ((ComboBoxItem)cTool.DdlReferenceFormat.SelectedItem).Value;
@@ -961,9 +961,12 @@ namespace SIL.PublishingSolution
 			key = ((ComboBoxItem)cTool.DdlRules.SelectedItem).Value;
 			WriteAtImport(writeCss, attribute, key);
 
-			attribute = "Sense";
-			key = ((ComboBoxItem)cTool.DdlSense.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (inputTypeBL.ToLower() == "dictionary" && cTool.DdlSense.Items.Count > 0)
+			{
+				attribute = "Sense";
+				key = ((ComboBoxItem) cTool.DdlSense.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
 			//Writing TextBox Values into Css
 			if (cTool.TxtPageGutterWidth.Text.Length > 0)
@@ -1469,6 +1472,13 @@ namespace SIL.PublishingSolution
 					}
 				}
 
+				if (control.GetType().Name == "TableLayoutPanel")
+				{
+					foreach (Control subControl in control.Controls)
+					{
+						_groupPropertyValue.Add(subControl.Text);
+					}
+				}
 				string val = control.Text;
 				_propertyValue.Add(val);
 			}
@@ -1532,7 +1542,7 @@ namespace SIL.PublishingSolution
 			{
 				LoadData();
 			}
-
+			//cTool.DdlTocLevel.Items.Clear();
 			ClearDropdownListItems();
 			Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulateFeatureSheet");
 			// populate the font drop-down if needed
@@ -3638,6 +3648,18 @@ namespace SIL.PublishingSolution
 					}
 				}
 
+				if (_groupPropertyValue.Count > 0 && _groupPropertyValue.Count >= g && control.GetType().Name == "TableLayoutPanel")
+				{
+					foreach (Control subControl in control.Controls)
+					{
+						string subValue = subControl.Text;
+						if (_groupPropertyValue[g++] != subValue)
+						{
+							return true;
+						}
+					}
+				}
+
 				if (control.GetType().Name == "CheckBox")
 				{
 					propertyModified = true;
@@ -4057,6 +4079,7 @@ namespace SIL.PublishingSolution
 				ClearPropertyTab(tabothers);
 				ClearPropertyTab(tabweb);
 				PopulateFeatureSheet(); //For TD-1194 // Load Default Values
+				ShowCSSValue();
 				SetPreviousLayoutSelect(cTool.StylesGrid);
 				SetSideBar();
 				ShowDataInGrid();
@@ -4080,6 +4103,7 @@ namespace SIL.PublishingSolution
 				LoadParam();
 				ClearPropertyTab(cTool.TabDisplay);
 				PopulateFeatureSheet(); //For TD-1194 // Load Default Values
+				ShowCSSValue();
 				SetPreviousLayoutSelect(cTool.StylesGrid);
 				SetSideBar();
 				ShowDataInGrid();
