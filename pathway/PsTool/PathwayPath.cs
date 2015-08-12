@@ -46,14 +46,14 @@ namespace SIL.Tool
                     Common.SupportFolder = "";
                     return (string)regObj;
                 }
-                if (Common.IsUnixOS())
-                {
-                    const string myPathwayDir = "/usr/lib/pathway";
-                    RegistryAccess.SetStringRegistryValue("PathwayDir", myPathwayDir);
-                    Common.SupportFolder = "";
-                    return myPathwayDir;
-                }
-                if (GetPathwayInstallerDirectoryForCurrentUserRegistry(out pathwayDir))
+	            if (Common.IsUnixOS() && !Common.Testing)
+	            {
+		            const string myPathwayDir = "/usr/lib/pathway";
+		            RegistryAccess.SetStringRegistryValue("PathwayDir", myPathwayDir);
+		            Common.SupportFolder = "";
+		            return myPathwayDir;
+	            }
+	            if (GetPathwayInstallerDirectoryForCurrentUserRegistry(out pathwayDir))
                 {
                     return pathwayDir;
                 }
