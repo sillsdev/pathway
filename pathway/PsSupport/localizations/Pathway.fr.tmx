@@ -34,7 +34,7 @@
         <seg>About Pathway Configuration Tool</seg>
       </tuv>
       <tuv xml:lang="fr">
-        <seg>Ouvrir le type de fichier Epub </seg>
+        <seg>À propos de Pathway Configuration Tool</seg>
       </tuv>
     </tu>
     <tu tuid="AboutPw.btnOk">
@@ -82,7 +82,7 @@
         <seg>Other project related information is available at:</seg>
       </tuv>
       <tuv xml:lang="fr">
-        <seg>Autre renseignements concernants ce projet sont disponibles à :</seg>
+        <seg>Autre renseignements concernants ce projet à :</seg>
       </tuv>
     </tu>
     <tu tuid="AboutPw.lblSilPathway">
