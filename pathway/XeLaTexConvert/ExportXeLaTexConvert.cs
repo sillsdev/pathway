@@ -766,7 +766,7 @@ namespace SIL.PublishingSolution
                             if (File.Exists(pdfFullName))
                             {
                                 string installedLocation = pdfFullName;
-                                var msg = LocalizationManager.GetString("ExportXelatex.OpenXelatexOutput.Message", "The output has been save in {0}.\n Please install the Xelatex application.", "");
+                                var msg = LocalizationManager.GetString("ExportXelatex.OpenXelatexOutput.Message", "The output has been saved in {0}.\n Please install the Xelatex application.", "");
                                 msg = string.Format(msg, installedLocation);
                                 MessageBox.Show(msg);
                             }
