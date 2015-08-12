@@ -246,7 +246,7 @@ namespace SIL.PublishingSolution
                         installedLocation = ldmlFullName;
                         
                         var msg = new[] { "Indesign application." };
-                        LocDB.Message("errInstallFile", "The output has been save in " + installedLocation, "Please install " + msg, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
+                        LocDB.Message("errInstallFile", "The output has been saved in " + installedLocation, "Please install " + msg, msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                     }
                 }
             }

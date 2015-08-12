@@ -2232,7 +2232,7 @@
     </tu>
     <tu tuid="ExportXelatex.OpenXelatexOutput.Message">
       <tuv xml:lang="en">
-        <seg>The output has been save in {0}.\n Please install the Xelatex application.</seg>
+        <seg>The output has been saved in {0}.\n Please install the Xelatex application.</seg>
       </tuv>
       <tuv xml:lang="ta">
         <seg>{0}. \ N Xelatex பயன்பாட்டை நிறுவ தயவு சேமி வருகிறது.</seg>
