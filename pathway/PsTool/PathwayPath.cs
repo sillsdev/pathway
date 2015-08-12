@@ -46,15 +46,13 @@ namespace SIL.Tool
                     Common.SupportFolder = "";
                     return (string)regObj;
                 }
-                if (Path.DirectorySeparatorChar == '/') //Test for Linux (see: http://www.mono-project.com/FAQ:_Technical)
+                if (Common.IsUnixOS())
                 {
                     const string myPathwayDir = "/usr/lib/pathway";
                     RegistryAccess.SetStringRegistryValue("PathwayDir", myPathwayDir);
                     Common.SupportFolder = "";
                     return myPathwayDir;
                 }
-
-
                 if (GetPathwayInstallerDirectoryForCurrentUserRegistry(out pathwayDir))
                 {
                     return pathwayDir;

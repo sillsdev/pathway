@@ -35,8 +35,8 @@ namespace epubConvert
 		        MessageBuilder.ToString());
 			msg = msg + @"</span>";
 			msg = msg + @"<span style='font-family:Charis SIL;font-size:100%;font-weight:bold'>";
-			msg = msg + @" " + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Folder", "Folder") +
-	                                  @" ";
+			msg = msg + @"&nbsp;" + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Folder", "Folder") +
+									  @"&nbsp;";
 	        msg = msg + @"</span>";
 			msg += @"<span style='font-family:Charis SIL;font-size:100%;'>";
 			msg = msg + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Part2",
