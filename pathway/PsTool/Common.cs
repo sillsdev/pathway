@@ -4655,21 +4655,26 @@ namespace SIL.Tool
 			    if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
 			        (fileInfo.Name.Contains("Writer")) || (fileInfo.Name.Contains("Validator")))
 			    {
-				    using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
+				    try
 				    {
-
-					    var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
-
-					    foreach (
-						    var stype in
-							    sAssembly.GetTypes()
-								    .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+					    using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
 					    {
-						    sAssembly.CreateInstance(stype.FullName);
+
+						    var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
+
+						    foreach (
+							    var stype in
+								    sAssembly.GetTypes()
+									    .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+						    {
+							    sAssembly.CreateInstance(stype.FullName);
+						    }
+
 					    }
-
 				    }
-
+				    catch
+				    {
+				    }
 			    }
 		    }
 		    GC.Collect();
