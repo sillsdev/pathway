@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tmx version="1.4">
-  <header srclang="fr" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.35.0" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
-    <prop type="x-appversion">1.13.1.4442</prop>
+  <header srclang="fr" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.39.0" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
+    <prop type="x-appversion">1.13.2.4487</prop>
     <prop type="x-hardlinebreakreplacement">\n</prop>
   </header>
   <body>
@@ -109,6 +109,46 @@
         <seg>N'inclure pas des images</seg>
       </tuv>
     </tu>
+    <tu tuid="ConfigurationTool.ConfigurationTool.btnApproved">
+      <tuv xml:lang="en">
+        <seg>...</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>...</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.ConfigurationTool.btnNext">
+      <tuv xml:lang="en">
+        <seg>&gt;</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>&gt;</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.ConfigurationTool.btnPrevious">
+      <tuv xml:lang="en">
+        <seg>&lt;</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>&lt;</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.ConfigurationTool.lblPct">
+      <tuv xml:lang="en">
+        <seg>%</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>%</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.ConfigurationTool.lnkLblUrl">
+      <tuv xml:lang="en">
+        <seg>http://pathway.sil.org</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>http://pathway.sil.org</seg>
+      </tuv>
+    </tu>
     <tu tuid="ConfigurationTool.LblPicPosition">
       <tuv xml:lang="en">
         <seg>Picture Position</seg>
@@ -190,15 +230,6 @@
         <seg>&amp;A propos de</seg>
       </tuv>
     </tu>
-    <tu tuid="ConfigurationTool.btnApproved">
-      <prop type="x-nolongerused">true</prop>
-      <tuv xml:lang="en">
-        <seg>...</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>...</seg>
-      </tuv>
-    </tu>
     <tu tuid="ConfigurationTool.btnBrowse">
       <tuv xml:lang="en">
         <seg>Browse...</seg>
@@ -223,15 +254,6 @@
         <seg>&amp;Mobile</seg>
       </tuv>
     </tu>
-    <tu tuid="ConfigurationTool.btnNext">
-      <prop type="x-nolongerused">true</prop>
-      <tuv xml:lang="en">
-        <seg>&gt;</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>&gt;</seg>
-      </tuv>
-    </tu>
     <tu tuid="ConfigurationTool.btnOthers">
       <tuv xml:lang="en">
         <seg>&amp;Others</seg>
@@ -246,15 +268,6 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>&amp;Papier</seg>
-      </tuv>
-    </tu>
-    <tu tuid="ConfigurationTool.btnPrevious">
-      <prop type="x-nolongerused">true</prop>
-      <tuv xml:lang="en">
-        <seg>&lt;</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>&lt;</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.btnScripture">
@@ -731,7 +744,7 @@
     </tu>
     <tu tuid="ConfigurationTool.lblNonSILFont">
       <tuv xml:lang="en">
-        <seg>If font is non-SIL:</seg>
+        <seg>If restricted:</seg>
       </tuv>
       <tuv xml:lang="fr">
         <seg>Si la police ne vient pas de SIL :</seg>
@@ -799,15 +812,6 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>En haut</seg>
-      </tuv>
-    </tu>
-    <tu tuid="ConfigurationTool.lblPct">
-      <prop type="x-nolongerused">true</prop>
-      <tuv xml:lang="en">
-        <seg>%</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>%</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.lblProjectUrl">
@@ -904,15 +908,6 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Justification verticale</seg>
-      </tuv>
-    </tu>
-    <tu tuid="ConfigurationTool.lnkLblUrl">
-      <prop type="x-nolongerused">true</prop>
-      <tuv xml:lang="en">
-        <seg>http://pathway.sil.org</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>http://pathway.sil.org</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.moreHelpToolStripMenuItem">
@@ -1580,7 +1575,6 @@
       </tuv>
     </tu>
     <tu tuid="EpubExportTypeDlg.btnexprtCancel">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Close</seg>
       </tuv>
@@ -1589,7 +1583,6 @@
       </tuv>
     </tu>
     <tu tuid="EpubExportTypeDlg.btnexprtEpub2">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>Epub&amp;2</seg>
       </tuv>
@@ -1598,7 +1591,6 @@
       </tuv>
     </tu>
     <tu tuid="EpubExportTypeDlg.btnexprtEpub3">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>Epub&amp;3</seg>
       </tuv>
@@ -1607,7 +1599,6 @@
       </tuv>
     </tu>
     <tu tuid="EpubExportTypeDlg.btnexprtfolder">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Folder</seg>
       </tuv>
@@ -1624,7 +1615,6 @@
       </tuv>
     </tu>
     <tu tuid="EpubValidateTypeDlg.btnBoth">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Both</seg>
       </tuv>
@@ -1633,7 +1623,6 @@
       </tuv>
     </tu>
     <tu tuid="EpubValidateTypeDlg.btnNeither">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Neither</seg>
       </tuv>
@@ -1642,7 +1631,6 @@
       </tuv>
     </tu>
     <tu tuid="EpubValidateTypeDlg.btnValidateEpub2">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>Epub&amp;2</seg>
       </tuv>
@@ -1651,7 +1639,6 @@
       </tuv>
     </tu>
     <tu tuid="EpubValidateTypeDlg.btnValidateEpub3">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>Epub&amp;3</seg>
       </tuv>
@@ -1675,8 +1662,15 @@
         <seg>Établir les valeurs par défaut</seg>
       </tuv>
     </tu>
+    <tu tuid="ExportThroughPathway.ExportThroughPathway.btnBrowseColophon">
+      <tuv xml:lang="en">
+        <seg>...</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>...</seg>
+      </tuv>
+    </tu>
     <tu tuid="ExportThroughPathway.ExportThroughPathway.btnBrowseSaveInFolder">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>...</seg>
       </tuv>
@@ -1746,15 +1740,6 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Exporter via Pathway</seg>
-      </tuv>
-    </tu>
-    <tu tuid="ExportThroughPathway.btnBrowseColophon">
-      <prop type="x-nolongerused">true</prop>
-      <tuv xml:lang="en">
-        <seg>...</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>...</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.btnCancel">
@@ -2078,20 +2063,11 @@
       </tuv>
     </tu>
     <tu tuid="FontWarningDlg.btn_OK">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;OK</seg>
       </tuv>
       <tuv xml:lang="fr">
         <seg>&amp;OK</seg>
-      </tuv>
-    </tu>
-    <tu tuid="InProcess.WindowTitle">
-      <tuv xml:lang="en">
-        <seg>Export In Process</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>Exportation en cours</seg>
       </tuv>
     </tu>
     <tu tuid="MainWindow.MoreMenuItem">
@@ -2288,7 +2264,6 @@
       </tuv>
     </tu>
     <tu tuid="frmResults.btnClose">
-      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>&amp;Close</seg>
       </tuv>
