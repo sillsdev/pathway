@@ -149,6 +149,8 @@ namespace SIL.PublishingSolution
 				grid.Columns[5].Visible = false; // CSS Filename     
 				grid.Columns[6].Visible = false; // StyleType
 			}
+			grid.Columns[0].HeaderText = LocalizationManager.GetString("PreviewPrintVia.Column.Name", "Name");
+			grid.Columns[1].HeaderText = LocalizationManager.GetString("PreviewPrintVia.Column.Description","Description");
 
 			if (grid.RowCount > 0)
 			{
