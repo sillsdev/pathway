@@ -343,7 +343,10 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\setcounter{page}{1} \r\n";
-            tableOfContent += "\\pagenumbering{arabic} ";
+			if (_cssClass.ContainsKey("@page:none-none"))
+				tableOfContent += "\\pagenumbering{gobble} ";
+			else
+				tableOfContent += "\\pagenumbering{arabic} ";
             sw.WriteLine(tableOfContent);
         }
 
@@ -725,7 +728,10 @@ namespace SIL.PublishingSolution
 
             if (Convert.ToBoolean(CopyrightInformation))
             {
-                tableOfContent += "\\pagenumbering{roman}  \r\n";
+				if (_cssClass.ContainsKey("@page:none-none"))
+					tableOfContent += "\\pagenumbering{gobble}  \r\n";
+				else
+					tableOfContent += "\\pagenumbering{roman}  \r\n";
                 tableOfContent += "\\setcounter{page}{3} \r\n";
                 tableOfContent += "\\input{" + CopyrightTexFilename + "} \r\n";
                 tableOfContent += "\\pagestyle{plain} \r\n";
@@ -735,7 +741,10 @@ namespace SIL.PublishingSolution
             {
                 if (tableOfContent != string.Empty)
                 {
-                    tableOfContent += "\\pagenumbering{roman}  \r\n";
+					if (_cssClass.ContainsKey("@page:none-none"))
+						tableOfContent += "\\pagenumbering{gobble}  \r\n";
+					else
+						tableOfContent += "\\pagenumbering{roman}  \r\n";
                     tableOfContent += "\\setcounter{page}{3} \r\n";
                     tableOfContent += "\\pagestyle{plain} \r\n";
                     tableOfContent += "\\newpage \r\n";
