@@ -4647,7 +4647,7 @@ namespace SIL.Tool
 	    public static void InitializeOtherProjects()
 	    {
 		    string pathwayDirectory = PathwayPath.GetPathwayDir();
-			if (pathwayDirectory == null) return;
+		    if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory)) return;
 
 		    foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
 		    {
@@ -4684,7 +4684,8 @@ namespace SIL.Tool
 	    {
 		    var namespacestoLocalize = new List<string>();
 		    var pathwayDirectory = PathwayPath.GetPathwayDir();
-		    if (pathwayDirectory == null) return null;
+		    if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory))
+			    return new[] {"SIL.PublishingSolution"};
 		    foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$"))
 			    )
 		    {
