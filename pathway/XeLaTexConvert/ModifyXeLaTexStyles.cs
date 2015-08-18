@@ -568,6 +568,7 @@ namespace SIL.PublishingSolution
             }
             tableOfContent += "\\pagestyle{plain} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
+			tableOfContent += "\\newpage \r\n";
             sw.WriteLine(tableOfContent);
         }
 
