@@ -337,8 +337,6 @@ namespace SIL.PublishingSolution
         private void InsertContentApplyFormat(StreamWriter sw)
         {
             String tableOfContent = string.Empty;
-			//tableOfContent += "\\newpage \r\n";
-			//tableOfContent += "\\thispagestyle{empty} \r\n";
             tableOfContent += "\\mbox{} \r\n";
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\newpage \r\n";
@@ -546,6 +544,7 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\newpage \r\n";
                 sw.WriteLine(tableOfContent);
                 InsertContentApplyFormat(sw);
+	            tableOfContent = "";
             }
 
             if (_projectType.ToLower() == "scripture")
