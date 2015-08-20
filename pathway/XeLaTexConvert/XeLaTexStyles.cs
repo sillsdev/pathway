@@ -38,6 +38,7 @@ namespace SIL.PublishingSolution
         public StringBuilder PageStyle = new StringBuilder();
         readonly Dictionary<string, string> _pageStyleFormat = new Dictionary<string, string>();
         private Dictionary<string, string> _langFontDictionary = new Dictionary<string, string>();
+        private bool _isHeaderRule = false, _isFooterRule = false;
 
         #endregion
 
@@ -123,6 +124,7 @@ namespace SIL.PublishingSolution
 
         private void CreateHeaderFooter()
         {
+            
             PageStyle.Append("\\pagestyle{plain}");
             PageStyle.AppendLine("\\pagestyle{fancy}");
 			PageStyle.AppendLine("\\fancyhead{}");
@@ -146,7 +148,7 @@ namespace SIL.PublishingSolution
                 pageName = "@page:right";
                 SetPageHeaderFooter(pageName);
             }
-            PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \r\n \\renewcommand{\\footrulewidth}{0.4pt} \r\n");
+            //PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \r\n \\renewcommand{\\footrulewidth}{0.4pt} \r\n");
             PageStyle.AppendLine("\\renewcommand{\\thefootnote}{\\alphalph{\\value{footnote}}} \r\n");
             
         }
@@ -159,6 +161,16 @@ namespace SIL.PublishingSolution
                 string currentPagePosition = pageName + "-" + searchKey[i];   // Ex: page:first-topleft
                 if (_cssProperty.ContainsKey(currentPagePosition))
                 {
+                    if (!_isHeaderRule && i <= 2)
+                    {
+                        PageStyle.AppendLine("\\renewcommand{\\headrulewidth}{0.4pt} \r\n");
+                        _isHeaderRule = true;
+                    }
+                    else if (!_isFooterRule && i >= 3 && pageName != "@page:first" && _cssProperty[currentPagePosition]["content"].Trim().Length > 2)
+                    {
+                        PageStyle.AppendLine("\\renewcommand{\\footrulewidth}{0.4pt} \r\n");
+                        _isFooterRule = true;
+                    }
                     Dictionary<string, string> cssProp = _cssProperty[currentPagePosition];
                     foreach (KeyValuePair<string, string> para in cssProp)
                     {
@@ -197,8 +209,6 @@ namespace SIL.PublishingSolution
                             _projInfo.HeaderReferenceFormat = para.Value;
                         }
                     }
-
-
                 }
             }
         }
