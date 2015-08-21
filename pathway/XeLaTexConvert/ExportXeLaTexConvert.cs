@@ -192,7 +192,7 @@ namespace SIL.PublishingSolution
 
             modifyXeLaTexStyles.XeLaTexPropertyFontStyleList = _xeLaTexPropertyFullFontStyleList;
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile,
-                                                include, _langFontCodeandName);
+                                                include, _langFontCodeandName, true);
         }
 
         private void InitilizeXelatexStyle(ModifyXeLaTexStyles modifyXeLaTexStyles)
@@ -531,8 +531,12 @@ namespace SIL.PublishingSolution
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
+	            bool createPageNumber = false;
+	            if (projInfo.DefaultXhtmlFileWithPath.IndexOf("PreserveFlexRev.xhtml") > 0)
+		            createPageNumber = true;
+
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
-                                                    xeLatexRevesalIndexFile, include, _langFontCodeandName);
+													xeLatexRevesalIndexFile, include, _langFontCodeandName, createPageNumber);
                 _xeLaTexPropertyFullFontStyleList = modifyXeLaTexStyles.XeLaTexPropertyFontStyleList;
 
                 if (newProperty.ContainsKey("TableofContent") && newProperty["TableofContent"].Count > 0)

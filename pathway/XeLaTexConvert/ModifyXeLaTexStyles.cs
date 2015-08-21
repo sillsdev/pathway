@@ -25,6 +25,7 @@ namespace SIL.PublishingSolution
     {
         #region Private Variables
 
+		private bool _createPageNumber;
         private string _projectPath;
         private string _pageStyleFormat;
         private string _xetexFullFile;
@@ -151,8 +152,9 @@ namespace SIL.PublishingSolution
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
-            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat, Dictionary<string, string> langFontDictionary)
+			Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat, Dictionary<string, string> langFontDictionary, bool createPageNumber)
         {
+			_createPageNumber = createPageNumber;
             _langFontDictionary = langFontDictionary;
             _projectPath = projectPath;
             _cssClass = cssClass;
@@ -340,12 +342,15 @@ namespace SIL.PublishingSolution
             tableOfContent += "\\mbox{} \r\n";
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\setcounter{page}{1} \r\n";
-			if (_cssClass.ContainsKey("@page:none-none"))
-				tableOfContent += "\\pagenumbering{gobble} ";
-			else
-				tableOfContent += "\\pagenumbering{arabic} ";
-            sw.WriteLine(tableOfContent);
+			if (_createPageNumber)
+	        {
+		        tableOfContent += "\\setcounter{page}{1} \r\n";
+		        if (_cssClass.ContainsKey("@page:none-none"))
+			        tableOfContent += "\\pagenumbering{gobble} ";
+		        else
+			        tableOfContent += "\\pagenumbering{arabic} ";
+	        }
+	        sw.WriteLine(tableOfContent);
         }
 
         private void MergeFile(string newFile1, string newFile2)

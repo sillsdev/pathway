@@ -1351,7 +1351,7 @@ namespace Test.XeLatex
             CloseFile(xetexFile);
 
             ModifyXeLaTexStyles modifyXeTexStyles = new ModifyXeLaTexStyles();
-            modifyXeTexStyles.ModifyStylesXML(_projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile, string.Empty, _langFontCodeandName);
+            modifyXeTexStyles.ModifyStylesXML(_projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile, string.Empty, _langFontCodeandName,true);
 
         }
 
