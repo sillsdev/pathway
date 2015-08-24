@@ -144,7 +144,7 @@ namespace SIL.PublishingSolution
             }
             if (!_mXslParams.ContainsKey("langInfo"))
             {
-                _mXslParams.Add("langInfo", Common.ParaTextDcLanguage(databaseName));
+                _mXslParams.Add("langInfo", Common.ParaTextDcLanguage(databaseName,false));
             }
             LoadStyleSheets();
         }

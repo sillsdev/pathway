@@ -3898,7 +3898,7 @@ namespace SIL.Tool
         /// <summary>
         /// Get the LangCode from the Database.ssf file and insert it in css file
         /// </summary>
-        public static string ParaTextDcLanguage(string dataBaseName)
+        public static string ParaTextDcLanguage(string dataBaseName,bool hyphenlang)
         {
             string dcLanguage = string.Empty;
             if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext00
@@ -3912,7 +3912,7 @@ namespace SIL.Tool
                 {
                     dcLanguage = xmlLangCode.InnerText;
                 }
-                xPath = "//ScriptureText/Language";
+				xPath = "//ScriptureText/Language";
                 XmlNode xmlLangNameNode = GetXmlNode(fileName, xPath);
                 if (xmlLangNameNode != null && xmlLangNameNode.InnerText != string.Empty)
                 {
@@ -3920,17 +3920,26 @@ namespace SIL.Tool
                     {
                         Dictionary<string, string> _languageCodes = new Dictionary<string, string>();
                         _languageCodes = LanguageCodesfromXMLFile();
-                        if (_languageCodes.Count > 0)
-                        {
-                            foreach (var languageCode in _languageCodes)
-                            {
-                                if (languageCode.Value.ToLower() == xmlLangNameNode.InnerText.ToLower())
-                                {
-                                    dcLanguage = languageCode.Key;
-                                    break;
-                                }
-                            }
-                        }
+	                    if (_languageCodes.Count > 0)
+	                    {
+		                    foreach (
+			                    var languageCode in
+				                    _languageCodes.Where(
+					                    languageCode => languageCode.Value.ToLower() == xmlLangNameNode.InnerText.ToLower()))
+		                    {
+			                    if (hyphenlang)
+			                    {
+				                    dcLanguage = _languageCodes.ContainsValue(languageCode.Key.ToLower())
+					                    ? _languageCodes.FirstOrDefault(x => x.Value == languageCode.Key.ToLower()).Key
+					                    : languageCode.Key;
+			                    }
+			                    else
+			                    {
+				                    dcLanguage = languageCode.Key;
+			                    }
+			                    break;
+		                    }
+	                    }
                     }
                     dcLanguage += ":" + xmlLangNameNode.InnerText;
                 }
@@ -4748,7 +4757,42 @@ namespace SIL.Tool
 
         #endregion
 
+		#region Hyphenation Settings
 
-        #endregion
-    }
+	    public static void EnableHyphenation()
+	    {
+		    try
+		    {
+			    OperatingSystem OS = Environment.OSVersion;
+			    if (OS.ToString().IndexOf("Microsoft") == 0)
+			    {
+				    string strFilePath;
+				    string strPath = @"SOFTWARE\Classes\.odt\LibreOffice.WriterDocument.1\ShellNew\";
+				    RegistryKey regKeyAppRoot = Registry.LocalMachine.OpenSubKey(strPath);
+				    strFilePath = (string) regKeyAppRoot.GetValue("FileName");
+				    strFilePath = strFilePath.Replace(@"template\shellnew\soffice.odt", @"extensions\");
+				    string[] files = Directory.GetFiles(strFilePath, "hyph*.dic", SearchOption.AllDirectories);
+				    if (files.Length > 0)
+				    {
+					    foreach (var lang in Param.HyphenLang.Split(','))
+						    foreach (var file in files)
+						    {
+							    if (file.Split(Convert.ToChar("_"))[1] == lang.Substring(0, lang.IndexOf(":", StringComparison.Ordinal)))
+							    {
+								    Param.IsHyphen = true;
+								    Param.HyphenationSelectedLanguagelist.Add(lang);
+							    }
+						    }
+				    }
+			    }
+		    }
+		    catch (Exception)
+		    {
+		    }
+
+	    }
+
+	    #endregion
+		#endregion
+	}
 }

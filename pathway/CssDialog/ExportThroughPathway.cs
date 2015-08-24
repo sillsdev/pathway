@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
@@ -380,11 +381,11 @@ namespace SIL.PublishingSolution
                 chkHyphen.Checked = false;
                 clbHyphenlang.Items.Clear();
                 //Loads Hyphenation related settings
-                if (InputType == "Scripture")
-                {
-                    LoadHyphenationSettings();
-                }
-                LoadProperty();
+	            if (InputType == "Scripture")
+	            {
+		            LoadHyphenationSettings();
+	            }
+	            LoadProperty();
                 EnableUIElements();
 
                 ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
@@ -414,33 +415,22 @@ namespace SIL.PublishingSolution
                 var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
                 Param.DatabaseName = _settingsHelper.Database;
                 Param.IsHyphen = false;
-                Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database);
+                Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database,true);
                 foreach (string filename in Directory.GetFiles(paratextpath, "*.txt"))
                 {
                     if (filename.Contains("hyphen"))
                     {
-                        chkHyphen.Enabled = true;
-                        chkHyphen.Checked = false;
                         Param.IsHyphen = true;
                         Param.HyphenFilepath = filename;
+	                    Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
                     }
                 }
             }
+			Common.EnableHyphenation();
             CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database, InputType);
-            chkHyphen.Checked = Param.HyphenEnable;
-            chkHyphen.Enabled = Param.IsHyphen;
             foreach (string lang in Param.HyphenLang.Split(','))
             {
-                if (chkHyphen.Checked == true)
-                {
-                    clbHyphenlang.Enabled = true;
                     clbHyphenlang.Items.Add(lang, (Param.HyphenationSelectedLanguagelist.Contains(lang) ? true : false));
-                }
-                else
-                {
-                    clbHyphenlang.Enabled = false;
-                    clbHyphenlang.Items.Add(lang, false);
-                }
             }
         }
 
@@ -574,7 +564,7 @@ namespace SIL.PublishingSolution
                 {
                     chkTOC.Checked = true;
                     chkTOC.Enabled = false;
-                }
+                }	            
             }
 
             // Processing Options tab
@@ -586,7 +576,22 @@ namespace SIL.PublishingSolution
                 chkReversalIndexes.Visible = false;
                 chkGrammarSketch.Visible = false; // currently this is false anyways (it's not implemented)
             }
-
+			if (ddlLayout.Text.Contains("LibreOffice"))
+			{
+				chkHyphen.Enabled = Param.IsHyphen;
+				chkHyphen.Checked = Param.HyphenEnable;
+				for (int i = 0; i < clbHyphenlang.Items.Count; i++)
+					clbHyphenlang.SetItemCheckState(i, ((Param.HyphenEnable && Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(clbHyphenlang.Items[i]))) ? CheckState.Checked : CheckState.Unchecked));
+				clbHyphenlang.Enabled = false;
+			}
+			else
+			{
+				chkHyphen.Enabled = false;
+				clbHyphenlang.Enabled = false;
+				chkHyphen.Checked = false;
+				while (clbHyphenlang.CheckedIndices.Count > 0)
+					clbHyphenlang.SetItemChecked(clbHyphenlang.CheckedIndices[0], false);
+			}
         }
 
         #region ValidateXMLVersion
@@ -1482,8 +1487,8 @@ namespace SIL.PublishingSolution
         {
             bool hyphencheck = chkHyphen.Checked;
             for (int i = 0; i < clbHyphenlang.Items.Count; i++)
-                clbHyphenlang.SetItemCheckState(i, ((hyphencheck && Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(i))) ? CheckState.Checked : CheckState.Unchecked));
-            clbHyphenlang.Enabled = hyphencheck;
+				clbHyphenlang.SetItemCheckState(i, ((hyphencheck && Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(clbHyphenlang.Items[i]))) ? CheckState.Checked : CheckState.Unchecked));
+            clbHyphenlang.Enabled = false;
         }
     }
 }
