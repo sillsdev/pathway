@@ -569,6 +569,7 @@ namespace SIL.PublishingSolution
                 }
                 tableOfContent += "\r\n";
                 tableOfContent += "\\newpage \r\n";
+				InsertContentApplyFormat(sw);
             }
             tableOfContent += "\\pagestyle{plain} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
