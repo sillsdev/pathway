@@ -577,17 +577,18 @@ namespace SIL.PublishingSolution
             if (_style == "s")
             {
                 string booksID = _bookCodeName + "." + _chapterNumber + "." + _verseNumber;
+				
                 if (!_isFirstScope)
                 {
                     _writer.WriteEndElement();
-
-                    _mappingScopeChapterandVerse.Add(_scopeKey,
-                                                     _scopeChapterandVerse[0].ToString() + "-" +
-                                                     _scopeChapterandVerse[_scopeChapterandVerse.Count - 1].ToString());
-                    _scopeKey = string.Empty;
-                    _scopeChapterandVerse.Clear();
+					if (_scopeKey != string.Empty && !_mappingScopeChapterandVerse.ContainsKey(_scopeKey) && _scopeChapterandVerse.Count > 0)
+					{
+						_mappingScopeChapterandVerse.Add(_scopeKey, _scopeChapterandVerse[0].ToString() + "-" + _scopeChapterandVerse[_scopeChapterandVerse.Count - 1].ToString());
+					}
+					_scopeKey = string.Empty;
+					_scopeChapterandVerse.Clear();
                 }
-                _scopeKey = booksID;
+				_scopeKey = booksID;
                 _writer.WriteStartElement("div");
                 _writer.WriteAttributeString("scope", booksID);
                 _writer.WriteAttributeString("type", "section");
@@ -972,10 +973,11 @@ namespace SIL.PublishingSolution
 
         private void ClearScope()
         {
-            _mappingScopeChapterandVerse.Add(_scopeKey,
-                                             _scopeChapterandVerse[0].ToString() + "-" +
-                                             _scopeChapterandVerse[_scopeChapterandVerse.Count - 1].ToString());
-            _scopeKey = string.Empty;
+			if (_scopeKey != string.Empty && !_mappingScopeChapterandVerse.ContainsKey(_scopeKey) && _scopeChapterandVerse.Count > 0)
+			{
+				_mappingScopeChapterandVerse.Add(_scopeKey, _scopeChapterandVerse[0].ToString() + "-" + _scopeChapterandVerse[_scopeChapterandVerse.Count - 1].ToString());
+			}
+	        _scopeKey = string.Empty;
             _scopeChapterandVerse.Clear();
         }
 
