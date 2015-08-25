@@ -18,6 +18,7 @@
 using System;
 using System.Configuration;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -875,7 +876,7 @@ namespace SIL.PublishingSolution
 		private void ConfigurationTool_Load(object sender, EventArgs e)
 		{
 			SetUpErrorHandling();
-
+            UpdateFontOnL10NSharp(LocalizationManager.UILanguageId);
 
 			_cToolBL = new ConfigurationToolBL();
 			_cToolBL.inputTypeBL = InputType;
@@ -1063,6 +1064,90 @@ namespace SIL.PublishingSolution
 			_cToolBL.SetGotFocusValueBL(sender);
 		}
 		#endregion
+
+        #region UI Language Fonts
+
+        /// <summary>
+        /// To set the font-name and font-size to the controls in the form.
+        /// </summary>
+        /// <param name="langId"></param>
+        private void UpdateFontOnL10NSharp(string langId)
+        {
+            string fontName = "Microsoft Sans Serif";
+            float fontSize = 8.25F;
+
+            if (langId == "ta")
+            {
+                fontName = "Latha";
+                fontSize = 6.50F;
+            }
+
+            //For all labels and textboxes
+            List<Control> allControls = GetAllControls(this);
+            allControls.ForEach(k => k.Font = new Font(fontName, fontSize));
+            //For ToolStripMenu Items
+            for (int i = 0; i < this.toolStripMain.Items.Count; i++)
+            {
+                toolStripMain.Items[i].Font = new Font(fontName, fontSize, FontStyle.Bold);
+            }
+            //For TabControl
+            this.tabControl1.Font = new Font(fontName, fontSize, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
+        }
+
+        /// <summary>
+        /// Get the list of controls in the form
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        private List<Control> GetAllControls(Control container, List<Control> list)
+        {
+            var ignoreControls = new List<string>();
+            ignoreControls = IgnoreControlList();
+            foreach (Control c in container.Controls)
+            {
+                if (c.Controls.Count > 0)
+                    list = GetAllControls(c, list);
+                else
+                {
+                    if (!ignoreControls.Contains(c.Name))
+                    {
+                        list.Add(c);
+                    }
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// List og Ignored controls which not under UILanguage changes
+        /// </summary>
+        /// <returns>List of ignored items</returns>
+        private List<string> IgnoreControlList()
+        {
+            var ignoreControls = new List<string>();
+            ignoreControls.Add("lblType");
+            ignoreControls.Add("lblInfoCaption");
+            ignoreControls.Add("txtCss");
+            ignoreControls.Add("txtName");
+            ignoreControls.Add("txtDesc");
+            ignoreControls.Add("txtComment");
+
+            return ignoreControls;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="container"></param>
+        /// <returns></returns>
+        private List<Control> GetAllControls(Control container)
+        {
+            return GetAllControls(container, new List<Control>());
+        }
+
+        #endregion
 
 		private void EditCSS(object sender, EventArgs e)
 		{
