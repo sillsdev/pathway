@@ -48,6 +48,7 @@ namespace Test.UIConfigurationToolTest
         [TestFixtureSetUp]
         protected void SetUp()
         {
+	        Common.Testing = true;
             _configTool = new ConfigurationTool();
 
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");

@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.IO;
 using JWTools;
 using L10NSharp;
+using SilTools;
 using SIL.Tool;
 using SIL.Tool.Localization;
 
@@ -63,8 +64,10 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void Export(string outFullName)
         {
+			Common.SetupLocalization();
             Debug.Assert(DataType == "Scripture" || DataType == "Dictionary", "DataType must be Scripture or Dictionary");
             Debug.Assert(outFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "full path for output must be given");
+			string caption = LocalizationManager.GetString("PsExport.ExportClick.Caption", "Pathway Export", "");
             try
 
             {
@@ -129,7 +132,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    MessageBox.Show(string.Format(err.ToString(), err.FullFilePath), "Pathway Export",
+					Utils.MsgBox(string.Format(err.ToString(), err.FullFilePath), caption,
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return;
@@ -143,7 +146,7 @@ namespace SIL.PublishingSolution
                 else
                 {
                     var msg = LocalizationManager.GetString("PsExport.ExportClick.Message", "Sorry! You might not have permission to use this resource.", "");
-                    MessageBox.Show(string.Format(err.ToString(), msg), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Utils.MsgBox(string.Format(err.ToString(), msg), caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return;
             }
@@ -157,7 +160,7 @@ namespace SIL.PublishingSolution
                 {
                     if (ex.ToString().IndexOf("Module1.xml") == -1)
                     {
-                        MessageBox.Show(ex.ToString(), @"Pathway Export", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						Utils.MsgBox(ex.ToString(), caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 return;

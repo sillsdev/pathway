@@ -192,7 +192,7 @@ namespace SIL.PublishingSolution
 
             modifyXeLaTexStyles.XeLaTexPropertyFontStyleList = _xeLaTexPropertyFullFontStyleList;
             modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass, xeLatexFullFile,
-                                                include, _langFontCodeandName);
+                                                include, _langFontCodeandName, true);
         }
 
         private void InitilizeXelatexStyle(ModifyXeLaTexStyles modifyXeLaTexStyles)
@@ -531,8 +531,12 @@ namespace SIL.PublishingSolution
                 ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
                 modifyXeLaTexStyles.XelatexDocumentOpenClosedRequired = true;
                 modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
+	            bool createPageNumber = false;
+	            if (projInfo.DefaultXhtmlFileWithPath.IndexOf("PreserveFlexRev.xhtml") > 0)
+		            createPageNumber = true;
+
                 modifyXeLaTexStyles.ModifyStylesXML(projInfo.ProjectPath, xeLatexFile, newProperty, cssClass,
-                                                    xeLatexRevesalIndexFile, include, _langFontCodeandName);
+													xeLatexRevesalIndexFile, include, _langFontCodeandName, createPageNumber);
                 _xeLaTexPropertyFullFontStyleList = modifyXeLaTexStyles.XeLaTexPropertyFontStyleList;
 
                 if (newProperty.ContainsKey("TableofContent") && newProperty["TableofContent"].Count > 0)
@@ -568,9 +572,12 @@ namespace SIL.PublishingSolution
             var systemFontList = FontFamily.Families;
             if (systemFontList.Length != XeLaTexInstallation.GetXeLaTexFontCount())
             {
+				var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
+	            if (!Directory.Exists(xelatexPath))
+		            return;
+
                 using (var p2 = new Process())
                 {
-                    var xelatexPath = XeLaTexInstallation.GetXeLaTexDir();
                     if (!Common.IsUnixOS())
                     {
                         xelatexPath = Common.PathCombine(xelatexPath, "bin");
@@ -588,6 +595,11 @@ namespace SIL.PublishingSolution
 
         public void CallXeLaTex(PublicationInformation projInfo, string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
+			if(Common.Testing)
+			{
+				return;
+			}
+
             string originalDirectory = Directory.GetCurrentDirectory();
             string[] pdfFiles = Directory.GetFiles(Path.GetDirectoryName(xeLatexFullFile), "*.pdf");
             foreach (string pdfFile in pdfFiles)
@@ -758,7 +770,7 @@ namespace SIL.PublishingSolution
                             if (File.Exists(pdfFullName))
                             {
                                 string installedLocation = pdfFullName;
-                                var msg = LocalizationManager.GetString("ExportXelatex.OpenXelatexOutput.Message", "The output has been save in {0}.\n Please install the Xelatex application.", "");
+                                var msg = LocalizationManager.GetString("ExportXelatex.OpenXelatexOutput.Message", "The output has been saved in {0}.\n Please install the Xelatex application.", "");
                                 msg = string.Format(msg, installedLocation);
                                 MessageBox.Show(msg);
                             }

@@ -1134,7 +1134,7 @@ namespace SIL.PublishingSolution
                     }
                     if (!string.IsNullOrEmpty(toPath))
                     {
-                        if (fromPath != Common.PathCombine(toPath, Path.GetFileName(fromPath)))
+						if (fromPath != Common.PathCombine(toPath, Path.GetFileName(fromPath)) && Directory.Exists(Common.PathCombine(toPath, Path.GetFileName(fromPath))))
                             File.Copy(fromPath, Common.PathCombine(toPath, Path.GetFileName(fromPath)), true);
                     }
                 }

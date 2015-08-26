@@ -57,7 +57,11 @@ namespace SIL.PublishingSolution
                 _isFromExe = Common.CheckExecutionPath();
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
-                EnableHyphenation();
+	            if (Param.HyphenEnable)
+	            {
+		            IsHyphenEnabled = true;
+	            }
+                //EnableHyphenation();
                 GetGuidewordLength(cssProperty);
                 InitializeObject(outputFile); // Creates new Objects
                 LoadAllProperty();  // Loads all properties
@@ -92,42 +96,14 @@ namespace SIL.PublishingSolution
                         _guidewordLength = Convert.ToInt16(IdAllClass["guidewordLength"]["guideword-length"]);
                     }
                 }
-                _guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
+                //_guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
             }
         }
 
         /// <summary>
         /// Enabling hyphenation
         /// </summary>
-        private void EnableHyphenation()
-        {
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-            {
-                if (!Param.HyphenEnable)
-                {
-                    try
-                    {
-                        OperatingSystem OS = Environment.OSVersion;
-                        if (OS.ToString().IndexOf("Microsoft") == 0)
-                        {
-                            string strFilePath;
-                            string strPath = @"SOFTWARE\Classes\.odt\LibreOffice.WriterDocument.1\ShellNew\";
-                            RegistryKey regKeyAppRoot = Registry.LocalMachine.OpenSubKey(strPath);
-                            strFilePath = (string) regKeyAppRoot.GetValue("FileName");
-                            strFilePath = strFilePath.Replace(@"template\shellnew\soffice.odt", @"extensions\");
-                            string[] files = Directory.GetFiles(strFilePath, "hyph*.dic", SearchOption.AllDirectories);
-                            if (files.Length > 0)
-                            {
-                                IsHyphenEnabled = true;
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
-            }
-        }
+        
 
         private string GetLanguageForReversalNumber()
         {
@@ -774,7 +750,6 @@ namespace SIL.PublishingSolution
             CreatePageFirstPage();
             if (_guidewordLength == 0 && _projInfo.ProjectInputType.ToLower() == "dictionary") return;
             CreateHeaderFooter();
-            
         }
 
         private void CreatePageFirstPage()
@@ -1651,8 +1626,8 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:font-size-complex", _defaultFontSize);
             _writer.WriteAttributeString("style:language-complex", "zxx");
             _writer.WriteAttributeString("style:country-complex", "none");
-            _writer.WriteAttributeString("fo:hyphenate", "false");
-            _writer.WriteAttributeString("fo:hyphenation-remain-char-count", "2");
+	        _writer.WriteAttributeString("fo:hyphenate", IsHyphenEnabled ? "true" : "false");
+	        _writer.WriteAttributeString("fo:hyphenation-remain-char-count", "2");
             _writer.WriteAttributeString("fo:hyphenation-push-char-count", "2");
             _writer.WriteEndElement();
             _writer.WriteEndElement();

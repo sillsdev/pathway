@@ -218,7 +218,7 @@ namespace SIL.PublishingSolution
             if (!isUnixOS)
             {
                 Object princePath = regPrinceKey.GetValue("InstallLocation");
-                _fullPrincePath = Common.PathCombine((string) princePath, "Engine/Bin/Prince.exe");
+                _fullPrincePath = Common.PathCombine((string) princePath, "Engine/bin/prince.exe");
 
                 if (File.Exists(_fullPrincePath))
                 {

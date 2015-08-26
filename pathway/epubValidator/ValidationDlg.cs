@@ -29,7 +29,7 @@ namespace epubValidator
         ResourceManager _rm = new ResourceManager("epubValidator.Properties.Resources", typeof(ValidationDialog).Assembly);
         public ValidationDialog()
         {
-            Common.SetupLocalization("epubValidator");
+	        Common.SetupLocalization();
             InitializeComponent();
         }
 

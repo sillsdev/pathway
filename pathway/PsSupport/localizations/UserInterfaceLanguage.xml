@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<UILanguage>
+  <string>ta</string>
+  <fontstyle>
+    <font lang="en" name="Microsoft Sans Serif" size="8.25" />
+    <font lang="fr" name="Microsoft Sans Serif" size="8.25" />
+    <font lang="ta" name="Latha" size="7" />
+  </fontstyle>
+</UILanguage>

@@ -25,6 +25,7 @@ namespace SIL.PublishingSolution
     {
         #region Private Variables
 
+		private bool _createPageNumber;
         private string _projectPath;
         private string _pageStyleFormat;
         private string _xetexFullFile;
@@ -151,8 +152,9 @@ namespace SIL.PublishingSolution
         #endregion
 
         public void ModifyStylesXML(string projectPath, StreamWriter xetexFile, Dictionary<string, Dictionary<string, string>> newProperty,
-            Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat, Dictionary<string, string> langFontDictionary)
+			Dictionary<string, Dictionary<string, string>> cssClass, string xetexFullFile, string pageStyleFormat, Dictionary<string, string> langFontDictionary, bool createPageNumber)
         {
+			_createPageNumber = createPageNumber;
             _langFontDictionary = langFontDictionary;
             _projectPath = projectPath;
             _cssClass = cssClass;
@@ -337,14 +339,18 @@ namespace SIL.PublishingSolution
         private void InsertContentApplyFormat(StreamWriter sw)
         {
             String tableOfContent = string.Empty;
-            tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\thispagestyle{empty} \r\n";
             tableOfContent += "\\mbox{} \r\n";
             tableOfContent += "\\newpage \r\n";
             tableOfContent += "\\newpage \r\n";
-            tableOfContent += "\\setcounter{page}{1} \r\n";
-            tableOfContent += "\\pagenumbering{arabic} ";
-            sw.WriteLine(tableOfContent);
+			if (_createPageNumber)
+	        {
+		        tableOfContent += "\\setcounter{page}{1} \r\n";
+		        if (_cssClass.ContainsKey("@page:none-none"))
+			        tableOfContent += "\\pagenumbering{gobble} ";
+		        else
+			        tableOfContent += "\\pagenumbering{arabic} ";
+	        }
+	        sw.WriteLine(tableOfContent);
         }
 
         private void MergeFile(string newFile1, string newFile2)
@@ -543,6 +549,7 @@ namespace SIL.PublishingSolution
                 tableOfContent += "\\newpage \r\n";
                 sw.WriteLine(tableOfContent);
                 InsertContentApplyFormat(sw);
+	            tableOfContent = "";
             }
 
             if (_projectType.ToLower() == "scripture")
@@ -562,9 +569,11 @@ namespace SIL.PublishingSolution
                 }
                 tableOfContent += "\r\n";
                 tableOfContent += "\\newpage \r\n";
+				InsertContentApplyFormat(sw);
             }
             tableOfContent += "\\pagestyle{plain} \r\n";
             tableOfContent += "\\tableofcontents \r\n";
+			tableOfContent += "\\newpage \r\n";
             sw.WriteLine(tableOfContent);
         }
 
@@ -593,7 +602,7 @@ namespace SIL.PublishingSolution
                 string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
                 if (CoverPageImagePath.Trim() != "")
                 {
-                    if (CoverPageImagePath != destinctionPath)
+					if (CoverPageImagePath != destinctionPath && Directory.Exists(xeLaTexInstallationPath))
                         File.Copy(CoverPageImagePath, destinctionPath, true);
 
                     tableOfContent += "\\color{black} \r\n";
@@ -697,7 +706,9 @@ namespace SIL.PublishingSolution
                                 File.Copy(copyRightFilePath, logoTitleFileName, true);
                                 File.Copy(copyRightFilePath, Common.PathCombine(_projectPath, logoFileName), true);
 
-                                File.Copy(copyRightFilePath, Common.PathCombine(xeLaTexInstallationPath, logoFileName), true);
+								if (Directory.Exists(xeLaTexInstallationPath))
+									File.Copy(copyRightFilePath, Common.PathCombine(xeLaTexInstallationPath, logoFileName), true);
+
                             }
                         }
                     }
@@ -723,7 +734,10 @@ namespace SIL.PublishingSolution
 
             if (Convert.ToBoolean(CopyrightInformation))
             {
-                tableOfContent += "\\pagenumbering{roman}  \r\n";
+				if (_cssClass.ContainsKey("@page:none-none"))
+					tableOfContent += "\\pagenumbering{gobble}  \r\n";
+				else
+					tableOfContent += "\\pagenumbering{roman}  \r\n";
                 tableOfContent += "\\setcounter{page}{3} \r\n";
                 tableOfContent += "\\input{" + CopyrightTexFilename + "} \r\n";
                 tableOfContent += "\\pagestyle{plain} \r\n";
@@ -733,7 +747,10 @@ namespace SIL.PublishingSolution
             {
                 if (tableOfContent != string.Empty)
                 {
-                    tableOfContent += "\\pagenumbering{roman}  \r\n";
+					if (_cssClass.ContainsKey("@page:none-none"))
+						tableOfContent += "\\pagenumbering{gobble}  \r\n";
+					else
+						tableOfContent += "\\pagenumbering{roman}  \r\n";
                     tableOfContent += "\\setcounter{page}{3} \r\n";
                     tableOfContent += "\\pagestyle{plain} \r\n";
                     tableOfContent += "\\newpage \r\n";

@@ -72,7 +72,6 @@ namespace SIL.Tool
         public static void ReadHyphenationSettings(string projName, string exportType)
         {
             Param.HyphenEnable = false;
-            Param.HyphenationSelectedLanguagelist.Clear();
             if (string.IsNullOrEmpty(projName))
                 return;
 
@@ -89,18 +88,6 @@ namespace SIL.Tool
                     if (xExistProjnode.Attributes != null)
                     {
                         Param.HyphenEnable = (Param.IsHyphen) && Convert.ToBoolean(xExistProjnode.Attributes["enable"].Value);
-                        var value = xExistProjnode.Attributes["languages"].Value;
-                        if (value != null)
-                        {
-                            string selectlang= value;
-                            if (selectlang.Length > 0)
-                            {
-                                foreach (string lang in selectlang.Split(','))
-                                {
-                                    Param.HyphenationSelectedLanguagelist.Add(lang);
-                                }
-                            }
-                        }
                     }
                 }
             }

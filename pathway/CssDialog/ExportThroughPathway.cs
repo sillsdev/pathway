@@ -32,10 +32,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
+using SilTools;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -60,6 +62,7 @@ namespace SIL.PublishingSolution
         private string _sDateTime = string.Empty;
         public ExportThroughPathway()
         {
+			Common.SetupLocalization();
             InitializeComponent();
             _helpTopic = "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
             _fromPlugIn = true;
@@ -325,66 +328,50 @@ namespace SIL.PublishingSolution
             try
             {
                 AssignFolderDateTime();
-
                 if (!Common.isRightFieldworksVersion())
                 {
                     var message = LocalizationManager.GetString("ExportThroughPathway.ExportThroughPathwayLoad.Message", "Please download and install a Pathway version compatible with your software", "");
-                    const string caption = "Incompatible Pathway Version";
-                    MessageBox.Show(message, caption, MessageBoxButtons.OK,
+					string caption = LocalizationManager.GetString("ExportThroughPathway.ExportThroughPathwayLoad.ProjectName", "Incompatible Pathway Version", "");
+					Utils.MsgBox(message, caption, MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
                     DialogResult = DialogResult.Cancel;
                     Close();
                 }
                 _isUnixOS = Common.UnixVersionCheck();
                 PopulateFilesFromPreprocessingFolder();
-                
+
                 // Load the .ssf or .ldml as appropriate
                 _settingsHelper = new SettingsHelper(DatabaseName);
                 _settingsHelper.LoadValues();
 
-                if (this.Text != "Set Defaults")
-                {
-                    // not setting defaults, just opening the dialog:
-                    // load the settings file and migrate it if necessary
-                    Param.LoadSettings();
-                    Param.SetValue(Param.InputType, InputType);
-                    Param.LoadSettings();
-                    ValidateXMLVersion(Param.SettingPath);
-                }
-                else
-                {
-                    // setting defaults: just load the settings file (don't migrate)
-                    Param.SetValue(Param.InputType, InputType);
-                    Param.LoadSettings();
-                    // add the input type (to give a little more information to the user)
-                    Text += " - " + InputType;
-                    isFromConfigurationTool = true;
-                }
+                LoadDefaultSettings();
 
                 // get the current organization
                 Organization = Param.GetOrganization();
 
-                if (Organization == "")
-                {
-                    // no organization set yet -- display the Select Organization dialog
-                    var dlg = new SelectOrganizationDialog(InputType);
-                    if (Text.Contains("Set Defaults"))
-                    {
-                        // if we're setting defaults, provide a clue as to what they're setting the defaults for
-                        dlg.Text += " - " + InputType;
-                    }
-                    if (dlg.ShowDialog() == DialogResult.OK)
-                    {
-                        Organization = dlg.Organization;
-                        PopulateFromSettings();
-                    }
-                    else
-                    {
-                        // User pressed cancel - exit out of the export process altogether
-                        DialogResult = DialogResult.Cancel;
-                        Close();
-                    }
-                }
+	            if (Organization == "")
+	            {
+		            // no organization set yet -- display the Select Organization dialog
+		            var dlg = new SelectOrganizationDialog(InputType);
+		            if (dlg.ShowDialog() == DialogResult.OK)
+		            {
+			            Organization = dlg.Organization;
+			            PopulateFromSettings();
+		            }
+		            else
+		            {
+			            // User pressed cancel - exit out of the export process altogether
+			            DialogResult = DialogResult.Cancel;
+			            Close();
+		            }
+	            }
+	            else
+	            {
+					if (DatabaseName == "{Project_Name}")
+					{
+						this.Text += " - " + InputType;
+					}
+	            }
                 LoadAvailFormats();
                 LoadAvailStylesheets();
                 IsExpanded = false;
@@ -394,13 +381,13 @@ namespace SIL.PublishingSolution
                 chkHyphen.Checked = false;
                 clbHyphenlang.Items.Clear();
                 //Loads Hyphenation related settings
-                if (InputType == "Scripture")
-                {
-                    LoadHyphenationSettings();
-                }
-                LoadProperty();
+	            if (InputType == "Scripture")
+	            {
+		            LoadHyphenationSettings();
+	            }
+	            LoadProperty();
                 EnableUIElements();
-                
+
                 ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
                 if (AppDomain.CurrentDomain.FriendlyName.ToLower().IndexOf("configurationtool") == -1)
                 {
@@ -408,6 +395,16 @@ namespace SIL.PublishingSolution
                 }
             }
             catch { }
+        }
+
+        private void LoadDefaultSettings()
+        {
+            // not setting defaults, just opening the dialog:
+            // load the settings file and migrate it if necessary
+            Param.LoadSettings();
+            Param.SetValue(Param.InputType, InputType);
+            Param.LoadSettings();
+            isFromConfigurationTool = true;
         }
 
         private void LoadHyphenationSettings()
@@ -418,33 +415,22 @@ namespace SIL.PublishingSolution
                 var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
                 Param.DatabaseName = _settingsHelper.Database;
                 Param.IsHyphen = false;
-                Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database);
-                foreach (string filename in Directory.GetFiles(paratextpath,"*.txt"))
+                Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database,true);
+                foreach (string filename in Directory.GetFiles(paratextpath, "*.txt"))
                 {
                     if (filename.Contains("hyphen"))
                     {
-                        chkHyphen.Enabled = true;
-                        chkHyphen.Checked = false;
                         Param.IsHyphen = true;
                         Param.HyphenFilepath = filename;
+	                    Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
                     }
                 }
             }
-            CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database,InputType);
-            chkHyphen.Checked = Param.HyphenEnable;
-            chkHyphen.Enabled = Param.IsHyphen;
+			Common.EnableHyphenation();
+            CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database, InputType);
             foreach (string lang in Param.HyphenLang.Split(','))
             {
-                if (chkHyphen.Checked == true)
-                {
-                    clbHyphenlang.Enabled = true;
                     clbHyphenlang.Items.Add(lang, (Param.HyphenationSelectedLanguagelist.Contains(lang) ? true : false));
-                }
-                else
-                {
-                    clbHyphenlang.Enabled = false;
-                    clbHyphenlang.Items.Add(lang, false);
-                }
             }
         }
 
@@ -578,7 +564,7 @@ namespace SIL.PublishingSolution
                 {
                     chkTOC.Checked = true;
                     chkTOC.Enabled = false;
-                }
+                }	            
             }
 
             // Processing Options tab
@@ -590,7 +576,22 @@ namespace SIL.PublishingSolution
                 chkReversalIndexes.Visible = false;
                 chkGrammarSketch.Visible = false; // currently this is false anyways (it's not implemented)
             }
-
+			if (ddlLayout.Text.Contains("LibreOffice"))
+			{
+				chkHyphen.Enabled = Param.IsHyphen;
+				chkHyphen.Checked = Param.HyphenEnable;
+				for (int i = 0; i < clbHyphenlang.Items.Count; i++)
+					clbHyphenlang.SetItemCheckState(i, ((Param.HyphenEnable && Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(clbHyphenlang.Items[i]))) ? CheckState.Checked : CheckState.Unchecked));
+				clbHyphenlang.Enabled = false;
+			}
+			else
+			{
+				chkHyphen.Enabled = false;
+				clbHyphenlang.Enabled = false;
+				chkHyphen.Checked = false;
+				while (clbHyphenlang.CheckedIndices.Count > 0)
+					clbHyphenlang.SetItemChecked(clbHyphenlang.CheckedIndices[0], false);
+			}
         }
 
         #region ValidateXMLVersion
@@ -726,8 +727,8 @@ namespace SIL.PublishingSolution
                 if (!Common.Testing)
                 {
                     var message = LocalizationManager.GetString("ExportThroughPathway.LoadAvailFormat.Message", "Pathway was unable to find any export formats. Please reinstall Pathway to correct this error.", "");
-                    const string caption = "Pathway";
-                    dialogResult = MessageBox.Show(message, caption, MessageBoxButtons.AbortRetryIgnore,
+					string caption = LocalizationManager.GetString("ExportThroughPathway.MessageBoxCaption.ProjectName", "Pathway", "");
+                    dialogResult = Utils.MsgBox(message, caption, MessageBoxButtons.AbortRetryIgnore,
                                     MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 }
                 else
@@ -804,8 +805,8 @@ namespace SIL.PublishingSolution
             catch (Exception)
             {
                 var message = LocalizationManager.GetString("ExportThroughPathway.OkButtonClick.Message", "Please select a folder for which you have creation permission", "");
-                const string caption = "Pathway";
-                MessageBox.Show(message, caption, MessageBoxButtons.OK,
+				string caption = LocalizationManager.GetString("ExportThroughPathway.MessageBoxCaption.projectname", "Pathway", "");
+				Utils.MsgBox(message, caption, MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
                 return;
             }
@@ -938,9 +939,9 @@ namespace SIL.PublishingSolution
             }
             if (node != null)
             {
-// ReSharper disable RedundantAssignment
+                // ReSharper disable RedundantAssignment
                 string copyrightFileName = string.Empty;
-// ReSharper restore RedundantAssignment
+                // ReSharper restore RedundantAssignment
                 if (_isUnixOS)
                 {
                     copyrightFileName = Common.LeftRemove(CopyrightPagePath, "\\");
@@ -1031,7 +1032,7 @@ namespace SIL.PublishingSolution
                 // User wants a title page or a cover page with a title, but they haven't told us the title.
                 // Make them enter one now.
                 var message = LocalizationManager.GetString("ExportThroughPathway.SaveProperty.Message1", "Please enter a title for this publication.", "");
-                MessageBox.Show(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Utils.MsgBox(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dlg.IsExpanded = true;
                 dlg.ResizeDialog();
                 dlg.tabControl1.SelectedTab = dlg.tabPage1;
@@ -1050,7 +1051,7 @@ namespace SIL.PublishingSolution
                 {
                     // Dictionary with nothing to export. Make them export something.
                     var message = LocalizationManager.GetString("ExportThroughPathway.SaveProperty.Message2", "Please select at least one item to include in the export.", "");
-                    MessageBox.Show(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					Utils.MsgBox(message, dlg.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     dlg.IsExpanded = true;
                     dlg.ResizeDialog();
                     dlg.tabControl1.SelectedTab = dlg.tabPage3;
@@ -1172,6 +1173,8 @@ namespace SIL.PublishingSolution
             {
                 ddlStyle.Text = selectedStyle;
             }
+
+            LoadDefaultSettings();
         }
 
         private bool EnableEdit()
@@ -1318,9 +1321,9 @@ namespace SIL.PublishingSolution
                     double width = iconImage.Width;
                     if (height > 1000 || width > 1000)
                     {
-                        var message = LocalizationManager.GetString("ExportThroughPathway.CoverImageClick.Message", 
+                        var message = LocalizationManager.GetString("ExportThroughPathway.CoverImageClick.Message",
                             "The selected image is too large. Please select an image that is smaller than 1000 x 1000 pixels.", "");
-                        MessageBox.Show(message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+						Utils.MsgBox(message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                     CoverPageImagePath = filename;
@@ -1432,7 +1435,7 @@ namespace SIL.PublishingSolution
         {
             if (!IsExpanded)
             {
-                _helpTopic = (Text.Contains("Set Defaults"))
+				_helpTopic = (DatabaseName == "{Project_Name}")
                                  ? "User_Interface/Dialog_boxes/Set_Defaults_dialog_box.htm"
                                  : "User_Interface/Dialog_boxes/Export_Through_Pathway_dialog_box.htm";
             }
@@ -1484,8 +1487,8 @@ namespace SIL.PublishingSolution
         {
             bool hyphencheck = chkHyphen.Checked;
             for (int i = 0; i < clbHyphenlang.Items.Count; i++)
-                clbHyphenlang.SetItemCheckState(i, ((hyphencheck&&Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(i))) ? CheckState.Checked : CheckState.Unchecked)); 
-            clbHyphenlang.Enabled = hyphencheck;
+				clbHyphenlang.SetItemCheckState(i, ((hyphencheck && Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(clbHyphenlang.Items[i]))) ? CheckState.Checked : CheckState.Unchecked));
+            clbHyphenlang.Enabled = false;
         }
     }
 }

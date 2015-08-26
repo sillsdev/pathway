@@ -194,7 +194,7 @@ namespace Test.PsTool
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
-            Assert.True(CreatedOn == DateTime.Now.ToString("r"), "Created on is incorrect!");
+            Assert.True(CreatedOn.Substring(0,20) == DateTime.Now.ToString("r").Substring(0,20), "Created on is incorrect!");
         }
 
         [Test]

@@ -533,6 +533,9 @@ Func InstallXeLaTeXIfNecessary()
 	CleanUp($name)
 	GetInstaller($name)
 	LaunchInstaller($name)
+	;TD-4364 Allow xelatex to write data and run data it creates even if the user runs in User mode
+	;REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "C:\pwtex\bin\win32\xelatex.exe" /t REG_SZ /d "WIN7RTM RUNASADMIN" /f
+	RegWrite("HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", "C:\pwtex\bin\win32\xelatex.exe", "REG_SZ", "WIN7RTM RUNASADMIN")
 EndFunc
 
 ;~ Func YouVersionInstalled($size)

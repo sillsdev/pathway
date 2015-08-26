@@ -402,8 +402,8 @@
     <column name="0" width="85" />
     <column name="1" width="318" />
     <column name="2" width="91" />
-    <column name="3" width="52" />
-    <column name="4" width="46" />
+    <column name="3" width="60" />
+    <column name="4" width="110" />
   </column-width>
   <Organizations>
     <Organization>SIL International</Organization>

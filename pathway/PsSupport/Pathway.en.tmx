@@ -667,7 +667,7 @@
     </tu>
     <tu tuid="ConfigurationToolBL.CopyStyle.Message">
       <tuv xml:lang="en">
-        <seg>Styles should not be greater than 50 characters.</seg>
+        <seg>Names of styles should not be greater than 50 characters.</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationToolBL.CreatePreviewFile.Message">
@@ -1358,12 +1358,12 @@
     </tu>
     <tu tuid="SettingsValidator.CopySettingsFile.Message1">
       <tuv xml:lang="en">
-        <seg>Settings file  "{0}".xml is invalid, do you want to overwrite it with the setting file previously installed. \n (Specifically, "{1}" property has an invalid path.)</seg>
+        <seg>Settings file  "{0}".xml is invalid. Do you want to overwrite it with the setting file previously installed? \n (Specifically, "{1}" property has an invalid path.)</seg>
       </tuv>
     </tu>
     <tu tuid="SettingsValidator.CopySettingsFile.Message2">
       <tuv xml:lang="en">
-        <seg>Settings file  "{0}".xml is invalid, do you want to overwrite it with the setting file previously installed. \n (Specifically, "{1}" property has an invalid value.)</seg>
+        <seg>Settings file  "{0}".xml is invalid. Do you want to overwrite it with the setting file previously installed? \n (Specifically, "{1}" property has an invalid value.)</seg>
       </tuv>
     </tu>
     <tu tuid="ValidationDialog.WindowTitle">

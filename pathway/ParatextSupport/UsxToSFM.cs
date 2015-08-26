@@ -322,9 +322,16 @@ namespace SIL.PublishingSolution
             if (_style != string.Empty)
             {                
                 if (_style == "bdit" || _style == "wj")
-                {
-                    _sfmFile.WriteLine();
-                    string line = "\\v " + _verseNumber + Space +_content;
+                {                    
+					string line = "\\v " + _verseNumber + Space + _content;
+					if (_verseNumber == null || _verseNumber == string.Empty)
+					{
+						line = Space + _content;
+					}
+					else
+					{
+						_sfmFile.WriteLine();
+					}					
                     _sfmFile.Write(line);
                     return;
                 }   

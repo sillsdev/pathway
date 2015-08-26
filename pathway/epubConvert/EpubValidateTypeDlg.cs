@@ -12,7 +12,7 @@ namespace epubConvert
 
         public EpubValidateTypeDlg()
         {
-            Common.SetupLocalization("epubConvert");
+	        Common.SetupLocalization();
             InitializeComponent();
         }
 

@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security.Permissions;
 using System.Text;
@@ -34,6 +35,7 @@ using L10NSharp;
 using Microsoft.Win32;
 using Palaso.Xml;
 using SIL.Tool.Localization;
+using System.Reflection;
 
 #endregion Using
 
@@ -3896,7 +3898,7 @@ namespace SIL.Tool
         /// <summary>
         /// Get the LangCode from the Database.ssf file and insert it in css file
         /// </summary>
-        public static string ParaTextDcLanguage(string dataBaseName)
+        public static string ParaTextDcLanguage(string dataBaseName,bool hyphenlang)
         {
             string dcLanguage = string.Empty;
             if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext00
@@ -3910,7 +3912,7 @@ namespace SIL.Tool
                 {
                     dcLanguage = xmlLangCode.InnerText;
                 }
-                xPath = "//ScriptureText/Language";
+				xPath = "//ScriptureText/Language";
                 XmlNode xmlLangNameNode = GetXmlNode(fileName, xPath);
                 if (xmlLangNameNode != null && xmlLangNameNode.InnerText != string.Empty)
                 {
@@ -3918,17 +3920,26 @@ namespace SIL.Tool
                     {
                         Dictionary<string, string> _languageCodes = new Dictionary<string, string>();
                         _languageCodes = LanguageCodesfromXMLFile();
-                        if (_languageCodes.Count > 0)
-                        {
-                            foreach (var languageCode in _languageCodes)
-                            {
-                                if (languageCode.Value.ToLower() == xmlLangNameNode.InnerText.ToLower())
-                                {
-                                    dcLanguage = languageCode.Key;
-                                    break;
-                                }
-                            }
-                        }
+	                    if (_languageCodes.Count > 0)
+	                    {
+		                    foreach (
+			                    var languageCode in
+				                    _languageCodes.Where(
+					                    languageCode => languageCode.Value.ToLower() == xmlLangNameNode.InnerText.ToLower()))
+		                    {
+			                    if (hyphenlang)
+			                    {
+				                    dcLanguage = _languageCodes.ContainsValue(languageCode.Key.ToLower())
+					                    ? _languageCodes.FirstOrDefault(x => x.Value == languageCode.Key.ToLower()).Key
+					                    : languageCode.Key;
+			                    }
+			                    else
+			                    {
+				                    dcLanguage = languageCode.Key;
+			                    }
+			                    break;
+		                    }
+	                    }
                     }
                     dcLanguage += ":" + xmlLangNameNode.InnerText;
                 }
@@ -4565,11 +4576,34 @@ namespace SIL.Tool
             return filePath;
         }
         #region "Localization"
-        public static void SaveLocalizationSettings(string setting)
+        public static void SaveLocalizationSettings(string setting, string fontname, string fontsize)
         {
-            string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
-            string content = XmlSerializationHelper.SerializeToString(setting);
-            File.WriteAllText(fileName, content);
+            var xmlDoc = new XmlDocument();
+            string fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+            if (!File.Exists(fileName))
+            {
+                string pathwayDirectory = PathwayPath.GetPathwayDir();
+                if (pathwayDirectory != null)
+                {
+                    string installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
+                    string xmlSourcePath = PathCombine(installedLocalizationsFolder, "UserInterfaceLanguage.xml");
+                    File.Copy(xmlSourcePath, fileName);
+                }
+            }
+            xmlDoc.Load(fileName);
+            var uiValueNode = xmlDoc.SelectSingleNode("//UILanguage/string");
+            if (uiValueNode != null) uiValueNode.InnerText = setting;
+
+            if (fontname != null && fontsize != null)
+            {
+                XmlNode fontNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + setting + "']");
+                if (fontNode != null && fontNode.Attributes != null)
+                {
+                    fontNode.Attributes["name"].InnerText = fontname;
+                    fontNode.Attributes["size"].InnerText = fontsize;
+                }
+            }
+            xmlDoc.Save(fileName);
         }
 
         public static string GetLocalizationSettings()
@@ -4579,7 +4613,7 @@ namespace SIL.Tool
                 var fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
                 if (!File.Exists(fileName))
                 {
-                    SaveLocalizationSettings("en");
+                    SaveLocalizationSettings("en", null, null);
                 }
 
                 var content = File.ReadAllText(fileName);
@@ -4594,23 +4628,8 @@ namespace SIL.Tool
             }
         }
 
-        public static void SetupLocalization(string namespaces)
+        private static string InstalledLocalizations()
         {
-            //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
-            var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-            string localizedStringFilesFolder = CopyInstalledLocalizations(targetTmxFilePath);
-            var desiredUiLangId = GetLocalizationSettings();
-            if (desiredUiLangId == string.Empty)
-                desiredUiLangId = "en";
-            if (!Testing)
-                L10NMngr = LocalizationManager.Create(desiredUiLangId, "Pathway", Application.ProductName, Application.ProductVersion,
-                                  localizedStringFilesFolder, targetTmxFilePath, null, IssuesEmailAddress, namespaces);
-        }
-
-        private static string CopyInstalledLocalizations(string silLocation)
-        {
-            string localizedStringFilesFolder = Common.PathCombine(Common.GetAllUserAppPath(), silLocation);
-            localizedStringFilesFolder = Common.PathCombine(localizedStringFilesFolder, "localizations");
             string pathwayDirectory = PathwayPath.GetPathwayDir();
             var installedLocalizationsFolder = string.Empty;
             if (pathwayDirectory != null)
@@ -4622,29 +4641,107 @@ namespace SIL.Tool
                 installedLocalizationsFolder = Path.Combine(Application.StartupPath, "localizations");
             }
 
-            if (Directory.Exists(installedLocalizationsFolder))
-            {
-                if (!Directory.Exists(localizedStringFilesFolder))
-                    Directory.CreateDirectory(localizedStringFilesFolder);
-
-                foreach (var file in Directory.GetFiles(installedLocalizationsFolder))
-                {
-                    var name = Path.GetFileName(file);
-                    var dest = Path.Combine(localizedStringFilesFolder, name);
-                    if (!File.Exists(dest) || FileLength(file) != FileLength(dest))
-                        File.Copy(file, dest, true);
-                }
-            }
-
             return installedLocalizationsFolder;
         }
 
-        private static long FileLength(string file)
-        {
-            return new FileInfo(file).Length;
-        }
+	    public static void SetupLocalization()
+	    {
+		    if (!Testing)
+		    {
+			    var namespacebeginnings = GetnamespacestoLocalize();
+			    if (namespacebeginnings == null) return;
+			    Assembly assembly = Assembly.GetExecutingAssembly();
+			    FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+			    var companyName = fvi.CompanyName;
+			    var productName = fvi.ProductName;
+			    var productVersion = fvi.ProductVersion;
 
-        #region Localization Manager Access methods
+			    //var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
+			    var targetTmxFilePath = Path.Combine(kCompany, kProduct);
+			    string installedLocalizationsFolder = InstalledLocalizations();
+			    var desiredUiLangId = GetLocalizationSettings();
+			    if (desiredUiLangId == string.Empty)
+				    desiredUiLangId = "en";
+
+
+			    L10NMngr = LocalizationManager.Create(desiredUiLangId, productName, productName, productVersion,
+				    installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespacebeginnings);
+
+			    LocalizationManager.SetUILanguage(desiredUiLangId, true);
+		    }
+	    }
+
+	    public static void InitializeOtherProjects()
+	    {
+		    string pathwayDirectory = PathwayPath.GetPathwayDir();
+		    if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory)) return;
+
+		    foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
+		    {
+			    var fileInfo = new FileInfo(file);
+			    if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
+			        (fileInfo.Name.Contains("Writer")) || (fileInfo.Name.Contains("Validator")))
+			    {
+				    try
+				    {
+					    using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
+					    {
+
+						    var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
+
+						    foreach (
+							    var stype in
+								    sAssembly.GetTypes()
+									    .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+						    {
+							    sAssembly.CreateInstance(stype.FullName);
+						    }
+
+					    }
+				    }
+				    catch
+				    {
+				    }
+			    }
+		    }
+		    GC.Collect();
+	    }
+
+	    public static string[] GetnamespacestoLocalize()
+	    {
+		    var namespacestoLocalize = new List<string>();
+		    var pathwayDirectory = PathwayPath.GetPathwayDir();
+		    if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory))
+			    return new[] {"SIL.PublishingSolution"};
+		    foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$"))
+			    )
+		    {
+			    var fileInfo = new FileInfo(file);
+			    if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
+			        (fileInfo.Name.Contains("Writer")) || (fileInfo.Name.Contains("Validator")))
+			    {
+				    using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
+				    {
+
+					    var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
+
+					    foreach (
+						    var stype in
+							    sAssembly.GetTypes()
+								    .Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+					    {
+						    if (!namespacestoLocalize.Contains(stype.Namespace))
+							    namespacestoLocalize.Add(stype.Namespace);
+					    }
+
+				    }
+
+			    }
+		    }
+		    return namespacestoLocalize.Distinct().ToArray();
+	    }
+
+	    #region Localization Manager Access methods
         /// ------------------------------------------------------------------------------------
         public static LocalizationManager L10NMngr { get; set; }
 
@@ -4678,7 +4775,42 @@ namespace SIL.Tool
 
         #endregion
 
+		#region Hyphenation Settings
 
-        #endregion
-    }
+	    public static void EnableHyphenation()
+	    {
+		    try
+		    {
+			    OperatingSystem OS = Environment.OSVersion;
+			    if (OS.ToString().IndexOf("Microsoft") == 0)
+			    {
+				    string strFilePath;
+				    string strPath = @"SOFTWARE\Classes\.odt\LibreOffice.WriterDocument.1\ShellNew\";
+				    RegistryKey regKeyAppRoot = Registry.LocalMachine.OpenSubKey(strPath);
+				    strFilePath = (string) regKeyAppRoot.GetValue("FileName");
+				    strFilePath = strFilePath.Replace(@"template\shellnew\soffice.odt", @"extensions\");
+				    string[] files = Directory.GetFiles(strFilePath, "hyph*.dic", SearchOption.AllDirectories);
+				    if (files.Length > 0)
+				    {
+					    foreach (var lang in Param.HyphenLang.Split(','))
+						    foreach (var file in files)
+						    {
+							    if (file.Split(Convert.ToChar("_"))[1] == lang.Substring(0, lang.IndexOf(":", StringComparison.Ordinal)))
+							    {
+								    Param.IsHyphen = true;
+								    Param.HyphenationSelectedLanguagelist.Add(lang);
+							    }
+						    }
+				    }
+			    }
+		    }
+		    catch (Exception)
+		    {
+		    }
+
+	    }
+
+	    #endregion
+		#endregion
+	}
 }

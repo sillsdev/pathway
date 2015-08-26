@@ -47,6 +47,7 @@ using epubConvert;
 using epubConvert.Properties;
 using epubValidator;
 using L10NSharp;
+using SilTools;
 using SIL.Tool;
 
 
@@ -128,7 +129,7 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-            Common.SetupLocalization("SIL.PublishingSolution");
+	        Common.SetupLocalization();
             if (projInfo == null)
                 return false;
             const bool success = true;
@@ -392,7 +393,8 @@ namespace SIL.PublishingSolution
             bool isOutputDilalogNeeded = true;
             if (!Common.Testing)
             {
-                if (MessageBox.Show(LocalizationManager.GetString("Exportepub.ValidateMsgBox", Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files"), Resources.ExportComplete, MessageBoxButtons.YesNo,
+				string caption = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Caption", "Export Complete", "");
+				if (Utils.MsgBox(LocalizationManager.GetString("Exportepub.ValidateMsgBox", Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files?"), caption, MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     ValidateResult(outputPathWithFileName);     // Epub2 ExportType
@@ -654,7 +656,8 @@ namespace SIL.PublishingSolution
         private static InProcess SetupProgressReporting(int steps)
         {
             var inProcess = new InProcess(0, steps) { Text = Resources.Exportepub_Export_Exporting__epub_file }; // create a progress bar with 7 steps (we'll add more below)
-            inProcess.Show();
+			inProcess.Text = LocalizationManager.GetString("Exportepub.InProcessWindow.Title", "Exporting .epub file", "");
+			inProcess.Show();
             inProcess.ShowStatus = true;
             return inProcess;
         }
@@ -2049,6 +2052,8 @@ namespace SIL.PublishingSolution
             bool looped = false;
             foreach (var href in hrefs)
             {
+				if (string.IsNullOrEmpty(href))
+					continue; // A glossary term with no glossary entry
                 // find where the target is for this reference -
                 // since the lists are sequential in the references file, we're using an index instead
                 // of a foreach loop (so the search continues in the same file the last href left off on).

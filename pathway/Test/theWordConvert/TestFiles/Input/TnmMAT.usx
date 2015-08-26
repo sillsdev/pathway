@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<usx version="2.0">
+  <book code="MAT" style="id">- Test Nested Markers</book>
+  <para style="is">Introduction</para>
+  <para style="ip">
+    <char style="bk">The Acts of the Apostles</char> refers to this geneology.</para>
+  <chapter number="1" style="c" />
+  <para style="p">
+    <verse number="1" style="v" />Regular text <char style="add">blah <char style="nd">BLAH</char><note caller="+" style="f"><char style="fr" closed="false">1.1 </char><char style="ft" closed="false"><char style="nd">BLAH</char> should be typed differently</char></note> blah</char>. <verse number="2" style="v" /><char style="dc">Deuterocanonical addition</char> <verse number="3" style="v" />The 1<char style="ord">st</char> first item. The 2<char style="ord">nd</char> second item. <verse number="4" style="v" /><char style="pn">Greg</char> was here.</para>
+  <para style="q1">
+    <verse number="5" style="v" />
+    <char style="qt">Roses are red</char>
+  </para>
+  <para style="q2">
+    <char style="qt">Violets are blue</char>
+  </para>
+  <para style="lit">Selah</para>
+  <para style="p">
+    <verse number="6" style="v" />With my own hand I write: <char style="sig">I Paul send my greetings</char> <verse number="7" style="v" /><char style="sls">E plurabus unim </char></para>
+  <para style="p">
+    <verse number="8" style="v" />
+    <char style="tl">kwa fair</char> <verse number="9" style="v" />Remembering the words of the Lord <char style="wj">It is more blessed to give than to receive</char> . <verse number="10" style="v" /><char style="em">I insist .</char> <char style="bd">Do it now.</char> <char style="it">If not, there will be consequences.</char> <char style="bdit">Don't test me.</char> <char style="no">or you will find out what happens.</char> <char style="sc">you have been warned.</char> 1 Cor. 3:17 <optbreak /> So we say</para>
+</usx>

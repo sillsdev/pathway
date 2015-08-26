@@ -1106,11 +1106,11 @@ namespace SIL.Tool
                 Debug.WriteLine(e.ToString());
                 return null;
             }
-            if (node == null)
+            if (node == null || node.InnerText == "")
             {
                 // no current value - attempt to get the organization default
                 node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/organizationDefault[@organizationName='" + XmlConvert.EncodeName(Organization) + "']");
-                if (node == null)
+				if (node == null || node.InnerText == "")
                 {
                     // no organization default for this node - get the default value
                     node = GetItem("//stylePick/Metadata/meta[@name='" + Name + "']/defaultValue");

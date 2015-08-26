@@ -31,6 +31,7 @@ using System.Xml;
 using SIL.Tool;
 using System.Threading;
 using L10NSharp;
+using SilTools;
 
 
 namespace SIL.PublishingSolution
@@ -139,6 +140,7 @@ namespace SIL.PublishingSolution
                 
                 string jarFile = Common.PathCombine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
                 inProcess.PerformStep();
+				string caption = LocalizationManager.GetString("ExportGoBible.ExportClick.Caption", "Go Bible Export", "");
                 if (File.Exists(jarFile))
                 {
                     Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", string.Empty, string.Empty);
@@ -155,7 +157,7 @@ namespace SIL.PublishingSolution
                         // Failed to send the .jar to a bluetooth device. Tell the user to do it manually.
                         var msg = LocalizationManager.GetString("ExportGoBible.ExportClick.Message1", "Please copy the file {0} to your phone.\n\nDo you want to open the folder?", "");
                         msg = string.Format(msg, jarFile);
-                        DialogResult dialogResult = MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.YesNo,
+						DialogResult dialogResult = Utils.MsgBox(msg, caption, MessageBoxButtons.YesNo,
                                                                     MessageBoxIcon.Information);
 
                         if (dialogResult == DialogResult.Yes)
@@ -175,7 +177,7 @@ namespace SIL.PublishingSolution
                     if (!Common.Testing)
                     {
                         var msg = LocalizationManager.GetString("ExportGoBible.ExportClick.Message2", "Failed Exporting GoBible Process.", "");
-                        MessageBox.Show(msg, "Go Bible Export", MessageBoxButtons.OK,
+						Utils.MsgBox(msg, caption, MessageBoxButtons.OK,
                                         MessageBoxIcon.Information);
                     }
                 }

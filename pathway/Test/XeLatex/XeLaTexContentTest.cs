@@ -1185,7 +1185,8 @@ namespace Test.XeLatex
         [Category("SkipOnTeamCity")]
         public void XeLaTexPath()
         {
-            Assert.AreEqual(@":\pwtex\", XeLaTexInstallation.GetXeLaTexDir().Substring(1));
+			if (Directory.Exists(XeLaTexInstallation.GetXeLaTexDir()))
+				Assert.AreEqual(@":\pwtex\", XeLaTexInstallation.GetXeLaTexDir().Substring(1));
         }
 
         [Ignore]
@@ -1350,7 +1351,7 @@ namespace Test.XeLatex
             CloseFile(xetexFile);
 
             ModifyXeLaTexStyles modifyXeTexStyles = new ModifyXeLaTexStyles();
-            modifyXeTexStyles.ModifyStylesXML(_projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile, string.Empty, _langFontCodeandName);
+            modifyXeTexStyles.ModifyStylesXML(_projInfo.ProjectPath, xetexFile, newProperty, cssClass, xetexFullFile, string.Empty, _langFontCodeandName,true);
 
         }
 
