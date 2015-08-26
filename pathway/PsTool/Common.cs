@@ -4576,16 +4576,34 @@ namespace SIL.Tool
             return filePath;
         }
         #region "Localization"
-        public static void SaveLocalizationSettings(string setting)
+        public static void SaveLocalizationSettings(string setting, string fontname, string fontsize)
         {
-            string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
-            string content = XmlSerializationHelper.SerializeToString(setting);
-	        var fileFolder = Path.GetDirectoryName(fileName);
-	        if (!Directory.Exists(fileFolder))
-	        {
-		        Directory.CreateDirectory(fileFolder);
-	        }
-            File.WriteAllText(fileName, content);
+            var xmlDoc = new XmlDocument();
+            string fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+            if (!File.Exists(fileName))
+            {
+                string pathwayDirectory = PathwayPath.GetPathwayDir();
+                if (pathwayDirectory != null)
+                {
+                    string installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
+                    string xmlSourcePath = PathCombine(installedLocalizationsFolder, "UserInterfaceLanguage.xml");
+                    File.Copy(xmlSourcePath, fileName);
+                }
+            }
+            xmlDoc.Load(fileName);
+            var uiValueNode = xmlDoc.SelectSingleNode("//UILanguage/string");
+            if (uiValueNode != null) uiValueNode.InnerText = setting;
+
+            if (fontname != null && fontsize != null)
+            {
+                XmlNode fontNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + setting + "']");
+                if (fontNode != null && fontNode.Attributes != null)
+                {
+                    fontNode.Attributes["name"].InnerText = fontname;
+                    fontNode.Attributes["size"].InnerText = fontsize;
+                }
+            }
+            xmlDoc.Save(fileName);
         }
 
         public static string GetLocalizationSettings()
@@ -4595,7 +4613,7 @@ namespace SIL.Tool
                 var fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
                 if (!File.Exists(fileName))
                 {
-                    SaveLocalizationSettings("en");
+                    SaveLocalizationSettings("en", null, null);
                 }
 
                 var content = File.ReadAllText(fileName);

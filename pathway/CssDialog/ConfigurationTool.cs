@@ -24,6 +24,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Xml;
 using DesktopAnalytics;
 using L10NSharp;
 using SIL.PublishingSolution.Properties;
@@ -62,7 +63,6 @@ namespace SIL.PublishingSolution
 			Common.InitializeOtherProjects();
 			Common.SetupLocalization();
 			InitializeComponent();
-			SetupUILanguageMenu();
 			if (Common.IsUnixOS())
 			{
 				ddlPagePageSize.Width = 200;
@@ -76,41 +76,6 @@ namespace SIL.PublishingSolution
 				//ddlPageNumber.Width = 200;
 				//ddlRules.Width = 200;
 			}
-		}
-
-		private void SetupUILanguageMenu()
-		{
-			_uiLanguageMenu.DropDownItems.Clear();
-			foreach (var lang in LocalizationManager.GetUILanguages(true))
-			{
-				var item = _uiLanguageMenu.DropDownItems.Add(lang.NativeName);
-				item.Tag = lang;
-				item.Click += ((a, b) =>
-				{
-					LocalizationManager.SetUILanguage(((CultureInfo)item.Tag).IetfLanguageTag, true);
-					Settings.Default.UserInterfaceLanguage = ((CultureInfo)item.Tag).IetfLanguageTag;
-					item.Select();
-
-					_uiLanguageMenu.Text = ((CultureInfo)item.Tag).NativeName;
-					LocalizationManager.ReapplyLocalizationsToAllObjects(Common.L10NMngr.Id);
-					Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage);
-					_cToolBL.ConfigurationTool_LoadBL();
-				});
-				if (((CultureInfo)item.Tag).IetfLanguageTag == Settings.Default.UserInterfaceLanguage)
-				{
-					_uiLanguageMenu.Text = ((CultureInfo)item.Tag).NativeName;
-				}
-			}
-
-			_uiLanguageMenu.DropDownItems.Add(new ToolStripSeparator());
-			var menu = _uiLanguageMenu.DropDownItems.Add(LocalizationManager.GetString("MainWindow.MoreMenuItem",
-				"More...", "Last item in menu of UI languages"));
-			menu.Click += ((a, b) =>
-			{
-				ShowL10NsharpDlg();
-				SetupUILanguageMenu();
-				_cToolBL.ConfigurationTool_LoadBL();
-			});
 		}
 
 		public static void ShowL10NsharpDlg()
@@ -937,7 +902,7 @@ namespace SIL.PublishingSolution
 			_cToolBL.ConfigurationTool_FormClosingBL();
 			Style = _cToolBL.StyleEXE.ToString();
 			Settings.Default.Save();
-			Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage);
+			Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage, null, null);
 		}
 		private void btnDictionary_Click(object sender, EventArgs e)
 		{
@@ -1071,16 +1036,12 @@ namespace SIL.PublishingSolution
         /// To set the font-name and font-size to the controls in the form.
         /// </summary>
         /// <param name="langId"></param>
-        private void UpdateFontOnL10NSharp(string langId)
+        public void UpdateFontOnL10NSharp(string langId)
         {
             string fontName = "Microsoft Sans Serif";
             float fontSize = 8.25F;
 
-            if (langId == "ta")
-            {
-                fontName = "Latha";
-                fontSize = 6.50F;
-            }
+            fontName = SetUILanguage(langId, fontName, ref fontSize);
 
             //For all labels and textboxes
             List<Control> allControls = GetAllControls(this);
@@ -1093,6 +1054,20 @@ namespace SIL.PublishingSolution
             //For TabControl
             this.tabControl1.Font = new Font(fontName, fontSize, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
+        }
+
+        private static string SetUILanguage(string langId, string fontName, ref float fontSize)
+        {
+            string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+            var xmlDoc = new XmlDocument();
+            xmlDoc.Load(fileName);
+            var fontNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + langId + "']");
+            if (fontNode != null && fontNode.Attributes != null)
+            {
+                fontName = fontNode.Attributes["name"].InnerText;
+                fontSize = float.Parse(fontNode.Attributes["size"].InnerText);
+            }
+            return fontName;
         }
 
         /// <summary>
@@ -1504,6 +1479,14 @@ namespace SIL.PublishingSolution
 			Analytics.ReportException(e.Exception);
 		}
 		#endregion
+
+        private void userInterfaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var uiLanguage = new UILanguageDialog();
+            uiLanguage.ShowDialog();
+            UpdateFontOnL10NSharp(LocalizationManager.UILanguageId);
+            _cToolBL.ConfigurationTool_LoadBL();
+        }
 
 	}
 }
