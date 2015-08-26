@@ -1,5 +1,53 @@
-pathway (1.13.2.4457-1) unstable; urgency=high
+pathway (1.13.3.4560-1) unstable; urgency=high
 
+  * pathway sprint 1.13.3
+    - LibreOffice:TD-4202 Enabling hyphenation for Libre Office output</li>
+    - LibreOffice:TD-4185 Setting Running Header to None disables Header</li>
+    - Smart Device:TD-4235 GoBible word of jesus conversion</li>
+    - Smart Device:TD-4360 Fix GoBible output name</li>
+    - MySword:TD-4219 Crash when keyword not in glossary</li>
+    - MySword:TD-4236 Add extended Footnote</li>
+    - MySword:TD-4236 Embedded markers</li>
+    - MySword:TD-4236 Handle additional character styles in theWord/MySword</li>
+    - UI:TD-2453 Complete French localization file</li>
+    - UI:TD-4246 Localization applied for EpubExportType and Inprocess Title</li>
+    - UI:TD-4249 Localization using L10NSharp for Splash </li>
+    - UI:TD-4366 Applied localization in Grid header</li>
+    - UI:TD-4274 Apply Localization for messageboxes</li>
+    - UI:TD-4287 Change "if not SIL" to "if restricted"</li>
+    - UI:TD-4290 Added Layout for Mobile and web</li>
+    - UI:TD-4290 Align controls in TableLayoutPanel</li>
+    - UI:TD-4290 Layout changed for the property Others.</li>
+    - UI:TD-4290 Minor changes in Web Property.</li>
+    - UI:TD-4290 Word wrap text not shown properly</li>
+    - UI:TD-4291 Localize configuration tool drop down property</li>
+    - UI:TD-4296 remove extra space before the question mark</li>
+    - UI:TD-4299 Updated French localization translations</li>
+    - UI:TD-4303 Crash when I click the Edit Layout button in Linux</li>
+    - UI:TD-4304 I applied the changes what was suggested</li>
+    - UI:TD-4306 Allow L10NSharp to copy tmx files if larger (newer).</li>
+    - UI:TD-4313 Epub results not localized</li>
+    - UI:TD-4314 Identify types of strings missed by scanner</li>
+    - UI:TD-4351 Added missing string in Pathway.ta.tmx</li>
+    - UI:TD-4354 Remember values in Configuration Tool</li>
+    - UI:TD-4359 Changed WindowTitle, Project Url label in About window</li>
+    - UI:TD-4361 Select your Organization will show full localized text</li>
+    - UI:TD-4364 Replace save with saved </li>
+    - UI:TD-4366 Applied localization for ConfigurationTool Grid header text</li>
+    - UI:TD-4377 Apply the user selected font in Localized Text. </li>
+    - XeLaTeX:TD-4185 Setting Running Header to None disables Header</li>
+    - XeLaTeX:TD-4363 Setting Header and Page number to None removes page number</li>
+    - XeLaTeX:TD-4367 Change the code to leave one page after TOC</li>
+    - XeLaTeX:TD-4368 Fixed empty page between main and reversal page</li>
+    - XeLaTeX:TD-4369 I fixed duplicate TOC bug</li>
+    - XeLaTeX:TD-4370 Fixed page number issue for reversal</li>
+    - XeLaTeX:TD-4372 Footer is created </li>
+    - XeLaTeX:TD-4378 Fixed page number issue in scripture</li>
+    - Installer:TD-4221 Update Prince.dll to latest version</li>
+    - Installer:TD-4285 Fatal Error after installation in Linux</li>
+    - Installer:TD-4373 Run xelatex as administrator</li>
+    - Installer:Update Linux Debug install</li>
+    - Installer:update dependencies for vivid</li>
   * pathway 1.13.2 hotfix
     - update dependencies in debian/control for vivid
   * pathway 1.13.1 hotfix
