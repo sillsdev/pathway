@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tmx version="1.4">
-  <header srclang="fr" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.39.0" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
-    <prop type="x-appversion">1.13.2.4487</prop>
+  <header srclang="fr" adminlang="en" creationtool="Palaso Localization Manager" creationtoolversion="2.0.5617.13834" segtype="block" datatype="unknown" o-tmf="PalasoTMXUtils">
+    <prop type="x-appversion">1.9.1.4065</prop>
     <prop type="x-hardlinebreakreplacement">\n</prop>
   </header>
   <body>
@@ -107,6 +107,54 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>N'inclure pas des images</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.Column.Comment">
+      <tuv xml:lang="en">
+        <seg>Comment</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Commentaire</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.Column.Description">
+      <tuv xml:lang="en">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Description</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.Column.Name">
+      <tuv xml:lang="en">
+        <seg>Name</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Nom</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.Column.Shown">
+      <tuv xml:lang="en">
+        <seg>Shown</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Montré</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.Column.Type">
+      <tuv xml:lang="en">
+        <seg>Type</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Class</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.ConfigurationTool.SpinPicWidth">
+      <tuv xml:lang="en">
+        <seg>4</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>4</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.ConfigurationTool.btnApproved">
@@ -1087,11 +1135,20 @@
       </tuv>
     </tu>
     <tu tuid="ConfigurationTool.uiLanguageMenu">
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>English</seg>
       </tuv>
       <tuv xml:lang="fr">
         <seg>Anglais</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ConfigurationTool.userInterfaceToolStripMenuItem">
+      <tuv xml:lang="en">
+        <seg>User Interface</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Interface utilisateur</seg>
       </tuv>
     </tu>
     <tu tuid="ConfigurationToolBL.BrowseButton.Message">
@@ -1494,6 +1551,14 @@
         <seg>En haut</seg>
       </tuv>
     </tu>
+    <tu tuid="ConfigurationToolBL.MessageBoxCaption.projectname">
+      <tuv xml:lang="en">
+        <seg>Pathway Configuration Tool</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Outil de Configuration de Pathway</seg>
+      </tuv>
+    </tu>
     <tu tuid="ConfigurationToolBL.NameValidate.Message">
       <tuv xml:lang="en">
         <seg>Sorry, your recent changes cannot be saved because Pathway cannot find the stylesheet file '{0}'</seg>
@@ -1566,6 +1631,86 @@
         <seg>Veuillez éviter {0} dans le nom de style</seg>
       </tuv>
     </tu>
+    <tu tuid="CopySettingsFile.MessageBoxCaption.Caption">
+      <tuv xml:lang="en">
+        <seg>Information</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Informations</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Abort">
+      <tuv xml:lang="en">
+        <seg>Abort</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Apropos</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Cancel">
+      <tuv xml:lang="en">
+        <seg>Cancel</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Annuler</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Ignore">
+      <tuv xml:lang="en">
+        <seg>Ignore</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Ignorer</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.No">
+      <tuv xml:lang="en">
+        <seg>No</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Non</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.OK">
+      <tuv xml:lang="en">
+        <seg>OK</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>OK</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Retry">
+      <tuv xml:lang="en">
+        <seg>Retry</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Nouvelle tentative</seg>
+      </tuv>
+    </tu>
+    <tu tuid="CustomMessageBox.Yes">
+      <tuv xml:lang="en">
+        <seg>Yes</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Oui</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.ValidateAndDisplay.Caption">
+      <tuv xml:lang="en">
+        <seg>Export Complete</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Export complet</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.ValidateAndDisplay.Message">
+      <tuv xml:lang="en">
+        <seg>\nDo you want to Validate ePub file?</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>\nVous voulez valider le fichier ePub ?</seg>
+      </tuv>
+    </tu>
     <tu tuid="EpubExportTypeDlg.WindowTitle">
       <tuv xml:lang="en">
         <seg>Open Epub File Type</seg>
@@ -1606,6 +1751,46 @@
         <seg>Dossier</seg>
       </tuv>
     </tu>
+    <tu tuid="EpubExportTypeDlg.lblMessage.Folder">
+      <tuv xml:lang="en">
+        <seg>Folder</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Dossier</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.lblMessage.NoteCaption">
+      <tuv xml:lang="en">
+        <seg>Note:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Remarque :</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.lblMessage.NoteMsg">
+      <tuv xml:lang="en">
+        <seg>Some readers cannot display Epub3 files correctly.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Certains lecteurs ne peut pas afficher les fichiers Epub3 correctement.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.lblMessage.Part1">
+      <tuv xml:lang="en">
+        <seg>The export process is finished. There are separate files for Epub2, Epub3 and HTML5.&lt;br/&gt;&lt;br/&gt;Click a button below to open the desired Epub file in your default reader. Alternatively, click</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Le processus d'exportation est terminé. Il y a des fichiers séparés pour Epub2, Epub3 et HTML5.&lt;br&gt;&lt;br&gt;Cliquez sur un bouton ci-dessous pour ouvrir le fichier Epub désiré dans votre lecteur par défaut. Sinon, cliquez sur</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubExportTypeDlg.lblMessage.Part2">
+      <tuv xml:lang="en">
+        <seg>to open the folder that contains both Epub files and the HTML5. You can display the HTML files in your internet browser.&lt;br/&gt;&lt;br/&gt;</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Ouvrez le dossier qui contient les fichiers Epub et le HTML5. Vous pouvez afficher les fichiers HTML dans votre navigateur internet.&lt;br&gt;&lt;br&gt;</seg>
+      </tuv>
+    </tu>
     <tu tuid="EpubValidateTypeDlg.WindowTitle">
       <tuv xml:lang="en">
         <seg>Open Validate Type</seg>
@@ -1644,6 +1829,142 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Epub&amp;3</seg>
+      </tuv>
+    </tu>
+    <tu tuid="EpubValidateTypeDlg.lblMessage">
+      <tuv xml:lang="en">
+        <seg>Do you want to select the Epub validate type?</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Vous voulez choisir le Epub valider type ?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportDictionaryForMIDs.ExportClick.Caption">
+      <tuv xml:lang="en">
+        <seg>Report: Failure</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Rapport : échec</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportDictionaryForMIDs.ExportClick.Message">
+      <tuv xml:lang="en">
+        <seg>{0} Display partial results?</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Affichage des résultats partiels {0} ?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportDictionaryForMIDs.ReportResults.Message">
+      <tuv xml:lang="en">
+        <seg>Dictionary for Mid output successfully created in {0}. Display output files?</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Dictionnaire pour sortie Mid avec succès créée dans {0}. Afficher les fichiers de sortie ?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportGoBible.ExportClick.Caption">
+      <tuv xml:lang="en">
+        <seg>Go Bible Export</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Export de Go Bible</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportGoBible.ExportClick.Message1">
+      <tuv xml:lang="en">
+        <seg>Please copy the file {0} to your phone.\n\nDo you want to open the folder?</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>S'il vous plaît copiez le fichier {0} vers votre téléphone. \n\n Voulez-vous ouvrir le dossier ?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportGoBible.ExportClick.Message2">
+      <tuv xml:lang="en">
+        <seg>Failed Exporting GoBible Process.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>N'a pas de processus d'exportation GoBible.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportSword.ExportClick.Message">
+      <tuv xml:lang="en">
+        <seg>Dictionary for Mid output successfully created in {0}. Display output?</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Succès créée Dictionnaire pour Mid dans {0}. Sortie d'affichage ?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.DisplayMessageReport.Message">
+      <tuv xml:lang="en">
+        <seg>Display issues encountered during conversion?</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Problèmes d'affichage rencontrés lors de la conversion ?</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportFailure.Caption">
+      <tuv xml:lang="en">
+        <seg>theWord Export</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Export theWord</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportFailure.Message">
+      <tuv xml:lang="en">
+        <seg>Please run the References basic check.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Veuillez exécuter la vérification des références.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportResults.Caption">
+      <tuv xml:lang="en">
+        <seg>theWord Export</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Export theWord</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportResults.Message">
+      <tuv xml:lang="en">
+        <seg>Failed Exporting TheWord Process.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>N'a pas de processus d'exportation theWord</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportWhenTheWordInstalled.Message">
+      <tuv xml:lang="en">
+        <seg>Do you want to start theWord?\n\n● Click Yes.\n\nThe program will copy the "{0}" file to {1} and start theWord. \n\n● Click No. \n\nThe folder with the "{0}" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file "{3}" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n● Click Cancel to do neither of the above.\n</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Vous voulez commencer theWord ?\n\n ● cliquez sur Oui.\n\n Le programme va copier le fichier « {0} » dans {1} et commencer à mot.\n\n ● cliquez sur no \n\n, le dossier avec le fichier "{0}" ({2}) ouvrira donc vous pouvez le copier manuellement dans {1}. -(999) -(999) Le fichier MySword « {3} » est également là pour vous pouvez copier sur votre appareil Android ou l'envoyer à pathway@sil.org pour le téléchargement. \n \n ● cliquez sur Annuler pour ne pas de ce qui précède. \n</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportWhenTheWordNotInstalled.Caption">
+      <tuv xml:lang="en">
+        <seg>theWord Export</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Export theWord</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.ReportWhenTheWordNotInstalled.Message">
+      <tuv xml:lang="en">
+        <seg>Do you want to open the folder with the results?\n\n● Click Yes.\n\nThe folder with the "{0}" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file "{3}" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n● Click Cancel to do neither of the above.\n</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Voulez-vous ouvrir le dossier avec les résultats ?\n\n ● cliquez sur Oui.\n\n Le dossier avec le fichier « {0} » ({2}) ouvrira donc vous pouvez le copier manuellement dans {1}.\n\n Le fichier MySword « {3} » est également là pour vous pouvez copier sur votre appareil Android ou l'envoyer à pathway@sil.org pour le téléchargement.\n\n ● cliquez sur Annuler pour ne pas de ce qui précède. -(999)</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportTheWord.Title">
+      <tuv xml:lang="en">
+        <seg>theWord Export</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Export theWord</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.CoverImageClick.Message">
@@ -1692,6 +2013,14 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Veuillez télécharger et installer une version de Pathway compatible avec votre logiciel</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportThroughPathway.ExportThroughPathwayLoad.ProjectName">
+      <tuv xml:lang="en">
+        <seg>Incompatible Pathway Version</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Pathway incompatible Version</seg>
       </tuv>
     </tu>
     <tu tuid="ExportThroughPathway.Form.Text">
@@ -2046,6 +2375,38 @@
         <seg>Coupure de mots</seg>
       </tuv>
     </tu>
+    <tu tuid="ExportXelatex.CallXelatex.Message">
+      <tuv xml:lang="en">
+        <seg>Please install the Xelatex application.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Installez l'application Xelatex.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ExportXelatex.OpenXelatexOutput.Message">
+      <tuv xml:lang="en">
+        <seg>The output has been saved in {0}.\n Please install the Xelatex application.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>La sortie a été enregistrée dans {0}. -(999)  Installez l'application Xelatex.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Exportepub.InProcessWindow.Title">
+      <tuv xml:lang="en">
+        <seg>Exporting .epub file</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Exportation fichier .epub</seg>
+      </tuv>
+    </tu>
+    <tu tuid="Exportepub.ValidateMsgBox">
+      <tuv xml:lang="en">
+        <seg>\n Do you want to Validate ePub files?</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>\n  Vous voulez valider les fichiers ePub ?</seg>
+      </tuv>
+    </tu>
     <tu tuid="FontWarningDlg.WindowTitle">
       <tuv xml:lang="en">
         <seg>Font Warning Dialog</seg>
@@ -2070,8 +2431,17 @@
         <seg>&amp;OK</seg>
       </tuv>
     </tu>
+    <tu tuid="InProcess.Window.Title">
+      <tuv xml:lang="en">
+        <seg>Export In Process</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Dans le processus d'exportation</seg>
+      </tuv>
+    </tu>
     <tu tuid="MainWindow.MoreMenuItem">
       <note>Last item in menu of UI languages</note>
+      <prop type="x-nolongerused">true</prop>
       <tuv xml:lang="en">
         <seg>More...</seg>
       </tuv>
@@ -2103,12 +2473,76 @@
         <seg>Saisir le nom de votre organisation :</seg>
       </tuv>
     </tu>
+    <tu tuid="PreviewPrintVia.BtnCancel">
+      <tuv xml:lang="en">
+        <seg>Cancel</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Annuler</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PreviewPrintVia.BtnHelp">
+      <tuv xml:lang="en">
+        <seg>Help</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Aide</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PreviewPrintVia.Column.Description">
+      <tuv xml:lang="en">
+        <seg>Description</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Description</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PreviewPrintVia.Column.Name">
+      <tuv xml:lang="en">
+        <seg>Name</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Nom</seg>
+      </tuv>
+    </tu>
     <tu tuid="PreviewPrintVia.CreatePreviewFile.Message">
       <tuv xml:lang="en">
         <seg>Sorry a preview of this stylesheet is not available. Please install PrinceXML or LibreOffice to enable the preview.</seg>
       </tuv>
       <tuv xml:lang="fr">
         <seg>Désolé. Un aperçu de cette feuille de style n'est pas disponible. Veuillez installer PrinceXML ou LibreOffice pour permettre l'aperçu.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PreviewPrintVia.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>Select Layout</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Sélectionnez mise en page</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PreviewPrintVia.btnEdit">
+      <tuv xml:lang="en">
+        <seg>Edit Layout</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Modifier la mise en page</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PreviewPrintVia.btnOK">
+      <tuv xml:lang="en">
+        <seg>OK</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>OK</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PreviewPrintVia.lblPreview">
+      <tuv xml:lang="en">
+        <seg>Sample data in this layout:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Exemples de données dans cette mise en page :</seg>
       </tuv>
     </tu>
     <tu tuid="PrintVia.LoadBackEnds.Message">
@@ -2125,6 +2559,14 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Veuillez sélectionner un dossier pour lequel vous avez l'autorisation de création</seg>
+      </tuv>
+    </tu>
+    <tu tuid="PrintVia.PrintViaLoad.Caption">
+      <tuv xml:lang="en">
+        <seg>Incompatible Pathway Version</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Une incompatible Version de Pathway</seg>
       </tuv>
     </tu>
     <tu tuid="PrintVia.PrintViaLoad.Message">
@@ -2207,6 +2649,70 @@
         <seg>Le fichier de paramètres "{0}".xml n'est pas valide. Voulez-vous le remplacer par le fichier de paramètres installé précédemment ?\n(Plus précisément, la valeur de la propriété "{1}" n'est pas valide.)</seg>
       </tuv>
     </tu>
+    <tu tuid="UILanguageDialog.UILanguageDialog.btnCancel">
+      <tuv xml:lang="en">
+        <seg>Cancel</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Annuler</seg>
+      </tuv>
+    </tu>
+    <tu tuid="UILanguageDialog.UILanguageDialog.btnOk">
+      <tuv xml:lang="en">
+        <seg>&amp;Ok</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>&amp;OK</seg>
+      </tuv>
+    </tu>
+    <tu tuid="UILanguageDialog.WindowTitle">
+      <tuv xml:lang="en">
+        <seg>UI Language Dialog</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Dialogue de langue de l'interface utilisateur</seg>
+      </tuv>
+    </tu>
+    <tu tuid="UILanguageDialog.groupBox1">
+      <tuv xml:lang="en">
+        <seg>Preview</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Aperçu</seg>
+      </tuv>
+    </tu>
+    <tu tuid="UILanguageDialog.lblFontName">
+      <tuv xml:lang="en">
+        <seg>Font-Name</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Now du policier</seg>
+      </tuv>
+    </tu>
+    <tu tuid="UILanguageDialog.lblFontSize">
+      <tuv xml:lang="en">
+        <seg>Font-Size</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Taille de police de charactères</seg>
+      </tuv>
+    </tu>
+    <tu tuid="UILanguageDialog.lblUserInterface">
+      <tuv xml:lang="en">
+        <seg>User Interface Language:</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Langue d'Interface utilisateur :</seg>
+      </tuv>
+    </tu>
+    <tu tuid="UILanguageDialog.linkLabel1">
+      <tuv xml:lang="en">
+        <seg>I want to localize Pathway for another langauge..</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>http://code.google.com/p/epubcheck/wiki/Errors</seg>
+      </tuv>
+    </tu>
     <tu tuid="ValidationDialog.WindowTitle">
       <tuv xml:lang="en">
         <seg>Validate .epub File</seg>
@@ -2231,6 +2737,14 @@
         <seg>Annuler</seg>
       </tuv>
     </tu>
+    <tu tuid="ValidationDialog.btnValidate">
+      <tuv xml:lang="en">
+        <seg>&amp;Validate</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>&amp;Valider</seg>
+      </tuv>
+    </tu>
     <tu tuid="ValidationDialog.groupBox1">
       <tuv xml:lang="en">
         <seg>&amp;File to Validate:</seg>
@@ -2253,6 +2767,14 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Cliquer sur le bouton Valider ci-dessous pour démarrer le processus.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="ValidationDialog.lblStatus">
+      <tuv xml:lang="en">
+        <seg>Validating file - please wait.</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>Validation du fichier - s'il vous plaît attendre.</seg>
       </tuv>
     </tu>
     <tu tuid="frmResults.WindowTitle">
@@ -2285,15 +2807,6 @@
       </tuv>
       <tuv xml:lang="fr">
         <seg>Voici les résultats de validation. Pour plus d'informations sur les erreurs spécifiques, veuillez vous reporter à la documentation d'utilitaire epubcheck :</seg>
-      </tuv>
-    </tu>
-    <tu tuid="frmResults.linkLabel1">
-      <prop type="x-nolongerused">true</prop>
-      <tuv xml:lang="en">
-        <seg>http://code.google.com/p/epubcheck/wiki/Errors</seg>
-      </tuv>
-      <tuv xml:lang="fr">
-        <seg>http://code.google.com/p/epubcheck/wiki/Errors</seg>
       </tuv>
     </tu>
     <tu tuid="frmSplash.WindowTitle">
