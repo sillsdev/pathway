@@ -4580,6 +4580,7 @@ namespace SIL.Tool
         {
             var xmlDoc = new XmlDocument();
             string fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+			
             if (!File.Exists(fileName))
             {
                 string pathwayDirectory = PathwayPath.GetPathwayDir();
@@ -4590,7 +4591,8 @@ namespace SIL.Tool
                     File.Copy(xmlSourcePath, fileName);
                 }
             }
-            xmlDoc.Load(fileName);
+			var content = File.ReadAllText(fileName);
+			xmlDoc.LoadXml(content);
             var uiValueNode = xmlDoc.SelectSingleNode("//UILanguage/string");
             if (uiValueNode != null) uiValueNode.InnerText = setting;
 

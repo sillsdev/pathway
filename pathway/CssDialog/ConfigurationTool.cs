@@ -1060,7 +1060,11 @@ namespace SIL.PublishingSolution
         {
             string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
             var xmlDoc = new XmlDocument();
-            xmlDoc.Load(fileName);
+            //xmlDoc.Load(fileName);
+			var content = File.ReadAllText(fileName);
+			//var doc = new XmlDocument();
+			xmlDoc.LoadXml(content);
+
             var fontNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + langId + "']");
             if (fontNode != null && fontNode.Attributes != null)
             {
