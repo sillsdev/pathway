@@ -4659,13 +4659,13 @@ namespace SIL.Tool
 			    if (desiredUiLangId == string.Empty)
 				    desiredUiLangId = "en";
 
-				Console.WriteLine(desiredUiLangId);
-				Console.WriteLine(productName);
-				Console.WriteLine(productVersion);
-				Console.WriteLine(installedLocalizationsFolder);
-				Console.WriteLine(targetTmxFilePath);
-				Console.WriteLine(IssuesEmailAddress);
-				if (productVersion == null)
+				//Console.WriteLine(desiredUiLangId);
+				//Console.WriteLine(productName);
+				//Console.WriteLine(productVersion);
+				//Console.WriteLine(installedLocalizationsFolder);
+				//Console.WriteLine(targetTmxFilePath);
+				//Console.WriteLine(IssuesEmailAddress);
+				if (string.IsNullOrEmpty(productVersion))
 				{
 					productVersion = "1.13.3.0000";
 				}
