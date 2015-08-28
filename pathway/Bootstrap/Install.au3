@@ -157,7 +157,7 @@ Func DotNetInstalled($size)
 	Local $DotNet4
 	
 	;See http://msdn.microsoft.com/en-us/library/xhz1cfs8(v=VS.90).aspx
-	$DotNet4 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Policy\v4.0", "")
+	$DotNet4 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Policy\v4.0", "30319")
 	if not @error Then
 		;MsgBox(4096,"Status","Installing dot net is unnecessary...")
 		Return True
