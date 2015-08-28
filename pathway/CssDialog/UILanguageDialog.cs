@@ -21,86 +21,71 @@ namespace SIL.PublishingSolution
 		public ConfigurationToolBL CToolBl = new ConfigurationToolBL();
 		private string _uiLanguage = "en";
 		private string _fontName = "Microsoft Sans Serif";
-		private string _fontSize = "8.25";
+		private string _fontSize = "8";
 
 		public UILanguageDialog()
 		{
 			InitializeComponent();
 		}
 
-
-		private void LoadUiLanguages()
-		{
-			ddlUILanguage.Items.Clear();
-			foreach (var lang in LocalizationManager.GetUILanguages(true))
-			{
-				var item = new ComboBoxItem(lang.Name, lang.NativeName);
-				ddlUILanguage.Items.Add(item);
-			}
-			ddlUILanguage.SelectedItem =
-				ddlUILanguage.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == _uiLanguage);
-		}
-
-		private void LoadInstalledFonts()
-		{
-			ddlFontName.Items.Clear();
-			foreach (FontFamily font in FontFamily.Families)
-			{
-				ddlFontName.Items.Add(font.Name);
-				ddlFontName.SelectedIndex = 0;
-			}
-			ddlFontName.SelectedItem = _fontName;
-		}
-
-		private void LoadFontSize()
-		{
-			ddlFontSize.Items.Clear();
-			ddlFontSize.Items.Add("7");
-			ddlFontSize.Items.Add("8");
-			ddlFontSize.Items.Add("9");
-			ddlFontSize.Items.Add("10");
-			ddlFontSize.Items.Add("11");
-			ddlFontSize.Items.Add("12");
-			ddlFontSize.Items.Add("14");
-			ddlFontSize.Items.Add("16");
-			ddlFontSize.Items.Add("18");
-			ddlFontSize.Items.Add("20");
-			ddlFontSize.Items.Add("22");
-			ddlFontSize.Items.Add("24");
-			ddlFontSize.Items.Add("26");
-			ddlFontSize.Items.Add("28");
-			ddlFontSize.Items.Add("36");
-			ddlFontSize.Items.Add("48");
-			ddlFontSize.Items.Add("72");
-			ddlFontSize.SelectedItem = _fontSize;
-		}
+		
 
 		private void UILanguageDialog_Load(object sender, EventArgs e)
 		{
-			string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
-			var content = File.ReadAllText(fileName);
-			var xd = new XmlDocument();
-			xd.LoadXml(content);
-			//xd.Load(fileName);
-			var selectSingleNode = xd.SelectSingleNode("//UILanguage/string");
-			if (selectSingleNode != null)
-				_uiLanguage = selectSingleNode.InnerText;
-			var singleNode = xd.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + _uiLanguage + "']/@name");
-			if (singleNode != null)
-				_fontName = singleNode.InnerText;
-			var xmlNode = xd.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + _uiLanguage + "']/@size");
-			if (xmlNode != null)
-				_fontSize = xmlNode.InnerText;
-
+            UpdateFontOnL10NSharp(_uiLanguage);
 			LoadUiLanguages();
 			LoadInstalledFonts();
 			LoadFontSize();
-			UpdateFontOnL10NSharp(_uiLanguage);
-
 			rtbPreview.Text = ddlUILanguage.SelectedItem.ToString();
-			//rtbPreview.Font = new Font(ddlFontName.SelectedItem.ToString(),
-			//  float.Parse(ddlFontSize.SelectedItem.ToString(), CultureInfo.InvariantCulture.NumberFormat));
+			rtbPreview.Font = new Font(ddlFontName.SelectedItem.ToString(),
+			  float.Parse(ddlFontSize.SelectedItem.ToString(), CultureInfo.InvariantCulture.NumberFormat));
 		}
+
+        private void LoadUiLanguages()
+        {
+            ddlUILanguage.Items.Clear();
+            foreach (var lang in LocalizationManager.GetUILanguages(true))
+            {
+                var item = new ComboBoxItem(lang.Name, lang.NativeName);
+                ddlUILanguage.Items.Add(item);
+            }
+            ddlUILanguage.SelectedItem =
+                ddlUILanguage.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == _uiLanguage);
+        }
+
+        private void LoadInstalledFonts()
+        {
+            ddlFontName.Items.Clear();
+            foreach (FontFamily font in FontFamily.Families)
+            {
+                ddlFontName.Items.Add(font.Name);
+                ddlFontName.SelectedIndex = 0;
+            }
+            ddlFontName.SelectedItem = _fontName;
+        }
+
+        private void LoadFontSize()
+        {
+            ddlFontSize.Items.Clear();
+            ddlFontSize.Items.Add("7");
+            ddlFontSize.Items.Add("8");
+            ddlFontSize.Items.Add("9");
+            ddlFontSize.Items.Add("10");
+            ddlFontSize.Items.Add("11");
+            ddlFontSize.Items.Add("12");
+            ddlFontSize.Items.Add("14");
+            ddlFontSize.Items.Add("16");
+            ddlFontSize.Items.Add("18");
+            ddlFontSize.Items.Add("20");
+            ddlFontSize.Items.Add("22");
+            ddlFontSize.Items.Add("24");
+            ddlFontSize.Items.Add("26");
+            ddlFontSize.Items.Add("28");
+            ddlFontSize.Items.Add("36");
+            ddlFontSize.Items.Add("48");
+            ddlFontSize.Items.Add("72");
+            ddlFontSize.SelectedItem = _fontSize;
+        }
 
 		private void ddlFontName_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -154,18 +139,7 @@ namespace SIL.PublishingSolution
 		{
 			var lang = ((ComboBoxItem)ddlUILanguage.SelectedItem).Value;
 			rtbPreview.Text = ddlUILanguage.SelectedItem.ToString();
-			string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
-			var xmlDoc = new XmlDocument();
-			var content = File.ReadAllText(fileName);
-			xmlDoc.LoadXml(content);
-
-			var fontNameNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + lang + "']/@name");
-			if (fontNameNode != null)
-				_fontName = fontNameNode.InnerText;
-			var fontSizeNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + lang + "']/@size");
-			if (fontSizeNode != null)
-				_fontSize = fontSizeNode.InnerText;
-
+			Param.GetFontValues(lang, ref _fontName, ref _fontSize);
 			ddlFontName.SelectedItem = _fontName;
 			ddlFontSize.SelectedItem = _fontSize;
 		}
@@ -176,19 +150,14 @@ namespace SIL.PublishingSolution
 		/// <param name="langId"></param>
 		public void UpdateFontOnL10NSharp(string langId)
 		{
-			string fontName = "Microsoft Sans Serif";
-			float fontSize = 8.25F;
-
-			fontName = _fontName;
-			fontSize = float.Parse(_fontSize);
-
-			//For all labels and textboxes
+            _uiLanguage = Common.GetLocalizationSettings();
+            Param.GetFontValues(_uiLanguage, ref _fontName, ref _fontSize);
+      		//For all labels and textboxes
 			List<Control> allControls = GetAllControls(this);
-			allControls.ForEach(k => k.Font = new Font(fontName, fontSize));
+			allControls.ForEach(k => k.Font = new Font(_fontName, float.Parse(_fontSize)));
 		}
 
-
-		/// <summary>
+	    /// <summary>
 		/// Get the list of controls in the form
 		/// </summary>
 		/// <param name="container"></param>
