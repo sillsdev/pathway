@@ -182,8 +182,8 @@ namespace SIL.PublishingSolution
 			pageDict.Add("@page-bottom-right", "Bottom Right Margin");
 			pageDict.Add("@page-bottom-left", "Bottom Left Margin");
 			pageDict.Add("@page-bottom-center", "Bottom Center");
-			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
 			ColumnHeaderAddLocalization();
+			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
 		}
 
 		private static void ColumnHeaderAddLocalization()
