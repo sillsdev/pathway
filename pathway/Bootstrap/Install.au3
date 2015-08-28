@@ -154,10 +154,10 @@ EndFunc
 
 Func DotNetInstalled($size)
 	Global $INS_Num, $INS_Size
-	Local $DotNet2
+	Local $DotNet4
 	
 	;See http://msdn.microsoft.com/en-us/library/xhz1cfs8(v=VS.90).aspx
-	$DotNet2 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Policy\v2.0", "50727")
+	$DotNet4 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Policy\v4.0", "")
 	if not @error Then
 		;MsgBox(4096,"Status","Installing dot net is unnecessary...")
 		Return True
@@ -174,22 +174,24 @@ Func InstallDotNetIfNecessary()
 	if Not $INS_DotNet Then
 		Return
 	Endif
-	if @OSArch = "X86" Then
-		;MsgBox(4096,"Status","Installing dot net x86...")
-		$name = "dotnetfx.exe"
-	Else
-		;MsgBox(4096,"Status","Installing dot net 64...")
-		$name = "NetFx64.exe"
-	EndIf
-	GetFromUrl($name, "http://pathway.sil.org/wp-content/sprint/" & $name)
-	;RunWait("dotnetfx.exe /q:a /c:""install /l /q""")
-	if FileExists($name) Then
-		RunWait($name)
-		CleanUp($name)
-	Else
-		MsgBox(4096,"Status","Please install dot net 2.0")
-		LaunchSite("http://search.microsoft.com/en-us/results.aspx?form=MSHOME&setlang=en-us&q=dot%20net%202.0")
-	Endif
+;~  	if @OSArch = "X86" Then
+;~    		;MsgBox(4096,"Status","Installing dot net x86...")
+;~    		$name = "dotnetfx.exe"
+;~    	Else
+;~    		;MsgBox(4096,"Status","Installing dot net 64...")
+;~    		$name = "NetFx64.exe"
+;~    	EndIf
+;~    	GetFromUrl($name, "http://pathway.sil.org/wp-content/sprint/" & $name)
+;~    	;RunWait("dotnetfx.exe /q:a /c:""install /l /q""")
+;~    	if FileExists($name) Then
+;~    		RunWait($name)
+;~    		CleanUp($name)
+;~    	Else
+;~    		MsgBox(4096,"Status","Please install dot net 2.0")
+;~    		LaunchSite("http://search.microsoft.com/en-us/results.aspx?form=MSHOME&setlang=en-us&q=dot%20net%202.0")
+;~    	Endif
+	; Normally .net 4 is installed by FieldWorks or Paratext
+	LaunchSite("http://www.microsoft.com/download/en/details.aspx?displaylang=en&id=17718")
 EndFunc
 
 Func InstallVersions()
