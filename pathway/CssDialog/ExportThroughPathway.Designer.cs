@@ -827,7 +827,7 @@ namespace SIL.PublishingSolution
 			this.clbHyphenlang.Margin = new System.Windows.Forms.Padding(2);
 			this.clbHyphenlang.MultiColumn = true;
 			this.clbHyphenlang.Name = "clbHyphenlang";
-			this.clbHyphenlang.Size = new System.Drawing.Size(223, 104);
+			this.clbHyphenlang.Size = new System.Drawing.Size(250, 104);
 			this.clbHyphenlang.Sorted = true;
 			this.clbHyphenlang.TabIndex = 1;
 			// 

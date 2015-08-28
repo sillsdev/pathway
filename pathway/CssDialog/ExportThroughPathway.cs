@@ -31,12 +31,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
+using Palaso.UI.WindowsForms.WritingSystems;
+using Palaso.WritingSystems;
 using SilTools;
 using SIL.Tool;
 
@@ -381,10 +384,7 @@ namespace SIL.PublishingSolution
                 chkHyphen.Checked = false;
                 clbHyphenlang.Items.Clear();
                 //Loads Hyphenation related settings
-	            if (InputType == "Scripture")
-	            {
-		            LoadHyphenationSettings();
-	            }
+		        LoadHyphenationSettings();
 	            LoadProperty();
                 EnableUIElements();
 
@@ -412,19 +412,57 @@ namespace SIL.PublishingSolution
             var ssf = _settingsHelper.GetSettingsFilename(_settingsHelper.Database);
             if (ssf != null && ssf.Trim().Length > 0)
             {
-                var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
-                Param.DatabaseName = _settingsHelper.Database;
-                Param.IsHyphen = false;
-                Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database,true);
-                foreach (string filename in Directory.GetFiles(paratextpath, "*.txt"))
-                {
-                    if (filename.Contains("hyphen"))
-                    {
-                        Param.IsHyphen = true;
-                        Param.HyphenFilepath = filename;
-	                    Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
-                    }
-                }
+	            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe")
+	            {
+		            var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
+		            Param.DatabaseName = _settingsHelper.Database;
+		            Param.IsHyphen = false;
+		            Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database, true);
+		            foreach (string filename in Directory.GetFiles(paratextpath, "*.txt"))
+		            {
+			            if (filename.Contains("hyphen"))
+			            {
+				            Param.IsHyphen = true;
+				            Param.HyphenFilepath = filename;
+				            Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
+			            }
+		            }
+	            }
+	            if (AppDomain.CurrentDomain.FriendlyName.ToLower().Contains("fieldworks"))
+	            {
+		            var xdoc = new XmlDocument();
+		            try
+		            {
+						IDictionary<string,string> value=new Dictionary<string, string>();
+						var settingsFile = ssf;
+			            xdoc.Load(settingsFile);
+			            var curVernWssnode = xdoc.SelectSingleNode("//CurVernWss/Uni");
+			            if (curVernWssnode != null)
+			            {
+				            foreach (var lang in curVernWssnode.InnerText.Split(' '))
+				            {
+								var langname = GetLanguageValues(lang);
+					            if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+						            value.Add(lang, langname.Replace(',',' '));
+				            }
+			            }
+			            var curAnalysisWssnode = xdoc.SelectSingleNode("//CurAnalysisWss/Uni");
+			            if (curAnalysisWssnode != null)
+			            {
+							foreach (var lang in curAnalysisWssnode.InnerText.Split(' '))
+				            {
+								var langname = GetLanguageValues(lang);
+								if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+									value.Add(lang, langname.Replace(',', ' '));
+				            }
+			            }
+						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
+		            }
+		            catch (Exception)
+		            {
+		            }
+	            }
+
             }
 			Common.EnableHyphenation();
             CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database, InputType);
@@ -434,7 +472,23 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void AssignFolderDateTime()
+	    public static string GetLanguageValues(string lang)
+	    {
+		    if (lang.Contains("-"))
+		    {
+			    lang = lang.Substring(0, lang.IndexOf("-", System.StringComparison.Ordinal));
+		    }
+		    var allLangs = from ci in CultureInfo.GetCultures(CultureTypes.NeutralCultures)
+			    where ci.TwoLetterISOLanguageName != "iv"
+			    orderby ci.DisplayName
+			    select ci;
+		    var langname = lang.Length == 2
+			    ? allLangs.FirstOrDefault(s => s.TwoLetterISOLanguageName == lang)
+			    : allLangs.FirstOrDefault(s => s.ThreeLetterISOLanguageName == lang);
+		    return langname != null ? langname.EnglishName : Common.GetPalasoLanguageName(lang);
+	    }
+
+	    private void AssignFolderDateTime()
         {
             _sDateTime = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
         }

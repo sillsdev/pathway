@@ -33,6 +33,7 @@ using System.Xml;
 using System.Xml.Xsl;
 using L10NSharp;
 using Microsoft.Win32;
+using Palaso.WritingSystems;
 using Palaso.Xml;
 using SIL.Tool.Localization;
 using System.Reflection;
@@ -4790,7 +4791,8 @@ namespace SIL.Tool
 					    foreach (var lang in Param.HyphenLang.Split(','))
 						    foreach (var file in files)
 						    {
-							    if (file.Split(Convert.ToChar("_"))[1] == lang.Substring(0, lang.IndexOf(":", StringComparison.Ordinal)))
+							    if (file.Split(new char[] {Convert.ToChar("_"), '.'})[1] ==
+							        lang.Substring(0, lang.IndexOf(":", StringComparison.Ordinal)))
 							    {
 								    Param.IsHyphen = true;
 								    Param.HyphenationSelectedLanguagelist.Add(lang);
@@ -4806,6 +4808,15 @@ namespace SIL.Tool
 	    }
 
 	    #endregion
+		public static string GetPalasoLanguageName(string lang)
+	    {
+		    var lpModel = new EthnologueLookup();
+		    var matchLang = lpModel.SuggestLanguages(lang.ToLower()).FirstOrDefault();
+		    string langname = null;
+		    if (matchLang != null)
+			    langname = matchLang.DesiredName;
+			return langname ?? string.Empty;
+	    }
 		#endregion
 	}
 }

@@ -150,24 +150,72 @@ namespace SIL.Tool
             }
             if (_hostProgram == HostProgram.FieldWorks)
             {
-                // For Fieldworks, the <databasename>.fwdata file contains the list of writing systems
-                // in use, in a format like this:
-                //<AnalysisWss>                 << not in use
-                //<Uni>en pt</Uni>
-                //</AnalysisWss>
-                //<CurVernWss>                  << in use
-                //<Uni>seh</Uni>
-                //</CurVernWss>
-                //<CurAnalysisWss>              << in use
-                //<Uni>pt en</Uni>
-                //</CurAnalysisWss>
-                //<CurPronunWss>                << in use (but I don't think this is exported?)
-                //<Uni>seh-fonipa-x-etic</Uni>
-                //</CurPronunWss>
-                //<VernWss>                     << not in use
-                //<Uni>seh seh-fonipa-x-etic</Uni>
-                //</VernWss>
+
+				// For Fieldworks, the <databasename>.fwdata file contains the list of writing systems
+				// in use, in a format like this:
+				//<AnalysisWss>                 << not in use
+				//<Uni>en pt</Uni>
+				//</AnalysisWss>
+				//<CurVernWss>                  << in use
+				//<Uni>seh</Uni>
+				//</CurVernWss>
+				//<CurAnalysisWss>              << in use
+				//<Uni>pt en</Uni>
+				//</CurAnalysisWss>
+				//<CurPronunWss>                << in use (but I don't think this is exported?)
+				//<Uni>seh-fonipa-x-etic</Uni>
+				//</CurPronunWss>
+				//<VernWss>                     << not in use
+				//<Uni>seh seh-fonipa-x-etic</Uni>
+				//</VernWss>
+
+				object fwprojectPath;
+	            string fwdataFile = database + "/" + database + ".fwdata";
+				if (Common.UnixVersionCheck())
+				{
+					var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
+					if (windowsIdentity != null)
+					{
+						string userName = windowsIdentity.Name;
+						string registryPath = "/home/" + userName + "/.config/fieldworks/registry/LocalMachine/software/sil/fieldworks/";
+						if (Directory.Exists(Common.PathCombine(registryPath, "8")))
+							registryPath = Common.PathCombine(registryPath, "8");
+						else
+						{
+							if (Directory.Exists(Common.PathCombine(registryPath, "7")))
+								registryPath = Common.PathCombine(registryPath, "7");
+						}
+						while (Directory.Exists(registryPath))
+						{
+							if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
+							{
+								XmlDocument doc = new XmlDocument();
+								doc.Load(Common.PathCombine(registryPath, "values.xml"));
+								fwprojectPath = doc.SelectSingleNode("/values/value[@name=='ProjectsDir'");
+								if (fwprojectPath == null) return string.Empty;
+								Environment.SetEnvironmentVariable("FieldworksProjPath", fwprojectPath.ToString());
+								return Common.PathCombine(fwprojectPath.ToString(), fwdataFile);
+							}
+						}
+					}
+				}
+				else
+				{
+					fwprojectPath = SilTools.Utils.FwProjectsPath;
+					if (Directory.Exists((string)fwprojectPath))
+					{
+						string settingFilePath = Common.PathCombine((string)fwprojectPath, fwdataFile);
+						if (File.Exists(settingFilePath))
+							return settingFilePath;
+						else
+							return string.Empty;
+					}
+				}
+
+				Debug.WriteLine(fwdataFile + " does not exist.");
+				return string.Empty;
             }
+			// not found on logical drives. 
             if (_hostProgram == HostProgram.Other)
             {
                 
@@ -199,7 +247,6 @@ namespace SIL.Tool
             {
                 return;
             }
-
             // open up the settings file and populate our dictionary
             XmlTextReader reader = null;
             try
@@ -235,9 +282,12 @@ namespace SIL.Tool
                             if (nodeName != null)
                             {
                                 // yes - add it now
-                                Value.Add(nodeName, nodeValue);
-                                nodeName = null;
-                                nodeValue = null;
+	                            if (!Value.ContainsKey(nodeName))
+	                            {
+		                            Value.Add(nodeName, nodeValue);
+	                            }
+								nodeName = null;
+								nodeValue = null;
                             }
                             break;
                     }
