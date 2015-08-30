@@ -85,11 +85,12 @@ namespace SIL.PublishingSolution
             // 
             // lblFontName
             // 
+            this.lblFontName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFontName.AutoSize = true;
             this.l10NSharpExtender1.SetLocalizableToolTip(this.lblFontName, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.lblFontName, null);
             this.l10NSharpExtender1.SetLocalizingId(this.lblFontName, "UILanguageDialog.lblFontName");
-            this.lblFontName.Location = new System.Drawing.Point(3, 53);
+            this.lblFontName.Location = new System.Drawing.Point(3, 61);
             this.lblFontName.Name = "lblFontName";
             this.lblFontName.Size = new System.Drawing.Size(59, 13);
             this.lblFontName.TabIndex = 3;
@@ -97,13 +98,14 @@ namespace SIL.PublishingSolution
             // 
             // lblFontSize
             // 
+            this.lblFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFontSize.AutoSize = true;
             this.l10NSharpExtender1.SetLocalizableToolTip(this.lblFontSize, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.lblFontSize, null);
             this.l10NSharpExtender1.SetLocalizingId(this.lblFontSize, "UILanguageDialog.lblFontSize");
-            this.lblFontSize.Location = new System.Drawing.Point(3, 82);
+            this.lblFontSize.Location = new System.Drawing.Point(3, 90);
             this.lblFontSize.Name = "lblFontSize";
-            this.lblFontSize.Size = new System.Drawing.Size(51, 13);
+            this.lblFontSize.Size = new System.Drawing.Size(59, 13);
             this.lblFontSize.TabIndex = 5;
             this.lblFontSize.Text = "Font-Size";
             // 
@@ -132,7 +134,7 @@ namespace SIL.PublishingSolution
             this.ddlFontName.Location = new System.Drawing.Point(68, 56);
             this.ddlFontName.Name = "ddlFontName";
             this.ddlFontName.Size = new System.Drawing.Size(157, 21);
-            this.ddlFontName.TabIndex = 4;
+            this.ddlFontName.TabIndex = 2;
             this.ddlFontName.SelectedIndexChanged += new System.EventHandler(this.ddlFontName_SelectedIndexChanged);
             // 
             // ddlFontSize
@@ -145,7 +147,7 @@ namespace SIL.PublishingSolution
             this.ddlFontSize.Location = new System.Drawing.Point(68, 85);
             this.ddlFontSize.Name = "ddlFontSize";
             this.ddlFontSize.Size = new System.Drawing.Size(157, 21);
-            this.ddlFontSize.TabIndex = 6;
+            this.ddlFontSize.TabIndex = 3;
             this.ddlFontSize.SelectedIndexChanged += new System.EventHandler(this.ddlFontSize_SelectedIndexChanged);
             // 
             // btnOk
@@ -156,7 +158,7 @@ namespace SIL.PublishingSolution
             this.btnOk.Location = new System.Drawing.Point(241, 160);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 9;
+            this.btnOk.TabIndex = 4;
             this.btnOk.Text = "&Ok";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -170,7 +172,7 @@ namespace SIL.PublishingSolution
             this.btnCancel.Location = new System.Drawing.Point(322, 161);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 10;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);

@@ -4579,31 +4579,26 @@ namespace SIL.Tool
         public static void SaveLocalizationSettings(string setting, string fontname, string fontsize)
         {
             var xmlDoc = new XmlDocument();
+            Param.LoadUiLanguageFontInfo();
             string fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
-            if (!File.Exists(fileName))
+            if (File.Exists(fileName))
             {
-                string pathwayDirectory = PathwayPath.GetPathwayDir();
-                if (pathwayDirectory != null)
-                {
-                    string installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
-                    string xmlSourcePath = PathCombine(installedLocalizationsFolder, "UserInterfaceLanguage.xml");
-                    File.Copy(xmlSourcePath, fileName);
-                }
-            }
-            xmlDoc.Load(fileName);
-            var uiValueNode = xmlDoc.SelectSingleNode("//UILanguage/string");
-            if (uiValueNode != null) uiValueNode.InnerText = setting;
+                var content = File.ReadAllText(fileName);
+                xmlDoc.LoadXml(content);
+                var uiValueNode = xmlDoc.SelectSingleNode("//UILanguage/string");
+                if (uiValueNode != null) uiValueNode.InnerText = setting;
 
-            if (fontname != null && fontsize != null)
-            {
-                XmlNode fontNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + setting + "']");
-                if (fontNode != null && fontNode.Attributes != null)
+                if (fontname != null && fontsize != null)
                 {
-                    fontNode.Attributes["name"].InnerText = fontname;
-                    fontNode.Attributes["size"].InnerText = fontsize;
+                    XmlNode fontNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + setting + "']");
+                    if (fontNode != null && fontNode.Attributes != null)
+                    {
+                        fontNode.Attributes["name"].InnerText = fontname;
+                        fontNode.Attributes["size"].InnerText = fontsize;
+                    }
                 }
+                xmlDoc.Save(fileName);
             }
-            xmlDoc.Save(fileName);
         }
 
         public static string GetLocalizationSettings()

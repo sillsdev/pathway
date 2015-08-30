@@ -147,12 +147,20 @@ namespace SIL.Tool
 				return Common.FromRegistry(DefaultSettingsFileName);
             }
         }
+
+        public static Dictionary<string, Dictionary<string, string>> UiLanguageFontSettings
+        {
+            get { return _uiLanguageFontSettings; }
+            set { _uiLanguageFontSettings = value; }
+        }
+
         #endregion Public properties
 
         public static Dictionary<string, string> Value = new Dictionary<string, string>();
         public static Dictionary<string, string> DefaultValue = new Dictionary<string, string>();
         public static Dictionary<string, string> StyleFile = new Dictionary<string, string>();
         public static Dictionary<string, Dictionary<string, string>> featureList = new Dictionary<string, Dictionary<string, string>>();
+        private static Dictionary<string, Dictionary<string, string>> _uiLanguageFontSettings = new Dictionary<string, Dictionary<string, string>>();
         public static readonly XmlDocument xmlMap = Common.DeclareXMLDocument(false);
         private static int _selectedIndex = 1;
         private const int UnSelectedIndex = 2;
@@ -1375,5 +1383,59 @@ namespace SIL.Tool
 
         }
         #endregion LoadImageList
+
+        #region UI Language Fonts
+
+        public static void LoadUiLanguageFontInfo()
+        {
+            var xmlDoc = new XmlDocument();
+            string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+            if (!File.Exists(fileName))
+            {
+                string pathwayDirectory = PathwayPath.GetPathwayDir();
+                if (pathwayDirectory != null)
+                {
+                    string installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
+                    string xmlSourcePath = Common.PathCombine(installedLocalizationsFolder, "UserInterfaceLanguage.xml");
+                    File.Copy(xmlSourcePath, fileName);
+                }
+            }
+            var content = File.ReadAllText(fileName);
+            xmlDoc.LoadXml(content);
+            var uiFontInfos = xmlDoc.SelectNodes("//UILanguage/fontstyle/font");
+            foreach (XmlNode fontInfo in uiFontInfos)
+            {
+                if (fontInfo.Attributes != null)
+                {
+                    string lang = fontInfo.Attributes["lang"].InnerText;
+                    string fontName = fontInfo.Attributes["name"].InnerText;
+                    string fontSize = fontInfo.Attributes["size"].InnerText;
+                    UiLanguageFontSettings[lang] = new Dictionary<string, string> { { fontName, fontSize } };
+                }
+            }
+        }
+
+        public static void GetFontValues(string langId, ref string fontName, ref string fontSize)
+	    {
+            try
+            {
+                if (UiLanguageFontSettings.ContainsKey(langId))
+                {
+                    Dictionary<string, string> fontInfo = Param.UiLanguageFontSettings[langId];
+                    foreach (KeyValuePair<string, string> fontValue in fontInfo)
+                    {
+                        fontName = fontValue.Key;
+                        fontSize = fontValue.Value;
+                    }
+                }
+            }
+            catch
+            {
+
+                fontName = "Microsoft Sans Serif";
+                fontSize = "8";
+            }
+	    }
+        #endregion
     }
 }

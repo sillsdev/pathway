@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using System.Xml;
 using DesktopAnalytics;
 using L10NSharp;
+using Palaso.UI.WindowsForms;
 using SIL.PublishingSolution.Properties;
 using SIL.Tool;
 using Palaso.Reporting;
@@ -841,6 +842,7 @@ namespace SIL.PublishingSolution
 		private void ConfigurationTool_Load(object sender, EventArgs e)
 		{
 			SetUpErrorHandling();
+            Param.LoadUiLanguageFontInfo();
             UpdateFontOnL10NSharp(LocalizationManager.UILanguageId);
 
 			_cToolBL = new ConfigurationToolBL();
@@ -1032,42 +1034,27 @@ namespace SIL.PublishingSolution
 
         #region UI Language Fonts
 
-        /// <summary>
+	    /// <summary>
         /// To set the font-name and font-size to the controls in the form.
         /// </summary>
         /// <param name="langId"></param>
         public void UpdateFontOnL10NSharp(string langId)
         {
             string fontName = "Microsoft Sans Serif";
-            float fontSize = 8.25F;
+            string fontSize = "8";
+            
+            Param.GetFontValues(langId, ref fontName, ref fontSize);
 
-            fontName = SetUILanguage(langId, fontName, ref fontSize);
-
-            //For all labels and textboxes
+	        //For all labels and textboxes
             List<Control> allControls = GetAllControls(this);
-            allControls.ForEach(k => k.Font = new Font(fontName, fontSize));
+            allControls.ForEach(k => k.Font = new Font(fontName, float.Parse(fontSize)));
             //For ToolStripMenu Items
             for (int i = 0; i < this.toolStripMain.Items.Count; i++)
             {
-                toolStripMain.Items[i].Font = new Font(fontName, fontSize, FontStyle.Bold);
+                toolStripMain.Items[i].Font = new Font(fontName,  float.Parse(fontSize), FontStyle.Bold);
             }
             //For TabControl
-            this.tabControl1.Font = new Font(fontName, fontSize, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-
-        }
-
-        private static string SetUILanguage(string langId, string fontName, ref float fontSize)
-        {
-            string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
-            var xmlDoc = new XmlDocument();
-            xmlDoc.Load(fileName);
-            var fontNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font[@lang='" + langId + "']");
-            if (fontNode != null && fontNode.Attributes != null)
-            {
-                fontName = fontNode.Attributes["name"].InnerText;
-                fontSize = float.Parse(fontNode.Attributes["size"].InnerText);
-            }
-            return fontName;
+            this.tabControl1.Font = new Font(fontName,  float.Parse(fontSize), FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
         }
 
         /// <summary>
