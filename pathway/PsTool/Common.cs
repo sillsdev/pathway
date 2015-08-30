@@ -4659,17 +4659,6 @@ namespace SIL.Tool
 			    if (desiredUiLangId == string.Empty)
 				    desiredUiLangId = "en";
 
-				//Console.WriteLine(desiredUiLangId);
-				//Console.WriteLine(productName);
-				//Console.WriteLine(productVersion);
-				//Console.WriteLine(installedLocalizationsFolder);
-				//Console.WriteLine(targetTmxFilePath);
-				//Console.WriteLine(IssuesEmailAddress);
-				if (string.IsNullOrEmpty(productVersion))
-				{
-					productVersion = "1.13.3.0000";
-				}
-
 			    L10NMngr = LocalizationManager.Create(desiredUiLangId, productName, productName, productVersion,
 				    installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespacebeginnings);
 
