@@ -675,6 +675,11 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("type", "scope");
                 _writer.WriteStartElement("reference");
             }
+            else if (_style == "s1")
+            {
+                _writer.WriteStartElement("hi");
+                _writer.WriteAttributeString("type", "bold");
+            }
             else
             {
                 _writer.WriteStartElement("p");
