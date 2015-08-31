@@ -4660,11 +4660,9 @@ namespace SIL.Tool
 					desiredUiLangId = "en";
 				if (string.IsNullOrEmpty(productVersion))
 				{
-					productVersion = "1.13.3.4587";
+					productVersion = Application.ProductVersion;
 				}
-				Console.WriteLine("==========================================");
-				Console.WriteLine("<" + Application.ProductVersion + " - " + productName  + ">");
-				Console.WriteLine("==========================================");
+
 				try
 				{
 					L10NMngr = LocalizationManager.Create(desiredUiLangId, productName, productName, productVersion,
