@@ -4663,7 +4663,7 @@ namespace SIL.Tool
 					productVersion = "1.13.3.4587";
 				}
 				Console.WriteLine("==========================================");
-				Console.WriteLine("<" + productVersion + ">");
+				Console.WriteLine("<" + Application.ProductVersion + " - " + productName  + ">");
 				Console.WriteLine("==========================================");
 				try
 				{
