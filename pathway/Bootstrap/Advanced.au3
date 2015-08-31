@@ -31,7 +31,7 @@ Func Advanced($left, $top)
 	$close = GUICtrlCreateButton("Close", 536, 464, 87, 28)
 	$message = GUICtrlCreateLabel("After analyzing what is available in your computer, Pathway bootstrap will download and install the following applications.", 256, 24, 350, 124)
 	GUICtrlSetFont($message, 14, 400, 0, "Tahoma")
-	$dotnet = GUICtrlCreateCheckbox("Microsoft Dotnet 2.0 - " & DotNetSize() & "MB", 264, 150, 340, 28)
+	$dotnet = GUICtrlCreateCheckbox("Microsoft Dotnet 4.0 - " & DotNetSize() & "MB", 264, 150, 340, 28)
 	$java = GUICtrlCreateCheckbox("Java runtime (Go Bible, Epub) - 16.4MB", 264, 180, 340, 28)
 	$office = GUICtrlCreateCheckbox("Libre Office - 190MB", 264, 210, 340, 28)
 	$epub = GUICtrlCreateCheckbox("Epub (e-book reader) - 43.2MB", 264, 240, 340, 28)
@@ -153,9 +153,10 @@ Func Advanced_SetTip($control, $msg, $INS_flag)
 EndFunc
 
 Func DotNetSize()
+	; see: http://www.microsoft.com/en-us/download/details.aspx?id=17851
 	if @OSArch = "X86" Then
-		Return 22.4
+		Return 850
 	Else
-		Return 45.2
+		Return 2000
 	EndIf
 EndFunc
