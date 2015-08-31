@@ -4650,7 +4650,7 @@ namespace SIL.Tool
 				FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
 				var companyName = fvi.CompanyName;
 				var productName = fvi.ProductName;
-				var productVersion = fvi.ProductVersion;
+				var productVersion = fvi.ProductVersion.Trim();
 
 				//var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
 				var targetTmxFilePath = Path.Combine(kCompany, kProduct);
@@ -4660,9 +4660,11 @@ namespace SIL.Tool
 					desiredUiLangId = "en";
 				if (string.IsNullOrEmpty(productVersion))
 				{
-					productVersion = "1.13.3.4586";
+					productVersion = "1.13.3.4587";
 				}
-				Console.WriteLine(productVersion);
+				Console.WriteLine("==========================================");
+				Console.WriteLine("<" + productVersion + ">");
+				Console.WriteLine("==========================================");
 				try
 				{
 					L10NMngr = LocalizationManager.Create(desiredUiLangId, productName, productName, productVersion,
