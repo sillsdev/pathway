@@ -156,6 +156,12 @@ namespace SIL.PublishingSolution
                 _writer.WriteString(_content);
                 _style = string.Empty;
             }
+            else if (_tagName == "char" && _style == "nd")
+            {
+                _writer.WriteString(_content);
+                _writer.WriteEndElement();
+                _style = string.Empty;
+            }
             else if (_tagName == "para" && _style == "rem")
             {
                 _writer.WriteComment("\\" + _style + " " + _content);
@@ -490,6 +496,11 @@ namespace SIL.PublishingSolution
                 else if (_style == "xt")
                 {
                     return;
+                }
+                else if (_style == "nd")
+                {
+                    _writer.WriteStartElement("seg");
+                    _writer.WriteStartElement("divineName");
                 }
                 else
                 {
