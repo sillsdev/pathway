@@ -287,6 +287,65 @@ namespace Test.SwordConvert
             FileAssert.AreEqual(expected, output, file + " test fails");
         }
 
+        ///<summary>
+        ///Compare files
+        /// </summary>  
+        [Test]
+        [Category("SkipOnTeamCity")]
+        public void JudgesBookTest()
+        {
+            const string file = "JDG";
+
+            string input = Common.PathCombine(_inputPath, file + ".usx");
+            string output = Common.PathCombine(_outputPath, file + ".xml");
+            string expected = Common.PathCombine(_expectedPath, file + ".xml");
+
+            var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName().Replace(".", "_"));
+            Directory.CreateDirectory(inputTmpDir);
+            string inputTmpDirFileName = string.Empty;
+            inputTmpDirFileName = Common.PathCombine(inputTmpDir, "usx");
+            Directory.CreateDirectory(inputTmpDirFileName);
+            inputTmpDirFileName = Common.PathCombine(inputTmpDirFileName, Path.GetFileName(input));
+            File.Copy(input, inputTmpDirFileName, true);
+
+            ExportSword swordObj = new ExportSword();
+            PublicationInformation projInfo = new PublicationInformation();
+            projInfo.ProjectPath = inputTmpDir;
+            projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(inputTmpDir, "Test.xhtml");
+            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
+            swordObj.OpenOutputDirectory = false;
+            swordObj.Export(projInfo);
+
+            string osisOutputFile = Common.PathCombine(inputTmpDir, "OSIS");
+            var swordTmpDir = Common.PathCombine(Path.GetTempPath(), "Sword");
+            osisOutputFile = Common.PathCombine(osisOutputFile, Path.GetFileName(output));
+            if (File.Exists(osisOutputFile))
+            {
+                File.Copy(osisOutputFile, output, true);
+            }
+
+            if (Directory.Exists(swordTmpDir))
+            {
+                swordObj.CopySwordCreatorFolderToTemp(swordTmpDir, Common.PathCombine(_outputPath, file), null);
+            }
+            string swordOutputPath = Common.PathCombine(_outputPath, file);
+            Common.CleanupExportFolder(Common.PathCombine(swordOutputPath, file + ".xml"), ".exe,.dll", string.Empty, string.Empty);
+
+            if (Directory.Exists(inputTmpDir))
+            {
+                DirectoryInfo di = new DirectoryInfo(inputTmpDir);
+                Common.CleanDirectory(di);
+            }
+
+            if (Directory.Exists(swordTmpDir))
+            {
+                DirectoryInfo di = new DirectoryInfo(swordTmpDir);
+                Common.CleanDirectory(di);
+            }
+
+            FileAssert.AreEqual(expected, output, file + " test fails");
+        }
+
         
     }
 }

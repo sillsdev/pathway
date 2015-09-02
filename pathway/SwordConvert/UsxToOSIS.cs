@@ -162,12 +162,18 @@ namespace SIL.PublishingSolution
                 _writer.WriteEndElement();
                 _style = string.Empty;
             }
+            else if (_tagName == "para" && _style == "r")
+            {
+                _writer.WriteString(_content);
+                _writer.WriteEndElement();
+                _style = string.Empty;
+            }
             else if (_tagName == "para" && _style == "rem")
             {
                 _writer.WriteComment("\\" + _style + " " + _content);
                 _style = string.Empty;
             }
-            else if (_tagName == "para" && (_style == "mr" || _style == "r" || _style == "imt" || _style == "mt" || _style == "mt1"))
+            else if (_tagName == "para" && (_style == "mr" || _style == "imt" || _style == "mt" || _style == "mt1"))
             {
                 _writer.WriteString(_content);
                 _writer.WriteEndElement();
@@ -605,6 +611,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("type", "section");
 
                 _writer.WriteStartElement("title");
+                _writer.WriteAttributeString("level", "1");
                 _isFirstScope = false;
             }
             else if (_style == "h" || _style == "is" || _style == "title")
@@ -662,12 +669,6 @@ namespace SIL.PublishingSolution
                 }
                 _writer.WriteStartElement("item");
             }
-            else if (_style == "r")
-            {
-                _writer.WriteStartElement("title");
-                _writer.WriteAttributeString("type", "parallel");
-                _writer.WriteStartElement("reference");
-            }
             else if (_style == "p")
             {
                 _writer.WriteStartElement("p");
@@ -690,6 +691,13 @@ namespace SIL.PublishingSolution
             {
                 _writer.WriteStartElement("hi");
                 _writer.WriteAttributeString("type", "bold");
+            }
+            else if (_style == "r")
+            {
+                _writer.WriteStartElement("title");
+                _writer.WriteAttributeString("level", "2");
+                _writer.WriteStartElement("hi");
+                _writer.WriteAttributeString("type", "italic");
             }
             else
             {
