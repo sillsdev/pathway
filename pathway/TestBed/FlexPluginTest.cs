@@ -207,6 +207,7 @@ namespace TestBed
         {
             var fd = new OpenFileDialog();
             fd.Filter = fileType;
+	        fd.FilterIndex = 8;
             fd.ShowDialog();
 
             return fd.FileName;
@@ -396,7 +397,7 @@ namespace TestBed
         {
             var supportFolder = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
             FolderTree.Copy(supportFolder, ".");
-            LocalizationSetup();
+           // LocalizationSetup();
         }
 
         private void button6_Click_1(object sender, EventArgs e)
@@ -879,10 +880,11 @@ namespace TestBed
                 return;
             }
 
-            UsxToOSIS usxToSis = new UsxToOSIS();
-            string output = txtInputPath.Text.Replace(".usx", ".xml");
-            usxToSis.ConvertUsxToOSIS(txtInputPath.Text, output, "eng");
-            MessageBox.Show("Done");
+			UsxToOSIS usxToSis = new UsxToOSIS();
+			string output = txtInputPath.Text.Replace(".usx", ".xml");
+			usxToSis.ConvertUsxToOSIS(txtInputPath.Text, output);
+			//usxToSis.ConvertUsxToOSIS(txtInputPath.Text, output, "eng");
+			MessageBox.Show("Done");
 
         }
 
