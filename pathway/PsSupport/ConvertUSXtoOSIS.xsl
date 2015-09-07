@@ -133,6 +133,15 @@
             </title>
         </div>
     </xsl:template>
+    
+    <xsl:template match="para[@style='d']">
+        <div align="center">
+            <hi type="italic">
+                <xsl:apply-templates/>
+            </hi>
+        </div>
+    </xsl:template>
+    
     <xsl:template match="para[@style='li2']"/>
     <xsl:template match="para[@style='li3']"/>
     <xsl:template match="para[@style='toc1' or @style='toc2' or @style='toc3']"/>
