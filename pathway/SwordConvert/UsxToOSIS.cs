@@ -85,7 +85,10 @@ namespace SIL.PublishingSolution
 
 		public void ConvertUsxToOSIS(string usxFullPath, string OSISFullPath)
 		{
+			_usxFullPath = usxFullPath;
+			_osisFullPath = OSISFullPath;
 			ProcessUsxtoOsis(usxFullPath, OSISFullPath);
+			UpdateScopeProcess();
 		}
 
 		/// ------------------------------------------------------------------------
@@ -1016,7 +1019,15 @@ namespace SIL.PublishingSolution
 		private void UpdateScopeProcess()
 		{
 			string scope;
-			XmlDocument xmlDocument = new XmlDocument();
+			XmlDocument xmlDocument = new XmlDocument();			
+			if(!File.Exists(_osisFullPath))
+			{
+				string usxToOsisFile = _usxFullPath.Replace(".usx",".xml");
+				if(File.Exists(usxToOsisFile))
+				{
+					File.Copy(usxToOsisFile, _osisFullPath, true);
+				}
+			}
 			xmlDocument.Load(_osisFullPath);
 			XmlNodeList entryNodes = xmlDocument.GetElementsByTagName("div");
 			foreach (XmlNode node in entryNodes)

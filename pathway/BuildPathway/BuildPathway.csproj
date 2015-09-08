@@ -485,6 +485,7 @@
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" />
     <AllTransform Include="..\PsSupport\AddBidi.xsl" />
+	<AllTransform Include="..\PsSupport\ConvertUSXtoOSIS.xsl" />	
     <AllTransform Include="..\PsSupport\addDicTocHeads.xsl" />
     <AllTransform Include="..\PsSupport\FixEpub.xsl" />
     <AllTransform Include="..\PsSupport\FixEpubToc.xsl" />

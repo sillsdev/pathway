@@ -1397,7 +1397,14 @@ namespace SIL.Tool
                 {
                     string installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
                     string xmlSourcePath = Common.PathCombine(installedLocalizationsFolder, "UserInterfaceLanguage.xml");
-                    File.Copy(xmlSourcePath, fileName);
+	                if (File.Exists(xmlSourcePath))
+	                {
+		                File.Copy(xmlSourcePath, fileName, true);
+	                }
+	                else
+	                {
+		                return;
+	                }
                 }
             }
             var content = File.ReadAllText(fileName);

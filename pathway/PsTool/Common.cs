@@ -4612,11 +4612,18 @@ namespace SIL.Tool
 					SaveLocalizationSettings("en", null, null);
 				}
 
-				var content = File.ReadAllText(fileName);
-				var doc = new XmlDocument();
-				doc.LoadXml(content);
-				var node = doc.SelectSingleNode("//string");
-				return (node != null) ? node.InnerText : "en";
+				if (File.Exists(fileName))
+				{
+					var content = File.ReadAllText(fileName);
+					var doc = new XmlDocument();
+					doc.LoadXml(content);
+					var node = doc.SelectSingleNode("//string");
+					return (node != null) ? node.InnerText : "en";
+				}
+				else
+				{
+					return "en";
+				}
 			}
 			catch (Exception)
 			{

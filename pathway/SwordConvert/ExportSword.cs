@@ -225,7 +225,8 @@ namespace SIL.PublishingSolution
             {
                 string osisFileName = Path.GetFileNameWithoutExtension(usxfile) + ".xml";
                 osisFileName = Common.PathCombine(osisFilePath, osisFileName);
-                usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName, xhtmlLang);
+	            usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName);
+	            //usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName, xhtmlLang);
             }
         }
 
