@@ -77,9 +77,46 @@
             </xsl:comment>
          </xsl:when>
         <xsl:otherwise>
-            <p>
-                <xsl:apply-templates/>
-            </p>
+          <p>
+            <xsl:variable name="BookID">
+                    <xsl:value-of select="ancestor::book[1]/@code"/>
+                </xsl:variable>
+                <xsl:variable name="chapternumber">
+                    <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
+                </xsl:variable>
+                <xsl:for-each select="@*|node()|text()">
+                    <xsl:choose>
+                        <xsl:when test="local-name()='verse'">
+                            <xsl:if test="local-name(preceding-sibling::*)='verse'">
+                                <xsl:element name="verse">
+                                    <xsl:attribute name="eID">
+                                        <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                            </xsl:if>
+                            <xsl:variable name="versenumber">
+                                <xsl:value-of select="@number"/>
+                            </xsl:variable>
+                            <xsl:element name="verse">
+                                <xsl:attribute name="sID">
+                                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
+                                </xsl:attribute>
+                            </xsl:element>
+                        </xsl:when>
+                        <xsl:otherwise><xsl:copy>
+                            <xsl:apply-templates select="@* | node()"/>
+                        </xsl:copy></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+                <xsl:if test="child::*[local-name()='verse']">
+                    <!--<xsl:text> true</xsl:text>-->
+                    <xsl:element name="verse">
+                        <xsl:attribute name="eID">
+                            <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"/>
+                        </xsl:attribute>
+                    </xsl:element>
+                </xsl:if>
+            </p>    
         </xsl:otherwise>
     </xsl:choose>
     </xsl:template>
@@ -94,10 +131,49 @@
         <div>
         <list>
             <item style="{$li}">
-                <xsl:apply-templates/>
-                <xsl:if test="following-sibling::*[1]/@style='li2'">
-                    <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
-                </xsl:if>
+              <xsl:variable name="BookID">
+                <xsl:value-of select="ancestor::book[1]/@code"/>
+              </xsl:variable>
+              <xsl:variable name="chapternumber">
+                <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
+              </xsl:variable>
+              <xsl:for-each select="@*|node()|text()">
+                <xsl:choose>
+                  <xsl:when test="local-name()='verse'">
+                    <xsl:if test="local-name(preceding-sibling::*)='verse'">
+                      <xsl:element name="verse">
+                        <xsl:attribute name="eID">
+                          <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"/>
+                        </xsl:attribute>
+                      </xsl:element>
+                    </xsl:if>
+                    <xsl:variable name="versenumber">
+                      <xsl:value-of select="@number"/>
+                    </xsl:variable>
+                    <xsl:element name="verse">
+                      <xsl:attribute name="sID">
+                        <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
+                      </xsl:attribute>
+                    </xsl:element>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:copy>
+                      <xsl:apply-templates select="@* | node()"/>
+                    </xsl:copy>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:for-each>
+              <xsl:if test="child::*[local-name()='verse']">
+                <!--<xsl:text> true</xsl:text>-->
+                <xsl:element name="verse">
+                  <xsl:attribute name="eID">
+                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"/>
+                  </xsl:attribute>
+                </xsl:element>
+              </xsl:if>
+              <xsl:if test="following-sibling::*[1]/@style='li2'">
+                <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
+              </xsl:if>
             </item>
         </list>
         </div>
@@ -105,17 +181,94 @@
     <xsl:template match="para[@style='li2']" mode="listitem">
         <list>
             <item>
-                <xsl:apply-templates/>
-                <xsl:if test="following-sibling::*[1]/@style='li3'">
-                    <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
-                </xsl:if>
+              <xsl:variable name="BookID">
+                <xsl:value-of select="ancestor::book[1]/@code"/>
+              </xsl:variable>
+              <xsl:variable name="chapternumber">
+                <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
+              </xsl:variable>
+              <xsl:for-each select="@*|node()|text()">
+                <xsl:choose>
+                  <xsl:when test="local-name()='verse'">
+                    <xsl:if test="local-name(preceding-sibling::*)='verse'">
+                      <xsl:element name="verse">
+                        <xsl:attribute name="eID">
+                          <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"/>
+                        </xsl:attribute>
+                      </xsl:element>
+                    </xsl:if>
+                    <xsl:variable name="versenumber">
+                      <xsl:value-of select="@number"/>
+                    </xsl:variable>
+                    <xsl:element name="verse">
+                      <xsl:attribute name="sID">
+                        <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
+                      </xsl:attribute>
+                    </xsl:element>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:copy>
+                      <xsl:apply-templates select="@* | node()"/>
+                    </xsl:copy>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:for-each>
+              <xsl:if test="child::*[local-name()='verse']">
+                <!--<xsl:text> true</xsl:text>-->
+                <xsl:element name="verse">
+                  <xsl:attribute name="eID">
+                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"/>
+                  </xsl:attribute>
+                </xsl:element>
+              </xsl:if>
+              <xsl:if test="following-sibling::*[1]/@style='li3'">
+                <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
+              </xsl:if>
             </item>
         </list>
     </xsl:template>
     <xsl:template match="para[@style='li3']" mode="listitem">
         <list>
             <item>
-                <xsl:apply-templates/>
+              <xsl:variable name="BookID">
+                <xsl:value-of select="ancestor::book[1]/@code"/>
+              </xsl:variable>
+              <xsl:variable name="chapternumber">
+                <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
+              </xsl:variable>
+              <xsl:for-each select="@*|node()|text()">
+                <xsl:choose>
+                  <xsl:when test="local-name()='verse'">
+                    <xsl:if test="local-name(preceding-sibling::*)='verse'">
+                      <xsl:element name="verse">
+                        <xsl:attribute name="eID">
+                          <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"/>
+                        </xsl:attribute>
+                      </xsl:element>
+                    </xsl:if>
+                    <xsl:variable name="versenumber">
+                      <xsl:value-of select="@number"/>
+                    </xsl:variable>
+                    <xsl:element name="verse">
+                      <xsl:attribute name="sID">
+                        <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
+                      </xsl:attribute>
+                    </xsl:element>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:copy>
+                      <xsl:apply-templates select="@* | node()"/>
+                    </xsl:copy>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:for-each>
+              <xsl:if test="child::*[local-name()='verse']">
+                <xsl:element name="verse">
+                  <xsl:attribute name="eID">
+                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"/>
+                  </xsl:attribute>
+                </xsl:element>
+              </xsl:if>
             </item>
         </list>
     </xsl:template>
