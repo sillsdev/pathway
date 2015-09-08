@@ -286,7 +286,7 @@
             </title>
         </div>
     </xsl:template>
-    
+    <!-- d -->
     <xsl:template match="para[@style='d']">
         <div align="center">
             <hi type="italic">
@@ -294,7 +294,62 @@
             </hi>
         </div>
     </xsl:template>
-    
+    <!-- qs , fq -->
+    <xsl:template match="para[@style='qs' or @style='fq']">
+        <hi type="italic">
+          <xsl:apply-templates/>
+        </hi>
+    </xsl:template>
+    <!-- r -->
+    <xsl:template match="para[@style='r']">
+      <title level="2">
+        <hi type="italic">
+          <xsl:apply-templates/>
+        </hi>
+      </title>
+    </xsl:template>
+    <!-- nd -->
+    <xsl:template match="para[@style='nd']">
+      <seg>
+        <divineName>
+          <xsl:apply-templates/>
+        </divineName>
+      </seg>
+    </xsl:template>
+    <!-- ms1 -->
+    <xsl:template match="para[@style='ms1']">
+      <title level="2">
+        <hi type="bold">
+          <xsl:apply-templates/>
+        </hi>
+      </title>
+    </xsl:template>
+    <!-- b -->
+    <xsl:template match="para[@style='b']">
+      <br/>
+    </xsl:template>
+    <!-- ide -->
+    <xsl:template match="para[@style='ide']">
+    </xsl:template>
+    <!-- pi -->
+    <xsl:template match="para[@style='pi']">
+      <list>
+        <item>
+        <p>
+          <xsl:apply-templates/>
+        </p>
+        </item>
+      </list>
+    </xsl:template>
+    <!-- q -->
+    <xsl:template match="para[@style='q']">
+      <lg>
+        <l level="1">
+          <xsl:apply-templates/>
+        </l>
+      </lg>
+    </xsl:template>
+
     <xsl:template match="para[@style='li2']"/>
     <xsl:template match="para[@style='li3']"/>
     <xsl:template match="para[@style='toc1' or @style='toc2' or @style='toc3']"/>
