@@ -1055,9 +1055,9 @@ namespace SIL.PublishingSolution
 					if (node.Attributes != null && node.Attributes["type"] != null && node.Attributes["osisID"] != null)
 					{
 						string bookCode = node.Attributes["osisID"].Value;
-						if (_bookCode.ContainsKey(bookCode))
+						if (_bookCode.ContainsKey(bookCode.ToLower()))
 						{
-							bookCodeValue = _bookCode[bookCode];
+							bookCodeValue = _bookCode[bookCode.ToLower()];
 							node.Attributes["osisID"].Value = bookCodeValue;
 						}
 					}
