@@ -21,7 +21,9 @@ using System.Text;
 using System.Xml;
 using SIL.Tool;
 using System.IO;
+using System.Reflection;
 using System.Threading;
+using System.Xml.Xsl;
 
 namespace SIL.PublishingSolution
 {
@@ -1047,43 +1049,30 @@ namespace SIL.PublishingSolution
 
 		private void ProcessUsxtoOsis(string USXFile, string OSISFile)
 		{
-			string xsltFullName = GetXsltFile();
-			string getPsApplicationPath = Common.GetPSApplicationPath();
-			string xsltProcessExe = Common.PathCombine(getPsApplicationPath, "XslProcess.exe");
-
-			if (File.Exists(xsltProcessExe))
-			{
 				if (File.Exists(OSISFile))
 				{
 					File.Delete(OSISFile);  // clean up the un-transformed file
 				}
-				string file = USXFile;
-				const string outputExtension = ".xml";
-				var inputExtension = Path.GetExtension(file);
-				Debug.Assert(inputExtension != null);
-				var OutputFile = file.Replace(inputExtension, outputExtension);
-				if (Common.IsUnixOS())
-				{
-					Common.XsltProcess(file, xsltFullName, outputExtension);
-				}
-				else
-				{
-					var args = string.Format(@"""{0}"" ""{1}"" {2} ""{3}""", file, xsltFullName,
-											outputExtension, getPsApplicationPath);
-					Common.RunCommand(xsltProcessExe, args, 1);
-				}
-			}
+				XslCompiledTransform xsltProcess = new XslCompiledTransform();
+				xsltProcess.Load(XmlReader.Create(Common.UsersXsl("ConvertUSXtoOSIS.xsl")));
+				ApplyUsxtoOsisXsl(USXFile, xsltProcess, OSISFile);
 		}
 
-		private string GetXsltFile()
-		{
-			string xsltFullName = Common.FromRegistry("ConvertUSXtoOSIS.xsl");
-			if (!File.Exists(xsltFullName))
-				return "";
-			var tempXslt = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
-			File.Copy(xsltFullName, tempXslt, true);
 
-			return tempXslt;
+		public static void ApplyUsxtoOsisXsl(string fileFullPath, XslCompiledTransform xslt, string OSISFile)
+		{
+		
+			XmlTextReader reader = Common.DeclareXmlTextReader(fileFullPath, true);
+			FileStream xmlFile = new FileStream(OSISFile, FileMode.Create);
+			XmlWriter writer = XmlWriter.Create(xmlFile, xslt.OutputSettings);
+			xslt.Transform(reader, null, writer, null);
+			xmlFile.Close();
+			reader.Close();
+
+			if (File.Exists(OSISFile))
+			{
+				File.Copy(OSISFile, fileFullPath.Replace(".usx", ".xml"), true);
+			}
 		}
 	}
 }

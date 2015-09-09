@@ -184,14 +184,15 @@ namespace SIL.PublishingSolution
 
             WriteConfig(sw2, "[" + languageCode.ToUpper() + "]");
             WriteConfig(sw2, "DataPath=./modules/texts/ztext/" + languageCode + "/");
-            WriteConfig(sw2, "ModDrv=zText");
+            WriteConfig(sw2, "ModDrv   =     zText");
             WriteConfig(sw2, "Encoding=UTF-8");
             WriteConfig(sw2, "BlockType=BOOK");
             WriteConfig(sw2, "CompressType=ZIP");
             WriteConfig(sw2, "SourceType=OSIS");
+
             if (_languageName == string.Empty)
             {
-                _languageName = "UNKNOWN";
+                _languageName = "English";
             }
             WriteConfig(sw2, "Lang=" + _languageName);
             WriteConfig(sw2, "GlobalOptionFilter=OSISStrongs");
