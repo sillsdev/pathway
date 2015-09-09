@@ -184,7 +184,7 @@ namespace SIL.PublishingSolution
 
             WriteConfig(sw2, "[" + languageCode.ToUpper() + "]");
             WriteConfig(sw2, "DataPath=./modules/texts/ztext/" + languageCode + "/");
-            WriteConfig(sw2, "ModDrv   =     zText");
+            WriteConfig(sw2, "ModDrv=zText");
             WriteConfig(sw2, "Encoding=UTF-8");
             WriteConfig(sw2, "BlockType=BOOK");
             WriteConfig(sw2, "CompressType=ZIP");
@@ -227,7 +227,6 @@ namespace SIL.PublishingSolution
                 string osisFileName = Path.GetFileNameWithoutExtension(usxfile) + ".xml";
                 osisFileName = Common.PathCombine(osisFilePath, osisFileName);
 	            usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName);
-	            //usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName, xhtmlLang);
             }
         }
 

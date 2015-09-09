@@ -1020,6 +1020,8 @@ namespace SIL.PublishingSolution
 
 		private void UpdateScopeProcess()
 		{
+			SetBookCode();
+
 			string scope;
 			XmlDocument xmlDocument = new XmlDocument();			
 			if(!File.Exists(_osisFullPath))
@@ -1044,6 +1046,30 @@ namespace SIL.PublishingSolution
 					}
 				}
 			}
+			string bookCodeValue;
+			entryNodes = xmlDocument.GetElementsByTagName("div");
+			foreach (XmlNode node in entryNodes)
+			{
+				if (node.Attributes != null && node.Attributes["type"] != null)
+				{
+					if (node.Attributes != null && node.Attributes["type"] != null && node.Attributes["osisID"] != null)
+					{
+						string bookCode = node.Attributes["osisID"].Value;
+						if (_bookCode.ContainsKey(bookCode))
+						{
+							bookCodeValue = _bookCode[bookCode];
+							node.Attributes["osisID"].Value = bookCodeValue;
+						}
+					}
+
+					if (node.Attributes["xmlns"] != null)
+					{
+						node.Attributes.Remove(node.Attributes["xmlns"]);
+					}
+				}
+			}
+			
+
 			xmlDocument.Save(_osisFullPath);
 		}
 

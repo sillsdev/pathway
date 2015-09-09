@@ -21,17 +21,10 @@
   </xsl:template>
 
   <xsl:template match="usx|usfm|USX">
-    <osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd">
-      <osisText osisIDWork="KJV" osisRefWork="defaultReferenceScheme" xml:lang="en">
+    <osis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace file:../osisCore.2.0_UBS_SIL_BestPractice.xsd">
+      <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="eng">
         <header>
-          <work osisWork="Pathway">
-            <title>PathwayTitle</title>
-            <identifier type="OSIS">SIL International</identifier>
-            <scope>Gen-Rev</scope>
-            <refSystem>SIL International</refSystem>
-          </work>
+          <work osisWork="thisWork" />
         </header>
         <xsl:apply-templates/>
       </osisText>
@@ -55,14 +48,10 @@
     <xsl:variable name="bookHeading" select="normalize-space(para[@style='h'])"/>
     <xsl:variable name="bookTitle" select="normalize-space(para[@style='mt'])"/>
     <xsl:variable name="bookTitle1" select="normalize-space(para[@style='mt1'])"/>
-    <div type="bookGroup">
-      <title>Old Testament</title>
-      <div type="book" osisID="{$bookCode}">
+     <div type="book" osisID="{$bookCode}">
         <xsl:apply-templates/>
-      </div>
-    </div>
+     </div>    
   </xsl:template>
-
   <xsl:template match="chapter">
     <xsl:variable name="BookID">
       <xsl:value-of select="ancestor::book[1]/@code"/>
@@ -77,8 +66,10 @@
       <xsl:attribute name="osisID">
         <xsl:value-of select="concat($BookID,'.',$chapternumber)"/>
       </xsl:attribute>
+      <xsl:attribute name="sID">
+        <xsl:value-of select="concat($BookID,'.',$chapternumber)"/>
+      </xsl:attribute>
     </xsl:element>
-
   </xsl:template>
   <xsl:template match="para">
     <xsl:choose>
@@ -104,14 +95,14 @@
         </xsl:comment>
       </xsl:when>
       <xsl:otherwise>
-        <p>
+        <xsl:element name="p">
           <xsl:variable name="BookID">
             <xsl:value-of select="ancestor::book[1]/@code"/>
           </xsl:variable>
           <xsl:variable name="chapternumber">
             <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
           </xsl:variable>
-          <xsl:for-each select="@*|node()|text()">
+          <xsl:for-each select="node()|text()">
             <xsl:choose>
               <xsl:when test="local-name()='verse'">
                 <xsl:if test="local-name(preceding-sibling::*)='verse'">
@@ -127,14 +118,28 @@
                   <xsl:value-of select="@number"/>
                 </xsl:variable>
                 <xsl:element name="verse">
+                  <xsl:attribute name="n">
+                    <xsl:value-of select="$versenumber"/>
+                  </xsl:attribute>
                   <xsl:attribute name="sID">
                     <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
+                  </xsl:attribute>
+                  <xsl:attribute name="osisID">
+                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
+                  </xsl:attribute>
+                  <xsl:attribute name="subType">
+                    <xsl:if test="$versenumber = '1'">
+                      <xsl:text>x-first</xsl:text>  
+                    </xsl:if>
+                    <xsl:if test="$versenumber != '1'">
+                      <xsl:text>x-embedded</xsl:text>  
+                    </xsl:if>                    
                   </xsl:attribute>
                 </xsl:element>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:copy>
-                  <xsl:apply-templates select="@* | node()"/>
+                  <xsl:apply-templates select="node()"/>
                 </xsl:copy>
               </xsl:otherwise>
             </xsl:choose>
@@ -146,10 +151,10 @@
                 <xsl:value-of
                   select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"
                 />
-              </xsl:attribute>
+              </xsl:attribute>              
             </xsl:element>
           </xsl:if>
-        </p>
+        </xsl:element>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -186,7 +191,13 @@
                   <xsl:value-of select="@number"/>
                 </xsl:variable>
                 <xsl:element name="verse">
+                  <xsl:attribute name="n">
+                    <xsl:value-of select="$versenumber"/>
+                  </xsl:attribute>
                   <xsl:attribute name="sID">
+                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
+                  </xsl:attribute>
+                  <xsl:attribute name="osisID">
                     <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
                   </xsl:attribute>
                 </xsl:element>
@@ -240,7 +251,13 @@
                 <xsl:value-of select="@number"/>
               </xsl:variable>
               <xsl:element name="verse">
+                <xsl:attribute name="n">
+                  <xsl:value-of select="$versenumber"/>
+                </xsl:attribute>
                 <xsl:attribute name="sID">
+                  <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
+                </xsl:attribute>
+                <xsl:attribute name="osisID">
                   <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
                 </xsl:attribute>
               </xsl:element>
@@ -292,7 +309,13 @@
                 <xsl:value-of select="@number"/>
               </xsl:variable>
               <xsl:element name="verse">
+                <xsl:attribute name="n">
+                  <xsl:value-of select="$versenumber"/>
+                </xsl:attribute>
                 <xsl:attribute name="sID">
+                  <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
+                </xsl:attribute>
+                <xsl:attribute name="osisID">
                   <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
                 </xsl:attribute>
               </xsl:element>
@@ -325,20 +348,20 @@
     </p>
   </xsl:template>
   <xsl:template match="para[@style='mt1']|para[@style='ms1']">
-    <title level="2">
-      <hi type="bold">
-        <xsl:apply-templates/>
-      </hi>
-    </title>
-  </xsl:template>
-  <xsl:template match="para[@style='mt2']">
-    <p>
-      <title level="4" placement="centerHead">
-        <center>
+    <title type="main">
+        <title level="2">
           <hi type="bold">
             <xsl:apply-templates/>
           </hi>
-        </center>
+        </title>
+      </title>
+  </xsl:template>
+  <xsl:template match="para[@style='mt2']">
+    <p>
+      <title level="4" placement="centerHead">        
+          <hi type="bold">
+            <xsl:apply-templates/>
+          </hi>        
       </title>
     </p>
   </xsl:template>
@@ -417,8 +440,16 @@
         <xsl:apply-templates/>
       </l>
     </lg>
+  </xsl:template>  
+  <xsl:template match="para[@style='mr']">
+    <div type="majorSection">
+      <title type="scope">
+        <reference>
+          <xsl:apply-templates/>
+        </reference>
+      </title>
+    </div>
   </xsl:template>
-
   <xsl:template match="para[@style='li2']"/>
   <xsl:template match="para[@style='li3']"/>
   <xsl:template match="para[@style='toc1' or @style='toc2' or @style='toc3']"/>

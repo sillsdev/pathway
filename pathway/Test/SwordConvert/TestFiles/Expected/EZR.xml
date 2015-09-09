@@ -1,57 +1,66 @@
-<?xml version="1.0"?>
-<osis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace file:../osisCore.2.0_UBS_SIL_BestPractice.xsd">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<osis xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace file:../osisCore.2.0_UBS_SIL_BestPractice.xsd" xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="eng">
     <header>
       <work osisWork="thisWork" />
     </header>
-    <div type="book" osisID="Ezra">
-      <p>65001 - Unicode (UTF-8)</p>
+    <div type="book" osisID="EZR" xmlns="">
       <!--\rem taken from NIV, note tr, tc1, tc2 in 1:9-->
       <title short="EZRA" />
       <title type="main">
-        <title level="1">Ezra</title>
+        <title level="2">
+          <hi type="bold">Ezra</hi>
+        </title>
       </title>
-      <chapter n="1" osisID="Ezra.1" />
-      <hi type="bold">Cyrus Helps the Exiles to Return</hi>
+      <chapter n="1" osisID="EZR.1" sID="EZR.1" />
+      <div type="section">
+        <title>
+          <hi type="bold">Cyrus Helps the Exiles to Return</hi>
+        </title>
+      </div>
       <p>
-        <verse subType="x-first" sID="Ezra.1.1" n="1" osisID="Ezra.1.1" />In the first year of Cyrus king of Persia, in order to fulfill the word of the <seg><divineName>Lord</divineName></seg> spoken by Jeremiah, the <seg><divineName>Lord</divineName></seg> moved the heart of Cyrus king of Persia to make a proclamation throughout his realm and to put it in writing:</p>
+        <verse n="1" sID="EZR.1.1" osisID="EZR.1.1" subType="x-first" />In the first year of Cyrus king of Persia, in order to fulfill the word of the <char>Lord</char> spoken by Jeremiah, the <char>Lord</char> moved the heart of Cyrus king of Persia to make a proclamation throughout his realm and to put it in writing:<verse eID="EZR.1.1" /></p>
       <p>
-        <verse subType="x-embedded" sID="Ezra.1.2" n="2" osisID="Ezra.1.2" />This is what Cyrus king of Persia says:<verse eID="Ezra.1.2" /></p>
-      <p>The <seg><divineName>Lord</divineName></seg>, the God of heaven, has given me all the kingdoms of the earth and he has appointed me to build a temple for him at Jerusalem in Judah. <verse subType="x-embedded" sID="Ezra.1.3" n="3" osisID="Ezra.1.3" />Anyone of his people among you–may his God be with him, and let him go up to Jerusalem in Judah and build the temple of the <seg><divineName>Lord</divineName></seg>, the God of Israel, the God who is in Jerusalem. <verse subType="x-embedded" sID="Ezra.1.4" n="4" osisID="Ezra.1.4" />And the people of any place where survivors may now be living are to provide him with silver and gold, with goods and livestock, and with freewill offerings for the temple of God in Jerusalem.<verse eID="Ezra.1.4" /></p>
+        <verse n="2" sID="EZR.1.2" osisID="EZR.1.2" subType="x-embedded" />This is what Cyrus king of Persia says:<verse eID="EZR.1.2" /></p>
+      <list>
+        <item>
+          <p>The <char style="nd">Lord</char>, the God of heaven, has given me all the kingdoms of the earth and he has appointed me to build a temple for him at Jerusalem in Judah. <verse number="3" style="v" />Anyone of his people among you–may his God be with him, and let him go up to Jerusalem in Judah and build the temple of the <char style="nd">Lord</char>, the God of Israel, the God who is in Jerusalem. <verse number="4" style="v" />And the people of any place where survivors may now be living are to provide him with silver and gold, with goods and livestock, and with freewill offerings for the temple of God in Jerusalem.</p>
+        </item>
+      </list>
       <p>
-        <verse subType="x-embedded" sID="Ezra.1.5" n="5" osisID="Ezra.1.5" />Then the family heads of Judah and Benjamin, and the priests and Levites–everyone whose heart God had moved–prepared to go up and build the house of the <seg><divineName>Lord</divineName></seg> in Jerusalem. <verse subType="x-embedded" sID="Ezra.1.6" n="6" osisID="Ezra.1.6" />All their neighbors assisted them with articles of silver and gold, with goods and livestock, and with valuable gifts, in addition to all the freewill offerings. <verse subType="x-embedded" sID="Ezra.1.7" n="7" osisID="Ezra.1.7" />Moreover, King Cyrus brought out the articles belonging to the temple of the <seg><divineName>Lord</divineName></seg>, which Nebuchadnezzar had carried away from Jerusalem and had placed in the temple of his god.<note type="crossReference" n="+"><char>1.7 </char><char>Or </char><char>gods</char></note><verse subType="x-embedded" sID="Ezra.1.8" n="8" osisID="Ezra.1.8" />Cyrus king of Persia had them brought by Mithredath the treasurer, who counted them out to Sheshbazzar the prince of Judah.<verse eID="Ezra.1.8" /></p>
+        <verse n="5" sID="EZR.1.5" osisID="EZR.1.5" subType="x-embedded" />Then the family heads of Judah and Benjamin, and the priests and Levites–everyone whose heart God had moved–prepared to go up and build the house of the <char>Lord</char> in Jerusalem. <verse eID="EZR.1.5" /><verse n="6" sID="EZR.1.6" osisID="EZR.1.6" subType="x-embedded" />All their neighbors assisted them with articles of silver and gold, with goods and livestock, and with valuable gifts, in addition to all the freewill offerings. <verse eID="EZR.1.6" /><verse n="7" sID="EZR.1.7" osisID="EZR.1.7" subType="x-embedded" />Moreover, King Cyrus brought out the articles belonging to the temple of the <char>Lord</char>, which Nebuchadnezzar had carried away from Jerusalem and had placed in the temple of his god.<note><char style="fr" closed="false">1.7 </char><char style="ft" closed="false">Or </char><char style="fq" closed="false">gods</char></note><verse eID="EZR.1.7" /><verse n="8" sID="EZR.1.8" osisID="EZR.1.8" subType="x-embedded" />Cyrus king of Persia had them brought by Mithredath the treasurer, who counted them out to Sheshbazzar the prince of Judah.<verse eID="EZR.1.8" /></p>
       <p>
-        <verse subType="x-embedded" sID="Ezra.1.9" n="9" osisID="Ezra.1.9" />This was the inventory:<verse eID="Ezra.1.9" /></p>
-      <p />
+        <verse n="9" sID="EZR.1.9" osisID="EZR.1.9" subType="x-embedded" />This was the inventory:<verse eID="EZR.1.9" /></p>
+      <br />
       <table>
-        <row>
-          <cell>gold dishes </cell>
-          <cell>30</cell>
+        <row style="tr">
+          <cell style="tc1" align="start">gold dishes </cell>
+          <cell style="tc2" align="start">30</cell>
         </row>
-        <row>
-          <cell>silver dishes </cell>
-          <cell>1,000</cell>
+        <row style="tr">
+          <cell style="tc1" align="start">silver dishes </cell>
+          <cell style="tc2" align="start">1,000</cell>
         </row>
-        <row>
-          <cell>silver pans <note type="crossReference" n="+"><char>1.9 </char><char>The meaning of the Hebrew for this word is uncertain.</char></note></cell>
-          <cell>29</cell>
+        <row style="tr">
+          <cell style="tc1" align="start">silver pans <note caller="+" style="f"><char style="fr" closed="false">1.9 </char><char style="ft" closed="false">The meaning of the Hebrew for this word is uncertain.</char></note></cell>
+          <cell style="tc2" align="start">29</cell>
         </row>
-        <row>
-          <cell>
-            <verse subType="x-embedded" sID="Ezra.1.10" n="10" osisID="Ezra.1.10" />gold bowls <verse eID="Ezra.1.10" /></cell>
-          <cell>30</cell>
+        <row style="tr">
+          <cell style="tc1" align="start">
+            <verse number="10" style="v" />gold bowls </cell>
+          <cell style="tc2" align="start">30</cell>
         </row>
-        <row>
-          <cell>matching silver bowls </cell>
-          <cell>410</cell>
+        <row style="tr">
+          <cell style="tc1" align="start">matching silver bowls </cell>
+          <cell style="tc2" align="start">410</cell>
         </row>
-        <row>
-          <cell>other articles </cell>
-          <cell>1,000</cell>
+        <row style="tr">
+          <cell style="tc1" align="start">other articles </cell>
+          <cell style="tc2" align="start">1,000</cell>
         </row>
       </table>
       <p>
-        <verse subType="x-embedded" sID="Ezra.1.11" n="11" osisID="Ezra.1.11" />In all, there were 5,400 articles of gold and of silver. Sheshbazzar brought all these along when the exiles came up from Babylon to Jerusalem.<verse eID="Ezra.1.11" /></p>
+        <verse n="11" sID="EZR.1.11" osisID="EZR.1.11" subType="x-embedded" />In all, there were 5,400 articles of gold and of silver. Sheshbazzar brought all these along when the exiles came up from Babylon to Jerusalem.<verse eID="EZR.1.11" /></p>
     </div>
   </osisText>
 </osis>
