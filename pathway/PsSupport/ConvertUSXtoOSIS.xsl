@@ -102,7 +102,7 @@
           <xsl:variable name="chapternumber">
             <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
           </xsl:variable>
-          <xsl:for-each select="node()|text()">
+          <xsl:for-each select="@*|node()|text()">
             <xsl:choose>
               <xsl:when test="local-name()='verse'">
                 <xsl:if test="local-name(preceding-sibling::*)='verse'">
@@ -138,9 +138,7 @@
                 </xsl:element>
               </xsl:when>
               <xsl:otherwise>
-                <xsl:copy>
-                  <xsl:apply-templates select="node()"/>
-                </xsl:copy>
+                <xsl:apply-templates select="current()"/>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:for-each>
@@ -203,9 +201,7 @@
                 </xsl:element>
               </xsl:when>
               <xsl:otherwise>
-                <xsl:copy>
-                  <xsl:apply-templates select="@* | node()"/>
-                </xsl:copy>
+                <xsl:apply-templates select="current()"/>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:for-each>
@@ -263,9 +259,7 @@
               </xsl:element>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:copy>
-                <xsl:apply-templates select="@* | node()"/>
-              </xsl:copy>
+              <xsl:apply-templates select="current()"/>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:for-each>
@@ -321,9 +315,7 @@
               </xsl:element>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:copy>
-                <xsl:apply-templates select="@* | node()"/>
-              </xsl:copy>
+              <xsl:apply-templates select="current()"/>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:for-each>
@@ -395,12 +387,18 @@
       </hi>
     </div>
   </xsl:template>
-  <!-- qs , fq -->
-  <xsl:template match="para[@style='qs' or @style='fq']">
+  <!-- fq -->
+  <xsl:template match="char[@style='fq' and @closed='false']">
     <hi type="italic">
       <xsl:apply-templates/>
     </hi>
   </xsl:template>
+  <!-- qs -->
+  <xsl:template match="char[@style='qs' and @closed='false']">
+    <hi type="italic">
+      <xsl:apply-templates/>
+    </hi>
+  </xsl:template>  
   <!-- r -->
   <xsl:template match="para[@style='r']">
     <title level="2">
@@ -409,20 +407,7 @@
       </hi>
     </title>
   </xsl:template>
-  <!-- nd -->
-  <xsl:template match="para[@style='nd']">
-    <seg>
-      <divineName>
-        <xsl:apply-templates/>
-      </divineName>
-    </seg>
-  </xsl:template>
-  <!-- b -->
-  <xsl:template match="para[@style='b']">
-    <br/>
-  </xsl:template>
-  <!-- ide -->
-  <xsl:template match="para[@style='ide']"> </xsl:template>
+  
   <!-- pi -->
   <xsl:template match="para[@style='pi']">
     <list>
@@ -432,7 +417,23 @@
         </p>
       </item>
     </list>
+  </xsl:template>  
+  <!-- nd -->
+  <xsl:template match="char[@style='nd']">
+    <seg>
+      <divineName>
+        <xsl:apply-templates/>
+      </divineName>
+    </seg>
   </xsl:template>
+  
+  <!-- b -->
+  <xsl:template match="para[@style='b']">
+    <br/>
+  </xsl:template>
+  <!-- ide -->
+  <xsl:template match="para[@style='ide']"> </xsl:template>
+
   <!-- q -->
   <xsl:template match="para[@style='q']">
     <lg>
