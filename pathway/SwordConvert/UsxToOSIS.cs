@@ -87,8 +87,10 @@ namespace SIL.PublishingSolution
 
 		public void ConvertUsxToOSIS(string usxFullPath, string OSISFullPath)
 		{
+			
 			_usxFullPath = usxFullPath;
 			_osisFullPath = OSISFullPath;
+			CorrectTheBookCodeProcess();
 			ProcessUsxtoOsis(usxFullPath, OSISFullPath);
 			UpdateScopeProcess();
 		}
@@ -1046,31 +1048,42 @@ namespace SIL.PublishingSolution
 					}
 				}
 			}
-			string bookCodeValue;
-			entryNodes = xmlDocument.GetElementsByTagName("div");
-			foreach (XmlNode node in entryNodes)
+			xmlDocument.Save(_osisFullPath);
+		}
+
+		private void CorrectTheBookCodeProcess()
+		{
+			SetBookCode();
+			XmlDocument xmlDocument = new XmlDocument();
+			try		
 			{
-				if (node.Attributes != null && node.Attributes["type"] != null)
-				{
-					if (node.Attributes != null && node.Attributes["type"] != null && node.Attributes["osisID"] != null)
+				if (File.Exists(_usxFullPath))
+				{					
+					xmlDocument.Load(_usxFullPath);
+					XmlNodeList entryNodes = xmlDocument.GetElementsByTagName("book");
+					string bookCodeValue;
+					foreach (XmlNode node in entryNodes)
 					{
-						string bookCode = node.Attributes["osisID"].Value;
-						if (_bookCode.ContainsKey(bookCode.ToLower()))
+						if (node.Attributes != null && node.Attributes["code"] != null)
 						{
-							bookCodeValue = _bookCode[bookCode.ToLower()];
-							node.Attributes["osisID"].Value = bookCodeValue;
+							if (node.Attributes != null && node.Attributes["code"] != null)
+							{
+								string bookCode = node.Attributes["code"].Value;
+								if (_bookCode.ContainsKey(bookCode.ToLower()))
+								{
+									bookCodeValue = _bookCode[bookCode.ToLower()];
+									node.Attributes["code"].Value = bookCodeValue;
+								}
+							}
 						}
 					}
-
-					if (node.Attributes["xmlns"] != null)
-					{
-						node.Attributes.Remove(node.Attributes["xmlns"]);
-					}
+					xmlDocument.Save(_usxFullPath);
 				}
 			}
-			
-
-			xmlDocument.Save(_osisFullPath);
+			catch
+			{
+				return;
+			}
 		}
 
 		private void ProcessUsxtoOsis(string USXFile, string OSISFile)
@@ -1094,11 +1107,7 @@ namespace SIL.PublishingSolution
 			xslt.Transform(reader, null, writer, null);
 			xmlFile.Close();
 			reader.Close();
-
-			if (File.Exists(OSISFile))
-			{
-				File.Copy(OSISFile, fileFullPath.Replace(".usx", ".xml"), true);
-			}
+		
 		}
 	}
 }
