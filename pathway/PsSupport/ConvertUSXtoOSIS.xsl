@@ -48,9 +48,9 @@
     <xsl:variable name="bookHeading" select="normalize-space(para[@style='h'])"/>
     <xsl:variable name="bookTitle" select="normalize-space(para[@style='mt'])"/>
     <xsl:variable name="bookTitle1" select="normalize-space(para[@style='mt1'])"/>
-     <div type="book" osisID="{$bookCode}">
-        <xsl:apply-templates/>
-     </div>    
+    <div type="book" osisID="{$bookCode}">
+      <xsl:apply-templates/>
+    </div>
   </xsl:template>
   <xsl:template match="chapter">
     <xsl:variable name="BookID">
@@ -102,40 +102,27 @@
           <xsl:variable name="chapternumber">
             <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
           </xsl:variable>
-          <xsl:for-each select="@*|node()|text()">
+          <xsl:for-each select="node()|text()">
             <xsl:choose>
               <xsl:when test="local-name()='verse'">
                 <xsl:if test="local-name(preceding-sibling::*)='verse'">
-                  <xsl:element name="verse">
-                    <xsl:attribute name="eID">
-                      <xsl:value-of
-                        select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"
-                      />
-                    </xsl:attribute>
-                  </xsl:element>
+                  <xsl:call-template name="VerseTemplate">
+                    <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
+                    <xsl:with-param name="IDValue"
+                      select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"/>
+                    <xsl:with-param name="IDTypeattribute">
+                      <xsl:text>eID</xsl:text>
+                    </xsl:with-param>
+                  </xsl:call-template>
                 </xsl:if>
-                <xsl:variable name="versenumber">
-                  <xsl:value-of select="@number"/>
-                </xsl:variable>
-                <xsl:element name="verse">
-                  <xsl:attribute name="n">
-                    <xsl:value-of select="$versenumber"/>
-                  </xsl:attribute>
-                  <xsl:attribute name="sID">
-                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
-                  </xsl:attribute>
-                  <xsl:attribute name="osisID">
-                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
-                  </xsl:attribute>
-                  <xsl:attribute name="subType">
-                    <xsl:if test="$versenumber = '1'">
-                      <xsl:text>x-first</xsl:text>  
-                    </xsl:if>
-                    <xsl:if test="$versenumber != '1'">
-                      <xsl:text>x-embedded</xsl:text>  
-                    </xsl:if>                    
-                  </xsl:attribute>
-                </xsl:element>
+                <xsl:call-template name="VerseTemplate">
+                  <xsl:with-param name="versenumber" select="@number"/>
+                  <xsl:with-param name="IDValue"
+                    select="concat($BookID,'.',$chapternumber,'.',@number)"/>
+                  <xsl:with-param name="IDTypeattribute">
+                    <xsl:text>sID</xsl:text>
+                  </xsl:with-param>
+                </xsl:call-template>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:apply-templates select="current()"/>
@@ -143,18 +130,45 @@
             </xsl:choose>
           </xsl:for-each>
           <xsl:if test="child::*[local-name()='verse']">
-            <!--<xsl:text> true</xsl:text>-->
-            <xsl:element name="verse">
-              <xsl:attribute name="eID">
-                <xsl:value-of
-                  select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"
-                />
-              </xsl:attribute>              
-            </xsl:element>
-          </xsl:if>
+            <xsl:call-template name="VerseTemplate">
+              <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
+              <xsl:with-param name="IDValue"
+                select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"/>
+              <xsl:with-param name="IDTypeattribute">
+                <xsl:text>eID</xsl:text>
+              </xsl:with-param>
+            </xsl:call-template>
+                </xsl:if>
         </xsl:element>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="VerseTemplate">
+    <xsl:param name="versenumber"/>
+    <xsl:param name="IDValue"/>
+    <xsl:param name="IDTypeattribute"/>
+                <xsl:element name="verse">
+      <xsl:if test="$IDTypeattribute='sID'">
+                  <xsl:attribute name="n">
+                    <xsl:value-of select="$versenumber"/>
+                  </xsl:attribute>
+                  <xsl:attribute name="osisID">
+          <xsl:value-of select="$IDValue"/>
+                  </xsl:attribute>
+                  <xsl:attribute name="subType">
+                    <xsl:if test="$versenumber = '1'">
+                      <xsl:text>x-first</xsl:text>
+                    </xsl:if>
+                    <xsl:if test="$versenumber != '1'">
+                      <xsl:text>x-embedded</xsl:text>
+                    </xsl:if>
+                  </xsl:attribute>
+          </xsl:if>
+      <xsl:attribute name="{$IDTypeattribute}">
+        <xsl:value-of select="$IDValue"/>
+      </xsl:attribute>
+        </xsl:element>
   </xsl:template>
   <xsl:template match="para[@style='h']">
     <xsl:element name="title">
@@ -177,28 +191,23 @@
             <xsl:choose>
               <xsl:when test="local-name()='verse'">
                 <xsl:if test="local-name(preceding-sibling::*)='verse'">
-                  <xsl:element name="verse">
-                    <xsl:attribute name="eID">
-                      <xsl:value-of
-                        select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"
-                      />
-                    </xsl:attribute>
-                  </xsl:element>
+                  <xsl:call-template name="VerseTemplate">
+                    <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
+                    <xsl:with-param name="IDValue"
+                      select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"/>
+                    <xsl:with-param name="IDTypeattribute">
+                      <xsl:text>eID</xsl:text>
+                    </xsl:with-param>
+                  </xsl:call-template>
                 </xsl:if>
-                <xsl:variable name="versenumber">
-                  <xsl:value-of select="@number"/>
-                </xsl:variable>
-                <xsl:element name="verse">
-                  <xsl:attribute name="n">
-                    <xsl:value-of select="$versenumber"/>
-                  </xsl:attribute>
-                  <xsl:attribute name="sID">
-                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
-                  </xsl:attribute>
-                  <xsl:attribute name="osisID">
-                    <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
-                  </xsl:attribute>
-                </xsl:element>
+                <xsl:call-template name="VerseTemplate">
+                  <xsl:with-param name="versenumber" select="@number"/>
+                  <xsl:with-param name="IDValue"
+                    select="concat($BookID,'.',$chapternumber,'.',@number)"/>
+                  <xsl:with-param name="IDTypeattribute">
+                    <xsl:text>sID</xsl:text>
+                  </xsl:with-param>
+                </xsl:call-template>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:apply-templates select="current()"/>
@@ -206,14 +215,14 @@
             </xsl:choose>
           </xsl:for-each>
           <xsl:if test="child::*[local-name()='verse']">
-            <!--<xsl:text> true</xsl:text>-->
-            <xsl:element name="verse">
-              <xsl:attribute name="eID">
-                <xsl:value-of
-                  select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"
-                />
-              </xsl:attribute>
-            </xsl:element>
+            <xsl:call-template name="VerseTemplate">
+              <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
+              <xsl:with-param name="IDValue"
+                select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"/>
+              <xsl:with-param name="IDTypeattribute">
+                <xsl:text>eID</xsl:text>
+              </xsl:with-param>
+            </xsl:call-template>
           </xsl:if>
           <xsl:if test="following-sibling::*[1]/@style='li2'">
             <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
@@ -235,28 +244,23 @@
           <xsl:choose>
             <xsl:when test="local-name()='verse'">
               <xsl:if test="local-name(preceding-sibling::*)='verse'">
-                <xsl:element name="verse">
-                  <xsl:attribute name="eID">
-                    <xsl:value-of
-                      select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"
-                    />
-                  </xsl:attribute>
-                </xsl:element>
+                <xsl:call-template name="VerseTemplate">
+                  <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
+                  <xsl:with-param name="IDValue"
+                    select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"/>
+                  <xsl:with-param name="IDTypeattribute">
+                    <xsl:text>eID</xsl:text>
+                  </xsl:with-param>
+                </xsl:call-template>
               </xsl:if>
-              <xsl:variable name="versenumber">
-                <xsl:value-of select="@number"/>
-              </xsl:variable>
-              <xsl:element name="verse">
-                <xsl:attribute name="n">
-                  <xsl:value-of select="$versenumber"/>
-                </xsl:attribute>
-                <xsl:attribute name="sID">
-                  <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
-                </xsl:attribute>
-                <xsl:attribute name="osisID">
-                  <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
-                </xsl:attribute>
-              </xsl:element>
+              <xsl:call-template name="VerseTemplate">
+                <xsl:with-param name="versenumber" select="@number"/>
+                <xsl:with-param name="IDValue"
+                  select="concat($BookID,'.',$chapternumber,'.',@number)"/>
+                <xsl:with-param name="IDTypeattribute">
+                  <xsl:text>sID</xsl:text>
+                </xsl:with-param>
+              </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
               <xsl:apply-templates select="current()"/>
@@ -264,13 +268,14 @@
           </xsl:choose>
         </xsl:for-each>
         <xsl:if test="child::*[local-name()='verse']">
-          <!--<xsl:text> true</xsl:text>-->
-          <xsl:element name="verse">
-            <xsl:attribute name="eID">
-              <xsl:value-of
+          <xsl:call-template name="VerseTemplate">
+            <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
+            <xsl:with-param name="IDValue"
                 select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"/>
-            </xsl:attribute>
-          </xsl:element>
+            <xsl:with-param name="IDTypeattribute">
+              <xsl:text>eID</xsl:text>
+            </xsl:with-param>
+          </xsl:call-template>
         </xsl:if>
         <xsl:if test="following-sibling::*[1]/@style='li3'">
           <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
@@ -291,28 +296,23 @@
           <xsl:choose>
             <xsl:when test="local-name()='verse'">
               <xsl:if test="local-name(preceding-sibling::*)='verse'">
-                <xsl:element name="verse">
-                  <xsl:attribute name="eID">
-                    <xsl:value-of
-                      select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"
-                    />
-                  </xsl:attribute>
-                </xsl:element>
+                <xsl:call-template name="VerseTemplate">
+                  <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
+                  <xsl:with-param name="IDValue"
+                    select="concat($BookID,'.',$chapternumber,'.',preceding-sibling::verse[1]/@number)"/>
+                  <xsl:with-param name="IDTypeattribute">
+                    <xsl:text>eID</xsl:text>
+                  </xsl:with-param>
+                </xsl:call-template>
               </xsl:if>
-              <xsl:variable name="versenumber">
-                <xsl:value-of select="@number"/>
-              </xsl:variable>
-              <xsl:element name="verse">
-                <xsl:attribute name="n">
-                  <xsl:value-of select="$versenumber"/>
-                </xsl:attribute>
-                <xsl:attribute name="sID">
-                  <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
-                </xsl:attribute>
-                <xsl:attribute name="osisID">
-                  <xsl:value-of select="concat($BookID,'.',$chapternumber,'.',$versenumber)"/>
-                </xsl:attribute>
-              </xsl:element>
+              <xsl:call-template name="VerseTemplate">
+                <xsl:with-param name="versenumber" select="@number"/>
+                <xsl:with-param name="IDValue"
+                  select="concat($BookID,'.',$chapternumber,'.',@number)"/>
+                <xsl:with-param name="IDTypeattribute">
+                  <xsl:text>sID</xsl:text>
+                </xsl:with-param>
+              </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
               <xsl:apply-templates select="current()"/>
@@ -320,12 +320,14 @@
           </xsl:choose>
         </xsl:for-each>
         <xsl:if test="child::*[local-name()='verse']">
-          <xsl:element name="verse">
-            <xsl:attribute name="eID">
-              <xsl:value-of
+          <xsl:call-template name="VerseTemplate">
+            <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
+            <xsl:with-param name="IDValue"
                 select="concat($BookID,'.',$chapternumber,'.',descendant::verse[last()]/@number)"/>
-            </xsl:attribute>
-          </xsl:element>
+            <xsl:with-param name="IDTypeattribute">
+              <xsl:text>eID</xsl:text>
+            </xsl:with-param>
+          </xsl:call-template>
         </xsl:if>
       </item>
     </list>
@@ -341,19 +343,19 @@
   </xsl:template>
   <xsl:template match="para[@style='mt1']|para[@style='ms1']">
     <title type="main">
-        <title level="2">
-          <hi type="bold">
-            <xsl:apply-templates/>
-          </hi>
-        </title>
+      <title level="2">
+        <hi type="bold">
+          <xsl:apply-templates/>
+        </hi>
       </title>
+    </title>
   </xsl:template>
   <xsl:template match="para[@style='mt2']">
     <p>
-      <title level="4" placement="centerHead">        
-          <hi type="bold">
-            <xsl:apply-templates/>
-          </hi>        
+      <title level="4" placement="centerHead">
+        <hi type="bold">
+          <xsl:apply-templates/>
+        </hi>
       </title>
     </p>
   </xsl:template>
@@ -398,7 +400,7 @@
     <hi type="italic">
       <xsl:apply-templates/>
     </hi>
-  </xsl:template>  
+  </xsl:template>
   <!-- r -->
   <xsl:template match="para[@style='r']">
     <title level="2">
@@ -407,7 +409,23 @@
       </hi>
     </title>
   </xsl:template>
-  
+
+  <!-- nd -->
+  <xsl:template match="char[@style='nd']">
+    <seg>
+      <divineName>
+        <xsl:apply-templates/>
+      </divineName>
+    </seg>
+  </xsl:template>
+
+  <!-- b -->
+  <xsl:template match="para[@style='b']">
+    <br/>
+  </xsl:template>
+  <!-- ide -->
+  <xsl:template match="para[@style='ide']"> </xsl:template>
+
   <!-- pi -->
   <xsl:template match="para[@style='pi']">
     <list>
@@ -417,22 +435,7 @@
         </p>
       </item>
     </list>
-  </xsl:template>  
-  <!-- nd -->
-  <xsl:template match="char[@style='nd']">
-    <seg>
-      <divineName>
-        <xsl:apply-templates/>
-      </divineName>
-    </seg>
   </xsl:template>
-  
-  <!-- b -->
-  <xsl:template match="para[@style='b']">
-    <br/>
-  </xsl:template>
-  <!-- ide -->
-  <xsl:template match="para[@style='ide']"> </xsl:template>
 
   <!-- q -->
   <xsl:template match="para[@style='q']">
@@ -441,7 +444,7 @@
         <xsl:apply-templates/>
       </l>
     </lg>
-  </xsl:template>  
+  </xsl:template>
   <xsl:template match="para[@style='mr']">
     <div type="majorSection">
       <title type="scope">
@@ -454,4 +457,5 @@
   <xsl:template match="para[@style='li2']"/>
   <xsl:template match="para[@style='li3']"/>
   <xsl:template match="para[@style='toc1' or @style='toc2' or @style='toc3']"/>
+
 </xsl:stylesheet>
