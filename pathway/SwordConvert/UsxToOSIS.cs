@@ -1048,6 +1048,21 @@ namespace SIL.PublishingSolution
 					}
 				}
 			}
+
+            XmlNodeList symbolNodes = xmlDocument.GetElementsByTagName("p");
+            foreach (XmlNode node in symbolNodes)
+            {
+                if (node != null)
+                {
+                    string sText = node.InnerXml;
+                    if (sText.IndexOf("&lt;", StringComparison.Ordinal) >= 0 || sText.IndexOf("&gt;", StringComparison.Ordinal) >= 0)
+                    {
+                        sText = sText.Replace("&lt;", "‘").Replace("&gt;", "’");
+                        node.InnerXml = sText;
+                    }
+
+                }
+            }
 			xmlDocument.Save(_osisFullPath);
 		}
 
