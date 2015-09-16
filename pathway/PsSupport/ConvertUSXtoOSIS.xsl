@@ -224,17 +224,22 @@
       </xsl:attribute>
     </xsl:element>
   </xsl:template>
-  <xsl:template match="para[@style='li1']">
+  <xsl:template match="para[@style='li1' or @style='pi' or @style='pi1']">
     <div>
       <list>
         <item style="{$li}">
+          <xsl:if test="@style='pi' or @style='pi1'">
+            <xsl:value-of 
+              disable-output-escaping="yes"
+              select="concat('&lt;p','&gt;')" />
+          </xsl:if>
           <xsl:variable name="BookID">
             <xsl:value-of select="ancestor::book[1]/@code"/>
           </xsl:variable>
           <xsl:variable name="chapternumber">
             <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
           </xsl:variable>
-          <xsl:for-each select="@*|node()|text()">
+          <xsl:for-each select="node()|text()">
             <xsl:choose>
               <xsl:when test="local-name()='verse'">
                 <xsl:if test="local-name(preceding-sibling::*)='verse'">
@@ -271,23 +276,33 @@
               </xsl:with-param>
             </xsl:call-template>
           </xsl:if>
-          <xsl:if test="following-sibling::*[1]/@style='li2'">
+          <xsl:if test="following-sibling::*[1]/@style='li2' or following-sibling::*[1]/@style='pi2'">
             <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
+          </xsl:if>
+          <xsl:if test="@style='pi' or @style='pi1'">
+            <xsl:value-of 
+              disable-output-escaping="yes"
+              select="concat('&lt;/p','&gt;')" />
           </xsl:if>
         </item>
       </list>
     </div>
   </xsl:template>
-  <xsl:template match="para[@style='li2']" mode="listitem">
+  <xsl:template match="para[@style='li2' or style='pi2']" mode="listitem">
     <list>
       <item>
+        <xsl:if test="@style='pi2'">
+          <xsl:value-of 
+            disable-output-escaping="yes"
+            select="concat('&lt;p','&gt;')" />
+        </xsl:if>
         <xsl:variable name="BookID">
           <xsl:value-of select="ancestor::book[1]/@code"/>
         </xsl:variable>
         <xsl:variable name="chapternumber">
           <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
         </xsl:variable>
-        <xsl:for-each select="@*|node()|text()">
+        <xsl:for-each select="node()|text()">
           <xsl:choose>
             <xsl:when test="local-name()='verse'">
               <xsl:if test="local-name(preceding-sibling::*)='verse'">
@@ -324,22 +339,32 @@
             </xsl:with-param>
           </xsl:call-template>
         </xsl:if>
-        <xsl:if test="following-sibling::*[1]/@style='li3'">
+        <xsl:if test="following-sibling::*[1]/@style='li3' or following-sibling::*[1]/@style='pi3'">
           <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
+        </xsl:if>
+        <xsl:if test="@style='pi2'">
+          <xsl:value-of 
+            disable-output-escaping="yes"
+            select="concat('&lt;/p','&gt;')" />
         </xsl:if>
       </item>
     </list>
   </xsl:template>
-  <xsl:template match="para[@style='li3']" mode="listitem">
+  <xsl:template match="para[@style='li3' or @style='pi3']" mode="listitem">
     <list>
       <item>
+        <xsl:if test="@style='pi3'">
+          <xsl:value-of 
+            disable-output-escaping="yes"
+            select="concat('&lt;p','&gt;')" />
+        </xsl:if>
         <xsl:variable name="BookID">
           <xsl:value-of select="ancestor::book[1]/@code"/>
         </xsl:variable>
         <xsl:variable name="chapternumber">
           <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
         </xsl:variable>
-        <xsl:for-each select="@*|node()|text()">
+        <xsl:for-each select="node()|text()">
           <xsl:choose>
             <xsl:when test="local-name()='verse'">
               <xsl:if test="local-name(preceding-sibling::*)='verse'">
@@ -375,6 +400,11 @@
               <xsl:text>eID</xsl:text>
             </xsl:with-param>
           </xsl:call-template>
+        </xsl:if>
+        <xsl:if test="@style='pi3'">
+          <xsl:value-of 
+            disable-output-escaping="yes"
+            select="concat('&lt;/p','&gt;')" />
         </xsl:if>
       </item>
     </list>
@@ -470,17 +500,6 @@
   <!-- ide -->
   <xsl:template match="para[@style='ide']"> </xsl:template>
 
-  <!-- pi -->
-  <xsl:template match="para[@style='pi']">
-    <list>
-      <item>
-        <p>
-          <xsl:apply-templates/>
-        </p>
-      </item>
-    </list>
-  </xsl:template>
-
   <!-- q -->
   <xsl:template match="para[@style='q']">
     <lg>
@@ -534,8 +553,49 @@
       <xsl:apply-templates/>
     </xsl:copy>
   </xsl:template>
-  <xsl:template match="para[@style='li2']"/>
-  <xsl:template match="para[@style='li3']"/>
+  
+  <!-- bk -->
+  <xsl:template match="char[@style='bk']">
+    <xsl:element name="reference">
+      <xsl:attribute name="type">
+        <xsl:text>x-bookName</xsl:text>
+      </xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:element>
+  </xsl:template>
+  
+  <!-- xo -->
+  <xsl:template match="char[@style='xo']">
+    <xsl:element name="reference">
+      <xsl:attribute name="type">
+        <xsl:text>source</xsl:text>
+      </xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:element>
+  </xsl:template>
+  
+  <!-- iot -->
+  <xsl:template match="para[@style='iot']">
+    <div type="introduction" canonical="false">
+      <div type="outline">
+        <xsl:element name="title">
+          <xsl:apply-templates/>
+        </xsl:element>
+      </div>
+    </div>
+  </xsl:template>
+  
+  <xsl:template match="para[@style='imt']">
+    <div type="introduction" canonical="false">
+      <div type="main">
+        <xsl:element name="title">
+          <xsl:apply-templates/>
+        </xsl:element>
+      </div>
+    </div>
+  </xsl:template>
+  <xsl:template match="para[@style='li2' or @style='pi2']"/>
+  <xsl:template match="para[@style='li3' or @style='pi3']"/>
   <xsl:template match="para[@style='toc1' or @style='toc2' or @style='toc3']"/>
 
 </xsl:stylesheet>
