@@ -60,8 +60,26 @@
     <xsl:variable name="bookTitle1" select="normalize-space(para[@style='mt1'])"/>
     <div type="book" osisID="{$bookCode}">
       <xsl:apply-templates/>
+      <xsl:if test="descendant::para[@style='s2']">
+        <xsl:value-of
+          disable-output-escaping="yes"
+          select="concat('&lt;','/div','&gt;')" />
+      </xsl:if>
+      <xsl:if test="descendant::para[@style='s1']">
+        <xsl:value-of
+          disable-output-escaping="yes"
+          select="concat('&lt;','/div','&gt;','&lt;','/div','&gt;')" />
+      </xsl:if>
+      <xsl:if test="local-name(descendant::chapter[last()])='chapter'">
+        <xsl:element name="chapter">
+          <xsl:attribute name="eID">
+            <xsl:value-of select="concat($bookCode,'.',descendant::chapter[last()]/@number)"/>
+          </xsl:attribute>
+        </xsl:element>
+      </xsl:if>
     </div>
   </xsl:template>
+
   <xsl:template match="chapter">
     <xsl:variable name="BookID">
       <xsl:value-of select="ancestor::book[1]/@code"/>
@@ -378,20 +396,35 @@
       </title>
   </xsl:template>
   <xsl:template match="para[@style='s1']">
-    <div type="section">
-      <title>
-        <hi type="bold">
-          <xsl:apply-templates/>
-        </hi>
-      </title>
-    </div>
-  </xsl:template>
-  <xsl:template match="para[@style='s2']">
-    <div type="subSection">
-      <title>
+    <xsl:if test="preceding::para[@style='s1']">
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','/div','&gt;','&lt;','/div','&gt;')" />
+    </xsl:if>
+    <xsl:value-of
+      disable-output-escaping="yes"
+      select="concat('&lt;div type=','&quot;','majorSection','&quot; ','&gt;','&lt;div type=','&quot;','section','&quot; ','annotateType=','&quot;commentary&quot;','&gt;')" />
+    <title placement="centerHead">
+      <hi type="bold">
         <xsl:apply-templates/>
-      </title>
-    </div>
+      </hi>
+    </title>
+  </xsl:template>
+
+  <xsl:template match="para[@style='s2']">
+    <xsl:if test="preceding::para[@style='s2']">
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','/div','&gt;')" />
+    </xsl:if>
+    <xsl:value-of
+      disable-output-escaping="yes"
+      select="concat('&lt;div type=','&quot;','subSection','&quot;','&gt;')" />
+
+      <hi type="italic">
+      <xsl:apply-templates/>
+      </hi>
+
   </xsl:template>
   <xsl:template match="para[@style='d']">
     <div align="center">
@@ -456,6 +489,29 @@
       </l>
     </lg>
   </xsl:template>
+
+  <!-- qa -->
+  <xsl:template match="para[@style='qa']">
+    <lg>
+      <l>
+        <hi type="italic">
+        <xsl:apply-templates/>
+        </hi>
+      </l>
+    </lg>
+  </xsl:template>
+
+  <!-- sp -->
+  <xsl:template match="para[@style='sp']">
+    <speech>
+      <speaker>
+        <hi type="italic">
+          <xsl:apply-templates/>
+        </hi>
+      </speaker>
+    </speech>
+  </xsl:template>
+
   <xsl:template match="para[@style='mr']">
     <div type="majorSection">
       <title type="scope">
