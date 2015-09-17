@@ -578,6 +578,24 @@
     </xsl:copy>
   </xsl:template>
   
+<!-- fr -->
+  <xsl:template match="char[@style='fr']">
+    <xsl:element name="reference">
+      <xsl:attribute name="osisRef">
+        <xsl:value-of select="text()"/>
+      </xsl:attribute>
+      <xsl:attribute name="type">
+        <xsl:text>source</xsl:text>
+      </xsl:attribute>
+      <xsl:apply-templates/>
+    </xsl:element>
+  </xsl:template>
+
+  <!-- ft -->
+  <xsl:template match="char[@style='ft']">
+    <xsl:value-of select="text()"/>
+  </xsl:template>
+
   <!-- bk -->
   <xsl:template match="char[@style='bk']">
     <xsl:element name="reference">
