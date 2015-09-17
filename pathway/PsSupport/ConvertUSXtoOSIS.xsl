@@ -505,6 +505,30 @@
     <lg>
       <l level="1">
         <xsl:apply-templates/>
+        <xsl:if test="following-sibling::*[1]/@style='q2'">
+          <xsl:apply-templates select="following-sibling::*[1]" mode="q"/>
+        </xsl:if>
+      </l>
+    </lg>
+  </xsl:template>
+
+  <!-- q2 -->
+  <xsl:template match="para[@style='q2']"  mode="q">
+    <lg>
+      <l level="2">
+        <xsl:apply-templates/>
+        <xsl:if test="following-sibling::*[1]/@style='q3'">
+          <xsl:apply-templates select="following-sibling::*[1]" mode="q"/>
+        </xsl:if>
+      </l>
+    </lg>
+  </xsl:template>
+
+  <!-- q3 -->
+  <xsl:template match="para[@style='q3']"  mode="q">
+    <lg>
+      <l level="3">
+        <xsl:apply-templates/>
       </l>
     </lg>
   </xsl:template>
