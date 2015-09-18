@@ -21,9 +21,7 @@
   </xsl:template>
 
   <xsl:template match="usx|usfm|USX">
-    <osis xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace"
-      xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace file:../osisCore.2.0_UBS_SIL_BestPractice.xsd">
+    <osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd">
       <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="eng">
         <header>
           <work osisWork="thisWork">
@@ -409,6 +407,15 @@
       </item>
     </list>
   </xsl:template>
+  <xsl:template match="para[@style='s']">
+   <div type="section">
+      <title>
+       <hi type="bold">
+          <xsl:apply-templates/>
+        </hi>
+      </title>
+    </div>
+  </xsl:template>
   <xsl:template match="para[@style='r']">
     <p>
       <title level="2">
@@ -419,11 +426,11 @@
     </p>
   </xsl:template>
   <xsl:template match="para[@style='mt2']">
-      <title level="2">
-        <hi type="bold">
+    <div type="introduction" canonical="false">
+        <hi type="italic">
           <xsl:apply-templates/>
         </hi>
-      </title>
+    </div>
   </xsl:template>
   <xsl:template match="para[@style='s1']">
     <xsl:if test="preceding::para[@style='s1']">
@@ -475,15 +482,6 @@
       <xsl:apply-templates/>
     </hi>
   </xsl:template>
-  <!-- r -->
-  <xsl:template match="para[@style='r']">
-    <title level="2">
-      <hi type="italic">
-        <xsl:apply-templates/>
-      </hi>
-    </title>
-  </xsl:template>
-
   <!-- nd -->
   <xsl:template match="char[@style='nd']">
     <seg>
