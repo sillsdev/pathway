@@ -136,7 +136,7 @@
           <xsl:for-each select="node()|text()">
             <xsl:choose>
               <xsl:when test="local-name()='verse'">
-                <xsl:if test="local-name(preceding-sibling::*)='verse'">
+                <xsl:if test="preceding-sibling::verse">
                   <xsl:call-template name="VerseTemplate">
                     <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
                     <xsl:with-param name="booknumber" select="$BookID"/>
@@ -222,7 +222,7 @@
       </xsl:attribute>
     </xsl:element>
   </xsl:template>
-  <xsl:template match="para[@style='li1' or @style='pi' or @style='pi1']">
+  <xsl:template match="para[@style='li1' or @style='pi' or @style='pi1' or @style='io1']">
     <div>
       <list>
         <item style="{$li}">
@@ -240,7 +240,7 @@
           <xsl:for-each select="node()|text()">
             <xsl:choose>
               <xsl:when test="local-name()='verse'">
-                <xsl:if test="local-name(preceding-sibling::*)='verse'">
+                <xsl:if test="preceding-sibling::verse">
                   <xsl:call-template name="VerseTemplate">
                     <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
                     <xsl:with-param name="booknumber" select="$BookID"/>
@@ -274,7 +274,7 @@
               </xsl:with-param>
             </xsl:call-template>
           </xsl:if>
-          <xsl:if test="following-sibling::*[1]/@style='li2' or following-sibling::*[1]/@style='pi2'">
+          <xsl:if test="following-sibling::*[1]/@style='li2' or following-sibling::*[1]/@style='pi2' or following-sibling::*[1]/@style='io2'">
             <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
           </xsl:if>
           <xsl:if test="@style='pi' or @style='pi1'">
@@ -286,7 +286,7 @@
       </list>
     </div>
   </xsl:template>
-  <xsl:template match="para[@style='li2' or style='pi2']" mode="listitem">
+  <xsl:template match="para[@style='li2' or style='pi2' or @style='io2']" mode="listitem">
     <list>
       <item>
         <xsl:if test="@style='pi2'">
@@ -303,7 +303,7 @@
         <xsl:for-each select="node()|text()">
           <xsl:choose>
             <xsl:when test="local-name()='verse'">
-              <xsl:if test="local-name(preceding-sibling::*)='verse'">
+              <xsl:if test="preceding-sibling::verse">
                 <xsl:call-template name="VerseTemplate">
                   <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
                   <xsl:with-param name="booknumber" select="$BookID"/>
@@ -337,7 +337,7 @@
             </xsl:with-param>
           </xsl:call-template>
         </xsl:if>
-        <xsl:if test="following-sibling::*[1]/@style='li3' or following-sibling::*[1]/@style='pi3'">
+        <xsl:if test="following-sibling::*[1]/@style='li3' or following-sibling::*[1]/@style='pi3' or following-sibling::*[1]/@style='io3'">
           <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
         </xsl:if>
         <xsl:if test="@style='pi2'">
@@ -348,7 +348,7 @@
       </item>
     </list>
   </xsl:template>
-  <xsl:template match="para[@style='li3' or @style='pi3']" mode="listitem">
+  <xsl:template match="para[@style='li3' or @style='pi3' or @style='io3']" mode="listitem">
     <list>
       <item>
         <xsl:if test="@style='pi3'">
@@ -365,7 +365,7 @@
         <xsl:for-each select="node()|text()">
           <xsl:choose>
             <xsl:when test="local-name()='verse'">
-              <xsl:if test="local-name(preceding-sibling::*)='verse'">
+              <xsl:if test="preceding-sibling::verse">
                 <xsl:call-template name="VerseTemplate">
                   <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
                   <xsl:with-param name="booknumber" select="$BookID"/>
@@ -472,6 +472,11 @@
   </xsl:template>
   <!-- fq -->
   <xsl:template match="char[@style='fq' and @closed='false']">
+    <xsl:if test="not(node())">
+      <hi type="italic">
+        <xsl:apply-templates select="following::*[1]"></xsl:apply-templates>
+    </hi>  
+    </xsl:if>
     <hi type="italic">
       <xsl:apply-templates/>
     </hi>
@@ -482,6 +487,7 @@
       <xsl:apply-templates/>
     </hi>
   </xsl:template>
+  
   <!-- nd -->
   <xsl:template match="char[@style='nd']">
     <seg>
@@ -582,7 +588,7 @@
   <xsl:template match="char[@style='fr']">
     <xsl:element name="reference">
       <xsl:attribute name="osisRef">
-        <xsl:value-of select="text()"/>
+        <xsl:value-of select="normalize-space(text())"/>
       </xsl:attribute>
       <xsl:attribute name="type">
         <xsl:text>source</xsl:text>
