@@ -192,9 +192,9 @@ namespace SIL.PublishingSolution
 
             if (_languageName == string.Empty)
             {
-                _languageName = "English";
+                _languageName = "en";
             }
-            WriteConfig(sw2, "Lang=" + _languageName);
+            WriteConfig(sw2, "Lang=" + languageCode);
             WriteConfig(sw2, "GlobalOptionFilter=OSISStrongs");
             WriteConfig(sw2, "GlobalOptionFilter=OSISMorph");
             WriteConfig(sw2, "GlobalOptionFilter=OSISFootnotes");
