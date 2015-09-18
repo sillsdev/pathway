@@ -568,9 +568,11 @@
   <!-- note -->
   <xsl:template match="note">
     <xsl:copy>
-      <xsl:attribute name="type">
-        <xsl:text>crossReference</xsl:text>
-      </xsl:attribute>
+	<xsl:if test="@style='x'">
+        <xsl:attribute name="type">
+          <xsl:text>crossReference</xsl:text>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:attribute name="n">
         <xsl:value-of select="@caller"/>
       </xsl:attribute>
