@@ -633,6 +633,15 @@
     </div>
   </xsl:template>
   
+  <!-- figure  para-verse
+    <figure style="fig" desc="" file="co00603c.png" size="" loc="" copy="" ref="" />
+    <figure src="co00603c.jpg" alt="Image not found" />
+  -->
+  <xsl:template match="figure[@style='fig']">
+    <figure src="figure/co00603c.jpg" alt="Image not found">
+    </figure>
+  </xsl:template>
+
   <xsl:template match="para[@style='imt']">
     <div type="introduction" canonical="false">
       <div type="main">
