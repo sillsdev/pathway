@@ -97,7 +97,7 @@
       </xsl:attribute>
     </xsl:element>
   </xsl:template>
-  <xsl:template match="para">
+  <xsl:template match="para" name="GeneralPara">
     <xsl:choose>
       <xsl:when test="@style='mt' or @style='mt1' or @style='ms1'">
         <xsl:element name="title">
@@ -472,14 +472,11 @@
   </xsl:template>
   <!-- fq -->
   <xsl:template match="char[@style='fq' and @closed='false']">
-    <xsl:if test="not(node())">
+    <xsl:if test="not(following-sibling::char[@style='nd'])">
       <hi type="italic">
-        <xsl:apply-templates select="following::*[1]"></xsl:apply-templates>
-    </hi>  
+        <xsl:apply-templates/>
+      </hi>
     </xsl:if>
-    <hi type="italic">
-      <xsl:apply-templates/>
-    </hi>
   </xsl:template>
   <!-- qs -->
   <xsl:template match="char[@style='qs' and @closed='false']">
@@ -490,11 +487,21 @@
   
   <!-- nd -->
   <xsl:template match="char[@style='nd']">
+    <xsl:if test="preceding-sibling::char[@style='fq']">
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','hi type=&quot; italic &quot;','&gt;')" />
+    </xsl:if>
     <seg>
       <divineName>
         <xsl:apply-templates/>
       </divineName>
     </seg>
+    <xsl:if test="preceding-sibling::char[@style='fq']">
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','/hi','&gt;')" />
+    </xsl:if>
   </xsl:template>
 
   <!-- b -->
@@ -651,8 +658,8 @@
       </div>
     </div>
   </xsl:template>
-  <xsl:template match="para[@style='li2' or @style='pi2']"/>
-  <xsl:template match="para[@style='li3' or @style='pi3']"/>
+  <xsl:template match="para[@style='li2' or @style='pi2' or @style='q2']"/>
+  <xsl:template match="para[@style='li3' or @style='pi3'or @style='q3']"/>
   <xsl:template match="para[@style='toc1' or @style='toc2' or @style='toc3']"/>
 
 </xsl:stylesheet>
