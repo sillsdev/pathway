@@ -68,7 +68,19 @@
           disable-output-escaping="yes"
           select="concat('&lt;','/div','&gt;','&lt;','/div','&gt;')" />
       </xsl:if>
-      <xsl:if test="local-name(descendant::chapter[last()])='chapter'">
+      <xsl:variable name="Lastchapter" select="descendant::chapter[last()]/@number"/>
+      <xsl:variable name="LastVerseChapter" select="descendant::verse[last()]/preceding::chapter[1]/@number"/>
+      <xsl:if test="$Lastchapter=$LastVerseChapter">
+        <xsl:call-template name="VerseTemplate">
+          <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
+          <xsl:with-param name="booknumber" select="@code"/>
+          <xsl:with-param name="chapternumber" select="$Lastchapter"/>
+          <xsl:with-param name="IDTypeattribute">
+            <xsl:text>eID</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
+      <xsl:if test="descendant::chapter">
         <xsl:element name="chapter">
           <xsl:attribute name="eID">
             <xsl:value-of select="concat($bookCode,'.',descendant::chapter[last()]/@number)"/>
@@ -85,6 +97,23 @@
     <xsl:variable name="chapternumber">
       <xsl:value-of select="@number"/>
     </xsl:variable>
+    <xsl:if test="preceding-sibling::chapter">
+      <xsl:if test="preceding::verse/ancestor::book/@code=$BookID">
+        <xsl:call-template name="VerseTemplate">
+          <xsl:with-param name="versenumber" select="preceding::verse[1]/@number"/>
+          <xsl:with-param name="booknumber" select="$BookID"/>
+          <xsl:with-param name="chapternumber" select="preceding-sibling::chapter[1]/@number"/>
+          <xsl:with-param name="IDTypeattribute">
+            <xsl:text>eID</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
+      <xsl:element name="chapter">
+        <xsl:attribute name="eID">
+          <xsl:value-of select="concat($BookID,'.',preceding-sibling::chapter[1]/@number)"/>
+        </xsl:attribute>
+      </xsl:element>
+    </xsl:if>
     <xsl:element name="chapter">
       <xsl:attribute name="n">
         <xsl:value-of select="$chapternumber"/>
@@ -127,18 +156,23 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:element name="p">
+           <xsl:for-each select="node()|text()">
+                <xsl:apply-templates select="current()"/>
+          </xsl:for-each>
+        </xsl:element>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  <xsl:template match="verse">
           <xsl:variable name="BookID">
             <xsl:value-of select="ancestor::book[1]/@code"/>
           </xsl:variable>
           <xsl:variable name="chapternumber">
-            <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
+      <xsl:value-of select="preceding::chapter[1]/@number"/>
           </xsl:variable>
-          <xsl:for-each select="node()|text()">
-            <xsl:choose>
-              <xsl:when test="local-name()='verse'">
-                <xsl:if test="preceding-sibling::verse">
+    <xsl:if test="preceding::verse/ancestor::book/@code=$BookID">
                   <xsl:call-template name="VerseTemplate">
-                    <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
+        <xsl:with-param name="versenumber" select="preceding::verse[1]/@number"/>
                     <xsl:with-param name="booknumber" select="$BookID"/>
                     <xsl:with-param name="chapternumber" select="$chapternumber"/>
                     <xsl:with-param name="IDTypeattribute">
@@ -154,25 +188,6 @@
                     <xsl:text>sID</xsl:text>
                   </xsl:with-param>
                 </xsl:call-template>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:apply-templates select="current()"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:for-each>
-          <xsl:if test="child::*[local-name()='verse']">
-            <xsl:call-template name="VerseTemplate">
-              <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
-              <xsl:with-param name="booknumber" select="$BookID"/>
-              <xsl:with-param name="chapternumber" select="$chapternumber"/>
-              <xsl:with-param name="IDTypeattribute">
-                <xsl:text>eID</xsl:text>
-              </xsl:with-param>
-            </xsl:call-template>
-          </xsl:if>
-        </xsl:element>
-      </xsl:otherwise>
-    </xsl:choose>
   </xsl:template>
   <xsl:template name="VerseTemplate">
     <xsl:param name="versenumber"/>
@@ -231,49 +246,7 @@
               disable-output-escaping="yes"
               select="concat('&lt;p','&gt;')" />
           </xsl:if>
-          <xsl:variable name="BookID">
-            <xsl:value-of select="ancestor::book[1]/@code"/>
-          </xsl:variable>
-          <xsl:variable name="chapternumber">
-            <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
-          </xsl:variable>
-          <xsl:for-each select="node()|text()">
-            <xsl:choose>
-              <xsl:when test="local-name()='verse'">
-                <xsl:if test="preceding-sibling::verse">
-                  <xsl:call-template name="VerseTemplate">
-                    <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
-                    <xsl:with-param name="booknumber" select="$BookID"/>
-                    <xsl:with-param name="chapternumber" select="$chapternumber"/>
-                    <xsl:with-param name="IDTypeattribute">
-                      <xsl:text>eID</xsl:text>
-                    </xsl:with-param>
-                  </xsl:call-template>
-                </xsl:if>
-                <xsl:call-template name="VerseTemplate">
-                  <xsl:with-param name="versenumber" select="@number"/>
-                  <xsl:with-param name="booknumber" select="$BookID"/>
-                  <xsl:with-param name="chapternumber" select="$chapternumber"/>
-                  <xsl:with-param name="IDTypeattribute">
-                    <xsl:text>sID</xsl:text>
-                  </xsl:with-param>
-                </xsl:call-template>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:apply-templates select="current()"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:for-each>
-          <xsl:if test="child::*[local-name()='verse']">
-            <xsl:call-template name="VerseTemplate">
-              <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
-              <xsl:with-param name="booknumber" select="$BookID"/>
-              <xsl:with-param name="chapternumber" select="$chapternumber"/>
-              <xsl:with-param name="IDTypeattribute">
-                <xsl:text>eID</xsl:text>
-              </xsl:with-param>
-            </xsl:call-template>
-          </xsl:if>
+          <xsl:apply-templates/>
           <xsl:if test="following-sibling::*[1]/@style='li2' or following-sibling::*[1]/@style='pi2' or following-sibling::*[1]/@style='io2'">
             <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
           </xsl:if>
@@ -294,49 +267,7 @@
             disable-output-escaping="yes"
             select="concat('&lt;p','&gt;')" />
         </xsl:if>
-        <xsl:variable name="BookID">
-          <xsl:value-of select="ancestor::book[1]/@code"/>
-        </xsl:variable>
-        <xsl:variable name="chapternumber">
-          <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
-        </xsl:variable>
-        <xsl:for-each select="node()|text()">
-          <xsl:choose>
-            <xsl:when test="local-name()='verse'">
-              <xsl:if test="preceding-sibling::verse">
-                <xsl:call-template name="VerseTemplate">
-                  <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
-                  <xsl:with-param name="booknumber" select="$BookID"/>
-                  <xsl:with-param name="chapternumber" select="$chapternumber"/>
-                  <xsl:with-param name="IDTypeattribute">
-                    <xsl:text>eID</xsl:text>
-                  </xsl:with-param>
-                </xsl:call-template>
-              </xsl:if>
-              <xsl:call-template name="VerseTemplate">
-                <xsl:with-param name="versenumber" select="@number"/>
-                <xsl:with-param name="booknumber" select="$BookID"/>
-                <xsl:with-param name="chapternumber" select="$chapternumber"/>
-                <xsl:with-param name="IDTypeattribute">
-                  <xsl:text>sID</xsl:text>
-                </xsl:with-param>
-              </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:apply-templates select="current()"/>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:for-each>
-        <xsl:if test="child::*[local-name()='verse']">
-          <xsl:call-template name="VerseTemplate">
-            <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
-            <xsl:with-param name="booknumber" select="$BookID"/>
-            <xsl:with-param name="chapternumber" select="$chapternumber"/>
-            <xsl:with-param name="IDTypeattribute">
-              <xsl:text>eID</xsl:text>
-            </xsl:with-param>
-          </xsl:call-template>
-        </xsl:if>
+        <xsl:apply-templates/>
         <xsl:if test="following-sibling::*[1]/@style='li3' or following-sibling::*[1]/@style='pi3' or following-sibling::*[1]/@style='io3'">
           <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
         </xsl:if>
@@ -356,49 +287,7 @@
             disable-output-escaping="yes"
             select="concat('&lt;p','&gt;')" />
         </xsl:if>
-        <xsl:variable name="BookID">
-          <xsl:value-of select="ancestor::book[1]/@code"/>
-        </xsl:variable>
-        <xsl:variable name="chapternumber">
-          <xsl:value-of select="preceding-sibling::chapter[1]/@number"/>
-        </xsl:variable>
-        <xsl:for-each select="node()|text()">
-          <xsl:choose>
-            <xsl:when test="local-name()='verse'">
-              <xsl:if test="preceding-sibling::verse">
-                <xsl:call-template name="VerseTemplate">
-                  <xsl:with-param name="versenumber" select="preceding-sibling::verse[1]/@number"/>
-                  <xsl:with-param name="booknumber" select="$BookID"/>
-                  <xsl:with-param name="chapternumber" select="$chapternumber"/>
-                  <xsl:with-param name="IDTypeattribute">
-                    <xsl:text>eID</xsl:text>
-                  </xsl:with-param>
-                </xsl:call-template>
-              </xsl:if>
-              <xsl:call-template name="VerseTemplate">
-                <xsl:with-param name="versenumber" select="@number"/>
-                <xsl:with-param name="booknumber" select="$BookID"/>
-                <xsl:with-param name="chapternumber" select="$chapternumber"/>
-                <xsl:with-param name="IDTypeattribute">
-                  <xsl:text>sID</xsl:text>
-                </xsl:with-param>
-              </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:apply-templates select="current()"/>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:for-each>
-        <xsl:if test="child::*[local-name()='verse']">
-          <xsl:call-template name="VerseTemplate">
-            <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
-            <xsl:with-param name="booknumber" select="$BookID"/>
-            <xsl:with-param name="chapternumber" select="$chapternumber"/>
-            <xsl:with-param name="IDTypeattribute">
-              <xsl:text>eID</xsl:text>
-            </xsl:with-param>
-          </xsl:call-template>
-        </xsl:if>
+        <xsl:apply-templates/>
         <xsl:if test="@style='pi3'">
           <xsl:value-of 
             disable-output-escaping="yes"
@@ -490,7 +379,7 @@
     <xsl:if test="preceding-sibling::char[@style='fq']">
       <xsl:value-of
         disable-output-escaping="yes"
-        select="concat('&lt;','hi type=&quot; italic &quot;','&gt;')" />
+        select="concat('&lt;','hi type=&quot;italic&quot;','&gt;')" />
     </xsl:if>
     <seg>
       <divineName>
@@ -511,8 +400,8 @@
   <!-- ide -->
   <xsl:template match="para[@style='ide']"> </xsl:template>
 
-  <!-- q -->
-  <xsl:template match="para[@style='q']">
+  <!-- q, q1 -->
+  <xsl:template match="para[@style='q' or @style='q1']">
     <lg>
       <l level="1">
         <xsl:apply-templates/>
