@@ -529,13 +529,25 @@
     </div>
   </xsl:template>
   
-  <!-- figure  para-verse
-    <figure style="fig" desc="" file="co00603c.png" size="" loc="" copy="" ref="" />
-    <figure src="co00603c.jpg" alt="Image not found" />
-  -->
+  <!-- figure -->
   <xsl:template match="figure[@style='fig']">
-    <figure src="figure/co00603c.jpg" alt="Image not found">
-    </figure>
+    <xsl:element name="figure">
+      <xsl:attribute name="src">
+        <xsl:value-of select="concat(substring-before(@file,'.'),'.jpg')"/>
+      </xsl:attribute>
+      <xsl:attribute name="size">
+        <xsl:value-of select="@size"/>
+      </xsl:attribute>
+      <xsl:attribute name="osisRef">
+        <xsl:value-of select="@ref"/>
+      </xsl:attribute>
+      <xsl:attribute name="alt">
+        <xsl:text>No Image</xsl:text>
+      </xsl:attribute>
+      <xsl:element name="caption">
+        <xsl:value-of select="text()"/>
+      </xsl:element>
+    </xsl:element>
   </xsl:template>
 
   <xsl:template match="para[@style='imt']">
