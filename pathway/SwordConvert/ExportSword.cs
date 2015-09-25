@@ -19,7 +19,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 using L10NSharp;
+using Microsoft.Win32;
 using SIL.Tool;
 
 
@@ -123,6 +125,38 @@ namespace SIL.PublishingSolution
             CopySwordCreatorFolderToTemp(swordTempFolder, swordOutputExportLocation, restricttoCopyExtensions);
             WriteModConfigFile(swordOutputExportLocation, xhtmlLang);
 
+            //Copy Image Part
+            string databaseNamePara = Common.databaseName; // "MTP"; 
+            const string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\ScrChecks\1.0\Settings_Directory";
+            object regValue = Registry.GetValue(key, "", "") ?? string.Empty;
+            if (regValue.ToString().Trim().Length > 0)
+            {
+                string paraImagePath = Common.PathCombine(regValue.ToString(), databaseNamePara);
+                paraImagePath = Common.PathCombine(paraImagePath, "figures");
+
+                foreach (string osisFile in osisFilesList)
+                {
+                    var xDoc = new XmlDocument();
+                    xDoc.Load(osisFile);
+                    XmlNodeList imgList = xDoc.SelectNodes("//figure/@src");
+                    if (imgList != null)
+                        foreach (XmlNode img in imgList)
+                        {
+                            string sourcePath = Common.PathCombine(paraImagePath, img.Value);
+                            if (File.Exists(sourcePath))
+                            {
+                                string targetpath = Common.PathCombine(projInfo.ProjectPath, "SwordOutput");
+                                targetpath = Common.PathCombine(targetpath, "modules/texts/ztext/" + xhtmlLang);
+                                targetpath = Common.PathCombine(targetpath, img.Value);
+                                if (!Directory.Exists(Path.GetDirectoryName(targetpath)))
+                                    Directory.CreateDirectory(Path.GetDirectoryName(targetpath));
+                                File.Copy(sourcePath, targetpath);
+                            }
+                        }
+                }
+            }
+            //Copy Image Part
+
             if (_openOutputDirectory)
             {
                 var output = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
@@ -203,6 +237,7 @@ namespace SIL.PublishingSolution
             WriteConfig(sw2, "OSISqToTick=false");
             WriteConfig(sw2, "Feature=StrongsNumbers");
             WriteConfig(sw2, "MinimumVersion=1.5.9");
+            WriteConfig(sw2, "Feature=Images");
             WriteConfig(sw2, "SwordVersionDate=2006-10-09");
             WriteConfig(sw2, "Version=2.3");
             WriteConfig(sw2, "Description=" + GetInfo(Param.Description));
