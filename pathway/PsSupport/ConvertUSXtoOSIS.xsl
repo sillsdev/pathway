@@ -4,7 +4,7 @@
     doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"/>
   <xsl:param name="xmlLang"/>
   <xsl:param name="ws" select="'es'"/>
-  <xsl:param name="li" select="'font-family:12pt;'"/>
+  <xsl:param name="li" select="'font-family:12pt;text-indent: -.375pt;'"/>
   <!-- The templates matching * and @* match and copy unhandled elements/attributes. -->
   <xsl:template match="*">
     <xsl:copy>
