@@ -4580,7 +4580,6 @@ namespace SIL.Tool
 		public static void SaveLocalizationSettings(string setting, string fontname, string fontsize)
 		{
 			var xmlDoc = new XmlDocument();
-			Param.LoadUiLanguageFontInfo();
 			string fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
 			if (File.Exists(fileName))
 			{
@@ -4596,6 +4595,16 @@ namespace SIL.Tool
 					{
 						fontNode.Attributes["name"].InnerText = fontname;
 						fontNode.Attributes["size"].InnerText = fontsize;
+					}
+					else
+					{
+						fontNode = xmlDoc.SelectSingleNode("//UILanguage/fontstyle/font");
+						var newChildElement = xmlDoc.CreateElement("font");
+						newChildElement.SetAttribute("lang", setting);
+						newChildElement.SetAttribute("name", fontname);
+						newChildElement.SetAttribute("size", fontsize);
+						if (fontNode != null && fontNode.ParentNode != null)
+							fontNode.ParentNode.InsertAfter(newChildElement, fontNode);
 					}
 				}
 				xmlDoc.Save(fileName);

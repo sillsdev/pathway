@@ -121,7 +121,6 @@ namespace SIL.PublishingSolution
             this.ddlUILanguage.Name = "ddlUILanguage";
             this.ddlUILanguage.Size = new System.Drawing.Size(222, 21);
             this.ddlUILanguage.TabIndex = 1;
-            this.ddlUILanguage.SelectedIndexChanged += new System.EventHandler(this.ddlUILanguage_SelectedIndexChanged_1);
             this.ddlUILanguage.TabIndexChanged += new System.EventHandler(this.ddlUILanguage_SelectedIndexChanged);
             // 
             // ddlFontName
