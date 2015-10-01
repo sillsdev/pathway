@@ -569,7 +569,7 @@ namespace SIL.PublishingSolution
             Height = SystemInformation.CaptionHeight + btnOK.Bottom + 15;//(IsExpanded) ? 587 : 265;
 
             // Set the text and image on the More / Less Options button
-            btnMoreLessOptions.Text = (IsExpanded) ? "Less" : "More";
+            btnMoreLessOptions.Text = (IsExpanded) ? LocalizationManager.GetString("ExportThroughPathway.btnMoreLessOptions.Less", "Less", "") : LocalizationManager.GetString("ExportThroughPathway.btnMoreLessOptions.More", "More", "");
             btnMoreLessOptions.Image = (IsExpanded) ? Properties.Resources.go_up : Properties.Resources.go_down;
         }
 
