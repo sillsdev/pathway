@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CssParser", "CssParser\CssParser.csproj", "{B58FD9BA-1783-43F2-86D1-D79E1EACC365}"
 EndProject
@@ -1099,6 +1099,7 @@ Global
 		{448FDD03-71C0-4C86-9878-BC81ACC440C0}.Release|x86.Build.0 = Release7SE|x86
 		{448FDD03-71C0-4C86-9878-BC81ACC440C0}.Release7BTE|Any CPU.ActiveCfg = Release7BTE|Any CPU
 		{448FDD03-71C0-4C86-9878-BC81ACC440C0}.Release7BTE|x86.ActiveCfg = Release7BTE|x86
+		{448FDD03-71C0-4C86-9878-BC81ACC440C0}.Release7BTE|x86.Build.0 = Release7BTE|x86
 		{448FDD03-71C0-4C86-9878-BC81ACC440C0}.Release7SE|Any CPU.ActiveCfg = Release7SE|Any CPU
 		{448FDD03-71C0-4C86-9878-BC81ACC440C0}.Release7SE|x86.ActiveCfg = Release7SE|x86
 	EndGlobalSection

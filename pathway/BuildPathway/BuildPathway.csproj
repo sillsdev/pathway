@@ -395,7 +395,7 @@
     <Copy SourceFiles="@(PdfLicense)" DestinationFiles="@(PdfLicense->'Files\ConfigurationTool\%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'Files\ConfigurationTool\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'Files\ConfigurationTool\TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <!--Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'Files\ConfigurationTool\Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing' " /-->
+    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'Files\ConfigurationTool\Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing' " />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'Files\ConfigurationTool\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="Files\ConfigurationTool\" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="Files\ConfigurationTool\" Condition=" '$(Edition)' == 'BTE' " />
@@ -444,7 +444,7 @@
     <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
     <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
     <BteBackend Include="..\theWordConvert\$(OutputPath)\TheWordConvert.*" />
-    <!--TestBackend Include="..\SwordConvert\$(OutputPath)\SwordConvert.*" /-->
+    <TestBackend Include="..\SwordConvert\$(OutputPath)\SwordConvert.*" />
     <BteBackend Include="..\theWordConvert\$(OutputPath)\*.xml" />
     <DicStyles Include="..\PsSupport\Styles\Dictionary\**\*.*" />
     <ScrStyles Include="..\PsSupport\Styles\Scripture\**\*.*" />
@@ -481,7 +481,7 @@
     <!-- Validator is referenced even if not called -->
     <GoBibleFiles Include="..\PsSupport\GoBible\**\*.*" />
     <TheWordFiles Include="..\PsSupport\TheWord\**\*.*" />
-    <!--SwordFiles Include="..\PsSupport\Sword\**\*.*" /-->
+    <SwordFiles Include="..\PsSupport\Sword\**\*.*" />
     <InDesignFiles Include="..\PsSupport\InDesignFiles\**\*.*" />
     <LiftFiles Include="..\PsSupport\LiftSupport\**\*.*" />
     <AllTransform Include="..\PsSupport\AddBidi.xsl" />
