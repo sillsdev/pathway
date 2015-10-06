@@ -550,6 +550,13 @@
     </xsl:element>
   </xsl:template>
 
+  <!-- ord -->
+  <xsl:template match="char[@style='ord']">
+    <hi type="super">
+      <xsl:apply-templates/>
+    </hi>
+  </xsl:template>
+
   <xsl:template match="para[@style='imt']">
     <div type="introduction" canonical="false">
       <div type="main">
