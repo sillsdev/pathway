@@ -473,6 +473,11 @@
           <xsl:text>crossReference</xsl:text>
         </xsl:attribute>
       </xsl:if>
+	  <xsl:if test="@style='f'">
+        <xsl:attribute name="placement">
+          <xsl:text>x-foot</xsl:text>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:attribute name="n">
         <xsl:value-of select="@caller"/>
       </xsl:attribute>
@@ -498,6 +503,17 @@
     <xsl:value-of select="text()"/>
   </xsl:template>
 
+  <!-- add -->
+  <xsl:template match="char[@style='add']">
+  <span>
+    <hi type="bold">
+      <hi type="italic">
+        <xsl:apply-templates/>
+      </hi>
+    </hi>
+	</span>
+  </xsl:template>
+  
   <!-- bk -->
   <xsl:template match="char[@style='bk']">
     <xsl:element name="reference">
