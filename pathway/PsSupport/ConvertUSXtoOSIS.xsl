@@ -444,6 +444,13 @@
     </lg>
   </xsl:template>
 
+  <!-- qt -->
+  <xsl:template match="char[@style='qt']">
+    <seg type="otPassage">
+      <xsl:apply-templates/>
+    </seg>
+  </xsl:template>
+  
   <!-- sp -->
   <xsl:template match="para[@style='sp']">
     <speech>
@@ -500,7 +507,7 @@
 
   <!-- ft -->
   <xsl:template match="char[@style='ft']">
-    <xsl:value-of select="text()"/>
+    <xsl:apply-templates/>
   </xsl:template>
 
   <!-- add -->
