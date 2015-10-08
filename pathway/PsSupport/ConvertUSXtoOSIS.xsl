@@ -573,6 +573,13 @@
     </hi>
   </xsl:template>
 
+  <!-- pn -->
+  <xsl:template match="char[@style='pn']">
+    <hi type="bold">
+      <xsl:apply-templates/>
+    </hi>
+  </xsl:template>
+
   <xsl:template match="para[@style='imt']">
     <div type="introduction" canonical="false">
       <div type="main">
