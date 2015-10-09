@@ -93,7 +93,7 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void DaiBannaTest()
         {
-            string fontName = "SIL Dai Banna Book";
+            string fontName = "Dai Banna SIL Book";
             if (Common.IsUnixOS())
             {
                 fontName = "dai-banna";
