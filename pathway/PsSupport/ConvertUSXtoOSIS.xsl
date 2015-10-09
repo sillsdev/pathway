@@ -580,8 +580,8 @@
     </hi>
   </xsl:template>
 
-  <!-- pn -->
-  <xsl:template match="char[@style='pn']">
+  <!-- pn, pd -->
+  <xsl:template match="char[@style='pn' or @style='bd']">
     <hi type="bold">
       <xsl:apply-templates/>
     </hi>
