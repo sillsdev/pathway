@@ -587,6 +587,13 @@
     </hi>
   </xsl:template>
 
+  <!-- sig, sls, em, t1, dc -->
+  <xsl:template match="char[@style='sig' or @style='sls' or @style='em' or @style='tl' or @style='dc' ]">
+    <hi type="italic">
+      <xsl:apply-templates/>
+    </hi>
+  </xsl:template>
+
   <xsl:template match="para[@style='imt']">
     <div type="introduction" canonical="false">
       <div type="main">
