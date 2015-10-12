@@ -626,5 +626,7 @@ portable 1
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-de-ch-1901.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-el-polyton.hyp.txt"/>
     <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-el-monoton.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-la-x-classic.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\doc\xelatex\bidi\presentation-sample.tex"/>
   </Target>
 </Project>

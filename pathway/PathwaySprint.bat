@@ -1,5 +1,5 @@
 c:
-set path=C:\Windows\Microsoft.NET\Framework\v3.5;%path%
+set path=C:\Windows\Microsoft.NET\Framework\v4.0.30319;%path%
 cd C:\git\pathway\pathway
 if "%1" == "" goto end
 if "%2" == "" goto fullSprint

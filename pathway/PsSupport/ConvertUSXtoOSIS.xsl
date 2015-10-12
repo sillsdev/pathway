@@ -444,6 +444,13 @@
     </lg>
   </xsl:template>
 
+  <!-- qt -->
+  <xsl:template match="char[@style='qt']">
+    <seg type="otPassage">
+      <xsl:apply-templates/>
+    </seg>
+  </xsl:template>
+  
   <!-- sp -->
   <xsl:template match="para[@style='sp']">
     <speech>
@@ -473,6 +480,11 @@
           <xsl:text>crossReference</xsl:text>
         </xsl:attribute>
       </xsl:if>
+	  <xsl:if test="@style='f'">
+        <xsl:attribute name="placement">
+          <xsl:text>x-foot</xsl:text>
+        </xsl:attribute>
+      </xsl:if>
       <xsl:attribute name="n">
         <xsl:value-of select="@caller"/>
       </xsl:attribute>
@@ -495,9 +507,20 @@
 
   <!-- ft -->
   <xsl:template match="char[@style='ft']">
-    <xsl:value-of select="text()"/>
+    <xsl:apply-templates/>
   </xsl:template>
 
+  <!-- add -->
+  <xsl:template match="char[@style='add']">
+  <span>
+    <hi type="bold">
+      <hi type="italic">
+        <xsl:apply-templates/>
+      </hi>
+    </hi>
+	</span>
+  </xsl:template>
+  
   <!-- bk -->
   <xsl:template match="char[@style='bk']">
     <xsl:element name="reference">
@@ -548,6 +571,27 @@
         <xsl:value-of select="text()"/>
       </xsl:element>
     </xsl:element>
+  </xsl:template>
+
+  <!-- ord -->
+  <xsl:template match="char[@style='ord']">
+    <hi type="super">
+      <xsl:apply-templates/>
+    </hi>
+  </xsl:template>
+
+  <!-- pn, pd -->
+  <xsl:template match="char[@style='pn' or @style='bd']">
+    <hi type="bold">
+      <xsl:apply-templates/>
+    </hi>
+  </xsl:template>
+
+  <!-- sig, sls, em, t1, dc -->
+  <xsl:template match="char[@style='sig' or @style='sls' or @style='em' or @style='tl' or @style='dc' ]">
+    <hi type="italic">
+      <xsl:apply-templates/>
+    </hi>
   </xsl:template>
 
   <xsl:template match="para[@style='imt']">
