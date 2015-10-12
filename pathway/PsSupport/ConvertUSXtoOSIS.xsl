@@ -367,6 +367,14 @@
       </hi>
     </xsl:if>
   </xsl:template>
+  <!-- fqa -->
+  <xsl:template match="char[@style='fqa' and @closed='false']">
+    <xsl:if test="not(following-sibling::char[@style='nd'])">
+      <hi type="italic">
+        <xsl:apply-templates/>
+      </hi>
+    </xsl:if>
+  </xsl:template>
   <!-- qs -->
   <xsl:template match="char[@style='qs' and @closed='false']">
     <hi type="italic">
