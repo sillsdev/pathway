@@ -234,7 +234,7 @@ namespace SIL.PublishingSolution
             WriteConfig(sw2, "GlobalOptionFilter=OSISFootnotes");
             WriteConfig(sw2, "GlobalOptionFilter=OSISHeadings");
             WriteConfig(sw2, "GlobalOptionFilter=OSISRedLetterWords");
-            WriteConfig(sw2, "OSISqToTick=false");
+            WriteConfig(sw2, "OSISqToTick=true");
             WriteConfig(sw2, "Feature=StrongsNumbers");
             WriteConfig(sw2, "MinimumVersion=1.5.9");
             WriteConfig(sw2, "Feature=Images");
