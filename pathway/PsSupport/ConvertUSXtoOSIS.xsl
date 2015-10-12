@@ -601,6 +601,13 @@
     </hi>
   </xsl:template>
 
+  <!-- wj -->
+  <xsl:template match="char[@style='wj']">
+    <q who="Jesus">
+      <xsl:apply-templates/>
+    </q>
+  </xsl:template>
+
   <xsl:template match="para[@style='imt']">
     <div type="introduction" canonical="false">
       <div type="main">
