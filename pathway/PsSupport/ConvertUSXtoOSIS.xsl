@@ -594,6 +594,13 @@
     </hi>
   </xsl:template>
 
+   <!-- sc -->
+  <xsl:template match="char[@style='sc']">
+    <hi type="small-caps">
+      <xsl:apply-templates/>
+    </hi>
+  </xsl:template>
+
   <xsl:template match="para[@style='imt']">
     <div type="introduction" canonical="false">
       <div type="main">
