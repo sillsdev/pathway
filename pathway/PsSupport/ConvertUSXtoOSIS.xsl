@@ -518,8 +518,8 @@
     <xsl:apply-templates/>
   </xsl:template>
 
-  <!-- add -->
-  <xsl:template match="char[@style='add']">
+  <!-- add, bdit -->
+  <xsl:template match="char[@style='add' or @style='bdit']">
   <span>
     <hi type="bold">
       <hi type="italic">
