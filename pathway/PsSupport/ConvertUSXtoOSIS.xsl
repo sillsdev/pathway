@@ -596,7 +596,7 @@
   </xsl:template>
 
   <!-- sig, sls, em, t1, dc -->
-  <xsl:template match="char[@style='sig' or @style='sls' or @style='em' or @style='tl' or @style='dc' ]">
+  <xsl:template match="char[@style='sig' or @style='sls' or @style='em' or @style='tl' or @style='dc' or @style='it']">
     <hi type="italic">
       <xsl:apply-templates/>
     </hi>
