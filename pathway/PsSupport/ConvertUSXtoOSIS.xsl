@@ -306,13 +306,11 @@
     </div>
   </xsl:template>
   <xsl:template match="para[@style='r']">
-    <p>
-      <title level="2">
+    <div type="subsection">     
         <hi type="italic">
           <xsl:apply-templates/>
-        </hi>
-      </title>
-    </p>
+        </hi>        
+    </div>
   </xsl:template>
   <xsl:template match="para[@style='mt2']">
     <div type="introduction" canonical="false">
