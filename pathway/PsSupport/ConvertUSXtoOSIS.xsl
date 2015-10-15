@@ -348,6 +348,7 @@
       <hi type="italic">
       <xsl:apply-templates/>
       </hi>
+    </xsl:template>
 
     <!-- d -->
     <xsl:template match="para[@style='d']">
