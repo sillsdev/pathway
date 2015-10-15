@@ -349,14 +349,17 @@
       <xsl:apply-templates/>
       </hi>
 
-  </xsl:template>
-  <xsl:template match="para[@style='d']">
-    <div align="center">
-      <hi type="italic">
-        <xsl:apply-templates/>
-      </hi>
-    </div>
-  </xsl:template>
+    <!-- d -->
+    <xsl:template match="para[@style='d']">
+      <div align="left">
+        <div align="center">
+          <hi type="italic">
+            <xsl:apply-templates/>
+          </hi>
+        </div>
+      </div>
+    </xsl:template>
+
   <!-- fq -->
   <xsl:template match="char[@style='fq' and @closed='false']">
     <xsl:if test="not(following-sibling::char[@style='nd'])">
