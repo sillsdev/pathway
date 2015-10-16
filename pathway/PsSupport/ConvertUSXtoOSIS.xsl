@@ -618,6 +618,17 @@
     </q>
   </xsl:template>
 
+  <!-- lit -->
+  <xsl:template match="para[@style='lit']">
+    <div align="left">
+      <div align="right">
+        <hi type="bold">
+          <xsl:apply-templates/>
+        </hi>
+      </div>
+    </div>
+  </xsl:template>
+
   <xsl:template match="para[@style='imt']">
     <div type="introduction" canonical="false">
       <div type="main">
