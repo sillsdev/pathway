@@ -21,6 +21,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace SIL.Tool
 {
@@ -174,9 +175,13 @@ namespace SIL.Tool
             {
                 if (wait)
                 {
-                    if (p1.Id <= 0)
-                        throw new MissingSatelliteAssemblyException(name);
-                    p1.WaitForExit();
+					if (p1 == null || p1.Id == null && p1.Id <= 0)
+	                {
+		                MessageBox.Show(name + " process not available. Kindly install the required application");
+		                return;
+	                }
+
+	                p1.WaitForExit();
                     ExitCode = p1.ExitCode;
                     if (!string.IsNullOrEmpty(RedirectOutput))
                     {
