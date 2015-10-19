@@ -20,6 +20,26 @@
     <xsl:apply-templates/>
   </xsl:template>
 
+  <xsl:template name="string-replace-all">
+    <xsl:param name="text"/>
+    <xsl:param name="replace"/>
+    <xsl:param name="by"/>
+    <xsl:choose>
+      <xsl:when test="contains($text,$replace)">
+        <xsl:value-of select="substring-before($text,$replace)"/>
+        <xsl:value-of select="$by"/>
+        <xsl:call-template name="string-replace-all">
+          <xsl:with-param name="text" select="substring-after($text,$replace)"/>
+          <xsl:with-param name="replace" select="$replace"/>
+          <xsl:with-param name="by" select="$by"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$text"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
   <xsl:template match="usx|usfm|USX">
     <osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd">
       <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="eng">
@@ -631,10 +651,20 @@
 
   <!-- period -->
   <xsl:template match="text()">
-    <xsl:value-of select="current()"/>
-    <xsl:if test="contains(current(),'.')">
-      <xsl:text> </xsl:text>
-    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="contains(current(),'.')">
+        <xsl:call-template name="string-replace-all">
+          <xsl:with-param name="text" select="current()"/>
+          <xsl:with-param name="replace">
+            <xsl:text>.</xsl:text>
+          </xsl:with-param>
+          <xsl:with-param name="by" select="'. '"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="current()"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template match="para[@style='imt']">
