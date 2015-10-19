@@ -13,7 +13,6 @@
 // Exports sword output
 // </remarks>
 // --------------------------------------------------------------------------------------------
-
 using System;
 using System.Collections.Generic;
 using System.IO;
