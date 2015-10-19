@@ -629,6 +629,14 @@
     </div>
   </xsl:template>
 
+  <!-- period -->
+  <xsl:template match="text()">
+    <xsl:value-of select="current()"/>
+    <xsl:if test="contains(current(),'.')">
+      <xsl:text> </xsl:text>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template match="para[@style='imt']">
     <div type="introduction" canonical="false">
       <div type="main">
