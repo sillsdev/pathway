@@ -72,7 +72,7 @@ namespace SIL.PublishingSolution
             string swordFullPath = Common.FromRegistry("Sword");
             string usxFilePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             projInfo.ProjectPath = usxFilePath;
-            usxFilePath = Common.PathCombine(usxFilePath, "usx");
+            usxFilePath = Common.PathCombine(usxFilePath, "USX");
             string osisFilePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
 
             string tempSwordCreatorPath = string.Empty;
@@ -126,32 +126,66 @@ namespace SIL.PublishingSolution
 
             //Copy Image Part
             string databaseNamePara = Common.databaseName; // "MTP"; 
-            const string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\ScrChecks\1.0\Settings_Directory";
-            object regValue = Registry.GetValue(key, "", "") ?? string.Empty;
-            if (regValue.ToString().Trim().Length > 0)
+            if (!Common.UnixVersionCheck())
             {
-                string paraImagePath = Common.PathCombine(regValue.ToString(), databaseNamePara);
-                paraImagePath = Common.PathCombine(paraImagePath, "figures");
-
-                foreach (string osisFile in osisFilesList)
+                const string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\ScrChecks\1.0\Settings_Directory";
+                object regValue = Registry.GetValue(key, "", "") ?? string.Empty;
+                if (regValue.ToString().Trim().Length > 0)
                 {
-                    var xDoc = new XmlDocument();
-                    xDoc.Load(osisFile);
-                    XmlNodeList imgList = xDoc.SelectNodes("//figure/@src");
-                    if (imgList != null)
-                        foreach (XmlNode img in imgList)
-                        {
-                            string sourcePath = Common.PathCombine(paraImagePath, img.Value);
-                            if (File.Exists(sourcePath))
+                    string paraImagePath = Common.PathCombine(regValue.ToString(), databaseNamePara);
+                    paraImagePath = Common.PathCombine(paraImagePath, "figures");
+
+                    foreach (string osisFile in osisFilesList)
+                    {
+                        var xDoc = new XmlDocument();
+                        xDoc.Load(osisFile);
+                        XmlNodeList imgList = xDoc.SelectNodes("//figure/@src");
+                        if (imgList != null)
+                            foreach (XmlNode img in imgList)
                             {
-                                string targetpath = Common.PathCombine(projInfo.ProjectPath, "SwordOutput");
-                                targetpath = Common.PathCombine(targetpath, "modules/texts/ztext/" + xhtmlLang);
-                                targetpath = Common.PathCombine(targetpath, img.Value);
-                                if (!Directory.Exists(Path.GetDirectoryName(targetpath)))
-                                    Directory.CreateDirectory(Path.GetDirectoryName(targetpath));
-                                File.Copy(sourcePath, targetpath);
+                                string sourcePath = Common.PathCombine(paraImagePath, img.Value);
+                                if (File.Exists(sourcePath))
+                                {
+                                    string targetpath = Common.PathCombine(projInfo.ProjectPath, "SwordOutput");
+                                    targetpath = Common.PathCombine(targetpath, "modules/texts/ztext/" + xhtmlLang);
+                                    targetpath = Common.PathCombine(targetpath, img.Value);
+                                    if (!Directory.Exists(Path.GetDirectoryName(targetpath)))
+                                        Directory.CreateDirectory(Path.GetDirectoryName(targetpath));
+                                    File.Copy(sourcePath, targetpath);
+                                }
+                            }
+                    }
+                }
+            }
+            else //Linux
+            {
+                string paraImagePath = Common.PathCombine(System.Environment.GetEnvironmentVariable("HOME"), "ParatextProjects");
+                paraImagePath = Common.PathCombine(paraImagePath, databaseNamePara);
+                paraImagePath = Common.PathCombine(paraImagePath, "figures");
+                if (Directory.Exists(paraImagePath))
+                {
+                    foreach (string osisFile in osisFilesList)
+                    {
+                        var xDoc = new XmlDocument();
+                        xDoc.Load(osisFile);
+                        XmlNodeList imgList = xDoc.SelectNodes("//figure/@src");
+                        if (imgList != null)
+                        {
+                            for (int i = 0; i <= imgList.Count - 1; i++)
+                            {
+                                string sourcePath = Common.PathCombine(paraImagePath, imgList[i].Value);
+                                if (File.Exists(sourcePath))
+                                {
+                                    string targetpath = Common.PathCombine(projInfo.ProjectPath, "SwordOutput");
+                                    targetpath = Common.PathCombine(targetpath, "modules/texts/ztext/" + xhtmlLang);
+                                    targetpath = Common.PathCombine(targetpath, imgList[i].Value);
+                                    if (!Directory.Exists(Path.GetDirectoryName(targetpath)))
+                                        Directory.CreateDirectory(Path.GetDirectoryName(targetpath));
+                                    File.Copy(sourcePath, targetpath);
+                                }
                             }
                         }
+                    }
                 }
             }
             //Copy Image Part
@@ -178,7 +212,7 @@ namespace SIL.PublishingSolution
             const bool noWait = false;
             if (_isUnixOS)
             {
-                SubProcess.Run("", "nautilus",  Common.HandleSpaceinLinuxPath(outputDirectory), noWait);
+                SubProcess.Run("", "nautilus", Common.HandleSpaceinLinuxPath(outputDirectory), noWait);
             }
             else
             {
@@ -260,7 +294,7 @@ namespace SIL.PublishingSolution
             {
                 string osisFileName = Path.GetFileNameWithoutExtension(usxfile) + ".xml";
                 osisFileName = Common.PathCombine(osisFilePath, osisFileName);
-	            usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName);
+                usxToOsis.ConvertUsxToOSIS(usxfile, osisFileName);
             }
         }
 
@@ -380,7 +414,7 @@ namespace SIL.PublishingSolution
             foreach (var osisFile in osisFilesList)
             {
                 var args = string.Format(@"""{0}"" ""{1}"" {2}", swordOutputPath, osisFile, moreArguments);
-                
+
                 SubProcess.Run(processFolder, creator, args, true);
                 moreArguments = "-a -z -N -v NRSV";
 
