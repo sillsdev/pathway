@@ -387,6 +387,10 @@
       </title>
     </div>
   </xsl:template>
+  <xsl:template match="char[@style='w']">    
+     <xsl:text>*</xsl:text>      
+     <xsl:apply-templates/>
+  </xsl:template>
   <xsl:template match="para[@style='s1']">
     <xsl:if test="preceding::para[@style='s1']">
       <xsl:value-of
