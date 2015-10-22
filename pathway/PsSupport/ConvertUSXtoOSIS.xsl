@@ -76,7 +76,7 @@
     <xsl:variable name="bookHeading" select="normalize-space(para[@style='h'])"/>
     <xsl:variable name="bookTitle" select="normalize-space(para[@style='mt'])"/>
     <xsl:variable name="bookTitle1" select="normalize-space(para[@style='mt1'])"/>
-    <div type="book" osisID="{$bookCode}">
+    <div type="book" osisID="{$bookCode}" canonical="true">
       <xsl:apply-templates/>
       <xsl:if test="descendant::para[@style='s2']">
         <xsl:value-of
@@ -148,7 +148,7 @@
   </xsl:template>
   <xsl:template match="para" name="GeneralPara">
     <xsl:choose>
-      <xsl:when test="@style='mt' or @style='mt1' or @style='ms1'">
+      <xsl:when test="@style='mt' or @style='mt5' or @style='ms1'">
         <xsl:element name="title">
           <xsl:attribute name="type">
             <xsl:text>main</xsl:text>
@@ -332,11 +332,22 @@
         </hi>        
     </div>
   </xsl:template>
+  <xsl:template match="para[@style='mt1']">
+    <div type="section">
+      <title>
+        <hi type="bold">
+          <xsl:apply-templates/>
+        </hi>
+      </title>
+    </div>
+  </xsl:template>
   <xsl:template match="para[@style='mt2']">
-    <div type="introduction" canonical="false">
+    <div type="section">
+      <title>
         <hi type="italic">
           <xsl:apply-templates/>
         </hi>
+      </title>
     </div>
   </xsl:template>
   <xsl:template match="para[@style='s1']">
