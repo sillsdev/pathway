@@ -228,27 +228,64 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:param>
-    <xsl:element name="verse">
-      <xsl:attribute name="{$IDTypeattribute}">
-        <xsl:value-of select="$IDValue"/>
-      </xsl:attribute>
-      <xsl:if test="$IDTypeattribute='sID'">
-        <xsl:attribute name="osisID">
-          <xsl:value-of select="translate($IDValue,'-',' ')"/>
-        </xsl:attribute>
-        <xsl:attribute name="subType">
-          <xsl:if test="$versenumber = '1'">
-            <xsl:text>x-first</xsl:text>
+    <xsl:choose>
+      <xsl:when test="contains($IDValue,'-')">
+        <xsl:element name="verse">
+          <xsl:if test="$IDTypeattribute='sID'">
+            <xsl:attribute name="{$IDTypeattribute}">
+              <xsl:value-of select="substring-before($IDValue,'-')"/>
+            </xsl:attribute>
           </xsl:if>
-          <xsl:if test="$versenumber != '1'">
-            <xsl:text>x-embedded</xsl:text>
+          <xsl:if test="$IDTypeattribute='eID'">
+            <xsl:attribute name="{$IDTypeattribute}">
+              <xsl:value-of select="substring-after($IDValue,'-')"/>
+            </xsl:attribute>
           </xsl:if>
-        </xsl:attribute>
-        <xsl:attribute name="n">
-          <xsl:value-of select="$versenumber"/>
-        </xsl:attribute>
-      </xsl:if>
-    </xsl:element>
+          <xsl:if test="$IDTypeattribute='sID'">
+            <xsl:attribute name="osisID">
+              <xsl:value-of select="substring-before($IDValue,'-')"/>
+            </xsl:attribute>
+            <xsl:attribute name="n">
+              <xsl:value-of select="substring-before($versenumber,'-')"/>
+            </xsl:attribute>
+          </xsl:if>
+        </xsl:element>
+        <xsl:if test="$IDTypeattribute='sID'">
+          <span><hi type="super">-</hi></span>
+          <xsl:element name="verse">
+            <xsl:attribute name="eID">
+              <xsl:value-of select="substring-before($IDValue,'-')"/>
+            </xsl:attribute>
+          </xsl:element>
+          <xsl:element name="verse">
+            <xsl:attribute name="{$IDTypeattribute}">
+              <xsl:value-of select="substring-after($IDValue,'-')"/>
+            </xsl:attribute>
+            <xsl:attribute name="osisID">
+              <xsl:value-of select="substring-after($IDValue,'-')"/>
+            </xsl:attribute>
+            <xsl:attribute name="n">
+              <xsl:value-of select="substring-after($versenumber,'-')"/>
+            </xsl:attribute>
+          </xsl:element>
+        </xsl:if>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:element name="verse">
+          <xsl:attribute name="{$IDTypeattribute}">
+            <xsl:value-of select="$IDValue"/>
+          </xsl:attribute>
+          <xsl:if test="$IDTypeattribute='sID'">
+            <xsl:attribute name="osisID">
+              <xsl:value-of select="translate($IDValue,'-',' ')"/>
+            </xsl:attribute>
+            <xsl:attribute name="n">
+              <xsl:value-of select="$versenumber"/>
+            </xsl:attribute>
+          </xsl:if>
+        </xsl:element>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   <xsl:template match="para[@style='h']">
     <xsl:element name="title">
