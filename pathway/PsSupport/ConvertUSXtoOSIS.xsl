@@ -452,6 +452,13 @@
         </xsl:if>
       </l>
     </lg>
+    <xsl:if test="following-sibling::*[1]/@style='q2'">
+      <xsl:apply-templates select="following-sibling::*[1]" mode="q"/>
+    </xsl:if>
+    <xsl:if test="following-sibling::*[2]/@style='q2' and not(following-sibling::*
+      [1]/@style='q1') and not(following-sibling::*[1]/@style='q')">
+      <xsl:apply-templates select="following-sibling::*[2]" mode="q"/>
+    </xsl:if>
   </xsl:template>
 
   <!-- q3 -->
@@ -461,6 +468,9 @@
         <xsl:apply-templates/>
       </l>
     </lg>
+    <xsl:if test="following-sibling::*[1]/@style='q3'">
+      <xsl:apply-templates select="following-sibling::*[1]" mode="q"/>
+    </xsl:if>
   </xsl:template>
 
   <!-- qa -->
