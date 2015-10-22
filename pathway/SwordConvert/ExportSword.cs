@@ -268,9 +268,16 @@ namespace SIL.PublishingSolution
 			WriteConfig(sw2, "Lang=" + languageCode);
 			WriteConfig(sw2, "GlobalOptionFilter=OSISStrongs");
 			WriteConfig(sw2, "GlobalOptionFilter=OSISMorph");
+			WriteConfig(sw2, "GlobalOptionFilter=OSISGlosses");
+			WriteConfig(sw2, "GlobalOptionFilter=OSISXlit");
+			WriteConfig(sw2, "GlobalOptionFilter=OSISEnum");
+			WriteConfig(sw2, "GlobalOptionFilter=OSISVariants");
 			WriteConfig(sw2, "GlobalOptionFilter=OSISFootnotes");
 			WriteConfig(sw2, "GlobalOptionFilter=OSISHeadings");
 			WriteConfig(sw2, "GlobalOptionFilter=OSISRedLetterWords");
+			WriteConfig(sw2, "GlobalOptionFilter=OSISScripref");
+			WriteConfig(sw2, "GlobalOptionFilter=OSISMorphSegmentation");
+			WriteConfig(sw2, "GlobalOptionFilter=OSISReferenceLinks");
 			WriteConfig(sw2, "OSISqToTick=true");
 			WriteConfig(sw2, "Feature=StrongsNumbers");
 			WriteConfig(sw2, "MinimumVersion=1.5.9");
