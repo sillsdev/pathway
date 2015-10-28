@@ -164,6 +164,7 @@ namespace SIL.PublishingSolution
 			standardSize["378x594"] = "5.25in x 8.25in";
 			standardSize["418x626"] = "5.8in x 8.7in";
 			standardSize["432x648"] = "6in x 9in";
+            standardSize["468x648"] = "6.5in x 9in";
 
 			_screenMode = ScreenMode.Load;
 
@@ -2248,7 +2249,11 @@ namespace SIL.PublishingSolution
 					pageWidth = 432;
 					pageHeight = 648;
 					break;
-			}
+                case "6.6in x 9in":
+                    pageWidth = 468;
+                    pageHeight = 648;
+                    break;
+            }
 
 			if (dimension == "Height")
 			{

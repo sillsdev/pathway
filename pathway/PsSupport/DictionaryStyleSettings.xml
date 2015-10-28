@@ -58,6 +58,7 @@
       <option name="Letter" file="Page_size_Letter.css" />
       <option name="Half letter" file="Page_size_Half_Letter.css" />
       <option name="6in x 9in" file="Page_size_6inx9in.css" />
+      <option name="6.5in x 9in on letter" file="Page_size_6.5x9onLetter.css" />
       <option name="5.25in x 8.25in" file="Page_size_GPS1.css" />
       <option name="5.8in x 8.7in" file="Page_size_GPS2.css" />
     </feature>
