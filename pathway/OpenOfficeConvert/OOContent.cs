@@ -2088,11 +2088,21 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("office:automatic-styles");
             
             _writer.WriteStartElement("style:style");
+            _writer.WriteAttributeString("style:name", "P2");
+            _writer.WriteAttributeString("style:family", "paragraph");
+            _writer.WriteAttributeString("style:parent-style-name", "copyright_dicBody");
+            _writer.WriteAttributeString("style:master-page-name", "TableofContents_20_Page");
+            _writer.WriteStartElement("style:paragraph-properties");
+            _writer.WriteAttributeString("style:page-number", "auto");
+            _writer.WriteEndElement();
+            _writer.WriteEndElement();
+
+            _writer.WriteStartElement("style:style");
             _writer.WriteAttributeString("style:name", "P4");
             _writer.WriteAttributeString("style:family", "paragraph");
             _writer.WriteAttributeString("style:master-page-name", "First_20_Page");
             _writer.WriteStartElement("style:paragraph-properties");
-            _writer.WriteAttributeString("style:page-number", "auto");
+            _writer.WriteAttributeString("style:page-number", "1");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 

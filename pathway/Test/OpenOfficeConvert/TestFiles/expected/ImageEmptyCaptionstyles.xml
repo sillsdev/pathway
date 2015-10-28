@@ -394,12 +394,11 @@
   </office:automatic-styles>
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="pm1" />
-    <style:master-page style:name="Cover_20_Page" style:display-name="Cover Page" style:next-style-name="First_20_Page" style:page-layout-name="pm1" />
-    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
-    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
-    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="CopyRight_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
+    <style:master-page style:name="Cover_20_Page" style:display-name="Cover Page" style:next-style-name="Title_20_Page" style:page-layout-name="pm1" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="Title_20_Page" style:page-layout-name="pm12" />
+    <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="TableofContents_20_Page" style:page-layout-name="pm7" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="TableofContents_20_Page" style:page-layout-name="pm12" />
+    <style:master-page style:name="TableofContents_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />

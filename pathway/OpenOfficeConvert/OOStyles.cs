@@ -96,7 +96,7 @@ namespace SIL.PublishingSolution
                         _guidewordLength = Convert.ToInt16(IdAllClass["guidewordLength"]["guideword-length"]);
                     }
                 }
-                //_guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
+                _guidewordLength = _guidewordLength > 0 ? _guidewordLength : 99;
             }
         }
 
@@ -2188,7 +2188,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("style:master-page");
                 _writer.WriteAttributeString("style:name", "Cover_20_Page");
                 _writer.WriteAttributeString("style:display-name", "Cover Page");
-                _writer.WriteAttributeString("style:next-style-name", "First_20_Page");
+                _writer.WriteAttributeString("style:next-style-name", "Title_20_Page");
                 _writer.WriteAttributeString("style:page-layout-name", "pm1");
                 _writer.WriteEndElement(); // Close of Master Page
                 //COVER CODE PART ENDS
@@ -2197,41 +2197,51 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("style:master-page");
                 _writer.WriteAttributeString("style:name", "Dummy_20_Page");
                 _writer.WriteAttributeString("style:display-name", "Dummy Page");
-                _writer.WriteAttributeString("style:next-style-name", "First_20_Page");
+                _writer.WriteAttributeString("style:next-style-name", "Title_20_Page");
                 _writer.WriteAttributeString("style:page-layout-name", "pm12");
                 _writer.WriteEndElement(); // Close of Master Page
                 //DUMMYPAGE CODE PART ENDS
-
 
                 //TITLE CODE PART
                 _writer.WriteStartElement("style:master-page");
                 _writer.WriteAttributeString("style:name", "Title_20_Page");
                 _writer.WriteAttributeString("style:display-name", "Title Page");
-                _writer.WriteAttributeString("style:next-style-name", "First_20_Page");
-                _writer.WriteAttributeString("style:page-layout-name", "pm7");
-                _writer.WriteEndElement(); // Close of Master Page
-                //TITLE CODE PART ENDS
+                if (_cssProperty.ContainsKey("copyright"))
+                {
+                    _writer.WriteAttributeString("style:next-style-name", "CopyRight_20_Page");
+                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteEndElement(); // Close of Master Page
+                    //TITLE CODE PART ENDS
 
-                //COPYRIGHT CODE PART
-                _writer.WriteStartElement("style:master-page");
-                _writer.WriteAttributeString("style:name", "CopyRight_20_Page");
-                _writer.WriteAttributeString("style:display-name", "CopyRight Page");
-                _writer.WriteAttributeString("style:next-style-name", "First_20_Page");
-                _writer.WriteAttributeString("style:page-layout-name", "pm7");
-                _writer.WriteEndElement(); // Close of Master Page
+                    //COPYRIGHT CODE PART
+                    _writer.WriteStartElement("style:master-page");
+                    _writer.WriteAttributeString("style:name", "CopyRight_20_Page");
+                    _writer.WriteAttributeString("style:display-name", "CopyRight Page");
+                    _writer.WriteAttributeString("style:next-style-name", "TableofContents_20_Page");
+                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteEndElement(); // Close of Master Page
+                }
+                else
+                {
+                    _writer.WriteAttributeString("style:next-style-name", "TableofContents_20_Page");
+                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteEndElement(); // Close of Master Page
+                    //TITLE CODE PART ENDS
+                }
+                
 
                 //DUMMYPAGE CODE PART
                 _writer.WriteStartElement("style:master-page");
                 _writer.WriteAttributeString("style:name", "Dummy_20_Page");
                 _writer.WriteAttributeString("style:display-name", "Dummy Page");
-                _writer.WriteAttributeString("style:next-style-name", "First_20_Page");
+                _writer.WriteAttributeString("style:next-style-name", "TableofContents_20_Page");
                 _writer.WriteAttributeString("style:page-layout-name", "pm12");
                 _writer.WriteEndElement(); // Close of Master Page
                 //DUMMYPAGE CODE PART ENDS
 
                 //TABLEOFCONTENTS CODE PART
                 _writer.WriteStartElement("style:master-page");
-                _writer.WriteAttributeString("style:name", "CopyRight_20_Page");
+                _writer.WriteAttributeString("style:name", "TableofContents_20_Page");
                 _writer.WriteAttributeString("style:display-name", "TableofContents Page");
                 _writer.WriteAttributeString("style:next-style-name", "First_20_Page");
                 _writer.WriteAttributeString("style:page-layout-name", "pm7");

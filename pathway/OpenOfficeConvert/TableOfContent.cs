@@ -23,7 +23,7 @@ namespace SIL.PublishingSolution
         public void CreateTOC(XmlTextWriter _writer, string inputType, string outlineLevel, string tocStyle)
         {
             _writer.WriteStartElement("text:p");
-            _writer.WriteAttributeString("text:style-name", "copyright_dicBody"); //To give page break
+            _writer.WriteAttributeString("text:style-name", "P2"); //To give page break
             _writer.WriteEndElement();
 
             _writer.WriteStartElement("text:table-of-content");
