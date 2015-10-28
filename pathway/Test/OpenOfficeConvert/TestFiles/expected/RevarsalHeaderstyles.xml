@@ -430,61 +430,61 @@
   </office:styles>
   <office:automatic-styles>
     <style:style style:name="PageHeaderFooter0" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter1" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter2" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="string(guidewordlast)" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter3" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter4" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter5" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter12" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="string(guidewordfirst)" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter13" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter14" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter15" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter16" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter17" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter18" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter19" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter20" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="string(guidewordlast)" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter21" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter22" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="PageHeaderFooter23" style:family="text">
-      <style:text-properties />
+      <style:text-properties content="" />
     </style:style>
     <style:style style:name="MP1" style:family="paragraph" style:parent-style-name="Frame_20_contents">
-      <style:paragraph-properties fo:text-align="start" style:justify-single-word="false" />
+      <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
     </style:style>
     <style:style style:name="MT1" style:family="text">
       <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" />
@@ -496,7 +496,7 @@
       <style:text-properties style:font-name="Charis SIL" style:font-name-asian="Charis SIL" style:font-name-complex="Charis SIL" />
     </style:style>
     <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
-      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="left" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="right" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
         <style:background-image />
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>
@@ -586,12 +586,12 @@
   </office:automatic-styles>
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="pm1" />
-    <style:master-page style:name="Cover_20_Page" style:display-name="Cover Page" style:next-style-name="First_20_Page" style:page-layout-name="pm1" />
-    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
-    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7" />
-    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="CopyRight_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
+    <style:master-page style:name="Cover_20_Page" style:display-name="Cover Page" style:next-style-name="Title_20_Page" style:page-layout-name="pm1" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="Title_20_Page" style:page-layout-name="pm12" />
+    <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="CopyRight_20_Page" style:page-layout-name="pm7" />
+    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="TableofContents_20_Page" style:page-layout-name="pm7" />
+    <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="TableofContents_20_Page" style:page-layout-name="pm12" />
+    <style:master-page style:name="TableofContents_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />
@@ -600,8 +600,80 @@
       </style:footer>
     </style:master-page>
     <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3" />
-    <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page" />
-    <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page" />
+    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3">
+      <style:header>
+        <text:p text:style-name="Header">
+          <text:span text:style-name="MT3">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
+        </text:p>
+      </style:header>
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="55.95pt" fo:min-width="145pt" draw:z-index="1">
+            <draw:text-box fo:min-height="19.00pt">
+              <text:p text:style-name="MP1">
+                <text:span text:style-name="MT1">
+                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                </text:span>
+                <text:span text:style-name="MT2">
+                  <text:variable-get text:name="RRight_Guideword_R" office:value-type="string" />
+                </text:span>
+              </text:p>
+            </draw:text-box>
+          </draw:frame>
+        </text:p>
+      </style:footer>
+    </style:master-page>
+    <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page">
+      <style:header>
+        <text:p text:style-name="Header">
+          <text:span text:style-name="MT1">
+            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+          </text:span>
+          <text:span text:style-name="MT2">
+            <text:variable-get text:name="RLeft_Guideword_L" office:value-type="string" />
+          </text:span>
+          <text:tab />
+          <text:tab />
+          <text:span text:style-name="MT3">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
+        </text:p>
+      </style:header>
+    </style:master-page>
+    <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page">
+      <style:header>
+        <text:p text:style-name="Header">
+          <text:span text:style-name="MT3">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
+          <text:tab />
+          <text:tab />
+          <text:span text:style-name="MT1">
+            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+          </text:span>
+          <text:span text:style-name="MT2">
+            <text:variable-get text:name="RLeft_Guideword_L" office:value-type="string" />
+          </text:span>
+        </text:p>
+      </style:header>
+      <style:footer>
+        <text:p text:style-name="Footer">
+          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="55.95pt" fo:min-width="145pt" draw:z-index="1">
+            <draw:text-box fo:min-height="19.00pt">
+              <text:p text:style-name="MP1">
+                <text:span text:style-name="MT1">
+                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                </text:span>
+                <text:span text:style-name="MT2">
+                  <text:variable-get text:name="RRight_Guideword_R" office:value-type="string" />
+                </text:span>
+              </text:p>
+            </draw:text-box>
+          </draw:frame>
+        </text:p>
+      </style:footer>
+    </style:master-page>
   </office:master-styles>
 </office:document-styles>
