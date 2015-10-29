@@ -11,7 +11,6 @@
       <xsl:apply-templates select="@* | node()"/>
     </xsl:copy>
   </xsl:template>
-
   <xsl:template match="@*">
     <xsl:copy-of select="."/>
   </xsl:template>
@@ -484,56 +483,80 @@
 
   <!-- q, q1 -->
   <xsl:template match="para[@style='q' or @style='q1']">
-    <lg>
-      <l level="1">
-        <xsl:apply-templates/>
-        <xsl:if test="following-sibling::*[1]/@style='q2'">
-          <xsl:apply-templates select="following-sibling::*[1]" mode="q"/>
-        </xsl:if>
-      </l>
-    </lg>
+    <xsl:if test="not(preceding-sibling::para[1][starts-with(@style,'q')])">
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','p type=&quot;embedded&quot;','&gt;')" />
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','lg','&gt;')" />
+    </xsl:if>
+    <l level="1" >
+      <xsl:text> &#xA0;&#xA0;</xsl:text><xsl:apply-templates/>
+    </l>
+    <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','/lg','&gt;')" />
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','/p','&gt;')" />
+    </xsl:if>
   </xsl:template>
 
   <!-- q2 -->
-  <xsl:template match="para[@style='q2']"  mode="q">
-    <lg>
-      <l level="2">
+  <xsl:template match="para[@style='q2']">
+    <l level="2" ><xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
         <xsl:apply-templates/>
-        <xsl:if test="following-sibling::*[1]/@style='q3'">
-          <xsl:apply-templates select="following-sibling::*[1]" mode="q"/>
-        </xsl:if>
-      </l>
-    </lg>
-    <xsl:if test="following-sibling::*[1]/@style='q2'">
-      <xsl:apply-templates select="following-sibling::*[1]" mode="q"/>
-    </xsl:if>
-    <xsl:if test="following-sibling::*[2]/@style='q2' and not(following-sibling::*
-      [1]/@style='q1') and not(following-sibling::*[1]/@style='q')">
-      <xsl:apply-templates select="following-sibling::*[2]" mode="q"/>
+    </l>
+    <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','/lg','&gt;')" />
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','/p','&gt;')" />
     </xsl:if>
   </xsl:template>
 
   <!-- q3 -->
-  <xsl:template match="para[@style='q3']"  mode="q">
-    <lg>
-      <l level="3">
+  <xsl:template match="para[@style='q3']">
+    <l level="3"><xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
         <xsl:apply-templates/>
-      </l>
-    </lg>
-    <xsl:if test="following-sibling::*[1]/@style='q3'">
-      <xsl:apply-templates select="following-sibling::*[1]" mode="q"/>
-    </xsl:if>
+    </l>
+      <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
+        <xsl:value-of
+          disable-output-escaping="yes"
+          select="concat('&lt;','/lg &gt;')" />
+        <xsl:value-of
+          disable-output-escaping="yes"
+          select="concat('&lt;','/p','&gt;')" />
+      </xsl:if>
   </xsl:template>
 
   <!-- qa -->
   <xsl:template match="para[@style='qa']">
-    <lg>
-      <l>
+    <xsl:if test="not(preceding-sibling::para[1][starts-with(@style,'q')])">
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','p type=&quot;embedded&quot;','&gt;')" />
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','lg','&gt;')" />
+    </xsl:if>
+      <l type="acrostic">
         <hi type="italic">
-        <xsl:apply-templates/>
+          <xsl:text>&#xA0;&#xA0;</xsl:text><xsl:apply-templates/>
         </hi>
       </l>
-    </lg>
+    <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','/lg','&gt;')" />
+      <xsl:value-of
+        disable-output-escaping="yes"
+        select="concat('&lt;','/p','&gt;')" />
+    </xsl:if>
   </xsl:template>
 
   <!-- qt -->
@@ -738,8 +761,8 @@
       </div>
     </div>
   </xsl:template>
-  <xsl:template match="para[@style='li2' or @style='pi2' or @style='q2']"/>
-  <xsl:template match="para[@style='li3' or @style='pi3'or @style='q3']"/>
+  <xsl:template match="para[@style='li2' or @style='pi2']"/>
+  <xsl:template match="para[@style='li3' or @style='pi3']"/>
   <xsl:template match="para[@style='toc1' or @style='toc2' or @style='toc3']"/>
 
 </xsl:stylesheet>
