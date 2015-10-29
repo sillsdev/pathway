@@ -3636,7 +3636,7 @@ namespace SIL.PublishingSolution
 			bool propertyModified = false;
 			int i = 0;
 			int g = 0;
-			Control.ControlCollection ctls = cTool.TabControl1.TabPages[1].Controls;
+			Control.ControlCollection ctls = cTool.TableLayoutPanel2.Controls; //cTool.TabControl1.TabPages[1].Controls
 			foreach (Control control in ctls)
 			{
 				if (control.GetType().Name == "Label") continue;

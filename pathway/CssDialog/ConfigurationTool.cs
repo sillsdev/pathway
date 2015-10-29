@@ -203,6 +203,11 @@ namespace SIL.PublishingSolution
 			get { return toolStripHelpButton; }
 		}
 
+		public TableLayoutPanel TableLayoutPanel2
+		{
+			get { return tableLayoutPanel2; }
+		}
+
 		public TabControl TabControl1
 		{
 			get { return tabControl1; }
