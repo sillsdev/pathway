@@ -1425,6 +1425,7 @@ namespace SIL.PublishingSolution
             ddlCopyrightStatement.Enabled = rdoStandardCopyright.Checked;
             txtColophonFile.Enabled = rdoCustomCopyright.Checked;
             btnBrowseColophon.Enabled = rdoCustomCopyright.Checked;
+            rdoCustomCopyright.Checked = !(rdoStandardCopyright.Checked);
         }
 
         private void rdoCustomCopyright_CheckedChanged(object sender, EventArgs e)
@@ -1434,6 +1435,7 @@ namespace SIL.PublishingSolution
             txtColophonFile.Enabled = rdoCustomCopyright.Checked;
             btnBrowseColophon.Enabled = rdoCustomCopyright.Checked;
             txtColophonFile.Text = GetCopyRightFileName();
+            rdoStandardCopyright.Checked = !(rdoCustomCopyright.Checked);
         }
 
         /// <summary>
