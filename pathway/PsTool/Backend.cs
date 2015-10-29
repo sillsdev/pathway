@@ -79,17 +79,21 @@ namespace SIL.Tool
             string xhtmlFile = publicationInformation.DefaultXhtmlFileWithPath;
             CreateVerbose(publicationInformation);
             var localType = type.Replace(@"\", "/").ToLower();
-            try
-            {
-                foreach (IExportProcess process in _backend)
-                {
-                    if (process.ExportType.ToLower() == "openoffice/libreoffice")
-                        localType = OpenOfficeClassifier(publicationInformation, localType); // Cross checking for OpenOffice
+	        try
+	        {
+		        foreach (IExportProcess process in _backend)
+		        {
+			        if (process.ExportType.ToLower() == "openoffice/libreoffice")
+				        localType = OpenOfficeClassifier(publicationInformation, localType); // Cross checking for OpenOffice
 
-                    if (process.ExportType.ToLower() == localType.ToLower())
-                        return process.Export(publicationInformation);
-                }
-            }
+			        if (process.ExportType.ToLower() == localType.ToLower())
+				        return process.Export(publicationInformation);
+		        }
+	        }
+	        catch(Exception ex)
+	        {
+		        throw new Exception(ex.Message);
+	        }
             finally
             {
                 publicationInformation.DefaultXhtmlFileWithPath = xhtmlFile;
