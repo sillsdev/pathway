@@ -506,7 +506,7 @@
 
   <!-- q2 -->
   <xsl:template match="para[@style='q2']">
-    <l level="2" ><xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
+    <l level="2" ><xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
         <xsl:apply-templates/>
     </l>
     <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
