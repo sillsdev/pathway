@@ -80,7 +80,7 @@ namespace SIL.PublishingSolution
             this.linkLabel1.Size = new System.Drawing.Size(237, 13);
             this.linkLabel1.TabIndex = 2;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "I want to localize Pathway for another langauge..";
+            this.linkLabel1.Text = "I want to localize Pathway for another language";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // lblFontName
