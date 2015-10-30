@@ -4627,7 +4627,7 @@ namespace SIL.Tool
 					var doc = new XmlDocument();
 					doc.LoadXml(content);
 					var node = doc.SelectSingleNode("//string");
-					return (node != null) ? node.InnerText : "en";
+                    return (node != null && node.InnerText.Trim().Length > 0) ? node.InnerText : "en";
 				}
 				else
 				{

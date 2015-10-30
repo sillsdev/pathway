@@ -126,15 +126,6 @@ namespace SIL.PublishingSolution
 			}
 		}
 
-		private void ddlUILanguage_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			var lang = ((ComboBoxItem)ddlUILanguage.SelectedItem).Value;
-			rtbPreview.Text = ddlUILanguage.SelectedItem.ToString();
-			Param.GetFontValues(lang, ref _fontName, ref _fontSize);
-			ddlFontName.SelectedItem = _fontName;
-			ddlFontSize.SelectedItem = _fontSize;
-		}
-
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			ShowL10NsharpDlg();
@@ -252,5 +243,14 @@ namespace SIL.PublishingSolution
 		{
 			return GetAllControls(container, new List<Control>());
 		}
+
+        private void ddlUILanguage_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            var lang = ((ComboBoxItem)ddlUILanguage.SelectedItem).Value;
+            rtbPreview.Text = ddlUILanguage.SelectedItem.ToString();
+            Param.GetFontValues(lang, ref _fontName, ref _fontSize);
+            ddlFontName.SelectedItem = _fontName;
+            ddlFontSize.SelectedItem = _fontSize;
+        }
 	}
 }

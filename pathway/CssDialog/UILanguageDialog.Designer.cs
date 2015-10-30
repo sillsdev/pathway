@@ -92,9 +92,9 @@ namespace SIL.PublishingSolution
             this.l10NSharpExtender1.SetLocalizingId(this.lblFontName, "UILanguageDialog.lblFontName");
             this.lblFontName.Location = new System.Drawing.Point(3, 61);
             this.lblFontName.Name = "lblFontName";
-            this.lblFontName.Size = new System.Drawing.Size(59, 13);
+            this.lblFontName.Size = new System.Drawing.Size(49, 13);
             this.lblFontName.TabIndex = 3;
-            this.lblFontName.Text = "Font-Name";
+            this.lblFontName.Text = "Font";
             // 
             // lblFontSize
             // 
@@ -105,9 +105,9 @@ namespace SIL.PublishingSolution
             this.l10NSharpExtender1.SetLocalizingId(this.lblFontSize, "UILanguageDialog.lblFontSize");
             this.lblFontSize.Location = new System.Drawing.Point(3, 90);
             this.lblFontSize.Name = "lblFontSize";
-            this.lblFontSize.Size = new System.Drawing.Size(59, 13);
+            this.lblFontSize.Size = new System.Drawing.Size(49, 13);
             this.lblFontSize.TabIndex = 5;
-            this.lblFontSize.Text = "Font-Size";
+            this.lblFontSize.Text = "Font size";
             // 
             // ddlUILanguage
             // 
@@ -121,7 +121,7 @@ namespace SIL.PublishingSolution
             this.ddlUILanguage.Name = "ddlUILanguage";
             this.ddlUILanguage.Size = new System.Drawing.Size(222, 21);
             this.ddlUILanguage.TabIndex = 1;
-            this.ddlUILanguage.TabIndexChanged += new System.EventHandler(this.ddlUILanguage_SelectedIndexChanged);
+            this.ddlUILanguage.SelectedIndexChanged += new System.EventHandler(this.ddlUILanguage_SelectedIndexChanged_1);
             // 
             // ddlFontName
             // 
@@ -130,7 +130,7 @@ namespace SIL.PublishingSolution
             this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlFontName, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.ddlFontName, null);
             this.l10NSharpExtender1.SetLocalizingId(this.ddlFontName, "UILanguageDialog.UILanguageDialog.ddlFontName");
-            this.ddlFontName.Location = new System.Drawing.Point(68, 56);
+            this.ddlFontName.Location = new System.Drawing.Point(58, 56);
             this.ddlFontName.Name = "ddlFontName";
             this.ddlFontName.Size = new System.Drawing.Size(157, 21);
             this.ddlFontName.TabIndex = 2;
@@ -143,7 +143,7 @@ namespace SIL.PublishingSolution
             this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlFontSize, null);
             this.l10NSharpExtender1.SetLocalizationComment(this.ddlFontSize, null);
             this.l10NSharpExtender1.SetLocalizingId(this.ddlFontSize, "UILanguageDialog.UILanguageDialog.ddlFontSize");
-            this.ddlFontSize.Location = new System.Drawing.Point(68, 85);
+            this.ddlFontSize.Location = new System.Drawing.Point(58, 85);
             this.ddlFontSize.Name = "ddlFontSize";
             this.ddlFontSize.Size = new System.Drawing.Size(157, 21);
             this.ddlFontSize.TabIndex = 3;
@@ -235,7 +235,7 @@ namespace SIL.PublishingSolution
             this.l10NSharpExtender1.SetLocalizationComment(this, null);
             this.l10NSharpExtender1.SetLocalizingId(this, "UILanguageDialog.WindowTitle");
             this.Name = "UILanguageDialog";
-            this.Text = "UI Language Dialog";
+            this.Text = "User Interface Language";
             this.Load += new System.EventHandler(this.UILanguageDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
             this.groupBox1.ResumeLayout(false);
