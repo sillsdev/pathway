@@ -40,7 +40,9 @@
   </xsl:template>
 
   <xsl:template match="usx|usfm|USX">
-    <osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd">
+    <osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd">
       <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="eng">
         <header>
           <work osisWork="thisWork">
@@ -49,7 +51,8 @@
                 select="concat(descendant::book[1]/@code,'.',descendant::chapter[1]/@number,'.',descendant::verse[1]/@number)"/>
               <xsl:text>-</xsl:text>
               <xsl:value-of
-                select="concat(descendant::book[last()]/@code,'.',descendant::chapter[last()]/@number,'.',descendant::verse[last()]/@number)"/>
+                select="concat(descendant::book[last()]/@code,'.',descendant::chapter[last()]/@number,'.',descendant::verse[last()]/@number)"
+              />
             </scope>
           </work>
         </header>
@@ -78,17 +81,15 @@
     <div type="book" osisID="{$bookCode}" canonical="true">
       <xsl:apply-templates/>
       <xsl:if test="descendant::para[@style='s2']">
-        <xsl:value-of
-          disable-output-escaping="yes"
-          select="concat('&lt;','/div','&gt;')" />
+        <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/div','&gt;')"/>
       </xsl:if>
       <xsl:if test="descendant::para[@style='s1']">
-        <xsl:value-of
-          disable-output-escaping="yes"
-          select="concat('&lt;','/div','&gt;','&lt;','/div','&gt;')" />
+        <xsl:value-of disable-output-escaping="yes"
+          select="concat('&lt;','/div','&gt;','&lt;','/div','&gt;')"/>
       </xsl:if>
       <xsl:variable name="Lastchapter" select="descendant::chapter[last()]/@number"/>
-      <xsl:variable name="LastVerseChapter" select="descendant::verse[last()]/preceding::chapter[1]/@number"/>
+      <xsl:variable name="LastVerseChapter"
+        select="descendant::verse[last()]/preceding::chapter[1]/@number"/>
       <xsl:if test="$Lastchapter=$LastVerseChapter">
         <xsl:call-template name="VerseTemplate">
           <xsl:with-param name="versenumber" select="descendant::verse[last()]/@number"/>
@@ -160,7 +161,7 @@
               <xsl:attribute name="type">
                 <xsl:text>bold</xsl:text>
               </xsl:attribute>
-            <xsl:apply-templates/>
+              <xsl:apply-templates/>
             </xsl:element>
           </xsl:element>
         </xsl:element>
@@ -175,38 +176,38 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:element name="p">
-           <xsl:for-each select="node()|text()">
-                <xsl:apply-templates select="current()"/>
+          <xsl:for-each select="node()|text()">
+            <xsl:apply-templates select="current()"/>
           </xsl:for-each>
         </xsl:element>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
   <xsl:template match="verse">
-          <xsl:variable name="BookID">
-            <xsl:value-of select="ancestor::book[1]/@code"/>
-          </xsl:variable>
-          <xsl:variable name="chapternumber">
+    <xsl:variable name="BookID">
+      <xsl:value-of select="ancestor::book[1]/@code"/>
+    </xsl:variable>
+    <xsl:variable name="chapternumber">
       <xsl:value-of select="preceding::chapter[1]/@number"/>
-          </xsl:variable>
+    </xsl:variable>
     <xsl:if test="preceding::verse/ancestor::book/@code=$BookID">
-                  <xsl:call-template name="VerseTemplate">
+      <xsl:call-template name="VerseTemplate">
         <xsl:with-param name="versenumber" select="preceding::verse[1]/@number"/>
-                    <xsl:with-param name="booknumber" select="$BookID"/>
-                    <xsl:with-param name="chapternumber" select="$chapternumber"/>
-                    <xsl:with-param name="IDTypeattribute">
-                      <xsl:text>eID</xsl:text>
-                    </xsl:with-param>
-                  </xsl:call-template>
-                </xsl:if>
-                <xsl:call-template name="VerseTemplate">
-                  <xsl:with-param name="versenumber" select="@number"/>
-                  <xsl:with-param name="booknumber" select="$BookID"/>
-                  <xsl:with-param name="chapternumber" select="$chapternumber"/>
-                  <xsl:with-param name="IDTypeattribute">
-                    <xsl:text>sID</xsl:text>
-                  </xsl:with-param>
-                </xsl:call-template>
+        <xsl:with-param name="booknumber" select="$BookID"/>
+        <xsl:with-param name="chapternumber" select="$chapternumber"/>
+        <xsl:with-param name="IDTypeattribute">
+          <xsl:text>eID</xsl:text>
+        </xsl:with-param>
+      </xsl:call-template>
+    </xsl:if>
+    <xsl:call-template name="VerseTemplate">
+      <xsl:with-param name="versenumber" select="@number"/>
+      <xsl:with-param name="booknumber" select="$BookID"/>
+      <xsl:with-param name="chapternumber" select="$chapternumber"/>
+      <xsl:with-param name="IDTypeattribute">
+        <xsl:text>sID</xsl:text>
+      </xsl:with-param>
+    </xsl:call-template>
   </xsl:template>
   <xsl:template name="VerseTemplate">
     <xsl:param name="versenumber"/>
@@ -250,7 +251,9 @@
           </xsl:if>
         </xsl:element>
         <xsl:if test="$IDTypeattribute='sID'">
-          <span><hi type="super">-</hi></span>
+          <span>
+            <hi type="super">-</hi>
+          </span>
           <xsl:element name="verse">
             <xsl:attribute name="eID">
               <xsl:value-of select="substring-before($IDValue,'-')"/>
@@ -298,18 +301,15 @@
       <list>
         <item style="{$li}">
           <xsl:if test="@style='pi' or @style='pi1'">
-            <xsl:value-of 
-              disable-output-escaping="yes"
-              select="concat('&lt;p','&gt;')" />
+            <xsl:value-of disable-output-escaping="yes" select="concat('&lt;p','&gt;')"/>
           </xsl:if>
           <xsl:apply-templates/>
-          <xsl:if test="following-sibling::*[1]/@style='li2' or following-sibling::*[1]/@style='pi2' or following-sibling::*[1]/@style='io2'">
+          <xsl:if
+            test="following-sibling::*[1]/@style='li2' or following-sibling::*[1]/@style='pi2' or following-sibling::*[1]/@style='io2'">
             <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
           </xsl:if>
           <xsl:if test="@style='pi' or @style='pi1'">
-            <xsl:value-of 
-              disable-output-escaping="yes"
-              select="concat('&lt;/p','&gt;')" />
+            <xsl:value-of disable-output-escaping="yes" select="concat('&lt;/p','&gt;')"/>
           </xsl:if>
         </item>
       </list>
@@ -319,18 +319,15 @@
     <list>
       <item>
         <xsl:if test="@style='pi2'">
-          <xsl:value-of 
-            disable-output-escaping="yes"
-            select="concat('&lt;p','&gt;')" />
+          <xsl:value-of disable-output-escaping="yes" select="concat('&lt;p','&gt;')"/>
         </xsl:if>
         <xsl:apply-templates/>
-        <xsl:if test="following-sibling::*[1]/@style='li3' or following-sibling::*[1]/@style='pi3' or following-sibling::*[1]/@style='io3'">
+        <xsl:if
+          test="following-sibling::*[1]/@style='li3' or following-sibling::*[1]/@style='pi3' or following-sibling::*[1]/@style='io3'">
           <xsl:apply-templates select="following-sibling::*[1]" mode="listitem"/>
         </xsl:if>
         <xsl:if test="@style='pi2'">
-          <xsl:value-of 
-            disable-output-escaping="yes"
-            select="concat('&lt;/p','&gt;')" />
+          <xsl:value-of disable-output-escaping="yes" select="concat('&lt;/p','&gt;')"/>
         </xsl:if>
       </item>
     </list>
@@ -339,33 +336,29 @@
     <list>
       <item>
         <xsl:if test="@style='pi3'">
-          <xsl:value-of 
-            disable-output-escaping="yes"
-            select="concat('&lt;p','&gt;')" />
+          <xsl:value-of disable-output-escaping="yes" select="concat('&lt;p','&gt;')"/>
         </xsl:if>
         <xsl:apply-templates/>
         <xsl:if test="@style='pi3'">
-          <xsl:value-of 
-            disable-output-escaping="yes"
-            select="concat('&lt;/p','&gt;')" />
+          <xsl:value-of disable-output-escaping="yes" select="concat('&lt;/p','&gt;')"/>
         </xsl:if>
       </item>
     </list>
   </xsl:template>
   <xsl:template match="para[@style='s']">
-   <div type="section">
+    <div type="section">
       <title>
-       <hi type="bold">
+        <hi type="bold">
           <xsl:apply-templates/>
         </hi>
       </title>
     </div>
   </xsl:template>
   <xsl:template match="para[@style='r']">
-    <div type="subsection">     
-        <hi type="italic">
-          <xsl:apply-templates/>
-        </hi>        
+    <div type="subsection">
+      <hi type="italic">
+        <xsl:apply-templates/>
+      </hi>
     </div>
   </xsl:template>
   <xsl:template match="para[@style='mt1']">
@@ -386,19 +379,17 @@
       </title>
     </div>
   </xsl:template>
-  <xsl:template match="char[@style='w']">    
-     <xsl:text>*</xsl:text>      
-     <xsl:apply-templates/>
+  <xsl:template match="char[@style='w']">
+    <xsl:text>*</xsl:text>
+    <xsl:apply-templates/>
   </xsl:template>
   <xsl:template match="para[@style='s1']">
     <xsl:if test="preceding::para[@style='s1']">
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','/div','&gt;','&lt;','/div','&gt;')" />
+      <xsl:value-of disable-output-escaping="yes"
+        select="concat('&lt;','/div','&gt;','&lt;','/div','&gt;')"/>
     </xsl:if>
-    <xsl:value-of
-      disable-output-escaping="yes"
-      select="concat('&lt;div type=','&quot;','majorSection','&quot; ','&gt;','&lt;div type=','&quot;','section','&quot; ','annotateType=','&quot;commentary&quot;','&gt;')" />
+    <xsl:value-of disable-output-escaping="yes"
+      select="concat('&lt;div type=','&quot;','majorSection','&quot; ','&gt;','&lt;div type=','&quot;','section','&quot; ','annotateType=','&quot;commentary&quot;','&gt;')"/>
     <title placement="centerHead">
       <hi type="bold">
         <xsl:apply-templates/>
@@ -408,29 +399,26 @@
 
   <xsl:template match="para[@style='s2']">
     <xsl:if test="preceding::para[@style='s2']">
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','/div','&gt;')" />
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/div','&gt;')"/>
     </xsl:if>
-    <xsl:value-of
-      disable-output-escaping="yes"
-      select="concat('&lt;div type=','&quot;','subSection','&quot;','&gt;')" />
+    <xsl:value-of disable-output-escaping="yes"
+      select="concat('&lt;div type=','&quot;','subSection','&quot;','&gt;')"/>
 
-      <hi type="italic">
+    <hi type="italic">
       <xsl:apply-templates/>
-      </hi>
-    </xsl:template>
+    </hi>
+  </xsl:template>
 
-    <!-- d -->
-    <xsl:template match="para[@style='d']">
-      <div align="left">
-        <div align="center">
-          <hi type="italic">
-            <xsl:apply-templates/>
-          </hi>
-        </div>
+  <!-- d -->
+  <xsl:template match="para[@style='d']">
+    <div align="left">
+      <div align="center">
+        <hi type="italic">
+          <xsl:apply-templates/>
+        </hi>
       </div>
-    </xsl:template>
+    </div>
+  </xsl:template>
 
   <!-- fq -->
   <xsl:template match="char[@style='fq' and @closed='false']">
@@ -454,13 +442,12 @@
       <xsl:apply-templates/>
     </hi>
   </xsl:template>
-  
+
   <!-- nd -->
   <xsl:template match="char[@style='nd']">
     <xsl:if test="preceding-sibling::char[@style='fq']">
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','hi type=&quot;italic&quot;','&gt;')" />
+      <xsl:value-of disable-output-escaping="yes"
+        select="concat('&lt;','hi type=&quot;italic&quot;','&gt;')"/>
     </xsl:if>
     <seg>
       <divineName>
@@ -468,9 +455,7 @@
       </divineName>
     </seg>
     <xsl:if test="preceding-sibling::char[@style='fq']">
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','/hi','&gt;')" />
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/hi','&gt;')"/>
     </xsl:if>
   </xsl:template>
 
@@ -484,88 +469,74 @@
   <!-- q, q1 -->
   <xsl:template match="para[@style='q' or @style='q1']">
     <xsl:if test="not(preceding-sibling::para[1][starts-with(@style,'q')])">
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','p type=&quot;embedded&quot;','&gt;')" />
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','lg','&gt;')" />
+      <xsl:value-of disable-output-escaping="yes"
+        select="concat('&lt;','p type=&quot;embedded&quot;','&gt;')"/>
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','lg','&gt;')"/>
     </xsl:if>
-    <l level="1" >
-      <xsl:text> &#xA0;&#xA0;</xsl:text><xsl:apply-templates/>
+    <l level="1">
+      <xsl:text> &#xA0;&#xA0;</xsl:text>
+      <xsl:apply-templates/>
     </l>
     <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','/lg','&gt;')" />
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','/p','&gt;')" />
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/lg','&gt;')"/>
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/p','&gt;')"/>
     </xsl:if>
   </xsl:template>
 
   <!-- q2 -->
   <xsl:template match="para[@style='q2']">
-    <l level="2" ><xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
-        <xsl:apply-templates/>
+    <l level="2">
+      <xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
+      <xsl:apply-templates/>
     </l>
     <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','/lg','&gt;')" />
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','/p','&gt;')" />
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/lg','&gt;')"/>
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/p','&gt;')"/>
     </xsl:if>
   </xsl:template>
 
   <!-- q3 -->
   <xsl:template match="para[@style='q3']">
-    <l level="3"><xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
-        <xsl:apply-templates/>
+    <l level="3">
+      <xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
+      <xsl:apply-templates/>
     </l>
-      <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
-        <xsl:value-of
-          disable-output-escaping="yes"
-          select="concat('&lt;','/lg &gt;')" />
-        <xsl:value-of
-          disable-output-escaping="yes"
-          select="concat('&lt;','/p','&gt;')" />
-      </xsl:if>
+    <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/lg &gt;')"/>
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/p','&gt;')"/>
+    </xsl:if>
   </xsl:template>
 
   <!-- qa -->
   <xsl:template match="para[@style='qa']">
     <xsl:if test="not(preceding-sibling::para[1][starts-with(@style,'q')])">
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','p type=&quot;embedded&quot;','&gt;')" />
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','lg','&gt;')" />
+      <xsl:value-of disable-output-escaping="yes"
+        select="concat('&lt;','p type=&quot;embedded&quot;','&gt;')"/>
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','lg','&gt;')"/>
     </xsl:if>
-      <l type="acrostic">
-        <hi type="italic">
-          <xsl:text>&#xA0;&#xA0;</xsl:text><xsl:apply-templates/>
-        </hi>
-      </l>
+    <l type="acrostic">
+      <hi type="italic">
+        <xsl:text>&#xA0;&#xA0;</xsl:text>
+        <xsl:apply-templates/>
+      </hi>
+    </l>
     <xsl:if test="not(following-sibling::para[1][starts-with(@style,'q')])">
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','/lg','&gt;')" />
-      <xsl:value-of
-        disable-output-escaping="yes"
-        select="concat('&lt;','/p','&gt;')" />
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/lg','&gt;')"/>
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','/p','&gt;')"/>
     </xsl:if>
   </xsl:template>
 
   <!-- qt -->
   <xsl:template match="char[@style='qt']">
     <seg type="otPassage">
-      <span><hi type="italic"><xsl:apply-templates/></hi></span>
+      <span>
+        <hi type="italic">
+          <xsl:apply-templates/>
+        </hi>
+      </span>
     </seg>
   </xsl:template>
-  
+
   <!-- sp -->
   <xsl:template match="para[@style='sp']">
     <speech>
@@ -587,15 +558,45 @@
     </div>
   </xsl:template>
 
+  <xsl:template name="tokenize">
+    <xsl:param name="text" select="."/>
+    <xsl:param name="separator" select="';'"/>
+    <xsl:choose>
+      <xsl:when test="not(contains($text, $separator))">
+        <xsl:element name="reference">
+          <xsl:attribute name="osisRef">
+            <xsl:value-of select="normalize-space($text)"/>
+          </xsl:attribute>
+          <xsl:value-of select="normalize-space($text)"/>
+
+        </xsl:element>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:element name="reference">
+          <xsl:attribute name="osisRef">
+            <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+          </xsl:attribute>
+          <xsl:value-of select="normalize-space(substring-before($text, $separator))"/>
+        </xsl:element>
+        <xsl:call-template name="tokenize">
+          <xsl:with-param name="text" select="substring-after($text, $separator)"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
   <!-- note -->
   <xsl:template match="note">
     <xsl:copy>
-	<xsl:if test="@style='x'">
+      <xsl:if test="@style='x'">
         <xsl:attribute name="type">
           <xsl:text>crossReference</xsl:text>
         </xsl:attribute>
+        <xsl:attribute name="osisID">
+          <xsl:value-of select="concat(ancestor::book[1]/@code,'.',child::char[@style='xo'])"/>
+        </xsl:attribute>
       </xsl:if>
-	  <xsl:if test="@style='f'">
+      <xsl:if test="@style='f'">
         <xsl:attribute name="placement">
           <xsl:text>x-foot</xsl:text>
         </xsl:attribute>
@@ -606,8 +607,14 @@
       <xsl:apply-templates/>
     </xsl:copy>
   </xsl:template>
-  
-<!-- fr -->
+
+  <xsl:template match="char[@style='xt']">
+    <xsl:call-template name="tokenize">
+      <xsl:with-param name="string" select="text()"/>
+    </xsl:call-template>
+  </xsl:template>
+
+  <!-- fr -->
   <xsl:template match="char[@style='fr']">
     <xsl:element name="reference">
       <xsl:attribute name="osisRef">
@@ -627,15 +634,15 @@
 
   <!-- add, bdit -->
   <xsl:template match="char[@style='add' or @style='bdit']">
-  <span>
-    <hi type="bold">
-      <hi type="italic">
-        <xsl:apply-templates/>
+    <span>
+      <hi type="bold">
+        <hi type="italic">
+          <xsl:apply-templates/>
+        </hi>
       </hi>
-    </hi>
-	</span>
+    </span>
   </xsl:template>
-  
+
   <!-- bk -->
   <xsl:template match="char[@style='bk']">
     <xsl:element name="reference">
@@ -645,17 +652,17 @@
       <xsl:apply-templates/>
     </xsl:element>
   </xsl:template>
-  
+
   <!-- xo -->
-  <xsl:template match="char[@style='xo']">
+  <!--<xsl:template match="char[@style='xo']">
     <xsl:element name="reference">
       <xsl:attribute name="type">
         <xsl:text>source</xsl:text>
       </xsl:attribute>
       <xsl:apply-templates/>
     </xsl:element>
-  </xsl:template>
-  
+  </xsl:template>-->
+
   <!-- iot -->
   <xsl:template match="para[@style='iot']">
     <div type="introduction" canonical="false">
@@ -666,7 +673,7 @@
       </div>
     </div>
   </xsl:template>
-  
+
   <!-- figure -->
   <xsl:template match="figure[@style='fig']">
     <xsl:element name="figure">
@@ -690,33 +697,39 @@
 
   <!-- ord -->
   <xsl:template match="char[@style='ord']">
-   <span>
-    <hi type="super">
-      <xsl:apply-templates/>
-    </hi>
-   </span>
+    <span>
+      <hi type="super">
+        <xsl:apply-templates/>
+      </hi>
+    </span>
   </xsl:template>
 
   <!-- pn, pd -->
   <xsl:template match="char[@style='pn' or @style='bd']">
-    <span> <hi type="bold">
-      <xsl:apply-templates/>
-    </hi></span>
+    <span>
+      <hi type="bold">
+        <xsl:apply-templates/>
+      </hi>
+    </span>
   </xsl:template>
 
   <!-- sig, sls, em, t1, dc -->
-  <xsl:template match="char[@style='sig' or @style='sls' or @style='em' or @style='tl' or @style='dc' or @style='it']">
-    <span> <hi type="italic">
-      <xsl:apply-templates/>
-    </hi></span>
+  <xsl:template
+    match="char[@style='sig' or @style='sls' or @style='em' or @style='tl' or @style='dc' or @style='it']">
+    <span>
+      <hi type="italic">
+        <xsl:apply-templates/>
+      </hi>
+    </span>
   </xsl:template>
 
-   <!-- sc -->
+  <!-- sc -->
   <xsl:template match="char[@style='sc']">
     <span>
-    <hi type="small-caps">
-      <xsl:apply-templates/>
-    </hi></span>
+      <hi type="small-caps">
+        <xsl:apply-templates/>
+      </hi>
+    </span>
   </xsl:template>
 
   <!-- wj -->
@@ -740,7 +753,7 @@
   <!-- period -->
   <xsl:template match="text()">
     <xsl:choose>
-      <xsl:when test="contains(current(),'.')">
+      <xsl:when test="contains(current(),'.') and substring-after(current(),'.')=''">
         <xsl:call-template name="string-replace-all">
           <xsl:with-param name="text" select="current()"/>
           <xsl:with-param name="replace">
@@ -767,5 +780,5 @@
   <xsl:template match="para[@style='li2' or @style='pi2']"/>
   <xsl:template match="para[@style='li3' or @style='pi3']"/>
   <xsl:template match="para[@style='toc1' or @style='toc2' or @style='toc3']"/>
-
+  <xsl:template match="char[@style='xo']"/>
 </xsl:stylesheet>
