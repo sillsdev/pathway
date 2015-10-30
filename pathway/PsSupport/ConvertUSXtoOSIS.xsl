@@ -562,7 +562,7 @@
   <!-- qt -->
   <xsl:template match="char[@style='qt']">
     <seg type="otPassage">
-      <xsl:apply-templates/>
+      <span><hi type="italic"><xsl:apply-templates/></hi></span>
     </seg>
   </xsl:template>
   
@@ -690,30 +690,33 @@
 
   <!-- ord -->
   <xsl:template match="char[@style='ord']">
+   <span>
     <hi type="super">
       <xsl:apply-templates/>
     </hi>
+   </span>
   </xsl:template>
 
   <!-- pn, pd -->
   <xsl:template match="char[@style='pn' or @style='bd']">
-    <hi type="bold">
+    <span> <hi type="bold">
       <xsl:apply-templates/>
-    </hi>
+    </hi></span>
   </xsl:template>
 
   <!-- sig, sls, em, t1, dc -->
   <xsl:template match="char[@style='sig' or @style='sls' or @style='em' or @style='tl' or @style='dc' or @style='it']">
-    <hi type="italic">
+    <span> <hi type="italic">
       <xsl:apply-templates/>
-    </hi>
+    </hi></span>
   </xsl:template>
 
    <!-- sc -->
   <xsl:template match="char[@style='sc']">
+    <span>
     <hi type="small-caps">
       <xsl:apply-templates/>
-    </hi>
+    </hi></span>
   </xsl:template>
 
   <!-- wj -->
