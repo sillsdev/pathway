@@ -129,7 +129,6 @@ namespace SIL.PublishingSolution
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			ShowL10NsharpDlg();
-			this.Close();
 		}
 
 		public static void ShowL10NsharpDlg()

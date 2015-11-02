@@ -71,25 +71,25 @@ namespace SIL.PublishingSolution
 			// 
 			// lblFontName
 			// 
-			this.lblFontName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblFontName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblFontName.AutoSize = true;
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblFontName, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblFontName, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblFontName, "UILanguageDialog.lblFontName");
-			this.lblFontName.Location = new System.Drawing.Point(3, 61);
+			this.lblFontName.Location = new System.Drawing.Point(24, 51);
 			this.lblFontName.Name = "lblFontName";
-			this.lblFontName.Size = new System.Drawing.Size(49, 13);
+			this.lblFontName.Size = new System.Drawing.Size(28, 13);
 			this.lblFontName.TabIndex = 3;
 			this.lblFontName.Text = "Font";
 			// 
 			// lblFontSize
 			// 
-			this.lblFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+			this.lblFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblFontSize.AutoSize = true;
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblFontSize, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblFontSize, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblFontSize, "UILanguageDialog.lblFontSize");
-			this.lblFontSize.Location = new System.Drawing.Point(3, 90);
+			this.lblFontSize.Location = new System.Drawing.Point(3, 82);
 			this.lblFontSize.Name = "lblFontSize";
 			this.lblFontSize.Size = new System.Drawing.Size(49, 13);
 			this.lblFontSize.TabIndex = 5;
@@ -111,19 +111,24 @@ namespace SIL.PublishingSolution
 			// 
 			// ddlFontName
 			// 
+			this.ddlFontName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.ddlFontName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.ddlFontName.IntegralHeight = false;
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlFontName, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.ddlFontName, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.ddlFontName, "UILanguageDialog.UILanguageDialog.ddlFontName");
-			this.ddlFontName.Location = new System.Drawing.Point(58, 56);
+			this.ddlFontName.Location = new System.Drawing.Point(58, 54);
 			this.ddlFontName.Name = "ddlFontName";
-			this.ddlFontName.Size = new System.Drawing.Size(157, 21);
+			this.ddlFontName.Size = new System.Drawing.Size(167, 21);
 			this.ddlFontName.TabIndex = 2;
 			this.ddlFontName.SelectedIndexChanged += new System.EventHandler(this.ddlFontName_SelectedIndexChanged);
 			// 
 			// ddlFontSize
 			// 
+			this.ddlFontSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.ddlFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.ddlFontSize.FormattingEnabled = true;
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.ddlFontSize, null);
@@ -131,7 +136,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.ddlFontSize, "UILanguageDialog.UILanguageDialog.ddlFontSize");
 			this.ddlFontSize.Location = new System.Drawing.Point(58, 85);
 			this.ddlFontSize.Name = "ddlFontSize";
-			this.ddlFontSize.Size = new System.Drawing.Size(157, 21);
+			this.ddlFontSize.Size = new System.Drawing.Size(167, 21);
 			this.ddlFontSize.TabIndex = 3;
 			this.ddlFontSize.SelectedIndexChanged += new System.EventHandler(this.ddlFontSize_SelectedIndexChanged);
 			// 
@@ -140,9 +145,9 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.btnOk, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.btnOk, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.btnOk, "UILanguageDialog.UILanguageDialog.btnOk");
-			this.btnOk.Location = new System.Drawing.Point(241, 160);
+			this.btnOk.Location = new System.Drawing.Point(247, 160);
 			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(75, 23);
+			this.btnOk.Size = new System.Drawing.Size(75, 28);
 			this.btnOk.TabIndex = 4;
 			this.btnOk.Text = "&Ok";
 			this.btnOk.UseVisualStyleBackColor = true;
@@ -154,9 +159,9 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.btnCancel, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.btnCancel, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.btnCancel, "UILanguageDialog.UILanguageDialog.btnCancel");
-			this.btnCancel.Location = new System.Drawing.Point(322, 161);
+			this.btnCancel.Location = new System.Drawing.Point(328, 160);
 			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(75, 23);
+			this.btnCancel.Size = new System.Drawing.Size(75, 28);
 			this.btnCancel.TabIndex = 5;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
@@ -192,7 +197,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.linkLabel1, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.linkLabel1, L10NSharp.LocalizationPriority.NotLocalizable);
 			this.l10NSharpExtender1.SetLocalizingId(this.linkLabel1, "UILanguageDialog.UILanguageDialog.linkLabel1");
-			this.linkLabel1.Location = new System.Drawing.Point(11, 138);
+			this.linkLabel1.Location = new System.Drawing.Point(6, 168);
 			this.linkLabel1.Name = "linkLabel1";
 			this.linkLabel1.Size = new System.Drawing.Size(231, 13);
 			this.linkLabel1.TabIndex = 2;
@@ -215,27 +220,30 @@ namespace SIL.PublishingSolution
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 4;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.49495F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.50505F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(228, 112);
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(228, 149);
 			this.tableLayoutPanel1.TabIndex = 12;
 			// 
 			// UILanguageDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(415, 192);
+			this.AutoSize = true;
+			this.ClientSize = new System.Drawing.Size(415, 200);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.linkLabel1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this, null);
 			this.l10NSharpExtender1.SetLocalizingId(this, "UILanguageDialog.WindowTitle");
 			this.Name = "UILanguageDialog";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "User Interface Language";
 			this.Load += new System.EventHandler(this.UILanguageDialog_Load);
 			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).EndInit();
