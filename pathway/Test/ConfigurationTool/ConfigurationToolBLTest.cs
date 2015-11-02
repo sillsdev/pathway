@@ -292,10 +292,10 @@ namespace Test.UIConfigurationToolBLTest
             cTool._cToolBL.ConfigurationTool_LoadBL();
             cTool._cToolBL.tsNew_ClickBL();
             int afterNew = cTool.StylesGrid.RowCount;
-            Assert.AreEqual(9, afterNew, "New Count Test Fails");
+            Assert.Greater(afterNew, 1, "New Count Test Fails");
             cTool._cToolBL.tsDelete_ClickBL();
             int afterDelete = cTool.StylesGrid.RowCount;
-            Assert.AreEqual(8, afterDelete, "New Count Test Fails");
+            Assert.AreEqual(afterNew - 1, afterDelete, "New Count Test Fails");
             cTool.Close();
         }
 
