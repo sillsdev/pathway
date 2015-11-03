@@ -22,6 +22,7 @@ namespace SIL.PublishingSolution
 		private string _uiLanguage = "en";
 		private string _fontName = "Microsoft Sans Serif";
 		private string _fontSize = "8";
+		private bool _isLinux = false;
 
 		public UILanguageDialog()
 		{
@@ -30,8 +31,9 @@ namespace SIL.PublishingSolution
 
 		private void UILanguageDialog_Load(object sender, EventArgs e)
 		{
+			_isLinux = Common.IsUnixOS();
 			CreateUserInterfaceLanguagexml();
-			if (Common.IsUnixOS())
+			if (_isLinux)
 			{
 				_fontName = "Liberation Serif";
 				_fontSize = "8";
@@ -79,16 +81,16 @@ namespace SIL.PublishingSolution
             ddlFontSize.Items.Add("11");
             ddlFontSize.Items.Add("12");
             ddlFontSize.Items.Add("14");
-            ddlFontSize.Items.Add("16");
-            ddlFontSize.Items.Add("18");
-            ddlFontSize.Items.Add("20");
-            ddlFontSize.Items.Add("22");
-            ddlFontSize.Items.Add("24");
-            ddlFontSize.Items.Add("26");
-            ddlFontSize.Items.Add("28");
-            ddlFontSize.Items.Add("36");
-            ddlFontSize.Items.Add("48");
-            ddlFontSize.Items.Add("72");
+			ddlFontSize.Items.Add("16");
+			ddlFontSize.Items.Add("18");
+			ddlFontSize.Items.Add("20");
+			ddlFontSize.Items.Add("22");
+			ddlFontSize.Items.Add("24");
+			ddlFontSize.Items.Add("26");
+			ddlFontSize.Items.Add("28");
+			ddlFontSize.Items.Add("36");
+			ddlFontSize.Items.Add("48");
+			ddlFontSize.Items.Add("72");
             ddlFontSize.SelectedItem = _fontSize;
         }
 
@@ -193,6 +195,10 @@ namespace SIL.PublishingSolution
 					if (fontNode != null && fontNode.Attributes != null)
 					{
 						_fontName = fontNode.Attributes["name"].InnerText;
+						if (_fontName == "Microsoft Sans Serif" && _isLinux)
+						{
+							_fontName = "Liberation Serif";
+						}
 						_fontSize = fontNode.Attributes["size"].InnerText;
 					}
 				}

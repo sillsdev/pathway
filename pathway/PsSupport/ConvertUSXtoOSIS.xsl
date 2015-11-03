@@ -557,6 +557,17 @@
       </title>
     </div>
   </xsl:template>
+  
+  <xsl:template match="row[@style='tr']">
+    <row>
+          <xsl:apply-templates/>
+    </row>    
+  </xsl:template>
+  <xsl:template match="cell[starts-with(@style,'tc')]">
+    <cell>
+      <xsl:apply-templates/>
+    </cell>    
+  </xsl:template>
 
   <xsl:template name="tokenize">
     <xsl:param name="text" select="."/>
