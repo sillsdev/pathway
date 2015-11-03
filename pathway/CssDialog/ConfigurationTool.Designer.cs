@@ -3508,6 +3508,7 @@ namespace SIL.PublishingSolution
             this.chkCenterTitleHeader.TabIndex = 110;
             this.chkCenterTitleHeader.Text = "Center Title in Header";
             this.chkCenterTitleHeader.UseVisualStyleBackColor = true;
+            this.chkCenterTitleHeader.CheckStateChanged += new System.EventHandler(this.chkCenterTitleHeader_CheckStateChanged);
             // 
             // ddlHeaderFontSize
             // 

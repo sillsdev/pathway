@@ -127,6 +127,7 @@ namespace SIL.PublishingSolution
 		protected bool _fixedLineHeight = false;
 		protected bool _includeImage = true;
 		protected bool _pageBreak = false;
+        protected bool _centerTitleHeader = false;
 		protected string _tocLevel = "2 - Book and Chapter";
 		protected string _embedFonts = "Yes";
 		protected string _includeFontVariants = "Yes";
@@ -508,6 +509,16 @@ namespace SIL.PublishingSolution
 			}
 		}
 
+        public string HeaderFontSize
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-header-font-size";
+                return GetValue(task, key, "Default");
+            }
+        }
+
 		public string JustifyUI
 		{
 			get
@@ -634,6 +645,20 @@ namespace SIL.PublishingSolution
 				return false;
 			}
 		}
+
+        public bool CenterTitleHeader
+        {
+            get
+            {
+                string task = "@page";
+                string key = "-ps-center-title-header";
+                if (_cssClass.ContainsKey("@page") && _cssClass[task].ContainsKey(key))
+                {
+                    return Convert.ToBoolean(_cssClass["@page"][key]);
+                }
+                return false;
+            }
+        }
 
 		#endregion
 
@@ -947,6 +972,10 @@ namespace SIL.PublishingSolution
 			key = ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value;
 			WriteAtImport(writeCss, attribute, key);
 
+            attribute = "Header Size";
+            key = ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value;
+            WriteAtImport(writeCss, attribute, key);
+
 			if (inputTypeBL.ToLower() == "scripture" && cTool.DdlReferenceFormat.SelectedItem != null)
 			{
 				attribute = "Reference Format";
@@ -1003,6 +1032,8 @@ namespace SIL.PublishingSolution
 			value["-ps-fileproduce"] = "\"" + ((ComboBoxItem)cTool.DdlFileProduceDict.SelectedItem).Value + "\"";
 			value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
 			value["-ps-split-file-by-letter"] = "\"" + _splitFileByLetter + "\"";
+            value["-ps-center-title-header"] = "\"" + _centerTitleHeader + "\"";
+            value["-ps-header-font-size"] = "\"" + ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value + "\"";
 			if (inputTypeBL.ToLower() == "scripture")
 			{
 				value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
@@ -1194,7 +1225,9 @@ namespace SIL.PublishingSolution
 			cTool.DdlJustified.SelectedItem = (ComboBoxItem)cTool.DdlJustified.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == JustifyUI);
 			cTool.DdlPagePageSize.SelectedItem = (ComboBoxItem)cTool.DdlPagePageSize.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == PageSize);
 			cTool.DdlRunningHead.SelectedItem = (ComboBoxItem)cTool.DdlRunningHead.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == RunningHeader);
+            cTool.DdlHeaderFontSize.SelectedItem = (ComboBoxItem)cTool.DdlHeaderFontSize.Items.OfType<ComboBoxItem>().SingleOrDefault(s => s.Value == HeaderFontSize);
 			cTool.ChkSplitFileByLetter.Checked = SplitFileByLetter;
+		    cTool.ChkCenterTitleHeader.Checked = CenterTitleHeader;
 
 			string pageType = GetDdlRunningHead();
 			DdlRunningHeadSelectedIndexChangedBl(pageType);
@@ -1604,6 +1637,7 @@ namespace SIL.PublishingSolution
 			cTool.DdlMissingFont.Items.Clear();
 			cTool.DdlNonSILFont.Items.Clear();
 			cTool.DdlTocLevel.Items.Clear();
+            cTool.DdlHeaderFontSize.Items.Clear();
 		}
 
 		private void PopulateFeatureItemsInDropDownctrl(string task, TreeNode ctn)
@@ -1712,6 +1746,11 @@ namespace SIL.PublishingSolution
 						cTool.DdlTocLevel.SelectedIndex = 0;
 					}
 					break;
+
+                case "Header Size":
+                    if (ComboBoxContains(enText, cTool.DdlHeaderFontSize))
+                        cTool.DdlHeaderFontSize.Items.Add(new ComboBoxItem(enText, ctn.Text));
+                    break;
 			}
 		}
 
@@ -1741,6 +1780,10 @@ namespace SIL.PublishingSolution
 				string fontSize = string.Empty;
 				if (cTool.DdlFontSize.SelectedItem != null)
 					fontSize = (((ComboBoxItem)cTool.DdlFontSize.SelectedItem).Value.Length > 0) ? " Base FontSize - " + ((ComboBoxItem)cTool.DdlFontSize.SelectedItem).Value + ", " : "";
+
+                string headerSize = string.Empty;
+                if (cTool.DdlHeaderFontSize.SelectedItem != null)
+                    headerSize = (((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value.Length > 0) ? " Header Size - " + ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value + ", " : "";
 
 				string rules = string.Empty;
 				if (cTool.DdlRules.SelectedItem != null)
@@ -1798,6 +1841,7 @@ namespace SIL.PublishingSolution
 								  rules + " " +
 								  justified + " " +
 								  sense + " " +
+                                  headerSize + " " +
 								  picture + ".";
 				cTool.TxtCss.Text = combined;
 			}
@@ -3880,6 +3924,15 @@ namespace SIL.PublishingSolution
 			}
 			catch { }
 		}
+
+        public void chkCenterTitleHeader_CheckStateChangedBL()
+        {
+            try
+			{
+				_centerTitleHeader = cTool.ChkCenterTitleHeader.Checked;
+			}
+			catch { }
+        }
 
 		public void chkIncludeImage_CheckedChangedBL(object sender, EventArgs e)
 		{

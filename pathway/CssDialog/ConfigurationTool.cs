@@ -840,6 +840,16 @@ namespace SIL.PublishingSolution
 			get { return chkDisableWO; }
 		}
 
+        public ComboBox DdlHeaderFontSize
+        {
+            get { return ddlHeaderFontSize; }
+        }
+
+        public CheckBox ChkCenterTitleHeader
+        {
+            get { return chkCenterTitleHeader; }
+        }
+
 		#endregion
 
 		#region Event Method
@@ -1478,6 +1488,12 @@ namespace SIL.PublishingSolution
             uiLanguage.ShowDialog();
             UpdateFontOnL10NSharp(LocalizationManager.UILanguageId);
             _cToolBL.ConfigurationTool_LoadBL();
+        }
+
+        private void chkCenterTitleHeader_CheckStateChanged(object sender, EventArgs e)
+        {
+            EditCSS(sender, e);
+            _cToolBL.chkCenterTitleHeader_CheckStateChangedBL();
         }
 
 	}

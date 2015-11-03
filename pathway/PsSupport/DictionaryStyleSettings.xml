@@ -99,6 +99,15 @@
       <option name="9" file="Font_Size_9.css" />
       <option name="No Change" file="Font_Size_nc.css" />
     </feature>
+	<feature name="Header Size">
+      <option name="14" />
+      <option name="12" />
+      <option name="11" />
+      <option name="10" />
+      <option name="9" />
+      <option name="8" />
+      <option name="No Change" />
+    </feature>
     <feature name="Headword Size">
       <option name="14" file="Headword_Size_14.css" />
       <option name="12" file="Headword_Size_12.css" />
