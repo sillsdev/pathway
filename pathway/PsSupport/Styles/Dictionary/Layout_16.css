@@ -9,3 +9,7 @@
 @import "PageNumber_TopInside.css";
 @import "Rules_No.css";
 @import "Sense_nc.css";
+@page{
+	-ps-center-title-header:"True";
+	-ps-header-font-size:"Same as headword";
+}

@@ -515,7 +515,7 @@ namespace SIL.PublishingSolution
             {
                 string task = "@page";
                 string key = "-ps-header-font-size";
-                return GetValue(task, key, "Default");
+                return GetValue(task, key, "Same as headword");
             }
         }
 

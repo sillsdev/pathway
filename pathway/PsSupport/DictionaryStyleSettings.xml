@@ -106,7 +106,8 @@
       <option name="10" />
       <option name="9" />
       <option name="8" />
-      <option name="No Change" />
+      <option name="Same as body" />
+	  <option name="Same as headword" />
     </feature>
     <feature name="Headword Size">
       <option name="14" file="Headword_Size_14.css" />
