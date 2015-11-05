@@ -126,9 +126,17 @@ namespace SilTools
         /// </remarks>
 		public static void Register()
 		{
-			if (hHook != IntPtr.Zero)
-				return;
-			hHook = SetWindowsHookEx(WH_CALLWNDPROCRET, hookProc, IntPtr.Zero, AppDomain.GetCurrentThreadId());
+	        try
+	        {
+		        if (hHook != IntPtr.Zero)
+			        return;
+		        hHook = SetWindowsHookEx(WH_CALLWNDPROCRET, hookProc, IntPtr.Zero, AppDomain.GetCurrentThreadId());
+	        }
+	        catch
+	        {
+				//AppDomain.GetCurrentThreadId() thread id crash on linux
+	        }
+			
 		}
 
         /// <summary>
