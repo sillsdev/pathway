@@ -31,22 +31,27 @@ namespace SIL.PublishingSolution
 
 		private void UILanguageDialog_Load(object sender, EventArgs e)
 		{
-			_isLinux = Common.IsUnixOS();
-			CreateUserInterfaceLanguagexml();
-			if (_isLinux)
+			try
 			{
-				_fontName = "Liberation Serif";
-				_fontSize = "8";
-			}
-			Param.LoadUiLanguageFontInfo();
-            UpdateFontOnL10NSharp(_uiLanguage);
-			LoadUiLanguages();
-			ReadLocalizationSettings(Settings.Default.UserInterfaceLanguage);
-			LoadInstalledFonts();
-			LoadFontSize();
+				_isLinux = Common.IsUnixOS();
+				CreateUserInterfaceLanguagexml();
+				if (_isLinux)
+				{
+					_fontName = "Liberation Serif";
+					_fontSize = "8";
+				}
+				Param.LoadUiLanguageFontInfo();
+				UpdateFontOnL10NSharp(_uiLanguage);
+				LoadUiLanguages();
+				ReadLocalizationSettings(_uiLanguage);
+				LoadInstalledFonts();
+				LoadFontSize();
 
-			rtbPreview.Text = ddlUILanguage.SelectedItem.ToString();
-			rtbPreview.Font = new Font(ddlFontName.SelectedItem.ToString(), float.Parse(ddlFontSize.SelectedItem.ToString(), CultureInfo.InvariantCulture.NumberFormat));
+				rtbPreview.Text = ddlUILanguage.SelectedItem.ToString();
+				if (ddlFontName.SelectedItem != null)
+					rtbPreview.Font = new Font(ddlFontName.SelectedItem.ToString(), float.Parse(ddlFontSize.SelectedItem.ToString(), CultureInfo.InvariantCulture.NumberFormat));
+			}
+			catch{}
 		}
 
         private void LoadUiLanguages()
@@ -254,6 +259,10 @@ namespace SIL.PublishingSolution
 			var lang = ((ComboBoxItem)ddlUILanguage.SelectedItem).Value;
 			rtbPreview.Text = ddlUILanguage.SelectedItem.ToString();
 			Param.GetFontValues(lang, ref _fontName, ref _fontSize);
+			if (_fontName == "Microsoft Sans Serif" && _isLinux)
+			{
+				_fontName = "Liberation Serif";
+			}
 			ddlFontName.SelectedItem = _fontName;
 			ddlFontSize.SelectedItem = _fontSize;
 		}

@@ -4618,7 +4618,7 @@ namespace SIL.Tool
 				var fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
 				if (!File.Exists(fileName))
 				{
-					SaveLocalizationSettings("en", null, null);
+					SaveLocalizationSettings("en", "Microsoft Sans Serif", "8");
 				}
 
 				if (File.Exists(fileName))
