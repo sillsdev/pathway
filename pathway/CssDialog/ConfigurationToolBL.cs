@@ -91,6 +91,7 @@ namespace SIL.PublishingSolution
 		public bool AddMode1;
 		public enum ScreenMode { Load, New, View, Edit, Delete, SaveAs, Modify };
 		public ScreenMode _screenMode;
+	    public string _TitleText = string.Empty;
 
 		CssTree cssTree = new CssTree();
 
@@ -1056,9 +1057,35 @@ namespace SIL.PublishingSolution
 				value["margin-left"] = cTool.TxtPageInside.Text;
 				WriteCssClass(writeCss, "page :right", value);
 			}
+
+            if (_centerTitleHeader)
+		    {
+		        if (((ComboBoxItem) cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
+		        {
+                    SetPageTopCenter(value);
+		            WriteCssClass(writeCss, "page :left-top-center", value);
+
+                    SetPageTopCenter(value);
+                    WriteCssClass(writeCss, "page :right-top-center", value);
+		        }
+		        else
+		        {
+                    SetPageTopCenter(value);
+                    WriteCssClass(writeCss, "page -top-center", value);
+		        }
+		    }
+            
 		}
 
-		private void SetAttributesForWebProperties(string attribName, XmlNode baseNode, HashUtilities hashUtil)
+	    private void SetPageTopCenter(Dictionary<string, string> value)
+	    {
+	        value.Clear();
+	        value["content"] = "\"" + _TitleText + "\"";
+	        value["font-size"] = cTool.DdlHeaderFontSize.SelectedItem + "pt";
+	        value["font-weight"] = "bold";
+	    }
+
+	    private void SetAttributesForWebProperties(string attribName, XmlNode baseNode, HashUtilities hashUtil)
 		{
 			switch (attribName)
 			{
@@ -2723,13 +2750,30 @@ namespace SIL.PublishingSolution
 			string precedeChar = className.ToLower().IndexOf("page") == 0 ? "@" : ".";
 			if (value.Count > 0)
 			{
-				writeCss.WriteLine(precedeChar + className + "{");
-				foreach (var pair in value)
-				{
-					if (pair.Value.Length > 0)
-						writeCss.WriteLine(pair.Key + ":" + pair.Value + ";");
-				}
-				writeCss.WriteLine("}");
+                if (className.IndexOf("-") > 0)
+                {
+                    var clsName = className.Split('-');
+                    writeCss.WriteLine(precedeChar + clsName[0] + "{");
+                    writeCss.WriteLine(precedeChar + clsName[1] + "-" + clsName[2] + "{");
+                    foreach (var pair in value)
+                    {
+                        if (pair.Value.Length > 0)
+                            writeCss.WriteLine(pair.Key + ":" + pair.Value + ";");
+                    }
+                    writeCss.WriteLine("}");
+                    writeCss.WriteLine("}");
+                }
+                else
+                {
+
+                    writeCss.WriteLine(precedeChar + className + "{");
+                    foreach (var pair in value)
+                    {
+                        if (pair.Value.Length > 0)
+                            writeCss.WriteLine(pair.Key + ":" + pair.Value + ";");
+                    }
+                    writeCss.WriteLine("}");
+                }
 			}
 		}
 
@@ -3928,13 +3972,43 @@ namespace SIL.PublishingSolution
         public void chkCenterTitleHeader_CheckStateChangedBL()
         {
             try
-			{
-				_centerTitleHeader = cTool.ChkCenterTitleHeader.Checked;
-			}
-			catch { }
+            {
+                _centerTitleHeader = cTool.ChkCenterTitleHeader.Checked;
+                ReloadPageNumberLocList();
+            }
+            catch { }
         }
 
-		public void chkIncludeImage_CheckedChangedBL(object sender, EventArgs e)
+        /// <summary>
+        /// Based on checkbox "Center title in Header" selection, The "Top Center option will be removed/added
+        /// </summary>
+	    private void ReloadPageNumberLocList()
+	    {
+	        string pageType = GetDdlRunningHead();
+	        string xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
+            string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
+	        XmlNodeList pageNumList = Param.GetItems(xPath);
+            _TitleText = Param.GetItem(titlePath).InnerText;
+	        cTool.DdlPageNumber.Items.Clear();
+	        foreach (XmlNode node in pageNumList)
+	        {
+	            if (node.Attributes != null)
+	            {
+	                string value = node.Attributes["name"].Value;
+	                if (ComboBoxContains(value, cTool.DdlPageNumber))
+	                {
+	                    string enText = value;
+	                    value = LocalizeItems.LocalizeItem("Page Number", value);
+	                    if (_centerTitleHeader && enText.ToLower() == "top center")
+	                        continue;
+	                    cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
+	                }
+	            }
+	        }
+	        cTool.DdlPageNumber.SelectedIndex = 0;
+	    }
+
+	    public void chkIncludeImage_CheckedChangedBL(object sender, EventArgs e)
 		{
 			try
 			{
