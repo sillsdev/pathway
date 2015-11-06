@@ -196,6 +196,36 @@ namespace Test.UIConfigurationToolTest
             TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "WriteCss Test fails");
         }
 
+        [Test]
+        public void WriteCssClassForEveryPage()
+        {
+            string fileName = "WriteCssEveryPage.css";
+            string outputFileWithPath = Common.PathCombine(_outputBasePath, fileName);
+            StreamWriter writeCss = new StreamWriter(outputFileWithPath);
+            var value = new Dictionary<string, string>();
+            value["font-size"] = "5pt";
+            value["font-weight"] = "bold";
+            _configTool._cToolBL.WriteCssClass(writeCss, "page-top-center", value);
+            writeCss.Close();
+            string expectedFileWithPath = Common.PathCombine(_expectBasePath, fileName);
+            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "WriteCssClassForEveryPage Test fails");
+        }
+
+        [Test]
+        public void WriteCssClassForMirrored()
+        {
+            string fileName = "WriteCssMirrored.css";
+            string outputFileWithPath = Common.PathCombine(_outputBasePath, fileName);
+            StreamWriter writeCss = new StreamWriter(outputFileWithPath);
+            var value = new Dictionary<string, string>();
+            value["font-size"] = "5pt";
+            value["font-weight"] = "bold";
+            _configTool._cToolBL.WriteCssClass(writeCss, "page:left-top-center", value);
+            writeCss.Close();
+            string expectedFileWithPath = Common.PathCombine(_expectBasePath, fileName);
+            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "WriteCssClassForMirrored Test fails");
+        }
+
         /// <summary>
         ///A test for RemoveXMLNode
         ///</summary>
