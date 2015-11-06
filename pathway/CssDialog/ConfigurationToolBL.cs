@@ -1081,7 +1081,12 @@ namespace SIL.PublishingSolution
 	    {
 	        value.Clear();
 	        value["content"] = "\"" + _TitleText + "\"";
-	        value["font-size"] = cTool.DdlHeaderFontSize.SelectedItem + "pt";
+            string fontSize = cTool.DdlHeaderFontSize.SelectedItem.ToString();
+	        if (Regex.IsMatch(cTool.DdlHeaderFontSize.SelectedItem.ToString(), @"^\d+$"))
+	        {
+                fontSize = fontSize + "pt";
+	        }
+            value["font-size"] = fontSize;
 	        value["font-weight"] = "bold";
 	    }
 
@@ -3873,11 +3878,16 @@ namespace SIL.PublishingSolution
 			{
 				cTool.TxtGuidewordLength.Text = "0";
 				cTool.TxtGuidewordLength.Enabled = false;
+                cTool.ChkCenterTitleHeader.Checked = false;
+			    cTool.ChkCenterTitleHeader.Enabled = false;
+			    cTool.DdlHeaderFontSize.Enabled = false;
 			}
 			else
 			{
 				cTool.TxtGuidewordLength.Text = "99";
 				cTool.TxtGuidewordLength.Enabled = true;
+                cTool.ChkCenterTitleHeader.Enabled = true;
+                cTool.DdlHeaderFontSize.Enabled = true;
 			}
 			string xPath = string.Empty;
 			Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationTool: PopulatePageNumberFeature");
