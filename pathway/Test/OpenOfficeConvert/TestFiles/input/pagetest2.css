@@ -11,7 +11,7 @@ background-color:blue;
 @page :left {
 background-color:green;
     @top-left {
-        content: "Page left - Top Left";
+        content: "";
         font-weight: bold;
     }
     @top-center {

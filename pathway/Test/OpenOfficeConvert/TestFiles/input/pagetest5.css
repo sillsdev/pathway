@@ -3,7 +3,7 @@ background-color:red;
     size: 14.8cm 21cm;
     margin: 3cm 3cm;
    @top-left {
- content: "top left";
+ content: "";
         font-weight: bold;
     }
     @top-center {
@@ -12,11 +12,11 @@ color:blue;
 font-weight:bold;
     }    
     @top-right {
-       content: "top right ";
+       content: "";
     }
 
    @bottom-left {
- content: "bottom left";
+ content: "";
         font-weight: bold;
     }
     @bottom-center {
@@ -25,7 +25,7 @@ color:yellow;
 font-weight:bold;
     }    
     @bottom-right {
-       content: "bottom right ";
+       content: "";
     }
 
 }

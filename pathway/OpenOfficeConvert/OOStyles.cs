@@ -1833,6 +1833,10 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
+					else if (_pageHeaderFooter[i]["content"].Length > 0)
+					{
+						CreateVariableForTitle(i);
+					}
                 }
             }
             //Close Header/Footer
@@ -1846,6 +1850,35 @@ namespace SIL.PublishingSolution
                 CreateEmptyHeader(true);
             }
         }
+
+	    private void CreateVariableForTitle(int i)
+	    {
+			var pageCenterVariable = string.Empty;
+		    if (isMirrored)
+		    {
+			    if (_cssProperty.ContainsKey("@page:left-top-center") &&
+			        _cssProperty["@page:left-top-center"].ContainsKey("content"))
+			    {
+				    pageCenterVariable = _cssProperty["@page:left-top-center"]["content"];
+			    }
+		    }
+			else if (_cssProperty.ContainsKey("@page-top-center") &&
+				_cssProperty["@page-top-center"].ContainsKey("content"))
+			{
+				pageCenterVariable = _cssProperty["@page-top-center"]["content"];
+			}
+			if(pageCenterVariable.Length > 0)
+		    {
+				if (i == 1 || i == 7 || i == 13 || i == 19)
+					SetTab();
+				_writer.WriteStartElement("text:span");
+				_writer.WriteAttributeString("text:style-name", "MT1");
+				_writer.WriteAttributeString("style:horizontal-pos", "center");
+				_writer.WriteString(pageCenterVariable);
+				_writer.WriteEndElement();
+				_isCenterTabStopNeeded = false;
+			}
+	    }
 
         private void HeaderFooterEndElement()
         {
@@ -1921,17 +1954,15 @@ namespace SIL.PublishingSolution
         {
             if (!_cssProperty.ContainsKey("@page:none-none"))
             {
-                _writer.WriteStartElement("text:span");
-                _writer.WriteAttributeString("text:style-name", "MT3");
-                _writer.WriteStartElement("text:page-number");
-                _writer.WriteAttributeString("text:select-page", "current");
-                _writer.WriteString("4");
-                _writer.WriteEndElement();
-                _writer.WriteEndElement();
+		        _writer.WriteStartElement("text:span");
+		        _writer.WriteAttributeString("text:style-name", "MT3");
+		        _writer.WriteStartElement("text:page-number");
+		        _writer.WriteAttributeString("text:select-page", "current");
+		        _writer.WriteString("4");
+		        _writer.WriteEndElement();
+		        _writer.WriteEndElement();
             }
         }
-
-
 
         private void CreateRightGuideword(int i)
         {
@@ -2114,7 +2145,7 @@ namespace SIL.PublishingSolution
                 else
                     SetPageNumber();
                 //TD-2825 This will work for right page alone
-                if (i == 18)                    //if page no is topLeft, leftguideword will be created topRight with 2 Tabs
+                if (i == 18 && _isCenterTabStopNeeded)                    //if page no is topLeft, leftguideword will be created topRight with 2 Tabs
                     CreateLeftGuideword(20);
                 else if (i == 19)               //if page no is topCenter, leftguideword will be created topRight with 1 Tab
                     CreateLeftGuideword(19);
