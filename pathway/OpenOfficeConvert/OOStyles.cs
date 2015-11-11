@@ -1853,7 +1853,7 @@ namespace SIL.PublishingSolution
 
 	    private void CreateVariableForTitle(int i)
 	    {
-			var pageCenterVariable = string.Empty;
+			string pageCenterVariable = string.Empty;
 		    if (isMirrored)
 		    {
 			    if (_cssProperty.ContainsKey("@page:left-top-center") &&
