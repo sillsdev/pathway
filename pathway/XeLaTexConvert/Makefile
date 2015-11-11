@@ -24,17 +24,13 @@ build:
 	cp -r $(binsrc)/../BuildPathway/Files/pwtex/* $(bindst)
 
 install:
-	sudo mkdir -p $(DESTDIR)$(prefix)$(bininst)
-	sudo cp -r bin/. $(DESTDIR)$(prefix)$(bininst)
-	sudo mkdir -p $(DESTDIR)$(prefix)/share/doc/pathway-xelatex
-	sudo chmod 777 $(DESTDIR)$(prefix)/share/doc/pathway-xelatex
-	sudo mkdir -p $(DESTDIR)$(prefix)/share/pwtex
-	sudo chmod 777 $(DESTDIR)$(prefix)/share/pwtex
-	sudo cp -r debian/pathwayXelatexRegistryKeys.sh $(DESTDIR)$(prefix)/share/pwtex/pathwayXelatexRegistryKeys.sh
-	sudo mkdir -p $(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX
-	sudo chmod 777 $(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX
-	sudo python -c 'print "<values><value name=\"XeLaTexDir\" type=\"string\">/usr$(bininst)/</value><value name=\"XeLaTexVer\" type=\"string\">$(BUILD_NUMBER)</value></values>"' >$(DESTDIR)$(prefix)/share/pwtex/pathwayXelatexValues.xml
-	sudo cp $(DESTDIR)$(prefix)/share/pwtex/pathwayXelatexValues.xml $(DESTDIR)/etc/mono/registry/LocalMachine/software/sil/PathwayXeLaTeX/values.xml
+	mkdir -p $(DESTDIR)$(prefix)$(bininst)
+	cp -r bin/. $(DESTDIR)$(prefix)$(bininst)
+	mkdir -p $(DESTDIR)$(prefix)/share/doc/pathway-xelatex
+	chmod 777 $(DESTDIR)$(prefix)/share/doc/pathway-xelatex
+	mkdir -p $(DESTDIR)$(prefix)/share/pwtex
+	chmod 777 $(DESTDIR)$(prefix)/share/pwtex
+	cp -r debian/pathwayXelatexRegistryKeys.sh $(DESTDIR)$(prefix)/share/pwtex/pathwayXelatexRegistryKeys.sh
 
 binary:
 	exit 0

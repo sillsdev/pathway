@@ -363,7 +363,7 @@
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=PwCtx;Platform=$(Platform)"/>
   </Target>
-  <Target Name="PathwayXeLaTeX" DependsOnTargets="TlGetInstaller;TlInstall">
+  <Target Name="PathwayXeLaTeX" DependsOnTargets="">
     <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
       Properties="Configuration=PathwayXeLaTeX;Platform=$(Platform)"/>
   </Target>
