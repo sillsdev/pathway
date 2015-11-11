@@ -1080,7 +1080,7 @@ namespace SIL.PublishingSolution
 	    private void SetPageTopCenter(Dictionary<string, string> value)
 	    {
 	        value.Clear();
-	        value["content"] = "\"" + _TitleText + "\"";
+	        value["content"] = "\"HeaderTitleLable\"";
             string fontSize = cTool.DdlHeaderFontSize.SelectedItem.ToString();
 	        if (Regex.IsMatch(cTool.DdlHeaderFontSize.SelectedItem.ToString(), @"^\d+$"))
 	        {

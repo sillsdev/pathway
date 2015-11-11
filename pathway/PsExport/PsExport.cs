@@ -94,6 +94,7 @@ namespace SIL.PublishingSolution
                 }
                 string cssFullName = GetCssFullName(outDir, mainFullName);
                 if (cssFullName == null) return;
+                SetPageCenterTitle(cssFullName, DataType);
                 _selectedCssFromTemplate = Path.GetFileNameWithoutExtension(cssFullName);
                 string fluffedCssFullName;
                 string revFileName = string.Empty;
@@ -172,6 +173,45 @@ namespace SIL.PublishingSolution
                     pb.Close();
                 }
             }
+        }
+
+        /// <summary>
+        /// The constant "HeaderTitleLable" will replaced by the Title text in the DictionarySettingsXmlFIle.
+        /// </summary>
+        /// <param name="cssFullName">Css file before export</param>
+        /// <param name="dataType">Dictionary/Scripture</param>
+        private static void SetPageCenterTitle(string cssFullName, string DataType)
+        {
+            if (DataType == "Scripture") return;
+            var fs = new FileStream(cssFullName, FileMode.Open);
+            var stream = new StreamReader(fs);
+            string fileDir = Path.GetDirectoryName(cssFullName);
+            string fileName = "Preserve" + Path.GetFileName(cssFullName);
+            string modifiedFile = Common.PathCombine(fileDir, fileName);
+
+            var fs2 = new FileStream(modifiedFile, FileMode.Create, FileAccess.Write);
+            var sw2 = new StreamWriter(fs2);
+            string line, prevLine = string.Empty;
+            while ((line = stream.ReadLine()) != null)
+            {
+                if (prevLine.IndexOf("@top-center{") == 0 &&   line.IndexOf("content:") == 0)
+                {
+                    const string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
+                    string titleText = Param.GetItem(titlePath).InnerText;
+                    line = line.Replace(line, "content:\"" + titleText + "\";");
+                    sw2.WriteLine(line);
+                }
+                else
+                {
+                    sw2.WriteLine(line);
+                }
+                prevLine = line;
+            }
+            sw2.Close();
+            fs.Close();
+            fs2.Close();
+            File.Copy(modifiedFile, cssFullName, true);
+            File.Delete(modifiedFile);
         }
 
         /// <summary>
