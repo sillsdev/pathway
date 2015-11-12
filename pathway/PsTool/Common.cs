@@ -1738,7 +1738,20 @@ namespace SIL.Tool
 		public static string GetHeaderFontSize(Dictionary<string, Dictionary<string, string>> _cssProperty) //TD-2815
 		{
 			string headerFontSize = "12";
-			if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-size"))
+			if (_cssProperty.ContainsKey("@page") && _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
+			{
+				if (_cssProperty.ContainsKey("@page:left-top-center") &&
+						_cssProperty["@page:left-top-center"].ContainsKey("font-size"))
+				{
+					headerFontSize = _cssProperty["@page:left-top-center"]["font-size"];
+				}
+				else if (_cssProperty.ContainsKey("@page-top-center") &&
+				_cssProperty["@page-top-center"].ContainsKey("font-size"))
+				{
+					headerFontSize = _cssProperty["@page-top-center"]["font-size"];
+				}
+			}
+			else if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-size"))
 			{
 				headerFontSize = _cssProperty["entry"]["font-size"];
 			}
