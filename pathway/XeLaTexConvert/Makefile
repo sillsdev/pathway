@@ -11,14 +11,14 @@ ifndef bininst
 bininst=/lib/pwtex
 endif
 ifndef target
-target=XeLaTexBeforeBuild
+target=ReBuild
 endif
 ifndef BUILD_NUMBER
 BUILD_NUMBER=1.5.0.2445
 endif
 
 build:
-	xbuild /target:XeLaTexBeforeBuild /property:BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux ../BuildPathway/BuildPathway.csproj
+	xbuild /target:$(target) /property:Configuration=PathwayXeLaTeX\;BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux ../PublishingSolution.sln
 	rm -r -f $(bindst)
 	mkdir $(bindst)
 	cp -r $(binsrc)/../BuildPathway/Files/pwtex/* $(bindst)
@@ -40,7 +40,7 @@ tlsetup:
 	xbuild /target:TlInstall /property:OS=Linux ../BuildPathwaySprint.csproj
 
 clean:
-	xbuild /target:Clean ../BuildPathwaySprint.csproj
+	rm -rf bin ../pathway-xelatex* ../BuildPathway/Files ../*/bin ../*/obj debian/pathway-xelatex
 
 uninstall:
 	-sudo apt-get -y purge pathway-xelatex
