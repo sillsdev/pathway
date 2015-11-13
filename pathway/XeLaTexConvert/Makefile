@@ -36,8 +36,7 @@ binary:
 	exit 0
 
 tlsetup:
-	xbuild /target:TlGetInstaller /property:OS=Linux ../BuildPathwaySprint.csproj
-	xbuild /target:TlInstall /property:OS=Linux ../BuildPathwaySprint.csproj
+	xbuild /t:TlGetInstaller\;TlInstall /property:OS=Linux\;OutputPath=. ../BuildPathwaySprint.csproj
 
 clean:
 	rm -rf bin ../pathway-xelatex* ../BuildPathway/Files ../*/bin ../*/obj debian/pathway-xelatex
