@@ -63,6 +63,7 @@ namespace SIL.PublishingSolution
 	            }
                 //EnableHyphenation();
                 GetGuidewordLength(cssProperty);
+                GetHeaderRule();
                 InitializeObject(outputFile); // Creates new Objects
                 LoadAllProperty();  // Loads all properties
                 LoadSpellCheck();
@@ -79,6 +80,26 @@ namespace SIL.PublishingSolution
                 Console.Write(ex.Message);
             }
             return _LOAllClass;
+        }
+
+        /// <summary>
+        /// Get the Header rule values based on selection from the Dropdown in the ConfigurationTool Window
+        /// </summary>
+        private void GetHeaderRule()
+        {
+            if (!string.IsNullOrEmpty(HeaderRule) || !_cssProperty.ContainsKey("letHead")) return;
+            if (_cssProperty["letHead"].ContainsKey("border-bottom-width"))
+            {
+                HeaderRule = _cssProperty["letHead"]["border-bottom-width"];
+            }
+            if (_cssProperty["letHead"].ContainsKey("border-bottom-style"))
+            {
+                HeaderRule = HeaderRule + " " + _cssProperty["letHead"]["border-bottom-style"];
+            }
+            if (_cssProperty["letHead"].ContainsKey("border-bottom-color"))
+            {
+                HeaderRule = HeaderRule + " " + _cssProperty["letHead"]["border-bottom-color"];
+            }
         }
 
         /// <summary>
