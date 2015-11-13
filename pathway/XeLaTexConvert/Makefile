@@ -18,7 +18,7 @@ BUILD_NUMBER=1.5.0.2445
 endif
 
 build:
-	xbuild /target:$(target) /property:Configuration=PathwayXeLaTeX\;BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux ../PublishingSolution.sln
+	xbuild /target:XeLaTexBeforeBuild /property:Configuration=PathwayXeLaTeX\;BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux\;OutputPath=. ../BuildPathway/BuildPathway.csproj
 	rm -r -f $(bindst)
 	mkdir $(bindst)
 	cp -r $(binsrc)/../BuildPathway/Files/pwtex/* $(bindst)
