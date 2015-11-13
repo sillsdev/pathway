@@ -513,16 +513,10 @@
     <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
     <Exec Command="mktexlsr ..\..\texmf-dist" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="i386-linux" Condition="$(Platform) == 'x86'">
-      <Output TaskParameter="Folders" ItemName="bdir" />
-    </MSBuild.ExtensionPack.FileSystem.Folder>
-    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
-    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
-    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="..\XeLaTexConvert/XeLaTexExe/bin" Match="x86_64-linux" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'">
-      <Output TaskParameter="Folders" ItemName="bdir" />
-    </MSBuild.ExtensionPack.FileSystem.Folder>
-    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
-    <Exec Command="cd %(bdir.Identity); ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/i386-linux; ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/i386-linux; ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/x86_64-linux; ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/x86_64-linux; ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
   </Target>
   <ItemGroup>
     <XeLaTexExe Include="..\XeLaTexConvert\XeLaTexExe\**\*.*" />
