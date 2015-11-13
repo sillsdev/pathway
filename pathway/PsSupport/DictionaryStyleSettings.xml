@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="37">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="38">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -100,14 +100,14 @@
       <option name="No Change" file="Font_Size_nc.css" />
     </feature>
 	<feature name="Header Size">
-      <option name="14" />
-      <option name="12" />
-      <option name="11" />
-      <option name="10" />
-      <option name="9" />
-      <option name="8" />
-      <option name="Same as body" />
-	  <option name="Same as headword" />
+	  <option name="14"  file="Font_Size_nc.css" />
+	  <option name="12"  file="Font_Size_nc.css" />
+	  <option name="11"  file="Font_Size_nc.css" />
+	  <option name="10"  file="Font_Size_nc.css" />
+	  <option name="9" file="Font_Size_nc.css" />
+	  <option name="8" file="Font_Size_nc.css" />
+	  <option name="Same as body" file="Font_Size_nc.css" />
+	  <option name="Same as headword" file="Font_Size_nc.css" />
     </feature>
     <feature name="Headword Size">
       <option name="14" file="Headword_Size_14.css" />
