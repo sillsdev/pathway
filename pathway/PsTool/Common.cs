@@ -1750,6 +1750,13 @@ namespace SIL.Tool
 				{
 					headerFontSize = _cssProperty["@page-top-center"]["font-size"];
 				}
+				if (string.IsNullOrEmpty(headerFontSize))
+				{
+					if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-size"))
+					{
+						headerFontSize = _cssProperty["entry"]["font-size"];
+					}
+				}
 			}
 			else if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-size"))
 			{
@@ -4640,7 +4647,7 @@ namespace SIL.Tool
 					var doc = new XmlDocument();
 					doc.LoadXml(content);
 					var node = doc.SelectSingleNode("//string");
-                    return (node != null && node.InnerText.Trim().Length > 0) ? node.InnerText : "en";
+					return (node != null && node.InnerText.Trim().Length > 0) ? node.InnerText : "en";
 				}
 				else
 				{
