@@ -585,7 +585,7 @@ namespace SIL.Tool
             var folder = Path.GetDirectoryName(SettingOutputPath);
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
-            var writer = new XmlTextWriter(SettingOutputPath, Encoding.Unicode);
+            var writer = new XmlTextWriter(SettingOutputPath, Encoding.UTF8);
             writer.Formatting = Formatting.Indented;
             xmlMap.Save(writer);
             writer.Close();
