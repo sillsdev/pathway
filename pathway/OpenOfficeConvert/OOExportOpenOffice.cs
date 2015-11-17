@@ -616,6 +616,7 @@ namespace SIL.PublishingSolution
             metaXML.CreateMeta(projInfo);
             // BEGIN Generate Content.Xml File 
             var cXML = new LOContent();
+            preProcessor.MovePictureAsLastChild(preProcessor.ProcessedXhtml);
             preProcessor.ImagePreprocess(false);
             preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
             if (projInfo.SwapHeadword)

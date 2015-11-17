@@ -2412,16 +2412,13 @@ namespace SIL.Tool
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(fileName);
-            string xPath = "//xhtml:div[@class='entry']";
+            string xPath = "//div[@class='entry']/div[@class= 'pictureRight']";
             XmlNodeList entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
             if (entryNodeList == null) return;
             for (int i = 0; i < entryNodeList.Count; i++)
             {
-                XmlNode firstNode = entryNodeList[i].FirstChild;
-                if (firstNode.Attributes != null && firstNode.Attributes["class"].Value.ToLower() == "pictureright")
-                {
-                    entryNodeList[i].InsertAfter(firstNode, entryNodeList[i].LastChild);
-                }
+                XmlNode entryNode = entryNodeList[i].ParentNode;
+                if (entryNode != null) entryNode.InsertAfter(entryNodeList[i], entryNode.LastChild);
             }
             xDoc.Save(fileName);
         }
