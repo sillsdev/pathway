@@ -57,7 +57,8 @@ namespace SIL.PublishingSolution
                 _isFromExe = Common.CheckExecutionPath();
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
-	            if (Param.HyphenEnable)
+                HandleSubEntryIndent();
+                if (Param.HyphenEnable)
 	            {
 		            IsHyphenEnabled = true;
 	            }
@@ -80,6 +81,26 @@ namespace SIL.PublishingSolution
                 Console.Write(ex.Message);
             }
             return _LOAllClass;
+        }
+
+        /// <summary>
+        /// For TD-4471, For temporary solution provided till new version of Fieldworks released
+        /// After testing, we can remove this method, this issue is margin-left for entry and subentry are same, but is shouldn't.
+        /// </summary>
+        private void HandleSubEntryIndent()
+        {
+            if (_cssProperty.ContainsKey("subentry") && _cssProperty["subentry"].ContainsKey("class-margin-left"))
+            {
+                if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("class-margin-left"))
+                {
+                    string subEntrySize = _cssProperty["subentry"]["class-margin-left"];
+                    string entrySize = _cssProperty["entry"]["class-margin-left"];
+                    if (subEntrySize == entrySize)
+                    {
+                        _cssProperty["entry"]["class-margin-left"] = "0";
+                    }
+                }
+            }
         }
 
         /// <summary>
