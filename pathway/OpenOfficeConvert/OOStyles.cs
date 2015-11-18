@@ -2956,9 +2956,14 @@ namespace SIL.PublishingSolution
             {
                 ht = "fo:min-height";
             }
-            if (index == 15)
-                height = "10.8pt";
-            _writer.WriteAttributeString("fo:margin-bottom", space); //Spacing
+	        if (index == 15)
+	        {
+				if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+					height = "15.84pt";
+				else
+					height = "10.8pt";
+	        }
+	        _writer.WriteAttributeString("fo:margin-bottom", space); //Spacing
             _writer.WriteAttributeString(ht, height); //Height
             _writer.WriteAttributeString("fo:margin-left", "0pt");
             _writer.WriteAttributeString("fo:margin-right", "0pt");
