@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -57,7 +58,8 @@ namespace SIL.PublishingSolution
                 _isFromExe = Common.CheckExecutionPath();
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
-                HandleSubEntryIndent();
+				HandleSubEntryIndent();
+                HandleMexioStyleSheet();
                 if (Param.HyphenEnable)
 	            {
 		            IsHyphenEnabled = true;
@@ -84,11 +86,42 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
+        /// Header center values should be added for Mexico standard stylesheet,
+        /// </summary>
+        private void HandleMexioStyleSheet()
+        {
+            if (_projInfo.ProjectInputType.ToLower()!= "dictionary") return;
+            if (_projInfo._selectedTemplateStyle.ToLower() == "layout_16" && _cssProperty.ContainsKey("@page") &&
+                _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
+            {
+                const string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
+                string headerText = Param.GetItem(titlePath).InnerText;
+                string headerFontSize = "10pt";
+                string[] pageDir = { "@page:left-top-center", "@page:right-top-center" };
+                if (_cssProperty.ContainsKey("headword") && _cssProperty["headword"].ContainsKey("font-size"))
+                {
+                    headerFontSize = _cssProperty["entry"]["font-size"];
+                }
+
+                for (int i = 0; i < pageDir.Count(); i++)
+                {
+                    if (_cssProperty.ContainsKey(pageDir[i]))
+                    {
+                        _cssProperty[pageDir[i]]["content"] = headerText;
+                        _cssProperty[pageDir[i]]["font-size"] = headerFontSize;
+                        _cssProperty[pageDir[i]]["font-weight"] = "bold";
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// For TD-4471, For temporary solution provided till new version of Fieldworks released
         /// After testing, we can remove this method, this issue is margin-left for entry and subentry are same, but is shouldn't.
         /// </summary>
         private void HandleSubEntryIndent()
         {
+            if (_projInfo.ProjectInputType.ToLower() != "dictionary") return;
             if (_cssProperty.ContainsKey("subentry") && _cssProperty["subentry"].ContainsKey("class-margin-left"))
             {
                 if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("class-margin-left"))
