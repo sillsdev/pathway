@@ -94,7 +94,7 @@ namespace SIL.PublishingSolution
                 }
                 string cssFullName = GetCssFullName(outDir, mainFullName);
                 if (cssFullName == null) return;
-                SetPageCenterTitle(cssFullName);
+				SetPageCenterTitle(cssFullName, DataType);
                 _selectedCssFromTemplate = Path.GetFileNameWithoutExtension(cssFullName);
                 string fluffedCssFullName;
                 string revFileName = string.Empty;
@@ -179,11 +179,19 @@ namespace SIL.PublishingSolution
         /// The constant "HeaderTitleLable" will replaced by the Title text in the DictionarySettingsXmlFIle.
         /// </summary>
         /// <param name="cssFullName">Css file before export</param>
-        private static void SetPageCenterTitle(string cssFullName)
+        private static void SetPageCenterTitle(string cssFullName, string exportType)
         {
+			if (exportType == "Scripture")
+			{
+				return;
+			}
+
             string fileDir = Path.GetDirectoryName(cssFullName);
             string fileName = Path.GetFileName(cssFullName);
-            if (fileName != null && fileName.IndexOf("Layout", System.StringComparison.Ordinal) == 0) return; //For PathwayB Test fail
+			
+	        if (fileName != null && fileName.IndexOf("Layout", System.StringComparison.Ordinal) == 0) 
+				return; //For PathwayB Test fail
+
             fileName = "Preserve" + fileName;
             var fs = new FileStream(cssFullName, FileMode.Open);
             var stream = new StreamReader(fs);
