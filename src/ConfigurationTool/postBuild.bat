@@ -5,7 +5,7 @@ set base2=..\..\..\..
 set cfg2=bin\x86\%1
 :anyCpu
 xcopy %base2%\ThirdParty\gsdll32.dll . /y
-xcopy %base2%\PsSupport\epubcheck-3.0.1\* .\epubcheck-3.0.1  /i /s /q /y
+xcopy %base2%\..\DistFiles\epubcheck-3.0.1\* .\epubcheck-3.0.1  /i /s /q /y
 xcopy %base2%\LiftPrepare\Lib\PalasoLib\*.dll . /y
 xcopy %base2%\HelpImprove\%cfg2%\HelpImprove.* . /y
 xcopy %base2%\PathwayB\%cfg2%\PathwayB.* . /y
@@ -43,7 +43,7 @@ xcopy %base2%\theWordConvert\%cfg2%\Devart*.* . /y
 xcopy %base2%\ThirdParty\sqlite3.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\*.xml . /y
 xcopy %base2%\ParatextSupport\%cfg2%\ParatextSupport.* . /y
-xcopy %base2%\PsSupport\ScriptureStyleSettings.xml . /q /y
+xcopy %base2%\..\DistFiles\ScriptureStyleSettings.xml . /q /y
 rem xcopy %base2%\BuildPathway\HelpBTE\* .\Help /i /s /q /y
 goto endBible
 :nogobible
@@ -59,26 +59,26 @@ rem xcopy %base2%\BuildPathway\HelpSE\* .\Help /i /s /q /y
 
 if exist styles rmdir styles /s /q
 mkdir Styles
-xcopy %base2%\PsSupport\Styles .\Styles  /i /s /q /y
-xcopy %base2%\PsSupport\Icons .\Icons  /i /s /q /y
-xcopy %base2%\PsSupport\Graphic .\Graphic  /i /s /q /y
-xcopy %base2%\PsSupport\Loc .\Loc  /i /s /q /y
-xcopy %base2%\PsSupport\Samples .\Samples  /i /s /q /y
-xcopy %base2%\PsSupport\DictionaryForMIDs .\DictionaryForMIDs  /i /s /q /y
+xcopy %base2%\..\DistFiles\Styles .\Styles  /i /s /q /y
+xcopy %base2%\..\DistFiles\Icons .\Icons  /i /s /q /y
+xcopy %base2%\..\DistFiles\Graphic .\Graphic  /i /s /q /y
+xcopy %base2%\..\DistFiles\Loc .\Loc  /i /s /q /y
+xcopy %base2%\..\DistFiles\Samples .\Samples  /i /s /q /y
+xcopy %base2%\..\DistFiles\DictionaryForMIDs .\DictionaryForMIDs  /i /s /q /y
 
 mkdir Help
 xcopy %base2%\Build\Installer\Pathway*.chm .\Help /i /s /q /y
 
-xcopy %base2%\PsSupport\DictionaryStyleSettings.xml . /q /y
-xcopy %base2%\PsSupport\StyleSettings.xml . /q /y
-xcopy %base2%\PsSupport\StyleSettings.xsd . /q /y
+xcopy %base2%\..\DistFiles\DictionaryStyleSettings.xml . /q /y
+xcopy %base2%\..\DistFiles\StyleSettings.xml . /q /y
+xcopy %base2%\..\DistFiles\StyleSettings.xsd . /q /y
 
 
 rem for preview
-xcopy %base2%\PsSupport\previewdll\* . /i /s /q /y
-xcopy %base2%\PsSupport\*.xhtml . /i /s /q /y
+xcopy %base2%\..\DistFiles\previewdll\* . /i /s /q /y
+xcopy %base2%\..\DistFiles\*.xhtml . /i /s /q /y
 
 if exist styles rmdir OfficeFiles /s /q
 mkdir OfficeFiles
 
-xcopy %base2%\PsSupport\OfficeFiles .\OfficeFiles  /i /s /q /y
+xcopy %base2%\..\DistFiles\OfficeFiles .\OfficeFiles  /i /s /q /y

@@ -53,7 +53,7 @@ namespace Test.CssDialog
             CommonTestMethod.DisableDebugAsserts();
             string currentFolder = PathPart.Bin(Environment.CurrentDirectory, "/CssDialog/TestFiles");
             _inputBasePath = Common.PathCombine(currentFolder, "Input");
-            _supportPath = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
+            _supportPath = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles");
             _publishingSolutionsData = Common.GetAllUserPath();
         }
 

@@ -63,7 +63,7 @@ namespace Test.UIConfigurationToolTest
             }
             Directory.CreateDirectory(_outputBasePath);
 
-            _supportSource = Common.DirectoryPathReplace(testPath + "/../../../PsSupport");
+            _supportSource = Common.DirectoryPathReplace(testPath + "/../../../../DistFiles");
 
             string fileName = "DictionaryStyleSettings.xml";
             CopyFilesSupportToIO(fileName);

@@ -45,7 +45,7 @@ namespace Test.epubConvert
         public void Setup()
         {
             _isUnix = Common.IsUnixOS();
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
             Common.Testing = true;

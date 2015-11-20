@@ -58,7 +58,7 @@ namespace Test.UIConfigurationToolBLTest
                 Common.CleanDirectory(di);
             }
             Directory.CreateDirectory(_outputBasePath);
-            _supportSource = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
+            _supportSource = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles");
 
             string folderName = "Graphic";
             CopyFolderSupportToIO(folderName);

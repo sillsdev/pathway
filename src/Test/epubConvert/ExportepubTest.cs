@@ -44,7 +44,7 @@ namespace Test.epubConvert
         [TestFixtureSetUp]
         public void Setup()
         {
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
             Common.Testing = true;

@@ -42,7 +42,7 @@ namespace Test.ParatextSupport
         [TestFixtureSetUp]
         public void Setup()
         {
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ParatextSupport/TestFiles");

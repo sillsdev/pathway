@@ -31,7 +31,7 @@ namespace Test.PsTool
         protected void SetUp()
         {
             Common.SupportFolder = "";
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.Testing = true;
         }
 

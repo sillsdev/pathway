@@ -65,7 +65,7 @@ namespace Test.InDesignConvert
             projInfo.TempOutputFolder = _outputPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
             Common.SupportFolder = "";
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles");
             Common.CopyFolderandSubFolder(_expectedPath, _outputPath, true);
         }
 

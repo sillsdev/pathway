@@ -134,7 +134,7 @@ xcopy %SRC%\PsExport.pdb "%DST%" /y
 xcopy %SRC%\PsTool.pdb "%DST%" /y
 
 :nopdb
-xcopy %BASE%\PsSupport\*.* "%DST%" /s /q /y
+xcopy %BASE%\..\DistFiles\*.* "%DST%" /s /q /y
 xcopy %BASE%\XslProcess%cfg%\XslProcess.* "%DST%" /q /y
 xcopy %BASE%\XeTex\xetexExe "%DST%\xetexExe" /i /s /q /y
 
@@ -150,11 +150,11 @@ xcopy %BASE%\BuildPathway\UtilityCatalogIncludePublishingSolution.xml "%FW_HOME%
 :noFw
 
 if not exist "%USERPROFILE%\Application Data\Adobe\InDesign\Version 6.0\en_US\Scripts" goto notxp
-xcopy %BASE%\PsSupport\InDesignFiles\Dictionary\Scripts "%USERPROFILE%\Application Data\Adobe\InDesign\Version 6.0\en_US\Scripts" /s/y
+xcopy %BASE%\..\DistFiles\InDesignFiles\Dictionary\Scripts "%USERPROFILE%\Application Data\Adobe\InDesign\Version 6.0\en_US\Scripts" /s/y
 
 :notxp
 if not exist "%USERPROFILE%\AppData\Roaming\Adobe\InDesign\Version 6.0\en_US\Scripts" goto not7
-xcopy %BASE%\PsSupport\InDesignFiles\Dictionary\Scripts "%USERPROFILE%\AppData\Roaming\Adobe\InDesign\Version 6.0\en_US\Scripts" /s/y
+xcopy %BASE%\..\DistFiles\InDesignFiles\Dictionary\Scripts "%USERPROFILE%\AppData\Roaming\Adobe\InDesign\Version 6.0\en_US\Scripts" /s/y
 
 :not7
 :done

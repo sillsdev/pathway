@@ -85,8 +85,8 @@ namespace Test.OpenOfficeConvert
             _projInfo.IsFrontMatterEnabled = false;
             _projInfo.FinalOutput = "odt";
             Common.SupportFolder = "";
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
-            Common.ProgBase = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport"); // for masterDocument
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFIles");
+            Common.ProgBase = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles"); // for masterDocument
             _styleFile = "styles.xml";
             _contentFile = "content.xml";
             _isLinux = Common.IsUnixOS();

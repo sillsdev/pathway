@@ -349,7 +349,7 @@
                 <include name="**"/>
             </fileset>
         </copy>
-        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="PsSupport\FieldworksVersions.txt" overwrite="true"/>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
     </target>
 
     <target name="Set605">
@@ -358,7 +358,7 @@
                 <include name="**"/>
             </fileset>
         </copy>
-        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="PsSupport\FieldworksVersions.txt" overwrite="true"/>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
     </target>
     
     <target name="Set604">
@@ -367,7 +367,7 @@
                 <include name="**"/>
             </fileset>
         </copy>
-        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="PsSupport\FieldworksVersions.txt" overwrite="true"/>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
     </target>
     
     <target name="Set603">
@@ -376,7 +376,7 @@
                 <include name="**"/>
             </fileset>
         </copy>
-        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="PsSupport\FieldworksVersions.txt" overwrite="true"/>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
     </target>
     
     <target name="Set602">
@@ -385,7 +385,7 @@
                 <include name="**"/>
             </fileset>
         </copy>
-        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="PsSupport\FieldworksVersions.txt" overwrite="true"/>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
     </target>
     
     <target name="Set601">
@@ -394,7 +394,7 @@
                 <include name="**"/>
             </fileset>
         </copy>
-        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="PsSupport\FieldworksVersions.txt" overwrite="true"/>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
     </target>
     
     <target name="Clean60">

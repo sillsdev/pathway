@@ -395,7 +395,7 @@ namespace TestBed
 
         private void FlexPluginTest_Load(object sender, EventArgs e)
         {
-            var supportFolder = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport");
+            var supportFolder = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles");
             FolderTree.Copy(supportFolder, ".");
            // LocalizationSetup();
         }

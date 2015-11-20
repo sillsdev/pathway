@@ -57,7 +57,7 @@ namespace Test.OpenOfficeConvert
             _outputPath = Common.PathCombine(testPath, "output");
             Common.PathCombine(testPath, "expected");
             Common.SupportFolder = "";
-            Common.ProgInstall = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../../PsSupport");
+            Common.ProgInstall = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../../../DistFiles");
             projInfo.ProjectInputType = "Dictionary";
 
 

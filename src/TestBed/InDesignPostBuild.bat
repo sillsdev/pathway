@@ -1,3 +1,3 @@
-if exist PsSupport rmdir PsSupport /s /q
-xcopy ..\..\..\PsSupport . /i /s /y
+if exist DistFiles rmdir DistFiles /s /q
+xcopy ..\..\..\..\..\DistFiles . /i /s /y
 

@@ -72,7 +72,7 @@ sudo cp $SRCDIR/PathwayB/$builddir/* $outdir
 sudo cp $SRCDIR/PdfConvert/$builddir/* $outdir
 # sudo cp $SRCDIR/PrincessConvert/$builddir/* $outdir
 sudo cp $SRCDIR/PsExport/$builddir/* $outdir
-sudo cp -r $SRCDIR/PsSupport/* $outdir
+sudo cp -r $SRCDIR/../DistFiles/* $outdir
 sudo cp $SRCDIR/PsTool/$builddir/* $outdir
 sudo cp $SRCDIR/SwordConvert/$builddir/* $outdir
 sudo cp $SRCDIR/theWordConvert/$builddir/* $outdir

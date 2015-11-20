@@ -5,7 +5,7 @@ cd ..
 :rightLoc
 rem requires Python 2.5 (www.python.org) with modules Py2Exe, lxml
 python setup.py
-set dst=..\PsSupport\Wordpress
+set dst=..\..\DistFiles\Wordpress
 if not exist %dst% mkdir %dst%
 copy dist\*.* %dst%\*.*
 copy *.htt %dst%

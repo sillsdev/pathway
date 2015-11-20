@@ -47,7 +47,7 @@ namespace Test.XeLatex
         protected void SetUpAll()
         {
             Common.Testing = true;
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
             _isLinux = Common.IsUnixOS();

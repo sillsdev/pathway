@@ -65,7 +65,7 @@ namespace Test.PsTool
             if (Directory.Exists(_outputBasePath))
                 Directory.Delete(_outputBasePath, true);
             Directory.CreateDirectory(_outputBasePath);
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.Testing = true;
         }
 
@@ -414,7 +414,7 @@ namespace Test.PsTool
         [Test]
         public void GetPSApplicationPathTest()
         {
-            string expected = PathPart.Bin(Environment.CurrentDirectory, "/../PsSupport"); 
+            string expected = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles"); 
             string actual = Common.GetPSApplicationPath();
             Assert.AreEqual(expected, actual);
         }

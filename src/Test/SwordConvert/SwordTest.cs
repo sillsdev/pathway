@@ -37,7 +37,7 @@ namespace Test.SwordConvert
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
             Common.Testing = true;

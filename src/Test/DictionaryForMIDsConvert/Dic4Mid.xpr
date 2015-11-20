@@ -205,7 +205,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>../git/pathway/pathway/PsSupport/Preprocessing/Scripture/Remove%20Empty%202Chapters.xsl</String>
+                                    <String>../git/pathway/DistFiles/Preprocessing/Scripture/Remove%20Empty%202Chapters.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -220,7 +220,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>../git/pathway/pathway/PsSupport/Preprocessing/Scripture/Remove%20Empty%201Verses.xsl</String>
+                                    <String>../git/pathway/DistFiles/Preprocessing/Scripture/Remove%20Empty%201Verses.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -235,7 +235,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>../git/pathway/pathway/PsSupport/Preprocessing/Scripture/Remove%20Empty%20Verses.xsl</String>
+                                    <String>../git/pathway/DistFiles/Preprocessing/Scripture/Remove%20Empty%20Verses.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>

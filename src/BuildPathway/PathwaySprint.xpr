@@ -25,7 +25,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>../PsSupport/RemoveEmptyDiv.xsl</String>
+                                    <String>../../DistFiles/RemoveEmptyDiv.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>

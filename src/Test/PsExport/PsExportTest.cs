@@ -59,7 +59,7 @@ namespace Test.PsExport
             //DoBatch("ConfigurationTool", "postBuild.bat", "Debug");
             //Common.ProgInstall = Environment.CurrentDirectory.Replace("Test", "ConfigurationTool");
             Common.ProgInstall = Environment.CurrentDirectory;
-            //FolderTree.Copy(Common.PathCombine(testPath, "../../../PsSupport/OfficeFiles"),Common.PathCombine(Common.ProgInstall,"OfficeFiles"));
+            //FolderTree.Copy(Common.PathCombine(testPath, "../../../../DistFiles/OfficeFiles"),Common.PathCombine(Common.ProgInstall,"OfficeFiles"));
             Backend.Load(Common.ProgInstall);
         }
 
@@ -124,7 +124,7 @@ namespace Test.PsExport
 
         private static string TestDataSetup(string test, string data)
         {
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../PsSupport");
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
             TestPathSetup(test);
