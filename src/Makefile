@@ -22,7 +22,7 @@ build:
 	xbuild /target:$(target) /property:BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux BuildPathwaySprint.csproj
 	rm -r -f $(bindst)
 	mkdir $(bindst)
-	cp -r $(binsrc)/BuildPathway/Files/ConfigurationTool/* $(bindst)
+	cp -r $(binsrc)/../Installer/Files/ConfigurationTool/* $(bindst)
 
 compile:
 	xbuild /target:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform=Any\ CPU\;OS=Linux PublishingSolution.sln

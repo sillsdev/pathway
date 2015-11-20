@@ -709,12 +709,12 @@
     <Graphic Include="..\..\DistFiles\Graphic\**\*.*" />
     <Loc Include="..\..\DistFiles\localizations\**\*.*" />
     <Preprocessing Include="..\..\DistFiles\Preprocessing\**\*.*" />
-    <BteHelp Include="..\BuildPathway\Pathway_Configuration_Tool_BTE.chm" />
-    <SeHelp Include="..\BuildPathway\Pathway_Configuration_Tool_SE.chm" />
-    <BteStudent Include="..\BuildPathway\Pathway_Student_Manual_BTE.doc" />
-    <SeStudent Include="..\BuildPathway\Pathway_Student_Manual_SE.doc" />
-    <License Include="..\BuildPathway\License.rtf" />
-    <Readme Include="..\BuildPathway\ReadMePw.rtf" />
+    <BteHelp Include="..\..\Installer\Pathway_Configuration_Tool_BTE.chm" />
+    <SeHelp Include="..\..\Installer\Pathway_Configuration_Tool_SE.chm" />
+    <BteStudent Include="..\..\Installer\Pathway_Student_Manual_BTE.doc" />
+    <SeStudent Include="..\..\Installer\Pathway_Student_Manual_SE.doc" />
+    <License Include="..\..\Installer\License.rtf" />
+    <Readme Include="..\..\Installer\ReadMePw.rtf" />
     <AllSettings Include="..\..\DistFiles\DictionaryStyleSettings.xml" />
     <AllSettings Include="..\..\DistFiles\StyleSettings.xml" />
     <AllSettings Include="..\..\DistFiles\StyleSettings.xsd" />
@@ -742,7 +742,7 @@
     <WordpressFiles Include="..\..\DistFiles\Wordpress\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
     <XetexFiles Include="..\..\DistFiles\xetexPathway\**\*.*" />
-    <WixSoftware Include="..\BuildPathway\WixSoftware\**\*.*" />
+    <WixSoftware Include="..\..\Installer\WixSoftware\**\*.*" />
     <UsfmConvert Include="..\..\lib\ParatextShared.dll;..\..\lib\NetLoc.dll" />
   </ItemGroup>
   <ItemGroup>

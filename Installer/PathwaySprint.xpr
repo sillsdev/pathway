@@ -224,7 +224,7 @@
         </options>
     </meta>
     <projectTree name="PathwaySprint.xpr">
-        <file name="BuildPathway.csproj"/>
+        <file name="Installer.csproj"/>
         <file name="../BuildPathwaySprint.csproj"/>
         <file name="../BuildTasks/BuildTasks.csproj"/>
         <file name="FeaturesPw7-tpl.wxs"/>

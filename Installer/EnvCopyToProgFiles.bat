@@ -88,7 +88,7 @@ rem run the postbuild.bat file in the configuration tool -
 rem this stages the files we need in the ConfigurationTool's output directory
 cd %BASE%\ConfigurationTool%cfg%
 call %BASE%\ConfigurationTool\postBuild.bat debug
-cd %BASE%\BuildPathway
+cd %BASE%\..\Installer
 
 rem now copy the files from the ConfigurationTool output directory to the destination folder
 xcopy %base%\ConfigurationTool%cfg% "%DST%" /y
@@ -97,7 +97,7 @@ xcopy %base%\ConfigurationTool%cfg%\epubcheck-3.0.1\* "%DST%"\epubcheck-3.0.1 /i
 rem nuke the extra entries in the Print Via dialog
 cd %DST%
 del OpenOfficeConvert_OLD.dll
-cd %BASE%\BuildPathway
+cd %BASE%\..\Installer
 
 rem ** edb 1/14/2011: these should be taken care of by calling postBuild.bat and copying over the results
 rem ** in the code blocks above
@@ -118,7 +118,7 @@ xcopy %SRC%\CssDialog.dll "%DST%" /y
 xcopy %SRC%\CSSParser.dll "%DST%" /y
 xcopy %SRC%\PsExport.dll "%DST%" /y
 xcopy %SRC%\PsTool.dll "%DST%" /y
-xcopy %BASE%\BuildPathway\Pathway_Configuration_Tool_BTE.chm "%DST%\Help" /y
+xcopy %BASE%\..\Installer\Pathway_Configuration_Tool_BTE.chm "%DST%\Help" /y
 xcopy %BASE%\ConfigurationTool%cfg%\Help\* "%DST%Help" /i /s /q /y
 xcopy %SRC%\Antlr3.Runtime.dll "%DST%" /y
 xcopy %SRC%\Prince.dll "%DST%" /y
@@ -141,11 +141,11 @@ xcopy %BASE%\XeTex\xetexExe "%DST%\xetexExe" /i /s /q /y
 rem the first line here works with the development version the second, the installed version.
 if Exist "%FW_HOME%\Language Explorer\Configuration" goto FwInstalled
 if "%FwBase%" == "" goto noFw
-xcopy %BASE%\BuildPathway\UtilityCatalogIncludePublishingSolution.xml "%FwBase%\DistFiles\Language Explorer\Configuration" /y
+xcopy %BASE%\..\Installer\UtilityCatalogIncludePublishingSolution.xml "%FwBase%\DistFiles\Language Explorer\Configuration" /y
 goto noFw
 
 :FwInstalled
-xcopy %BASE%\BuildPathway\UtilityCatalogIncludePublishingSolution.xml "%FW_HOME%\Language Explorer\Configuration" /y
+xcopy %BASE%\..\Installer\UtilityCatalogIncludePublishingSolution.xml "%FW_HOME%\Language Explorer\Configuration" /y
 :noFw
 
 if not exist "%USERPROFILE%\Application Data\Adobe\InDesign\Version 6.0\en_US\Scripts" goto notxp
@@ -162,11 +162,11 @@ echo. Registering path...
 echo.--------------------------------------------------------------------------
 set pathext=.reg;%pathext%
 if not "%PROCESSOR_ARCHITECTURE%" == "AMD64" goto win32reg
-%BASE%\BuildPathway\Pathway7-64.reg
+%BASE%\..\Installer\Pathway7-64.reg
 goto regdone
 
 :win32reg
-%BASE%\BuildPathway\Pathway7.reg
+%BASE%\..\Installer\Pathway7.reg
 
 :regdone
 echo.--------------------------------------------------------------------------

@@ -252,6 +252,6 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <Copy SourceFiles="$(OutDir)BuildTasks.dll" DestinationFolder="..\BuildPathway" />
+    <Copy SourceFiles="$(OutDir)BuildTasks.dll" DestinationFolder="..\..\Installer" />
   </Target>
 </Project>

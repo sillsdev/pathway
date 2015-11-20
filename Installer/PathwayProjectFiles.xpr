@@ -6,7 +6,7 @@
     </meta>
     <projectTree name="PathwayProjectFiles.xpr">
         <file name="../ApplyPDFLicenseInfo/ApplyPDFLicenseInfo.csproj"/>
-        <file name="BuildPathway.csproj"/>
+        <file name="Installer.csproj"/>
         <file name="../BuildTasks/BuildTasks.csproj"/>
         <file name="../ConfigurationTool/ConfigurationTool.csproj"/>
         <file name="../CssDialog/CssDialog.csproj"/>

@@ -92,7 +92,7 @@ cd -
 # make sure output directories exist
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
        echo "Linux"
-	   mkdir -p ../BuildPathway/
+	   mkdir -p ../../Installer/
 	   mkdir -p ../../lib
 
 		# download artifact dependencies
@@ -101,7 +101,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 		# End of script
 elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
         echo "windows"
-		mkdir -p ../BuildPathway/
+		mkdir -p ../../Installer/
 		mkdir -p ../../lib
 
 		# download artifact dependencies

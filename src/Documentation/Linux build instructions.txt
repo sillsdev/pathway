@@ -11,7 +11,7 @@ SETTING UP BUILD SYSTEM
 -----------------------
 To set up Linux for building packages, I used:
 sudo apt-get -y install devscripts debhelper autotools-dev mono-complete
-Edit .git/config to include the BuildPathway/Add2Config
+Edit .git/config to include the ../Installer/Add2Config
 
 BUILDING PATHWAY
 ----------------

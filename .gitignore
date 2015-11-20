@@ -29,10 +29,10 @@ src/ApplyXslt/obj/*
 src/BookletBuilder/bin/*
 src/BookletBuilder/obj/*
 src/Bootstrap/*.exe
-src/BuildPathway/bin/*
-src/BuildPathway/obj/*
-src/BuildPathway/Files/*
-src/BuildPathway/Wix/*
+Installer/bin/*
+Installer/obj/*
+Installer/Files/*
+Installer/Wix/*
 src/BuildTasks/bin/*
 src/BuildTasks/obj/*
 src/CadreBibleConvert/bin/*

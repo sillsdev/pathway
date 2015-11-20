@@ -51,7 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenOfficeConvert", "OpenOf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTasks", "BuildTasks\BuildTasks.csproj", "{B0B420FE-6E6C-421C-A6F2-A9E349FC3EA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildPathway", "BuildPathway\BuildPathway.csproj", "{168871A6-2191-4E4A-85E1-E2BB8592265E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{168871A6-2191-4E4A-85E1-E2BB8592265E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012} = {65D64C80-2AA4-4BD0-AC87-B4C2B3720012}
 	EndProjectSection
