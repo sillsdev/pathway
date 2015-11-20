@@ -10,6 +10,8 @@
 *.userprefs
 *Thumbs.db
 ./pathway_*
+output/*
+Installer/BuildTasks.*
 src/_*
 src/Releases
 src/Reference

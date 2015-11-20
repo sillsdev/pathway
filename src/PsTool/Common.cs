@@ -37,6 +37,7 @@ using Palaso.WritingSystems;
 using Palaso.Xml;
 using SIL.Tool.Localization;
 using System.Reflection;
+using Test;
 
 #endregion Using
 
@@ -313,12 +314,7 @@ namespace SIL.Tool
 						if (executablePath.Contains("ReSharper") || executablePath.Contains("NUnit"))
 						{
 							//This code will work when this method call from NUnit Test case
-							int binFolderPart =
-								Environment.CurrentDirectory.IndexOf(Path.DirectorySeparatorChar + "bin" +
-																	 Path.DirectorySeparatorChar);
-							executablePath =
-								DirectoryPathReplace(Environment.CurrentDirectory.Substring(0, binFolderPart) +
-													 "/ConfigurationTool/TestFiles/input");
+						    executablePath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles/input");
 						}
 						else if (executablePath.ToLower().Contains("fieldworks") ||
 								 executablePath.ToLower().Contains("configurationtool") ||

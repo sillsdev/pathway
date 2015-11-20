@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
   <UsingTask TaskName="NUnitTeamCity" AssemblyFile="$(agent_home_dir)/plugins/dotnetPlugin/bin/JetBrains.BuildServer.MSBuildLoggers.dll" />
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,7 +42,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -53,7 +53,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\Release7BTE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -67,7 +67,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\Release7SE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -81,7 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\Corporate7BTE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -94,7 +94,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\Corporate7SE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -108,7 +108,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>..\..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -122,7 +122,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\x86\Release7BTE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -136,7 +136,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\x86\Release7SE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -150,7 +150,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\x86\Corporate7BTE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -163,7 +163,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\x86\Corporate7SE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -176,7 +176,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
@@ -186,7 +186,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
@@ -196,7 +196,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\Corporate7EPUB\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -213,7 +213,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>bin\x86\Corporate7EPUB\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -345,7 +345,6 @@
     <Compile Include="TestFiles.cs" />
     <Compile Include="TextFileAssert.cs" />
     <Compile Include="ValidateXMLFile.cs" />
-    <Compile Include="WordPressConvert\ExportWordPressTest.cs" />
     <Compile Include="XhtmlExport\XhtmlExportTest.cs" />
     <Compile Include="XmlAssert.cs">
       <SubType>Code</SubType>
@@ -431,10 +430,6 @@
       <Project>{C08B9A1C-C204-4FDE-A290-AE567688D67D}</Project>
       <Name>TheWordConvert</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WordPressConvert\WordPressConvert.csproj">
-      <Project>{12FE8988-5957-427D-BA6C-B4C601F5A558}</Project>
-      <Name>WordPressConvert</Name>
-    </ProjectReference>
     <ProjectReference Include="..\XeLaTexConvert\XeLaTexConvert.csproj">
       <Project>{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}</Project>
       <Name>XeLaTexConvert</Name>
@@ -445,8 +440,6 @@
     <Folder Include="PsExport\TestFiles\Input\T5\Pictures\" />
     <Folder Include="PsExport\TestFiles\Input\T6\Pictures\" />
     <Folder Include="PsExport\TestFiles\Input\T7\Pictures\" />
-    <Folder Include="WordPressConvert\TestFiles\Expected\" />
-    <Folder Include="WordPressConvert\TestFiles\Input\" />
     <Folder Include="XeLatex\TestFiles\Expected\" />
     <Folder Include="XeLatex\TestFiles\input\" />
     <Folder Include="XeLatex\TestFiles\output\" />
@@ -469,285 +462,18 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ScriptureStyleSettingsCopy.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
          -->
   <Target Name="TeamCityTest" DependsOnTargets="Build">
-    <NUnitTeamCity
-      Assemblies="$(TeamCityRootDir)/Test/bin/Debug/Test.dll"
-      ExcludeCategory="SkipOnTeamCity;LongTest"
-      NUnitVersion="NUnit-2.5.10" />
+    <NUnitTeamCity Assemblies="$(TeamCityRootDir)/Test/bin/Debug/Test.dll" ExcludeCategory="SkipOnTeamCity;LongTest" NUnitVersion="NUnit-2.5.10" />
   </Target>
-  <Target Name="BeforeBuild">
-    <Copy SourceFiles="@(Plugin)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(GhostScript)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(BatchProcess)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(ParatextSupport)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(AllBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" />
-    <Copy SourceFiles="@(BteBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(TestBackend)" DestinationFiles="$(OutputPath)\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)\Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'$(OutputPath)\Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'$(OutputPath)\Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'$(OutputPath)\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'$(OutputPath)\Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(Loc)" DestinationFiles="@(Loc->'$(OutputPath)\localizations\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
-    <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'$(OutputPath)\Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(FwVersion)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'$(OutputPath)\Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
-    <Copy SourceFiles="@(BteStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(SeStudent)" DestinationFolder="Files\ConfigurationTool" Condition=" '$(Edition)' == 'SE' " />
-    <Copy SourceFiles="@(Readme)" DestinationFolder="Files\ConfigurationTool" />
-    <Copy SourceFiles="@(License)" DestinationFolder="Files\ConfigurationTool" />
-    <Copy SourceFiles="@(AllSettings)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(BteSettings)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\..\lib\Devart.Data.dll" DestinationFiles="$(OutputPath)\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\..\lib\Devart.Data.xml" DestinationFiles="$(OutputPath)\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\..\lib\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\..\lib\Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\..\lib\sqlite3.dll" DestinationFiles="$(OutputPath)\sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'$(OutputPath)\Samples\Dictionary\%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'$(OutputPath)\Samples\Scripture\%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'$(OutputPath)\Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)\epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)\epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)\GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'$(OutputPath)\TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'$(OutputPath)\Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing'" />
-    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)\InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(AllTransform)" DestinationFolder="$(OutputPath)\" />
-    <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'$(OutputPath)\Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'$(OutputPath)\xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(XetexFiles)" DestinationFiles="@(XetexFiles->'$(OutputPath)\xetexPathway\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-  </Target>
+  <Target Name="BeforeBuild" />
   <Target Name="AfterBuild" />
-  <ItemGroup>
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssDialog.dll" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssDialog.pdb" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssParser.dll" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\CssParser.pdb" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\ICSharpCode.SharpZipLib.dll" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LibreOfficeConvert.dll" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\LibreOfficeConvert.pdb" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.dll" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PdfConvert.pdb" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\Prince.dll" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.dll" />
-    <ConfigurationTool Include="..\ConfigurationTool\bin\Debug\\PsTool.pdb" />
-    <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
-    <EpubCheck Include="..\..\DistFiles\epubcheck-3.0.1\**\*.*" />
-    <BatchProcess Include="..\PathwayB\$(OutputPath)\PathwayB.*" />
-    <ParatextSupport Include="..\ParatextSupport\$(OutputPath)\ParatextSupport.*" />
-    <AllBackend Include="..\InDesignConvert\$(OutputPath)\InDesignConvert.*" />
-    <AllBackend Include="..\epubConvert\$(OutputPath)\epubConvert.*" />
-    <AllBackend Include="..\PdfConvert\$(OutputPath)\PdfConvert.*" />
-    <AllBackend Include="..\PdfLicense\$(OutputPath)\PdfLicense.*" />
-    <AllBackend Include="..\ApplyPdfLicenseInfo\$(OutputPath)\ApplyPdfLicenseInfo.*" />
-    <TestBackend Include="..\OpenOfficeConvert_OLD\$(OutputPath)\OpenOfficeConvert_OLD.*" />
-    <TestBackend Include="..\WordPressConvert\$(OutputPath)\WordPressConvert.*" />
-    <TestBackend Include="..\SwordConvert\$(OutputPath)\SwordConvert.*" />
-    <AllBackend Include="..\XeTexConvert\$(OutputPath)\XeTexConvert.*" />
-    <AllBackend Include="..\XeLaTexConvert\$(OutputPath)\XeLaTexWriter.*" />
-    <TestBackend Include="..\XeTex\$(OutputPath)\XeTexWriter.*" />
-    <BteBackend Include="..\GoBibleConvert\$(OutputPath)\GoBibleConvert.*" />
-    <BteBackend Include="..\theWordConvert\$(OutputPath)\theWordConvert.*" />
-    <DicStyles Include="..\..\DistFiles\Styles\Dictionary\**\*.*" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\base_font_andika.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\base_font_charis.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\base_font_charis_compact.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\base_font_doulos.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\base_font_nc.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\base_font_sophia.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\book.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Columns_1.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Columns_2.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Default.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\epub.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\epubRightAlign.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\epub_FontSize.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\epub_Pictures.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\epub_Scripture.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\epub_ScriptureRightAlign.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\font_size_10_12.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\font_size_11_13.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\font_size_12_14.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\font_size_13_15.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\font_size_14_16.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\font_size_15_17.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\font_size_9_11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\font_size_nc.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\FrontMatter.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GoBible.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS11J11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS11L11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS12J10.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS12J11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS12J9.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS12L10.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS12L11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS12L9.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS21J11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS21L11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS22J10.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS22J11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS22J9.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS22L10.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS22L11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\GPS22L9.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Justified_No.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Justified_Yes.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_01.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_02.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_03.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_04.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_05.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_06.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_07.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_08.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_09.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_10.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_12.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_13.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_14.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Layout_15.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Leading_11.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Leading_12.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Leading_13.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Leading_24.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Leading_26.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Leading_nc.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_BottomCenter.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_BottomCenter_FirstPage.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_BottomCenter_Mirrored.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_BottomInside.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_BottomOutside.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_None.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_TopCenter.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_TopCenter_Mirrored.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_TopInside.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\PageNumber_TopOutside.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_6inx9in.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_A4.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_A5.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_A6.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_B5.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_C5.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_GPS1.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_GPS2.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_Half_Letter.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Page_size_Letter.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Pictures_No.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Pictures_Yes.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - A4 - 2 Col p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - A4 - 2 Col p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - C5 - 2 Col p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - C5 - 2 Col p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - Letter - 2 Col p1.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\GPS - Letter - 2 Col p2.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Preview\PreviewMessage.jpg" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Rules_No.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Rules_Yes.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Running_Head_Every_Page.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Running_Head_Mirrored.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Running_Head_Mirrored_Chapter.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Running_Head_Mirrored_Chapter_Abbr.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Running_Head_Mirrored_MultiChapter.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Running_Head_Mirrored_MultiChapter_Abbr.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Running_Head_Paged_Chapter.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\Scripture.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\VerticalJustify_Bottom.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\VerticalJustify_Center.css" />
-    <ScrStyles Include="..\..\DistFiles\Styles\Scripture\VerticalJustify_Top.css" />
-    <DictionaryForMIDs Include="..\..\DistFiles\Dic4Mid\**\*.*" />
-    <Hyphenation Include="..\..\DistFiles\Hyphenation_Languages\**\*.*" />
-    <Icons Include="..\..\DistFiles\Icons\**\*.*" />
-    <Graphic Include="..\..\DistFiles\Graphic\**\*.*" />
-    <Loc Include="..\..\DistFiles\localizations\**\*.*" />
-    <Preprocessing Include="..\..\DistFiles\Preprocessing\**\*.*" />
-    <BteHelp Include="..\..\Installer\Pathway_Configuration_Tool_BTE.chm" />
-    <SeHelp Include="..\..\Installer\Pathway_Configuration_Tool_SE.chm" />
-    <BteStudent Include="..\..\Installer\Pathway_Student_Manual_BTE.doc" />
-    <SeStudent Include="..\..\Installer\Pathway_Student_Manual_SE.doc" />
-    <License Include="..\..\Installer\License.rtf" />
-    <Readme Include="..\..\Installer\ReadMePw.rtf" />
-    <AllSettings Include="..\..\DistFiles\DictionaryStyleSettings.xml" />
-    <AllSettings Include="..\..\DistFiles\StyleSettings.xml" />
-    <AllSettings Include="..\..\DistFiles\StyleSettings.xsd" />
-    <AllSettings Include="..\..\DistFiles\RampLangCode.xml" />
-    <AllSettings Include="..\..\DistFiles\GenericFont.xml" />
-    <BteSettings Include="..\..\DistFiles\ScriptureStyleSettings.xml" />
-    <AllPreview Include="..\..\DistFiles\DictionaryPreview.xhtml" />
-    <BtePreview Include="..\..\DistFiles\ScripturePreview.xhtml" />
-    <OfficeFiles Include="..\..\DistFiles\OfficeFiles\**\*.*" />
-    <AllSamples Include="..\..\DistFiles\Samples\Dictionary\*.*" />
-    <BteSamples Include="..\..\DistFiles\Samples\Scripture\*.*" />
-    <copyrightFiles Include="..\..\DistFiles\Copyrights\**\*.*" />
-    <epubFiles Include="..\..\DistFiles\epub\**\*.*" />
-    <AllBackend Include="..\epubValidator\$(OutputPath)\epubValidator.*" />
-    <GoBibleFiles Include="..\..\DistFiles\GoBible\**\*.*" />
-    <TheWordFiles Include="..\..\DistFiles\TheWord\**\*.*" />
-    <SwordFiles Include="..\..\DistFiles\Sword\**\*.*" />
-    <InDesignFiles Include="..\..\DistFiles\InDesignFiles\**\*.*" />
-    <AllTransform Include="..\..\DistFiles\AddBidi.xsl" />
-    <AllTransform Include="..\..\DistFiles\addDicTocHeads.xsl" />
-    <AllTransform Include="..\..\DistFiles\FixEpub.xsl" />
-    <AllTransform Include="..\..\DistFiles\FixEpubToc.xsl" />
-    <BteTransform Include="..\..\DistFiles\TE_XHTML-to-epub_XHTML.xslt" />
-    <BteTransform Include="..\..\DistFiles\*.xslt" />
-    <WordpressFiles Include="..\..\DistFiles\Wordpress\**\*.*" />
-    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
-    <XetexFiles Include="..\..\DistFiles\xetexPathway\**\*.*" />
-    <WixSoftware Include="..\..\Installer\WixSoftware\**\*.*" />
-    <UsfmConvert Include="..\..\lib\ParatextShared.dll;..\..\lib\NetLoc.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ScriptureStyleSettingsCopy.xml" />
-  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent />
   </PropertyGroup>

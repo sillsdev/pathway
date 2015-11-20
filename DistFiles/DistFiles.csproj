@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.FindUnder" AssemblyFile="MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="UpdateReadme" AssemblyFile="BuildTasks.dll" />
+  <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
+  <UsingTask TaskName="ZeroCheck" AssemblyFile="BuildTasks.dll" />
+  <UsingTask TaskName="FileComponents" AssemblyFile="BuildTasks.dll" />
+  <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
+  <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="MSBuild.ExtensionPack.dll" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{168871A6-2191-4E4A-85E1-E2BB8592265E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Installer</RootNamespace>
+    <AssemblyName>Installer</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\output\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition) Debug</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
+    <OutputPath>..\output\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition) Testing</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
+    <OutputPath>..\output\Release\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ProductName>Pathway $(Edition) Testing</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
+    <OutputPath>..\output\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>
+    </Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
+    <OutputPath>..\output\Release\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>
+    </Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\output\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition) Debug</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <Optimize>false</Optimize>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
+    <OutputPath>..\output\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition) Testing</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
+    <OutputPath>..\output\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ProductName>Pathway $(Edition) Testing</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
+    <OutputPath>..\output\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>
+    </Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
+    <OutputPath>..\output\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>
+    </Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
+    <OutputPath>..\output\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition />
+    <ProductName>Pathway XeLaTeX</ProductName>
+    <ConfTag>XeLaTeX</ConfTag>
+    <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
+    <OutputPath>..\output\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Edition />
+    <ProductName>Pathway XeLaTeX</ProductName>
+    <ConfTag>XeLaTeX</ConfTag>
+    <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
+    <OutputPath>..\otuput\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>EPUB</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status />
+    <CodeAnalysisLogFile>bin\Corporate7BTE\Installer.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
+    <OutputPath>..\output\Release\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>EPUB</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>
+    </Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\Installer.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\ConfigurationTool\ConfigurationTool.csproj">
+      <Project>{C1ED7E03-C92E-4223-909B-E9C35A4D98E2}</Project>
+      <Name>ConfigurationTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\CssDialog\CssDialog.csproj">
+      <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
+      <Name>CssDialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\CssParser\CssParser.csproj">
+      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
+      <Name>CssParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\epubConvert\epubConvert.csproj">
+      <Project>{B19037F2-26F7-48A2-9301-B5CA335C6824}</Project>
+      <Name>epubConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\epubValidator\epubValidator.csproj">
+      <Project>{403F8C54-4154-4D79-AED7-326B976875B4}</Project>
+      <Name>epubValidator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\GoBibleConvert\GoBibleConvert.csproj">
+      <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
+      <Name>GoBibleConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\InDesignConvert\InDesignConvert.csproj">
+      <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
+      <Name>InDesignConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\OpenOfficeConvert\OpenOfficeConvert.csproj">
+      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
+      <Name>OpenOfficeConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\ParatextSupport\ParatextSupport.csproj">
+      <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
+      <Name>ParatextSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\PathwayB\PathwayB.csproj">
+      <Project>{24E32D8C-5ECF-4263-98C1-C15D1A05ABDE}</Project>
+      <Name>PathwayB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\PsExport\PsExport.csproj">
+      <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
+      <Name>PsExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\PsTool\PsTool.csproj">
+      <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
+      <Name>PsTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\WordPressConvert\WordPressConvert.csproj">
+      <Project>{12FE8988-5957-427D-BA6C-B4C601F5A558}</Project>
+      <Name>WordPressConvert</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="License\License.rtf" />
+    <None Include="Readme\ReadMePw.rtf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="BuildTasks, Version=1.0.6.1920, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>BuildTasks.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets. -->
+  <Target Name="Build">
+    <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion' " />
+    <Delete Files="$(OutputPath)LibreOfficeConvert.dll;$(OutputPath)LibreOfficeConvert.pdb" Condition=" '$(Edition)' == 'EPUB'" />
+    <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
+  </Target>
+  <Target Name="BeforeBuild">
+    <!-- validator is referenced even if not called -->
+    <Copy SourceFiles="..\lib\Devart.Data.dll" DestinationFiles="$(OutputPath)Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\lib\Devart.Data.xml" DestinationFiles="$(OutputPath)Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\lib\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\lib\Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\lib\sqlite3.dll" DestinationFiles="$(OutputPath)sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
+    <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'$(OutputPath)Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Hyphenation)" DestinationFiles="@(Hyphenation->'$(OutputPath)Hyphenation_Languages\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Icons)" DestinationFiles="@(Icons->'$(OutputPath)Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Graphic)" DestinationFiles="@(Graphic->'$(OutputPath)Graphic\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Local)" DestinationFiles="@(Local->'$(OutputPath)localizations\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EngLocal)" DestinationFiles="@(EngLocal->'$(OutputPath)localizations\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
+    <Copy SourceFiles="@(Preprocessing)" DestinationFiles="@(Preprocessing->'$(OutputPath)Preprocessing\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(BteHelp)" DestinationFiles="@(BteHelp->'$(OutputPath)Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
+    <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'$(OutputPath)Help\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'SE' " />
+    <Copy SourceFiles="@(BteStudent)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
+    <Copy SourceFiles="@(SeStudent)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'SE' " />
+    <Copy SourceFiles="@(Readme)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(License)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(Mets)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(AllSettings)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(BteSettings)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
+    <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
+    <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
+    <Copy SourceFiles="@(AllSamples)" DestinationFiles="@(AllSamples->'$(OutputPath)Samples\Dictionary\%(RecursiveDir)\%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'$(OutputPath)Samples\Scripture\%(RecursiveDir)\%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'$(OutputPath)Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)epub\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(PdfLicenseManager)" DestinationFiles="@(PdfLicenseManager->'$(OutputPath)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ApplyPdfLicense)" DestinationFiles="@(ApplyPdfLicense->'$(OutputPath)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(PdfLicense)" DestinationFiles="@(PdfLicense->'$(OutputPath)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'$(OutputPath)TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'$(OutputPath)Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
+    <Copy SourceFiles="@(AllTransform)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'$(OutputPath)Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'$(OutputPath)xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'$(OutputPath)Paratexmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
+    <Copy SourceFiles="@(InstallTex)" DestinationFiles="@(InstallTex->'$(OutputPath)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
+  </Target>
+  <Target Name="AfterBuild"/>
+  <ItemGroup>
+    <EpubCheck Include="epubcheck-3.0.1\**\*.*" />
+    <PdfLicenseManager Include="pdflicensemanager-2.3.jar" />
+    <Paratexmf Include="..\src\XeLaTexConvert\Paratexmf\**\*.*" />
+    <InstallTex Include="..\src\XeLaTexConvert\InstallPathwayXeLaTeX.sh" />
+    <TestBackend Include="..\WordPressConvert\$(OutputPath)MySql*.dll" />
+    <DicStyles Include="Styles\Dictionary\**\*.*" />
+    <ScrStyles Include="Styles\Scripture\**\*.*" />
+    <DictionaryForMIDs Include="Dic4Mid\**\*.*" />
+    <Hyphenation Include="Hyphenation_Languages\**\*.*" />
+    <Icons Include="Icons\**\*.*" />
+    <Graphic Include="Graphic\**\*.*" />
+    <Local Include="localizations\**\*.*" />
+    <EngLocal Include="Pathway.en.tmx" />
+    <Preprocessing Include="Preprocessing\**\*.*" />
+    <BteHelp Include="Help\Pathway_Configuration_Tool_BTE.chm" />
+    <SeHelp Include="Help\Pathway_Configuration_Tool_SE.chm" />
+    <BteStudent Include="Training\Pathway_Student_Manual_BTE.pdf" />
+    <SeStudent Include="Training\Pathway_Student_Manual_SE.pdf" />
+    <License Include="License\License.rtf" />
+    <Readme Include="Readme\ReadMePw.rtf" />
+    <Mets Include="mets.xml" />
+    <AllSettings Include="DictionaryStyleSettings.xml" />
+    <AllSettings Include="StyleSettings.xml" />
+    <AllSettings Include="StyleSettings.xsd" />
+    <AllSettings Include="RampLangCode.xml" />
+    <AllSettings Include="GenericFont.xml" />
+    <BteSettings Include="ScriptureStyleSettings.xml" />
+    <AllPreview Include="DictionaryPreview.xhtml" />
+    <BtePreview Include="ScripturePreview.xhtml" />
+    <OfficeFiles Include="OfficeFiles\**\*.*" />
+    <AllSamples Include="Samples\Dictionary\**\*.*" />
+    <BteSamples Include="Samples\Scripture\**\*.*" />
+    <copyrightFiles Include="Copyrights\**\*.*" />
+    <epubFiles Include="epub\**\*.*" />
+    <GoBibleFiles Include="GoBible\**\*.*" />
+    <TheWordFiles Include="TheWord\**\*.*" />
+    <SwordFiles Include="Sword\**\*.*" />
+    <InDesignFiles Include="InDesignFiles\**\*.*" />
+    <LiftFiles Include="LiftSupport\**\*.*" />
+    <AllTransform Include="AddBidi.xsl" />
+    <AllTransform Include="ConvertUSXtoOSIS.xsl" />
+    <AllTransform Include="addDicTocHeads.xsl" />
+    <AllTransform Include="FixEpub.xsl" />
+    <AllTransform Include="FixEpubToc.xsl" />
+    <AllTransform Include="Xhtml-Usx.xsl" />
+    <AllTransform Include="Xhtml2BookNames.xsl" />
+    <AllTransform Include="StyleMap.xml" />
+    <BteTransform Include="TE_XHTML-to-epub_XHTML.xslt" />
+    <BteTransform Include="*.xslt" />
+    <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
+    <UsfmConvert Include="..\lib\ParatextShared.dll;..\..\lib\NetLoc.dll" />
+  </ItemGroup>
+  <Target Name="XeLaTexBeforeBuild">
+    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
+    <Copy SourceFiles="@(XeLaTexLinBin)" DestinationFiles="@(XeLaTexLinBin->'Files\pwtex\bin\i386-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Copy SourceFiles="@(XeLaTexLinBin64)" DestinationFiles="@(XeLaTexLinBin64->'Files\pwtex\bin\x86_64-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <MakeDir Directories="Files\pwtex\temp" />
+    <Exec Command="echo This file is a place holder&gt;Files\pwtex\temp\readme.txt" />
+    <Delete Files="@(XeLaTexCache)" />
+    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
+    <Exec Command="mktexlsr ..\..\texmf-dist" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
+    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/i386-linux; ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/i386-linux; ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/x86_64-linux; ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/x86_64-linux; ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+  </Target>
+  <ItemGroup>
+    <XeLaTexExe Include="..\src\XeLaTexConvert\XeLaTexExe\**\*.*" />
+    <XeLaTexTexmf Include="..\src\XeLaTexConvert\XeLaTexExe\texmf\**\*.*" />
+    <XeLaTexConfig Include="..\src\XeLaTexConvert\XeLaTexExe\texmf-config\**\*.*" />
+    <XeLaTexDist Include="..\src\XeLaTexConvert\XeLaTexExe\texmf-dist\**\*.*" />
+    <XeLaTexVar Include="..\src\XeLaTexConvert\XeLaTexExe\texmf-var\**\*.*" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\icudt*.dll" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\kpathsea*.dll" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\mktexlsr.exe" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\teckit_compile.exe" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\tex.dll;..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.exe" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\xdvipdfmx.exe" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\xelatex.exe" />
+    <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\kpse*" />
+    <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\xdvipdf*" />
+    <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\xe*" />
+    <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tec*" />
+    <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tex" />
+    <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\mk*" />
+    <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\fmt*" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\kpse*" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xdvipdf*" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xe*" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\tec*" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\tex" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\mk*" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\fmt*" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\luatex" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\pdftex" />
+    <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\mf-nowin" />
+    <XeLaTexCache Include="..\src\XeLaTexConvert\XeLaTexExe\texmf-var\fonts\cache\*.cache-3" />
+    <Paratexmf Include="..\src\XeLaTexConvert\Paratexmf\**\*.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+</Project>

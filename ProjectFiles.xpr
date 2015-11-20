@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="14.2">
+    <meta>
+        <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
+        <options>
+            <serialized version="14.2" xml:space="preserve">
+                <map>
+                    <entry>
+                        <String>bom_handling</String>
+                        <Integer>2</Integer>
+                    </entry>
+                    <entry>
+                        <String>editor.non.xml.file.encoding.v5.1</String>
+                        <String>UTF8</String>
+                    </entry>
+                    <entry>
+                        <String>key.encoding.option.pane</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                    <entry>
+                        <String>scenario.associations</String>
+                        <scenarioAssociation-array>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>Installer/Installer.wixproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/XslProcess/XslProcess.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/ApplyPDFLicenseInfo/ApplyPDFLicenseInfo.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/XeLaTexConvert/XeLaTexConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/WordPressConvert/WordPressConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/theWordConvert/TheWordConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/TestBed/TestBed.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/Test/Test.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/SwordConvert/SwordConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/PsTool/PsTool.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/PsExport/PsExport.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/PrincessConvert/PrincessConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/PdfLicense/PdfLicense.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/PdfConvert/PdfConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/PathwayB/PathwayB.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/ParatextSupport/ParatextSupport.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/OpenOfficeConvert/OpenOfficeConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/InDesignConvert/InDesignConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/HelpImprove/HelpImprove.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/GoBibleConvert/GoBibleConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/epubValidator/epubValidator.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/epubConvert/epubConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/DictionaryForMIDsConvert/DictionaryForMIDsConvert.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/CssParser/CssParser.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/CssDialog/CssDialog.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/ConfigurationTool/ConfigurationTool.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/BuildTasks/BuildTasks.csproj</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>ApplyPDFLicenseInfo</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                        </scenarioAssociation-array>
+                    </entry>
+                    <entry>
+                        <String>scenarios</String>
+                        <scenario-array>
+                            <scenario>
+                                <field name="advancedOptionsMap">
+                                    <null/>
+                                </field>
+                                <field name="name">
+                                    <String>ApplyPDFLicenseInfo</String>
+                                </field>
+                                <field name="baseURL">
+                                    <String></String>
+                                </field>
+                                <field name="footerURL">
+                                    <String></String>
+                                </field>
+                                <field name="fOPMethod">
+                                    <String>pdf</String>
+                                </field>
+                                <field name="fOProcessorName">
+                                    <String>Apache FOP</String>
+                                </field>
+                                <field name="headerURL">
+                                    <String></String>
+                                </field>
+                                <field name="inputXSLURL">
+                                    <String>file:/C:/Users/Trihus/git/pathway/Change2output.xsl</String>
+                                </field>
+                                <field name="inputXMLURL">
+                                    <String>${currentFileURL}</String>
+                                </field>
+                                <field name="defaultScenario">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="isFOPPerforming">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="type">
+                                    <String>XSL</String>
+                                </field>
+                                <field name="saveAs">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="openInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="outputFile">
+                                    <File>Out/${cfn}.csproj</File>
+                                </field>
+                                <field name="openOtherLocationInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="locationToOpenInBrowserURL">
+                                    <null/>
+                                </field>
+                                <field name="openInEditor">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInHTMLPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInXMLPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInSVGPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInResultSetPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="useXSLTInput">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="xsltParams">
+                                    <list/>
+                                </field>
+                                <field name="cascadingStylesheets">
+                                    <String-array/>
+                                </field>
+                                <field name="xslTransformer">
+                                    <String>Saxon6.5.5</String>
+                                </field>
+                                <field name="extensionURLs">
+                                    <String-array/>
+                                </field>
+                            </scenario>
+                        </scenario-array>
+                    </entry>
+                </map>
+            </serialized>
+        </options>
+    </meta>
+    <projectTree name="ProjectFiles.xpr">
+        <file name="src/ApplyPDFLicenseInfo/ApplyPDFLicenseInfo.csproj"/>
+        <file name="src/BuildTasks/BuildTasks.csproj"/>
+        <file name="Change2output.xsl"/>
+        <file name="src/ConfigurationTool/ConfigurationTool.csproj"/>
+        <file name="src/CssDialog/CssDialog.csproj"/>
+        <file name="src/CssParser/CssParser.csproj"/>
+        <file name="src/DictionaryForMIDsConvert/DictionaryForMIDsConvert.csproj"/>
+        <file name="DistFiles/DistFiles.csproj"/>
+        <file name="src/epubConvert/epubConvert.csproj"/>
+        <file name="src/epubValidator/epubValidator.csproj"/>
+        <file name="src/GoBibleConvert/GoBibleConvert.csproj"/>
+        <file name="src/HelpImprove/HelpImprove.csproj"/>
+        <file name="src/InDesignConvert/InDesignConvert.csproj"/>
+        <file name="Installer/Installer.wixproj"/>
+        <file name="src/OpenOfficeConvert/OpenOfficeConvert.csproj"/>
+        <file name="src/ParatextSupport/ParatextSupport.csproj"/>
+        <file name="src/PathwayB/PathwayB.csproj"/>
+        <file name="src/PdfConvert/PdfConvert.csproj"/>
+        <file name="src/PdfLicense/PdfLicense.csproj"/>
+        <file name="src/PrincessConvert/PrincessConvert.csproj"/>
+        <file name="src/PsExport/PsExport.csproj"/>
+        <file name="src/PsTool/PsTool.csproj"/>
+        <file name="src/SwordConvert/SwordConvert.csproj"/>
+        <file name="src/Test/Test.csproj"/>
+        <file name="src/TestBed/TestBed.csproj"/>
+        <file name="src/theWordConvert/TheWordConvert.csproj"/>
+        <file name="src/WordPressConvert/WordPressConvert.csproj"/>
+        <file name="src/XeLaTexConvert/XeLaTexConvert.csproj"/>
+        <file name="src/XslProcess/XslProcess.csproj"/>
+    </projectTree>
+</project>

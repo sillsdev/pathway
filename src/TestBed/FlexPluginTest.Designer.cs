@@ -408,18 +408,6 @@
             this.btnEpub.UseVisualStyleBackColor = false;
             this.btnEpub.Click += new System.EventHandler(this.btnEpub_Click);
             // 
-            // btnWordPress
-            // 
-            this.btnWordPress.AccessibleName = "BtnWordPress";
-            this.btnWordPress.BackColor = System.Drawing.Color.Plum;
-            this.btnWordPress.Location = new System.Drawing.Point(22, 201);
-            this.btnWordPress.Name = "btnWordPress";
-            this.btnWordPress.Size = new System.Drawing.Size(100, 40);
-            this.btnWordPress.TabIndex = 69;
-            this.btnWordPress.Text = "Word Press";
-            this.btnWordPress.UseVisualStyleBackColor = false;
-            this.btnWordPress.Click += new System.EventHandler(this.btnWordPress_Click);
-            // 
             // btnGetSoftwareData
             // 
             this.btnGetSoftwareData.AccessibleName = "BtnFlexTest";

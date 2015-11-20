@@ -587,52 +587,6 @@ namespace TestBed
 
         }
 
-        private void btnWordPress_Click(object sender, EventArgs e)
-        {
-
-            if (!File.Exists(txtInputPath.Text))
-            {
-                MessageBox.Show("Please enter the valid XHTML path");
-                return;
-            }
-
-            PublicationInformation projInfo = new PublicationInformation();
-
-            projInfo.ProjectPath = Path.GetDirectoryName(txtInputPath.Text);
-            projInfo.DefaultXhtmlFileWithPath = txtInputPath.Text;
-            projInfo.ProjectInputType = radDictionary.Checked ? "Dictionary" : "Scripture";
-            projInfo.ProjectFileWithPath = projInfo.ProjectPath;
-            projInfo.DictionaryPath = projInfo.ProjectPath;
-
-            ExportWordPress exportWS = new ExportWordPress();
-            exportWS.Export(projInfo);
-
-            ExportXhtmlToSqlData xhtmlToSqlData = new ExportXhtmlToSqlData();
-            xhtmlToSqlData.MysqlDataFileName = "data.sql";
-            xhtmlToSqlData._projInfo = projInfo;
-            xhtmlToSqlData.XhtmlToBlog();
-
-            WebonaryMysqlDatabaseTransfer webonaryMysql = new WebonaryMysqlDatabaseTransfer();
-            webonaryMysql.projInfo = projInfo;
-            webonaryMysql.CreateDatabase("CreateUser-Db.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306",
-                "samdoss");
-
-            webonaryMysql.InstallWordPressPHPPage("http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123",
-                "Sam Wordpress", "Samdoss", "arthur", "samdoss@live.com", "1");
-
-            webonaryMysql.Drop2reset("drop2reset.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306",
-                "sym147_webonary");
-
-            webonaryMysql.EmptyWebonary("EmptyWebonary.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306",
-                "sym147_webonary", "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123",
-                "Webonary Site");
-
-            webonaryMysql.Data("data.sql", "sym147_Webroot", "pathway1234", "204.93.172.30", "3306", "sym147_webonary",
-                "http://pathwaywebonary.com.cws10.my-hosting-panel.com", "samdoss123");
-
-            MessageBox.Show("Data Exported to Wordpress.");
-        }
-
         private void btnEpub_Click(object sender, EventArgs e)
         {
             if (!File.Exists(txtInputPath.Text))

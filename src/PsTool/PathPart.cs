@@ -22,8 +22,8 @@ namespace Test
     {
         public static string Bin(string currentDir, string addedPath)
         {
-            int binFolderPart = currentDir.IndexOf(Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar);
-            return Common.DirectoryPathReplace(currentDir.Substring(0, binFolderPart) + addedPath);
+            int binFolderPart = currentDir.IndexOf(Path.DirectorySeparatorChar + "output" + Path.DirectorySeparatorChar);
+            return Common.DirectoryPathReplace(currentDir.Substring(0, binFolderPart) + "/src/Test" + addedPath);
         }
     }
 }

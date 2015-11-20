@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define Product="Pathway"?>
+  <?define UpgradeCode="74173B43-8B0C-499e-99B0-759A6C8EBDD2"?>
+  <Product Id="*" Name="$(var.Product) $(var.Version)" Language="1033" Version="$(var.Version)" Manufacturer="SIL International" UpgradeCode="$(var.UpgradeCode)">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Upgrade Id ="$(var.Property_UpgradeCode)" >
+      <UpgradeVersion Minimum ="$(var.Version)" OnlyDetect ="yes" Property ="NEWVERSIONDETECTED" />
+      <UpgradeVersion Minimum ="0.0.0" IncludeMinimum ="yes" Maximum ="$(var.Version)" IncludeMaximum ="no" OnlyDetect ="no" Property ="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade >
+    <!-- 
+		"from the list: Don't use Advertise="yes" Advertised shortcuts are designed to allow
+		users to install just the shortcut for your app, then demand-install the
+		rest of the app the first time the icon is run.  If this is not behavior you
+		are trying to support, you're better off using non-advertised shortcuts. "
+		-->
+
+    <PropertyRef Id="NETFRAMEWORK40FULL" />
+    <Condition Message="Before $(var.Product) can install, you need to install Microsoft's free .NET Framework 4.0.">
+      Installed OR NETFRAMEWORK40FULL
+    </Condition>
+
+    <Property Id ="ALLUSERS">1</Property>
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of $(var.Product) is already installed." />
+    
+		<MediaTemplate />
+
+    <Feature Id="ProgramFiles" Level="1" Absent="disallow" Title="Program Files">
+      <ComponentGroupRef Id="Application"/>
+    </Feature>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="DesktopFolder" SourceName="Desktop">
+        <Component Id="DeskShortcutApp" Guid="FC2D322B-277A-42b8-BB3D-4039EFE026BE">
+          <Shortcut Id="DeskShortcutApp" Directory="DesktopFolder" Name="ConfigTo"
+						LongName="Pathway Configuration Tool" Target="[#ConfigurationTool.exe]"
+						Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR"/>
+        </Component>
+      </Directory>
+      <Directory Id="ProgramMenuFolder" SourceName="Programs">
+        <Directory Id="PathwayMenu" Name="Pathway7">
+          <Component Id="ShortcutApp" Guid="96BE5240-DC73-4b1c-A590-9FC7CFE71AEF">
+            <Shortcut Id="ShortcutApp" Directory="PathwayMenu" Name="Pathway"
+							LongName="Pathway Configuration Tool"
+							Target="[#ConfigurationTool.exe]" Hotkey="0" IconIndex="0"
+							Show="normal" WorkingDirectory="INSTALLDIR"/>
+          </Component>
+          <Component Id="ReadMeShortcutApp"
+						Guid="23575D91-3CF8-41dc-96FC-D2466EDE125C">
+            <Shortcut Id="ReadMeShortcutApp" Directory="PathwayMenu" Name="ReadMe"
+							Target="[#ReadMePw.rtf]" Hotkey="0" IconIndex="0" Show="normal"
+							WorkingDirectory="INSTALLDIR"/>
+          </Component>
+          <Component Id="TutorialShortcutApp"
+						Guid="3A0CF01A-A7C3-49F0-A00F-0574B54370C9">
+            <Shortcut Id="TutorialShortcutApp" Directory="PathwayMenu"
+							Name="Tutorial" LongName="Student Manual"
+							Target="[#Pathway_Student_Manual_$(var.Edition).pdf]" Hotkey="0" IconIndex="0"
+							Show="normal" WorkingDirectory="INSTALLDIR"/>
+          </Component>
+          <Component Id="LicenseShortcutApp"
+						Guid="23575D91-3CF8-41dc-96FC-D2466EDE125D">
+            <Shortcut Id="LicenseShortcutApp" Directory="PathwayMenu" Name="License"
+							LongName="License" Target="[#License.rtf]" Hotkey="0" IconIndex="0"
+							Show="normal" WorkingDirectory="INSTALLDIR"/>
+          </Component>
+          <Component Id="HelpShortcut" Guid="8D72119D-8590-4552-9A08-00AA4825FEF1">
+            <Shortcut Id="HelpShortcut" Directory="PathwayMenu" Name="HelpFile"
+							LongName="Pathway Help" Target="[#Pathway_Configuration_Tool_$(var.Edition).chm]" Hotkey="0"
+							IconIndex="0" Show="normal" WorkingDirectory="INSTALLDIR"/>
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="RegistryEntries" Guid="371D3AFA-C611-4928-89E5-6BC00EDA2EAB">
+        <Registry Root="HKLM" Action="createKeyAndRemoveKeyOnUninstall"
+					Key="Software\SIL\Pathway"/>
+        <Registry Root="HKLM" Action="write" Key="Software\SIL\Pathway" Name="PathwayDir"
+					Type="string" Value="[INSTALLDIR]"/>
+        <!-- cf. http://msdn.microsoft.com/en-us/library/aa367992.aspx -->
+        <Registry Root="HKLM" Action="write" Key="Software\SIL\Pathway" Name="WritingSystemStore"
+					Type="string" Value="[CommonAppDataFolder]SIL\WritingSystemStore\"/>
+      </Component>
+    </ComponentGroup>
+
+    <Icon Id="ConfigurationTool.exe" SourceFile ="#ConfigurationTool.exe" />
+    <Property Id="ARPPRODUCTICON" Value="ConfigurationTool.exe" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+      <RegisterFonts />
+      <!--We need the condition here so that we only launch the executable when we make an installation but not when we remove the product-->
+    </InstallExecuteSequence>
+  </Product>
+
+</Wix>

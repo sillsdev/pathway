@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<?xml version="1.0" encoding="utf-8"?><Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -33,13 +32,13 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile/>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -49,7 +48,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
-    <OutputPath>bin\Release7BTE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -62,7 +61,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
-    <OutputPath>bin\Release7SE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -75,7 +74,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
-    <OutputPath>bin\Corporate7BTE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -87,7 +86,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
-    <OutputPath>bin\Corporate7SE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -100,7 +99,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>..\..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -113,7 +112,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
-    <OutputPath>bin\x86\Release7BTE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -126,7 +125,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
-    <OutputPath>bin\x86\Release7SE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -139,7 +138,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
-    <OutputPath>bin\x86\Corporate7BTE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -151,7 +150,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
-    <OutputPath>bin\x86\Corporate7SE\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -163,7 +162,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
-    <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
@@ -172,7 +171,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
-    <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
@@ -181,7 +180,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
-    <OutputPath>bin\Corporate7EPUB\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -195,7 +194,7 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
-    <OutputPath>bin\x86\Corporate7EPUB\</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -215,40 +214,40 @@
     <Reference Include="Palaso">
       <HintPath>..\..\lib\Palaso.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System"/>
+    <Reference Include="System.Data"/>
+    <Reference Include="System.Drawing"/>
+    <Reference Include="System.Windows.Forms"/>
+    <Reference Include="System.Xml"/>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration"/>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfterBeforeProcess.cs" />
-    <Compile Include="AfterBeforeProcessEpub.cs" />
-    <Compile Include="AfterBeforeXHTMLProcess.cs" />
-    <Compile Include="Backend.cs" />
-    <Compile Include="CheckUserFileAccessRights.cs" />
-    <Compile Include="ClassInfo.cs" />
-    <Compile Include="ComboBoxItem.cs" />
+    <Compile Include="AfterBeforeProcess.cs"/>
+    <Compile Include="AfterBeforeProcessEpub.cs"/>
+    <Compile Include="AfterBeforeXHTMLProcess.cs"/>
+    <Compile Include="Backend.cs"/>
+    <Compile Include="CheckUserFileAccessRights.cs"/>
+    <Compile Include="ClassInfo.cs"/>
+    <Compile Include="ComboBoxItem.cs"/>
     <Compile Include="Common.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CommonXml.cs" />
-    <Compile Include="CreatingHyphenationSettings.cs" />
-    <Compile Include="FileStreamXmlResolver.cs" />
-    <Compile Include="Json.cs" />
+    <Compile Include="CommonXml.cs"/>
+    <Compile Include="CreatingHyphenationSettings.cs"/>
+    <Compile Include="FileStreamXmlResolver.cs"/>
+    <Compile Include="Json.cs"/>
     <Compile Include="FontInternals.cs">
     </Compile>
-    <Compile Include="HashUtilities.cs" />
-    <Compile Include="MergeCss.cs" />
-    <Compile Include="MessageBoxExtender.cs" />
-    <Compile Include="Param.cs" />
-    <Compile Include="PathPart.cs" />
-    <Compile Include="PathwayPath.cs" />
+    <Compile Include="HashUtilities.cs"/>
+    <Compile Include="MergeCss.cs"/>
+    <Compile Include="MessageBoxExtender.cs"/>
+    <Compile Include="Param.cs"/>
+    <Compile Include="PathPart.cs"/>
+    <Compile Include="PathwayPath.cs"/>
     <Compile Include="Progress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,29 +259,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Ramp.cs" />
-    <Compile Include="RampFile.cs" />
-    <Compile Include="ReflectionHelper.cs" />
-    <Compile Include="RegistryHelperLite.cs" />
-    <Compile Include="SettingsHelper.cs" />
-    <Compile Include="ShowHelp.cs" />
+    <Compile Include="Ramp.cs"/>
+    <Compile Include="RampFile.cs"/>
+    <Compile Include="ReflectionHelper.cs"/>
+    <Compile Include="RegistryHelperLite.cs"/>
+    <Compile Include="SettingsHelper.cs"/>
+    <Compile Include="ShowHelp.cs"/>
     <Compile Include="StyleCategories.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StyleCategories.Designer.cs">
       <DependentUpon>StyleCategories.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils.cs" />
-    <Compile Include="VerboseClass.cs" />
-    <Compile Include="XeLaTexInstallation.cs" />
-    <Compile Include="FileData.cs" />
-    <Compile Include="FolderTree.cs" />
+    <Compile Include="Utils.cs"/>
+    <Compile Include="VerboseClass.cs"/>
+    <Compile Include="XeLaTexInstallation.cs"/>
+    <Compile Include="FileData.cs"/>
+    <Compile Include="FolderTree.cs"/>
     <Compile Include="IExportProcess.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Localization\JW_Localization.cs" />
-    <Compile Include="Localization\JW_Registry.cs" />
-    <Compile Include="Localization\JW_Xml.cs" />
+    <Compile Include="Localization\JW_Localization.cs"/>
+    <Compile Include="Localization\JW_Registry.cs"/>
+    <Compile Include="Localization\JW_Xml.cs"/>
     <Compile Include="Localization\Localizer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -295,15 +294,15 @@
     <Compile Include="Localization\NewLanguageDlg.designer.cs">
       <DependentUpon>NewLanguageDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="PreExportProcess.cs" />
-    <Compile Include="PublicationInformation.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistryAccess.cs" />
-    <Compile Include="SubProcess.cs" />
-    <Compile Include="Substitution.cs" />
-    <Compile Include="XHTMLProcess.cs" />
-    <Compile Include="ZipFolder.cs" />
-    <Compile Include="ZipUtil.cs" />
+    <Compile Include="PreExportProcess.cs"/>
+    <Compile Include="PublicationInformation.cs"/>
+    <Compile Include="Properties\AssemblyInfo.cs"/>
+    <Compile Include="RegistryAccess.cs"/>
+    <Compile Include="SubProcess.cs"/>
+    <Compile Include="Substitution.cs"/>
+    <Compile Include="XHTMLProcess.cs"/>
+    <Compile Include="ZipFolder.cs"/>
+    <Compile Include="ZipUtil.cs"/>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\Localizer.resx">
@@ -343,8 +342,8 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup/>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets"/>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
