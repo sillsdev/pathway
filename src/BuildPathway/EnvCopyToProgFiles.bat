@@ -41,7 +41,6 @@ echo. Building: %1
 echo. Setting environment variables...
 if not exist %SVN_DIR% goto notInEnvVars
 set base=%SVN_DIR%
-set thirdParty=%BASE%\ThirdParty
 if /i "%2"=="any" set CPU=
 if /i "%2"=="x86" set CPU=\x86
 if /i "%2"=="" set CPU=\x86

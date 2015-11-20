@@ -93,20 +93,20 @@ cd -
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
        echo "Linux"
 	   mkdir -p ../BuildPathway/
-	   mkdir -p ../ThirdParty
+	   mkdir -p ../../lib
 
 		# download artifact dependencies
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt271/latest.lastSuccessful/L10NSharp.dll ../ThirdParty/L10NSharp.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt271/latest.lastSuccessful/L10NSharp.pdb ../ThirdParty/L10NSharp.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt271/latest.lastSuccessful/L10NSharp.dll ../../lib/L10NSharp.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt271/latest.lastSuccessful/L10NSharp.pdb ../../lib/L10NSharp.pdb
 		# End of script
 elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
         echo "windows"
 		mkdir -p ../BuildPathway/
-		mkdir -p ../ThirdParty
+		mkdir -p ../../lib
 
 		# download artifact dependencies
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt196/latest.lastSuccessful/L10NSharp.dll ../ThirdParty/L10NSharp.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt196/latest.lastSuccessful/L10NSharp.pdb ../ThirdParty/L10NSharp.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt196/latest.lastSuccessful/L10NSharp.dll ../../lib/L10NSharp.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt196/latest.lastSuccessful/L10NSharp.pdb ../../lib/L10NSharp.pdb
 		# End of script
 else
 echo "Unknown."

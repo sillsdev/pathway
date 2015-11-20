@@ -214,7 +214,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">
-      <HintPath>..\ThirdParty\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\..\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

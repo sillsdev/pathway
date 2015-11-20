@@ -51,7 +51,7 @@ Pathway is currently running under .net 4.0.
 
 Before building Pathway, the developer should install the latest L10NSharp library. This is done with
 `BuildPathway/getDependencies.sh`
-This command runs a bash script. (On Windows, make sure you have git installed and run from the bash window.) This will go to Team City and download the latest successful build of L10NSharp and put it in the ThirdParty folder.
+This command runs a bash script. (On Windows, make sure you have git installed and run from the bash window.) This will go to Team City and download the latest successful build of L10NSharp and put it in the lib folder.
 
 *Building on Windows*
 

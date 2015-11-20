@@ -231,25 +231,25 @@
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Antlr3.Runtime.dll</HintPath>
+      <HintPath>..\..\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="L10NSharp">
-      <HintPath>..\ThirdParty\L10NSharp.dll</HintPath>
+      <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities" />
     <Reference Include="NMock2, Version=2.0.0.44, Culture=neutral, PublicKeyToken=37d3be0adc87c2b7">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\NMock2.dll</HintPath>
+      <HintPath>..\..\lib\NMock2.dll</HintPath>
     </Reference>
     <Reference Include="Palaso">
-      <HintPath>..\ThirdParty\Palaso.dll</HintPath>
+      <HintPath>..\..\lib\Palaso.dll</HintPath>
     </Reference>
     <Reference Include="Palaso.Media">
-      <HintPath>..\ThirdParty\Palaso.Media.dll</HintPath>
+      <HintPath>..\..\lib\Palaso.Media.dll</HintPath>
     </Reference>
     <Reference Include="PalasoUIWindowsForms">
-      <HintPath>..\ThirdParty\PalasoUIWindowsForms.dll</HintPath>
+      <HintPath>..\..\lib\PalasoUIWindowsForms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -259,11 +259,11 @@
     <Reference Include="System.Security" />
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\nunit.framework.dll</HintPath>
+      <HintPath>..\..\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -504,11 +504,11 @@
     <Copy SourceFiles="@(License)" DestinationFolder="Files\ConfigurationTool" />
     <Copy SourceFiles="@(AllSettings)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BteSettings)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\Devart.Data.dll" DestinationFiles="$(OutputPath)\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\Devart.Data.xml" DestinationFiles="$(OutputPath)\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\sqlite3.dll" DestinationFiles="$(OutputPath)\sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\Devart.Data.dll" DestinationFiles="$(OutputPath)\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\Devart.Data.xml" DestinationFiles="$(OutputPath)\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\sqlite3.dll" DestinationFiles="$(OutputPath)\sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)\" />
     <Copy SourceFiles="@(BtePreview)" DestinationFolder="$(OutputPath)\" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(OfficeFiles)" DestinationFiles="@(OfficeFiles->'$(OutputPath)\OfficeFiles\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -743,7 +743,7 @@
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
     <XetexFiles Include="..\..\DistFiles\xetexPathway\**\*.*" />
     <WixSoftware Include="..\BuildPathway\WixSoftware\**\*.*" />
-    <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
+    <UsfmConvert Include="..\..\lib\ParatextShared.dll;..\..\lib\NetLoc.dll" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ScriptureStyleSettingsCopy.xml" />

@@ -357,11 +357,11 @@
     <Copy SourceFiles="@(epubValid)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" />
     <!-- validator is referenced even if not called -->
     <Copy SourceFiles="@(BteBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\Devart.Data.dll" DestinationFiles="Files\ConfigurationTool\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\Devart.Data.xml" DestinationFiles="Files\ConfigurationTool\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.dll" DestinationFiles="Files\ConfigurationTool\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\Devart.Data.SQLite.xml" DestinationFiles="Files\ConfigurationTool\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\ThirdParty\sqlite3.dll" DestinationFiles="Files\ConfigurationTool\sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\Devart.Data.dll" DestinationFiles="Files\ConfigurationTool\Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\Devart.Data.xml" DestinationFiles="Files\ConfigurationTool\Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\Devart.Data.SQLite.dll" DestinationFiles="Files\ConfigurationTool\Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\Devart.Data.SQLite.xml" DestinationFiles="Files\ConfigurationTool\Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\..\lib\sqlite3.dll" DestinationFiles="Files\ConfigurationTool\sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TestBackend)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Status)' == 'Testing' " />
     <!-- Copy SourceFiles="@(UsfmConvert)" DestinationFiles="Files\ConfigurationTool\%(Filename)%(Extension)" Condition=" '$(Edition)' == 'BTE' " / -->
     <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'Files\ConfigurationTool\Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -418,7 +418,7 @@
     <AllFileDirs Include="Files\**" />
     <ConfigurationTool Include="..\ConfigurationTool\$(OutputPath)\*.*" />
     <Plugin Include="..\PsExport\$(OutputPath)\*.*" />
-    <!-- GhostScript Include="..\ThirdParty\gsdll32.dll" / -->
+    <!-- GhostScript Include="..\..\lib\gsdll32.dll" / -->
     <EpubCheck Include="..\..\DistFiles\epubcheck-3.0.1\**\*.*" />
     <PdfLicenseManager Include="..\..\DistFiles\pdflicensemanager-2.3.jar" />
     <ApplyPdfLicense Include="..\ApplyPDFLicenseInfo\$(OutputPath)\ApplyPDFLicenseInfo.*" />
@@ -497,7 +497,7 @@
     <WordpressFiles Include="..\..\DistFiles\Wordpress\**\*.*" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
     <WixSoftware Include="WixSoftware\**\*.*" />
-    <UsfmConvert Include="..\ThirdParty\ParatextShared.dll;..\ThirdParty\NetLoc.dll" />
+    <UsfmConvert Include="..\..\lib\ParatextShared.dll;..\..\lib\NetLoc.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
     <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -553,12 +553,12 @@
     <Paratexmf Include="..\XeLaTexConvert\Paratexmf\**\*.*" />
   </ItemGroup>
   <Target Name="WebonaryBeforeBuild">
-    <MSBuild.ExtensionPack.FileSystem.FindUnder TaskAction="FindFiles" Path="$(MSBuildProjectDirectory)\..\ThirdParty" SearchPattern="lame*.zip">
+    <MSBuild.ExtensionPack.FileSystem.FindUnder TaskAction="FindFiles" Path="$(MSBuildProjectDirectory)\..\..\lib" SearchPattern="lame*.zip">
       <Output ItemName="AllFoundFiles" TaskParameter="FoundItems" />
     </MSBuild.ExtensionPack.FileSystem.FindUnder>
     <Message Text="===== Found Files =====" Importance="high" />
     <Message Text="AllFoundFiles:%0d%0a@(AllFoundFiles,'%0d%0a')" />
-    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="Files\ConfigurationTool\Lame" ZipFileName="..\ThirdParty\lame3.99.5.zip" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />
+    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="Files\ConfigurationTool\Lame" ZipFileName="..\..\lib\lame3.99.5.zip" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />
     <Delete Files="Files\ConfigurationTool\Lame\images\CVS\Entries.Extra.Old" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />
     <Delete Files="Files\ConfigurationTool\Lame\images\CVS\Entries.Old" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />
     <Delete Files="Files\ConfigurationTool\Lame\styles\CVS\Entries.Extra.Old" Condition=" '$(Status)' == 'Testing' and @(AllFoundFiles) != ''" />

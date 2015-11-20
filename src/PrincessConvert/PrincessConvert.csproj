@@ -146,11 +146,11 @@
   <ItemGroup>
     <Reference Include="AxInterop.AcroPDFLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\AxInterop.AcroPDFLib.dll</HintPath>
+      <HintPath>..\..\lib\AxInterop.AcroPDFLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.AcroPDFLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Interop.AcroPDFLib.dll</HintPath>
+      <HintPath>..\..\lib\Interop.AcroPDFLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />

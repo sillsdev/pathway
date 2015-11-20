@@ -4,7 +4,7 @@ if exist %base2%\ConfigurationTool\postBuild.bat goto anyCpu
 set base2=..\..\..\..
 set cfg2=bin\x86\%1
 :anyCpu
-xcopy %base2%\ThirdParty\gsdll32.dll . /y
+xcopy %base2%\..\lib\gsdll32.dll . /y
 xcopy %base2%\..\DistFiles\epubcheck-3.0.1\* .\epubcheck-3.0.1  /i /s /q /y
 xcopy %base2%\LiftPrepare\Lib\PalasoLib\*.dll . /y
 xcopy %base2%\HelpImprove\%cfg2%\HelpImprove.* . /y
@@ -40,7 +40,7 @@ xcopy %base2%\SwordConvert\%cfg2%\SwordConvert.* . /y
 xcopy %base2%\GoBibleConvert\%cfg2%\GoBibleConvert.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\theWordConvert.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\Devart*.* . /y
-xcopy %base2%\ThirdParty\sqlite3.* . /y
+xcopy %base2%\..\lib\sqlite3.* . /y
 xcopy %base2%\theWordConvert\%cfg2%\*.xml . /y
 xcopy %base2%\ParatextSupport\%cfg2%\ParatextSupport.* . /y
 xcopy %base2%\..\DistFiles\ScriptureStyleSettings.xml . /q /y

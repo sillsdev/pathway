@@ -212,17 +212,17 @@
   <ItemGroup>
     <Reference Include="Devart.Data, Version=5.0.953.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Devart.Data.dll</HintPath>
+      <HintPath>..\..\lib\Devart.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Devart.Data.SQLite, Version=5.2.161.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\Devart.Data.SQLite.dll</HintPath>
+      <HintPath>..\..\lib\Devart.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="L10NSharp, Version=2.0.17.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\L10NSharp.dll</HintPath>
+      <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Data.Sqlite">
       <Private>True</Private>
@@ -234,7 +234,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
