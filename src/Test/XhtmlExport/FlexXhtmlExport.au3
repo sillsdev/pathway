@@ -23,11 +23,11 @@ if $OutputPath = "" Then $OutputPath = "C:\tmp"
 
 $fwHome = EnvGet("FW_HOME")
 if not FileExists($fwHome & "\\FieldWorks.exe") Then
-	$fwHome = RegRead("HKEY_LOCAL_MACHINE\Software\SIL\Fieldworks\7.0", "RootCodeDir")
+	$fwHome = RegRead("HKEY_LOCAL_MACHINE\Software\SIL\Fieldworks\8", "RootCodeDir")
 	if not FileExists($fwHome & "\\FieldWorks.exe") Then
-		$fwHome = RegRead("HKEY_LOCAL_MACHINE\Software\\Wow6432Node\\SIL\\Fieldworks\\7.0", "RootCodeDir")
+		$fwHome = RegRead("HKEY_LOCAL_MACHINE\Software\\Wow6432Node\\SIL\\Fieldworks\\8", "RootCodeDir")
 		if not FileExists($fwHome & "\\FieldWorks.exe") Then
-			MsgBox(48, "Missing FieldWorks 7", "Unable to find location of FieldWorks 7")
+			MsgBox(48, "Missing FieldWorks 8", "Unable to find location of FieldWorks 8")
 			Exit
 		EndIf
 	EndIf
