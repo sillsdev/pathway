@@ -3842,7 +3842,7 @@ namespace Test.OpenOfficeConvert
                     Debug.Print(FileData.Get(file + "temp.txt"));
                 }
             }
-            TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
         ///<summary>
