@@ -143,7 +143,6 @@ src/Test/PsTool/TestFiles/InputFiles/xhtmlMain.xhtml
 src/CssParser/Jars/*
 src/CssParser/ThirdParty/*
 src/CadreBible*
-DistFiles/Help/*
 DistFiles/Wordpress/lame*
 DistFiles/xetexPathway/*
 src/Google/*

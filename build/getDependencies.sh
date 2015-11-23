@@ -92,21 +92,21 @@ cd -
 # make sure output directories exist
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
        echo "Linux"
-	   mkdir -p ../../Installer/
-	   mkdir -p ../../lib
+	   mkdir -p ../Installer/
+	   mkdir -p ../lib
 
 		# download artifact dependencies
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt271/latest.lastSuccessful/L10NSharp.dll ../../lib/L10NSharp.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt271/latest.lastSuccessful/L10NSharp.pdb ../../lib/L10NSharp.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt271/latest.lastSuccessful/L10NSharp.dll ../lib/L10NSharp.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt271/latest.lastSuccessful/L10NSharp.pdb ../lib/L10NSharp.pdb
 		# End of script
 elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
         echo "windows"
-		mkdir -p ../../Installer/
-		mkdir -p ../../lib
+		mkdir -p ../Installer/
+		mkdir -p ../lib
 
 		# download artifact dependencies
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt196/latest.lastSuccessful/L10NSharp.dll ../../lib/L10NSharp.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt196/latest.lastSuccessful/L10NSharp.pdb ../../lib/L10NSharp.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt196/latest.lastSuccessful/L10NSharp.dll ../lib/L10NSharp.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt196/latest.lastSuccessful/L10NSharp.pdb ../lib/L10NSharp.pdb
 		# End of script
 else
 echo "Unknown."
