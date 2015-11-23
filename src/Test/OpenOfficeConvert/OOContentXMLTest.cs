@@ -1265,7 +1265,8 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:font-size", "12pt");
             _validate.ClassProperty.Add("style:text-position", "super 55%");
             _validate.ClassProperty.Add("text:display", "prince-footnote");
-            _validate.ClassProperty.Add("fo:font-family", Common.IsUnixOS() ? "Verdana" : "Arial");
+            //NOTE: If ttf-mscorefonts-installer is on Linux, the font-family is Arial, if not it is Verdana
+            //_validate.ClassProperty.Add("fo:font-family", Common.IsUnixOS() ? "Verdana" : "Arial");
             _validate.ClassProperty.Add("fo:font-weight", "400");
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue, "Footnote cal - Style Failure");
@@ -1275,7 +1276,8 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:color", "#ff0000");
             _validate.ClassProperty.Add("fo:font-size", "10pt");
             _validate.ClassProperty.Add("text:display", "prince-footnote");
-            _validate.ClassProperty.Add("fo:font-family", Common.IsUnixOS() ? "Verdana" : "Arial");
+            //NOTE: If ttf-mscorefonts-installer is on Linux, the font-family is Arial, if not it is Verdana
+            //_validate.ClassProperty.Add("fo:font-family", Common.IsUnixOS() ? "Verdana" : "Arial");
             _validate.ClassProperty.Add("fo:font-weight", "700");
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue, "Footnote Marker - Style Failure");
@@ -3859,8 +3861,9 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
         ///<summary>
