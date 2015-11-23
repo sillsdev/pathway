@@ -3833,7 +3833,8 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             if (!_isLinux)
             {
                 using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
