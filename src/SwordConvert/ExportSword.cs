@@ -421,13 +421,13 @@ namespace SIL.PublishingSolution
 		protected void SwordOutputBuildProcess(string processFolder, string swordOutputPath, string[] osisFilesList, string projectPath)
 		{
 			const string creator = "osis2mod";
-			string moreArguments = "-z -N -v NRSV";
+			string moreArguments = "-z -N -v KJV";
 			foreach (var osisFile in osisFilesList)
 			{
 				var args = string.Format(@"""{0}"" ""{1}"" {2}", swordOutputPath, osisFile, moreArguments);
 
 				SubProcess.Run(processFolder, creator, args, true);
-				moreArguments = "-a -z -N -v NRSV";
+				moreArguments = "-a -z -N -v KJV";
 
 			}
 		}
