@@ -50,7 +50,6 @@
     <PreBuildEvent />
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>copy "$(SolutionDir)output\$(OutputName).msi" "$(SolutionDir)output\$(OutputName)-$(BuildNumber).msi"
-del "$(SolutionDir)output\$(OutputName).msi"</PostBuildEvent>
+    <PostBuildEvent />
   </PropertyGroup>
 </Project>
