@@ -309,7 +309,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="License\License.rtf" />
+    <None Include="..\Installer\License.rtf" />
     <None Include="Readme\ReadMePw.rtf" />
   </ItemGroup>
   <ItemGroup>
@@ -393,7 +393,7 @@
     <SeHelp Include="Help\Pathway_Configuration_Tool_SE.chm" />
     <BteStudent Include="Training\Pathway_Student_Manual_BTE.pdf" />
     <SeStudent Include="Training\Pathway_Student_Manual_SE.pdf" />
-    <License Include="License\License.rtf" />
+    <License Include="..\Installer\License.rtf" />
     <Readme Include="Readme\ReadMePw.rtf" />
     <Mets Include="mets.xml" />
     <AllSettings Include="DictionaryStyleSettings.xml" />

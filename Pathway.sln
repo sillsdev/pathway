@@ -69,6 +69,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwordConvert", "src\SwordConvert\SwordConvert.csproj", "{448FDD03-71C0-4C86-9878-BC81ACC440C0}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "Installer\Installer.wixproj", "{ED6722BE-05EC-4683-A55F-BC305CEFC453}"
+	ProjectSection(ProjectDependencies) = postProject
+		{168871A6-2191-4E4A-85E1-E2BB8592265E} = {168871A6-2191-4E4A-85E1-E2BB8592265E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistFiles", "DistFiles\DistFiles.csproj", "{168871A6-2191-4E4A-85E1-E2BB8592265E}"
 	ProjectSection(ProjectDependencies) = postProject
