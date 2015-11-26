@@ -485,6 +485,11 @@
 
   <!-- q2 -->
   <xsl:template match="para[@style='q2']">
+    <xsl:if test="not(preceding-sibling::para[1][starts-with(@style,'q')])">
+      <xsl:value-of disable-output-escaping="yes"
+        select="concat('&lt;','p type=&quot;embedded&quot;','&gt;')"/>
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','lg','&gt;')"/>
+    </xsl:if>
     <l level="2">
       <xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
       <xsl:apply-templates/>
@@ -497,6 +502,11 @@
 
   <!-- q3 -->
   <xsl:template match="para[@style='q3']">
+    <xsl:if test="not(preceding-sibling::para[1][starts-with(@style,'q')])">
+      <xsl:value-of disable-output-escaping="yes"
+        select="concat('&lt;','p type=&quot;embedded&quot;','&gt;')"/>
+      <xsl:value-of disable-output-escaping="yes" select="concat('&lt;','lg','&gt;')"/>
+    </xsl:if>
     <l level="3">
       <xsl:text>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;</xsl:text>
       <xsl:apply-templates/>

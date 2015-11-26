@@ -4207,7 +4207,7 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
             _validate.ClassName = "Paragraph_scrBook_scrBody";
-            const string content = "17\n Epʉraꞌan awonsiꞌkɨ Tepiꞌ, kin pe teꞌsen pʉꞌkʉ pona, 14 kaisa rɨ itamo­kori ton uꞌtɨsaꞌ esiꞌpʉ mɨrɨ.";
+			const string content = "17\n Epʉraꞌan awonsiꞌkɨ Tepiꞌ, kin pe teꞌsen pʉꞌkʉ pona, 14 kaisa rɨ itamokori ton uꞌtɨsaꞌ esiꞌpʉ mɨrɨ.";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1, "Hyphenation word test failure");
             Param.HyphenEnable = false;
