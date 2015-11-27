@@ -2075,7 +2075,7 @@ namespace Test.OpenOfficeConvert
 
             _validate.ClassProperty.Add("style:vertical-pos", "from-top");
             _validate.ClassProperty.Add("style:vertical-rel", "paragraph-content");
-            _validate.ClassProperty.Add("style:horizontal-pos", "right");
+            _validate.ClassProperty.Add("style:horizontal-pos", "center");
             _validate.ClassProperty.Add("style:horizontal-rel", "paragraph");
 
             _validate.ClassProperty.Add("run-through", "foreground");
@@ -2105,7 +2105,7 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = "fr3";
             _validate.ClassProperty.Add("style:vertical-pos", "from-top");
             _validate.ClassProperty.Add("style:vertical-rel", "paragraph-content");
-            _validate.ClassProperty.Add("style:horizontal-pos", "right");
+            _validate.ClassProperty.Add("style:horizontal-pos", "center");
             _validate.ClassProperty.Add("style:horizontal-rel", "paragraph");
 
             _validate.ClassProperty.Add("run-through", "foreground");

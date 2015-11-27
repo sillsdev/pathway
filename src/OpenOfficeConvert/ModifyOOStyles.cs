@@ -777,13 +777,13 @@ namespace SIL.PublishingSolution
                 else if (displayProperty == "frame")
                 {
                     wrap = "dynamic";
-                    displayProperty = "right";
+					displayProperty = "center";
                 }
 
                 _nameElement = (XmlElement)node.ChildNodes[1];
                 SetAttribute("foreground", "style:run-through");
                 SetAttribute(wrap, "style:wrap");
-                SetAttribute("no-limit", "style:number-wrapped-paragraphs");
+                SetAttribute("1", "style:number-wrapped-paragraphs");
                 SetAttribute("false", "style:wrap-contour");
                 SetAttribute("from-top", "style:vertical-pos");
                 SetAttribute("paragraph-content", "style:vertical-rel");
@@ -845,13 +845,13 @@ namespace SIL.PublishingSolution
                 else if (displayProperty == "frame")
                 {
                     wrap = "dynamic";
-                    displayProperty = "right";
+                    displayProperty = "center";
                 }
 
                 _nameElement = (XmlElement)node.ChildNodes[1];
                 SetAttribute("foreground", "style:run-through");
                 SetAttribute(wrap, "style:wrap");
-                SetAttribute("no-limit", "style:number-wrapped-paragraphs");
+                SetAttribute("1", "style:number-wrapped-paragraphs");
                 SetAttribute("false", "style:wrap-contour");
                 SetAttribute("from-top", "style:vertical-pos");
                 SetAttribute("paragraph-content", "style:vertical-rel");

@@ -2230,9 +2230,6 @@ namespace SIL.PublishingSolution
         private void SetPageNumberInFrame()
         {
 
-
-
-
             string mainFrameName = "Mfr1";
 
             _writer.WriteStartElement("draw:frame");
