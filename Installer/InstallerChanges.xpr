@@ -10,26 +10,11 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>../../../Desktop/wixFIles/ReleaseBTE/Features.wxs</String>
+                                    <String>../../../Desktop/wixFIles/ReleaseBTE/FeaturesU.wxs</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>UniqueId</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>../../../Desktop/wixFIles/ReleaseBTE/Files.wxs</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>UniqueId</String>
+                                        <String>Application</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -55,11 +40,26 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>../../../Desktop/wixFIles/ReleaseBTE/FeaturesU.wxs</String>
+                                    <String>../../../Desktop/wixFIles/ReleaseBTE/Features.wxs</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>Application</String>
+                                        <String>UniqueId</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../Desktop/wixFIles/ReleaseBTE/Files.wxs</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>UniqueId</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -367,6 +367,10 @@
                                 </field>
                             </scenario>
                         </scenario-array>
+                    </entry>
+                    <entry>
+                        <String>validation.scenarios</String>
+                        <validationScenario-array/>
                     </entry>
                 </map>
             </serialized>
