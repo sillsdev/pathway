@@ -2075,7 +2075,7 @@ namespace Test.OpenOfficeConvert
 
             _validate.ClassProperty.Add("style:vertical-pos", "from-top");
             _validate.ClassProperty.Add("style:vertical-rel", "paragraph-content");
-            _validate.ClassProperty.Add("style:horizontal-pos", "right");
+            _validate.ClassProperty.Add("style:horizontal-pos", "center");
             _validate.ClassProperty.Add("style:horizontal-rel", "paragraph");
 
             _validate.ClassProperty.Add("run-through", "foreground");
@@ -2105,7 +2105,7 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = "fr3";
             _validate.ClassProperty.Add("style:vertical-pos", "from-top");
             _validate.ClassProperty.Add("style:vertical-rel", "paragraph-content");
-            _validate.ClassProperty.Add("style:horizontal-pos", "right");
+            _validate.ClassProperty.Add("style:horizontal-pos", "center");
             _validate.ClassProperty.Add("style:horizontal-rel", "paragraph");
 
             _validate.ClassProperty.Add("run-through", "foreground");
@@ -4207,7 +4207,7 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
             _validate.ClassName = "Paragraph_scrBook_scrBody";
-            const string content = "17\n Epʉraꞌan awonsiꞌkɨ Tepiꞌ, kin pe teꞌsen pʉꞌkʉ pona, 14 kaisa rɨ itamo­kori ton uꞌtɨsaꞌ esiꞌpʉ mɨrɨ.";
+			const string content = "17\n Epʉraꞌan awonsiꞌkɨ Tepiꞌ, kin pe teꞌsen pʉꞌkʉ pona, 14 kaisa rɨ itamokori ton uꞌtɨsaꞌ esiꞌpʉ mɨrɨ.";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1, "Hyphenation word test failure");
             Param.HyphenEnable = false;

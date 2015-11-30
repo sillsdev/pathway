@@ -2,7 +2,7 @@
 <usx version="2.0">
     <book code="RUT" style="id">- Perjanjian 
         Lama 
-        Melayu Ambon</book>
+        Melayu Ambon
     <para style="h">Rut</para>
     <para style="imt">Kata-Kata Partama</para>
     <para style="ip">Kitab <char style="bk">Rut</char> ni carita soal Rut, parampuang Moab yang
@@ -372,4 +372,5 @@
     <para style="q2">Boas tu pung ana par Obet.</para>
     <para style="q2"><verse number="22" style="v"/>La Obet ni pung ana par Isai.</para>
     <para style="q2">Isai ni pung ana par Daud.</para>
+    </book>
 </usx>
