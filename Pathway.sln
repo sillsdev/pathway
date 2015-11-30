@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InDesignConvert", "src\InDesignConvert\InDesignConvert.csproj", "{8D0D307D-3785-4561-A923-FF3DDF6C2F14}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsTool", "src\PsTool\PsTool.csproj", "{448F846F-CE23-462C-BF7E-827875A36F82}"
+	ProjectSection(ProjectDependencies) = postProject
+		{168871A6-2191-4E4A-85E1-E2BB8592265E} = {168871A6-2191-4E4A-85E1-E2BB8592265E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBed", "src\TestBed\TestBed.csproj", "{C7A57432-7AE4-456F-90FF-51582DE1BA65}"
 EndProject

@@ -255,68 +255,8 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\ConfigurationTool\ConfigurationTool.csproj">
-      <Project>{C1ED7E03-C92E-4223-909B-E9C35A4D98E2}</Project>
-      <Name>ConfigurationTool</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\CssDialog\CssDialog.csproj">
-      <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
-      <Name>CssDialog</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\CssParser\CssParser.csproj">
-      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
-      <Name>CssParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\epubConvert\epubConvert.csproj">
-      <Project>{B19037F2-26F7-48A2-9301-B5CA335C6824}</Project>
-      <Name>epubConvert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\epubValidator\epubValidator.csproj">
-      <Project>{403F8C54-4154-4D79-AED7-326B976875B4}</Project>
-      <Name>epubValidator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\GoBibleConvert\GoBibleConvert.csproj">
-      <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
-      <Name>GoBibleConvert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\InDesignConvert\InDesignConvert.csproj">
-      <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
-      <Name>InDesignConvert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\OpenOfficeConvert\OpenOfficeConvert.csproj">
-      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
-      <Name>OpenOfficeConvert</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\ParatextSupport\ParatextSupport.csproj">
-      <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
-      <Name>ParatextSupport</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\PathwayB\PathwayB.csproj">
-      <Project>{24E32D8C-5ECF-4263-98C1-C15D1A05ABDE}</Project>
-      <Name>PathwayB</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\PsExport\PsExport.csproj">
-      <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
-      <Name>PsExport</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\PsTool\PsTool.csproj">
-      <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
-      <Name>PsTool</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\WordPressConvert\WordPressConvert.csproj">
-      <Project>{12FE8988-5957-427D-BA6C-B4C601F5A558}</Project>
-      <Name>WordPressConvert</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\Installer\License.rtf" />
     <None Include="Readme\ReadMePw.rtf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="BuildTasks, Version=1.0.6.1920, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>BuildTasks.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -373,7 +313,7 @@
     <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'$(OutputPath)Paratexmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
     <Copy SourceFiles="@(InstallTex)" DestinationFiles="@(InstallTex->'$(OutputPath)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
   </Target>
-  <Target Name="AfterBuild"/>
+  <Target Name="AfterBuild" />
   <ItemGroup>
     <EpubCheck Include="epubcheck-3.0.1\**\*.*" />
     <PdfLicenseManager Include="pdflicensemanager-2.3.jar" />
@@ -496,5 +436,11 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\BuildTasks\BuildTasks.csproj">
+      <Project>{b0b420fe-6e6c-421c-a6f2-a9e349fc3ea9}</Project>
+      <Name>BuildTasks</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
