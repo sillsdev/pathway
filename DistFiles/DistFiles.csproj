@@ -4,10 +4,10 @@
   <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.FindUnder" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.UI.Dialog" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.Computer.EnvironmentVariable" AssemblyFile="MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="UpdateAssemblies" AssemblyFile="..\Installer\BuildTasks.dll" />
-  <UsingTask TaskName="UpdateVersion" AssemblyFile="..\Installer\BuildTasks.dll" />
-  <UsingTask TaskName="ZeroCheck" AssemblyFile="..\Installer\BuildTasks.dll" />
-  <UsingTask TaskName="FileComponents" AssemblyFile="..\Installer\BuildTasks.dll" />
+  <UsingTask TaskName="UpdateAssemblies" AssemblyFile="BuildTasks.dll" />
+  <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
+  <UsingTask TaskName="ZeroCheck" AssemblyFile="BuildTasks.dll" />
+  <UsingTask TaskName="FileComponents" AssemblyFile="BuildTasks.dll" />
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
   <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="MSBuild.ExtensionPack.dll" />
