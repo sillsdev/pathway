@@ -2,10 +2,12 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.FindUnder" AssemblyFile="MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="UpdateReadme" AssemblyFile="BuildTasks.dll" />
-  <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
-  <UsingTask TaskName="ZeroCheck" AssemblyFile="BuildTasks.dll" />
-  <UsingTask TaskName="FileComponents" AssemblyFile="BuildTasks.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.UI.Dialog" AssemblyFile="MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Computer.EnvironmentVariable" AssemblyFile="MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="UpdateAssemblies" AssemblyFile="..\Installer\BuildTasks.dll" />
+  <UsingTask TaskName="UpdateVersion" AssemblyFile="..\Installer\BuildTasks.dll" />
+  <UsingTask TaskName="ZeroCheck" AssemblyFile="..\Installer\BuildTasks.dll" />
+  <UsingTask TaskName="FileComponents" AssemblyFile="..\Installer\BuildTasks.dll" />
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
   <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="MSBuild.ExtensionPack.dll" />
@@ -262,9 +264,21 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
-    <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' and '$(ConfTag)' != 'YouVersion' " />
-    <Delete Files="$(OutputPath)LibreOfficeConvert.dll;$(OutputPath)LibreOfficeConvert.pdb" Condition=" '$(Edition)' == 'EPUB'" />
+    <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' " />
+    <CallTarget Targets="GetBuildNumber" Condition="'$(BUILD_NUMBER)' == '' and '$(Configuration)' != 'Debug'" />
+    <CallTarget Targets="UpdateAssemblies" Condition="'$(BUILD_NUMBER)' != '' and '$(Configuration)' != 'Debug'" />
     <CallTarget Targets="XeLaTeXBeforeBuild" Condition=" '$(ConfTag)' == 'XeLaTeX' " />
+  </Target>
+  <Target Name="GetBuildNumber">
+    <MSBuild.ExtensionPack.UI.Dialog TaskAction="Prompt" Title="Enter Build Number" Text="BuildNumber: $(BUILD_NUMBER)" Button1Text="Ok" Button2Text="Cancel">
+      <Output PropertyName="BUILD_NUMBER" TaskParameter="UserText" />
+    </MSBuild.ExtensionPack.UI.Dialog>
+    <Message Text="User entered BuildNumber: $(BUILD_NUMBER)" Importance="high" />
+	<UpdateAssemblies RootFolder="$(SolutionDir)" Product="$(SolutionDir)\Installer\Pathway.wxs" BuildNumber="$(BUILD_NUMBER)"/>
+  </Target>
+  <Target Name="UpdateAssemblies">
+	<UpdateAssemblies RootFolder="$(SolutionDir)" Product="$(SolutionDir)\Installer\Pathway.wxs" BuildNumber="$(BUILD_NUMBER)"/>
+    <Message Text="BuildNumber: $(BUILD_NUMBER)" Importance="high" />
   </Target>
   <Target Name="BeforeBuild">
     <!-- validator is referenced even if not called -->
@@ -443,4 +457,8 @@
       <Name>BuildTasks</Name>
     </ProjectReference>
   </ItemGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>

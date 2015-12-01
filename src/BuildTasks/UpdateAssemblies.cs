@@ -15,8 +15,12 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -32,6 +36,16 @@ namespace BuildTasks
         {
             get { return _rootFolder; }
             set { _rootFolder = value; }
+        }
+        #endregion RootFolder
+
+        #region Product
+        private string _product;
+        [Required]
+        public string Product
+        {
+            get { return _product; }
+            set { _product = value; }
         }
         #endregion RootFolder
 
@@ -53,6 +67,10 @@ namespace BuildTasks
             if (!match.Success)
                 return false;
             UpdateVersion(_rootFolder, _buildNumber);
+            var result = UpdateProduct(_product, _buildNumber);
+            const bool overwrite = true;
+            File.Copy(result, _product, overwrite);
+            File.Delete(result);
             return true;
         }
 
@@ -87,5 +105,39 @@ namespace BuildTasks
             }
         }
         #endregion UpdateVersion
+
+        #region UpdateProduct
+        public static string UpdateProduct(string product, string buildNumber)
+        {
+            var prodDoc = new XmlDocument{XmlResolver = null};
+            prodDoc.Load(product);
+            XmlProcessingInstruction lastOne = null;
+            bool foundIt = false;
+            Debug.Assert(prodDoc.DocumentElement != null, "prodDoc.DocumentElement != null");
+            foreach (var childNode in prodDoc.ChildNodes.Cast<XmlNode>().Where(childNode => childNode.NodeType == XmlNodeType.ProcessingInstruction).Cast<XmlProcessingInstruction>())
+            {
+                if (childNode.Value.StartsWith("BUILD_NUMBER"))
+                {
+                    childNode.Value = string.Format(@"BUILD_NUMBER=""{0}""", buildNumber);
+                    foundIt = true;
+                }
+                else
+                {
+                    lastOne = childNode;
+                }
+            }
+            if (!foundIt)
+            {
+                var verProcInst = prodDoc.CreateProcessingInstruction("define",
+                    string.Format(@"BUILD_NUMBER=""{0}""", buildNumber));
+                prodDoc.InsertAfter(verProcInst, lastOne);
+            }
+            var tempName = Path.GetTempFileName();
+            var writer = XmlTextWriter.Create(tempName, new XmlWriterSettings {Indent = true, Encoding = Encoding.UTF8});
+            prodDoc.Save(writer);
+            writer.Close();
+            return tempName;
+        }
+        #endregion UpdateProduct
     }
 }
