@@ -1,16 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
-  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.FindUnder" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="MSBuild.ExtensionPack.UI.Dialog" AssemblyFile="MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.Computer.EnvironmentVariable" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <UsingTask TaskName="UpdateAssemblies" AssemblyFile="BuildTasks.dll" />
-  <UsingTask TaskName="UpdateVersion" AssemblyFile="BuildTasks.dll" />
-  <UsingTask TaskName="ZeroCheck" AssemblyFile="BuildTasks.dll" />
-  <UsingTask TaskName="FileComponents" AssemblyFile="BuildTasks.dll" />
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
-  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>

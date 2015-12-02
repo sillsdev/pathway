@@ -17,12 +17,13 @@
 using System;
 using System.Collections;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace BuildTasks
 {
@@ -39,48 +40,31 @@ namespace BuildTasks
         }
         #endregion BasePath
 
-        #region FilesTemplate
-        private string _filesTemplate;
+        #region ApplicationFileName
+        private string _applicationFileName;
         [Required]
-        public string FilesTemplate
+        public string ApplicationFileName
         {
-            get { return _filesTemplate; }
-            set { _filesTemplate = value; }
+            get { return _applicationFileName; }
+            set { _applicationFileName = value; }
         }
-        #endregion FilesTemplate
-
-        #region FeaturesTemplate
-        private string _featuresTemplate;
-        [Required]
-        public string FeaturesTemplate
-        {
-            get { return _featuresTemplate; }
-            set { _featuresTemplate = value; }
-        }
-        #endregion FeaturesTemplate
+        #endregion ApplicationFileName
         #endregion Properties
 
         protected readonly XmlDocument XDoc = new XmlDocument();
+        private const string Wixns = "http://schemas.microsoft.com/wix/2006/wi";
 
         public override bool Execute()
         {
-            var map = new Dictionary<string, string>();
             var path = _basePath;
             LoadGuids(Path.Combine(path, "FileLibrary.xml"));
-            var directoryInfo = new DirectoryInfo(Path.Combine(path, "Files"));
-            foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
-            {
-                ResetFileComponents();
-                ProcessTree((XmlElement)XDoc.SelectSingleNode("//Files"), directory.FullName);
-                AddFeatures();
-                map[directory.Name + "Files"] = XDoc.SelectSingleNode("//Files//Directory").InnerXml;
-                map[directory.Name + "Features"] = XDoc.SelectSingleNode("//Features").InnerXml;
-            }
-            var sub = new Substitution { TargetPath = path };
-            sub.FileSubstitute(_filesTemplate, map, "Files.wxs");
-            sub.FileSubstitute(_featuresTemplate, map, "Features.wxs");
-            FileData.MoveToWix(Path.Combine(path,"Files.wxs"));
-            FileData.MoveToWix(Path.Combine(path, "Features.wxs"));
+            var directoryInfo = new DirectoryInfo(Path.Combine(path, "../output/Release"));
+            ResetFileComponents();
+            ProcessFoldersAndFiles((XmlElement)XDoc.SelectSingleNode("//*[@Id='APPLICATIONFOLDER']"), directoryInfo);
+            AddFeatures();
+            var writer = XmlWriter.Create(_applicationFileName, new XmlWriterSettings { Indent = true, Encoding = Encoding.UTF8 });
+            XDoc.WriteTo(writer);
+            writer.Close();
             SaveGuids(Path.Combine(path, "FileLibrary.xml"));
             return true;
         }
@@ -88,7 +72,9 @@ namespace BuildTasks
         protected void ResetFileComponents()
         {
             XDoc.RemoveAll();
-            XDoc.LoadXml("<partial><Files/><Features/></partial>");
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("BuildTasks.ApplicationTemplate.wxs");
+            Debug.Assert(stream != null, "ApplicationTemplate.wxs missing from BuildTasks project resources");
+            XDoc.Load(XmlReader.Create(stream));
         }
 
         protected readonly ArrayList CompIds = new ArrayList();
@@ -97,35 +83,41 @@ namespace BuildTasks
         {
             var info = new DirectoryInfo(path);
             if (info.Name.Substring(0,1) == ".") return;
-            XmlElement dirElem = CreateFileSystemElement("Directory", info);
+            var dirElem = CreateFileSystemElement("Directory", info);
+            ProcessFoldersAndFiles(dirElem, info);
+            parent.AppendChild(dirElem);
+        }
+
+        private void ProcessFoldersAndFiles(XmlElement parent, DirectoryInfo info)
+        {
             foreach (DirectoryInfo directoryInfo in info.GetDirectories())
             {
-                ProcessTree(dirElem, directoryInfo.FullName);
+                ProcessTree(parent, directoryInfo.FullName);
             }
             foreach (FileInfo fileInfo in info.GetFiles())
             {
-                var compElem = XDoc.CreateElement("Component");
+                var compElem = XDoc.CreateElement("Component", Wixns);
                 var fileElem = CreateFileSystemElement("File", fileInfo);
                 AddAttribute("Checksum", "yes", fileElem);
-                AddAttribute("KeyPath",  "yes", fileElem);
-                AddAttribute("DiskId",   "1",   fileElem);
+                AddAttribute("KeyPath", "yes", fileElem);
+                AddAttribute("DiskId", "1", fileElem);
                 AddAttribute("Source", GetSource(fileInfo), fileElem);
                 compElem.AppendChild(fileElem);
                 var compId = fileElem.Attributes.GetNamedItem("Id").Value;
                 CompIds.Add(compId);
                 AddAttribute("Id", compId, compElem);
                 AddAttribute("Guid", GetGuid(fileInfo), compElem);
-                dirElem.AppendChild(compElem);
+                parent.AppendChild(compElem);
             }
-            parent.AppendChild(dirElem);
         }
 
         protected void AddFeatures()
         {
-            XmlNode features = XDoc.SelectSingleNode("//Features");
+            var features = XDoc.SelectSingleNode("//*[@Id='Application']");
+            Debug.Assert(features != null, "features != null");
             foreach (string compId in CompIds)
             {
-                var compElem = XDoc.CreateElement("ComponentRef");
+                var compElem = XDoc.CreateElement("ComponentRef", Wixns);
                 AddAttribute("Id", compId, compElem);
                 features.AppendChild(compElem);
             }
@@ -135,7 +127,8 @@ namespace BuildTasks
 
         protected string GetGuid(FileInfo fileInfo)
         {
-            var guidPathKey = GetSource(fileInfo).Substring(3);
+            const string pathbase = @"output\Release";
+            var guidPathKey = GetSource(fileInfo).Substring(4 + pathbase.Length);
             if (Guids.ContainsKey(guidPathKey))
                 return Guids[guidPathKey];
             var guid = Guid.NewGuid().ToString().ToUpper();
@@ -145,45 +138,47 @@ namespace BuildTasks
 
         protected void LoadGuids(string libraryPath)
         {
-            XmlDocument GuidStore = new XmlDocument();
-            GuidStore.Load(libraryPath);
+            var guidStore = new XmlDocument();
+            guidStore.Load(libraryPath);
             ResetIds();
-            foreach (XmlNode child in GuidStore.DocumentElement.ChildNodes)
+            Debug.Assert(guidStore.DocumentElement != null, "GuidStore.DocumentElement != null");
+            foreach (XmlNode child in guidStore.DocumentElement.ChildNodes)
+            {
+                Debug.Assert(child.Attributes != null, "child.Attributes != null");
                 Guids[child.Attributes.GetNamedItem("Path").Value] =
                     child.Attributes.GetNamedItem("ComponentGuid").Value;
+            }
         }
 
         protected void SaveGuids(string libraryPath)
         {
-            XmlDocument GuidStore = new XmlDocument();
-            GuidStore.LoadXml("<FileLibrary/>");
+            var guidStore = new XmlDocument();
+            guidStore.LoadXml("<FileLibrary/>");
             foreach (string key in Guids.Keys)
             {
-                var guidElem = GuidStore.CreateElement("File");
-                AddAttribute("Path", key, guidElem, GuidStore);
-                AddAttribute("ComponentGuid", Guids[key], guidElem, GuidStore);
-                GuidStore.DocumentElement.AppendChild(guidElem);
+                var guidElem = guidStore.CreateElement("File");
+                AddAttribute("Path", key, guidElem, guidStore);
+                AddAttribute("ComponentGuid", Guids[key], guidElem, guidStore);
+                Debug.Assert(guidStore.DocumentElement != null, "GuidStore.DocumentElement != null");
+                guidStore.DocumentElement.AppendChild(guidElem);
             }
 
-            var writer = new XmlTextWriter(libraryPath, Encoding.UTF8);
-            GuidStore.WriteTo(writer);
+            var writer = XmlWriter.Create(libraryPath, new XmlWriterSettings{Indent = true, Encoding = Encoding.UTF8});
+            guidStore.WriteTo(writer);
             writer.Close();
         }
 
         protected string GetSource(FileInfo fileInfo)
         {
-            var idx = fileInfo.FullName.IndexOf("\\Files\\");
+            var idx = fileInfo.FullName.IndexOf(@"\output\", StringComparison.Ordinal);
             return ".." + fileInfo.FullName.Substring(idx);
         }
 
         private XmlElement CreateFileSystemElement(string tag, FileSystemInfo info)
         {
-            var elem = XDoc.CreateElement(tag);
+            var elem = XDoc.CreateElement(tag, Wixns);
             AddAttribute("Id", MakeId(info.Name), elem);
-            var shortName = Path.GetFileName(ShortName(info.FullName));
-            AddAttribute("Name", shortName, elem);
-            if (info.Name != shortName)
-                AddAttribute("LongName", info.Name, elem);
+            AddAttribute("Name", info.Name, elem);
             return elem;
         }
 
@@ -204,7 +199,7 @@ namespace BuildTasks
         protected static readonly Dictionary<string,int> AllIds = new Dictionary<string, int>();
         protected string MakeId(string name)
         {
-            var id = name.ToCharArray();
+            var id = name.ToLower().ToCharArray();
             const string validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.";
             const int notFound = -1;
             for (int iChar = 0; iChar < id.Length; iChar += 1)
@@ -238,21 +233,6 @@ namespace BuildTasks
             Guids.Clear();
             AllIds.Clear();
             CompIds.Clear();
-        }
-
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
-        public static extern uint GetShortPathName(string lpszLongPath, StringBuilder lpszShortPath, uint cchBuffer);
-
-        public string ShortName(string name)
-        {
-            var length = GetShortPathName(name, null, 0);
-            if (length == 0)
-                throw new OutOfMemoryException("No space for short name");
-            StringBuilder buffer = new StringBuilder(int.Parse(length.ToString()));
-            var result = GetShortPathName(name, buffer, length);
-            if (result == 0)
-                throw new ArgumentException("Unable to create short name");
-            return buffer.ToString();
         }
     }
 }

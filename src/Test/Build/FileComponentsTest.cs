@@ -42,20 +42,9 @@ namespace Test.Build
         {
             ResetIds();
             var actual = MakeId("ConfigurationTool");
-            Assert.AreEqual("ConfigurationTool", actual);
+            Assert.AreEqual("configurationtool", actual);
             var actual2 = MakeId("ConfigurationTool");
-            Assert.AreEqual("ConfigurationTool2", actual2);
-        }
-
-        [Test]
-        public void ShortNameTest()
-        {
-            if (Common.IsUnixOS())
-            {
-                return;
-            }
-            var actual = ShortName(_tf.Input("Files/ConfigurationTool"));
-            Assert.AreEqual("CONFIG~1", Path.GetFileName(actual));
+            Assert.AreEqual("configurationtool2", actual2);
         }
 
         [Test]
@@ -68,38 +57,25 @@ namespace Test.Build
             ResetIds();
             var inputGuids = _tf.Input("FileLibrary.xml");
             LoadGuids(inputGuids);
-            DirectoryInfo directoryInfo = new DirectoryInfo(_tf.Input("Files"));
+            DirectoryInfo directoryInfo = new DirectoryInfo(_tf.Input(@"output\Release"));
             foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
             {
                 ResetFileComponents();
-                ProcessTree((XmlElement)XDoc.SelectSingleNode("//Files"), directory.FullName);
+                ProcessTree((XmlElement)XDoc.SelectSingleNode("//*[@Id='APPLICATIONFOLDER']"), directory.FullName);
                 AddFeatures();
             }
             
             // Check File & Features Match
-            var actualPath = _tf.Output("partial.xml");
-            var writer = new XmlTextWriter(actualPath, Encoding.UTF8);
+            var actualPath = _tf.Output("Application.wxs");
+            var writer = XmlTextWriter.Create(actualPath, new XmlWriterSettings{Indent = true, Encoding = Encoding.UTF8});
             XDoc.WriteTo(writer);
             writer.Close();
-            XmlAssert.AreEqual(_tf.Expected("Partial ConfigurationTool.wxs"),actualPath, "File Feature format changed");
+            XmlAssert.AreEqual(_tf.Expected("Application.wxs"),actualPath, "File Feature format changed");
             
             // Check no Guids created
             var actualGuids = _tf.Output("FileLibrary.xml");
             SaveGuids(actualGuids);
             XmlAssert.AreEqual(inputGuids, actualGuids, "Guids changed");
-        }
-
-        [Test]
-        public void ExecuteTest()
-        {
-            FolderTree.Copy(_tf.Input(""), _tf.Output(""));
-            BasePath = _tf.Output("");
-            FilesTemplate = "FilesPw7-tpl.wxs";
-            FeaturesTemplate = "FeaturesPw7-tpl.wxs";
-            if (!Common.IsUnixOS())
-            {
-                Execute();
-            }
         }
     }
 }
