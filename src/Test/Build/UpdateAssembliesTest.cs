@@ -14,14 +14,9 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Xml;
 using BuildTasks;
 using NUnit.Framework;
-using SIL.Tool;
 
 namespace Test.Build
 {
@@ -45,7 +40,7 @@ namespace Test.Build
             const bool overwrite = true;
             File.Copy(result, _tf.Output("Pathway.wxs"), overwrite);
             File.Delete(result);
-            FileAssert.AreEqual(_tf.Expected("Pathway.wxs"), _tf.Output("Pathway.wxs"));
+            XmlAssert.AreEqual(_tf.Expected("Pathway.wxs"), _tf.Output("Pathway.wxs"),"Pathway Product File mismatch on insert");
         }
 
         [Test]
@@ -55,7 +50,7 @@ namespace Test.Build
             const bool overwrite = true;
             File.Copy(result, _tf.Output("Pathway2.wxs"), overwrite);
             File.Delete(result);
-            FileAssert.AreEqual(_tf.Expected("Pathway2.wxs"), _tf.Output("Pathway2.wxs"));
+            XmlAssert.AreEqual(_tf.Expected("Pathway2.wxs"), _tf.Output("Pathway2.wxs"), "Pathway Product File mismatch on change");
         }
 
     }
