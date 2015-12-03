@@ -267,8 +267,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Build\FileComponentsTest.cs" />
-    <Compile Include="Build\UpdateAssembliesTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
     <Compile Include="CssDialog\AboutPwTest.cs">
