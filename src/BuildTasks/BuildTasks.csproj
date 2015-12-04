@@ -103,9 +103,6 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <Copy SourceFiles="$(OutDir)BuildTasks.dll" DestinationFolder="..\..\Installer" />
+    <Copy SourceFiles="$(OutDir)BuildTasks.dll" DestinationFolder="$(SolutionDir)Installer" />
   </Target>
-  <PropertyGroup>
-    <PostBuildEvent>copy $(TargetPath) $(SolutionDir)Installer</PostBuildEvent>
-  </PropertyGroup>
 </Project>
