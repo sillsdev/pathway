@@ -12,8 +12,8 @@
     <ProjectGuid>{168871A6-2191-4E4A-85E1-E2BB8592265E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Installer</RootNamespace>
-    <AssemblyName>Installer</AssemblyName>
+    <RootNamespace>DistFiles</RootNamespace>
+    <AssemblyName>DistFiles</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -267,10 +267,10 @@
       <Output PropertyName="BUILD_NUMBER" TaskParameter="UserText" />
     </MSBuild.ExtensionPack.UI.Dialog>
     <Message Text="User entered BuildNumber: $(BUILD_NUMBER)" Importance="high" />
-	<UpdateAssemblies RootFolder="$(SolutionDir)" Product="$(SolutionDir)\Installer\Pathway.wxs" BuildNumber="$(BUILD_NUMBER)"/>
+    <UpdateAssemblies RootFolder="$(SolutionDir)" Product="$(SolutionDir)\Installer\Pathway.wxs" BuildNumber="$(BUILD_NUMBER)" />
   </Target>
   <Target Name="UpdateAssemblies">
-	<UpdateAssemblies RootFolder="$(SolutionDir)" Product="$(SolutionDir)\Installer\Pathway.wxs" BuildNumber="$(BUILD_NUMBER)"/>
+    <UpdateAssemblies RootFolder="$(SolutionDir)" Product="$(SolutionDir)\Installer\Pathway.wxs" BuildNumber="$(BUILD_NUMBER)" />
     <Message Text="BuildNumber: $(BUILD_NUMBER)" Importance="high" />
   </Target>
   <Target Name="BeforeBuild">
@@ -443,12 +443,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\src\BuildTasks\BuildTasks.csproj">
-      <Project>{b0b420fe-6e6c-421c-a6f2-a9e349fc3ea9}</Project>
-      <Name>BuildTasks</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <PreBuildEvent>
