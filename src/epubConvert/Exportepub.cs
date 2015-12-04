@@ -901,7 +901,7 @@ namespace SIL.PublishingSolution
                     {
                         File.Delete(file);  // clean up the un-transformed file
                     }
-                    else // SE version doesn't have the XSLT Transform
+                    else if (File.Exists(file)) // SE version doesn't have the XSLT Transform
                     {
                         File.Move(file, xhtmlOutputFile);
                     }
@@ -1142,8 +1142,13 @@ namespace SIL.PublishingSolution
                     {
                         Common.RemoveDTDForLinuxProcess(file, "epub");
                     }
-                    File.Move(file, dest);
-                    // split the file into smaller pieces if needed
+
+	                if (File.Exists(file))
+	                {
+		                File.Move(file, dest);
+	                }
+	               
+	                // split the file into smaller pieces if needed
                     var files = new List<string>();
 
                     if (!PageBreak && InputType.ToLower() == "dictionary")
@@ -1156,7 +1161,7 @@ namespace SIL.PublishingSolution
                         files = SplitBook(dest);
                     }
 
-                    if (files.Count > 1)
+					if (files != null && files.Count > 1)
                     {
                         if (File.Exists(dest))
                             File.Delete(dest);
@@ -1168,7 +1173,7 @@ namespace SIL.PublishingSolution
                         GetTocId(tocFiletoUpdate);
                     }
 
-                    if (files.Count > 0 && files[0].Contains("PartFile"))
+					if (files != null && files.Count > 0 && files[0].Contains("PartFile"))
                     {
                         MapTocIdAndSectionHeadId(files);
                     }

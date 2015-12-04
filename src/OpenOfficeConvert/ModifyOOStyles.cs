@@ -736,8 +736,6 @@ namespace SIL.PublishingSolution
             nsmgr.AddNamespace("st", "urn:oasis:names:tc:opendocument:xmlns:style:1.0");
             nsmgr.AddNamespace("fo", "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0");
 
-
-
             // if new stylename exists
             XmlElement root = _styleXMLdoc.DocumentElement;
             string style = "//st:style[@st:name='" + makeClassName + "']";
@@ -750,12 +748,19 @@ namespace SIL.PublishingSolution
                 }
                 style = "//st:style[@st:name='" + className + "']";
                 node = root.SelectSingleNode(style, nsmgr); // work
+				if (node == null)
+				{
+					return;
+				}
 
                 XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
-                styleNode.InnerXml = node.OuterXml;
-                node.ParentNode.InsertAfter(styleNode, node);
+				if (node != null && node.OuterXml != null)
+	            {
+		            styleNode.InnerXml = node.OuterXml;
+		            node.ParentNode.InsertAfter(styleNode, node);
+	            }
 
-                //        <style:style style:name="fr4" style:family="graphic" style:parent-style-name="Graphics">
+	            //        <style:style style:name="fr4" style:family="graphic" style:parent-style-name="Graphics">
                 //    <style:graphic-properties fo:margin-left="0in" fo:margin-right="0in" fo:margin-top="0in"
                 //        fo:margin-bottom="0in" style:run-through="foreground" style:wrap="none"
                 //        style:vertical-pos="top" style:vertical-rel="paragraph-content"
@@ -828,7 +833,10 @@ namespace SIL.PublishingSolution
                 }
                 style = "//st:style[@st:name='" + className + "']";
                 node = root.SelectSingleNode(style, nsmgr); // work
-
+				if (node == null)
+				{
+					return;
+				}
                 XmlDocumentFragment styleNode = _styleXMLdoc.CreateDocumentFragment();
                 styleNode.InnerXml = node.OuterXml;
                 node.ParentNode.InsertAfter(styleNode, node);

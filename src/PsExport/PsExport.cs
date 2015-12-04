@@ -120,7 +120,6 @@ namespace SIL.PublishingSolution
                 }
                 else if (DataType == "Dictionary")
                 {
-                    
                     string revFullName = GetRevFullName(outDir);
                     DeExport(outFullName, fluffedCssFullName, revFullName, fluffedRevCssFullName);
                 }
@@ -281,7 +280,6 @@ namespace SIL.PublishingSolution
                 Common.TeLanguageSettings(fluffedCssFullName);
             }
         }
-
 
         /// <summary>
         /// Returns reversal name with path (empty string if file doesn't exist)

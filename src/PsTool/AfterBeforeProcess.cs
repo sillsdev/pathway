@@ -246,15 +246,23 @@ namespace SIL.Tool
             {
                 return;
             }
-
+			List<string> psuedoContent =  new List<string>();
             // Psuedo Before
-            foreach (ClassInfo psuedoBefore in _psuedoBefore)
-            {
-                string beforeContent = ReplaceLineBreakSymbol(psuedoBefore.Content);
-                _writer.WriteRaw(beforeContent);
-            }
+	        foreach (ClassInfo psuedoBefore in _psuedoBefore)
+	        {
+		        string beforeContent = ReplaceLineBreakSymbol(psuedoBefore.Content);
+		        if (!psuedoContent.Contains(beforeContent))
+		        {
+			        psuedoContent.Add(beforeContent);
+			        _writer.WriteRaw(beforeContent);
+		        }
+		        else if (beforeContent == null)
+		        {
+			        _writer.WriteRaw(beforeContent);
+		        }
+	        }
 
-            // Text Write
+	        // Text Write
             if (_characterName == null)
             {
                 _characterName = StackPeekCharStyle(_allCharacter);

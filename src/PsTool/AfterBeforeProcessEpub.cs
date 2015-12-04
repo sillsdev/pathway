@@ -260,6 +260,7 @@ namespace SIL.Tool
                 return;
             }
 
+			List<string> psuedoContent =  new List<string>();
             // Psuedo Before
             foreach (ClassInfo psuedoBefore in _psuedoBefore)
             {
@@ -275,11 +276,23 @@ namespace SIL.Tool
                 }
                 else
                 {
-                    _writer.WriteString(psuedoBefore.Content);
-                    if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
-                    {
-                        _psuedoClassName.Add(psuedoBefore.StyleName);
-                    }
+	                if (!psuedoContent.Contains(psuedoBefore.Content))
+	                {
+		                psuedoContent.Add(psuedoBefore.Content);
+		                _writer.WriteString(psuedoBefore.Content);
+		                if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
+		                {
+			                _psuedoClassName.Add(psuedoBefore.StyleName);
+		                }
+	                }
+					else if (psuedoBefore.Content == null)
+	                {
+						_writer.WriteString(psuedoBefore.Content);
+						if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
+						{
+							_psuedoClassName.Add(psuedoBefore.StyleName);
+						}
+	                }
                 }
             }
 

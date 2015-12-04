@@ -56,7 +56,7 @@ namespace Test.PsTool
             }
             else
             {
-                Assert.IsTrue(actual.Replace(" (x86)", "").Substring(1) == @":\Program Files\SIL\Pathway7\" || actual.Contains("ReSharper") || actual.Contains("NUnit"));
+                Assert.IsTrue(actual.Replace(" (x86)", "").Substring(1) == @":\Program Files\SIL\Pathway\" || actual.Contains("ReSharper") || actual.Contains("NUnit"));
             }
         }
     }
