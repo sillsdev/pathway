@@ -14,12 +14,10 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
-using BuildTasks;
+using BuildStep;
 using NUnit.Framework;
 using SIL.Tool;
 

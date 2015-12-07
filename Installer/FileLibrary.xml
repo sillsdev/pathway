@@ -1760,4 +1760,6 @@
   <File Path="PalasoUIWindowsForms.dll" ComponentGuid="250F0FC4-37FB-460D-8AF9-C69EE4B99C3A" />
   <File Path="SwordConvert.dll" ComponentGuid="B7FC1538-EF2C-4A6B-A68A-1787CA70F5F1" />
   <File Path="SwordConvert.pdb" ComponentGuid="9FC19366-CC0F-4A1C-BC23-4EAE69E8B1F6" />
+  <File Path="L10NSharp.pdb" ComponentGuid="E0A9A1C7-0871-4183-9603-CF94111F0832" />
+  <File Path="L10NSharp.xml" ComponentGuid="208DFF0A-6B79-4F24-A29E-B923D5C01D25" />
 </FileLibrary>

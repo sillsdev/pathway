@@ -267,6 +267,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Build\FileComponentsTest.cs" />
+    <Compile Include="Build\UpdateAssembliesTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
     <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
     <Compile Include="CssDialog\AboutPwTest.cs">
@@ -357,9 +359,9 @@
       <Project>{2B00A4D8-D9C7-4F7F-9CC8-776C9B84AD9E}</Project>
       <Name>ApplyPDFLicenseInfo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BuildTasks\BuildTasks.csproj">
-      <Project>{B0B420FE-6E6C-421C-A6F2-A9E349FC3EA9}</Project>
-      <Name>BuildTasks</Name>
+    <ProjectReference Include="..\BuildStep\BuildStep.csproj">
+      <Project>{b3c7bd82-538f-421d-89db-991a4f0f65e1}</Project>
+      <Name>BuildStep</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
       <Project>{C1ED7E03-C92E-4223-909B-E9C35A4D98E2}</Project>

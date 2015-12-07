@@ -11,7 +11,7 @@
 *Thumbs.db
 ./pathway_*
 output/*
-Installer/BuildTasks.*
+BuildStep.exe
 src/_*
 src/Releases
 src/Reference
@@ -35,8 +35,8 @@ Installer/bin/*
 Installer/obj/*
 Installer/Files/*
 Installer/Wix/*
-src/BuildTasks/bin/*
-src/BuildTasks/obj/*
+src/BuildStep/bin/*
+src/BuildStep/obj/*
 src/CadreBibleConvert/bin/*
 src/CadreBibleConvert/obj/*
 src/ConfigurationTool/bin/*

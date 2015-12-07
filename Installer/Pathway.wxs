@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?define Product="Pathway"?>
 <?define UpgradeCode="74173B43-8B0C-499e-99B0-759A6C8EBDD2"?>
-<?define BUILD_NUMBER="1.13.4.4657"?>
+<?define BUILD_NUMBER="1.13.4"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="$(var.Product) $(var.BUILD_NUMBER)" Language="1033" Version="$(var.BUILD_NUMBER)" Manufacturer="SIL International" UpgradeCode="$(var.UpgradeCode)">
+  <Product Id="*" Name="$(var.Product) $(var.Edition) $(var.BUILD_NUMBER)" Language="1033" Version="$(var.BUILD_NUMBER)" Manufacturer="SIL International" UpgradeCode="$(var.UpgradeCode)">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     <Upgrade Id="$(var.UpgradeCode)">
       <UpgradeVersion Minimum="$(var.BUILD_NUMBER)" OnlyDetect="yes" Property="NEWVERSIONDETECTED" />
@@ -26,7 +26,7 @@
     </Feature>
     <DirectoryRef Id="TARGETDIR">
       <Directory Id="ProgramMenuFolder" SourceName="Programs">
-        <Directory Id="PathwayMenu" Name="Pathway $(var.BUILD_NUMBER)">
+        <Directory Id="PathwayMenu" Name="Pathway $(var.Edition) $(var.BUILD_NUMBER)">
           <Component Id="AddShortcutApp" Guid="96BE5240-DC73-4b1c-A590-9FC7CFE71AEF">
             <Shortcut Id="ShortcutApp" Name="Pathway Configuration Tool" Target="[!configurationtool.exe]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="APPLICATIONFOLDER" />
             <Shortcut Id="desktopShortcutApp" Directory="DesktopFolder" Name="Pathway Configuration Tool" Target="[!configurationtool.exe]" IconIndex="0" />
@@ -44,6 +44,8 @@
     <Icon Id="configurationtool.exe" SourceFile="..\output\Release\ConfigurationTool.exe" />
     <Property Id="ARPPRODUCTICON" Value="configurationtool.exe" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="bannrbmp.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="dlgbmp.bmp" />
     <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />
     <UIRef Id="WixUI_InstallDir" />
     <InstallExecuteSequence>

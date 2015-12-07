@@ -15,7 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System.IO;
-using BuildTasks;
+using BuildStep;
 using NUnit.Framework;
 
 namespace Test.Build
