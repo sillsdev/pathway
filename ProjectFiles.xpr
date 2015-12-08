@@ -623,8 +623,7 @@
     </meta>
     <projectTree name="ProjectFiles.xpr">
         <file name="src/ApplyPDFLicenseInfo/ApplyPDFLicenseInfo.csproj"/>
-        <file name="src/BuildTasks/BuildTasks.csproj"/>
-        <file name="Change2output.xsl"/>
+        <file name="src/BuildStep/BuildStep.csproj"/>
         <file name="src/ConfigurationTool/ConfigurationTool.csproj"/>
         <file name="src/CssDialog/CssDialog.csproj"/>
         <file name="src/CssParser/CssParser.csproj"/>
@@ -636,7 +635,6 @@
         <file name="src/HelpImprove/HelpImprove.csproj"/>
         <file name="src/InDesignConvert/InDesignConvert.csproj"/>
         <file name="Installer/Installer.wixproj"/>
-        <file name="Installer/InstallerSE.wixproj"/>
         <file name="src/OpenOfficeConvert/OpenOfficeConvert.csproj"/>
         <file name="src/ParatextSupport/ParatextSupport.csproj"/>
         <file name="src/PathwayB/PathwayB.csproj"/>
