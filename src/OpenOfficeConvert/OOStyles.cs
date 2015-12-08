@@ -100,7 +100,8 @@ namespace SIL.PublishingSolution
                 string[] pageDir = { "@page:left-top-center", "@page:right-top-center" };
                 if (_cssProperty.ContainsKey("headword") && _cssProperty["headword"].ContainsKey("font-size"))
                 {
-                    headerFontSize = _cssProperty["entry"]["font-size"];
+					if (_cssProperty["entry"].ContainsKey("font-size") && _cssProperty["entry"]["font-size"] != null)
+						headerFontSize = _cssProperty["entry"]["font-size"];
                 }
 
                 for (int i = 0; i < pageDir.Count(); i++)
