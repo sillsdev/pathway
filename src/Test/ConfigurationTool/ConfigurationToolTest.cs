@@ -320,7 +320,7 @@ namespace Test.UIConfigurationToolTest
         {
             string[] width = { "595", "420", "459", "298", "612", "396", "378", "418", "432", "468" };
             string[] height = { "842", "595", "649", "420", "792", "612", "594", "626", "648", "648" };
-            string[] expected = { "A4", "A5", "C5", "A6", "Letter", "Half letter", "5.25in x 8.25in", "5.8in x 8.7in", "6in x 9in", "6.5in x 9in" };
+			string[] expected = { "A4", "A5", "C5", "A6", "Letter", "Half letter", "5.25in x 8.25in", "5.8in x 8.7in", "6in x 9in", "6.5in x 9in on letter" };
             for (int i = 0; i < expected.Length; i++)
             {
                 string actual = _configTool._cToolBL.PageSize1(width[i], height[i]);
