@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -43,7 +44,16 @@ namespace BuildStep
             get { return _product; }
             set { _product = value; }
         }
-        #endregion RootFolder
+        #endregion Product
+
+        #region Edition
+        private string _edition;
+        public string Edition
+        {
+            get { return _edition; }
+            set { _edition = value; }
+        }
+        #endregion Edition
 
         #region BuildNumber
         private string _buildNumber;
@@ -64,7 +74,7 @@ namespace BuildStep
             UpdateVersion(_rootFolder, _buildNumber);
             if (!string.IsNullOrEmpty(_product))
             {
-                var result = UpdateProduct(_product, match.Groups[1].Value);
+                var result = UpdateProduct(_product, match.Groups[1].Value, _edition);
                 const bool overwrite = true;
                 File.Copy(result, _product, overwrite);
                 File.Delete(result);
@@ -105,29 +115,41 @@ namespace BuildStep
         #endregion UpdateVersion
 
         #region UpdateProduct
-        public static string UpdateProduct(string product, string buildNumber)
+        public static string UpdateProduct(string product, string buildNumber, string edition)
         {
             var prodDoc = new XmlDocument{XmlResolver = null};
             prodDoc.Load(product);
             XmlProcessingInstruction lastOne = null;
-            bool foundIt = false;
+            bool foundBuildNumber = false;
+            bool foundEdition = false;
             Debug.Assert(prodDoc.DocumentElement != null, "prodDoc.DocumentElement != null");
             foreach (var childNode in prodDoc.ChildNodes.Cast<XmlNode>().Where(childNode => childNode.NodeType == XmlNodeType.ProcessingInstruction).Cast<XmlProcessingInstruction>())
             {
                 if (childNode.Value.StartsWith("BUILD_NUMBER"))
                 {
                     childNode.Value = string.Format(@"BUILD_NUMBER=""{0}""", buildNumber);
-                    foundIt = true;
+                    foundBuildNumber = true;
+                }
+                else if (childNode.Value.StartsWith("Edition"))
+                {
+                    childNode.Value = string.Format(@"Edition=""{0}""", edition);
+                    foundEdition = true;
                 }
                 else
                 {
                     lastOne = childNode;
                 }
             }
-            if (!foundIt)
+            if (!foundBuildNumber)
             {
                 var verProcInst = prodDoc.CreateProcessingInstruction("define",
                     string.Format(@"BUILD_NUMBER=""{0}""", buildNumber));
+                prodDoc.InsertAfter(verProcInst, lastOne);
+            }
+            if (!foundEdition)
+            {
+                var verProcInst = prodDoc.CreateProcessingInstruction("define",
+                    string.Format(@"Edition=""{0}""", edition));
                 prodDoc.InsertAfter(verProcInst, lastOne);
             }
             var tempName = Path.GetTempFileName();

@@ -37,7 +37,7 @@ namespace Test.Build
         [Category("SkipOnTeamCity")]
         public void UpdateProductTest()
         {
-            var result = UpdateProduct(_tf.Input("Pathway.wxs"), "1.13.4.4658");
+            var result = UpdateProduct(_tf.Input("Pathway.wxs"), "1.13.4.4658", "BTE");
             const bool overwrite = true;
             File.Copy(result, _tf.Output("Pathway.wxs"), overwrite);
             File.Delete(result);
@@ -48,7 +48,7 @@ namespace Test.Build
         [Category("SkipOnTeamCity")]
         public void UpdateProduct2Test()
         {
-            var result = UpdateProduct(_tf.Input("Pathway2.wxs"), "1.13.4.4658");
+            var result = UpdateProduct(_tf.Input("Pathway2.wxs"), "1.13.4.4658", "SE");
             const bool overwrite = true;
             File.Copy(result, _tf.Output("Pathway2.wxs"), overwrite);
             File.Delete(result);

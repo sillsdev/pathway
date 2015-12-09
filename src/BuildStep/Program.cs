@@ -32,6 +32,7 @@ namespace BuildStep
             string rootFolder = null;
             string product = null;
             string buildNumber = null;
+            string edition = "BTE";
             string basePath = null;
             string applicationFileName = null;
             bool showHelp = false;
@@ -65,6 +66,15 @@ namespace BuildStep
                         else
                             throw new ArgumentException("build number format error");
                         DebugMessage("BuildNumber: {0}", buildNumber);
+                    }},
+                {"e|Edition=", "the edition, either 'BTE' or 'SE'",
+                    v =>
+                    {
+                        if (new List<string>{"BTE", "SE"}.Contains(v))
+                            edition = v;
+                        else
+                            throw new ArgumentException("unknown edition, must be BTE or SE");
+                        DebugMessage("Edition: {0}", edition);
                     }},
                 {"b|BasePath=", "location of FileLibrary.xml",
                     v =>
@@ -103,7 +113,7 @@ namespace BuildStep
             switch (action)
             {
                 case "updateassemblies":
-                    var act = new UpdateAssemblies{BuildNumber = buildNumber, Product = product, RootFolder = rootFolder};
+                    var act = new UpdateAssemblies{BuildNumber = buildNumber, Product = product, RootFolder = rootFolder, Edition = edition};
                     if (!act.Execute())
                         throw new ApplicationException("UpdateAssemblies Failed.");
                     break;
