@@ -43,6 +43,7 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=SE</DefineConstants>
+    <Edition>SE</Edition>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\output\</OutputPath>
@@ -69,6 +70,7 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=SE</DefineConstants>
+    <Edition>SE</Edition>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
     <OutputPath>..\output\</OutputPath>
