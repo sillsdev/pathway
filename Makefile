@@ -2,10 +2,10 @@ ifndef prefix
 prefix=/usr
 endif
 ifndef binsrc
-binsrc=~/git/pathway
+binsrc=/home/g/git/pathway
 endif
 ifndef bindst
-bindst=$(binsrc)/output/Debug
+bindst=$(binsrc)/output/Release
 endif
 ifndef BUILD_NUMBER
 BUILD_NUMBER=1.13.4.4657
@@ -15,14 +15,17 @@ Platform=Any CPU
 endif
 
 build:
-	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
+	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Release\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
+
+buildStep:
+	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/\;OutputPath=src/BuildStep/bin/Debug src/BuildStep/BuildStep.csproj
 
 dotests:
 	nunit-console -exclude=SkipOnTeamCity\;LongTest -labels -nodots output/Test.dll
 
 install:
 	mkdir -p $(DESTDIR)$(prefix)/lib/pathway
-	cp -r $(bindst) $(DESTDIR)$(prefix)/lib/pathway
+	cp -r $(bindst)/. $(DESTDIR)$(prefix)/lib/pathway
 	mkdir -p $(DESTDIR)$(prefix)/bin
 	cp src/PathwayB.sh $(DESTDIR)$(prefix)/bin/pathwayB
 	cp src/ConfigurationTool.sh $(DESTDIR)$(prefix)/bin/ConfigurationTool
@@ -50,7 +53,7 @@ binary:
 	exit 0
 
 clean:
-	rm -rf output/Debug
+	rm -rf output/*
 
 uninstall:
 	-sudo apt-get -y remove pathway

@@ -270,11 +270,11 @@
     <Error Text="Cancelled by User" Condition="'$(Result)' == 'Cancel'"/>
     <Message Text="User entered BuildNumber: $(BUILD_NUMBER)" Importance="high" />
     <Exec Command="BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --Product=$(SolutionDir)Installer\Pathway.wxs --BuildNumber=$(BUILD_NUMBER) --Edition=$(Edition) " WorkingDirectory="$(SolutionDir)" Condition="$(OS) != 'Linux' " />
-    <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --Product=$(SolutionDir)Installer\Pathway.wxs --BuildNumber=$(BUILD_NUMBER) --Edition=$(Edition) " WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
+    <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
   </Target>
   <Target Name="UpdateAssemblies">
-    <Exec Command="BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --Product=$(SolutionDir)Installer\Pathway.wxs --BuildNumber=$(BUILD_NUMBER) --Edition=$(Edition) " WorkingDirectory="$(SolutionDir)" Condition="$(OS) != 'Linux' " />
-    <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --Product=$(SolutionDir)Installer\Pathway.wxs --BuildNumber=$(BUILD_NUMBER) --Edition=$(Edition) " WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
+    <Exec Command="BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir)--Product=$(SolutionDir)Installer\Pathway.wxs --BuildNumber=$(BUILD_NUMBER) --Edition=$(Edition) " WorkingDirectory="$(SolutionDir)" Condition="$(OS) != 'Linux' " />
+    <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER) " WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
   </Target>
   <Target Name="BeforeBuild">
     <!-- validator is referenced even if not called -->
