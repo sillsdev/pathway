@@ -114,6 +114,7 @@ namespace SIL.PublishingSolution
                 }
                 DestinationSetup();
                 SetDefaultLanguageFont(fluffedCssFullName, mainFullName, fluffedRevCssFullName);
+				Common.StreamReplaceInFile(fluffedCssFullName, "\\2B27", "\\25C6");
                 if (DataType == "Scripture")
                 {
                     SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
