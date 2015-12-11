@@ -1,53 +1,142 @@
-pathway (1.13.3.4560-1) unstable; urgency=high
+pathway (1.13.4.4689-1) unstable; urgency=high
 
+ * pathway 1.13.4
+    - epub:TD-4403 Crash exporting to EPUB from Flex and Paratext
+    - epub:TD-4491 Flex to Epub exception throw
+    - LibreOffice:LT-16655 combine lexical relation with single header.
+    - LibreOffice:TD-3546 picture placements
+    - LibreOffice:TD-4271 Page number appeared on table of content
+    - LibreOffice:TD-4471 subentry indents aren't as FieldWorks 
+    - LibreOffice:TD-4472 Add title to header 
+    - LibreOffice:TD-4477 css property for Title
+    - LibreOffice:TD-4478 Move picture to end of entry and center
+    - LibreOffice:TD-4479 Remove rule line under header 
+    - LibreOffice:TD-4480 Fixed bug to show odd and even page in equal bottom margin
+    - LibreOffice:TD-4485 DictionarySettings encoding error 
+    - LibreOffice:TD-4487 header created for Mexico project
+    - LibreOffice:TD-4501 bullet overwrites part of text in subentry
+    - LibreOffice:TD-4502 Subentry bullets missing
+    - Sword:TD-4318 Language name reported as Unknown 
+    - Sword:TD-4320 Section head not bolded  *Mapping tag for bold format.
+    - Sword:TD-4322 show verse numbers and indent
+    - Sword:TD-4326 li2 should be the same indent as the text of li1
+    - Sword:TD-4329 mt2 text missing from output
+    - Sword:TD-4331 r should format as italic with left and right indent 
+    - Sword:TD-4333 Sword image
+    - Sword:TD-4333 fig doesn't show picture 
+    - Sword:TD-4334 nd doesn't hightlight 
+    - Sword:TD-4335 Added info about tables via SWORD
+    - Sword:TD-4336 f embedded in table comes out in text 
+    - Sword:TD-4340 Sword make d field italic and centered
+    - Sword:TD-4342 nd not italic in footnote 
+    - Sword:TD-4347 quote deleted from output 
+    - Sword:TD-4349 Sword export crashes displaying folder on Linux
+    - Sword:TD-4349 add dependency on nautilus
+    - Sword:TD-4349 add libsword-utils dependency
+    - Sword:TD-4384 Convertion process from usx to osis
+    - Sword:TD-4387 Sword fq, qs, pi
+    - Sword:TD-4388 qa and sp
+    - Sword:TD-4391 Transforming c# code to Xslt 
+    - Sword:TD-4393 Sword quotes (q, q2 ,q) elements
+    - Sword:TD-4397 Sword image
+    - Sword:TD-4400 fig doesn't show picture on Linux convert 
+    - Sword:TD-4401 Showing picture and updated the sword export msg
+    - Sword:TD-4404 Tit 1:1 \add missing bold-italic 
+    - Sword:TD-4405, 4413, 4414, 4415, 4417 Sword italic
+    - Sword:TD-4407 Sword pn to bold
+    - Sword:TD-4408 Sword superscript
+    - Sword:TD-4410 Tit 1:1 missing BLAH in footnote 
+    - Sword:TD-4411 Tit 1:5 \q2 missing indent 
+    - Sword:TD-4412 Sword fix alignment issue(lit)
+    - Sword:TD-4416 Tit 1:9 \wj missing red 
+    - Sword:TD-4419 Sword bold
+    - Sword:TD-4423 Rev verse numbers wrong
+    - Sword:TD-4425 Jdg 1 4 r remove bold
+    - Sword:TD-4426 Sword fix missing line
+    - Sword:TD-4428 Neh 1:1 q2 doesn't indent after q1 
+    - Sword:TD-4435 Luk missing mt2 and mt1
+    - Sword:TD-4436 Luk 1 39 fqa should be italic
+    - Sword:TD-4437 Glossary word lookup w
+    - Sword:TD-4438 Jhn 1:3-4 verse bridge 
+    - Sword:TD-4440 Rom 12 cross ref point click crash
+    - Sword:TD-4441 Rom 12:5 \it not italic
+    - Sword:TD-4443 Sword small caps
+    - Sword:TD-4444 Sword color
+    - Sword:TD-4448 Sword Crash fixed
+    - Sword:TD-4448 Sword fix alignment issue in Esther
+    - Sword:TD04420 Sword bold italic
+    - UI:TD-4379 Linux - Config tool won't start, and crash exporting from FLEx
+    - UI:TD-4380 Windows - Pathway Config Tool will not close
+    - UI:TD-4382 Crash selecting User Interface from Help 
+    - UI:TD-4399 French Localization alignment and size issues 
+    - UI:TD-4449 Two radio button is selected front matter tab. 
+    - UI:TD-4452 Wrong Link button name (Label  to open L10N Sharp)
+    - UI:TD-4473 Add font size for header drop down
+    - UI:TD-4475 No Header implies no title or size 
+    - UI:UI lang dialog box updates
+    - build:Add Sword to Corporate release
+    - build:Remove WordPress export
+    - build:Simplify TexLive base setup
+    - build:TD-4261 fix error when installing from Firefox on Wasta
+    - build:TD-4389 Linux localization settings dialog not showing
+    - build:TD-4389 User Interface Control UI Changes in Linux
+    - build:TD-4389 User interface control vanish
+    - build:TD-4389 UserInterface UI Settings
+    - build:TD-4402 Pathway not compatible with this version paratext
+    - build:Update Windows Installer to use Wix3
+    - build:Update folder structure to match other SIL projects
+    - build:Update pathway-xelatex Linux build script for TexLive 2015
+    - style:TD-4476 Add Mexico 6.5 x 9 as a default template
+    - style:Add Mexico Page size 6.5x9 on letter
+    - style:TD-4260 Page number isn't set as "None" in custom style sheet..
   * pathway sprint 1.13.3
-    - LibreOffice:TD-4202 Enabling hyphenation for Libre Office output</li>
-    - LibreOffice:TD-4185 Setting Running Header to None disables Header</li>
-    - Smart Device:TD-4235 GoBible word of jesus conversion</li>
-    - Smart Device:TD-4360 Fix GoBible output name</li>
-    - MySword:TD-4219 Crash when keyword not in glossary</li>
-    - MySword:TD-4236 Add extended Footnote</li>
-    - MySword:TD-4236 Embedded markers</li>
-    - MySword:TD-4236 Handle additional character styles in theWord/MySword</li>
-    - UI:TD-2453 Complete French localization file</li>
-    - UI:TD-4246 Localization applied for EpubExportType and Inprocess Title</li>
-    - UI:TD-4249 Localization using L10NSharp for Splash </li>
-    - UI:TD-4366 Applied localization in Grid header</li>
-    - UI:TD-4274 Apply Localization for messageboxes</li>
-    - UI:TD-4287 Change "if not SIL" to "if restricted"</li>
-    - UI:TD-4290 Added Layout for Mobile and web</li>
-    - UI:TD-4290 Align controls in TableLayoutPanel</li>
-    - UI:TD-4290 Layout changed for the property Others.</li>
-    - UI:TD-4290 Minor changes in Web Property.</li>
-    - UI:TD-4290 Word wrap text not shown properly</li>
-    - UI:TD-4291 Localize configuration tool drop down property</li>
-    - UI:TD-4296 remove extra space before the question mark</li>
-    - UI:TD-4299 Updated French localization translations</li>
-    - UI:TD-4303 Crash when I click the Edit Layout button in Linux</li>
-    - UI:TD-4304 I applied the changes what was suggested</li>
-    - UI:TD-4306 Allow L10NSharp to copy tmx files if larger (newer).</li>
-    - UI:TD-4313 Epub results not localized</li>
-    - UI:TD-4314 Identify types of strings missed by scanner</li>
-    - UI:TD-4351 Added missing string in Pathway.ta.tmx</li>
-    - UI:TD-4354 Remember values in Configuration Tool</li>
-    - UI:TD-4359 Changed WindowTitle, Project Url label in About window</li>
-    - UI:TD-4361 Select your Organization will show full localized text</li>
-    - UI:TD-4364 Replace save with saved </li>
-    - UI:TD-4366 Applied localization for ConfigurationTool Grid header text</li>
-    - UI:TD-4377 Apply the user selected font in Localized Text. </li>
-    - XeLaTeX:TD-4185 Setting Running Header to None disables Header</li>
-    - XeLaTeX:TD-4363 Setting Header and Page number to None removes page number</li>
-    - XeLaTeX:TD-4367 Change the code to leave one page after TOC</li>
-    - XeLaTeX:TD-4368 Fixed empty page between main and reversal page</li>
-    - XeLaTeX:TD-4369 I fixed duplicate TOC bug</li>
-    - XeLaTeX:TD-4370 Fixed page number issue for reversal</li>
-    - XeLaTeX:TD-4372 Footer is created </li>
-    - XeLaTeX:TD-4378 Fixed page number issue in scripture</li>
-    - Installer:TD-4221 Update Prince.dll to latest version</li>
-    - Installer:TD-4285 Fatal Error after installation in Linux</li>
-    - Installer:TD-4373 Run xelatex as administrator</li>
-    - Installer:Update Linux Debug install</li>
-    - Installer:update dependencies for vivid</li>
+    - LibreOffice:TD-4202 Enabling hyphenation for Libre Office output
+    - LibreOffice:TD-4185 Setting Running Header to None disables Header
+    - Smart Device:TD-4235 GoBible word of jesus conversion
+    - Smart Device:TD-4360 Fix GoBible output name
+    - MySword:TD-4219 Crash when keyword not in glossary
+    - MySword:TD-4236 Add extended Footnote
+    - MySword:TD-4236 Embedded markers
+    - MySword:TD-4236 Handle additional character styles in theWord/MySword
+    - UI:TD-2453 Complete French localization file
+    - UI:TD-4246 Localization applied for EpubExportType and Inprocess Title
+    - UI:TD-4249 Localization using L10NSharp for Splash 
+    - UI:TD-4366 Applied localization in Grid header
+    - UI:TD-4274 Apply Localization for messageboxes
+    - UI:TD-4287 Change "if not SIL" to "if restricted"
+    - UI:TD-4290 Added Layout for Mobile and web
+    - UI:TD-4290 Align controls in TableLayoutPanel
+    - UI:TD-4290 Layout changed for the property Others.
+    - UI:TD-4290 Minor changes in Web Property.
+    - UI:TD-4290 Word wrap text not shown properly
+    - UI:TD-4291 Localize configuration tool drop down property
+    - UI:TD-4296 remove extra space before the question mark
+    - UI:TD-4299 Updated French localization translations
+    - UI:TD-4303 Crash when I click the Edit Layout button in Linux
+    - UI:TD-4304 I applied the changes what was suggested
+    - UI:TD-4306 Allow L10NSharp to copy tmx files if larger (newer).
+    - UI:TD-4313 Epub results not localized
+    - UI:TD-4314 Identify types of strings missed by scanner
+    - UI:TD-4351 Added missing string in Pathway.ta.tmx
+    - UI:TD-4354 Remember values in Configuration Tool
+    - UI:TD-4359 Changed WindowTitle, Project Url label in About window
+    - UI:TD-4361 Select your Organization will show full localized text
+    - UI:TD-4364 Replace save with saved 
+    - UI:TD-4366 Applied localization for ConfigurationTool Grid header text
+    - UI:TD-4377 Apply the user selected font in Localized Text. 
+    - XeLaTeX:TD-4185 Setting Running Header to None disables Header
+    - XeLaTeX:TD-4363 Setting Header and Page number to None removes page number
+    - XeLaTeX:TD-4367 Change the code to leave one page after TOC
+    - XeLaTeX:TD-4368 Fixed empty page between main and reversal page
+    - XeLaTeX:TD-4369 I fixed duplicate TOC bug
+    - XeLaTeX:TD-4370 Fixed page number issue for reversal
+    - XeLaTeX:TD-4372 Footer is created 
+    - XeLaTeX:TD-4378 Fixed page number issue in scripture
+    - Installer:TD-4221 Update Prince.dll to latest version
+    - Installer:TD-4285 Fatal Error after installation in Linux
+    - Installer:TD-4373 Run xelatex as administrator
+    - Installer:Update Linux Debug install
+    - Installer:update dependencies for vivid
   * pathway 1.13.2 hotfix
     - update dependencies in debian/control for vivid
   * pathway 1.13.1 hotfix
@@ -1056,30 +1145,30 @@ pathway (1.13.3.4560-1) unstable; urgency=high
     - XeLaTeX: TD-3079 XeLaTeX export for Linux
     - XeLaTeX: Update for XeLaTeX TexLive 2012 installer build
   * Sprint 1.1.6.2485
-    - Common Code: TD-3077 don't require writing system store for direction. </li>
-    - Common Code: TD-3077 don't require writing system store for font name.</li>
-    - Common Code: Remove CadreBible from Pathway build</li>
-    - Common Code: adjust files for 64-bit package.</li>
-    - Help: TD-2630 Added republishing statement.</li>
-    - Linux build: TD-3072 Pictures are not shown in EPub for Linux</li>
-    - Linux build: TD-3075 Fix Linux test fails </li>
-    - EBook: TD-2760 Section Head style missing</li>
-    - EBook: TD-2904(&amp;03) New spacing between words often is underlined</li>
-    - EBook: TD-2905 Book Title set as default not remembered</li>
-    - EBook: TD-3021 Red exclamation mark next to Column Gap</li>
-    - EBook: TD-3032 Picture caption appears as headword</li>
-    - EBook: TD-3070 EBook export terrilbly slow - remove validator</li>
-    - EBook: TD-3073 reversal epub contains box chars </li>
-    - EBook: TD-3078 Remove gaps in Ebook export</li>
-    - EBook: Add spaces between chapter number</li>
-    - EBook: Picture missing on Linux</li>
-    - Stylesheet: TD-3048 crash exporting with custom style sheet.</li>
-    - UI: TD-3026 allow setting the Half Letter Page Size</li>
-    - UI: Fix print preview error. </li>
-    - Web: TD-3057 Upload failed but no error given</li>
-    - XeLaTeX: TD-1610 XeLaTex difference output with different styles.</li>
-    - XeLaTeX: TD-2057 margin-bottom on paragraph</li>
-    - XeLaTeX: Update TexLive Linux install process for Linux 32 &amp; 64 bit</li>
+    - Common Code: TD-3077 don't require writing system store for direction. 
+    - Common Code: TD-3077 don't require writing system store for font name.
+    - Common Code: Remove CadreBible from Pathway build
+    - Common Code: adjust files for 64-bit package.
+    - Help: TD-2630 Added republishing statement.
+    - Linux build: TD-3072 Pictures are not shown in EPub for Linux
+    - Linux build: TD-3075 Fix Linux test fails 
+    - EBook: TD-2760 Section Head style missing
+    - EBook: TD-2904(&amp;03) New spacing between words often is underlined
+    - EBook: TD-2905 Book Title set as default not remembered
+    - EBook: TD-3021 Red exclamation mark next to Column Gap
+    - EBook: TD-3032 Picture caption appears as headword
+    - EBook: TD-3070 EBook export terrilbly slow - remove validator
+    - EBook: TD-3073 reversal epub contains box chars 
+    - EBook: TD-3078 Remove gaps in Ebook export
+    - EBook: Add spaces between chapter number
+    - EBook: Picture missing on Linux
+    - Stylesheet: TD-3048 crash exporting with custom style sheet.
+    - UI: TD-3026 allow setting the Half Letter Page Size
+    - UI: Fix print preview error. 
+    - Web: TD-3057 Upload failed but no error given
+    - XeLaTeX: TD-1610 XeLaTex difference output with different styles.
+    - XeLaTeX: TD-2057 margin-bottom on paragraph
+    - XeLaTeX: Update TexLive Linux install process for Linux 32 &amp; 64 bit
   * 1.1.5.2445 sprint
     - CadreBible: TD-2911 Create the DBL bundle
     - CadreBible: TD-3059 accomodate different between versions of USX export
