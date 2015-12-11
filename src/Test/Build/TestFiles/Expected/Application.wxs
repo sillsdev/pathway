@@ -23,6 +23,10 @@
   <Fragment>
     <ComponentGroup Id="Application">
       <ComponentRef Id="AddShortcutApp" />
+      <ComponentRef Id="AddReadmeShortcut" />
+      <ComponentRef Id="AddTutorialShortcut" />
+      <ComponentRef Id="AddLicenseShortcut" />
+      <ComponentRef Id="AddHelpShortcut" />
       <ComponentRef Id="RegistryEntries" />
       <ComponentRef Id="w3c.txt" />
       <ComponentRef Id="copying.txt" />
