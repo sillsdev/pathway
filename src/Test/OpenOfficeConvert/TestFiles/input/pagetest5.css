@@ -1,0 +1,42 @@
+@page {
+background-color:red;
+    size: 14.8cm 21cm;
+    margin: 3cm 3cm;
+   @top-left {
+ content: "";
+        font-weight: bold;
+    }
+    @top-center {
+        content: counter(page);
+color:blue;
+font-weight:bold;
+    }    
+    @top-right {
+       content: "";
+    }
+
+   @bottom-left {
+ content: "";
+        font-weight: bold;
+    }
+    @bottom-center {
+        content: counter(page);
+color:yellow;
+font-weight:bold;
+    }    
+    @bottom-right {
+       content: "";
+    }
+
+}
+@page :first {
+
+}
+
+@page :left {
+}
+
+
+@page :right {
+}
+

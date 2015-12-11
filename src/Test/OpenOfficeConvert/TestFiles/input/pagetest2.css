@@ -1,0 +1,31 @@
+@page {
+background-color:red;
+    size: 14.8cm 21cm;
+    margin: 3cm 3cm;
+
+}
+@page :first {
+background-color:blue;
+}
+
+@page :left {
+background-color:green;
+    @top-left {
+        content: "";
+        font-weight: bold;
+    }
+    @top-center {
+        content: counter(page);
+color:blue;
+font-size:14pt;
+  font-style: italic;
+
+    }    
+    @top-right {
+      }
+}
+
+
+@page :right {
+}
+

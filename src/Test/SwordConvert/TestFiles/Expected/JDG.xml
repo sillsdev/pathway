@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<osis xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd" xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="eng">
+    <header>
+      <work osisWork="thisWork">
+        <scope>Judg.1.1-Judg.2.2-3</scope>
+      </work>
+    </header>
+    <div type="book" osisID="Judg" canonical="true" xmlns="">
+      <!--\rem taken from hegDBL GEN, c2, note v4a break and ref list, quotes are it in f in v23-->
+      <title short="Dehet deng Apan-kloma ki in Dadi ka" />
+      <div type="section">
+        <title>
+          <hi type="bold">Judges</hi>
+        </title>
+      </div>
+      <div type="section">
+        <title>
+          <hi type="italic">Ama Lamtua Allah koet apan-dapa kua nol apan-kloma kia</hi>
+        </title>
+      </div>
+      <chapter n="1" osisID="Judg.1" sID="Judg.1" />
+      <p>
+        <verse sID="Judg.1.1" osisID="Judg.1.1" n="1" />Nini ela, Ama Lamtua Allah koet nal apan-dapa kua, nol apan-kloma kia, nonool un isin nas totoang. </p>
+      <p>
+        <verse eID="Judg.1.1" />
+        <verse sID="Judg.1.2" osisID="Judg.1.2" n="2" />Un koet hidis totoang, kon ola ka tom nol leol itu la, Un tene. <verse eID="Judg.1.2" /><verse sID="Judg.1.3" osisID="Judg.1.3" n="3" />Nini ela, leol itu la daid leol in tene dui, deng lelo-leol tenga las. Un ator ela meman, le eta Un koet hidis totoang son nam, Un tene se leol itu la. <verse eID="Judg.1.3" /><verse sID="Judg.1.4a" osisID="Judg.1.4a" n="4a" />Ama Lamtua Allah in koet apan-dapa kua nol apan-kloma kia ka, un dehet ta ela. </p>
+      <div type="section">
+        <title>
+          <hi type="bold">Ama Lamtua Allah koet biklobe nol bihata</hi>
+        </title>
+      </div>
+      <div type="subsection">
+        <hi type="italic">(Matius 19:4-6; Markus 10:4-9; Korintus mesa la 6:16; 15:45, 47; Efesus 5:31-33)</hi>
+      </div>
+      <p>
+        <verse eID="Judg.1.4a" />
+        <verse sID="Judg.1.4b" osisID="Judg.1.4b" n="4b" />Dedeng AMA LAMTUA Allah halas-sam mana le koet apan-dapa ku nol apan-kloma kia ka, <verse eID="Judg.1.4b" /><verse sID="Judg.1.5" osisID="Judg.1.5" n="5" /><span><hi type="super">-</hi></span><verse eID="Judg.1.5" /><verse sID="Judg.1.6" osisID="Judg.1.6" n="6" />muik kai ina in nuli lo, undeng Un niung ulan lo bii. Dedeng na suma muik salbuta man puti deng dale kia, le tao ngoe apan-kloma kia. Nol muik atuli in daek klapa lo bii. <verse eID="Judg.1.6" /><verse sID="Judg.1.7" osisID="Judg.1.7" n="7" />Hidi kon AMA LAMTUA Allah kat nal dale bubuit, le daken daid atuli. Hidim Un huu tamang hngasa laok se atuling na deng ilu ka, kon un nuli meman.</p>
+      <p>
+        <verse eID="Judg.1.7" />
+        <verse sID="Judg.1.8" osisID="Judg.1.8" n="8" />Hidi nam, AMA LAMTUA Allah daek klapa mesa se dale Eden, se halin leol saken. Hidim Un bel atuling na le daad se klaap na dale. <verse eID="Judg.1.8" /><verse sID="Judg.1.9" osisID="Judg.1.9" n="9" />Se klaap na, Un mul kai ina banan mamo-mamo son, man atuli li bisa kaa oen isin man fala banan nas. Un kon mul kai ina dua man hnika ngas bakisan se klaap na hlala ka. Eta atuli li kaa kai ina mesan na isin na lam, un haup in nuli napiut. Mo eta atuli li kaa deng kai isin mesan na lam, un taan nal ol man banan nol ol man daat ta.</p>
+      <p>
+        <verse eID="Judg.1.9" />
+        <verse sID="Judg.1.10" osisID="Judg.1.10" n="10" />Muik palun mesa man baa puti deng klaap na. Palun na baa fanga aat. <verse eID="Judg.1.10" /><verse sID="Judg.1.11" osisID="Judg.1.11" n="11" />Un fanga mesa la, ngala Pison. Fanga na baa keo papmes dale Hawila, man muik lil-mea mamo. <verse eID="Judg.1.11" /><verse sID="Judg.1.12" osisID="Judg.1.12" n="12" />Se na muik lil-mea isin, muik kai ina man uin na bui bingis, nol muik baut kaloeꞌ. <verse eID="Judg.1.12" /><verse sID="Judg.1.13" osisID="Judg.1.13" n="13" />Palun na fanga dua la, ngala Gihon. Fanga na baa keo papmes dale Kus.<note placement="x-foot" n="+"><reference osisRef="2:13:" type="source">2:13: </reference>Hmunan nu dale ni ngala ‘Kus’. Halas ni, dale na ne dale Etiopia, nol dale Sudan, maan dua nias ne Afrika halin leol-saken.</note><verse eID="Judg.1.13" /><verse sID="Judg.1.14" osisID="Judg.1.14" n="14" />Un fanga tilu la, ngala Tigris. Fanga ni daid toon, deng dale Asyur<note placement="x-foot" n="+"><reference osisRef="2:14:" type="source">2:14: </reference>Dale Asyur ram halas ni ngala, ‘Irak’. </note> halin leol-saken. Un fanga aat ta, ngala Efrat.</p>
+      <p>
+        <verse eID="Judg.1.14" />
+        <verse sID="Judg.1.15" osisID="Judg.1.15" n="15" />Ama Lamtua Allah bel atuling na daad se Eden le doha-tinang klaap na babanan. <verse eID="Judg.1.15" /><verse sID="Judg.1.16" osisID="Judg.1.16" n="16" />Hidim Un hid atuling na noan, “Ku boel kaa kai isin saa tuun deng totoang kai ina in se klaap ni dalen nias. <verse eID="Judg.1.16" /><verse sID="Judg.1.17" osisID="Judg.1.17" n="17" />Mo muik kai ina mesa, man ku boel kaa isin na lo. Na kai ina in tek puting ol man banan nol ol man daat ta. Eta ku kaan nam taon elola ko ku mate.”</p>
+      <p>
+        <verse eID="Judg.1.17" />
+        <verse sID="Judg.1.18" osisID="Judg.1.18" n="18" />Hidi nam AMA LAMTUA Allah aa pait noan, “Eta atuling ni sii nuli sii-siing ngam banan lo. Tiata Auk le daek belen tapa mesa, man tatai nol una.”</p>
+      <p>
+        <verse eID="Judg.1.18" />
+        <verse sID="Judg.1.19" osisID="Judg.1.19" n="19" />
+        <span>
+          <hi type="super">-</hi>
+        </span>
+        <verse eID="Judg.1.19" />
+        <verse sID="Judg.1.20" osisID="Judg.1.20" n="20" />Dedeng na, AMA LAMTUA Allah dauk dale, le daek hmukit ti beas bakun, nol tilu-kee kas. Hidim Un kil nol hmukit tas nol tilu-kee nas laok bel atuling na, le halin nam un ngali oen ngalan nas. Kon nam atuling na ngali hmukit tas nol tilu-kee nas, mesa-mesam nol un ngala. Mo un esa haup tapa, man tom nol una lo bii. <figure src="co00603c.jpg" size="" osisRef="" alt="No Image"><caption></caption></figure></p>
+      <p>
+        <verse eID="Judg.1.20" />
+        <verse sID="Judg.1.21" osisID="Judg.1.21" n="21" />Hidi kon AMA LAMTUA Allah tao atuling na le un niin nala. Nikit un niin nala kon, Ama Lamtua kat un seen blapas sas mesa, hidim kulis tema papa la pait. <verse eID="Judg.1.21" /><verse sID="Judg.1.22" osisID="Judg.1.22" n="22" />Deng seen na, Un daken daid bihata mesa. Hidim Un tapa bihatang na lako bel atuling nga. <verse eID="Judg.1.22" /><verse sID="Judg.1.23" osisID="Judg.1.23" n="23" />Net bihatang na kon, atuling nga tek noan,</p>
+      <p type="embedded">
+        <lg>
+          <l level="1">   “Eli le! Ni halas-sam tom nol au!</l>
+          <l level="2">         Un seen na banansila el auk seen ni kon. </l>
+          <l level="3">          Nol un sisin na kon banansila el auk sising ngia. </l>
+          <l level="2">         Undeng un daid deng biklobe lia, tiata auk ngali un ngala ka noan ‘bihata’.”<note placement="x-foot" n="+"><reference osisRef="2:23:" type="source">2:23: </reference>Se dais Ibranin nam, biklobe li noken ‘<span><hi type="italic">ish</hi></span>’. Nol bihata li ‘<span><hi type="italic">isha</hi></span>’. Tiata se nia, oen kuti dais noan “<span><hi type="italic">isha</hi></span> (bihata) daid deng <span><hi type="italic">ish</hi></span> (biklobe).”</note></l>
+          <l level="1">   <verse eID="Judg.1.23" /><verse sID="Judg.1.24" osisID="Judg.1.24" n="24" />Undeng na, biklobe li musti nang un ina-aman nas,</l>
+          <l level="2">         le lako nuil koo-dalen mes nol un sapa-bihatan na,</l>
+          <l level="3">          ta oen duas butu-kil apa daid mes son. </l>
+        </lg>
+      </p>
+      <p>
+        <verse eID="Judg.1.24" />
+        <verse sID="Judg.1.25" osisID="Judg.1.25" n="25" />Dedeng na, oen duas lulit, mo oen duas nataka taan in mae ki lo. </p>
+      <verse eID="Judg.1.25" />
+      <chapter eID="Judg.1" />
+      <chapter n="2" osisID="Judg.2" sID="Judg.2" />
+      <div type="section">
+        <title>
+          <hi type="bold">Atuli li dai hii-ming se Ama Lamtua Allah lo</hi>
+        </title>
+      </div>
+      <p>
+        <verse eID="Judg.2.25" />
+        <verse sID="Judg.2.1" osisID="Judg.2.1" n="1" />Totoang hmukit man AMA LAMTUA Allah in koet son se apan-kloma kia ngas, ula la man taan in nole-lilung dui. Oe mesan na, ula la keket bihatang nga noan, “Baktebes Ama Lamtua Allah kaing noan, ‘Mi boel kaa totoang kai isin in se klaap ni dalen nias lo, ta lo?’ ” <figure src="co00606c.jpg" size="" osisRef="" alt="No Image"><caption></caption></figure></p>
+      <p>
+        <verse eID="Judg.2.1" />
+        <verse sID="Judg.2.2" osisID="Judg.2.2" n="2" />
+        <span>
+          <hi type="super">-</hi>
+        </span>
+        <verse eID="Judg.2.2" />
+        <verse sID="Judg.2.3" osisID="Judg.2.3" n="3" />Bihatang nga situn noan “Loo! Kaim boel kaas totoang! Mo muik kai ina mes sii man ne klaap ni hlala kia, man Ama Lamtua Allah kaing kaim le boel kaan lo. Un tek noan kaim boel kaan lo, nol boel sepo tom un isin na deken, ta lo kam kaim matem.”</p>
+      <verse eID="Judg.2.3" />
+      <chapter eID="Judg.2" />
+    </div>
+  </osisText>
+</osis>

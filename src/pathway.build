@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://nant.sf.net/release/0.91-alpha1/nant.xsd"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://nant.sf.net/release/0.91-alpha1/nant.xsd pathwayNant.xsd"
+ name="Pathway"
+ default="debug">
+    <property name="nant.settings.currentframework" value="net-3.5" if="${platform::is-win32()}"/>
+    <property name="Platform" value="x86"/>
+    <property name="WixNs" value="http://schemas.microsoft.com/wix/2003/01/wi"/>
+   
+    <target name="clean" description="Delete all previously compiled binaries.">
+        <delete>
+            <fileset>
+                <include name="*/bin/**" />
+                <include name="*/obj/**" />
+				<include name="../Installer/Files/**" />
+				<include name="../Installer/Wix/**" />
+                <include name="Build/*/bin/**" />
+                <include name="Build/*/obj/**" />
+                <include name="WordPressConvert/build/**" />
+                <include name="WordPressConvert/dist/**" />
+                <include name="PwTxEx/build/**" />
+                <include name="PwTxEx/dist/**" />
+                <include name="PwTxEx/*.pyc" />
+                <include name="**/TestFiles/output/**" />
+            </fileset>
+        </delete>
+    </target>
+    
+    <target name="debug">
+        <property name="Configuration" value="Debug"/>
+        <call target="AllDebug"/>
+    </target>
+    <target name="AllDebug" depends="BookletBuilder, ConfigurationTool, PsExport, ParatextSupport, PathwayB, epubConvert, GoBibleConvert, InDesignConvert, LogosConvert, OpenOfficeConvert, OpenOfficeConvert_OLD,  PdfConvert, WordPressConvert, XeTeXConvert, XeTex, Test, TestBed"/>
+    <target name="test" depends="debug">
+        <exec program="testpathway.bat"/>
+    </target>
+    
+    <target name="daily">
+        <call target="clean"/>
+        <call target="Corporate7BTE"/>
+    </target>
+    
+    <target name="sprint">
+        <call target="clean"/>
+        <call target="Corporate7BTE"/>
+        <call target="Corporate7SE"/>
+        <call target="Release7BTE"/>
+        <call target="ConTeXt"/>
+        <call target="clean"/>
+        <call target="Set606"/>
+        <call target="CorporateBTE"/>
+        <call target="CorporateSE"/>
+        <call target="Release"/>
+        <call target="Set605"/>
+        <call target="CorporateBTE"/>
+        <call target="CorporateSE"/>
+        <call target="Set604"/>
+        <call target="CorporateBTE"/>
+        <call target="CorporateSE"/>
+        <call target="ReleaseBTE"/>
+    </target>
+    
+    <target name="sprint6">
+        <call target="clean"/>
+        <call target="Set606"/>
+        <call target="CorporateBTE"/>
+        <call target="CorporateSE"/>
+        <call target="Set605"/>
+        <call target="CorporateBTE"/>
+        <call target="CorporateSE"/>
+        <call target="Set604"/>
+        <call target="CorporateBTE"/>
+        <call target="CorporateSE"/>
+        <call target="ReleaseBTE"/>
+    </target>
+    
+    <target name="ConTeXt">
+        <property name="Configuration" value="PwCtx"/>
+        <call target="AllPwCtx"/>
+    </target>
+    <target name="AllPwCtx" depends="BuildCtx, BuilderBL, PsTool"/>
+    
+    <target name="TextExport">
+        <property name="Configuration" value="PwTxEx"/>
+        <call target="AllPwTxEx"/>
+    </target>
+    <target name="AllPwTxEx" depends="BuildTxEx, BuilderBL, PsTool"/>
+    
+    <target name="Corporate7BTE">
+        <property name="Scope" value="BTE"/>
+        <property name="Configuration" value="Corporate7${Scope}"/>
+        <property name="Product" value="Pathway ${Scope} Corporate "/>
+        <call target="SetPwVer"/>
+        <call target="MakePw7"/>
+        <call target="AllCorporate7BTE"/>
+        <call target="Builder7BTE"/>
+    </target>
+    <target name="AllCorporate7BTE" depends="BuilderBL, ConfigurationTool, epubConvert, GoBibleConvert, InDesignConvert, LogosConvert, OpenOfficeConvert, ParatextSupport, PathwayB, PsExport"/>
+    
+    <target name="Corporate7SE">
+        <property name="Scope" value="SE"/>
+        <property name="Configuration" value="Corporate7${Scope}"/>
+        <property name="Product" value="Pathway ${Scope} Corporate "/>
+        <call target="SetPwVer"/>
+        <call target="MakePw7"/>
+        <call target="AllCorporate7SE"/>
+        <call target="Builder7SE"/>
+    </target>
+    <target name="AllCorporate7SE" depends="BuilderBL, ConfigurationTool, epubConvert, InDesignConvert, OpenOfficeConvert, PathwayB, PsExport"/>
+    
+    <target name="Release7BTE">
+        <property name="Scope" value="BTE"/>
+        <property name="Configuration" value="Release7${Scope}"/>
+        <property name="Product" value="Pathway ${Scope} (Testing) "/>
+        <call target="SetPwVer"/>
+        <call target="MakePw7"/>
+        <call target="AllRelease7BTE"/>
+        <call target="Builder7BTE"/>
+    </target>
+    <target name="AllRelease7BTE" depends="BuilderBL, ConfigurationTool, epubConvert, GoBibleConvert, InDesignConvert, LogosConvert, OpenOfficeConvert, ParatextSupport, PathwayB, PdfConvert, PsExport, WordPressConvert, XeTeXConvert, XeTex"/>
+    
+    <target name="Release7SE">
+        <property name="Scope" value="BTE"/>
+        <property name="Configuration" value="Release7${Scope}"/>
+        <property name="Product" value="Pathway ${Scope} (Testing) "/>
+        <call target="SetPwVer"/>
+        <call target="MakePw7"/>
+        <call target="AllRelease7SE"/>
+        <call target="Builder7SE"/>
+    </target>
+    <target name="AllRelease7SE" depends="BuilderBL, ConfigurationTool, epubConvert, InDesignConvert, OpenOfficeConvert, PathwayB, PdfConvert, PsExport, WordPressConvert, XeTeXConvert, XeTex"/>
+    
+    <target name="MakePw7">
+        <property name="myFile" value="Build\Installer\Pathway7${Scope}.wxs"/>
+        <copy file="Build\Installer\Pathway7BTE-tpl.wxs" tofile="${myFile}" overwrite="true"/>
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Name" value="${Product}${PwVer}">
+            <namespaces>
+                <namespace prefix="wix" uri="${WixNs}"/>
+            </namespaces>
+        </xmlpoke>
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${FullPwVer}">
+            <namespaces>
+                <namespace prefix="wix" uri="${WixNs}"/>
+            </namespaces>
+        </xmlpoke>
+        <xmlpoke file="${myFile}" xpath="//wix:Shortcut[@Id='TutorialShortcutApp']/@Target" value="[#Pathway_Student_Manual_${Scope}.doc]">
+            <namespaces>
+                <namespace prefix="wix" uri="${WixNs}"/>
+            </namespaces>
+        </xmlpoke>
+    </target>
+    
+    <target name="BookletBuilder" depends="CssDialog, PsTool">
+        <msbuild project="BookletBuilder\BookletBuilder.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="BuildCtx" depends="BuilderBL, PsTool">
+        <msbuild project="Build\BuildCtx\BuildCtx.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="BuildTxEx" depends="BuilderBL, PsTool,PwTxEx">
+        <msbuild project="Build\BuildTxEx\BuildTxEx.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PwTxEx">
+        <exec program="c:\Python25\Python.exe" commandline="setup.py" workingdir="PwTxEx"/>
+    </target>
+    <target name="Builder7BTE" depends="BuilderBL, PsTool">
+        <msbuild project="Build\Builder7BTE\Builder7BTE.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="Builder7SE" depends="BuilderBL, PsTool">
+        <msbuild project="Build\Builder7SE\Builder7SE.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="BuilderBL" depends="PsTool">
+        <msbuild project="Build\BuilderBL\BuilderBL.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="ConfigurationTool" depends="CssDialog, CssParser, OpenOfficeConvert, PsTool">
+        <msbuild project="ConfigurationTool\ConfigurationTool.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="CssDialog" depends="CssParser, OpenOfficeConvert, PsTool">
+        <msbuild project="CssDialog\CssDialog.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="CssParser" depends="PsTool">
+        <msbuild project="CssParser\CssParser.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="epubConvert" depends="CssDialog, CssParser, OpenOfficeConvert, PsTool">
+        <msbuild project="epubConvert\epubConvert.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="GoBibleConvert" depends="CssDialog, CssParser, PsTool">
+        <msbuild project="GoBibleConvert\GoBibleConvert.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="InDesignConvert" depends="CssParser, PsTool">
+        <msbuild project="InDesignConvert\InDesignConvert.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="LiftPrepare">
+        <msbuild project="LiftPrepare\LiftPrepare.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="LogosConvert" depends="CssDialog, CssParser, PsTool">
+        <msbuild project="LogosConvert\LogosConvert.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="OpenOfficeConvert" depends="CssParser, LiftPrepare, PsTool">
+        <msbuild project="OpenOfficeConvert\OpenOfficeConvert.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="OpenOfficeConvert_OLD" depends="CssParser, LiftPrepare, PsTool">
+        <msbuild project="OpenOfficeConvert_OLD\OpenOfficeConvert_OLD.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="ParatextSupport" depends="CssDialog, PsExport, PsTool">
+        <msbuild project="ParatextSupport\ParatextSupport.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PathwayB" depends="PsTool">
+        <msbuild project="PathwayB\PathwayB.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PdfConvert" depends="CssDialog, PsTool">
+        <msbuild project="PdfConvert\PdfConvert.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PsExport" depends="CssDialog, PsTool">
+        <msbuild project="PsExport\PsExport.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PsTool">
+        <msbuild project="PsTool\PsTool.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PublishingSolutionsExe" depends="CssDialog, CssParser, PsTool">
+        <msbuild project="PublishingSolutionExe\PublishingSolutionExe.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="SetVersion" depends="BuilderBL, PsTool">
+        <msbuild project="SetVersion\SetVersion.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="Test" depends="ConfigurationTool, CssDialog, CssParser, epubConvert, GoBibleConvert, InDesignConvert, LiftPrepare, LogosConvert, OpenOfficeConvert, OpenOfficeConvert_OLD, PsExport, PsTool, WordPressConvert, XeTeXConvert, XeTex">
+        <msbuild project="Test\Test.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="TestBed" depends="CssDialog, CssParser, InDesignConvert, LiftPrepare, LogosConvert, OpenOfficeConvert, OpenOfficeConvert_OLD, ParatextSupport, PsExport, PsTool">
+        <msbuild project="TestBed\TestBed.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="WordPressConvert" depends="CssDialog, PsTool">
+        <msbuild project="WordPressConvert\WordPressConvert.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="XeTeXConvert" depends="CssDialog, CssParser, PsTool">
+        <msbuild project="XeTeXConvert\XeTeXConvert.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="XeTex" depends="CssParser, PsTool">
+        <msbuild project="XeTex\XeTex.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+
+    <target name="SetPwVer">
+        <loadfile file="ConfigurationTool\Properties\AssemblyInfo.cs" property="AssemblyInfo"/>
+        <property name="VerTag" value="AssemblyVersion" readonly="true"/>
+        <property name="VerIdx" value="${string::last-index-of(AssemblyInfo, VerTag) + string::get-length(VerTag) + 2}"/>
+        <property name="InfoRestLen" value="${string::get-length(AssemblyInfo) - int::parse(VerIdx)}"/>
+        <property name="InfoRest" value="${string::substring(AssemblyInfo, VerIdx, InfoRestLen)}"/>
+        <property name="VerLen" value="${string::index-of(InfoRest, ')]') - 1}"/>
+        <property name="FullPwVer" value="${string::substring(InfoRest, 0, VerLen)}"/>
+        <property name="RevIdx" value="${string::last-index-of(FullPwVer, '.')}"/>
+        <property name="PwVer" value="${string::substring(FullPwVer, 0, RevIdx)}"/>
+        <echo message="PwVer is ${PwVer}"/>
+    </target>
+    
+    <target name="SetFwVer">
+        <property name="FullVer" value="${fileversioninfo::get-file-version(fileversioninfo::get-version-info('PsExport\Dlls601\BasicUtils.dll'))}"/>
+        <property name="RevIdx" value="${string::last-index-of(FullVer, '.')}"/>
+        <property name="FwVer" value="${string::substring(FullVer, 0, RevIdx)}"/>
+        <echo message="FwVer is ${FwVer}"/>
+    </target>
+
+    <target name="Set606">
+        <copy overwrite="true" todir="PsExport\Dlls601">
+            <fileset basedir="PsExport\Dlls606">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
+    </target>
+
+    <target name="Set605">
+        <copy overwrite="true" todir="PsExport\Dlls601">
+            <fileset basedir="PsExport\Dlls605">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
+    </target>
+    
+    <target name="Set604">
+        <copy overwrite="true" todir="PsExport\Dlls601">
+            <fileset basedir="PsExport\Dllstable">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
+    </target>
+    
+    <target name="Set603">
+        <copy overwrite="true" todir="PsExport\Dlls601">
+            <fileset basedir="PsExport\Dlls603">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
+    </target>
+    
+    <target name="Set602">
+        <copy overwrite="true" todir="PsExport\Dlls601">
+            <fileset basedir="PsExport\Dlls602">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
+    </target>
+    
+    <target name="Set601">
+        <copy overwrite="true" todir="PsExport\Dlls601">
+            <fileset basedir="PsExport\Dlls601s">
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <copy file="PsExport\Dlls601\FieldworksVersions.txt" tofile="..\DistFiles\FieldworksVersions.txt" overwrite="true"/>
+    </target>
+    
+    <target name="Clean60">
+        <delete>
+            <fileset>
+                <include name="PsExport\Dlls601\**"/>
+            </fileset>
+        </delete>
+    </target>
+    
+    <target name="CorporateBTE">
+        <property name="Scope" value="BTE"/>
+        <property name="Configuration" value="Corporate${Scope}"/>
+        <property name="Product" value="Pathway ${Scope} "/>
+        <call target="SetPwVer"/>
+        <call target="SetFwVer"/>
+        <call target="MakePw"/>
+        <call target="AllCorporateBTE"/>
+        <call target="BuilderBTE60"/>
+    </target>
+    <target name="AllCorporateBTE" depends="BuilderBL60, ConfigurationTool60, epubConvert60, GoBibleConvert60, InDesignConvert60, LogosConvert60, OpenOfficeConvert60, PathwayB60, PsExport60"/>
+    
+    <target name="CorporateSE">
+        <property name="Scope" value="SE"/>
+        <property name="Configuration" value="Corporate${Scope}"/>
+        <property name="Product" value="Pathway ${Scope} "/>
+        <call target="SetPwVer"/>
+        <call target="SetFwVer"/>
+        <call target="MakePw"/>
+        <call target="AllCorporateSE"/>
+        <call target="BuilderSE60"/>
+    </target>
+    <target name="AllCorporateSE" depends="BuilderBL60, ConfigurationTool60, epubConvert60, InDesignConvert60, OpenOfficeConvert60, PathwayB60, PsExport60"/>
+    
+    <target name="ReleaseBTE">
+        <property name="Scope" value="BTE"/>
+        <property name="Configuration" value="Release${Scope}"/>
+        <property name="Product" value="Pathway ${Scope} (Testing) "/>
+        <call target="SetPwVer"/>
+        <call target="SetFwVer"/>
+        <call target="MakePw"/>
+        <call target="AllReleaseBTE"/>
+        <call target="BuilderBTE60"/>
+    </target>
+    <target name="AllReleaseBTE" depends="BuilderBL60, ConfigurationTool60, epubConvert60, GoBibleConvert60, InDesignConvert60, LogosConvert60, OpenOfficeConvert60, PathwayB60, PdfConvert60, PsExport60, WordPressConvert60, XeTeXConvert60, XeTex60"/>
+    
+    <target name="ReleaseSE">
+        <property name="Scope" value="SE"/>
+        <property name="Configuration" value="Release${Scope}"/>
+        <property name="Product" value="Pathway ${Scope} (Testing) "/>
+        <call target="SetPwVer"/>
+        <call target="SetFwVer"/>
+        <call target="MakePw"/>
+        <call target="AllReleaseSE"/>
+        <call target="BuilderSE60"/>
+    </target>
+    <target name="AllReleaseSE" depends="BuilderBL60, ConfigurationTool60, epubConvert60, InDesignConvert60, OpenOfficeConvert60, PathwayB60, PdfConvert60, PsExport60, WordPressConvert60, XeTeXConvert60, XeTex60"/>
+    
+    <target name="MakePw">
+        <property name="myFile" value="Build\Installer\Pathway${Scope}.wxs"/>
+        <copy file="Build\Installer\PathwayBTE-tpl.wxs" tofile="${myFile}" overwrite="true"/>
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Name" value="${Product}${PwVer} for FieldWorks ${FwVer}">
+            <namespaces>
+                <namespace prefix="wix" uri="${WixNs}"/>
+            </namespaces>
+        </xmlpoke>
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${FullPwVer}">
+            <namespaces>
+                <namespace prefix="wix" uri="${WixNs}"/>
+            </namespaces>
+        </xmlpoke>
+        <xmlpoke file="${myFile}" xpath="//wix:Shortcut[@Id='TutorialShortcutApp']/@Target" value="[#Pathway_Student_Manual_${Scope}.doc]">
+            <namespaces>
+                <namespace prefix="wix" uri="${WixNs}"/>
+            </namespaces>
+        </xmlpoke>
+    </target>    
+    
+    <target name="Release">
+        <property name="Configuration" value="Release"/>
+        <call target="SetPwVer"/>
+        <call target="MakePs"/>
+        <call target="AllRelease"/>
+        <call target="Builder60"/>
+    </target>
+    <target name="AllRelease" depends="BuilderBL60, ConfigurationTool60, GoBibleConvert60, InDesignConvert60, LogosConvert60, OpenOfficeConvert60, PathwayB60, PdfConvert60, PsExport60, PublishingSolutionExe60, WordPressConvert60, XeTeXConvert60, XeTex60"/>
+    
+    <target name="MakePs">
+        <property name="myFile" value="Build\Installer\OOS.wxs"/>
+        <copy file="Build\Installer\OOS-tpl.wxs" tofile="${myFile}" overwrite="true"/>
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Name" value="SIL PublishingSolution ${PwVer}">
+            <namespaces>
+                <namespace prefix="wix" uri="${WixNs}"/>
+            </namespaces>
+        </xmlpoke>
+        <xmlpoke file="${myFile}" xpath="//wix:Product/@Version" value="${FullPwVer}">
+            <namespaces>
+                <namespace prefix="wix" uri="${WixNs}"/>
+            </namespaces>
+        </xmlpoke>
+    </target>    
+    
+    <target name="BuildCtx60" depends="BuilderBL60, PsTool60">
+        <msbuild project="Build\BuildCtx\BuildCtx60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="BuildTxEx60" depends="BuilderBL60, PsTool60">
+        <msbuild project="Build\BuildTxEx\BuildTxEx60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="Builder60" depends="BuilderBL60, PsTool60">
+        <msbuild project="Build\Builder\Builder60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="BuilderBTE60" depends="BuilderBL60, PsTool60">
+        <msbuild project="Build\BuilderBTE\BuilderBTE60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="BuilderSE60" depends="BuilderBL60, PsTool60">
+        <msbuild project="Build\BuilderSE\BuilderSE60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="BuilderBL60" depends="PsTool60">
+        <msbuild project="Build\BuilderBL\BuilderBL60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="ConfigurationTool60" depends="CssDialog60, CssParser60, OpenOfficeConvert60, PsTool60">
+        <msbuild project="ConfigurationTool\ConfigurationTool60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="CssDialog60" depends="CssParser60, OpenOfficeConvert60, PsTool60">
+        <msbuild project="CssDialog\CssDialog60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="CssParser60" depends="PsTool60">
+        <msbuild project="CssParser\CssParser60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="epubConvert60" depends="CssDialog60, CssParser60, OpenOfficeConvert60, PsTool60">
+        <msbuild project="epubConvert\epubConvert60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="GoBibleConvert60" depends="CssDialog60, CssParser60, PsTool60">
+        <msbuild project="GoBibleConvert\GoBibleConvert60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="InDesignConvert60" depends="CssParser60, PsTool60">
+        <msbuild project="InDesignConvert\InDesignConvert60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="LogosConvert60" depends="CssDialog60, CssParser60, PsTool60">
+        <msbuild project="LogosConvert\LogosConvert60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="OpenOfficeConvert60" depends="CssParser60, LiftPrepare, PsTool60">
+        <msbuild project="OpenOfficeConvert\OpenOfficeConvert60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="OpenOfficeConvert_OLD60" depends="CssDialog60, CssParser60, LiftPrepare, PsTool60">
+        <msbuild project="OpenOfficeConvert_OLD\OpenOfficeConvert_OLD60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="ParatextSupport60" depends="CssDialog60, PsExport60, PsTool60">
+        <msbuild project="ParatextSupport\ParatextSupport60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PathwayB60" depends="PsTool60">
+        <msbuild project="PathwayB\PathwayB60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PdfConvert60" depends="CssDialog60, PsTool60">
+        <msbuild project="PdfConvert\PdfConvert60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PsExport60" depends="CssDialog60, PsTool60">
+        <msbuild project="PsExport\PsExport60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PsTool60">
+        <msbuild project="PsTool\PsTool60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="PublishingSolutionExe60" depends="CssDialog60, CssParser60, PsTool60">
+        <msbuild project="PublishingSolutionExe\PublishingSolutionExe60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="SetVersion60" depends="BuilderBL60, PsTool60">
+        <msbuild project="SetVersion\SetVersion60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="Test60" depends="ConfigurationTool60, CssDialog60, CssParser60, epubConvert60, GoBibleConvert60, InDesignConvert60, LiftPrepare, LogosConvert60, OpenOfficeConvert60, OpenOfficeConvert_OLD60, PsExport60, PsTool60, WordPressConvert60, XeTeXConvert60, XeTex60">
+        <msbuild project="Test\Test60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="TestBed60" depends="CssDialog60, CssParser60, InDesignConvert60, LiftPrepare, LogosConvert60, OpenOfficeConvert60, OpenOfficeConvert_OLD60, ParatextSupport60, PsExport60, PsTool60">
+        <msbuild project="TestBed\TestBed60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="WordPressConvert60" depends="CssDialog60, PsTool60">
+        <msbuild project="WordPressConvert\WordPressConvert60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="XeTeXConvert60" depends="CssDialog60, CssParser60, PsTool60">
+        <msbuild project="XeTeXConvert\XeTeXConvert60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+    <target name="XeTex60" depends="CssParser60, PsTool60">
+        <msbuild project="XeTex\XeTex60.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
+</project>

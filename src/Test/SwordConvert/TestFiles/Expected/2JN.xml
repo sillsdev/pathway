@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<osis xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace http://www.bibletechnologies.net/osisCore.2.1.1.xsd" xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <osisText osisIDWork="thisWork" osisRefWork="bible" xml:lang="eng">
+    <header>
+      <work osisWork="thisWork">
+        <scope>2John.1.1-2John.1.13</scope>
+      </work>
+    </header>
+    <div type="book" osisID="2John" canonical="true" xmlns="">- Miniafia (Arifama) NT [aai] -Papua New Guinea 2009 (web version -2012 bd)</div>
+    <title short="2 John" xmlns="" />
+    <title type="main" xmlns="">
+      <title level="1">
+        <hi type="bold">2 John</hi>
+      </title>
+    </title>
+    <div type="introduction" canonical="false" xmlns="">
+      <div type="main">
+        <title>Roube’aten Ana Tur</title>
+      </div>
+    </div>
+    <p xmlns="">John ana fef bairou’abin i Babin natunatun bairi isah, ana itinin ekaleisia kikimin nati i ana baremaim bairi hima’am isah. Iti tur an kabumin i ana fefeyan naatu ana baimatnuwen tur, sabuw baifuwenamaim bai’obaiyen kakafih tibi’obaibiyih isan, hina’itin saise matah toniwa’an hinama.</p>
+    <div type="introduction" canonical="false" xmlns="">
+      <div type="outline">
+        <title>Fef wanawanan tur iti na’atube hi’asgidigid</title>
+      </div>
+    </div>
+    <div xmlns="">
+      <list>
+        <item style="font-family:12pt;text-indent: -.375pt;">Merarayow naatu yoyoban (1-3)</item>
+      </list>
+    </div>
+    <div xmlns="">
+      <list>
+        <item style="font-family:12pt;text-indent: -.375pt;">Turobe naatu yabow (4-6)</item>
+      </list>
+    </div>
+    <div xmlns="">
+      <list>
+        <item style="font-family:12pt;text-indent: -.375pt;">Baibaiyen kakafih ana bai baimatnuwen (7-11)</item>
+      </list>
+    </div>
+    <div xmlns="">
+      <list>
+        <item style="font-family:12pt;text-indent: -.375pt;">Yomanin ana merarayow (12-13)</item>
+      </list>
+    </div>
+    <chapter n="1" osisID=".1" sID=".1" xmlns="" />
+    <p xmlns="">
+      <verse sID=".1.1" osisID=".1.1" n="1" />Tuwat ain biyanane, Kou’ay Bar kafai wanawananamaim natunatun bairi isah abiyabow men kafaita. Men ayu akisu kwa isa abiyabowamih, baise sabuw iyab tur obe hisoso’ob auman isa tibiyabow. <verse sID=".1.2" osisID=".1.2" n="2" />Ana yabin tur obe it wanawanatamaim ema’am, naatu boro mar etei bairit tana ma wanatowan. <verse sID=".1.3" osisID=".1.3" n="3" />Tamat God, naatu Jesu Keriso Tamat Natun, baiwan babanen, kabeber, tufuw hinitit. It nowatamih, tur obe’emaim naatu yabowamaim.</p>
+    <div type="section" xmlns="">
+      <title>
+        <hi type="bold">Turobe Naatu Yabow</hi>
+      </title>
+    </div>
+    <p xmlns="">
+      <verse sID=".1.4" osisID=".1.4" n="4" />
+      <note type="crossReference" osisID=".4 " n="*">
+        <reference osisRef="3Jn 3">3Jn 3</reference>
+      </note>Tamat iu’uwit na’atube, natunat Kirisiyan ana efamaim hai yawas hibabatun hima’am ana atit aitih yau sisir gagamin maiyow. <verse sID=".1.5" osisID=".1.5" n="5" /><note type="crossReference" osisID=".5 " n="*"><reference osisRef="1Jn 2.7">1Jn 2.7</reference></note>Imih are au yabow babin, akokok it etei’imak taniyabowbonen. Iti obaiyunen tur i men boubun. Iti obaiyunen tur i marasika anamaim tanowar. <verse sID=".1.6" osisID=".1.6" n="6" />Imih God tanabiyabuw boro fanan tanab ana ofafar tanakaif. Naatu taniyabowbonen tanama. Ana yabin iti obaiyunen tur i marasika anamaim hibinan kwanowar. <verse sID=".1.7" osisID=".1.7" n="7" /><note type="crossReference" osisID=".7 " n="*"><reference osisRef="1Jn 4.1-3">1Jn 4.1-3</reference></note>Ana yabin yabowamaim kwanama sabuw baikubibiruwenayah afa Jesu Keriso na orot babin biyah baib isan, men tibibabatun i moumurih na’in hitit tafaram awan kakaratan. Imih orot ta nati na’atube nao men nibibabatun i baikubibiruwenayan, naatu Keriso ana rakit wairafin. <verse sID=".1.8" osisID=".1.8" n="8" />Mata toniwa’an abisa isan tabowabow men kwanabohamiy. Baise kwana bukikin kwanabow, saise a baiyan tutufin kwanab. <verse sID=".1.9" osisID=".1.9" n="9" />Orot yait men Keriso ana bai’obaiyenamaim ebi’obaibiyen, i men God bai. Ana yabin i Keriso ana bai’obaiyen nasair rabon me’at. Orot yait Keriso ana bai’obaiyenamaim ema’am i Tamat God Natun hairi buwih. <verse sID=".1.10" osisID=".1.10" n="10" />Isan imih orot yait men Keriso ana bai’obaiyen bai enan, abaremaim men ana merar kwanay kwanabaimih. O men tufuw kwanitin. <verse sID=".1.11" osisID=".1.11" n="11" />Ana yabin orot yait tufuw ebitin, nati orot i ana ofomih matar naatu abisa kakafin esisinaf boro ana ubar turin nab. </p>
+    <div type="section" xmlns="">
+      <title>
+        <hi type="bold">Tur Yomanin</hi>
+      </title>
+    </div>
+    <p xmlns="">
+      <verse sID=".1.12" osisID=".1.12" n="12" />Ayu akokok boro tur moumurih na’in atao kwatanowar, baise men akokok fefemaim ana kirum, imih anotanot boro ayu taiyuwu anan aninanawani, yumatau kwana’itin bairi tanao. Saise boro bairit taniyasisir gewas. <verse sID=".1.13" osisID=".1.13" n="13" />God akisin iti tai a yabow babin rubin, i natunatun iti tema’am kwa etei a merar tiyiy. </p>
+  </osisText>
+</osis>

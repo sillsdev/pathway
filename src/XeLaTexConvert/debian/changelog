@@ -1,0 +1,25 @@
+pathway-xelatex (1.13.3.4612-1) unstable; urgency=high
+
+  * 1.13.3.4612 sprint
+    - based on TexLive 2015
+  * 1.10.0.3915 daily
+    - based on TexLive 2013
+  * 1.9.0.3751 daily
+    - add needspace
+  * 1.8.2.3707 daily
+    - handle install when launched from Firefox
+  * 1.8.1.3688 daily
+    - add iftex package
+  * 1.8.0.3679 daily
+    - add bidi package
+  * 1.7.0.3077 daily
+    - add lettrine package for drop capitals
+    - execute mktexlsr and fmtutil after install
+  * 1.6.0.2545 daily
+  * 1.6.0.2528 sprint
+    - Update to TexLive 2012
+  * 1.5.0.2463 sprint
+    - First release of XeLaTex for Pathway on Linux
+
+ -- Greg Trihus <greg_trihus@sil.org>  Mon, 23 Jul 2012 16:21:26 -0600
+
