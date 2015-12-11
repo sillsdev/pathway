@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?define Product="Pathway"?>
 <?define UpgradeCode="74173B43-8B0C-499e-99B0-759A6C8EBDD2"?>
+<?define Edition="BTE"?>
 <?define BUILD_NUMBER="1.13.4"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" Name="$(var.Product) $(var.Edition) $(var.BUILD_NUMBER)" Language="1033" Version="$(var.BUILD_NUMBER)" Manufacturer="SIL International" UpgradeCode="$(var.UpgradeCode)">
@@ -32,6 +33,22 @@
             <Shortcut Id="desktopShortcutApp" Directory="DesktopFolder" Name="Pathway Configuration Tool" Target="[!configurationtool.exe]" IconIndex="0" />
             <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
             <RegistryValue Root="HKCU" Key="Software\SIL\Pathway" Name="PathwayDir" Type="string" Value="[APPLICATIONFOLDER]" />
+          </Component>
+          <Component Id="AddReadmeShortcut" Guid="23575D91-3CF8-41dc-96FC-D2466EDE125C">
+            <Shortcut Id="ShortcutReadme" Name="Read Me" Target="[!readmepw.rtf]" Hotkey="0" IconIndex="0" Show="normal" />
+            <RegistryValue Root="HKCU" Key="Software\SIL\Pathway" Name="Readme" Type="string" Value="[!readmepw.rtf]" />
+          </Component>
+          <Component Id="AddTutorialShortcut" Guid="3A0CF01A-A7C3-49F0-A00F-0574B54370C9">
+            <Shortcut Id="ShortcutTutorial" Name="Tutorial" Target="[!pathway_student_manual.pdf]" Hotkey="0" IconIndex="0" Show="normal" />
+            <RegistryValue Root="HKCU" Key="Software\SIL\Pathway" Name="Tutorial" Type="string" Value="[!pathway_student_manual.pdf]" />
+          </Component>
+          <Component Id="AddLicenseShortcut" Guid="23575D91-3CF8-41dc-96FC-D2466EDE125D">
+            <Shortcut Id="ShortcutLicense" Name="License" Target="[!license.rtf]" Hotkey="0" IconIndex="0" Show="normal" />
+            <RegistryValue Root="HKCU" Key="Software\SIL\Pathway" Name="License" Type="string" Value="[!license.rtf]" />
+          </Component>
+          <Component Id="AddHelpShortcut" Guid="8D72119D-8590-4552-9A08-00AA4825FEF1">
+            <Shortcut Id="ShortcutHelp" Name="Help" Target="[!pathway_configuration_tool.chm]" Hotkey="0" IconIndex="0" Show="normal" />
+            <RegistryValue Root="HKCU" Key="Software\SIL\Pathway" Name="Help" Type="string" Value="[!pathway_configuration_tool.chm]" />
           </Component>
         </Directory>
       </Directory>

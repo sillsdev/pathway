@@ -1762,4 +1762,8 @@
   <File Path="SwordConvert.pdb" ComponentGuid="9FC19366-CC0F-4A1C-BC23-4EAE69E8B1F6" />
   <File Path="L10NSharp.pdb" ComponentGuid="E0A9A1C7-0871-4183-9603-CF94111F0832" />
   <File Path="L10NSharp.xml" ComponentGuid="208DFF0A-6B79-4F24-A29E-B923D5C01D25" />
+  <File Path="Help\Pathway_Configuration_Tool.chm" ComponentGuid="5FCD14C5-A493-449C-8708-601342E69B24" />
+  <File Path="Pathway_Student_Manual.pdf\Pathway_Student_Manual_BTE.pdf" ComponentGuid="97B1A4BF-A2DD-40E7-9E67-3805142AA022" />
+  <File Path="Help\Pathway_Student_Manual.pdf\Pathway_Student_Manual_BTE.pdf" ComponentGuid="8CFE9E5E-D62C-4A5F-85E5-563431094A54" />
+  <File Path="Help\Pathway_Student_Manual.pdf" ComponentGuid="23B7D104-D511-47E3-AA3A-46226881F8B8" />
 </FileLibrary>
