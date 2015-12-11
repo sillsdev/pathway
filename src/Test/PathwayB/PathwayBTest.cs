@@ -273,7 +273,7 @@ namespace Test
         /// Runs PathwayB.exe with the -h parameter, to get the usage info back
         /// </summary>
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void UsageTest()
         {
@@ -319,7 +319,7 @@ namespace Test
         /// Export from TE itself is not affected by this code.
         /// </summary>
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void XhtmlScriptureTest()
         {

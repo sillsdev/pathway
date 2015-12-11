@@ -1874,7 +1874,7 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void TokPisin()
         {

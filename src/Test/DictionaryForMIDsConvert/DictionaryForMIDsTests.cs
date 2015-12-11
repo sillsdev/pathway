@@ -196,7 +196,7 @@ namespace Test.DictionaryForMIDsConvert
         }
 
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void CreateDictionaryForMIDsTest()
         {

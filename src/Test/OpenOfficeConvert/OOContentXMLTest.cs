@@ -3766,7 +3766,7 @@ namespace Test.OpenOfficeConvert
         ///B1pe Full Scripture Test
         /// </summary>      
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void B1peExport()
         {
@@ -3888,7 +3888,7 @@ namespace Test.OpenOfficeConvert
         ///B1pe Full Scripture Test
         /// </summary>      
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void TeTestExport()
         {

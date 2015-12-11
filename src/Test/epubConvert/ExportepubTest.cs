@@ -217,7 +217,7 @@ namespace Test.epubConvert
 		}
 
 		[Test]
-		[Category("LongTest")]
+		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
 		public void InsertReferenceLinkInTocFileTest()
 		{

@@ -417,7 +417,7 @@ namespace Test.PsExport
         /// For country see: http://www.iso.org/iso/iso-3166-1_decoding_table.html
         /// </remarks>
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void AcceptT5BuangALO()
         {
@@ -729,7 +729,7 @@ namespace Test.PsExport
         /// Test TE Export test
         /// </summary>
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TD3661LineSpace24()
         {
@@ -756,7 +756,7 @@ namespace Test.PsExport
         /// Test TE Export test
         /// </summary>
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void TD3661vLineSpace24()
         {
@@ -783,7 +783,7 @@ namespace Test.PsExport
         /// Test TE Export test
         /// </summary>
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void T11()
         {
@@ -924,7 +924,7 @@ namespace Test.PsExport
         /// For country see: http://www.iso.org/iso/iso-3166-1_decoding_table.html
         /// </remarks>
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void T15DictionaryRights()
         {
@@ -995,7 +995,7 @@ namespace Test.PsExport
         /// Test Paratext with A5 page size, 36pt column gap, page numbers on outside margins
         /// </summary>
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void T16A5ScriptureWideGap()
         {
@@ -1056,7 +1056,7 @@ namespace Test.PsExport
         /// Test TE Export test
         /// </summary>
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void T17NoSpaceAfterVerse()
         {

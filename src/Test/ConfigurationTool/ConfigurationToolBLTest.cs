@@ -315,7 +315,7 @@ namespace Test.UIConfigurationToolBLTest
 
 
         [Test]
-        [Category("LongTest")]
+        [Category("ShortTest")]
         public void SaveInputTypeTest()
         {
             SetUp();

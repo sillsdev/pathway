@@ -177,6 +177,7 @@ namespace Test.theWordConvert
         ///A test for ProcessAllBooks
         ///</summary>
         [Test]
+        [NUnit.Framework.Category("LongTest")]
         public void ProcessAllBooksTest()
         {
             Common.Testing = true;      // Don't write settings to settings folder.
@@ -205,6 +206,7 @@ namespace Test.theWordConvert
         }
 
         [Test]
+        [NUnit.Framework.Category("LongTest")]
         public void ProcessTestamentTest()
         {
             LoadMyXslt();
@@ -674,7 +676,7 @@ namespace Test.theWordConvert
         ///A test for ConvertToMySword
         ///</summary>
         [Test]
-        [NUnit.Framework.Category("ShortTest")]
+        [NUnit.Framework.Category("LongTest")]
         [NUnit.Framework.Category("SkipOnTeamCity")]
         public void ConvertToMySwordTest()
         {
@@ -743,7 +745,7 @@ namespace Test.theWordConvert
         ///A test for Export
         ///</summary>
         [Test]
-        [NUnit.Framework.Category("ShortTest")]
+        [NUnit.Framework.Category("LongTest")]
         [NUnit.Framework.Category("SkipOnTeamCity")]
         public void ExportTest()
         {

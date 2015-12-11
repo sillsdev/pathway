@@ -641,7 +641,7 @@ namespace Test.XeLatex
         }
 
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void PictureCaptionTest()
         {
@@ -1005,7 +1005,7 @@ namespace Test.XeLatex
         }
 
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void UnicodeSymbolTest()
         {
@@ -1217,7 +1217,7 @@ namespace Test.XeLatex
         }
 
         [Test]
-        [Category("ShortTest")]
+        [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void FootNoteMarker()
         {
