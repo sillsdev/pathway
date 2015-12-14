@@ -17,11 +17,14 @@ endif
 build:
 	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Release\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
 
+debug:
+	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
+
 buildStep:
 	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/\;OutputPath=src/BuildStep/bin/Debug src/BuildStep/BuildStep.csproj
 
-dotests:
-	nunit-console -exclude=SkipOnTeamCity\;LongTest -labels -nodots output/Test.dll
+test:
+	nunit-console -exclude=SkipOnTeamCity\;LongTest -labels -nodots output/Debug/Test.dll
 
 install:
 	mkdir -p $(DESTDIR)$(prefix)/lib/pathway
