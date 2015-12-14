@@ -86,7 +86,7 @@ namespace Test.UIConfigurationToolBLTest
                                 "Draft"
                             };
 
-            string folderName = "styles";
+            string folderName = "Styles";
             CopyFolderSupportToIO(folderName);
         }
 
