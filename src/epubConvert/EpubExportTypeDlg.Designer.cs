@@ -37,9 +37,9 @@ namespace epubConvert
 			this.btnexprtEpub3 = new System.Windows.Forms.Button();
 			this.btnexprtEpub2 = new System.Windows.Forms.Button();
 			this.IcnInfo = new System.Windows.Forms.PictureBox();
-			this.lblMessage = new System.Windows.Forms.WebBrowser();
 			this.grpExportType = new System.Windows.Forms.GroupBox();
 			this.grpButtons = new System.Windows.Forms.GroupBox();
+			this.rtbControl = new System.Windows.Forms.RichTextBox();
 			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.IcnInfo)).BeginInit();
 			this.grpExportType.SuspendLayout();
@@ -127,31 +127,13 @@ namespace epubConvert
 			this.IcnInfo.TabIndex = 0;
 			this.IcnInfo.TabStop = false;
 			// 
-			// lblMessage
-			// 
-			this.lblMessage.AccessibleRole = System.Windows.Forms.AccessibleRole.Grip;
-			this.lblMessage.AllowNavigation = false;
-			this.lblMessage.AllowWebBrowserDrop = false;
-			this.lblMessage.Dock = System.Windows.Forms.DockStyle.Right;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblMessage, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.lblMessage, null);
-			this.l10NSharpExtender1.SetLocalizationPriority(this.lblMessage, L10NSharp.LocalizationPriority.High);
-			this.l10NSharpExtender1.SetLocalizingId(this.lblMessage, "EpubExportTypeDlg.EpubExportTypeDlg.lblMessage");
-			this.lblMessage.Location = new System.Drawing.Point(75, 16);
-			this.lblMessage.Name = "lblMessage";
-			this.lblMessage.ScrollBarsEnabled = false;
-			this.lblMessage.Size = new System.Drawing.Size(472, 256);
-			this.lblMessage.TabIndex = 4;
-			this.lblMessage.WebBrowserShortcutsEnabled = false;
-			this.lblMessage.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.lblMessage_DocumentCompleted);
-			// 
 			// grpExportType
 			// 
 			this.grpExportType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.grpExportType.BackColor = System.Drawing.Color.White;
+			this.grpExportType.BackColor = System.Drawing.SystemColors.Control;
 			this.grpExportType.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.grpExportType.Controls.Add(this.rtbControl);
 			this.grpExportType.Controls.Add(this.IcnInfo);
-			this.grpExportType.Controls.Add(this.lblMessage);
 			this.grpExportType.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.grpExportType.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.grpExportType.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -182,6 +164,22 @@ namespace epubConvert
 			this.grpButtons.Size = new System.Drawing.Size(550, 54);
 			this.grpButtons.TabIndex = 0;
 			this.grpButtons.TabStop = false;
+			// 
+			// rtbControl
+			// 
+			this.rtbControl.BackColor = System.Drawing.SystemColors.Control;
+			this.rtbControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.rtbControl.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.rtbControl.Dock = System.Windows.Forms.DockStyle.Right;
+			this.rtbControl.Enabled = false;
+			this.rtbControl.Font = new System.Drawing.Font("FreeSerif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.rtbControl.Location = new System.Drawing.Point(56, 16);
+			this.rtbControl.Name = "rtbControl";
+			this.rtbControl.ReadOnly = true;
+			this.rtbControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+			this.rtbControl.Size = new System.Drawing.Size(491, 256);
+			this.rtbControl.TabIndex = 1;
+			this.rtbControl.Text = "";
 			// 
 			// EpubExportTypeDlg
 			// 
@@ -217,8 +215,8 @@ namespace epubConvert
         private System.Windows.Forms.Button btnexprtEpub3;
 		private System.Windows.Forms.Button btnexprtEpub2;
 		private PictureBox IcnInfo;
-		private WebBrowser lblMessage;
 		private GroupBox grpExportType;
 		private GroupBox grpButtons;
+		private RichTextBox rtbControl;
     }
 }
