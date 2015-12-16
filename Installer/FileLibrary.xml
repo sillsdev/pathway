@@ -1766,4 +1766,6 @@
   <File Path="Pathway_Student_Manual.pdf\Pathway_Student_Manual_BTE.pdf" ComponentGuid="97B1A4BF-A2DD-40E7-9E67-3805142AA022" />
   <File Path="Help\Pathway_Student_Manual.pdf\Pathway_Student_Manual_BTE.pdf" ComponentGuid="8CFE9E5E-D62C-4A5F-85E5-563431094A54" />
   <File Path="Help\Pathway_Student_Manual.pdf" ComponentGuid="23B7D104-D511-47E3-AA3A-46226881F8B8" />
+  <File Path="Styles\Dictionary\epubMexico.css" ComponentGuid="60B6BA7D-03E2-4FD8-99B7-9C16EEB13B75" />
+  <File Path="Styles\Dictionary\MexicoStyles.css" ComponentGuid="7D833CB9-4406-4233-8377-45D8AA538A1C" />
 </FileLibrary>
