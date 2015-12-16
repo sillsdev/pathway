@@ -16,8 +16,6 @@
 ;
 #include "Welcome.au3"
 
-;Global $StableVersionDate = '-0.7.1-2011-04-12'
-Global $StableVersionDate = ''
 ;Global $XeLaTexSuffix = 'Testing-1.7.0.3077.msi' - currently installing from Team City
 Global $DEL_Installer = True
 
@@ -45,8 +43,16 @@ Func DoUI()
 	If not FileExists("PathwayBuild.ini") Then
 		FileInstall("res\PathwayBuild.ini", "PathwayBuild.ini")
 	EndIf
-	Global $LatestSuffix = 'Testing-' & IniRead("PathwayBuild.ini", "PathwayVersion", "buildNumber", "1.4.0.3429")
-	Global $Bootstrap_version = 'Version ' & IniRead("PathwayBuild.ini", "PathwayVersion", "buildNumber", "1.4.0.3429")
+	Local $BuildNumber = IniRead("PathwayBuild.ini", "PathwayVersion", "buildNumber", "1.13.4.4657")
+	;Global $StableVersionDate = '-0.7.1-2011-04-12'
+	Global $Version = "1.13.4"
+	Local $asResult = StringRegExp($BuildNumber, "([0-9]+.[0-9]+.[0-9]+).[0-9]+", 1)
+	If @error == 0 Then
+		$Version = $asResult[0]
+	EndIf
+	Global $StableSuffix = '-' & $Version
+	Global $LatestSuffix = 'Test-' & $Version
+	Global $Bootstrap_version = 'Version ' & $BuildNumber
 
 	If FileExists("License.rtf") Then
 		Welcome()

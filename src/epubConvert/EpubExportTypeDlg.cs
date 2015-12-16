@@ -29,28 +29,13 @@ namespace epubConvert
         private void EpubExportTypeDlg_Load(object sender, EventArgs e)
         {
             IcnInfo.Image = SystemIcons.Information.ToBitmap();
-			var msg = "<html style='font-family:Charis SIL;font-size:100%;'><body><div>";
-			msg += @"<span style='font-family:Charis SIL;font-size:100%;'>";
-			msg = msg + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Part1",
-		        MessageBuilder.ToString());
-			msg = msg + @"</span>";
-			msg = msg + @"<span style='font-family:Charis SIL;font-size:100%;font-weight:bold'>";
-			msg = msg + @"&nbsp;" + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Folder", "Folder") +
-									  @"&nbsp;";
-	        msg = msg + @"</span>";
-			msg += @"<span style='font-family:Charis SIL;font-size:100%;'>";
-			msg = msg + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Part2",
-				MessageBuilder1.ToString());
-			msg = msg + @"</span>";
-			msg = msg + @"<span style='font-family:Charis SIL;font-size:100%;font-weight:bold'>";
-			msg = msg + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.NoteCaption", "Note:") + @" ";
-			msg = msg + @"</span>";
-			msg = msg + @"<span style='font-family:Charis SIL;font-size:100%;'>";
-			msg = msg + LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.NoteMsg", "Some readers cannot display Epub3 files correctly.");
-			msg = msg + @"</span>";
-			msg = msg + "</div></body></html>";
-	        lblMessage.DocumentText = msg;
-	        
+			string msgPart1 = LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Part1", MessageBuilder.ToString());
+			string msgFolder = LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Folder", "Folder") + @" ";
+			string msgPart2 = LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.Part2", MessageBuilder1.ToString());
+			string msgNote = LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.NoteCaption", "Note:") + @" ";
+			string msgNoteMessage = LocalizationManager.GetString("EpubExportTypeDlg.lblMessage.NoteMsg", "Some readers cannot display Epub3 files correctly.");
+			
+			rtbControl.Text = msgPart1 + msgFolder + msgPart2 + msgNote + msgNoteMessage;
         }
 
 	    private static StringBuilder MessageBuilder1
@@ -58,9 +43,9 @@ namespace epubConvert
 		    get
 		    {
 			    var messageBuilder1 = new StringBuilder(300);
-			    messageBuilder1.Append("to open the folder that contains both Epub files and the HTML5. You can display the HTML files in your internet browser.");
-			    messageBuilder1.Append("<br/>");
-				messageBuilder1.Append("<br/>");
+			    messageBuilder1.Append("to open the folder that contains both Epub files and the HTML5. You can display the HTML files in your internet browser. ");
+			    messageBuilder1.Append("\r\n");
+				messageBuilder1.Append("\r\n");
 			    return messageBuilder1;
 		    }
 	    }
@@ -70,10 +55,10 @@ namespace epubConvert
 		    get
 		    {
 			    var messageBuilder = new StringBuilder(300);
-			    messageBuilder.Append("The export process is finished. There are separate files for Epub2, Epub3 and HTML5.");
-				messageBuilder.Append("<br/>");
-			    messageBuilder.Append("<br/>");
-			    messageBuilder.Append("Click a button below to open the desired Epub file in your default reader. Alternatively, click");
+			    messageBuilder.Append("The export process is finished. There are separate files for Epub2, Epub3 and HTML5. ");
+				messageBuilder.Append("\r\n");
+				messageBuilder.Append("\r\n");
+			    messageBuilder.Append("Click a button below to open the desired Epub file in your default reader. Alternatively, click ");
 			    return messageBuilder;
 		    }
 	    }
@@ -89,7 +74,7 @@ namespace epubConvert
             }
             else
             {
-                var msg = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Message", "\r\nDo you want to Validate ePub file?", "");
+                var msg = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Message", "\r\n Do you want to Validate ePub file?", "");
 				string caption = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Caption", "Export Complete", "");
 				if(Utils.MsgBox(Resources.ExportCallingEpubValidator + msg,
 					caption, MessageBoxButtons.YesNo,
@@ -149,17 +134,17 @@ namespace epubConvert
             Close();
         }
 
-		private void lblMessage_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-		{
-			var htmlDocument = lblMessage.Document;
-			if ((htmlDocument != null) && (htmlDocument.Body != null))
-			{
-				if (htmlDocument.Body.ScrollRectangle.Height >= lblMessage.Height)
-				{
-					this.ClientSize = new Size(ClientSize.Width, ClientSize.Height + (htmlDocument.Body.ScrollRectangle.Height - lblMessage.ClientSize.Height));
-					lblMessage.ClientSize = new Size(lblMessage.Size.Width, htmlDocument.Body.ScrollRectangle.Height);
-				}
-			}
-		}
+		//private void lblMessage_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+		//{
+		//	var htmlDocument = lblMessage.Document;
+		//	if ((htmlDocument != null) && (htmlDocument.Body != null))
+		//	{
+		//		if (htmlDocument.Body.ScrollRectangle.Height >= lblMessage.Height)
+		//		{
+		//			this.ClientSize = new Size(ClientSize.Width, ClientSize.Height + (htmlDocument.Body.ScrollRectangle.Height - lblMessage.ClientSize.Height));
+		//			lblMessage.ClientSize = new Size(lblMessage.Size.Width, htmlDocument.Body.ScrollRectangle.Height);
+		//		}
+		//	}
+		//}
     }
 }

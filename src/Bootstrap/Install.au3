@@ -27,10 +27,10 @@ Func DoInstall($bar)
 	GUICtrlSetData($bar, 10)
 	if BteVersion() Then
 		GUICtrlSetData($bar, 20)
-		InstallPathway("SetupPw7BTE")
+		InstallPathway("PathwayBTESetup")
 	Else
 		GUICtrlSetData($bar, 20)
-		InstallPathway("SetupPw7SE")
+		InstallPathway("PathwaySESetup")
 	EndIf
 	InstallVersions()
 	GUICtrlSetData($bar, 30)
@@ -83,9 +83,9 @@ Func BteVersion()
 EndFunc
 
 Func InstallPathway($name)
-	Global $InstallStable, $StableVersionDate
+	Global $InstallStable, $StableSuffix, $LatestSuffix
 	If $InstallStable Then
-		$name = $name & $StableVersionDate
+		$name = $name & $StableSuffix
 	Else
 		$name = $name & $LatestSuffix
 	Endif
@@ -97,16 +97,13 @@ Func InstallPathway($name)
 EndFunc
 
 Func GetInstaller($name)
-	Global $InstallStable
+	Global $InstallStable, $Version
 	Local $urlPath
-	if $InstallStable Then
-		;$urlPath = 'http://pathway.googlecode.com/files/'
-		$urlPath = 'http://pathway.sil.org/wp-content/stable/' & $name
-	Elseif StringInStr($name, "XeLaTeX") Then
+	if StringInStr($name, "XeLaTeX") Then
 		;$urlPath = 'http://pathway.sil.org/wp-content/sprint/' & $name
 		$urlPath = 'http://build.palaso.org/repository/download/bt190/.lastPinned/' & $name & '?guest=1'
 	Else
-		$urlPath = 'http://build.palaso.org/repository/download/bt84/.lastPinned/' & $name & '?guest=1'
+		$urlPath = 'http://downloads.sil.org/Pathway/' & $Version & '/' & $name
 	EndIf
 	if not FileExists($name) Then
 		;MsgBox(4096,"Status","Downloading " & $urlPath & " " & $name)
@@ -537,6 +534,7 @@ Func InstallXeLaTeXIfNecessary()
 	LaunchInstaller($name)
 	;TD-4364 Allow xelatex to write data and run data it creates even if the user runs in User mode
 	;REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "C:\pwtex\bin\win32\xelatex.exe" /t REG_SZ /d "WIN7RTM RUNASADMIN" /f
+	RegWrite("HKLM\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexDir", "REG_SZ", $latest)
 	RegWrite("HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", "C:\pwtex\bin\win32\xelatex.exe", "REG_SZ", "WIN7RTM RUNASADMIN")
 EndFunc
 
