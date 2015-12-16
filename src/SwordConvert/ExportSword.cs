@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -127,22 +128,81 @@ namespace SIL.PublishingSolution
 
 			if (_openOutputDirectory)
 			{
-				var output = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-				if (output != null && (!Common.Testing && Directory.Exists(output)))
-				{
-					var msg = LocalizationManager.GetString("ExportSword.ExportClick.Message", "Sword output successfully created in {0}. Display output?", "");
-					msg = string.Format(msg, output);
-					var result = MessageBox.Show(msg, "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
-					if (result == DialogResult.Yes)
-					{
-						DisplayOutput(output);
-					}
-				}
+			    Report(swordOutputExportLocation,xhtmlLang);
 			}
-			return true;
+		    return true;
 		}
 
-		private static void ProcessImages(PublicationInformation projInfo, string[] osisFilesList, string xhtmlLang)
+	    private void Report(string swordOutputExportLocation, string xhtmlLang)
+	    {
+	        var swordData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Sword");
+	        if (Directory.Exists(swordData))
+	        {
+	            ReportWithSword(swordOutputExportLocation, xhtmlLang, swordData);
+	        }
+	        else
+	        {
+	            ReportNoSword(swordOutputExportLocation);
+	        }
+	    }
+
+	    private void ReportWithSword(string swordOutputExportLocation, string xhtmlLang, string swordData)
+	    {
+	        if (!Common.Testing && swordOutputExportLocation != null && Directory.Exists(swordOutputExportLocation) &&
+	            xhtmlLang != null)
+	        {
+                var msg = LocalizationManager.GetString("ExportSword.ResultClick.Message",
+                    "Sword output successfully created. Select Yes to install the results (replacing previous results for the same language), no to open the folder {0} and Cancel for neither?", "");
+                msg = string.Format(msg, swordOutputExportLocation);
+                var result = MessageBox.Show(msg, "Results", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+	            if (result == DialogResult.Yes)
+	            {
+	                var confName = Path.Combine("mods.d", xhtmlLang + ".conf");
+	                const bool overwrite = true;
+                    File.Copy(Path.Combine(swordOutputExportLocation, confName), Path.Combine(swordData, confName), overwrite);
+	                var dataLoc = Path.Combine(Path.Combine(Path.Combine("modules", "texts"), "ztext"), xhtmlLang);
+	                var instData = Path.Combine(swordData, dataLoc);
+	                if (Directory.Exists(instData))
+	                {
+	                    Directory.Delete(instData, true);
+	                }
+                    FolderTree.Copy(Path.Combine(swordOutputExportLocation, dataLoc), instData);
+	                try
+	                {
+	                    var cmd = RegistryHelperLite.SwordKeyCommandValue;
+	                    Process.Start(cmd.Substring(1,cmd.Length - 7));
+	                }
+	                catch
+	                {
+	                    // ignored
+	                }
+	            }
+                else if (result == DialogResult.No)
+                {
+                    DisplayOutput(swordOutputExportLocation);
+                }
+            }
+	    }
+
+	    private void ReportNoSword(string swordOutputExportLocation)
+	    {
+	        var output = swordOutputExportLocation;
+	        if (output != null && (!Common.Testing && Directory.Exists(output)))
+	        {
+	            var msg = LocalizationManager.GetString("ExportSword.ExportClick.Message",
+	                "Sword output successfully created in {0}. Display output?", "");
+	            msg = string.Format(msg, output);
+	            var result = MessageBox.Show(msg, "Results", MessageBoxButtons.YesNo, MessageBoxIcon.Information,
+	                MessageBoxDefaultButton.Button2);
+	            if (result == DialogResult.Yes)
+	            {
+	                DisplayOutput(output);
+	            }
+	        }
+	    }
+
+	    private static void ProcessImages(PublicationInformation projInfo, string[] osisFilesList, string xhtmlLang)
 		{
 			//Copy Image Part
 			string databaseNamePara = Common.databaseName; // "MTP"; 

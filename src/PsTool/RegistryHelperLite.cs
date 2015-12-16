@@ -155,6 +155,10 @@ namespace SIL.Tool
             }
         }
 
+        public static String SwordKeyCommandValue
+        {
+            get { return Registry.ClassesRoot.OpenSubKey("sword").OpenSubKey("shell").OpenSubKey("open").OpenSubKey("command").GetValue("") as string; }
+        }
         public static RegistryKey JarFile
         {
             get { return Registry.ClassesRoot.OpenSubKey("jarfile"); }
