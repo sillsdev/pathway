@@ -23,7 +23,10 @@ a {text-decoration: inherit;}
 
 .subentry {
     text-indent: -12pt;
-    margin-left: 24pt;
+    margin-left: 36pt;
+}
+.complexform:before {
+    content: "";
 }
 .complexform-summary {
     color: rgb(128,128,0);
@@ -39,11 +42,20 @@ a {text-decoration: inherit;}
 .headword-minor {
     color: rgb(0,0,255);
 }
+.LexEntry-publishStemMinorPrimaryTarget-HeadWordRef {
+	color: rgb(0,0,255);
+}
+.LexEntry-publishStemComponentTarget-HeadWordRef {
+	color: rgb(0,0,255);
+}
 .LexEntry-publishStemMinorPara-CommentPub {
     color: rgb(128,0,0);
 }
 .LexEntry-publishStemPara-CommentPub {    
     color: rgb(128,0,0);
+}
+.LexEntryType-publishStemEntryType-AbbreviationPub {
+	color: rgb(128,0,0);
 }
 .LexEntryType-publishStemMinorEntryType-AbbreviationPub {
     color: rgb(128,0,0);
@@ -66,6 +78,9 @@ a {text-decoration: inherit;}
     color: rgb(128,128,0);    
 }
 
+.scientific-name {
+	color: rgb(0,0,128);
+}
 .translations {
     color: rgb(0,128,0);    
 }
