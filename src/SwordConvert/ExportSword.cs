@@ -135,7 +135,7 @@ namespace SIL.PublishingSolution
 
 	    private void Report(string swordOutputExportLocation, string xhtmlLang)
 	    {
-	        var swordData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Sword");
+	        var swordData = Path.Combine(Common.IsUnixOS() ? "/tmp" : Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Sword");
 	        if (Directory.Exists(swordData))
 	        {
 	            ReportWithSword(swordOutputExportLocation, xhtmlLang, swordData);
