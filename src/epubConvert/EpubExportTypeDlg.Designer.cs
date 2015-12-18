@@ -38,8 +38,8 @@ namespace epubConvert
 			this.btnexprtEpub2 = new System.Windows.Forms.Button();
 			this.IcnInfo = new System.Windows.Forms.PictureBox();
 			this.grpExportType = new System.Windows.Forms.GroupBox();
-			this.grpButtons = new System.Windows.Forms.GroupBox();
 			this.rtbControl = new System.Windows.Forms.RichTextBox();
+			this.grpButtons = new System.Windows.Forms.GroupBox();
 			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.IcnInfo)).BeginInit();
 			this.grpExportType.SuspendLayout();
@@ -147,6 +147,23 @@ namespace epubConvert
 			this.grpExportType.TabIndex = 5;
 			this.grpExportType.TabStop = false;
 			// 
+			// rtbControl
+			// 
+			this.rtbControl.BackColor = System.Drawing.SystemColors.Control;
+			this.rtbControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.rtbControl.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.rtbControl.Dock = System.Windows.Forms.DockStyle.Right;
+			this.rtbControl.Font = new System.Drawing.Font("FreeSerif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.rtbControl.ForeColor = System.Drawing.Color.Black;
+			this.rtbControl.Location = new System.Drawing.Point(56, 16);
+			this.rtbControl.Name = "rtbControl";
+			this.rtbControl.ReadOnly = true;
+			this.rtbControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+			this.rtbControl.Size = new System.Drawing.Size(491, 256);
+			this.rtbControl.TabIndex = 1;
+			this.rtbControl.Text = "";
+			this.rtbControl.Enter += new System.EventHandler(this.rtbControl_Enter);
+			// 
 			// grpButtons
 			// 
 			this.grpButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -164,22 +181,6 @@ namespace epubConvert
 			this.grpButtons.Size = new System.Drawing.Size(550, 54);
 			this.grpButtons.TabIndex = 0;
 			this.grpButtons.TabStop = false;
-			// 
-			// rtbControl
-			// 
-			this.rtbControl.BackColor = System.Drawing.SystemColors.Control;
-			this.rtbControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.rtbControl.Cursor = System.Windows.Forms.Cursors.Arrow;
-			this.rtbControl.Dock = System.Windows.Forms.DockStyle.Right;
-			this.rtbControl.Enabled = false;
-			this.rtbControl.Font = new System.Drawing.Font("FreeSerif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.rtbControl.Location = new System.Drawing.Point(56, 16);
-			this.rtbControl.Name = "rtbControl";
-			this.rtbControl.ReadOnly = true;
-			this.rtbControl.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-			this.rtbControl.Size = new System.Drawing.Size(491, 256);
-			this.rtbControl.TabIndex = 1;
-			this.rtbControl.Text = "";
 			// 
 			// EpubExportTypeDlg
 			// 

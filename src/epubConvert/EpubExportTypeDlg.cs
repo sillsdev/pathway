@@ -134,5 +134,10 @@ namespace epubConvert
 			ExportType = "cancel";
 			Close();
 		}
+
+		private void rtbControl_Enter(object sender, EventArgs e)
+		{
+			IcnInfo.Focus();
+		}
 	}
 }
