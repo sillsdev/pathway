@@ -80,6 +80,15 @@
       <option name="15" file="font_size_15_17.css" />
       <option name="No Change" file="font_size_nc.css" />
     </feature>
+	<feature name="Headword Size">
+      <option name="14" file="Headword_Size_14.css" />
+      <option name="12" file="Headword_Size_12.css" />
+      <option name="11" file="Headword_Size_11.css" />
+      <option name="10" file="Headword_Size_10.css" />
+      <option name="9" file="Headword_Size_9.css" />
+      <option name="8" file="Headword_Size_8.css" />
+      <option name="No Change" file="Headword_Size_nc.css" />
+    </feature>
     <feature name="Font Size / Leading">
       <option name="9 / 11" file="font_size_9_11.css" />
       <option name="10 / 12" file="font_size_10_12.css" />
