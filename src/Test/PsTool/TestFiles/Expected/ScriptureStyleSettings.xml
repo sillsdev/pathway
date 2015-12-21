@@ -76,7 +76,17 @@
       <option name="15" file="font_size_15_17.css" />
       <option name="No Change" file="font_size_nc.css" />
     </feature>
-	<feature name="Headword Size">
+	<feature name="Header Size">
+	  <option name="14"  file="Font_HeaderSize_14.css" />
+	  <option name="12"  file="Font_HeaderSize_12.css" />
+	  <option name="11"  file="Font_HeaderSize_11.css" />
+	  <option name="10"  file="Font_HeaderSize_10.css" />
+	  <option name="9" file="Font_HeaderSize_9.css" />
+	  <option name="8" file="Font_HeaderSize_8.css" />
+	  <option name="Same as body" file="Font_HeaderSize_nc.css" />
+	  <option name="Same as headword" file="Font_HeaderSize_nc.css" />
+    </feature>
+    <feature name="Headword Size">
       <option name="14" file="Headword_Size_14.css" />
       <option name="12" file="Headword_Size_12.css" />
       <option name="11" file="Headword_Size_11.css" />
