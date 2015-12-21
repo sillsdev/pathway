@@ -74,3 +74,5 @@ a {text-decoration: inherit;}
     text-indent: -12pt;
     margin-left: 12pt;
 }
+
+.subentry:before {content: "\25C6\0009";}
