@@ -165,8 +165,8 @@ cd pathway
 git checkout master
 bash Build/getDependencies.sh
 mkdir ../pathway-${RELEASE}
-cp lib/L10NSharp.* ../pathway-${RELEASE}/lib/.
 git archive HEAD | tar -x -C ../pathway-${RELEASE} || exit 2
+cp lib/L10NSharp.* ../pathway-${RELEASE}/lib/.
 cd ..
 
 # Delete unwanted non-source files here using find
