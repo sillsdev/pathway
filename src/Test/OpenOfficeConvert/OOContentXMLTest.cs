@@ -62,8 +62,6 @@ namespace Test.OpenOfficeConvert
         [TestFixtureSetUp]
         protected void SetUp()
         {
-	        LoadParam("Dictionary", "false");
-
             Common.Testing = true;
             //_styleName = new Styles();
             //_util = new Utility();
@@ -92,8 +90,11 @@ namespace Test.OpenOfficeConvert
             _styleFile = "styles.xml";
             _contentFile = "content.xml";
             _isLinux = Common.IsUnixOS();
-			
+
+			if (!_isLinux)
+				LoadParam("Dictionary", "false");
         }
+
         #endregion
 
         #region Private Functions
