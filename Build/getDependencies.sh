@@ -111,4 +111,4 @@ elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
 else
 echo "Unknown."
 fi
-read t
+#read t
