@@ -8,6 +8,7 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
-
 %:
-	dh  $@
+	dh  $@ --with cli
+	dh_makeclilibs -Xsqlite3
+

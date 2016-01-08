@@ -2,7 +2,7 @@ ifndef prefix
 prefix=/usr
 endif
 ifndef binsrc
-binsrc=/home/g/git/pathway
+binsrc=${PWD}
 endif
 ifndef bindst
 bindst=$(binsrc)/output/Release
