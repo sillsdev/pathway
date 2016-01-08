@@ -3,14 +3,16 @@
 #               First optional parameter is a version number e.g. 6.2.2
 #               Second optional parameter is a space-delimited set
 #                 of distro names to build for, e.g. "lucid maverick"
+#               Third option parameter is the branch in the repo to build
 #
 # Author: Jonathan Marsden <jmarsden@fastmail.fm>
 # Date: 2012-10-03
 # Revised 2015-01-21 by Bill Martin to include "utopic"
-# Revised 2015-12-18 by Greg Trihus to apply to Pathway
+# Revised 2015-12-18 by Greg Trihus to apply to Pathway (add branch)
 
 PBUILDFOLDER=${PBUILDFOLDER:-~/pbuilder}
 OSRELEASES=${2:-"lucid maverick natty oneiric precise quantal raring saucy trusty utopic sid"}
+BRANCH=${3:-"master"}
 DEVTOOLS="ubuntu-dev-tools debhelper libtool quilt git devscripts autotools-dev cli-common-dev"
 BUILDDEPS="default-jre-headless mono-basic-sil fonts-sil-charissil libmono-system-core4.0-cil libmono-system-xml-linq4.0-cil libmono-winforms2.0-cil lame xchm libsword-utils nautilus"
 
@@ -162,11 +164,12 @@ git clone -q https://github.com/sillsdev/pathway.git || exit 1
 #cd ..
 #http://stackoverflow.com/questions/160608/do-a-git-export-like-svn-export
 cd pathway
-git checkout master
+git checkout ${BRANCH}
 bash Build/getDependencies.sh
 mkdir ../pathway-${RELEASE}
 git archive HEAD | tar -x -C ../pathway-${RELEASE} || exit 2
-cp lib/L10NSharp.* ../pathway-${RELEASE}/lib/.
+cd ../pathway-${RELEASE}
+bash Build/getDependencies.sh
 cd ..
 
 # Delete unwanted non-source files here using find
