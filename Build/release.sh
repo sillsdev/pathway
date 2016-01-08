@@ -152,7 +152,7 @@ sudo apt-get install $BUILDDEPS -y
 
 # Figure out which release to build -- default is latest numbered release in svn
 #RELEASE=${1:-$(svn ls http://adaptit.googlecode.com/svn/tags/ |grep ^adaptit-[0-9] |sort |tail -1 |sed -e 's%adaptit-%%' -e 's%/$%%')}
-RELEASE=${1:-$(echo 1.13.4.4689)}
+RELEASE=${1:-"1.13.4"}
 
 # Check out the desired release from svn
 #svn -q checkout http://adaptit.googlecode.com/svn/tags/adaptit-${RELEASE} adaptit || exit 1
