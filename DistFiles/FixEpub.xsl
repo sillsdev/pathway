@@ -15,7 +15,7 @@
     
     <xsl:variable name="xhtml">http://www.w3.org/1999/xhtml</xsl:variable>
     
-    <xsl:output  doctype-public="-//W3C//DTD XHTML 1.1//EN" 
+    <xsl:output method="xml"  doctype-public="-//W3C//DTD XHTML 1.1//EN" 
         doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"/>
     
     <!-- Recursive copy template -->   
