@@ -340,7 +340,7 @@ namespace SIL.PublishingSolution
 			this.stylesGrid.RowHeadersVisible = false;
 			this.stylesGrid.RowTemplate.Height = 24;
 			this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.stylesGrid.Size = new System.Drawing.Size(417, 525);
+			this.stylesGrid.Size = new System.Drawing.Size(416, 525);
 			this.stylesGrid.TabIndex = 0;
 			this.stylesGrid.TabStop = false;
 			this.stylesGrid.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.stylesGrid_ColumnWidthChanged);
@@ -598,7 +598,7 @@ namespace SIL.PublishingSolution
 			this.tabControl1.Location = new System.Drawing.Point(0, 0);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(317, 475);
+			this.tabControl1.Size = new System.Drawing.Size(345, 475);
 			this.tabControl1.TabIndex = 0;
 			this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
 			// 
@@ -615,7 +615,7 @@ namespace SIL.PublishingSolution
 			this.tabInfo.Location = new System.Drawing.Point(4, 22);
 			this.tabInfo.Name = "tabInfo";
 			this.tabInfo.Padding = new System.Windows.Forms.Padding(3);
-			this.tabInfo.Size = new System.Drawing.Size(309, 449);
+			this.tabInfo.Size = new System.Drawing.Size(337, 449);
 			this.tabInfo.TabIndex = 0;
 			this.tabInfo.Text = "Info";
 			this.tabInfo.UseVisualStyleBackColor = true;
@@ -644,7 +644,7 @@ namespace SIL.PublishingSolution
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(306, 265);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(315, 265);
 			this.tableLayoutPanel1.TabIndex = 14;
 			// 
 			// lblName
@@ -654,7 +654,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblName, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblName, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblName, "ConfigurationTool.lblName");
-			this.lblName.Location = new System.Drawing.Point(45, 9);
+			this.lblName.Location = new System.Drawing.Point(48, 9);
 			this.lblName.Name = "lblName";
 			this.lblName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.lblName.Size = new System.Drawing.Size(35, 13);
@@ -666,7 +666,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtName, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.txtName, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.txtName, "ConfigurationTool.txtName");
-			this.txtName.Location = new System.Drawing.Point(86, 6);
+			this.txtName.Location = new System.Drawing.Point(89, 6);
 			this.txtName.MaxLength = 50;
 			this.txtName.Name = "txtName";
 			this.txtName.Size = new System.Drawing.Size(214, 20);
@@ -682,7 +682,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblDesc, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblDesc, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblDesc, "ConfigurationTool.lblDesc");
-			this.lblDesc.Location = new System.Drawing.Point(20, 29);
+			this.lblDesc.Location = new System.Drawing.Point(23, 29);
 			this.lblDesc.Name = "lblDesc";
 			this.lblDesc.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.lblDesc.Size = new System.Drawing.Size(60, 13);
@@ -695,7 +695,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtApproved, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.txtApproved, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.txtApproved, "ConfigurationTool.txtApproved");
-			this.txtApproved.Location = new System.Drawing.Point(86, 214);
+			this.txtApproved.Location = new System.Drawing.Point(89, 214);
 			this.txtApproved.MaxLength = 10;
 			this.txtApproved.Name = "txtApproved";
 			this.txtApproved.Size = new System.Drawing.Size(211, 20);
@@ -708,7 +708,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtDesc, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.txtDesc, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.txtDesc, "ConfigurationTool.txtDesc");
-			this.txtDesc.Location = new System.Drawing.Point(86, 32);
+			this.txtDesc.Location = new System.Drawing.Point(89, 32);
 			this.txtDesc.MaxLength = 250;
 			this.txtDesc.Multiline = true;
 			this.txtDesc.Name = "txtDesc";
@@ -725,7 +725,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblApproved, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblApproved, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblApproved, "ConfigurationTool.lblApproved");
-			this.lblApproved.Location = new System.Drawing.Point(12, 211);
+			this.lblApproved.Location = new System.Drawing.Point(15, 211);
 			this.lblApproved.Name = "lblApproved";
 			this.lblApproved.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.lblApproved.Size = new System.Drawing.Size(68, 26);
@@ -739,7 +739,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblAvailable, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblAvailable, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblAvailable, "ConfigurationTool.lblAvailable");
-			this.lblAvailable.Location = new System.Drawing.Point(30, 110);
+			this.lblAvailable.Location = new System.Drawing.Point(33, 110);
 			this.lblAvailable.Name = "lblAvailable";
 			this.lblAvailable.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.lblAvailable.Size = new System.Drawing.Size(50, 13);
@@ -752,7 +752,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.chkAvailable, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.chkAvailable, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.chkAvailable, "ConfigurationTool.chkAvailable");
-			this.chkAvailable.Location = new System.Drawing.Point(86, 113);
+			this.chkAvailable.Location = new System.Drawing.Point(89, 113);
 			this.chkAvailable.Name = "chkAvailable";
 			this.chkAvailable.Size = new System.Drawing.Size(15, 14);
 			this.chkAvailable.TabIndex = 3;
@@ -766,7 +766,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.txtComment, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.txtComment, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.txtComment, "ConfigurationTool.txtComment");
-			this.txtComment.Location = new System.Drawing.Point(86, 133);
+			this.txtComment.Location = new System.Drawing.Point(89, 133);
 			this.txtComment.MaxLength = 250;
 			this.txtComment.Multiline = true;
 			this.txtComment.Name = "txtComment";
@@ -783,7 +783,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblComment, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblComment, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblComment, "ConfigurationTool.lblComment");
-			this.lblComment.Location = new System.Drawing.Point(29, 130);
+			this.lblComment.Location = new System.Drawing.Point(32, 130);
 			this.lblComment.Name = "lblComment";
 			this.lblComment.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
 			this.lblComment.Size = new System.Drawing.Size(51, 13);
@@ -825,10 +825,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.btnApproved, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.btnApproved, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.btnApproved, "ConfigurationTool.ConfigurationTool.btnApproved");
-			this.btnApproved.Location = new System.Drawing.Point(182, 335);
+			this.btnApproved.Location = new System.Drawing.Point(232, 345);
 			this.btnApproved.Margin = new System.Windows.Forms.Padding(2);
 			this.btnApproved.Name = "btnApproved";
-			this.btnApproved.Size = new System.Drawing.Size(115, 25);
+			this.btnApproved.Size = new System.Drawing.Size(65, 25);
 			this.btnApproved.TabIndex = 6;
 			this.btnApproved.Text = "...";
 			this.btnApproved.UseVisualStyleBackColor = true;
@@ -844,7 +844,7 @@ namespace SIL.PublishingSolution
 			this.tabDisplay.Location = new System.Drawing.Point(4, 22);
 			this.tabDisplay.Name = "tabDisplay";
 			this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-			this.tabDisplay.Size = new System.Drawing.Size(309, 449);
+			this.tabDisplay.Size = new System.Drawing.Size(337, 449);
 			this.tabDisplay.TabIndex = 1;
 			this.tabDisplay.Text = "Properties";
 			this.tabDisplay.UseVisualStyleBackColor = true;
@@ -1760,7 +1760,7 @@ namespace SIL.PublishingSolution
 			this.tabMobile.Location = new System.Drawing.Point(4, 22);
 			this.tabMobile.Name = "tabMobile";
 			this.tabMobile.Padding = new System.Windows.Forms.Padding(3);
-			this.tabMobile.Size = new System.Drawing.Size(309, 449);
+			this.tabMobile.Size = new System.Drawing.Size(337, 449);
 			this.tabMobile.TabIndex = 2;
 			this.tabMobile.Text = "Properties";
 			this.tabMobile.UseVisualStyleBackColor = true;
@@ -1940,7 +1940,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.lblMobileOptionsSection, "ConfigurationTool.lblMobileOptionsSection");
 			this.lblMobileOptionsSection.Location = new System.Drawing.Point(7, 52);
 			this.lblMobileOptionsSection.Name = "lblMobileOptionsSection";
-			this.lblMobileOptionsSection.Size = new System.Drawing.Size(345, 23);
+			this.lblMobileOptionsSection.Size = new System.Drawing.Size(373, 23);
 			this.lblMobileOptionsSection.TabIndex = 68;
 			this.lblMobileOptionsSection.Text = "Options";
 			this.lblMobileOptionsSection.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1954,7 +1954,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.lblGoBibleDescription, "ConfigurationTool.lblGoBibleDescription");
 			this.lblGoBibleDescription.Location = new System.Drawing.Point(48, 16);
 			this.lblGoBibleDescription.Name = "lblGoBibleDescription";
-			this.lblGoBibleDescription.Size = new System.Drawing.Size(300, 26);
+			this.lblGoBibleDescription.Size = new System.Drawing.Size(328, 26);
 			this.lblGoBibleDescription.TabIndex = 66;
 			this.lblGoBibleDescription.Text = "Change the settings for mobile content.";
 			// 
@@ -2001,7 +2001,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.tabOthers, "ConfigurationTool.tabOthers");
 			this.tabOthers.Location = new System.Drawing.Point(4, 22);
 			this.tabOthers.Name = "tabOthers";
-			this.tabOthers.Size = new System.Drawing.Size(309, 449);
+			this.tabOthers.Size = new System.Drawing.Size(337, 449);
 			this.tabOthers.TabIndex = 3;
 			this.tabOthers.Text = "Properties";
 			this.tabOthers.UseVisualStyleBackColor = true;
@@ -2301,7 +2301,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.ddlReferences, "ConfigurationTool.ddlReferences");
 			this.ddlReferences.Location = new System.Drawing.Point(147, 264);
 			this.ddlReferences.Name = "ddlReferences";
-			this.ddlReferences.Size = new System.Drawing.Size(159, 21);
+			this.ddlReferences.Size = new System.Drawing.Size(187, 21);
 			this.ddlReferences.TabIndex = 14;
 			this.ddlReferences.SelectedIndexChanged += new System.EventHandler(this.ddlReferences_SelectedIndexChanged);
 			// 
@@ -2354,7 +2354,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.lblEpubFontsSection, "ConfigurationTool.lblEpubFontsSection");
 			this.lblEpubFontsSection.Location = new System.Drawing.Point(7, 292);
 			this.lblEpubFontsSection.Name = "lblEpubFontsSection";
-			this.lblEpubFontsSection.Size = new System.Drawing.Size(299, 23);
+			this.lblEpubFontsSection.Size = new System.Drawing.Size(327, 23);
 			this.lblEpubFontsSection.TabIndex = 36;
 			this.lblEpubFontsSection.Text = "Embedded Fonts";
 			this.lblEpubFontsSection.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2370,7 +2370,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.lblEputLayoutSection, "ConfigurationTool.lblEputLayoutSection");
 			this.lblEputLayoutSection.Location = new System.Drawing.Point(7, 52);
 			this.lblEputLayoutSection.Name = "lblEputLayoutSection";
-			this.lblEputLayoutSection.Size = new System.Drawing.Size(299, 23);
+			this.lblEputLayoutSection.Size = new System.Drawing.Size(327, 23);
 			this.lblEputLayoutSection.TabIndex = 33;
 			this.lblEputLayoutSection.Text = "Layout";
 			this.lblEputLayoutSection.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2384,7 +2384,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.chkIncludeFontVariants, "ConfigurationTool.chkIncludeFontVariants");
 			this.chkIncludeFontVariants.Location = new System.Drawing.Point(51, 341);
 			this.chkIncludeFontVariants.Name = "chkIncludeFontVariants";
-			this.chkIncludeFontVariants.Size = new System.Drawing.Size(234, 17);
+			this.chkIncludeFontVariants.Size = new System.Drawing.Size(262, 17);
 			this.chkIncludeFontVariants.TabIndex = 16;
 			this.chkIncludeFontVariants.Text = "Also Embed Font Variants";
 			this.chkIncludeFontVariants.UseVisualStyleBackColor = true;
@@ -2399,7 +2399,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.lblEpubDescription, "ConfigurationTool.lblEpubDescription");
 			this.lblEpubDescription.Location = new System.Drawing.Point(48, 10);
 			this.lblEpubDescription.Name = "lblEpubDescription";
-			this.lblEpubDescription.Size = new System.Drawing.Size(251, 38);
+			this.lblEpubDescription.Size = new System.Drawing.Size(279, 38);
 			this.lblEpubDescription.TabIndex = 31;
 			this.lblEpubDescription.Text = "Change the settings for e-book content.";
 			// 
@@ -2412,7 +2412,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.chkEmbedFonts, "ConfigurationTool.chkEmbedFonts");
 			this.chkEmbedFonts.Location = new System.Drawing.Point(51, 318);
 			this.chkEmbedFonts.Name = "chkEmbedFonts";
-			this.chkEmbedFonts.Size = new System.Drawing.Size(239, 17);
+			this.chkEmbedFonts.Size = new System.Drawing.Size(267, 17);
 			this.chkEmbedFonts.TabIndex = 15;
 			this.chkEmbedFonts.Text = "Embed Fonts in Document";
 			this.chkEmbedFonts.UseVisualStyleBackColor = true;
@@ -2429,7 +2429,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.ddlTocLevel, "ConfigurationTool.ddlTocLevel");
 			this.ddlTocLevel.Location = new System.Drawing.Point(101, 209);
 			this.ddlTocLevel.Name = "ddlTocLevel";
-			this.ddlTocLevel.Size = new System.Drawing.Size(205, 21);
+			this.ddlTocLevel.Size = new System.Drawing.Size(233, 21);
 			this.ddlTocLevel.TabIndex = 10;
 			this.ddlTocLevel.SelectedIndexChanged += new System.EventHandler(this.ddlTocLevel_SelectedIndexChanged);
 			// 
@@ -2469,7 +2469,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.ddlChapterNumbers, "ConfigurationTool.ddlChapterNumbers");
 			this.ddlChapterNumbers.Location = new System.Drawing.Point(147, 237);
 			this.ddlChapterNumbers.Name = "ddlChapterNumbers";
-			this.ddlChapterNumbers.Size = new System.Drawing.Size(159, 21);
+			this.ddlChapterNumbers.Size = new System.Drawing.Size(187, 21);
 			this.ddlChapterNumbers.TabIndex = 12;
 			this.ddlChapterNumbers.SelectedIndexChanged += new System.EventHandler(this.ddlChapterNumbers_SelectedIndexChanged);
 			// 
@@ -2522,7 +2522,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.tabWeb, "ConfigurationTool.tabWeb");
 			this.tabWeb.Location = new System.Drawing.Point(4, 22);
 			this.tabWeb.Name = "tabWeb";
-			this.tabWeb.Size = new System.Drawing.Size(309, 449);
+			this.tabWeb.Size = new System.Drawing.Size(337, 449);
 			this.tabWeb.TabIndex = 6;
 			this.tabWeb.Text = "Properties";
 			this.tabWeb.UseVisualStyleBackColor = true;
@@ -2984,7 +2984,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.tabDict4Mids, "ConfigurationTool.tabDict4Mids");
 			this.tabDict4Mids.Location = new System.Drawing.Point(4, 22);
 			this.tabDict4Mids.Name = "tabDict4Mids";
-			this.tabDict4Mids.Size = new System.Drawing.Size(309, 449);
+			this.tabDict4Mids.Size = new System.Drawing.Size(337, 449);
 			this.tabDict4Mids.TabIndex = 7;
 			this.tabDict4Mids.Text = "Properties";
 			this.tabDict4Mids.UseVisualStyleBackColor = true;
@@ -3000,7 +3000,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.tabPreview, "ConfigurationTool.tabPreview");
 			this.tabPreview.Location = new System.Drawing.Point(4, 22);
 			this.tabPreview.Name = "tabPreview";
-			this.tabPreview.Size = new System.Drawing.Size(309, 449);
+			this.tabPreview.Size = new System.Drawing.Size(337, 449);
 			this.tabPreview.TabIndex = 4;
 			this.tabPreview.Text = "Preview";
 			this.tabPreview.UseVisualStyleBackColor = true;
@@ -3026,7 +3026,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.btnNext, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.btnNext, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.btnNext, "ConfigurationTool.ConfigurationTool.btnNext");
-			this.btnNext.Location = new System.Drawing.Point(178, 0);
+			this.btnNext.Location = new System.Drawing.Point(184, 0);
 			this.btnNext.Margin = new System.Windows.Forms.Padding(2);
 			this.btnNext.Name = "btnNext";
 			this.btnNext.Size = new System.Drawing.Size(25, 23);
@@ -3044,7 +3044,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.picPreview, "ConfigurationTool.picPreview");
 			this.picPreview.Location = new System.Drawing.Point(3, 24);
 			this.picPreview.Name = "picPreview";
-			this.picPreview.Size = new System.Drawing.Size(261, 352);
+			this.picPreview.Size = new System.Drawing.Size(289, 352);
 			this.picPreview.TabIndex = 0;
 			this.picPreview.TabStop = false;
 			// 
@@ -3243,7 +3243,7 @@ namespace SIL.PublishingSolution
 			this.label2.Location = new System.Drawing.Point(94, 1);
 			this.label2.Margin = new System.Windows.Forms.Padding(0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(426, 23);
+			this.label2.Size = new System.Drawing.Size(425, 23);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Stylesheets";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3256,7 +3256,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblInfoCaption, "ConfigurationTool.lblInfoCaption");
-			this.lblInfoCaption.Location = new System.Drawing.Point(521, 1);
+			this.lblInfoCaption.Location = new System.Drawing.Point(520, 1);
 			this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
 			this.lblInfoCaption.Name = "lblInfoCaption";
 			this.lblInfoCaption.Size = new System.Drawing.Size(341, 23);
@@ -3285,7 +3285,7 @@ namespace SIL.PublishingSolution
 			this.TLPanelOuter.ColumnCount = 3;
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 354F));
+			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
 			this.TLPanelOuter.Controls.Add(this.label2, 1, 0);
 			this.TLPanelOuter.Controls.Add(this.TLPanel1, 0, 1);
 			this.TLPanelOuter.Controls.Add(this.lblInfoCaption, 2, 0);
@@ -3462,7 +3462,7 @@ namespace SIL.PublishingSolution
 			this.TLPanel2.RowCount = 1;
 			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 525F));
-			this.TLPanel2.Size = new System.Drawing.Size(420, 525);
+			this.TLPanel2.Size = new System.Drawing.Size(419, 525);
 			this.TLPanel2.TabIndex = 4;
 			// 
 			// TLPanel3
@@ -3473,25 +3473,25 @@ namespace SIL.PublishingSolution
 			this.TLPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLPanel3.Controls.Add(this.panel3, 0, 1);
 			this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
-			this.TLPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.TLPanel3.Location = new System.Drawing.Point(524, 28);
+			this.TLPanel3.Dock = System.Windows.Forms.DockStyle.Left;
+			this.TLPanel3.Location = new System.Drawing.Point(523, 28);
 			this.TLPanel3.MinimumSize = new System.Drawing.Size(331, 0);
 			this.TLPanel3.Name = "TLPanel3";
 			this.TLPanel3.RowCount = 2;
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLPanel3.Size = new System.Drawing.Size(348, 525);
+			this.TLPanel3.Size = new System.Drawing.Size(349, 525);
 			this.TLPanel3.TabIndex = 5;
 			// 
 			// panel3
 			// 
 			this.panel3.AutoScroll = true;
 			this.panel3.Controls.Add(this.tabControl1);
-			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
 			this.panel3.Location = new System.Drawing.Point(3, 44);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(435, 478);
+			this.panel3.Size = new System.Drawing.Size(322, 478);
 			this.panel3.TabIndex = 20;
 			// 
 			// lblType
