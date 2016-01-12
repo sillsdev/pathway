@@ -1546,5 +1546,10 @@ namespace SIL.PublishingSolution
 				clbHyphenlang.SetItemCheckState(i, ((hyphencheck && Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(clbHyphenlang.Items[i]))) ? CheckState.Checked : CheckState.Unchecked));
             clbHyphenlang.Enabled = false;
         }
+
+		private void btnHelpHyphenation_Click(object sender, EventArgs e)
+		{
+			ShowHelp.ShowHelpTopicKeyPress(this, @"User_Interface/Dialog_boxes/Hyphenation_tab.htm", _isUnixOS);
+		}
     }
 }
