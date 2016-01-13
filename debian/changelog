@@ -1,4 +1,4 @@
-pathway (1.13.4-1) experimental; urgency=high
+pathway (1.13.4) experimental; urgency=high
 
   * epub:TD-4403 Crash exporting to EPUB from Flex and Paratext
   * epub:TD-4491 Flex to Epub exception throw

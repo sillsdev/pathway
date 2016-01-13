@@ -174,12 +174,6 @@ Build/getDependencies.sh
 # Delete unwanted non-source files here using find
 find . -type f -iname "*.exe" -delete
 
-# Create orig tarball
-TARBALL=../pathway_${RELEASE}.orig.tar.bz2
-if [ ! -e $TARBALL ]; then
-  tar -cjf $TARBALL -C .. ${PWD##*/}
-fi
-
 # Do an initial unsigned source build in host OS environment
 debuild -S -nc -sa -us -uc
 
