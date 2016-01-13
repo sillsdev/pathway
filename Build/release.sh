@@ -10,15 +10,17 @@
 # Revised 2015-01-21 by Bill Martin to include "utopic"
 # Revised 2015-12-18 by Greg Trihus to apply to Pathway (add branch)
 
+set -e # Exit on error
+
 PBUILDFOLDER=${PBUILDFOLDER:-~/pbuilder}
 OSRELEASES=${2:-"lucid maverick natty oneiric precise quantal raring saucy trusty utopic sid"}
 BRANCH=${3:-"master"}
-DEVTOOLS="ubuntu-dev-tools debhelper libtool quilt git devscripts autotools-dev cli-common-dev"
-BUILDDEPS="default-jre-headless mono-basic-sil fonts-sil-charissil libmono-system-core4.0-cil libmono-system-xml-linq4.0-cil libmono-winforms2.0-cil lame xchm libsword-utils nautilus"
+DEVTOOLS="git wget ca-certificates devscripts fakeroot"
 
 # Install development tools as required
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install $DEVTOOLS -y
+sudo apt-get update
+sudo apt-get dist-upgrade -y
+sudo apt-get install -y --no-install-recommends $DEVTOOLS
 
 # Install ~/.pbuilderrc unless there already is one
 [ -f ~/.pbuilderrc ] || cat >~/.pbuilderrc <<"EOF"
@@ -146,44 +148,30 @@ EOF
   chmod 0755 ${PBUILDFOLDER}/hooks/A05suffix
 fi
 
-# Install build dependencies
-#sudo add-apt-repository ppa:
-sudo apt-get install $BUILDDEPS -y
-
 # Figure out which release to build -- default is latest numbered release in svn
 #RELEASE=${1:-$(svn ls http://adaptit.googlecode.com/svn/tags/ |grep ^adaptit-[0-9] |sort |tail -1 |sed -e 's%adaptit-%%' -e 's%/$%%')}
 RELEASE=${1:-"1.13.4"}
 
-# Check out the desired release from svn
-#svn -q checkout http://adaptit.googlecode.com/svn/tags/adaptit-${RELEASE} adaptit || exit 1
-git clone -q https://github.com/sillsdev/pathway.git || exit 1
-
 # Export the release, ready for creating a source tarball
-#cd adaptit
-#svn export --force . ../adaptit-${RELEASE} || exit 2
-#cd ..
-#http://stackoverflow.com/questions/160608/do-a-git-export-like-svn-export
-cd pathway
-git checkout ${BRANCH}
-bash Build/getDependencies.sh
-mkdir ../pathway-${RELEASE}
-git archive HEAD | tar -x -C ../pathway-${RELEASE} || exit 2
-cd ../pathway-${RELEASE}
-bash Build/getDependencies.sh
-cd ..
+rm -rf pathway-${RELEASE}
+mkdir pathway-${RELEASE}
+cd pathway-${RELEASE}
+
+git archive --remote=git://github.com/sillsdev/pathway.git ${BRANCH} | tar -x
+Build/getDependencies.sh
 
 # Delete unwanted non-source files here using find
-find pathway-${RELEASE} -type f -iname "*.hhc" -delete
-#find pathway-${RELEASE} -type f -iname "*.dll" -delete
-find pathway-${RELEASE} -type f -iname "*.exe" -delete
+find . -type f -iname "*.exe" -delete
 
-# Tar it up and create symlink for .orig.bz2
-tar jcf pathway-${RELEASE}.tar.bz2 pathway-${RELEASE} || exit 3
-ln -fs pathway-${RELEASE}.tar.bz2 pathway_${RELEASE}.orig.tar.bz2
+# Create orig tarball
+TARBALL=../pathway_${RELEASE}.orig.tar.bz2
+if [ ! -e $TARBALL ]; then
+  tar -cjf $TARBALL -C .. ${PWD##*/}
+fi
 
 # Do an initial unsigned source build in host OS environment
-cd pathway-${RELEASE}
-debuild -S -sa -us -uc || exit 4
+debuild -S -nc -sa -us -uc
+
 cd ..
 
 for i in $OSRELEASES; do
