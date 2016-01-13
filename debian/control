@@ -11,6 +11,8 @@ Build-Depends: debhelper (>= 7), autotools-dev, cli-common, mono-gmcs, mono-xbui
  libmono-system-data-linq4.0-cil, libmono-system-data-datasetextensions4.0-cil
 Standards-Version: 3.9.5
 Homepage: http://pathway.sil.org
+Vcs-Git: git://github.com/sillsdev/pathway.git
+Vcs-Browser: http://github.com/sillsdev/pathway/
 
 Package: pathway
 Architecture: any
