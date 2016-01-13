@@ -148,9 +148,20 @@ EOF
   chmod 0755 ${PBUILDFOLDER}/hooks/A05suffix
 fi
 
-# Figure out which release to build -- default is latest numbered release in svn
-#RELEASE=${1:-$(svn ls http://adaptit.googlecode.com/svn/tags/ |grep ^adaptit-[0-9] |sort |tail -1 |sed -e 's%adaptit-%%' -e 's%/$%%')}
-RELEASE=${1:-"1.13.4"}
+# Figure out which release to build -- default is latest changelog entry
+CHANGELOG=$(readlink -m "$(dirname "$0")/../debian/changelog")
+if [ -r "$CHANGELOG" ]; then
+  VERSION=$(dpkg-parsechangelog -l"$CHANGELOG" | sed -n '/^Version: /s///p')
+  UPSTREAM=${VERSION%-*}
+fi
+RELEASE=${1:-$UPSTREAM}
+if [ -z "$RELEASE" ]; then
+  echo "I need a version number to use for the release" >&2
+  echo "I didn't find a debian/changelog, and an explicit version wasn't given" >&2
+  echo "I expected to find the changelog here:" >&2
+  echo "  $CHANGELOG" >&2
+  exit 1
+fi
 
 # Export the release, ready for creating a source tarball
 rm -rf pathway-${RELEASE}
