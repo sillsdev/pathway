@@ -316,6 +316,17 @@ namespace SIL.Tool
             };
             // figure out the dimensions of our rect based on the font info
             Font badgeFont = new Font("Times New Roman", 48);
+			if(bmp.Width <= 599)
+				badgeFont = new Font("Times New Roman", 42);
+			if(bmp.Width <= 499)
+				badgeFont = new Font("Times New Roman", 38);
+			if (bmp.Width <= 399)
+				badgeFont = new Font("Times New Roman", 32);
+			if (bmp.Width <= 299)
+				badgeFont = new Font("Times New Roman", 22);
+			if (bmp.Width <= 199)
+				badgeFont = new Font("Times New Roman", 14);
+
             SizeF size = g.MeasureString(strTitle, badgeFont, (bmp.Width - 20));
             int width = (int)Math.Ceiling(size.Width);
             int height = (int)Math.Ceiling(size.Height);
@@ -330,20 +341,53 @@ namespace SIL.Tool
             }
 
             // create the bounding rect, centered horizontally on the image
-            Rectangle rect = new Rectangle(((bmp.Size.Width / 2) - (width / 2)), 100, width, height);
-            // draw the badge (rect and string)
-            g.FillRectangle(Brushes.Brown, rect);
-            g.DrawRectangle(Pens.Gold, rect);
+            //Rectangle rect = new Rectangle(((bmp.Size.Width / 2) - (width / 2)), 100, width, height);
 
-            g.DrawString(strTitle, badgeFont, Brushes.Gold,
-                new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width / 2)), 100f), size), strFormat);
-
-            // save this puppy
-            string strCoverImageFile = Common.PathCombine(outputFolder, "cover.png");
-            bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
+	        if (bmp.Height >= 600)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 100, 100f, outputFolder);
+	        }
+	        else if (bmp.Height >= 500)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 80, 80f, outputFolder);
+	        }
+	        else if (bmp.Height >= 400)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 60, 60f, outputFolder);
+	        }
+	        else if (bmp.Height >= 300)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 40, 40f, outputFolder);
+	        }
+	        else if (bmp.Height >= 200)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 30, 30f, outputFolder);
+	        }
+			else if (bmp.Height >= 50)
+			{
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 20, 20f, outputFolder);
+			}
+            
         }
 
-        public string TitlePage()
+		private static Rectangle SetImageRectangleText(Bitmap bmp, int width, int height, Graphics g, string strTitle,
+			Font badgeFont, SizeF size, StringFormat strFormat, int lineHeight, float heightSize, string outputFolder)
+	    {
+		    Rectangle rect;
+			rect = new Rectangle(((bmp.Size.Width / 2) - (width / 2)), lineHeight, width, height);
+		    // draw the badge (rect and string)
+		    g.FillRectangle(Brushes.Brown, rect);
+		    g.DrawRectangle(Pens.Gold, rect);
+		    g.DrawString(strTitle, badgeFont, Brushes.Gold,
+				new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width / 2)), heightSize), size), strFormat);
+
+			string strCoverImageFile = Common.PathCombine(outputFolder, "cover.png");
+			bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
+
+			return rect;
+	    }
+
+	    public string TitlePage()
         {
             if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("false")) { return string.Empty; }
             var sb = new StringBuilder();
