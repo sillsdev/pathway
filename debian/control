@@ -10,7 +10,7 @@ Vcs-Git: git://github.com/sillsdev/pathway.git
 Vcs-Browser: http://github.com/sillsdev/pathway/
 
 Package: pathway
-Architecture: any
+Architecture: all
 Depends: default-jre-headless, mono-basic-sil, fonts-sil-charissil,
  lame, xchm, libsword-utils, nautilus,
  ${misc:Depends}, ${cli:Depends}
