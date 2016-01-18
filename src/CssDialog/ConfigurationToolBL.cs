@@ -729,6 +729,10 @@ namespace SIL.PublishingSolution
 		{
 			get
 			{
+				//string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+				
+				//return  version;
+
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
 				if (attributes.Length == 0)
 				{
@@ -4546,7 +4550,7 @@ namespace SIL.PublishingSolution
 			var sb = new StringBuilder();
 			sb.Append("Pathway Configuration Tool");
 			sb.Append(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")) ? " - BTE " : " - SE ");
-			sb.Append(Application.ProductVersion);
+			sb.Append(AssemblyFileVersion);
 			cTool.Text = sb.ToString();
 			SetFocusToName();
 			SetMenuToolStrip();
