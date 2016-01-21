@@ -9,14 +9,16 @@ RELEASE=${1:-"1.13.4.4756"}
 rm -rf ../pathway-*
 rm -rf ../pathway_*
 mkdir ../pathway-${RELEASE}
-git archive HEAD | tar -x -C ../pathway-${RELEASE} || exit 2
+#git archive HEAD | tar -x -C ../pathway-${RELEASE} || exit 2
 cd ../pathway-${RELEASE}
+cp -r ../pathway/. .
+rm -rf .git
 cp ../pathway/lib/L10NSharp.* lib/.
 cp ../pathway/debian/changelog debian/.
 cp ../pathway/debian/control debian/control
 cp ../pathway/debian/rules debian/rules
-cp -rf ../pathway/debian/source debian/.
-cp ../pathway/DistFiles/*.csproj DistFiles/.
+#cp -rf ../pathway/debian/source debian/.
+#cp ../pathway/DistFiles/*.csproj DistFiles/.
 cd ..
 
 # Delete unwanted non-source files here using find
