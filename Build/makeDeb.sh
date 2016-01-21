@@ -10,13 +10,13 @@ rm -rf ../pathway-*
 rm -rf ../pathway_*
 mkdir ../pathway-${RELEASE}
 #git archive HEAD | tar -x -C ../pathway-${RELEASE} || exit 2
-cd ../pathway-${RELEASE}
-cp -r ../pathway/. .
-rm -rf .git
-cp ../pathway/lib/L10NSharp.* lib/.
-cp ../pathway/debian/changelog debian/.
-cp ../pathway/debian/control debian/control
-cp ../pathway/debian/rules debian/rules
+#cd ../pathway-${RELEASE}
+cp -r . ../pathway-${RELEASE}
+rm -rf ../pathway-${RELEASE}/.git
+cp lib/L10NSharp.* ../pathway-${RELEASE}/lib/.
+cp debian/changelog ../pathway-${RELEASE}/debian/.
+cp debian/control ../pathway-${RELEASE}/debian/control
+cp debian/rules ../pathway-${RELEASE}/debian/rules
 #cp -rf ../pathway/debian/source debian/.
 #cp ../pathway/DistFiles/*.csproj DistFiles/.
 cd ..
