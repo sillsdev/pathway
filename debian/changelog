@@ -1,4 +1,4 @@
-pathway (1.13.4-1) experimental; urgency=high
+pathway (1.13.4.4756-1) experimental; urgency=high
 
   * pathway 1.13.4
     - epub:TD-4403 Crash exporting to EPUB from Flex and Paratext
@@ -11,7 +11,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice:TD-4477 css property for Title
     - LibreOffice:TD-4478 Move picture to end of entry and center
     - LibreOffice:TD-4479 Remove rule line under header 
-    - LibreOffice:TD-4480 Fixed bug to show odd and even page in equal bottom margin
+    - LibreOffice:TD-4480 Show odd and even page in equal bottom margin
     - LibreOffice:TD-4485 DictionarySettings encoding error 
     - LibreOffice:TD-4487 header created for Mexico project
     - LibreOffice:TD-4501 bullet overwrites part of text in subentry
@@ -47,12 +47,12 @@ pathway (1.13.4-1) experimental; urgency=high
     - Sword:TD-4408 Sword superscript
     - Sword:TD-4410 Tit 1:1 missing BLAH in footnote 
     - Sword:TD-4411 Tit 1:5 \q2 missing indent 
-    - Sword:TD-4412 Sword fix alignment issue(lit)
+    - Sword:TD-4412 Sword alignment issue(lit)
     - Sword:TD-4416 Tit 1:9 \wj missing red 
     - Sword:TD-4419 Sword bold
     - Sword:TD-4423 Rev verse numbers wrong
     - Sword:TD-4425 Jdg 1 4 r remove bold
-    - Sword:TD-4426 Sword fix missing line
+    - Sword:TD-4426 Sword missing line
     - Sword:TD-4428 Neh 1:1 q2 doesn't indent after q1 
     - Sword:TD-4435 Luk missing mt2 and mt1
     - Sword:TD-4436 Luk 1 39 fqa should be italic
@@ -62,8 +62,8 @@ pathway (1.13.4-1) experimental; urgency=high
     - Sword:TD-4441 Rom 12:5 \it not italic
     - Sword:TD-4443 Sword small caps
     - Sword:TD-4444 Sword color
-    - Sword:TD-4448 Sword Crash fixed
-    - Sword:TD-4448 Sword fix alignment issue in Esther
+    - Sword:TD-4448 Sword no crash
+    - Sword:TD-4448 Sword alignment issue in Esther
     - Sword:TD04420 Sword bold italic
     - UI:TD-4379 Linux - Config tool won't start, and crash exporting from FLEx
     - UI:TD-4380 Windows - Pathway Config Tool will not close
@@ -77,7 +77,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - build:Add Sword to Corporate release
     - build:Remove WordPress export
     - build:Simplify TexLive base setup
-    - build:TD-4261 fix error when installing from Firefox on Wasta
+    - build:TD-4261 error when installing from Firefox on Wasta
     - build:TD-4389 Linux localization settings dialog not showing
     - build:TD-4389 User Interface Control UI Changes in Linux
     - build:TD-4389 User interface control vanish
@@ -93,7 +93,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice:TD-4202 Enabling hyphenation for Libre Office output
     - LibreOffice:TD-4185 Setting Running Header to None disables Header
     - Smart Device:TD-4235 GoBible word of jesus conversion
-    - Smart Device:TD-4360 Fix GoBible output name
+    - Smart Device:TD-4360 GoBible output name
     - MySword:TD-4219 Crash when keyword not in glossary
     - MySword:TD-4236 Add extended Footnote
     - MySword:TD-4236 Embedded markers
@@ -127,11 +127,11 @@ pathway (1.13.4-1) experimental; urgency=high
     - XeLaTeX:TD-4185 Setting Running Header to None disables Header
     - XeLaTeX:TD-4363 Setting Header and Page number to None removes page number
     - XeLaTeX:TD-4367 Change the code to leave one page after TOC
-    - XeLaTeX:TD-4368 Fixed empty page between main and reversal page
-    - XeLaTeX:TD-4369 I fixed duplicate TOC bug
-    - XeLaTeX:TD-4370 Fixed page number issue for reversal
+    - XeLaTeX:TD-4368 empty page between main and reversal page
+    - XeLaTeX:TD-4369 duplicate TOC
+    - XeLaTeX:TD-4370 page number issue for reversal
     - XeLaTeX:TD-4372 Footer is created 
-    - XeLaTeX:TD-4378 Fixed page number issue in scripture
+    - XeLaTeX:TD-4378 page number issue in scripture
     - Installer:TD-4221 Update Prince.dll to latest version
     - Installer:TD-4285 Fatal Error after installation in Linux
     - Installer:TD-4373 Run xelatex as administrator
@@ -180,14 +180,14 @@ pathway (1.13.4-1) experimental; urgency=high
     - UI:TD-4291 Localize ConfigurationTool Dropdown Property Text
     - UI:TD-4293 PsLocalization.xml missing error
     - UI:TD-4294 Don't show this again not functional
-    - UI:TD-4294 Dont show this again dialog not functional
+    - UI:TD-4294 Don't show this again dialog not functional
     - UI:TD-4295 List of items are removed from the localization item
     - UI:TD-4296 extra space before the question mark
     - UI:TD-4297 what is the significance of 'dim'?
     - UI:TD-4299, TD-1344 Add non-English localizations to Windows installer
   * pathway 1.12.0 sprint
     - Epub3:TD-4176 Validation Error in D33
-    - LibreOffice:TD-4179 PDF missing reversal Table of Contents in bookmarks pane
+    - LibreOffice:TD-4179 PDF missing reversal TOC in bookmarks pane
     - LibreOffice:TD-4181 Table of contents missing from epub3
     - LibreOffice:TD-4182 Missing space after glossary term
   * pathway 1.11.0 sprint
@@ -195,7 +195,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Epub3:TD-4131 Close button in Epub type window should open E-Book
     - Epub3:TD-4134 Epub3 output does not have endnote
     - Epub3:TD-4135 Epub3 ebook output does not have hierarchy
-    - Epub3:TD-4137 References number appears twice in all ebook when set to "refs at end"
+    - Epub3:TD-4137 Ref number appears twice in all ebook with "refs at end"
     - Epub3:TD-4138 Headword appears in reverse order
     - Epub3:TD-4139 TOC level doesn't work properly
     - Epub3:TD-4143 Copyright information appears in the Epub3
@@ -204,27 +204,27 @@ pathway (1.13.4-1) experimental; urgency=high
     - Epub3:TD-4147 Endnote and reference does not work in ebook
     - Epub3:TD-4155 Book fails to load in Epub3
     - Epub3:TD-4157 Two bullets and two brackets
-    - Epub3:TD-4158 pre-process to remove ReversalIndexEntry_PartOfSpeech and PartOfSpeechLink
+    - Epub3:TD-4158 pre-process to remove FieldWorks elements
     - Epub3:TD-4159 [Linux] Duplicate epub file
-    - Epub3:TD-4160 Epub 3 & XHTML 5 output on left side for right-to-left dictionary.
+    - Epub3:TD-4160 Epub 3 & XHTML 5 on left side for right-to-left dict
     - Epub3:TD-4164 validation errors exporting NKonya
     - Epub3:TD-4166 Validation Error in Epub3
-    - Epub3:TD-4169 Error on Epub 3 output when exporting multiple scriptures in Linux
+    - Epub3:TD-4169 Epub 3 output when exporting multiple scriptures
     - Common:TD-4123 Apply license error with Prince.
     - Common:TD-4162 Picture doesn't properly appear in the Prince output.
     - Common:TD-4043 "FieldworksA4Styles" always given as the default
     - Common:TD-4102 Check html5 content and picture in browser
     - Installer:TD-4141 "International" is missing in About dialog
     - LibreOffice:TD-4115 missing header
-    - LibreOffice:TD-4126 Point size doesn't reflect choice in Configuration Tool
+    - LibreOffice:TD-4126 Point size doesn't reflect user choice choice
     - Paratext:TD-4124 Scripture content missing.
     - E-book:TD-4146 theWord / MySword glossary pop ups
     - E-book:TD-4153 Export from Translation Editor to theWord/MySword
-    - UI:TD-4042 Letter “T” is missing from "Fixed Line Height" label
+    - UI:TD-4042 "Fixed Line Height" label
     - UI:TD-4140 Reword epub results dialog to eliminate need for help
     - UI:TD-4150 Remember checked export options
-    - UI:TD-4151 Trademark symbol appears a notable distance from the SIL International word
-    - UI:TD-4154 [Linux] Picture and Running Header Combobox names show partially in Properties tab
+    - UI:TD-4151 Trademark symbol too far from the SIL International
+    - UI:TD-4154 Picture and Running Header Combobox names show partially
     - UI:TD-4171 Non ASCII copyright chars crash program
     - Web:TD-4136 HTML 5 TOC doesn't have "Endnote & References".
     - XeLaTeX:TD-4163 Null Reference Exception is thrown error
@@ -237,9 +237,9 @@ pathway (1.13.4-1) experimental; urgency=high
     - Epub3: TD-4061 create epub3 destination
     - Epub3: TD-4063 Add Epub2 and Epub3 sub folders with files.
     - Epub3: TD-4064 Export Epub3 output
-    - Epub3: TD-4065 Create Dialog screen with four options (Epub2,Epub3,Folder,Cancel)
+    - Epub3: TD-4065 Dialog with four options (Epub2,Epub3,Folder,Cancel)
     - Epub3: TD-4066 Implement dialog result for Epub options
-    - Epub3: TD-4067 Create dialog for Validation with four options(Epub2,Epub3,Both,Neither)
+    - Epub3: TD-4067 Validation dlg with options(Epub2,Epub3,Both,Neither)
     - Epub3: TD-4068 Implement dialog result for Epub Validations
     - Epub3: TD-4069 Create RAMP for Epub3
     - Epub3: TD-4070 Create Meta-inf file for Epub3
@@ -277,7 +277,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - General: TD-4048 Dictionary Entry content missing in entry with pictures
     - General: TD-4113 Adding space after proper name
     - Epub2: TD-3958, TD-4108 Add MySword conversion (remove dependency)
-    - Epub2: TD-4024 Scripture name appears at top of left corner in the Ebook output file.
+    - Epub2: TD-4024 Scripture name appears at top of left in the Ebook
     - Epub2: TD-4025 Chapter number link doesn't work it in EBook output file.
     - Epub2: TD-4029 refactor epub conversion
     - Epub2: TD-4040 Link letters fail if set to "At end of Document"
@@ -291,7 +291,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - UI: TD-4035 Custom Sheet doesn't have default values
     - UI: TD-4039 Replace Ubuntu help browser with xchm
     - UI: TD-4041 Selected item doesn't save in single field.
-    - UI: TD-4042 Letter “T” is missing from "Fixed Line Height" label
+    - UI: TD-4042 "Fixed Line Height" label
     - UI: TD-4050 Preview button should be disable for web output
     - UI: TD-4105 Incomplete checkbox captions
     - UI: TD-4112 Clicking link sends text to wrong position
@@ -305,13 +305,13 @@ pathway (1.13.4-1) experimental; urgency=high
     - Common: TD-3984 Question tag appears on the scripture header in Pdf Prince
     - Common: TD-3989 Use default locations if registry not accessible
     - Common: TD-3895 License information on copyright page
-    - Installer: TD-3992 Update bootstrap logic to install XeLaTeX from Team City
+    - Installer: TD-3992 Update bootstrap logic to install XeLaTeX
     - LibreOffice: TD-3481 Ad guide words for minor entries
     - LibreOffice: TD-3898 Square boxes appears in PDF output after exporting
     - LibreOffice: TD-3964 Header shows 0 along with Reference
     - LibreOffice: TD-3969 Cover image isn't full size
     - LibreOffice: TD-3975 square boxes in Table of Contents
-    - LibreOffice: TD-3983 Logo missing when using "Pioneer Bible Translators" & "Other" organization.
+    - LibreOffice: TD-3983 Logo missing
     - LibreOffice: TD-3987 Header shows empty guidewords
     - LibreOffice: TD-3990 Header related test failures
     - LibreOffice: TD-3991 Scripture header doesn't appear
@@ -319,14 +319,14 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice: TD-4006 The right guide words allows something visible behind
     - LibreOffice: TD-4007 Add guidewords for minor entries
     - LibreOffice: TD-4015 Macro not running for certain settings files
-    - Epub: TD-3965 Fix validator error in Nkonya
+    - Epub: TD-3965 validator error in Nkonya
     - Epub: TD-3997 Dictionary for Mid Reversal
     - Epub: TD-3998 theWord export crashes trying to find vrs.xml
     - UI: TD-3890 Clicking customsheet displaying preview screen
-    - UI: TD-3960 Controls can be stuck against side or under scroll bar in Properties tab
+    - UI: TD-3960 Controls stuck to side or under scroll bar in Properties tab
     - UI: TD-3961 Macro should run for Reference Format = Genisis 1-2
     - UI: TD-3962 update help menu to include link for getting more help online.
-    - UI: TD-3962 Changed reference to Student Manual which is now online instead of installed
+    - UI: TD-3962 ref to Student Manual which is now online instead of installed
     - UI: TD-3963 Property tab missing
     - UI: TD-3966 Are you sure responses
     - UI: TD-3967 Setting file error
@@ -336,7 +336,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - UI: TD-3978 Sample Data not available for a custom
     - UI: TD-3979 No font name is been appeared against Fallback
     - UI: TD-3980 Properties and Preview tabs are missing after Reset button
-    - UI: TD-3981 Stylesheet Name error on tool bar Preview after unchecked available box.
+    - UI: TD-3981 Stylesheet on tool bar Preview after unchecked.
     - UI: TD-3982 Clicking on the Help me choose a right statement
     - UI: TD-4013 The word version appears twice in about dialog
     - UI: TD-4027 validation error prevents navigation on web properties tab
@@ -353,7 +353,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Common: Removed Undo Redo and added Reset
     - Common: ReSharper issues in the css and project files
     - Common: registry files don't work correctly in UTF-8
-    - Common: fix pdf parameter parsing
+    - Common: pdf parameter parsing
     - Common: TD-3814 Remove extended Unicode characters from source
     - Common: TD-3868 Settings not migrated Properly
     - Common: TD-3913 Refactoring the most complex methods
@@ -366,7 +366,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Help: Added brief description of new space transformation
     - Help: Create README.md
     - Installer: Update solution for building 64-bit PathwayXeLaTeX (Any CPU)
-    - Installer: TD-3929 fix install of PDF viewer
+    - Installer: TD-3929 install of PDF viewer
     - Ubuntu: Add PdfLicense to Ubuntu build
     - Ubuntu: Correct case of TheWordConvert
     - Ubuntu: Don't require reboot on Ubuntu
@@ -380,20 +380,20 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice: TD-3854 Square boxes appears as headers
     - LibreOffice: TD-3869 Entries with pictures are indented one space
     - LibreOffice: TD-3879 Custom License SIL link not hyperlinked
-    - LibreOffice: TD-3880, TD-3882 Fix custom Licenses
+    - LibreOffice: TD-3880, TD-3882 custom Licenses
     - LibreOffice: TD-3888 Table of content number doesn't update
     - LibreOffice: TD-3892 Scriptures doesn't appear in new page
     - LibreOffice: TD-3893 Cover image doesn't appear if One File Per Book set
-    - LibreOffice: TD-3897 Scripture first paragraph fails when fixed line height
+    - LibreOffice: TD-3897 Scripture first para fails with fixed line height
     - LibreOffice: TD-3902 Guide Word overlapped to page number
-    - LibreOffice: TD-3906 Verse number doesn't appear on header as Gen 1:1 format
+    - LibreOffice: TD-3906 Verse number doesn't appear on header as Gen 1:1
     - LibreOffice: TD-3940 Genesis 1-2 Reference Format
-    - LibreOffice: TD-3941 Introduce Menu that updates header reference guide words
+    - LibreOffice: TD-3941 Menu that updates header reference guide words
     - LibreOffice: TD-3944 Reference Format does not retain the value set
     - LibreOffice: TD-3952 Avoid Empty Pages between books
     - LibreOffice: TD-3954 Introduce Macro Progress Bar
     - LibreOffice: TD-3957 Gen 1-2 reference format - abbreviated book name
-    - LibreOffice: TD-850 Right to Left scripts appear incorrectly in Open Office
+    - LibreOffice: TD-850 Right to Left scripts appear incorrectly
     - E-Reader: No partial books so books don't change
     - E-Reader: Right Align added for Epub
     - E-Reader: TD-3871 Generic family names should not be quotes
@@ -401,7 +401,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - E-Reader: TD-3885 Font Header overlaps with the text of the content
     - E-Reader: TD-3903 Fallback font is missing in Linux
     - E-Reader: TD-3908 fix space inside quotes in footnotes
-    - E-Reader: TD-3910 updated transform to handle book names with multi-word names
+    - E-Reader: TD-3910 book names with multi-word names
     - E-Reader: TD-3912 theWord length error
     - E-Reader: TD-3937 Go Bible support for partial books
     - Stylesheet: TD-3931 Extra page breaks inserted
@@ -424,7 +424,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - XeLaTeX: TD-2327 Handle scripture Reference Format for Normal Page
     - XeLaTeX: TD-3419 Add needspace package
     - XeLaTeX: TD-3836 Scripture output start left to right towards
-    - XeLaTeX: TD-3837 Squares box appears in the copyright page when exporting scriptures
+    - XeLaTeX: TD-3837 Squares box in the copyright page
     - XeLaTeX: TD-3838 Verse number appears wrong in the xelatex
     - XeLaTeX: TD-3827 Title page image appears at top
     - XeLaTeX: TD-3829 Two page number appear in single page
@@ -455,7 +455,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - InDesign:TD-3742 Save pictures in output folder
     - InDesign:TD-3779 Missing pictures in Indesign output.
     - Installer:TD-3777 Update XeLaTeX name &amp; allow stable
-    - Installer:fix copy of samples
+    - Installer:copy of samples
     - LibreOffice:TD-3298 Handle h2 and h3 tags
     - LibreOffice:TD-3781 Hang when creating PDF
     - LibreOffice:TD-3802 Ramp Package missing for pdf via Libreoffice
@@ -467,7 +467,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice:TD-3811 Tag error reported when Wycliffe front matter used.
     - LibreOffice:TD-3822 Crash when layout setup from Export
     - LibreOffice:TD-3823 Introduction Main title formatting
-    - LibreOffice:TD-3849 epub and Libreoffice shows Right-to-Left as Left-to-Right
+    - LibreOffice:TD-3849 Show Right-to-Left as Left-to-Right
     - LibreOffice:TD-3851 RTL texts beyond the Margins
     - LibreOffice:TD-3856 Page number problem in Custom stylesheet
     - LibreOffice:TD-3867 Add descriptions to the macros
@@ -518,14 +518,14 @@ pathway (1.13.4-1) experimental; urgency=high
     - Common: TD-3757 update copyright year in settings
     - Common: TD-3758 Updated copyright date not migrated to new settings file
     - Common: -ps-outline-level custom style in CSS for TOC
-    - Common: Add test for A5, column gap 36pt, and page numbers on outside margins
+    - Common: test for A5, column gap 36pt, and page numbers on outside margins
     - Common: Certain settings crash the test, start clean
     - Common: Preprocessing option to add header above A a
     - InDesign: Header font and size
     - InDesign: Simplify InDesign Stylesheet
     - LibreOffice: TD-3171 Add a checkbox that splits LO Output by Letter
     - LibreOffice: TD-3189 Word are merged in PDF and Openoffice files
-    - LibreOffice: TD-3546 Picture comes in between the texts with Single Coloumn
+    - LibreOffice: TD-3546 Picture comes in between the texts
     - LibreOffice: TD-3547 Pictures are always appear in the default place ...
     - LibreOffice: TD-3665 Glossary entry missing space after it.
     - LibreOffice: TD-3676 Make sure usfm &amp; custom styles are implemented
@@ -540,9 +540,9 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice: TD-3716 Content starts on even page
     - LibreOffice: TD-3717 Blank page at beginning for reversal only export
     - LibreOffice: TD-3718 Spaces inserted inside square brackets in reversal
-    - LibreOffice: TD-3719 Space inserted before punctuation following glossary entry
+    - LibreOffice: TD-3719 Space before punctuation following glossary entry
     - LibreOffice: TD-3719: Update test result
-    - LibreOffice: Reversal has spaces added inside parenthesis and before ; and :&"
+    - LibreOffice: Reversal has spaces added inside parenthesis
     - LibreOffice: TD-3730 Footnote export error
     - LibreOffice: TD-3752 Tunen data TD-3754 space before homograph subscript
     - LibreOffice: guideword-length for guideword variables for Dictionary
@@ -558,12 +558,12 @@ pathway (1.13.4-1) experimental; urgency=high
     - EReaders: TD-3640 verse number increases the line spacing in EPUB
     - EReaders: TD-3700 Scripture Epub not validating
     - EReaders: TD-3712 theWord Handle ShortNames as well as Abbreviations
-    - EReaders: TD-3721 GoBible sfm file doesn't have style tags, Handled empty tag
+    - EReaders: TD-3721 GoBible sfm file style tags, Handled empty tag
     - EReaders: TD-3724 theWord Adjust link to not include http: or =
     - EReaders: TD-3724 theWord space after footnote ref
     - EReaders: TD-3725 theWord Handle right to left and bridges
     - EReaders: TD-3747 theWord mt2 before mt1
-    - EReaders: TD-3748 theWord verse bridge with sequence seperator
+    - EReaders: TD-3748 theWord verse bridge with sequence separator
     - EReaders: TD-3750 Export Osis2mod conversion process for sword
     - EReaders: TD-3755 theWord Don't remove .ont file
     - EReaders: mySword Template revised to reflect arguments
@@ -605,7 +605,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Common: Handle right-to-left formatting
     - Common: Include text in template Use vernacular for about this document
     - Common: Update copy to copy empty br tags.
-    - Common: Update templates to avoid validation error Superscript (R) at least in epub.
+    - Common: validation error Superscript (R) at least in epub.
     - Build: TD-3624 Using Preview from within Flex Fails
     - Build: TD-3645 Identify license for each icon
     - Build: TD-3646 Export from Fieldworks in Linux it fails
@@ -636,25 +636,25 @@ pathway (1.13.4-1) experimental; urgency=high
     - E-Pub: Initial TheWord
     - E-Pub: see if theWord installed.
     - E-Pub: theWord: Use short title fullname and allow description override
-    - Stylesheet: TD-3334 Previews do not seem to match Right Header and Right Footer
-    - Stylesheet: TD-3635 1st para of every chapter has left alignment instead of justified
-    - Stylesheet: TD-3559 Stylesheet editor without Save option is unintuitive, needs explanation
+    - Stylesheet: TD-3334 Previews of Right Header and Right Footer
+    - Stylesheet: TD-3635 1st para of every chapter justified
+    - Stylesheet: TD-3559 Stylesheet editor save needs explanation
     - Stylesheet: TD-3647 Merge custom styles into latest style sheet
     - Stylesheet: Updated Sending Stylesheets topics
     - Stylesheet: Updated to not force font size
-    - UserInterface: TD-3272 propose ui for checkbox for Insert space Test failure
+    - UserInterface: TD-3272 ui for checkbox for Insert space Test failure
     - UserInterface: TD-3488 update bootstrap logo
     - UserInterface: TD-3637 Update help icon in ConfigurationTool
     - UserInterface: TD-3638 Update About Us dialog
     - UserInterface: TD-3639 Show Splash Screen for Configuration Tool
     - UserInterface: TD-3649 Progress bar for Paratext conversion
     - UserInterface: TD-3650 Check boxes on front matter tab deselect themselves
-    - UserInterface: TD-3654 Nothing displayed anything in Export Through Pathway dialog
+    - UserInterface: TD-3654 Nothing displayed in Export Through Pathway dialog
     - UserInterface: TD-3659 Defaults from Configuration Tool not remembered
     - UserInterface: TD-3661 Double spacing not working
     - UserInterface: TD-3668 Paratext and fw export invalid value
     - UserInterface: TD-3690 Update settings and test for Paratext
-    - UserInterface: Disable style sheets in ConfigurationTool when theWord is selected
+    - UserInterface: Disable style sheets in ConfigurationTool for theWord
     - UserInterface: Edits to About Pathway dialog box
     - UserInterface: Properties tab updates topics added
     - UserInterface: Update results dialogs, test for missing booknames
@@ -663,7 +663,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - XeLaTeX: TD-2605 poetry section not formatted correctly
     - XeLaTeX: TD-3161 Two column output switches to single column
     - XeLaTeX: TD-3634 PDF was not created for xelatex
-    - XeLaTeX: TD-3695 fix rights templates for XeLaTeX
+    - XeLaTeX: TD-3695 rights templates for XeLaTeX
   * pathway sprint 1.4.0
     - Common:TD-1875 Removing extra files (leaves xhtml,css, pictures)
     - Common:TD-3581 Ensure meta data in all PDF files
@@ -677,23 +677,23 @@ pathway (1.13.4-1) experimental; urgency=high
     - Common:go to folder after changes
     - Common:Update bootstrap to use latest XeLaTex
     - LibreOffice:TD-3105 cause each book to start on a new page
-    - LibreOffice:TD-3494 Default copyright info page appears when Selecting custom.
+    - LibreOffice:TD-3494 copyright info page when Selecting custom.
     - LibreOffice:TD-3498 Title and the contents are displayed in separate
-    - LibreOffice:TD-3523 Front page is missing for scripture with custom stylesheet
+    - LibreOffice:TD-3523 Front page is missing for custom stylesheet
     - LibreOffice:TD-3539 Picture is corrupted and appears in between the texts
-    - LibreOffice:TD-3546 Picture comes in between the texts while exporting Single Coloumn
+    - LibreOffice:TD-3546 Picture comes in between the texts for Single Coloumn
     - LibreOffice:TD-3565 Time in folder name
     - LibreOffice:TD-3577 letter not decoded meta data
-    - LibreOffice:TD-3594 Create Batch file for Macro to produce License Information for PDF
+    - LibreOffice:TD-3594 License Information for PDF
     - LibreOffice:TD-3595 Preview displays unformatted
     - LibreOffice:TD-3596 Copyright Information not added in Scripture
-    - LibreOffice:TD-3596 Fixed the Path issue in Scripture Output
+    - LibreOffice:TD-3596 Path in Scripture Output
     - LibreOffice:TD-3601 Add copyright information for linux
     - LibreOffice:TD-3603 Reversal export has no headers
     - LibreOffice:TD-3608 Reversal document produces empty pages
     - Linux:TD-3622 Update icon on menu in Ubuntu 12.04
     - Paratext:TD-3588 Guideword problem solved
-    - Paratext:TD-3575 Cross references at beginning of verse cause verse break to be lost
+    - Paratext:TD-3575 Cross references at beginning of verse
     - Paratext:TD-3588 main title not displayed
     - Paratext:TD-3612 support tables with three columns
     - Epub:TD-3267 Go Bible export hanging
@@ -708,17 +708,17 @@ pathway (1.13.4-1) experimental; urgency=high
     - StyleSheet:TD-3590 Minor entry indents not reflecting flex settings
     - UI:TD-2749 Claims it isn't responding when its actually working
     - UI:TD-3272 Change text for Insert space after verse number
-    - UI:TD-3518 First customstylesheet accepts the properties of the Second customstylesheet
+    - UI:TD-3518 First customstylesheet uses properties of Second
     - UI:TD-3550 Change icon
     - UI:TD-3592 Fieldworks and Paratext export show "TaskStyle" Error Dialog
-    - UI:TD-3598 Copyright symbol and year missing from default copyright in Scripture
+    - UI:TD-3598 Copyright symbol and year
     - UI:TD-3605 Clicking on edit layout button
     - UI:TD-3613, TD-3618, TD-3619 License choice retained
     - XeLaTeX:TD-2296 Handle Nested list
     - XeLaTeX:TD-2968 Headers not present
-    - XeLaTeX:TD-3537 Book name isn't appear in "Table of content" page for scripture.
+    - XeLaTeX:TD-3537 Book name in Table of content.
     - XeLaTeX:TD-3567 Chapter number is missing at Content
-    - XeLaTeX:TD-3580 Table of Contents doesn't have the starting page of each letter.
+    - XeLaTeX:TD-3580 Table of Contents starting page of each letter.
     - XeLaTeX:TD-3582 DropCap is not correct
     - XeLaTeX:TD-3583 Project shows Box character for Xelatex
     - XeLaTeX:TD-3587 TOC Letter list for Reversal in Xelatex
@@ -726,14 +726,14 @@ pathway (1.13.4-1) experimental; urgency=high
   * pathway sprint 1.3.7
     - Build:TD3496 Pathway Export Error in DicMid in Linux
     - Build:TD-3522 Getting a Crash, when clicking on "Send" button.
-    - Build:TD-3548 Paratext reported missing component if login user is not admin
+    - Build:TD-3548 Paratext reported missing component for non-admin user
     - Build:Installer updates for DictionaryForMIDsConvert
     - Build:Move InDesign to testing release only (not Corporate)
-    - Build:Remove xelatex dependancy of EPUB only build
+    - Build:Remove xelatex dependency of EPUB only build
     - Libre Office:TD-3282 Drop cap should remove paragraph indentation
     - Libre Office:TD-3492 out of memory on Selaru data with Fw8
     - Libre Office:TD-3509 Pdf using LibreOffice is not showing the output
-    - Libre Office:TD-3554 Book name in page header should reflect new book, not first book
+    - Libre Office:TD-3554 Book name in page header to reflect new book
     - Libre Office:TD-3560 Drop Cap Indentation on LibreOffice Macro
     - Libre Office:TD-3563 significant spaces missing from output.
     - Libre Office:TD-3574 missing publisher in combined export
@@ -744,7 +744,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - epub:TD-3511 Two bullet appears When exporting dictionary data in E-Book.
     - epub:TD-3551 Dic4Mid rename and stylesheet still not quite fully completed
     - epub:TD-3552 DictionaryForMids go.bat file output
-    - epub:TD-3568 Optionally do not split epub letters in multiple files internally
+    - epub:TD-3568 not splitting epub letters in multiple files internally
     - epub:TD-3571 Use epubcheck-3.0.1
     - stylesheet:TD-3521 Getting an error, when trying to delete
     - ui:TD-3504 Sample data preview isn't appear in "Sense Layout" dialog box.
@@ -771,7 +771,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice: TD-3477 Normal space after footnote caller
     - LibreOffice: TD-3478 Footnote caller as *
     - LibreOffice: TD-3481 Add guide words for minor entries.
-    - LibreOffice: TD-3482 breakable space between a word and its footnote caller
+    - LibreOffice: TD-3482 breakable space before footnote caller
     - LibreOffice: TD-3484 turn off vs1
     - LibreOffice: TD-3486 \q1 paragraphs are justified
     - LibreOffice: TD-3491 Unrequested capitalization of captions
@@ -794,7 +794,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - UI: TD-3471 Unhandled Exception
     - UI: TD-3487 clear away the previous settings
     - UI: TD-3488 Black and White logo
-    - UI: TD-3503 Settings saved when configuration tool opened from Style button.
+    - UI: TD-3503 save when configuration tool opened from Style button.
     - UI: TD-3513 Words are partially appearing
     - UI: TD-3529 Error when exporting twice within a minute
     - XeLaTeX: TD-3414 Hanging indent for list paragraphs
@@ -829,10 +829,10 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice:TD-3286 book names in headers
     - LibreOffice:TD-3288 Space between caption and caption reference
     - LibreOffice:TD-3289 New books should start
-    - LibreOffice:TD-3290 Convert &gt;&gt;&gt; as single quote followed by a double
+    - LibreOffice:TD-3290 Convert < << as single quote followed by a double
     - LibreOffice:TD-3291 Table code processing
     - LibreOffice:TD-3299 list items should be same size as running text
-    - LibreOffice:TD-3311 Scripture Fixed line height not fixed.
+    - LibreOffice:TD-3311 Scripture Fixed line height
     - LibreOffice:TD-3314 Header should contain \h
     - LibreOffice:TD-3315 Header text size should be base font size
     - LibreOffice:TD-3316 Footnote reference font size too large
@@ -841,9 +841,9 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice:TD-3328 Paratext picture export broken
     - LibreOffice:TD-3331 Guide word references for every page.
     - LibreOffice:TD-3333 Apply filter for pagenumber for Dictionary
-    - LibreOffice:TD-3345 fix bug causing computer to hang
+    - LibreOffice:TD-3345 avoid hang
     - LibreOffice:TD-3349 right header contains part of a line
-    - LibreOffice:TD-3351 Fix apply of fixed line spacing
+    - LibreOffice:TD-3351 fixed line spacing
     - LibreOffice:TD-3358 extra page breaks removed
     - LibreOffice:TD-3359 Move the publisher
     - LibreOffice:TD-3365 Putting page number at bottom leads to hang
@@ -859,13 +859,13 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice:TD-3381 Header on page 6 didn't reflect page content
     - LibreOffice:TD-3386 Information box wording
     - LibreOffice:TD-3387 Use thin space when no caller should be used.
-    - LibreOffice:TD-3396 Fix left header bug
+    - LibreOffice:TD-3396 left header bug
     - LibreOffice:TD-3397 Add Publisher name and logo to Title page
-    - LibreOffice:TD-3405 Fix picture placement to right of column
+    - LibreOffice:TD-3405 picture placement to right of column
     - LibreOffice:TD-3407 fqa shows as italic
-    - LibreOffice:TD-3409 Fix front matter issues
-    - LibreOffice:TD-3435 Words are broken instead of breaking the line at a space
-    - LibreOffice:TD-3436 Use Black and white 12mm x 15mm SIL International logo
+    - LibreOffice:TD-3409 front matter issues
+    - LibreOffice:TD-3435 break the line at a space
+    - LibreOffice:TD-3436 Use Black and white SIL International logo
     - LibreOffice:Allow for 2 character language code.
     - PtxPlugin:TD-3276 Trying GoBible option from Paratext
     - PtxPlugin:TD-3283 Handle discretionary line break (// )
@@ -887,23 +887,23 @@ pathway (1.13.4-1) experimental; urgency=high
     - EBook:TD-3394 Dictionary for Mids add method to create jar file.
     - EBook:TD-3402 Add FixEpub and EpubCheck to installer
     - EBook:TD-3433 On Linux Error opening epub
-    - EBook:TD-3434 Fix error in Linux epub
-    - EBook:TD-3439 Fix broken Epub links
+    - EBook:TD-3434 Linux epub
+    - EBook:TD-3439 Epub links
     - Stylesheet:TD-3246 Index error Message
-    - Stylesheet:TD-3302 Fix One Column Preview
+    - Stylesheet:TD-3302 One Column Preview
     - Stylesheet:TD-3302a UI changes
     - Stylesheet:TD-3336 Page numbers do not appear in Libreoffice
     - Stylesheet:TD-3393 give Letter and A4 default for Scripture too.
     - Stylesheet:TD-3422 Drop cap given 3 lines instead of 2
-    - Stylesheet:TD-3423 Fix guide words that end with colon
-    - Stylesheet:TD-3425 Fix footnote markers
+    - Stylesheet:TD-3423 guide words that end with colon
+    - Stylesheet:TD-3425 footnote markers
     - Stylesheet:TD-3426 references used instead of daggers for xref
     - Stylesheet:TD-3403 mt, mt1, mt2 all cause page break
     - Stylesheet:TD-3427 Keep pictures within the column margins
     - Stylesheet:TD-3437 License missing from intended for sale option
     - Stylesheet:TD-3442 Indents wrong for entries with pictures
     - Stylesheet:TD-3443 Indents of entries with pictures
-    - Stylesheet:Fix Copyright css
+    - Stylesheet:Copyright css
     - Stylesheet:Make a best guess for Paratext color values.
     - Stylesheet:Update style sheet to handle case where style name is a unit
     - UI:TD-3266 allow writing to a LocalMachine registry key
@@ -913,11 +913,11 @@ pathway (1.13.4-1) experimental; urgency=high
     - UI:TD-3368 Adding a page size
     - UI:TD-3388 ConfigurationTool creates invalid settings
     - UI:TD-3393 move FieldWorks export options to top of the list
-    - UI:TD-3431 Linux Custom styles issues fixed
+    - UI:TD-3431 Linux Custom styles
     - UI:TD-3448 Linux set A5 page size
     - UI:added blurb about new preprocessing option
     - XeLaTeX:TD-1283 Xetex page size incorrect
-    - XeLaTeX:TD-2090 font-size: x-small, small, medium, large, x-large, xx-large
+    - XeLaTeX:TD-2090 font-size: x-small, x-large, xx-large, etc
     - XeLaTeX:TD-3352 Copyright Statement Missing
     - XeLaTeX:TD-3353 Title page is missing publisher
     - XeLaTeX:TD-3354 Remove extra page number
@@ -926,16 +926,16 @@ pathway (1.13.4-1) experimental; urgency=high
     - XeLaTeX:TD-3406 Reversal guide words not correct
     - XeLaTeX:TD-3410 Add lettrine package to XeLaTeX making 1.7 build
     - XeLaTeX:TD-3411 Table of contents empty
-    - XeLaTeX:TD-3412 Page 4 - space above Copyright Information header and left align
+    - XeLaTeX:TD-3412 space above Copyright
     - XeLaTeX:TD-3413 Guideword content and style
     - XeLaTeX:TD-3417 Have each book start on a new page
     - XeLaTeX:TD-3420 picture is too small. Should fit better in column
-    - XeLaTeX:Minor Issue fixed for Xelatex header.
+    - XeLaTeX:header.
   * pathway 1.3.4 sprint
     - packaging: Don't offer stable if incompatible with Fieldworks
     - packaging: Remove xetex cobolt support from package
     - packaging: TD-3325 Keep reference to Epub validator
-    - help: TD-3202 Fix broken links in Help page
+    - help: TD-3202 broken links in Help page
     - help: Reset missing picture.
     - help: Updated info related to macros
     - help: add link for pathway site backup
@@ -948,18 +948,18 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice: TD-3270 Homograph number too small in reversal
     - LibreOffice: TD-3271 Show book name in header
     - LibreOffice: TD-3274 Remove unused macros - removed unused macros
-    - LibreOffice: TD-3301 Fix Margin indentations
+    - LibreOffice: TD-3301 Margin indentations
     - LibreOffice: TD-3304 Use vernacular font for header
     - LibreOffice: TD-3307 Remove duplicate headers
     - LibreOffice: TD-3313 Introduction table heading too large
     - LibreOffice: TD-3319 Pictures set off still leave boxes
-    - paratext plugin: TD-2909 Add ability to get USFM from Paratext for Go Bible
+    - paratext plugin: TD-2909 Add ability to get USFM for Go Bible
     - paratext plugin: TD-3150 Update PathwayB Paratextshared call
-    - paratext plugin: TD-3150 ParatextSupport must be dynamically loaded for SE build
+    - paratext plugin: TD-3150 ParatextSupport dynamic load
     - e-book: TD-3123 E-book formatting discrepencies
     - stylesheet: TD-3229 Headwords not bold, and other styles
     - stylesheet: TD-3251 Center Margin merges with the Words
-    - ui: TD-3132 Erase settings when starting ConfigurationTool with Shift down key
+    - ui: TD-3132 starting ConfigurationTool with Shift down key
     - ui: TD-3220 Page number field update
     - ui: TD-3220 Switching Nochange in the Fontsize,leading
     - ui: TD-3220 reset the dropdown in Configuration tool
@@ -970,7 +970,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - ui: TD-3255 Preview would not be opened
     - ui: TD-3261 Prince option is missing
     - ui: TD-3287 Add transform to remove empty chapters
-    - ui: TD-3306 Save the new custom style sheets with same name and descriptions.
+    - ui: TD-3306 Save the new custom style sheets with same name
     - ui: TD-3309 Remove unwanted letter dividers
     - ui: TD-3269 Remove "Insert Running Header" check box
     - ui: Expand pre-processing list box to more easily read name
@@ -978,7 +978,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - ui: set ConfigurationTool maximum window size on Windows
     - xelatex: TD-2144 handle before punctuation
     - xelatex: TD-2145 orphan control
-    - xelatex: TD-2146 combine properties from general and specific selector blocks
+    - xelatex: TD-2146 combine properties from selector blocks
     - xelatex: TD-2154 widow control
     - xelatex: TD-2157 div.header
     - xelatex: TD-2121 Handle scripture Reference Format for Mirror Page
@@ -990,7 +990,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Common: Reset missing picture.
     - Help: TD-3202 Help page and links
     - Libre Office: TD-3199 Table Of Contents page number formatting
-    - Libre Office: TD-3210 Page number fixes
+    - Libre Office: TD-3210 Page number
     - Libre Office: TD-3253 Word header is appeared out of margin
     - Libre Office: TD-3271 Book Name missing from header
     - Libre Office: TD-3274 Remove unused macros - removed unused macros
@@ -1011,10 +1011,10 @@ pathway (1.13.4-1) experimental; urgency=high
     - Help: Added topic for making installation package to Going Further.
     - Help: New topic for making USB/CD install package.
     - Help: Updated Toolbar overview to include the Student Manual command.
-    - Installer: Remove gsdll32.dll from installer since Preview now uses Prince.
-    - Installer: Fix Help Improve ckeck box.
+    - Installer: Remove gsdll32.dll since Preview now uses Prince.
+    - Installer: Help Improve ckeck box.
     - LibreOffice: TD-2499 Complex form formatting
-    - LibreOffice: TD-3187 Fix columns balancing for Sena
+    - LibreOffice: TD-3187 columns balancing for Sena
     - LibreOffice: TD-3188 Picture is not appeared
     - LibreOffice: TD-3199 Unformated page number
     - LibreOffice: TD-3235 TOC missing in export from Paratext
@@ -1061,7 +1061,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Stylesheet: TD-3200 Others for a custom stylesheet.
     - UI: TD-3170 Add project URL to rights page.
     - UI: TD-3174 Preview isnt available
-    - UI: TD-3175 Fix Save button on Configuration Tool
+    - UI: TD-3175 Save button on Configuration Tool
     - UI: Edit Layout button in paratext.
     - XeLaTex: TD-3162 (2-3 pages) takes over 6 minutes
     - XeLaTex: TD-3196 Error on paratext in Linux
@@ -1076,33 +1076,33 @@ pathway (1.13.4-1) experimental; urgency=high
     - InDesign:TD-3166 span tag not inherited from the parent property
     - InDesign:TD-3167 Wrong Guidewords shown on Main and Reversal Header
     - LibreOffice:TD-3117 Adjust chapter number in header
-    - LibreOffice:TD-3127 Output takes a long time with no progress bar on Linux Precise 32 bit
+    - LibreOffice:TD-3127 Output takes a long time on Linux Precise 32 bit
     - LibreOffice:TD-3128 Parallel reference not formated on Precise 32 bit
     - LibreOffice:TD-3131 Picture missing
     - LibreOffice:TD-3137 Default Libre Office export crashes if macro is run
-    - LibreOffice:TD-3159 French Regional settings causes large numbers and small pictures
+    - LibreOffice:TD-3159 French Regional settings
     - LibreOffice:TD-3162 Gondwana sample (2-3 pages) takes over 6 minutes
-    - PrincePdf:TD-3168 Fix test for Prince output.
+    - PrincePdf:TD-3168 test for Prince output.
     - E-Book:TD-3139 Crash exporting Gondwana to Epub on Linux
-    - E-Book:TD-3140 Link uses verse bridge when cross reference specifies a verse
-    - E-Book:TD-3141 Footnote references should be present if given but absent otherwise.
+    - E-Book:TD-3140 Link uses verse bridge
+    - E-Book:TD-3141 Footnote references should be present if given
     - E-Book:TD-3143 Cross reference verse is duplicated.
     - E-Book:TD-3152 Handle hard line breaks for E-Book
     - E-Book:TD-3154 Unchecking include images is not saved.
-    - E-Book:TD-3156 put links after all titles don't put links for single chapter
-    - UI:TD-3148 Disable preview of Open Office / Libre Office assembly is not present
+    - E-Book:TD-3156 put links after all titles not for single chapter
+    - UI:TD-3148 Disable preview if LibreOffice assembly is not present
     - UI:TD-3149 Default destination to first one if Libre Office is not present
     - UI:TD-3155 Making stylesheet unavailable is not honored by defaults
     - UI:TD-3158 Lucid gives error after running ConfigurationTool
     - XeLaTeX:Add XeLaTeX binary folder to the path in Linux
     - XeLaTeX:Adjust XeLaTeX package to work on 64-bit
-    - XeLaTeX:Fix XeLaTeX export on Linux, Update developer copy
+    - XeLaTeX:export on Linux, Update developer copy
     - XeLaTeX:Include fmtutil in Linux XeLaTeX package.
   * 1.2.0.2573 sprint
-    - Common: Optionally remove empty verses when only part of a book has been translated
+    - Common: Optionally remove empty verses
     - Common: TD-3109 Speed up conversion, avoid accessing the Internet
     - Common: TD-3110 Update rights statements based on GPS input
-    - Common: Update Copyright page order, adding WBT and fix SIL pages.
+    - Common: Update Copyright page order, adding WBT and SIL pages.
     - Go Bible: TD-3082 Map USX to USFM
     - Go Bible: TD-3083 User interface to choose UI language for GoBible
     - Go Bible: TD-3084 Create Go Bible module with non-English UI.
@@ -1120,12 +1120,12 @@ pathway (1.13.4-1) experimental; urgency=high
     - Libre Office: TD-3104 Book names missing from TOC
     - Libre Office: TD-3105 cause each book to start on a new page
     - Libre Office: TD-3107 Include page number for all print output formats
-    - Libre Office: TD-3108 Activate widow and orphan control on standard style sheets
+    - Libre Office: TD-3108 Activate widow and orphan control
     - Libre Office: TD-3120 Reversal section missing
-    - Libre Office: TD-3121 Dictionary export no longer has date and time in folder name
+    - Libre Office: TD-3121 no date and time in folder name
     - Libre Office: TD-3129 Drop capital chapter number is not large
     - Libre Office: TD-3130 Footnote reference causes extra line space
-    - Libre Office: TD-3138 referenced headword in reversal doesn't display with the right font.
+    - Libre Office: TD-3138 referenced headword in reversal with the right font.
     - E-Book: TD-3088 Reference appears twice in cross reference
     - E-Book: TD-3089 Epub ignore illustrations
     - E-Book: TD-3092 \toc2 field comes through in epub
@@ -1136,12 +1136,11 @@ pathway (1.13.4-1) experimental; urgency=high
     - E-Book: Td-3093 Chapter links after main
     - E-Book: Add DocType to noXmlSpace.xsl
     - Stylesheet: Edits to stylesheet-related topics and index items.
-    - User Interface: TD-3101 Webonary values not saved in the ConfigurationTool
-    - User Interface: TD-3097 Add Include Image check box above Maximum Image Width in Properties tab
-    - Web: TD-3097 Add Include Image check box above Maximum Image Width in Properties tab
+    - UI: TD-3101 Webonary values not saved in the ConfigurationTool
+    - UI: TD-3097 Add Include Image check box
     - Web: Added Contact link for Webonary.
     - Web: Edited Webonary topic.
-    - Web: Updates from Philip for MultilingualDictionary-1.3 and webonary-zeedisplay-1.2
+    - Web: Webonary updates
     - XeLaTeX: TD-3079 XeLaTeX export for Linux
     - XeLaTeX: Update for XeLaTeX TexLive 2012 installer build
   * Sprint 1.1.6.2485
@@ -1151,7 +1150,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Common Code: adjust files for 64-bit package.
     - Help: TD-2630 Added republishing statement.
     - Linux build: TD-3072 Pictures are not shown in EPub for Linux
-    - Linux build: TD-3075 Fix Linux test fails 
+    - Linux build: TD-3075 Linux test fails 
     - EBook: TD-2760 Section Head style missing
     - EBook: TD-2904(&amp;03) New spacing between words often is underlined
     - EBook: TD-2905 Book Title set as default not remembered
@@ -1164,14 +1163,14 @@ pathway (1.13.4-1) experimental; urgency=high
     - EBook: Picture missing on Linux
     - Stylesheet: TD-3048 crash exporting with custom style sheet.
     - UI: TD-3026 allow setting the Half Letter Page Size
-    - UI: Fix print preview error. 
+    - UI: print preview
     - Web: TD-3057 Upload failed but no error given
     - XeLaTeX: TD-1610 XeLaTex difference output with different styles.
     - XeLaTeX: TD-2057 margin-bottom on paragraph
     - XeLaTeX: Update TexLive Linux install process for Linux 32 &amp; 64 bit
   * 1.1.5.2445 sprint
     - CadreBible: TD-2911 Create the DBL bundle
-    - CadreBible: TD-3059 accomodate different between versions of USX export
+    - CadreBible: TD-3059 accommodate different between versions of USX export
     - CadreBible: TD-3063 use lower case lds extension
     - CadreBible: TD-3064 use upper case USX for folder name in bundle created
     - CadreBible: TD-3065 get title from ConfigurationTool for metadata
@@ -1185,7 +1184,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Common: TD-3060 Paratext Export crashes missing writing systems store
     - Common: TD-3061 Set direction for Language font when export from Paratext
     - Common: TD-3068 Crash on non American Windows?
-    - Common: Fix duplicate before and afte Fix crash on Null Reference
+    - Common: duplicate before and after on Null Reference
     - Common: If user hasn't enter the title, allow them to enter it.
     - Common: Reversal Indexes is not in Pathway output file.
     - Common: added 'Searchbar Popups' function
@@ -1206,7 +1205,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - LibreOffice: TD-3030 Edit Layout Button and Sample data layout pane
     - LibreOffice: TD-3051 Numbered sub-senses don't create the correct output
     - LibreOffice: TD-3058 LO 3.5 crashes on OneColumn export of Gondwana
-    - Paratext: TD-3042: Fix USX to XHTML mapping for footnote quotations
+    - Paratext: TD-3042: USX to XHTML mapping for footnote quotations
     - Paratext: Get Paratext Projects path from OS registry.
   * 1.1.4.2367 sprint
     - Go Bible will process each book separately and combine
@@ -1215,14 +1214,14 @@ pathway (1.13.4-1) experimental; urgency=high
     - Help: Simplifying lengthy topics.
     - Help: Use different help topics for each tab
     - Linux: TD-2990 ConfigurationTool crash on start up
-    - Linux: TD-2991 fix default export for Linux 12.04
-    - Linux: Performace fix
+    - Linux: TD-2991 default export for Linux 12.04
+    - Linux: Performace
     - Linux: Update Linux build instructions.
     - Linux: Simplify build by setting default to Daily
     - Linux: changes for Ubuntu 12.04 packaging
     - Linux: Update for 64-bit
-    - Linux: XMLResolver issue fixed.
-    - Linux: record Ubunutu build dependancies in control
+    - Linux: XMLResolver
+    - Linux: record Ubunutu build dependencies in control
     - Linux: remove dependency on /usr/bin/csharp
     - Open Office: TD-2908 keep line separator character
     - Open Office: TD-2956 paragraph spacing is not even
@@ -1238,9 +1237,9 @@ pathway (1.13.4-1) experimental; urgency=high
     - Open Office: TD-3012 Crash when letter headers are removed
     - Open Office: TD-3027 Reversal export takes too long.
     - Open Office: TD-3033 Enable removing of letter dividers
-    - Open Office: Fix picture Read-Err
+    - Open Office: picture Read-Err
     - Open Office: TD-3038 Gondwana sample export shows header in wrong font
-    - Open Office: PreserveSpace() HTML tag position fix
+    - Open Office: PreserveSpace() HTML tag position
     - Open Office: Updated include punctuation
     - Paratext: TD-2961 Integrate new Paratext support changes
     - Paratext: TD-3031 Support tilde as non-breaking space in Paratext Import.
@@ -1271,13 +1270,13 @@ pathway (1.13.4-1) experimental; urgency=high
     - Web: TD-3003 Crash on empty password
     - Web: TD-3005 setup_wp.php in wrong location
     - Web: TD-3008 enable in ExportThroughPathway when parameters were entered
-    - Web: TD-3009 When ftp://localhost is used as the address, files not transfered.
+    - Web: TD-3009 transfer files for local host
     - Web: TD-3011 Unable to load query to MySql database
     - Web: TD-3013 Handle minor-entry for mysql queries
     - Web: Install Lame mp3 converter folder on Windows
     - Web: Update build and install to include MySql third party tools.
     - Web: TD-3006 Only 3 of the audio files copy
-    - Web: TD-3007 Fix crash when user puts ftp folder name as "webonary"
+    - Web: TD-3007 ftp folder name as "webonary"
     - Web: Started adding topics
   * 1.1.2.2254 sprint
     - InDesign: TD-2984 Change Macro to format FrontMatter Elements
@@ -1299,7 +1298,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Common Code: TD-2646 out of memory
     - Common Code: TD-2841 Add Pre-process list
     - Common Code: TD-2868 Preprocessing Transformation check box
-    - Common Code: TD-2921 Fix error which Four style copies created
+    - Common Code: TD-2921 Four style copies created
     - Common Code: TD-2939 Update dates on copyrights and licenses
     - InDesign: TD-2847  InDesign - Front Matter
     - InDesign: TD-2860 InDesign: Implement Image in Cover page
@@ -1325,11 +1324,11 @@ pathway (1.13.4-1) experimental; urgency=high
     - Open Office Writer: TD-2866 remove doubled the brackets in reversal
     - Open Office Writer: TD-2872 Start Content on page 1
     - Open Office Writer: TD-2876 Front matter order and page type
-    - Open Office Writer: TD-2883 Fix header when page number on outside
+    - Open Office Writer: TD-2883 header when page number on outside
     - Open Office Writer: TD-2889 Page number bottom half missing
     - Open Office Writer: TD-2899 LibreOffice - Move punctuation to xhtml
     - Open Office Writer: TD-2912 headers contain first entry on page
-    - Open Office Writer: TD-2913 Fix rectangles in Paratext
+    - Open Office Writer: TD-2913 rectangles in Paratext
     - Open Office Writer: TD-2935 Cover to appear when checked by default
     - Open Office Writer: TD-2936 before styles still appear
     - Open Office Writer: TD-2937 Picture appears in the margin
@@ -1350,7 +1349,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - Smart Device: TD-2957 Gondwana epub export has formatting issues
     - User Interface: TD-2857 include preprocessing xslt files
     - User Interface: TD-2861 claify Preprocessing option Transformation
-    - User Interface: TD-2871 fix pre-process not applied/ separate Scrip
+    - User Interface: TD-2871 pre-process not applied/ separate Scrip
     - User Interface: TD-2873 Reset title when the project is changed
     - User Interface: TD-2874 Available option enabled for standard styles
     - User Interface: TD-2898 Pathway Installation Path Problem
@@ -1386,7 +1385,7 @@ pathway (1.13.4-1) experimental; urgency=high
   * 1.0.5.1894 release
     - Bootstrap: Documentation on installing from USB
     - Bootstrap: Install LibreOffice on Win7
-    - Bootstrap: fix XeLaTeX install (TD-2832)
+    - Bootstrap: XeLaTeX install (TD-2832)
     - Bootstrap: remove unrecognized message errors (TD-2832)
     - Bootstrap: updated LibreOffice version numbers. (TD-2833)
     - Bootstrap: warn user that install takes time (TD-2833)
@@ -1398,7 +1397,7 @@ pathway (1.13.4-1) experimental; urgency=high
     - XeLaTeX: front matter - Copyright Page (TD-2829)
   * 1.0.4.1875 release
     - Bootstrap: Add installer icon
-    - Bootstrap: Fix BTE test to work for XP as well as Win7
+    - Bootstrap: BTE test to work for XP as well as Win7
     - Bootstrap: use clean up and close up logic to remove temporary files
     - InDesign: Empty footnotes (TD-2817)
     - OpenOffice: guideword box (TD-2631)
@@ -1413,5 +1412,5 @@ pathway (1.13.4-1) experimental; urgency=high
     - UI: Size is not changed in preview on Custom Style sheet (TD-2803)
     - Xelatex: Export crash (TD-2820)
 
- -- Greg Trihus <greg_trihus@sil.org>  Thu, 2 Feb 2012 14:24:26 -0600
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 21 Jan 2016 07:50:26 -0600
 

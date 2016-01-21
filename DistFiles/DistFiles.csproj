@@ -322,7 +322,7 @@
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'$(OutputPath)Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
     <Copy SourceFiles="@(XeTexExe)" DestinationFiles="@(XeTexExe->'$(OutputPath)xetexExe\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
-    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'$(OutputPath)Paratexmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
+    <!-- Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'$(OutputPath)Paratexmf\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " / -->
     <Copy SourceFiles="@(InstallTex)" DestinationFiles="@(InstallTex->'$(OutputPath)%(Filename)%(Extension)')" Condition=" '$(OS)' == 'Linux' " />
   </Target>
   <Target Name="AfterBuild" />
