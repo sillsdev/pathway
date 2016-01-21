@@ -36,7 +36,7 @@ cd pathway-${RELEASE}
 if [ "$(dpkg --print-architecture)" == "amd64" ]; then
    debuild -eBUILD_NUMBER=${RELEASE} -ebinsrc=${PWD} -us -uc || exit 4
 else
-   debuild -eBUILD_NUMBER=${RELEASE} -ePlatform=x86 -ebinsrc=${PWD} -us -uc || exit 4
+   dpkg-buildpackage -eBUILD_NUMBER=${RELEASE} -ePlatform=x86 -ebinsrc=${PWD} -us -uc || exit 4
 fi
 cd ..
 
