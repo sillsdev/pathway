@@ -30,6 +30,11 @@ ln -fs pathway-${RELEASE}.tar.bz2 pathway_${RELEASE}.orig.tar.bz2
 
 # Do an initial unsigned source build in host OS environment
 cd pathway-${RELEASE}
-debuild -eBUILD_NUMBER=${RELEASE} -ebinsrc=${PWD} -us -uc || exit 4
+
+if [ "$(dpkg --print-architecture)" == "amd64" ]; then
+   debuild -eBUILD_NUMBER=${RELEASE} -ebinsrc=${PWD} -us -uc || exit 4
+else
+   debuild -eBUILD_NUMBER=${RELEASE} -ePlatform=x86 -ebinsrc=${PWD} -us -uc || exit 4
+fi
 cd ..
 
