@@ -3766,6 +3766,28 @@ namespace Test.OpenOfficeConvert
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
+		///<summary>
+		///Dictionary Tab Test
+		///</summary>      
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void DictionaryTabUnicodeTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "TabUnicode";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
         ///<summary>
         ///B1pe Full Scripture Test
         /// </summary>      

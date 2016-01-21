@@ -746,7 +746,7 @@ namespace SIL.PublishingSolution
         {
             if (content == null) return "";
             content = content.Replace("\r\n", "");
-            content = content.Replace("\t", "");
+			content = content.Replace("\t", "");
             Char[] charac = content.ToCharArray();
             StringBuilder builder = new StringBuilder();
             foreach (char var in charac)
@@ -1086,7 +1086,7 @@ namespace SIL.PublishingSolution
                         content.Replace(" ", "");
                     }
                 }
-
+				
                 content = SignificantSpace(content);
 
                 if (_isPreviousGlossary)
@@ -1134,6 +1134,7 @@ namespace SIL.PublishingSolution
                         content = content.Trim();
                     }
                 }
+				
 
                 if (_imageClass.Length > 0)
                 {
@@ -1153,6 +1154,11 @@ namespace SIL.PublishingSolution
                         content = content.Replace(@"text:line-break/", @"<text:line-break/>");
                         _writer.WriteRaw(content);
                     }
+					else if (content.Contains(@"text:tab/"))
+					{
+						content = content.Replace(@"text:tab/", @"<text:tab/>");
+						_writer.WriteRaw(content);
+					}
                     else
                     {
                         content = WriteTitleLogo(content);
@@ -1165,6 +1171,8 @@ namespace SIL.PublishingSolution
                         _pseudoSingleSpace = true;
                     }
                 }
+
+				
             }
         }
 
@@ -1315,7 +1323,7 @@ namespace SIL.PublishingSolution
                     WriteFootNoteMarker(footerClassName, footnoteStyle.ToString(), "");
                     return;
                 }
-
+				content = content.Replace(Common.ConvertUnicodeToString("\\0009"), @"text:tab/");
                 if (_isVerseNumberContent == false)
                 {
                     _writer.WriteStartElement("text:span");
