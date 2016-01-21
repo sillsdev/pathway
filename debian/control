@@ -5,8 +5,8 @@ Maintainer: Greg Trihus <greg_trihus@sil.org>
 Build-Depends: debhelper (>= 7), autotools-dev, cli-common, mono-gmcs, mono-xbuild, mono-dmcs, libmono-microsoft-csharp4.0-cil, libmono-microsoft-build-engine4.0-cil,
  libmono-microsoft-build-framework4.0-cil, libmono-microsoft-build-tasks-v4.0-4.0-cil,
  libmono-microsoft-build-utilities-v4.0-4.0-cil, libmono-microsoft-build2.0-cil,
- libmono-system-data2.0-cil, libmono-system-data4.0-cil,
- libmono-system-data-datasetextensions4.0-cil
+ libmono-system-data2.0-cil, libmono-system-data4.0-cil, libmono-system-data-linq2.0-cil,
+ libmono-system-data-linq4.0-cil, libmono-system-data-datasetextensions4.0-cil
 Standards-Version: 3.9.5
 Homepage: http://pathway.sil.org
 
