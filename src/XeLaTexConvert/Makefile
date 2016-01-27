@@ -2,7 +2,7 @@ ifndef prefix
 prefix=/usr
 endif
 ifndef binsrc
-binsrc=~/git/pathway/pathway/XeLaTexConvert
+binsrc=~/git/pathway/src/XeLaTexConvert
 endif
 ifndef bindst
 bindst=$(binsrc)/bin
@@ -18,10 +18,10 @@ BUILD_NUMBER=1.5.0.2445
 endif
 
 build:
-	xbuild /target:XeLaTexBeforeBuild /property:Configuration=PathwayXeLaTeX\;BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux\;OutputPath=. ../../Installer/Installer.csproj
+	cd ../../DistFiles;xbuild /verbosity:detailed /target:XeLaTexBeforeBuild /property:Configuration=PathwayXeLaTeX\;BUILD_NUMBER=$(BUILD_NUMBER)\;Platform='$(Platform)'\;OS=Linux\;OutputPath=. /flp:LogFile=log.txt
 	rm -r -f $(bindst)
 	mkdir $(bindst)
-	cp -r $(binsrc)/../../Installer/Files/pwtex/* $(bindst)
+	cp -r $(binsrc)/../../output/pwtex/* $(bindst)
 
 install:
 	mkdir -p $(DESTDIR)$(prefix)$(bininst)
@@ -36,10 +36,10 @@ binary:
 	exit 0
 
 tlsetup:
-	xbuild /t:TlGetInstaller\;TlInstall /property:OS=Linux\;OutputPath=. ../BuildPathwaySprint.csproj
+	cd ..;xbuild /t:TlGetInstaller\;TlInstall /property:OS=Linux\;OutputPath=. BuildPathwaySprint.csproj
 
 clean:
-	rm -rf bin ../pathway-xelatex* ../../Installer/Files ../*/bin ../*/obj debian/pathway-xelatex
+	rm -rf bin ../pathway-xelatex* ../../output/pwtex ../*/bin ../*/obj debian/pathway-xelatex
 
 uninstall:
 	-sudo apt-get -y purge pathway-xelatex
