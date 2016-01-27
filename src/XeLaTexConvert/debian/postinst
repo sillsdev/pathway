@@ -30,7 +30,9 @@ case "$1" in
 		mktexlsr
 		fmtutil --all
 	fi
-	if [ ! -z "$SUDO_USER" ]; then
+	echo "$SUDO_USER"
+	echo "$HOME"
+	if [ ! -z "$SUDO_USER" -a "$HOME" != "/root" ]; then
 		sudo -u $SUDO_USER bash ${prefix}/share/pwtex/pathwayXelatexRegistryKeys.sh
 	else
 		mkdir -p /etc/profile.d

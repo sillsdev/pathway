@@ -390,6 +390,7 @@
     <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'..\output\pwtex\bin\win32\%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
     <Copy SourceFiles="@(XeLaTexLinBin)" DestinationFiles="@(XeLaTexLinBin->'..\output\pwtex\bin\i386-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
     <Copy SourceFiles="@(XeLaTexLinBin64)" DestinationFiles="@(XeLaTexLinBin64->'..\output\pwtex\bin\x86_64-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Copy SourceFiles="@(XeLaTexUtil)" DestinationFiles="@(XeLaTexUtil->'..\output\pwtex\tlpkg\TeXLive\%(Filename)%(Extension)')" />
     <MakeDir Directories="..\output\pwtex\temp" />
     <Exec Command="echo This file is a place holder&gt;..\output\pwtex\temp\readme.txt" />
     <Delete Files="@(XeLaTexCache)" />
@@ -422,6 +423,7 @@
     <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tex" />
     <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\mk*" />
     <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\fmt*" />
+    <XeLaTexUtil Include="..\src\XeLaTexConvert\XeLaTexExe\tlpkg\TeXLive\*.pm" />
     <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\kpse*" />
     <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xdvipdf*" />
     <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xe*" />

@@ -31,7 +31,7 @@ install:
 	mkdir -p $(DESTDIR)$(prefix)/share/pwtex
 	chmod 777 $(DESTDIR)$(prefix)/share/pwtex
 	cp -r debian/pathwayXelatexRegistryKeys.sh $(DESTDIR)$(prefix)/share/pwtex/pathwayXelatexRegistryKeys.sh
-
+	python -c 'print "<values><value name=\"XeLaTexDir\" type=\"string\">/usr$(bininst)/</value><value name=\"XeLaTexVer\" type=\"string\">$(BUILD_NUMBER)</value></values>"' >$(DESTDIR)$(prefix)/share/pwtex/pathwayXelatexValues.xml
 binary:
 	exit 0
 
