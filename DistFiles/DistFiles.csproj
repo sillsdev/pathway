@@ -207,7 +207,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
-    <OutputPath>..\otuput\Release\</OutputPath>
+    <OutputPath>..\output\Release\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -382,23 +382,25 @@
     <UsfmConvert Include="..\lib\ParatextShared.dll;..\..\lib\NetLoc.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
-    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'Files\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'Files\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'Files\pwtex\bin\win32\%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
-    <Copy SourceFiles="@(XeLaTexLinBin)" DestinationFiles="@(XeLaTexLinBin->'Files\pwtex\bin\i386-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
-    <Copy SourceFiles="@(XeLaTexLinBin64)" DestinationFiles="@(XeLaTexLinBin64->'Files\pwtex\bin\x86_64-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
-    <MakeDir Directories="Files\pwtex\temp" />
-    <Exec Command="echo This file is a place holder&gt;Files\pwtex\temp\readme.txt" />
+    <Message Text="User entered BuildNumber: $(BUILD_NUMBER)" Importance="high" />
+    <Copy SourceFiles="@(XeLaTexTexmf)" DestinationFiles="@(XeLaTexTexmf->'..\output\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexConfig)" DestinationFiles="@(XeLaTexConfig->'..\output\pwtex\texmf-config\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexDist)" DestinationFiles="@(XeLaTexDist->'..\output\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexVar)" DestinationFiles="@(XeLaTexVar->'..\output\pwtex\texmf-var\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(XeLaTexBin)" DestinationFiles="@(XeLaTexBin->'..\output\pwtex\bin\win32\%(Filename)%(Extension)')" Condition="$(OS) != 'Linux'" />
+    <Copy SourceFiles="@(XeLaTexLinBin)" DestinationFiles="@(XeLaTexLinBin->'..\output\pwtex\bin\i386-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Copy SourceFiles="@(XeLaTexLinBin64)" DestinationFiles="@(XeLaTexLinBin64->'..\output\pwtex\bin\x86_64-linux\%(Filename)%(Extension)')" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Copy SourceFiles="@(XeLaTexUtil)" DestinationFiles="@(XeLaTexUtil->'..\output\pwtex\tlpkg\TeXLive\%(Filename)%(Extension)')" />
+    <MakeDir Directories="..\output\pwtex\temp" />
+    <Exec Command="echo This file is a place holder&gt;..\output\pwtex\temp\readme.txt" />
     <Delete Files="@(XeLaTexCache)" />
-    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'Files\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
-    <Exec Command="mktexlsr ..\..\texmf-dist" WorkingDirectory="Files\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
-    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/i386-linux; ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
-    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/i386-linux; ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
-    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/x86_64-linux; ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
-    <Exec Command="cd ..\XeLaTexConvert/XeLaTexExe/bin/x86_64-linux; ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Copy SourceFiles="@(Paratexmf)" DestinationFiles="@(Paratexmf->'..\output\pwtex\texmf-dist\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Exec Command="mktexlsr ..\..\texmf-var" WorkingDirectory="..\output\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
+    <Exec Command="mktexlsr ..\..\texmf-dist" WorkingDirectory="..\output\pwtex\bin\win32" Condition="$(OS) != 'Linux'" />
+    <Exec Command="cd ../src/XeLaTexConvert/XeLaTexExe/bin/i386-linux; ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Exec Command="cd ../src/XeLaTexConvert/XeLaTexExe/bin/i386-linux; ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) == 'x86'" />
+    <Exec Command="cd ../src/XeLaTexConvert/XeLaTexExe/bin/x86_64-linux; ./mktexlsr ..\..\texmf-var" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
+    <Exec Command="cd ../src/XeLaTexConvert/XeLaTexExe/bin/x86_64-linux; ./mktexlsr ..\..\texmf-dist" Condition="$(OS) == 'Linux' and $(Platform) != 'x86'" />
   </Target>
   <ItemGroup>
     <XeLaTexExe Include="..\src\XeLaTexConvert\XeLaTexExe\**\*.*" />
@@ -421,6 +423,7 @@
     <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\tex" />
     <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\mk*" />
     <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\fmt*" />
+    <XeLaTexUtil Include="..\src\XeLaTexConvert\XeLaTexExe\tlpkg\TeXLive\*.pm" />
     <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\kpse*" />
     <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xdvipdf*" />
     <XeLaTexLinBin64 Include="..\src\XeLaTexConvert\XeLaTexExe\bin\x86_64-linux\xe*" />

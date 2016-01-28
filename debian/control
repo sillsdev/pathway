@@ -2,13 +2,19 @@ Source: pathway
 Section: cli-mono
 Priority: extra
 Maintainer: Greg Trihus <greg_trihus@sil.org>
-Build-Depends: debhelper (>= 7), autotools-dev, cli-common, devscripts
+Build-Depends: debhelper (>= 7), autotools-dev, cli-common, mono-gmcs, mono-xbuild,
+ mono-dmcs, libmono-microsoft-csharp4.0-cil, libmono-corlib2.0-cil, libmono-corlib4.0-cil,
+ libmono-microsoft-build-engine4.0-cil,  libmono-microsoft-build-framework4.0-cil,
+ libmono-microsoft-build-tasks-v4.0-4.0-cil, 
+ libmono-microsoft-build-utilities-v4.0-4.0-cil, libmono-microsoft-build2.0-cil,
+ libmono-system-data2.0-cil, libmono-system-data4.0-cil, libmono-system-data-linq2.0-cil,
+ libmono-system-data-linq4.0-cil, libmono-system-data-datasetextensions4.0-cil
 Standards-Version: 3.9.5
 Homepage: http://pathway.sil.org
 
 Package: pathway
 Architecture: any
-Depends: default-jre-headless, mono-basic-sil, fonts-sil-charissil, libmono-system-core4.0-cil, libmono-system-xml-linq4.0-cil, libmono-winforms2.0-cil, lame, xchm, libsword-utils, nautilus
+Depends: default-jre-headless, mono-basic-sil, fonts-sil-charissil, libmono-system-core4.0-cil, libmono-system-xml-linq4.0-cil, libmono-system-windows-forms4.0-cil, libmono-winforms2.0-cil, lame, xchm, libsword-utils, nautilus
 Recommends: libreoffice-writer, prince, calibre, evince
 Description: Prepare dictionary and Scripture data in open
  document (odf), e-book (epub 2.0), portable document (pdf), TeX and
