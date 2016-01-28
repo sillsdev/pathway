@@ -13,6 +13,9 @@ mkdir ../pathway-${RELEASE}
 #cd ../pathway-${RELEASE}
 cp -r . ../pathway-${RELEASE}
 rm -rf ../pathway-${RELEASE}/.git
+rm -rf ../pathway-${RELEASE}/src/XeLaTexConvert/TexLive
+rm -rf ../pathway-${RELEASE}/src/XeLaTexConvert/XeLaTexExe
+rm -rf ../pathway-${RELEASE}/src/XeLaTexConvert/debian/pathway-xelatex
 cp lib/L10NSharp.* ../pathway-${RELEASE}/lib/.
 cp debian/changelog ../pathway-${RELEASE}/debian/.
 cp debian/control ../pathway-${RELEASE}/debian/control
@@ -25,6 +28,9 @@ cd ..
 find pathway-${RELEASE} -type f -iname "*.hhc" -delete
 #find pathway-${RELEASE} -type f -iname "*.dll" -delete
 find pathway-${RELEASE} -type f -iname "*.exe" -delete
+find pathway-${RELEASE} -type f -iname "pathway-xelatex*" -delete
+find pathway-1.13.4.4786 -type d -iname "bin" -exec rm -rf '{}' \;
+find pathway-1.13.4.4786 -type d -iname "obj" -exec rm -rf '{}' \;
 
 # Tar it up and create symlink for .orig.bz2
 tar jcf pathway-${RELEASE}.tar.bz2 pathway-${RELEASE} || exit 3
