@@ -284,7 +284,7 @@
     <Copy SourceFiles="..\lib\Devart.Data.xml" DestinationFiles="$(OutputPath)Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="..\lib\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="..\lib\Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\lib\sqlite3.dll" DestinationFiles="$(OutputPath)sqlite3.dll" Condition=" '$(Edition)' == 'BTE' " />
+    <Copy SourceFiles="..\lib\sqlite3.dll" DestinationFiles="$(OutputPath)sqlite3.dll" Condition=" '$(Edition)' == 'BTE' and $(OS) != 'Linux' " />
     <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
     <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'$(OutputPath)Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -316,7 +316,7 @@
     <Copy SourceFiles="@(PdfLicense)" DestinationFiles="@(PdfLicense->'$(OutputPath)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'$(OutputPath)TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'$(OutputPath)Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing' " />
+    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'$(OutputPath)Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing' and $(OS) != 'Linux'" />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'BTE' " />
