@@ -3267,7 +3267,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    tocStyle = "scrBook_scrBody";
+					tocStyle = "TitleMain_scrBook_scrBody";
                     if (IdAllClass.ContainsKey("scrBook") && IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
                         strOutlineLevel = IdAllClass["scrBook"]["-ps-outline-level"];
                     
