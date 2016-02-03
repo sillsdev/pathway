@@ -33,6 +33,9 @@ trap "rm -rf $TMPDIR" 0
 PKGDIR=$TMPDIR/package
 mkdir -p $PKGDIR
 
+# Bring git up to date
+git remote update -p
+
 # Export the source from git
 (cd "./$(git rev-parse --show-cdup)" && git archive ${BRANCH}) | tar -x -C $PKGDIR
 
