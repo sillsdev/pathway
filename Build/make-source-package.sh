@@ -34,7 +34,7 @@ PKGDIR=$TMPDIR/package
 mkdir -p $PKGDIR
 
 # Export the source from git
-git -C "./$(git rev-parse --show-cdup)" archive ${BRANCH} | tar -x -C $PKGDIR
+(cd "./$(git rev-parse --show-cdup)" && git archive ${BRANCH}) | tar -x -C $PKGDIR
 
 cd $PKGDIR
 
