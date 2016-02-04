@@ -1,6 +1,6 @@
 import sys,re
 from os.path import join, exists
-versionPattern = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+")
+versionPattern = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?")
 if len(sys.argv) < 2 or versionPattern.match(sys.argv[1]) == None:
     sys.stderr.write('Usage: updateChangeLog a.b.c.d\n\nwhere a.b.c.d represents a version number with four components')
     sys.exit(1)
