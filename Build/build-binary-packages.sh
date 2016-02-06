@@ -169,11 +169,6 @@ for DIST in $DISTROS; do
 
   for ARCH in amd64 i386; do
 
-    SUFFIX=$DIST
-    if [ $ARCH != amd64 ]; then
-      SUFFIX+=-$ARCH
-    fi
-
     # See if we need to build for this architecture
     if [ $ARCH = amd64 ]; then
       has-arch any || has-arch $ARCH || has-arch all || continue
@@ -181,18 +176,16 @@ for DIST in $DISTROS; do
       has-arch any || has-arch $ARCH || continue
     fi
 
-    # Ensure pbuilder-dist symlink for relevant release exists
-    if [ ! -L /usr/bin/pbuilder-$SUFFIX ]; then
-      echo "$0: Creating pbuilder-$SUFFIX symlink"
-      sudo ln -s pbuilder-dist /usr/bin/pbuilder-$SUFFIX
-    fi
-
     # Create pbuilder chroot if it doesn't already exist
-    [ -f ${PBUILDFOLDER}/$SUFFIX-base.tgz ] || pbuilder-$SUFFIX create
+    BUILDTYPE=$DIST
+    if [ $ARCH != $(dpkg --print-architecture) ]; then
+      BUILDTYPE+=-$ARCH
+    fi
+    [ -f $PBUILDFOLDER/$BUILDTYPE-base.tgz ] || pbuilder-dist $DIST $ARCH create
 
     # Update and clean pbuilder chroot, add extra packages so A05suffix hook works
-    pbuilder-$SUFFIX update --extrapackages "lsb-release devscripts"
-    pbuilder-$SUFFIX clean
+    pbuilder-dist $DIST $ARCH update --extrapackages "lsb-release devscripts"
+    pbuilder-dist $DIST $ARCH clean
 
     # Build in pbuilder
     if [ $ARCH = amd64 ]; then
@@ -202,12 +195,12 @@ for DIST in $DISTROS; do
       # Don't build arch-independent packages - that's done with the default arch
       BUILDOPTS="--binary-arch"
     fi
-    pbuilder-$SUFFIX build $BUILDOPTS "$SRCPKG"
+    pbuilder-dist $DIST $ARCH build $BUILDOPTS "$SRCPKG"
   done
 
   # Move the resulting .deb files to a results folder under the current directory
   mkdir -p debs/$DIST
-  dcmd mv $PBUILDFOLDER/${DIST}_result/"${PKGNAME}_${PKGVERSION}"*.{build,changes} debs/$DIST/
+  dcmd mv -f $PBUILDFOLDER/${DIST}_result/"${PKGNAME}_${PKGVERSION}"*.{build,changes} debs/$DIST/
 done
 
 dcmd ls -l debs/*/"${PKGNAME}_${PKGVERSION}"*.{build,changes}
