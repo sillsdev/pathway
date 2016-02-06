@@ -2,7 +2,7 @@ Source: pathway
 Section: cli-mono
 Priority: extra
 Maintainer: Greg Trihus <greg_trihus@sil.org>
-Build-Depends: debhelper (>= 7), autotools-dev, devscripts, cli-common-dev (>=0.8~),
+Build-Depends: debhelper (>= 9), autotools-dev, devscripts, cli-common-dev (>=0.8~),
  libasound2, libsndfile1
 Standards-Version: 3.9.6
 Homepage: http://pathway.sil.org
