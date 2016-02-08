@@ -167,6 +167,38 @@ namespace Test.PsTool
             TextFileAssert.AreEqual(expected, output, fileName + " in xhtml ");
         }
 
+		/// <summary>
+		///    
+		/// </summary>
+		[Test]
+		public void RemovePreserveSpaceForPrincePdf()
+		{
+			const string fileName = "RemovePreserveSpaceForPrincePdf.xhtml";
+			var input = GetFileNameWithPath(fileName);
+			var output = GetFileNameWithOutputPath(fileName);
+			CopyToOutput(input, output);
+			preExportProcess = new PreExportProcess();
+			preExportProcess.HandleNewFieldworksChangeInXhtml(output);
+			string expected = GetFileNameWithExpectedPath(fileName);
+			TextFileAssert.AreEqual(expected, output, fileName + " in xhtml ");
+		}
+
+		/// <summary>
+		///    
+		/// </summary>
+		[Test]
+		public void InsertDisplayInlinePictureForPrincePdf()
+		{
+			const string fileName = "InsertDisplayInlinePictureForPrincePdf.css";
+			var input = GetFileNameWithPath(fileName);
+			var output = GetFileNameWithOutputPath(fileName);
+			CopyToOutput(input, output);
+			preExportProcess = new PreExportProcess();
+			preExportProcess.HandleNewFieldworksChangeInCss(output);
+			string expected = GetFileNameWithExpectedPath(fileName);
+			TextFileAssert.AreEqual(expected, output, fileName + " in CSS ");
+		}
+
 
         #region private Methods
         private static string GetPath(string place, string filename)

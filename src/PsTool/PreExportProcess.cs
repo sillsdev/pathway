@@ -1524,7 +1524,56 @@ namespace SIL.Tool
             xdoc.Save(ProcessedXhtml);
         }
 
-        public void GetTempFolderPath()
+		/// <summary>
+		/// Remove xml:space in XHTML for Pdf using Prince
+		/// </summary>
+		public void HandleNewFieldworksChangeInXhtml(string xhtmlFileName)
+	    {
+			var xdoc = Common.DeclareXMLDocument(true);
+			var namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			xdoc.Load(xhtmlFileName);
+			// Remove attribute "xml:space" in the XHTML file.
+			const string xPath = "//xhtml:span[@xml:space='preserve']";
+			XmlNodeList spaceNodeList = xdoc.SelectNodes(xPath, namespaceManager);
+			if (spaceNodeList == null) return;
+			foreach (XmlNode spaceNode in spaceNodeList)
+			{
+				if (spaceNode.Attributes != null && (spaceNode.Attributes["xml:space"] != null))
+					spaceNode.Attributes.Remove(spaceNode.Attributes["xml:space"]);
+			}
+			xdoc.Save(xhtmlFileName);
+	    }
+
+		/// <summary>
+		/// Insert property for pictures to avoid overlapping
+		/// </summary>
+		/// <param name="cssFileName"></param>
+		public void HandleNewFieldworksChangeInCss(string cssFileName)
+	    {
+			TextWriter tw = new StreamWriter(cssFileName, true);
+			//Picture Property
+			tw.WriteLine(".pictureRight {");
+			tw.WriteLine("display: inline;");
+			tw.WriteLine("}");
+
+			tw.WriteLine(".pictureLeft {");
+			tw.WriteLine("display: inline;");
+			tw.WriteLine("}");
+
+			tw.WriteLine(".pictureCenter {");
+			tw.WriteLine("display: inline;");
+			tw.WriteLine("}");
+
+			tw.WriteLine(".picturePage {");
+			tw.WriteLine("display: inline;");
+			tw.WriteLine("}");
+
+			tw.Close();
+	    }
+
+
+	    public void GetTempFolderPath()
         {
             if (Directory.Exists(tempFolder))
             {
