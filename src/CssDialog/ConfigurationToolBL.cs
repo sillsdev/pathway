@@ -194,11 +194,7 @@ namespace SIL.PublishingSolution
 			if (!Common.Testing)
 			{
 				Common.SetupLocalization();
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Name", "Name", "", "", "");
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Description", "Description", "", "", "");
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Comment", "Comment", "", "", "");
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Type", "Type", "", "", "");
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Shown", "Shown", "", "", "");
+				InitializeGridColumnHeader();
 			}
 		}
 
@@ -664,6 +660,19 @@ namespace SIL.PublishingSolution
 		#endregion
 
 		#region Methods
+
+		private static void InitializeGridColumnHeader()
+		{
+			if (Common.L10NMngr != null)
+			{
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Name", "Name", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Description", "Description", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Comment", "Comment", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Type", "Type", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Shown", "Shown", "", "", "");
+			}
+		}
+
 		public void SetClassReference(ConfigurationTool configTool)
 		{
 			cTool = configTool;
