@@ -998,7 +998,9 @@ namespace SIL.PublishingSolution
                                     {
                                         _firstPageContentNone.Add(i); // avoiding first page content:normal or none.
                                     }
-                                    continue;
+									//When Running Header is none, we should update _pageHeaderFooter as none for left and right pages
+									if (pageName != "@page:left" && pageName != "@page:right")
+										continue;
                                 }
                                 _pageHeaderFooter[i + headerFooterIndex][para.Key] = writingString;
                             }
