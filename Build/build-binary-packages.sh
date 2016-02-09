@@ -31,6 +31,7 @@ then
     sudo apt-get install -y --no-install-recommends $DEVTOOLS
 fi
 
+rm -f ~/.pbuilderrc
 # Install ~/.pbuilderrc unless there already is one
 [ -f ~/.pbuilderrc ] || cat >~/.pbuilderrc <<"EOF"
 # Codenames for Debian suites according to their alias.
@@ -202,6 +203,8 @@ for DIST in $DISTROS; do
     fi
     pbuilder-dist $DIST $ARCH build $BUILDOPTS "$SRCPKG"
   done
+
+  ls -lR $PBUILDFOLDER/${DIST}_result
 
   # Move the resulting .deb files to a results folder under the current directory
   mkdir -p debs/$DIST
