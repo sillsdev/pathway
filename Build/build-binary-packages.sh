@@ -170,6 +170,8 @@ PKGARCHES=$(sed -n "/^Architecture: /s///p" "$SRCPKG")
 
 has-arch() { grep -qw "$1" <<<"$PKGARCHES"; }
 
+FAILURES=0
+
 for DIST in $DISTROS; do
   export DIST	# $DIST is used in .pbuilderrc
 
@@ -201,7 +203,7 @@ for DIST in $DISTROS; do
       # Don't build arch-independent packages - that's done with the default arch
       BUILDOPTS="--binary-arch"
     fi
-    pbuilder-dist $DIST $ARCH build $BUILDOPTS "$SRCPKG"
+    pbuilder-dist $DIST $ARCH build $BUILDOPTS "$SRCPKG" || : $((FAILURES += 1))
   done
 
   ls -lR $PBUILDFOLDER/${DIST}_result
@@ -213,4 +215,6 @@ done
 
 dcmd ls -l debs/*/"${PKGNAME}_${PKGVERSION}"*.{build,changes}
 
-echo "$0: Completed"
+echo "$0: Completed with $FAILURES failures"
+
+exit $FAILURES
