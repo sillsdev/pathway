@@ -38,6 +38,7 @@ git remote update -p
 
 # Export the source from git
 (cd "./$(git rev-parse --show-cdup)" && git archive ${BRANCH}) | tar -x -C $PKGDIR
+(cd "./$(git rev-parse --show-cdup)" && git diff) | (cd $PKGDIR && git apply)
 
 cd $PKGDIR
 
