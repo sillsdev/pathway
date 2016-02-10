@@ -120,10 +120,6 @@ APTCACHE=~/pbuilder/"${NAME}_aptcache/"
 APTCACHEHARDLINK=no
 BINDMOUNTS=$BUILDRESULT # To allow results to be saved
 
-PKGNAME_LOGFILE=yes
-PKGNAME_LOGFILE_EXTENTION=_$ARCH.build # Pre-0.216 (xenial)
-PKGNAME_LOGFILE_EXTENSION=_$ARCH.build
-
 ## Use local packages from ~/pbuilder/deps
 #DEPDIR=~/pbuilder/deps
 #OTHERMIRROR="deb file://"$DEPDIR" ./"
@@ -210,10 +206,11 @@ for DIST in $DISTROS; do
 
   # Move the resulting .deb files to a results folder under the current directory
   mkdir -p debs/$DIST
-  dcmd mv -f $PBUILDFOLDER/${DIST}_result/"${PKGNAME}_${PKGVERSION}"*.{build,changes} debs/$DIST/
+  mv -f $PBUILDFOLDER/${DIST}_result/last_operation.log debs/$DIST/
+  dcmd mv -f $PBUILDFOLDER/${DIST}_result/"${PKGNAME}_${PKGVERSION}"*.changes debs/$DIST/ || true
 done
 
-dcmd ls -l debs/*/"${PKGNAME}_${PKGVERSION}"*.{build,changes}
+dcmd ls -l debs/*/"${PKGNAME}_${PKGVERSION}"*.changes
 
 echo "$0: Completed with $FAILURES failures"
 
