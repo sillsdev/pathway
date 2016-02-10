@@ -118,6 +118,10 @@ BUILDPLACE=~/pbuilder/build/
 APTCACHE=~/pbuilder/"${NAME}_aptcache/"
 APTCACHEHARDLINK=no
 
+PKGNAME_LOGFILE=yes
+PKGNAME_LOGFILE_EXTENTION=_$ARCH.build # Pre-0.216 (xenial)
+PKGNAME_LOGFILE_EXTENSION=_$ARCH.build
+
 ## Use local packages from ~/pbuilder/deps
 #DEPDIR=~/pbuilder/deps
 #OTHERMIRROR="deb file://"$DEPDIR" ./"
