@@ -117,6 +117,7 @@ BUILDRESULT=~/pbuilder/"${NAME}_result/"
 BUILDPLACE=~/pbuilder/build/
 APTCACHE=~/pbuilder/"${NAME}_aptcache/"
 APTCACHEHARDLINK=no
+BINDMOUNTS=$BUILDRESULT # To allow results to be saved
 
 PKGNAME_LOGFILE=yes
 PKGNAME_LOGFILE_EXTENTION=_$ARCH.build # Pre-0.216 (xenial)
