@@ -580,7 +580,6 @@ namespace SIL.PublishingSolution
             preProcessor.MoveBookcodeFRTtoFront(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.GetfigureNode();
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
-            preProcessor.InsertBookPageBreak();
             preProcessor.ArrangeImages();
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 
@@ -609,6 +608,7 @@ namespace SIL.PublishingSolution
 
 
             _refFormat = Common.GetReferenceFormat(idAllClass, _refFormat);
+			preProcessor.InsertBookPageBreak(_refFormat);
             IncludeTextinMacro(strMacroPath, _refFormat, macroFileName, projInfo.IsExtraProcessing, isCoverImageInserted, isToc);
 
             // BEGIN Generate Meta.Xml File

@@ -3181,10 +3181,16 @@ namespace SIL.Tool
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
         }
 
-        public void InsertBookPageBreak()
+		public void InsertBookPageBreak(string _refFormat)
         {
             if (_projInfo.ProjectInputType.ToLower() != "scripture")
             { return; }
+
+			var strBookType = string.Empty;
+			if (_refFormat.ToLower().IndexOf("gen 1") == 0)
+				strBookType = "scrBookCode";
+			else
+				strBookType = "scrBookName";
 
             if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
@@ -3206,9 +3212,8 @@ namespace SIL.Tool
                     bookLists[i].InsertBefore(divNode, bookLists[i].FirstChild);
 
                     XmlNode getBookName = bookLists[i].ParentNode;
-                    XmlNodeList bookNodeList = getBookName.SelectNodes("//span[@class='scrBookName']", namespaceManager);
+                    XmlNodeList bookNodeList = getBookName.SelectNodes("//span[@class='" + strBookType + "']", namespaceManager);
                     bookName = bookNodeList.Item(i).InnerText;
-
 
                     XmlNode divReferenceNode = xDoc.CreateElement("div");
                     XmlAttribute xmlReferenceAttribute = xDoc.CreateAttribute("class");
