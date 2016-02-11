@@ -3919,6 +3919,10 @@ namespace SIL.PublishingSolution
 					{
 						string enText = value;
 						value = LocalizeItems.LocalizeItem("Page Number", value);
+						if (GetDdlRunningHead().ToLower() == "mirrored" && enText.ToLower() == "top outside margin")
+						{
+							continue;
+						}
 						cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
 
 						if (enText.ToLower() == "none")
@@ -3929,7 +3933,9 @@ namespace SIL.PublishingSolution
 					}
 				}
 			}
-			cTool.DdlPageNumber.SelectedIndex = 0;
+			if (cTool.DdlPageNumber.Items.Count > 0)
+				cTool.DdlPageNumber.SelectedIndex = 0;
+
 			xPath = "//features/feature[@name='Reference Format']/option[@type='" + pageType + "' or @type= 'Both']";
 			pageNumList = Param.GetItems(xPath);
 			foreach (XmlNode node in pageNumList)
