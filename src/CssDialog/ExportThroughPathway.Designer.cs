@@ -82,7 +82,6 @@ namespace SIL.PublishingSolution
 			this.chkGrammarSketch = new System.Windows.Forms.CheckBox();
 			this.chkOOReduceStyleNames = new System.Windows.Forms.CheckBox();
 			this.tpHyphenation = new System.Windows.Forms.TabPage();
-			this.btnHelpHyphenation = new System.Windows.Forms.Button();
 			this.chkHyphen = new System.Windows.Forms.CheckBox();
 			this.gbHyphnSettings = new System.Windows.Forms.GroupBox();
 			this.clbHyphenlang = new System.Windows.Forms.CheckedListBox();
@@ -94,6 +93,7 @@ namespace SIL.PublishingSolution
 			this.ddlLayout = new System.Windows.Forms.ComboBox();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.btnHelpHyphenation = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -276,7 +276,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblRights, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblRights, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblRights, "ExportThroughPathway.lblRights");
-			this.lblRights.Location = new System.Drawing.Point(-3, 151);
+			this.lblRights.Location = new System.Drawing.Point(0, 159);
 			this.lblRights.Name = "lblRights";
 			this.lblRights.Size = new System.Drawing.Size(129, 34);
 			this.lblRights.TabIndex = 14;
@@ -310,24 +310,22 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblDescription, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblDescription, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblDescription, "ExportThroughPathway.lblDescription");
-			this.lblDescription.Location = new System.Drawing.Point(9, 59);
+			this.lblDescription.Location = new System.Drawing.Point(15, 59);
 			this.lblDescription.Name = "lblDescription";
-			this.lblDescription.Size = new System.Drawing.Size(114, 20);
+			this.lblDescription.Size = new System.Drawing.Size(114, 14);
 			this.lblDescription.TabIndex = 8;
 			this.lblDescription.Text = "Description";
 			this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// lblCreator
 			// 
-			this.lblCreator.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblCreator, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblCreator, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblCreator, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblCreator, "ExportThroughPathway.lblCreator");
-			this.lblCreator.Location = new System.Drawing.Point(12, 107);
-			this.lblCreator.Margin = new System.Windows.Forms.Padding(3);
+			this.lblCreator.Location = new System.Drawing.Point(18, 110);
 			this.lblCreator.Name = "lblCreator";
-			this.lblCreator.Size = new System.Drawing.Size(111, 20);
+			this.lblCreator.Size = new System.Drawing.Size(111, 12);
 			this.lblCreator.TabIndex = 10;
 			this.lblCreator.Text = "Creator";
 			this.lblCreator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -351,7 +349,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblPublisher, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblPublisher, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblPublisher, "ExportThroughPathway.lblPublisher");
-			this.lblPublisher.Location = new System.Drawing.Point(13, 135);
+			this.lblPublisher.Location = new System.Drawing.Point(18, 138);
 			this.lblPublisher.Name = "lblPublisher";
 			this.lblPublisher.Size = new System.Drawing.Size(111, 15);
 			this.lblPublisher.TabIndex = 12;
@@ -364,7 +362,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblBookTitle, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblBookTitle, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblBookTitle, "ExportThroughPathway.lblBookTitle");
-			this.lblBookTitle.Location = new System.Drawing.Point(9, 31);
+			this.lblBookTitle.Location = new System.Drawing.Point(15, 31);
 			this.lblBookTitle.Name = "lblBookTitle";
 			this.lblBookTitle.Size = new System.Drawing.Size(114, 20);
 			this.lblBookTitle.TabIndex = 6;
@@ -833,22 +831,6 @@ namespace SIL.PublishingSolution
 			this.tpHyphenation.Text = "Hyphenation";
 			this.tpHyphenation.UseVisualStyleBackColor = true;
 			// 
-			// btnHelpHyphenation
-			// 
-			this.btnHelpHyphenation.AccessibleName = "Preview";
-			this.btnHelpHyphenation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.btnHelpHyphenation.Image = global::SIL.PublishingSolution.Properties.Resources.Help_Image;
-			this.l10NSharpExtender1.SetLocalizableToolTip(this.btnHelpHyphenation, null);
-			this.l10NSharpExtender1.SetLocalizationComment(this.btnHelpHyphenation, null);
-			this.l10NSharpExtender1.SetLocalizationPriority(this.btnHelpHyphenation, L10NSharp.LocalizationPriority.High);
-			this.l10NSharpExtender1.SetLocalizingId(this.btnHelpHyphenation, "ExportThroughPathway.btnHelpShow");
-			this.btnHelpHyphenation.Location = new System.Drawing.Point(336, 5);
-			this.btnHelpHyphenation.Name = "btnHelpHyphenation";
-			this.btnHelpHyphenation.Size = new System.Drawing.Size(24, 24);
-			this.btnHelpHyphenation.TabIndex = 13;
-			this.btnHelpHyphenation.UseVisualStyleBackColor = true;
-			this.btnHelpHyphenation.Click += new System.EventHandler(this.btnHelpHyphenation_Click);
-			// 
 			// chkHyphen
 			// 
 			this.chkHyphen.AutoSize = true;
@@ -925,7 +907,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.btnHelpShow, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.btnHelpShow, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.btnHelpShow, "ExportThroughPathway.btnHelpShow");
-			this.btnHelpShow.Location = new System.Drawing.Point(278, 3);
+			this.btnHelpShow.Location = new System.Drawing.Point(279, 3);
 			this.btnHelpShow.Name = "btnHelpShow";
 			this.btnHelpShow.Size = new System.Drawing.Size(24, 24);
 			this.btnHelpShow.TabIndex = 12;
@@ -941,7 +923,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.BtnBrwsLayout, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.BtnBrwsLayout, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.BtnBrwsLayout, "ExportThroughPathway.BtnBrwsLayout");
-			this.BtnBrwsLayout.Location = new System.Drawing.Point(278, 33);
+			this.BtnBrwsLayout.Location = new System.Drawing.Point(279, 33);
 			this.BtnBrwsLayout.Name = "BtnBrwsLayout";
 			this.BtnBrwsLayout.Size = new System.Drawing.Size(24, 24);
 			this.BtnBrwsLayout.TabIndex = 4;
@@ -974,7 +956,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.ddlStyle, "ExportThroughPathway.ExportThroughPathway.ddlStyle");
 			this.ddlStyle.Location = new System.Drawing.Point(97, 33);
 			this.ddlStyle.Name = "ddlStyle";
-			this.ddlStyle.Size = new System.Drawing.Size(175, 21);
+			this.ddlStyle.Size = new System.Drawing.Size(176, 21);
 			this.ddlStyle.TabIndex = 3;
 			this.ddlStyle.SelectedIndexChanged += new System.EventHandler(this.ddlStyle_SelectedIndexChanged);
 			// 
@@ -987,7 +969,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.ddlLayout, "ExportThroughPathway.ExportThroughPathway.ddlLayout");
 			this.ddlLayout.Location = new System.Drawing.Point(97, 3);
 			this.ddlLayout.Name = "ddlLayout";
-			this.ddlLayout.Size = new System.Drawing.Size(175, 21);
+			this.ddlLayout.Size = new System.Drawing.Size(176, 21);
 			this.ddlLayout.TabIndex = 1;
 			this.ddlLayout.SelectedIndexChanged += new System.EventHandler(this.ddlLayout_SelectedIndexChanged);
 			// 
@@ -1009,7 +991,7 @@ namespace SIL.PublishingSolution
 			this.tableLayoutPanel1.ColumnCount = 3;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.28571F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.71429F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 46F));
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.BtnBrwsLayout, 2, 1);
 			this.tableLayoutPanel1.Controls.Add(this.btnHelpShow, 2, 0);
@@ -1023,6 +1005,22 @@ namespace SIL.PublishingSolution
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(323, 60);
 			this.tableLayoutPanel1.TabIndex = 13;
+			// 
+			// btnHelpHyphenation
+			// 
+			this.btnHelpHyphenation.AccessibleName = "Preview";
+			this.btnHelpHyphenation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.btnHelpHyphenation.Image = global::SIL.PublishingSolution.Properties.Resources.Help_Image;
+			this.l10NSharpExtender1.SetLocalizableToolTip(this.btnHelpHyphenation, null);
+			this.l10NSharpExtender1.SetLocalizationComment(this.btnHelpHyphenation, null);
+			this.l10NSharpExtender1.SetLocalizationPriority(this.btnHelpHyphenation, L10NSharp.LocalizationPriority.High);
+			this.l10NSharpExtender1.SetLocalizingId(this.btnHelpHyphenation, "ExportThroughPathway.btnHelpShow");
+			this.btnHelpHyphenation.Location = new System.Drawing.Point(336, 5);
+			this.btnHelpHyphenation.Name = "btnHelpHyphenation";
+			this.btnHelpHyphenation.Size = new System.Drawing.Size(24, 24);
+			this.btnHelpHyphenation.TabIndex = 13;
+			this.btnHelpHyphenation.UseVisualStyleBackColor = true;
+			this.btnHelpHyphenation.Click += new System.EventHandler(this.btnHelpHyphenation_Click);
 			// 
 			// ExportThroughPathway
 			// 
