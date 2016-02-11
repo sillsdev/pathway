@@ -340,7 +340,7 @@ namespace SIL.PublishingSolution
 			this.stylesGrid.RowHeadersVisible = false;
 			this.stylesGrid.RowTemplate.Height = 24;
 			this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.stylesGrid.Size = new System.Drawing.Size(464, 693);
+			this.stylesGrid.Size = new System.Drawing.Size(416, 525);
 			this.stylesGrid.TabIndex = 0;
 			this.stylesGrid.TabStop = false;
 			this.stylesGrid.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.stylesGrid_ColumnWidthChanged);
@@ -367,7 +367,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.toolStripMain, "ConfigurationTool.toolStripMain");
 			this.toolStripMain.Location = new System.Drawing.Point(0, 0);
 			this.toolStripMain.Name = "toolStripMain";
-			this.toolStripMain.Size = new System.Drawing.Size(925, 52);
+			this.toolStripMain.Size = new System.Drawing.Size(876, 52);
 			this.toolStripMain.TabIndex = 0;
 			this.toolStripMain.Text = "New";
 			this.toolStripMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripMain_ItemClicked);
@@ -596,10 +596,9 @@ namespace SIL.PublishingSolution
 			this.tabControl1.Controls.Add(this.tabPicture);
 			this.tabControl1.HotTrack = true;
 			this.tabControl1.Location = new System.Drawing.Point(0, 0);
-			this.tabControl1.MinimumSize = new System.Drawing.Size(350, 0);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(350, 626);
+			this.tabControl1.Size = new System.Drawing.Size(345, 475);
 			this.tabControl1.TabIndex = 0;
 			this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
 			// 
@@ -616,7 +615,7 @@ namespace SIL.PublishingSolution
 			this.tabInfo.Location = new System.Drawing.Point(4, 22);
 			this.tabInfo.Name = "tabInfo";
 			this.tabInfo.Padding = new System.Windows.Forms.Padding(3);
-			this.tabInfo.Size = new System.Drawing.Size(342, 600);
+			this.tabInfo.Size = new System.Drawing.Size(337, 449);
 			this.tabInfo.TabIndex = 0;
 			this.tabInfo.Text = "Info";
 			this.tabInfo.UseVisualStyleBackColor = true;
@@ -829,7 +828,7 @@ namespace SIL.PublishingSolution
 			this.btnApproved.Location = new System.Drawing.Point(232, 345);
 			this.btnApproved.Margin = new System.Windows.Forms.Padding(2);
 			this.btnApproved.Name = "btnApproved";
-			this.btnApproved.Size = new System.Drawing.Size(92, 25);
+			this.btnApproved.Size = new System.Drawing.Size(65, 25);
 			this.btnApproved.TabIndex = 6;
 			this.btnApproved.Text = "...";
 			this.btnApproved.UseVisualStyleBackColor = true;
@@ -845,7 +844,7 @@ namespace SIL.PublishingSolution
 			this.tabDisplay.Location = new System.Drawing.Point(4, 22);
 			this.tabDisplay.Name = "tabDisplay";
 			this.tabDisplay.Padding = new System.Windows.Forms.Padding(3);
-			this.tabDisplay.Size = new System.Drawing.Size(337, 600);
+			this.tabDisplay.Size = new System.Drawing.Size(337, 449);
 			this.tabDisplay.TabIndex = 1;
 			this.tabDisplay.Text = "Properties";
 			this.tabDisplay.UseVisualStyleBackColor = true;
@@ -3061,7 +3060,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.tabPicture, "ConfigurationTool.tabPicture");
 			this.tabPicture.Location = new System.Drawing.Point(4, 22);
 			this.tabPicture.Name = "tabPicture";
-			this.tabPicture.Size = new System.Drawing.Size(337, 449);
+			this.tabPicture.Size = new System.Drawing.Size(309, 449);
 			this.tabPicture.TabIndex = 5;
 			this.tabPicture.Text = "Pictures";
 			this.tabPicture.UseVisualStyleBackColor = true;
@@ -3244,7 +3243,7 @@ namespace SIL.PublishingSolution
 			this.label2.Location = new System.Drawing.Point(94, 1);
 			this.label2.Margin = new System.Windows.Forms.Padding(0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(473, 23);
+			this.label2.Size = new System.Drawing.Size(425, 23);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Stylesheets";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3257,7 +3256,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblInfoCaption, "ConfigurationTool.lblInfoCaption");
-			this.lblInfoCaption.Location = new System.Drawing.Point(568, 1);
+			this.lblInfoCaption.Location = new System.Drawing.Point(520, 1);
 			this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
 			this.lblInfoCaption.Name = "lblInfoCaption";
 			this.lblInfoCaption.Size = new System.Drawing.Size(341, 23);
@@ -3286,7 +3285,7 @@ namespace SIL.PublishingSolution
 			this.TLPanelOuter.ColumnCount = 3;
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 356F));
+			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
 			this.TLPanelOuter.Controls.Add(this.label2, 1, 0);
 			this.TLPanelOuter.Controls.Add(this.TLPanel1, 0, 1);
 			this.TLPanelOuter.Controls.Add(this.lblInfoCaption, 2, 0);
@@ -3296,12 +3295,11 @@ namespace SIL.PublishingSolution
 			this.TLPanelOuter.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TLPanelOuter.Location = new System.Drawing.Point(0, 52);
 			this.TLPanelOuter.Margin = new System.Windows.Forms.Padding(1);
-			this.TLPanelOuter.MinimumSize = new System.Drawing.Size(350, 0);
 			this.TLPanelOuter.Name = "TLPanelOuter";
 			this.TLPanelOuter.RowCount = 2;
 			this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLPanelOuter.Size = new System.Drawing.Size(925, 725);
+			this.TLPanelOuter.Size = new System.Drawing.Size(876, 557);
 			this.TLPanelOuter.TabIndex = 19;
 			// 
 			// TLPanel1
@@ -3464,7 +3462,7 @@ namespace SIL.PublishingSolution
 			this.TLPanel2.RowCount = 1;
 			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 525F));
-			this.TLPanel2.Size = new System.Drawing.Size(467, 693);
+			this.TLPanel2.Size = new System.Drawing.Size(419, 525);
 			this.TLPanel2.TabIndex = 4;
 			// 
 			// TLPanel3
@@ -3476,14 +3474,14 @@ namespace SIL.PublishingSolution
 			this.TLPanel3.Controls.Add(this.panel3, 0, 1);
 			this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
 			this.TLPanel3.Dock = System.Windows.Forms.DockStyle.Left;
-			this.TLPanel3.Location = new System.Drawing.Point(571, 28);
+			this.TLPanel3.Location = new System.Drawing.Point(523, 28);
 			this.TLPanel3.MinimumSize = new System.Drawing.Size(331, 0);
 			this.TLPanel3.Name = "TLPanel3";
 			this.TLPanel3.RowCount = 2;
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLPanel3.Size = new System.Drawing.Size(349, 693);
+			this.TLPanel3.Size = new System.Drawing.Size(349, 525);
 			this.TLPanel3.TabIndex = 5;
 			// 
 			// panel3
@@ -3493,7 +3491,7 @@ namespace SIL.PublishingSolution
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
 			this.panel3.Location = new System.Drawing.Point(3, 44);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(322, 629);
+			this.panel3.Size = new System.Drawing.Size(322, 478);
 			this.panel3.TabIndex = 20;
 			// 
 			// lblType
@@ -3517,9 +3515,9 @@ namespace SIL.PublishingSolution
 			this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 755);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 587);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(925, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(876, 22);
 			this.statusStrip1.TabIndex = 20;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -3541,7 +3539,7 @@ namespace SIL.PublishingSolution
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(925, 777);
+			this.ClientSize = new System.Drawing.Size(876, 609);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.TLPanelOuter);
 			this.Controls.Add(this.toolStripMain);
