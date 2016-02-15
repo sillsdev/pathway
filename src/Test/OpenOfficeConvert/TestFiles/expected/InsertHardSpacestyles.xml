@@ -1069,7 +1069,11 @@
         </text:p>
       </style:header>
       <style:footer>
-        <text:p text:style-name="Footer" />
+        <text:p text:style-name="Footer">
+          <text:span text:style-name="MT3">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
+        </text:p>
       </style:footer>
     </style:master-page>
     <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page">

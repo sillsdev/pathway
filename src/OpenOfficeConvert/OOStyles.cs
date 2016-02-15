@@ -1929,14 +1929,13 @@ namespace SIL.PublishingSolution
                     else if (_pageHeaderFooter[i]["content"].IndexOf("counter") > 0)
                     {
                         CreateHeaderFooter(i, "PageNumber", ref isHeaderCreated, ref isFooterCreated, ref isHeaderClosed, ref isFooterClosed);
-                        if (i != 15)
+
+                        CreateLeftGuidewordPageNumber(i, "PageNumber");
+                        if (i < 21) //PageNumber Created on RightPage Header
                         {
-                            CreateLeftGuidewordPageNumber(i, "PageNumber");
-                            if (i < 21) //PageNumber Created on RightPage Header
-                            {
-                                isPageNumber = true;
-                            }
+                            isPageNumber = true;
                         }
+                        
                     }
 					else if (_pageHeaderFooter[i]["content"].Length > 0)
 					{
