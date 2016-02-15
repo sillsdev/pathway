@@ -3974,6 +3974,33 @@ namespace Test.OpenOfficeConvert
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
+		///<summary>
+		///RunningHeaderNone Full Scripture Test
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void RunningHeaderNoneTest()
+		{
+			_projInfo.ProjectInputType = "Scripture";
+			const string file = "RunningHeaderNone";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+			string style = "";
+			if (Common.UnixVersionCheck())
+			{
+				style = "_Unix";
+			}
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
         ///<summary>
         ///Kabwa Full Scripture Test
         /// </summary>      
