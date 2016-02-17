@@ -441,10 +441,10 @@ namespace SIL.PublishingSolution
             
             #region Clean up
             inProcess.SetStatus("Clean up");
-            Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
+            Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1.x", string.Empty);
             if (!Common.Testing)
             {
-                Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de,.zip", "_1", "META-INF,OEBPS");
+                Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de,.zip", "_1.x", "META-INF,OEBPS");
             }
             inProcess.PerformStep();
             #endregion Clean up
