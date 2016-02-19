@@ -60,7 +60,7 @@ namespace SIL.PublishingSolution
                         {
                             // this style is installed on the machine - add it to the list
                             fontList.Remove(cfont.Key);
-                            fontList.Add(cfont.Key, Path.GetFileName(fullName));
+                            fontList.Add(cfont.Key, Path.GetFileNameWithoutExtension(fullName));
                         }
                         else
                         {
@@ -73,7 +73,7 @@ namespace SIL.PublishingSolution
                                 {
                                     // this style is installed on the machine - add it to the list
                                     fontList.Remove(cfont.Key);
-                                    fontList.Add(cfont.Key, Path.GetFileName(fullName));
+									fontList.Add(cfont.Key, Path.GetFileNameWithoutExtension(fullName));
                                 }
                                 else
                                 {
@@ -122,8 +122,8 @@ namespace SIL.PublishingSolution
             }
             foreach (var fontFamily in pfc.Families)
             {
-                if (!installedFontList.ContainsKey(fontFamily.GetName(0)) && fontFamily.GetName(0) != string.Empty)
-                    installedFontList.Add(fontFamily.GetName(0), fontFamily.GetName(0));
+				if (!installedFontList.ContainsKey(fontFamily.Name) && fontFamily.Name != string.Empty)
+					installedFontList.Add(fontFamily.Name, fontFamily.Name);
             }
             return installedFontList;
         }
