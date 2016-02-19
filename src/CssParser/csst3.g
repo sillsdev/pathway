@@ -1,9 +1,8 @@
-grammar csst3;
+grammar csst4;
+// See setup information: http://www.antlr.org/wiki/display/ANTLR3/Antlr3CSharpReleases
 options {
-	    output=AST;
-	    ASTLabelType=CommonTree;
-        language=CSharp;
-	    k=4;
+        output=AST;
+        ASTLabelType=CommonTree;
 		}
 
 tokens {
@@ -25,23 +24,10 @@ tokens {
 	TAG;
 	ID;
 	CLASS;
+	EM;
 }
 
-//@lexer::namespace {SIL.PublishingSolution.Compiler}
-//@parser::namespace {SIL.PublishingSolution.Compiler}
-
-@members {
-private System.Collections.Generic.List<System.String> errors = new System.Collections.Generic.List<System.String>();
-override public void DisplayRecognitionError(System.String[] tokenNames, RecognitionException e) {
-    System.String hdr = GetErrorHeader(e);
-    System.String msg = GetErrorMessage(e, tokenNames);
-    errors.Add(hdr + " " + msg);
-}
-public System.Collections.Generic.List<System.String> GetErrors() {
-    return errors;
-}
-}
-
+public
 stylesheet
 	: importRule* (media | pageRule | ruleset)+
 	;
@@ -56,7 +42,7 @@ media
 	;
 
 pageRule
- 	: '@page' IDENT? pseudo? '{' properties? region* '}' -> ^( PAGE IDENT* pseudo* properties* region* )
+ 	: '@page' IDENT* pseudo* '{' properties? region* '}' -> ^( PAGE IDENT* pseudo* properties* region* )
 	;
 
 region
@@ -72,7 +58,7 @@ selectors
 	;
 	
 selector
-	: elem selectorOperation* pseudo? ->  elem selectorOperation* pseudo*
+	: elem selectorOperation* pseudo* ->  elem selectorOperation* pseudo*
 	| pseudo -> ANY pseudo 
 	;
 
@@ -155,27 +141,24 @@ STRING
 	;
 
 NUM
-	:	'-' (('0'..'9')* '.')? ('0'..'9')+
-	|	(('0'..'9')* '.')? ('0'..'9')+
+	:	'-'? ('0'..'9')+ ('.' ('0'..'9')+)?
+	|	'-'? '.' ('0'..'9')+
 	;
 
 COLOR
 	:	'#' ('0'..'9'|'a'..'f'|'A'..'F')+
 	;
 
-// Single-line comments
-SL_COMMENT
-	:	'//'
-		(~('\n'|'\r'))* ('\n'|'\r'('\n')?)
-		{$channel=HIDDEN;}
+
+// Whitespace -- ignored See: http://www.antlr.org/pipermail/antlr-interest/2010-December/040362.html
+WS	: (' '|'\t'|'\r'|'\n'|'\f')+  {$channel=HIDDEN;} // {System.Console.WriteLine("WS");}
 	;
-	
 // multiple-line comments
 COMMENT
-	:	'/*' .* '*/' { $channel = HIDDEN; }
+	:	'/*' .* '*/' {$channel=HIDDEN;}
 	;
-
-// Whitespace -- ignored
-WS	: ( ' ' | '\t' | '\r' | '\n' | '\f' )+ { $channel = HIDDEN; }
+// Single-line comments
+LINE_COMMENT
+	:	'//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
 	;
 

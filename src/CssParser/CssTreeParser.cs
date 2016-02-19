@@ -21,6 +21,7 @@ using System.Text;
 using SIL.Tool;
 using Antlr.Runtime;
 using Antlr.Runtime.Tree;
+using SIL.PublishingSolution.Compiler;
 
 namespace SIL.PublishingSolution
 {
