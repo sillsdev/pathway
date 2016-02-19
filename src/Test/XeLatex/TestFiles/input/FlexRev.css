@@ -89,7 +89,7 @@
     /* placeholder for adding list separators */
 }
 .xitem[lang='hi'] {
-    font-family: "Mangal", serif;	/* default Serif font */
+    font-family: "Annapurna SIL", sans-serif;
     font-size: 10pt;	/* cascaded environment */
 }
 
@@ -122,7 +122,7 @@
 .definition_L4 {
     /* lang = 'hi' */
     /* cascaded environment FieldWorks style = 'Dictionary-Normal' */
-    font-family: "Mangal", serif;	/* default Serif font */
+    font-family: "Annapurna SIL", sans-serif;
     font-size: 10pt;	/* cascaded environment */
     text-indent: 0pt;
     margin-left: 0pt;
@@ -180,7 +180,7 @@
 .partofspeech_L4 {
     /* lang = 'hi' */
     /* cascaded environment FieldWorks style = 'Dictionary-Normal' */
-    font-family: "Mangal", serif;	/* default Serif font */
+    font-family: "Annapurna SIL", sans-serif;
     font-size: 10pt;	/* cascaded environment */
     text-indent: 0pt;
     margin-left: 0pt;
@@ -219,7 +219,7 @@
 .reversal-form_L4 {
     /* lang = 'hi' */
     /* explicit FieldWorks style = 'Dictionary-Headword' */
-    font-family: "Mangal", serif;	/* default Serif font */
+    font-family: "Annapurna SIL", sans-serif;
     font-size: 10pt;	/* cascaded environment */
     font-weight: bold;
     text-indent: 0pt;

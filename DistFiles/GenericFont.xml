@@ -38,7 +38,7 @@
             <font>Latha</font>
         </language>
         <language name="hi">
-            <font>Mangal</font>
+            <font>Annapurna SIL</font>
         </language>
 		<language name="cmo">
             <font>Khmer Busra Bunong</font>
@@ -50,16 +50,16 @@
             <font>Bangla</font>
         </UnicodeMap>
         <UnicodeMap Language="Hindi" From="0x0900" To="0x097F">
-            <font>Mangal</font>
+            <font>Annapurna SIL</font>
         </UnicodeMap>
         <UnicodeMap Language="Hindi Extended" From="0xA8E0" To="0xA8FF">
-            <font>Mangal</font>
+            <font>Annapurna SIL</font>
         </UnicodeMap>
         <UnicodeMap Language="Gujarati" From="0x0A80" To="0x0AFF">
             <font>Shruti</font>
         </UnicodeMap>
         <UnicodeMap Language="Oriya" From="0x0B00" To="0x0B7F">
-            <font>Mangal</font>
+            <font>Annapurna SIL</font>
         </UnicodeMap>
         <UnicodeMap Language="Tamil" From="0x0B80" To="0x0BFF">
             <font>Latha</font>
@@ -74,7 +74,7 @@
             <font>Kartika</font>
         </UnicodeMap>
         <UnicodeMap Language="Thai" From="0xE00" To="0xE7F">
-            <font>Mangal</font>
+            <font>Annapurna SIL</font>
         </UnicodeMap>
 	<UnicodeMap Language="Khmer" From="0x1780" To="0x17FF">
             <font>Khmer Busra Bunong</font>
