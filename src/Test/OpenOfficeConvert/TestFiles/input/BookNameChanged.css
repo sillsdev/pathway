@@ -227,7 +227,7 @@ padding-bottom: 4pt;
     padding-bottom: 0pt;
     padding-top: 0pt;
     margin-top: 12pt;
-    //margin-bottom:6pt;
+    /* margin-bottom:6pt; */
     margin-bottom:0pt;
 }
 
@@ -417,18 +417,18 @@ font-size: 12pt;
        column-rule: solid 1pt #808080;
 }
 /* Top Center Mirrored.css */
-@page :left {
+@page:left {
     @top-center{
            content: counter( page);
     }
 }
-@page :right {
+@page:right {
    @top-center{
            content: counter( page);
     }
 }
 /* First Page Bottom Center.css */
-@page :first {
+@page:first {
     @top-left      { content: ''; }
     @top-center    { content: ''; }
     @top-right     { content: ''; }
@@ -437,6 +437,3 @@ font-size: 12pt;
     @bottom-right  { content: ''; }
 }
 
-}
-
-}

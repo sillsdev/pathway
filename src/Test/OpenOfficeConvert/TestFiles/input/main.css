@@ -23,7 +23,7 @@
         margin-top: 1em;
     }
 }
-@page :first {
+@page:first {
     @top-left { content: ''; }
     @top-center { content: ''; }
     @top-right { content: ''; }

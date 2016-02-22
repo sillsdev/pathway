@@ -1,4 +1,4 @@
-grammar csst4;
+grammar csst3;
 // See setup information: http://www.antlr.org/wiki/display/ANTLR3/Antlr3CSharpReleases
 options {
         output=AST;
