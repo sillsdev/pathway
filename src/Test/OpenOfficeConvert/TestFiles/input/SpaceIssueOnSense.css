@@ -23,7 +23,7 @@
         margin-top: 1em;
     }
 }
-@page :first {
+@page:first {
     @top-left { content: ''; }
     @top-center { content: ''; }
     @top-right { content: ''; }
@@ -315,10 +315,10 @@
 }
 .LexSense-publishStem-Literal--Definition:before { content: "lit. " }
 .LexSense-publishStem-Literal--Definition:after { content: ". " }
-.LexSense-publishStem-Literal--meaning--of--ex. {
+.LexSense-publishStem-Literal--meaning--of--ex {
 }
-.LexSense-publishStem-Literal--meaning--of--ex.:before { content: "Lit. " }
-.LexSense-publishStem-Literal--meaning--of--ex.:after { content: " " }
+.LexSense-publishStem-Literal--meaning--of--ex:before { content: "Lit. " }
+.LexSense-publishStem-Literal--meaning--of--ex:after { content: " " }
 .MoMorphSynAnalysis-publishStem-FeaturesPub {
 }
 .MoMorphSynAnalysis-publishStem-FeaturesPub:before { content: " " }

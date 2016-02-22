@@ -10,3 +10,9 @@
            content: counter( page);
     }
 }
+
+@page :first {
+	@bottom-left{
+           content: counter( page);
+    }
+}

@@ -9,7 +9,7 @@
 
 
 @page :first {
-    @bottom-center {
+    @bottom-left {
            content: counter( page);
     }
 }

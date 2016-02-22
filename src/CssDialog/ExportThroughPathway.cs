@@ -1508,6 +1508,9 @@ namespace SIL.PublishingSolution
                     case 2:
                         _helpTopic = "User_Interface/Dialog_boxes/Processing_Options_tab.htm";
                         break;
+					case 3:
+						_helpTopic = "User_Interface/Dialog_boxes/Hyphenation_tab.htm";
+						break;
                 }
             }
         }
@@ -1515,6 +1518,7 @@ namespace SIL.PublishingSolution
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetTabbedHelpTopic();
+			ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
         }
 
         private void btnHelpShow_Click(object sender, EventArgs e)
@@ -1546,5 +1550,10 @@ namespace SIL.PublishingSolution
 				clbHyphenlang.SetItemCheckState(i, ((hyphencheck && Param.HyphenationSelectedLanguagelist.Contains(clbHyphenlang.GetItemText(clbHyphenlang.Items[i]))) ? CheckState.Checked : CheckState.Unchecked));
             clbHyphenlang.Enabled = false;
         }
+
+		private void btnHelpHyphenation_Click(object sender, EventArgs e)
+		{
+			ShowHelp.ShowHelpTopicKeyPress(this, @"User_Interface/Dialog_boxes/Hyphenation_tab.htm", _isUnixOS);
+		}
     }
 }

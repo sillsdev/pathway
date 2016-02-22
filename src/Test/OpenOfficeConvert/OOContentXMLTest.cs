@@ -90,7 +90,11 @@ namespace Test.OpenOfficeConvert
             _styleFile = "styles.xml";
             _contentFile = "content.xml";
             _isLinux = Common.IsUnixOS();
+
+			if (!_isLinux)
+				LoadParam("Dictionary", "false");
         }
+
         #endregion
 
         #region Private Functions
@@ -2658,7 +2662,237 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue1, "DisplayInline failed");
         }
 
-        [Test]
+		[Test]
+		public void PageDictionaryTest1()
+	    {
+			// Single Page - Top Center
+			const string file = "DictionaryPageTest";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 1;
+			string styleOutput = GetStyleOutput(file);
+			const string xpath = "//style:master-page[@style:name=\"XHTML\"]";
+			_validate = new ValidateXMLFile(styleOutput) {GetOuterXml = true};
+			const string content = "<style:master-page style:name=\"XHTML\" style:page-layout-name=\"pm2\" style:next-style-name=\"XHTML\" " +
+			                       "xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" " +
+			                       "xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get " +
+			                       "text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" />" +
+			                       "</text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" " +
+			                       "xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:tab /><text:span text:style-name=\"MT3\">" +
+			                       "<text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer>" +
+			                       "<text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" " +
+			                       "draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"42.25pt\" fo:min-width=\"145pt\" draw:z-index=\"1\" " +
+			                       "xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" " +
+			                       "xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\">" +
+			                       "<text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" " +
+			                       "xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\">" +
+			                       "<text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" />" +
+			                       "</text:span></text:p></draw:text-box></draw:frame></text:p></style:footer></style:master-page>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Single Page with Top Center Test failed");
+	    }
+
+		[Test]
+		public void PageDictionaryTest2()
+		{
+			// Single Page - Bottom Center
+			const string file = "DictionaryPageTest";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 2;
+			string styleOutput = GetStyleOutput(file);
+			const string xpath = "//style:master-page[@style:name=\"XHTML\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			const string content = "<style:master-page style:name=\"XHTML\" style:page-layout-name=\"pm2\" style:next-style-name=\"XHTML\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"42.25pt\" fo:min-width=\"145pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer></style:master-page>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Single Page with Bottom Center Test failed");
+		}
+
+		[Test]
+		public void PageDictionaryTest3()
+		{
+			// Mirrored Page - Top Inside Margin
+			const string file = "DictionaryPageTest";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 3;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//style:master-page[@style:name=\"Left_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header></style:master-page>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Top Inside Margin - Left Page Test failed");
+
+			xpath = "//style:master-page[@style:name=\"Right_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			content = "<style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span><text:tab /><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"42.25pt\" fo:min-width=\"145pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame></text:p></style:footer></style:master-page>";
+			returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Top Inside Margin - Right Page Test failed");
+		}
+
+		[Test]
+		public void PageDictionaryTest4()
+		{
+			// Mirrored Page - Top Center
+			const string file = "DictionaryPageTest";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 4;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//style:master-page[@style:name=\"Left_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header></style:master-page>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Top Center - Left Page Test failed");
+
+			xpath = "//style:master-page[@style:name=\"Right_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			content = "<style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"42.25pt\" fo:min-width=\"145pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame></text:p></style:footer></style:master-page>";
+			returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Top Center - Right Page Test failed");
+		}
+
+		[Test]
+		public void PageDictionaryTest5()
+		{
+			// Mirrored Page - Bottom Inside Margin
+			const string file = "DictionaryPageTest";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 5;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//style:master-page[@style:name=\"Left_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer></style:master-page>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Bottom Inside Margin - Left Page Test failed");
+
+			xpath = "//style:master-page[@style:name=\"Right_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			content = "<style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"42.25pt\" fo:min-width=\"145pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame><style:header><text:p text:style-name=\"Header\"><text:span text:style-name=\"MT1\" /></text:p></style:header><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:tab /><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:span></text:p></style:header></style:master-page>";
+			returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Bottom Inside Margin - Right Page Test failed");
+		}
+
+		[Test]
+		public void PageDictionaryTest6()
+		{
+			// Mirrored Page - Bottom Outside Margin
+			const string file = "DictionaryPageTest";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 6;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//style:master-page[@style:name=\"Left_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer></style:master-page>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Bottom Outside Margin - Left Page Test failed");
+
+			xpath = "//style:master-page[@style:name=\"Right_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			content = "<style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"42.25pt\" fo:min-width=\"145pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame><text:tab /><text:tab /><style:header><text:p text:style-name=\"Header\"><text:span text:style-name=\"MT1\" /></text:p></style:header><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:tab /><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:span></text:p></style:header></style:master-page>";
+			returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Bottom Outside Margin - Right Page Test failed");
+		}
+
+		[Test]
+		public void PageDictionaryTest7()
+		{
+			// Mirrored Page - Bottom Center
+			const string file = "DictionaryPageTest";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 7;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//style:master-page[@style:name=\"Left_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer></style:master-page>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Bottom Center - Left Page Test failed");
+
+			xpath = "//style:master-page[@style:name=\"Right_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			content = "<style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"42.25pt\" fo:min-width=\"145pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame><text:tab /><style:header><text:p text:style-name=\"Header\"><text:span text:style-name=\"MT1\" /></text:p></style:header><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:tab /><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:span></text:p></style:header></style:master-page>";
+			returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with Bottom Center - Right Page Test failed");
+		}
+
+		[Test]
+		public void PageDictionaryTest8()
+		{
+			// Mirrored Page - None
+			const string file = "DictionaryPageTest";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 8;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//style:master-page[@style:name=\"Left_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header></style:master-page>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with None - Left Page Test failed");
+
+			xpath = "//style:master-page[@style:name=\"Right_20_Page\"]";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			content = "<style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"42.25pt\" fo:min-width=\"145pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame></text:p></style:footer><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:tab /><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:span></text:p></style:header></style:master-page>";
+			returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with None - Right Page Test failed");
+		}
+
+	    [Test]
+	    public void PageFrontMatterOption1()
+	    {
+			// FrontMatter - All Options
+			const string file = "FrontMatterOptions";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 1;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//office:master-styles";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<office:master-styles xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\"><style:master-page style:name=\"Standard\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Cover_20_Page\" style:display-name=\"Cover Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Title_20_Page\" style:display-name=\"Title Page\" style:next-style-name=\"CopyRight_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"CopyRight_20_Page\" style:display-name=\"CopyRight Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"TableofContents_20_Page\" style:display-name=\"TableofContents Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:page-number style:num-format=\"i\" text:select-page=\"current\">xv</text:page-number></text:p></style:footer></style:master-page><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"First_20_Page\" style:display-name=\"First Page\" style:next-style-name=\"XHTML\" style:page-layout-name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header></style:master-page><style:master-page style:name=\"XHTML\" style:page-layout-name=\"pm2\" style:next-style-name=\"XHTML\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" /></text:span><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"55.94291pt\" fo:min-width=\"145pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" /></text:span></text:p></draw:text-box></draw:frame></text:p></style:footer></style:master-page></office:master-styles>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with None - Left Page Test failed");
+	    }
+
+		[Test]
+		public void PageFrontMatterOption2()
+		{
+			// FrontMatter - All Options except TOC
+			const string file = "FrontMatterOptions";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 2;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//office:master-styles";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<office:master-styles xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\"><style:master-page style:name=\"Standard\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Cover_20_Page\" style:display-name=\"Cover Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Title_20_Page\" style:display-name=\"Title Page\" style:next-style-name=\"CopyRight_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"CopyRight_20_Page\" style:display-name=\"CopyRight Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"TableofContents_20_Page\" style:display-name=\"TableofContents Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:page-number style:num-format=\"i\" text:select-page=\"current\">xv</text:page-number></text:p></style:footer></style:master-page><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"First_20_Page\" style:display-name=\"First Page\" style:next-style-name=\"XHTML\" style:page-layout-name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header></style:master-page><style:master-page style:name=\"XHTML\" style:page-layout-name=\"pm2\" style:next-style-name=\"XHTML\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /></office:master-styles>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with None - Left Page Test failed");
+		}
+
+		[Test]
+		public void PageFrontMatterOption3()
+		{
+			// FrontMatter - All Options except copyright, TOC
+			const string file = "FrontMatterOptions";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 3;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//office:master-styles";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<office:master-styles xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\"><style:master-page style:name=\"Standard\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Cover_20_Page\" style:display-name=\"Cover Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Title_20_Page\" style:display-name=\"Title Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"TableofContents_20_Page\" style:display-name=\"TableofContents Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:page-number style:num-format=\"i\" text:select-page=\"current\">xv</text:page-number></text:p></style:footer></style:master-page><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"First_20_Page\" style:display-name=\"First Page\" style:next-style-name=\"XHTML\" style:page-layout-name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header></style:master-page><style:master-page style:name=\"XHTML\" style:page-layout-name=\"pm2\" style:next-style-name=\"XHTML\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /></office:master-styles>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with None - Left Page Test failed");
+		}
+
+		[Test]
+		public void PageFrontMatterOption4()
+		{
+			// FrontMatter - Only CoverImage and Title
+			const string file = "FrontMatterOptions";
+			_projInfo.ProjectInputType = "Dictionary";
+			_index = 4;
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//office:master-styles";
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			string content = "<office:master-styles xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\"><style:master-page style:name=\"Standard\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Cover_20_Page\" style:display-name=\"Cover Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Title_20_Page\" style:display-name=\"Title Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"TableofContents_20_Page\" style:display-name=\"TableofContents Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:page-number style:num-format=\"i\" text:select-page=\"current\">xv</text:page-number></text:p></style:footer></style:master-page><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"First_20_Page\" style:display-name=\"First Page\" style:next-style-name=\"XHTML\" style:page-layout-name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header></style:master-page><style:master-page style:name=\"XHTML\" style:page-layout-name=\"pm2\" style:next-style-name=\"XHTML\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /></office:master-styles>";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Mirrored Page with None - Left Page Test failed");
+		}
+
+	    [Test]
         public void PageTest1()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -2805,7 +3039,7 @@ namespace Test.OpenOfficeConvert
             else
             {
                 content =
-                    "<style:master-page style:name=\"Standard\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Cover_20_Page\" style:display-name=\"Cover Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Title_20_Page\" style:display-name=\"Title Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"TableofContents_20_Page\" style:display-name=\"TableofContents Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:page-number style:num-format=\"i\" text:select-page=\"current\">xv</text:page-number></text:p></style:footer></style:master-page><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"First_20_Page\" style:display-name=\"First Page\" style:next-style-name=\"Left_20_Page\" style:page-layout-name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer></style:master-page><style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /></style:footer></style:master-page><style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><style:header><text:p text:style-name=\"Header\"><text:span text:style-name=\"MT1\" /></text:p></style:header><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer></style:master-page>";
+					"<style:master-page style:name=\"Standard\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Cover_20_Page\" style:display-name=\"Cover Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Title_20_Page\" style:display-name=\"Title Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"TableofContents_20_Page\" style:display-name=\"TableofContents Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:page-number style:num-format=\"i\" text:select-page=\"current\">xv</text:page-number></text:p></style:footer></style:master-page><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"First_20_Page\" style:display-name=\"First Page\" style:next-style-name=\"Left_20_Page\" style:page-layout-name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer></style:master-page><style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer></style:master-page><style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><style:header><text:p text:style-name=\"Header\"><text:span text:style-name=\"MT1\" /></text:p></style:header><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:footer></style:master-page>";
             }
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "PageTest-master failed");
@@ -3708,6 +3942,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, "TeluguFootnoteMarkerTeststyles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, "TeluguFootnoteMarkerTestcontent.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } }); 
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -3736,9 +3971,38 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
+
+		///<summary>
+		///RunningHeaderNone Full Scripture Test
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void RunningHeaderNoneTest()
+		{
+			_projInfo.ProjectInputType = "Scripture";
+			const string file = "RunningHeaderNone";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+			string style = "";
+			if (Common.UnixVersionCheck())
+			{
+				style = "_Unix";
+			}
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
 
         ///<summary>
         ///Kabwa Full Scripture Test
@@ -3758,9 +4022,58 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
+
+		///<summary>
+		///Dictionary Tab Test
+		///</summary>      
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void DictionaryTabUnicodeTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "TabUnicode";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
+		///<summary>
+		///Dictionary Insert HardSpace Test
+		///</summary>      
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void DictionaryInsertHardSpaceTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "InsertHardSpace";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
+		
 
         ///<summary>
         ///B1pe Full Scripture Test
@@ -3799,6 +4112,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -3881,6 +4195,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string>{{"office","urn:oasis:names:tc:opendocument:xmlns:office:1.0"}});
             TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -3902,6 +4217,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -3930,6 +4246,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -3952,6 +4269,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -3974,6 +4292,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -3996,6 +4315,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -4018,6 +4338,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -4040,6 +4361,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -4063,6 +4385,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -4085,6 +4408,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -4107,6 +4431,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -4130,6 +4455,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -4153,6 +4479,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -4176,6 +4503,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 

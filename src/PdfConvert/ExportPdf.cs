@@ -138,6 +138,8 @@ namespace SIL.PublishingSolution
                     preProcessor.InsertPropertyInCSS(mergedCSS);
                     preProcessor.RemoveDeclaration(mergedCSS, ".pictureRight > .picture");
                     preProcessor.RemoveDeclaration(mergedCSS, "div.pictureLeft > img.picture");
+					preProcessor.HandleNewFieldworksChangeInXhtml(preProcessor.ProcessedXhtml);
+					preProcessor.HandleNewFieldworksChangeInCss(mergedCSS);
                     mergedCSS = preProcessor.RemoveTextIndent(mergedCSS);
 
                     if (isUnixOS)

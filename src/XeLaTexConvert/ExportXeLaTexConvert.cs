@@ -645,10 +645,21 @@ namespace SIL.PublishingSolution
                 xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
 
                 string dest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(xeLatexFullFile));
-                if (xeLatexFullFile != dest)
-                    File.Copy(xeLatexFullFile, dest, true);
+	            if (xeLatexFullFile != dest)
+	            {
+		            File.Copy(xeLatexFullFile, dest, true);
 
-                if (_copyrightTexCreated)
+					string[] picList = Directory.GetFiles(Path.GetDirectoryName(xeLatexFullFile), "*.jpg");
+					foreach (string picturefile in picList)
+					{
+						string pictureCopyTo = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(picturefile));
+
+						File.Copy(picturefile, pictureCopyTo, true);
+					}
+
+	            }
+
+	            if (_copyrightTexCreated)
                 {
                     string copyrightDest = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(_copyrightTexFileName));
                     if (_copyrightTexFileName != copyrightDest)
@@ -783,11 +794,23 @@ namespace SIL.PublishingSolution
                     File.Delete(Common.PathCombine(xeLaTexInstallationPath, texNameOnly + ".pdf"));
                     File.Delete(Common.PathCombine(xeLaTexInstallationPath, texNameOnly + ".aux"));
 
-                    string[] picList = Directory.GetFiles(xeLaTexInstallationPath, "*.jpg");
-                    foreach (string picturefile in picList)
-                    {
-                        File.Delete(picturefile);
-                    }
+					string[] deleteList = Directory.GetFiles(xeLaTexInstallationPath, "*.jpg");
+					foreach (string deletefile in deleteList)
+	                {
+						File.Delete(deletefile);
+	                }
+
+					deleteList = Directory.GetFiles(xeLaTexInstallationPath, "*.tex");
+					foreach (string deletefile in deleteList)
+					{
+						File.Delete(deletefile);
+					}
+
+					deleteList = Directory.GetFiles(xeLaTexInstallationPath, "*.png");
+					foreach (string deletefile in deleteList)
+					{
+						File.Delete(deletefile);
+					}
                 }
                 catch
                 {

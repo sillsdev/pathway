@@ -410,17 +410,17 @@ namespace SIL.PublishingSolution
 
                     var exportTypeDlg = new EpubExportTypeDlg();
                     exportTypeDlg.ShowDialog();
-                    if (exportTypeDlg._exportType == "epub2")
+                    if (exportTypeDlg.ExportType == "epub2")
                     {
                         outputFolder = Path.GetDirectoryName(outputPathWithFileName);
                         DisplayOutput(outputFolder, fileName, ref outputPathWithFileName);
                     }
-                    else if (exportTypeDlg._exportType == "epub3")
+                    else if (exportTypeDlg.ExportType == "epub3")
                     {
                         outputFolder = Path.GetDirectoryName(outputPathWithFileNameV3);
                         DisplayOutput(outputFolder, fileName, ref outputPathWithFileNameV3);
                     }
-                    else if (exportTypeDlg._exportType == "folder")
+                    else if (exportTypeDlg.ExportType == "folder")
                     {
                         if (_isUnixOs)
                         {
@@ -441,10 +441,10 @@ namespace SIL.PublishingSolution
             
             #region Clean up
             inProcess.SetStatus("Clean up");
-            Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1", string.Empty);
+            Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1.x", string.Empty);
             if (!Common.Testing)
             {
-                Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de,.zip", "_1", "META-INF,OEBPS");
+                Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de,.zip", "_1.x", "META-INF,OEBPS");
             }
             inProcess.PerformStep();
             #endregion Clean up

@@ -1,6 +1,7 @@
 #-----------------------------------------------------------------------------
 # Name:        tvf.py
 # Purpose:     Compare output to expected data highlighting changes
+# see: http://stackoverflow.com/questions/749796/pretty-printing-xml-in-python
 #
 # Author:      <greg_trihus@sil.org>
 #
@@ -11,8 +12,9 @@
 #-----------------------------------------------------------------------------
 #Boa:Frame:treeReview
 
-import os,wx,glob,shutil
+import os,sys,re,wx,glob,shutil
 from os.path import basename, splitext
+from xml.dom.minidom import parseString
 
 winMerge = "C:\\Program Files (x86)\\WinMerge\\WinMergeU.exe"
 
@@ -72,51 +74,61 @@ class treeReview(wx.Frame):
 
     def __init__(self, parent):
         self._init_ctrls(parent)
-        self.inp = glob.glob('Output/*.xml')
+        self.inp = glob.glob('output/*.xml')
         self.listBox1.Set(self.inp)
 
     def OnListBox1Listbox(self, event):
         sel = event.GetSelection()
         fileName = splitext(basename(self.inp[sel]))[0].replace('content','').replace('styles','')
-        inpName = 'Input/%s.xhtml' % fileName
-        inpData = open(inpName).read().decode('utf-8')
+        inpName = 'input/%s.xhtml' % fileName
+        tmpName1 = self._XmlPretty(inpName)
+        inpData = open(tmpName1).read().decode('utf-8')
         self.textCtrl1.SetValue(inpData)
-        cssName = 'Input/%s.css' % fileName
+        cssName = 'input/%s.css' % fileName
         cssData = open(cssName).read().decode('utf-8')
         self.textCtrl3.SetValue(cssData)
         treeFile = self.inp[sel]
-        treeData = open(treeFile).read().decode('utf-8')
-        res = ''
-        cnt = 0
-        for c in treeData:
-            if c == '(':
-                res += '\n'
-                cnt += 4;
-                for x in range(cnt):
-                    res += ' ';
-                res += c
-            elif c == ')':
-                cnt -= 4;
-                res += c
-            else:
-                res += c
-        self.textCtrl2.SetValue(res)
+        tmpName2 = self._XmlPretty(treeFile)
+        treeData = open(tmpName2).read().decode('utf-8')
+        self.textCtrl2.SetValue(treeData)
+        os.unlink(tmpName1)
+        os.unlink(tmpName2)
 
     def OnCorrectButton(self, event):
         sel = self.listBox1.GetSelection()
         base = splitext(basename(self.inp[sel]))[0]
-        src = 'Output/%s.xml' % base
-        dst = 'Expected/%s.xml' % base
+        src = 'output/%s.xml' % base
+        dst = 'expected/%s.xml' % base
         shutil.copy2(src, dst)
         wx.MessageBox('%s copied to %s' % (src, dst))
 
     def _Q(self, s):
         return '"' + s + '"'
+		
+    def _XmlPretty(self, s):
+        text_re = re.compile('>\n\s+([^<>\s].*?)\n\s+</', re.DOTALL)
+        data = open(s).read()
+        xmldom = parseString(data)
+        uglyXml = xmldom.toprettyxml(indent='  ')
+        prettyXml0 = text_re.sub('>\g<1></', uglyXml)
+        prettyXml1 = re.compile(' +\n').sub('\n', prettyXml0)   # remove spaces at end of lines
+        prettyXml = re.compile('\n+', re.MULTILINE).sub('\n', prettyXml1) # multiple lines to 1
+        tempName = os.path.join(os.getenv('TMP'),s)
+        try:
+            os.makedirs(os.path.dirname(tempName))
+        except:
+            pass
+        f = open(tempName, 'w')
+        f.write(prettyXml.encode('utf-8'))
+        f.close()
+        return tempName
         
     def OnCompareButton(self, event):
         sel = self.listBox1.GetSelection()
         base = splitext(basename(self.inp[sel]))[0]
-        src = 'Output/%s.xml' % base
-        dst = 'Expected/%s.xml' % base
+        src = self._XmlPretty('output/%s.xml' % base)
+        dst = self._XmlPretty('expected/%s.xml' % base)
         progParts = os.path.split(winMerge)
         os.spawnl(os.P_WAIT, winMerge, progParts[1], self._Q(src), self._Q(dst))
+        os.unlink(src)
+        os.unlink(dst)

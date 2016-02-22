@@ -4,6 +4,7 @@
     @top-center    { content: ''; }
     @top-right     { content: ''; }
     @bottom-left   { content: ''; }
-    @bottom-center { content: counter(page); }
+    /* This file used in conjunction with PageNumber_TopCenter and PageNumber_TopCenterMirrored */
     @bottom-right  { content: ''; }
 }
+

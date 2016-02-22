@@ -28,3 +28,9 @@
     @bottom-center { content: ''; }
     @bottom-right  { content: ''; }
 }
+
+@page :first {
+	@bottom-right{
+           content: counter( page);
+    }
+}

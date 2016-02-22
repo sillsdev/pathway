@@ -194,11 +194,7 @@ namespace SIL.PublishingSolution
 			if (!Common.Testing)
 			{
 				Common.SetupLocalization();
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Name", "Name", "", "", "");
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Description", "Description", "", "", "");
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Comment", "Comment", "", "", "");
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Type", "Type", "", "", "");
-				Common.L10NMngr.AddString("ConfigurationTool.Column.Shown", "Shown", "", "", "");
+				InitializeGridColumnHeader();
 			}
 		}
 
@@ -664,6 +660,19 @@ namespace SIL.PublishingSolution
 		#endregion
 
 		#region Methods
+
+		private static void InitializeGridColumnHeader()
+		{
+			if (Common.L10NMngr != null)
+			{
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Name", "Name", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Description", "Description", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Comment", "Comment", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Type", "Type", "", "", "");
+				Common.L10NMngr.AddString("ConfigurationTool.Column.Shown", "Shown", "", "", "");
+			}
+		}
+
 		public void SetClassReference(ConfigurationTool configTool)
 		{
 			cTool = configTool;
@@ -729,6 +738,10 @@ namespace SIL.PublishingSolution
 		{
 			get
 			{
+				//string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+				
+				//return  version;
+
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
 				if (attributes.Length == 0)
 				{
@@ -3906,6 +3919,10 @@ namespace SIL.PublishingSolution
 					{
 						string enText = value;
 						value = LocalizeItems.LocalizeItem("Page Number", value);
+						if (GetDdlRunningHead().ToLower() == "mirrored" && enText.ToLower() == "top outside margin")
+						{
+							continue;
+						}
 						cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
 
 						if (enText.ToLower() == "none")
@@ -3916,7 +3933,9 @@ namespace SIL.PublishingSolution
 					}
 				}
 			}
-			cTool.DdlPageNumber.SelectedIndex = 0;
+			if (cTool.DdlPageNumber.Items.Count > 0)
+				cTool.DdlPageNumber.SelectedIndex = 0;
+
 			xPath = "//features/feature[@name='Reference Format']/option[@type='" + pageType + "' or @type= 'Both']";
 			pageNumList = Param.GetItems(xPath);
 			foreach (XmlNode node in pageNumList)
@@ -4546,7 +4565,7 @@ namespace SIL.PublishingSolution
 			var sb = new StringBuilder();
 			sb.Append("Pathway Configuration Tool");
 			sb.Append(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")) ? " - BTE " : " - SE ");
-			sb.Append(Application.ProductVersion);
+			sb.Append(AssemblyFileVersion);
 			cTool.Text = sb.ToString();
 			SetFocusToName();
 			SetMenuToolStrip();

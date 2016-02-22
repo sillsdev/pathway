@@ -998,7 +998,9 @@ namespace SIL.PublishingSolution
                                     {
                                         _firstPageContentNone.Add(i); // avoiding first page content:normal or none.
                                     }
-                                    continue;
+									//When Running Header is none, we should update _pageHeaderFooter as none for left and right pages
+									if (pageName != "@page:left" && pageName != "@page:right")
+										continue;
                                 }
                                 _pageHeaderFooter[i + headerFooterIndex][para.Key] = writingString;
                             }
@@ -1112,14 +1114,17 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:family", "paragraph");
             _writer.WriteAttributeString("style:class", "text");
             _writer.WriteEndElement();
+			
+	        string aTagColor = string.Empty;
+	        aTagColor = GetAnchorTagColor(aTagColor);
 
-            //// "HyperLink"
+	        //// "HyperLink"
             _writer.WriteStartElement("style:style");
             _writer.WriteAttributeString("style:name", "Internet_20_link");
             _writer.WriteAttributeString("style:display-name", "Internet link");
             _writer.WriteAttributeString("style:family", "text");
             _writer.WriteStartElement("style:text-properties");
-            _writer.WriteAttributeString("fo:color", "#000000");
+			_writer.WriteAttributeString("fo:color", aTagColor);
             _writer.WriteAttributeString("style:text-line-through-style", "none");
             _writer.WriteAttributeString("style:text-underline-style", "none");
             _writer.WriteEndElement();
@@ -1130,7 +1135,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:display-name", "Visited Internet Link");
             _writer.WriteAttributeString("style:family", "text");
             _writer.WriteStartElement("style:text-properties");
-            _writer.WriteAttributeString("fo:color", "#000000");
+			_writer.WriteAttributeString("fo:color", aTagColor);
             _writer.WriteAttributeString("style:text-line-through-style", "none");
             _writer.WriteAttributeString("style:text-underline-style", "none");
             _writer.WriteEndElement();
@@ -1632,7 +1637,31 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
         }
 
-        private void CreateDefaultStyles()
+	    private string GetAnchorTagColor(string aTagColor)
+	    {
+		    foreach (string keyValue in _cssProperty.Keys)
+		    {
+			    if (keyValue == "a")
+			    {
+				    Dictionary<string, string> cssProp = _cssProperty[keyValue];
+				    foreach (KeyValuePair<string, string> property in cssProp)
+				    {
+					    if (property.Key.ToLower() == "color" || property.Key.ToLower() == "text-decoration")
+					    {
+						    aTagColor = property.Value.ToString();
+						    break;
+					    }
+				    }
+				    break;
+			    }
+		    }
+
+		    if (aTagColor == string.Empty || aTagColor.ToLower() == "inherit")
+			    aTagColor = "#0000ff";
+		    return aTagColor;
+	    }
+
+	    private void CreateDefaultStyles()
         {
             // "graphic"
             _writer.WriteStartElement("style:default-style");
@@ -1900,14 +1929,13 @@ namespace SIL.PublishingSolution
                     else if (_pageHeaderFooter[i]["content"].IndexOf("counter") > 0)
                     {
                         CreateHeaderFooter(i, "PageNumber", ref isHeaderCreated, ref isFooterCreated, ref isHeaderClosed, ref isFooterClosed);
-                        if (i != 15)
+
+                        CreateLeftGuidewordPageNumber(i, "PageNumber");
+                        if (i < 21) //PageNumber Created on RightPage Header
                         {
-                            CreateLeftGuidewordPageNumber(i, "PageNumber");
-                            if (i < 21) //PageNumber Created on RightPage Header
-                            {
-                                isPageNumber = true;
-                            }
+                            isPageNumber = true;
                         }
+                        
                     }
 					else if (_pageHeaderFooter[i]["content"].Length > 0)
 					{

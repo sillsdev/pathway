@@ -4,13 +4,14 @@
   <ChapterMarker>c</ChapterMarker>
   <VerseMarker>v</VerseMarker>
   <FullName>Kumaoni</FullName>
+  
   <FileNameBookNameForm>41MAT</FileNameBookNameForm>
   <FileNamePostPart>KFY.SFM</FileNamePostPart>
   <Versification>4</Versification>
   <CreatedWithPTW6>T</CreatedWithPTW6>
   <Encoding>65001</Encoding>
   <Language>Devanagari</Language>
-  <DefaultFont>Arial Unicode MS</DefaultFont>
+  <DefaultFont>Annapurna SIL</DefaultFont>
   <DefaultFontSize>16</DefaultFontSize>
   <Editable>T</Editable>
   <InitialImportBooksDirectory>E:\My Paratext Projects\KFY</InitialImportBooksDirectory>
@@ -20,9 +21,13 @@
   <ContinueQuotes>Yes</ContinueQuotes>
   <VerboseQuotes>No</VerboseQuotes>
   <ContinueAt>p p/q p/q1</ContinueAt>
-  <ValidPunctuation>._ !_ ?_</ValidPunctuation>
+  
+  <NeedsEnglishLanguageFix />
+  <NeedsPortugueseLanguageFix />
   <FileNamePrePart />
   <FileNameChapterNumberForm />
-  <Guid>4c0db83b0ac6bc5ab3e88c9e8683d491bae9b8ac</Guid>
+  <TranslationInfo />
+  <Guid>d980d0ad70bf098e30bc650af1055a27514c8bad</Guid>
+  <Naming />
   <Naming PrePart="" PostPart="KFY.SFM" BookNameForm="41MAT" ChapterNumberForm="" />
 </ScriptureText>

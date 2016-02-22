@@ -135,7 +135,12 @@ namespace SIL.PublishingSolution
 
 	    private void Report(string swordOutputExportLocation, string xhtmlLang)
 	    {
-	        var swordData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Sword");
+		    var swordData = Common.IsUnixOS()? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".sword"):
+			Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Sword");
+		    var swordOutput = Path.Combine(swordOutputExportLocation, "SwordOutput");
+		    if (Directory.Exists(swordOutput))
+    		    swordOutputExportLocation = swordOutput;
+		    Debug.Print("swordOutputExportLocation={0}, swordData={1}", swordOutputExportLocation, swordData);
 	        if (Directory.Exists(swordData))
 	        {
 	            ReportWithSword(swordOutputExportLocation, xhtmlLang, swordData);
@@ -170,8 +175,15 @@ namespace SIL.PublishingSolution
                     FolderTree.Copy(Path.Combine(swordOutputExportLocation, dataLoc), instData);
 	                try
 	                {
-	                    var cmd = RegistryHelperLite.SwordKeyCommandValue;
-	                    Process.Start(cmd.Substring(1,cmd.Length - 7));
+			            if (Common.IsUnixOS())
+			            {
+				            Process.Start("/usr/bin/xiphos");
+			            }
+			            else
+			            {
+				            var cmd = RegistryHelperLite.SwordKeyCommandValue;
+				            Process.Start(cmd.Substring(1,cmd.Length - 7));
+			            }
 	                }
 	                catch
 	                {

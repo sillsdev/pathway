@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <UsingTask TaskName="UpdateAssemblies" AssemblyFile="../Installer/BuildTasks.dll"/>
+  <UsingTask TaskName="UpdateAssemblies" AssemblyFile="../DistFiles/BuildTasks.dll"/>
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
-  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="../Installer/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="../Installer/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="../Installer/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="../Installer/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -183,7 +183,7 @@
     <ProductName>Pathway $(Edition)</ProductName>
     <ConfTag>Pw7</ConfTag>
     <Status/>
-    <CodeAnalysisLogFile>bin\Corporate7BTE\../Installer.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Corporate7BTE\../DistFiles.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -205,7 +205,7 @@
     <Status>
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\../Installer.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\../DistFiles.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -217,7 +217,7 @@
   <ItemGroup>
     <Reference Include="BuildTasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\../Installer\BuildTasks.dll</HintPath>
+      <HintPath>.\../DistFiles\BuildTasks.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(MSBuildToolsPath)' != '' "/>

@@ -11,3 +11,9 @@
     }
     
 }
+
+@page :first {
+	@bottom-right{
+           content: counter( page);
+    }
+}

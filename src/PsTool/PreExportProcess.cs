@@ -316,6 +316,17 @@ namespace SIL.Tool
             };
             // figure out the dimensions of our rect based on the font info
             Font badgeFont = new Font("Times New Roman", 48);
+			if(bmp.Width <= 599)
+				badgeFont = new Font("Times New Roman", 42);
+			if(bmp.Width <= 499)
+				badgeFont = new Font("Times New Roman", 38);
+			if (bmp.Width <= 399)
+				badgeFont = new Font("Times New Roman", 32);
+			if (bmp.Width <= 299)
+				badgeFont = new Font("Times New Roman", 22);
+			if (bmp.Width <= 199)
+				badgeFont = new Font("Times New Roman", 14);
+
             SizeF size = g.MeasureString(strTitle, badgeFont, (bmp.Width - 20));
             int width = (int)Math.Ceiling(size.Width);
             int height = (int)Math.Ceiling(size.Height);
@@ -330,20 +341,53 @@ namespace SIL.Tool
             }
 
             // create the bounding rect, centered horizontally on the image
-            Rectangle rect = new Rectangle(((bmp.Size.Width / 2) - (width / 2)), 100, width, height);
-            // draw the badge (rect and string)
-            g.FillRectangle(Brushes.Brown, rect);
-            g.DrawRectangle(Pens.Gold, rect);
+            //Rectangle rect = new Rectangle(((bmp.Size.Width / 2) - (width / 2)), 100, width, height);
 
-            g.DrawString(strTitle, badgeFont, Brushes.Gold,
-                new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width / 2)), 100f), size), strFormat);
-
-            // save this puppy
-            string strCoverImageFile = Common.PathCombine(outputFolder, "cover.png");
-            bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
+	        if (bmp.Height >= 600)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 100, 100f, outputFolder);
+	        }
+	        else if (bmp.Height >= 500)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 80, 80f, outputFolder);
+	        }
+	        else if (bmp.Height >= 400)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 60, 60f, outputFolder);
+	        }
+	        else if (bmp.Height >= 300)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 40, 40f, outputFolder);
+	        }
+	        else if (bmp.Height >= 200)
+	        {
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 30, 30f, outputFolder);
+	        }
+			else if (bmp.Height >= 50)
+			{
+				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 20, 20f, outputFolder);
+			}
+            
         }
 
-        public string TitlePage()
+		private static Rectangle SetImageRectangleText(Bitmap bmp, int width, int height, Graphics g, string strTitle,
+			Font badgeFont, SizeF size, StringFormat strFormat, int lineHeight, float heightSize, string outputFolder)
+	    {
+		    Rectangle rect;
+			rect = new Rectangle(((bmp.Size.Width / 2) - (width / 2)), lineHeight, width, height);
+		    // draw the badge (rect and string)
+		    g.FillRectangle(Brushes.Brown, rect);
+		    g.DrawRectangle(Pens.Gold, rect);
+		    g.DrawString(strTitle, badgeFont, Brushes.Gold,
+				new RectangleF(new PointF(((bmp.Size.Width / 2) - (size.Width / 2)), heightSize), size), strFormat);
+
+			string strCoverImageFile = Common.PathCombine(outputFolder, "cover.png");
+			bmp.Save(strCoverImageFile, System.Drawing.Imaging.ImageFormat.Png);
+
+			return rect;
+	    }
+
+	    public string TitlePage()
         {
             if (Param.GetMetadataValue(Param.TitlePage).ToLower().Equals("false")) { return string.Empty; }
             var sb = new StringBuilder();
@@ -1480,7 +1524,56 @@ namespace SIL.Tool
             xdoc.Save(ProcessedXhtml);
         }
 
-        public void GetTempFolderPath()
+		/// <summary>
+		/// Remove xml:space in XHTML for Pdf using Prince
+		/// </summary>
+		public void HandleNewFieldworksChangeInXhtml(string xhtmlFileName)
+	    {
+			var xdoc = Common.DeclareXMLDocument(true);
+			var namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			xdoc.Load(xhtmlFileName);
+			// Remove attribute "xml:space" in the XHTML file.
+			const string xPath = "//xhtml:span[@xml:space='preserve']";
+			XmlNodeList spaceNodeList = xdoc.SelectNodes(xPath, namespaceManager);
+			if (spaceNodeList == null) return;
+			foreach (XmlNode spaceNode in spaceNodeList)
+			{
+				if (spaceNode.Attributes != null && (spaceNode.Attributes["xml:space"] != null))
+					spaceNode.Attributes.Remove(spaceNode.Attributes["xml:space"]);
+			}
+			xdoc.Save(xhtmlFileName);
+	    }
+
+		/// <summary>
+		/// Insert property for pictures to avoid overlapping
+		/// </summary>
+		/// <param name="cssFileName"></param>
+		public void HandleNewFieldworksChangeInCss(string cssFileName)
+	    {
+			TextWriter tw = new StreamWriter(cssFileName, true);
+			//Picture Property
+			tw.WriteLine(".pictureRight {");
+			tw.WriteLine("display: inline;");
+			tw.WriteLine("}");
+
+			tw.WriteLine(".pictureLeft {");
+			tw.WriteLine("display: inline;");
+			tw.WriteLine("}");
+
+			tw.WriteLine(".pictureCenter {");
+			tw.WriteLine("display: inline;");
+			tw.WriteLine("}");
+
+			tw.WriteLine(".picturePage {");
+			tw.WriteLine("display: inline;");
+			tw.WriteLine("}");
+
+			tw.Close();
+	    }
+
+
+	    public void GetTempFolderPath()
         {
             if (Directory.Exists(tempFolder))
             {
@@ -2809,24 +2902,29 @@ namespace SIL.Tool
         {
             if (File.Exists(cssFileName))
             {
-                var sr = new StreamReader(cssFileName);
-                string fileContent = sr.ReadToEnd();
-                sr.Close();
-                int searchPos = fileContent.Length;
-                while (true)
-                {
-                    int findFrom = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
-                    if (findFrom == -1)
-                    {
-                        break;
-                    }
-                    int closingbracePos = fileContent.IndexOf(";", findFrom) + 1;
-                    fileContent = fileContent.Substring(0, findFrom) + fileContent.Substring(closingbracePos);
-                    searchPos = findFrom - 1;
-                }
-                var sw = new StreamWriter(cssFileName);
-                sw.Write(fileContent);
-                sw.Close();
+	            string fileContent = string.Empty;
+	            using (var sr = new StreamReader(cssFileName))
+	            {
+		            fileContent = sr.ReadToEnd();
+		            sr.Close();
+		            int searchPos = fileContent.Length;
+		            while (true)
+		            {
+			            int findFrom = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
+			            if (findFrom == -1)
+			            {
+				            break;
+			            }
+			            int closingbracePos = fileContent.IndexOf(";", findFrom) + 1;
+			            fileContent = fileContent.Substring(0, findFrom) + fileContent.Substring(closingbracePos);
+			            searchPos = findFrom - 1;
+		            }
+	            }
+	            using (var sw = new StreamWriter(cssFileName))
+	            {
+		            sw.Write(fileContent);
+		            sw.Close();
+	            }
             }
         }
 
@@ -3083,10 +3181,16 @@ namespace SIL.Tool
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
         }
 
-        public void InsertBookPageBreak()
+		public void InsertBookPageBreak(string _refFormat)
         {
             if (_projInfo.ProjectInputType.ToLower() != "scripture")
             { return; }
+
+			var strBookType = string.Empty;
+			if (_refFormat.ToLower().IndexOf("gen 1") == 0)
+				strBookType = "scrBookCode";
+			else
+				strBookType = "scrBookName";
 
             if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
@@ -3108,9 +3212,8 @@ namespace SIL.Tool
                     bookLists[i].InsertBefore(divNode, bookLists[i].FirstChild);
 
                     XmlNode getBookName = bookLists[i].ParentNode;
-                    XmlNodeList bookNodeList = getBookName.SelectNodes("//span[@class='scrBookName']", namespaceManager);
+                    XmlNodeList bookNodeList = getBookName.SelectNodes("//span[@class='" + strBookType + "']", namespaceManager);
                     bookName = bookNodeList.Item(i).InnerText;
-
 
                     XmlNode divReferenceNode = xDoc.CreateElement("div");
                     XmlAttribute xmlReferenceAttribute = xDoc.CreateAttribute("class");

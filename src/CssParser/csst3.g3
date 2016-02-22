@@ -1,12 +1,10 @@
 grammar csst3;
 // See setup information: http://www.antlr.org/wiki/display/ANTLR3/Antlr3CSharpReleases
 options {
-        language=CSharp2;
-		// TokenLabelType=CommonToken;
+        language=CSharp;
         output=AST;
         ASTLabelType=CommonTree;
-        // k=4;
-		}
+	}
 
 tokens {
 	IMPORT;
@@ -47,7 +45,7 @@ public System.Collections.Generic.List<System.String> GetErrors() {
 
 public
 stylesheet
-	: importRule* (media | pageRule | ruleset)+
+	: (importRule | media | pageRule | ruleset)+
 	;
 
 importRule
@@ -76,7 +74,7 @@ selectors
 	;
 	
 selector
-	: elem selectorOperation* pseudo? ->  elem selectorOperation* pseudo*
+	: elem selectorOperation* pseudo* ->  elem selectorOperation* pseudo*
 	| pseudo -> ANY pseudo 
 	;
 
@@ -160,6 +158,7 @@ STRING
 
 NUM
 	:	'-'? ('0'..'9')+ ('.' ('0'..'9')+)?
+	|	'-'? '.' ('0'..'9')+
 	;
 
 COLOR

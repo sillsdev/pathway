@@ -14,7 +14,7 @@
 
 
 @page :first {
-    @bottom-center {
+    @bottom-right {
            content: counter( page);
     }
 }

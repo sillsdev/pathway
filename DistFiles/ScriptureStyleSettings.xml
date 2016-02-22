@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="38">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="39">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
@@ -80,6 +80,25 @@
       <option name="14" file="font_size_14_16.css" />
       <option name="15" file="font_size_15_17.css" />
       <option name="No Change" file="font_size_nc.css" />
+    </feature>
+	<feature name="Header Size">
+	  <option name="14"  file="Font_HeaderSize_14.css" />
+	  <option name="12"  file="Font_HeaderSize_12.css" />
+	  <option name="11"  file="Font_HeaderSize_11.css" />
+	  <option name="10"  file="Font_HeaderSize_10.css" />
+	  <option name="9" file="Font_HeaderSize_9.css" />
+	  <option name="8" file="Font_HeaderSize_8.css" />
+	  <option name="Same as body" file="Font_HeaderSize_nc.css" />
+	  <option name="Same as headword" file="Font_HeaderSize_nc.css" />
+    </feature>
+	<feature name="Headword Size">
+      <option name="14" file="Headword_Size_14.css" />
+      <option name="12" file="Headword_Size_12.css" />
+      <option name="11" file="Headword_Size_11.css" />
+      <option name="10" file="Headword_Size_10.css" />
+      <option name="9" file="Headword_Size_9.css" />
+      <option name="8" file="Headword_Size_8.css" />
+      <option name="No Change" file="Headword_Size_nc.css" />
     </feature>
     <feature name="Font Size / Leading">
       <option name="9 / 11" file="font_size_9_11.css" />
