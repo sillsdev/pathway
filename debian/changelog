@@ -1,3 +1,49 @@
+pathway (1.14.0)  experimental; urgency=high
+
+  * Common:TD-4011:Text overlaps with Picture
+  * Common:TD-4460 Two page numbers appeared it on same page
+  * Common:TD-4461 Creator label missing in Linux dialog
+  * Epub:TD-4267 Epub output when number in the dictionary
+  * Epub:TD-4381 Epub book title appears too low on cover page
+  * Epub:TD-4503 Flex to Epub Null Exception
+  * Epub:TD-4503 Open Epub File Type dialog text visibility
+  * Help:TD-4256 Hook up help button for hyphenation tab
+  * Help:Update to remove 80th anniversary logo
+  * OO/LO:TD-4522 Fix inflection export with sense numbers
+  * OO/LO:TD-4196 Pages show wrong guidewords when Mirrored error message
+  * OO/LO:No Guidewords when Running Header is None
+  * OO/LO:Fix Gen 1 type guideword
+  * OO/LO:TD-4470 TitlePage Title not showing properly
+  * OO/LO:TD-4488 Use TIF for libreoffice and other print oriented
+  * OO/LO:TD-4504 Internet link color ignored
+  * OO/LO:TD-4505 Windows 10 Spacing Problem
+  * OO/LO:TD-4509 Spacing elements of entries and subentries
+  * OO/LO:TD-4550 look for more than _1 in file name before deleting.
+  * OO/LO:TD-4551 Configuration Tool not saving settings
+  * OO/LO:TD-4547 Verify all guide word and page number combinations
+  * OO/LO:TD-4553 When page number in footer make it the same on all pages
+  * SW:TD-4496 Update FixEpub.xsl to force XML output
+  * SW:Include install and launch of sword module if client present
+  * SW:Update sword results and install for Ubuntu.
+  * Styles:Update Mexico styles as per Tom's request
+  * Styles:Mexico Styles for Epub
+  * Styles:TD-4558 Update CSS parser to handle multiple pseudo selectors
+  * Styles:TD-4559 update css to correct errors that cause parser to fail
+  * Styles:TD-4560 test all files in DistFiles/Styles
+  * UI:TD-4258 Linux - can only see Info/Properties/Preview tabs
+  * UI:TD-4258 Linux ConfigurationTool Adjusting tab control
+  * UI:TD-4455 Linux text overlaps in about dialog
+  * UI:TD-4456 Crash while clicking on the edit layout
+  * UI:TD-4463 Not able to change the base font size in Scripture
+  * UI:TD-4465 Pathway ConfigurationTool shows different Version
+  * XeLaTex:TD-4445 Exporting to Xelatex has no pictures
+  * XeLaTex:TD-4525 Add Letter Header Language preprocessing
+  * Build:Improve Linux build and packaging
+  * Build:Installer background, Menu, ReadMe, Help, License, Tutorial
+  * Build:Update to allow builds with pbuilder
+
+ -- Greg Trihus <greg_trihus@sil.org>  Mon, 22 Feb 2016 16:20:41 -0600
+
 pathway (1.13.4) experimental; urgency=high
 
   * epub:TD-4403 Crash exporting to EPUB from Flex and Paratext
