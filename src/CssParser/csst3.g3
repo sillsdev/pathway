@@ -45,7 +45,7 @@ public System.Collections.Generic.List<System.String> GetErrors() {
 
 public
 stylesheet
-	: importRule* (media | pageRule | ruleset)+
+	: (importRule | media | pageRule | ruleset)+
 	;
 
 importRule

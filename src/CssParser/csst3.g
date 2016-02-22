@@ -29,7 +29,7 @@ tokens {
 
 public
 stylesheet
-	: importRule* (media | pageRule | ruleset)+
+	: (importRule | media | pageRule | ruleset)+
 	;
 
 importRule
