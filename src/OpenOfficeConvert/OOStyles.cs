@@ -2093,18 +2093,7 @@ namespace SIL.PublishingSolution
                 }
                 _writer.WriteAttributeString("svg:y", value);
 
-
-                string frameWidth = "145pt";
-
-                if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:page-width"]))
-                {
-                    if (Convert.ToDouble(_pageLayoutProperty["fo:page-width"].Replace("pt", "")) < 400)
-                    {
-                        frameWidth = "100pt";
-                    }
-                }
-
-                _writer.WriteAttributeString("fo:min-width", frameWidth);
+				_writer.WriteAttributeString("fo:min-width", GetRightGUidewordFrameWidth());
 
                 _writer.WriteAttributeString("draw:z-index", "1");
                 _writer.WriteStartElement("draw:text-box");
@@ -2145,7 +2134,27 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void CreateEmptyHeader(bool isLeftGuidewordNeeded)
+		/// <summary>
+		/// To set correct width to the Right Guideword Frame to avoid overlap by @top-center content
+		/// </summary>
+		/// <returns>points in string</returns>
+	    private string GetRightGUidewordFrameWidth()
+	    {
+		    string frameWidth = "145pt";
+			if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:page-width"]) && !String.IsNullOrEmpty(_pageLayoutProperty["fo:margin-left"]) && !String.IsNullOrEmpty(_pageLayoutProperty["fo:margin-right"]))
+			{
+				double calcWidth = Convert.ToDouble(_pageLayoutProperty["fo:page-width"].Replace("pt", "")) -
+								   (Convert.ToDouble(_pageLayoutProperty["fo:margin-left"].Replace("pt", "")) +
+									Convert.ToDouble(_pageLayoutProperty["fo:margin-right"].Replace("pt", "")));
+				if (calcWidth < 400)
+				{
+					frameWidth = "100pt";
+				}
+			}
+		    return frameWidth;
+	    }
+
+	    private void CreateEmptyHeader(bool isLeftGuidewordNeeded)
         {
             string hf = "Header";
             _writer.WriteStartElement("style:" + hf.ToLower());

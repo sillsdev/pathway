@@ -912,7 +912,7 @@
       </style:header>
       <style:footer>
         <text:p text:style-name="Footer">
-          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="35.25pt" fo:min-width="145pt" draw:z-index="1">
+          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="35.25pt" fo:min-width="100pt" draw:z-index="1">
             <draw:text-box fo:min-height="19.00pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">
