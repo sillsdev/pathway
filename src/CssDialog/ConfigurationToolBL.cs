@@ -913,7 +913,7 @@ namespace SIL.PublishingSolution
 						writeCss.WriteLine(importStatement);
 
 					// changes for paper media
-					if (MediaType == "paper")
+					if (MediaType == "paper" && tabDisplay.Visible)
 					{
 						SetAttributesForPaperProperties(writeCss);
 					}
