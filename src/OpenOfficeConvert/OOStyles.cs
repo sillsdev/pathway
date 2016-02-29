@@ -127,11 +127,11 @@ namespace SIL.PublishingSolution
             {
                 if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("class-margin-left"))
                 {
-                    string subEntrySize = _cssProperty["subentry"]["class-margin-left"];
-                    string entrySize = _cssProperty["entry"]["class-margin-left"];
+                    int subEntrySize = Int16.Parse(_cssProperty["subentry"]["class-margin-left"]);
+                    int entrySize = Int16.Parse(_cssProperty["entry"]["class-margin-left"]);
                     if (subEntrySize == entrySize)
                     {
-                        _cssProperty["entry"]["class-margin-left"] = "0";
+						_cssProperty["subentry"]["class-margin-left"] = (subEntrySize + (entrySize/2)).ToString();
                     }
                 }
             }

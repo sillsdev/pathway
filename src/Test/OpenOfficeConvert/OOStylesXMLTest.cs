@@ -1318,6 +1318,24 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
         }
 
+		///<summary>
+		/// When Entry and SubEntry have same margin-left, calculate part add half-of the entry value to SubEntry to maintain indent.
+		/// </summary> 
+		[Test]
+		public void EntrySubEntrySameMarginLeft_Node()
+		{
+			const string file = "EntrySubEntryMarginLeft";
+			string input = FileInput(file + ".css");
+			string output = FileOutput(file + "styles.xml");
+			GetCssClass(input, output);
 
+			string xpath = "//style:style[@style:name='subentry']";
+			_validate = new ValidateXMLFile(output);
+			_validate.ClassName = string.Empty;
+			_validate.ClassProperty.Add("fo:margin-left", "18pt");
+
+			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
+			Assert.IsTrue(returnValue);
+		}
     }
 }
