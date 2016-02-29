@@ -579,6 +579,7 @@ namespace SIL.PublishingSolution
 
         private void InsertFrontMatter(StreamWriter sw)
         {
+	        bool isLinux = Common.UnixVersionCheck();
             string xeLaTexInstallationPath = string.Empty;
             String tableOfContent = string.Empty;
             if (Convert.ToBoolean(CoverImage) || Convert.ToBoolean(TitleInCoverPage))
@@ -616,16 +617,30 @@ namespace SIL.PublishingSolution
 
                 if (Convert.ToBoolean(IncludeBookTitleintheImage))
                 {
-                    tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
-                    tableOfContent += "\\vskip 60pt \r\n";
+	                if (isLinux)
+	                {
+						tableOfContent += "\\font\\CoverPageHeading=\"Liberation Serif/B\":color=000000 at 22pt \r\n";
+	                }
+	                else
+	                {
+		                tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+	                }
+	                tableOfContent += "\\vskip 60pt \r\n";
                     tableOfContent += "\\begin{center} \r\n";
                     tableOfContent += "\\CoverPageHeading{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
                     tableOfContent += "\\end{center} \r\n";
                 }
                 else
                 {
-                    tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
-                    tableOfContent += "\\vskip 60pt \r\n";
+	                if (isLinux)
+	                {
+		                tableOfContent += "\\font\\CoverPageHeading=\"Liberation Serif/B\":color=000000 at 22pt \r\n";
+	                }
+	                else
+	                {
+						tableOfContent += "\\font\\CoverPageHeading=\"Times New Roman/B\":color=000000 at 22pt \r\n";
+	                }
+	                tableOfContent += "\\vskip 60pt \r\n";
                     tableOfContent += "\\begin{center} \r\n";
                     tableOfContent += "\\CoverPageHeading{" + " " + "} \r\n";
                     tableOfContent += "\\end{center} \r\n";
@@ -665,7 +680,7 @@ namespace SIL.PublishingSolution
                 copyRightFilePath = Common.PathCombine(copyRightFilePath, logoFileName);
                 if (File.Exists(copyRightFilePath))
                 {
-                    if (Common.UnixVersionCheck())
+					if (isLinux)
                     {
                         string logoTitleFileName = logoFileName;
                         logoTitleFileName = Common.PathCombine(Path.GetTempPath(), logoTitleFileName);

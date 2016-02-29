@@ -684,7 +684,7 @@ namespace SIL.PublishingSolution
                     letterletHeadStyle = letterletHeadStyle + classNameWOLang;
                 }
                 letterletHeadStyle = letterletHeadStyle.Replace("-", "") + "letHead";
-                if (_childName.IndexOf(letterletHeadStyle) == 0 && content != null)
+                if (_childName.Contains(letterletHeadStyle) && content != null)
                 {
                     _tocStartingPage = content;
                     _tocStartingPage = _tocStartingPage.Replace("~", "\\textasciitilde{~}");
