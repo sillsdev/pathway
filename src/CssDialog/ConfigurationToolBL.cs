@@ -374,7 +374,7 @@ namespace SIL.PublishingSolution
 		{
 			get
 			{
-				string defaultValue = "Top Center";
+				string defaultValue = "None";
 				if (_loadType == "Dictionary")
 				{
 					foreach (string srchKey in pageDict.Keys)
@@ -913,7 +913,7 @@ namespace SIL.PublishingSolution
 						writeCss.WriteLine(importStatement);
 
 					// changes for paper media
-					if (MediaType == "paper" && tabDisplay.Visible)
+					if (MediaType == "paper")
 					{
 						SetAttributesForPaperProperties(writeCss);
 					}
@@ -3925,7 +3925,7 @@ namespace SIL.PublishingSolution
 						}
 						cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
 
-						if (enText.ToLower() == "none")
+						if (enText.ToLower() == "none" && cTool.DdlRunningHead.Text.ToLower() == "none")
 						{
 							value = LocalizeItems.LocalizeItem("Reference Format", value);
 							cTool.DdlReferenceFormat.Items.Add(new ComboBoxItem(enText, value));
@@ -4764,7 +4764,7 @@ namespace SIL.PublishingSolution
 			}
 			PreviousStyleName = cTool.StylesGrid.Rows[SelectedRowIndex].Cells[0].Value.ToString();
 			WriteCss();
-
+			ShowCSSValue();
 		}
 
 		public void chkTurnOffFirstVerse_CheckStateChangedBL(object sender, EventArgs e)
