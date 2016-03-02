@@ -4772,8 +4772,8 @@ namespace SIL.PublishingSolution
 				ShowInfoValue();
 			}
 			PreviousStyleName = cTool.StylesGrid.Rows[SelectedRowIndex].Cells[0].Value.ToString();
-			WriteCss();
 			ShowCSSValue();
+			WriteCss();
 		}
 
 		public void chkTurnOffFirstVerse_CheckStateChangedBL(object sender, EventArgs e)
