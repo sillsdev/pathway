@@ -13,7 +13,8 @@
 output/*
 BuildStep.exe
 src/_*
-src/Releases
+releases
+testResults
 src/Reference
 src/bin
 src/debian/files
