@@ -1416,7 +1416,7 @@ namespace SIL.PublishingSolution
         /// <returns>Full path / filename of the xslt file</returns>
         private string GetXsltFile()
         {
-            string xsltFullName = Common.FromRegistry("TE_XHTML-to-epub_XHTML.xslt");
+            string xsltFullName = Common.FromRegistry("Xhtml-Epub.xslt");
             if (!File.Exists(xsltFullName))
                 return "";
             var tempXslt = Common.PathCombine(Path.GetTempPath(), Path.GetFileName(xsltFullName));
