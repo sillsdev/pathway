@@ -1,0 +1,13 @@
+/* Top Center.css */
+@page {
+    @top-center{
+           content: counter( page);
+    }
+}
+
+@page :first {
+	@bottom-center{
+           content: counter( page);
+    }
+}
+

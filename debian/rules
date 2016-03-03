@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh  $@ --with cli
+
+override_dh_clideps:
+	dh_clideps \
+		--exclude-moduleref=MAPI32.DLL \
+		--exclude-moduleref=Mpr.dll \
+		--exclude-moduleref=icuuc40.dll \
+		--exclude-moduleref=icuin40.dll

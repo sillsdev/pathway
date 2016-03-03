@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="UpdateAssemblies" AssemblyFile="../DistFiles/BuildTasks.dll"/>
+  <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
+  <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
+  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Any CPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|Any CPU' ">
+    <OutputPath>bin\Release7BTE\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|Any CPU' ">
+    <OutputPath>bin\Release7SE\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|Any CPU' ">
+    <OutputPath>bin\Corporate7BTE\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status></Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|Any CPU' ">
+    <OutputPath>bin\Corporate7SE\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status></Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|Any CPU' ">
+    <OutputPath>bin\PwCtx\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
+    <OutputPath>bin\x86\Release7BTE\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
+    <OutputPath>bin\x86\Release7SE\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
+    <OutputPath>bin\x86\Corporate7BTE\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status></Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
+    <OutputPath>bin\x86\Corporate7SE\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status></Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PwCtx|x86' ">
+    <OutputPath>bin\x86\PwCtx\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|Any CPU' ">
+    <OutputPath>bin\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
+    <OutputPath>bin\x86\PathwayXeLaTeX\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayYouVersion|Any CPU' ">
+    <OutputPath>bin\PathwayYouVersion\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayYouVersion|x86' ">
+    <OutputPath>bin\x86\PathwayYouVersion\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Status>Testing</Status>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
+    <OutputPath>bin\Corporate7EPUB\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>EPUB</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status/>
+    <CodeAnalysisLogFile>bin\Corporate7BTE\../DistFiles.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
+    <OutputPath>bin\x86\Corporate7EPUB\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>EPUB</Edition>
+    <ProductName>Pathway $(Edition)</ProductName>
+    <ConfTag>Pw7</ConfTag>
+    <Status>
+    </Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\../DistFiles.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Reference Include="BuildTasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\../DistFiles\BuildTasks.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(MSBuildToolsPath)' != '' "/>
+  <Import Project="C:\Windows\Microsoft.NET\Framework64\v2.0.50727\Microsoft.CSharp.targets" Condition=" '$(MSBuildToolsPath)' == '' "/>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets. -->
+  <Target Name="MyTest">
+    <Message Text="Path: $(MSBuildToolsPath)" Importance="high" />
+  </Target>
+  <Target Name="BuildAll">
+    <CallTarget Targets="Clean"/>
+    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <CallTarget Targets="Corporate7BTE"/>
+    <CallTarget Targets="Release7BTE"/>
+    <CallTarget Targets="Release7SE"/>
+    <CallTarget Targets="Corporate7SE"/>
+    <!-- CallTarget Targets="PwCtx"/ -->
+    <Copy SourceFiles="@(Dll604)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
+      OverwriteReadOnlyFiles="true"/>
+    <CallTarget Targets="CorporateBTE604"/>
+    <CallTarget Targets="CorporateSE604"/>
+    <CallTarget Targets="ReleaseBTE604"/>
+    <Copy SourceFiles="@(Dll605)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
+      OverwriteReadOnlyFiles="true"/>
+    <CallTarget Targets="CorporateBTE605"/>
+    <CallTarget Targets="CorporateSE605"/>
+    <Copy SourceFiles="@(Dll606)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
+      OverwriteReadOnlyFiles="true"/>
+    <CallTarget Targets="CorporateBTE606"/>
+    <CallTarget Targets="CorporateSE606"/>
+    <CallTarget Targets="ReleaseBTE606"/>
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="Clean"/>
+    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <CallTarget Targets="Corporate7BTE"/>
+    <CallTarget Targets="Release7BTE"/>
+    <CallTarget Targets="Release7SE"/>
+    <CallTarget Targets="Corporate7SE"/>
+  </Target>
+  <Target Name="Build60">
+    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <Copy SourceFiles="@(Dll604)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
+      OverwriteReadOnlyFiles="true"/>
+    <CallTarget Targets="CorporateBTE604"/>
+    <CallTarget Targets="CorporateSE604"/>
+    <CallTarget Targets="ReleaseBTE604"/>
+    <Copy SourceFiles="@(Dll605)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
+      OverwriteReadOnlyFiles="true"/>
+    <CallTarget Targets="CorporateBTE605"/>
+    <CallTarget Targets="CorporateSE605"/>
+    <Copy SourceFiles="@(Dll606)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
+      OverwriteReadOnlyFiles="true"/>
+    <CallTarget Targets="CorporateBTE606"/>
+    <CallTarget Targets="CorporateSE606"/>
+    <CallTarget Targets="ReleaseBTE606"/>
+  </Target>
+  <Target Name="Daily">
+    <CallTarget Targets="Clean"/>
+    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <CallTarget Targets="Release7BTE"/>
+  </Target>
+  <Target Name="DailySE">
+    <CallTarget Targets="Clean"/>
+    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <CallTarget Targets="Release7SE"/>
+  </Target>
+  <Target Name="BeforeBuild"/>
+  <Target Name="AfterBuild"/>
+  <Target Name="Clean">
+    <CallTarget Targets="RemoveSprint"/>
+    <!-- See: http://en.csharp-online.net/MSBuild:_By_Example%E2%80%94Understanding_the_Difference_between_@_and_%25 and http://en.csharp-online.net/MSBuild:_By_Example%E2%80%94Introducing_Well-Known_Metadata -->
+    <!-- See also: http://stackoverflow.com/questions/1502410/msbuild-passing-parameters-to-calltarget -->
+    <CallTarget Targets="RemoveBinaries"/>
+    <CallTarget Targets="RemoveBuild"/>
+    <CallTarget Targets="RemovePythonBinaries"/>
+    <CallTarget Targets="RemoveTestResults"/>
+  </Target>
+  <ItemGroup>
+    <TestOutput Include="**\TestFiles\output\**"/>
+    <PathwayProjects Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;BookletBuilder;Installer;BuildTasks;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;SwordConvert;TestBed;Test;theWordConvert;WordPressConvert;XeLaTexConvert;XslProcess" />
+    <PathwayTests Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;Build;ConfigurationTool;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExeUi;SwordConvert;theWordConvert;WordPressConvert;XeLatex;XhtmlExport"/>
+    <RampTests Include="PathwayB;epubConvert" />
+  </ItemGroup>
+  <Target Name="RemoveSprint">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Sprint" Condition="Exists(Sprint)"/>
+    <RemoveDir Directories="Sprint" Condition="Exists(Sprint)"/>
+  </Target>
+  <Target Name="RemoveFolder">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="$(folder)" Condition="Exists($(folder))"/>
+    <RemoveDir Directories="$(folder)" Condition="Exists($(folder))"/>
+  </Target>
+  <Target Name="RemoveBinaries">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="%(PathwayProjects.Identity)\bin" Condition="Exists('%(PathwayProjects.Identity)\bin')"/>
+    <RemoveDir Directories="%(PathwayProjects.Identity)\bin" Condition="Exists('%(PathwayProjects.Identity)\bin')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="%(PathwayProjects.Identity)\obj" Condition="Exists('%(PathwayProjects.Identity)\obj')"/>
+    <RemoveDir Directories="%(PathwayProjects.Identity)\obj" Condition="Exists('%(PathwayProjects.Identity)\obj')"/>
+  </Target>
+  <Target Name="RemoveBuild">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="..\Installer\Files" Condition="Exists('..\Installer\Files')"/>
+    <RemoveDir Directories="..\Installer\Files" Condition="Exists('..\Installer\Files')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="..\Installer\Wix" Condition="Exists('..\Installer\Wix')"/>
+    <RemoveDir Directories="..\Installer\Wix" Condition="Exists('..\Installer\Wix')"/>
+  </Target>
+  <Target Name="RemovePythonBinaries">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="WordPressConvert\build" Condition="Exists('WordPressConvert\build')"/>
+    <RemoveDir Directories="WordPressConvert\build" Condition="Exists('WordPressConvert\build')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="WordPressConvert\dist" Condition="Exists('WordPressConvert\dist')"/>
+    <RemoveDir Directories="WordPressConvert\dist" Condition="Exists('WordPressConvert\dist')"/>
+  </Target>
+  <Target Name="RemoveTestResults">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Test\%(PathwayTests.Identity)\TestFiles\output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\output')"/>
+    <RemoveDir Directories="Test\%(PathwayTests.Identity)\TestFiles\output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\output')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="Test\%(PathwayTests.Identity)\TestFiles\Output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\Output')"/>
+    <RemoveDir Directories="Test\%(PathwayTests.Identity)\TestFiles\Output" Condition="Exists('Test\%(PathwayTests.Identity)\TestFiles\Output')"/>
+    <Delete Files="Test\%(RampTests.Identity)\TestFiles\Output.ramp" />
+  </Target>
+  <Target Name="Corporate7BTE">
+    <Message Text="Status: $(Status)" Importance="high" />
+    <MSBuild Projects="PublishingSolution.sln" Targets="Build"
+      Properties="Configuration=Corporate7BTE;Platform=$(Platform)"/>
+    <Message Text="Status: $(Status)" Importance="high" />
+  </Target>
+  <Target Name="Corporate7EPUB">
+    <Message Text="Status: $(Status)" Importance="high" />
+    <MSBuild Projects="PublishingSolution.sln" Targets="Build"
+      Properties="Configuration=Corporate7EPUB;Platform=$(Platform)"/>
+    <Message Text="Status: $(Status) / OutputPath: $(OutputPath)" Importance="high" />
+  </Target>
+  <Target Name="Corporate7SE">
+    <MSBuild Projects="PublishingSolution.sln" Targets="Build"
+      Properties="Configuration=Corporate7SE;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="Release7BTE">
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+      Properties="Configuration=Release7BTE;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="Release7SE">
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+      Properties="Configuration=Release7SE;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="PwCtx">
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+      Properties="Configuration=PwCtx;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="PathwayXeLaTeX" DependsOnTargets="">
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+      Properties="Configuration=PathwayXeLaTeX;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="PathwayYouVersion">
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+      Properties="Configuration=PathwayYouVersion;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="Checking">
+    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+      Properties="Configuration=Checking;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="CorporateBTE">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=CorporateBTE;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="CorporateSE">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=CorporateSE;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="CorporateBTE604">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=CorporateBTE604;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="CorporateSE604">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=CorporateSE604;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="CorporateBTE605">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=CorporateBTE605;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="CorporateSE605">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=CorporateSE605;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="CorporateBTE606">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=CorporateBTE606;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="CorporateSE606">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=CorporateSE606;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="ReleaseBTE">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=ReleaseBTE;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="ReleaseBTE604">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=ReleaseBTE604;Platform=$(Platform)"/>
+  </Target>
+  <Target Name="ReleaseBTE606">
+    <MSBuild Projects="PublishingSolution60.sln" Targets="Rebuild"
+      Properties="Configuration=ReleaseBTE606;Platform=$(Platform)"/>
+  </Target>
+  <ItemGroup>
+    <Dll606 Include=".\PsExport\Dlls606\*.dll"/>
+    <Dll605 Include=".\PsExport\Dlls605\*.dll"/>
+    <Dll604 Include=".\PsExport\Dllstable\*.dll"/>
+  </ItemGroup>
+  <Target Name="TlGetInstaller">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="XeLaTexConvert" Match="TexLive"/>
+    <MakeDir Directories="XeLaTexConvert\TexLive" />
+    <CallTarget Targets="TlGetWinInstaller" Condition="$(OS) != 'Linux'"/>
+    <CallTarget Targets="TlGetUnxInstaller" Condition="$(OS) == 'Linux'"/>
+  </Target>
+  <ItemGroup>
+    <repo Include="http://ftp.math.purdue.edu/mirrors/ctan.org/systems/texlive/tlnet"/>
+    <!-- repo Include="http://mirror.math.ku.edu/tex-archive/systems/texlive/tlnet"/>
+    <repo Include="http://mirror.ctan.org/systems/texlive/tlnet"/ -->
+  </ItemGroup>
+  <Target Name="TlGetWinInstaller">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="TexLive">
+      <Output TaskParameter="Folders" ItemName="InstallerDir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@InstallerDir@/install-tl.zip" OldValue="@InstallerDir@" NewValue="%(InstallerDir.Identity)">
+      <Output PropertyName="RepoZip" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <Message Text="cmd: $(cmd2)" Importance="high" />
+    <Message Text="InstallerDir: %(InstallerDir.Identity)" Importance="high" />
+
+    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="%(repo.Identity)/install-tl.zip" FileName="$(RepoZip)"/>
+    <Exec Command="dir %(InstallerDir.Identity)"/>
+    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="%(InstallerDir.Identity)" ZipFileName="%(InstallerDir.Identity)\install-tl.zip"/>
+    <Exec Command="dir %(InstallerDir.Identity)\*.bat /s"/>
+  </Target>
+  <Target Name="TlGetUnxInstaller">
+    <!--MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="/usr/local" Match="texlive"/ -->
+    <!-- MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="~" Match=".texlive2011"/ -->
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="TexLive">
+      <Output TaskParameter="Folders" ItemName="InstallerWorkDir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="InstallerWorkDir: %(InstallerWorkDir.Identity)" Importance="high" />
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@InstallerWorkDir@/install-tl-unx.tar.gz" OldValue="@InstallerWorkDir@" NewValue="%(InstallerWorkDir.Identity)">
+      <Output PropertyName="ArchiveName" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <Message Text="ArchiveName: $(ArchiveName)" Importance="high" />
+    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://ftp.math.purdue.edu/mirrors/ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz" FileName="$(ArchiveName)"/>
+    <Exec Command="tar -xzf install-tl-unx.tar.gz" WorkingDirectory="%(InstallerWorkDir.Identity)"/>
+  </Target>
+
+  <Target Name="TlInstall">
+    <CallTarget Targets="TlWinInstall" Condition="$(OS) != 'Linux'"/>
+    <CallTarget Targets="TlUnxInstall" Condition="$(OS) == 'Linux'"/>
+  </Target>
+  <Target Name="TlUnxInstall">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert/TexLive" Match="install-tl-*">
+      <Output TaskParameter="Folders" ItemName="InstallerWorkDir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="InstallerWorkDir: %(InstallerWorkDir.Identity)" Importance="high" />
+
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="XeLaTexConvert" Match="XeLaTexExe"/>
+    <MakeDir Directories="XeLaTexConvert\XeLaTexExe" />
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="XeLaTexExe">
+      <Output TaskParameter="Folders" ItemName="TexLiveExeDir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="TexLiveExeDir: %(TexLiveExeDir.Identity)" Importance="high" />
+
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="cd @InstallerWorkDir@; export TEXLIVE_INSTALL_PREFIX=@TexLiveExeDir@; echo i|./install-tl -scheme=scheme-minimal -portable" OldValue="@InstallerWorkDir@" NewValue="%(InstallerWorkDir.Identity)">
+      <Output PropertyName="cmd1" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="$(cmd1)" OldValue="@TexLiveExeDir@" NewValue="%(TexLiveExeDir.Identity)">
+      <Output PropertyName="cmd2" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <Message Text="Out: $(cmd2)" Importance="high" />
+
+    <Exec Command="$(cmd2)"/>
+    <CallTarget Targets="TlUnxPkgInstall"/>
+  </Target>
+  <Target Name="TlUnxPkgInstall">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert\XeLaTexExe\bin" Match="i386-linux|x86_64-linux">
+      <Output TaskParameter="Folders" ItemName="TlExeBinDir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="cd @TlExeBinDir@" OldValue="@TlExeBinDir@" NewValue="%(TlExeBinDir.Identity)">
+      <Output PropertyName="cmd3" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <Exec Command="$(cmd3);./tlmgr install %(modules.Identity)"/>
+  </Target>
+  <ItemGroup>
+    <modules Include="latex l3kernel l3packages etoolbox"/>
+    <modules Include="lm fontspec euenc tipa xkeyval xunicode"/>
+    <modules Include="fancyhdr float graphics hanging mdframed oberdiek"/>
+    <modules Include="setspace tools xcolor eso-pic geometry lettrine"/>
+    <modules Include="bidi iftex xetex xetex-def needspace"/>
+  </ItemGroup>
+  <Target Name="TlWinPkgInstall">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert\XeLaTexExe\bin" Match="win32">
+      <Output TaskParameter="Folders" ItemName="TlExeBinDir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <Message Text="TlExeBinDir: %(TlExeBinDir.Identity)" Importance="high" />
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@TlExeBinDir@\tlmgr.bat" OldValue="@TlExeBinDir@" NewValue="%(TlExeBinDir.Identity)">
+      <Output PropertyName="cmd3" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <Message Text="cmd3: $(cmd3)" Importance="high" />
+    <Exec Command="$(cmd3) install %(modules.Identity)" WorkingDirectory="%(TlExeBinDir.Identity)"/>
+  </Target>
+  <Target Name="TlWinInstall">
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert/TexLive" Match="install-tl-*">
+      <Output TaskParameter="Folders" ItemName="InstallerWorkDir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@InstallerWorkDir@" OldValue="@InstallerWorkDir@" NewValue="%(InstallerWorkDir.Identity)">
+      <Output PropertyName="InstallerWorkProp" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <Message Text="InstallerWorkProp: $(InstallerWorkProp)" Importance="high" />
+
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="DeleteAll" Path="XeLaTexConvert" Match="XeLaTexExe"/>
+    <MakeDir Directories="XeLaTexConvert\XeLaTexExe" />
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="XeLaTexExe">
+      <Output TaskParameter="Folders" ItemName="TexLiveExeDir"/>
+    </MSBuild.ExtensionPack.FileSystem.Folder>
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@TexLiveExeDir@" OldValue="@TexLiveExeDir@" NewValue="%(TexLiveExeDir.Identity)">
+      <Output PropertyName="TexLiveExeProp" TaskParameter="NewString"/>
+    </MSBuild.ExtensionPack.Framework.TextString>
+    <Message Text="TexLiveExeDir: $(TexLiveExeProp)" Importance="high" />
+
+    <WriteLinesToFile File="%(InstallerWorkDir.Identity)\tlpw.profile" Overwrite="true" Lines="
+# texlive.profile written on Tue Sep 13 10:00:58 2011 UTC
+# It will NOT be updated and reflects only the
+# installation profile at installation time.
+selected_scheme scheme-minimal
+TEXDIR $(TexLiveExeProp)
+TEXMFCONFIG $TEXMFSYSCONFIG
+TEXMFHOME $TEXMFLOCAL
+TEXMFLOCAL $(TexLiveExeProp)/texmf-local
+TEXMFSYSCONFIG $(TexLiveExeProp)/texmf-config
+TEXMFSYSVAR $(TexLiveExeProp)/texmf-var
+TEXMFVAR $TEXMFSYSVAR
+binary_win32 1
+collection-basic 1
+collection-wintools 1
+doc_splitting_supported 1
+inst_platform win32
+option_adjustrepo 1
+option_autobackup 1
+option_backupdir tlpkg/backups
+option_fmt 1
+option_letter 1
+option_path 1
+option_post_code 1
+option_src 1
+option_sys_bin /usr/local/bin
+option_sys_info /usr/local/share/info
+option_sys_man /usr/local/share/man
+option_write18_restricted 1
+portable 1
+" />
+
+    <Exec Command="echo y| $(InstallerWorkProp)\install-tl-advanced.bat -profile tlpw.profile -repository %(repo.Identity)" WorkingDirectory="$(InstallerWorkProp)"/>
+    <CallTarget Targets="TlWinPkgInstall"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-ka.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-th.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-zh-latn-pinyin.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-pms.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-uk.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-tr.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-tk.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-te.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-as.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-ta.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-sv.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-sl.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-bg.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-sa.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-ro.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-pa.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-bn.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-or.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-mul-ethi.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-mr.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-mn-cyrl.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-ml.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-lv.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-lt.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-cop.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-lo.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-la.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-kn.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-kmr.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-it.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-is.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-hy.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-cy.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-hu.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-hr.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-hi.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-da.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-gu.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-grc.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-gl.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-de-1901.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-fr.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-fi.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-eu.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-de-1996.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-et.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-es.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-eo.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-fur.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-rm.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-de-ch-1901.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-el-polyton.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-el-monoton.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\tex\generic\hyph-utf8\patterns\txt\hyph-la-x-classic.hyp.txt"/>
+    <Copy SourceFiles="$(TexLiveExeProp)\..\empty-hyph.txt" DestinationFiles="$(TexLiveExeProp)\texmf-dist\doc\xelatex\bidi\presentation-sample.tex"/>
+  </Target>
+</Project>

@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <UsingTask TaskName="NUnitTeamCity" AssemblyFile="$(agent_home_dir)/plugins/dotnetPlugin/bin/JetBrains.BuildServer.MSBuildLoggers.dll" />
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{222CBAAB-B338-4670-A553-B6154E582FC8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test</RootNamespace>
+    <AssemblyName>Test</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <TeamCityRootDir>$(teamcity_build_checkoutDir)</TeamCityRootDir>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\output\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\output\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <Optimize>false</Optimize>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <Status>Testing</Status>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>BTE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Edition>SE</Edition>
+    <ConfTag>Pw7</ConfTag>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Status>Testing</Status>
+    <DebugType>none</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Corporate7BTE\Test.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\Test.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="L10NSharp">
+      <HintPath>..\..\lib\L10NSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities" />
+    <Reference Include="NMock2, Version=2.0.0.44, Culture=neutral, PublicKeyToken=37d3be0adc87c2b7">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NMock2.dll</HintPath>
+    </Reference>
+    <Reference Include="Palaso">
+      <HintPath>..\..\lib\Palaso.dll</HintPath>
+    </Reference>
+    <Reference Include="Palaso.Media">
+      <HintPath>..\..\lib\Palaso.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="PalasoUIWindowsForms">
+      <HintPath>..\..\lib\PalasoUIWindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Security" />
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Build\FileComponentsTest.cs" />
+    <Compile Include="Build\UpdateAssembliesTest.cs" />
+    <Compile Include="ConfigurationTool\ConfigurationToolBLTest.cs" />
+    <Compile Include="ConfigurationTool\ConfigurationToolTest.cs" />
+    <Compile Include="CssDialog\AboutPwTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CssDialog\BackendTest.cs" />
+    <Compile Include="CssDialog\ExportThroughPathwayTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CssParser\StylesTest.cs" />
+    <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
+    <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
+    <Compile Include="epubConvert\EpubXsltTransformationTest.cs" />
+    <Compile Include="GoBibleConvert\ExportGoBibleTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoBibleConvert\PartialBookTest.cs" />
+    <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
+    <Compile Include="OpenOfficeConvert\LOTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParatextSupport\EncloseParasInSectionsTests.cs" />
+    <Compile Include="ParatextSupport\ParatextSupportExtensions.cs" />
+    <Compile Include="ParatextSupport\SfmToUsxTest.cs" />
+    <Compile Include="ParatextSupport\StyToCssTest.cs" />
+    <Compile Include="ParatextSupport\UsxToUsfmTests.cs" />
+    <Compile Include="PathwayB\PathwayBTest.cs" />
+    <Compile Include="PdfConvert\ExportPdfTest.cs" />
+    <Compile Include="PsTool\RampTest.cs" />
+    <Compile Include="SwordConvert\SwordTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="theWordConvert\ExportTheWordTest.cs" />
+    <Compile Include="theWordConvert\MySwordSqliteTest.cs" />
+    <Compile Include="XeLatex\XeLaTexContentTest.cs" />
+    <Compile Include="CssParser\ClassInfoTest.cs" />
+    <Compile Include="CssParser\CssTreeTest.cs" />
+    <Compile Include="IdmlTest.cs" />
+    <Compile Include="InDesignConvert\InDesignMapTest.cs" />
+    <Compile Include="InDesignConvert\InGraphicTest.cs" />
+    <Compile Include="InDesignConvert\InInsertMacroTest.cs" />
+    <Compile Include="InDesignConvert\InMapPropertyTest.cs" />
+    <Compile Include="InDesignConvert\InMasterSpreadTest.cs" />
+    <Compile Include="InDesignConvert\InPreferencesTest.cs" />
+    <Compile Include="InDesignConvert\InSpreadTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InDesignConvert\InStoryTest.cs" />
+    <Compile Include="InDesignConvert\InStylesTest.cs" />
+    <Compile Include="OdtTest.cs" />
+    <Compile Include="CssDialog\CommonTestMethod.cs" />
+    <Compile Include="CssDialog\FeatureSheetTest.cs" />
+    <Compile Include="CssDialog\MergeCssTest.cs" />
+    <Compile Include="CssDialog\PdfTest.cs" />
+    <Compile Include="CssDialog\PreviewTest.cs" />
+    <Compile Include="CssParser\ClassAttributeTest.cs" />
+    <Compile Include="CssParser\StyleAttributeTest.cs" />
+    <Compile Include="CssParser\CssParserTest.cs" />
+    <Compile Include="CssParser\GramTest.cs" />
+    <Compile Include="CssParser\MakePropertyTest.cs" />
+    <Compile Include="OpenOfficeConvert\OOContentXMLTest.cs" />
+    <Compile Include="OpenOfficeConvert\OOStylesXMLTest.cs" />
+    <Compile Include="PsExport\PsExportTest.cs" />
+    <Compile Include="PsTool\CommonCssTest.cs" />
+    <Compile Include="PsTool\CommonTest.cs" />
+    <Compile Include="PsTool\CommonXmlTest.cs" />
+    <Compile Include="PsTool\FolderTreeTest.cs" />
+    <Compile Include="PsTool\FontInternalsTest.cs" />
+    <Compile Include="PsTool\ParamTest.cs" />
+    <Compile Include="PsTool\PathwayPathTest.cs" />
+    <Compile Include="PsTool\PreExportProcessTest.cs" />
+    <Compile Include="PsTool\ProjectInformationTest.cs" />
+    <Compile Include="PsTool\SubProcessTest.cs" />
+    <Compile Include="PsTool\FileDataTest.cs" />
+    <Compile Include="PsTool\ZipFolderTest.cs" />
+    <Compile Include="TestFiles.cs" />
+    <Compile Include="TextFileAssert.cs" />
+    <Compile Include="ValidateXMLFile.cs" />
+    <Compile Include="XhtmlExport\XhtmlExportTest.cs" />
+    <Compile Include="XmlAssert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="epubConvert\EmbeddedFontTest.cs" />
+    <Compile Include="epubConvert\ExportepubTest.cs" />
+    <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApplyPDFLicenseInfo\ApplyPDFLicenseInfo.csproj">
+      <Project>{2B00A4D8-D9C7-4F7F-9CC8-776C9B84AD9E}</Project>
+      <Name>ApplyPDFLicenseInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuildStep\BuildStep.csproj">
+      <Project>{b3c7bd82-538f-421d-89db-991a4f0f65e1}</Project>
+      <Name>BuildStep</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
+      <Project>{C1ED7E03-C92E-4223-909B-E9C35A4D98E2}</Project>
+      <Name>ConfigurationTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CssDialog\CssDialog.csproj">
+      <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
+      <Name>CssDialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CssParser\CssParser.csproj">
+      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
+      <Name>CssParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DictionaryForMIDsConvert\DictionaryForMIDsConvert.csproj">
+      <Project>{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}</Project>
+      <Name>DictionaryForMIDsConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\epubConvert\epubConvert.csproj">
+      <Project>{B19037F2-26F7-48A2-9301-B5CA335C6824}</Project>
+      <Name>epubConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\epubValidator\epubValidator.csproj">
+      <Project>{403F8C54-4154-4D79-AED7-326B976875B4}</Project>
+      <Name>epubValidator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GoBibleConvert\GoBibleConvert.csproj">
+      <Project>{C7A3F4E5-1F86-4D22-AB4F-5BEA0D923DDD}</Project>
+      <Name>GoBibleConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InDesignConvert\InDesignConvert.csproj">
+      <Project>{8D0D307D-3785-4561-A923-FF3DDF6C2F14}</Project>
+      <Name>InDesignConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
+      <Project>{F91C8F61-9DFA-42F0-84EF-FE64B47FF433}</Project>
+      <Name>OpenOfficeConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParatextSupport\ParatextSupport.csproj">
+      <Project>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</Project>
+      <Name>ParatextSupport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PathwayB\PathwayB.csproj">
+      <Project>{24E32D8C-5ECF-4263-98C1-C15D1A05ABDE}</Project>
+      <Name>PathwayB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PdfConvert\PdfConvert.csproj">
+      <Project>{E75BC85C-6240-45F0-ADBF-F0F80EEFD6D8}</Project>
+      <Name>PdfConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PdfLicense\PdfLicense.csproj">
+      <Project>{FB9DD8CF-B05E-4E83-A987-42F639BB9840}</Project>
+      <Name>PdfLicense</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PsExport\PsExport.csproj">
+      <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
+      <Name>PsExport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PsTool\PsTool.csproj">
+      <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
+      <Name>PsTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SwordConvert\SwordConvert.csproj">
+      <Project>{448FDD03-71C0-4C86-9878-BC81ACC440C0}</Project>
+      <Name>SwordConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\theWordConvert\TheWordConvert.csproj">
+      <Project>{C08B9A1C-C204-4FDE-A290-AE567688D67D}</Project>
+      <Name>TheWordConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XeLaTexConvert\XeLaTexConvert.csproj">
+      <Project>{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}</Project>
+      <Name>XeLaTexConvert</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="PsExport\TestFiles\Input\T5\Pictures\" />
+    <Folder Include="PsExport\TestFiles\Input\T6\Pictures\" />
+    <Folder Include="PsExport\TestFiles\Input\T7\Pictures\" />
+    <Folder Include="XeLatex\TestFiles\Expected\" />
+    <Folder Include="XeLatex\TestFiles\input\" />
+    <Folder Include="XeLatex\TestFiles\output\" />
+    <Folder Include="XhtmlExport\TestFiles\Input\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ScriptureStyleSettingsCopy.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+         -->
+  <Target Name="TeamCityTest" DependsOnTargets="Build">
+    <NUnitTeamCity Assemblies="$(TeamCityRootDir)/Test/bin/Debug/Test.dll" ExcludeCategory="SkipOnTeamCity;LongTest" NUnitVersion="NUnit-2.5.10" />
+  </Target>
+  <Target Name="BeforeBuild" />
+  <Target Name="AfterBuild" />
+  <PropertyGroup>
+    <PostBuildEvent />
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,22 @@
+/* Page number  Top Outside.css */
+@page :left {
+@top-left {
+           content: counter( page);
+           margin-top: 1cm;
+    }
+}
+
+@page :right {
+    @top-right {
+           content: counter( page);
+           margin-top: 1cm;
+    }
+    
+}
+
+
+@page :first {
+    @bottom-right {
+           content: counter( page);
+    }
+}

@@ -1,0 +1,124 @@
+#!/bin/bash
+# PWLinuxCopy
+# Authors: Erik Brommers, taken from an earlier script from Greg Trihus
+# Notes:  This utility script copies the build output for Pathway from the
+#         build directory to /usr/lib/pathway. It makes use of one environment
+#         variable, SRCDIR, that is set to a default value of 
+#         /media/sf_svn/pathway/pathway (personal bias :-)  ). To set this
+#         value, add the following line to your .bashrc, replacing "mypath"
+#         with your path to the subversion source directory.
+#
+#         export SRCDIR=mypath
+#
+#         Currently the utility can copy over the Debug, Release7BTE, 
+#         Corporate7BTE or Corporate7SE outputs. More can be added to the
+#         case statement below as needed.
+
+function usage
+{
+    echo "usage: PwLinuxCopy [-dbg | -dbg64 | -test | -bte | -se | -h]"
+}
+
+case $1 in
+    -dbg | --debug )        builddir=bin/x86/Debug
+                            ;;
+    -dbg64 | --debug )        builddir=bin/Debug
+                            ;;
+    -test | --releasebte ) builddir=bin/x86/Release7BTE
+                            ;;
+    -bte | --corporatebte ) builddir=bin/x86/Corporate7BTE
+                            ;;
+    -se | --corporatese )   builddir=bin/x86/Corporate7SE
+                            ;;
+    -h | --help )           usage
+                            exit
+                            ;;
+    * )                     usage
+                            exit 1
+esac
+
+clear
+echo --------------------------------------------------------------------------
+echo - PwLinuxCopy
+echo -
+echo - © 2010, 2011 SIL International, Inc.
+echo -
+echo - Building: $1
+echo - Build Directory: $builddir
+echo --------------------------------------------------------------------------
+echo Setting environment variables...
+outdir=/usr/lib/pathway
+if [ -z $SRCDIR ]; then
+    # no sourcedir defined; set a default value
+    SRCDIR=/media/sf_svn/pathway/pathway
+    echo No sourcedir defined - taking default of $SRCDIR
+fi
+echo Cleaning directories...
+sudo rm -r -f $outdir
+sudo mkdir $outdir
+echo Copying files...
+sudo cp -r $SRCDIR/ConfigurationTool/$builddir/* $outdir
+sudo cp $SRCDIR/CssDialog/$builddir/* $outdir
+sudo cp $SRCDIR/CssParser/$builddir/* $outdir
+sudo cp $SRCDIR/DictionaryForMIDsConvert/$builddir/* $outdir
+sudo cp $SRCDIR/epubConvert/$builddir/* $outdir
+sudo cp $SRCDIR/epubValidator/$builddir/* $outdir
+sudo cp $SRCDIR/GoBibleConvert/$builddir/* $outdir
+sudo cp $SRCDIR/HelpImprove/$builddir/* $outdir
+sudo cp $SRCDIR/InDesignConvert/$builddir/* $outdir
+sudo cp $SRCDIR/OpenOfficeConvert/$builddir/* $outdir
+sudo cp $SRCDIR/ParatextSupport/$builddir/* $outdir
+sudo cp $SRCDIR/PathwayB/$builddir/* $outdir
+sudo cp $SRCDIR/PdfConvert/$builddir/* $outdir
+# sudo cp $SRCDIR/PrincessConvert/$builddir/* $outdir
+sudo cp $SRCDIR/PsExport/$builddir/* $outdir
+sudo cp -r $SRCDIR/../DistFiles/* $outdir
+sudo cp $SRCDIR/PsTool/$builddir/* $outdir
+sudo cp $SRCDIR/SwordConvert/$builddir/* $outdir
+sudo cp $SRCDIR/theWordConvert/$builddir/* $outdir
+sudo cp $SRCDIR/WordPressConvert/$builddir/* $outdir
+sudo cp $SRCDIR/XeLaTexConvert/$builddir/* $outdir
+sudo cp $SRCDIR/XslProcess/$builddir/* $outdir
+# sudo cp $SRCDIR/XeTex/$builddir/* $outdir
+# sudo cp $SRCDIR/XeTeXConvert/$builddir/* $outdir
+# YouVersion is no longer supported
+#sudo cp $SRCDIR/YouVersionConvert/$builddir/* $outdir
+echo Setting permissions...
+sudo chmod 777 $outdir/*
+sudo chmod 777 $outdir/*StyleSettings.*
+sudo chmod 777 $outdir/Copyrights/*
+sudo chmod -R 777 $outdir/epub/*
+sudo chmod -R 777 $outdir/epubcheck-3.0.1/*
+sudo chmod 777 $outdir/GoBible/*
+sudo chmod 777 $outdir/GoBible/GoBibleCore/*
+sudo chmod 777 $outdir/Graphic/*
+sudo chmod 777 $outdir/Icons/*
+sudo chmod 777 $outdir/Samples/*
+sudo chmod 777 $outdir/Samples/Dictionary/*
+sudo chmod 777 $outdir/Samples/Scripture/*
+sudo chmod 777 $outdir/Styles/*
+sudo chmod 777 $outdir/Styles/Dictionary/*
+sudo chmod 777 $outdir/Styles/Scripture/*
+sudo chmod 777 $outdir/Template/*
+sudo chmod 777 $outdir/Template/Dictionary/*
+sudo chmod 777 $outdir/Template/Scripture/*
+echo Creating registry keys
+cd ~
+sudo mkdir -p ~/.mono/registry/CurrentUser/software/sil/pathway
+python -c 'print "<values>\n<value name=\"PathwayDir\"\ntype=\"string\">/usr/lib/pathway/</value>\n</values>"' >~/tmp
+sudo cp ~/tmp ~/.mono/registry/CurrentUser/software/sil/pathway/values.xml
+rm ~/tmp
+ if [ -d "/var/lib/fieldworks/SIL/WritingSystemStore/" ]; then
+	python -c 'print "<values>\n<value name=\"PathwayDir\"\ntype=\"string\">/usr/lib/pathway/</value>\n<value name=\"WritingSystemStore\"\ntype=\"string\">/var/lib/fieldworks/SIL/WritingSystemStore/</value>\n</values>"' >~/tmp
+	sudo cp ~/tmp ~/.mono/registry/CurrentUser/software/sil/pathway/values.xml
+	rm ~/tmp
+	fi
+sudo cp $SRCDIR/ConfigurationTool.sh /usr/bin/ConfigurationTool
+sudo chmod 755 /usr/bin/ConfigurationTool
+echo --------------------------------------------------------------------------
+right_now=$(date +"%x %r %Z")
+time_stamp="Process finished on $right_now by $USER"
+echo $time_stamp
+echo Have an outstanding day!
+echo 
+

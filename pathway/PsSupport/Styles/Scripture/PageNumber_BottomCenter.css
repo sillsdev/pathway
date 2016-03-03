@@ -1,6 +1,0 @@
-/* Bottom Center.css */
-@page {
-    @bottom-center{
-           content: counter( page);
-    }
-}

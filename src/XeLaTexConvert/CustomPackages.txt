@@ -1,0 +1,7 @@
+To add a custom package to XeLaTex installer:
+
+1. create a folder in Paratexmf\tex and put the package in that folder.
+
+2. update the version in ..\Installer\InstallXeLaTeX-tpl.wxs
+
+3. Rebuild the installer and post to the pathway.sil.org (and optionally to the google code site).

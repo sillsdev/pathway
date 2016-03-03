@@ -1,0 +1,5 @@
+@page {
+    size: 6.5in 9in;
+    counter-increment: page;
+    margin: 0.5in 0.5in;
+}

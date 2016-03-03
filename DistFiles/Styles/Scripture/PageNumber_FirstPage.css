@@ -1,0 +1,10 @@
+/* First Page Bottom Center.css */
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    /* This file used in conjunction with PageNumber_TopCenter and PageNumber_TopCenterMirrored */
+    @bottom-right  { content: ''; }
+}
+

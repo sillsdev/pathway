@@ -1,0 +1,15 @@
+/* Bottom Inside.css */
+@page :left {
+    @bottom-right  {  content: counter( page); }
+}
+@page :right {
+    @bottom-left   {  content: counter( page); }
+
+}
+
+
+@page :first {
+    @bottom-left {
+           content: counter( page);
+    }
+}

@@ -1,0 +1,110 @@
+/* Mexico styles */
+a {color: rgb(0,0,255);}
+
+.entry {
+    text-indent: -12pt;
+    margin-left: 12pt;
+}
+
+.subentry {
+    text-indent: -12pt;
+    margin-left: 36pt;
+}
+.complexform:before {
+    content: "";
+}
+.complexform-summary {
+    color: rgb(128,128,0);
+}
+
+.grammatical-info {
+    color: rgb(128,0,0);
+}
+
+.headword {
+    color: rgb(0,0,255);
+}
+.headword-minor {
+    color: rgb(0,0,255);
+}
+.LexEntry-publishStemMinorPrimaryTarget-HeadWordRef {
+	color: rgb(0,0,255);
+}
+.LexEntry-publishStemComponentTarget-HeadWordRef {
+	color: rgb(0,0,255);
+}
+.LexEntry-publishStemMinorPara-CommentPub {
+    color: rgb(128,0,0);
+}
+.LexEntry-publishStemPara-CommentPub {    
+    color: rgb(128,0,0);
+}
+.LexEntryType-publishStemEntryType-AbbreviationPub {
+	color: rgb(128,0,0);
+}
+.LexEntryType-publishStemMinorEntryType-AbbreviationPub {
+    color: rgb(128,0,0);
+}
+.LexEntryType-publishStemVariantType-ReverseAbbrPub {   
+    color: rgb(128,0,0);
+}
+.partofspeech {
+    color: rgb(128,0,0);
+}
+.partofspeech-complexform {
+   color: rgb(128,0,0);
+}
+
+.restrictions {
+    color: rgb(128,128,0);
+}
+
+.restrictionsentry-minor {
+    color: rgb(128,128,0);    
+}
+
+.scientific-name {
+	color: rgb(0,0,128);
+}
+.translations {
+    color: rgb(0,128,0);    
+}
+
+.variantref-entry-type {    
+    text-indent: -12pt;
+    margin-left: 12pt;
+}
+
+.subentry:before {
+    content: "";
+    counter-increment: subentryCounter;
+}
+.subentry .subentry:before {
+    content: "\25C6\0009";
+    counter-increment: subentryCounter;
+}
+
+.complexform-form + .grammatical-info-complexform::before {
+    content: "\A0";
+}
+.complexform-form + .complexform-summarydef::before {
+    content: "\A0";
+}
+.partofspeech::before {
+    content: "\A0";
+}
+.complexform-summarydef::before {
+    content: "\A0";
+}
+.scientific-name::before {
+    content: "\A0";
+}
+.example::before{
+	content: "\A0";
+}
+.translations::before{
+	content: "\A0";
+}
+.variantrefs1::before{
+    content: "\A0\A0";
+}

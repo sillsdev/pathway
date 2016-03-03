@@ -1,6 +1,0 @@
-/* Top Center.css */
-@page {
-    @top-center{
-           content: counter( page);
-    }
-}

@@ -1,0 +1,1771 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FileLibrary>
+  <File Path="XeTexWriter.pdb" ComponentGuid="D86ADF8E-5512-474C-9BBD-1D38B6ECFDCC" />
+  <File Path="Wordpress\select.png" ComponentGuid="A7A987FD-D412-4D7D-8A52-34A5ACE7754A" />
+  <File Path="Wordpress\select-all.png" ComponentGuid="B1C3F61E-346F-4CF4-83F8-11666BB02696" />
+  <File Path="Wordpress\select-all.ico" ComponentGuid="559EC9F5-D39E-4561-B8B1-3C033EF1D167" />
+  <File Path="Wordpress\i123.png" ComponentGuid="D484D814-9D88-446D-A709-7295AB543AC5" />
+  <File Path="Wordpress\i123.ICO" ComponentGuid="A3F7F7C5-F963-44E8-93E5-0B9048F5D715" />
+  <File Path="Wordpress\font.png" ComponentGuid="292C7E81-946F-45D1-B831-7C39CA76C982" />
+  <File Path="Wordpress\font.ico" ComponentGuid="87B5ED09-DC46-48AF-B2ED-F6A9228A2204" />
+  <File Path="Wordpress\final.png" ComponentGuid="E3013BF5-6A41-4DC5-B606-2426412FA9A4" />
+  <File Path="Wordpress\final.ico" ComponentGuid="4B7494C7-0EAA-4EB9-9876-6AF514A385D7" />
+  <File Path="Wordpress\draft.png" ComponentGuid="C7BC2BC3-8218-43F6-A000-1079B0D5FADF" />
+  <File Path="Wordpress\draft.ico" ComponentGuid="1F5B959B-338E-47D2-8153-E6559CA284D0" />
+  <File Path="Wordpress\deselect.png" ComponentGuid="6F8ED5D1-0721-49B0-8671-14964E7DC406" />
+  <File Path="Wordpress\Column3b.png" ComponentGuid="206D37FE-75DF-4781-8414-6430CFD57024" />
+  <File Path="Wordpress\Column3b.bmp" ComponentGuid="57A86205-9FE1-41A6-B25C-BAE6A77ED282" />
+  <File Path="Wordpress\Column2b.png" ComponentGuid="AD79E0A1-A97B-4245-B926-61FA52804EC4" />
+  <File Path="Wordpress\Column2b.bmp" ComponentGuid="D6AFBF6B-97A2-49A4-AC00-D324252AA05D" />
+  <File Path="Wordpress\Column1.png" ComponentGuid="086A41EA-9849-45EE-BFA6-A82E4A9950D9" />
+  <File Path="Wordpress\Column1.ico" ComponentGuid="5821B0DB-DDA3-43A9-9A25-6FA779A0434F" />
+  <File Path="xetexExe\share\texmf\fonts\type1\bluesky\cmr7.pfb" ComponentGuid="71BAE586-03A5-4629-960E-D78BF97AB3D2" />
+  <File Path="xetexExe\share\texmf\fonts\type1\bluesky\cmmi10.pfb" ComponentGuid="1C576859-63E1-4965-8ED4-0C6C5331900D" />
+  <File Path="xetexExe\share\texmf\fonts\type1\bluesky\cmb10.pfb" ComponentGuid="B3DB26C6-75B9-431D-A501-1784B1A7341F" />
+  <File Path="xetexExe\share\texmf\fonts\tfm\cm\cmr7.tfm" ComponentGuid="ABA955C5-8CF0-4344-853A-397034E8AE84" />
+  <File Path="xetexExe\share\texmf\fonts\tfm\cm\cmmi10.tfm" ComponentGuid="0CBD030E-080E-4A08-B329-693702429506" />
+  <File Path="xetexExe\share\texmf\fonts\tfm\cm\cmb10.tfm" ComponentGuid="A09165AB-DBCC-49BF-9BEB-BFCE8B4BC82C" />
+  <File Path="TE_XHTML-to-YouVersion_SQL_offline_unformatted.xslt" ComponentGuid="FD34D160-800A-49E3-A69F-B74E03541B3E" />
+  <File Path="TE_XHTML-to-YouVersion_SQL_offline_html.xslt" ComponentGuid="690F4E45-0D86-42D0-81F1-B59D38D6F651" />
+  <File Path="result" ComponentGuid="CA37F05E-FB75-42F3-8E8D-B20BBD8A85ED" />
+  <File Path="XeTexWriter.dll.config" ComponentGuid="08CAB66E-56A2-45B1-89C8-7D6C325F047C" />
+  <File Path="XeTexWriter.dll" ComponentGuid="9E68BE65-D800-4A60-BD24-3715F0CD6488" />
+  <File Path="xetexExe\share\texmf\web2c\texmf.cnf" ComponentGuid="1BDF38EB-B1D0-4064-A2AC-84271A58B471" />
+  <File Path="xetexExe\share\texmf\web2c\fmtutil.cnf" ComponentGuid="56867BDE-436B-43EE-93D6-AF221A607A22" />
+  <File Path="xetexExe\share\texmf\web2c\xetex\xetex.fmt" ComponentGuid="C3299BF6-28E1-4F01-9659-803462EB84DC" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx2pdf-MacroSetupParameters.pdf" ComponentGuid="3F45BA60-8C1C-4E83-B48A-D9A88FFC68ED" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-toc.tex" ComponentGuid="73B1F290-B2B5-439A-8FAC-D5B341E16EF2" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-tables.tex" ComponentGuid="6084855C-928D-42B2-8C1B-EEDC007BF930" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-stylesheet.tex" ComponentGuid="3C7725FB-C4E4-41FA-929B-081464F00F95" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-references.tex" ComponentGuid="829EFAA3-C447-4953-B5BE-73482CEF8271" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-pic-list.tex" ComponentGuid="A7A9EC29-942F-40C4-A867-897C77F7189A" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-para-style.tex" ComponentGuid="AFB9FBE5-471A-49B1-AFAF-2BA36B68F2F7" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-note-style.tex" ComponentGuid="5016B491-4EE4-49B3-92F6-3ED36302C451" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-cutouts.tex" ComponentGuid="FB2CE75E-8F83-4956-AEF3-1AB1301EDA09" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-cropmarks.tex" ComponentGuid="685E8C97-6FDB-4B78-932F-330106E01C25" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-char-style.tex" ComponentGuid="332AC051-CF15-435F-B542-3094CEB908B4" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-callers.tex" ComponentGuid="8B86CE1E-4D75-4397-9EBC-EBC52E7F9AD1" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\ptx-adj-list.tex" ComponentGuid="8E1E21C5-8704-4AA0-9B84-6E86F23651D0" />
+  <File Path="xetexExe\share\texmf\tex\ptx2pdf\paratext2.tex" ComponentGuid="C293AADB-0556-4784-9BF2-A28FEDC1911D" />
+  <File Path="xetexExe\share\texmf\tex\plain\xetex\xetex-pstricks\pstricks.con" ComponentGuid="8B195D6B-49CB-4DF2-9D42-9FF0454C6D59" />
+  <File Path="xetexExe\share\texmf\tex\plain\config\xetex.ini" ComponentGuid="B56EDAB9-DFAE-4B38-A471-24C18D52C953" />
+  <File Path="xetexExe\share\texmf\tex\generic\xetex-pstricks\xetex-pstricks.con" ComponentGuid="135F6866-F9F6-4CD0-99CD-1D10E27065B4" />
+  <File Path="xetexExe\share\texmf\tex\generic\xetex\unicode-letters.tex" ComponentGuid="E485F670-7322-4BAB-994A-C48E0E2F1DD6" />
+  <File Path="xetexExe\share\texmf\tex\generic\ifxetex\ifxetex.sty" ComponentGuid="E2845EB1-CE48-4825-83AF-606B72D0BBC1" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-ruhyphvl.tex" ComponentGuid="F54DE1B8-C35E-4EF2-AC74-605CCA175B14" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-ruhyphdv.tex" ComponentGuid="1BD820B3-5F2F-4665-9A6C-98356E583BE2" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-ruhyphct.tex" ComponentGuid="2F8DCD17-7BA5-4FF9-A206-F3BCF2A78FEF" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-ruhyphal.tex" ComponentGuid="FC09F6AA-BDFE-4E66-956E-DD7BC15DC08A" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-cyryozn.tex" ComponentGuid="74AF162F-52A8-434C-8036-A513F4A04418" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-cyryovl.tex" ComponentGuid="17135DB3-8409-4816-A798-0837DC41DF94" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-cyryodv.tex" ComponentGuid="BE9A05B8-A938-4513-BADB-3CB5F86AD152" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-cyryoct.tex" ComponentGuid="AF5D78BA-A7CB-4B96-A702-CF612FE35FFB" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-cyryoas.tex" ComponentGuid="E5E8A570-E298-4E24-9EDE-1D8BF65C1FA2" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\uni-cyryoal.tex" ComponentGuid="78F1D46B-5B28-4E62-ACB6-FE66600567DA" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\ukrhyph.tex" ComponentGuid="55292DC9-7B57-4043-9268-23944766B97B" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\trhyph.tex" ComponentGuid="79C1397E-F9D7-40B3-8A98-D42E46C3B390" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\skhyph.tex" ComponentGuid="7A0B6BA5-60D7-4043-A6F5-22351D8B92D9" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\sihyph23.tex" ComponentGuid="A6614CA6-C90F-44F8-90AE-549E475189A3" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\ruhyphen.tex" ComponentGuid="CD059C1A-24EE-43A8-8F8F-DCB607D5C466" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\rohyphen.tex" ComponentGuid="72FEFE38-F4E3-4F9F-BE6C-B81E3E7245DE" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\plhyph.tex" ComponentGuid="3230858C-A8D3-4E3E-8147-B65EE284E9A7" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\huhyph.tex" ComponentGuid="180AC81C-EADF-42C5-BA72-B7D726C3505D" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\hrhyph.tex" ComponentGuid="C715A2EE-513C-49BB-90D5-987916641DC7" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\gahyph.tex" ComponentGuid="8203BA68-6D1A-4FB7-93CE-C5ED51A1963A" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\dkhyphen.tex" ComponentGuid="2DB2B145-D714-431A-872F-AB63D8251826" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\dehypht.tex" ComponentGuid="CBFB7ADF-455A-4AE7-A668-C64CAB4DC6FD" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\dehyphn.tex" ComponentGuid="CFE4B3B6-3A0B-43A7-8466-F1E9F4544F66" />
+  <File Path="xetexExe\share\texmf\tex\generic\hyphen\czhyph.tex" ComponentGuid="81C3DDD5-E16F-4B05-98E7-C115623803D0" />
+  <File Path="xetexExe\share\texmf\fonts\type1\bluesky\cmtt10.pfb" ComponentGuid="09D3E7C4-9C7D-4A02-8970-806E10789B8A" />
+  <File Path="xetexExe\share\texmf\fonts\type1\bluesky\cmr10.pfb" ComponentGuid="D5E335D2-12C1-4166-BFB8-24F9502AAED9" />
+  <File Path="xetexExe\share\texmf\fonts\tfm\cm\cmtt10.tfm" ComponentGuid="29C185AC-6396-47DD-A222-8B7BCDB0E989" />
+  <File Path="xetexExe\share\texmf\fonts\tfm\cm\cmr10.tfm" ComponentGuid="CA18685D-23B5-4DDC-8D02-A5135B54D785" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\tibetandigits.tec" ComponentGuid="139D8798-248C-4E35-B0E3-237E35B80032" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\tibetandigits.map" ComponentGuid="A218DC04-2900-444E-82D8-BFCA3C3B91DD" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\thaidigits.tec" ComponentGuid="C1F1EEC9-28A1-436F-8391-E4C0881CD38E" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\thaidigits.map" ComponentGuid="56782E03-5C4A-4856-8CA1-DF600822881E" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\tex-text.tec" ComponentGuid="02020783-D274-4804-80B3-B086F2940E61" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\tex-text.map" ComponentGuid="9C157EB6-FB0B-44C3-93E3-F711F4074087" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\telugudigits.tec" ComponentGuid="81890DEC-F308-4796-9FB5-90D082B5A46D" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\telugudigits.map" ComponentGuid="D5211292-59CB-4702-B95E-064F4F29ABD1" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\tamildigits.tec" ComponentGuid="8BEA219A-B71C-4786-93F1-C35D9CD75510" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\tamildigits.map" ComponentGuid="21D46042-FAC0-412E-A627-BB56675FEF23" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\oriyadigits.tec" ComponentGuid="01EB5321-4300-4EB3-97B2-CC4A286A39F8" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\oriyadigits.map" ComponentGuid="80E51F3D-4963-4CDB-A4E2-641C73E16B42" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\malayalamdigits.tec" ComponentGuid="DE96656D-9FC0-4B0E-A757-A439EF630DEC" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\malayalamdigits.map" ComponentGuid="7DF4F521-D912-4832-AD41-B5EC941E1F6D" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\laodigits.tec" ComponentGuid="FF7E352E-7BE3-4717-AA37-D317B09AA10F" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\laodigits.map" ComponentGuid="A464A269-F966-4701-8C1D-24705A5300E2" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\khmerdigits.tec" ComponentGuid="FA8E07BC-E2FE-47A0-BB71-17AE3BD6BF62" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\khmerdigits.map" ComponentGuid="296D3F44-977C-496B-A9B5-1C58EB81E795" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\kannadadigits.tec" ComponentGuid="BF062F7E-C992-4E48-8B3A-C45F6BBAD9E6" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\kannadadigits.map" ComponentGuid="A0864362-84C7-4247-89CB-062A22185CAA" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\gurmukhidigits.tec" ComponentGuid="62A671AC-085D-49DB-B771-C3D58DAB9697" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\gurmukhidigits.map" ComponentGuid="D5F9E7BD-A67F-4BD2-9EB6-60F0D11614A7" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\gujaratidigits.tec" ComponentGuid="8A746CDA-8E05-479B-BFAE-87680546A5F9" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\gujaratidigits.map" ComponentGuid="8D5D1256-E8C4-44C9-9101-3F945E7FD068" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\devanagaridigits.tec" ComponentGuid="C882E42C-04B5-44EF-8FA3-12507D2C6127" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\devanagaridigits.map" ComponentGuid="E567C9EC-7C07-4448-ACAD-7A2BF326C0EC" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\burmesedigits.tec" ComponentGuid="1681B2F5-EA0C-439D-8E5A-6570F3A1C0C1" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\burmesedigits.map" ComponentGuid="038EAC19-EAB3-44BA-BEFB-4A56FB307C2D" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\bengalidigits.tec" ComponentGuid="3BA77556-003E-47D6-90A1-98062DD995FC" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\bengalidigits.map" ComponentGuid="AECA4367-9DAA-4B89-9169-190955564509" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\arabic-hindidigits.tec" ComponentGuid="1EC6C275-4DB0-464A-91A2-E531BA74B92F" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\arabic-hindidigits.map" ComponentGuid="D350C30D-3FCE-4C76-9CDF-F608EFF9C2D3" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\arabic-farsidigits.tec" ComponentGuid="8F335B88-16F4-42CD-AABC-16208AD64F93" />
+  <File Path="xetexExe\share\texmf\fonts\misc\xetex\fontmapping\arabic-farsidigits.map" ComponentGuid="EBF1B673-28DA-44C6-9A87-43D776AA5BA7" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\updmap\pdfmfnt.map" ComponentGuid="A86591C3-3D69-4A78-A7CA-C1A5DA53738C" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\updmap\pdfmfnt-base.map" ComponentGuid="26C0A138-5634-4B03-B32F-B0F89C53CF3E" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\base\psbase14.map" ComponentGuid="5238A9CB-FCA2-4605-B690-B2F1AEEAB6F3" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\base\pdfmomegaj.map" ComponentGuid="471CA2BE-C813-4DFD-8872-09F6621B07F3" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\base\msembed.map" ComponentGuid="3A6FFBCE-01FC-45C9-BE65-63874EB2B8F2" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\base\kozembed.map" ComponentGuid="620095B5-D20F-4B4C-BCA0-AC34F297DB6F" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\base\kbbase14.map" ComponentGuid="A385C0CF-AD85-4D00-AFE1-10148704C733" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\base\embase14.map" ComponentGuid="9907AFCE-AC00-49FE-82BC-7FABA6DD0631" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\base\dlbase14.map" ComponentGuid="5B99F250-41F8-494A-A1A5-2AB5E4B34FE0" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\base\cid.map" ComponentGuid="01EEC2B2-C01C-4E2D-A9E0-0BD8DBEE466E" />
+  <File Path="xetexExe\share\texmf\fonts\map\dvipdfm\base\cid-x.map" ComponentGuid="2089B25B-656B-4EE7-89A5-474CD94FE823" />
+  <File Path="xetexExe\share\texmf\fonts\map\agl\glyphlist.txt" ComponentGuid="2965F399-9A08-40F0-B83C-08B29DA10D46" />
+  <File Path="xetexExe\share\texmf\fonts\enc\dvipdfm\base\ot1r.enc" ComponentGuid="00E3CA86-25C4-4770-8EC0-7CB3964FA933" />
+  <File Path="xetexExe\share\texmf\fonts\enc\dvipdfm\base\ot1alt.enc" ComponentGuid="CF59DFDA-416A-4C9D-AC9F-0B6C6D79B5B5" />
+  <File Path="xetexExe\share\texmf\fonts\enc\dvipdfm\base\ot1.enc" ComponentGuid="5F37258F-D22A-40E1-9025-7CB6AB9D3BB5" />
+  <File Path="xetexExe\share\texmf\fonts\conf\fonts.dtd" ComponentGuid="5EAF0769-09AD-45BA-A12B-C32BA9577355" />
+  <File Path="xetexExe\share\texmf\fonts\conf\fonts.conf" ComponentGuid="63C4A90E-7707-412D-9594-C96A6EF1DD08" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\README" ComponentGuid="F6630D91-85F4-4B7B-ADB9-6A4D247C21C1" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\90-synthetic.conf" ComponentGuid="A446A22B-233A-4AB5-B70B-0B12005758EF" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\80-delicious.conf" ComponentGuid="0F4BB436-F4A3-47CD-97AA-FE0590880E58" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\70-yes-bitmaps.conf" ComponentGuid="28E71875-7451-4C4B-AC4D-D58D8C80833B" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\70-no-bitmaps.conf" ComponentGuid="7DC20B40-9E6D-4D33-968D-1EA5AED3CCE4" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\69-unifont.conf" ComponentGuid="90E552F3-AE11-4D2A-9617-023A6A76113C" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\65-nonlatin.conf" ComponentGuid="AD9477FA-24FB-43C1-A3A1-B0687F6778FE" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\65-khmer.conf" ComponentGuid="301B22F6-F555-40D1-9FDD-75ACA3A05282" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\65-fonts-persian.conf" ComponentGuid="CA25F698-4BA4-490B-A292-E13CCFC5B7AC" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\60-latin.conf" ComponentGuid="383638F5-FDAA-495B-A97F-BB0B8574C76E" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\51-local.conf" ComponentGuid="291AC2C5-6E53-4462-BE88-EAD1902CF64F" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\50-user.conf" ComponentGuid="165A2B14-95D4-495E-8779-E278B66B7227" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\49-sansserif.conf" ComponentGuid="BC846237-1853-4D6D-A4E4-092EC0E557BC" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\45-latin.conf" ComponentGuid="4465278E-5B68-4360-B3D0-1FA568BE62E5" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\40-nonlatin.conf" ComponentGuid="7ECFF0E0-69EC-407F-BE99-CABD9C320DC4" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\30-urw-aliases.conf" ComponentGuid="5D4CCDB9-D7FD-4E58-B455-1537814434D0" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\30-metric-aliases.conf" ComponentGuid="48021877-82C3-43E3-B1A1-56DEE298C2BD" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\25-unhint-nonlatin.conf" ComponentGuid="B40118F9-B529-4D6A-852B-85A9B46E8961" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\20-unhint-small-vera.conf" ComponentGuid="8BF185B7-8CB9-4D7F-9E51-B341B9735AE0" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\20-fix-globaladvance.conf" ComponentGuid="1A677EBF-7A57-40C8-BF73-D363F436AB1A" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\10-unhinted.conf" ComponentGuid="21D50DFA-EEC4-49B7-83A6-0E2D9F48CD4D" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\10-sub-pixel-vrgb.conf" ComponentGuid="60796BF4-272D-464E-A738-2BF6A26860B7" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\10-sub-pixel-vbgr.conf" ComponentGuid="47BF7254-EE5F-4F03-A872-9D2CBD10984A" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\10-sub-pixel-rgb.conf" ComponentGuid="88AEF000-9310-4DA2-B646-A30AD3EEE494" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\10-sub-pixel-bgr.conf" ComponentGuid="0222A269-8533-4FDB-A1ED-1ABB12CD59FD" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\10-no-sub-pixel.conf" ComponentGuid="06A21773-646E-4ACB-9279-50A4924A8509" />
+  <File Path="xetexExe\share\texmf\fonts\conf\conf.d\10-autohint.conf" ComponentGuid="7EDCE766-34BC-4697-8212-01DB6E872439" />
+  <File Path="xetexExe\share\texmf\fonts\cache\fe1dbb5a98cb4443939b32b1858eec08-x86.cache-2" ComponentGuid="5B8264CC-4FE5-4B03-A7CA-610436AB2A9F" />
+  <File Path="xetexExe\share\texmf\dvipdfmx\config\dvipdfmx.cfg" ComponentGuid="51F03B4C-8DE5-4508-879C-9EDA8132E30C" />
+  <File Path="xetexExe\share\texmf\doc\xetex\xetexref\XeTeX-reference.pdf" ComponentGuid="FC955635-726B-4D9F-B690-EB4D4D780F14" />
+  <File Path="xetexExe\share\texmf\doc\fontconfig\fc-match.pdf" ComponentGuid="62FECC87-9719-4D5D-BCE2-A0809D470DBB" />
+  <File Path="xetexExe\share\texmf\doc\fontconfig\fc-list.pdf" ComponentGuid="2C9297AF-60E7-40E6-BE5B-B7C57449A54F" />
+  <File Path="xetexExe\share\texmf\doc\fontconfig\fc-cat.pdf" ComponentGuid="69355004-4D8B-49FB-884B-F603865FB522" />
+  <File Path="xetexExe\share\texmf\doc\fontconfig\fc-cache.pdf" ComponentGuid="0D86AB60-FA68-4F74-844F-E737CFCF36C2" />
+  <File Path="xetexExe\bin\xetex.exe" ComponentGuid="C1CA3C05-886A-4C2B-9CC1-B9F327FF4F5F" />
+  <File Path="xetexExe\bin\xdvipdfmx.exe" ComponentGuid="87A3BA72-549C-4A8E-83A9-8EE365F0AF82" />
+  <File Path="xetexExe\bin\teckit_compile.exe" ComponentGuid="E2C95E2A-FD48-462B-8BF3-56D4A32445F6" />
+  <File Path="xetexExe\bin\msvcr71.dll" ComponentGuid="10B5EEB9-2567-4D90-8BAC-E2372BE0CC23" />
+  <File Path="xetexExe\bin\msvcp71.dll" ComponentGuid="ABEE94C5-F237-4948-83CB-02CA8E7F2470" />
+  <File Path="xetexExe\bin\kpathsea35771.dll" ComponentGuid="EF79F1BB-2DDD-4B0B-A92A-03D554589ACC" />
+  <File Path="xetexExe\bin\icudt38.dll" ComponentGuid="CB2170B5-7075-4FFC-AC1E-0D7AD6A5DADC" />
+  <File Path="xetexExe\bin\fc-match.exe" ComponentGuid="4CABB30C-5CA5-4AE3-B138-29A3F1025B75" />
+  <File Path="xetexExe\bin\fc-list.exe" ComponentGuid="78DBE74D-9201-46AA-B396-BB0EE0D3DA39" />
+  <File Path="xetexExe\bin\fc-cat.exe" ComponentGuid="5E85BBD8-58B4-4781-9425-0E88FC3DB2CB" />
+  <File Path="xetexExe\bin\fc-cache.exe" ComponentGuid="9ED1C2E3-4FFD-4CF2-850A-860A8D806BAD" />
+  <File Path="TE_XHTML-to-YouVersion_SQL.xslt" ComponentGuid="448582D3-E738-4715-A4E9-BD40164F2F57" />
+  <File Path="TE_XHTML-to-YouVersion_OneChapter_SQL.xslt" ComponentGuid="96E469DB-B09C-4A6E-AE89-14833619F574" />
+  <File Path="epubValidator.pdb" ComponentGuid="A489F3F0-9527-4029-AF63-A8E4C6B2F124" />
+  <File Path="TE_FixChapters_XHTML.xslt" ComponentGuid="949F04B7-B46E-44CE-AAC2-18C49A4A267B" />
+  <File Path="OpenOfficeConvert_OLD.pdb" ComponentGuid="AA5EE136-17AD-4F5B-BB39-BBD444C0C456" />
+  <File Path="YouVersionConvert.pdb" ComponentGuid="6F6BB65E-30BD-4E5C-AC6E-EF7A4DCAC886" />
+  <File Path="YouVersionConvert.dll" ComponentGuid="E4606DF6-FA60-4C06-8D2F-CF050CAEA6E6" />
+  <File Path="YouVersion.xpr" ComponentGuid="08A6169E-B74F-476F-9273-CD1CAF677052" />
+  <File Path="TE_XHTML-to-YouVersion_OneChapter_HTML.xslt" ComponentGuid="E233D3B1-9975-4030-A0ED-DE56285EFCD9" />
+  <File Path="Styles\Dictionary\PageNumber_TopCenterMirrored.css" ComponentGuid="90B10E10-2F12-4935-A05C-6201B33F7311" />
+  <File Path="OpenOfficeConvert_OLD.dll" ComponentGuid="925B71FF-2829-4A5F-80D8-BB515115C477" />
+  <File Path="Styles\Dictionary\PageNumber_TopRight.css" ComponentGuid="F335E460-DA42-4641-B222-F30FCA0D08C3" />
+  <File Path="Styles\Dictionary\PageNumber_TopLeft.css" ComponentGuid="87E460AA-3EBE-495C-88A2-DBA3D9E6F9BD" />
+  <File Path="Styles\Dictionary\PageNumber_TopCenter_Mirrored.css" ComponentGuid="3CC9BA1A-B398-445D-A79D-78BAED6201BE" />
+  <File Path="Styles\Dictionary\PageNumber_BottomRight.css" ComponentGuid="0EFE445E-B2C7-41FD-A8DB-D59CD88735B2" />
+  <File Path="Styles\Dictionary\PageNumber_BottomLeft.css" ComponentGuid="40DFA730-9CBA-43EE-856A-743588B5F0FB" />
+  <File Path="Styles\Dictionary\PageNumber_BottomCenterMirrored.css" ComponentGuid="F1093F9F-E496-4872-99F4-5350085C5A0E" />
+  <File Path="Styles\Scripture\Running_Head_Paged_Verse_Abbr.css" ComponentGuid="8CD2480E-6D81-4BC6-9118-80B2BF3BFFFB" />
+  <File Path="Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" ComponentGuid="F9CE5EE8-C98B-4A6F-BF77-E1275D3F937E" />
+  <File Path="Styles\Scripture\Running_Head_Mirrored_Verse_Abbr.css" ComponentGuid="750875A7-EEE0-4E55-B642-E7DC35ADB6B1" />
+  <File Path="Styles\Scripture\Running_Head_Mirrored_Chapter_Abbr.css" ComponentGuid="285C8A91-F4A1-48E1-B020-EF50CE7D8FA5" />
+  <File Path="epubValidator.exe" ComponentGuid="3F8FAF63-9412-4B14-BA2E-F755DE40D95E" />
+  <File Path="epubcheck-1.1\README.txt" ComponentGuid="55170368-EEA5-4986-B9DE-EEB5BF15258D" />
+  <File Path="epubcheck-1.1\jing_license.txt" ComponentGuid="084770C6-AB9D-440E-9594-4BFCD46BA767" />
+  <File Path="epubcheck-1.1\jigsaw_license.txt" ComponentGuid="5739B5A3-B1F0-45D1-8D98-FCF3CB24F117" />
+  <File Path="epubcheck-1.1\epubcheck-1.1.jar" ComponentGuid="AFFFFD1B-7627-4EB1-9404-435D21936D2D" />
+  <File Path="epubcheck-1.1\COPYING.txt" ComponentGuid="0C546AC4-5941-4DF8-BDAC-9F8C7FA6664B" />
+  <File Path="epubcheck-1.1\lib\saxon.jar" ComponentGuid="A76416E9-C2A6-4B00-B7D4-8EA66CD91840" />
+  <File Path="epubcheck-1.1\lib\jigsaw.jar" ComponentGuid="45F5D268-2B59-4163-96C9-45418B70598C" />
+  <File Path="Graphic\cover.png" ComponentGuid="863B1240-E8A6-4F6E-876B-6F3066B8BA5C" />
+  <File Path="Styles\Dictionary\Vernacular_rtl.css" ComponentGuid="A1D066D8-EEAD-4E96-96E8-5027126421C0" />
+  <File Path="epub\OEBPS\cover.html" ComponentGuid="2D35A6CF-79E1-45E9-A674-BD743C93A531" />
+  <File Path="InDesignFiles\Dictionary\Scripts\Scripts Panel\Testing.jsx" ComponentGuid="9389054B-3808-4841-A53D-B0EBA7E73F65" />
+  <File Path="Graphic\book_se.png" ComponentGuid="773F4AE9-3F6A-4A89-9001-3EBECEE79745" />
+  <File Path="Graphic\book_bte.png" ComponentGuid="9EA51C3A-E9A7-408C-827F-D4175E4F1A81" />
+  <File Path="epub\epub.zip" ComponentGuid="3C10DF90-9CFC-44F3-881D-2BC603572E6E" />
+  <File Path="ScripturePreview.xhtml" ComponentGuid="7995A725-DC58-44F3-8E76-F36EED3DA45C" />
+  <File Path="DictionaryPreview.xhtml" ComponentGuid="AD581277-A694-4FA5-87A3-927D2195A895" />
+  <File Path="Styles\Scripture\Preview\GPS - C5 - 2 Col p2.jpg" ComponentGuid="CA572DE1-C4F0-40F6-AEB7-0498F86B3CE3" />
+  <File Path="Styles\Scripture\Preview\GPS - C5 - 2 Col p1.jpg" ComponentGuid="5D6B2D29-BE2B-4CC0-9B7F-F11D8F49CB6B" />
+  <File Path="Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p2.jpg" ComponentGuid="B0563D6B-D431-4910-86D9-050EA23EBABB" />
+  <File Path="Styles\Scripture\Preview\GPS - A4 - 2 Col - Charis 11 on 13 p1.jpg" ComponentGuid="0ED1C886-4306-48BD-81F2-E48D65910129" />
+  <File Path="Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg" ComponentGuid="8A202ADD-79BB-4A14-AA34-6CE2B0A27C7D" />
+  <File Path="Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg" ComponentGuid="86A47557-5FB2-4468-82FE-B57911124459" />
+  <File Path="Help\Intellectual_Property.docx" ComponentGuid="1BCE0C03-F784-4FBA-8DCF-4A2B343B5A2F" />
+  <File Path="epubConvert.pdb" ComponentGuid="5021D5B3-5CA3-4949-8A47-B46022C925A6" />
+  <File Path="Styles\Scripture\PageNumber_TopOutside.css" ComponentGuid="6F9215C6-D1AF-41F5-B2AD-CC8BD2F9AF4E" />
+  <File Path="Styles\Scripture\PageNumber_TopInside.css" ComponentGuid="E7D44637-EF54-4A10-AAA2-58B8C9C9BE5F" />
+  <File Path="Styles\Scripture\PageNumber_TopCenter.css" ComponentGuid="7A80AA95-DB91-4AA8-9325-C32AB182BFA5" />
+  <File Path="Styles\Scripture\PageNumber_None.css" ComponentGuid="F2EBA3A8-BC08-4C39-9800-5E4CC0B66113" />
+  <File Path="Styles\Scripture\PageNumber_BottomOutside.css" ComponentGuid="E6D37E5B-9F53-4727-A2EA-548DD5404E62" />
+  <File Path="Styles\Scripture\PageNumber_BottomInside.css" ComponentGuid="43C0C057-9676-4B8B-9ABB-B7937A47B0E9" />
+  <File Path="Styles\Scripture\PageNumber_BottomCenter_FirstPage.css" ComponentGuid="6D3A3A8C-68AF-4447-8F8A-C0E97A5832E3" />
+  <File Path="Styles\Scripture\PageNumber_BottomCenter.css" ComponentGuid="A8D26BF9-84FD-463A-8BA4-B47982A05F96" />
+  <File Path="Styles\Dictionary\PageNumber_TopOutside.css" ComponentGuid="389CD1DA-D64D-428A-AACD-E605D3A5632A" />
+  <File Path="Styles\Dictionary\PageNumber_TopInside.css" ComponentGuid="B6EF7E2F-7C5D-45A1-A1BD-B1A5FEDD753A" />
+  <File Path="Styles\Dictionary\PageNumber_TopCenter.css" ComponentGuid="7D13B3BE-6EF7-4831-BF40-257D407E58C2" />
+  <File Path="Styles\Dictionary\PageNumber_None.css" ComponentGuid="9F05E011-4412-497C-88F1-68B4033311F4" />
+  <File Path="Styles\Dictionary\PageNumber_BottomOutside.css" ComponentGuid="B36A17AC-4A19-43FB-8242-9E5B0C265689" />
+  <File Path="Styles\Dictionary\PageNumber_BottomInside.css" ComponentGuid="62130D43-231C-4C43-97C0-2FE1EF981F70" />
+  <File Path="Styles\Dictionary\PageNumber_BottomCenter.css" ComponentGuid="87010BF9-BA6B-4E2F-B0B6-3752467FC9C1" />
+  <File Path="Wordpress\main.xhtml" ComponentGuid="12EE59E8-8B91-42CC-8441-DC631DAEB7B7" />
+  <File Path="epubConvert.dll" ComponentGuid="77A148E5-E35E-4E33-A054-9E0F489D2802" />
+  <File Path="TE_XHTML-to-epub_XHTML.xslt" ComponentGuid="D3DF2A98-A092-469B-B844-4840D3B419EC" />
+  <File Path="epub\mimetype" ComponentGuid="B28BF6C2-C8F4-4753-8B2A-45F3AC8A1A3A" />
+  <File Path="epub\META-INF\container.xml" ComponentGuid="324DFF29-DD9D-4E69-A25E-2479B2BEFF26" />
+  <File Path="Styles\Scripture\epub.css" ComponentGuid="E9ADB951-ACD7-4A72-A9AC-A3FFD7DF1668" />
+  <File Path="Styles\Scripture\base_font_andika.css" ComponentGuid="F2902290-25F1-411C-941C-E92523E4F5CA" />
+  <File Path="Styles\Dictionary\Font_Andika.css" ComponentGuid="D54D26DE-C8FB-4D1D-B0B7-7B8317911A2A" />
+  <File Path="Styles\Dictionary\epub.css" ComponentGuid="825BB3B9-C8DF-492C-A894-07456432AF7D" />
+  <File Path="Pathway_Student_Manual_SE.doc" ComponentGuid="92521FD3-9949-4780-8FDA-B776F1204D89" />
+  <File Path="WordPressConvert.pdb" ComponentGuid="A7AFCCCE-8692-45CA-8088-E8B1DE1E17C3" />
+  <File Path="PathwayB.pdb" ComponentGuid="EDACE7ED-757B-40F7-97E8-E74E0EE03D68" />
+  <File Path="icuuc40.dll" ComponentGuid="CC7562E0-4000-497D-BDCD-238ABE4EC63A" />
+  <File Path="icuin40.dll" ComponentGuid="A4A3FF95-7807-4579-8CA2-3D1AD93412A6" />
+  <File Path="icudt40.dll" ComponentGuid="F57B8784-2DE6-476C-9CF4-7D9217753FE2" />
+  <File Path="PsExport.pdb" ComponentGuid="DB30065D-DF4A-46F6-B508-3CDAE83062DC" />
+  <File Path="ParatextSupport.pdb" ComponentGuid="8D1FB406-38F4-4D65-B052-DE87A1498660" />
+  <File Path="PreviewDll\gsdll32.dll" ComponentGuid="21DB77BF-D766-479D-B2CD-1C1F5C20E27D" />
+  <File Path="gsdll32.dll" ComponentGuid="CDAA1EF4-1EFB-476C-A59B-16A7F24CB19E" />
+  <File Path="Palaso.dll" ComponentGuid="FDC5701D-0080-4E3F-A5D5-C0F067F9C2C3" />
+  <File Path="icu.net.dll" ComponentGuid="032646B7-57DC-462E-B8B4-E40256D0798E" />
+  <File Path="PreviewXhtml.xhtml" ComponentGuid="57A26F96-DA3F-4412-9EC7-500CAD83C65D" />
+  <File Path="BookletSettings.xml" ComponentGuid="CE74DB20-21BB-42BA-BD32-8378121440AC" />
+  <File Path="DEXCTX\miniRuby\lib\libmsvcrt-ruby191.dll.a" ComponentGuid="14760695-C44B-4166-953B-D816D2D10A1F" />
+  <File Path="DEXCTX\miniRuby\lib\libmsvcrt-ruby191-static.a" ComponentGuid="A1E00DD3-2EE7-455D-AD45-52312D70F93D" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.9.1\timeout.rb" ComponentGuid="0E650479-68D6-4913-86F0-BAB1C416F083" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.9.1\thread.rb" ComponentGuid="AAF135B1-4DE9-444C-8B13-7007DACB5E63" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.9.1\set.rb" ComponentGuid="DB1E7834-0084-412D-BB30-C83126977318" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.9.1\logger.rb" ComponentGuid="AAD6D87A-E3CB-4BAD-BECA-D9321F372E4A" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.9.1\fileutils.rb" ComponentGuid="DD551D4D-16DE-43D3-8E6D-3F94842CF6D2" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.9.1\i386-mingw32\rbconfig.rb" ComponentGuid="451CD341-602C-4064-8EA2-949AEC5CD535" />
+  <File Path="DEXCTX\miniRuby\bin\msvcrt-ruby191.dll" ComponentGuid="444F83E2-729D-4490-858D-E5BB290E9BC5" />
+  <File Path="TE_XHTML-to-Libronix_Styles.xslt" ComponentGuid="ED4E8314-F194-4994-B4C7-3DDD1DB4E1C4" />
+  <File Path="TE_XHTML-to-Libronix_Popups.xslt" ComponentGuid="EC41830C-0CD8-4F79-BC47-7919D312FC46" />
+  <File Path="TE_XHTML-to-Libronix_Metadata.xslt" ComponentGuid="C503689A-D48C-4E67-AB7B-4EB99ADAE328" />
+  <File Path="TE_XHTML-to-Libronix_Content.xslt" ComponentGuid="EB82A5E1-8563-4487-9262-283FCBF8A1EC" />
+  <File Path="PdfToImage.dll" ComponentGuid="D47B7459-C89C-4CB1-BCCF-78768F0F929C" />
+  <File Path="TE_XHTML-to-Libronix_ResourcesFile.xslt" ComponentGuid="3C18DB62-5297-4FBE-AD64-1D82F24170C8" />
+  <File Path="TE_XHTML-to-Libronix_NonScrolling.xslt" ComponentGuid="322D2115-3780-49B3-89CC-04A81EB3EC24" />
+  <File Path="TE_XHTML-to-Libronix_MainFile.xslt" ComponentGuid="DC1A3884-08A3-4F1F-8A05-82C740455FC8" />
+  <File Path="LogosConvert.pdb" ComponentGuid="29A47124-503A-4453-A9DD-2D7EC01B15DC" />
+  <File Path="PathwayB.vshost.exe.manifest" ComponentGuid="E34E6F7C-6248-446D-A1F7-4C3F4AABC0A7" />
+  <File Path="LogosConvert.dll.config" ComponentGuid="D0946813-E58F-4697-A8BD-6AA3371D0468" />
+  <File Path="LogosConvert.dll" ComponentGuid="A2EAC7BB-DDBC-4D23-A9B9-2A59043F6760" />
+  <File Path="PathwayB.vshost.exe" ComponentGuid="B28C77A7-0944-4FE2-94F7-5D8FB5E44C06" />
+  <File Path="PathwayB.exe" ComponentGuid="FA3A7CAC-8AF2-402D-96C9-AB947CD2D04D" />
+  <File Path="PsExport.dll" ComponentGuid="C3787096-9CCA-4E05-BEBC-BA6DF06E0D75" />
+  <File Path="pxhtml2xpw-scr.xsl" ComponentGuid="6C5679A1-5E3D-4B31-80FD-6F10C2BE58FD" />
+  <File Path="pxhtml2xpw-dict.xsl" ComponentGuid="840B4E06-A05A-49F1-96E0-BBE9CF391BD8" />
+  <File Path="FieldworksVersions.txt" ComponentGuid="34981D8A-EA9C-4CF4-8CB3-D0A3EF3263D6" />
+  <File Path="xetexPathway\XPWtoolc.bat" ComponentGuid="2F98323F-F449-48BD-817D-BDBDA83552BA" />
+  <File Path="xetexPathway\XPWtool.tex" ComponentGuid="FCDDF0D8-3799-43A4-8648-06D8386D0B3C" />
+  <File Path="xetexPathway\XPWtool.bat" ComponentGuid="C0B60EA7-30B4-4576-9117-910C51C6D03E" />
+  <File Path="xetexPathway\startXPWtool-tpl.bat" ComponentGuid="0009821C-D786-4D4A-8EFC-E1C4C27746D4" />
+  <File Path="xetexPathway\data\XPWsettings.txt" ComponentGuid="D239CE7B-1CE9-4D01-8A93-BB8768DD3268" />
+  <File Path="xetexPathway\data\XPWsettings-tpl.txt" ComponentGuid="FBE4C180-3297-4938-8F1C-6DF20F97C3E0" />
+  <File Path="xetexPathway\data\XPWmanual.txt" ComponentGuid="F7A264DC-51A3-4E58-99D5-F0A2EBE613ED" />
+  <File Path="xetexPathway\data\Input.txt" ComponentGuid="759BD6A4-5840-4058-9425-F0AB4CF7DF26" />
+  <File Path="xetexPathway\data\Input-rtl.txt" ComponentGuid="66ED3144-2A1C-4859-843F-CA0AACF8B790" />
+  <File Path="xetexPathway\cobalt\scripture\scripture.tex" ComponentGuid="6FB6A354-D42E-44D2-AC59-E9CA4AB72C83" />
+  <File Path="xetexPathway\cobalt\general\typescript.tex" ComponentGuid="A424D8E9-218A-454F-874B-6599D6C0D212" />
+  <File Path="xetexPathway\cobalt\general\productselect.tex" ComponentGuid="7090F4C6-DA10-440A-82E6-82F5DA7C12FC" />
+  <File Path="xetexPathway\cobalt\general\lettrine.tex" ComponentGuid="76E09CEE-BAF1-4202-9D27-9518125EF48F" />
+  <File Path="xetexPathway\cobalt\general\general.tex" ComponentGuid="07A628AA-D16B-4362-AC8E-3CBEE687B087" />
+  <File Path="xetexPathway\cobalt\general\extras.tex" ComponentGuid="14BAD2A9-233F-4349-A38C-C9532BDC5EC8" />
+  <File Path="xetexPathway\cobalt\dictionary\rtlpara.tex" ComponentGuid="9DF54D75-46A6-44C3-8496-5FDAE341D538" />
+  <File Path="xetexPathway\cobalt\dictionary\normalpara.tex" ComponentGuid="E09AD9AE-C5B7-4C91-AC57-199934BCC551" />
+  <File Path="xetexPathway\cobalt\dictionary\dictionary.tex" ComponentGuid="C1A15BE9-6CD8-4FF0-8AEF-84A2BBF9B41E" />
+  <File Path="WordPress\WordPress.bat" ComponentGuid="175514EC-2D74-4F38-BB0B-18429A2E7916" />
+  <File Path="WordPress\WordPress site setup.txt" ComponentGuid="893462B1-25B6-40B3-85A2-58B3F5D59868" />
+  <File Path="WordPress\w9xpopen.exe" ComponentGuid="5BE102AB-F805-4FFB-989D-5F38864C50DA" />
+  <File Path="WordPress\Translation-tpl.htt" ComponentGuid="6C22C39C-0049-4332-BB19-CE9887705951" />
+  <File Path="WordPress\Table-tpl.htt" ComponentGuid="BF276F83-B210-4A99-8F7B-60598265981C" />
+  <File Path="WordPress\SubEntry-tpl.htt" ComponentGuid="2E339305-6EBF-416B-84CA-8F44A30DBB2D" />
+  <File Path="WordPress\site.css" ComponentGuid="66EC956C-9BC8-46A6-AFF4-57BCEC91C2E9" />
+  <File Path="WordPress\MSVCR71.dll" ComponentGuid="C9E58AF7-C206-41D6-9807-FC6F6FA6C681" />
+  <File Path="WordPress\media.htt" ComponentGuid="6667CBEF-4B54-42BA-BF5D-A1B7C9A6A10B" />
+  <File Path="WordPress\Media-tpl.htt" ComponentGuid="C1C121FE-F920-4CBB-93AA-035E12C33B81" />
+  <File Path="WordPress\index-tpl.htt" ComponentGuid="308AD28A-F978-4975-8355-F25825B559A8" />
+  <File Path="WordPress\FwEntry-tpl.htt" ComponentGuid="F2C01ECF-4C46-4B82-96B3-F8CC7A910915" />
+  <File Path="WordPress\Example-tpl.htt" ComponentGuid="CE26B6BC-E55E-424F-AEAF-EA8D39F8D529" />
+  <File Path="WordPress\Entry-tpl.htt" ComponentGuid="8A203872-32D4-4F43-A198-CA79C1E5CF6F" />
+  <File Path="WordPress\blogExport.py" ComponentGuid="DB38F618-55DB-4687-9A39-42B481EC8DA3" />
+  <File Path="WordPress\BlogExport.exe" ComponentGuid="79E016CB-1EA1-4F90-B439-F6F2B53DC1B7" />
+  <File Path="OfficeFiles\Scripture\mimetype" ComponentGuid="0538D6CC-691B-42C6-8B50-7228160125EA" />
+  <File Path="OfficeFiles\Scripture\Thumbnails\thumbnail.png" ComponentGuid="5E9E6018-F533-4758-9D70-17221BD23212" />
+  <File Path="OfficeFiles\Scripture\Pictures\temp.txt" ComponentGuid="5AD7BD2C-ED3F-4CC7-BE98-CBA8428EC8CD" />
+  <File Path="OfficeFiles\Scripture\Configurations2\images\Bitmaps\sc_userimages.png" ComponentGuid="D8808C6A-7C61-4968-A835-234219456EBB" />
+  <File Path="OfficeFiles\Dictionary\mimetype" ComponentGuid="FD788B64-018F-4463-92F4-AA46B5D55B1E" />
+  <File Path="OfficeFiles\Dictionary\Thumbnails\thumbnail.png" ComponentGuid="B1565A63-88A1-407F-B814-F5B9237F852B" />
+  <File Path="OfficeFiles\Dictionary\Pictures\temp.txt" ComponentGuid="65BF6ADD-351D-4E67-825D-F9D2F618C168" />
+  <File Path="OfficeFiles\Dictionary\Configurations2\images\Bitmaps\sc_userimages.png" ComponentGuid="37742ADF-9B07-4F4E-8BDE-642FD60A5EFA" />
+  <File Path="InDesignFiles\Scripture\mimetype" ComponentGuid="AFC91F8D-70B5-430B-946D-8FFC596C9359" />
+  <File Path="InDesignFiles\Dictionary\mimetype" ComponentGuid="0CE2AAF7-F566-4D92-8D49-A891BAC821B9" />
+  <File Path="InDesignFiles\Dictionary\Scripts\Startup Scripts\PlaceFrames.jsx" ComponentGuid="B4C416B1-E378-4D15-B692-F83E3518AF46" />
+  <File Path="InDesignFiles\Dictionary\Scripts\Scripts Panel\PlaceFrames.jsx" ComponentGuid="11BA0AA1-2FE7-4B6D-99AA-3A02558A857C" />
+  <File Path="Icons\Thumbs.db" ComponentGuid="74C0B43B-2BA5-4B57-81B7-6B1704221D3E" />
+  <File Path="Hyphenation_Languages\hyph_zu_ZA.dic" ComponentGuid="7F8F6502-C793-46A8-A87F-B2A11E461AD2" />
+  <File Path="Hyphenation_Languages\hyph_sl_SI.dic" ComponentGuid="03F4A56E-4F4D-48AF-B1A8-CFA34681E5E3" />
+  <File Path="Hyphenation_Languages\hyph_ru_RU.dic" ComponentGuid="6ABE7811-08D7-4407-B088-2CF6B983C2F1" />
+  <File Path="Hyphenation_Languages\hyph_pl_PL.dic" ComponentGuid="4D618EFB-9A62-4A8E-9C3E-B2C953413E28" />
+  <File Path="Hyphenation_Languages\hyph_nl_NL.dic" ComponentGuid="EAC1CAF4-3CDF-41D2-A7E0-B017750BD3F6" />
+  <File Path="Hyphenation_Languages\hyph_lt_LT.dic" ComponentGuid="E4760C43-6C0F-4F47-B321-BE21D8CE6679" />
+  <File Path="Hyphenation_Languages\hyph_it_IT.dic" ComponentGuid="9159E6D6-64D3-4100-BB87-BE62C565A5C4" />
+  <File Path="Hyphenation_Languages\hyph_hu_HU.dic" ComponentGuid="38A7A201-A310-49D6-A388-E7AA31E8BD3D" />
+  <File Path="Hyphenation_Languages\hyph_fr_FR.dic" ComponentGuid="D2A5E5C2-1CF6-44FF-9B44-3614988798AD" />
+  <File Path="Hyphenation_Languages\hyph_et_EE.dic" ComponentGuid="FFDE5AEC-3AF1-4F17-A359-3A65990C5556" />
+  <File Path="Hyphenation_Languages\hyph_en_US.dic" ComponentGuid="47F2E032-7A42-4281-B52E-05D3622832E4" />
+  <File Path="Hyphenation_Languages\hyph_en_GB.dic" ComponentGuid="B2A139FF-594A-4118-8ED6-9D1C0BD4D390" />
+  <File Path="Hyphenation_Languages\hyph_de_DE.dic" ComponentGuid="3778D7E7-9F61-4424-B44D-318CC9CC5DA5" />
+  <File Path="Hyphenation_Languages\hyph_da_DK.dic" ComponentGuid="05CBAFBC-4F0C-407D-BAE4-E661F9EC9C99" />
+  <File Path="Hyphenation_Languages\hyph_af_ZA.dic" ComponentGuid="BC854F75-1DEE-4F32-86E6-3C075EB02786" />
+  <File Path="Help\silDEK.html" ComponentGuid="FB40E82A-67CB-41FB-AA01-9C189993F2CC" />
+  <File Path="Help\SetupPS.rtf" ComponentGuid="38964C12-5E91-4376-BE23-EB7E3F21649F" />
+  <File Path="Help\PwCss.htm" ComponentGuid="CC0803C8-AB7F-4D15-BAEF-FEA8532B718E" />
+  <File Path="Help\PsDoc.chm" ComponentGuid="9050CF91-DD7B-4072-8475-C7A81225C3DF" />
+  <File Path="Help\creating_large_docs_OpenOffice.pdf" ComponentGuid="7952518A-071F-4803-A1DF-DA8FE9B9F806" />
+  <File Path="Help\images\sildek.css" ComponentGuid="3B6DAEB1-86B5-44BE-928D-77A227C92ADE" />
+  <File Path="Help\images\logo-ps.PNG" ComponentGuid="FAF20007-7E42-4895-8391-99903F9A80F3" />
+  <File Path="Help\images\logo-DE.PNG" ComponentGuid="93AA49E8-4E26-477C-9BBC-1F575010140D" />
+  <File Path="Help\CSS3\page.html" ComponentGuid="B9627F37-8150-488A-A9B3-552A5A4F728B" />
+  <File Path="Help\CSS3\multicol.html" ComponentGuid="7DF29943-9726-479D-9AC9-29A27AFC73B9" />
+  <File Path="Help\CSS3\gcpm.html" ComponentGuid="DF78152E-815E-402E-B803-7D6B3929B66D" />
+  <File Path="Help\CSS3\page_files\w3c_home.png" ComponentGuid="72719836-4E5E-4AA7-A177-BFBBD26FB84C" />
+  <File Path="Help\CSS3\page_files\W3C-WD.css" ComponentGuid="0D547C7D-D196-4276-943B-9389DC8D7AA8" />
+  <File Path="Help\CSS3\page_files\TopRightMarginBox.png" ComponentGuid="0C012EBA-7A30-43C8-A58D-945CCB9A1403" />
+  <File Path="Help\CSS3\page_files\TopRightCornerMarginBox.png" ComponentGuid="57C51D4A-E81D-45F6-8BF8-0A80D9BEE488" />
+  <File Path="Help\CSS3\page_files\TopLeftMarginBox.png" ComponentGuid="94C3C9F9-3172-4882-AB84-242CFC4D1BDD" />
+  <File Path="Help\CSS3\page_files\TopLeftCornerBox.png" ComponentGuid="6B60387D-8B6A-4991-9CC4-CF8EA0BA8CC0" />
+  <File Path="Help\CSS3\page_files\TopCenterMarginBox.png" ComponentGuid="AFCDF1A5-A0FE-46B6-8212-6A0AF194E99D" />
+  <File Path="Help\CSS3\page_files\RightMarginBoxes.png" ComponentGuid="B5A5C567-FDAA-428B-9BD7-780AA65DE71A" />
+  <File Path="Help\CSS3\page_files\PageSheet.png" ComponentGuid="BA6C5023-27E8-401C-B7F4-766E11527B01" />
+  <File Path="Help\CSS3\page_files\PageBox.png" ComponentGuid="F8E5AAA1-16DB-4CC4-BC4C-440C7CC352C3" />
+  <File Path="Help\CSS3\page_files\LeftMarginBoxes.png" ComponentGuid="2643D53F-DCC4-4C93-94FF-416D73BEE860" />
+  <File Path="Help\CSS3\page_files\header-ex-6.png" ComponentGuid="D5AF7A76-6737-4202-B8A2-5CEAD44FCA4D" />
+  <File Path="Help\CSS3\page_files\header-ex-5.png" ComponentGuid="29A1C171-E7C6-4090-9362-85E2B0552353" />
+  <File Path="Help\CSS3\page_files\header-ex-4.png" ComponentGuid="FB1C941F-424B-454C-92BE-8020E7307D18" />
+  <File Path="Help\CSS3\page_files\header-ex-3.png" ComponentGuid="5FAC931D-01B5-4A3A-9BC5-38B1BD01FB4E" />
+  <File Path="Help\CSS3\page_files\header-ex-2.png" ComponentGuid="73C9E0FF-271A-4FA0-9F29-B5A637FF6698" />
+  <File Path="Help\CSS3\page_files\header-ex-1.png" ComponentGuid="67BCC95E-C908-4787-ADA8-62283A9ED729" />
+  <File Path="Help\CSS3\page_files\fit.png" ComponentGuid="21E531AB-25DB-4837-B2F8-4ADD6BF0FEB9" />
+  <File Path="Help\CSS3\page_files\default.css" ComponentGuid="9F3A521E-A4CD-4205-898B-52FF734A1FAC" />
+  <File Path="Help\CSS3\page_files\BottomRightMarginBox.png" ComponentGuid="9DDD4ECF-9FA7-4DF1-AA59-4BFF188492AD" />
+  <File Path="Help\CSS3\page_files\BottomRightCornerBox.png" ComponentGuid="E57F9A8F-DC47-457B-90AF-3C26B32D8CC4" />
+  <File Path="Help\CSS3\page_files\BottomLeftMarginBox.png" ComponentGuid="D67E96FE-6C35-4C93-90EF-E77C23F4FEC9" />
+  <File Path="Help\CSS3\page_files\BottomLeftCornerBox.png" ComponentGuid="F8A0DB92-3019-4E07-A5AC-3F497382507F" />
+  <File Path="Help\CSS3\page_files\BottomCenterMarginBox.png" ComponentGuid="9B31DFD2-2A23-47C2-9938-61D1552A4F73" />
+  <File Path="Help\CSS3\multicol_files\w3c_home.png" ComponentGuid="BE1859FA-B134-4FC5-AE21-5CE2FBBA164D" />
+  <File Path="Help\CSS3\multicol_files\W3C-WD.css" ComponentGuid="D157E113-AB67-470E-98A8-413C562339EA" />
+  <File Path="Help\CSS3\multicol_files\default.css" ComponentGuid="808B2E4E-F3F0-4FCA-8B1D-7D3E065B0402" />
+  <File Path="Help\CSS3\gcpm_files\w3c_home.png" ComponentGuid="98D70955-45A4-4270-B931-F52A552A3015" />
+  <File Path="Help\CSS3\gcpm_files\W3C-WD.css" ComponentGuid="29811CDD-4329-4E94-B5AE-35D6FF7C5D35" />
+  <File Path="Help\CSS3\gcpm_files\default.css" ComponentGuid="CA804A77-A562-48DF-9944-5CA200F9CEE1" />
+  <File Path="Help\Css21\zindex.html" ComponentGuid="52774AAC-50C3-4E28-B144-1469B08F9ED8" />
+  <File Path="Help\Css21\visuren.html" ComponentGuid="785FBAF7-0081-4B32-803D-0574B0805274" />
+  <File Path="Help\Css21\visufx.html" ComponentGuid="D353495B-D7E7-4800-939A-4FA2A1BD7462" />
+  <File Path="Help\Css21\visudet.html" ComponentGuid="AEB4255A-3424-4E35-BE10-5240078D11A6" />
+  <File Path="Help\Css21\ui.html" ComponentGuid="A9AE22F7-6DBA-47EE-95A6-C986A5FED060" />
+  <File Path="Help\Css21\text.html" ComponentGuid="631AF86B-3636-4E29-B1E0-47758A2CB280" />
+  <File Path="Help\Css21\tables.html" ComponentGuid="769E39DF-37E3-42F3-A8C0-1CCA2CC9C305" />
+  <File Path="Help\Css21\syndata.html" ComponentGuid="CC0758BD-4514-471C-9476-76AC4973CEDD" />
+  <File Path="Help\Css21\selector.html" ComponentGuid="453118FE-2ED7-42F3-A146-147ED5482210" />
+  <File Path="Help\Css21\sample.html" ComponentGuid="D141BC67-160A-498A-8FF8-38AF6C61E42E" />
+  <File Path="Help\Css21\refs.html" ComponentGuid="C5AE2AB4-CF57-413D-B293-5970827ABAF2" />
+  <File Path="Help\Css21\propidx.html" ComponentGuid="3ADE80F8-CF11-4196-B905-7575B06A963F" />
+  <File Path="Help\Css21\page.html" ComponentGuid="61EE05F6-FFA4-4F57-83AB-E801C1B9FAD2" />
+  <File Path="Help\Css21\media.html" ComponentGuid="5394B1F4-4A85-4DAA-9D78-671529B9EC12" />
+  <File Path="Help\Css21\leftblank.html" ComponentGuid="CA816052-ED0A-4036-AA23-D82DC924E54D" />
+  <File Path="Help\Css21\intro.html" ComponentGuid="4D89DA85-31D1-4812-988E-E8FAF46BCD27" />
+  <File Path="Help\Css21\indexlist.html" ComponentGuid="7E616978-3C38-45BC-A5C4-E440928B330C" />
+  <File Path="Help\Css21\grammar.html" ComponentGuid="BF4DD983-231D-4222-8BF2-8F4DEE0DB73C" />
+  <File Path="Help\Css21\generate.html" ComponentGuid="CB1C5F0D-20FE-4494-9821-EF51FF20ED3F" />
+  <File Path="Help\Css21\fonts.html" ComponentGuid="CFC3D32F-CF64-437A-8C3A-9BAEB95FC0D6" />
+  <File Path="Help\Css21\cover.html" ComponentGuid="3430E5A3-677D-40C0-A8CC-239927F0A4B5" />
+  <File Path="Help\Css21\conform.html" ComponentGuid="E8E9D37D-72C7-458A-B6EC-D4D6E03BA08C" />
+  <File Path="Help\Css21\colors.html" ComponentGuid="4627AA96-8513-4C69-A1DC-E6EA12D153CC" />
+  <File Path="Help\Css21\changes.html" ComponentGuid="94ABB74F-3213-4F69-803E-83DE4F99A181" />
+  <File Path="Help\Css21\cascade.html" ComponentGuid="079F13AD-4BBF-4BEF-8A42-DC83450198B0" />
+  <File Path="Help\Css21\box.html" ComponentGuid="E5EC5D1E-3606-4E61-B5B6-D2FC282FCD26" />
+  <File Path="Help\Css21\aural.html" ComponentGuid="EE98DEEB-4B91-4B17-AC68-2124D2E6C05B" />
+  <File Path="Help\Css21\about.html" ComponentGuid="D2A42820-B729-4DD7-8A05-64C7C7F3A1BA" />
+  <File Path="Help\Css21\style\default.css" ComponentGuid="B4352931-D9EC-4058-8732-456558C93AF7" />
+  <File Path="Help\Css21\images\x-height.png" ComponentGuid="DAD5EA02-FF22-4925-9DB2-F76BE39D693A" />
+  <File Path="Help\Css21\images\w3c_home.png" ComponentGuid="B0B88CF6-0583-40E7-ABED-ECCD1CCC2605" />
+  <File Path="Help\Css21\images\underline-example.png" ComponentGuid="8C831771-8D69-47A0-8D88-36BEF49B6EF3" />
+  <File Path="Help\Css21\images\top-caption.png" ComponentGuid="25628F87-6F24-48DB-A50B-241624F7B7E2" />
+  <File Path="Help\Css21\images\tbl-width.png" ComponentGuid="6C566A25-6D09-4A54-9DE8-6F82C64E515D" />
+  <File Path="Help\Css21\images\tbl-spacing.png" ComponentGuid="21A58AA9-1243-4ADA-883F-2023626B3037" />
+  <File Path="Help\Css21\images\tbl-rules.png" ComponentGuid="908DEC21-78A6-4929-91BF-3E6B4C8252F9" />
+  <File Path="Help\Css21\images\tbl-layers.png" ComponentGuid="57D19306-A7B5-4908-A0F9-E90B838CC2EF" />
+  <File Path="Help\Css21\images\tbl-empty.png" ComponentGuid="B82E54C9-1E8C-49EF-9138-43C8293FC592" />
+  <File Path="Help\Css21\images\tbl-border.png" ComponentGuid="62344D4A-497B-4DD7-8043-1D3A663671FB" />
+  <File Path="Help\Css21\images\tbl-border-conflict.png" ComponentGuid="4B8ED410-4A8F-4C47-9519-D45BB986EDBF" />
+  <File Path="Help\Css21\images\table1.png" ComponentGuid="14621F2A-534A-4FD3-AD37-29BEF1B0FEEC" />
+  <File Path="Help\Css21\images\table-overlap.png" ComponentGuid="E9325B4A-FCDF-4C3E-8535-86841EF63871" />
+  <File Path="Help\Css21\images\supercal.png" ComponentGuid="A35EADE2-6324-4C18-A07F-48A71D682301" />
+  <File Path="Help\Css21\images\recbg.jpg" ComponentGuid="344D666E-64EA-4E28-BE0C-676079B15AE2" />
+  <File Path="Help\Css21\images\pixel2.png" ComponentGuid="35E80FF2-7E25-40B0-A698-9B65E3BDBDB1" />
+  <File Path="Help\Css21\images\pixel1.png" ComponentGuid="D6AA7C4C-09C7-4308-B84B-F39F2B925540" />
+  <File Path="Help\Css21\images\panose-16.png" ComponentGuid="9146D032-0315-46D3-8EC4-D9F68215BC00" />
+  <File Path="Help\Css21\images\page-info.png" ComponentGuid="58A81A63-3EB2-4840-BB72-745F6736AA9B" />
+  <File Path="Help\Css21\images\P2F24.png" ComponentGuid="314C1107-55CA-4043-B134-96664733B28C" />
+  <File Path="Help\Css21\images\overflow2.png" ComponentGuid="DB7847E2-31E5-4039-831F-46FBE11BF0B7" />
+  <File Path="Help\Css21\images\overflow1.png" ComponentGuid="2AD4A2C8-C57D-4F1F-B315-149520ABED42" />
+  <File Path="Help\Css21\images\list-square.png" ComponentGuid="79A4D6DF-6AB3-484A-9DDC-6A899043C321" />
+  <File Path="Help\Css21\images\list-none.png" ComponentGuid="B954E787-46C9-4C39-91BA-2DB460A77B23" />
+  <File Path="Help\Css21\images\list-inout.png" ComponentGuid="A56C4690-62C0-400E-8A14-3350C8927EF7" />
+  <File Path="Help\Css21\images\left-caption.png" ComponentGuid="692EBAE3-EB4A-49E6-B9A2-EADAB1BF166B" />
+  <File Path="Help\Css21\images\kern-22.png" ComponentGuid="35BEC167-39BD-4612-B3DE-0793C10F35BF" />
+  <File Path="Help\Css21\images\italic-40.png" ComponentGuid="9B012A91-609C-4D07-B87C-FAD6BA192D31" />
+  <File Path="Help\Css21\images\inline-layout.png" ComponentGuid="7CCE2BFE-7C9F-45FC-887A-54EB06A95040" />
+  <File Path="Help\Css21\images\initial-cap.png" ComponentGuid="F83BEB90-F2A0-4C58-9FC0-70CD931D9BAD" />
+  <File Path="Help\Css21\images\heb-height.png" ComponentGuid="2C3D92A5-50E5-4122-BAF6-16F79D9661D0" />
+  <File Path="Help\Css21\images\frame.png" ComponentGuid="D5E0B92D-0181-4D53-A9AB-0870A21D61AA" />
+  <File Path="Help\Css21\images\font-adjust-b.png" ComponentGuid="B25350FE-4008-4C64-930A-6671FEE79A7E" />
+  <File Path="Help\Css21\images\font-adjust-a.png" ComponentGuid="402BA633-5E1C-4B8C-A8D1-D7B5C5F8B926" />
+  <File Path="Help\Css21\images\flow-static.png" ComponentGuid="D2294868-791A-448A-847F-365C41256ED4" />
+  <File Path="Help\Css21\images\flow-relative.png" ComponentGuid="58FE065E-616B-4674-A0AC-16D0BFC1B5CF" />
+  <File Path="Help\Css21\images\flow-generic.png" ComponentGuid="B5C4FEAB-1A97-4508-B202-B5780F013604" />
+  <File Path="Help\Css21\images\flow-float.png" ComponentGuid="05AC529B-BE1F-4C96-B722-2188F84A3696" />
+  <File Path="Help\Css21\images\flow-clear2.png" ComponentGuid="3310937C-34E1-4E51-9720-DD06269CC570" />
+  <File Path="Help\Css21\images\flow-clear.png" ComponentGuid="3C666D8E-A8B0-4A90-BB13-4307B0860A17" />
+  <File Path="Help\Css21\images\flow-absolute.png" ComponentGuid="2A8BF75F-782F-4C64-8404-195C3EC98099" />
+  <File Path="Help\Css21\images\flow-abs-rel.png" ComponentGuid="D796CD2B-2971-4F83-BB39-A98C6E97A64F" />
+  <File Path="Help\Css21\images\floateg.png" ComponentGuid="04EF0551-D538-489B-8C98-EA32541CCEDC" />
+  <File Path="Help\Css21\images\floatclear.png" ComponentGuid="08D6AEC7-A8B4-4B7F-AB56-A30EABC02B55" />
+  <File Path="Help\Css21\images\float2p.png" ComponentGuid="8AA367C9-A2D4-49BB-A192-D4C0089C3E12" />
+  <File Path="Help\Css21\images\float-right.png" ComponentGuid="0055D72C-3B34-4915-BE1F-18C7EEBE9F98" />
+  <File Path="Help\Css21\images\first-letter2.png" ComponentGuid="69B75BC9-DB01-40A7-AA1D-117BA2E2BFDC" />
+  <File Path="Help\Css21\images\first-letter.png" ComponentGuid="25EA5EC8-F57D-4473-AB0B-1511C4A01934" />
+  <File Path="Help\Css21\images\eclipse-outline.png" ComponentGuid="0165A0C7-39FC-4749-9AA0-53888940382D" />
+  <File Path="Help\Css21\images\doctree.png" ComponentGuid="6137E8A3-A95A-42F8-AAC0-0B3A2C382D26" />
+  <File Path="Help\Css21\images\descender.png" ComponentGuid="2EF1365C-BC36-4777-9857-226EBC1884CE" />
+  <File Path="Help\Css21\images\CSStbl3.png" ComponentGuid="ABF02E2D-B4E4-42C0-8E11-455B1399330F" />
+  <File Path="Help\Css21\images\CSStbl2.png" ComponentGuid="8E2CDF9D-48E2-4271-8155-3C938D9BA2EF" />
+  <File Path="Help\Css21\images\CSStbl1a.png" ComponentGuid="FA0582C5-2838-42CC-8E65-2DEDAF8AAF03" />
+  <File Path="Help\Css21\images\CSStbl1.png" ComponentGuid="474F3059-79E2-4DA8-BF9F-3AD372B0E4EC" />
+  <File Path="Help\Css21\images\clip.png" ComponentGuid="8FA63801-1F17-4EFE-A4C6-78B53C277777" />
+  <File Path="Help\Css21\images\changebar.png" ComponentGuid="DCA5E515-0373-40B4-AE38-D5BFC305576B" />
+  <File Path="Help\Css21\images\cell-align.png" ComponentGuid="9656E15F-858B-4612-BBB4-C4D785E2EA47" />
+  <File Path="Help\Css21\images\caution.png" ComponentGuid="46825F7D-412A-4531-BC61-5C2420876957" />
+  <File Path="Help\Css21\images\boxdimeg.png" ComponentGuid="F9B4F54D-B876-437F-A1BD-D6A4A9D4F804" />
+  <File Path="Help\Css21\images\boxdim.png" ComponentGuid="A792BFC3-2C50-45E6-A539-E98C7F50C690" />
+  <File Path="Help\Css21\images\box-coord.png" ComponentGuid="C43A894A-1D57-4D83-B85A-F6DC163276E3" />
+  <File Path="Help\Css21\images\bg-repeat.png" ComponentGuid="773EF08A-F02C-4D22-B4BC-BB868721F473" />
+  <File Path="Help\Css21\images\bach2.png" ComponentGuid="CEC9C2D5-8598-49AD-8D9F-E82CA80F40F0" />
+  <File Path="Help\Css21\images\bach1.png" ComponentGuid="087E6EEB-1064-43AE-A3AA-9812C9004E32" />
+  <File Path="Help\Css21\images\ascender.png" ComponentGuid="434B3BCB-92F6-4FD4-BEA5-B85AE6B5CB7B" />
+  <File Path="Help\Css21\images\anon-block.png" ComponentGuid="AE8EF4DC-A933-4211-9CF8-3DDBBA2DC3CC" />
+  <File Path="Help\Css21\images\longdesc\top-caption-desc.html" ComponentGuid="6B83103B-5662-4F68-A8D7-6E966C15CE59" />
+  <File Path="Help\Css21\images\longdesc\tbl-width-desc.html" ComponentGuid="D8DCB74A-1702-43E4-9CDA-31780FE83CD2" />
+  <File Path="Help\Css21\images\longdesc\tbl-spacing-desc.html" ComponentGuid="A30FB2EF-7B51-475D-B0E1-9921012A2423" />
+  <File Path="Help\Css21\images\longdesc\tbl-rules-desc.html" ComponentGuid="AFE19CD7-4C42-4C38-B023-0BC778060F38" />
+  <File Path="Help\Css21\images\longdesc\tbl-layers-desc.html" ComponentGuid="7E09FAAE-ABE2-449E-8706-795AFDC2C919" />
+  <File Path="Help\Css21\images\longdesc\tbl-empty-desc.html" ComponentGuid="0DA9F9CD-8817-4384-BA4E-077CDE9B288D" />
+  <File Path="Help\Css21\images\longdesc\tbl-border-conflict-desc.html" ComponentGuid="F3B7E07D-B028-49A1-A33F-9C3D8D7A2F55" />
+  <File Path="Help\Css21\images\longdesc\table1-desc.html" ComponentGuid="813C84D8-A471-4635-96BF-76113233D825" />
+  <File Path="Help\Css21\images\longdesc\table-overlap-desc.html" ComponentGuid="246D94AD-6937-4A8E-B4CF-2832F3E57EEC" />
+  <File Path="Help\Css21\images\longdesc\pixel2-desc.html" ComponentGuid="1BA070C6-D705-4EB0-B13C-29C8B9E2C191" />
+  <File Path="Help\Css21\images\longdesc\pixel1-desc.html" ComponentGuid="9E291D77-97B1-4B0E-9264-D84EA6977EA8" />
+  <File Path="Help\Css21\images\longdesc\panose-16-desc.html" ComponentGuid="06C52186-12B5-453E-844E-83D50C55D416" />
+  <File Path="Help\Css21\images\longdesc\page-info-desc.html" ComponentGuid="163BB32B-1A3D-4B91-97E9-F3243142EFF2" />
+  <File Path="Help\Css21\images\longdesc\overflow2-desc.html" ComponentGuid="B0B8458B-7423-4EC1-A165-475A264148AE" />
+  <File Path="Help\Css21\images\longdesc\overflow1-desc.html" ComponentGuid="9B83D6E9-A04A-452B-AF9E-F068E19D02A6" />
+  <File Path="Help\Css21\images\longdesc\list-inout-desc.html" ComponentGuid="79E1ABA3-DB4C-4DA6-8CA9-00E0E73C76C5" />
+  <File Path="Help\Css21\images\longdesc\left-caption-desc.html" ComponentGuid="D00790A9-91E4-4B8E-9DBB-6B1914FA4B80" />
+  <File Path="Help\Css21\images\longdesc\kern-22-desc.html" ComponentGuid="CB8FF2EA-7F7A-46F0-95EE-E0BB0C6ED33D" />
+  <File Path="Help\Css21\images\longdesc\italic-40-desc.html" ComponentGuid="2E544945-9F0A-4689-9FBD-6FAE974A3328" />
+  <File Path="Help\Css21\images\longdesc\inline-layout-desc.html" ComponentGuid="74960507-DB96-4DE7-930F-E1F86963F750" />
+  <File Path="Help\Css21\images\longdesc\frame-desc.html" ComponentGuid="F093C8A4-7A88-4A4F-A92F-8EF6916E422F" />
+  <File Path="Help\Css21\images\longdesc\flow-static-desc.html" ComponentGuid="E794DBCD-2ED5-42DA-9217-AF4584094023" />
+  <File Path="Help\Css21\images\longdesc\flow-relative-desc.html" ComponentGuid="AE1617F3-998B-4DCB-95C2-2A4EBA49FD6D" />
+  <File Path="Help\Css21\images\longdesc\flow-generic-desc.html" ComponentGuid="BA917764-F625-4C07-B69C-DB7983A7C022" />
+  <File Path="Help\Css21\images\longdesc\flow-float-desc.html" ComponentGuid="F59979E7-07BF-488D-864A-E2EAB17B7190" />
+  <File Path="Help\Css21\images\longdesc\flow-clear2-desc.html" ComponentGuid="1D58F423-D6CF-44A7-BF83-19A6C2895465" />
+  <File Path="Help\Css21\images\longdesc\flow-clear-desc.html" ComponentGuid="FAADCC76-18B2-4E95-8115-1411AA47E6BC" />
+  <File Path="Help\Css21\images\longdesc\flow-absolute-desc.html" ComponentGuid="C20BC3BF-4F32-4522-B5CD-B4F67BB552F0" />
+  <File Path="Help\Css21\images\longdesc\flow-abs-rel-desc.html" ComponentGuid="33B230C4-CA93-443B-AB85-0FA2587B6449" />
+  <File Path="Help\Css21\images\longdesc\floateg-desc.html" ComponentGuid="8B3A8D40-4236-4653-9D12-D1C90D8F9173" />
+  <File Path="Help\Css21\images\longdesc\floatclear-desc.html" ComponentGuid="B1C1584F-7360-4F7D-BD18-EF49F14CA572" />
+  <File Path="Help\Css21\images\longdesc\float2p-desc.html" ComponentGuid="A052AA0C-AC19-43EF-8204-2B05093AA7A3" />
+  <File Path="Help\Css21\images\longdesc\first-letter2-desc.html" ComponentGuid="FDBB11AF-9359-46A5-AB97-991AE23D4E65" />
+  <File Path="Help\Css21\images\longdesc\first-letter-desc.html" ComponentGuid="BD2334AE-212B-4446-8C8A-8529F52B4207" />
+  <File Path="Help\Css21\images\longdesc\eclipse-outline-desc.html" ComponentGuid="BEEDD6A3-262B-4E52-ABF6-CCD2BE6AAFFE" />
+  <File Path="Help\Css21\images\longdesc\doctree-desc.html" ComponentGuid="C54EC3A6-003B-4C7D-AD5E-E4DD75D9DC86" />
+  <File Path="Help\Css21\images\longdesc\CSStbl3-desc.html" ComponentGuid="519D9F3A-C7C6-4328-A8A7-88DFDA59A314" />
+  <File Path="Help\Css21\images\longdesc\clip-desc.html" ComponentGuid="77AC8FBC-9C05-43F5-ACE0-B0E52F7A575F" />
+  <File Path="Help\Css21\images\longdesc\changebar-desc.html" ComponentGuid="B0859F41-37EF-4D35-875B-AFF0DB321432" />
+  <File Path="Help\Css21\images\longdesc\cell-align-desc.html" ComponentGuid="1311CBCB-AE66-449B-8DB6-7FA4D4AD6DA9" />
+  <File Path="Help\Css21\images\longdesc\boxdimeg-desc.html" ComponentGuid="A394860E-5A9E-4FBC-A022-30860DE824F7" />
+  <File Path="Help\Css21\images\longdesc\boxdim-desc.html" ComponentGuid="79B54072-C5A5-4960-AEE4-08AA33010DF5" />
+  <File Path="Help\Css21\images\longdesc\bg-repeat-desc.html" ComponentGuid="956A06A7-DF84-4360-8310-38E8C9A07D5C" />
+  <File Path="Help\Css21\images\longdesc\bach2-desc.html" ComponentGuid="10CA5F96-2D5F-4198-BCF3-0898EC553A18" />
+  <File Path="Help\Css21\images\longdesc\bach1-desc.html" ComponentGuid="3531A724-CD1B-4E66-8726-6EE27D92ADC6" />
+  <File Path="Help\Css21\images\longdesc\anon-block-desc.html" ComponentGuid="E8A25DFF-5708-4151-9983-275FAEB82158" />
+  <File Path="Graphic\Thumbs.db" ComponentGuid="B859F4CB-8AE5-4FB6-9966-2C48F619858F" />
+  <File Path="GoBible\GoBibleCreator.jar" ComponentGuid="6DFAD091-B415-42AA-A6CC-8FA61B24EBAB" />
+  <File Path="GoBible\GoBibleCore\ui.properties" ComponentGuid="A4C2788B-082B-469D-8243-0A90E887CB06" />
+  <File Path="GoBible\GoBibleCore\ReadMe.txt" ComponentGuid="01112854-79AC-41AD-A0F8-92265191933E" />
+  <File Path="GoBible\GoBibleCore\GoBibleCore2.jar" ComponentGuid="7C508503-935E-4EBE-951E-89400BE895F6" />
+  <File Path="GoBible\GoBibleCore\GoBibleCore1.jar" ComponentGuid="897A2329-6835-47BA-8716-23BA46C95E58" />
+  <File Path="GoBible\GoBibleCore\build.xml" ComponentGuid="5A6C0F46-83A1-4584-8ABF-5A249FF23EE5" />
+  <File Path="GoBible\GoBibleCore\icon\Icon.png" ComponentGuid="BE56925F-29C6-48A8-A594-E9496AE6AF8C" />
+  <File Path="DEXCTX\starttestXPWtool.bat" ComponentGuid="80834915-87D9-4346-9303-E038E7CC419F" />
+  <File Path="DEXCTX\starttestminiCTX.bat" ComponentGuid="E4FCE8EA-BD14-4745-9946-E1E8CFBA0798" />
+  <File Path="DEXCTX\starttestDEtool.bat" ComponentGuid="8C3BAEA8-277A-477D-B94B-553C7F349E03" />
+  <File Path="DEXCTX\startminiCTX.bat" ComponentGuid="F2D4F585-F882-4F85-B0D3-B79209AA9F1B" />
+  <File Path="DEXCTX\minitest.tex" ComponentGuid="1A2202EB-E169-4A04-A40B-8B8DBC1B0C68" />
+  <File Path="DEXCTX\miniRuby\lib\msvcrt-ruby18.lib" ComponentGuid="0262E862-39C1-4C9E-8516-AFB2B9D847F9" />
+  <File Path="DEXCTX\miniRuby\lib\msvcrt-ruby18-static.lib" ComponentGuid="1657EBAF-C33B-444D-9B1C-FB3B415DE690" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\timeout.rb" ComponentGuid="0C595A8C-658F-4642-BB8A-10B3D98FB3E4" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\set.rb" ComponentGuid="03A1526A-3D86-436E-A227-CDCECCA47E57" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\fileutils.rb" ComponentGuid="0BB79B4A-5D81-4CB8-AEAE-40900F60D289" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\Win32API.so" ComponentGuid="032C0C62-D5FA-4A91-863D-54AC8E07904D" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\thread.so" ComponentGuid="0A148375-2064-45F1-8B50-6837AF5359C1" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\socket.so" ComponentGuid="A84EBCDE-B999-456D-A591-3010F3337B12" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\rbconfig.rb" ComponentGuid="897EDAF7-CCFF-412B-B391-F069DDF0098D" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\digest.so" ComponentGuid="2A07F06A-1F2B-423A-BE2C-F4DB97B7484E" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\win32\win32.h" ComponentGuid="A43391BA-E3A0-4282-9A6F-001A37AF1573" />
+  <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\digest\md5.so" ComponentGuid="2E3DFEF7-C4A7-4187-BC50-20AD99FB5816" />
+  <File Path="DEXCTX\miniRuby\bin\ruby.exe" ComponentGuid="BC332243-326A-458C-8DD6-B1268299355C" />
+  <File Path="DEXCTX\miniRuby\bin\msvcrt-ruby18.dll" ComponentGuid="B473B2A5-22A7-44E2-A17B-535E31ADB188" />
+  <File Path="DEXCTX\miniCTX\setuptex.bat" ComponentGuid="17862C28-0572-42F8-8FDB-EE208F61B4D9" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\ls-R" ComponentGuid="E6B4E697-DB58-4ED2-B3E7-D6316BBC128C" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\web2c\xetex\cont-en.log" ComponentGuid="68887247-3EBF-4EFD-8C27-A09BF5D8469B" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\web2c\xetex\cont-en.fmt" ComponentGuid="273395F7-43F9-4FFD-BE48-1D23FC5B5B76" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\fonts\conf\fonts.conf" ComponentGuid="3892C7F9-AF23-4916-8E51-0AA92758A4BB" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\fonts\cache\fe1dbb5a98cb4443939b32b1858eec08-x86.cache-2" ComponentGuid="67295EF0-1B47-45F8-8CA5-F5FC8C54D898" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\xetex.exe" ComponentGuid="535FF197-2206-41F5-989C-740D738F3772" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\xdvipdfmx.exe" ComponentGuid="21003C4D-5E90-4065-9F5E-1C16EFE1F2F8" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\texexec.cmd" ComponentGuid="A6E887FA-A716-451B-8D2B-779AEF6AE13E" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\msvcr71.dll" ComponentGuid="0F4609D7-B482-4111-B99C-CBCFD6767FD0" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\msvcp71.dll" ComponentGuid="DCD07620-D099-4C71-961D-0EC6F593546A" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\kpathsea50071.dll" ComponentGuid="6DE7C14C-F087-469A-9AB4-F9833A7802BB" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\kpathsea500.dll" ComponentGuid="2AB547BA-011C-4E6F-AFD9-23D27C90FC1F" />
+  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\icudt40.dll" ComponentGuid="60D94E5B-9F6D-4E5D-AF25-5CFF1FBA66C9" />
+  <File Path="DEXCTX\miniCTX\texmf-context\ls-R" ComponentGuid="4317AC7E-C737-4E22-A04B-860F488CEA9D" />
+  <File Path="DEXCTX\miniCTX\texmf-context\web2c\natural.tcx" ComponentGuid="8F38AC29-C9F3-4A71-9A7A-54AE68483C49" />
+  <File Path="DEXCTX\miniCTX\texmf-context\web2c\context.cnf" ComponentGuid="C42B637C-FD24-4793-9253-0C4436E29ECC" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\user\cont-sys.rme" ComponentGuid="41421A3B-65E8-4FBC-BE29-A504766DD715" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\sample\knuth.tex" ComponentGuid="75108B92-F6E0-41A5-8A50-D4882CCA52C9" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\patterns\lang-us.rme" ComponentGuid="E6041402-6399-4F3D-ACCF-6BB17369C305" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\patterns\lang-us.pat" ComponentGuid="F7D47F39-1100-405F-9419-C93A76D9E56A" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\patterns\lang-us.hyp" ComponentGuid="F01376EB-CC0B-49D5-9C00-1810DF7E3056" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\patterns\lang-gb.rme" ComponentGuid="7706ABE0-A518-4091-9C75-A4FB723A10DA" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\patterns\lang-gb.pat" ComponentGuid="1033A7D9-7C07-4649-9253-308E8268E0B2" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\patterns\lang-gb.hyp" ComponentGuid="6E3ADC6D-7541-4568-8DE9-8784A8225012" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\config\cont-usr.tex" ComponentGuid="5C2DAB6B-0F14-4F5D-A2CE-B52284A81B94" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\xetx-utf.mkii" ComponentGuid="1D911ADB-0769-4837-9512-151DDDF920B5" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\xetx-ini.mkii" ComponentGuid="E803396B-2F5D-481C-922F-F64FE45783C8" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\xetx-cls.mkii" ComponentGuid="C3443344-78F4-4DCB-AD3E-05CB6ECCEA73" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\xetx-chr.mkii" ComponentGuid="85F75CA7-1C01-42A0-AC1C-1A6A37986167" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\typo-ini.mkii" ComponentGuid="B2ECF354-FB5A-48CD-A8BF-598283367E5F" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-xtx.tex" ComponentGuid="0B3FF512-996A-4F58-968C-0DCE4F98A653" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-win.tex" ComponentGuid="353CBC9B-907D-47E4-9CA0-B5E7B15E6E61" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-siz.tex" ComponentGuid="B16D0BC3-2DBA-40D7-B584-DB6962DE570E" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-siz.mkii" ComponentGuid="9A88E90F-EDFB-408C-A815-A56441132802" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-run.mkii" ComponentGuid="7B777A7D-7056-4A9C-8AE1-B2BD341CD5DF" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-otf.tex" ComponentGuid="D70422F9-175D-465A-8880-FD529EB48A4C" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-otf.mkii" ComponentGuid="6376713E-4BFC-415E-BE02-D539D9866914" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-msw.tex" ComponentGuid="C3A93E2A-296E-47DA-937A-BC6886E18751" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-ini.mkii" ComponentGuid="62DD4C31-846F-46FC-AF96-29EBEF3D0F4D" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\type-def.tex" ComponentGuid="F591D713-0F72-40D1-AD9C-ACEEC3861CB3" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-tex.mkii" ComponentGuid="877D8D31-22D6-4B17-9892-B1F0272EDF14" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-str.mkii" ComponentGuid="DF20D189-F819-4B86-A03C-99239D8148DE" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-rtp.mkii" ComponentGuid="E23ADF65-85FF-4D01-8D39-C476D50B4A1C" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-pln.tex" ComponentGuid="C30468A1-0F37-4AB5-8CF3-799AF16AC8DF" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-new.mkii" ComponentGuid="42B9B559-675F-415F-81C6-F8148CF8960D" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-ini.tex" ComponentGuid="946F1BED-9EF2-4BE0-9478-96CE6BFB7AC0" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-gen.mkii" ComponentGuid="79DC0D7A-A413-4567-81B2-253E7BCACE93" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-fnt.mkii" ComponentGuid="6AF7AD47-85BE-4B36-9A22-245E1C2FCC92" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-ext.mkii" ComponentGuid="0F2DBA9C-C0BD-4E85-A8D3-A2858A90B4F1" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\syst-con.mkii" ComponentGuid="54CF44DC-BE15-4FE5-BC4A-51210D925828" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\spec-xtx.mkii" ComponentGuid="61EBDA48-5722-4BDE-B64A-C8CCEBFBC5DD" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\spec-xet.mkii" ComponentGuid="B26040BB-F5F2-4F30-9182-9E54B1EBC729" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\spec-ini.mkii" ComponentGuid="7B563F30-A999-4F1C-98D8-4A0582CCC675" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\spec-fdf.mkii" ComponentGuid="9E5E6D87-7F96-40CE-8E82-0B1EABA8B2F0" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\spec-dpx.mkii" ComponentGuid="EA0CE7F0-D842-4076-A538-6AE7653CC885" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\spec-def.mkii" ComponentGuid="8C1F30F6-5D88-4C65-9A6D-E598AB4E0AE3" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\spac-grd.mkii" ComponentGuid="C7232E16-E6F8-4D5A-A4CE-A57AF2AB7E03" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\spac-gen.mkii" ComponentGuid="28EFFDC2-6416-43D7-AE68-E6DE95303D27" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-txt.mkii" ComponentGuid="8DFF2D90-41F0-4D19-AE2C-B39767A21620" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-str.mkii" ComponentGuid="A20DF8AE-2352-4D09-A475-5E89444F1431" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-spr.mkii" ComponentGuid="9C1673F1-40F6-4C1A-A517-CB86B788E9BB" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-sid.mkii" ComponentGuid="D91705D3-9BBB-47C9-BC45-DE329DC04B8F" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-set.mkii" ComponentGuid="97EFE740-6C56-4B24-990F-635C4AEAF055" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-run.mkii" ComponentGuid="24621754-BBF1-479C-92FF-7BD0AF3A036B" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-plg.mkii" ComponentGuid="A117881D-F335-4346-9572-C3CF7E758DAC" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-par.mkii" ComponentGuid="EBF6698B-6E94-4E1C-8174-C4E3A2C545A9" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-one.mkii" ComponentGuid="96D19DB1-65C3-4762-8BB7-DFC092EA3B7C" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-not.mkii" ComponentGuid="B687B785-A409-4C84-8E12-825D9AF7EF27" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-mul.mkii" ComponentGuid="77301C66-1BCF-4CC2-ACE5-35D583D2A4E5" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-mis.mkii" ComponentGuid="62777E0F-C4D7-4DB3-90E9-72682B091C09" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-mar.mkii" ComponentGuid="BB1E0325-210D-4B6C-9DFF-B6275F74E4A3" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-mak.mkii" ComponentGuid="C2B22DC1-D2C2-4768-9471-0C59ED6FF7BD" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-log.mkii" ComponentGuid="F070C289-420B-4D08-836E-C5652E7A0E97" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-lin.mkii" ComponentGuid="ADD688DD-8CB5-42BB-A6F5-853078ABD406" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-lay.mkii" ComponentGuid="36EA11E9-AC5B-4212-A654-F79B78DEBEC5" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-ins.mkii" ComponentGuid="E7D67D98-716A-49B9-9541-E9284239FF17" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-ini.mkii" ComponentGuid="09E2DBF3-5971-4F9A-B95D-C155A04DC87E" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-imp.mkii" ComponentGuid="7822DC65-486A-45C4-B502-CEE7BF38FC6A" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-flw.mkii" ComponentGuid="7C05B73A-F57D-4200-86F6-BB86F4D868A6" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-bck.mkii" ComponentGuid="901AA3B9-38E8-4349-96CC-96C1DB2B3ED4" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\page-app.mkii" ComponentGuid="E9B78D47-6189-4E23-BCDE-EF260F98C019" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\grph-inc.mkii" ComponentGuid="9D85FFCE-92E4-429E-855E-FC4A9D8E8C8E" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\grph-fig.mkii" ComponentGuid="CB6F5973-DC71-4DA9-9891-996319F189E6" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\font-xtx.mkii" ComponentGuid="ED6E807E-F63E-4B44-990A-47427FB464FF" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\font-unk.mkii" ComponentGuid="DF18F90E-AC1F-4174-A477-2D8AAC4B9E16" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\font-uni.mkii" ComponentGuid="239B9E60-1ECD-4E25-BC15-A8C873E4EDF5" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\font-run.mkii" ComponentGuid="FFE1EFD4-047E-4A3D-9AAB-C0283B96A927" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\font-jap.mkii" ComponentGuid="93B9B8DA-5C25-41ED-B98B-30909A2C3BB2" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\font-ini.mkii" ComponentGuid="BD955CCB-AC4D-44ED-BEF4-8997F853EDF2" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\font-heb.mkii" ComponentGuid="F8655DE3-EEDB-40AC-93C6-73A654E2C2A3" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\font-arb.mkii" ComponentGuid="B53521F3-3E43-4D1C-8874-01DBC100D3B7" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-var.mkii" ComponentGuid="1A143BF9-81C6-48C8-9887-C9A6B68C6200" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-uti.mkii" ComponentGuid="EA621704-8E77-4223-8937-B5562479FB03" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-two.mkii" ComponentGuid="9432F9A0-2090-4044-A72D-AD04010856A7" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-sys.mkii" ComponentGuid="D1AA02CB-BBE3-4DD3-9A45-D2D694E7AE7C" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-stg.mkii" ComponentGuid="94075E70-A54F-42B3-A37B-E39BCC8CBD3F" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-par.mkii" ComponentGuid="A33D7FE1-F43D-4E11-8FE1-8B7B5CA8948E" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-mis.mkii" ComponentGuid="AF6A20BD-3567-4ED8-BD61-3E138DA9352C" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-job.mkii" ComponentGuid="7AE4D7B1-BEA8-4451-88C9-EDE1B22435FB" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-ini.mkii" ComponentGuid="6F4A9E06-8456-4CBE-81B6-29F30BED3517" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-gen.mkii" ComponentGuid="9CF72DE2-D7CC-4EE7-812B-7925F5921DD4" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-fnt.mkii" ComponentGuid="2FA56D08-A268-4D72-A703-F4D7E16A2429" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-fil.mkii" ComponentGuid="7C5ACD6F-44C0-49EF-A66F-7C6DCFA02B0E" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-env.mkii" ComponentGuid="047BABCA-3465-40FF-A56F-9D480CB4B6E9" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-def.mkii" ComponentGuid="C755F8B4-CEE0-47D3-B18E-0588740C05E6" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-ctx.mkii" ComponentGuid="8F19F06D-0DAB-4E9C-9127-D3D254F86596" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\core-con.mkii" ComponentGuid="2A3507A1-7536-4C49-9FAD-B735661CB358" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\cont-new.tex" ComponentGuid="AD7D6B08-95E4-44AA-A4D8-FEA400E39A27" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\base\cont-new.mkii" ComponentGuid="01E60A70-EA60-41D8-91AF-F0D99C9ED727" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\texexec.rb" ComponentGuid="349E2F3A-CDDF-4ADA-8C38-FABBF6E95321" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\variables.rb" ComponentGuid="E448D6B9-8160-4D8A-B979-6E0DAA7B540B" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\tool.rb" ComponentGuid="DFBE19F0-2DC2-4A12-ABFF-6EFFD9BEDD90" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\texutil.rb" ComponentGuid="AFB23612-77A1-4B56-8B56-4007243C18AD" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\tex.rb" ComponentGuid="77BFD5B9-4712-46E4-A041-94EFE53606DA" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\system.rb" ComponentGuid="A575D30B-75D4-495F-A25A-64BD01F1158A" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\switch.rb" ComponentGuid="AA7CB616-D5FA-41B0-82E8-A7F98E0F8120" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\state.rb" ComponentGuid="931D10D5-EA61-444D-836C-79C550130C83" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\pdf.rb" ComponentGuid="E2B5BC57-D151-4BB5-8AD7-CFAA39806C46" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\mp.rb" ComponentGuid="7D117F59-2CBA-41B9-81B8-0606AC5407C8" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\logger.rb" ComponentGuid="9C440362-53C3-4ADF-953A-F907FB0854C9" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\kpserunner.rb" ComponentGuid="19E65037-8D8A-4D2F-B8B4-B13ABD3A1CBB" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\kpsefast.rb" ComponentGuid="E5BFC99A-D3F9-4D8C-B53D-D228B60B73BE" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\kpse.rb" ComponentGuid="AB8123B4-66A9-4B28-A09D-CB4CB54D867A" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\file.rb" ComponentGuid="2F73567E-ACDA-4AB6-9207-E7D39B7456B5" />
+  <File Path="DEXCTX\miniCTX\texmf-context\scripts\context\ruby\base\ctx.rb" ComponentGuid="03A2932C-4F30-48F9-A12E-FFE9ABE37D26" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\texnansi-os-public-lm.map" ComponentGuid="DEC73D9D-F604-4266-BB7C-8BDCFE75CBD1" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\texnansi-base.map" ComponentGuid="C9F1CE3C-7E2E-4E9D-9226-066AD83FF397" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\t5-os-public-lm.map" ComponentGuid="E74BEC1C-DD79-42ED-9839-82B2202123A7" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\t5-base.map" ComponentGuid="DE798477-6D8A-45A7-960F-ED88D3376561" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\qx-os-public-lm.map" ComponentGuid="E6483494-1D37-4D10-ADEA-602381F336FD" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\qx-base.map" ComponentGuid="7F7A72FB-16BF-4C17-A88A-0CFD278051B1" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-youngryu-tx.map" ComponentGuid="03A40088-77BD-4F06-A4CB-19FEC4B84EB3" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-youngryu-px.map" ComponentGuid="727F01D2-9584-4430-994E-5D1A2A75CEDA" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-wasy.map" ComponentGuid="44D89AB5-2BB7-437E-AFD5-54F506026D77" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-vogel-symbol.map" ComponentGuid="D262C43B-536B-4292-8D5F-707E403AA745" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-public-vnr.map" ComponentGuid="9722CD06-F3B8-4875-844B-7F7A39EF7960" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-public-plr.map" ComponentGuid="067467A4-6E33-45A9-AEB7-61EC57043ACF" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-public-lm.map" ComponentGuid="20ECB55E-5C71-46B6-B351-CADD7CFC1D47" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-public-csr.map" ComponentGuid="8D901EDF-2975-4E1F-A9B9-21B2421BAFF9" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-micropress-informal.map" ComponentGuid="2F95B783-74C8-48DE-B4B1-B4AE0D3DA33C" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-empty.map" ComponentGuid="3A4286C5-28D6-4739-9A00-3635EB555629" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-dummy.map" ComponentGuid="7843B1E4-822D-4DC2-BD69-2EE1CAAEA9AB" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-context-symbol.map" ComponentGuid="8FA72B1F-BF9F-46E1-87F3-595688DA7A6C" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-base.map" ComponentGuid="2A917D23-C81C-47AF-B8E1-7181747E3AC0" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-ams-euler.map" ComponentGuid="74A0E825-9561-4EFC-995E-DB7CCDF56097" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-ams-cmr.map" ComponentGuid="5B31CEF9-BA97-42CB-8FFA-8314EB0CAF55" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-ams-base.map" ComponentGuid="6F6FCDF4-14BE-4C7F-87AF-1938D8C6401A" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\original-adobe-euro.map" ComponentGuid="0CC5B4E5-FB51-422A-9DA1-FC83A580DDE7" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\koeieletters.map" ComponentGuid="42C837D4-9409-44E5-9837-03DD10DCF419" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\ec-os-public-lm.map" ComponentGuid="8085D968-C132-4896-B123-FD9D2DD1D735" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\ec-base.map" ComponentGuid="B5B69F55-29D4-4CA7-BCBA-6A9C44D7FD4B" />
+  <File Path="DEXCTX\miniCTX\texmf-context\fonts\map\pdftex\context\8r-base.map" ComponentGuid="28E6CD4A-A970-4C0C-B7DE-03DC15D56EF6" />
+  <File Path="DEXCTX\miniCTX\texmf\ls-R" ComponentGuid="27301E8D-44D9-4209-AF59-3EB5C54BDCF2" />
+  <File Path="DEXCTX\miniCTX\texmf\web2c\texmf.cnf" ComponentGuid="B99FFB56-5853-42AC-9EC7-2CFEDAAC5F21" />
+  <File Path="DEXCTX\miniCTX\texmf\tex\plain\base\plain.tex" ComponentGuid="D4F95208-D25A-4010-A892-EF4B00733333" />
+  <File Path="DEXCTX\miniCTX\texmf\tex\generic\hyphen\hyphen.tex" ComponentGuid="E62A1CB2-095E-4B1F-8E02-19221129B8A8" />
+  <File Path="DEXCTX\miniCTX\texmf\tex\context\third\gentium\type-gentium.tex" ComponentGuid="ADBEC116-D80E-4F63-B96F-EE1B6BC2237D" />
+  <File Path="DEXCTX\miniCTX\texmf\fonts\map\dvips\lm\lm-rm.map" ComponentGuid="B902F19D-DB14-4B31-B3AE-336B185CAC23" />
+  <File Path="DEXCTX\miniCTX\texmf\fonts\map\dvips\lm\lm-math.map" ComponentGuid="5B185C02-8C49-4BFC-9B16-30BCBECBBEFF" />
+  <File Path="BackEnds\dicTemplate.tpl" ComponentGuid="F55E4943-1E57-4E63-B43A-505EF85BDB0F" />
+  <File Path="ParatextSupport.dll.config" ComponentGuid="18A042BF-0A51-425F-81CF-3A08F6157627" />
+  <File Path="ParatextSupport.dll" ComponentGuid="3FA85BA4-176B-4884-AA44-927CB81FD6BA" />
+  <File Path="XeTeXConvert.pdb" ComponentGuid="393F5EA5-B5B5-4374-88A1-1A8E0FEEEA9C" />
+  <File Path="XeTeXConvert.dll.config" ComponentGuid="4BDACAF5-B1FA-4592-BE98-76058A781BC6" />
+  <File Path="XeTeXConvert.dll" ComponentGuid="4DF216BC-373C-4B33-902C-1A96BBD08EF0" />
+  <File Path="WordPressConvert.dll" ComponentGuid="10AED192-8024-462A-B107-8779529BFB64" />
+  <File Path="PdfConvert.pdb" ComponentGuid="4A0169D9-8128-4289-9073-7A73D54370EC" />
+  <File Path="PdfConvert.dll.config" ComponentGuid="59943663-C5CA-4FEA-BA86-5418DFAA8E2E" />
+  <File Path="PdfConvert.dll" ComponentGuid="CB593E53-0D93-4D32-BCA2-1AF13F4CA6C0" />
+  <File Path="OpenOfficeConvert.pdb" ComponentGuid="5B14D18D-2E91-41DF-91B9-2298C38486AE" />
+  <File Path="OpenOfficeConvert.dll" ComponentGuid="67017AFA-7312-4400-9DBB-2FCB551A32A0" />
+  <File Path="LiftPrepare.pdb" ComponentGuid="2BC4455C-3ADD-4EB1-9424-D8AEDD28564D" />
+  <File Path="LiftPrepare.dll.config" ComponentGuid="F756E850-D8F7-4C0B-A7C1-4670B7D501FD" />
+  <File Path="LiftPrepare.dll" ComponentGuid="31462A57-2C05-406B-87EF-2EFBE99855E2" />
+  <File Path="InDesignConvert.pdb" ComponentGuid="ED199DED-A084-462C-B0A9-4A46B3C064BD" />
+  <File Path="InDesignConvert.dll.config" ComponentGuid="13FA79DD-5184-4EF8-93C8-1F425C0C4F17" />
+  <File Path="InDesignConvert.dll" ComponentGuid="1E2C760A-599E-45DA-9AC6-54891D05328D" />
+  <File Path="GoBibleConvert.pdb" ComponentGuid="4B570ACD-C9EB-496E-9184-5EA267AB58E0" />
+  <File Path="GoBibleConvert.dll.config" ComponentGuid="4A41AEA9-2CB2-4D70-AF0A-DC981F713ED4" />
+  <File Path="GoBibleConvert.dll" ComponentGuid="AAB61F93-9B0E-473B-BDF8-8975E1F6152B" />
+  <File Path="BackEnds\WordPressConvert.dll" ComponentGuid="C43C67B2-A728-44E7-AC39-FFC7D6C79604" />
+  <File Path="Styles\Scripture\GoBible.css" ComponentGuid="40D80A14-6988-49A2-BB1E-F218151E4C88" />
+  <File Path="Styles\Dictionary\GoBible.css" ComponentGuid="CB4D435C-07F7-4A40-99BF-754518AE99B3" />
+  <File Path="Styles\Scripture\VerticalJustify_Top.css" ComponentGuid="1C26682A-7C4A-4E6E-BEE0-A8EABDB2D66B" />
+  <File Path="Styles\Scripture\VerticalJustify_Center.css" ComponentGuid="A81638BD-ABF3-4FC0-94D3-F4D48459C889" />
+  <File Path="Styles\Scripture\VerticalJustify_Bottom.css" ComponentGuid="20353460-135C-41E4-A452-E23DD09BA017" />
+  <File Path="Styles\Dictionary\VerticalJustify_Top.css" ComponentGuid="8E47A2B7-7475-4EFF-B2AD-BB237FE1F28B" />
+  <File Path="Styles\Dictionary\VerticalJustify_Center.css" ComponentGuid="95D145E7-4BEB-41B2-B87D-FFEB8D4C206F" />
+  <File Path="Styles\Dictionary\VerticalJustify_Bottom.css" ComponentGuid="AB8BA100-1EB6-4102-85DF-6F0108613673" />
+  <File Path="BackEnds\GoBibleConvert.pdb" ComponentGuid="9D579CFE-ECAD-4E9A-A182-F86D566D07A3" />
+  <File Path="BackEnds\GoBibleConvert.dll.config" ComponentGuid="6C48278D-5AD8-4D15-8AF9-40B432AFF85B" />
+  <File Path="BackEnds\GoBibleConvert.dll" ComponentGuid="39A4AFB1-81C5-43C5-8610-60EEBE362524" />
+  <File Path="Samples\Scripture\Scripture.de" ComponentGuid="8DAD281B-CE4E-4234-9363-D4AD756B1B6B" />
+  <File Path="Samples\Scripture\Pictures\lion.tif" ComponentGuid="44EF7B29-CB5E-4BFB-B6DC-717157E0AC78" />
+  <File Path="Samples\Dictionary\Dictionary.de" ComponentGuid="21718DFF-7179-4A3B-A90A-A543AAABF6F9" />
+  <File Path="Pathway_Student_Manual_BTE.doc" ComponentGuid="3A0CF01A-A7C3-49F0-A00F-0574B54370C9" />
+  <File Path="Styles\Scripture\Leading_11.css" ComponentGuid="5466F5C9-8FA3-4926-ACB2-14D5D0F0FC67" />
+  <File Path="Styles\Scripture\GPS21J11.css" ComponentGuid="4D167CB1-29B8-4727-AFFD-CE36D7CE7F05" />
+  <File Path="Styles\Dictionary\Preview\FieldworksArabicBased_Layout_13 p2.jpg" ComponentGuid="CBA88FCE-5FD8-4396-8090-574BC27B73B3" />
+  <File Path="Styles\Dictionary\Preview\FieldworksArabicBased_Layout_13 p1.jpg" ComponentGuid="F71B26E1-1BD2-4893-9EF5-1016D6C9E4E3" />
+  <File Path="Styles\Dictionary\Vernacular_ScheherazadeGraphite.css" ComponentGuid="8780AF8E-CAF5-43DB-A30D-F4562E2D7FF1" />
+  <File Path="Styles\Dictionary\Layout_13.css" ComponentGuid="F581DEFD-5D9C-4B22-8EC8-1C18DCF96BAD" />
+  <File Path="BackEnds\XeTeXConvert.pdb" ComponentGuid="46E171E2-D466-4ECC-AD76-CE055098DEDF" />
+  <File Path="BackEnds\XeTeXConvert.dll.config" ComponentGuid="96755BFE-3D9C-4799-9C8D-967550318E05" />
+  <File Path="BackEnds\XeTeXConvert.dll" ComponentGuid="523655A4-20B9-439C-8997-140D2AF0E452" />
+  <File Path="Styles\Dictionary\Preview\TwoColumn_LayoutTwoCol p2.jpg" ComponentGuid="09DB5716-7EBD-4017-A132-4B60209E50A2" />
+  <File Path="Styles\Dictionary\Preview\TwoColumn_LayoutTwoCol p1.jpg" ComponentGuid="E3377443-4B44-4830-9556-44697D1A41D5" />
+  <File Path="Styles\Dictionary\Preview\Pacific_Layout_04 p2.jpg" ComponentGuid="25C7D5A8-0A0C-4EEF-BB4B-9A22F9056DA4" />
+  <File Path="Styles\Dictionary\Preview\Pacific_Layout_04 p1.jpg" ComponentGuid="EC5AFA5C-2A70-41BC-ABA5-2CC1E5DF539D" />
+  <File Path="Styles\Dictionary\Preview\OneColumn_LayoutOneCol p2.jpg" ComponentGuid="5C42A299-4708-49A5-B113-48222C40556F" />
+  <File Path="Styles\Dictionary\Preview\OneColumn_LayoutOneCol p1.jpg" ComponentGuid="4F03159D-C918-4C15-AC8B-0BBC15EE82F8" />
+  <File Path="Styles\Dictionary\Preview\Fieldworks_Layout_12 P2.jpg" ComponentGuid="9A7F0A1C-06CE-4587-8335-B5D0738A0677" />
+  <File Path="Styles\Dictionary\Preview\Fieldworks_Layout_12 P1.jpg" ComponentGuid="E506F00F-8934-4A6A-95C7-2586C92A78D9" />
+  <File Path="Styles\Dictionary\Preview\Draft_Layout_01 p2.jpg" ComponentGuid="0AD29B3C-764A-44F9-9CC7-DDBAF2F18098" />
+  <File Path="Styles\Dictionary\Preview\Draft_Layout_01 p1.jpg" ComponentGuid="DB613C25-8859-4731-9437-24E37186DA16" />
+  <File Path="Styles\Dictionary\Background_Transparent.css" ComponentGuid="07B23AF4-FFAE-4ABB-B26F-D6A91A93AC51" />
+  <File Path="Styles\Dictionary\Background_nc.css" ComponentGuid="B2B4A3EF-D79F-4BF1-86C0-2D33184E5897" />
+  <File Path="Help\Pathway_Configuration_Tool_SE.chm" ComponentGuid="6346D451-1AA1-476B-9AA6-6FD8E4B1CA14" />
+  <File Path="saxon9he.dll" ComponentGuid="4CDA936C-268B-4FFF-8F38-2A1C07661202" />
+  <File Path="saxon9he-api.dll" ComponentGuid="12EF8054-D3C4-4D5D-A244-939AC2B650E7" />
+  <File Path="IKVM.Runtime.dll" ComponentGuid="F23B6442-6AF3-4D56-9290-F37FB3BA5D4E" />
+  <File Path="IKVM.OpenJDK.XML.API.dll" ComponentGuid="AB7D798D-812A-438D-BD93-1FCB18F21D9F" />
+  <File Path="IKVM.OpenJDK.Util.dll" ComponentGuid="593BCD4D-8C7D-4B79-993B-EF46D9EAA055" />
+  <File Path="IKVM.OpenJDK.Text.dll" ComponentGuid="C2ED4865-96BD-45C5-9DD7-AE3A7D390635" />
+  <File Path="IKVM.OpenJDK.Core.dll" ComponentGuid="C9DA34FB-42FB-47B4-9DBB-CBA0E47076F9" />
+  <File Path="IKVM.OpenJDK.Charsets.dll" ComponentGuid="2C7F0D88-31BE-4CFD-9720-10B6E8868F7F" />
+  <File Path="Styles\Scripture\base_font_sophia.css" ComponentGuid="343DA1D4-75F4-4E06-AC48-946B035F539D" />
+  <File Path="Styles\Scripture\base_font_nc.css" ComponentGuid="623CF1EB-2178-4D8A-8859-FFA4DCD696D2" />
+  <File Path="Styles\Scripture\base_font_doulos.css" ComponentGuid="7035EAE5-4851-4C0D-B3D4-695BD07DA63D" />
+  <File Path="Styles\Scripture\base_font_charis_compact.css" ComponentGuid="230EB8A1-49AE-4F9C-A41E-4DF7CCC3CE1C" />
+  <File Path="Styles\Scripture\base_font_charis.css" ComponentGuid="B1498BCA-C672-49EC-B576-EEFAF5760C27" />
+  <File Path="Styles\Dictionary\Leading_16.css" ComponentGuid="1918321E-F3D5-4EB6-9828-2D2366990E95" />
+  <File Path="Styles\Dictionary\LayoutTwoCol.css" ComponentGuid="24E6768E-60AB-46D9-8298-93BBAD326FDB" />
+  <File Path="Styles\Dictionary\LayoutOneCol.css" ComponentGuid="CA0AE4EB-AA51-4062-BEE8-231CADF83ABD" />
+  <File Path="Styles\Dictionary\Font_Size_11.css" ComponentGuid="D796EB2C-1A3D-4D21-B9FA-6D9B6C95AF71" />
+  <File Path="Styles\Scripture\Default.css" ComponentGuid="F5F0587B-B72C-4AC7-A9D6-0926ECB6A4A5" />
+  <File Path="Styles\Dictionary\Default.css" ComponentGuid="323195C9-A112-41CB-A260-C79C206E4EB0" />
+  <File Path="Help\Pathway_Configuration_Tool_BTE.chm" ComponentGuid="CB8CE612-14E0-479B-91BA-F2E3B25DB688" />
+  <File Path="styles\Scripture\Page_Size_Letter.css" ComponentGuid="1633A809-D83C-45E2-ADF5-88603F86BA32" />
+  <File Path="styles\Scripture\Page_Size_Half_Letter.css" ComponentGuid="DFEB4B36-B797-435A-BB8B-BFAD6DDBBDEE" />
+  <File Path="styles\Scripture\Page_Size_GPS2.css" ComponentGuid="82BD2CEA-135D-47A3-997F-C201B77AF9E9" />
+  <File Path="styles\Scripture\Page_Size_GPS1.css" ComponentGuid="1F7EC803-25C0-46C9-BD3C-14EAD184CC3A" />
+  <File Path="styles\Scripture\Page_Size_6inx9in.css" ComponentGuid="9E70BCD8-3A28-48B1-97FC-1E00B5FAA948" />
+  <File Path="styles\Scripture\Page Size_GPS2.css" ComponentGuid="C9F48729-559F-4C6C-B6A4-65AFEE8AA26B" />
+  <File Path="styles\Scripture\Page Size_GPS1.css" ComponentGuid="5AE5CCD8-B94A-4913-8EEE-CE572FDC8B47" />
+  <File Path="styles\Scripture\GPS22L9.css" ComponentGuid="89983418-8CF9-44A6-ABA9-D77825E03F04" />
+  <File Path="styles\Scripture\GPS22L11.css" ComponentGuid="E6E8D6EE-FCA0-48C7-8E5C-99C202DEC71E" />
+  <File Path="styles\Scripture\GPS22L10.css" ComponentGuid="E1508A96-C25E-4F14-AC3E-CEDFD63BF4C2" />
+  <File Path="styles\Scripture\GPS22J9.css" ComponentGuid="3D0E5E33-1FD0-48C8-B61D-704E2D53A84A" />
+  <File Path="styles\Scripture\GPS22J11.css" ComponentGuid="2EC61B48-80EE-4B1A-B907-8D611D9CC650" />
+  <File Path="styles\Scripture\GPS22J10.css" ComponentGuid="3498EBAC-650E-4587-8ECE-0FD1C49640FA" />
+  <File Path="styles\Scripture\GPS21L11.css" ComponentGuid="43D18706-2A50-49E8-909C-CB2F9043B22A" />
+  <File Path="styles\Scripture\GPS12L9.css" ComponentGuid="F0748279-71CE-44D0-A8F0-1ADA90140DD9" />
+  <File Path="styles\Scripture\GPS12L11.css" ComponentGuid="81804DCF-0444-4433-B597-928AACDAB1CA" />
+  <File Path="styles\Scripture\GPS12L10.css" ComponentGuid="047F641C-FEED-4EF2-A3F3-FF0C3F67227E" />
+  <File Path="styles\Scripture\GPS12J9.css" ComponentGuid="0E4C4540-7C1F-4883-B180-CD445EABE1C3" />
+  <File Path="styles\Scripture\GPS12J11.css" ComponentGuid="37EA0AAF-DF67-4A3A-AF9B-8D09B1B42AE9" />
+  <File Path="styles\Scripture\GPS12J10.css" ComponentGuid="703E01E8-B6BC-4120-AB15-D44C3F753A6C" />
+  <File Path="styles\Scripture\GPS11L11.css" ComponentGuid="47C19EBB-F293-4CDE-8EA4-A631DA8F45C8" />
+  <File Path="styles\Scripture\GPS11J11.css" ComponentGuid="767CB422-9DFD-4B2F-B0F2-2753AA823710" />
+  <File Path="styles\Scripture\font_size_9_11.css" ComponentGuid="A7A51448-2FB7-4A7D-8C44-A9CCDCE36319" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg" ComponentGuid="F8F3EC2E-98BC-4298-B736-08CE17A89FF0" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" ComponentGuid="318E1565-0E17-41C5-B4E2-AF17E6E01B77" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p2.jpg" ComponentGuid="7CA2CD19-206F-4710-8D68-7F5CFA23E84D" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p1.jpg" ComponentGuid="716A820F-7E7A-4D74-841D-120BEFC2F08A" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p2.jpg" ComponentGuid="EF36F522-C7C4-4F21-83C2-454FB9AE5F7B" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p1.jpg" ComponentGuid="6C1C5C0B-E2DA-441A-A017-59BCD7FE6268" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p2.jpg" ComponentGuid="67021E69-BE6A-41A8-BFD6-9571C296ED62" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p1.jpg" ComponentGuid="9D7CA205-2BC0-4218-A6D6-D17BBE7CF2AF" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p2.jpg" ComponentGuid="B0B02C92-B1F3-468C-BFCF-7F2C3F425039" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p1.jpg" ComponentGuid="8F0E20B8-75DE-48EB-A555-3E99585C11C1" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p2.jpg" ComponentGuid="13139B56-B512-4D09-8B1C-A34C0C522245" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p1.jpg" ComponentGuid="F6F0B7F8-22EA-4997-8F0D-35436CC885A3" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p2.jpg" ComponentGuid="32C48E32-6BA2-480C-8798-D93E4887C462" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p1.jpg" ComponentGuid="E68BB9EE-15F2-4C77-B0B9-B9D7DD9FCB55" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" ComponentGuid="CE246137-8F79-4FC7-83BB-B080B167EC76" />
+  <File Path="styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" ComponentGuid="4CFA717A-A5B8-4BB5-AC75-A1245ED9348A" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p2.jpg" ComponentGuid="8227BCEA-691D-4103-B1CB-26AE5CBE4A45" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p1.jpg" ComponentGuid="23567734-9E81-4900-9671-8E01614B618D" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p2.jpg" ComponentGuid="9A71142E-0E6C-408E-9B2A-AE75DCBA1162" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p1.jpg" ComponentGuid="BFFB2D8D-8B4F-40E6-A2FB-F6D22FBFF073" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p2.jpg" ComponentGuid="F9903A1C-61EA-49AE-901B-7650B48A8F83" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p1.jpg" ComponentGuid="C4F7F5E4-F2AE-4733-A597-4D5696CB5D50" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p2.jpg" ComponentGuid="7F912D4B-1E60-4D80-9006-6CC03AC2D46F" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p1.jpg" ComponentGuid="9098249B-2CA8-470F-A172-316620A009DD" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p2.jpg" ComponentGuid="29B77FE6-43D7-4809-8AB2-9FF84A18D6D5" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p1.jpg" ComponentGuid="B5923204-5FF5-4459-8014-1B88E6A3CEA2" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p2.jpg" ComponentGuid="6358C580-D6A8-44F9-BB0B-619D14249ADE" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p1.jpg" ComponentGuid="0D264C2D-2D05-406E-A4C5-50B5776C81EE" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" ComponentGuid="168CD3BF-645B-4E78-820E-F0695E2A6D41" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" ComponentGuid="FD81CD5D-4FD1-42D4-9598-578E5C32C0D7" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p2.jpg" ComponentGuid="ED9F7D3D-6AD3-4F30-90D4-6F95A544106A" />
+  <File Path="styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p1.jpg" ComponentGuid="B7C819AE-66C3-4704-99AA-C53F7DA8AC74" />
+  <File Path="styles\Dictionary\Page_size_GPS2.css" ComponentGuid="64D439BF-AEA8-4662-AA22-D839BC6FAE77" />
+  <File Path="styles\Dictionary\Page_size_GPS1.css" ComponentGuid="2E2CAA0A-D837-4462-89F5-57DD2E85E07B" />
+  <File Path="styles\Dictionary\Leading_13.css" ComponentGuid="90949B16-4C34-4029-BAF6-BE0BB9F62751" />
+  <File Path="styles\Dictionary\Leading_11.css" ComponentGuid="4D0E894E-5B73-4EEA-8F89-74908B932160" />
+  <File Path="styles\Dictionary\Headword_Size_9.css" ComponentGuid="29F0D85C-32ED-4F7F-A4B4-CAFC67D337D7" />
+  <File Path="styles\Dictionary\Headword_Size_8.css" ComponentGuid="FD48E56B-8DE4-41D7-B5F4-D94E956DF08E" />
+  <File Path="styles\Dictionary\Headword_Size_11.css" ComponentGuid="26293034-8891-4498-BF70-5EA5FBAC2A5E" />
+  <File Path="styles\Dictionary\GPS22L9.css" ComponentGuid="431B75FB-0323-439A-BA9B-E07C38420646" />
+  <File Path="styles\Dictionary\GPS22L11.css" ComponentGuid="31D3DF53-A632-407C-85FA-E67F850D7735" />
+  <File Path="styles\Dictionary\GPS22L10.css" ComponentGuid="29E61129-FCD9-46F6-9898-486421D245B1" />
+  <File Path="styles\Dictionary\GPS22J9.css" ComponentGuid="1FC9BF92-4564-47CF-9405-57C7D930B68E" />
+  <File Path="styles\Dictionary\GPS22J11.css" ComponentGuid="B70CF3EC-4A0C-4280-8F83-3FD8910E7382" />
+  <File Path="styles\Dictionary\GPS22J10.css" ComponentGuid="E5DC7C44-18CF-4C97-BA6F-B257CACEBE5E" />
+  <File Path="styles\Dictionary\GPS21L11.css" ComponentGuid="F6E02D86-DEB7-4231-A3AF-B1D49CE6935E" />
+  <File Path="styles\Dictionary\GPS21J11.css" ComponentGuid="1023A0AA-574D-434F-822E-85314855F85B" />
+  <File Path="styles\Dictionary\GPS12L9.css" ComponentGuid="26CEA2FD-1925-4A40-88FA-01C08931DD9A" />
+  <File Path="styles\Dictionary\GPS12L11.css" ComponentGuid="B888925C-51AB-422B-BD7F-D3BDDA990046" />
+  <File Path="styles\Dictionary\GPS12L10.css" ComponentGuid="135D4DC7-D1CD-446C-B5C9-E98696C838F5" />
+  <File Path="styles\Dictionary\GPS12J9.css" ComponentGuid="F0D1E3C3-4994-421C-8F9D-E78A428AF6B6" />
+  <File Path="styles\Dictionary\GPS12J11.css" ComponentGuid="F767AD2F-AD22-466B-AE87-0A0C27788D8E" />
+  <File Path="styles\Dictionary\GPS12J10.css" ComponentGuid="11B66397-FC4C-42BD-8B71-2BCFAD0597C3" />
+  <File Path="styles\Dictionary\GPS11L11.css" ComponentGuid="A4CF1FD7-7317-4FDC-8A42-F07315FEE8EC" />
+  <File Path="styles\Dictionary\GPS11J11.css" ComponentGuid="A15B8665-7018-4D56-ADC4-5BAE85AA5AC1" />
+  <File Path="styles\Dictionary\Font_Size_9.css" ComponentGuid="5C2D237A-8E79-4713-AB1E-5FB391917715" />
+  <File Path="ReadMePw.rtf" ComponentGuid="A402829D-FA1A-422F-86FA-8C470FAC7630" />
+  <File Path="Loc\web.png" ComponentGuid="B4E1B89C-F62D-48BC-B39D-2007C30FE25F" />
+  <File Path="Loc\userTask.png" ComponentGuid="54209A2A-F0C0-4B24-8122-86FDDE93DF3C" />
+  <File Path="Loc\user.png" ComponentGuid="F8F62926-D1D6-418A-ADA2-20225B13B139" />
+  <File Path="Loc\user.ico" ComponentGuid="23D514B7-34AE-405A-A78A-6F5C745CFD53" />
+  <File Path="Loc\trialPrint.png" ComponentGuid="EAE9AAB6-69A5-43B5-99EA-A05A045B62FD" />
+  <File Path="Loc\quick.png" ComponentGuid="973CA51C-852D-4488-B85D-6D48DBB258BB" />
+  <File Path="Loc\missing.png" ComponentGuid="E01EE217-D678-4AFE-9415-DEB472D32C3F" />
+  <File Path="Loc\missing.ico" ComponentGuid="6696385F-98BD-4303-9898-7CF020F70310" />
+  <File Path="Loc\intermediate.png" ComponentGuid="835A549B-D09E-480A-93CB-F1457C22BFE0" />
+  <File Path="Loc\intermediate.ico" ComponentGuid="3B5BE2A4-9785-4DFD-8137-AE8DF08557EF" />
+  <File Path="Loc\final.png" ComponentGuid="947BF2B3-20A2-43EB-8481-33896B759958" />
+  <File Path="Loc\draft.png" ComponentGuid="A614E7C3-F6B5-4BC6-AE5A-3BA7421D4483" />
+  <File Path="Loc\designer.png" ComponentGuid="44BC8FCB-B47C-44CD-A51B-A847DAB74920" />
+  <File Path="Loc\designer.ico" ComponentGuid="5D1D1091-9C63-4BCF-A19F-805269ADCF03" />
+  <File Path="Loc\coordinator.png" ComponentGuid="C177300C-7285-4C54-AA95-A0EEAEE27197" />
+  <File Path="Loc\coordinator.ico" ComponentGuid="98AB033C-14AB-4BA4-B830-C418DB971D76" />
+  <File Path="Loc\cell.png" ComponentGuid="8D45BED2-56B4-4842-8AE5-F26D0457E5F9" />
+  <File Path="Loc\books.png" ComponentGuid="606F50C8-EB2C-4A0A-B2EB-38596C1C3B4C" />
+  <File Path="Loc\books.ico" ComponentGuid="67280FA2-29A1-4A88-B1B4-9A42CC778590" />
+  <File Path="Loc\book.png" ComponentGuid="81F74EFC-29E4-4DCA-9413-198F0F3168B3" />
+  <File Path="Loc\BOOK.ico" ComponentGuid="9EA5B1B4-402A-43AA-B48A-81FF2B9D9BD1" />
+  <File Path="Loc\beginner.png" ComponentGuid="FFC08672-7C39-4C16-819D-0F210D56222D" />
+  <File Path="Loc\beginner.ico" ComponentGuid="4305C7D0-B8BE-49DB-B15C-11169B066C3B" />
+  <File Path="Loc\arrow.png" ComponentGuid="F756F743-917B-4DBF-A3E8-DACB577603A3" />
+  <File Path="Loc\arrow.ico" ComponentGuid="61AD35D2-5BAE-43A0-A1F4-7656DF33B281" />
+  <File Path="Loc\advanced.png" ComponentGuid="3CF12B04-32E7-4D6A-8990-A22E745B4190" />
+  <File Path="Loc\advanced.ico" ComponentGuid="06638208-D01B-4AC8-8E4C-11E53CDC5BB6" />
+  <File Path="ConfigurationTool.vshost.exe.manifest" ComponentGuid="1C2C87BF-5C5D-4228-9A36-273AC52A6FB0" />
+  <File Path="XLingPap.xsl" ComponentGuid="2BAF2C7D-E4B6-439F-867E-BAA6FF4B3EBD" />
+  <File Path="xhtml2dex-tpl.xsl" ComponentGuid="CF95A0DD-5705-4676-867E-5F07A178EFC9" />
+  <File Path="TE_XHTML-to-Phone_XHTML.xslt" ComponentGuid="B6B97326-B568-433D-96C2-45BD604D50B1" />
+  <File Path="styleSettings.xsd" ComponentGuid="9935D821-5778-4792-B074-69602478A092" />
+  <File Path="StyleSettings.xml" ComponentGuid="55153B74-2B1A-4B42-A8B3-63D2AED6036E" />
+  <File Path="sectionTypes.xml" ComponentGuid="757C75FE-51D4-455C-A38F-78B79C36B351" />
+  <File Path="ScriptureStyleSettings.xml" ComponentGuid="130DC5E5-72F1-4699-A93B-F669051FF255" />
+  <File Path="ReadMeBTE.rtf" ComponentGuid="01B9E6C5-821E-4ABF-8D98-FD74D302B235" />
+  <File Path="PsTool.pdb" ComponentGuid="FCA8B89B-405A-494B-B28D-AF50B120B3D0" />
+  <File Path="PsTool.dll" ComponentGuid="0D6BFDFD-E166-44EC-A0BC-FB361525E3AC" />
+  <File Path="Prince.dll" ComponentGuid="C30F680D-259B-4073-A29E-998291D99F87" />
+  <File Path="License.rtf" ComponentGuid="2231F3B4-C72B-449E-944A-70BB964EE74E" />
+  <File Path="JobList.xml" ComponentGuid="91CA87BF-641F-4BAB-81FC-B730E823CC01" />
+  <File Path="ICSharpCode.SharpZipLib.dll" ComponentGuid="6484C644-8231-4081-94E9-CF513E3610BD" />
+  <File Path="GenericFont.xml" ComponentGuid="E1B7740A-D32D-4F07-B79D-3CF4874B03AE" />
+  <File Path="FwUtils.dll" ComponentGuid="AD5DE4E7-835A-4C26-8FFA-E079502C2B4B" />
+  <File Path="FLExRev.xsl" ComponentGuid="BEC2DDDD-328E-4A3A-9E54-9800959724FF" />
+  <File Path="DictionaryStyleSettings.xml" ComponentGuid="E6A094A7-F09E-4A90-9325-9A62164FED21" />
+  <File Path="CSSParser.pdb" ComponentGuid="ADF7061D-E9A5-4758-A428-EBB09BA2586E" />
+  <File Path="CSSParser.dll" ComponentGuid="528AAE42-B78B-4FF4-B377-E94E451B16DD" />
+  <File Path="CssDialog.pdb" ComponentGuid="F3A7049E-8FAA-4650-8FF2-DE003556950E" />
+  <File Path="CssDialog.dll" ComponentGuid="CAF36038-B3B4-4B85-90AD-59BB10B3A117" />
+  <File Path="ConfigurationTool.vshost.exe.config" ComponentGuid="09881EA2-102F-433D-BDC4-4E43F9F31C97" />
+  <File Path="ConfigurationTool.vshost.exe" ComponentGuid="B09855EC-ADB8-4A98-8FFA-3B725AD20294" />
+  <File Path="ConfigurationTool.pdb" ComponentGuid="0D771785-9068-4546-8FAD-D77707B12940" />
+  <File Path="ConfigurationTool.exe.config" ComponentGuid="4481307D-F36F-4797-96F0-14BFC6F149D6" />
+  <File Path="ConfigurationTool.exe" ComponentGuid="BFA34EB2-7C0B-490F-89EF-E9CFD94617CC" />
+  <File Path="BasicUtils.dll" ComponentGuid="39655861-1F17-4E47-9A4F-BC91DEEFB9B2" />
+  <File Path="Antlr3.Runtime.dll" ComponentGuid="A5AC90E9-8DF9-4AD9-ACCE-FC95EED04ED9" />
+  <File Path="Template\Scripture\Template.xhtml" ComponentGuid="8877F5E5-2ACC-4B46-9C93-4D1337C3DFE0" />
+  <File Path="Template\Dictionary\Template.xhtml" ComponentGuid="742F7694-AFB6-4618-BE0F-835BED8310A9" />
+  <File Path="styles\Scripture\Scripture.css" ComponentGuid="9DADC154-475E-4881-A204-ED6C88D5CA2D" />
+  <File Path="styles\Scripture\Running_Head_Paged_Verse.css" ComponentGuid="783B6210-0148-4383-9CD3-5536498B3B04" />
+  <File Path="styles\Scripture\Running_Head_Paged_Chapter.css" ComponentGuid="46A8EE6F-7F9D-4388-B36F-FA0BD78C9909" />
+  <File Path="styles\Scripture\Running_Head_Mirrored_Verse.css" ComponentGuid="FFD976F8-AD7F-4F1C-9F51-B7450598AA90" />
+  <File Path="styles\Scripture\Running_Head_Mirrored_Chapter.css" ComponentGuid="A6512B8E-5B9D-4ED4-BDAE-9314CA7A87B3" />
+  <File Path="styles\Scripture\Rules_Yes.css" ComponentGuid="23815E91-17F7-4738-A49E-2532CBE396A4" />
+  <File Path="styles\Scripture\Rules_No.css" ComponentGuid="66023F1F-F5FB-4A8D-834A-E9BFB8254B82" />
+  <File Path="styles\Scripture\Pictures_Yes.css" ComponentGuid="D916EFC9-C4A6-4D82-AA1F-61C9614DFE6F" />
+  <File Path="styles\Scripture\Pictures_No.css" ComponentGuid="DCBA7D06-CC2D-460E-8CD6-367912CCE01C" />
+  <File Path="styles\Scripture\Page_size_C5.css" ComponentGuid="D48A4ADD-2908-4CA3-9CD9-F2F2423C1507" />
+  <File Path="styles\Scripture\Page_size_A6.css" ComponentGuid="84BD7C8F-811D-4DED-AE63-81D131C61D09" />
+  <File Path="styles\Scripture\Page_size_A5.css" ComponentGuid="12CC6943-7151-4F34-A77D-E95D05EC2830" />
+  <File Path="styles\Scripture\Page_size_A4.css" ComponentGuid="6FEAA599-2E82-43AB-80BF-0E2E54E81D77" />
+  <File Path="styles\Scripture\Page Size_Letter.css" ComponentGuid="A9E8B268-57ED-434B-B3A5-B393D98D7208" />
+  <File Path="styles\Scripture\Page Size_Half_Letter.css" ComponentGuid="5CAB77B2-D44A-4AB8-AF3E-B158C9CB966A" />
+  <File Path="styles\Scripture\Page Size_6inx9in.css" ComponentGuid="BA5188A0-E711-4DCA-ABDF-4663154F14CA" />
+  <File Path="styles\Scripture\Leading_nc.css" ComponentGuid="5A0E186A-F6E4-44A1-88CF-9E7AE55A817D" />
+  <File Path="styles\Scripture\Leading_26.css" ComponentGuid="A62C3418-0AD7-4F45-8001-06AB3BD632CF" />
+  <File Path="styles\Scripture\Leading_24.css" ComponentGuid="259FFA2C-A327-423B-AB2E-D88085B2B24C" />
+  <File Path="styles\Scripture\Leading_13.css" ComponentGuid="9AAC7A23-A11B-47A1-BCE4-295A38A9CFD5" />
+  <File Path="styles\Scripture\Leading_12.css" ComponentGuid="8483470B-C21E-4574-B183-7981E802233C" />
+  <File Path="styles\Scripture\Layout_13.css" ComponentGuid="1D515799-0817-420C-8F26-68BE9DDA5EFE" />
+  <File Path="styles\Scripture\Layout_12.css" ComponentGuid="DD676E50-0A9E-4236-AE11-C0BC35B0B40E" />
+  <File Path="styles\Scripture\Layout_11.css" ComponentGuid="24F5443F-9CB9-44DA-9D6D-61C05997E177" />
+  <File Path="styles\Scripture\Layout_10.css" ComponentGuid="228576DF-DFA5-4001-9076-45949B272289" />
+  <File Path="styles\Scripture\Layout_09.css" ComponentGuid="C2AD6F51-EA5D-4366-B736-4C15C07D83DC" />
+  <File Path="styles\Scripture\Layout_08.css" ComponentGuid="49F47D16-99A5-4B58-9218-4D45916255D5" />
+  <File Path="styles\Scripture\Layout_07.css" ComponentGuid="3A51D7CB-2658-4BE0-9851-A57BEA7F3DAD" />
+  <File Path="styles\Scripture\Layout_06.css" ComponentGuid="B12676EF-7B18-4AED-AC96-B5D19803A60B" />
+  <File Path="styles\Scripture\Layout_05.css" ComponentGuid="2674E421-260A-4576-9A7F-DD3BD5BB0C24" />
+  <File Path="styles\Scripture\Layout_04.css" ComponentGuid="F7F21C51-23CD-4522-82C0-7551DDF7EAD5" />
+  <File Path="styles\Scripture\Layout_03.css" ComponentGuid="F5AFF8E3-16B3-4056-B62E-3E79DCBA0E3E" />
+  <File Path="styles\Scripture\Layout_02.css" ComponentGuid="B1DDCE84-8D14-4397-8F12-300D4972CF87" />
+  <File Path="styles\Scripture\Layout_01.css" ComponentGuid="D14C0CB2-8DF2-40A3-BF01-E9BF01AF9811" />
+  <File Path="styles\Scripture\Justified_Yes.css" ComponentGuid="7B01C33C-2BB0-498C-83EE-03A4445F5D74" />
+  <File Path="styles\Scripture\Justified_No.css" ComponentGuid="2CB91021-127F-4E3D-A9FF-73082D4FDA82" />
+  <File Path="styles\Scripture\gloss_font_sophia.css" ComponentGuid="96534F5E-E516-4972-A193-4C674B3E810E" />
+  <File Path="styles\Scripture\gloss_font_nc.css" ComponentGuid="151C5886-4224-4718-A9BF-308E63C82F0C" />
+  <File Path="styles\Scripture\gloss_font_doulos.css" ComponentGuid="DE16B053-CDDD-4654-9424-68AAEAC1AA8F" />
+  <File Path="styles\Scripture\gloss_font_charis_compact.css" ComponentGuid="0C446B38-1CA8-4B35-A5EB-2E697F5A555F" />
+  <File Path="styles\Scripture\gloss_font_charis.css" ComponentGuid="90DC36F4-DA54-4255-8536-042D6A802614" />
+  <File Path="styles\Scripture\font_size_nc.css" ComponentGuid="5FBD0ED0-C9D8-4D1C-B828-C3F34D0B0CCA" />
+  <File Path="styles\Scripture\font_size_11_13.css" ComponentGuid="DA3AB0BA-AFFE-4936-B2EE-6A3D587A60C2" />
+  <File Path="styles\Scripture\font_size_10_12.css" ComponentGuid="870FACC5-BD5F-4200-979E-C67158998E91" />
+  <File Path="styles\Scripture\Columns_2.css" ComponentGuid="D5C1578E-2FEE-42C1-B4F5-097A2209A6FF" />
+  <File Path="styles\Scripture\Columns_1.css" ComponentGuid="4CD279B6-4FFC-419B-BD54-5585E138044F" />
+  <File Path="styles\Dictionary\Writing_System_Separator.css" ComponentGuid="76232345-E247-4779-8963-7160623FD938" />
+  <File Path="styles\Dictionary\Writing_System_nc.css" ComponentGuid="8BC2CF74-B4B8-4AB5-982C-16E08F9292EE" />
+  <File Path="styles\Dictionary\Sense_nc.css" ComponentGuid="3633141A-3DEC-4399-BD52-F66728B0C8EC" />
+  <File Path="styles\Dictionary\Sense_Bullet.css" ComponentGuid="BB2A6A49-578B-495F-BD55-877862445D6E" />
+  <File Path="styles\Dictionary\Running_Head_Mirrored.css" ComponentGuid="340AC300-7BBC-498E-BBF2-6B8475C7A9EB" />
+  <File Path="styles\Dictionary\Running_Head_Every_Page.css" ComponentGuid="B15DA402-CA28-4C3E-B03B-99852E5B4732" />
+  <File Path="styles\Dictionary\Rules_Yes.css" ComponentGuid="CDDB63FC-2CA0-4A63-8DDC-05494A821939" />
+  <File Path="styles\Dictionary\Rules_No.css" ComponentGuid="2F4570ED-B0E1-4188-90A8-9F376FE24A8E" />
+  <File Path="styles\Dictionary\Pictures_Yes.css" ComponentGuid="DDFE0DEF-7107-43E5-B047-3336EE7E0C75" />
+  <File Path="styles\Dictionary\Pictures_No.css" ComponentGuid="0B9ED902-8A4E-4EBE-BCF4-8001324638E7" />
+  <File Path="styles\Dictionary\Page_size_Letter.css" ComponentGuid="8BCFD87E-8459-4CBE-AB73-2CDE455EE559" />
+  <File Path="styles\Dictionary\Page_size_Half_Letter.css" ComponentGuid="26FDA1DD-A2ED-45D0-9A9C-0D359C71249A" />
+  <File Path="styles\Dictionary\Page_size_C5.css" ComponentGuid="33E19264-0B96-4FAE-823B-A075EA848C46" />
+  <File Path="styles\Dictionary\Page_size_A6.css" ComponentGuid="7629D09F-33AB-425A-BBF9-E7621A801A5E" />
+  <File Path="styles\Dictionary\Page_size_A5.css" ComponentGuid="133A45FB-F034-45FF-9912-C77EE9EA69D6" />
+  <File Path="styles\Dictionary\Page_size_A4.css" ComponentGuid="A0E7A17F-9C47-4A08-B684-9111D43DA822" />
+  <File Path="styles\Dictionary\Page_size_6inx9in.css" ComponentGuid="ECF8FFD0-B5A7-4E1C-B03B-7496F0C653DE" />
+  <File Path="styles\Dictionary\Page Size_Letter.css" ComponentGuid="19C72655-342A-435C-9AEA-FFE3E6DA2A50" />
+  <File Path="styles\Dictionary\Leading_nc.css" ComponentGuid="67035DC3-3FFA-44A1-89E5-65AC1F18E571" />
+  <File Path="styles\Dictionary\Leading_24.css" ComponentGuid="BED55A51-EFC9-4297-A0A2-B7E3226A0D02" />
+  <File Path="styles\Dictionary\Leading_14.css" ComponentGuid="80FD4D93-8525-4D1D-A606-BCAABB3A1570" />
+  <File Path="styles\Dictionary\Leading_12.css" ComponentGuid="E09196FD-703D-4EC7-AC60-E98B0121C59F" />
+  <File Path="styles\Dictionary\Layout_12.css" ComponentGuid="B3A2C6FD-DE48-4412-92D8-8FAB22756B01" />
+  <File Path="styles\Dictionary\Layout_11.css" ComponentGuid="9AE1C5D0-C183-4F5B-96BC-0BC7F289E618" />
+  <File Path="styles\Dictionary\Layout_10.css" ComponentGuid="D32944FF-CBE3-4DC3-8461-518770226105" />
+  <File Path="styles\Dictionary\Layout_09.css" ComponentGuid="39CC8E08-ED21-4937-B781-E0420136BF04" />
+  <File Path="styles\Dictionary\Layout_08.css" ComponentGuid="F94F0DEC-1A7E-4414-BC3C-929D8626CCF5" />
+  <File Path="styles\Dictionary\Layout_07.css" ComponentGuid="A001A372-7AC3-4CF2-9813-074E05E95285" />
+  <File Path="styles\Dictionary\Layout_06.css" ComponentGuid="74D763C3-3878-442E-A68E-612B2CAA7D16" />
+  <File Path="styles\Dictionary\Layout_05.css" ComponentGuid="BC5581F2-EC09-4E8F-9F0B-ECF21BA35B66" />
+  <File Path="styles\Dictionary\Layout_04.css" ComponentGuid="233753EF-5D4F-46EE-BCD9-563D39A30F8C" />
+  <File Path="styles\Dictionary\Layout_03.css" ComponentGuid="5A1DB489-94C9-441B-8693-85373019046D" />
+  <File Path="styles\Dictionary\Layout_02.css" ComponentGuid="0842CF11-1428-4AB9-9DF3-0EE24AE06AB7" />
+  <File Path="styles\Dictionary\Layout_01.css" ComponentGuid="D56870A8-8E53-457A-8A2C-30546B72037C" />
+  <File Path="styles\Dictionary\Language_Tag_Yes.css" ComponentGuid="32EFBCCB-FF54-4FFC-ADB5-91435C118623" />
+  <File Path="styles\Dictionary\Language_Tag_No.css" ComponentGuid="2BDF8B20-2EED-4B46-B6E5-AD83752E1062" />
+  <File Path="styles\Dictionary\Justified_Yes.css" ComponentGuid="4E9F6246-2D2B-4CEB-B1E9-C5EDC5BE5060" />
+  <File Path="styles\Dictionary\Justified_No.css" ComponentGuid="2AB7FD2D-4EFB-40F8-AB6F-45B5EC72BFD5" />
+  <File Path="styles\Dictionary\Headword_Size_nc.css" ComponentGuid="8A766640-D73D-4F8E-9DDF-A2497E101359" />
+  <File Path="styles\Dictionary\Headword_Size_14.css" ComponentGuid="6FF0911C-B838-4268-9ACB-740F07511F0E" />
+  <File Path="styles\Dictionary\Headword_Size_12.css" ComponentGuid="B05CC2C6-30DE-47CC-B619-2A220CA43195" />
+  <File Path="styles\Dictionary\Headword_Size_10.css" ComponentGuid="C992F346-4696-4271-A746-40E702FBCA77" />
+  <File Path="styles\Dictionary\Font_Sophia.css" ComponentGuid="CD3457A7-5843-47E3-B616-9BA4AC12D110" />
+  <File Path="styles\Dictionary\Font_Size_nc.css" ComponentGuid="606B1635-2713-451F-8EB4-1274DF88BBBD" />
+  <File Path="styles\Dictionary\Font_Size_12.css" ComponentGuid="8085158C-AF71-44A8-AF25-A22941794450" />
+  <File Path="styles\Dictionary\Font_Size_10.css" ComponentGuid="05E199F5-527C-420B-BD42-7DCABF68B93A" />
+  <File Path="styles\Dictionary\Font_nc.css" ComponentGuid="F4CAE8E5-4F84-4A55-8F2E-A0A20CE11D1A" />
+  <File Path="styles\Dictionary\Font_Doulos.css" ComponentGuid="7EBE2DD9-5BC0-438E-AD96-60369A573389" />
+  <File Path="styles\Dictionary\font_charis_compact.css" ComponentGuid="B185597A-1DCE-4A46-AFB9-4D0C0CFECD20" />
+  <File Path="styles\Dictionary\Font_Charis.css" ComponentGuid="8B496AE9-345D-465E-BBD3-3B785C002EA3" />
+  <File Path="styles\Dictionary\Example_nc.css" ComponentGuid="D4816DDB-D84F-4BC2-A02D-C0AB3BD16109" />
+  <File Path="styles\Dictionary\Example_Callout.css" ComponentGuid="3132D00A-2F42-47D6-BA6A-2ED4C429BB8E" />
+  <File Path="styles\Dictionary\Embedded_Spans_nc.css" ComponentGuid="39267898-2668-4A03-91B2-339DC51B738F" />
+  <File Path="styles\Dictionary\Embedded_Spans.css" ComponentGuid="8298DE83-161E-491D-80F8-B0E75C0797BC" />
+  <File Path="styles\Dictionary\Dictionary.css" ComponentGuid="F30119ED-1266-4F04-8245-1B4B12D7555C" />
+  <File Path="styles\Dictionary\Compact_Embedded_Spans.css" ComponentGuid="AB35299D-099D-4F1A-A1C0-EA77E8C10E22" />
+  <File Path="styles\Dictionary\Columns_2.css" ComponentGuid="DB669FBC-ECEA-496C-93E9-8D2FA331311E" />
+  <File Path="styles\Dictionary\Columns_1.css" ComponentGuid="225DB794-4D3F-4D06-B06E-7515DC13EA5E" />
+  <File Path="Samples\Scripture\Bughotu-1pe.xhtml" ComponentGuid="2343397E-D50E-4DD0-A47B-DE589F1C170D" />
+  <File Path="Samples\Dictionary\bce.xhtml" ComponentGuid="B07E9B7E-5620-4A7C-915D-BB5F39DEF203" />
+  <File Path="OfficeFiles\Scripture\styles.xml" ComponentGuid="B7B2397C-9177-41CF-933E-6D21FFF6115E" />
+  <File Path="OfficeFiles\Scripture\settings.xml" ComponentGuid="E74ACC7E-DE2E-4F9A-A2A0-1DF58CEDB04A" />
+  <File Path="OfficeFiles\Scripture\meta.xml" ComponentGuid="7B223281-BFCC-4FBE-8BEA-0FE59250CC05" />
+  <File Path="OfficeFiles\Scripture\content.xml" ComponentGuid="4F197702-4FF6-49F8-8DCA-976D9F9AAEC5" />
+  <File Path="OfficeFiles\Scripture\META-INF\manifest.xml" ComponentGuid="896A642F-2215-499C-97AF-A661A7AF393E" />
+  <File Path="OfficeFiles\Scripture\Configurations2\toolbar\custom_toolbar_42d5.xml" ComponentGuid="AEF64EBC-848D-45F9-9231-902A73B184E7" />
+  <File Path="OfficeFiles\Scripture\Configurations2\menubar\menubar.xml" ComponentGuid="59B24D6F-EFF8-4169-9D63-F7E7D5C45C30" />
+  <File Path="OfficeFiles\Scripture\Configurations2\images\sc_imagelist.xml" ComponentGuid="1D6BBECE-BEE3-455A-BA2C-9189612B40CE" />
+  <File Path="OfficeFiles\Scripture\Configurations2\accelerator\current.xml" ComponentGuid="F9FFAA25-F1D1-4225-9958-70C1C1D58639" />
+  <File Path="OfficeFiles\Scripture\Basic\script-lc.xml" ComponentGuid="A13576AC-18CA-4084-9BD0-5E52F699DF97" />
+  <File Path="OfficeFiles\Scripture\Basic\Standard\script-lb.xml" ComponentGuid="B569FA77-B2A0-4123-B02B-B2E077E4D9AB" />
+  <File Path="OfficeFiles\Scripture\Basic\Standard\Module1.xml" ComponentGuid="2040ABBE-6495-4743-BDAC-F52BF91F3DFD" />
+  <File Path="OfficeFiles\Dictionary\styles.xml" ComponentGuid="10D9F6D1-4DDF-4BE2-BEBC-8E1B03323E9E" />
+  <File Path="OfficeFiles\Dictionary\settings.xml" ComponentGuid="47C6F2CE-0119-4927-985D-9189F94A5D1E" />
+  <File Path="OfficeFiles\Dictionary\meta.xml" ComponentGuid="8723D30B-84EC-4468-BDA4-0776530CBA48" />
+  <File Path="OfficeFiles\Dictionary\content.xml" ComponentGuid="C1B00561-4937-4DD7-88E9-3C264D6CA669" />
+  <File Path="OfficeFiles\Dictionary\META-INF\manifest.xml" ComponentGuid="E2C20A4D-9082-452F-988C-A9D314A273FB" />
+  <File Path="OfficeFiles\Dictionary\Configurations2\toolbar\custom_toolbar_42d5.xml" ComponentGuid="C7D19A6B-A80D-48C7-A29D-2AD798250FC8" />
+  <File Path="OfficeFiles\Dictionary\Configurations2\menubar\menubar.xml" ComponentGuid="90DA8414-2CD6-4D6F-B937-BAFF2F01B55E" />
+  <File Path="OfficeFiles\Dictionary\Configurations2\images\sc_imagelist.xml" ComponentGuid="6EBAF2DC-15C5-4F3D-81CB-2E7D24879B98" />
+  <File Path="OfficeFiles\Dictionary\Configurations2\accelerator\current.xml" ComponentGuid="296ADB08-90BC-4F91-86EB-DA9FADDE534F" />
+  <File Path="OfficeFiles\Dictionary\Basic\script-lc.xml" ComponentGuid="C69806E4-2859-47FA-A3A8-3B0CE85E0792" />
+  <File Path="OfficeFiles\Dictionary\Basic\Standard\script-lb.xml" ComponentGuid="6645813E-63AF-4D8A-9510-89828C6DAE0B" />
+  <File Path="OfficeFiles\Dictionary\Basic\Standard\Module1.xml" ComponentGuid="20DABF80-788C-47D8-941B-9501E36A5D7E" />
+  <File Path="Loc\PsLocalization.xml" ComponentGuid="1D72B22E-ADC9-49D8-B6D8-9AD79D9C9616" />
+  <File Path="LiftSupport\liftTransform.xsl" ComponentGuid="6058676D-0443-498C-BE64-E1D0D135267C" />
+  <File Path="LiftSupport\liftLangFilter.xsl" ComponentGuid="CFFFA039-91F7-4DDE-BE77-C3901B2A60D0" />
+  <File Path="LiftSupport\liftEntryAndSenseFilter.xsl" ComponentGuid="9AC0AB9A-73AB-402D-BC00-2413D8C3DD39" />
+  <File Path="LiftSupport\lift.xsd" ComponentGuid="4D45CA8B-6A4C-4769-AF99-06B3D46A375A" />
+  <File Path="InDesignFiles\Scripture\designmap.xml" ComponentGuid="86DB4729-4189-46AD-BB43-8DCF0F34014C" />
+  <File Path="InDesignFiles\Scripture\XML\Tags.xml" ComponentGuid="9058B768-B8E8-407F-AF17-5EFF5DC787D2" />
+  <File Path="InDesignFiles\Scripture\XML\BackingStory.xml" ComponentGuid="D9C41500-3AFA-4E2C-8A83-46601592C12D" />
+  <File Path="InDesignFiles\Scripture\Stories\Story_uc9.xml" ComponentGuid="63A7682E-8063-41EE-9515-4E26348A0031" />
+  <File Path="InDesignFiles\Scripture\Spreads\Spread_ub9.xml" ComponentGuid="131AD35C-0F1D-45DD-A2E4-FA3302FC8BC6" />
+  <File Path="InDesignFiles\Scripture\Resources\Styles.xml" ComponentGuid="30C6C95F-C409-4109-B8B8-D5467EE5A6FF" />
+  <File Path="InDesignFiles\Scripture\Resources\Preferences.xml" ComponentGuid="DCE4F9A6-8582-4668-9056-60B08E67DC3E" />
+  <File Path="InDesignFiles\Scripture\Resources\Graphic.xml" ComponentGuid="9F17C04D-1463-469E-A18C-F85140B52607" />
+  <File Path="InDesignFiles\Scripture\Resources\Fonts.xml" ComponentGuid="EB51844F-2B94-4CCF-8BB2-C040C69109CD" />
+  <File Path="InDesignFiles\Scripture\META-INF\metadata.xml" ComponentGuid="2CA45243-85A4-4D0B-B8FC-192B00B0EAD4" />
+  <File Path="InDesignFiles\Scripture\META-INF\container.xml" ComponentGuid="09C78DB1-E5C2-4121-BFD0-A8FA0536B90F" />
+  <File Path="InDesignFiles\Scripture\MasterSpreads\MasterSpread_uc0.xml" ComponentGuid="D049763A-976A-40B9-9C08-D5A6843E421E" />
+  <File Path="InDesignFiles\Dictionary\designmap.xml" ComponentGuid="A2C0224C-ECFA-46E4-9788-E1B4E748B6F2" />
+  <File Path="InDesignFiles\Dictionary\XML\Tags.xml" ComponentGuid="863FBA1B-8CFA-4CEC-AAE1-527E1BFA9738" />
+  <File Path="InDesignFiles\Dictionary\XML\BackingStory.xml" ComponentGuid="6A4C6967-ED75-4807-B3BF-B57D99199D45" />
+  <File Path="InDesignFiles\Dictionary\Stories\Story_uc9.xml" ComponentGuid="23E6746D-65F3-462D-B7BF-FF861CEB4D34" />
+  <File Path="InDesignFiles\Dictionary\Spreads\Spread_ub9.xml" ComponentGuid="31DCCD2E-A759-4F75-9CBF-4C8091498AE9" />
+  <File Path="InDesignFiles\Dictionary\Resources\Styles.xml" ComponentGuid="293B2D51-7BA8-48BB-9ECE-D803B93920A5" />
+  <File Path="InDesignFiles\Dictionary\Resources\Preferences.xml" ComponentGuid="5401B341-929C-476A-8D59-2A40CBA97D47" />
+  <File Path="InDesignFiles\Dictionary\Resources\Graphic.xml" ComponentGuid="52D7C8AF-490A-4370-AC1B-FE7B9366E3AE" />
+  <File Path="InDesignFiles\Dictionary\Resources\Fonts.xml" ComponentGuid="595586E0-2147-4AB0-A6BC-9B59FE54ADA9" />
+  <File Path="InDesignFiles\Dictionary\META-INF\metadata.xml" ComponentGuid="7338B032-6EE0-4C84-95CF-FFA60D81E5C7" />
+  <File Path="InDesignFiles\Dictionary\META-INF\container.xml" ComponentGuid="BA211636-6A31-403D-B760-5DC887E3C7E2" />
+  <File Path="InDesignFiles\Dictionary\MasterSpreads\MasterSpread_uc0.xml" ComponentGuid="4BF94E82-00E8-400D-8856-C541FED77EDF" />
+  <File Path="Icons\select.png" ComponentGuid="CAE3261F-73CA-47ED-8A8D-4FE0C46FD232" />
+  <File Path="Icons\select-all.png" ComponentGuid="A3BD14C0-56B0-4F9A-BBF9-B951DFE58F0A" />
+  <File Path="Icons\select-all.ico" ComponentGuid="76704A4D-92C3-428C-964D-0F7CFDBB828B" />
+  <File Path="Icons\i123.png" ComponentGuid="0CEFEE99-9942-471F-8801-9573F4F4D377" />
+  <File Path="Icons\i123.ICO" ComponentGuid="36E9496E-2688-492C-9427-40F26675FAB1" />
+  <File Path="Icons\font.png" ComponentGuid="EE890B6F-0823-4147-B56E-18691BB633D3" />
+  <File Path="Icons\font.ico" ComponentGuid="6BA98B90-9F2B-4F98-B923-84AA2C276FEF" />
+  <File Path="Icons\final.png" ComponentGuid="75B04EF0-06D6-4DE7-8BDA-9E868F8DEE15" />
+  <File Path="Icons\final.ico" ComponentGuid="A691DBBC-BA8B-43C6-B5C0-22E7C8509EA4" />
+  <File Path="Icons\draft.png" ComponentGuid="955A442E-EEEC-4104-82D7-DCAF50643ABE" />
+  <File Path="Icons\draft.ico" ComponentGuid="FC1DE8D6-9832-4FFD-AA82-4F120B22D674" />
+  <File Path="Icons\deselect.png" ComponentGuid="F92DE74A-735D-4C56-BA62-705A9E36C5D6" />
+  <File Path="Icons\Column3b.png" ComponentGuid="9C43C963-F2EE-4434-AC06-BDDB0CD771B1" />
+  <File Path="Icons\Column3b.bmp" ComponentGuid="8C3C0AE9-6ACC-4729-B8F4-CC68BAE70F88" />
+  <File Path="Icons\Column2b.png" ComponentGuid="480C925C-F053-4A4E-9FB6-06AC2422AFBC" />
+  <File Path="Icons\Column2b.bmp" ComponentGuid="9EB6E4F5-9547-4CB5-9385-E122B38B0197" />
+  <File Path="Icons\Column1.png" ComponentGuid="DE0DE7AC-548E-4D6C-806E-4CC0FE67BC4B" />
+  <File Path="Icons\Column1.ico" ComponentGuid="B13B8DCA-CAB2-4B0F-B852-88C27D0E742F" />
+  <File Path="Graphic\web.png" ComponentGuid="48E687DC-8C80-49AF-8404-1F48F90813C4" />
+  <File Path="Graphic\userTask.png" ComponentGuid="44A01D48-1558-43A6-8F27-40507C1EB053" />
+  <File Path="Graphic\user.png" ComponentGuid="C1F49C37-7C3D-40D6-BD6A-6F9424131948" />
+  <File Path="Graphic\user.ico" ComponentGuid="29B633BD-BCDC-42F6-84A0-146335814A31" />
+  <File Path="Graphic\trialPrint.png" ComponentGuid="45006BAA-824D-4FF5-8B1F-107BA1B31905" />
+  <File Path="Graphic\quick.png" ComponentGuid="F215166F-850E-41C3-B134-5FE7226683C4" />
+  <File Path="Graphic\missing.png" ComponentGuid="CC4D43BF-B440-4CD4-81B2-B5A600B15E71" />
+  <File Path="Graphic\missing.ico" ComponentGuid="47F81097-E636-482C-9DDC-378B5DD60B7D" />
+  <File Path="Graphic\intermediate.png" ComponentGuid="229FDF32-8937-4EDD-AC02-CB7E214308FF" />
+  <File Path="Graphic\intermediate.ico" ComponentGuid="32C194EE-8995-4FA4-BBAF-0E8BE880561F" />
+  <File Path="Graphic\final.png" ComponentGuid="0179E9AB-3126-49F1-B48F-204F861135EA" />
+  <File Path="Graphic\draft.png" ComponentGuid="992A6504-D686-47C6-9A5B-8D37335D815F" />
+  <File Path="Graphic\designer.png" ComponentGuid="059208ED-1F38-43FE-98C4-7064D7DD3A5B" />
+  <File Path="Graphic\designer.ico" ComponentGuid="2CB0B16B-4727-4BFE-8BEE-C637EEF15695" />
+  <File Path="Graphic\coordinator.png" ComponentGuid="87DE64A9-69B0-46D5-BFFD-132C100A897B" />
+  <File Path="Graphic\coordinator.ico" ComponentGuid="DA4B9E69-05F3-4588-BB1A-2855C5703C3B" />
+  <File Path="Graphic\cell.png" ComponentGuid="4873199A-BBB1-4A83-A698-BBCFBF88805E" />
+  <File Path="Graphic\books.png" ComponentGuid="30A53B0A-5D77-4F81-9A0D-E6B47244071B" />
+  <File Path="Graphic\books.ico" ComponentGuid="11A91810-836F-45B2-94B2-BDD895BAF43D" />
+  <File Path="Graphic\book.png" ComponentGuid="CC7879B4-985C-4104-97AF-9BDA5B0D45C2" />
+  <File Path="Graphic\BOOK.ico" ComponentGuid="5931EB30-67E5-4B69-93EA-E087B72EB5A5" />
+  <File Path="Graphic\beginner.png" ComponentGuid="C4012F25-FB35-48CD-892B-3AC7679B6B2E" />
+  <File Path="Graphic\beginner.ico" ComponentGuid="E32947D5-6201-4B9D-BB7B-6EB6F4B6366E" />
+  <File Path="Graphic\arrow.png" ComponentGuid="E00C29E8-8723-488A-9ECF-148E902FFA2F" />
+  <File Path="Graphic\arrow.ico" ComponentGuid="90F55E7F-1D91-4948-B1AF-5358955A4381" />
+  <File Path="Graphic\advanced.png" ComponentGuid="6D1D40D0-ADAE-4465-AF7D-21AD4A4239DC" />
+  <File Path="Graphic\advanced.ico" ComponentGuid="D90A3F42-DE7B-42F7-BF39-107EEAC80C30" />
+  <File Path="DEXCTX\miniCTX\texmf-context\tex\context\interface\cont-en.xml" ComponentGuid="12871201-A995-4967-BD6F-1945E24185BA" />
+  <File Path="BackEnds\PdfConvert.pdb" ComponentGuid="50C55C49-E94F-41F8-9579-526A8FD9896B" />
+  <File Path="BackEnds\PdfConvert.dll.config" ComponentGuid="ACB5C7A9-33C5-4CD7-8C04-7991699F8E10" />
+  <File Path="BackEnds\PdfConvert.dll" ComponentGuid="A10F6A56-0447-416C-8CA4-B35F7F7FACE7" />
+  <File Path="BackEnds\OpenOfficeConvert.pdb" ComponentGuid="DE8B83E2-923C-44F5-AB97-2BC5197C024B" />
+  <File Path="BackEnds\OpenOfficeConvert.dll" ComponentGuid="2BFF6F29-AD9D-4B4E-B8B8-E44A4167DB99" />
+  <File Path="BackEnds\LiftPrepare.pdb" ComponentGuid="7DCBD1C1-F5DB-4BBC-BDC5-B077207F3A17" />
+  <File Path="BackEnds\LiftPrepare.dll.config" ComponentGuid="9E755DD5-B62A-4B82-A2BF-C2B25213025B" />
+  <File Path="BackEnds\LiftPrepare.dll" ComponentGuid="386EB0A7-E634-4419-9D23-66303974C669" />
+  <File Path="BackEnds\InDesignConvert.pdb" ComponentGuid="A534A4A7-8306-4DEA-B486-AB2F5ECA1539" />
+  <File Path="BackEnds\InDesignConvert.dll.config" ComponentGuid="F66EA656-95C2-4C57-BE3F-901EB87B4872" />
+  <File Path="BackEnds\InDesignConvert.dll" ComponentGuid="0E167417-2E96-4340-8E6A-A715F64D9CD9" />
+  <File Path="Copyrights\by.png" ComponentGuid="D5145460-8939-4B1B-8D05-D1039174CB71" />
+  <File Path="Copyrights\CC-by-nc-nd.xhtml" ComponentGuid="75097076-C8A2-4DC0-AB11-BAF62D3BD130" />
+  <File Path="Copyrights\CC-by-nc-sa.xhtml" ComponentGuid="9024B776-E673-47AE-8F11-D74ED5D61B49" />
+  <File Path="Copyrights\Copy.css" ComponentGuid="3BD0C29D-6335-465D-81EC-7627A49493DA" />
+  <File Path="Copyrights\Draft.xhtml" ComponentGuid="1F626858-9758-424E-8860-66AA84D7AF6D" />
+  <File Path="Copyrights\nc.png" ComponentGuid="2C13BE1D-1577-400D-8657-68C1112D7438" />
+  <File Path="Copyrights\nd.png" ComponentGuid="3427847F-7B5C-4022-A318-0499443AB41C" />
+  <File Path="Copyrights\sa.png" ComponentGuid="ABC5D364-7454-4474-9EAE-A05A2CA57340" />
+  <File Path="Copyrights\Selling.xhtml" ComponentGuid="45C39E50-F3E5-4556-9168-D490F2E7FF6C" />
+  <File Path="Copyrights\SIL-Logo-No-Tag-Color.gif" ComponentGuid="1621DB91-BEE0-4B85-8704-B99D5211AB2E" />
+  <File Path="Copyrights\SIL_CC-by-nc-nd.xhtml" ComponentGuid="8F0F18DC-8E37-4484-AF39-D8D51B4BAD58" />
+  <File Path="Copyrights\SIL_CC-by-nc-sa.xhtml" ComponentGuid="A544154D-EF02-4720-BA45-E101746BB9A9" />
+  <File Path="Copyrights\SIL_Draft.xhtml" ComponentGuid="8128B9E1-98E4-4398-AFFE-BC15B3B73B35" />
+  <File Path="Copyrights\SIL_Selling.xhtml" ComponentGuid="80769BC8-4E7E-4401-87C4-5DC1DA245510" />
+  <File Path="Copyrights\UBS_Draft.xhtml" ComponentGuid="23C70762-EC3B-4440-8CCC-8AB6102A1188" />
+  <File Path="Copyrights\WBT_H_RGB_red.png" ComponentGuid="23235068-AA91-41DF-A1EC-C41EA423462D" />
+  <File Path="epubcheck-1.2\lib\jing.jar" ComponentGuid="4268DFF5-2161-49ED-AD0E-68303E22AA70" />
+  <File Path="epubcheck-1.2\lib\saxon.jar" ComponentGuid="E0B553B0-48FA-43FA-A5E8-700886D2613F" />
+  <File Path="epubcheck-1.2\COPYING.txt" ComponentGuid="93B5C601-EA13-4D86-9FC8-8CAD5AF94CDD" />
+  <File Path="epubcheck-1.2\epubcheck-1.2.jar" ComponentGuid="708E4BFC-4C7E-4F75-8916-6C0A7AF445CC" />
+  <File Path="epubcheck-1.2\jing_license.txt" ComponentGuid="7E39B9CA-9185-4679-8071-A1D1C12338AC" />
+  <File Path="epubcheck-1.2\README.txt" ComponentGuid="CE6309FB-5245-427E-9C86-EDF62DC7FF2C" />
+  <File Path="Styles\Dictionary\Columns_1.css" ComponentGuid="847D516E-4974-4EEA-ACC0-6E75CC0B2095" />
+  <File Path="Styles\Dictionary\Columns_2.css" ComponentGuid="6237F5C2-9274-4283-BC78-E40CBC74D731" />
+  <File Path="Styles\Dictionary\Compact_Embedded_Spans.css" ComponentGuid="33B1585D-0B58-4F26-A89B-EAB1AEC98766" />
+  <File Path="Styles\Dictionary\Dictionary.css" ComponentGuid="3456F73E-F323-4CA5-9F98-6F7CC056E1AC" />
+  <File Path="Styles\Dictionary\Embedded_Spans.css" ComponentGuid="661E24B8-B74B-4855-BBF4-8462922455DE" />
+  <File Path="Styles\Dictionary\Embedded_Spans_nc.css" ComponentGuid="A4A99EF5-12D5-4DF4-8BFB-E55AAD1AA044" />
+  <File Path="Styles\Dictionary\Empty.css" ComponentGuid="A2516153-349D-4384-B568-65C22D797FDD" />
+  <File Path="Styles\Dictionary\epub_Dictionary.css" ComponentGuid="9EE31F09-313C-4976-9F0C-A0AE51317CB1" />
+  <File Path="Styles\Dictionary\epub_FontSize.css" ComponentGuid="7EA90129-351E-40CF-B7E8-66AFD2C0A051" />
+  <File Path="Styles\Dictionary\epub_Pictures.css" ComponentGuid="231223D5-92E7-48A6-96E3-098B907CEAE8" />
+  <File Path="Styles\Dictionary\Example_Callout.css" ComponentGuid="ABD6AC85-3353-4676-ACE3-82A933D67B7F" />
+  <File Path="Styles\Dictionary\Example_nc.css" ComponentGuid="5D40F23C-3F4C-4FBD-81D5-27533A1DAA75" />
+  <File Path="Styles\Dictionary\Font_Charis.css" ComponentGuid="3D83EEE5-E9AA-458F-B3C1-B91386B8DC05" />
+  <File Path="Styles\Dictionary\font_charis_compact.css" ComponentGuid="CFE763EB-188A-4047-AA78-6C356803E690" />
+  <File Path="Styles\Dictionary\Font_Doulos.css" ComponentGuid="D0F25AC1-E1E1-48C2-91B6-CA5B82639F19" />
+  <File Path="Styles\Dictionary\Font_nc.css" ComponentGuid="2D43B294-2C6A-42B8-9360-C59D3A542036" />
+  <File Path="Styles\Dictionary\Font_Size_10.css" ComponentGuid="55535561-8A37-44B7-8F87-F2F85ADB522F" />
+  <File Path="Styles\Dictionary\Font_Size_12.css" ComponentGuid="28F58C8D-0F5B-4897-8FB5-6026DEE3790F" />
+  <File Path="Styles\Dictionary\Font_Size_13.css" ComponentGuid="91F35661-FB0B-479B-913C-3A0D0AB2456A" />
+  <File Path="Styles\Dictionary\Font_Size_14.css" ComponentGuid="13331202-2AA6-4E50-941D-2EEBE374C8E3" />
+  <File Path="Styles\Dictionary\Font_Size_15.css" ComponentGuid="BAECD343-1455-4123-9AC8-CD8B5487ED2B" />
+  <File Path="Styles\Dictionary\Font_Size_9.css" ComponentGuid="FE5F75AA-C678-42A3-914F-F8DDC70A73A6" />
+  <File Path="Styles\Dictionary\Font_Size_nc.css" ComponentGuid="54EC4471-8871-4612-8178-238C690526C5" />
+  <File Path="Styles\Dictionary\Font_Sophia.css" ComponentGuid="E7D9A743-B2BE-40CE-B871-038070909DD7" />
+  <File Path="Styles\Dictionary\FrontMatter.css" ComponentGuid="138797F5-0FE7-48AF-BECE-4496F8956134" />
+  <File Path="Styles\Dictionary\GPS11J11.css" ComponentGuid="2ED28A02-194B-42D3-8A94-7C13E44166AD" />
+  <File Path="Styles\Dictionary\GPS11L11.css" ComponentGuid="00B84CBD-263A-4AB2-97EB-3A616DDB2512" />
+  <File Path="Styles\Dictionary\GPS12J10.css" ComponentGuid="741048A3-DF35-4C70-9973-CD99A3B1DDB2" />
+  <File Path="Styles\Dictionary\GPS12J11.css" ComponentGuid="75183D44-2684-47BF-9191-7F57ADF44C8A" />
+  <File Path="Styles\Dictionary\GPS12J9.css" ComponentGuid="C97BA895-081C-4EC2-875A-0AC552778994" />
+  <File Path="Styles\Dictionary\GPS12L10.css" ComponentGuid="8DF486E8-67B5-4F9B-93AB-15D4773C3F32" />
+  <File Path="Styles\Dictionary\GPS12L11.css" ComponentGuid="B7F8AE71-4D4E-408B-A062-164404F6B0CC" />
+  <File Path="Styles\Dictionary\GPS12L9.css" ComponentGuid="463ECE63-319A-4860-AE58-AD248C73D96C" />
+  <File Path="Styles\Dictionary\GPS21J11.css" ComponentGuid="58428DCA-2694-4F7C-8FAB-A676FD6C0B06" />
+  <File Path="Styles\Dictionary\GPS21L11.css" ComponentGuid="D4C2A556-CCA5-435A-9F98-50317C227A6C" />
+  <File Path="Styles\Dictionary\GPS22J10.css" ComponentGuid="074B9C8F-7662-4866-809D-0DDA9C59E7E9" />
+  <File Path="Styles\Dictionary\GPS22J11.css" ComponentGuid="38C3F269-DC3D-47F2-A914-2248DF11BB33" />
+  <File Path="Styles\Dictionary\GPS22J9.css" ComponentGuid="8B61AA49-7FE8-4B01-9D82-6DC67639C975" />
+  <File Path="Styles\Dictionary\GPS22L10.css" ComponentGuid="BC65313C-30FB-4509-869F-301E44718427" />
+  <File Path="Styles\Dictionary\GPS22L11.css" ComponentGuid="BC9E1FF3-ED2C-403B-ACD9-847EE07BB421" />
+  <File Path="Styles\Dictionary\GPS22L9.css" ComponentGuid="A5F4BA06-CFE0-4A8B-A97C-E75146DB1DF6" />
+  <File Path="Styles\Dictionary\Headword_Size_10.css" ComponentGuid="8AC6163B-AD34-4262-A3F9-41B7D34E23F0" />
+  <File Path="Styles\Dictionary\Headword_Size_11.css" ComponentGuid="C1C90560-854C-4CA8-BC00-76DACED49CA2" />
+  <File Path="Styles\Dictionary\Headword_Size_12.css" ComponentGuid="4CD6107D-0D8E-4B47-A078-3A869C45539D" />
+  <File Path="Styles\Dictionary\Headword_Size_14.css" ComponentGuid="B0878A7C-7492-4E30-ADFE-E96A34325DBC" />
+  <File Path="Styles\Dictionary\Headword_Size_8.css" ComponentGuid="3614709A-B522-4A1D-B523-C0504728878C" />
+  <File Path="Styles\Dictionary\Headword_Size_9.css" ComponentGuid="B84C2ED2-4A99-48D7-9C6F-B8ED93DF892F" />
+  <File Path="Styles\Dictionary\Headword_Size_nc.css" ComponentGuid="03D4AE6E-F235-43C1-9348-962B9AFA9C06" />
+  <File Path="Styles\Dictionary\Justified_No.css" ComponentGuid="7C01F098-3FBF-4375-B26A-2F12B8866EB6" />
+  <File Path="Styles\Dictionary\Justified_Yes.css" ComponentGuid="72883775-5930-48BC-BC5E-A2BCA6064D56" />
+  <File Path="Styles\Dictionary\Language_Tag_No.css" ComponentGuid="D8096741-9E39-4DA7-BAAA-1FD33FDCBE7D" />
+  <File Path="Styles\Dictionary\Language_Tag_Yes.css" ComponentGuid="1FFC1495-39CF-42AB-AB18-07FF9017C897" />
+  <File Path="Styles\Dictionary\Layout_01.css" ComponentGuid="E2F72F71-ACFD-4759-B08A-71C63DE6E03B" />
+  <File Path="Styles\Dictionary\Layout_02.css" ComponentGuid="3D0FF2D0-1381-42C9-B8DE-506C3E489CBB" />
+  <File Path="Styles\Dictionary\Layout_03.css" ComponentGuid="8D97B830-0695-45DA-9B66-7340419A4B70" />
+  <File Path="Styles\Dictionary\Layout_04.css" ComponentGuid="158E158B-5564-45AD-961D-7D12E6477AC0" />
+  <File Path="Styles\Dictionary\Layout_05.css" ComponentGuid="A0443F68-86BE-4455-AB2F-363B114FE0A0" />
+  <File Path="Styles\Dictionary\Layout_06.css" ComponentGuid="D98FF1BC-B21B-4A5A-8B60-3AA3FA009496" />
+  <File Path="Styles\Dictionary\Layout_07.css" ComponentGuid="321BE90A-1F19-4889-8702-54CF7C2531D2" />
+  <File Path="Styles\Dictionary\Layout_08.css" ComponentGuid="CF13D9B3-1FF3-4C07-9123-6A06E10F6C27" />
+  <File Path="Styles\Dictionary\Layout_09.css" ComponentGuid="6369C222-659E-4D85-A324-C8BF50E24813" />
+  <File Path="Styles\Dictionary\Layout_10.css" ComponentGuid="68975CB0-B935-430A-83B5-98F62168892F" />
+  <File Path="Styles\Dictionary\Layout_11.css" ComponentGuid="BBDE753C-5FBD-42A6-8B4E-62BD45B416AB" />
+  <File Path="Styles\Dictionary\Layout_12.css" ComponentGuid="A0D79EDB-2010-4D4E-BC22-B5E3B23F66A4" />
+  <File Path="Styles\Dictionary\Leading_11.css" ComponentGuid="F47FFFC3-E8A0-4FC4-9761-4E948880C176" />
+  <File Path="Styles\Dictionary\Leading_12.css" ComponentGuid="ECE0F2F1-81B9-4E77-9F07-19B2077E2DD6" />
+  <File Path="Styles\Dictionary\Leading_13.css" ComponentGuid="3E2C285C-39D7-4351-8DDA-EF2BD8C27B19" />
+  <File Path="Styles\Dictionary\Leading_14.css" ComponentGuid="6522BA91-824C-4A55-A494-99DEC6E307AF" />
+  <File Path="Styles\Dictionary\Leading_24.css" ComponentGuid="F502FFA7-B07D-4BD3-B82E-C320DA713B85" />
+  <File Path="Styles\Dictionary\Leading_nc.css" ComponentGuid="7EFCDE65-7B1D-4440-8DCD-F66529530FB1" />
+  <File Path="Styles\Dictionary\Page Size_Letter.css" ComponentGuid="67BF31C5-B8B9-4F5C-9C0D-6D921AB5B035" />
+  <File Path="Styles\Dictionary\Page_size_6inx9in.css" ComponentGuid="C1568105-7588-41E5-AE2D-85B8B8FFC07C" />
+  <File Path="Styles\Dictionary\Page_size_A4.css" ComponentGuid="A50792EC-037A-4B6F-9337-A2D114850184" />
+  <File Path="Styles\Dictionary\Page_size_A5.css" ComponentGuid="D2EED4B3-C9C2-45F5-A431-BBDDCD34DBD1" />
+  <File Path="Styles\Dictionary\Page_size_A6.css" ComponentGuid="D02F4BF7-83C2-43BD-AD8F-8E9729B55C73" />
+  <File Path="Styles\Dictionary\Page_size_C5.css" ComponentGuid="57FC17F5-09C0-48F9-92A9-1F9517A950A5" />
+  <File Path="Styles\Dictionary\Page_size_GPS1.css" ComponentGuid="B029E0BE-32DF-4D99-A758-16959EFE39FB" />
+  <File Path="Styles\Dictionary\Page_size_GPS2.css" ComponentGuid="EAEA8ECE-1535-4D98-8F2E-7D446FF32108" />
+  <File Path="Styles\Dictionary\Page_size_Half_Letter.css" ComponentGuid="5294556D-B1DF-4C08-90CA-88F76F981B9C" />
+  <File Path="Styles\Dictionary\Page_size_Letter.css" ComponentGuid="E8D38F42-56DB-4246-8598-0482904ED7F5" />
+  <File Path="Styles\Dictionary\Pictures_No.css" ComponentGuid="240AFF1B-DE8C-4D2C-8887-F58EB0548ED1" />
+  <File Path="Styles\Dictionary\Pictures_Yes.css" ComponentGuid="B1628058-9C73-4001-9C76-47DCAFF2C7ED" />
+  <File Path="Styles\Dictionary\Rules_No.css" ComponentGuid="90E60AD7-2CB7-4420-AEE6-A5FBCC42D0A2" />
+  <File Path="Styles\Dictionary\Rules_Yes.css" ComponentGuid="E940C27C-9626-4F23-97AC-15635C7E20EC" />
+  <File Path="Styles\Dictionary\Running_Head_Every_Page.css" ComponentGuid="50B3551A-885D-4157-BCC8-4CB96BE7D287" />
+  <File Path="Styles\Dictionary\Running_Head_Mirrored.css" ComponentGuid="B0C361E8-473A-4E19-BEAB-C1A99BF94899" />
+  <File Path="Styles\Dictionary\Sense_Bullet.css" ComponentGuid="A1786EE3-227C-490D-BDAD-D3F9661F06B9" />
+  <File Path="Styles\Dictionary\Sense_nc.css" ComponentGuid="18806BE2-D153-4CF7-9406-E712EA9120A1" />
+  <File Path="Styles\Dictionary\Writing_System_nc.css" ComponentGuid="68715F90-F2D3-4FF7-95BB-680CCD8A64FA" />
+  <File Path="Styles\Dictionary\Writing_System_Separator.css" ComponentGuid="578EFD50-39E1-4E77-8FAD-E4DFA03D200E" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p1.jpg" ComponentGuid="7C1E616D-9200-4748-ACA8-1AFBED2D281A" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p2.jpg" ComponentGuid="23DC84E3-59A0-4562-AC4E-25963EA18109" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" ComponentGuid="4B60A659-7195-4593-B635-64B4436195CB" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" ComponentGuid="17F8C29B-C0FF-4C86-8F2F-F203DEE43439" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p1.jpg" ComponentGuid="85C29C5D-0483-4CDD-8C0B-0A52E9104F63" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p2.jpg" ComponentGuid="68830E02-C0E9-4888-B5E1-702A017E311C" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p1.jpg" ComponentGuid="89202A9F-033A-4C30-9602-3DA86AB8BAFE" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p2.jpg" ComponentGuid="67F6D67B-C757-4532-A1A4-63E4BDC7D1C1" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p1.jpg" ComponentGuid="5062DB2F-0459-4545-86BB-4947850CE260" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p2.jpg" ComponentGuid="41BE223A-ABAD-4CDF-9AA0-2230C22663D7" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p1.jpg" ComponentGuid="A6AF5DC9-BA90-4787-A5AE-C15C02466664" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p2.jpg" ComponentGuid="CCC2A530-F56C-4D58-A046-361C436EA0BA" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p1.jpg" ComponentGuid="7E041924-991F-46FD-BD68-82BA35EC62D9" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p2.jpg" ComponentGuid="BE11576F-E89F-4CE2-AFEC-90A3C1CB0F2A" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p1.jpg" ComponentGuid="E2FAB375-A278-480B-8E61-D195E7ECEFE8" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p2.jpg" ComponentGuid="03E166C6-900C-424B-B12F-5B0C5EB25019" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" ComponentGuid="F69AA553-B0EE-4515-BDEE-EE9C2C9D5E2F" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" ComponentGuid="39DA411B-718C-464E-825A-844BE692E8AF" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p1.jpg" ComponentGuid="4243B583-DE62-4559-B753-15C132A352AC" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p2.jpg" ComponentGuid="FFE486F9-2E29-457C-A5AF-AB51BD1D0050" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p1.jpg" ComponentGuid="00234AA7-A8FA-4F05-A919-7217E5401FE8" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p2.jpg" ComponentGuid="254195B4-16A3-4205-9CB3-4426587E190C" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p1.jpg" ComponentGuid="9C8015EE-577C-49C2-9810-9FDFFA7C669F" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p2.jpg" ComponentGuid="9C9BF74F-9D49-4BDC-A08D-6E3EF638E0B0" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p1.jpg" ComponentGuid="A326C2AC-1418-48D2-9492-0DC155DE6BF5" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p2.jpg" ComponentGuid="96D4592B-6878-4DA5-8AF4-BEAF07A9CC00" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p1.jpg" ComponentGuid="5DC8975C-BE70-4435-9DF0-E13A207607A0" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p2.jpg" ComponentGuid="30378155-13EC-488A-8DC3-773A1234ED50" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p1.jpg" ComponentGuid="E62C0EA9-C906-4C0D-A3CF-7AE61B9FEBB2" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p2.jpg" ComponentGuid="D9266047-94B4-49E5-AA67-4801A9AD6BA7" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" ComponentGuid="660B7432-CB63-4A52-A8B5-73B101B0B649" />
+  <File Path="Styles\Scripture\Preview\GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg" ComponentGuid="2ADD2C6F-9D2A-415E-BB82-22DD1D840A4D" />
+  <File Path="Styles\Scripture\Columns_1.css" ComponentGuid="E0F2B99A-619C-4A21-BBB1-B792C7D55DF4" />
+  <File Path="Styles\Scripture\Columns_2.css" ComponentGuid="DE23FE7E-A400-419E-A074-1CCB3E59AF94" />
+  <File Path="Styles\Scripture\epub_FontSize.css" ComponentGuid="7992C745-A7B0-4790-9469-D3638E298C74" />
+  <File Path="Styles\Scripture\epub_Pictures.css" ComponentGuid="8C34F8A6-3BAF-4D48-A1ED-385556B048DE" />
+  <File Path="Styles\Scripture\epub_Scripture.css" ComponentGuid="7893E0DD-8B3B-47BD-B30A-E43CDC03649E" />
+  <File Path="Styles\Scripture\font_size_10_12.css" ComponentGuid="9BB517D4-6C48-4806-92EC-8121788FAA47" />
+  <File Path="Styles\Scripture\font_size_11_13.css" ComponentGuid="E61A25C8-1455-4B06-AEA9-C179696258CD" />
+  <File Path="Styles\Scripture\font_size_12_14.css" ComponentGuid="22E0C1AC-AD87-4FB5-B9D5-8D79DC014DD0" />
+  <File Path="Styles\Scripture\font_size_13_15.css" ComponentGuid="0099CDB5-5AA3-426E-B664-697A757E275E" />
+  <File Path="Styles\Scripture\font_size_14_16.css" ComponentGuid="00DD759B-A1BA-4DF0-AF8A-8ED44C9BB12F" />
+  <File Path="Styles\Scripture\font_size_15_17.css" ComponentGuid="C7E8F4AD-126B-41CE-A824-6BFBE72137A4" />
+  <File Path="Styles\Scripture\font_size_9_11.css" ComponentGuid="29C88795-265C-43F3-B3F6-049450B8B602" />
+  <File Path="Styles\Scripture\font_size_nc.css" ComponentGuid="6756C926-65BE-4FD3-ABB5-F70124BB5779" />
+  <File Path="Styles\Scripture\FrontMatter.css" ComponentGuid="A3071FA7-5247-43F2-B504-DD3D5310B4BA" />
+  <File Path="Styles\Scripture\GPS11J11.css" ComponentGuid="A8201B51-7124-4806-A0C1-3014F6D0419F" />
+  <File Path="Styles\Scripture\GPS11L11.css" ComponentGuid="5BEACBFD-DF9D-419C-9BC8-3BBF4D2C9671" />
+  <File Path="Styles\Scripture\GPS12J10.css" ComponentGuid="A09BBC54-CB2E-4E70-9EFE-72B5DCF2ABCC" />
+  <File Path="Styles\Scripture\GPS12J11.css" ComponentGuid="C8A470D0-5471-409B-B7CF-B5D90F2EFE86" />
+  <File Path="Styles\Scripture\GPS12J9.css" ComponentGuid="AA2E4575-9709-4C15-89A4-76FF05C89442" />
+  <File Path="Styles\Scripture\GPS12L10.css" ComponentGuid="55045703-CC13-4680-80B7-BFF78A65F00B" />
+  <File Path="Styles\Scripture\GPS12L11.css" ComponentGuid="09FC925B-25E7-419D-AC37-DE34AF12F289" />
+  <File Path="Styles\Scripture\GPS12L9.css" ComponentGuid="8093A9FB-D49D-4909-AC40-D59A75CFBF5C" />
+  <File Path="Styles\Scripture\GPS21L11.css" ComponentGuid="D49CF371-BD64-49A0-8944-ADF69E6A8389" />
+  <File Path="Styles\Scripture\GPS22J10.css" ComponentGuid="51635861-0246-48A7-AD56-0C210F5408F3" />
+  <File Path="Styles\Scripture\GPS22J11.css" ComponentGuid="54BC9720-99DB-453C-9E51-D168C722E678" />
+  <File Path="Styles\Scripture\GPS22J9.css" ComponentGuid="388EDFF0-1435-4491-9DFE-8DC4721287C4" />
+  <File Path="Styles\Scripture\GPS22L10.css" ComponentGuid="75994BB9-AAF0-4166-9CAD-163667816A12" />
+  <File Path="Styles\Scripture\GPS22L11.css" ComponentGuid="FF6DFA25-47BD-46D8-9941-9F2D93AD025F" />
+  <File Path="Styles\Scripture\GPS22L9.css" ComponentGuid="51B210C7-69AA-446B-AE3F-34C4FCDAA7FD" />
+  <File Path="Styles\Scripture\Justified_No.css" ComponentGuid="B93841FE-B91C-40B6-8B87-D3D58AC18C9E" />
+  <File Path="Styles\Scripture\Justified_Yes.css" ComponentGuid="D48E8E42-43ED-4BBB-BC9A-EC8959418AC0" />
+  <File Path="Styles\Scripture\Layout_01.css" ComponentGuid="A740C1B9-392E-4DF8-9247-F56C26F845DE" />
+  <File Path="Styles\Scripture\Layout_02.css" ComponentGuid="4E2F2FFF-90F7-487D-A28C-732953888C62" />
+  <File Path="Styles\Scripture\Layout_03.css" ComponentGuid="7E976A61-F27D-46C1-8312-710FFDB0522B" />
+  <File Path="Styles\Scripture\Layout_04.css" ComponentGuid="B7AFAF5C-6D48-4139-AC03-C757FB641B21" />
+  <File Path="Styles\Scripture\Layout_05.css" ComponentGuid="AF2A643D-0F57-48AF-A18C-2035291533CA" />
+  <File Path="Styles\Scripture\Layout_06.css" ComponentGuid="989A0555-8EF7-4ED4-8449-2B54287C5C36" />
+  <File Path="Styles\Scripture\Layout_07.css" ComponentGuid="70ECA52D-C79B-47C2-8433-6D01E3F6EA4E" />
+  <File Path="Styles\Scripture\Layout_08.css" ComponentGuid="25C50D48-52DD-495A-84A0-96B0C1E70E32" />
+  <File Path="Styles\Scripture\Layout_09.css" ComponentGuid="FC120B86-2DE8-4AD9-8E23-E443C363B3AD" />
+  <File Path="Styles\Scripture\Layout_10.css" ComponentGuid="5ABA4BEA-99AB-488E-A8DD-7EFC31A4D85C" />
+  <File Path="Styles\Scripture\Layout_11.css" ComponentGuid="11B47028-FA2D-40E3-97E5-9E20A0781DD1" />
+  <File Path="Styles\Scripture\Layout_12.css" ComponentGuid="E2EF06E3-D026-4C13-8DB3-672F4E1B14E2" />
+  <File Path="Styles\Scripture\Layout_13.css" ComponentGuid="344C5CD5-3A62-49F5-9805-3BE2EABB05ED" />
+  <File Path="Styles\Scripture\Leading_12.css" ComponentGuid="D8CCBB4B-4D26-4009-B5B0-CB49AD4EE89E" />
+  <File Path="Styles\Scripture\Leading_13.css" ComponentGuid="AA17C8E1-5DB1-4531-872E-AC2E1E75A102" />
+  <File Path="Styles\Scripture\Leading_24.css" ComponentGuid="9FA16C14-F654-4EC8-8F5B-D2E9E9E8A993" />
+  <File Path="Styles\Scripture\Leading_26.css" ComponentGuid="D9ED6E62-C470-4BC6-8C1E-4BDD5E0C7CD3" />
+  <File Path="Styles\Scripture\Leading_nc.css" ComponentGuid="02835850-2DFE-44D0-9E4B-50CAD6B6CE24" />
+  <File Path="Styles\Scripture\Page_Size_6inx9in.css" ComponentGuid="28D7CFC3-14B2-4C74-8AE5-AB73792FBF7E" />
+  <File Path="Styles\Scripture\Page_size_A4.css" ComponentGuid="47B5D1F6-48F2-4EF9-8EC2-9F7D525EEEF4" />
+  <File Path="Styles\Scripture\Page_size_A5.css" ComponentGuid="CFBD59A6-FD57-4651-92AE-84E53FA945EB" />
+  <File Path="Styles\Scripture\Page_size_A6.css" ComponentGuid="792BA7AA-5880-4EBE-9DD5-11D345B774B3" />
+  <File Path="Styles\Scripture\Page_size_C5.css" ComponentGuid="B76590CF-CDF1-4A82-BE89-F88843CFB655" />
+  <File Path="Styles\Scripture\Page_Size_GPS1.css" ComponentGuid="143A88A7-2700-49FA-BEEC-BE1B6484F4F8" />
+  <File Path="Styles\Scripture\Page_Size_GPS2.css" ComponentGuid="7B678916-8099-43D4-AF4E-70D7D9123F33" />
+  <File Path="Styles\Scripture\Page_Size_Half_Letter.css" ComponentGuid="7CAA0B92-A81D-4DDE-88F8-AD6CA91F3772" />
+  <File Path="Styles\Scripture\Page_Size_Letter.css" ComponentGuid="508C4496-BBF7-45F8-ACFF-E1CF9A2F6BE2" />
+  <File Path="Styles\Scripture\Pictures_No.css" ComponentGuid="51D25886-7702-44B5-947A-6B2CE4AE0E36" />
+  <File Path="Styles\Scripture\Pictures_Yes.css" ComponentGuid="81631C6B-DAE4-4215-A60E-F9F417EEA727" />
+  <File Path="Styles\Scripture\Rules_No.css" ComponentGuid="199B3DF3-3A60-4BC0-BE50-3222FF5A305D" />
+  <File Path="Styles\Scripture\Rules_Yes.css" ComponentGuid="DE860D85-CEB2-4D28-8423-2846418C92F8" />
+  <File Path="Styles\Scripture\Running_Head_Mirrored_Chapter.css" ComponentGuid="B66C7422-F3EC-4376-B8F6-F66D264976F8" />
+  <File Path="Styles\Scripture\Running_Head_Mirrored_Verse.css" ComponentGuid="AFA345D2-24BC-4470-92B5-A9C837BAA81A" />
+  <File Path="Styles\Scripture\Running_Head_Paged_Chapter.css" ComponentGuid="262C604E-C1D5-4416-8FBA-BA91431CC5E4" />
+  <File Path="Styles\Scripture\Running_Head_Paged_Verse.css" ComponentGuid="BD136DF3-97D2-46C5-BB91-C24FEFA99EF3" />
+  <File Path="Styles\Scripture\Scripture.css" ComponentGuid="017018A9-B459-4C06-924C-53F1DC4D2078" />
+  <File Path="CssParser.dll" ComponentGuid="6F8ED447-F49D-46B1-9113-A4BEFDEC3581" />
+  <File Path="CssParser.pdb" ComponentGuid="50993DB5-E792-4D59-94BD-0B87EB70AC52" />
+  <File Path="LibreOfficeConvert.dll" ComponentGuid="C9A44815-8F75-4E9E-B911-5CACE70FD823" />
+  <File Path="LibreOfficeConvert.pdb" ComponentGuid="C2772F24-0333-45A8-9728-1B96DC7C3FD6" />
+  <File Path="punct_XHTML.xslt" ComponentGuid="829F22F2-2576-404F-8DBC-6BD546F961AD" />
+  <File Path="StyleSettings.xsd" ComponentGuid="EA1D5F39-23EB-4308-8A1E-90433161A112" />
+  <File Path="XeLaTexWriter.dll" ComponentGuid="E0E61B4C-3939-4F0B-815F-E0D3859B39A1" />
+  <File Path="XeLaTexWriter.dll.config" ComponentGuid="58F6630C-438F-4B4F-859C-0163B66D8315" />
+  <File Path="XeLaTexWriter.pdb" ComponentGuid="94866210-6D9D-48A1-8595-6C3D2AB48528" />
+  <File Path="icu.net.dll.config" ComponentGuid="11D12BAB-E3DD-4E56-BA45-C7694B6CDD41" />
+  <File Path="Styles\Dictionary\Reversal_Reference_Numbers.css" ComponentGuid="F0E29C59-9566-41F4-B645-7858D3D9C43A" />
+  <File Path="Styles\Dictionary\PageNumber_BottomCenter_Mirrored.css" ComponentGuid="DCE200F5-0719-4295-9F82-A7DE03EAB341" />
+  <File Path="Preprocessing\Remove Empty Divs.xsl" ComponentGuid="98FB82D7-74B0-4382-8113-CA78AE124312" />
+  <File Path="Preprocessing\Remove Hyperlinks.xsl" ComponentGuid="5F2ADDC6-E6FE-4A99-AEF4-A6F9498DA23F" />
+  <File Path="Preprocessing\Filter Broken Links.xsl" ComponentGuid="15C4093C-2FB1-4EA4-A1A1-DB209F011197" />
+  <File Path="Preprocessing\Filter Empty Entries.xsl" ComponentGuid="A1AC94A3-B5EF-488C-BD29-64F909C67466" />
+  <File Path="GoBible\GoBibleCore\Icon.png" ComponentGuid="6BB5B36B-6EA6-4465-9CCB-D63B40C8CC2D" />
+  <File Path="GoBible\GoBibleCore\MANIFEST.MF" ComponentGuid="B3C8D2A3-17BD-410D-881D-C1BE2CFD7A80" />
+  <File Path="GoBible\Icons\blank_logo.png" ComponentGuid="84E008F2-2FBC-4323-80EB-6C6282CEE16E" />
+  <File Path="GoBible\Icons\book_logo.png" ComponentGuid="5BA31BA8-3CF2-481D-B9D7-42AEB3380F91" />
+  <File Path="GoBible\Icons\Cross_Icon.png" ComponentGuid="744F7A25-2339-40CC-979B-1E4CB61521EB" />
+  <File Path="Preprocessing\Remove Cross References.xsl" ComponentGuid="ABEAFFD5-1335-4AAE-9C35-9A0E8FD94330" />
+  <File Path="addDicTocHeads.xsl" ComponentGuid="41BC3029-0B49-4FD5-9F5B-06789DF7256C" />
+  <File Path="Preprocessing\Dictionary\Filter Broken Links.xsl" ComponentGuid="333A11FE-5AB7-4CAA-BB07-BEE0F772F2F4" />
+  <File Path="Preprocessing\Dictionary\Filter Empty Entries.xsl" ComponentGuid="5D71CCBA-2A1D-49E6-8416-14841102362C" />
+  <File Path="Preprocessing\Dictionary\Fix Duplicate ids.xsl" ComponentGuid="13805501-FB3A-453E-9F5E-277FB4659FB9" />
+  <File Path="Preprocessing\Scripture\Remove Cross References.xsl" ComponentGuid="81C22E71-FF27-47B5-BE7C-773E6E89C2DC" />
+  <File Path="Preprocessing\Dictionary\Remove Leter Dividers.xsl" ComponentGuid="F2EEDB95-4234-4590-B04D-244268F8E4BF" />
+  <File Path="Preprocessing\Dictionary\Remove Leter Dividers2.xsl" ComponentGuid="42748259-07E8-4857-A22B-6D15E8A38B04" />
+  <File Path="Styles\Dictionary\OneWeb.css" ComponentGuid="3174674E-FA11-4D96-936D-3D8D789812C7" />
+  <File Path="MySql.Data.dll" ComponentGuid="DE6E4700-51B5-455B-9B69-9E245E036BAC" />
+  <File Path="MySql.Web.dll" ComponentGuid="72D4AC98-0A74-4F2B-B68C-9F0972ABF879" />
+  <File Path="Lame\images\CVS\Entries" ComponentGuid="6005FBE1-6EB5-43FD-A64E-B340EF1F1123" />
+  <File Path="Lame\images\CVS\Entries.Extra" ComponentGuid="01F714D6-097B-4C4F-880E-1D88844D387A" />
+  <File Path="Lame\images\CVS\Repository" ComponentGuid="13902A6C-C894-45B1-B7F1-90B67D340928" />
+  <File Path="Lame\images\CVS\Root" ComponentGuid="EA01BC90-D163-416E-A281-F9DCBC7C0821" />
+  <File Path="Lame\images\CVS\Tag" ComponentGuid="78AB39EC-2554-49BD-8210-52F379084736" />
+  <File Path="Lame\images\logo.gif" ComponentGuid="8929AA20-F593-4BC7-BE89-6E9C625ECEF4" />
+  <File Path="Lame\images\valid-css.png" ComponentGuid="9161F724-7AB2-4DDD-8FFB-405E13773657" />
+  <File Path="Lame\images\valid-xhtml10.png" ComponentGuid="C66FB954-BAAB-4C9C-8D4F-2706A8473E3E" />
+  <File Path="Lame\styles\CVS\Entries" ComponentGuid="CC716AF6-68B0-478E-86BD-8B437BBFD8E8" />
+  <File Path="Lame\styles\CVS\Entries.Extra" ComponentGuid="E3BC0E43-E8F6-4048-B8B3-3E51A2C6C367" />
+  <File Path="Lame\styles\CVS\Repository" ComponentGuid="F7DF5D19-2563-44C0-A1BB-F14C9F124198" />
+  <File Path="Lame\styles\CVS\Root" ComponentGuid="0FFB163D-DD02-4C27-B13B-6CD0BF6B0079" />
+  <File Path="Lame\styles\CVS\Tag" ComponentGuid="B74043A4-9AB5-41AF-ADA8-EEBAD01F9B67" />
+  <File Path="Lame\styles\lame.css" ComponentGuid="451D9F32-CB36-43E0-BB92-98D12D4F1B5B" />
+  <File Path="Lame\about.html" ComponentGuid="CA9F118A-5EF6-42FE-9AC7-A59B4123DD86" />
+  <File Path="Lame\abr.html" ComponentGuid="313357E6-95B9-4B6A-88E4-0954132BB2AB" />
+  <File Path="Lame\basic.html" ComponentGuid="9065BDEE-897D-4897-BA55-48548ED0AFEB" />
+  <File Path="Lame\cbr.html" ComponentGuid="D9DBDC41-FA64-4940-A052-B6092108D418" />
+  <File Path="Lame\contact.html" ComponentGuid="B35FCA7B-8921-4675-9692-6E26E3606F80" />
+  <File Path="Lame\contributors.html" ComponentGuid="7A626782-DD52-4580-8249-05DDF723BA7B" />
+  <File Path="Lame\detailed.html" ComponentGuid="2A8CD039-17D6-47E9-9B99-D8F69F6480C5" />
+  <File Path="Lame\history.html" ComponentGuid="FDDFEB0C-0027-4B9B-933A-0360420952BD" />
+  <File Path="Lame\index.html" ComponentGuid="CFD7BBA0-A884-4699-AC00-CA8D92F366D3" />
+  <File Path="Lame\introduction.html" ComponentGuid="BC4949BF-813E-4C57-AD59-EBE0402F554A" />
+  <File Path="Lame\Lame source.url" ComponentGuid="6619A16C-4755-4C5F-A2FE-07E50231A6B8" />
+  <File Path="Lame\lame.exe" ComponentGuid="6DAC211B-0C83-44FA-9412-C2A043B5C082" />
+  <File Path="Lame\lame_enc.dll" ComponentGuid="9FF1D435-FA8B-4063-8678-DD0E0EA7EEAA" />
+  <File Path="Lame\links.html" ComponentGuid="F780DA77-170C-4FB4-AC19-BE40DA3ACC61" />
+  <File Path="Lame\list.html" ComponentGuid="1C1EC55E-9FD4-4603-AA26-4C8193F0095F" />
+  <File Path="Lame\ms_stereo.html" ComponentGuid="3B3C1496-97CB-40FC-BF8C-A809DDCE5E62" />
+  <File Path="Lame\usage.html" ComponentGuid="07A6D393-6B1A-4DD0-AE57-CF89607F7D01" />
+  <File Path="Lame\vbr.html" ComponentGuid="D20AD2CF-D733-423A-971D-108FEDE0CF01" />
+  <File Path="OfficeFiles\Dictionary\manifest.rdf" ComponentGuid="F12848DF-D06D-4A97-8A32-6603712A22FC" />
+  <File Path="OfficeFiles\Scripture\manifest.rdf" ComponentGuid="33FA85FE-1A3A-4B31-B5B6-AB9A7B8AB7E9" />
+  <File Path="HelpImprove.exe" ComponentGuid="249D0407-CC85-4130-AACF-4F7EB009DB15" />
+  <File Path="HelpImprove.exe.config" ComponentGuid="8B5BC8D2-792E-4F39-B4A1-E1BC06E03A07" />
+  <File Path="HelpImprove.pdb" ComponentGuid="BF61CBD4-326A-4D6E-A7DE-E561CD97546C" />
+  <File Path="Preprocessing\Dictionary\Remove Letter Dividers.xsl" ComponentGuid="95ED446E-393E-42FD-ACF1-643E6143887E" />
+  <File Path="Preprocessing\Dictionary\Remove Letter Dividers2.xsl" ComponentGuid="07C2384D-0EE1-41FA-9CDC-B84F537DCBDA" />
+  <File Path="CadreBibleConvert.dll" ComponentGuid="394DCD00-9F2B-49DA-80A5-C15E68A2687B" />
+  <File Path="CadreBibleConvert.dll.config" ComponentGuid="CF678233-3ECA-47FC-BA87-58F3D3E08DDE" />
+  <File Path="CadreBibleConvert.pdb" ComponentGuid="F0D881D3-553B-4331-A23D-9326CB0C1F26" />
+  <File Path="Styles\Scripture\Page_size_6inx9in.css" ComponentGuid="0F629B31-B4CD-419F-9F0E-3E92263CB662" />
+  <File Path="Styles\Scripture\Page_size_GPS1.css" ComponentGuid="71EFF133-2C33-4D85-B48E-B59612E0C27D" />
+  <File Path="Styles\Scripture\Page_size_GPS2.css" ComponentGuid="0ECA7B84-01F3-42DF-A3E2-5260733D219C" />
+  <File Path="Styles\Scripture\Page_size_Half_Letter.css" ComponentGuid="C3718F89-5452-4280-BAF8-D911FBC18C9D" />
+  <File Path="Styles\Scripture\Page_size_Letter.css" ComponentGuid="1A1AAD79-2DC9-42D9-94B6-2AF578D2367F" />
+  <File Path="GoBible\User Interface\3_UIs\English_UI.txt" ComponentGuid="CAA2079D-6D87-44BB-9215-506406592783" />
+  <File Path="GoBible\User Interface\3_UIs\Kazakh_UI.txt" ComponentGuid="7747463D-F819-4D43-AA07-8DBBE69BB40C" />
+  <File Path="GoBible\User Interface\3_UIs\Russian_UI.txt" ComponentGuid="EEC6D218-D228-4109-A69C-54F10D6457D1" />
+  <File Path="GoBible\User Interface\Afrikaans\Afrikaans_UI.txt" ComponentGuid="8FABD273-0B3B-467D-8F8D-6570D023F903" />
+  <File Path="GoBible\User Interface\Amharic\UI.Amharic.txt" ComponentGuid="0AEE6452-86FE-4036-935D-1DC404C8AD7D" />
+  <File Path="GoBible\User Interface\Arabic\arabic.ui.properties.txt" ComponentGuid="87F84ACD-89F8-47E1-A8E6-D8BC44C87B2F" />
+  <File Path="GoBible\User Interface\Arabic\arabic.ui.properties.zip" ComponentGuid="FEAF28E8-5BA8-4787-BAE2-54806F3BA121" />
+  <File Path="GoBible\User Interface\Catalan\Catalan.UI.properties.txt" ComponentGuid="5B028F5B-9D1A-4945-A0D7-9677FB903292" />
+  <File Path="GoBible\User Interface\Chinese\Chinese Simplified\Simplified Chinese UI.txt" ComponentGuid="FF0DE0D5-922A-47A8-A861-DE0C6BD86549" />
+  <File Path="GoBible\User Interface\Chinese\Chinese Simplified\Simplified Chinese UI.zip" ComponentGuid="14B91780-D754-4D45-8441-62E3F58033FB" />
+  <File Path="GoBible\User Interface\Chinese\Chinese Simplified\ui.properties" ComponentGuid="6ACDAA5E-8D66-4000-BCB3-D99BD680BC1C" />
+  <File Path="GoBible\User Interface\Chinese\Chinese Traditional\Traditional Chinese UI.txt" ComponentGuid="8B92062A-B1B9-4199-BC38-20625B527BC3" />
+  <File Path="GoBible\User Interface\Chinese\Chinese Traditional\Traditional Chinese user interface.txt" ComponentGuid="4FA4B8B8-60C5-4618-ABA5-478D392D37A2" />
+  <File Path="GoBible\User Interface\Chinese\Chinese Traditional\Traditional Chinese user interface.zip" ComponentGuid="415186AF-0AFB-4C6A-B872-3C63A25AD7AD" />
+  <File Path="GoBible\User Interface\Chinese\Chinese Traditional\ui.properties" ComponentGuid="CFE3E6BC-4341-47B0-9876-74BACBBEE480" />
+  <File Path="GoBible\User Interface\Crimean Tatar\ui.properties" ComponentGuid="3BE8F073-7109-4EF6-B8CC-AA28C0E3203A" />
+  <File Path="GoBible\User Interface\Czech\cz.ui.properties" ComponentGuid="D8FA5FA9-3E9B-4E62-B311-65FAC076E441" />
+  <File Path="GoBible\User Interface\Dutch\ui.properties" ComponentGuid="E760BE3C-4B44-4E40-A0A1-5BB058ACBFE7" />
+  <File Path="GoBible\User Interface\Faroese\UI.defaul_FO translation.utf8.txt" ComponentGuid="FA1D09E2-FE7A-4A74-B5A7-742C3C102264" />
+  <File Path="GoBible\User Interface\Farsi\Farsi translation of user interface.txt" ComponentGuid="BCE1FED1-A650-424C-8EC4-4A60A2EB2F27" />
+  <File Path="GoBible\User Interface\Farsi\Farsi translation of user interface.zip" ComponentGuid="9500181E-0581-47D3-BB8C-83E630A5A6AF" />
+  <File Path="GoBible\User Interface\French\ui.properties" ComponentGuid="6726B34E-8D4F-4967-BE6B-A90FD92A64A8" />
+  <File Path="GoBible\User Interface\Georgian (Cyrillic)\ui.properties" ComponentGuid="52E6952F-CBAD-4053-A07D-07012114A3B4" />
+  <File Path="GoBible\User Interface\German\ui.properties" ComponentGuid="0C3F0E89-83C8-48E7-81CA-689A98B2BC31" />
+  <File Path="GoBible\User Interface\Hungarian\HungarianUI.txt" ComponentGuid="28600E5A-43BE-4AEB-9147-B7E66954A08C" />
+  <File Path="GoBible\User Interface\Hungarian\HungarianUI.zip" ComponentGuid="CAB8B67D-5019-483F-B0FF-A3BC5E7B5564" />
+  <File Path="GoBible\User Interface\Hungarian\readme.txt" ComponentGuid="405EEC23-7C4B-44DD-B837-439402121B05" />
+  <File Path="GoBible\User Interface\Hungarian\ui.properties" ComponentGuid="7D8CDEF5-3D8E-4ECA-97C8-5A95A7E33C50" />
+  <File Path="GoBible\User Interface\Indonesian\indonesian.ui.properties.txt" ComponentGuid="CCE982FE-3111-4BFC-89AB-85500EC8E751" />
+  <File Path="GoBible\User Interface\Indonesian\indonesian.ui.properties.zip" ComponentGuid="4D72B99B-87EE-4D2F-B548-1DF0F68EF771" />
+  <File Path="GoBible\User Interface\Indonesian\ui.properties" ComponentGuid="1B2F9F3A-CCD7-4EC7-A22F-3DE3CB2A8083" />
+  <File Path="GoBible\User Interface\Irish\GoBible Irish program localisation texts3.xls" ComponentGuid="1C4B96DB-4B5D-479A-AF2D-9C5A5ECD47DD" />
+  <File Path="GoBible\User Interface\Irish\Irish_UI.properties.txt" ComponentGuid="4BF5795E-8137-4710-AE95-7704DDC52317" />
+  <File Path="GoBible\User Interface\Italian\ui.properties" ComponentGuid="FA8A8584-B2FC-4983-8640-DBD658DE7966" />
+  <File Path="GoBible\User Interface\Japanese\ui.properties" ComponentGuid="2D5DFDC4-CFBC-47F7-8D95-1F6654848064" />
+  <File Path="GoBible\User Interface\Karakalpak\ui.properties" ComponentGuid="8A059D50-1A81-4920-92E6-794FD39E77C3" />
+  <File Path="GoBible\User Interface\Kazakh\Kazakh_UI.txt" ComponentGuid="6C98F6A7-166D-41A3-B308-47CF0C00DFCD" />
+  <File Path="GoBible\User Interface\Kazakh\Kazakh_UI_revised.txt" ComponentGuid="08B2CB2D-F385-4B21-873B-0476675C7E84" />
+  <File Path="GoBible\User Interface\Kazakh\Qazaq_UI_revised.zip" ComponentGuid="913EC9A3-6709-45E2-8B11-0817F049A2D9" />
+  <File Path="GoBible\User Interface\Khakas\ui.properties" ComponentGuid="9CE88E2C-8389-4484-A9CA-1E3D00DE8612" />
+  <File Path="GoBible\User Interface\Khmer\Khmer_UI_Sorted.txt" ComponentGuid="3F929F3F-D478-446F-B032-B990CD1B5FFA" />
+  <File Path="GoBible\User Interface\Khmer\Khmer_UI_Unsorted.txt" ComponentGuid="09F735AB-A882-49E3-A9D5-0FC6BA254D5E" />
+  <File Path="GoBible\User Interface\Khmer\Khmer_UI_Unsorted.zip" ComponentGuid="FEEC6841-58E0-4017-B810-BAB35C0AF99B" />
+  <File Path="GoBible\User Interface\Korean\ui.properties" ComponentGuid="62CC3B62-4C87-4E87-B076-59282000A290" />
+  <File Path="GoBible\User Interface\Kumyk\ui.properties" ComponentGuid="9A90A8B6-BBD0-482C-A716-02A755A5A487" />
+  <File Path="GoBible\User Interface\Kyrgyz\Arabic\ui.properties" ComponentGuid="6E7DD9B0-DA55-4301-9B3D-FA83092427F6" />
+  <File Path="GoBible\User Interface\Kyrgyz\Cyrillic\ui.properties" ComponentGuid="A011F189-CE91-41F3-A954-75DA01214E16" />
+  <File Path="GoBible\User Interface\Kyrgyz\Kyrgyz UI.xls" ComponentGuid="135CEC58-09B2-40A5-BD35-C6B8B6718D37" />
+  <File Path="GoBible\User Interface\Kyrgyz\kyrgyz_translation.doc" ComponentGuid="CBF4DB45-D7FF-4B7C-8643-72CD615DBE5B" />
+  <File Path="GoBible\User Interface\Kyrgyz\Kyrgyz_UI.txt" ComponentGuid="71F30E17-E7A5-4FB8-8F0B-FFDB120381FF" />
+  <File Path="GoBible\User Interface\Kyrgyz\Kyrgyz_UI.zip" ComponentGuid="5FBE5E19-F0EA-4355-8BD5-60814438C443" />
+  <File Path="GoBible\User Interface\Kyrgyz\UI-English.doc" ComponentGuid="3346A697-D311-4F3C-AA6B-26DA11D0DF35" />
+  <File Path="GoBible\User Interface\Kyrgyz\UI-Kyrgyz.doc" ComponentGuid="9D37E080-3441-47BC-97C6-A101CC06B19A" />
+  <File Path="GoBible\User Interface\Kyrgyz\UI-Kyrgyz.zip" ComponentGuid="74CFC7D2-1DB0-4CA2-96D4-1E08FDAAEB6E" />
+  <File Path="GoBible\User Interface\Kyrgyz\UI-trans-Jany.doc" ComponentGuid="E93D44DB-A884-4FB7-A10A-9166A73504F2" />
+  <File Path="GoBible\User Interface\Lithuanian\Lithuanian_UI_unsorted_wrong_syntax.txt" ComponentGuid="9B06C2C7-34D3-4FFF-89E6-74CF47AA2A6A" />
+  <File Path="GoBible\User Interface\Malay\ui.properties" ComponentGuid="373A85E6-9972-4F3E-9C29-89B6AEC392D6" />
+  <File Path="GoBible\User Interface\Mizo\Mizo_UI.txt" ComponentGuid="B5C25223-8513-41F3-A9EC-3019E763B381" />
+  <File Path="GoBible\User Interface\Mizo\ui.properties" ComponentGuid="D4641DB7-BEA5-4798-A124-721C344FB2F0" />
+  <File Path="GoBible\User Interface\Nepali\nepali.ui.properties.txt" ComponentGuid="9499112E-4E4A-4E60-A8B0-DDB8140E8C22" />
+  <File Path="GoBible\User Interface\Nepali\ui.properties" ComponentGuid="7BA6C03E-A85F-4DAA-B7C3-2CEBF4CE0C66" />
+  <File Path="GoBible\User Interface\Norwegian\Norwegian_UI.txt" ComponentGuid="D3F15FA9-FB51-46A7-9B36-3AA587ADC0D1" />
+  <File Path="GoBible\User Interface\Norwegian\Nynorsk_UI.txt" ComponentGuid="BFD6925B-4082-454F-A23D-1290600CC692" />
+  <File Path="GoBible\User Interface\Polish\polish_ui.properties" ComponentGuid="5BBE98F3-C504-4239-A22C-1065ED422DE3" />
+  <File Path="GoBible\User Interface\Portuguese\Go Bible - Portuguese.zip" ComponentGuid="CD95DAAC-8734-43F6-B93F-EDA94F4DCB4E" />
+  <File Path="GoBible\User Interface\Portuguese\ui.properties" ComponentGuid="C2067707-F5D2-411E-9E1D-3775D17CC9A9" />
+  <File Path="GoBible\User Interface\Portuguese\ui.properties.old" ComponentGuid="8169EF5E-D63D-4454-B37A-E340F5F8F61C" />
+  <File Path="GoBible\User Interface\Portuguese (Brasilian)\ui.properties" ComponentGuid="B699B00B-CB00-4543-ACD8-A34B066FCA9F" />
+  <File Path="GoBible\User Interface\Romanian\ui.new.properties" ComponentGuid="75EC3DBA-3C83-4A43-85E2-05313E430AA8" />
+  <File Path="GoBible\User Interface\Romanian\ui.properties" ComponentGuid="80F9CF7B-57CB-430A-9008-BB4DDAF74D4B" />
+  <File Path="GoBible\User Interface\Russian\IBT\ui.properties" ComponentGuid="FE5B9FED-099E-42E1-8979-CC06A9095BBB" />
+  <File Path="GoBible\User Interface\Russian\Zip\Russian_UI.zip" ComponentGuid="40A981E1-D589-441E-A9DE-622EA0F4E962" />
+  <File Path="GoBible\User Interface\Russian\Zip\Russian_UIs_WinMerge_Report.zip" ComponentGuid="5623F9BE-0790-4ADC-B8E9-837FCDC30FE2" />
+  <File Path="GoBible\User Interface\Russian\Zip\Russian_UI_corrected.zip" ComponentGuid="15DFF733-618C-4CA0-A678-FF5268CBFF37" />
+  <File Path="GoBible\User Interface\Russian\Zip\Russian_UI_revised.zip" ComponentGuid="41F3C19F-7A70-44DA-8C79-B8512DDF8A8B" />
+  <File Path="GoBible\User Interface\Russian\Russian_UIs_WinMerge_Report.htm" ComponentGuid="FDE072DD-2038-4415-8B9D-83930E53A3CF" />
+  <File Path="GoBible\User Interface\Russian\Russian_UI_corrected.revised.txt" ComponentGuid="CB9EC059-98A7-4575-8233-2F946B538ACE" />
+  <File Path="GoBible\User Interface\Russian\Russian_UI_corrected.txt" ComponentGuid="308FF7C7-86A4-4425-BE04-B23B1DB05F8B" />
+  <File Path="GoBible\User Interface\Russian\Russian_UI_revised.txt" ComponentGuid="C7D89630-2D58-4D22-B15F-F479C141AEF1" />
+  <File Path="GoBible\User Interface\Russian\Russian_UI_Sergey_Sarbash.txt" ComponentGuid="16014911-290D-4C63-90C0-7FEBC3BFC927" />
+  <File Path="GoBible\User Interface\Russian\ui.properties" ComponentGuid="E775517C-328B-461A-A2AB-A254E7FEF7F8" />
+  <File Path="GoBible\User Interface\Serbian\sebian-UI-both-cyr_and_lat.zip" ComponentGuid="E0DB93D7-14AD-4EAC-A979-A14A93C32FEE" />
+  <File Path="GoBible\User Interface\Serbian\UI-serbian-cyrilic.txt" ComponentGuid="6DF38CAF-613D-45C7-ADD2-9EF489085453" />
+  <File Path="GoBible\User Interface\Serbian\UI-serbian-latin.txt" ComponentGuid="A68942F6-3287-4E5E-8442-63214A3C20E1" />
+  <File Path="GoBible\User Interface\Slovak\Slovak.zip" ComponentGuid="A03CAEF6-D562-48BB-BA8D-4D2D6A25080D" />
+  <File Path="GoBible\User Interface\Slovak\sv.ui.properties" ComponentGuid="4708126C-3B0F-4657-B44A-CF8A9AFB5B6F" />
+  <File Path="GoBible\User Interface\Slovak\ui.properties" ComponentGuid="7214C53C-9B06-48CA-A377-4215F64F97AE" />
+  <File Path="GoBible\User Interface\Slovenian\SlovenianUI.properties" ComponentGuid="FD7EF683-1F0A-4B49-99ED-59361F4A8918" />
+  <File Path="GoBible\User Interface\Spanish\ui.properties" ComponentGuid="7B990680-14C4-4E4B-8BFA-C546D053981B" />
+  <File Path="GoBible\User Interface\Swahili\Swahili.ui.properties" ComponentGuid="F72815D5-8215-48A5-88BB-8D2994A4947A" />
+  <File Path="GoBible\User Interface\Swahili\Swahili.ui.zip" ComponentGuid="B9D989D3-01AD-41C4-96DE-32889FBE25E4" />
+  <File Path="GoBible\User Interface\Swahili\UI.default.txt" ComponentGuid="6F0B910E-3EED-4922-A97A-983D43E29EE3" />
+  <File Path="GoBible\User Interface\Swahili\UI.default.txt.zip" ComponentGuid="F35592F7-46FC-446C-A88B-23AF1B6E4F34" />
+  <File Path="GoBible\User Interface\Swedish\Swedish_UI_translation.txt" ComponentGuid="82CB9DDF-E5AB-4AD0-B955-EC772B194CEE" />
+  <File Path="GoBible\User Interface\Swedish\Swedish_UI_translations.zip" ComponentGuid="4858367B-BB65-4DB4-AFAD-A6D1826DC4A4" />
+  <File Path="GoBible\User Interface\Swedish\Swedish_UI_translation_Markus.txt" ComponentGuid="6542838F-61E2-4A2A-A551-2B894E51AA1F" />
+  <File Path="GoBible\User Interface\Tajik\ui v0·21r.properties.txt" ComponentGuid="D719B723-83E3-4051-B212-2ECA88BD1CA5" />
+  <File Path="GoBible\User Interface\Tatar\Cyrillic\ui.properties" ComponentGuid="AC6A57CE-A712-4909-99F6-D741F6934A29" />
+  <File Path="GoBible\User Interface\Tatar\Latin\ui.properties" ComponentGuid="C6C41081-EFF6-46D2-BF6E-31590ADE894C" />
+  <File Path="GoBible\User Interface\Thai\GO Bible UI Thai version Edited FINAL.txt" ComponentGuid="0E0AE1D6-D792-4D56-948E-CDD65047D833" />
+  <File Path="GoBible\User Interface\Turkish\Turkish_ui.properties.txt" ComponentGuid="CC85B735-90EC-4FE5-92E4-F10A52870E96" />
+  <File Path="GoBible\User Interface\Turkish\ui.turkish.utf8.txt" ComponentGuid="2086F4B1-1FFC-4902-B6D7-7766DD4721BB" />
+  <File Path="GoBible\User Interface\Turkish\ui.turkish.utf8.zip" ComponentGuid="666E5AC6-0794-4874-B40F-82D9A56A7489" />
+  <File Path="GoBible\User Interface\Turkmen\Cyrillic\ui.properties" ComponentGuid="5F4E1B2E-8C0C-4811-B2E2-DF31777ECA52" />
+  <File Path="GoBible\User Interface\Turkmen\Latin\ui.properties" ComponentGuid="E45AC41E-14A1-4D1A-B1ED-897B3A496B1F" />
+  <File Path="GoBible\User Interface\Ukrainian\UkrainianUI.txt" ComponentGuid="EC5DF38E-5C7F-4CC9-81DF-A6B824EB0A69" />
+  <File Path="GoBible\User Interface\Uzbek\Cyrillic\ui.properties" ComponentGuid="97B41DB7-F4F0-4D6D-B021-855DA919B08B" />
+  <File Path="GoBible\User Interface\Uzbek\Latin\ui.properties" ComponentGuid="134F31A8-7080-46B7-BADD-35989C0B5EA1" />
+  <File Path="GoBible\User Interface\Welsh\Superseded\UI.default.Cym.txt" ComponentGuid="B59E6AC3-ACDD-4EE6-B070-187D3ABA9CDB" />
+  <File Path="GoBible\User Interface\Welsh\Superseded\UI.default.Cym.zip" ComponentGuid="F6AD1393-B9D2-455F-814B-EEE94DEF0519" />
+  <File Path="GoBible\User Interface\Welsh\UI.default1.Cym.txt" ComponentGuid="084D9B14-847F-4C5D-B765-6AFE28472ECE" />
+  <File Path="GoBible\User Interface\Welsh\UI.default11.Cym.txt" ComponentGuid="52EBCD8F-0B76-4063-A0F6-37A042503166" />
+  <File Path="GoBible\User Interface\Welsh\Welsh UI from Arfon Jones.xlsx" ComponentGuid="E43EEBA1-6801-4604-85C4-E996D90824B2" />
+  <File Path="GoBible\User Interface\3_UIs.zip" ComponentGuid="81ED70BF-B02F-4438-A834-090DD8FD9F01" />
+  <File Path="GoBible\User Interface\Chinese_UIs.zip" ComponentGuid="3A262819-BFE6-45D3-A390-F3826D6E70D5" />
+  <File Path="GoBible\User Interface\Required_UI.txt" ComponentGuid="1D7DC7E6-50D6-41BB-8C2B-692B18F3AB2F" />
+  <File Path="GoBible\User Interface\UI.default.txt" ComponentGuid="433A9935-7BDC-47D2-9E04-56BBB5A13EEC" />
+  <File Path="GoBible\User Interface\UI.default.zip" ComponentGuid="8307AF80-65FB-4F74-A018-850CF88DCFEB" />
+  <File Path="GoBible\User Interface\ui.properties.utf8.zip" ComponentGuid="5728DA7A-CFC2-4D0C-B011-8BE5C91E5916" />
+  <File Path="GoBible\User Interface\UserInterface.xls" ComponentGuid="7EE2C8B6-4242-4836-B42D-8CEA5690CAB6" />
+  <File Path="GoBible\User Interface\UserInterface.zip" ComponentGuid="D8B39CD2-6A44-48BB-8254-7558F3AAA1A9" />
+  <File Path="GoBible\User Interface\Tajik\ui.properties.txt" ComponentGuid="7AEEAF5C-88ED-4889-BE9C-48B9471F4872" />
+  <File Path="Copyrights\WBT_CC-by-nc-nd.xhtml" ComponentGuid="A9D8180F-87B8-4FBD-9A0A-BA2B5518E9A6" />
+  <File Path="Copyrights\WBT_CC-by-nc-sa.xhtml" ComponentGuid="67CA825F-A021-4A9C-A760-039D021CB41F" />
+  <File Path="Copyrights\WBT_Draft.xhtml" ComponentGuid="D61E4C19-4FD2-4E81-A5C7-F693216DD39C" />
+  <File Path="Copyrights\WBT_Selling.xhtml" ComponentGuid="E5E622F7-A284-4A39-B55B-165EA299776D" />
+  <File Path="Preprocessing\Scripture\Remove Empty Verses.xsl" ComponentGuid="7E99D9AA-4C51-4B3B-BED0-A32810C46C66" />
+  <File Path="GoBible\Localizations\Languages.xml" ComponentGuid="D4CB0057-9514-433F-86F9-535B23C5667E" />
+  <File Path="GoBible\Reference\collections_example.txt" ComponentGuid="B8796241-4002-46D3-8C37-7AEEC1835148" />
+  <File Path="GoBible\Reference\GBC_2.4_Readme.txt" ComponentGuid="266C2486-9B59-4297-A31D-D28671B22149" />
+  <File Path="GoBible\Reference\README.TXT" ComponentGuid="BB9AFB49-82CE-438D-8D3C-D7051442E727" />
+  <File Path="GoBible\User Interface\Afrikaans\ui.properties" ComponentGuid="A71965CB-04CC-45ED-B582-A845C6F9ABAB" />
+  <File Path="GoBible\User Interface\Amharic\ui.properties" ComponentGuid="B69B9A78-87F3-45C4-878C-6162D3E2D364" />
+  <File Path="GoBible\User Interface\Arabic\ui.properties" ComponentGuid="E64AD994-5997-4F0C-8478-3F5D8B8D898A" />
+  <File Path="GoBible\User Interface\Catalan\ui.properties" ComponentGuid="E308F764-7354-4539-AD3B-9D3864AEF49F" />
+  <File Path="GoBible\User Interface\Chinese\ui.properties" ComponentGuid="A2589327-678B-4BEE-9DFA-298A1A1DC49E" />
+  <File Path="GoBible\User Interface\Czech\ui.properties" ComponentGuid="9F5815A9-A62B-49DB-BD0E-F99F86666D04" />
+  <File Path="GoBible\User Interface\English\ui.properties" ComponentGuid="78DCCA7A-9BD6-4C19-9A93-069F173AC2AD" />
+  <File Path="GoBible\User Interface\Faroese\ui.properties" ComponentGuid="3764D7C1-2C62-4545-8353-B1889ED402B2" />
+  <File Path="GoBible\User Interface\Farsi\ui.properties" ComponentGuid="12EC66DD-AA59-4B9F-BAFF-EFB8C3D50CB0" />
+  <File Path="GoBible\User Interface\Irish\ui.properties" ComponentGuid="304F77F5-7464-452E-B69D-522006FBA5F2" />
+  <File Path="GoBible\User Interface\Kazakh\ui.properties" ComponentGuid="D9118DB5-F322-4561-ACD6-19E4CB6FE11C" />
+  <File Path="GoBible\User Interface\Khmer\ui.properties" ComponentGuid="20B9492C-B8B7-464F-94E9-221BF2A1B612" />
+  <File Path="GoBible\User Interface\Kyrgyz\ui.properties" ComponentGuid="B99AAD7D-1337-4318-B4D5-34F4A0079C4F" />
+  <File Path="GoBible\User Interface\Lithuanian\ui.properties" ComponentGuid="0021102A-850F-4441-8DA8-DD992B0AD37B" />
+  <File Path="GoBible\User Interface\Norwegian\ui.properties" ComponentGuid="DC2C1274-5B8B-41EF-9996-8E2EF1DFC153" />
+  <File Path="GoBible\User Interface\Polish\ui.properties" ComponentGuid="C3A5ADC3-FB4C-41A2-805A-E20CA43566B4" />
+  <File Path="GoBible\User Interface\Serbian\ui.properties" ComponentGuid="7D2B8445-007E-401F-AFD3-76E9F6270C09" />
+  <File Path="GoBible\User Interface\Slovenian\ui.properties" ComponentGuid="BDC8D763-0070-4DE7-8433-7AC4C5076088" />
+  <File Path="GoBible\User Interface\Swahili\ui.properties" ComponentGuid="6DFE7E05-32A8-4AC5-95D9-EA21ECC8A9FC" />
+  <File Path="GoBible\User Interface\Swedish\ui.properties" ComponentGuid="C54590FB-2DA3-4FDD-9601-901B40C07B19" />
+  <File Path="GoBible\User Interface\Tajik\ui.properties" ComponentGuid="096E17D7-D0FA-4388-8677-D840B3AC3286" />
+  <File Path="GoBible\User Interface\Tatar\ui.properties" ComponentGuid="5F647E03-815F-4738-86C6-E4FA37312E6A" />
+  <File Path="GoBible\User Interface\Thai\ui.properties" ComponentGuid="BD5E07CD-8413-47C6-9DC1-A239FDBC022C" />
+  <File Path="GoBible\User Interface\Turkish\ui.properties" ComponentGuid="91EC8D8D-FB24-4786-A6DB-5C6168FD26C1" />
+  <File Path="GoBible\User Interface\Turkmen\ui.properties" ComponentGuid="C77325F7-CDB7-4629-98CF-9CB73542D8A5" />
+  <File Path="GoBible\User Interface\Ukrainian\ui.properties" ComponentGuid="22EE5A81-1669-444E-BC03-B8E43C015A94" />
+  <File Path="GoBible\User Interface\Uzbek\ui.properties" ComponentGuid="76C55566-BCDE-4E22-B605-432932EE30AB" />
+  <File Path="GoBible\User Interface\Welsh\ui.properties" ComponentGuid="EF67F239-4111-420F-B275-0661A3290B6C" />
+  <File Path="Preprocessing\Dictionary\FixLinksBeginWithSpace.xsl" ComponentGuid="2548F529-48C5-4A7A-BFDC-5E5BBAFCAF95" />
+  <File Path="Styles\Dictionary\Preview\PreviewMessage.jpg" ComponentGuid="CD631F6C-175A-4915-8A83-4877E31EF5F4" />
+  <File Path="Styles\Scripture\Preview\PreviewMessage.jpg" ComponentGuid="54BC92BC-EE86-4100-8893-CB5F384ABF4E" />
+  <File Path="Pathway_Student_Manual_BTE.pdf" ComponentGuid="972F6BC0-02FE-4EC7-9355-3B52B6244CDC" />
+  <File Path="Pathway_Student_Manual_SE.pdf" ComponentGuid="247F58B8-4713-4E87-9196-261CF45BD7C3" />
+  <File Path="Copyrights\Custom_Template.xhtml" ComponentGuid="A1BC5305-8811-4594-8A40-A0BEDA85C971" />
+  <File Path="Copyrights\sil-bw-logo.jpg" ComponentGuid="1E0578B7-7317-4D21-8DB0-5F8A0FF114D2" />
+  <File Path="Copyrights\sil-bw-logoBig.jpg" ComponentGuid="0A9BEE75-EDC7-4E30-8160-D0341C3C7BBE" />
+  <File Path="Copyrights\SIL_Custom_Template.xhtml" ComponentGuid="795E1EE5-FE07-4DE2-A2C9-D07A985F03CC" />
+  <File Path="Copyrights\SIL_License.xml" ComponentGuid="AEE0C8F0-0FEB-4F64-8E86-4B942B1129F8" />
+  <File Path="Copyrights\WBT_Custom_Template.xhtml" ComponentGuid="F9D82958-25F0-43BC-9BBA-E1D6AD2F0EA8" />
+  <File Path="Dic4Mid\DfM-Creator\Empty_Jar-Jad\DictionaryForMIDs.jad" ComponentGuid="E7636624-D0DA-4E1F-867B-B217BEF09312" />
+  <File Path="Dic4Mid\DfM-Creator\Empty_Jar-Jad\DictionaryForMIDs.jar" ComponentGuid="6F014F08-D007-4750-9F89-79D02B5CFD98" />
+  <File Path="Dic4Mid\DfM-Creator\DfM copyright notice.txt" ComponentGuid="DB94BA4D-C3C9-4F16-9BF8-355521A30F3E" />
+  <File Path="Dic4Mid\DfM-Creator\DfM-Creator.jar" ComponentGuid="1835AD6D-CD15-45DA-AA59-AC87E36CF42C" />
+  <File Path="Dic4Mid\DfM-Creator\go.bat" ComponentGuid="157CD0ED-FBC0-4352-A35A-6B68C2EC587A" />
+  <File Path="Dic4Mid\DictionaryForMIDs.properties" ComponentGuid="5A5395F7-6C05-42B0-A91B-42EC830AA729" />
+  <File Path="epubcheck-3.0.1\lib\commons-compress-1.4.1.jar" ComponentGuid="C0C797AE-7657-4B70-B570-A37FF537C5B4" />
+  <File Path="epubcheck-3.0.1\lib\guava-13.0.1.jar" ComponentGuid="379FC408-B77A-4CA1-B40D-1166C9DAF753" />
+  <File Path="epubcheck-3.0.1\lib\jing-20120724.0.0.jar" ComponentGuid="09A9F4C1-880B-4100-A4BB-DE99825EF84A" />
+  <File Path="epubcheck-3.0.1\lib\sac-1.3.jar" ComponentGuid="61B66D77-0AB6-49E7-9C94-20AEA830F97A" />
+  <File Path="epubcheck-3.0.1\lib\Saxon-HE-9.4.0.6.jar" ComponentGuid="9EE981AA-B790-4A8A-B10B-7E75A003B4C7" />
+  <File Path="epubcheck-3.0.1\licenses\Apache-2.0.txt" ComponentGuid="30B43F47-F3A4-4F45-8942-E62B03336DA7" />
+  <File Path="epubcheck-3.0.1\licenses\BSD-3-Clause.txt" ComponentGuid="B077F405-F88C-4CE6-B763-2E38BEE9C75E" />
+  <File Path="epubcheck-3.0.1\licenses\MPL-1.0.txt" ComponentGuid="64F352DE-B07F-4698-BD26-64E42E00C127" />
+  <File Path="epubcheck-3.0.1\licenses\W3C.txt" ComponentGuid="CDADDA27-AEC1-48EF-AB20-BA21A094048A" />
+  <File Path="epubcheck-3.0.1\COPYING.txt" ComponentGuid="0C7705D3-1BDF-4F49-9D4C-8A39A4E68D86" />
+  <File Path="epubcheck-3.0.1\epubcheck-3.0.1.jar" ComponentGuid="2D18D784-872E-4915-AC66-28F547E45C12" />
+  <File Path="epubcheck-3.0.1\README.txt" ComponentGuid="6B8C996A-D4AD-4CDC-9474-584369F74EFA" />
+  <File Path="epubcheck-3.0.1\THIRD-PARTY.txt" ComponentGuid="B8149A7D-DE24-4C60-B843-C2E1EC79146A" />
+  <File Path="Icons\icon.ico" ComponentGuid="65FD93F6-F43D-4010-9FBE-DE61DCEDA67A" />
+  <File Path="Preprocessing\Dictionary\Remove Duplicate Letter Dividers.xsl" ComponentGuid="9B3D6262-0CD9-443F-93EC-9EBCAB57A9CE" />
+  <File Path="Preprocessing\Dictionary\Roman Numeral Homographs.xsl" ComponentGuid="12B0E3BC-2266-48D6-8A37-B49D85E3F571" />
+  <File Path="Preprocessing\Dictionary\Section Subheaders.xsl" ComponentGuid="9083065C-D4A5-4BEC-995C-2BB5A6481A68" />
+  <File Path="Preprocessing\Scripture\Move FRT to front.xsl" ComponentGuid="6079969A-E7FC-4F67-8BC1-B340514E27C0" />
+  <File Path="Preprocessing\Scripture\Remove Empty 1Verses.xsl" ComponentGuid="2979421F-9C21-4E5D-858A-EA83B4DE72A0" />
+  <File Path="Preprocessing\Scripture\Remove Empty 2Chapters.xsl" ComponentGuid="793B15E5-C62C-4BD4-892F-DA9507097DFF" />
+  <File Path="Styles\Dictionary\Preview\FieldWorksA4Styles P1.jpg" ComponentGuid="9AC0413E-2934-4D81-B5CD-ACA8F35EC69B" />
+  <File Path="Styles\Dictionary\Preview\FieldWorksA4Styles P2.jpg" ComponentGuid="F4AF23E0-A749-4BAA-AAAE-C7C37E049343" />
+  <File Path="Styles\Dictionary\Preview\FieldWorksLetterStyles P1.jpg" ComponentGuid="8A97CEB4-25F6-429E-94A5-BD477D064F9B" />
+  <File Path="Styles\Dictionary\Preview\FieldWorksLetterStyles P2.jpg" ComponentGuid="CC17C025-4EF9-4A12-B114-AD2D878B42DE" />
+  <File Path="Styles\Dictionary\book.css" ComponentGuid="C968678A-4EA4-4CFB-8E3C-157FC5AD5C67" />
+  <File Path="Styles\Dictionary\DictionaryForMIDs.css" ComponentGuid="B5ECA801-020F-4830-B9BD-911A8FB17616" />
+  <File Path="Styles\Dictionary\Layout_14.css" ComponentGuid="B318FDBD-464F-4E26-A3BB-2EC4385DA7B0" />
+  <File Path="Styles\Dictionary\Layout_15.css" ComponentGuid="A0B9F837-00F2-4BC5-8ADB-89C90B57FEE8" />
+  <File Path="Styles\Dictionary\Page_size_B5.css" ComponentGuid="99C141D5-C97B-424F-B929-0FA0D6205200" />
+  <File Path="Styles\Scripture\Preview\GPS - A4 - 2 Col p1.jpg" ComponentGuid="AA2D9FF4-25CF-440D-A659-E5A81470B70D" />
+  <File Path="Styles\Scripture\Preview\GPS - A4 - 2 Col p2.jpg" ComponentGuid="40E48EAC-A4F1-4C8A-926B-9AC47FC4D949" />
+  <File Path="Styles\Scripture\Preview\GPS - Letter - 2 Col p1.jpg" ComponentGuid="044F8A04-B052-4C9B-87DD-1FC5928D8AB4" />
+  <File Path="Styles\Scripture\Preview\GPS - Letter - 2 Col p2.jpg" ComponentGuid="A3ACB15D-CE06-4D2C-8646-71209C81C92B" />
+  <File Path="Styles\Scripture\book.css" ComponentGuid="DDA884CF-F22E-455E-9B26-F13BFC75EFEE" />
+  <File Path="Styles\Scripture\Layout_14.css" ComponentGuid="B0FB732F-E425-4F06-8F7A-A099C14749A7" />
+  <File Path="Styles\Scripture\Layout_15.css" ComponentGuid="9486DFDD-4FB5-4E3E-ABF1-2DE741C21ECC" />
+  <File Path="Styles\Scripture\PageNumber_BottomCenter_Mirrored.css" ComponentGuid="62B741A4-C454-448B-862B-898EF99D4129" />
+  <File Path="Styles\Scripture\PageNumber_TopCenter_Mirrored.css" ComponentGuid="888EF5D8-E2C8-4ECD-924A-82FB583B5AB8" />
+  <File Path="Styles\Scripture\Page_size_B5.css" ComponentGuid="A10DC6AB-CC8D-44EC-BC32-2F3540323E63" />
+  <File Path="Styles\Scripture\Running_Head_Every_Page.css" ComponentGuid="B4BE6F48-DE81-4292-87F7-151DDCAC3FA7" />
+  <File Path="Styles\Scripture\Running_Head_Mirrored.css" ComponentGuid="B66B164A-158D-4BCF-9413-75A2468E64AD" />
+  <File Path="TheWord\x32\System.Data.SQLite.DLL" ComponentGuid="612B6A9F-302C-4E22-AC1F-F908B10B4359" />
+  <File Path="TheWord\x64\System.Data.SQLite.DLL" ComponentGuid="23878D79-29E6-4F79-99F5-9BF3A791BCCA" />
+  <File Path="TheWord\biblebase.sqlite" ComponentGuid="39FACE3B-2229-4649-9864-EB18D4746BA1" />
+  <File Path="TheWord\License.txt" ComponentGuid="0688B12F-DF1A-4C0E-8CF8-59D823F348D8" />
+  <File Path="TheWord\log4net.dll" ComponentGuid="B5202C32-8B78-4978-9185-CF4A5BFA7915" />
+  <File Path="TheWord\RTF2MySwordHTML.dll" ComponentGuid="1091257E-8102-4940-A2ED-E075F1137433" />
+  <File Path="TheWord\TheWordBible2MySword.exe" ComponentGuid="FBA92E4E-3876-4F36-B05C-470533CA26C2" />
+  <File Path="TheWord\TheWordBible2MySword.exe.config" ComponentGuid="849E084A-4223-435C-A1BF-6DC86DE2CB02" />
+  <File Path="Wordpress\icon.ico" ComponentGuid="8CEBCDCC-2769-416C-8362-B4E5EAD84ECC" />
+  <File Path="ApplyPDFLicenseInfo.exe" ComponentGuid="1C07B91B-BC51-4FB8-BE93-687ED68C30B5" />
+  <File Path="ApplyPDFLicenseInfo.exe.config" ComponentGuid="3C7160CD-957E-4661-9594-CBE2AC8283F7" />
+  <File Path="ApplyPDFLicenseInfo.pdb" ComponentGuid="BDACB5FE-B9B4-48A2-A4BE-9DD3C41371A2" />
+  <File Path="DictionaryForMIDsConvert.dll" ComponentGuid="213E4DA4-CCB6-44A6-8AFC-324A58E9416E" />
+  <File Path="DictionaryForMIDsConvert.dll.config" ComponentGuid="E1FC91F0-42E3-4499-9873-CC6E730C4F14" />
+  <File Path="DictionaryForMIDsConvert.pdb" ComponentGuid="4B6374E6-2D78-4CD8-BA68-5520EF6367B8" />
+  <File Path="FixEpub.xsl" ComponentGuid="F0717AC6-0958-442F-A42A-0A48A15427A6" />
+  <File Path="FixEpubToc.xsl" ComponentGuid="93C98672-E00F-430F-B7FA-B1FF21CF66CC" />
+  <File Path="mets.xml" ComponentGuid="EF465789-F6E0-4D03-AFE8-828FB2D92AA2" />
+  <File Path="pdflicensemanager-2.3.jar" ComponentGuid="05027363-8C53-40BD-A858-01CCE6EFB998" />
+  <File Path="RampLangCode.xml" ComponentGuid="5A67FD52-85D2-403E-B5D7-8B8C78EF172D" />
+  <File Path="TheWordConvert.dll" ComponentGuid="A94BEF10-B150-44C1-9CC2-660426C0C3DF" />
+  <File Path="TheWordConvert.dll.config" ComponentGuid="2AF24AD4-919F-407C-9F6E-3FDE10B1456F" />
+  <File Path="TheWordConvert.pdb" ComponentGuid="D9F5F10C-0B65-4DC1-BBBB-62FF0537298D" />
+  <File Path="vrs.xml" ComponentGuid="3F6155C2-AC50-496A-8986-62EE4019F9B8" />
+  <File Path="Copyrights\2014_sil_logo.png" ComponentGuid="B539F313-09E1-44AA-8E1F-66F072046C8A" />
+  <File Path="localizations\Pathway.fr.tmx" ComponentGuid="B765A184-48E7-4586-B7AC-066473833A04" />
+  <File Path="localizations\Pathway.ta.tmx" ComponentGuid="250CC5DB-9E32-473F-AC28-B4B92A560C42" />
+  <File Path="localizations\UserInterfaceLanguage.xml" ComponentGuid="76B3A222-5675-474A-A4DE-D08E0DB854A2" />
+  <File Path="Preprocessing\Dictionary\Combine Relations.xsl" ComponentGuid="EF058D83-7B48-4FA6-A3F5-957B9B70CF59" />
+  <File Path="Preprocessing\Dictionary\Filter Bogus Category Elements.xsl" ComponentGuid="2C427C0B-926D-46AA-81AE-00EFC197CEAD" />
+  <File Path="Preprocessing\Dictionary\Remove Space Before Picture Entry.xsl" ComponentGuid="EFAD2B55-F343-480F-9B24-3765FDA7F10E" />
+  <File Path="Samples\Dictionary\Pictures\Dagol2.jpg" ComponentGuid="AAF94960-FE59-40CF-B89C-4AAD612164DE" />
+  <File Path="Samples\Dictionary\Pictures\Danidek.jpg" ComponentGuid="921587C8-842A-41E4-9582-2BE529FD9C9E" />
+  <File Path="Samples\Dictionary\Pictures\duu.tif" ComponentGuid="20E551C5-526E-493E-BF36-ACE68B45EECD" />
+  <File Path="Samples\Scripture\Pictures\Sample1.jpg" ComponentGuid="110EFE1E-C8E0-46BD-99AF-2B617FBB2750" />
+  <File Path="Samples\Scripture\Pictures\Sample2.jpg" ComponentGuid="D2130A28-1A1A-41E7-AC04-59D8978BB7AB" />
+  <File Path="Samples\Scripture\Pictures\Sample3.jpg" ComponentGuid="11D228D8-6B27-4CF1-AA46-B64094ADBB8E" />
+  <File Path="Styles\Dictionary\Preview\NoPreview.jpg" ComponentGuid="25CCA53A-E282-4F4A-9E8E-ECFE50F5794C" />
+  <File Path="Styles\Dictionary\epubRightAlign.css" ComponentGuid="68FB42C8-3D90-4341-B89B-0F6A288857B6" />
+  <File Path="Styles\Dictionary\epub_DictionaryRightAlign.css" ComponentGuid="C010E294-6904-4781-BF72-B9A4EC7954F4" />
+  <File Path="Styles\Dictionary\Layout_16.css" ComponentGuid="BE41FF72-28F1-4F70-881B-59503F12DCB2" />
+  <File Path="Styles\Dictionary\Page_size_6.5x9onLetter.css" ComponentGuid="08D1DEF3-14C8-461D-8D15-EF27A249DEDF" />
+  <File Path="Styles\Dictionary\Pictures_Frame.css" ComponentGuid="0652A2D6-739C-4586-9074-F6E0DB0E739C" />
+  <File Path="Styles\Dictionary\Pictures_Paragraph.css" ComponentGuid="E06F1CAF-5055-4D15-B82A-CB9037070975" />
+  <File Path="Styles\Dictionary\Running_Head_None.css" ComponentGuid="A4474BB2-65A5-476F-BA1F-ED40080BA0C6" />
+  <File Path="Styles\Scripture\Preview\NoPreview.jpg" ComponentGuid="8D47EA24-0B77-4835-A6D1-9410F5BCC711" />
+  <File Path="Styles\Scripture\epubRightAlign.css" ComponentGuid="9EE1F540-373E-4D2A-BD1B-3B3586D4F4DC" />
+  <File Path="Styles\Scripture\epub_ScriptureRightAlign.css" ComponentGuid="C999C11E-1EDE-4C25-B938-2106555C76EC" />
+  <File Path="Styles\Scripture\Page_size_6.5x9onLetter.css" ComponentGuid="864EE4A1-2F7F-4386-9CB0-E2311F46F773" />
+  <File Path="Styles\Scripture\Pictures_Frame.css" ComponentGuid="F85513C3-B247-4E13-9CC5-C73456284DE8" />
+  <File Path="Styles\Scripture\Pictures_Paragraph.css" ComponentGuid="A2484E81-5B4F-4A0F-AC1C-8D40495BB1AC" />
+  <File Path="Styles\Scripture\Running_Head_Mirrored_MultiChapter.css" ComponentGuid="2805C4DF-D7B1-4ABB-9DC3-5FA2F1D3EB3C" />
+  <File Path="Styles\Scripture\Running_Head_Mirrored_MultiChapter_Abbr.css" ComponentGuid="9B214203-2590-4480-8D37-2145DD980F89" />
+  <File Path="Styles\Scripture\Running_Head_None.css" ComponentGuid="B6C9E0F8-2D75-4BAC-8007-E0675CF42C5B" />
+  <File Path="Styles\Scripture\Running_Head_Ref_None.css" ComponentGuid="F9C679BB-5C51-4EEE-B9F1-A112C0C3DBCF" />
+  <File Path="AddBidi.xsl" ComponentGuid="EC6B7C57-3E7A-413D-8195-926FB81BBB79" />
+  <File Path="ConvertUSXtoOSIS.xsl" ComponentGuid="72EA04EA-D5C1-4518-9DEA-EAE86891792F" />
+  <File Path="DesktopAnalytics.dll" ComponentGuid="BD8B9ADE-6ED1-4D78-9987-2BFD8BD4E916" />
+  <File Path="DesktopAnalytics.xml" ComponentGuid="A13DBECC-D13C-4D34-BF3B-7A0401A45453" />
+  <File Path="Devart.Data.dll" ComponentGuid="B4F301DC-2858-419E-BAA5-DFD813E79D5A" />
+  <File Path="Devart.Data.SQLite.dll" ComponentGuid="BA3BAA24-3D47-4AA2-9E34-AF6477D81068" />
+  <File Path="Devart.Data.SQLite.xml" ComponentGuid="6FE38B36-558D-4286-840C-85EAA4CF6414" />
+  <File Path="Devart.Data.xml" ComponentGuid="0FB4B2C1-D07F-4543-8179-2077F1CA3B0A" />
+  <File Path="epubValidator.exe.config" ComponentGuid="3A053DC0-CFD0-49DC-8105-AF6A18BDFB1B" />
+  <File Path="L10NSharp.dll" ComponentGuid="536A75FC-7F8B-4E79-83B0-EE69F618ED41" />
+  <File Path="PathwayB.exe.config" ComponentGuid="C1C4BC65-4958-489B-A639-DB27CA605533" />
+  <File Path="PdfLicense.exe" ComponentGuid="74C17F92-8997-4387-8156-DC737C398540" />
+  <File Path="PdfLicense.exe.config" ComponentGuid="0AECF5B3-D42C-454A-A464-682269350F3D" />
+  <File Path="PdfLicense.pdb" ComponentGuid="E17D67E5-81AA-47FE-AB09-37D600501EA4" />
+  <File Path="sqlite3.dll" ComponentGuid="BF63317E-85A9-4034-A459-DE89041D5774" />
+  <File Path="StyleMap.xml" ComponentGuid="8DF2A78A-48B6-4FE2-9541-02EBA45AF6AD" />
+  <File Path="Xhtml-Usx.xsl" ComponentGuid="1B1E4E21-C67D-423E-AAAD-0458C796973A" />
+  <File Path="Xhtml2BookNames.xsl" ComponentGuid="E1114AB6-365F-49D5-B095-462B14BDDDC6" />
+  <File Path="XslProcess.exe" ComponentGuid="EB409494-9138-461E-A1EC-FC1A0C58332F" />
+  <File Path="XslProcess.exe.config" ComponentGuid="8EBB1FB4-CD7B-4B19-9C30-800B0F91406C" />
+  <File Path="XslProcess.pdb" ComponentGuid="E180ED11-B8AE-4DF1-B872-5D4C606B740B" />
+  <File Path="Sword\addgb.exe" ComponentGuid="6C9EDA94-4C11-4E47-9D21-6C19D17A5217" />
+  <File Path="Sword\addld.exe" ComponentGuid="5421E9F9-5FD2-4ECC-AA3D-9198259C971A" />
+  <File Path="Sword\addvs.exe" ComponentGuid="6D7E5A78-5C42-4B43-8523-6FC09FC05DB2" />
+  <File Path="Sword\cipherraw.exe" ComponentGuid="EE03E476-86AC-4CE2-88E0-F6CA8D6A89AB" />
+  <File Path="Sword\diatheke.exe" ComponentGuid="D737E962-8885-4A8C-854E-7C4F85A1F660" />
+  <File Path="Sword\emptyvss.exe" ComponentGuid="B863E7DF-B1C1-4223-A3F2-D28E2C1908A9" />
+  <File Path="Sword\genbookutil.exe" ComponentGuid="09868078-E29B-4F1D-B6DC-0E9492053A37" />
+  <File Path="Sword\icudt52.dll" ComponentGuid="C8ACCC7E-2DCE-411B-AE9C-C98C17151CCB" />
+  <File Path="Sword\icuin52.dll" ComponentGuid="A192DF0E-DD5C-4185-B1A1-E168D007341A" />
+  <File Path="Sword\icuuc52.dll" ComponentGuid="D2299A19-C496-4FC7-8BEF-DF812036AF3E" />
+  <File Path="Sword\installmgr.exe" ComponentGuid="95E64A42-74A7-47F2-8B9A-0D77610C0FB9" />
+  <File Path="Sword\lexdump.exe" ComponentGuid="BCAF2A1E-89B0-4378-81D8-E89B46E46AA4" />
+  <File Path="Sword\libsword.dll" ComponentGuid="B887447B-1815-4BF3-A255-97D0DA16574C" />
+  <File Path="Sword\mkfastmod.exe" ComponentGuid="111C96FB-7BD2-4B50-9224-BC814360BE3D" />
+  <File Path="Sword\modwrite.exe" ComponentGuid="6FB415EE-31F0-4192-8102-BB9372233D66" />
+  <File Path="Sword\osis2mod.exe" ComponentGuid="4EAB8BE0-B507-43BD-AD3C-A63671C37C1B" />
+  <File Path="Sword\stepdump.exe" ComponentGuid="8CAF9B7D-27C8-4571-B444-932114119FAB" />
+  <File Path="Sword\treeidxutil.exe" ComponentGuid="C1D6EBBA-54E7-48A8-8EBB-E5C9AFAA4FF0" />
+  <File Path="Sword\uconv.exe" ComponentGuid="44E3F0B2-3093-474F-A93E-1331E671F139" />
+  <File Path="LibreOfficeConvert.dll.config" ComponentGuid="04F6A830-9783-4524-9BB2-905A88453427" />
+  <File Path="Palaso.Media.dll" ComponentGuid="75E92863-D382-4723-859D-7C2D9EE42C39" />
+  <File Path="PalasoUIWindowsForms.dll" ComponentGuid="250F0FC4-37FB-460D-8AF9-C69EE4B99C3A" />
+  <File Path="SwordConvert.dll" ComponentGuid="B7FC1538-EF2C-4A6B-A68A-1787CA70F5F1" />
+  <File Path="SwordConvert.pdb" ComponentGuid="9FC19366-CC0F-4A1C-BC23-4EAE69E8B1F6" />
+  <File Path="L10NSharp.pdb" ComponentGuid="E0A9A1C7-0871-4183-9603-CF94111F0832" />
+  <File Path="L10NSharp.xml" ComponentGuid="208DFF0A-6B79-4F24-A29E-B923D5C01D25" />
+  <File Path="Help\Pathway_Configuration_Tool.chm" ComponentGuid="5FCD14C5-A493-449C-8708-601342E69B24" />
+  <File Path="Pathway_Student_Manual.pdf\Pathway_Student_Manual_BTE.pdf" ComponentGuid="97B1A4BF-A2DD-40E7-9E67-3805142AA022" />
+  <File Path="Help\Pathway_Student_Manual.pdf\Pathway_Student_Manual_BTE.pdf" ComponentGuid="8CFE9E5E-D62C-4A5F-85E5-563431094A54" />
+  <File Path="Help\Pathway_Student_Manual.pdf" ComponentGuid="23B7D104-D511-47E3-AA3A-46226881F8B8" />
+  <File Path="Styles\Dictionary\epubMexico.css" ComponentGuid="60B6BA7D-03E2-4FD8-99B7-9C16EEB13B75" />
+  <File Path="Styles\Dictionary\MexicoStyles.css" ComponentGuid="7D833CB9-4406-4233-8377-45D8AA538A1C" />
+</FileLibrary>

@@ -1,0 +1,17 @@
+/* Bottom Center Mirrored.css */
+@page :left {
+    @bottom-center{
+           content: counter( page);
+    }
+}
+@page :right {
+   @bottom-center{
+           content: counter( page);
+    }
+}
+
+@page :first {
+	@bottom-center{
+           content: counter( page);
+    }
+}

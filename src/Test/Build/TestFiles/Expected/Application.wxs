@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="PFSIL" Name="SIL">
+          <Directory Id="APPLICATIONFOLDER" Name="Pathway">
+            <Directory Id="epubcheck_3.0.1" Name="epubcheck-3.0.1">
+              <Directory Id="licenses" Name="licenses">
+                <Component Id="w3c.txt" Guid="CDADDA27-AEC1-48EF-AB20-BA21A094048A">
+                  <File Id="w3c.txt" Name="W3C.txt" Checksum="yes" KeyPath="yes" DiskId="1" Source="..\output\Release\epubcheck-3.0.1\licenses\W3C.txt" />
+                </Component>
+              </Directory>
+              <Component Id="copying.txt" Guid="0C7705D3-1BDF-4F49-9D4C-8A39A4E68D86">
+                <File Id="copying.txt" Name="COPYING.txt" Checksum="yes" KeyPath="yes" DiskId="1" Source="..\output\Release\epubcheck-3.0.1\COPYING.txt" />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="Application">
+      <ComponentRef Id="AddShortcutApp" />
+      <ComponentRef Id="AddReadmeShortcut" />
+      <ComponentRef Id="AddTutorialShortcut" />
+      <ComponentRef Id="AddLicenseShortcut" />
+      <ComponentRef Id="AddHelpShortcut" />
+      <ComponentRef Id="RegistryEntries" />
+      <ComponentRef Id="w3c.txt" />
+      <ComponentRef Id="copying.txt" />
+    </ComponentGroup>
+  </Fragment>
+</Wix>

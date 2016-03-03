@@ -1,0 +1,19 @@
+/* Page number  Bottom Outside.css */
+@page :left {
+@bottom-left {
+           content: counter( page);
+    }
+}
+
+@page :right {
+    @bottom-right {
+           content: counter( page);
+    }
+    
+}
+
+@page :first {
+	@bottom-right{
+           content: counter( page);
+    }
+}
