@@ -4291,6 +4291,7 @@ namespace SIL.PublishingSolution
 				setLastSelectedLayout();
 				setDefaultInputType();
 				SaveInputType(inputTypeBL);
+				ShowCSSValue();
 				WriteCss();
 				StyleEXE = cTool.TxtName.Text;
 			}
