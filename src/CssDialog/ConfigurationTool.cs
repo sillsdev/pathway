@@ -1496,5 +1496,23 @@ namespace SIL.PublishingSolution
             _cToolBL.chkCenterTitleHeader_CheckStateChangedBL();
         }
 
+		private void txtBaseFontSize_KeyUp(object sender, KeyEventArgs e)
+		{
+			_cToolBL.SetModifyMode(true);
+			_cToolBL.txtBaseFontSize_ValidatedBL(sender);
+		}
+
+		private void txtDefaultLineHeight_KeyUp(object sender, KeyEventArgs e)
+		{
+			_cToolBL.SetModifyMode(true);
+			_cToolBL.txtDefaultLineHeight_ValidatedBL(sender);
+		}
+
+		private void txtMaxImageWidth_KeyUp(object sender, KeyEventArgs e)
+		{
+			_cToolBL.SetModifyMode(true);
+			_cToolBL.txtMaxImageWidth_ValidatedBL(sender);
+		}
+
 	}
 }
