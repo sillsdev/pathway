@@ -68,8 +68,8 @@
 
 .Note_CrossHYPHENReference_Paragraph {
     font-size: 9pt;	/* cascaded environment */
-    line-height: 17pt;
-    -ps-fixed-line-height: 17pt;
+    line-height: 11pt;
+    -ps-fixed-line-height: 11pt;
 }
 
 .Note_CrossHYPHENReference_Paragraph::footnote-call {

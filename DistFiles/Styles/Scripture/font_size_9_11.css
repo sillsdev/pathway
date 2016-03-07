@@ -84,8 +84,8 @@
 
 .Note_General_Paragraph {
     font-size: 9pt;	/* cascaded environment */
-    line-height: 8pt;
-    -ps-fixed-line-height: 8pt;
+    line-height: 11pt;
+    -ps-fixed-line-height: 11pt;
 }
 
 .Note_General_Paragraph::footnote-call {
