@@ -89,7 +89,7 @@
 	  <option name="9" file="Font_HeaderSize_9.css" />
 	  <option name="8" file="Font_HeaderSize_8.css" />
 	  <option name="Same as body" file="Font_HeaderSize_nc.css" />
-	  <option name="Same as headword" file="Font_HeaderSize_nc.css" />
+    <option name="Same as section (\s)" file="Font_HeaderSize_nc.css" />
     </feature>
 	<feature name="Headword Size">
       <option name="14" file="Headword_Size_14.css" />
