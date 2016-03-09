@@ -7,6 +7,7 @@
     -ps-IncludeVersenumber-string: "True";
     -ps-IncludeVerseInHeaderReferences-string:"yes";
     ps-NonConsecutiveReferenceSeparator-string:",";
+	-ps-header-font-size:"Same as section (\s)";
     @footnotes {
         border-top: thin solid black;
         padding: 4pt 0;

@@ -512,7 +512,12 @@ namespace SIL.PublishingSolution
             {
                 string task = "@page";
                 string key = "-ps-header-font-size";
-                return GetValue(task, key, "Same as headword");
+	            string defValue = "Same as headword";
+				if (_loadType == "Scripture")
+				{
+					defValue = "Same as section (\\s)";
+				}
+				return GetValue(task, key, defValue);
             }
         }
 

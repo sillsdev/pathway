@@ -1247,7 +1247,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("fo:font-weight", headerFontWeight);
 
             //TD-2819
-            string headerFontSize = Common.GetHeaderFontSize(_cssProperty);
+            string headerFontSize = Common.GetHeaderFontSize(_cssProperty, _projInfo.ProjectInputType);
             _writer.WriteAttributeString("fo:font-size", headerFontSize);
 
             _writer.WriteEndElement();
@@ -1382,7 +1382,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("fo:font-weight", headerFontWeight);
 
             //TD-2819
-            headerFontSize = Common.GetHeaderFontSize(_cssProperty);
+			headerFontSize = Common.GetHeaderFontSize(_cssProperty, _projInfo.ProjectInputType);
             _writer.WriteAttributeString("fo:font-size", headerFontSize);
 
             _writer.WriteEndElement();
