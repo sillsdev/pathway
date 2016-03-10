@@ -67,7 +67,7 @@ public class csst3Lexer : Lexer
     public const int STRING = 24;
     public const int TAG = 20;
     public const int BEGINSWITH = 15;
-    const int HIDDEN = Hidden;
+    const int HIDDEN = -9999;
 
     public csst3Lexer() 
     {
