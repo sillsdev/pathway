@@ -14,6 +14,7 @@ tokens {
 	ATTRIB;
 	PARENTOF;
 	PRECEDES;
+	SIBLING;
 	ATTRIBEQUAL;
 	HASVALUE;
 	BEGINSWITH;
@@ -68,7 +69,8 @@ selectorOperation
 
 selectop
 	: '>' -> PARENTOF
-        | '+'  -> PRECEDES
+        | '+' -> PRECEDES
+        | '~' -> SIBLING
 	;
 
 properties
