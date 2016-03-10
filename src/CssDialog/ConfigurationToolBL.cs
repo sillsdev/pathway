@@ -1339,7 +1339,7 @@ namespace SIL.PublishingSolution
 				}
 				SavePropertyValue();
 			}
-			catch
+			catch()
 			{
 			}
 			_screenMode = ScreenMode.Edit;

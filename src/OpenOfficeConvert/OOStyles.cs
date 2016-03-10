@@ -1939,7 +1939,6 @@ namespace SIL.PublishingSolution
                     }
 					else if (_pageHeaderFooter[i]["content"].Length > 0)
 					{
-						CreateHeaderFooter(i, "PageNumber", ref isHeaderCreated, ref isFooterCreated, ref isHeaderClosed, ref isFooterClosed);
 						CreateVariableForTitle(i);
 					}
                 }
@@ -2025,7 +2024,6 @@ namespace SIL.PublishingSolution
                         isHeaderCreated = true;
                         break;
                     default:
-						_isCenterTabStopNeeded = true;
                         if (isFooterCreated) return;
                         type = "Footer";
                         isFooterCreated = true;
@@ -2194,7 +2192,6 @@ namespace SIL.PublishingSolution
                     if (_isCenterTabStopNeeded)
                     {
                         SetTab();
-	                    _isCenterTabStopNeeded = false;
                     }
                     break;
             }
@@ -2251,7 +2248,6 @@ namespace SIL.PublishingSolution
                         if (_isCenterTabStopNeeded)
                         {
                             SetTab();
-	                        _isCenterTabStopNeeded = false;
                         }
                         break;
                 }
