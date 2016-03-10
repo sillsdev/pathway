@@ -958,146 +958,140 @@ namespace SIL.PublishingSolution
 
 		private void SetAttributesForPaperProperties(StreamWriter writeCss)
 		{
-			try
+			var value = new Dictionary<string, string>();
+			string attribute = "Justified";
+			string key = ((ComboBoxItem)cTool.DdlJustified.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			attribute = "VerticalJustify";
+			key = ((ComboBoxItem)cTool.DdlVerticalJustify.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			attribute = "Page Size";
+			key = ((ComboBoxItem)cTool.DdlPagePageSize.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			attribute = "Columns";
+			key = ((ComboBoxItem)cTool.DdlPageColumn.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			attribute = "Font Size";
+			key = ((ComboBoxItem)cTool.DdlFontSize.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			attribute = "Leading";
+			key = ((ComboBoxItem)cTool.DdlLeading.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			attribute = "Pictures";
+			key = ((ComboBoxItem)cTool.DdlPicture.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			attribute = "Running Head";
+			key = ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			attribute = "Header Size";
+			key = ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			if (inputTypeBL.ToLower() == "scripture" && cTool.DdlReferenceFormat.SelectedItem != null)
 			{
-				var value = new Dictionary<string, string>();
-				string attribute = "Justified";
-				string key = ((ComboBoxItem)cTool.DdlJustified.SelectedItem).Value;
+				attribute = "Reference Format";
+				key = ((ComboBoxItem)cTool.DdlReferenceFormat.SelectedItem).Value;
 				WriteAtImport(writeCss, attribute, key);
+			}
 
-				attribute = "VerticalJustify";
-				key = ((ComboBoxItem)cTool.DdlVerticalJustify.SelectedItem).Value;
+			attribute = "Page Number";
+			key = ((ComboBoxItem)cTool.DdlPageNumber.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			attribute = "Rules";
+			key = ((ComboBoxItem)cTool.DdlRules.SelectedItem).Value;
+			WriteAtImport(writeCss, attribute, key);
+
+			if (inputTypeBL.ToLower() == "dictionary" && cTool.DdlSense.Items.Count > 0)
+			{
+				attribute = "Sense";
+				key = ((ComboBoxItem)cTool.DdlSense.SelectedItem).Value;
 				WriteAtImport(writeCss, attribute, key);
+			}
 
-				attribute = "Page Size";
-				key = ((ComboBoxItem)cTool.DdlPagePageSize.SelectedItem).Value;
-				WriteAtImport(writeCss, attribute, key);
-
-				attribute = "Columns";
-				key = ((ComboBoxItem)cTool.DdlPageColumn.SelectedItem).Value;
-				WriteAtImport(writeCss, attribute, key);
-
-				attribute = "Font Size";
-				key = ((ComboBoxItem)cTool.DdlFontSize.SelectedItem).Value;
-				WriteAtImport(writeCss, attribute, key);
-
-				attribute = "Leading";
-				key = ((ComboBoxItem)cTool.DdlLeading.SelectedItem).Value;
-				WriteAtImport(writeCss, attribute, key);
-
-				attribute = "Pictures";
-				key = ((ComboBoxItem)cTool.DdlPicture.SelectedItem).Value;
-				WriteAtImport(writeCss, attribute, key);
-
-				attribute = "Running Head";
-				key = ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value;
-				WriteAtImport(writeCss, attribute, key);
-
-				attribute = "Header Size";
-				key = ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value;
-				WriteAtImport(writeCss, attribute, key);
-
-				if (inputTypeBL.ToLower() == "scripture" && cTool.DdlReferenceFormat.SelectedItem != null)
+			//Writing TextBox Values into Css
+			if (cTool.TxtPageGutterWidth.Text.Length > 0)
+			{
+				value["column-gap"] = cTool.TxtPageGutterWidth.Text;
+				if (_loadType == "Scripture")
 				{
-					attribute = "Reference Format";
-					key = ((ComboBoxItem)cTool.DdlReferenceFormat.SelectedItem).Value;
-					WriteAtImport(writeCss, attribute, key);
+					WriteCssClass(writeCss, "columns", value);
 				}
-
-				attribute = "Page Number";
-				key = ((ComboBoxItem)cTool.DdlPageNumber.SelectedItem).Value;
-				WriteAtImport(writeCss, attribute, key);
-
-				attribute = "Rules";
-				key = ((ComboBoxItem)cTool.DdlRules.SelectedItem).Value;
-				WriteAtImport(writeCss, attribute, key);
-
-				if (inputTypeBL.ToLower() == "dictionary" && cTool.DdlSense.Items.Count > 0)
+				else
 				{
-					attribute = "Sense";
-					key = ((ComboBoxItem)cTool.DdlSense.SelectedItem).Value;
-					WriteAtImport(writeCss, attribute, key);
-				}
-
-				//Writing TextBox Values into Css
-				if (cTool.TxtPageGutterWidth.Text.Length > 0)
-				{
-					value["column-gap"] = cTool.TxtPageGutterWidth.Text;
-					if (_loadType == "Scripture")
-					{
-						WriteCssClass(writeCss, "columns", value);
-					}
-					else
-					{
-						WriteCssClass(writeCss, "letData", value);
-					}
-				}
-				value.Clear();
-				//TD-3607
-				if (cTool.TxtGuidewordLength.Text.Length > 0 && inputTypeBL.ToLower() == "dictionary")
-				{
-					int a;
-					if (int.TryParse(cTool.TxtGuidewordLength.Text, out a))
-					{
-						value["guideword-length"] = Convert.ToInt16(cTool.TxtGuidewordLength.Text).ToString();
-					}
-					WriteCssClass(writeCss, "guidewordLength", value);
-				}
-
-
-				value.Clear();
-				value["margin-top"] = cTool.TxtPageTop.Text;
-				value["margin-right"] = cTool.TxtPageOutside.Text;
-				value["margin-bottom"] = cTool.TxtPageBottom.Text;
-				value["margin-left"] = cTool.TxtPageInside.Text;
-				value["-ps-fileproduce"] = "\"" + ((ComboBoxItem)cTool.DdlFileProduceDict.SelectedItem).Value + "\"";
-				value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
-				value["-ps-split-file-by-letter"] = "\"" + _splitFileByLetter + "\"";
-				value["-ps-center-title-header"] = "\"" + _centerTitleHeader + "\"";
-				value["-ps-header-font-size"] = "\"" + ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value + "\"";
-				if (inputTypeBL.ToLower() == "scripture")
-				{
-					value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
-					value["-ps-custom-XRef-caller"] = "\"" + cTool.TxtXrefCusSymbol.Text + "\"";
-					value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
-					value["-ps-hide-space-versenumber"] = "\"" + cTool.ChkHideSpaceVerseNo.Checked + "\"";
-				}
-				value["-ps-disable-widow-orphan"] = "\"" + _disableWidowOrphan + "\"";
-				WriteCssClass(writeCss, "page", value);
-
-				if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
-				{
-					value.Clear();
-					value["margin-right"] = cTool.TxtPageInside.Text;
-					value["margin-left"] = cTool.TxtPageOutside.Text;
-					WriteCssClass(writeCss, "page :left", value);
-
-					value.Clear();
-					value["margin-right"] = cTool.TxtPageOutside.Text;
-					value["margin-left"] = cTool.TxtPageInside.Text;
-					WriteCssClass(writeCss, "page :right", value);
-				}
-
-				if (_centerTitleHeader)
-				{
-					if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
-					{
-						SetPageTopCenter(value);
-						WriteCssClass(writeCss, "page :left-top-center", value);
-
-						SetPageTopCenter(value);
-						WriteCssClass(writeCss, "page :right-top-center", value);
-					}
-					else
-					{
-						SetPageTopCenter(value);
-						WriteCssClass(writeCss, "page -top-center", value);
-					}
+					WriteCssClass(writeCss, "letData", value);
 				}
 			}
-			catch
-			{}
-            
+			value.Clear();
+			//TD-3607
+			if (cTool.TxtGuidewordLength.Text.Length > 0 && inputTypeBL.ToLower() == "dictionary")
+			{
+				int a;
+				if (int.TryParse(cTool.TxtGuidewordLength.Text, out a))
+				{
+					value["guideword-length"] = Convert.ToInt16(cTool.TxtGuidewordLength.Text).ToString();
+				}
+				WriteCssClass(writeCss, "guidewordLength", value);
+			}
+
+
+			value.Clear();
+			value["margin-top"] = cTool.TxtPageTop.Text;
+			value["margin-right"] = cTool.TxtPageOutside.Text;
+			value["margin-bottom"] = cTool.TxtPageBottom.Text;
+			value["margin-left"] = cTool.TxtPageInside.Text;
+			value["-ps-fileproduce"] = "\"" + ((ComboBoxItem)cTool.DdlFileProduceDict.SelectedItem).Value + "\"";
+			value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
+			value["-ps-split-file-by-letter"] = "\"" + _splitFileByLetter + "\"";
+			value["-ps-center-title-header"] = "\"" + _centerTitleHeader + "\"";
+			value["-ps-header-font-size"] = "\"" + ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value + "\"";
+			if (inputTypeBL.ToLower() == "scripture")
+			{
+				value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
+				value["-ps-custom-XRef-caller"] = "\"" + cTool.TxtXrefCusSymbol.Text + "\"";
+				value["-ps-hide-versenumber-one"] = "\"" + cTool.ChkTurnOffFirstVerse.Checked + "\"";
+				value["-ps-hide-space-versenumber"] = "\"" + cTool.ChkHideSpaceVerseNo.Checked + "\"";
+			}
+			value["-ps-disable-widow-orphan"] = "\"" + _disableWidowOrphan + "\"";
+			WriteCssClass(writeCss, "page", value);
+
+			if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
+			{
+				value.Clear();
+				value["margin-right"] = cTool.TxtPageInside.Text;
+				value["margin-left"] = cTool.TxtPageOutside.Text;
+				WriteCssClass(writeCss, "page :left", value);
+
+				value.Clear();
+				value["margin-right"] = cTool.TxtPageOutside.Text;
+				value["margin-left"] = cTool.TxtPageInside.Text;
+				WriteCssClass(writeCss, "page :right", value);
+			}
+
+			if (_centerTitleHeader)
+			{
+				if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
+				{
+					SetPageTopCenter(value);
+					WriteCssClass(writeCss, "page :left-top-center", value);
+
+					SetPageTopCenter(value);
+					WriteCssClass(writeCss, "page :right-top-center", value);
+				}
+				else
+				{
+					SetPageTopCenter(value);
+					WriteCssClass(writeCss, "page -top-center", value);
+				}
+			}
 		}
 
 	    private void SetPageTopCenter(Dictionary<string, string> value)
@@ -1345,7 +1339,7 @@ namespace SIL.PublishingSolution
 				}
 				SavePropertyValue();
 			}
-			catch
+			catch()
 			{
 			}
 			_screenMode = ScreenMode.Edit;
