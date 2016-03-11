@@ -374,7 +374,7 @@ namespace SIL.PublishingSolution
 		{
 			get
 			{
-				const string defaultValue = "None";
+				const string defaultValue = "Top Center";
 				if (_loadType == "Dictionary")
 				{
 					foreach (string srchKey in pageDict.Keys)
@@ -3914,33 +3914,8 @@ namespace SIL.PublishingSolution
 			cTool.DdlPageNumber.Items.Clear();
 			cTool.DdlReferenceFormat.Items.Clear();
 
-			foreach (XmlNode node in pageNumList)
-			{
-				if (node.Attributes != null)
-				{
-					string value = node.Attributes["name"].Value;
-					if (ComboBoxContains(value, cTool.DdlPageNumber))
-					{
-						string enText = value;
-						value = LocalizeItems.LocalizeItem("Page Number", value);
-						if (GetDdlRunningHead().ToLower() == "mirrored" && enText.ToLower() == "top outside margin")
-						{
-							continue;
-						}
+			ReloadPageNumberLocList();
 
-						if (enText.ToLower() == "none" && cTool.DdlRunningHead.Text.ToLower() == "none")
-						{
-							value = LocalizeItems.LocalizeItem("Reference Format", value);
-							cTool.DdlReferenceFormat.Items.Add(new ComboBoxItem(enText, value));
-							cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
-						}
-						else if (enText.ToLower() != "none")
-						{
-							cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
-						}
-					}
-				}
-			}
 			if (cTool.DdlPageNumber.Items.Count > 0)
 				cTool.DdlPageNumber.SelectedIndex = 0;
 
@@ -4038,7 +4013,16 @@ namespace SIL.PublishingSolution
 	                    value = LocalizeItems.LocalizeItem("Page Number", value);
 	                    if (_centerTitleHeader && enText.ToLower() == "top center")
 	                        continue;
-	                    cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
+						if (enText.ToLower() == "none" && cTool.DdlRunningHead.Text.ToLower() == "none")
+						{
+							value = LocalizeItems.LocalizeItem("Reference Format", value);
+							cTool.DdlReferenceFormat.Items.Add(new ComboBoxItem(enText, value));
+							cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
+						}
+						else if (enText.ToLower() != "none")
+						{
+							cTool.DdlPageNumber.Items.Add(new ComboBoxItem(enText, value));
+						}
 	                }
 	            }
 	        }
@@ -4236,6 +4220,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
+				ShowCSSValue();
 				WriteCss();
 				cTool.DdlTocLevel.Items.Clear(); // clear / repopulate this dropdown
 				setLastSelectedLayout();
@@ -4263,6 +4248,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
+				ShowCSSValue();
 				WriteCss();
 				cTool.DdlTocLevel.Items.Clear(); // clear / repopulate this dropdown
 				setLastSelectedLayout();
