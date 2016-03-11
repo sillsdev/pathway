@@ -1744,7 +1744,7 @@ namespace SIL.Tool
 		/// <returns>font-size for header, by default it sets as 12</returns>
 		public static string GetHeaderFontSize(Dictionary<string, Dictionary<string, string>> _cssProperty, string projectInputType) //TD-2815
 		{
-			const string defFontSize = "12";
+			const string defFontSize = "12pt";
 			if (_cssProperty.ContainsKey("@page") && _cssProperty["@page"].ContainsKey("-ps-header-font-size"))
 			{
 				string headerFontSize = _cssProperty["@page"]["-ps-header-font-size"];
@@ -1758,7 +1758,7 @@ namespace SIL.Tool
 						clsName = headerFontSize.ToLower() == optionText ? "headword" : "entry";
 						if (_cssProperty.ContainsKey(clsName) && _cssProperty[clsName].ContainsKey("font-size"))
 						{
-							return _cssProperty[clsName]["font-size"];
+							return _cssProperty[clsName]["font-size"] + "pt";
 						}
 					}
 					else
@@ -1767,7 +1767,7 @@ namespace SIL.Tool
 						clsName = headerFontSize.ToLower() == optionText ? "SectionHead" : "Paragraph";
 						if (_cssProperty.ContainsKey(clsName) && _cssProperty[clsName].ContainsKey("font-size"))
 						{
-							return _cssProperty[clsName]["font-size"];
+							return _cssProperty[clsName]["font-size"] + "pt";
 						}
 					}
 				}
