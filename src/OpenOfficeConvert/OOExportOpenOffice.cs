@@ -633,6 +633,7 @@ namespace SIL.PublishingSolution
 
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML._multiLanguageHeader = isMultiLanguageHeader;
+			cXML.pictureCount = preProcessor.pictureCount;
 
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
             PostProcess(projInfo);

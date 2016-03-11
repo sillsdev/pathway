@@ -24,7 +24,7 @@ namespace SIL.Tool
         bool isNodeFound = false;
         XmlNode returnNode = null;
         private string _skipChapterInformation = null;
-
+	    public int pictureCount = 0;
         public const string CoverPageFilename = "File0Cvr.xhtml";
         public const string TitlePageFilename = "File1Ttl.xhtml";
         public const string CopyrightPageFilename = "File2Cpy.xhtml";
@@ -1353,7 +1353,7 @@ namespace SIL.Tool
                     XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
                     if (nodeList.Count > 0)
                     {
-                        var counter = 1;
+						pictureCount = 1;
                         foreach (XmlNode item in nodeList)
                         {
                             var name = item.Attributes.GetNamedItem("src");
@@ -1367,17 +1367,17 @@ namespace SIL.Tool
                                     if (File.Exists(fromFileName))
                                     {
                                         string ext = Path.GetExtension(fromFileName);
-                                        string toFileName = Common.PathCombine(tempFolder, counter + ext);
+										string toFileName = Common.PathCombine(tempFolder, pictureCount + ext);
                                         File.Copy(fromFileName, toFileName, true);
 
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;
                                         item.Attributes.Append(xa);
-                                        name.Value = counter + ext;
+										name.Value = pictureCount + ext;
                                     }
                                 }
                             }
-                            counter++;
+							pictureCount++;
                         }
                     }
                     try
@@ -1412,11 +1412,11 @@ namespace SIL.Tool
                     XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
                     if (nodeList.Count > 0)
                     {
-                        var counter = 1;
+						pictureCount = 1;
                         int imgCount = nodeList.Count;
                         for (int i = 0; i < imgCount; i++)
                         {
-                            XmlNode item = nodeList[counter - 1];
+							XmlNode item = nodeList[pictureCount - 1];
                             var name = item.Attributes.GetNamedItem("src");
                             if (name != null)
                             {
@@ -1428,7 +1428,7 @@ namespace SIL.Tool
                                     {
                                         string ext = Path.GetExtension(fromFileName);
 
-                                        string toFileName = Common.PathCombine(tempFolder, counter + ext);
+										string toFileName = Common.PathCombine(tempFolder, pictureCount + ext);
                                         File.Copy(fromFileName, toFileName, true);
                                         if (isInDesign)
                                         {
@@ -1437,21 +1437,21 @@ namespace SIL.Tool
                                             {
                                                 Directory.CreateDirectory(pictureFolderPath);
                                             }
-                                            toFileName = Common.PathCombine(pictureFolderPath, counter + ext);
+											toFileName = Common.PathCombine(pictureFolderPath, pictureCount + ext);
                                             File.Copy(fromFileName, toFileName, true);
                                         }
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;
                                         item.Attributes.Append(xa);
-                                        name.Value = counter + ext;
-                                        counter++;
+										name.Value = pictureCount + ext;
+										pictureCount++;
                                     }
                                     else
                                     {
-                                        var parentNode = nodeList[counter - 1].ParentNode;
+										var parentNode = nodeList[pictureCount - 1].ParentNode;
                                         if (parentNode != null)
                                         {
-                                            parentNode.RemoveChild(nodeList[counter - 1]);
+											parentNode.RemoveChild(nodeList[pictureCount - 1]);
                                         }
                                         if (parentNode != null)
                                         {
