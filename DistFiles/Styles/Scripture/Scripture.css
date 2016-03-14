@@ -335,3 +335,8 @@ page-break-after: avoid;
 
 .pn :after{
 content: " ";}
+
+.CoverPageTitle {
+	font-family: "Charis SIL";
+	font-size: 24pt;
+}
