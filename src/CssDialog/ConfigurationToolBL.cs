@@ -4011,7 +4011,8 @@ namespace SIL.PublishingSolution
 	                {
 	                    string enText = value;
 	                    value = LocalizeItems.LocalizeItem("Page Number", value);
-	                    if (_centerTitleHeader && enText.ToLower() == "top center")
+						if ((_centerTitleHeader && enText.ToLower() == "top center") || 
+							(cTool.DdlRunningHead.Text.ToLower() == "mirrored" && enText.ToLower() == "top outside margin"))
 	                        continue;
 						if (enText.ToLower() == "none" && cTool.DdlRunningHead.Text.ToLower() == "none")
 						{
