@@ -23,6 +23,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using NUnit.Framework;
+using Palaso.Data;
 using SIL.PublishingSolution;
 using SIL.Tool;
 using Test;
@@ -1309,6 +1310,40 @@ namespace Test.XeLatex
             ExportProcess(file);
             FileCompare(file);
         }
+
+		/// <summary>
+		///A test for Export Xelatex For Scripture
+		///</summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void CoverPageTitleTest()
+		{
+			string inputSourceDirectory = FileInput("ExportXelatex");
+			string outputDirectory = FileOutput("ExportXelatex");
+			if (Directory.Exists(outputDirectory))
+			{
+				Directory.Delete(outputDirectory, true);
+			}
+			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.LoadSettings();
+			_projInfo.ProjectPath = outputDirectory;
+			_projInfo.ProjectInputType = "Dictionary";
+			_projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "CoverPageTitle.xhtml");
+			_projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "CoverPageTitle.css");
+
+			EnableConfigurationSettings(outputDirectory);
+
+			var target = new ExportXeLaTex();
+			const bool expectedResult = true;
+			bool actual = target.Export(_projInfo);
+
+			string outputResultFile = _projInfo.ProjectPath;
+			outputResultFile = Path.Combine(outputResultFile, "CoverPageTitle.tex");
+			string expectedResultFile = FileExpected("CoverPageTitle" + ".tex");
+			TextFileAssert.AreEqual(outputResultFile, expectedResultFile, "CoverPageTitle in tex ");
+		}
+
         #endregion
 
         #region Private Functions
