@@ -1107,5 +1107,31 @@ namespace Test.PsExport
             Assert.AreEqual(3, files.Length);
             XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "Preprocess produced different results");
         }
+
+		[Test]
+		public void XsltPreProcessLetterHeaderLanguageTest()
+		{
+			DataType = "Dictionary";
+			const string data = "main.xhtml";
+			var infile = TestDataSetup("Pre3", data);
+			Param.Value["Preprocessing"] = "Letter Header Language";
+			XsltPreProcess(infile);
+			var files = Directory.GetFiles(_outputTestPath, "*.*");
+			Assert.AreEqual(2, files.Length);
+			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "main Preprocess produced different results");
+		}
+
+		[Test]
+		public void XsltPreProcessReversalLetterHeaderLanguageTest()
+		{
+			DataType = "Dictionary";
+			const string data = "FlexRev.xhtml";
+			var infile = TestDataSetup("Pre3", data);
+			Param.Value["Preprocessing"] = "Letter Header Language";
+			XsltPreProcess(infile);
+			var files = Directory.GetFiles(_outputTestPath, "*.*");
+			Assert.AreEqual(2, files.Length);
+			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "FlexRev Preprocess produced different results");
+		}
     }
 }

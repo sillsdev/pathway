@@ -1315,9 +1315,8 @@ namespace Test.XeLatex
 		///A test for Export Xelatex For Scripture
 		///</summary>
 		[Test]
-		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
-		public void CoverPageTitleTest()
+		public void XelatexCoverPageTitleTest()
 		{
 			string inputSourceDirectory = FileInput("ExportXelatex");
 			string outputDirectory = FileOutput("ExportXelatex");
@@ -1335,13 +1334,12 @@ namespace Test.XeLatex
 			EnableConfigurationSettings(outputDirectory);
 
 			var target = new ExportXeLaTex();
-			const bool expectedResult = true;
 			bool actual = target.Export(_projInfo);
 
 			string outputResultFile = _projInfo.ProjectPath;
 			outputResultFile = Path.Combine(outputResultFile, "CoverPageTitle.tex");
 			string expectedResultFile = FileExpected("CoverPageTitle" + ".tex");
-			TextFileAssert.AreEqual(outputResultFile, expectedResultFile, "CoverPageTitle in tex ");
+			TextFileAssert.AreEqual(expectedResultFile, outputResultFile, "CoverPageTitle test in tex ");
 		}
 
         #endregion
