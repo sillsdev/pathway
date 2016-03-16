@@ -1274,10 +1274,12 @@ namespace SIL.PublishingSolution
 
 		private void ddlRunningHead_SelectedIndexChanged(object sender, EventArgs e)
 		{
-
-			string pageType = ((ComboBoxItem)ddlRunningHead.SelectedItem).Value;
-			_cToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
-			EditCSS(sender, e);
+			if (!Common.Testing)
+			{
+				string pageType = ((ComboBoxItem) ddlRunningHead.SelectedItem).Value;
+				_cToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
+				EditCSS(sender, e);
+			}
 		}
 
 		private void ddlTocLevel_SelectedIndexChanged(object sender, EventArgs e)

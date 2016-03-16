@@ -143,7 +143,7 @@ namespace SIL.PublishingSolution
 		TabPage tabpreview = new TabPage();
 		TabPage tabDict4Mids = new TabPage();
 		protected TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
-		private ConfigurationTool cTool;
+		public ConfigurationTool cTool;
 		Dictionary<string, string> pageDict = new Dictionary<string, string>();
 		protected string _includeFootnoteCaller;
 		protected string _includeXRefCaller;
@@ -188,7 +188,10 @@ namespace SIL.PublishingSolution
 			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
 			ColumnHeaderAddLocalization();
 		}
-
+		public ConfigurationToolBL(ConfigurationTool ctool):this()
+		{
+			 cTool = ctool;
+		}
 		private static void ColumnHeaderAddLocalization()
 		{
 			if (!Common.Testing)
@@ -3914,7 +3917,7 @@ namespace SIL.PublishingSolution
 			cTool.DdlPageNumber.Items.Clear();
 			cTool.DdlReferenceFormat.Items.Clear();
 
-			ReloadPageNumberLocList();
+			ReloadPageNumberLocList(GetDdlRunningHead(), cTool);
 
 			if (cTool.DdlPageNumber.Items.Count > 0)
 				cTool.DdlPageNumber.SelectedIndex = 0;
@@ -3985,8 +3988,11 @@ namespace SIL.PublishingSolution
         {
             try
             {
-                _centerTitleHeader = cTool.ChkCenterTitleHeader.Checked;
-                ReloadPageNumberLocList();
+	            if (cTool != null)
+	            {
+		            _centerTitleHeader = cTool.ChkCenterTitleHeader.Checked;
+		            ReloadPageNumberLocList(GetDdlRunningHead(), cTool);
+	            }
             }
             catch { }
         }
@@ -3994,14 +4000,15 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Based on checkbox "Center title in Header" selection, The "Top Center option will be removed/added
         /// </summary>
-	    private void ReloadPageNumberLocList()
+		public void ReloadPageNumberLocList(string pageType, ConfigurationTool cTool)
 	    {
-	        string pageType = GetDdlRunningHead();
+	        //string pageType = GetDdlRunningHead();
 	        string xPath = "//features/feature[@name='Page Number']/option[@type='" + pageType + "' or @type= 'Both']";
-            string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
+            const string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
 	        XmlNodeList pageNumList = Param.GetItems(xPath);
-            _TitleText = Param.GetItem(titlePath).InnerText;
-	        cTool.DdlPageNumber.Items.Clear();
+	        if (!Common.Testing)
+		        _TitleText = Param.GetItem(titlePath).InnerText;
+			cTool.DdlPageNumber.Items.Clear();
 	        foreach (XmlNode node in pageNumList)
 	        {
 	            if (node.Attributes != null)
@@ -4012,7 +4019,7 @@ namespace SIL.PublishingSolution
 	                    string enText = value;
 	                    value = LocalizeItems.LocalizeItem("Page Number", value);
 						if ((_centerTitleHeader && enText.ToLower() == "top center") || 
-							(cTool.DdlRunningHead.Text.ToLower() == "mirrored" && enText.ToLower() == "top outside margin"))
+							(cTool.DdlRunningHead.SelectedItem.ToString().ToLower() == "mirrored" && enText.ToLower() == "top outside margin"))
 	                        continue;
 						if (enText.ToLower() == "none" && cTool.DdlRunningHead.Text.ToLower() == "none")
 						{
