@@ -1,0 +1,2068 @@
+div[lang='zxx']{ font-family: "Charis SIL";}
+span[lang='zxx']{ font-family: "Charis SIL";}
+@page{ font-family: "Charis SIL";}
+
+div[lang='aai']{ font-family: "Charis SIL"; font-size: 14pt;}
+span[lang='aai']{ font-family: "Charis SIL";}
+
+.id
+{
+font-size: 12pt;
+}
+
+.ide
+{
+font-size: 12pt;
+}
+
+.h
+{
+font-size: 12pt;
+}
+
+.h1
+{
+font-size: 12pt;
+}
+
+.h2
+{
+font-size: 12pt;
+}
+
+.h3
+{
+font-size: 12pt;
+}
+
+.scrBookCode
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+font-weight: bold;
+color: #400000;
+}
+
+.scrBookName
+{
+display: none;
+font-size: 12pt;
+font-style: italic;
+color: #400000;
+}
+
+.toc3
+{
+font-size: 12pt;
+font-weight: bold;
+font-style: italic;
+color: #800000;
+}
+
+.rem
+{
+font-size: 12pt;
+color: #ff0000;
+}
+
+.sts
+{
+font-size: 12pt;
+color: #ff0000;
+}
+
+.restore
+{
+font-size: 12pt;
+color: #ff0000;
+}
+
+.imt
+{
+font-size: 14pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.imt1
+{
+font-size: 14pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.imt2
+{
+font-size: 13pt;
+font-style: italic;
+text-align: center;
+padding-top: 6pt;
+padding-bottom: 3pt;
+}
+
+.imt3
+{
+font-size: 12pt;
+font-weight: bold;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 2pt;
+}
+
+.imt4
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 2pt;
+}
+
+.imte
+{
+font-size: 20pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.imte1
+{
+font-size: 20pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.imte2
+{
+font-size: 16pt;
+font-style: italic;
+text-align: center;
+padding-bottom: 2 pt;
+}
+
+.is
+{
+font-size: 14pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.is1
+{
+font-size: 14pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.is2
+{
+font-size: 12pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.iot
+{
+font-size: 12pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.io
+{
+font-size: 12pt;
+margin-left: .5pt;
+}
+
+.io1
+{
+font-size: 12pt;
+margin-left: .5pt;
+}
+
+.io2
+{
+font-size: 12pt;
+margin-left: .75pt;
+}
+
+.io3
+{
+font-size: 12pt;
+margin-left: 1pt;
+}
+
+.io4
+{
+font-size: 12pt;
+margin-left: 1.25pt;
+}
+
+.ior
+{
+font-size: 12pt;
+}
+
+.ip
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+
+.im
+{
+font-size: 12pt;
+}
+
+.ipi
+{
+font-size: 12pt;
+text-indent: .125pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.imi
+{
+font-size: 12pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.ili
+{
+font-size: 12pt;
+margin-left: .5pt;
+text-indent: -.375pt;
+}
+
+.ili1
+{
+font-size: 12pt;
+margin-left: .5pt;
+text-indent: -.375pt;
+}
+
+.ili2
+{
+font-size: 12pt;
+margin-left: .75pt;
+text-indent: -.375pt;
+}
+
+.ipq
+{
+font-size: 12pt;
+margin-left: .25pt;
+margin-right: .25pt;
+text-indent: .125pt;
+font-style: italic;
+}
+
+.imq
+{
+font-size: 12pt;
+margin-left: .25pt;
+margin-right: .25pt;
+font-style: italic;
+}
+
+.ipr
+{
+font-size: 12pt;
+margin-left: .25pt;
+margin-right: .25pt;
+text-align: right;
+font-style: italic;
+}
+
+.ib
+{
+font-size: 10pt;
+}
+
+.iq
+{
+font-size: 12pt;
+margin-left: 1pt;
+text-indent: -.75pt;
+font-style: italic;
+}
+
+.iq1
+{
+font-size: 12pt;
+margin-left: 1pt;
+text-indent: -.75pt;
+font-style: italic;
+}
+
+.iq2
+{
+font-size: 12pt;
+margin-left: 1pt;
+text-indent: -.5pt;
+font-style: italic;
+}
+
+.iq3
+{
+font-size: 12pt;
+margin-left: 1pt;
+text-indent: -.25pt;
+font-style: italic;
+}
+
+.iex
+{
+font-size: 12pt;
+text-indent: .125pt;
+padding-top: 4pt;
+padding-bottom: 4pt;
+}
+
+.iqt
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.ie
+{
+font-size: 10pt;
+}
+
+.Chapter_Number
+{
+font-weight: bold;
+font-size: 18pt;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.ca
+{
+font-style: italic;
+font-size: 16pt;
+color: #228b22;
+}
+
+.cp
+{
+font-weight: bold;
+font-size: 18pt;
+padding-top: 8pt;
+padding-bottom: 4pt;
+color: #ff0000;
+}
+
+.cl
+{
+font-weight: bold;
+font-size: 18pt;
+padding-top: 8pt;
+padding-bottom: 4pt;
+text-align: center;
+}
+
+.cd
+{
+font-size: 11pt;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.Verse_Number
+{
+font-size: 12pt;
+vertical-align: super;
+}
+
+.va
+{
+font-size: 12pt;
+vertical-align: super;
+color: #228b22;
+}
+
+.vp
+{
+font-size: 12pt;
+vertical-align: super;
+color: #ff0000;
+}
+
+.Paragraph
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+
+.Paragraph_Continuation
+{
+font-size: 12pt;
+}
+
+.pmo
+{
+font-size: 12pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pm
+{
+font-size: 12pt;
+text-indent: .125pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pmc
+{
+font-size: 12pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pmr
+{
+font-size: 12pt;
+text-align: right;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pi
+{
+font-size: 12pt;
+text-indent: .125pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pi1
+{
+font-size: 12pt;
+text-indent: .125pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.pi2
+{
+font-size: 12pt;
+text-indent: .125pt;
+margin-left: .5pt;
+margin-right: .25pt;
+}
+
+.pi3
+{
+font-size: 12pt;
+text-indent: .125pt;
+margin-left: .75pt;
+margin-right: .25pt;
+}
+
+.pc
+{
+text-align: center;
+font-size: 12pt;
+}
+
+.mi
+{
+font-size: 12pt;
+margin-left: .25pt;
+margin-right: .25pt;
+}
+
+.nb
+{
+font-size: 12pt;
+}
+
+.cls
+{
+font-size: 12pt;
+text-align: right;
+}
+
+.q
+{
+font-size: 12pt;
+margin-left: 1.25pt;
+text-indent: -1pt;
+}
+
+.Line1
+{
+font-size: 12pt;
+margin-left: 1.25pt;
+text-indent: -1pt;
+}
+
+.Line2
+{
+font-size: 12pt;
+margin-left: 1.25pt;
+text-indent: -.75pt;
+}
+
+.q3
+{
+font-size: 12pt;
+margin-left: 1.25pt;
+text-indent: -.5pt;
+}
+
+.q4
+{
+font-size: 12pt;
+margin-left: 1.25pt;
+text-indent: -.25pt;
+}
+
+.qc
+{
+font-size: 12pt;
+text-align: center;
+}
+
+.qr
+{
+font-size: 12pt;
+text-align: right;
+}
+
+.qs
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.qa
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.qac
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.qm
+{
+font-size: 12pt;
+margin-left: 1pt;
+text-indent: -.75pt;
+}
+
+.qm1
+{
+font-size: 12pt;
+margin-left: 1pt;
+text-indent: -.75pt;
+}
+
+.qm2
+{
+font-size: 12pt;
+margin-left: 1pt;
+text-indent: -.5pt;
+}
+
+.qm3
+{
+font-size: 12pt;
+margin-left: 1pt;
+text-indent: -.25pt;
+}
+
+.b
+{
+font-size: 10pt;
+}
+
+.mt
+{
+font-size: 20pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.Title_Main
+{
+font-size: 20pt;
+font-weight: bold;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 4pt;
+}
+
+.Title_Secondary
+{
+font-size: 16pt;
+font-style: italic;
+text-align: center;
+padding-bottom: 2pt;
+}
+
+.mt3
+{
+font-size: 16pt;
+font-weight: bold;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 2pt;
+}
+
+.mt4
+{
+font-size: 12pt;
+text-align: center;
+padding-top: 2pt;
+padding-bottom: 2pt;
+}
+
+.mte
+{
+font-size: 20pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.mte1
+{
+font-size: 20pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.mte2
+{
+font-size: 16pt;
+font-style: italic;
+text-align: center;
+padding-bottom: 2pt;
+}
+
+.ms
+{
+font-size: 14pt;
+font-weight: bold;
+text-align: center;
+padding-top: 16pt;
+padding-bottom: 4pt;
+}
+
+.ms1
+{
+font-size: 14pt;
+font-weight: bold;
+text-align: center;
+padding-top: 16pt;
+padding-bottom: 4pt;
+}
+
+.ms2
+{
+font-size: 14pt;
+font-weight: bold;
+text-align: center;
+padding-top: 16pt;
+padding-bottom: 4pt;
+}
+
+.ms3
+{
+font-size: 14pt;
+font-style: italic;
+text-align: center;
+padding-top: 16pt;
+padding-bottom: 4pt;
+}
+
+.mr
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+padding-bottom: 4pt;
+}
+
+.Section_Head
+{
+font-size: 12pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.s1
+{
+font-size: 12pt;
+font-weight: bold;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.s2
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.s3
+{
+font-size: 12pt;
+font-style: italic;
+text-align: left;
+padding-top: 6pt;
+padding-bottom: 3pt;
+}
+
+.s4
+{
+font-size: 12pt;
+font-style: italic;
+text-align: left;
+padding-top: 6pt;
+padding-bottom: 3pt;
+}
+
+.sr
+{
+font-size: 12pt;
+font-weight: bold;
+text-align: center;
+padding-bottom: 4pt;
+}
+
+.Parallel_Passage_Reference
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+padding-bottom: 4pt;
+}
+
+.sp
+{
+font-size: 12pt;
+font-style: italic;
+text-align: left;
+padding-top: 8pt;
+padding-bottom: 4pt;
+}
+
+.d
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+padding-top: 4pt;
+padding-bottom: 4pt;
+}
+
+.tr
+{
+font-size: 12pt;
+margin-left: .5pt;
+text-indent: -.25pt;
+}
+
+.th1
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.th2
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.th3
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.th4
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.th5
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.tc1
+{
+font-size: 12pt;
+}
+
+.tc2
+{
+font-size: 12pt;
+}
+
+.tc3
+{
+font-size: 12pt;
+}
+
+.tc4
+{
+font-size: 12pt;
+}
+
+.tc5
+{
+font-size: 12pt;
+}
+
+.thc1
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+}
+
+.thc2
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+}
+
+.thc3
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+}
+
+.thc4
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+}
+
+.thc5
+{
+font-size: 12pt;
+font-style: italic;
+text-align: center;
+}
+
+.tcc1
+{
+font-size: 12pt;
+text-align: center;
+}
+
+.tcc2
+{
+font-size: 12pt;
+text-align: center;
+}
+
+.tcc3
+{
+font-size: 12pt;
+text-align: center;
+}
+
+.tcc4
+{
+font-size: 12pt;
+text-align: center;
+}
+
+.tcc5
+{
+font-size: 12pt;
+text-align: center;
+}
+
+.thr1
+{
+font-size: 12pt;
+font-style: italic;
+text-align: right;
+}
+
+.thr2
+{
+font-size: 12pt;
+font-style: italic;
+text-align: right;
+}
+
+.thr3
+{
+font-size: 12pt;
+font-style: italic;
+text-align: right;
+}
+
+.thr4
+{
+font-size: 12pt;
+font-style: italic;
+text-align: right;
+}
+
+.thr5
+{
+font-size: 12pt;
+font-style: italic;
+text-align: right;
+}
+
+.tcr1
+{
+font-size: 12pt;
+text-align: right;
+}
+
+.tcr2
+{
+font-size: 12pt;
+text-align: right;
+}
+
+.tcr3
+{
+font-size: 12pt;
+text-align: right;
+}
+
+.tcr4
+{
+font-size: 12pt;
+text-align: right;
+}
+
+.tcr5
+{
+font-size: 12pt;
+text-align: right;
+}
+
+.li
+{
+font-size: 12pt;
+margin-left: .5pt;
+text-indent: -.375pt;
+}
+
+.li1
+{
+font-size: 12pt;
+margin-left: .5pt;
+text-indent: -.375pt;
+}
+
+.li2
+{
+font-size: 12pt;
+margin-left: .75pt;
+text-indent: -.375pt;
+}
+
+.li3
+{
+font-size: 12pt;
+margin-left: 1pt;
+text-indent: -.375pt;
+}
+
+.li4
+{
+font-size: 12pt;
+margin-left: 1.25pt;
+text-indent: -.375pt;
+}
+
+.Note_General_Paragraph
+{
+font-size: 12pt;
+}
+
+.fe
+{
+font-size: 12pt;
+}
+
+.Note_Target_Reference
+{
+font-size: 12pt;
+font-weight: bold;
+}
+
+.ft
+{
+font-size: 12pt;
+}
+
+.fk
+{
+font-size: 12pt;
+font-weight: bold;
+font-style: italic;
+}
+
+.Alternate_Reading
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.fqa
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.fl
+{
+font-size: 12pt;
+font-style: italic;
+font-weight: bold;
+}
+
+.fp
+{
+font-size: 12pt;
+}
+
+.fv
+{
+font-size: 12pt;
+vertical-align: super;
+}
+
+.fdc
+{
+font-size: 12pt;
+}
+
+.fm
+{
+font-size: 12pt;
+vertical-align: super;
+}
+
+.x
+{
+font-size: 12pt;
+}
+
+.xo
+{
+font-size: 12pt;
+font-weight: bold;
+}
+
+.xt
+{
+font-size: 12pt;
+}
+
+.xk
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.xq
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.xot
+{
+font-size: 12pt;
+}
+
+.xnt
+{
+font-size: 12pt;
+}
+
+.xdc
+{
+font-size: 12pt;
+}
+
+.rq
+{
+font-size: 10pt;
+font-style: italic;
+}
+
+.qt
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.NameOfGod
+{
+font-size: 12pt;
+text-decoration: underline;
+}
+
+.tl
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.dc
+{
+font-style: italic;
+}
+
+.bk
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.sig
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.pn
+{
+font-size: 12pt;
+font-weight: bold;
+text-decoration: underline;
+}
+
+.addpn
+{
+font-size: 12pt;
+font-weight: bold;
+font-style: italic;
+text-decoration: underline;
+}
+
+.wj
+{
+font-size: 12pt;
+color: #ff0000;
+}
+
+.k
+{
+font-size: 12pt;
+font-style: italic;
+font-weight: bold;
+}
+
+.sls
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.ord
+{
+font-size: 12pt;
+vertical-align: super;
+}
+
+.add
+{
+font-weight: bold;
+font-style: italic;
+}
+
+.lit
+{
+text-align: right;
+font-size: 12pt;
+font-weight: bold;
+}
+
+.no
+{
+font-size: 12pt;
+}
+
+.it
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.bd
+{
+font-size: 12pt;
+font-weight: bold;
+}
+
+.bdit
+{
+font-size: 12pt;
+font-weight: bold;
+font-style: italic;
+}
+
+.em
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.Inscription
+{
+font-size: 12pt;
+}
+
+.pb
+{
+font-size: 12pt;
+}
+
+.fig
+{
+font-size: 12pt;
+}
+
+.pro
+{
+font-size: 10pt;
+}
+
+.See_In_Glossary
+{
+font-size: 12pt;
+}
+
+.wh
+{
+font-size: 12pt;
+}
+
+.wg
+{
+font-size: 12pt;
+}
+
+.ndx
+{
+font-size: 12pt;
+}
+
+.periph
+{
+font-size: 14pt;
+font-weight: bold;
+padding-top: 16pt;
+padding-bottom: 4pt;
+color: #80ff00;
+}
+
+.p1
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+
+.p2
+{
+font-size: 12pt;
+text-indent: .125pt;
+margin-left: .125pt;
+}
+
+.k1
+{
+font-size: 12pt;
+}
+
+.k2
+{
+font-size: 12pt;
+}
+
+.xtSee
+{
+font-size: 12pt;
+font-style: italic;
+color: #ff0000;
+}
+
+.xtSeeAlso
+{
+font-size: 12pt;
+font-style: italic;
+color: #ff0000;
+}
+
+.pr
+{
+text-align: right;
+font-size: 12pt;
+}
+
+.ph
+{
+margin-left: .5pt;
+text-indent: -.25pt;
+font-size: 12pt;
+}
+
+.ph1
+{
+margin-left: .5pt;
+text-indent: -.25pt;
+font-size: 12pt;
+}
+
+.ph2
+{
+margin-left: .75pt;
+text-indent: -.25pt;
+font-size: 12pt;
+}
+
+.ph3
+{
+margin-left: 1pt;
+text-indent: -.25pt;
+font-size: 12pt;
+}
+
+.phi
+{
+margin-left: 1pt;
+}
+
+.tr1
+{
+font-size: 12pt;
+margin-left: .5pt;
+text-indent: -.25pt;
+}
+
+.tr2
+{
+font-size: 12pt;
+margin-left: .75pt;
+text-indent: -.25pt;
+}
+
+.ps
+{
+font-size: 12pt;
+text-indent: .125pt;
+}
+
+.psi
+{
+text-indent: .125pt;
+margin-left: .25pt;
+margin-right: .25pt;
+font-size: 12pt;
+}
+
+.fs
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.wr
+{
+font-size: 12pt;
+font-style: italic;
+}
+
+.pub
+{
+font-size: 10pt;
+}
+
+.toc
+{
+font-size: 10pt;
+}
+
+.pref
+{
+font-size: 10pt;
+}
+
+.intro
+{
+font-size: 10pt;
+}
+
+.conc
+{
+font-size: 10pt;
+}
+
+.glo
+{
+font-size: 10pt;
+}
+
+.idx
+{
+font-size: 10pt;
+}
+
+.maps
+{
+font-size: 10pt;
+}
+
+.cov
+{
+font-size: 10pt;
+}
+
+.spine
+{
+font-size: 10pt;
+}
+
+.pubinfo
+{
+font-size: 12pt;
+color: #ff0000;
+}
+
+.zpa-xb
+{
+font-size: 12pt;
+}
+
+.zpa-xc
+{
+font-size: 12pt;
+font-weight: bold;
+}
+
+.zpa-xv
+{
+font-size: 12pt;
+}
+
+.zpa-d
+{
+font-size: 12pt;
+}
+
+.scrBody
+{
+direction: ltr;
+font-family: "Charis SIL";
+}
+
+
+/** imported styles from from epub_Scripture.css **/
+
+body {
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: --> from BaseFontSize
+   line-height: --> from DefaultLineHeight
+*/
+font-weight: normal;
+font-style: normal;
+}
+.Alternate_Reading {
+    font-style: italic;
+    display: inline;
+    list-style-position: inside;
+}
+.border {
+    border-top : 0.5pt solid #808080;
+    text-align : center;
+    margin-left : 1in;
+    margin-right : 1in;
+    margin-top : 9pt;
+    margin-bottom : 18pt;
+    content : "&nbsp;";
+}
+.Chapter_Head {
+    padding-top:21pt;
+    padding-bottom:21pt;
+}
+.Chapter_Number {
+    line-height: 85%;
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: -->  from ChapterNumbers
+   width: --> if ChapterNumbers is set to left margin
+   padding-right, padding-left: --> from ChapterNumbers
+*/
+}
+.Emphasis, .it {
+    font-style: italic;	/* cascaded environment */
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.footnotes {
+    border-top: 1px solid #ccc;
+    padding-top: 1%;
+    margin-top: 1%;
+    padding-left: 0;
+    margin-left : 4%;
+    margin-right: 4%;
+    list-style: none;
+}
+.Inscription {
+    font-weight: bold;	/* cascaded environment */
+    font-style: normal;	/* cascaded environment */
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 0pt;
+    padding-top: 0pt;
+    margin-top: 1%;
+    margin-bottom: .5%;
+}
+.Inscription_Paragraph {
+    text-indent: .2in;
+    margin-left: 0pt;
+}
+.Intro_List_Item1, .List_Item1 {
+    text-indent : -1%;
+    margin-left : 5%;
+    margin-right: 5%;
+}
+.Intro_List_Item2, .List_Item2 {
+    text-indent : 0pt;
+    margin-left : 5%;
+    margin-right: 5%;
+}
+.Intro_Paragraph {
+    text-indent : 1%;
+    margin-left : 4%;
+    margin-right: 4%;
+}
+
+.Intro_Title_Main {
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 8pt;
+	padding-bottom: 4pt;
+}
+
+.Intro_Title_Secondary {
+	font-size: 13pt;
+	font-style: italic;
+	text-align: center;
+	padding-top: 6pt;
+	padding-bottom: 3pt;
+}
+.Intro_Section_Head {
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 8pt;
+	padding-bottom: 4pt;
+}
+.REVERSE_SOLIDUSCitation_Line1, .Citation_Line1, .Line1 {
+    margin-left : 6%;
+    margin-right: 4%;
+    text-indent : -1%;
+    padding-left : 0;
+}
+.REVERSE_SOLIDUSCitation_Line2, .Citation_Line2, .Line2 {
+    margin-left : 6%;
+    margin-right: 4%;
+    text-indent : -1%;
+    padding-left : 0;
+}
+.REVERSE_SOLIDUSCitation_Line3, .Citation_Line3, .Line3 {
+    margin-left : 6%;
+    margin-right: 4%;
+    text-indent : 0;
+    padding-left : 0;
+}
+.REVERSE_SOLIDUS2, .REVERSE_SOLIDUScom, .REVERSE_SOLIDUSCom, .REVERSE_SOLIDUSEllaFULL_STOP,
+.REVERSE_SOLIDUSsl, .REVERSE_SOLIDUSv1, .REVERSE_SOLIDUSv14, .REVERSE_SOLIDUSv15,
+.REVERSE_SOLIDUSv19, .REVERSE_SOLIDUSv20, .REVERSE_SOLIDUSv8 {
+    text-indent: 0pt;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+.Note_CrossHYPHENReference_Paragraph {
+    text-indent : 0;
+    margin-left : 0;
+    display : inline;
+    list-style-position : inside;
+}
+.Endnote_General_Paragraph,
+.Note_General_Paragraph {
+    text-indent : 0;
+    margin-left : 0;
+    padding-left: 2px;
+    display : inline;
+    list-style-position : inside;
+    line-height:80%;
+}
+.Endnote_General_Paragraph span,
+.Note_General_Paragraph span {
+    display: none;
+    visibility: hidden;
+}
+.Paragraph {
+    text-indent : 1%;
+    margin-left : 4%;
+    margin-right: 4%;
+    text-align:left;
+}
+.Paragraph_Continuation {
+    text-indent : 0;
+    margin-left : 4%;
+    margin-right: 4%;
+}
+.Paragraph1 {
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   margin-left: --> from ChapterNumbers
+*/
+    text-align:left;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.Parallel_Passage_Reference, .Parallel_Passage_Reference {  
+    font-style: italic;
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    margin-top: 0pt;
+    margin-bottom: 3pt;	
+}
+.scrBook {
+    clear: both;
+}
+/* hidden items */
+.rem, .Verse_Number1, .scrBookCode {
+    display : none;
+    visibility: hidden;
+}
+.scrBookName{
+    visibility: hidden;
+}
+.scrIntroSection {
+    text-align: left;
+}
+.scrSection {
+    text-align: left;
+}
+.Section_Head {
+    font-weight : bold;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    margin-bottom: 0;
+    padding-bottom : 1%;
+    padding-top : 2%;
+}
+.Section_Head_Major {
+    font-weight : bold;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 4%;
+    margin-right: 4%;
+    margin-top : 8pt;
+}
+.Section_Head_Minor {
+    font-weight : bold;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 4%;
+    margin-right: 4%;
+    margin-top : 8pt;
+}
+.See_In_Glossary {
+    color: blue;
+    background-color:inherit;
+}
+.Stanza_Break {
+    text-indent : 0;
+    margin-left : 0;
+    height: .9em;
+    content: "&nbsp;";
+}
+.Title_Main {
+    font-weight : bold;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    padding-bottom : 2%;
+    padding-top : 2%;
+    line-height:125%;
+}
+.Title_Secondary {
+    display: block;
+    font-weight : normal;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    padding-bottom : 2%;
+    padding-top : 1%;
+}
+.Title_Tertiary {
+    font-weight : normal;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    padding-bottom : 1%;
+    padding-top : 1%;
+}
+.Verse_Number {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Verse_Number_In_Note {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Front_Matter {
+margin-left : 4%;
+margin-right: 4%;
+text-align: left;
+}
+
+.li
+{
+margin-left: .5pt;
+text-indent: 33pt;
+}
+
+.iot{
+text-align: center;
+font-weight : bold;
+page-break-after:avoid;
+widows:2;
+font-family: inherit;
+}
+
+.Intro_List_Item1 {
+    text-indent: 6%;
+}
+.Glossary_Key{
+    font-size: 12pt;
+}
+.Glossary_Keyvalue {
+    font-weight : bold;
+    font-style : italic;
+    font-size: 12pt;
+}
+.Glossaryvaluehref{    
+    font-weight : bold;
+    font-style : italic;
+    font-size: 12pt;
+}
+.Foreign{
+    font-style : italic;
+    font-size: 12pt;
+}
+
+.chapternumberlink{ 
+font-size: 0.9em; 
+line-height: 1.25em; 
+vertical-align: top; 
+background-color: rgb(255, 200, 255); 
+border-radius: 1em; 
+width: 1.25em; 
+height: 1.25em; 
+text-align: center; 
+display: inline-block; 
+text-indent: 0; 
+font-family: sans-serif;
+ }
+/** imported styles from epub_Pictures.css **/
+
+.pictureRight {
+    float : right;
+    text-align : center;
+    margin: 0px 0px 5px 5px;
+    text-indent: 0px;
+}
+.pictureLeft {
+    float : left;
+    position : relative;
+    left : -2pc;
+    text-align : center;
+    margin: 0px 5px 5px 0px;
+    text-indent: 0px;
+}
+.pictureCenter {
+    clear : both;
+    text-align : center;
+    margin-top : 1%;
+    margin: 0px 5px 5px 0px;
+    text-indent: 0px;
+}
+.pictureCaption {
+    font-size : 80%;
+    font-weight : normal;
+    font-style : italic;
+    display : block;
+    text-align : center;
+    margin-bottom : .5%;
+}
+.pictureColumn {
+    float: right;
+    width: 100%;
+    margin: 0px 0px 5px 5px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+.picturePage {
+    clear: both;
+    width: 100%;
+    margin: 0px 5px 5px 0px;
+    margin-left: 0px;
+    text-indent: 0px;
+    text-align: center;
+}
+span.reference :before {
+	content: "(";
+}
+span.reference :after {
+	content: ")";
+}
+/** imported styles from from FrontMatter.css **/
+
+em {
+    font-weight: normal;
+    font-style: normal;
+}
+a {
+    white-space: nowrap;
+}
+table {
+    margin-bottom: 1em;
+}
+td {
+    vertical-align: middle;
+    padding: 8px;
+}
+h1 {
+    font-size: 125%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+#TitlePage h1 {
+    font-size: 250%;
+    margin-top: 2em;
+    text-align: center;
+    line-height: 125%;
+}
+h2 {
+    font-size: 110%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+.ccimg {
+    width: 32px;
+    height: 32px;
+}
+p {
+    margin-top: .5em;
+    margin-bottom: 1em;
+}
+#Logo {
+    padding-top: 0.5em;
+}
+.Publisher {
+    padding-top: 6em;
+    font-size: 80%;
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.logo {
+    text-align: center;
+    padding-top: .5em;
+    margin-top: 0;
+}
+.Contents ul a::after {
+  content: leader('.') target-counter(attr(href), page);
+}
+.Contents ul {
+    list-style-type: none;
+}
+#TitlePage{
+   text-align: center;
+}
+.dicBody{
+   margin-left : 10px;
+   margin-right: 10px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+/** imported styles from from epub_FontSize.css **/
+
+/*
+*  For the .epub format, each style is based on a percentage of the
+*  body element (which is set programmatically in the epubExport. Setting
+*  these values explicitly allows us to override the merged settings.
+*/
+
+.columns {
+    font-size: 100%;	/* cascaded environment */
+}
+.Chapter_Head {
+    font-size:150%;
+}
+.Chapter_Number {
+    font-size: 250%;
+}
+.Endnote_General_Paragraph,
+.Note_General_Paragraph {
+    font-size : 80%;
+}
+.footnotes {
+    font-size: 85%;
+}
+.Inscription {
+    font-size: 95%;
+}
+.Inscription_Paragraph {
+    font-size: 95%;
+}
+.Intro_List_Item1, .List_Item1 {
+    font-size: 95%;
+}
+.Intro_List_Item2, .List_Item2 {
+    font-size: 95%;
+}
+.Intro_Paragraph {
+    font-size: 95%;
+    line-height: inherit;
+}
+.Intro_Section_Head {
+    font-size: 95%;
+}
+.Citation_Line1, .Line1 {
+    font-size: 100%;
+}
+.Citation_Line2, .Line2 {
+    font-size: 100%;
+}
+.Note_CrossHYPHENReference_Paragraph {
+    font-size: 90%;
+}
+.Note_General_Paragraph {
+    font-size: 90%;
+}
+.Paragraph {
+    font-size: 100%;
+}
+.Paragraph_Continuation {
+    font-size: 100%;
+}
+.Paragraph1 {
+    font-size: 100%;
+}
+.Parallel_Passage_Reference {
+    font-size: 75%;
+}
+.REVERSE_SOLIDUS2, .REVERSE_SOLIDUScom, .REVERSE_SOLIDUSCom, .REVERSE_SOLIDUSEllaFULL_STOP,
+.REVERSE_SOLIDUSsl, .REVERSE_SOLIDUSv1, .REVERSE_SOLIDUSv14, .REVERSE_SOLIDUSv15,
+.REVERSE_SOLIDUSv19, .REVERSE_SOLIDUSv20, .REVERSE_SOLIDUSv8 {
+    font-size: 90%;
+}
+.Section_Head {
+    font-size: 95%;
+}
+.Section_Head_Major {
+    font-size: 100%;
+}
+.Section_Head_Minor {
+    font-size: 100%;
+}
+.Stanza_Break {
+    font-size: 100%;
+}
+.Title_Main {
+    font-size: 250%;
+}
+.Title_Secondary {
+    font-size: 125%;
+}
+.Title_Tertiary {
+    font-size: 100%;
+}
+.Verse_Number {
+    font-size: 30%;
+}
+.Verse_Number_In_Note {
+    font-size: 30%;
+}
+div[lang='aai']{ font-family: "Charis SIL"; font-size: 14pt;}
+span[lang='aai']{ font-family: "Charis SIL";}
+
+.scrBody
+{
+direction: ltr;
+font-family: "Charis SIL";
+}
+

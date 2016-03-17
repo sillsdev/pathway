@@ -1922,6 +1922,10 @@ namespace SIL.Tool
                     XmlNode o = nodeList[i];
                     if (o == null || o.Attributes["class"] == null)
                         continue;
+
+	                if (string.IsNullOrEmpty(o.InnerText) && string.IsNullOrEmpty(o.InnerXml))
+		                o.Attributes["class"].Value = "EmptyTag";
+
                     string a = o.Attributes["class"].Value;
                     if (a.ToLower().IndexOf("section_head") >= 0)
                     {
