@@ -199,6 +199,21 @@ namespace Test.PsTool
 			TextFileAssert.AreEqual(expected, output, fileName + " in CSS ");
 		}
 
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void HideVerseNumberOneExport()
+		{
+			const string fileName = "HideVerseNumberOne.xhtml";
+			var input = GetFileNameWithPath(fileName);
+			var output = GetFileNameWithOutputPath(fileName);
+			CopyToOutput(input, output);
+			preExportProcess = new PreExportProcess();
+			preExportProcess.ChangeVerseNumberOneStyleWhenHide("Scripture", input);
+			string expected = GetFileNameWithExpectedPath(fileName);
+			TextFileAssert.AreEqual(expected, output, fileName + " in XHTML ");
+		}
+
 
         #region private Methods
         private static string GetPath(string place, string filename)

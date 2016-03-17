@@ -2034,7 +2034,44 @@ namespace SIL.Tool
             return docFrag;
         }
 
-        public string InsertHiddenVerseNumber()
+		/// <summary>
+		/// Method to change the Verse_number style which contains "1", it happens when we choose "Hide Verse No. 1" in Pathway Configuration Tool
+		/// </summary>
+		/// <inputType>Dictionary/Scripture</inputType>
+		/// <xhtmlFilePath>XHTML File Path</xhtmlFilePath>
+		/// <returns>Modified XHTML file path</returns>
+	    public string ChangeVerseNumberOneStyleWhenHide(string inputType, string xhtmlFilePath)
+	    {
+			if (inputType.ToLower() == "dictionary") return xhtmlFilePath;
+			//Change Verse_Number to Verse_Number1 in XHTML File
+			XmlDocument xDoc = Common.DeclareXMLDocument(true);
+			xDoc.Load(xhtmlFilePath);
+		    const string xPath = "//div[@class='Paragraph']/span[@class='Verse_Number'][text()='1']";
+			XmlNodeList nodeList = xDoc.SelectNodes(xPath);
+		    if (nodeList != null && nodeList.Count > 0)
+		    {
+				foreach (XmlNode verseNode in nodeList)
+				{
+					if (verseNode.Attributes != null) verseNode.Attributes["class"].Value = verseNode.Attributes["class"].Value + "1";
+				}
+		    }
+			xDoc.Save(xhtmlFilePath);
+
+			//Add CSS for to Hide verse number one
+			if (File.Exists(_cssFileNameWithPath))
+			{
+				TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
+				tw.WriteLine(".Verse_Number1 {");
+				tw.WriteLine("font-size: 0.1pt;");
+				tw.WriteLine("visibility: hidden;");
+				tw.WriteLine("}");
+				tw.Close();
+			}
+
+			return xhtmlFilePath;
+	    }
+
+	    public string InsertHiddenVerseNumber()
         {
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
             xDoc.Load(_xhtmlFileNameWithPath);
@@ -3097,16 +3134,6 @@ namespace SIL.Tool
         public void InsertKeepWithNextOnStyles(string _cssFileNameWithPath)
         {
             TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
-            tw.WriteLine(".Section_Head {");
-            tw.WriteLine("page-break-after:avoid;");
-            tw.WriteLine("orphans:2;");
-            tw.WriteLine("}");
-
-            tw.WriteLine(".iot {");
-            tw.WriteLine("page-break-after:avoid;");
-            tw.WriteLine("widows:2;");
-            tw.WriteLine("}");
-
             tw.WriteLine(".Front_Matter {");
             tw.WriteLine("margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;");
             tw.WriteLine("}");
@@ -3120,6 +3147,16 @@ namespace SIL.Tool
 
             if (_projInfo.ProjectInputType.ToLower() == "scripture")
             {
+				tw.WriteLine(".Section_Head {");
+				tw.WriteLine("page-break-after:avoid;");
+				tw.WriteLine("orphans:2;");
+				tw.WriteLine("}");
+
+				tw.WriteLine(".iot {");
+				tw.WriteLine("page-break-after:avoid;");
+				tw.WriteLine("widows:2;");
+				tw.WriteLine("}");
+
                 tw.WriteLine(".scrBookName {");
                 tw.WriteLine("display: inline;");
                 tw.WriteLine("font-size: 0pt;");
