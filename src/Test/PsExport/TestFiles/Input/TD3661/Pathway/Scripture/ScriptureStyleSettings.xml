@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="39">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="42">
   <settings>
     <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
@@ -33,11 +33,7 @@
     <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s" />
     <property name="Media" value="paper" />
   </defaultSettings>
-  <features>
-    <!--feature name="Booklet">
-            <option name="Yes" file=""/>
-            <option name="No" file=""/>
-        </feature-->
+  <features>   
     <feature name="Justified">
       <option name="Yes" file="Justified_Yes.css" />
       <option name="No" file="Justified_No.css" />
@@ -112,11 +108,7 @@
       <option name="24" file="Leading_24.css" />
       <option name="26" file="Leading_26.css" />
       <option name="No Change" file="Leading_nc.css" />
-    </feature>
-    <!-- feature name="Footnotes / Cross References">
-            <option name="Bottom of page" file=""/>
-            <option name="End of book" file=""/>
-        </feature -->
+    </feature>  
     <feature name="Pictures">
       <option name="Yes" file="Pictures_Yes.css" />
       <option name="No" file="Pictures_No.css" />

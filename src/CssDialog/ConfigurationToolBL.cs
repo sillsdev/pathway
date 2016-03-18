@@ -563,10 +563,10 @@ namespace SIL.PublishingSolution
 				string result;
 				string task = "pictureRight";
 				string key = "display";
-				string display = GetValue(task, key, "Frame");
+				string display = GetValue(task, key, "Yes");
 				if (display == "block")
 				{
-					result = "Paragraph";
+					result = "Yes";
 				}
 				else if (display == "none")
 				{
@@ -574,7 +574,7 @@ namespace SIL.PublishingSolution
 				}
 				else
 				{
-					result = "Frame";
+					result = "Yes";
 				}
 				return result;
 			}
