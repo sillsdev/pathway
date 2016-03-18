@@ -340,3 +340,7 @@ content: " ";}
 	font-family: "Charis SIL";
 	font-size: 24pt;
 }
+
+.Chapter_Number {
+    string-set: chapter content();
+}
