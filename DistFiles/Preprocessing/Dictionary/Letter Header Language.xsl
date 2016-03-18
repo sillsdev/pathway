@@ -38,5 +38,13 @@
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
-
+    <xsl:template match="div[@class='letter']">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:attribute name="lang">
+                <xsl:value-of select="(parent::*/following-sibling::*[1]//span/@lang)[1]"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
 </xsl:stylesheet>

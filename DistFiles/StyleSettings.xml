@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="39">
+    xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="42">
     <settings>
         <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="OutputPath" value="%(AppData)s/SIL/Pathway"/>
         <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway"/>
-        <property name="PublicationLocation"
-            value="%(Documents)s/Publications/%(CurrentProject)s/Dictionary"/>
+        <property name="PublicationLocation" value="%(Documents)s/Publications/%(CurrentProject)s/Dictionary"/>
         <property name="MasterSheetPath" value="Styles/Dictionary"/>
         <property name="IconPath" value="Icons"/>
         <property name="SamplePath" value="Samples/Dictionary"/>
@@ -23,7 +22,7 @@
         <property name="PrintVia" value="OpenOffice/LibreOffice"/>
         <property name="ConfigureDictionary" value="True"/>
         <property name="ReversalIndexes" value="True"/>
-        <property name="Preprocessing" value="" />		
+        <property name="Preprocessing" value=""/>
         <property name="GrammerSketch" value="False"/>
         <property name="LayoutSelected" value="Draft"/>
         <property name="ExtraProcessing" value="True"/>
@@ -35,9 +34,8 @@
         <property name="GrammerSketch" value="False"/>
         <property name="LayoutSelected" value="Draft"/>
         <property name="ExtraProcessing" value="True"/>
-        <property name="Preprocessing" value="" />		
-        <property name="PublicationLocation"
-            value="%(Documents)s/Publications/%(CurrentProject)s/Dictionary"/>
+        <property name="Preprocessing" value=""/>
+        <property name="PublicationLocation" value="%(Documents)s/Publications/%(CurrentProject)s/Dictionary"/>
     </defaultSettings>
     <features>
         <feature name="Justified">
@@ -61,22 +59,22 @@
     </roles>
     <styles>
         <paper>
-            <style name="Draft" file="Layout_01.css"  shown="Yes">
+            <style name="Draft" file="Layout_01.css" shown="Yes">
                 <description> Single column draft 11pt A4 with drop capital </description>
             </style>
         </paper>
         <mobile>
-            <style name="Go Bible" file="GoBible.css" approvedBy="GPS"  shown="Yes">
+            <style name="Go Bible" file="GoBible.css" approvedBy="GPS" shown="Yes">
                 <description>Text only, no section heads or cross references</description>
             </style>
         </mobile>
         <web>
-            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS"  shown="Yes">
+            <style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS" shown="Yes">
                 <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
             </style>
         </web>
         <others>
-            <style name="EBook (epub)" file="epub.css" approvedBy="GPS"  shown="Yes">
+            <style name="EBook (epub)" file="epub.css" approvedBy="GPS" shown="Yes">
                 <description>1 column flowed text, left aligned, 13pt font</description>
             </style>
         </others>
@@ -94,57 +92,57 @@
     </Organizations>
     <Metadata>
         <meta name="Title" outputTypes="all">
-            <defaultValue></defaultValue>
-            <currentValue></currentValue>
-            <PreviousProjectName></PreviousProjectName>
+            <defaultValue/>
+            <currentValue/>
+            <PreviousProjectName/>
         </meta>
         <meta name="Creator" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Publisher" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Description" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Copyright Holder" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Type" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Source" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Format" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Contributor" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Relation" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Coverage" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Subject" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Date" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Language" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Identifier" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Cover Page" outputTypes="epub">
             <defaultValue>Yes</defaultValue>
         </meta>
         <meta name="Cover Page Filename" outputTypes="epub">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Cover Page Title" outputTypes="epub">
             <defaultValue>Yes</defaultValue>
@@ -156,7 +154,7 @@
             <defaultValue>No</defaultValue>
         </meta>
         <meta name="Copyright Page Filename" outputTypes="all">
-            <defaultValue></defaultValue>
+            <defaultValue/>
         </meta>
         <meta name="Table of Contents" outputTypes="all">
             <defaultValue>false</defaultValue>

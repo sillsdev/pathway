@@ -376,7 +376,7 @@
     <AllTransform Include="Xhtml-Usx.xsl" />
     <AllTransform Include="Xhtml2BookNames.xsl" />
     <AllTransform Include="StyleMap.xml" />
-    <BteTransform Include="TE_XHTML-to-epub_XHTML.xslt" />
+    <AllTransform Include="Xhtml-Epub.xslt" />
     <BteTransform Include="*.xslt" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
     <UsfmConvert Include="..\lib\ParatextShared.dll;..\..\lib\NetLoc.dll" />

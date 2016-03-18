@@ -24,7 +24,7 @@ namespace SIL.Tool
         bool isNodeFound = false;
         XmlNode returnNode = null;
         private string _skipChapterInformation = null;
-
+	    public int pictureCount = 0;
         public const string CoverPageFilename = "File0Cvr.xhtml";
         public const string TitlePageFilename = "File1Ttl.xhtml";
         public const string CopyrightPageFilename = "File2Cpy.xhtml";
@@ -1353,7 +1353,7 @@ namespace SIL.Tool
                     XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
                     if (nodeList.Count > 0)
                     {
-                        var counter = 1;
+						pictureCount = 1;
                         foreach (XmlNode item in nodeList)
                         {
                             var name = item.Attributes.GetNamedItem("src");
@@ -1367,17 +1367,17 @@ namespace SIL.Tool
                                     if (File.Exists(fromFileName))
                                     {
                                         string ext = Path.GetExtension(fromFileName);
-                                        string toFileName = Common.PathCombine(tempFolder, counter + ext);
+										string toFileName = Common.PathCombine(tempFolder, pictureCount + ext);
                                         File.Copy(fromFileName, toFileName, true);
 
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;
                                         item.Attributes.Append(xa);
-                                        name.Value = counter + ext;
+										name.Value = pictureCount + ext;
                                     }
                                 }
                             }
-                            counter++;
+							pictureCount++;
                         }
                     }
                     try
@@ -1412,11 +1412,11 @@ namespace SIL.Tool
                     XmlNodeList nodeList = xmldoc.GetElementsByTagName(tag);
                     if (nodeList.Count > 0)
                     {
-                        var counter = 1;
+						pictureCount = 1;
                         int imgCount = nodeList.Count;
                         for (int i = 0; i < imgCount; i++)
                         {
-                            XmlNode item = nodeList[counter - 1];
+							XmlNode item = nodeList[pictureCount - 1];
                             var name = item.Attributes.GetNamedItem("src");
                             if (name != null)
                             {
@@ -1428,7 +1428,7 @@ namespace SIL.Tool
                                     {
                                         string ext = Path.GetExtension(fromFileName);
 
-                                        string toFileName = Common.PathCombine(tempFolder, counter + ext);
+										string toFileName = Common.PathCombine(tempFolder, pictureCount + ext);
                                         File.Copy(fromFileName, toFileName, true);
                                         if (isInDesign)
                                         {
@@ -1437,21 +1437,21 @@ namespace SIL.Tool
                                             {
                                                 Directory.CreateDirectory(pictureFolderPath);
                                             }
-                                            toFileName = Common.PathCombine(pictureFolderPath, counter + ext);
+											toFileName = Common.PathCombine(pictureFolderPath, pictureCount + ext);
                                             File.Copy(fromFileName, toFileName, true);
                                         }
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;
                                         item.Attributes.Append(xa);
-                                        name.Value = counter + ext;
-                                        counter++;
+										name.Value = pictureCount + ext;
+										pictureCount++;
                                     }
                                     else
                                     {
-                                        var parentNode = nodeList[counter - 1].ParentNode;
+										var parentNode = nodeList[pictureCount - 1].ParentNode;
                                         if (parentNode != null)
                                         {
-                                            parentNode.RemoveChild(nodeList[counter - 1]);
+											parentNode.RemoveChild(nodeList[pictureCount - 1]);
                                         }
                                         if (parentNode != null)
                                         {
@@ -1922,6 +1922,10 @@ namespace SIL.Tool
                     XmlNode o = nodeList[i];
                     if (o == null || o.Attributes["class"] == null)
                         continue;
+
+	                if (string.IsNullOrEmpty(o.InnerText) && string.IsNullOrEmpty(o.InnerXml))
+		                o.Attributes["class"].Value = "EmptyTag";
+
                     string a = o.Attributes["class"].Value;
                     if (a.ToLower().IndexOf("section_head") >= 0)
                     {
@@ -2030,7 +2034,44 @@ namespace SIL.Tool
             return docFrag;
         }
 
-        public string InsertHiddenVerseNumber()
+		/// <summary>
+		/// Method to change the Verse_number style which contains "1", it happens when we choose "Hide Verse No. 1" in Pathway Configuration Tool
+		/// </summary>
+		/// <inputType>Dictionary/Scripture</inputType>
+		/// <xhtmlFilePath>XHTML File Path</xhtmlFilePath>
+		/// <returns>Modified XHTML file path</returns>
+	    public string ChangeVerseNumberOneStyleWhenHide(string inputType, string xhtmlFilePath)
+	    {
+			if (inputType.ToLower() == "dictionary") return xhtmlFilePath;
+			//Change Verse_Number to Verse_Number1 in XHTML File
+			XmlDocument xDoc = Common.DeclareXMLDocument(true);
+			xDoc.Load(xhtmlFilePath);
+		    const string xPath = "//div[@class='Paragraph']/span[@class='Verse_Number'][text()='1']";
+			XmlNodeList nodeList = xDoc.SelectNodes(xPath);
+		    if (nodeList != null && nodeList.Count > 0)
+		    {
+				foreach (XmlNode verseNode in nodeList)
+				{
+					if (verseNode.Attributes != null) verseNode.Attributes["class"].Value = verseNode.Attributes["class"].Value + "1";
+				}
+		    }
+			xDoc.Save(xhtmlFilePath);
+
+			//Add CSS for to Hide verse number one
+			if (File.Exists(_cssFileNameWithPath))
+			{
+				TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
+				tw.WriteLine(".Verse_Number1 {");
+				tw.WriteLine("font-size: 0.1pt;");
+				tw.WriteLine("visibility: hidden;");
+				tw.WriteLine("}");
+				tw.Close();
+			}
+
+			return xhtmlFilePath;
+	    }
+
+	    public string InsertHiddenVerseNumber()
         {
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
             xDoc.Load(_xhtmlFileNameWithPath);
@@ -3093,16 +3134,6 @@ namespace SIL.Tool
         public void InsertKeepWithNextOnStyles(string _cssFileNameWithPath)
         {
             TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
-            tw.WriteLine(".Section_Head {");
-            tw.WriteLine("page-break-after:avoid;");
-            tw.WriteLine("orphans:2;");
-            tw.WriteLine("}");
-
-            tw.WriteLine(".iot {");
-            tw.WriteLine("page-break-after:avoid;");
-            tw.WriteLine("widows:2;");
-            tw.WriteLine("}");
-
             tw.WriteLine(".Front_Matter {");
             tw.WriteLine("margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;");
             tw.WriteLine("}");
@@ -3116,6 +3147,16 @@ namespace SIL.Tool
 
             if (_projInfo.ProjectInputType.ToLower() == "scripture")
             {
+				tw.WriteLine(".Section_Head {");
+				tw.WriteLine("page-break-after:avoid;");
+				tw.WriteLine("orphans:2;");
+				tw.WriteLine("}");
+
+				tw.WriteLine(".iot {");
+				tw.WriteLine("page-break-after:avoid;");
+				tw.WriteLine("widows:2;");
+				tw.WriteLine("}");
+
                 tw.WriteLine(".scrBookName {");
                 tw.WriteLine("display: inline;");
                 tw.WriteLine("font-size: 0pt;");

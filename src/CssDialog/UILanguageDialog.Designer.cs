@@ -145,7 +145,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.btnOk, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.btnOk, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.btnOk, "UILanguageDialog.UILanguageDialog.btnOk");
-			this.btnOk.Location = new System.Drawing.Point(247, 160);
+			this.btnOk.Location = new System.Drawing.Point(246, 163);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 28);
 			this.btnOk.TabIndex = 4;
@@ -159,7 +159,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.btnCancel, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.btnCancel, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.btnCancel, "UILanguageDialog.UILanguageDialog.btnCancel");
-			this.btnCancel.Location = new System.Drawing.Point(328, 160);
+			this.btnCancel.Location = new System.Drawing.Point(328, 163);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 28);
 			this.btnCancel.TabIndex = 5;
@@ -195,9 +195,9 @@ namespace SIL.PublishingSolution
 			this.linkLabel1.AutoSize = true;
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.linkLabel1, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.linkLabel1, null);
-			this.l10NSharpExtender1.SetLocalizationPriority(this.linkLabel1, L10NSharp.LocalizationPriority.NotLocalizable);
+			this.l10NSharpExtender1.SetLocalizationPriority(this.linkLabel1, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.linkLabel1, "UILanguageDialog.UILanguageDialog.linkLabel1");
-			this.linkLabel1.Location = new System.Drawing.Point(6, 168);
+			this.linkLabel1.Location = new System.Drawing.Point(6, 136);
 			this.linkLabel1.Name = "linkLabel1";
 			this.linkLabel1.Size = new System.Drawing.Size(231, 13);
 			this.linkLabel1.TabIndex = 2;
@@ -223,20 +223,19 @@ namespace SIL.PublishingSolution
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(228, 149);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(228, 112);
 			this.tableLayoutPanel1.TabIndex = 12;
 			// 
 			// UILanguageDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSize = true;
-			this.ClientSize = new System.Drawing.Size(415, 200);
-			this.Controls.Add(this.tableLayoutPanel1);
-			this.Controls.Add(this.groupBox1);
+			this.ClientSize = new System.Drawing.Size(415, 197);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOk);
+			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.linkLabel1);
+			this.Controls.Add(this.groupBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
@@ -270,6 +269,6 @@ namespace SIL.PublishingSolution
         private System.Windows.Forms.Button btnCancel;
         private L10NSharp.UI.L10NSharpExtender l10NSharpExtender1;
         private GroupBox groupBox1;
-        private TableLayoutPanel tableLayoutPanel1;
+		private TableLayoutPanel tableLayoutPanel1;
     }
 }

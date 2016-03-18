@@ -1731,38 +1731,48 @@ namespace SIL.Tool
 			return headerFontWeight;
 		}
 
-		public static string GetHeaderFontSize(Dictionary<string, Dictionary<string, string>> _cssProperty) //TD-2815
+		/// <summary>
+		/// Method to set the header font-size based in the selection from the ConfigurationTool
+		/// If user select font-size, it will goes as it is.
+		/// If user select "Same as headword" in Dictionary, It copy the "headword" font size
+		/// If user select "Same as body" in Dictionary,  It copy the "entry" font-size
+		/// If user select "Same as section (\s)" in Scripture, It copy the "SectionHead" font size
+		/// If user select "Same as body" in Scripture, It copy the "Paragraph" font-size
+		/// </summary>
+		/// <param name="_cssProperty">Css property collection</param>
+		/// <param name="projectInputType">Dictionary/Scripture</param>
+		/// <returns>font-size for header, by default it sets as 12</returns>
+		public static string GetHeaderFontSize(Dictionary<string, Dictionary<string, string>> _cssProperty, string projectInputType) //TD-2815
 		{
-			string headerFontSize = "12";
-			if (_cssProperty.ContainsKey("@page") && _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
+			const string defFontSize = "12pt";
+			if (_cssProperty.ContainsKey("@page") && _cssProperty["@page"].ContainsKey("-ps-header-font-size"))
 			{
-				if (_cssProperty.ContainsKey("@page:left-top-center") &&
-						_cssProperty["@page:left-top-center"].ContainsKey("font-size"))
+				string headerFontSize = _cssProperty["@page"]["-ps-header-font-size"];
+				int i;
+				if (!int.TryParse(headerFontSize, out i))
 				{
-					headerFontSize = _cssProperty["@page:left-top-center"]["font-size"];
-				}
-				else if (_cssProperty.ContainsKey("@page-top-center") &&
-				_cssProperty["@page-top-center"].ContainsKey("font-size"))
-				{
-					headerFontSize = _cssProperty["@page-top-center"]["font-size"];
-				}
-				if (string.IsNullOrEmpty(headerFontSize))
-				{
-					if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-size"))
+					string optionText = "same as headword";
+					string clsName;
+					if (projectInputType.ToLower() == "dictionary")
 					{
-						headerFontSize = _cssProperty["entry"]["font-size"];
+						clsName = headerFontSize.ToLower() == optionText ? "headword" : "entry";
+						if (_cssProperty.ContainsKey(clsName) && _cssProperty[clsName].ContainsKey("font-size"))
+						{
+							return _cssProperty[clsName]["font-size"] + "pt";
+						}
+					}
+					else
+					{
+						optionText = "same as section (\\s)";
+						clsName = headerFontSize.ToLower() == optionText ? "SectionHead" : "Paragraph";
+						if (_cssProperty.ContainsKey(clsName) && _cssProperty[clsName].ContainsKey("font-size"))
+						{
+							return _cssProperty[clsName]["font-size"] + "pt";
+						}
 					}
 				}
 			}
-			else if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("font-size"))
-			{
-				headerFontSize = _cssProperty["entry"]["font-size"];
-			}
-			else if (_cssProperty.ContainsKey("Paragraph") && _cssProperty["Paragraph"].ContainsKey("font-size"))
-			{
-				headerFontSize = _cssProperty["Paragraph"]["font-size"];
-			}
-			return headerFontSize;
+			return defFontSize;
 		}
 
 		#region StreamReplaceInFile(string filePath, string searchText, string replaceText)

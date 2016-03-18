@@ -1274,10 +1274,12 @@ namespace SIL.PublishingSolution
 
 		private void ddlRunningHead_SelectedIndexChanged(object sender, EventArgs e)
 		{
-
-			string pageType = ((ComboBoxItem)ddlRunningHead.SelectedItem).Value;
-			_cToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
-			EditCSS(sender, e);
+			if (!Common.Testing)
+			{
+				string pageType = ((ComboBoxItem) ddlRunningHead.SelectedItem).Value;
+				_cToolBL.DdlRunningHeadSelectedIndexChangedBl(pageType);
+				EditCSS(sender, e);
+			}
 		}
 
 		private void ddlTocLevel_SelectedIndexChanged(object sender, EventArgs e)
@@ -1495,6 +1497,24 @@ namespace SIL.PublishingSolution
             EditCSS(sender, e);
             _cToolBL.chkCenterTitleHeader_CheckStateChangedBL();
         }
+
+		private void txtBaseFontSize_KeyUp(object sender, KeyEventArgs e)
+		{
+			_cToolBL.SetModifyMode(true);
+			_cToolBL.txtBaseFontSize_ValidatedBL(sender);
+		}
+
+		private void txtDefaultLineHeight_KeyUp(object sender, KeyEventArgs e)
+		{
+			_cToolBL.SetModifyMode(true);
+			_cToolBL.txtDefaultLineHeight_ValidatedBL(sender);
+		}
+
+		private void txtMaxImageWidth_KeyUp(object sender, KeyEventArgs e)
+		{
+			_cToolBL.SetModifyMode(true);
+			_cToolBL.txtMaxImageWidth_ValidatedBL(sender);
+		}
 
 	}
 }

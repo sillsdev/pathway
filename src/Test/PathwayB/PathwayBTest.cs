@@ -375,6 +375,44 @@ namespace Test
             RunPathwayB(InputFormat.USFM, "*", "KFY", "KFY", "Scripture", "E-Book (Epub2 and Epub3)", "usfmTest");
         }
 
+		/// <summary>
+        /// Tests USFM conversion from the command line. Currently the PathwayB module uses reflection to call into ParatextShared.dll. For this
+        /// to pass, you need to have ParatextShared.dll and NetLoc.dll in your Pathway installation directory.
+        /// </summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void ScriptureEpubExportTest()
+        {
+            // clean out old files
+            foreach (var file in Directory.GetFiles(_outputPath))
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
+            if (Directory.Exists(Common.PathCombine(_outputPath, "gather")))
+            {
+                // delete the gather subdirectory files as well
+                foreach (var file in Directory.GetFiles(Common.PathCombine(_outputPath, "gather")))
+                {
+                    File.Delete(file);
+                }
+            }
+            // Copy the files
+			var projPath = Common.PathCombine(_inputPath, "aaiNT");
+            //if (Directory.Exists(Common.PathCombine(projPath, "gather")))
+            DirectoryCopy(projPath, _outputPath, true);
+            // Copy Settings
+            var targetSettings = Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pathway");
+            if (Directory.Exists(targetSettings))
+            {
+                Directory.Delete(targetSettings, true);
+            }
+            DirectoryCopy(Common.PathCombine(_inputPath, "Pathway"), targetSettings, true);
+            // run the test
+			RunPathwayB(InputFormat.USFM, "*", "aaiNT", "aaiNT", "Scripture", "E-Book (Epub2 and Epub3)", "usfmTest");
+        }
+
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]

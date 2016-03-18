@@ -453,7 +453,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "18pt"),
                 new ODet(ODet.Chk, "entry background", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:background-color", "transparent"),
                 new ODet(ODet.Chk, "entry alignment", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-align", "left"),
-                new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "0pt"),
+                new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
                 new ODet(ODet.Chk, "entry indent", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-indent", "-12pt"),
                 new ODet(ODet.Chk, "headword font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-family", "Times New Roman"),
                 new ODet(ODet.Chk, "headword complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-name-complex", "Times New Roman"),
@@ -563,7 +563,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "18pt"),
                 new ODet(ODet.Chk, "entry background", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:background-color", "transparent"),
                 new ODet(ODet.Chk, "entry alignment", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-align", "left"),
-                new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "0pt"),
+                new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
                 new ODet(ODet.Chk, "entry indent", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-indent", "-12pt"),
                 new ODet(ODet.Chk, "headword font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-family", "Charis SIL"),
                 new ODet(ODet.Chk, "headword complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-name-complex", "Charis SIL"),
@@ -664,7 +664,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "letter header complex font size", ODet.Rev, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "18pt"),
                 new ODet(ODet.Chk, "entry background", ODet.Rev, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:background-color", "transparent"),
                 new ODet(ODet.Chk, "entry alignment", ODet.Rev, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-align", "left"),
-                new ODet(ODet.Chk, "entry left margin", ODet.Rev, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "0pt"),
+                new ODet(ODet.Chk, "entry left margin", ODet.Rev, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
                 new ODet(ODet.Chk, "entry indent", ODet.Rev, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-indent", "-12pt"),
                 new ODet(ODet.Chk, "reversalform font", ODet.Rev, ODet.Styles, "//style:style[@style:name='reversalform_entry_letData_dicBody']//@fo:font-family", "Times New Roman"),
                 new ODet(ODet.Chk, "reversalform complex font", ODet.Rev, ODet.Styles, "//style:style[@style:name='reversalform_entry_letData_dicBody']//@style:font-name-complex", "Times New Roman"),
@@ -956,7 +956,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "18pt"),
                 new ODet(ODet.Chk, "entry background", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:background-color", "transparent"),
                 new ODet(ODet.Chk, "entry alignment", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-align", "left"),
-                new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "0pt"),
+                new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
                 new ODet(ODet.Chk, "entry indent", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-indent", "-12pt"),
                 new ODet(ODet.Chk, "headword font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-family", "Doulos SIL"),
                 new ODet(ODet.Chk, "headword complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-name-complex", "Doulos SIL"),
@@ -1107,5 +1107,31 @@ namespace Test.PsExport
             Assert.AreEqual(3, files.Length);
             XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "Preprocess produced different results");
         }
+
+		[Test]
+		public void XsltPreProcessLetterHeaderLanguageTest()
+		{
+			DataType = "Dictionary";
+			const string data = "main.xhtml";
+			var infile = TestDataSetup("Pre3", data);
+			Param.Value["Preprocessing"] = "Letter Header Language";
+			XsltPreProcess(infile);
+			var files = Directory.GetFiles(_outputTestPath, "*.*");
+			Assert.AreEqual(2, files.Length);
+			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "main Preprocess produced different results");
+		}
+
+		[Test]
+		public void XsltPreProcessReversalLetterHeaderLanguageTest()
+		{
+			DataType = "Dictionary";
+			const string data = "FlexRev.xhtml";
+			var infile = TestDataSetup("Pre3", data);
+			Param.Value["Preprocessing"] = "Letter Header Language";
+			XsltPreProcess(infile);
+			var files = Directory.GetFiles(_outputTestPath, "*.*");
+			Assert.AreEqual(2, files.Length);
+			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "FlexRev Preprocess produced different results");
+		}
     }
 }

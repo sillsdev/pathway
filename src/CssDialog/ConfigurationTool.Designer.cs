@@ -340,7 +340,7 @@ namespace SIL.PublishingSolution
 			this.stylesGrid.RowHeadersVisible = false;
 			this.stylesGrid.RowTemplate.Height = 24;
 			this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.stylesGrid.Size = new System.Drawing.Size(415, 731);
+			this.stylesGrid.Size = new System.Drawing.Size(414, 657);
 			this.stylesGrid.TabIndex = 0;
 			this.stylesGrid.TabStop = false;
 			this.stylesGrid.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.stylesGrid_ColumnWidthChanged);
@@ -2037,6 +2037,8 @@ namespace SIL.PublishingSolution
 			this.txtMaxImageWidth.Name = "txtMaxImageWidth";
 			this.txtMaxImageWidth.Size = new System.Drawing.Size(45, 20);
 			this.txtMaxImageWidth.TabIndex = 8;
+			this.txtMaxImageWidth.Enter += new System.EventHandler(this.SetGotFocusValue);
+			this.txtMaxImageWidth.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMaxImageWidth_KeyUp);
 			this.txtMaxImageWidth.Validated += new System.EventHandler(this.txtMaxImageWidth_Validated);
 			// 
 			// lblPx
@@ -2088,6 +2090,7 @@ namespace SIL.PublishingSolution
 			this.ddlDefaultAlignment.Size = new System.Drawing.Size(103, 21);
 			this.ddlDefaultAlignment.TabIndex = 6;
 			this.ddlDefaultAlignment.SelectedIndexChanged += new System.EventHandler(this.ddlDefaultAlignment_SelectedIndexChanged);
+			this.ddlDefaultAlignment.Enter += new System.EventHandler(this.SetGotFocusValue);
 			// 
 			// flowLayoutPanel3
 			// 
@@ -2124,6 +2127,8 @@ namespace SIL.PublishingSolution
 			this.txtBaseFontSize.Name = "txtBaseFontSize";
 			this.txtBaseFontSize.Size = new System.Drawing.Size(45, 20);
 			this.txtBaseFontSize.TabIndex = 2;
+			this.txtBaseFontSize.Enter += new System.EventHandler(this.SetGotFocusValue);
+			this.txtBaseFontSize.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBaseFontSize_KeyUp);
 			this.txtBaseFontSize.Validated += new System.EventHandler(this.txtBaseFontSize_Validated);
 			// 
 			// lblPct
@@ -2301,6 +2306,7 @@ namespace SIL.PublishingSolution
 			this.ddlReferences.Size = new System.Drawing.Size(164, 21);
 			this.ddlReferences.TabIndex = 14;
 			this.ddlReferences.SelectedIndexChanged += new System.EventHandler(this.ddlReferences_SelectedIndexChanged);
+			this.ddlReferences.Enter += new System.EventHandler(this.SetGotFocusValue);
 			// 
 			// lblReferences
 			// 
@@ -2429,6 +2435,7 @@ namespace SIL.PublishingSolution
 			this.ddlTocLevel.Size = new System.Drawing.Size(210, 21);
 			this.ddlTocLevel.TabIndex = 10;
 			this.ddlTocLevel.SelectedIndexChanged += new System.EventHandler(this.ddlTocLevel_SelectedIndexChanged);
+			this.ddlTocLevel.Enter += new System.EventHandler(this.SetGotFocusValue);
 			// 
 			// lblTocLevel
 			// 
@@ -2469,6 +2476,7 @@ namespace SIL.PublishingSolution
 			this.ddlChapterNumbers.Size = new System.Drawing.Size(164, 21);
 			this.ddlChapterNumbers.TabIndex = 12;
 			this.ddlChapterNumbers.SelectedIndexChanged += new System.EventHandler(this.ddlChapterNumbers_SelectedIndexChanged);
+			this.ddlChapterNumbers.Enter += new System.EventHandler(this.SetGotFocusValue);
 			// 
 			// txtDefaultLineHeight
 			// 
@@ -2480,6 +2488,8 @@ namespace SIL.PublishingSolution
 			this.txtDefaultLineHeight.Name = "txtDefaultLineHeight";
 			this.txtDefaultLineHeight.Size = new System.Drawing.Size(45, 20);
 			this.txtDefaultLineHeight.TabIndex = 4;
+			this.txtDefaultLineHeight.Enter += new System.EventHandler(this.SetGotFocusValue);
+			this.txtDefaultLineHeight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDefaultLineHeight_KeyUp);
 			this.txtDefaultLineHeight.Validated += new System.EventHandler(this.txtDefaultLineHeight_Validated);
 			// 
 			// lblChapterNumbers
@@ -3240,7 +3250,7 @@ namespace SIL.PublishingSolution
 			this.label2.Location = new System.Drawing.Point(94, 1);
 			this.label2.Margin = new System.Windows.Forms.Padding(0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(424, 23);
+			this.label2.Size = new System.Drawing.Size(423, 23);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Stylesheets";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3253,7 +3263,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblInfoCaption, "ConfigurationTool.lblInfoCaption");
-			this.lblInfoCaption.Location = new System.Drawing.Point(519, 1);
+			this.lblInfoCaption.Location = new System.Drawing.Point(518, 1);
 			this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
 			this.lblInfoCaption.Name = "lblInfoCaption";
 			this.lblInfoCaption.Size = new System.Drawing.Size(341, 23);
@@ -3281,7 +3291,7 @@ namespace SIL.PublishingSolution
 			this.TLPanelOuter.ColumnCount = 3;
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 356F));
+			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 357F));
 			this.TLPanelOuter.Controls.Add(this.label2, 1, 0);
 			this.TLPanelOuter.Controls.Add(this.TLPanel1, 0, 1);
 			this.TLPanelOuter.Controls.Add(this.lblInfoCaption, 2, 0);
@@ -3296,7 +3306,7 @@ namespace SIL.PublishingSolution
 			this.TLPanelOuter.RowCount = 2;
 			this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
 			this.TLPanelOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLPanelOuter.Size = new System.Drawing.Size(876, 763);
+			this.TLPanelOuter.Size = new System.Drawing.Size(876, 689);
 			this.TLPanelOuter.TabIndex = 19;
 			// 
 			// TLPanel1
@@ -3458,8 +3468,8 @@ namespace SIL.PublishingSolution
 			this.TLPanel2.Name = "TLPanel2";
 			this.TLPanel2.RowCount = 1;
 			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 525F));
-			this.TLPanel2.Size = new System.Drawing.Size(418, 731);
+			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 731F));
+			this.TLPanel2.Size = new System.Drawing.Size(417, 657);
 			this.TLPanel2.TabIndex = 4;
 			// 
 			// TLPanel3
@@ -3468,14 +3478,14 @@ namespace SIL.PublishingSolution
 			this.TLPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 331F));
 			this.TLPanel3.Controls.Add(this.panel3, 0, 1);
 			this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
-			this.TLPanel3.Location = new System.Drawing.Point(522, 28);
+			this.TLPanel3.Location = new System.Drawing.Point(521, 28);
 			this.TLPanel3.MaximumSize = new System.Drawing.Size(331, 900);
 			this.TLPanel3.MinimumSize = new System.Drawing.Size(331, 0);
 			this.TLPanel3.Name = "TLPanel3";
 			this.TLPanel3.RowCount = 2;
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
 			this.TLPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
-			this.TLPanel3.Size = new System.Drawing.Size(331, 731);
+			this.TLPanel3.Size = new System.Drawing.Size(331, 657);
 			this.TLPanel3.TabIndex = 5;
 			// 
 			// panel3
@@ -3484,7 +3494,7 @@ namespace SIL.PublishingSolution
 			this.panel3.Location = new System.Drawing.Point(3, 44);
 			this.panel3.MaximumSize = new System.Drawing.Size(331, 800);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(325, 684);
+			this.panel3.Size = new System.Drawing.Size(325, 610);
 			this.panel3.TabIndex = 20;
 			// 
 			// lblType
@@ -3508,7 +3518,7 @@ namespace SIL.PublishingSolution
 			this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 793);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 719);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(876, 22);
 			this.statusStrip1.TabIndex = 20;
@@ -3532,7 +3542,7 @@ namespace SIL.PublishingSolution
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(876, 815);
+			this.ClientSize = new System.Drawing.Size(876, 741);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.TLPanelOuter);
 			this.Controls.Add(this.toolStripMain);

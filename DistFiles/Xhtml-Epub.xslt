@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Transform XHTML file exported from TE into a "flatter" XHTML to be used in making an .epub file. -->
-<!-- Note that this transform is meant to create a file that is neither chapter nor section-centric. -->
-<!-- ?xml version="1.0"? -->
+<!-- Transform Xhtml file of FieldWorks into a "flatter" Epub Xhtml schema -->
+<!-- For Scripture the output file is neither chapter nor section-centric. -->
 <!-- From Larry W.'s TE_XHTML-to-Phone_XHTML.xslt -->
-<!-- Modified October 6, 2010. -->
 
 <xsl:transform version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"

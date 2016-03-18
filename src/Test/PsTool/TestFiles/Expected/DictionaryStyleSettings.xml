@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="42">
   <settings>
     <property name="InputPath" value="" />
     <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
@@ -36,11 +36,7 @@
     <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s" />
     <property name="Media" value="paper" />
   </defaultSettings>
-  <features>
-    <!--feature name="Booklet">
-            <option name="Yes" file=""/>
-            <option name="No" file=""/>
-        </feature-->
+  <features>    
     <feature name="Justified">
       <option name="Yes" file="Justified_Yes.css" />
       <option name="No" file="Justified_No.css" />

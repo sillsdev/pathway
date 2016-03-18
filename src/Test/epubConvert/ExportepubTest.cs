@@ -572,6 +572,51 @@ namespace Test.epubConvert
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
+		public void ScriptureaaiProjectExportTest()
+		{
+			CleanOutputDirectory();
+			string inputDataFolder = Common.PathCombine(_inputPath, "aaiScriptureExportTest");
+			string outputDataFolder = Common.PathCombine(_outputPath, "aaiScriptureExportTest");
+			Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+
+			const string xhtmlName = "ebook.xhtml";
+			const string cssName = "ebook.css";
+			var projInfo = new PublicationInformation();
+			projInfo.ProjectInputType = "Scripture";
+			projInfo.ProjectPath = outputDataFolder;
+			projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDataFolder, xhtmlName);
+			projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
+			projInfo.ProjectName = "aaiScriptureExportTest";
+			Common.Testing = true;
+			var target = new Exportepub();
+			var actual = target.Export(projInfo);
+			Assert.IsTrue(actual);
+
+
+			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+			var zf = new FastZip();
+			zf.ExtractZip(result, FileOutput("aaiScriptureExportTest"), ".*");
+			var zfExpected = new FastZip();
+			result = Common.PathCombine(_expectedPath, "ebookExpected.epub");
+			zfExpected.ExtractZip(result, FileOutput("ebookExpected"), ".*");
+
+			string expectedFilesPath = FileOutput("ebookExpected");
+			expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
+			string[] filesList = Directory.GetFiles(expectedFilesPath);
+			foreach (var fileName in filesList)
+			{
+				var info = new FileInfo(fileName);
+				if (info.Extension == ".xhtml")
+				{
+					FileCompare("aaiScriptureExportTest/OEBPS/" + info.Name, "ebookExpected/OEBPS/" + info.Name);
+				}
+			}
+		}
+
+
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
 		public void XPathwayScriptureSettingTest()
 		{
 			_tf = new TestFiles("epubConvert");

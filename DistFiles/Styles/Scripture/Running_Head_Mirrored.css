@@ -6,7 +6,7 @@
 
 @top-left {
            
-content: string( guideword, first);
+content: string(bookname, first) " "  string(chapter, first);
            
 direction: ltr;
            
@@ -41,7 +41,7 @@ font-size: 12pt;
 
 @top-right  {
            
-content: string( guideword, last);
+content: string(bookname, last) " "  string(chapter, last);
            
 direction: ltr;
                       

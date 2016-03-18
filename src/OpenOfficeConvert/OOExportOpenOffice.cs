@@ -577,7 +577,7 @@ namespace SIL.PublishingSolution
             preProcessor.GetDefaultLanguage(projInfo);
             projInfo.DefaultXhtmlFileWithPath = preProcessor.PreserveSpace();
             InsertFrontMatter(projInfo);
-            preProcessor.MoveBookcodeFRTtoFront(projInfo.DefaultXhtmlFileWithPath);
+	        preProcessor.MoveBookcodeFRTtoFront(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.GetfigureNode();
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
             preProcessor.ArrangeImages();
@@ -587,6 +587,7 @@ namespace SIL.PublishingSolution
             CssTree cssTree = new CssTree();
             cssTree.OutputType = Common.OutputType.ODT;
             cssClass = cssTree.CreateCssProperty(cssFile, true);
+			HandleHideVerseNumberOne(cssClass, preProcessor, projInfo);
             SetHeaderFontName(projInfo, cssClass);
             HandledInCss(ref projInfo, ref cssClass);
             int pageWidth = GetPictureWidth(cssClass);
@@ -633,6 +634,7 @@ namespace SIL.PublishingSolution
 
             projInfo.TempOutputFolder += Path.DirectorySeparatorChar;
             cXML._multiLanguageHeader = isMultiLanguageHeader;
+			cXML.pictureCount = preProcessor.pictureCount;
 
             cXML.CreateStory(projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, pageWidth, pageSize);
             PostProcess(projInfo);
@@ -699,7 +701,22 @@ namespace SIL.PublishingSolution
             return returnValue;
         }
 
-        private static string EditCssValues(Dictionary<string, Dictionary<string, string>> idAllClass, out string isToc)
+		/// <summary>
+		/// Method to handle "Hide Verse No. 1" option, We do this using the "-ps-hide-versenumber-one = True"
+		/// </summary>
+		/// <param name="cssClass">CSS Dictionary</param>
+		/// <param name="preProcessor">PreExportProcess</param>
+		/// <param name="projinfo">PublicationInformation</param>
+	    private static void HandleHideVerseNumberOne(Dictionary<string, Dictionary<string, string>> cssClass, PreExportProcess preProcessor, PublicationInformation projinfo)
+		{
+			if (!cssClass.ContainsKey("@page") || !cssClass["@page"].ContainsKey("-ps-hide-versenumber-one")) return;
+			if (cssClass["@page"]["-ps-hide-versenumber-one"] == "True")
+			{
+				preProcessor.ChangeVerseNumberOneStyleWhenHide(projinfo.ProjectInputType, preProcessor.ProcessedXhtml);
+			}
+		}
+
+	    private static string EditCssValues(Dictionary<string, Dictionary<string, string>> idAllClass, out string isToc)
         {
             // Enable Table of content for macro
             isToc = "false";

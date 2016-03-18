@@ -71,15 +71,26 @@ namespace SIL.PublishingSolution
             try
 
             {
+				
                 pb = new Progress();
                 //get xsltFile from ExportThroughPathway.cs
-                XsltPreProcess(outFullName);
+				string revFileName = string.Empty;
+				var outDir = Path.GetDirectoryName(outFullName);
+				if (File.Exists(outFullName))
+	            {
+		            XsltPreProcess(outFullName);
+	            }
+				revFileName = Common.PathCombine(outDir, "FlexRev.xhtml");
+				if (File.Exists(revFileName))
+				{
+					XsltPreProcess(revFileName);
+				}
 
-                string supportPath = GetSupportPath();
+	            string supportPath = GetSupportPath();
 				Backend.Load(Common.ProgInstall);
                 LoadProgramSettings(supportPath);
                 LoadDataTypeSettings();
-                var outDir = Path.GetDirectoryName(outFullName);
+                
                 DefaultProjectFileSetup(outDir);
                 SubProcess.BeforeProcess(outFullName);
 
@@ -97,7 +108,7 @@ namespace SIL.PublishingSolution
 				SetPageCenterTitle(cssFullName);
                 _selectedCssFromTemplate = Path.GetFileNameWithoutExtension(cssFullName);
                 string fluffedCssFullName;
-                string revFileName = string.Empty;
+                
                 if (Path.GetFileNameWithoutExtension(outFullName) == "FlexRev")
                 {
                     fluffedCssFullName = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);

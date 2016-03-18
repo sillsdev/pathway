@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 using NUnit.Framework;
 using SIL.PublishingSolution;
@@ -195,7 +196,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlVerticalJustify.Text;
             Assert.AreEqual("Top", actual, "Grid vertical justify Test Failes");
             actual = cTool.DdlPicture.Text;
-            Assert.AreEqual("Frame", actual, "Grid picture Test Failes");
+            Assert.AreEqual("Yes", actual, "Grid picture Test Failes");
             actual = cTool.DdlLeading.Text;
             Assert.AreEqual("13", actual, "Grid leading Test Failes");
             actual = cTool.DdlRunningHead.Text;
@@ -260,7 +261,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlVerticalJustify.Text;
             Assert.AreEqual("Top", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlPicture.Text;
-            Assert.AreEqual("Frame", actual, "GridRowValueTest Test Failes");
+            Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlLeading.Text;
             Assert.AreEqual("13", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlRunningHead.Text;
@@ -356,7 +357,83 @@ namespace Test.UIConfigurationToolBLTest
             }
         }
 
-        private void GridRowCount_Load()
+		[Test]
+	    public void GetPageNumberListWhenEveryPage()
+		{
+			Common.Testing = true;
+			cTool = new ConfigurationTool();
+			cToolBL = new ConfigurationToolBL(cTool);
+			Param.LoadSettings();
+			var rHItem = new SIL.PublishingSolution.ComboBoxItem("Mirrored", "Mirrored");
+			cTool.DdlRunningHead.Items.Add(rHItem);
+			cTool.DdlRunningHead.SelectedItem = cTool.DdlRunningHead.Items[0];
+			ReloadPageNumberLocList("Every Page", cTool);
+			ComboBox result = cToolBL.cTool.DdlPageNumber;
+			var expected = new ComboBox();
+			var item = new SIL.PublishingSolution.ComboBoxItem("Top Center", "Top Center");
+			expected.Items.Add(item);
+			item = new SIL.PublishingSolution.ComboBoxItem("Bottom Center", "Bottom Center");
+			expected.Items.Add(item);
+			for (int i = 0; i < result.Items.Count; i++)
+			{
+				Assert.AreEqual(expected.Items[i].ToString(), result.Items[i].ToString(), String.Format("PageNumber[{0}] is loaded wrongly for EveryPage", expected.Items[i]));
+			}
+			Common.Testing = false;
+		}
+
+		[Test]
+		public void GetPageNumberListWhenMirrored()
+		{
+			Common.Testing = true;
+			cTool = new ConfigurationTool();
+			cToolBL = new ConfigurationToolBL(cTool);
+			Param.LoadSettings();
+			var rHItem = new SIL.PublishingSolution.ComboBoxItem("Mirrored", "Mirrored");
+			cTool.DdlRunningHead.Items.Add(rHItem);
+			cTool.DdlRunningHead.SelectedItem = cTool.DdlRunningHead.Items[0];
+			ReloadPageNumberLocList("Mirrored", cTool);
+			ComboBox result = cToolBL.cTool.DdlPageNumber;
+			var expected = new ComboBox();
+			var item = new SIL.PublishingSolution.ComboBoxItem("Top Inside Margin", "Top Inside Margin");
+			expected.Items.Add(item);
+			item = new SIL.PublishingSolution.ComboBoxItem("Top Center", "Top Center");
+			expected.Items.Add(item);
+			item = new SIL.PublishingSolution.ComboBoxItem("Bottom Inside Margin", "Bottom Inside Margin");
+			expected.Items.Add(item);
+			item = new SIL.PublishingSolution.ComboBoxItem("Bottom Outside Margin", "Bottom Outside Margin");
+			expected.Items.Add(item);
+			item = new SIL.PublishingSolution.ComboBoxItem("Bottom Center", "Bottom Center");
+			expected.Items.Add(item);
+			for (int i = 0; i < result.Items.Count; i++)
+			{
+				Assert.AreEqual(expected.Items[i].ToString(), result.Items[i].ToString(), String.Format("PageNumber[{0}] is loaded wrongly for Mirrored", expected.Items[i]));
+			}
+			Common.Testing = false;
+		}
+
+		[Test]
+		public void GetPageNumberListWhenNone()
+		{
+			Common.Testing = true;
+			cTool = new ConfigurationTool();
+			cToolBL = new ConfigurationToolBL(cTool);
+			Param.LoadSettings();
+			var rHItem = new SIL.PublishingSolution.ComboBoxItem("None", "None");
+			cTool.DdlRunningHead.Items.Add(rHItem);
+			cTool.DdlRunningHead.SelectedItem = cTool.DdlRunningHead.Items[0];
+			ReloadPageNumberLocList("None", cTool);
+			ComboBox result = cToolBL.cTool.DdlPageNumber;
+			var expected = new ComboBox();
+			var item = new SIL.PublishingSolution.ComboBoxItem("None", "None");
+			expected.Items.Add(item);
+			for (int i = 0; i < result.Items.Count; i++)
+			{
+				Assert.AreEqual(expected.Items[i].ToString(), result.Items[i].ToString(), String.Format("PageNumber[{0}] is loaded wrongly for None", expected.Items[i]));
+			}
+			Common.Testing = false;
+		}
+
+	    private void GridRowCount_Load()
         {
             const int expectedRowCount = 11;
             int rowCount = cTool.StylesGrid.Rows.Count;

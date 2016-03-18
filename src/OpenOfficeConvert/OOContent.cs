@@ -113,6 +113,7 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region Public Variable
+		public int pictureCount = 0;
         public bool _multiLanguageHeader = false;
         public bool IsMirrorPage;
         public bool IsFirstEntry;
@@ -2170,6 +2171,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:family", "graphic");
             _writer.WriteAttributeString("style:parent-style-name", "Frame");
             _writer.WriteStartElement("style:graphic-properties");
+			_writer.WriteAttributeString("style:wrap", "none");
             _writer.WriteAttributeString("style:vertical-pos", "from-top");
             _writer.WriteAttributeString("style:vertical-rel", "page");
             _writer.WriteAttributeString("style:horizontal-pos", "right");
@@ -2179,6 +2181,28 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:flow-with-text", "false");
             _writer.WriteEndElement();
             _writer.WriteEndElement();
+
+			int styleFrameCount = 1;
+			while (pictureCount >= 2)
+			{
+				styleFrameCount++;
+				_writer.WriteStartElement("style:style");
+				_writer.WriteAttributeString("style:name", "fr" + pictureCount);
+				_writer.WriteAttributeString("style:family", "graphic");
+				_writer.WriteAttributeString("style:parent-style-name", "Frame");
+				_writer.WriteStartElement("style:graphic-properties");
+				_writer.WriteAttributeString("style:wrap", "none");
+				_writer.WriteAttributeString("style:vertical-pos", "center");
+				_writer.WriteAttributeString("style:vertical-rel", "paragraph-content");
+				_writer.WriteAttributeString("style:horizontal-pos", "center");
+				_writer.WriteAttributeString("style:horizontal-rel", "paragraph-content");
+				_writer.WriteAttributeString("fo:padding", "0in");
+				_writer.WriteAttributeString("fo:border", "none");
+				_writer.WriteAttributeString("style:flow-with-text", "false");
+				_writer.WriteEndElement();
+				_writer.WriteEndElement();
+				pictureCount--;
+			}
 
             if (_outputExtension == "odm")
             {
@@ -2588,7 +2612,7 @@ namespace SIL.PublishingSolution
         {
             strGraphicsCount = "Graphics" + (_frameCount + 1);
             strFrameCount = "Frame" + (_frameCount + 1);
-            strFrameStyCount = "fr" + (_frameCount + 1);
+			strFrameStyCount = "fr" + (_frameCount + 1);
             _imageGraphicsName = strFrameCount;
             if (_isParagraphClosed) // Forcing a Paragraph Style, if it is not exist
             {

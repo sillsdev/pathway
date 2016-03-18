@@ -4,6 +4,7 @@
     height: 11in;
     width: 8.5in;
     margin: 72pt 72pt 72pt 72pt;
+	-ps-header-font-size:"Same as headword";
     @top-left { content: ''; }
     @top-center {
         //content: string(bookname, last) string(chapter, last):string(verse, last) ;

@@ -759,7 +759,7 @@
           <style:tab-stop style:position="5.5in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
-      <style:text-properties style:font-name="Times New Roman" fo:font-weight="bold" fo:font-size="12" />
+      <style:text-properties style:font-name="Times New Roman" fo:font-weight="bold" fo:font-size="11pt" />
     </style:style>
     <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" text:number-lines="false" text:line-number="0">
@@ -785,7 +785,7 @@
     </style:style>
     <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:class="extra">
       <style:paragraph-properties fo:text-align="center" style:justify-single-word="false" />
-      <style:text-properties style:font-name="Times New Roman" fo:font-weight="bold" fo:font-size="12" />
+      <style:text-properties style:font-name="Times New Roman" fo:font-weight="bold" fo:font-size="11pt" />
     </style:style>
     <style:style style:name="Contents_20_Heading" style:display-name="Contents Heading" style:family="paragraph" style:parent-style-name="Heading" style:class="index">
       <style:paragraph-properties fo:margin="100%" fo:margin-left="0in" fo:text-indent="0in" fo:margin-right="0in" style:auto-text-indent="false" text:number-lines="false" text:line-number="0" />
@@ -1070,7 +1070,7 @@
       </style:header>
       <style:footer>
         <text:p text:style-name="Footer">
-          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="35.25pt" fo:min-width="145pt" draw:z-index="1">
+          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="35.25pt" fo:min-width="100pt" draw:z-index="1">
             <draw:text-box fo:min-height="19.00pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">

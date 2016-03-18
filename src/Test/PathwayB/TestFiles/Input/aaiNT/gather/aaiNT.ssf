@@ -1,0 +1,44 @@
+<ScriptureText>
+  <Name>aaiNT</Name>
+  <StyleSheet>usfm.sty</StyleSheet>
+  <ChapterMarker>c</ChapterMarker>
+  <VerseMarker>v</VerseMarker>
+  <FullName>Arifama-Miniafia -PNG NT</FullName>
+  
+  <FileNameBookNameForm>41MAT</FileNameBookNameForm>
+  <FileNameChapterNumberForm />
+  <FileNamePostPart>aai.SFM</FileNamePostPart>
+  <FileNamePrePart />
+  <AdvancedView>False</AdvancedView>
+  
+  <ContinueAt>p p/q p/q1</ContinueAt>
+  <ContinueQuotes>Yes</ContinueQuotes>
+  <CreatedWithPTW6>T</CreatedWithPTW6>
+  <DefaultFont>Charis SIL</DefaultFont>
+  <DefaultFontSize>14</DefaultFontSize>
+  <Editable>T</Editable>
+  <Encoding>65001</Encoding>
+  <EthnologueCode>aai</EthnologueCode>
+  <InitialImportBooksDirectory>C:\My Paratext Projects\~from Mike Johnson (PNG)\aai</InitialImportBooksDirectory>
+  <InnerInnerQuotes>“ ”</InnerInnerQuotes>
+  <InnerQuotes>‘ ’</InnerQuotes>
+  <InvalidCharacters>'</InvalidCharacters>
+  <InvalidPunctuation>___</InvalidPunctuation>
+  <Language>aai</Language>
+  <LanguageIsoCode>aai:::</LanguageIsoCode>
+  
+  <LeftToRight>T</LeftToRight>
+  <Quotes>“ ”</Quotes>
+  
+  
+  <ValidCharacters>a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z - * ‌ ‍ ’ 3 — 2 4 9 – 8 1 ( . ) ; 7 5 / ‑ © _ ] [ ” “ 6 ? : ! ‘ , 0</ValidCharacters>
+  <ValidPunctuation>– ? / _)_ ! :_ _(_ _/_ _—_ _-_ ] _©_ : [ ;_ _“ ”_ )_ ,_ ._ _( ?_ - , _‘ . !_</ValidPunctuation>
+  <VerboseQuotes>No</VerboseQuotes>
+  <Versification>4</Versification>
+  <NeedsEnglishLanguageFix />
+  <NeedsPortugueseLanguageFix />
+  <TranslationInfo />
+  <Guid>ce5241280f6a82e85dd4e920cdcb02c38109d750</Guid>
+  <Naming />
+  <Naming PrePart="" PostPart="aai.SFM" BookNameForm="41MAT" ChapterNumberForm="" />
+</ScriptureText>
