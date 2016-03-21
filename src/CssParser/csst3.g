@@ -121,6 +121,7 @@ unit
 	
 function
 	: IDENT '(' args? ')' -> IDENT '(' args* ')'
+	| IDENT '(' selector? ')' -> IDENT '(' selector* ')'
 	;
 	
 UNIT      :	'em'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz';	

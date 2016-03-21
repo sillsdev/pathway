@@ -31,7 +31,7 @@ tokens {
 
 @lexer::namespace {SIL.PublishingSolution.Compiler}
 @parser::namespace {SIL.PublishingSolution.Compiler}
-@lexer::members {const int HIDDEN = Hidden;}
+@lexer::members {const int HIDDEN = -9999;}
 @members {
 private System.Collections.Generic.List<System.String> errors = new System.Collections.Generic.List<System.String>();
 override public void DisplayRecognitionError(System.String[] tokenNames, RecognitionException e) {
@@ -137,6 +137,7 @@ unit
 	
 function
 	: IDENT '(' args? ')' -> IDENT '(' args* ')'
+	| IDENT '(' selector? ')' -> IDENT '(' selector* ')'
 	;
 	
 UNIT      :	'em'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz';	

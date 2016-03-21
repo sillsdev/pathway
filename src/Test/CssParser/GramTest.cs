@@ -581,5 +581,16 @@ namespace Test.CssParserTest
             OneTest("T34", "Selector Is Unit");
         }
         #endregion T34
+
+        #region T35
+        /// <summary>
+        /// Test :not() pseudo selector with embedded pseudo
+        /// </summary>
+        [Test]
+        public void NotFuncWithEmbeddedPseudoT35()
+        {
+            OneTest("T35", ":not() pseudo selector with embedded pseudo");
+        }
+        #endregion T35
     }
 }
