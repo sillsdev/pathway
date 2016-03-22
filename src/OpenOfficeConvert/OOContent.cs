@@ -3284,8 +3284,6 @@ namespace SIL.PublishingSolution
                 string strOutlineLevel = "1";
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary")
                 {
-                    if (IdAllClass.ContainsKey("body"))
-                        tocStyle = "letter_letHead_body";
                     if (IdAllClass.ContainsKey("letter") && IdAllClass["letter"].ContainsKey("-ps-outline-level"))
                         strOutlineLevel = IdAllClass["letter"]["-ps-outline-level"];
                 }
