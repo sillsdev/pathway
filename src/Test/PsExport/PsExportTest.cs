@@ -1133,5 +1133,32 @@ namespace Test.PsExport
 			Assert.AreEqual(2, files.Length);
 			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "FlexRev Preprocess produced different results");
 		}
+		
+		[Test]
+		public void XsltPreProcessAddColumnFW83MainTest()
+		{
+			DataType = "Dictionary";
+			const string data = "A-One-w.xhtml";
+			var infile = TestDataSetup("Pre4", data);
+			Param.Value["Preprocessing"] = "Add Columns FW83";
+			XsltPreProcess(infile);
+			var files = Directory.GetFiles(_outputTestPath, "*.*");
+			Assert.AreEqual(2, files.Length);
+			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "A-One-w Preprocess produced different results");
+		}
+
+		[Test]
+		public void XsltPreProcessAddColumnFW83ReversalTest()
+		{
+			DataType = "Dictionary";
+			const string data = "Reversal.xhtml";
+			var infile = TestDataSetup("Pre4", data);
+			Param.Value["Preprocessing"] = "Add Columns FW83";
+			XsltPreProcess(infile);
+			var files = Directory.GetFiles(_outputTestPath, "*.*");
+			Assert.AreEqual(2, files.Length);
+			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "FW83v Reversal Preprocess produced different results");
+		}
+
     }
 }
