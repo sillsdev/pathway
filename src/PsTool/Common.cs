@@ -275,6 +275,17 @@ namespace SIL.Tool
 
 		#endregion
 
+		#region AlwaysPreProcessingXsltFiles
+
+		public static List<string> PreProcessingXsltFilesList()
+		{
+			List<string> lstFileName = new List<string>();
+			lstFileName.Add("Add Columns FW83");
+			return lstFileName;
+		}
+
+		#endregion
+
 		#region FillName(string cssFileWithPath)
 
 		/// -------------------------------------------------------------------------------------------
