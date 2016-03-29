@@ -496,34 +496,38 @@ namespace SIL.PublishingSolution
 
         private void PopulateFilesFromPreprocessingFolder()
         {
+			var lstxsltFiles = Common.PreProcessingXsltFilesList();
             var settingsFolder = Path.Combine(Common.GetAllUserPath(), InputType);
             if (Directory.Exists(settingsFolder))
             {
                 foreach (string filePath in Directory.GetFiles(settingsFolder, "*.xsl"))
                 {
                     var processName = Path.GetFileNameWithoutExtension(filePath);
-                    Debug.Assert(processName != null);
-                    chkLbPreprocess.Items.Add(processName, false);
+					if (!lstxsltFiles.Contains(processName))
+	                {
+		                Debug.Assert(processName != null);
+		                chkLbPreprocess.Items.Add(processName, false);
+	                }
                 }
             }
 
             string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\");// + xsltFile[0]
             xsltFullName = Common.PathCombine(xsltFullName, InputType + "\\"); //TD-2871 - separate dictionary and Scripture xslt
-
             if (Directory.Exists(xsltFullName))
             {
                 string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
-
                 // In case the xsl file name change and updated in the psexport.cs file XsltPreProcess
-
                 foreach (var filePath in filePaths)
                 {
                     var processName = Path.GetFileNameWithoutExtension(filePath);
                     Debug.Assert(processName != null);
-                    if (!chkLbPreprocess.Items.Contains(processName))
-                    {
-                        chkLbPreprocess.Items.Add(processName, false);
-                    }
+					if (!lstxsltFiles.Contains(processName))
+					{
+						if (!chkLbPreprocess.Items.Contains(processName))
+						{
+							chkLbPreprocess.Items.Add(processName, false);
+						}
+					}
                 }
             }
         }

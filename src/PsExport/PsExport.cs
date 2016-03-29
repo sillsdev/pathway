@@ -15,9 +15,11 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using JWTools;
 using L10NSharp;
 using SilTools;
@@ -69,23 +71,24 @@ namespace SIL.PublishingSolution
             Debug.Assert(outFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "full path for output must be given");
 			string caption = LocalizationManager.GetString("PsExport.ExportClick.Caption", "Pathway Export", "");
             try
-
             {
-				
                 pb = new Progress();
                 //get xsltFile from ExportThroughPathway.cs
 				string revFileName = string.Empty;
 				var outDir = Path.GetDirectoryName(outFullName);
 				if (File.Exists(outFullName))
 	            {
-		            XsltPreProcess(outFullName);
+					PermanentXsltPreprocess(outFullName);
+					Thread.Sleep(3000);
+		            UserOptionSelectionBasedXsltPreProcess(outFullName);
 	            }
 				revFileName = Common.PathCombine(outDir, "FlexRev.xhtml");
 				if (File.Exists(revFileName))
 				{
-					XsltPreProcess(revFileName);
+					PermanentXsltPreprocess(revFileName);
+					Thread.Sleep(3000);
+					UserOptionSelectionBasedXsltPreProcess(revFileName);
 				}
-
 	            string supportPath = GetSupportPath();
 				Backend.Load(Common.ProgInstall);
                 LoadProgramSettings(supportPath);
@@ -234,36 +237,62 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Preprocess the xhtml file using xsl file.
+		/// User Option Selection Based Xslt PreProcess the xhtml file using xsl file.
         /// </summary>
         /// <param name="outFullName">input xhtml file</param>
-        protected void XsltPreProcess(string outFullName)
+        protected void UserOptionSelectionBasedXsltPreProcess(string outFullName)
         {
-            if (!Param.Value.ContainsKey(Param.Preprocessing)) return;
+			if (!Param.Value.ContainsKey(Param.Preprocessing)) 
+				return;
             var preprocessing = Param.Value[Param.Preprocessing];
             if (preprocessing == string.Empty) return;
             var preProcessList = preprocessing.Split(",".ToCharArray());
             var curInput = AdjustNameExt(outFullName, "_.xhtml");
-            File.Copy(outFullName, curInput, true);
-            for (int i = 0; i < preProcessList.Length; i++)
-            {
-
-                var processName = Common.PathCombine(DataType, preProcessList[i] + ".xsl");
-                string xsltFullName = Common.PathCombine(Common.GetAllUserPath(), processName);
-                if (!File.Exists(xsltFullName))
-                {
-                    xsltFullName = Common.PathCombine(Common.PathCombine(Common.GetPSApplicationPath(), "Preprocessing"), processName);
-                }
-                Debug.Print("xsltFullName: {0}", xsltFullName);
-                string resultExtention = string.Format("{0}.xhtml", i);
-                Common.XsltProcess(curInput, xsltFullName, resultExtention);
-                curInput = AdjustNameExt(curInput, resultExtention);
+			foreach (string xsltfile in preProcessList)
+			{
+				int index = Array.IndexOf(preProcessList, xsltfile);
+				ProcessXslt(outFullName, xsltfile, curInput, index);
             }
-            File.Copy(curInput, outFullName, true);
-            File.Delete(curInput);
         }
 
-        private static string AdjustNameExt(string fullName, string extension)
+		/// <summary>
+		/// Permanent Xslt Preprocess the xhtml file using xsl file.
+		/// </summary>
+		/// <param name="outFullName">input xhtml file</param>
+		protected void PermanentXsltPreprocess(string outFullName)
+		{
+			var curInput = AdjustNameExt(outFullName, "_.xhtml");
+			var lstxsltFiles = Common.PreProcessingXsltFilesList();
+			foreach (string xsltfile in lstxsltFiles)
+			{
+				int index = lstxsltFiles.IndexOf(xsltfile);
+				ProcessXslt(outFullName, xsltfile, curInput, index);
+			}
+		}
+
+	    private void ProcessXslt(string outFullName, string lstxsltFiles, string curInput, int index)
+	    {
+			var processName = Common.PathCombine(DataType, lstxsltFiles + ".xsl");
+		    string xsltFullName = Common.PathCombine(Common.GetAllUserPath(), processName);
+		    if (!File.Exists(xsltFullName))
+		    {
+			    xsltFullName = Common.PathCombine(Common.PathCombine(Common.GetPSApplicationPath(), "Preprocessing"), processName);
+		    }
+		    if (!File.Exists(xsltFullName))
+		    {
+			    return;
+		    }
+
+		    File.Copy(outFullName, curInput, true);
+		    Debug.Print("xsltFullName: {0}", xsltFullName);
+			string resultExtention = string.Format("{0}.xhtml", index);
+		    Common.XsltProcess(curInput, xsltFullName, resultExtention);
+		    curInput = AdjustNameExt(curInput, resultExtention);
+		    File.Copy(curInput, outFullName, true);
+		    File.Delete(curInput);
+	    }
+
+	    private static string AdjustNameExt(string fullName, string extension)
         {
             return Common.PathCombine(Path.GetDirectoryName(fullName),
                                       Path.GetFileNameWithoutExtension(fullName) + extension);

@@ -1077,7 +1077,7 @@ namespace Test.PsExport
             DataType = "Dictionary";
             var infile = TestDataSetup("Pre0", "Predict.xhtml");
             Param.Value["Preprocessing"] = string.Empty;
-            XsltPreProcess(infile);
+            UserOptionSelectionBasedXsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(1, files.Length);
         }
@@ -1089,7 +1089,7 @@ namespace Test.PsExport
             const string  data = "Predict.xhtml";
             var infile = TestDataSetup("Pre1", data);
             Param.Value["Preprocessing"] = "Filter Empty Entries";
-            XsltPreProcess(infile);
+			UserOptionSelectionBasedXsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
             Assert.AreEqual(2, files.Length);
             XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "Empty Entries Preprocess produced different results");
@@ -1102,9 +1102,9 @@ namespace Test.PsExport
             const string data = "Predict.xhtml";
             var infile = TestDataSetup("Pre2", data);
             Param.Value["Preprocessing"] = "Filter Empty Entries,Fix Duplicate ids";
-            XsltPreProcess(infile);
+			UserOptionSelectionBasedXsltPreProcess(infile);
             var files = Directory.GetFiles(_outputTestPath, "*.*");
-            Assert.AreEqual(3, files.Length);
+            Assert.AreEqual(2, files.Length);
             XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "Preprocess produced different results");
         }
 
@@ -1115,7 +1115,7 @@ namespace Test.PsExport
 			const string data = "main.xhtml";
 			var infile = TestDataSetup("Pre3", data);
 			Param.Value["Preprocessing"] = "Letter Header Language";
-			XsltPreProcess(infile);
+			UserOptionSelectionBasedXsltPreProcess(infile);
 			var files = Directory.GetFiles(_outputTestPath, "*.*");
 			Assert.AreEqual(2, files.Length);
 			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "main Preprocess produced different results");
@@ -1128,7 +1128,7 @@ namespace Test.PsExport
 			const string data = "FlexRev.xhtml";
 			var infile = TestDataSetup("Pre3", data);
 			Param.Value["Preprocessing"] = "Letter Header Language";
-			XsltPreProcess(infile);
+			UserOptionSelectionBasedXsltPreProcess(infile);
 			var files = Directory.GetFiles(_outputTestPath, "*.*");
 			Assert.AreEqual(2, files.Length);
 			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "FlexRev Preprocess produced different results");
@@ -1140,8 +1140,7 @@ namespace Test.PsExport
 			DataType = "Dictionary";
 			const string data = "A-One-w.xhtml";
 			var infile = TestDataSetup("Pre4", data);
-			Param.Value["Preprocessing"] = "Add Columns FW83";
-			XsltPreProcess(infile);
+			PermanentXsltPreprocess(infile);
 			var files = Directory.GetFiles(_outputTestPath, "*.*");
 			Assert.AreEqual(2, files.Length);
 			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "A-One-w Preprocess produced different results");
@@ -1153,8 +1152,7 @@ namespace Test.PsExport
 			DataType = "Dictionary";
 			const string data = "Reversal.xhtml";
 			var infile = TestDataSetup("Pre4", data);
-			Param.Value["Preprocessing"] = "Add Columns FW83";
-			XsltPreProcess(infile);
+			PermanentXsltPreprocess(infile);
 			var files = Directory.GetFiles(_outputTestPath, "*.*");
 			Assert.AreEqual(2, files.Length);
 			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "FW83v Reversal Preprocess produced different results");
