@@ -355,7 +355,8 @@ namespace SIL.PublishingSolution
                             tagName = GetFirstChild(node) + Common.SepTag;
                             tagStyleName = _classInfo.Tag.ClassName;
                             tagStyleName = GetImageAttrib(tagStyleName);
-                            _specificityWeightage += 1;
+							styleName = HandleSpanStyles(styleName, tagStyleName, clsAttrib, ref isAncestor);
+		                    _specificityWeightage += 1;
                             break;
                         case "CLASS":
                             if (isAncestor)
@@ -412,7 +413,33 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string GetImageAttrib(string styleName)
+		/// <summary>
+		/// Method which handles span tag, new version of Fieldwords giving properties to the span tag with ancestor class
+		/// </summary>
+		/// <param name="styleName"></param>
+		/// <param name="tagStyleName"></param>
+		/// <param name="clsAttrib"></param>
+		/// <param name="isAncestor"></param>
+		/// <returns></returns>
+	    private string HandleSpanStyles(string styleName, string tagStyleName, ClassAttrib clsAttrib, ref bool isAncestor)
+	    {
+		    if (styleName != string.Empty && tagStyleName.ToLower() == "span")
+		    {
+			    if (isAncestor)
+			    {
+				    _classInfo.Ancestor = clsAttrib;
+				    styleName = tagStyleName + Common.SepAncestor + styleName;
+				    isAncestor = false;
+				    _classInfo.parent.Clear();
+				    _classInfo.parent.Add(_classInfo.Ancestor);
+			    }
+			    _baseClassName = tagStyleName;
+			    clsAttrib.ClassName = _baseClassName;
+		    }
+		    return styleName;
+	    }
+
+	    private string GetImageAttrib(string styleName)
         {
             if(_classInfo.Tag.ClassName.EndsWith("src"))
             {
@@ -573,6 +600,22 @@ namespace SIL.PublishingSolution
                     clsAttrib.Add(attribute);
                     _specificityWeightage += 10;
                 }
+				else if (string.Compare(classAttrib.AttributeSeperator, "BEGINSWITH") == 0)
+				{
+					string attribute;
+					classAttrib.AttributeValue = classAttrib.AttributeValue.Replace("\"", "");
+					if (classAttrib.Name == "lang")
+					{
+						attribute = classAttrib.AttributeValue; // remove string "lang"
+					}
+					else
+					{
+						attribute = classAttrib.Name + classAttrib.AttributeValue;
+					}
+					className = className + Common.SepAttrib + attribute;
+					clsAttrib.Add(attribute);
+					_specificityWeightage += 10;
+				}
                 else if (classAttrib.AttributeSeperator.Length == 0)
                 {
                     className = className + Common.SepAttrib + classAttrib.Name;

@@ -389,7 +389,7 @@ namespace Test.OpenOfficeConvert
         /// TD-90 .locator .letter
         /// </summary>      
         [Test]
-        public void AncestorChildTest_Node()
+        public void AncestorChildTest1_Node()
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "AncestorChildTest";
@@ -446,6 +446,24 @@ namespace Test.OpenOfficeConvert
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
         }
+
+		///<summary>
+		/// TD-4531 Definition appears bold and should be regular
+		/// </summary>
+		[Test]
+		public void AncestorChildTest2_Node()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "AncestorTestForNewFlexVersion";
+			
+			string styleOutput = GetStyleOutput(file);
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
 
         ///<summary>
         /// TD-1525 Period after double quotes
