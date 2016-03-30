@@ -460,14 +460,9 @@ namespace Test.OpenOfficeConvert
 
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "letter_letHead_body";
-			string content = "W w<text:variable-set text:name=\"Left_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:variable-set text:name=\"RLeft_Guideword_L\" text:display=\"none\" text:formula=\"ooow: =W=\" office:value-type=\"string\" office:string-value=\"=W=\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
-			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
-			Assert.IsTrue(returnValue1);
-
 			_validate.ClassName = "span.-mainheadword_entry_mainheadword_entry_div.entry_body";
-			content = "=W=";
-			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+			string content = "=W=";
+			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
 
 			_validate.ClassName = "span_.en_mainheadword_entry_mainheadword_entry_mainheadword_entry_mainheadword_entry_div.entry_body";
@@ -478,20 +473,12 @@ namespace Test.OpenOfficeConvert
 			//Note - The Styles will be created while processing xhtml(content.xml)
 			//Style Test - Second
 			_validate = new ValidateXMLFile(styleOutput);
-			_validate.ClassName = "letter_letHead_body";
-			_validate.ClassProperty.Add("fo:font-size", "14pt");
-			_validate.ClassProperty.Add("style:font-size-complex", "14pt");
-			_validate.ClassProperty.Add("fo:font-weight", "700");
-			_validate.ClassProperty.Add("style:font-weight-complex", "700");
-			bool returnValue = _validate.ValidateNodeAttributesNS(false);
-			Assert.IsTrue(returnValue);
-
 			_validate.ClassName = "span.-mainheadword_entry_mainheadword_entry_div.entry_body";
 			_validate.ClassProperty.Add("fo:font-weight", "700");
 			_validate.ClassProperty.Add("style:font-weight-complex", "700");
 			_validate.ClassProperty.Add("fo:font-size", "10pt");
 			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
-			returnValue = _validate.ValidateNodeAttributesNS(false);
+			bool returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
 
 			_validate.ClassName = "span_.en_mainheadword_entry_mainheadword_entry_mainheadword_entry_mainheadword_entry_div.entry_body";
