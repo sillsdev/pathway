@@ -458,20 +458,47 @@ namespace Test.OpenOfficeConvert
 			
 			string styleOutput = GetStyleOutput(file);
 
-			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
-			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			//Content Test - First
+			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+			_validate.ClassName = "letter_letHead_body";
+			string content = "W w<text:variable-set text:name=\"Left_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:variable-set text:name=\"RLeft_Guideword_L\" text:display=\"none\" text:formula=\"ooow: =W=\" office:value-type=\"string\" office:string-value=\"=W=\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
+			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
+			Assert.IsTrue(returnValue1);
 
-			StreamReader xx = new StreamReader(styleOutput);
-			string cc = xx.ReadToEnd();
-			xx.Close();
-			TextFileAssert.AreEqual(styleExpected, styleOutput, file + ".." + cc + ".." + " in styles.xml");
+			_validate.ClassName = "span.-mainheadword_entry_mainheadword_entry_div.entry_body";
+			content = "=W=";
+			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+			Assert.IsTrue(returnValue1);
 
-			xx = new StreamReader(_projInfo.TempOutputFolder);
-			cc = xx.ReadToEnd();
-			xx.Close();
-			xx.Dispose();
-			TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + ".." + cc + ".." + " in content.xml");
+			_validate.ClassName = "span_.en_mainheadword_entry_mainheadword_entry_mainheadword_entry_mainheadword_entry_div.entry_body";
+			content = "Second person; labialisation of the initial consonant of Class 3 verbs beginning with gg";
+			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+			Assert.IsTrue(returnValue1);
+
+			//Note - The Styles will be created while processing xhtml(content.xml)
+			//Style Test - Second
+			_validate = new ValidateXMLFile(styleOutput);
+			_validate.ClassName = "letter_letHead_body";
+			_validate.ClassProperty.Add("fo:font-size", "14pt");
+			_validate.ClassProperty.Add("style:font-size-complex", "14pt");
+			_validate.ClassProperty.Add("fo:font-weight", "700");
+			_validate.ClassProperty.Add("style:font-weight-complex", "700");
+			bool returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
+
+			_validate.ClassName = "span.-mainheadword_entry_mainheadword_entry_div.entry_body";
+			_validate.ClassProperty.Add("fo:font-weight", "700");
+			_validate.ClassProperty.Add("style:font-weight-complex", "700");
+			_validate.ClassProperty.Add("fo:font-size", "10pt");
+			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
+			returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
+
+			_validate.ClassName = "span_.en_mainheadword_entry_mainheadword_entry_mainheadword_entry_mainheadword_entry_div.entry_body";
+			_validate.ClassProperty.Add("fo:font-size", "10pt");
+			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
+			returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
 		}
 
         ///<summary>
