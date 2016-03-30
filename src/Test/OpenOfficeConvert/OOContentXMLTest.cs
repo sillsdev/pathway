@@ -451,6 +451,7 @@ namespace Test.OpenOfficeConvert
 		/// TD-4531 Definition appears bold and should be regular
 		/// </summary>
 		[Test]
+		[Category("SkipOnTeamCity")]
 		public void AncestorChildTest2_Node()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
