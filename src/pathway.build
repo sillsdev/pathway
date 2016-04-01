@@ -208,6 +208,12 @@
             <property name="Platform" value="${Platform}"/>
         </msbuild>
     </target>
+	 <target name="CssSimpler" depends="PsTool">
+        <msbuild project="CssSimpler\CssSimpler.csproj" >
+            <property name="Configuration" value="${Configuration}"/>
+            <property name="Platform" value="${Platform}"/>
+        </msbuild>
+    </target>
     <target name="epubConvert" depends="CssDialog, CssParser, OpenOfficeConvert, PsTool">
         <msbuild project="epubConvert\epubConvert.csproj" >
             <property name="Configuration" value="${Configuration}"/>

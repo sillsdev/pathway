@@ -76,19 +76,9 @@ namespace SIL.PublishingSolution
                 //get xsltFile from ExportThroughPathway.cs
 				string revFileName = string.Empty;
 				var outDir = Path.GetDirectoryName(outFullName);
-				if (File.Exists(outFullName))
-	            {
-					PermanentXsltPreprocess(outFullName);
-					Thread.Sleep(3000);
-		            UserOptionSelectionBasedXsltPreProcess(outFullName);
-	            }
-				revFileName = Common.PathCombine(outDir, "FlexRev.xhtml");
-				if (File.Exists(revFileName))
-				{
-					PermanentXsltPreprocess(revFileName);
-					Thread.Sleep(3000);
-					UserOptionSelectionBasedXsltPreProcess(revFileName);
-				}
+
+				SimplifyExportFiles(outFullName);
+
 	            string supportPath = GetSupportPath();
 				Backend.Load(Common.ProgInstall);
                 LoadProgramSettings(supportPath);
@@ -188,6 +178,27 @@ namespace SIL.PublishingSolution
                 }
             }
         }
+
+		private void SimplifyExportFiles(string exportedDirectory)
+		{
+			string cssSimplerExe = Path.Combine(Common.GetApplicationPath(), "CssSimpler.exe");
+			var outDir = Path.GetDirectoryName(exportedDirectory);
+			if (outDir != null)
+			{
+				foreach (string filename in Directory.GetFiles(outDir, "*.xhtml"))
+				{
+					if (File.Exists(filename))
+					{
+						PermanentXsltPreprocess(filename);
+						UserOptionSelectionBasedXsltPreProcess(filename);
+						if (DataType.ToLower() == "dictionary")
+						{
+							Common.RunCommand(cssSimplerExe, filename, 1);
+						}
+					}
+				}
+			}
+		}
 
         /// <summary>
         /// The constant "HeaderTitleLable" will replaced by the Title text in the DictionarySettingsXmlFIle.

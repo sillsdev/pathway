@@ -1,0 +1,335 @@
+﻿// ---------------------------------------------------------------------------------------------
+#region // Copyright (c) 2016, SIL International. All Rights Reserved.
+// <copyright from='2016' to='2016' company='SIL International'>
+//		Copyright (c) 2016, SIL International. All Rights Reserved.
+//
+//		Distributable under the terms of either the Common Public License or the
+//		GNU Lesser General Public License, as specified in the LICENSING.txt file.
+// </copyright>
+#endregion
+//
+// File: program.cs (from CssSimpler.cs)
+// Responsibility: Greg Trihus
+// ---------------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Xml;
+using System.Xml.Xsl;
+using Antlr.Css;
+using Antlr.Runtime.Tree;
+using Mono.Options;
+
+namespace CssSimpler
+{
+    public class Program
+    {
+        private static bool _showHelp;
+        private static bool _outputXml;
+        private static int _verbosity;
+        private static bool _makeBackup;
+
+        private static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
+        private static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
+        private static readonly List<string> UniqueClasses = new List<string>();
+
+        static void Main(string[] args)
+        {
+            // ReSharper disable AssignNullToNotNullAttribute
+            XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"CssSimpler.XmlCss.xsl")));
+            // ReSharper restore AssignNullToNotNullAttribute
+            // ReSharper disable AssignNullToNotNullAttribute
+            SimplifyXmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"CssSimpler.XmlCssSimplify.xsl")));
+            // ReSharper restore AssignNullToNotNullAttribute
+            // see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
+            var p = new OptionSet
+            {
+                {
+                    "x|xml", "produce XML output of CSS",
+                    v => _outputXml = v != null
+                },
+                {
+                    "b|backup", "make a backup of the original CSS file",
+                    v => _makeBackup = v != null
+                },
+                {
+                    "v", "increase debug message verbosity",
+                    v => { if (v != null) ++_verbosity; }
+                },
+                {
+                    "h|help", "show this message and exit",
+                    v => _showHelp = v != null
+                },
+            };
+
+            List<string> extra;
+            try
+            {
+                extra = p.Parse(args);
+                if (extra.Count == 0)
+                {
+                    Console.WriteLine("Enter full file name to process");
+                    extra.Add(Console.ReadLine());
+                }
+            }
+            catch (OptionException e)
+            {
+                Console.Write("SimpleCss: ");
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Try `SimpleCss --help' for more information.");
+                return;
+            }
+            if (_showHelp || extra.Count != 1)
+            {
+                ShowHelp(p);
+                return;
+            }
+            var xhtml = new XmlDocument();
+            xhtml.Load(extra[0]);
+	        string inputDirectory = Path.GetDirectoryName(extra[0]);
+            // unique classes:
+            var xmlNodeList = xhtml.SelectNodes("//@class[not(.=preceding::*/@class or .=parent::*/parent::*/@class)]");
+            if (xmlNodeList != null)
+                foreach (XmlNode node in xmlNodeList)
+                {
+                    UniqueClasses.Add(node.InnerText);
+                }
+            DebugWriteClassNames();
+            var selectSingleNode = xhtml.SelectSingleNode("//*[@rel='stylesheet']/@href");
+	        if (selectSingleNode == null)
+	        {
+		        return;
+		        //throw new ApplicationException("No stylesheet href in XHTML meta data.");
+	        }
+	        var styleSheet = selectSingleNode.InnerText;
+
+	        if (!File.Exists(styleSheet))
+	        {
+		        styleSheet = Path.Combine(inputDirectory, styleSheet);
+	        }
+
+            Debug("Stylesheet: {0}", styleSheet);
+            var parser = new CssTreeParser();
+            parser.Parse(styleSheet);
+            var r = parser.Root;
+            var xml = new XmlDocument();
+            xml.LoadXml("<ROOT/>");
+            AddSubTree(xml.DocumentElement, r, parser);
+            if (_outputXml)
+            {
+                Debug("Writing XML stylesheet");
+                WriteCssXml(styleSheet, xml);
+            }
+            //var contClass = new Dictionary<string, List<XmlNode>>();
+            //GetContTargets(xml, contClass);
+            WriteSimpleCss(styleSheet, xml);
+        }
+
+        private static void DebugWriteClassNames()
+        {
+            if (_verbosity > 0)
+            {
+                var classNames = "Class names found: [";
+                var firstClass = true;
+                foreach (string uniqueClass in UniqueClasses)
+                {
+                    if (!firstClass)
+                    {
+                        classNames += ", ";
+                    }
+                    classNames += uniqueClass;
+                    firstClass = false;
+                }
+                classNames += "]";
+                Debug(classNames);
+            }
+        }
+
+        private static void WriteSimpleCss(string styleSheet, XmlDocument xml)
+        {
+			if (string.IsNullOrEmpty(styleSheet) || !File.Exists(styleSheet))
+	        {
+		        return;
+				//throw new ArgumentNullException("styleSheet");
+	        }
+            MakeBaskupIfNecessary(styleSheet);
+            var cssFile = new FileStream(styleSheet, FileMode.Create);
+            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
+            Debug("Writing Simple Stylesheet: {0}", styleSheet);
+            var memory = new MemoryStream();
+            SimplifyXmlCss.Transform(xml, null, memory);
+            memory.Flush();
+            memory.Seek(0, 0);
+            var cssReader = XmlReader.Create(memory, null);
+            XmlCss.Transform(cssReader, null, cssWriter);
+            cssFile.Close();
+        }
+
+        private static void MakeBaskupIfNecessary(string styleSheet)
+        {
+            if (_makeBackup)
+            {
+                var folder = Path.GetDirectoryName(styleSheet);
+                if (string.IsNullOrEmpty(folder))
+                {
+	                return;
+	                //throw new ArgumentException("stylesheet has no path name.");
+                }
+                var backup = Path.Combine(folder, Path.GetFileNameWithoutExtension(styleSheet) + ".bak");
+                File.Copy(styleSheet, backup, true);
+            }
+        }
+
+        //private static void GetContTargets(XmlDocument xml, Dictionary<string, List<XmlNode>> contClass)
+        //{
+        //    foreach (XmlNode contProp in xml.SelectNodes("//PROPERTY[name='content']"))
+        //    {
+        //        var target = contProp.ParentNode.Attributes["lastClass"];
+        //        if (contClass.ContainsKey(target.InnerText))
+        //        {
+        //            contClass[target.InnerText].Add(contProp);
+        //        }
+        //        else
+        //        {
+        //            contClass[target.InnerText] = new List<XmlNode> {contProp};
+        //        }
+        //    }
+        //}
+
+        private static void WriteCssXml(string styleSheet, XmlDocument xml)
+        {
+            var folder = Path.GetDirectoryName(styleSheet);
+	        if (string.IsNullOrEmpty(folder))
+	        {
+		        return;
+		        //throw new ArgumentException("stylesheet has no path name");
+	        }
+	        var fullName = Path.Combine(folder, Path.GetFileNameWithoutExtension(styleSheet) + ".xml");
+            var writerSettings = new XmlWriterSettings {Indent = true};
+            var writer = XmlWriter.Create(fullName, writerSettings);
+            xml.WriteTo(writer);
+            writer.Close();
+        }
+
+        private static string _lastClass;
+        private static string _target;
+        private static bool _noData;
+        private static int _term;
+        private static readonly List<string> NeedHigher = new List<string> { "form", "sensenumber", "headword", "writingsystemprefix" };
+
+        private static void AddSubTree(XmlNode n, CommonTree t, CssTreeParser ctp)
+        {
+            var argState = 0;
+            var pos = 0;
+            var term = 0;
+            foreach (CommonTree child in ctp.Children(t))
+            {
+                var name = child.Text;
+                var first = name.ToCharArray()[0];
+                if (first >= 'A' && first <= 'Z')
+                {
+                    System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
+                    var node = n.OwnerDocument.CreateElement(name);
+                    if (name == "RULE") // later postion equals greater precedence
+                    {
+                        _lastClass = _target = "";
+                        _noData = false;
+                        _term = 0;
+                    }
+                    else if (name == "PROPERTY" && term == 0) // more terms equals greater precedence
+                    {
+                        term = _term;
+                        var termAttr = n.OwnerDocument.CreateAttribute("term");
+                        termAttr.Value = term.ToString();
+                        System.Diagnostics.Debug.Assert(n.Attributes != null, "Attributes != null");
+                        n.Attributes.Append(termAttr);
+                    }
+                    else
+                    {
+                        _term += 1;
+                    }
+                    n.AppendChild(node);
+                    AddSubTree(node, child, ctp);
+                    if (name == "RULE")
+                    {
+                        if (_noData)
+                        {
+                            System.Diagnostics.Debug.Assert(node.ParentNode != null, "ParentNode != null");
+                            node.ParentNode.RemoveChild(node);
+                            continue;
+                        }
+                        pos += 1;
+                        System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
+                        var posAttr = n.OwnerDocument.CreateAttribute("pos");
+                        posAttr.Value = pos.ToString();
+                        node.Attributes.Append(posAttr);
+                        if (_lastClass != "")
+                        {
+                            var lastClassAttr = n.OwnerDocument.CreateAttribute("lastClass");
+                            lastClassAttr.Value = _lastClass;
+                            node.Attributes.Append(lastClassAttr);
+                        }
+                        if (_target != "")
+                        {
+                            var targetAttr = n.OwnerDocument.CreateAttribute("target");
+                            targetAttr.Value = _target;
+                            node.Attributes.Append(targetAttr);
+                        }
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
+                    var node = n.OwnerDocument.CreateElement(argState == 0? "name": (argState & 1) == 1? "value": "unit");
+                    argState += 1;
+                    node.InnerText = name;
+                    n.AppendChild(node);
+                    if (n.Name == "CLASS")
+                    {
+                        if (!UniqueClasses.Contains(name))
+                        {
+                            _noData = true;
+                        }
+                        _target = name;
+                        if (!NeedHigher.Contains(name))
+                        {
+                            _lastClass = name;
+                        }
+                        else
+                        {
+                            Debug("skipping: {0}", name);
+                        }
+                    }
+                    if (n.Name == "TAG")
+                    {
+                        _target = name;
+                    }
+                    AddSubTree(node, child, ctp);
+                }
+
+            }
+                
+        }
+
+        static void ShowHelp(OptionSet p)
+        {
+            Console.WriteLine("Usage: SimpleCss [OPTIONS]+ FullInputFilePath.css");
+            Console.WriteLine("Simplify the input css.");
+            Console.WriteLine();
+            Console.WriteLine("Options:");
+            p.WriteOptionDescriptions(Console.Out);
+        }
+
+        static void Debug(string format, params object[] args)
+        {
+            if (_verbosity > 0)
+            {
+                Console.Write("# ");
+                Console.WriteLine(format, args);
+            }
+        }
+    }
+}
