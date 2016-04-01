@@ -117,24 +117,29 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// For TD-4471, For temporary solution provided till new version of Fieldworks released
-        /// After testing, we can remove this method, this issue is margin-left for entry and subentry are same, but is shouldn't.
+        /// For TD-4471 and TD-4536
+        /// After testing, we can remove this method, this issue is margin-left for subentry are not same or less than Entry, but is shouldn't.
         /// </summary>
         private void HandleSubEntryIndent()
         {
-            if (_projInfo.ProjectInputType.ToLower() != "dictionary") return;
-            if (_cssProperty.ContainsKey("subentry") && _cssProperty["subentry"].ContainsKey("class-margin-left"))
-            {
-                if (_cssProperty.ContainsKey("entry") && _cssProperty["entry"].ContainsKey("class-margin-left"))
-                {
-                    int subEntrySize = Int16.Parse(_cssProperty["subentry"]["class-margin-left"]);
-                    int entrySize = Int16.Parse(_cssProperty["entry"]["class-margin-left"]);
-                    if (subEntrySize == entrySize)
-                    {
-						_cssProperty["subentry"]["class-margin-left"] = (subEntrySize + (entrySize/2)).ToString();
-                    }
-                }
-            }
+			if (_projInfo.ProjectInputType.ToLower() != "dictionary") return;
+			string styelName = "entry";
+			if (_cssProperty.ContainsKey("div." + styelName))
+	        {
+				styelName = "div.entry";
+	        }
+	        if (_cssProperty.ContainsKey("subentry") && _cssProperty["subentry"].ContainsKey("class-margin-left"))
+			{
+				if (_cssProperty.ContainsKey(styelName) && _cssProperty["entry"].ContainsKey("class-margin-left"))
+				{
+					int subEntrySize = Int16.Parse(_cssProperty["subentry"]["class-margin-left"]);
+					int entrySize = Int16.Parse(_cssProperty[styelName]["class-margin-left"]);
+					if (subEntrySize <= entrySize)
+					{
+						_cssProperty["subentry"]["class-margin-left"] = (subEntrySize + entrySize).ToString();
+					}
+				}
+			}
         }
 
         /// <summary>

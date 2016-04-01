@@ -1,0 +1,72 @@
+.dicBody {
+}
+.letHead {
+    column-count: 1;
+    clear: both;
+}
+.letter {
+    text-align: center;
+    width: 100%;
+    margin-top: 18pt;
+    margin-bottom: 18pt;
+    direction: ltr;
+    font-family: "Charis SIL AmArea", serif;	/* default Serif font */
+    font-weight: bold;
+    font-size: 24pt;
+}
+.letData {
+    column-count: 2;   -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    text-align: left;
+}
+.entry {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 10pt;
+    padding-left: 9pt;
+    text-indent: -12pt;
+    margin-left: 12pt;
+    line-height: normal;
+    padding-bottom: 2pt;
+    padding-top: 1pt;
+    counter-reset: sense;
+}
+
+.subentry {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+    font-size: 10pt;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    line-height: normal;
+    padding-bottom: 2pt;
+    padding-top: 0pt;
+}
+.entry {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
+.revEntry {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
+.subentry {
+       text-align: left;
+       margin-left: 12pt;
+       display: block;
+}
+
+
+div.entry{
+		text-indent:-36pt;
+		margin-left:45pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+	
+.complexform {
+    counter-reset: complexformpara;
+    text-indent: 2pc;
+}
