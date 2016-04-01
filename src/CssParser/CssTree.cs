@@ -422,8 +422,8 @@ namespace SIL.PublishingSolution
 		/// <param name="isAncestor"></param>
 		/// <returns></returns>
 	    private string HandleSpanStyles(string styleName, string tagStyleName, ClassAttrib clsAttrib, ref bool isAncestor)
-	    {
-		    if (styleName != string.Empty && tagStyleName.ToLower() == "span")
+		{
+		    if (styleName != string.Empty && (tagStyleName.IndexOf("span") == 0 || tagStyleName.IndexOf("div") == 0))
 		    {
 			    if (isAncestor)
 			    {

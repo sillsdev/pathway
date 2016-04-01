@@ -461,12 +461,11 @@ namespace Test.OpenOfficeConvert
 
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "span.-mainheadword_entry_mainheadword_entry_div.entry_body";
+			_validate.ClassName = "span.-mainheadword_entry_mainheadword_div.entry_body";
 			string content = "=W=";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
-
-			_validate.ClassName = "span_.en_mainheadword_entry_mainheadword_entry_mainheadword_entry_mainheadword_entry_div.entry_body";
+			_validate.ClassName = "span_.en_definitionorgloss_sense_sensecontent_senses_div.entry_body";
 			content = "Second person; labialisation of the initial consonant of Class 3 verbs beginning with gg";
 			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
@@ -474,7 +473,7 @@ namespace Test.OpenOfficeConvert
 			//Note - The Styles will be created while processing xhtml(content.xml)
 			//Style Test - Second
 			_validate = new ValidateXMLFile(styleOutput);
-			_validate.ClassName = "span.-mainheadword_entry_mainheadword_entry_div.entry_body";
+			_validate.ClassName = "span.-mainheadword_entry_mainheadword_div.entry_body";
 			_validate.ClassProperty.Add("fo:font-weight", "700");
 			_validate.ClassProperty.Add("style:font-weight-complex", "700");
 			_validate.ClassProperty.Add("fo:font-size", "10pt");
@@ -482,7 +481,7 @@ namespace Test.OpenOfficeConvert
 			bool returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
 
-			_validate.ClassName = "span_.en_mainheadword_entry_mainheadword_entry_mainheadword_entry_mainheadword_entry_div.entry_body";
+			_validate.ClassName = "span_.en_definitionorgloss_sense_sensecontent_senses_div.entry_body";
 			_validate.ClassProperty.Add("fo:font-size", "10pt");
 			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
 			returnValue = _validate.ValidateNodeAttributesNS(false);
@@ -4584,7 +4583,30 @@ namespace Test.OpenOfficeConvert
 
         }
 
+		///<summary>
+		///TokPisinExport Full Scripture Test
+		/// </summary>      
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void NewGuidewordStyleTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "NewGuidewordStyle";
+			DateTime startTime = DateTime.Now;
 
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+			string style = "";
+			if (Common.UnixVersionCheck())
+			{
+				style = "_Unix";
+			}
+
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
 
         #endregion
         #endregion
