@@ -3210,22 +3210,25 @@ namespace SIL.Tool
 
 		public static string ReplaceSeperators(string styleName)
 		{
-			if (styleName.IndexOf(SepPseudo) > 0)
+			if (styleName.Contains(SepPseudo))
 				styleName = styleName.Replace(SepPseudo, "");
 
-			if (styleName.IndexOf(" ") > 0)
+			if (styleName.Contains(" "))
 				styleName = styleName.Replace(" ", "");
 
-			if (styleName.IndexOf(sepPrecede) > 0)
+			if (styleName.Contains("-"))
+				styleName = styleName.Replace("-", "");
+
+			if (styleName.Contains(sepPrecede))
 				styleName = styleName.Replace(sepPrecede, "");
 
-			if (styleName.IndexOf(SepPseudo) > 0)
+			if (styleName.Contains(SepPseudo))
 				styleName = styleName.Replace(SepPseudo, "");
 
-			if (styleName.IndexOf(SepParent) > 0)
+			if (styleName.Contains(SepParent))
 				styleName = styleName.Replace(SepParent, "");
 
-			if (styleName.IndexOf(SepTag) > 0)
+			if (styleName.Contains(SepTag))
 				styleName = styleName.Replace(SepTag, "");
 
 			if (styleName.IndexOf("1") > 0)
