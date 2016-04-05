@@ -120,8 +120,8 @@ unit
 	;
 	
 function
-	: IDENT '(' args? ')' -> IDENT '(' args* ')'
-	| IDENT '(' selector? ')' -> IDENT '(' selector* ')'
+	: IDENT '(' selector? ')' -> IDENT '(' selector* ')' 
+	| IDENT '(' args? ')' -> IDENT '(' args* ')'
 	;
 	
 UNIT      :	'em'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz';	

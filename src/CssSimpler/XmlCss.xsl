@@ -19,6 +19,22 @@
         <xsl:apply-templates select="node() | @*"/>
     </xsl:template>
 
+    <xsl:template match="PAGE">
+        <xsl:text>@page </xsl:text>
+        <xsl:apply-templates select="*[local-name() = 'PSEUDO']" mode="inRule"/>
+        <xsl:text> {</xsl:text>
+        <xsl:apply-templates select="*[local-name() != 'PSEUDO']" mode="inRule"/>
+        <xsl:text>}&#10;</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="REGION" mode="inRule">
+        <xsl:text>&#10;   @</xsl:text>
+        <xsl:value-of select="name"/>
+        <xsl:text> {</xsl:text>
+        <xsl:apply-templates select="*[local-name() != 'name']" mode="inRule"/>
+        <xsl:text>&#10;   }&#10;</xsl:text>
+    </xsl:template>
+
     <xsl:template match="RULE">
         <xsl:if test="count(child::PROPERTY) > 0">
             <xsl:apply-templates select="*[local-name() != 'PROPERTY']" mode="inRule"/>
@@ -47,6 +63,10 @@
         <xsl:text>[</xsl:text>
         <xsl:apply-templates select="*" mode="inRule"/>
         <xsl:text>]</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="ATTRIBEQUAL" mode="inRule">
+        <xsl:text>=</xsl:text>
     </xsl:template>
 
     <xsl:template match="ATTRIB/name" mode="inRule">
@@ -78,7 +98,19 @@
         <xsl:text>&#13;&#10;   </xsl:text>
         <xsl:value-of select="name"/>
         <xsl:text>:</xsl:text>
-        <xsl:apply-templates select="*[local-name() != 'name']" mode="inRule"/>
+        <xsl:choose>
+            <xsl:when test="value = 'string'">
+                <xsl:for-each select="*[local-name() != 'name']">
+                    <xsl:apply-templates select="." mode="inRule"/>
+                    <xsl:if test=". != '(' and ./following-sibling::* != ')' and . != 'string'">
+                        <xsl:text>,</xsl:text>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="*[local-name() != 'name']" mode="inRule"/>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:text>;</xsl:text>
     </xsl:template>
 
@@ -90,9 +122,14 @@
     </xsl:template>
 
     <xsl:template match="unit" mode="inRule">
-        <xsl:if test="contains(text(),'serif')">
-            <xsl:text>,</xsl:text>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="contains(text(), 'serif')">
+                <xsl:text>,</xsl:text>
+            </xsl:when>
+            <xsl:when test="string-length(text()) > 2">
+                <xsl:text> </xsl:text>
+            </xsl:when>
+        </xsl:choose>
         <xsl:value-of select="text()"/>
     </xsl:template>
 

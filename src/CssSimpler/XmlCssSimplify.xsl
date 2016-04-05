@@ -24,11 +24,11 @@
     <!-- Remove rules with div at root -->
     <xsl:template match="RULE[*[1][local-name()='TAG'][name='div']]"/>
 
-    <!-- Put before and after on parent to eliminate need of first and last child -->
+    <!-- Put before and after on parent to eliminate need of first and last child >
     <xsl:template match="TAG[following-sibling::*[1][name='last-child']]"/>
     <xsl:template match="*[name='last-child']"/>
     <xsl:template match="TAG[following-sibling::*[1][name='first-child']]"/>
-    <xsl:template match="*[name='first-child']"/>
+    <xsl:template match="*[name='first-child']"/ -->
 
     <!-- Eliminates part of selector -->
     <xsl:template match="RULE/*[position() > 1][following-sibling::*[name=parent::*/@lastClass]]">

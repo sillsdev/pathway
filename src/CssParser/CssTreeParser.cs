@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using SIL.Tool;
 using Antlr.Runtime;
@@ -49,11 +50,19 @@ namespace SIL.PublishingSolution
         /// <param name="inp">file name of input stream.</param>
         public void Parse(string inp)
         {
+	        if (String.IsNullOrEmpty(inp))
+		        return;
+
             string fullpath;
             if (Path.IsPathRooted(inp))
                 fullpath = inp;
             else
-                fullpath = Common.PathCombine(Environment.CurrentDirectory, inp);
+                fullpath = Path.Combine(Environment.CurrentDirectory, inp);
+
+	        if (!File.Exists(fullpath))
+	        {
+				System.Environment.Exit(-1);
+	        }
 
             ICharStream input = new ANTLRFileStream(fullpath, Encoding.UTF8);
             csst3Lexer lex = new csst3Lexer(input);

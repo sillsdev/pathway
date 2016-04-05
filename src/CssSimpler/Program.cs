@@ -17,7 +17,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Xsl;
-using Antlr.Css;
+using SIL.PublishingSolution;
 using Antlr.Runtime.Tree;
 using Mono.Options;
 
@@ -32,7 +32,7 @@ namespace CssSimpler
 
         private static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
         private static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
-        private static readonly List<string> UniqueClasses = new List<string>();
+        private static List<string> _uniqueClasses;
 
         static void Main(string[] args)
         {
@@ -87,54 +87,35 @@ namespace CssSimpler
                 ShowHelp(p);
                 return;
             }
-            var xhtml = new XmlDocument();
-            xhtml.Load(extra[0]);
-	        string inputDirectory = Path.GetDirectoryName(extra[0]);
-            // unique classes:
-            var xmlNodeList = xhtml.SelectNodes("//@class[not(.=preceding::*/@class or .=parent::*/parent::*/@class)]");
-            if (xmlNodeList != null)
-                foreach (XmlNode node in xmlNodeList)
-                {
-                    UniqueClasses.Add(node.InnerText);
-                }
-            DebugWriteClassNames();
-            var selectSingleNode = xhtml.SelectSingleNode("//*[@rel='stylesheet']/@href");
-	        if (selectSingleNode == null)
-	        {
-		        return;
-		        //throw new ApplicationException("No stylesheet href in XHTML meta data.");
-	        }
-	        var styleSheet = selectSingleNode.InnerText;
-
-	        if (!File.Exists(styleSheet))
-	        {
-		        styleSheet = Path.Combine(inputDirectory, styleSheet);
-	        }
-
-            Debug("Stylesheet: {0}", styleSheet);
+            var lc = new LoadClasses(extra[0]);
+            DebugWriteClassNames(lc.UniqueClasses);
+            Debug("Stylesheet: {0}", lc.StyleSheet);
             var parser = new CssTreeParser();
-            parser.Parse(styleSheet);
+            parser.Parse(lc.StyleSheet);
             var r = parser.Root;
             var xml = new XmlDocument();
             xml.LoadXml("<ROOT/>");
+            _uniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, r, parser);
             if (_outputXml)
             {
                 Debug("Writing XML stylesheet");
-                WriteCssXml(styleSheet, xml);
+                WriteCssXml(lc.StyleSheet, xml);
             }
-            //var contClass = new Dictionary<string, List<XmlNode>>();
+            WriteSimpleCss(lc.StyleSheet, xml); //reloads xml with simplified version
+            var contClass = new Dictionary<string, List<XmlNode>>();
             //GetContTargets(xml, contClass);
-            WriteSimpleCss(styleSheet, xml);
+            var outName = extra[0].Replace(".xhtml", "Out.xhtml");
+            //var pc = new ProcessContent(extra[0], outName, contClass);
         }
 
-        private static void DebugWriteClassNames()
+        private static void DebugWriteClassNames(List<string> uniqueClasses)
         {
             if (_verbosity > 0)
             {
                 var classNames = "Class names found: [";
                 var firstClass = true;
-                foreach (string uniqueClass in UniqueClasses)
+                foreach (string uniqueClass in uniqueClasses)
                 {
                     if (!firstClass)
                     {
@@ -166,6 +147,9 @@ namespace CssSimpler
             var cssReader = XmlReader.Create(memory, null);
             XmlCss.Transform(cssReader, null, cssWriter);
             cssFile.Close();
+            xml.RemoveAll();
+            memory.Seek(0, 0);
+            xml.Load(memory);
         }
 
         private static void MakeBaskupIfNecessary(string styleSheet)
@@ -174,30 +158,27 @@ namespace CssSimpler
             {
                 var folder = Path.GetDirectoryName(styleSheet);
                 if (string.IsNullOrEmpty(folder))
-                {
-	                return;
-	                //throw new ArgumentException("stylesheet has no path name.");
-                }
+                    throw new ArgumentException("stylesheet has no path name.");
                 var backup = Path.Combine(folder, Path.GetFileNameWithoutExtension(styleSheet) + ".bak");
                 File.Copy(styleSheet, backup, true);
             }
         }
 
-        //private static void GetContTargets(XmlDocument xml, Dictionary<string, List<XmlNode>> contClass)
-        //{
-        //    foreach (XmlNode contProp in xml.SelectNodes("//PROPERTY[name='content']"))
-        //    {
-        //        var target = contProp.ParentNode.Attributes["lastClass"];
-        //        if (contClass.ContainsKey(target.InnerText))
-        //        {
-        //            contClass[target.InnerText].Add(contProp);
-        //        }
-        //        else
-        //        {
-        //            contClass[target.InnerText] = new List<XmlNode> {contProp};
-        //        }
-        //    }
-        //}
+        private static void GetContTargets(XmlDocument xml, Dictionary<string, List<XmlNode>> contClass)
+        {
+            foreach (XmlNode contProp in xml.SelectNodes("//PROPERTY[name='content']"))
+            {
+                var target = contProp.ParentNode.Attributes["lastClass"];
+                if (contClass.ContainsKey(target.InnerText))
+                {
+                    contClass[target.InnerText].Add(contProp);
+                }
+                else
+                {
+                    contClass[target.InnerText] = new List<XmlNode> { contProp };
+                }
+            }
+        }
 
         private static void WriteCssXml(string styleSheet, XmlDocument xml)
         {
@@ -218,7 +199,7 @@ namespace CssSimpler
         private static string _target;
         private static bool _noData;
         private static int _term;
-        private static readonly List<string> NeedHigher = new List<string> { "form", "sensenumber", "headword", "writingsystemprefix" };
+        private static readonly List<string> NeedHigher = new List<string> { "form", "sensenumber", "headword", "writingsystemprefix", "xitem" };
 
         private static void AddSubTree(XmlNode n, CommonTree t, CssTreeParser ctp)
         {
@@ -229,7 +210,12 @@ namespace CssSimpler
             {
                 var name = child.Text;
                 var first = name.ToCharArray()[0];
-                if (first >= 'A' && first <= 'Z')
+                var second = '\0';
+                if (name.Length > 1)
+                {
+                    second = name.ToCharArray()[1];
+                }
+                if (first >= 'A' && first <= 'Z' && second >= 'A' && second <= 'Z')
                 {
                     System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
                     var node = n.OwnerDocument.CreateElement(name);
@@ -289,7 +275,7 @@ namespace CssSimpler
                     n.AppendChild(node);
                     if (n.Name == "CLASS")
                     {
-                        if (!UniqueClasses.Contains(name))
+                        if (!_uniqueClasses.Contains(name))
                         {
                             _noData = true;
                         }
@@ -316,7 +302,7 @@ namespace CssSimpler
 
         static void ShowHelp(OptionSet p)
         {
-            Console.WriteLine("Usage: SimpleCss [OPTIONS]+ FullInputFilePath.css");
+            Console.WriteLine("Usage: SimpleCss [OPTIONS]+ FullInputFilePath.xhtml");
             Console.WriteLine("Simplify the input css.");
             Console.WriteLine();
             Console.WriteLine("Options:");
