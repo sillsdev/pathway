@@ -21,6 +21,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 #endregion Using
@@ -1272,11 +1273,17 @@ namespace SIL.Tool
             int i = 0;
             foreach (ClassAttrib cssParentClass in parent)
             {
-                match = CompareClass(cssParentClass, xhtmlClassInfo[i++].CoreClass);
-                if (match == false)
-                {
-                    break;
-                }
+	            match = CompareClass(cssParentClass, xhtmlClassInfo[i++].CoreClass);
+				if (match == false)
+				{
+					foreach (var it in xhtmlClassInfo.Select((x, j) => new { Value = x, Index = j}))
+					{
+						if(it.Index <= i) continue;
+						match = CompareClass(cssParentClass, it.Value.CoreClass);
+						if (match) break;
+					}
+					break;
+				}
             }
             parent.Reverse();
             return match;

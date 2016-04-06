@@ -1,0 +1,47 @@
+.letData, .revData {
+    line-height: inherit;
+}
+.letData {
+    text-align: left;
+}
+
+div.entry {
+    line-height: 12pt;
+    text-indent: -36pt;
+}
+.entry {
+    line-height: inherit;
+}
+.entry {
+    text-align: left;
+    text-indent: -12pt;
+}
+.entry {
+    text-indent: -12pt;
+}
+.entry {
+    font-size: 10pt;
+    line-height: 12pt;
+    text-indent: -36pt;
+}
+
+.sense {
+    font-weight: normal;
+}
+
+.entry > .senses .sense > .morphosyntaxanalysis {
+    font-style: italic;
+}
+
+.entry > .senses .sense > .morphosyntaxanalysis > .partofspeech span:last-child::after {
+    content: " ";
+}
+span[lang|="en"] {
+    font-size: 10pt;
+}
+span[lang="en"] {
+    font-family: "Times New Roman";
+}
+
+
+

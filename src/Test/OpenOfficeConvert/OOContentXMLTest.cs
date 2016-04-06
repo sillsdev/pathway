@@ -488,6 +488,53 @@ namespace Test.OpenOfficeConvert
 			Assert.IsTrue(returnValue);
 		}
 
+		///<summary>
+		/// TD-4528 - V should be italic and not bold
+		/// TD-4529 - Person should be italic 
+		/// </summary>   
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void ItalicOnFlex83Test_Node()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "ItalicOnFlex83";
+
+			string styleOutput = GetStyleOutput(file);
+
+			//Content Test - First
+			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+			_validate.ClassName = "span_.en_partofspeech_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			string content = "v";
+			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+			Assert.IsTrue(returnValue1);
+			_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			content = "Person";
+			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+			Assert.IsTrue(returnValue1);
+
+			//Note - The Styles will be created while processing xhtml(content.xml)
+			//Style Test - Second
+			_validate = new ValidateXMLFile(styleOutput);
+			_validate.ClassName = "span_.en_partofspeech_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			_validate.ClassProperty.Add("fo:font-size", "10pt");
+			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
+			bool returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
+
+			_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			_validate.ClassProperty.Add("fo:font-size", "10pt");
+			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
+			returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
+
+			//Parent style for the above two test, which applied to all chile tags
+			_validate.ClassName = "morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			_validate.ClassProperty.Add("fo:font-style", "italic");
+			returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
+
+		}
+
         ///<summary>
         /// TD-1525 Period after double quotes
         /// </summary>      
