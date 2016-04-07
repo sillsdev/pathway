@@ -235,7 +235,9 @@
     <EmbeddedResource Include="XmlCss.xsl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="XmlCssSimplify.xsl" />
+    <EmbeddedResource Include="XmlCssSimplify.xsl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -264,6 +266,9 @@
       <Project>{b58fd9ba-1783-43f2-86d1-d79e1eacc365}</Project>
       <Name>CssParser</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XhtmlSimplify.xsl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

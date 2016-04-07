@@ -34,7 +34,7 @@
     <xsl:template match="RULE/*[position() > 1][following-sibling::*[name=parent::*/@lastClass]]">
         <xsl:choose>
             <!-- sub senses can format differently so we need this hierarchy -->
-            <xsl:when test="name='senses' or name='example'">
+            <xsl:when test="name='senses'">
                 <xsl:copy>
                     <xsl:apply-templates select="node() | @*"/>
                 </xsl:copy>

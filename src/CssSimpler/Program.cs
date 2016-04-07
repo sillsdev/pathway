@@ -32,6 +32,7 @@ namespace CssSimpler
 
         private static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
         private static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
+        private static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
         private static List<string> _uniqueClasses;
 
         static void Main(string[] args)
@@ -43,6 +44,10 @@ namespace CssSimpler
             // ReSharper disable AssignNullToNotNullAttribute
             SimplifyXmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"CssSimpler.XmlCssSimplify.xsl")));
+            // ReSharper restore AssignNullToNotNullAttribute
+            // ReSharper disable AssignNullToNotNullAttribute
+            SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
+                "CssSimpler.XhtmlSimplify.xsl")));
             // ReSharper restore AssignNullToNotNullAttribute
             // see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
             var p = new OptionSet
@@ -79,7 +84,7 @@ namespace CssSimpler
             {
                 Console.Write("SimpleCss: ");
                 Console.WriteLine(e.Message);
-                Console.WriteLine("Try `SimpleCss --help' for more information.");
+                Console.WriteLine("Try `CssSimple --help' for more information.");
                 return;
             }
             if (_showHelp || extra.Count != 1)
@@ -102,11 +107,67 @@ namespace CssSimpler
                 Debug("Writing XML stylesheet");
                 WriteCssXml(lc.StyleSheet, xml);
             }
+            MakeBaskupIfNecessary(lc.StyleSheet, extra[0]);
             WriteSimpleCss(lc.StyleSheet, xml); //reloads xml with simplified version
-            var contClass = new Dictionary<string, List<XmlNode>>();
+            WriteSimpleXhtml(extra[0]);
+            //var contClass = new Dictionary<string, List<XmlNode>>();
             //GetContTargets(xml, contClass);
-            var outName = extra[0].Replace(".xhtml", "Out.xhtml");
+            //var outName = extra[0].Replace(".xhtml", "Out.xhtml");
             //var pc = new ProcessContent(extra[0], outName, contClass);
+        }
+
+        private static void WriteSimpleXhtml(string xhtmlFullName)
+        {
+            if (string.IsNullOrEmpty(xhtmlFullName) || !File.Exists(xhtmlFullName))
+                throw new ArgumentException("Missing Xhtml file: {0}", xhtmlFullName);
+            var folder = Path.GetDirectoryName(xhtmlFullName);
+            if (string.IsNullOrEmpty(folder))
+                throw new ArgumentException("Xhtml name missing folder {0}", xhtmlFullName);
+            var outfile = Path.Combine(folder, Path.GetFileNameWithoutExtension(xhtmlFullName) + "Out.xhtml");
+            var reader = XmlReader.Create(xhtmlFullName, new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore});
+            var writer = XmlWriter.Create(outfile, SimplifyXhtml.OutputSettings);
+            SimplifyXhtml.Transform(reader, null, writer);
+            writer.Close();
+        }
+
+        private static void WriteSimpleCss(string styleSheet, XmlDocument xml)
+        {
+			if (string.IsNullOrEmpty(styleSheet) || !File.Exists(styleSheet))
+	        {
+		        return;
+				//throw new ArgumentNullException("styleSheet");
+	        }
+            var cssFile = new FileStream(styleSheet, FileMode.Create);
+            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
+            Debug("Writing Simple Stylesheet: {0}", styleSheet);
+            var memory = new MemoryStream();
+            SimplifyXmlCss.Transform(xml, null, memory);
+            memory.Flush();
+            memory.Seek(0, 0);
+            var cssReader = XmlReader.Create(memory, null);
+            XmlCss.Transform(cssReader, null, cssWriter);
+            cssFile.Close();
+            xml.RemoveAll();
+            memory.Seek(0, 0);
+            xml.Load(memory);
+        }
+
+        private static void MakeBaskupIfNecessary(string styleSheet, string xhtmlFullName)
+        {
+            if (_makeBackup)
+            {
+                var xhtmlFolder = Path.GetDirectoryName(xhtmlFullName);
+                if (string.IsNullOrEmpty(xhtmlFolder))
+                    throw  new ArgumentException("XHTML has no path name.");
+                var xhtmlBackup = Path.Combine(xhtmlFolder,
+                    Path.GetFileNameWithoutExtension(xhtmlFullName) + "Xhtml.bak");
+                File.Copy(xhtmlFullName, xhtmlBackup, true);
+                var folder = Path.GetDirectoryName(styleSheet);
+                if (string.IsNullOrEmpty(folder))
+                    throw new ArgumentException("stylesheet has no path name.");
+                var backup = Path.Combine(folder, Path.GetFileNameWithoutExtension(styleSheet) + "Css.bak");
+                File.Copy(styleSheet, backup, true);
+            }
         }
 
         private static void DebugWriteClassNames(List<string> uniqueClasses)
@@ -129,56 +190,21 @@ namespace CssSimpler
             }
         }
 
-        private static void WriteSimpleCss(string styleSheet, XmlDocument xml)
-        {
-			if (string.IsNullOrEmpty(styleSheet) || !File.Exists(styleSheet))
-	        {
-		        return;
-				//throw new ArgumentNullException("styleSheet");
-	        }
-            MakeBaskupIfNecessary(styleSheet);
-            var cssFile = new FileStream(styleSheet, FileMode.Create);
-            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
-            Debug("Writing Simple Stylesheet: {0}", styleSheet);
-            var memory = new MemoryStream();
-            SimplifyXmlCss.Transform(xml, null, memory);
-            memory.Flush();
-            memory.Seek(0, 0);
-            var cssReader = XmlReader.Create(memory, null);
-            XmlCss.Transform(cssReader, null, cssWriter);
-            cssFile.Close();
-            xml.RemoveAll();
-            memory.Seek(0, 0);
-            xml.Load(memory);
-        }
-
-        private static void MakeBaskupIfNecessary(string styleSheet)
-        {
-            if (_makeBackup)
-            {
-                var folder = Path.GetDirectoryName(styleSheet);
-                if (string.IsNullOrEmpty(folder))
-                    throw new ArgumentException("stylesheet has no path name.");
-                var backup = Path.Combine(folder, Path.GetFileNameWithoutExtension(styleSheet) + ".bak");
-                File.Copy(styleSheet, backup, true);
-            }
-        }
-
-        private static void GetContTargets(XmlDocument xml, Dictionary<string, List<XmlNode>> contClass)
-        {
-            foreach (XmlNode contProp in xml.SelectNodes("//PROPERTY[name='content']"))
-            {
-                var target = contProp.ParentNode.Attributes["lastClass"];
-                if (contClass.ContainsKey(target.InnerText))
-                {
-                    contClass[target.InnerText].Add(contProp);
-                }
-                else
-                {
-                    contClass[target.InnerText] = new List<XmlNode> { contProp };
-                }
-            }
-        }
+        //private static void GetContTargets(XmlDocument xml, Dictionary<string, List<XmlNode>> contClass)
+        //{
+        //    foreach (XmlNode contProp in xml.SelectNodes("//PROPERTY[name='content']"))
+        //    {
+        //        var target = contProp.ParentNode.Attributes["lastClass"];
+        //        if (contClass.ContainsKey(target.InnerText))
+        //        {
+        //            contClass[target.InnerText].Add(contProp);
+        //        }
+        //        else
+        //        {
+        //            contClass[target.InnerText] = new List<XmlNode> { contProp };
+        //        }
+        //    }
+        //}
 
         private static void WriteCssXml(string styleSheet, XmlDocument xml)
         {
@@ -302,7 +328,7 @@ namespace CssSimpler
 
         static void ShowHelp(OptionSet p)
         {
-            Console.WriteLine("Usage: SimpleCss [OPTIONS]+ FullInputFilePath.xhtml");
+            Console.WriteLine("Usage: CssSimple [OPTIONS]+ FullInputFilePath.xhtml");
             Console.WriteLine("Simplify the input css.");
             Console.WriteLine();
             Console.WriteLine("Options:");

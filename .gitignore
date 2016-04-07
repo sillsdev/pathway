@@ -47,6 +47,8 @@ src/CssDialog/obj/*
 src/CssParser/bin/*
 src/CssParser/obj/*
 src/CssParser/Output
+src/CssSimpler/bin/*
+src/CssSimpler/obj/*
 src/DictionaryForMIDsConvert/bin/*
 src/DictionaryForMIDsConvert/obj/*
 src/GoBibleConvert/bin/*
