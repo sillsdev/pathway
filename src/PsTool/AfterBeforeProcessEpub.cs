@@ -233,13 +233,10 @@ namespace SIL.Tool
 				{
 					_paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
 				}
-
 				ClosePara(false);
-
+				if (_imageInserted)
 				{
-
-					if (_imageInserted)
-						_imageParaForCaption = true;
+					_imageParaForCaption = true;
 				}
 				_previousParagraphName = _paragraphName;
 				_paragraphName = null;
@@ -296,22 +293,23 @@ namespace SIL.Tool
 							break;
 						}
 
-						psuedoContent.Add(psuedoBefore.Content);
-						_writer.WriteString(psuedoBefore.Content);
-						if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
-						{
-							_psuedoClassName.Add(psuedoBefore.StyleName);
-						}
+						//psuedoContent.Add(psuedoBefore.Content);
+						////Content writing
+						//_writer.WriteString(psuedoBefore.Content);
+						//if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
+						//{
+						//	_psuedoClassName.Add(psuedoBefore.StyleName);
+						//}
 
 					}
-					else if (psuedoBefore.Content == null)
-					{
-						_writer.WriteString(psuedoBefore.Content);
-						if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
-						{
-							_psuedoClassName.Add(psuedoBefore.StyleName);
-						}
-					}
+					//else if (psuedoBefore.Content == null)
+					//{
+					//	_writer.WriteString(psuedoBefore.Content);
+					//	if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
+					//	{
+					//		_psuedoClassName.Add(psuedoBefore.StyleName);
+					//	}
+					//}
 				}
 			}
 
@@ -444,14 +442,15 @@ namespace SIL.Tool
 						{
 							_writer.WriteString(" ");
 						}
-						else
-						{
-							_writer.WriteString(classInfo.Content);
-							if (classInfo.Content != null && !_psuedoClassName.Contains(classInfo.StyleName))
-							{
-								_psuedoClassName.Add(classInfo.StyleName);
-							}
-						}
+						//else
+						//{
+						//	//content writing
+						//	_writer.WriteString(classInfo.Content);
+						//	if (classInfo.Content != null && !_psuedoClassName.Contains(classInfo.StyleName))
+						//	{
+						//		_psuedoClassName.Add(classInfo.StyleName);
+						//	}
+						//}
 					}
 					_psuedoAfter.Remove(_closeChildName);
 				}

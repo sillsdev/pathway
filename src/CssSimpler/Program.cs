@@ -109,7 +109,7 @@ namespace CssSimpler
             }
             MakeBaskupIfNecessary(lc.StyleSheet, extra[0]);
             WriteSimpleCss(lc.StyleSheet, xml); //reloads xml with simplified version
-            WriteSimpleXhtml(extra[0]);
+            //WriteSimpleXhtml(extra[0]);
             //var contClass = new Dictionary<string, List<XmlNode>>();
             //GetContTargets(xml, contClass);
             //var outName = extra[0].Replace(".xhtml", "Out.xhtml");

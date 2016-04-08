@@ -483,6 +483,39 @@ namespace Test.epubConvert
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
+		public void ExportDictionaryInsertBeforeAfterFW83Test()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+
+			const string XhtmlName = "InsertBeforeAfterFW83.xhtml";
+			const string CssName = "InsertBeforeAfterFW83.css";
+			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+			projInfo.IsReversalExist = false;
+			projInfo.ProjectName = "Dictionary Test";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"));
+			var target = new Exportepub();
+			var actual = target.Export(projInfo);
+			Assert.IsTrue(actual);
+			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+			var zf = new FastZip();
+			zf.ExtractZip(result, FileOutput("InsertBeforeAfterFW83Comparison"), ".*");
+			var zfExpected = new FastZip();
+			result = result.Replace("Output", "Expected");
+			zfExpected.ExtractZip(result, FileOutput("InsertBeforeAfterFW83Expect"), ".*");
+			FileCompare("InsertBeforeAfterFW83Comparison/OEBPS/PartFile00001_.xhtml", "InsertBeforeAfterFW83Expect/OEBPS/PartFile00001_.xhtml");
+
+		}
+
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
 		public void Epub3ExportTest()
 		{
 			CleanOutputDirectory();
