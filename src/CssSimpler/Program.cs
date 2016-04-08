@@ -123,11 +123,13 @@ namespace CssSimpler
             var folder = Path.GetDirectoryName(xhtmlFullName);
             if (string.IsNullOrEmpty(folder))
                 throw new ArgumentException("Xhtml name missing folder {0}", xhtmlFullName);
-            var outfile = Path.Combine(folder, Path.GetFileNameWithoutExtension(xhtmlFullName) + "Out.xhtml");
-            var reader = XmlReader.Create(xhtmlFullName, new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore});
-            var writer = XmlWriter.Create(outfile, SimplifyXhtml.OutputSettings);
+            var infile = Path.Combine(folder, Path.GetFileNameWithoutExtension(xhtmlFullName) + "In.xhtml");
+            File.Copy(xhtmlFullName, infile, true);
+            var reader = XmlReader.Create(infile, new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore});
+            var writer = XmlWriter.Create(xhtmlFullName, SimplifyXhtml.OutputSettings);
             SimplifyXhtml.Transform(reader, null, writer);
             writer.Close();
+            File.Delete(infile);
         }
 
         private static void WriteSimpleCss(string styleSheet, XmlDocument xml)
