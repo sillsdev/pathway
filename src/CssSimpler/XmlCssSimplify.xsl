@@ -40,7 +40,7 @@
                 </xsl:copy>
             </xsl:when>
             <!-- sub senses can format differently so we need this hierarchy -->
-            <xsl:when test="name='senses'">
+            <xsl:when test="name='senses' or name='subentries'">
                 <xsl:copy>
                     <xsl:apply-templates select="node() | @*"/>
                 </xsl:copy>
@@ -59,13 +59,20 @@
         </xsl:choose>
     </xsl:template>
     
+    <!-- This plus the when clause above change example to complete when necessary -->
     <xsl:template match="name[text()='example' and local-name(parent::*/preceding-sibling::*[1]) = 'PRECEDES']">
         <xsl:copy>
             <xsl:text>complete</xsl:text>
         </xsl:copy>
     </xsl:template>
 
+    <!-- Remove tag class combinations -->
     <xsl:template match="RULE/*[local-name()='TAG' and local-name(following-sibling::*[1])='CLASS']"/>
+
+    <!-- Remove configtargets -->
+    <xsl:template match="*[name='configtargets']"/>
+    <xsl:template match="*[local-name()='PARENTOF' and preceding-sibling::*[1]/name='configtargets']"/>
+    <xsl:template match="*[local-name()='PARENTOF' and following-sibling::*[1]/name='configtargets']"/>
 
     <!-- Handles :not() by simplifying selector -->
     <xsl:template match="*[following-sibling::*[3][name='not']]">
