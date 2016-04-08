@@ -36,9 +36,17 @@
     <xsl:template match="x:head/@profile"/>
     <xsl:template match="x:html/@version"/>
     
-    <!-- Matches example in example and translation in translation and just puts one level -->
-    <xsl:template match="*[@class='example'][child::*[@class='example']] | *[@class='translation'][child::*[@class='translation']]">
+    <!-- Matches translation in translation and just puts one level -->
+    <xsl:template match="*[@class='translation'][child::*[@class='translation']]">
         <xsl:apply-templates select="*"/>
+    </xsl:template>
+
+    <!-- Matches example within example and changes internal name to text (of example) -->
+    <xsl:template match="*[@class='example' and parent::*/@class='example']">
+        <xsl:copy>
+            <xsl:attribute name="class">text</xsl:attribute>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
     </xsl:template>
 
 </xsl:stylesheet>

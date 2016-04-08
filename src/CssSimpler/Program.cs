@@ -109,7 +109,7 @@ namespace CssSimpler
             }
             MakeBaskupIfNecessary(lc.StyleSheet, extra[0]);
             WriteSimpleCss(lc.StyleSheet, xml); //reloads xml with simplified version
-            //WriteSimpleXhtml(extra[0]);
+            WriteSimpleXhtml(extra[0]);
             //var contClass = new Dictionary<string, List<XmlNode>>();
             //GetContTargets(xml, contClass);
             //var outName = extra[0].Replace(".xhtml", "Out.xhtml");
@@ -123,13 +123,17 @@ namespace CssSimpler
             var folder = Path.GetDirectoryName(xhtmlFullName);
             if (string.IsNullOrEmpty(folder))
                 throw new ArgumentException("Xhtml name missing folder {0}", xhtmlFullName);
-            var infile = Path.Combine(folder, Path.GetFileNameWithoutExtension(xhtmlFullName) + "In.xhtml");
-            File.Copy(xhtmlFullName, infile, true);
-            var reader = XmlReader.Create(infile, new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore});
-            var writer = XmlWriter.Create(xhtmlFullName, SimplifyXhtml.OutputSettings);
+            var outfile = Path.Combine(folder, Path.GetFileNameWithoutExtension(xhtmlFullName) + "Out.xhtml");
+            File.Copy(xhtmlFullName, outfile, true);
+            var ifs = new FileStream(xhtmlFullName, FileMode.Open, FileAccess.Read);
+            var reader = XmlReader.Create(ifs, new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore});
+            var writer = XmlWriter.Create(outfile, SimplifyXhtml.OutputSettings);
             SimplifyXhtml.Transform(reader, null, writer);
             writer.Close();
-            File.Delete(infile);
+            reader.Close();
+            ifs.Close();
+            File.Copy(outfile, xhtmlFullName, true);
+            File.Delete(outfile);
         }
 
         private static void WriteSimpleCss(string styleSheet, XmlDocument xml)
@@ -227,7 +231,7 @@ namespace CssSimpler
         private static string _target;
         private static bool _noData;
         private static int _term;
-        private static readonly List<string> NeedHigher = new List<string> { "form", "sensenumber", "headword", "writingsystemprefix", "xitem" };
+        private static readonly List<string> NeedHigher = new List<string> { "form", "sensenumber", "headword", "name", "writingsystemprefix", "xitem" };
 
         private static void AddSubTree(XmlNode n, CommonTree t, CssTreeParser ctp)
         {

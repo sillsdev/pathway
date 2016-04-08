@@ -23,18 +23,21 @@ namespace CssSimpler
         protected delegate void ParserMethod(XmlReader r);
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _nodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly XmlReader _rdr;
+        private StreamReader _srdr;
         private bool _finish;
         private bool _doAttributes;
 
         protected XmlParser(string xmlFullName)
         {
             var settings = new XmlReaderSettings(){DtdProcessing = DtdProcessing.Ignore};
-            _rdr = XmlReader.Create(new StreamReader(xmlFullName), settings);
+            _srdr = new StreamReader(xmlFullName);
+            _rdr = XmlReader.Create(_srdr, settings);
         }
 
         protected void Close()
         {
             _rdr.Close();
+            _srdr.Close();
         }
 
         protected void Parse()

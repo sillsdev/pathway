@@ -53,6 +53,20 @@
         </xsl:choose>
     </xsl:template>
 
+    <!-- Handle changing name from example to text -->
+  <xsl:template match="name[text()='example']">
+    <xsl:copy>
+      <xsl:choose>
+        <xsl:when test="parent::*/preceding-sibling::*[1]/name = 'example' or local-name(parent::*/preceding-sibling::*[1]) = 'PARENTOF' and parent::*/preceding-sibling::*[2]/name = 'example'">
+          <xsl:text>text</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="text()"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:copy>
+  </xsl:template>
+
     <xsl:template match="RULE/*[local-name()='TAG' and local-name(following-sibling::*[1])='CLASS']"/>
 
     <!-- Handles :not() by simplifying selector -->

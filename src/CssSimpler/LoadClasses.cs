@@ -11,7 +11,6 @@
 // File: LoadClasses.cs (from SimpleCss5.cs)
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -22,7 +21,7 @@ namespace CssSimpler
     {
         public readonly List<string> UniqueClasses = new List<string>();
         public string StyleSheet;
-        private string _folder;
+        private readonly string _folder;
 
         public LoadClasses(string xmlFullName) : base(xmlFullName)
         {
@@ -30,6 +29,7 @@ namespace CssSimpler
             Declare(XmlNodeType.Element, CaptureStylesheet);
             Declare(XmlNodeType.Attribute, GetClasses);
             Parse();
+            Close();
         }
 
         private void CaptureStylesheet(XmlReader rdr)
@@ -38,6 +38,7 @@ namespace CssSimpler
             if (rdr.GetAttribute("rel") == "stylesheet")
             {
                 StyleSheet = rdr.GetAttribute("href");
+                if (StyleSheet == null) return;
                 if (StyleSheet.ToLower().StartsWith("file:///"))
                 {
                     StyleSheet = StyleSheet.Substring(8);
