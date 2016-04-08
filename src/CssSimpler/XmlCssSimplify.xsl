@@ -33,6 +33,12 @@
     <!-- Eliminates part of selector -->
     <xsl:template match="RULE/*[position() > 1][following-sibling::*[name=parent::*/@lastClass]]">
         <xsl:choose>
+            <!-- sequence is actually of clusters since translation follows the example sentence -->
+            <xsl:when test="name='example' and local-name(following-sibling::*[1]) = 'PRECEDES'">
+                <xsl:copy>
+                    <xsl:element name="name">complete</xsl:element>
+                </xsl:copy>
+            </xsl:when>
             <!-- sub senses can format differently so we need this hierarchy -->
             <xsl:when test="name='senses'">
                 <xsl:copy>
@@ -52,20 +58,12 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-
-    <!-- Handle changing name from example to text -->
-  <xsl:template match="name[text()='example']">
-    <xsl:copy>
-      <xsl:choose>
-        <xsl:when test="parent::*/preceding-sibling::*[1]/name = 'example' or local-name(parent::*/preceding-sibling::*[1]) = 'PARENTOF' and parent::*/preceding-sibling::*[2]/name = 'example'">
-          <xsl:text>text</xsl:text>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="text()"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:copy>
-  </xsl:template>
+    
+    <xsl:template match="name[text()='example' and local-name(parent::*/preceding-sibling::*[1]) = 'PRECEDES']">
+        <xsl:copy>
+            <xsl:text>complete</xsl:text>
+        </xsl:copy>
+    </xsl:template>
 
     <xsl:template match="RULE/*[local-name()='TAG' and local-name(following-sibling::*[1])='CLASS']"/>
 

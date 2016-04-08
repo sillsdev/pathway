@@ -42,9 +42,9 @@
     </xsl:template>
 
     <!-- Matches example within example and changes internal name to text (of example) -->
-    <xsl:template match="*[@class='example' and parent::*/@class='example']">
+    <xsl:template match="*[@class='example' and child::*/@class='example']">
         <xsl:copy>
-            <xsl:attribute name="class">text</xsl:attribute>
+            <xsl:attribute name="class">complete</xsl:attribute>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
