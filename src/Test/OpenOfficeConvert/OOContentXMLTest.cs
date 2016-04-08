@@ -535,6 +535,26 @@ namespace Test.OpenOfficeConvert
 
 		}
 
+		///<summary>
+		/// TD-4527 Missing slot punctuation 
+		/// </summary>   
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void PseudoBeforeOnFlex83Test_Node()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "PseudoBeforeOnOnFlex83";
+
+			string styleOutput = GetStyleOutput(file);
+
+			//Content Test - First
+			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+			_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			string content = ": Person";
+			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+			Assert.IsTrue(returnValue1);
+		}
+
         ///<summary>
         /// TD-1525 Period after double quotes
         /// </summary>      
@@ -4634,6 +4654,7 @@ namespace Test.OpenOfficeConvert
 		///TokPisinExport Full Scripture Test
 		/// </summary>      
 		[Test]
+		[Ignore]
 		[Category("SkipOnTeamCity")]
 		public void NewGuidewordStyleTest()
 		{

@@ -18,6 +18,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -870,7 +871,13 @@ namespace SIL.Tool
                 match = CompareClass(cssParentClass, xhtmlClassInfo[i++].CoreClass);
                 if (match == false)
                 {
-                    break;
+                    foreach (var it in xhtmlClassInfo.Select((x, j) => new { Value = x, Index = j}))
+					{
+						if(it.Index <= i) continue;
+						match = CompareClass(cssParentClass, it.Value.CoreClass);
+						if (match) break;
+					}
+					break;
                 }
             }
             parent.Reverse();

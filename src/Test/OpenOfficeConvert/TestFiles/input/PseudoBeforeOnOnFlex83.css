@@ -1,0 +1,34 @@
+
+
+.slots {
+}
+.entry > .senses .sense > .morphosyntaxanalysis {
+    font-style: italic;
+}
+.sense {
+    font-weight: normal;
+}
+div.entry {
+    line-height: 12pt;
+}
+.entry {
+    line-height: inherit;
+}
+.entry {
+    text-align: left;
+
+}
+.entry {
+    font-size: 10pt;
+    line-height: 12pt;
+}
+.letData, .revData {
+    line-height: inherit;
+}
+.letData {
+    text-align: left;
+}
+
+.entry > .senses .sense > .morphosyntaxanalysis > .slots::before {
+    content: ": ";
+}
