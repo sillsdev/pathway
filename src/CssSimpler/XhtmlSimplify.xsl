@@ -41,6 +41,11 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
+    <!-- Matches span pictures and puts out its children (which are divs) to correct structure -->
+    <xsl:template match="x:span[@class='pictures']">
+        <xsl:apply-templates select="*"/>
+    </xsl:template>
+
     <!-- Matches example within example and changes internal name to text (of example) -->
     <xsl:template match="*[@class='example' and child::*/@class='example']">
         <xsl:copy>

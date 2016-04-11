@@ -33,6 +33,10 @@
     <!-- Eliminates part of selector -->
     <xsl:template match="RULE/*[position() > 1][following-sibling::*[name=parent::*/@lastClass]]">
         <xsl:choose>
+            <!-- remove pictures span -->
+            <xsl:when test="name='pictures'"/>
+            <xsl:when test="local-name() = 'PARENTOF' and following-sibling::*[1]/name = 'pictures'"/>
+            <xsl:when test="local-name() = 'PARENTOF' and preceding-sibling::*[1]/name = 'pictures'"/>
             <!-- sequence is actually of clusters since translation follows the example sentence -->
             <xsl:when test="name='example' and local-name(following-sibling::*[1]) = 'PRECEDES'">
                 <xsl:copy>
