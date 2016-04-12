@@ -201,15 +201,21 @@ namespace SIL.PublishingSolution
             }
             Debug.Assert(Styles != null);
             className = GetClassName(node, null);
-            var styleNum = Styles.Add(className, fontColor, fontStyle);
-            if (styleNum != CurStyle)
-            {
-                if (Styled)
-                    Rec += "]";
-                Rec += string.Format("[{0:D2}", styleNum);
-                CurStyle = styleNum;
-                Styled = true;
-            }
+	        if (className == null)
+	        {
+		        string incrementStyle = "style" + Convert.ToString(CurStyle + 1);
+				className = incrementStyle;
+	        }
+	        var styleNum = Styles.Add(className, fontColor, fontStyle);
+		    if (styleNum != CurStyle)
+		    {
+			    if (Styled)
+				    Rec += "]";
+			    Rec += string.Format("[{0:D2}", styleNum);
+			    CurStyle = styleNum;
+			    Styled = true;
+		    }
+	        
         }
 
         private string GetClassName(XmlNode node, string property)

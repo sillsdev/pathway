@@ -442,14 +442,6 @@ namespace SIL.Tool
                         _isNewParagraph = false;
                         _isParagraphClosed = false;
                     }
-                    else
-                    {
-
-                    }
-                }
-                else
-                {
-
                 }
             }
             if(_forcedPara)

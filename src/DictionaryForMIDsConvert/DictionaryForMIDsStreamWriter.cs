@@ -35,7 +35,7 @@ namespace SIL.PublishingSolution
 
         public void Open()
         {
-            StreamWriter = new StreamWriter(FullPath);
+			StreamWriter = File.CreateText(FullPath);
         }
 
         public void WriteLine(string value)

@@ -292,24 +292,7 @@ namespace SIL.Tool
 							}
 							break;
 						}
-
-						//psuedoContent.Add(psuedoBefore.Content);
-						////Content writing
-						//_writer.WriteString(psuedoBefore.Content);
-						//if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
-						//{
-						//	_psuedoClassName.Add(psuedoBefore.StyleName);
-						//}
-
 					}
-					//else if (psuedoBefore.Content == null)
-					//{
-					//	_writer.WriteString(psuedoBefore.Content);
-					//	if (psuedoBefore.Content != null && !_psuedoClassName.Contains(psuedoBefore.StyleName))
-					//	{
-					//		_psuedoClassName.Add(psuedoBefore.StyleName);
-					//	}
-					//}
 				}
 			}
 
@@ -318,7 +301,6 @@ namespace SIL.Tool
 			{
 				_characterName = StackPeekCharStyle(_allCharacter);
 			}
-			//content = whiteSpacePre(content);
 			bool contains = false;
 			if (_psuedoContainsStyle != null)
 			{
@@ -442,15 +424,6 @@ namespace SIL.Tool
 						{
 							_writer.WriteString(" ");
 						}
-						//else
-						//{
-						//	//content writing
-						//	_writer.WriteString(classInfo.Content);
-						//	if (classInfo.Content != null && !_psuedoClassName.Contains(classInfo.StyleName))
-						//	{
-						//		_psuedoClassName.Add(classInfo.StyleName);
-						//	}
-						//}
 					}
 					_psuedoAfter.Remove(_closeChildName);
 				}

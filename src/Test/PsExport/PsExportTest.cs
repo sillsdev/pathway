@@ -924,6 +924,7 @@ namespace Test.PsExport
         /// For country see: http://www.iso.org/iso/iso-3166-1_decoding_table.html
         /// </remarks>
         [Test]
+		[Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void T15DictionaryRights()
