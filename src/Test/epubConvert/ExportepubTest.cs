@@ -19,6 +19,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using epubConvert;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using SIL.PublishingSolution;
@@ -557,6 +558,43 @@ namespace Test.epubConvert
 				}
 			}
 		}
+
+		/// <summary>
+		/// Test for Creating the toc.ncx File for EPub Output
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void CreateNcxTest()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+
+			const string XhtmlName = "main.xhtml";
+			const string CssName = "main.css";
+			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+			projInfo.IsReversalExist = false;
+			projInfo.ProjectName = "Dictionary Test";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			CleanOutputDirectory();
+			string inputDataFolder = Common.PathCombine(_inputPath, "CreateNCXTestcase");
+			string outputDataFolder = Common.PathCombine(_outputPath, "CreateNCXTestcase");
+			Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+			string outputDirectory = Path.Combine(outputDataFolder, "OEBPS");
+			EpubToc target = new EpubToc(projInfo.ProjectInputType, "2 - Letter and Entry");
+			var bookId = new Guid("5C3DF448-BADC-4F83-AF5C-B880027FF079");
+			target.CreateNcx(projInfo, outputDirectory, bookId);
+			string tocOutputNCXFile = Path.Combine(outputDirectory, "toc.ncx");
+			string tocExpectedNCXFile = Path.Combine(_expectedPath, "toc.ncx");
+
+			FileCompare(tocOutputNCXFile, tocExpectedNCXFile);
+		}
+
 
 		[Test]
 		[Category("LongTest")]
