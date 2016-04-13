@@ -26,6 +26,8 @@ using System.IO;
 using System.Text.RegularExpressions;
 using SIL.Tool;
 using SIL.Tool.Localization;
+using System.Linq;
+
 
 #endregion Using
 namespace SIL.PublishingSolution
@@ -3546,19 +3548,7 @@ namespace SIL.PublishingSolution
                     _previousChildName = "This_is_some_blabla_text";
                 }
 
-				if ((_classNameWithLang.IndexOf("headwordminor") == 0 || _classNameWithLang.IndexOf("headword") == 0 || 
-					_classNameWithLang.IndexOf("span") == 0) && (_classNameWithLang.IndexOf("reversalform") == 0 ||
-					
-                      _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform") == 0 ||
-                      _childName.Replace(_classNameWithLang + "_", "").IndexOf("headword") == 0 ||
-                      _childName.Replace("span_", "").IndexOf("headword") == 0 || _childName.Replace("span.-", "").IndexOf("mainheadword") == 0 ||
-                      _childName.Replace("span_", "").IndexOf("reversalform") == 0)
-                    &&
-                    (_previousParagraphName.IndexOf("minorentries_") == 0 || _previousParagraphName.IndexOf("minorentry_") == 0 ||
-                     _previousParagraphName.IndexOf("entry_") == 0 ||
-					 _previousParagraphName.IndexOf("div_pictureCaption") == 0 || _previousParagraphName.IndexOf("div.entry_") == 0 ||
-                     _previousParagraphName.IndexOf("picture") >= 0) && _previousChildName.IndexOf("headword") == -1 &&
-                    _previousChildName.IndexOf("reversalform") == -1)
+				if (IsHeadwordMatches())
                 {
                     fillHeadword = true;
                     if (content.Trim().Length > _guidewordLength)
@@ -3594,7 +3584,39 @@ namespace SIL.PublishingSolution
             return fillHeadword;
         }
 
-        private string WrittingMultiLanguageHeader(string content, string chapterNo, string leftHeadword)
+
+		/// <summary>
+		/// Method validating the possible matching case with the possible classname, Then will enable headword when all case matches.
+		/// </summary>
+		/// <returns>True/False</returns>
+	    private bool IsHeadwordMatches()
+	    {
+		    bool fillHeadword = false;
+
+			//Check possible classname in ClassNameWithLang string.
+			bool isClassNameWithLangMatches = (_classNameWithLang.IndexOf("headwordminor", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("headword", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("span", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("a", StringComparison.Ordinal) == 0);
+
+			//Check possible classname in _childName string.
+			bool isClassNameMatches = (_classNameWithLang.IndexOf("reversalform", StringComparison.Ordinal) == 0 ||
+					  _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0 ||
+					  _childName.Replace(_classNameWithLang + "_", "").IndexOf("headword", StringComparison.Ordinal) == 0 ||
+					  _childName.Replace("span_", "").IndexOf("headword", StringComparison.Ordinal) == 0 || _childName.Replace("span.-", "").IndexOf("mainheadword", StringComparison.Ordinal) == 0 || _childName.Replace("a_span.-", "").IndexOf("mainheadword", StringComparison.Ordinal) == 0 ||
+					  _childName.Replace("span_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0);
+
+			//Check possible classname in _previousParagraphName string.
+			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 ||_previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0);
+
+			//Check possible classname in _previousChildName string.
+			bool isPrevChildNameMatches = (_previousChildName.IndexOf("headword", StringComparison.Ordinal) == -1 && _previousChildName.IndexOf("reversalform", StringComparison.Ordinal) == -1);
+
+		    if (isClassNameWithLangMatches && isClassNameMatches && isPrevParagraphMatches && isPrevChildNameMatches)
+		    {
+				fillHeadword = true;
+			}
+		    return fillHeadword;
+	    }
+
+	    private string WrittingMultiLanguageHeader(string content, string chapterNo, string leftHeadword)
         {
             if (_strBook2ndBook.Length > 0)
             {

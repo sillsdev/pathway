@@ -4651,15 +4651,39 @@ namespace Test.OpenOfficeConvert
         }
 
 		///<summary>
-		///TokPisinExport Full Scripture Test
+		/// Buang Ws Test
 		/// </summary>      
 		[Test]
-		[Ignore]
 		[Category("SkipOnTeamCity")]
 		public void NewGuidewordStyleTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "NewGuidewordStyle";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+			string style = "";
+			if (Common.UnixVersionCheck())
+			{
+				style = "_Unix";
+			}
+
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
+		///<summary>
+		/// Buang Ws Test
+		/// </summary>
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void FlexGuidewordStyleTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "NewGuidewordStyle2";
 			DateTime startTime = DateTime.Now;
 
 			string styleOutput = GetStyleOutput(file);
