@@ -480,11 +480,21 @@ namespace epubConvert
                 // This entry doesn't have any information - skip it
                 return false;
             }
-            const string headwordXPath = ".//xhtml:span[@class='headword']";
+            string headwordXPath = ".//xhtml:span[@class='headword']";
             XmlNode headwordNode = node.SelectSingleNode(headwordXPath, namespaceManager);
-            textString = headwordNode != null ? headwordNode.InnerText : node.FirstChild.InnerText;
 
-            if (textString.Trim().Length > 0)
+			if (headwordNode == null)
+			{
+				headwordXPath = ".//xhtml:span[@class='mainheadword']";
+				headwordNode = node.SelectSingleNode(headwordXPath, namespaceManager);
+			}
+
+			if (headwordNode != null)
+				textString = headwordNode.InnerText;
+			else
+				textString = node.FirstChild.InnerText;
+
+	        if (textString.Trim().Length > 0)
             {
                 // write out the node
                 ncx.WriteStartElement("navPoint");
@@ -713,10 +723,18 @@ namespace epubConvert
             if (InputType.ToLower().Equals("dictionary"))
             {
                 nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
-                if (nodes == null || nodes.Count == 0)
-                {
-                    nodes = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
-                }
+	            if (nodes == null || nodes.Count == 0)
+	            {
+		            nodes = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
+	            }
+	            if (nodes == null || nodes.Count == 0)
+	            {
+		            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='letter']", namespaceManager);
+	            }
+	            if (nodes == null || nodes.Count == 0)
+	            {
+		            nodes = xmlDocument.SelectNodes("//span[@class='letter']", namespaceManager);
+	            }
             }
             else
             {
