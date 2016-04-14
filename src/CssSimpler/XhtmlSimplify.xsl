@@ -16,7 +16,12 @@
     <xsl:output encoding="UTF-8" method="xml" />
 
     <xsl:template match="/">
-        <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"[]></xsl:text>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"[
+<!ATTLIST html lang CDATA #REQUIRED >
+<!ATTLIST span lang CDATA #IMPLIED >
+<!ATTLIST span entryguid CDATA #IMPLIED >
+<!ATTLIST img alt CDATA #IMPLIED >
+]>]]></xsl:text>
         <xsl:apply-templates select="node()|@*"/>
     </xsl:template>
 

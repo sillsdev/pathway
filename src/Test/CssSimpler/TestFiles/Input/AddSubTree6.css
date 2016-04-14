@@ -1,0 +1,8 @@
+.entry { margin-left: .5in; }
+.entry {}
+.entry> .pronunciations .pronunciation> .form span:first-child:before{
+		content:'[';
+	}
+.entry> .variantformentrybackrefs:before{
+		content:'(';
+	}
