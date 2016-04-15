@@ -3146,11 +3146,14 @@ namespace SIL.Tool
 					string[] folders = Directory.GetDirectories(sourceFolder);
 					foreach (string folder in folders)
 					{
-						string name = Path.GetFileName(folder);
-						string dest = Common.PathCombine(destFolder, name);
-						if (name != ".svn")
+						if (folder != destFolder)
 						{
-							CopyFolderandSubFolder(folder, dest, true);
+							string name = Path.GetFileName(folder);
+							string dest = Common.PathCombine(destFolder, name);
+							if (name != ".svn")
+							{
+								CopyFolderandSubFolder(folder, dest, true);
+							}
 						}
 					}
 				}
