@@ -632,7 +632,7 @@ namespace SIL.PublishingSolution
         }
         private static void CreateEpubFolder(PublicationInformation projInfo)
         {
-            Common.CopyFolderandSubFolder(projInfo.DictionaryPath, Common.PathCombine(projInfo.DictionaryPath, "Epub2"), false);
+            Common.CopyFolderandSubFolder(projInfo.DictionaryPath, Common.PathCombine(projInfo.DictionaryPath, "Epub2"), true);
             var di = new DirectoryInfo(projInfo.DictionaryPath);
             Common.CleanFile(di);
             projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Common.PathCombine(projInfo.DictionaryPath, "Epub2"),
