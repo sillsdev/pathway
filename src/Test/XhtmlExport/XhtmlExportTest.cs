@@ -266,15 +266,9 @@ namespace Test.XhtmlExport
 		[Category("SkipOnTeamCity")]
 		public void GondwanaSampleExportTest()
 		{
-			FieldWorksXhtmlExport("Flex", "Gondwana Sample", "Gondwana Sample 2011-02-09 0709.fwbackup", "Export changed");
-		}
-
-        [Test]
-        [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
-        public void GondwanaSampleFw83ExportTest()
-        {
-            FieldWorksXhtmlExport("Flex", "Gondwana Sample-Fw83", "Gondwana Sample 2011-02-09 0709.fwbackup", "Export changed");
+		    var fwver = FileVersionInfo.GetVersionInfo(@"C:\Program Files (x86)\SIL\FieldWorks 8\FieldWorks.exe");
+		    var suffix = (fwver.FileMajorPart > 8 || fwver.FileMajorPart == 8 && fwver.FileMinorPart >= 3) ? "-Fw83" : "";
+            FieldWorksXhtmlExport("Flex", "Gondwana Sample" + suffix, "Gondwana Sample 2011-02-09 0709.fwbackup", "Export changed");
         }
         #endregion Gondwana Sample
 

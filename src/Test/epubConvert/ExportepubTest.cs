@@ -823,7 +823,8 @@ namespace Test.epubConvert
 		{
 			string xhtmlOutput = FileOutput(file1);
 			string xhtmlExpected = FileOutput(file2);
-			TextFileAssert.AreEqual(xhtmlOutput, xhtmlExpected, file1 + " in epub ");
+            XmlAssert.Ignore(xhtmlOutput, "//*[@name='epub-creator']/@content", null);
+			XmlAssert.AreEqual(xhtmlOutput, xhtmlExpected, file1 + " in epub ");
 		}
 
 		/// <summary>
