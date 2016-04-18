@@ -106,6 +106,7 @@ namespace Test.XhtmlExport
 			XmlAssert.Ignore(xhtmlOutput, "/x:html/x:head/x:meta[@name='description']/@content", ns);
 			XmlAssert.Ignore(xhtmlOutput, "/x:html/x:head/x:meta[@name='linkedFilesRootDir']/@content", ns);
 			XmlAssert.Ignore(xhtmlOutput, "//@id", ns);
+            XmlAssert.Ignore(xhtmlOutput, "//@src", ns);
 			XmlAssert.AreEqual(xhtmlExpect, xhtmlOutput, message + ": " + xhtmlName);
 			var cssName = proj + ".css";
 			var cssExpect = _tf.Expected(cssName);
@@ -267,7 +268,15 @@ namespace Test.XhtmlExport
 		{
 			FieldWorksXhtmlExport("Flex", "Gondwana Sample", "Gondwana Sample 2011-02-09 0709.fwbackup", "Export changed");
 		}
-		#endregion Gondwana Sample
+
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void GondwanaSampleFw83ExportTest()
+        {
+            FieldWorksXhtmlExport("Flex", "Gondwana Sample-Fw83", "Gondwana Sample 2011-02-09 0709.fwbackup", "Export changed");
+        }
+        #endregion Gondwana Sample
 
 		#region Gondwana Sample Open Office
 		/// <summary>

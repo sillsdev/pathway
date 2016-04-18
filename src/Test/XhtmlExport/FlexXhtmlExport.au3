@@ -8,6 +8,7 @@
 ; Copyright: (c) 2013 SIL International
 ; License: MIT
 
+Opt("SendKeyDelay",500)
 $proj = EnvGet("proj")
 if $proj = "" Then $proj = "YCE-Test"
 $Backup = EnvGet("Backup")
@@ -38,15 +39,19 @@ AdlibRegister("MyAdlib")
 ;MsgBox(4112,"Run Command", $fwHome & "\Fieldworks.exe -app Flex -db """ & $proj & """ -restore """ & $InputPath & "\" & $Backup & """ -include " & $IncOpt)
 Run($fwHome & "\Fieldworks.exe -app Flex -db """ & $proj & """ -restore """ & $InputPath & "\" & $Backup & """ -include " & $IncOpt)
 WinWaitActive( $proj & " - FieldWorks Language Explorer")
-Send("{ALTDOWN}f{ALTUP}e{DOWN 5}{ENTER}")
+Sleep( 3000 )
+Send("{F10}")
+Sleep( 1000 )
+Send("fe{DOWN 5}{ENTER}")
 While True
-	if WinWaitActive("Export to SFM","",200) <> 0 Then
+	if WinWaitActive("Export to SFM","",1000) <> 0 Then
 		Send("{Esc}{Down}{ENTER}")
 	EndIf
-	if WinWaitActive("Export to XHTML","",200) <> 0 Then
+	if WinWaitActive("Export to XHTML","",1000) <> 0 Then
 		ExitLoop
 	EndIf
 WEnd
+Opt("SendKeyDelay",50)
 Send($OutputPath & "\" & $proj & ".xhtml{ENTER}")
 WinWaitActive("[CLASS:CabinetWClass]")
 Send("{ALTDOWN}{F4}{ALTUP}")
