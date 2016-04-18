@@ -73,28 +73,6 @@
     <!-- Remove tag class combinations -->
     <xsl:template match="RULE/*[local-name()='TAG' and local-name(following-sibling::*[1])='CLASS']"/>
 
-    <!-- Remove configtargets -->
-    <xsl:template match="*[name='configtargets']"/>
-    <xsl:template match="*[local-name()='PARENTOF' and preceding-sibling::*[1]/name='configtargets']"/>
-    <xsl:template match="*[local-name()='PARENTOF' and following-sibling::*[1]/name='configtargets']"/>
-
-    <!-- Handles :not() by simplifying selector -->
-    <xsl:template match="*[following-sibling::*[3][name='not']]">
-        <xsl:apply-templates select="following-sibling::*[1]"/>
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-        </xsl:copy>
-        <xsl:element name="PSEUDO">
-            <xsl:element name="name">
-                <xsl:text>before</xsl:text>
-            </xsl:element>
-        </xsl:element>
-    </xsl:template>
-    <xsl:template match="*[following-sibling::*[2][name='not']]"/>
-    <xsl:template match="*[following-sibling::*[1][name='not']]"/>
-    <xsl:template match="*[name='not']"/>
-    <xsl:template match="*[preceding-sibling::*[1][name='not']]"/>
-
     <!-- Used with indent to pretty print results -->
     <xsl:template match="text()[normalize-space(.)='']"/>
 </xsl:stylesheet>

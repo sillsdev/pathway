@@ -30,10 +30,10 @@ namespace CssSimpler
         private static int _verbosity;
         private static bool _makeBackup;
 
-        private static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
-        private static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
-        private static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
-        private static List<string> _uniqueClasses;
+        protected static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
+        protected static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
+        protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
+        protected static List<string> _uniqueClasses;
 
         static void Main(string[] args)
         {
@@ -116,7 +116,7 @@ namespace CssSimpler
             //var pc = new ProcessContent(extra[0], outName, contClass);
         }
 
-        private static void WriteSimpleXhtml(string xhtmlFullName)
+        protected static void WriteSimpleXhtml(string xhtmlFullName)
         {
             if (string.IsNullOrEmpty(xhtmlFullName) || !File.Exists(xhtmlFullName))
                 throw new ArgumentException("Missing Xhtml file: {0}", xhtmlFullName);
@@ -124,7 +124,6 @@ namespace CssSimpler
             if (string.IsNullOrEmpty(folder))
                 throw new ArgumentException("Xhtml name missing folder {0}", xhtmlFullName);
             var outfile = Path.Combine(folder, Path.GetFileNameWithoutExtension(xhtmlFullName) + "Out.xhtml");
-            File.Copy(xhtmlFullName, outfile, true);
             var ifs = new FileStream(xhtmlFullName, FileMode.Open, FileAccess.Read);
             var reader = XmlReader.Create(ifs, new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore});
             var writer = XmlWriter.Create(outfile, SimplifyXhtml.OutputSettings);
@@ -136,12 +135,11 @@ namespace CssSimpler
             File.Delete(outfile);
         }
 
-        private static void WriteSimpleCss(string styleSheet, XmlDocument xml)
+        protected static void WriteSimpleCss(string styleSheet, XmlDocument xml)
         {
 			if (string.IsNullOrEmpty(styleSheet) || !File.Exists(styleSheet))
 	        {
-		        return;
-				//throw new ArgumentNullException("styleSheet");
+				throw new ArgumentNullException("styleSheet");
 	        }
             var cssFile = new FileStream(styleSheet, FileMode.Create);
             var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
@@ -212,7 +210,7 @@ namespace CssSimpler
         //    }
         //}
 
-        private static void WriteCssXml(string styleSheet, XmlDocument xml)
+        protected static void WriteCssXml(string styleSheet, XmlDocument xml)
         {
             var folder = Path.GetDirectoryName(styleSheet);
 	        if (string.IsNullOrEmpty(folder))
@@ -233,7 +231,7 @@ namespace CssSimpler
         private static int _term;
         private static readonly List<string> NeedHigher = new List<string> { "form", "sensenumber", "headword", "name", "writingsystemprefix", "xitem", "configtarget", "configtargets" };
 
-        private static void AddSubTree(XmlNode n, CommonTree t, CssTreeParser ctp)
+        protected static void AddSubTree(XmlNode n, CommonTree t, CssTreeParser ctp)
         {
             var argState = 0;
             var pos = 0;

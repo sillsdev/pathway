@@ -1,0 +1,16 @@
+.entry .pictures .picture{
+		float:right;
+		text-align:center;
+		margin:0pt 0pt 4pt 4pt;
+		padding:2pt;
+		float:right;
+	}
+.entry .pictures .picture img{
+		max-height:1in;
+	}
+.entry> .pictures> span+ span:before{
+		content:'  ';
+	}
+.entry> .pictures:after{
+		content:' ';
+	}

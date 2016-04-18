@@ -118,7 +118,7 @@ namespace SIL.PublishingSolution
 
         /// <summary>
         /// For TD-4471 and TD-4536
-        /// After testing, we can remove this method, this issue is margin-left for subentry are not same or less than Entry, but is shouldn't.
+        /// Method to add the  entry's margin-left value to the SubEntry's margin-left to get the box effect.
         /// </summary>
         private void HandleSubEntryIndent()
         {
@@ -136,7 +136,13 @@ namespace SIL.PublishingSolution
 					int entrySize = Int16.Parse(_cssProperty[styelName]["class-margin-left"]);
 					if (subEntrySize <= entrySize)
 					{
-						_cssProperty["subentry"]["class-margin-left"] = (subEntrySize + entrySize).ToString();
+						foreach (string styleName in _cssProperty.Keys)
+						{
+							if (styleName.IndexOf("subentry", StringComparison.Ordinal) == 0 && _cssProperty[styleName].ContainsKey("class-margin-left"))
+							{
+								_cssProperty[styleName]["class-margin-left"] = (subEntrySize + entrySize).ToString();
+							}
+						}
 					}
 				}
 			}

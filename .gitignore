@@ -120,6 +120,7 @@ src/Test/Build/TestFiles/output/*
 src/Test/ConfigurationTool/TestFiles/output/*
 src/Test/CssDialog/TestFiles/output/*
 src/Test/CssParser/TestFiles/gramOutput/T*
+src/Test/CssSimpler/TestFiles/output/*
 src/Test/DictionaryForMIDsConvert/TestFiles/output/*
 src/Test/GoBibleConvert/TestFiles/output/*
 src/Test/InDesignConvert/TestFiles/output/*

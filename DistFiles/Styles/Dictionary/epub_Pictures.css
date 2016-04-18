@@ -50,3 +50,11 @@ span.reference :before {
 span.reference :after {
 	content: ")";
 }
+.entry> .pictures .picture{
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}
+.entry .pictures .picture{		
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}

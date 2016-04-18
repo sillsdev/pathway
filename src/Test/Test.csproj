@@ -279,6 +279,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CssParser\StylesTest.cs" />
+    <Compile Include="CssSimpler\CssSimplerTest.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
     <Compile Include="epubConvert\EpubXsltTransformationTest.cs" />
@@ -375,6 +376,10 @@
     <ProjectReference Include="..\CssParser\CssParser.csproj">
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CssSimpler\CssSimpler.csproj">
+      <Project>{cda4615f-63eb-4dce-9101-3e2b781fc1f8}</Project>
+      <Name>CssSimpler</Name>
     </ProjectReference>
     <ProjectReference Include="..\DictionaryForMIDsConvert\DictionaryForMIDsConvert.csproj">
       <Project>{D4AFCA5B-4C8A-4478-A08F-75540BE0D3B0}</Project>
