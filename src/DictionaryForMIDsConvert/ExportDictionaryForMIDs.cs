@@ -131,13 +131,14 @@ namespace SIL.PublishingSolution
             {
                 MoveJarFile(projInfo);
                 CreateRAMP(projInfo);
+                Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".txt,.xhtml,.css,.log,.jar,.jad,.properties,.xml", String.Empty, "pictures");
             }
             return success;
         }
 
         protected static void CleanUp(string name)
         {
-            Common.CleanupExportFolder(name, ".tmp,.jar,.bat,.de", string.Empty, "Empty_Jar-Jad,dictionary");
+            Common.CleanupExportFolder(name, ".tmp,.jar,.bat,.de", String.Empty, "Empty_Jar-Jad,dictionary");
         }
 
         protected void MoveJarFile(PublicationInformation projInfo)
@@ -183,8 +184,13 @@ namespace SIL.PublishingSolution
             var className = projInfo.IsLexiconSectionExist ? "definition" : "headref";
             var input = Input(projInfo);
             var sensePath = projInfo.IsLexiconSectionExist ? "//*[@class = 'entry']//*[@id]" : "//*[@class = 'headref']/parent::*";
+            if (input.Fw83())
+            {
+                sensePath = "//*[@entryguid]";
+            }
             foreach (XmlNode sense in input.SelectNodes(sensePath))
             {
+                if (!DictionaryForMIDsRec.HasChildClass(sense, className)) continue;
                 var rec = new DictionaryForMIDsRec { CssClass = CssClass, Styles = ContentStyles };
                 rec.AddHeadword(sense);
                 rec.AddBeforeSense(sense);

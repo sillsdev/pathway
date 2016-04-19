@@ -280,6 +280,7 @@
     </Compile>
     <Compile Include="CssParser\StylesTest.cs" />
     <Compile Include="CssSimpler\CssSimplerTest.cs" />
+    <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsInputTests.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
     <Compile Include="epubConvert\EpubXsltTransformationTest.cs" />

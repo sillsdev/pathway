@@ -64,7 +64,8 @@ namespace SIL.PublishingSolution
             var entry = sense;
             while (entry.Attributes == null ||
                    entry.Attributes.GetNamedItem("class") == null ||
-                   entry.Attributes.GetNamedItem("class").InnerText != "entry")
+                   entry.Attributes.GetNamedItem("class").InnerText != "entry" &&
+                   entry.Attributes.GetNamedItem("class").InnerText != "reversalindexentry")
             {
                 senses = entry;
                 entry = entry.ParentNode;
@@ -129,9 +130,20 @@ namespace SIL.PublishingSolution
 
         private void RenderChildClass(XmlNode sense, string className)
         {
-            var classPath = string.Format(@"//*[starts-with(@class, '{0}')]/*[normalize-space() != '']", className);
+            RenderNode(GetDefinition(sense, className));
+        }
+
+        public static bool HasChildClass(XmlNode sense, string className)
+        {
+            var node = GetDefinition(sense, className);
+            return node != null;
+        }
+
+        private static XmlNode GetDefinition(XmlNode sense, string className)
+        {
+            var classPath = string.Format(@".//*[starts-with(@class, '{0}')]/*[normalize-space() != '']", className);
             XmlNode node = sense.SelectSingleNode(classPath);
-            RenderNode(node);
+            return node;
         }
 
         private void RenderNode(XmlNode xmlNode)

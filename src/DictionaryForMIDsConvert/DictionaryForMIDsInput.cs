@@ -27,13 +27,15 @@ namespace SIL.PublishingSolution
 
 		protected XmlNamespaceManager Nsmgr;
 		protected XmlDocument Xml;
-		private bool IsLexicon;
+		private readonly bool _isLexicon;
+	    private readonly bool _fw83;
 
 		public DictionaryForMIDsInput(PublicationInformation projInfo)
 		{
 			Xml = LoadXmlDocument(projInfo);
 			Nsmgr = GetNamespaceManager(Xml);
-			IsLexicon = projInfo.IsLexiconSectionExist;
+			_isLexicon = projInfo.IsLexiconSectionExist;
+            _fw83 = Xml.SelectSingleNode("//@entryguid") != null;
 		}
 
 		~DictionaryForMIDsInput()
@@ -46,12 +48,17 @@ namespace SIL.PublishingSolution
 			return Xml.SelectNodes(xpath, Nsmgr);
 		}
 
+	    public bool Fw83()
+	    {
+	        return _fw83;
+	    }
+
 		public string VernacularIso()
 		{
 
 			if (_vernacularIso != null)
 				return _vernacularIso;
-			var vernLangPath = IsLexicon ? "//*[@class='headword']/@lang" : "//*[starts-with(@class,'reversal-form')]/@lang";
+			var vernLangPath = _isLexicon ? "//*[@class='headword']/@lang" : "//*[starts-with(@class,'reversal')]//@lang";
 			var node = Xml.SelectSingleNode(vernLangPath, Nsmgr);
 			if (node != null && node.InnerText != string.Empty)
 			{
@@ -61,7 +68,7 @@ namespace SIL.PublishingSolution
 			{
 				if (node == null)
 				{
-					vernLangPath = IsLexicon ? "//*[@class='mainheadword']/*/@lang" : "//*[starts-with(@class,'reversal-form')]/@lang";
+					vernLangPath = _isLexicon ? "//*[@class='mainheadword']/*/@lang" : "//*[starts-with(@class,'reversal-form')]/@lang";
 				}
 				XmlNodeList nodes = Xml.SelectNodes(vernLangPath, Nsmgr);
 				if (nodes.Count > 0)
@@ -81,12 +88,16 @@ namespace SIL.PublishingSolution
 		{
 			if (_analysisIso != null)
 				return _analysisIso;
-			var analLangPath = IsLexicon ? "//*[@class='entry']//*[@id]//@lang" : "//*[@class='headref']/@lang";
+			var analLangPath = _isLexicon ? "//*[@class='entry']//*[@id]//@lang" : "//*[@class='headref']/@lang";
+		    if (_fw83)
+		    {
+                analLangPath = _isLexicon ? "//*[starts-with(@class,'defin')]//@lang" : "//*[@class='headref']//@lang";
+		    }
 			var node = Xml.SelectSingleNode(analLangPath, Nsmgr);
 
 			if (node == null)
 			{
-				analLangPath = IsLexicon ? "//*[@class='entry']/*/*/@lang" : "//*[@class='headref']/@lang";
+				analLangPath = _isLexicon ? "//*[@class='entry']/*/*/@lang" : "//*[@class='headref']/@lang";
 				node = Xml.SelectSingleNode(analLangPath, Nsmgr);
 			}
 
