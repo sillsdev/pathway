@@ -188,13 +188,18 @@ namespace SIL.PublishingSolution
 		    var fontSize = string.Empty;
 
 			string languageCode = Common.GetLocalizationSettings();
-			Dictionary<string, string> fontInfo = Param.UiLanguageFontSettings[languageCode];
-			foreach (KeyValuePair<string, string> fontValue in fontInfo)
-			{
-				fontName = Convert.ToString(fontValue.Key);
-				fontSize = Convert.ToString(fontValue.Value);
-			}
-
+		    if (Param.UiLanguageFontSettings != null)
+		    {
+			    if (Param.UiLanguageFontSettings.ContainsKey(languageCode))
+			    {
+				    Dictionary<string, string> fontInfo = Param.UiLanguageFontSettings[languageCode];
+				    foreach (KeyValuePair<string, string> fontValue in fontInfo)
+				    {
+					    fontName = Convert.ToString(fontValue.Key);
+					    fontSize = Convert.ToString(fontValue.Value);
+				    }
+			    }
+		    }
 		    if (String.IsNullOrEmpty(fontName) || String.IsNullOrEmpty(fontSize))
 		    {
 			    fontName = "Charis SIL";
