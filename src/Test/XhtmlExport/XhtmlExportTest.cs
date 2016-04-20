@@ -75,15 +75,15 @@ namespace Test.XhtmlExport
 		/// <summary>
 		/// Launch the AutoIt subprocess to export the Xhtml from FieldWorks
 		/// </summary>
-		private static void FieldWorksXhtmlExport(string app, string proj, string backup, string message)
+		private static void FieldWorksXhtmlExport(string app, string proj, string backup, string message, bool reversal = false)
 		{
-			FieldWorksXhtmlExport(app, proj, backup, message, null);
+			FieldWorksXhtmlExport(app, proj, backup, message, null, reversal);
 		}
 
 		/// <summary>
 		/// Launch the AutoIt subprocess to export the Xhtml from FieldWorks
 		/// </summary>
-		private static void FieldWorksXhtmlExport(string app, string proj, string backup, string message, string incOpt)
+		private static void FieldWorksXhtmlExport(string app, string proj, string backup, string message, string incOpt, bool reversal = false)
 		{
 			var p1 = new Process();
 			p1.StartInfo.UseShellExecute = false;
@@ -92,6 +92,7 @@ namespace Test.XhtmlExport
 			p1.StartInfo.EnvironmentVariables.Add("InputPath", _tf.Input(null));
 			p1.StartInfo.EnvironmentVariables.Add("OutputPath", _tf.Output(null));
 			p1.StartInfo.EnvironmentVariables.Add("IncOpt", incOpt);
+            p1.StartInfo.EnvironmentVariables.Add("Rev", reversal? "True":"False");
 			p1.StartInfo.Arguments = Common.PathCombine(_scriptPath, app + "XhtmlExport.au3");
 			p1.StartInfo.WorkingDirectory = _scriptPath;
 			p1.StartInfo.FileName = _autoIt;
@@ -107,6 +108,7 @@ namespace Test.XhtmlExport
 			XmlAssert.Ignore(xhtmlOutput, "/x:html/x:head/x:meta[@name='linkedFilesRootDir']/@content", ns);
 			XmlAssert.Ignore(xhtmlOutput, "//@id", ns);
             XmlAssert.Ignore(xhtmlOutput, "//@src", ns);
+            XmlAssert.Ignore(xhtmlOutput, "//@href", ns);
 			XmlAssert.AreEqual(xhtmlExpect, xhtmlOutput, message + ": " + xhtmlName);
 			var cssName = proj + ".css";
 			var cssExpect = _tf.Expected(cssName);
@@ -268,11 +270,26 @@ namespace Test.XhtmlExport
 		{
 		    var fwver = FileVersionInfo.GetVersionInfo(@"C:\Program Files (x86)\SIL\FieldWorks 8\FieldWorks.exe");
 		    var suffix = (fwver.FileMajorPart > 8 || fwver.FileMajorPart == 8 && fwver.FileMinorPart >= 3) ? "-Fw83" : "";
-            FieldWorksXhtmlExport("Flex", "Gondwana Sample" + suffix, "Gondwana Sample 2011-02-09 0709.fwbackup", "Export changed");
+            FieldWorksXhtmlExport("Flex", "Gondwana Sample" + suffix, "Gondwana Sample 2011-02-09 0709.fwbackup", "Main Xhtml Export changed");
         }
         #endregion Gondwana Sample
 
-		#region Gondwana Sample Open Office
+        #region Gondwana Sample Reversal
+        /// <summary>
+        /// Export Gondwana Sample Reversal Flex data from Fieldworks, compare results to previous exports
+        /// </summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void BuangExportReversalTest()
+        {
+            var fwver = FileVersionInfo.GetVersionInfo(@"C:\Program Files (x86)\SIL\FieldWorks 8\FieldWorks.exe");
+            var suffix = (fwver.FileMajorPart > 8 || fwver.FileMajorPart == 8 && fwver.FileMinorPart >= 3) ? "-Fw83" : "";
+            FieldWorksXhtmlExport("Flex", "FlexRev" + suffix, "Gondwana Sample 2016-04-20 1129.fwbackup", "Reversal Export changed", "cl", true);
+        }
+        #endregion Gondwana Sample
+
+        #region Gondwana Sample Open Office
 		/// <summary>
 		/// Gondwana Sample Open Office Back End Test
 		/// </summary>
