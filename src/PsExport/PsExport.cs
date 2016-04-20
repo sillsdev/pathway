@@ -119,6 +119,7 @@ namespace SIL.PublishingSolution
                 DestinationSetup();
                 SetDefaultLanguageFont(fluffedCssFullName, mainFullName, fluffedRevCssFullName);
 				Common.StreamReplaceInFile(fluffedCssFullName, "\\2B27", "\\25C6");
+	            WritePublishingInformationFontStyleinCSS(fluffedCssFullName);
                 if (DataType == "Scripture")
                 {
                     SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
@@ -178,6 +179,35 @@ namespace SIL.PublishingSolution
                 }
             }
         }
+
+
+	    private void WritePublishingInformationFontStyleinCSS(string cssFileName)
+	    {
+			string cssFileInsert = string.Empty;
+			string fontName = string.Empty;
+		    var fontSize = string.Empty;
+
+			string languageCode = Common.GetLocalizationSettings();
+			Dictionary<string, string> fontInfo = Param.UiLanguageFontSettings[languageCode];
+			foreach (KeyValuePair<string, string> fontValue in fontInfo)
+			{
+				fontName = Convert.ToString(fontValue.Key);
+				fontSize = Convert.ToString(fontValue.Value);
+			}
+
+		    if (String.IsNullOrEmpty(fontName) || String.IsNullOrEmpty(fontSize))
+		    {
+			    fontName = "Charis SIL";
+			    fontSize = "24pt";
+		    }
+
+			string fontNameFontSize = "{font-family: " + fontName + "; \r\n " + "font-size: " + fontSize + "pt; \r\n }";
+
+		    cssFileInsert = "\r\n.BookTitle "+ fontNameFontSize + "\r\n.BookCreator" + fontNameFontSize + "\r\n.BookPublisher" + fontNameFontSize
+				+"\r\n.BookDescription" + fontNameFontSize + "\r\n.BookCopyrightHolder" + fontNameFontSize ;
+
+		    Common.FileInsertText(cssFileName, cssFileInsert);
+	    }
 
 		private void SimplifyExportFiles(string exportedDirectory)
 		{

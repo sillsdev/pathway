@@ -330,6 +330,7 @@ namespace SIL.PublishingSolution
         {
             try
             {
+	            AssignFontandSizeAllTextbox();
                 AssignFolderDateTime();
                 if (!Common.isRightFieldworksVersion())
                 {
@@ -1559,5 +1560,45 @@ namespace SIL.PublishingSolution
 		{
 			ShowHelp.ShowHelpTopicKeyPress(this, @"User_Interface/Dialog_boxes/Hyphenation_tab.htm", _isUnixOS);
 		}
+
+		private List<Control> GetAllControls(Control container, List<Control> list)
+		{
+			foreach (Control c in container.Controls)
+			{
+				if (c is TextBox) list.Add(c);
+				if (c.Controls.Count > 0)
+					list = GetAllControls(c, list);
+			}
+
+			return list;
+		}
+		private List<Control> GetAllControls(Control container)
+		{
+			return GetAllControls(container, new List<Control>());
+		}
+
+	    private void AssignFontandSizeAllTextbox()
+	    {
+			Param.LoadUiLanguageFontInfo();
+		    string languageCode = Common.GetLocalizationSettings();
+		    string fontName = string.Empty;
+			var fontSize = 8f;
+
+			Dictionary<string, string> fontInfo = Param.UiLanguageFontSettings[languageCode];
+			foreach (KeyValuePair<string, string> fontValue in fontInfo)
+			{
+				fontName = fontValue.Key;
+				fontSize = Convert.ToInt32(fontValue.Value);
+			}
+
+			List<Control> allTextboxes = GetAllControls(this);
+
+		    
+		    foreach (var textBoxCtrl in allTextboxes)
+		    {
+				Font txtBoxFont = new Font(fontName, fontSize);
+			    textBoxCtrl.Font = txtBoxFont;
+		    }
+	    }
     }
 }
