@@ -21,7 +21,6 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
-using System.Xml.Xsl;
 using BuildStep;
 using NUnit.Framework;
 using SIL.PublishingSolution;
@@ -234,7 +233,7 @@ namespace Test.CssSimplerTest
             Assert.True(root != null);
             var xml = new XmlDocument();
             xml.LoadXml("<root/>");
-            _uniqueClasses = new List<string> {"entry"};
+            UniqueClasses = new List<string> {"entry"};
             AddSubTree(xml.DocumentElement, root, ctp);
         }
 
@@ -253,7 +252,7 @@ namespace Test.CssSimplerTest
             Assert.True(root != null);
             var xml = new XmlDocument();
             xml.LoadXml("<root/>");
-            _uniqueClasses = new List<string> { "entry", "pronunciations", "pronunciation", "form" };
+            UniqueClasses = new List<string> { "entry", "pronunciations", "pronunciation", "form" };
             AddSubTree(xml.DocumentElement, root, ctp);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             Debug.Assert(xml.DocumentElement != null, "xml.DocumentElement != null");
@@ -353,7 +352,7 @@ namespace Test.CssSimplerTest
             Assert.True(root != null);
             var xml = new XmlDocument();
             xml.LoadXml("<root/>");
-            _uniqueClasses = new List<string> {"entry"};
+            UniqueClasses = new List<string> {"entry"};
             AddSubTree(xml.DocumentElement, root, ctp);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             _testFiles.Copy(fileName);
@@ -377,7 +376,7 @@ namespace Test.CssSimplerTest
             Assert.True(root != null);
             var xml = new XmlDocument();
             xml.LoadXml("<root/>");
-            _uniqueClasses = new List<string> { "entry", "pictures", "picture" };
+            UniqueClasses = new List<string> { "entry", "pictures", "picture" };
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(fileName);
             var resultFile = _testFiles.Output(fileName);
@@ -403,7 +402,7 @@ namespace Test.CssSimplerTest
             Assert.True(root != null);
             var xml = new XmlDocument();
             xml.LoadXml("<root/>");
-            _uniqueClasses = new List<string> { "entry", "senses", "sense", "examples", "example", "translations", "translation" };
+            UniqueClasses = new List<string> { "entry", "senses", "sense", "examples", "example", "translations", "translation" };
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(fileName);
             var resultFile = _testFiles.Output(fileName);
@@ -433,7 +432,7 @@ namespace Test.CssSimplerTest
             Assert.True(root != null);
             var xml = new XmlDocument();
             xml.LoadXml("<root/>");
-            _uniqueClasses = new List<string> { "entry", "senses", "sense", "sensecontent", "sensenumber", "sensetype"};
+            UniqueClasses = new List<string> { "entry", "senses", "sense", "sensecontent", "sensenumber", "sensetype"};
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(fileName);
             var resultFile = _testFiles.Output(fileName);
@@ -459,7 +458,7 @@ namespace Test.CssSimplerTest
             Assert.True(root != null);
             var xml = new XmlDocument();
             xml.LoadXml("<root/>");
-            _uniqueClasses = new List<string> { "entry", "subentries", "subentry" };
+            UniqueClasses = new List<string> { "entry", "subentries", "subentry" };
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(fileName);
             var resultFile = _testFiles.Output(fileName);
@@ -486,7 +485,7 @@ namespace Test.CssSimplerTest
             Assert.True(root != null);
             var xml = new XmlDocument();
             xml.LoadXml("<root/>");
-            _uniqueClasses = new List<string> { "entry", "senses", "sensecontent" };
+            UniqueClasses = new List<string> { "entry", "senses", "sensecontent" };
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(fileName);
             var resultFile = _testFiles.Output(fileName);
@@ -498,6 +497,9 @@ namespace Test.CssSimplerTest
 
         /// <summary>
         ///A test for ValidateXhtml
+        /// https://support.microsoft.com/en-us/kb/307379
+        /// https://msdn.microsoft.com/en-us/library/system.xml.xmlurlresolver%28v=vs.110%29.aspx
+        /// http://stackoverflow.com/questions/470313/net-how-to-validate-xml-file-with-dtd-without-doctype-declaration
         ///</summary>
         [Test]
         public void ValidateTest()
@@ -509,11 +511,12 @@ namespace Test.CssSimplerTest
             WriteSimpleXhtml(xhtmlFullName);
             var resolver = new MyUrlResolver();
             var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, ValidationType = ValidationType.DTD, XmlResolver = resolver};
-            settings.ValidationEventHandler += ValidationCallBack;
-            _validErrorCount = 0;
+            settings.ValidationEventHandler += delegate(object sender, ValidationEventArgs args)
+            {
+                throw new XmlSchemaValidationException(args.Message);
+            };
             var reader = XmlReader.Create(xhtmlFullName, settings);
             while (reader.Read()) { }
-            Assert.AreEqual(0, _validErrorCount, "Validation errors reported");
         }
 
         /// <summary>
@@ -522,24 +525,21 @@ namespace Test.CssSimplerTest
         [Test]
         public void ValidateFailTest()
         {
-            const string testName = "Validate";
+            const string testName = "ValidateFail";
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
             //WriteSimpleXhtml(xhtmlFullName);
             var resolver = new MyUrlResolver();
             var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, ValidationType = ValidationType.DTD, XmlResolver = resolver };
-            settings.ValidationEventHandler += ValidationCallBack;
-            _validErrorCount = 0;
+            var validErrorCount = 0;
+            settings.ValidationEventHandler += delegate
+            {
+                validErrorCount += 1;
+            };
             var reader = XmlReader.Create(xhtmlFullName, settings);
             while (reader.Read()) { }
-            Assert.AreEqual(33, _validErrorCount, "The number of DTD errors reported by C# has changed");
-        }
-
-        private static int _validErrorCount;
-        private static void ValidationCallBack(object sender, ValidationEventArgs args)
-        {
-            _validErrorCount += 1;
+            Assert.AreEqual(33, validErrorCount, "The number of DTD errors reported by C# has changed");
         }
 
         #endregion Tests
