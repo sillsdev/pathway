@@ -18,7 +18,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Xsl;
 using BuildStep;
 using NUnit.Framework;
 using SIL.PublishingSolution;
@@ -493,6 +496,111 @@ namespace Test.CssSimplerTest
             Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[3]/name[text()='sensecontent']"), "expected sensecontent (w/o span tag)");
         }
 
+        /// <summary>
+        ///A test for ValidateXhtml
+        ///</summary>
+        [Test]
+        public void ValidateTest()
+        {
+            const string testName = "Validate";
+            var fileName = testName + ".xhtml";
+            _testFiles.Copy(fileName);
+            string xhtmlFullName = _testFiles.Output(fileName);
+            WriteSimpleXhtml(xhtmlFullName);
+            var resolver = new MyUrlResolver();
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, ValidationType = ValidationType.DTD, XmlResolver = resolver};
+            settings.ValidationEventHandler += ValidationCallBack;
+            _validErrorCount = 0;
+            var reader = XmlReader.Create(xhtmlFullName, settings);
+            while (reader.Read()) { }
+            Assert.AreEqual(0, _validErrorCount, "Validation errors reported");
+        }
+
+        /// <summary>
+        ///A test for ValidateXhtml
+        ///</summary>
+        [Test]
+        public void ValidateFailTest()
+        {
+            const string testName = "Validate";
+            var fileName = testName + ".xhtml";
+            _testFiles.Copy(fileName);
+            string xhtmlFullName = _testFiles.Output(fileName);
+            //WriteSimpleXhtml(xhtmlFullName);
+            var resolver = new MyUrlResolver();
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, ValidationType = ValidationType.DTD, XmlResolver = resolver };
+            settings.ValidationEventHandler += ValidationCallBack;
+            _validErrorCount = 0;
+            var reader = XmlReader.Create(xhtmlFullName, settings);
+            while (reader.Read()) { }
+            Assert.AreEqual(33, _validErrorCount, "The number of DTD errors reported by C# has changed");
+        }
+
+        private static int _validErrorCount;
+        private static void ValidationCallBack(object sender, ValidationEventArgs args)
+        {
+            _validErrorCount += 1;
+        }
+
         #endregion Tests
+    }
+
+    public class MyUrlResolver : XmlUrlResolver
+    {
+        public override Uri ResolveUri(Uri baseUri, string relativeUri)
+        {
+            if (relativeUri.StartsWith("-//"))
+            {
+                return new Uri("file://" + relativeUri);
+            }
+            return base.ResolveUri(baseUri, relativeUri);
+        }
+
+        public override object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
+        {
+            switch (absoluteUri.OriginalString)
+            {
+                case "file://-//W3C//DTD XHTML 1.1//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml11.dtd");
+                case "file://-//W3C//ELEMENTS XHTML Inline Style 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-inlstyle-1.mod");
+                case "file://-//W3C//ENTITIES XHTML 1.1 Document Model 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml11-model-1.mod");
+                case "file://-//W3C//ENTITIES XHTML Datatypes 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-datatypes-1.mod");
+                case "file://-//W3C//ENTITIES XHTML Modular Framework 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-framework-1.mod");
+                case "file://-//W3C//ENTITIES XHTML Qualified Names 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-qname-1.mod");
+                case "file://-//W3C//ENTITIES XHTML Intrinsic Events 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-events-1.mod");
+                case "file://-//W3C//ENTITIES XHTML Common Attributes 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-attribs-1.mod");
+                case "file://-//W3C//ENTITIES XHTML Character Entities 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-charent-1.mod");
+                case "file://-//W3C//ENTITIES Latin 1 for XHTML//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-lat1.ent");
+                case "file://-//W3C//ENTITIES Symbols for XHTML//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-symbol.ent");
+                case "file://-//W3C//ENTITIES Special for XHTML//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-special.ent");
+                case "file://-//W3C//ELEMENTS XHTML Text 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-text-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Inline Structural 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-inlstruct-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Inline Phrasal 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-inlphras-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Block Structural 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-blkstruct-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Block Phrasal 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-blkphras-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Hypertext 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-hypertext-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Lists 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-list-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Editing Elements 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-edit-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML BIDI Override Element 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-bdo-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Ruby 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-ruby-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Presentation 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-pres-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Inline Presentation 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-inlpres-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Block Presentation 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-blkpres-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Link Element 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-link-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Metainformation 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-meta-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Base Element 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-base-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Scripting 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-script-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Style Sheets 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-style-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Images 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-image-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Client-side Image Maps 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-csismap-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Server-side Image Maps 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-ssismap-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Param Element 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-param-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Embedded Object 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-object-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Tables 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-table-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Forms 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-form-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Legacy Markup 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-legacy-1.mod");
+                case "file://-//W3C//ELEMENTS XHTML Document Structure 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-struct-1.mod");
+                default: return base.GetEntity(absoluteUri, role, ofObjectToReturn);
+            }
+        }
     }
 }
