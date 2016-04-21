@@ -70,7 +70,8 @@ namespace SIL.PublishingSolution
             projInfo.OutputExtension = "odt";
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
-            VerboseClass verboseClass = VerboseClass.GetInstance();
+			VerboseClass verboseClass = VerboseClass.GetInstance();
+			Common.CheckAndGetStyle(defaultXhtml, projInfo.ProjectInputType);
             _isFromExe = Common.CheckExecutionPath();
             var glossorywords = WriteGlossaryLink(projInfo);
             GlossaryLinkReferencing(projInfo, glossorywords);

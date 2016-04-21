@@ -36,6 +36,13 @@
     <xsl:template match="x:head/@profile"/>
     <xsl:template match="x:html/@version"/>
     
+    <xsl:template match="x:body">
+        <xsl:copy>
+            <xsl:attribute name="class">dicBody</xsl:attribute>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+
     <!-- Matches translation in translation and just puts one level -->
     <xsl:template match="*[@class='translation'][child::*[@class='translation']]">
         <xsl:apply-templates select="*"/>
