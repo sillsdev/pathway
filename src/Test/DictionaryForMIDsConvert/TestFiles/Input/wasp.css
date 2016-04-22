@@ -58,6 +58,7 @@
 }
 .entry {
     font-family: "Times New Roman", serif;	/* default Serif font */
+	color: rgb(255,102,0);
     padding-left: 9pt;
     text-indent: -12pt;
     margin-left: 12pt;
@@ -86,6 +87,7 @@
 }
 .xitem[lang='tpi'] {
     font-family: "Andika Basic", serif;	/* default Serif font */
+	color: rgb(153,51,102);
 }
 
 .CmPicture-publishRootPile-ThumbnailPub {
@@ -104,12 +106,18 @@
 }
 .example>.xitem + .xitem:before { content: " " }
 .examples {
+    font-family: "Charis SIL", serif;	/* default Serif font */
+	font-style: italic;
+	color: rgb(255,102,0);
+	text-indent: 0pt;
+	margin-left: 0pt;
 }
 .examples>.xitem + .xitem:before { content: "  " }
 .grammatical-info {
     /* explicit FieldWorks style = 'Dictionary-Contrasting' */
     font-family: "Times New Roman", serif;	/* default Serif font */
     font-style: italic;
+	color: rgb(255,102,0);
     text-indent: 0pt;
     margin-left: 0pt;
 }
@@ -131,6 +139,7 @@
     /* explicit FieldWorks style = 'Dictionary-Contrasting' */
     font-family: "Times New Roman", serif;	/* default Serif font */
     font-style: italic;
+	color: rgb(255,102,0);
     text-indent: 0pt;
     margin-left: 0pt;
 }
