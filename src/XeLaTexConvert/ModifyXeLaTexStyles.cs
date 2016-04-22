@@ -586,9 +586,34 @@ namespace SIL.PublishingSolution
 			string titleFontSize = string.Empty;
 			string styleCoverPage = string.Empty;
 
-			styleCoverPage = "CoverPageTitle";
-			GetCoverPageTitleFontStyle(styleCoverPage, ref titleFontName, ref titleFontSize);
+			string fontName = string.Empty;
+			var fontSize = string.Empty;
 
+			Param.LoadUiLanguageFontInfo();
+			string languageCode = Common.GetLocalizationSettings();
+			if (Param.UiLanguageFontSettings != null)
+			{
+				if (Param.UiLanguageFontSettings.ContainsKey(languageCode))
+				{
+					Dictionary<string, string> fontInfo = Param.UiLanguageFontSettings[languageCode];
+					foreach (KeyValuePair<string, string> fontValue in fontInfo)
+					{
+						fontName = Convert.ToString(fontValue.Key);
+						fontSize = Convert.ToString(fontValue.Value);
+					}
+				}
+			}
+			if (String.IsNullOrEmpty(fontName) || String.IsNullOrEmpty(fontSize))
+			{
+				styleCoverPage = "CoverPageTitle";
+				GetCoverPageTitleFontStyle(styleCoverPage, ref titleFontName, ref titleFontSize);
+			}
+			else
+			{
+				titleFontName = fontName;
+				titleFontSize = fontSize.ToString();
+			}
+			
 			if (Convert.ToBoolean(CoverImage) || Convert.ToBoolean(TitleInCoverPage))
 			{
 				xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
@@ -624,6 +649,7 @@ namespace SIL.PublishingSolution
 				if (Convert.ToBoolean(IncludeBookTitleintheImage))
 				{
 					tableOfContent += "\\font\\CoverPageTitle=\"" + titleFontName + "/B\":color=000000 at " + titleFontSize + "pt \r\n";
+					tableOfContent += "\\font\\pFrontMatterdiv=\"" + titleFontName + "/B\":color=000000 at " + titleFontSize + "pt \r\n";
 					tableOfContent += "\\vskip 60pt \r\n";
 					tableOfContent += "\\begin{center} \r\n";
 					tableOfContent += "\\CoverPageTitle{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
@@ -723,9 +749,9 @@ namespace SIL.PublishingSolution
 				}
 				tableOfContent += "\\begin{titlepage}\r\n";
 				tableOfContent += "\\begin{center}\r\n";
-				tableOfContent += "\\textsc{\\LARGE " + Param.GetMetadataValue(Param.Title) + "}\\\\[1.5cm] \r\n";
+				tableOfContent += "\\textsc{\\LARGE \\CoverPageTitle{" + Param.GetMetadataValue(Param.Title) + "}}\\\\[1.5cm] \r\n";
 				tableOfContent += "\\vspace{110 mm} \r\n";
-				tableOfContent += "\\textsc{" + Param.GetMetadataValue(Param.Publisher).Replace("&", @"\&") + "}\\\\[0.5cm] \r\n";
+				tableOfContent += "\\textsc{ \\CoverPageTitle{" + Param.GetMetadataValue(Param.Publisher).Replace("&", @"\&") + "}}\\\\[0.5cm] \r\n";
 				if (logoFileName.Contains(".png"))
 				{
 					tableOfContent += "\\includegraphics[width=0.15 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";
