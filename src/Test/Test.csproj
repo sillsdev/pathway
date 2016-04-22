@@ -473,6 +473,123 @@
   <ItemGroup>
     <EmbeddedResource Include="ScriptureStyleSettingsCopy.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml11.dtd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-inlstyle-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml11-model-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-datatypes-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-framework-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-text-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-qname-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-events-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-attribs-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-charent-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-lat1.ent" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-symbol.ent" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-special.ent" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-inlstruct-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-inlphras-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-blkstruct-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-blkphras-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-hypertext-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-list-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-edit-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-bdo-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-ruby-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-pres-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-inlpres-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-blkpres-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-link-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-meta-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-base-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-script-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-style-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-image-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-csismap-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-ssismap-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-param-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-object-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-table-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-form-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-legacy-1.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CssSimpler\xhtml-struct-1.mod" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

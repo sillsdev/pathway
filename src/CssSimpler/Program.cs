@@ -33,19 +33,15 @@ namespace CssSimpler
         protected static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
         protected static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
         protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
-        protected static List<string> _uniqueClasses;
+        protected static List<string> UniqueClasses;
 
         static void Main(string[] args)
         {
             // ReSharper disable AssignNullToNotNullAttribute
             XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"CssSimpler.XmlCss.xsl")));
-            // ReSharper restore AssignNullToNotNullAttribute
-            // ReSharper disable AssignNullToNotNullAttribute
             SimplifyXmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"CssSimpler.XmlCssSimplify.xsl")));
-            // ReSharper restore AssignNullToNotNullAttribute
-            // ReSharper disable AssignNullToNotNullAttribute
             SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "CssSimpler.XhtmlSimplify.xsl")));
             // ReSharper restore AssignNullToNotNullAttribute
@@ -100,7 +96,7 @@ namespace CssSimpler
             var r = parser.Root;
             var xml = new XmlDocument();
             xml.LoadXml("<ROOT/>");
-            _uniqueClasses = lc.UniqueClasses;
+            UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, r, parser);
             if (_outputXml)
             {
@@ -305,7 +301,7 @@ namespace CssSimpler
                     n.AppendChild(node);
                     if (n.Name == "CLASS")
                     {
-                        if (!_uniqueClasses.Contains(name))
+                        if (!UniqueClasses.Contains(name))
                         {
                             _noData = true;
                         }
