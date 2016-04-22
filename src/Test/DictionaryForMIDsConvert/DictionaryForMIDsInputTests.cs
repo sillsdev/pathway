@@ -81,7 +81,7 @@ namespace Test.DictionaryForMIDsConvert
             var result = new DictionaryForMIDsInput(projInfo);
             var nodes = result.SelectNodes("//*[@class='sense']");
             Assert.IsNotNull(nodes);
-            Assert.AreEqual(1,nodes.Count);
+            Assert.AreEqual(5,nodes.Count);
         }
 
         /// <summary>

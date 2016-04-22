@@ -40,7 +40,10 @@ namespace SIL.PublishingSolution
 
 		~DictionaryForMIDsInput()
 		{
-			Xml.RemoveAll();
+		    if (Xml != null)
+		    {
+                Xml.RemoveAll();
+            }
 		}
 
 		public XmlNodeList SelectNodes(string xpath)
@@ -81,10 +84,21 @@ namespace SIL.PublishingSolution
 
 		public string VernacularName()
 		{
-			return Common.GetLanguageName(VernacularIso());
+            return GetLanguageName(VernacularIso());
 		}
 
-		public string AnalysisIso()
+	    private string GetLanguageName(string iso)
+	    {
+	        var xpath = string.Format("//*[@name='DC.language'][starts-with(@content,concat('{0}',':'))]/@content", iso);
+	        var node = Xml.SelectSingleNode(xpath);
+	        if (node != null)
+	        {
+	            return node.InnerText.Substring(iso.Length + 1);
+	        }
+	        return Common.GetLanguageName(iso);
+	    }
+
+	    public string AnalysisIso()
 		{
 			if (_analysisIso != null)
 				return _analysisIso;
@@ -114,7 +128,7 @@ namespace SIL.PublishingSolution
 
 		public string AnalysisName()
 		{
-			return Common.GetLanguageName(AnalysisIso());
+			return GetLanguageName(AnalysisIso());
 		}
 
 		protected static XmlDocument LoadXmlDocument(PublicationInformation projInfo)
