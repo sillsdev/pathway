@@ -85,6 +85,7 @@ namespace SIL.Tool
 		public static string databaseName = string.Empty;
 		public static DateTime TimeStarted { get; set; }
 		public static OutputType _outputType = OutputType.ODT;
+		public static Dictionary<string, string> TempVariable = new Dictionary<string, string>();
 		public const string kCompany = "SIL";
 		public const string kProduct = "Pathway";
 		/// <summary>
@@ -569,6 +570,60 @@ namespace SIL.Tool
 
 		#endregion
 
+		#region CheckAndGetStyle
+
+		/// <summary>
+		/// Checks for tags and writes the styles to a dictinary variable
+		/// </summary>
+		/// <param name="xhtmlFileName">XHTML File Name</param>
+		/// <param name="ProjectInputType">Project Input Type</param>
+		public static void CheckAndGetStyle(string xhtmlFileName, string ProjectInputType)
+		{
+			if (!File.Exists(xhtmlFileName))
+				return;
+
+			XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+			XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
+			xmlDocument.Load(xmlReader);
+			xmlReader.Close();
+			XmlNodeList nodeResult;
+			if (ProjectInputType.ToLower() == "dictionary")
+			{
+				nodeResult = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
+				if (nodeResult != null && nodeResult.Count > 0)
+				{
+					if (TempVariable.ContainsKey("TOCStyleName"))
+					{
+						TempVariable["TOCStyleName"] = "letter_letHead_dicBody";
+					}
+					else
+					{
+						TempVariable.Add("TOCStyleName", "letter_letHead_dicBody");
+					}
+				}
+				else
+				{
+					nodeResult = xmlDocument.SelectNodes("//xhtml:span[@class='letter']", namespaceManager);
+					if (nodeResult != null && nodeResult.Count > 0)
+					{
+						if (TempVariable.ContainsKey("TOCStyleName"))
+						{
+							TempVariable["TOCStyleName"] = "letHead_dicBody";
+						}
+						else
+						{
+							TempVariable.Add("TOCStyleName", "letHead_dicBody");
+						}
+					}
+				}
+			}
+		}
+
+		#endregion
+
 		#region RightString(string fullString, string splitString)
 
 		/// <summary>
@@ -647,29 +702,28 @@ namespace SIL.Tool
 				XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
 				namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
 				xDoc.Load(xhtmlFileNameWithPath);
-				XmlNode node;
+				XmlNodeList nodes = null;
 				var vernacularLang = string.Empty;
 				if (vernagular)
 				{
-					node = xDoc.SelectSingleNode("//*[@class='headword']/@*[local-name()='lang']");
-					if (node != null)
+					string[] checkXPaths =
 					{
-						vernacularLang = node.InnerText;
-					}
-					else
+						"//*[@class='headword']/@*[local-name()='lang']",
+						"//*[@class='headword']/*/@lang",
+						"//*[@class='mainheadword']/@*[local-name()='lang']",
+						"//*[@class='mainheadword']/*/@lang",
+						"//*[@class='headref']/@*[local-name()='lang']",
+						"//*[@class='headref']/*/@lang",
+						"//*[@class='Paragraph']/@*[local-name()='lang']",
+						"//*[@class='Paragraph']/*/@lang"
+					};
+
+					foreach (string anXPath in checkXPaths)
 					{
-						node = xDoc.SelectSingleNode("//*[@class='headref']/@*[local-name()='lang']");
-						if (node != null)
+						if (((nodes = xDoc.SelectNodes(anXPath)) != null) && nodes.Count > 0)
 						{
-							vernacularLang = node.InnerText;
-						}
-						else
-						{
-							node = xDoc.SelectSingleNode("//*[@class='Paragraph']//@*[local-name()='lang']");
-							if (node != null)
-							{
-								vernacularLang = node.InnerText;
-							}
+							vernacularLang = nodes[0].InnerText;
+							break;
 						}
 					}
 				}

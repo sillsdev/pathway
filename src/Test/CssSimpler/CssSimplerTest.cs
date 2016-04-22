@@ -102,6 +102,25 @@ namespace Test.CssSimplerTest
             WriteSimpleXhtml(xhtmlFullName);
         }
 
+		/// <summary>
+		///A test for WriteSimpleXhtml
+		/// Checks whether the body tag has the class dicBody
+		///</summary>
+		[Test]
+		public void IsDicBodyExistsTest()
+		{
+			const string testName = "IsDicBodyExistsTest";
+			var fileName = testName + ".xhtml";
+			_testFiles.Copy(fileName);
+			string xhtmlFullName = _testFiles.Output(fileName);
+			WriteSimpleXhtml(xhtmlFullName);
+			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+			var xhtml = new XmlDocument();
+			xhtml.Load(XmlReader.Create(xhtmlFullName, settings));
+			var checkClass = xhtml.SelectSingleNode("//body[@class='dicBody']");
+			Assert.IsNull(checkClass);
+		}
+
         /// <summary>
         ///A test for WriteSimpleCss
         ///</summary>

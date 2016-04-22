@@ -1351,7 +1351,7 @@ namespace Test.XeLatex
 			string outputResultFile = _projInfo.ProjectPath;
 			outputResultFile = Path.Combine(outputResultFile, "CoverPageTitle.tex");
 			string expectedResultFile = FileExpected("CoverPageTitle" + ".tex");
-			TextFileAssert.AreEqual(expectedResultFile, outputResultFile, "CoverPageTitle test in tex ");
+			TextFileAssert.CheckLineAreEqualEx(expectedResultFile, outputResultFile, new ArrayList { 1, 10, 15, 20 });
 		}
 
 		#endregion
