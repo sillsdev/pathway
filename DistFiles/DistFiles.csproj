@@ -316,7 +316,7 @@
     <Copy SourceFiles="@(PdfLicense)" DestinationFiles="@(PdfLicense->'$(OutputPath)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(GoBibleFiles)" DestinationFiles="@(GoBibleFiles->'$(OutputPath)GoBible\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'$(OutputPath)TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'$(OutputPath)Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and '$(Status)' == 'Testing' and $(OS) != 'Linux'" />
+    <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'$(OutputPath)Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and $(OS) != 'Linux'" />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'BTE' " />
