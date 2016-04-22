@@ -702,29 +702,28 @@ namespace SIL.Tool
 				XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
 				namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
 				xDoc.Load(xhtmlFileNameWithPath);
-				XmlNode node;
+				XmlNodeList nodes = null;
 				var vernacularLang = string.Empty;
 				if (vernagular)
 				{
-					node = xDoc.SelectSingleNode("//*[@class='headword']/@*[local-name()='lang']");
-					if (node != null)
+					string[] checkXPaths =
 					{
-						vernacularLang = node.InnerText;
-					}
-					else
+						"//*[@class='headword']/@*[local-name()='lang']",
+						"//*[@class='headword']/*/@lang",
+						"//*[@class='mainheadword']/@*[local-name()='lang']",
+						"//*[@class='mainheadword']/*/@lang",
+						"//*[@class='headref']/@*[local-name()='lang']",
+						"//*[@class='headref']/*/@lang",
+						"//*[@class='Paragraph']/@*[local-name()='lang']",
+						"//*[@class='Paragraph']/*/@lang"
+					};
+
+					foreach (string anXPath in checkXPaths)
 					{
-						node = xDoc.SelectSingleNode("//*[@class='headref']/@*[local-name()='lang']");
-						if (node != null)
+						if (((nodes = xDoc.SelectNodes(anXPath)) != null) && nodes.Count > 0)
 						{
-							vernacularLang = node.InnerText;
-						}
-						else
-						{
-							node = xDoc.SelectSingleNode("//*[@class='Paragraph']//@*[local-name()='lang']");
-							if (node != null)
-							{
-								vernacularLang = node.InnerText;
-							}
+							vernacularLang = nodes[0].InnerText;
+							break;
 						}
 					}
 				}

@@ -1109,6 +1109,21 @@ namespace Test.PsTool
             TextFileAssert.AreEqual(expected, output);
         }
 
+		/// <summary>
+		///A test for GetLanguageCode
+		/// Checks whether the Language Code returned is as expected
+		///</summary>
+	    [Test]
+	    public void GetLanguageCodeWithVernacularTest()
+	    {
+			const string fileName = "LanguageCodeTest.xhtml";
+			var sourceXhtmlFile = GetFileNameWithPath(fileName);
+			var outputXhtmlFile = Common.PathCombine(_outputBasePath, fileName);
+			CopyToOutput(sourceXhtmlFile, outputXhtmlFile);
+		    string theLanguageCode = Common.GetLanguageCode(outputXhtmlFile, "Dictionary", true);
+			Assert.AreEqual(theLanguageCode, "bzh:Buang, Mapos;");
+	    }
+
         /// <summary>
         ///A test for XML settings file migration
         ///</summary>
