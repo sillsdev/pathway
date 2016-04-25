@@ -281,3 +281,13 @@ text-align: justify;
 	font-family: "Charis SIL";
 	font-size: 24pt;
 }
+.minorentry {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
+.minorentryvariant {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
