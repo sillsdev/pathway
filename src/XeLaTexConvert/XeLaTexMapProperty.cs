@@ -612,7 +612,7 @@ namespace SIL.PublishingSolution
             FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
             foreach (FontFamily systemFont in systemFontList)
             {
-                if (systemFont.Name.ToLower().Contains(propertyValue.ToLower()))
+				if (propertyValue.ToLower() == systemFont.Name.ToLower())
                 {
 					fontName = systemFont.Name;
                     break;

@@ -206,7 +206,7 @@ namespace SIL.PublishingSolution
 			    fontSize = "24pt";
 		    }
 
-			string fontNameFontSize = "{font-family: " + fontName + "; \r\n " + "font-size: " + fontSize + "pt; \r\n }";
+			string fontNameFontSize = "{font-family: \"" + fontName + "\"; \r\n " + "font-size: " + fontSize + "pt; \r\n }";
 
 		    cssFileInsert = "\r\n.BookTitle "+ fontNameFontSize + "\r\n.BookCreator" + fontNameFontSize + "\r\n.BookPublisher" + fontNameFontSize
 				+"\r\n.BookDescription" + fontNameFontSize + "\r\n.BookCopyrightHolder" + fontNameFontSize ;
