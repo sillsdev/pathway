@@ -1407,19 +1407,23 @@ namespace SIL.Tool
 	                }
                 }
             }
-            var content = File.ReadAllText(fileName);
-            xmlDoc.LoadXml(content);
-            var uiFontInfos = xmlDoc.SelectNodes("//UILanguage/fontstyle/font");
-            foreach (XmlNode fontInfo in uiFontInfos)
-            {
-                if (fontInfo.Attributes != null)
-                {
-                    string lang = fontInfo.Attributes["lang"].InnerText;
-                    string fontName = fontInfo.Attributes["name"].InnerText;
-                    string fontSize = fontInfo.Attributes["size"].InnerText;
-                    UiLanguageFontSettings[lang] = new Dictionary<string, string> { { fontName, fontSize } };
-                }
-            }
+
+	        if (File.Exists(fileName))
+	        {
+		        var content = File.ReadAllText(fileName);
+		        xmlDoc.LoadXml(content);
+		        var uiFontInfos = xmlDoc.SelectNodes("//UILanguage/fontstyle/font");
+		        foreach (XmlNode fontInfo in uiFontInfos)
+		        {
+			        if (fontInfo.Attributes != null)
+			        {
+				        string lang = fontInfo.Attributes["lang"].InnerText;
+				        string fontName = fontInfo.Attributes["name"].InnerText;
+				        string fontSize = fontInfo.Attributes["size"].InnerText;
+				        UiLanguageFontSettings[lang] = new Dictionary<string, string> {{fontName, fontSize}};
+			        }
+		        }
+	        }
         }
 
         public static void GetFontValues(string langId, ref string fontName, ref string fontSize)
