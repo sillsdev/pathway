@@ -196,3 +196,10 @@ text-align: left;
 .entry .senses > .sense + .sense::before {
 content: "";
 }
+
+.letter
+{
+	margin-top:10pt;
+	margin-bottom:10pt;
+	line-height:150%;
+}
