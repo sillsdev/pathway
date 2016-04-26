@@ -4700,6 +4700,29 @@ namespace Test.OpenOfficeConvert
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
+		///<summary>
+		///New Flex Dictionary Buang Color Test
+		///</summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void BuangColorTestFlex83()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "NewFlexBuangColor";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
         #endregion
         #endregion
 

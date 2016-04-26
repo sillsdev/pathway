@@ -1000,6 +1000,42 @@ namespace SIL.Tool
 
                     if (cssClassInfo.Pseudo != psuedo) continue;
 
+	                if (cssClassInfo.StyleName.IndexOf(".-", System.StringComparison.Ordinal) > 0)
+	                {
+						var xhtmlClassInfo = _allStyleInfo.ToArray();
+
+						var parentStyle = Common.LeftRemove(cssClassInfo.StyleName, ".-").Replace(".-", "_");
+						var clsNameList = parentStyle.Split('_').ToList();
+
+						if (clsNameList[0] != cssClassInfo.CoreClass.ClassName)
+						{
+							clsNameList.Remove(cssClassInfo.CoreClass.ClassName);
+						}
+
+						var currClsNameList = new ArrayList();
+
+						foreach (ClassInfo clsName in xhtmlClassInfo)
+						{
+							if (clsName.CoreClass.ClassName.IndexOf(' ') > 0)
+							{
+								string[] mulltiClass = clsName.CoreClass.ClassName.Split(' ');
+								currClsNameList.AddRange(mulltiClass);
+							}
+							else
+							{
+								currClsNameList.Add(clsName.CoreClass.ClassName);
+							}
+						}
+
+						//Consider only the list when is having greater than 2 classes
+						if (clsNameList.Count > 2 && clsNameList.Any(t => !currClsNameList.Contains(t)))
+						{
+							currClsNameList = new ArrayList();
+						}
+
+						if (currClsNameList.Count == 0) continue;
+	                }
+
                     resultCoreClass = CompareCoreClass(cssClassInfo.CoreClass, _xhtmlClassAttrib, multiClass);
                     resultTagClass = true;
                     if (cssClassInfo.TagName != string.Empty)
