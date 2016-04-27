@@ -203,3 +203,9 @@ content: "";
 	margin-bottom:10pt;
 	line-height:150%;
 }
+.minorentryvariant {
+    margin-left : 3%;
+    margin-right: 3%;
+    padding-bottom: 1%;
+    text-indent: -3%;
+}
