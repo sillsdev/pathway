@@ -3989,6 +3989,40 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
         }
 
+		///<summary>
+		/// Indesign MultiClass
+		/// </summary>      
+		[Test]
+		public void SubEntryMultiClass_Node()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "NewMultiClassSubEntry";
+			string styleOutput = GetStyleOutput(file);
+
+			//Content Test - First
+			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
+			_validate.GetInnerText = true;
+			string content = "wirek hen comp. ˈwiɾ.ək ʁɛn earlier, old, pertaining to or belonging to an earlier time.";
+			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
+			Assert.IsTrue(returnValue1);
+
+			//Note - The Styles will be created while processing xhtml(content.xml)
+			//Style Test - Second
+			_validate = new ValidateXMLFile(styleOutput);
+
+			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
+			_validate.ClassProperty.Add("fo:text-indent", "0pt");
+			_validate.ClassProperty.Add("fo:margin-left", "57pt");
+			bool returnValue = _validate.ValidateNodeAttributesNS(true);
+			Assert.IsTrue(returnValue);
+
+			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
+			_validate.ClassProperty.Add("text:display", "block");
+			returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
+		}
+
         ///<summary>
         /// Counter 
         /// </summary>      

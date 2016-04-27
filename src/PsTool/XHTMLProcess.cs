@@ -327,24 +327,37 @@ namespace SIL.Tool
             if (imgTag == "img")
                 return;
 
-            string value = GetDisplayBlock(_className, "display");
-            if (value == "block")
-            {
-                if (_tagType == "span")
-                {
-                    _tagType = "div";
-                }
-            }
-            else if (value == "inline")
-            {
-                _tagType = "span";
-            }
-            else if (value.ToLower() == "none")
-            {
-                if (_outputType != Common.OutputType.ODT)
-                    _isDisplayNone = true;
-                _displayNoneStyle = Common.LeftString(_classNameWithLang, Common.SepParent);
-            }
+			var multiClass = new List<string>();
+			if (_className.IndexOf(' ') > 0)
+			{
+				multiClass.AddRange(_className.Split(' '));
+			}
+			else
+			{
+				multiClass.Add(_className);
+			}
+
+			foreach (var clsName in multiClass)
+	        {
+				string value = GetDisplayBlock(clsName, "display");
+		        if (value == "block")
+		        {
+			        if (_tagType == "span")
+			        {
+				        _tagType = "div";
+			        }
+		        }
+		        else if (value == "inline")
+		        {
+			        _tagType = "span";
+		        }
+		        else if (value.ToLower() == "none")
+		        {
+			        if (_outputType != Common.OutputType.ODT)
+				        _isDisplayNone = true;
+			        _displayNoneStyle = Common.LeftString(_classNameWithLang, Common.SepParent);
+		        }
+	        }
         }
 
         private string GetDisplayBlock(string multiClass, string propertyName)
@@ -1036,7 +1049,7 @@ namespace SIL.Tool
 						if (currClsNameList.Count == 0) continue;
 	                }
 
-                    resultCoreClass = CompareCoreClass(cssClassInfo.CoreClass, _xhtmlClassAttrib, multiClass);
+	                resultCoreClass = CompareCoreClass(cssClassInfo.CoreClass, _xhtmlClassAttrib, multiClass);
                     resultTagClass = true;
                     if (cssClassInfo.TagName != string.Empty)
                     {
@@ -1054,7 +1067,7 @@ namespace SIL.Tool
                     if (resultCoreClass && resultTagClass && resultAncestor && resultParent && resultParentPrecede &&
                         resultPrecede)
                     {
-                        AssignProperty(cssClassInfo.StyleName, ancestorFontSize);
+	                    AssignProperty(cssClassInfo.StyleName, ancestorFontSize);
                         if (_matchedCssStyleName == string.Empty)
                         {
                             _matchedCssStyleName = cssClassInfo.StyleName;
@@ -1314,7 +1327,7 @@ namespace SIL.Tool
 				{
 					foreach (var it in xhtmlClassInfo.Select((x, j) => new { Value = x, Index = j}))
 					{
-						if(it.Index <= i) continue;
+						if(it.Index < i) continue;
 						match = CompareClass(cssParentClass, it.Value.CoreClass);
 						if (match) break;
 					}
@@ -1393,10 +1406,10 @@ namespace SIL.Tool
                 return result;
             }
 
-            ArrayList superList = new ArrayList();
+            var superList = new ArrayList();
             superList.AddRange(super);
 
-            for (int i = 0; i < sub.Length - 1; i++)
+            for (int i = 0; i < sub.Length; i++)
             {
                 if (!superList.Contains(sub[i]))
                 {

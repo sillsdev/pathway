@@ -62,6 +62,9 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-mainheadword.-entry_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span_entry_letData_dicBody">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="11pt" style:font-size-complex="11pt" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
     </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-mainheadword.-entry_span.-mainheadword.-entry_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-mainheadword.-entry_span_entry_letData_dicBody">
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="11pt" style:font-size-complex="11pt" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span_entry_letData_dicBody">
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" fo:background-color="transparent" />
     </style:style>
@@ -89,6 +92,9 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-headword_configtarget.-configtargets_minimallexreference.-entry_headword_span_span_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_span_span_span_span_entry_letData_dicBody">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:color="#993366" fo:font-size="11pt" style:font-size-complex="11pt" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
     </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-headword_configtarget.-configtargets_minimallexreference.-entry_span.-headword_configtarget.-configtargets_minimallexreference.-entry_headword_span_span_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-headword_configtarget.-configtargets_minimallexreference.-entry_headword_span_span_span_span_entry_letData_dicBody">
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:color="#993366" fo:font-size="11pt" style:font-size-complex="11pt" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span_span_entry_letData_dicBody">
       <style:text-properties fo:font-weight="400" style:font-weight-complex="400" fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
@@ -115,6 +121,9 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-example.-senses.-senses.-entry_example_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="example_span_span_sense_span_span_entry_letData_dicBody">
       <style:text-properties fo:font-style="italic" fo:font-size="11pt" style:font-size-complex="11pt" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-example.-senses.-senses.-entry_span.-example.-senses.-senses.-entry_example_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-example.-senses.-senses.-entry_example_span_span_sense_span_span_entry_letData_dicBody">
+      <style:text-properties fo:font-style="italic" fo:font-size="11pt" style:font-size-complex="11pt" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span_span_sense_span_span_entry_letData_dicBody">
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" />
@@ -152,9 +161,6 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensenumber.-sensecontent.-senses.-senses.-entry_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span_span_entry_letData_dicBody">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="11pt" style:font-size-complex="11pt" fo:background-color="transparent" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span.-mainheadword.-entry_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-mainheadword.-entry_span_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="zxx" fo:country="none" />
-    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_span_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span_span_span_sense_span_span_entry_letData_dicBody">
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
@@ -164,8 +170,8 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-entry_headword_span_span_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_span_span_span_span_sense_span_span_entry_letData_dicBody">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="11pt" style:font-size-complex="11pt" fo:color="#FF6600" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-entry_headword_span_span_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-entry_headword_span_span_span_span_sense_span_span_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="zxx" fo:country="none" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-entry_span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-entry_headword_span_span_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-entry_headword_span_span_span_span_sense_span_span_entry_letData_dicBody">
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="11pt" style:font-size-complex="11pt" fo:color="#FF6600" fo:background-color="transparent" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="picture.-entry_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody">
       <style:paragraph-properties fo:float="right" fo:text-align="left" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="12pt" fo:padding-top="1pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-indent="-12pt" style:line-height-at-least="13pt" fo:background-color="transparent" />
@@ -275,8 +281,8 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-subentries.-entry_headword_span_span_span_span_sense_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_span_span_span_span_sense_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="11pt" style:font-size-complex="11pt" fo:color="#008000" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-subentries.-entry_headword_span_span_span_span_sense_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-subentries.-entry_headword_span_span_span_span_sense_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="zxx" fo:country="none" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-subentries.-entry_span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-subentries.-entry_headword_span_span_span_span_sense_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-subentries.-entry_headword_span_span_span_span_sense_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody">
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="11pt" style:font-size-complex="11pt" fo:color="#008000" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-ownertypeabbreviation.-senses.-senses.-subentries.-entry_span_span_span_sense_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="span_span_span_sense_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody">
       <style:text-properties fo:font-style="italic" fo:font-size="11pt" style:font-size-complex="11pt" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:background-color="transparent" fo:language="en" fo:country="US" />
@@ -326,14 +332,14 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-headword_referencedentry.-minorentrycomplex_headword_span_span_span_span_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="headword_span_span_span_span_minorentrycomplex_letData_dicBody">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:color="#FF0000" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="zxx" fo:country="none" />
     </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-headword_referencedentry.-minorentrycomplex_span.-headword_referencedentry.-minorentrycomplex_headword_span_span_span_span_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="span.-headword_referencedentry.-minorentrycomplex_headword_span_span_span_span_minorentrycomplex_letData_dicBody">
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:color="#FF0000" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="zxx" fo:country="none" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.en_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_span_sense_span_span_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span_.en_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_span_sense_span_span_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-entry_headword_span_span_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-entry_headword_span_span_span_span_sense_span_span_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody">
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" />
@@ -349,18 +355,6 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span.-headword_configtarget.-configtargets_minimallexreference.-subentries.-entry_headword_span_span_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_span_span_span_span_subentry.-subentries.-subentries.-entry_subentries_entry_letData_dicBody">
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:color="#33CCCC" fo:font-size="11pt" style:font-size-complex="11pt" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span.-example.-senses.-senses.-entry_example_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-example.-senses.-senses.-entry_example_span_span_sense_span_span_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span.-example.-senses.-senses.-entry_example_span_span_sense_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-example.-senses.-senses.-entry_example_span_span_sense_span_span_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span.-headword_referencedentry.-minorentrycomplex_headword_span_span_span_span_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="span.-headword_referencedentry.-minorentrycomplex_headword_span_span_span_span_minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span.-headword_configtarget.-configtargets_minimallexreference.-entry_headword_span_span_span_span_entry_letData_dicBody" style:family="text" style:parent-style-name="span.-headword_configtarget.-configtargets_minimallexreference.-entry_headword_span_span_span_span_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
