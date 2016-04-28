@@ -552,7 +552,7 @@ namespace Test.epubConvert
 			foreach (var fileName in filesList)
 			{
 				var info = new FileInfo(fileName);
-				if (info.Extension == ".css" || info.Extension == ".html")
+				if (info.Extension == ".html")
 				{
 					FileCompare("FrenchHorse/OEBPS/" + info.Name, "FrenchHorseExpected/OEBPS/" + info.Name);
 				}
