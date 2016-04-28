@@ -441,6 +441,7 @@ namespace Test
                             if (innerText != value)
                             {
                                 match = false;
+								Console.WriteLine("Exception - TC Output :" + innerText);
                             }
                         }
 
@@ -463,11 +464,13 @@ namespace Test
                         if (inner != value)
                         {
                             match = false;
+							Console.WriteLine("Exception - TC Output :" + inner);
                         }
                     }
                 }
                 else
                 {
+					Console.WriteLine("Node Null Exception..");
                     match = false;
                 }
             }
@@ -504,6 +507,7 @@ namespace Test
                             if (innerText != value)
                             {
                                 match = false;
+								Console.WriteLine("Exception - TC Output :" + innerText);
                             }
                         }
 
@@ -525,6 +529,7 @@ namespace Test
                         }
                         if (inner != value)
                         {
+							Console.WriteLine("Exception - TC Output :" + inner);
                             match = false;
                         }
                     }

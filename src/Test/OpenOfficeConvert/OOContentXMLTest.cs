@@ -3998,18 +3998,6 @@ namespace Test.OpenOfficeConvert
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "NewMultiClassSubEntry";
 			string styleOutput = GetStyleOutput(file);
-
-			StreamReader xx = new StreamReader(styleOutput);
-			var cc = xx.ReadToEnd();
-			xx.Close();
-			//TextFileAssert.AreEqual("test", "test", file + ".." + cc + ".." );
-
-			xx = new StreamReader(_projInfo.TempOutputFolder);
-			cc = xx.ReadToEnd();
-			xx.Close();
-			xx.Dispose();
-			TextFileAssert.AreEqual("test", "test", _projInfo.TempOutputFolder + ".." + cc + ".." );
-			
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
