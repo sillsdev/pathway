@@ -337,8 +337,17 @@ namespace epubConvert
             xmlReader.Close();
             bool isSectionHead = false, isChapterNumber = false, isVerseNumber = false;
             string sectionHead = string.Empty, fromChapterNumber = string.Empty, firstVerseNumber = string.Empty, lastVerseNumber = string.Empty;
-            var divClass = InputType.ToLower() == "dictionary" ? "entry" : "scrBook";
-            var xPath = string.Format("//xhtml:div[@class='{0}']", divClass);
+            var xPath = string.Empty;
+
+	        if (InputType.ToLower() == "dictionary")
+	        {
+				xPath = string.Format("//xhtml:div[@class='{0}']|//xhtml:div[@class='{1}']|//xhtml:div[@class='{2}']", "entry", "minorentryvariant", "minorentrycomplex");
+	        }
+	        else
+	        {
+				xPath = string.Format("//xhtml:div[@class='{0}']", "scrBook");
+	        }
+
             XmlNodeList nodes = xmlDocument.SelectNodes(xPath, namespaceManager);
             if (nodes != null && nodes.Count > 0)
             {
@@ -480,13 +489,19 @@ namespace epubConvert
                 // This entry doesn't have any information - skip it
                 return false;
             }
-            string headwordXPath = ".//xhtml:span[@class='headword']";
+            string headwordXPath = ".//xhtml:span[@class='mainheadword']";
             XmlNode headwordNode = node.SelectSingleNode(headwordXPath, namespaceManager);
 
 			if (headwordNode == null)
 			{
-				headwordXPath = ".//xhtml:span[@class='mainheadword']";
+				headwordXPath = ".//xhtml:span[@class='headword']/*[not(ancestor::span[@class='referencedentries']) and not(ancestor::span[@class='configtargets']) and not(ancestor::span[@class='subentries'])]";
 				headwordNode = node.SelectSingleNode(headwordXPath, namespaceManager);
+
+				if (headwordNode == null)
+				{
+					headwordXPath = ".//xhtml:span[@class='headword']";
+					headwordNode = node.SelectSingleNode(headwordXPath, namespaceManager);
+				}
 			}
 
 			if (headwordNode != null)
