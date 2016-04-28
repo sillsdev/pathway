@@ -1329,11 +1329,6 @@ namespace SIL.PublishingSolution
 					return;
 				}
 
-				if (content.Trim() == ")" || content.Trim() == "]")
-				{
-					content = content.TrimEnd();
-				}
-
 				content = content.Replace(Common.ConvertUnicodeToString("\\0009"), @"text:tab/");
 				if (_isVerseNumberContent == false)
 				{
