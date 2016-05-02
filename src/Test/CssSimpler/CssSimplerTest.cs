@@ -117,8 +117,8 @@ namespace Test.CssSimplerTest
 			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
 			var xhtml = new XmlDocument();
 			xhtml.Load(XmlReader.Create(xhtmlFullName, settings));
-			var checkClass = xhtml.SelectSingleNode("//body[@class='dicBody']");
-			Assert.IsNull(checkClass);
+			var checkClass = xhtml.SelectSingleNode("//*[local-name()='body'][@class='dicBody']");
+			Assert.IsNotNull(checkClass);
 		}
 
         /// <summary>

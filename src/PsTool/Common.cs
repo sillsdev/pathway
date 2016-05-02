@@ -573,51 +573,51 @@ namespace SIL.Tool
 		#region CheckAndGetStyle
 
 		/// <summary>
-		/// Checks for tags and writes the styles to a dictinary variable
+		/// Checks for tags and writes the styles to a dictionary variable
 		/// </summary>
 		/// <param name="xhtmlFileName">XHTML File Name</param>
-		/// <param name="ProjectInputType">Project Input Type</param>
-		public static void CheckAndGetStyle(string xhtmlFileName, string ProjectInputType)
+		/// <param name="projectInputType">Project Input Type</param>
+		public static void CheckAndGetStyle(string xhtmlFileName, string projectInputType)
 		{
-			if (!File.Exists(xhtmlFileName))
-				return;
-
-			XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
-			XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-			XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-			XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
-			xmlDocument.Load(xmlReader);
-			xmlReader.Close();
-			XmlNodeList nodeResult;
-			if (ProjectInputType.ToLower() == "dictionary")
+			if (projectInputType.ToLower() == "dictionary")
 			{
-				nodeResult = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
-				if (nodeResult != null && nodeResult.Count > 0)
+				if (!File.Exists(xhtmlFileName))
+					return;
+
+				XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+				var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+				namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+				string styleName = string.Empty;
+				using (XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings))
 				{
-					if (TempVariable.ContainsKey("TOCStyleName"))
+					while (xmlReader.Read())
 					{
-						TempVariable["TOCStyleName"] = "letter_letHead_dicBody";
+						if (xmlReader.IsStartElement() && xmlReader.Name == "div" && xmlReader["class"] == "letHead")
+						{
+							if (xmlReader.Read())
+							{
+								if (xmlReader.IsStartElement() && xmlReader.Name == "div" && xmlReader["class"] == "letter")
+								{
+									styleName = "letter_letHead_dicBody";
+									break;
+								}
+								else if (xmlReader.IsStartElement() && xmlReader.Name == "span" && xmlReader["class"] == "letter")
+								{
+									styleName = "letHead_dicBody";
+									break;
+								}
+							}
+						}
 					}
-					else
-					{
-						TempVariable.Add("TOCStyleName", "letter_letHead_dicBody");
-					}
+				}
+				if (TempVariable.ContainsKey("TOCStyleName"))
+				{
+					TempVariable["TOCStyleName"] = styleName;
 				}
 				else
 				{
-					nodeResult = xmlDocument.SelectNodes("//xhtml:span[@class='letter']", namespaceManager);
-					if (nodeResult != null && nodeResult.Count > 0)
-					{
-						if (TempVariable.ContainsKey("TOCStyleName"))
-						{
-							TempVariable["TOCStyleName"] = "letHead_dicBody";
-						}
-						else
-						{
-							TempVariable.Add("TOCStyleName", "letHead_dicBody");
-						}
-					}
+					TempVariable.Add("TOCStyleName", styleName);
 				}
 			}
 		}
