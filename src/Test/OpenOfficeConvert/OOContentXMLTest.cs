@@ -4774,28 +4774,11 @@ namespace Test.OpenOfficeConvert
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
-		///<summary>
-		///Space issue fixed for etymology Test TD-4617
-		///</summary>      
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void SpaceAfterClosingBraceTest()
-		{   
-			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "SpaceAfterClosingBrace";
-			DateTime startTime = DateTime.Now;
-			string styleOutput = GetStyleOutput(file);
-			_totalTime = DateTime.Now - startTime;
-			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-		}
 
-        #endregion
-        #endregion
+		#endregion
+		#endregion
 
-        private void CopyInputToOutput()
+		private void CopyInputToOutput()
         {
             string[] files = new[] { "main.odt", "flexrev.odt", "main.odm", "flexrev.css", "main.xhtml", "flexrev.xhtml", "main.css", "flexrev.css" };
             foreach (string file in files)
