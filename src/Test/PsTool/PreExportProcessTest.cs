@@ -214,6 +214,21 @@ namespace Test.PsTool
 			TextFileAssert.AreEqual(expected, output, fileName + " in XHTML ");
 		}
 
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void HandlePictureBeforeSubEntryExport()
+		{
+			const string fileName = "PictureBeforeSubEntry.xhtml";
+			var input = GetFileNameWithPath(fileName);
+			var output = GetFileNameWithOutputPath(fileName);
+			CopyToOutput(input, output);
+			preExportProcess = new PreExportProcess();
+			preExportProcess.ArrangeImages("dictionary", output);
+			string expected = GetFileNameWithExpectedPath(fileName);
+			TextFileAssert.AreEqual(expected, output, fileName + " in XHTML ");
+		}
+
 
         #region private Methods
         private static string GetPath(string place, string filename)

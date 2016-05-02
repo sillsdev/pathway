@@ -3184,15 +3184,16 @@ namespace SIL.Tool
             tw.Close();
         }
 
-        public void ArrangeImages()
+		public void ArrangeImages(string inputType, string xhtmlFilePath)
         {
-            //div[@class='entry']/div[2]/img
-            if (!File.Exists(_projInfo.DefaultXhtmlFileWithPath)) return;
-            if (_projInfo.SplitFileByLetter != null && _projInfo.SplitFileByLetter.ToLower() == "true") return;
+			if (inputType.ToLower() != "dictionary") return;
+
+			if (!File.Exists(xhtmlFilePath)) return;
+            if (_projInfo !=null && _projInfo.SplitFileByLetter != null && _projInfo.SplitFileByLetter.ToLower() == "true") return;
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            xDoc.Load(_projInfo.DefaultXhtmlFileWithPath);
+			xDoc.Load(xhtmlFilePath);
             string xPath = "//div[@class='entry']/div[2]/img"; //Find the second image entry
             XmlNodeList entryLists = xDoc.SelectNodes(xPath, namespaceManager);
             if (entryLists.Count > 0)
@@ -3219,7 +3220,25 @@ namespace SIL.Tool
                     }
                 }
             }
-            xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);
+	        xPath = "//div[@class='entry']/*/img";
+			entryLists = xDoc.SelectNodes(xPath);
+			if (entryLists.Count > 0)
+			{
+				for (int i = 0; i < entryLists.Count; i++)
+				{
+					XmlNode pictureNode = entryLists[i].ParentNode;
+					XmlNode entryXmlNode = pictureNode.ParentNode;
+					XmlNode nextXmlNode = pictureNode.NextSibling;
+					if ((nextXmlNode != null && nextXmlNode.Attributes != null) && (nextXmlNode.Attributes["class"].Value == "subentries"))
+					{
+						if (pictureNode.Attributes != null)
+							pictureNode.Attributes["class"].Value = "pictureCenter";
+						entryXmlNode.InsertAfter(pictureNode.Clone(), entryXmlNode.LastChild);
+						if (pictureNode.ParentNode != null) pictureNode.ParentNode.RemoveChild(pictureNode);
+					}
+				}
+			}
+			xDoc.Save(xhtmlFilePath);
         }
 
 		public void InsertBookPageBreak(string _refFormat)

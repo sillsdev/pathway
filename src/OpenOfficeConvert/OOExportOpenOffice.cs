@@ -581,7 +581,7 @@ namespace SIL.PublishingSolution
 	        preProcessor.MoveBookcodeFRTtoFront(projInfo.DefaultXhtmlFileWithPath);
             preProcessor.GetfigureNode();
             preProcessor.InsertKeepWithNextOnStyles(cssFile);
-            preProcessor.ArrangeImages();
+			preProcessor.ArrangeImages("dictionary", projInfo.DefaultXhtmlFileWithPath);
             isMultiLanguageHeader = preProcessor.GetMultiLanguageHeader();
 
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
