@@ -1,3 +1,15 @@
+pathway (1.14.3)  experimental; urgency=high
+
+  * Epub:TD-4517 Retain spaces after etymology and usage
+
+ -- Greg Trihus <greg_trihus@sil.org>  Fri, 18 Mar 2016 15:18:20 -0600
+
+pathway (1.14.2)  experimental; urgency=high
+
+  * Sword:Add missing sword dependencies for Windows
+
+ -- Greg Trihus <greg_trihus@sil.org>  Fri, 18 Mar 2016 15:18:20 -0600
+
 pathway (1.14.1)  experimental; urgency=high
 
   * Epub:TD-4561 change Xhtml schema to Epub schema in SE Build
