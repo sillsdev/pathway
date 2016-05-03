@@ -32,10 +32,14 @@
     </xsl:template>
     
     <xsl:template match="@id">
-        <xsl:attribute name="id">
+        <xsl:attribute name="id">    
             <xsl:variable name="apos">&apos;</xsl:variable>
             <xsl:value-of select="translate(translate(.,$apos,''),' ','_')"/>
         </xsl:attribute>
+    </xsl:template>
+    
+    <xsl:template match="@entryguid">  
+        <!-- Omit the attribute entryguid -->   
     </xsl:template>
     
     <xsl:template match="@href">
@@ -44,5 +48,6 @@
             <xsl:value-of select="translate(translate(.,$apos,''),' ','_')"/>
         </xsl:attribute>
     </xsl:template>
+    
      <xsl:template match="/xhtml:html/xhtml:body/xhtml:span"></xsl:template>
 </xsl:stylesheet>
