@@ -557,8 +557,16 @@ namespace Test.CssSimplerTest
                 validErrorCount += 1;
             };
             var reader = XmlReader.Create(xhtmlFullName, settings);
-            while (reader.Read()) { }
-            Assert.AreEqual(33, validErrorCount, "The number of DTD errors reported by C# has changed");
+			try
+			{
+				while (reader.Read()) { }
+				// Windows will count errors and report the results.
+				Assert.AreEqual(33, validErrorCount, "The number of DTD errors reported by C# has changed");
+			}
+			catch (XmlSchemaException e) // Linux will throw an error on the first validation issue rather than counting.
+			{
+				Assert.AreEqual (1, e.LineNumber);
+			}
         }
 
         #endregion Tests
