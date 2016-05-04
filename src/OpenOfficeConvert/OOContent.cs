@@ -1307,6 +1307,10 @@ namespace SIL.PublishingSolution
 			{
 				valueOfProperty = IdAllClass[clsName][property];
 			}
+			else if (property == "height" && IdAllClass.ContainsKey(clsName) && IdAllClass[clsName].ContainsKey("max-height"))
+			{
+				valueOfProperty = IdAllClass[clsName]["max-height"];
+			}
 			return valueOfProperty;
 		}
 

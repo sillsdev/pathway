@@ -673,6 +673,7 @@ namespace SIL.PublishingSolution
                     break;
                 case "height":
                 case "width":
+				case "max-height":
                     value = styleAttributeInfo.StringValue.ToLower() == "auto" ? "72" : Common.UnitConverter(value);
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
@@ -681,6 +682,7 @@ namespace SIL.PublishingSolution
                 case "string-set":
                 case "unicode-bidi":
                 case "pathway":
+				case "-webkit-column-count":
                     break;
                 default:
                     throw new Exception("Not a valid CSS Command");

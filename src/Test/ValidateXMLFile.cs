@@ -410,6 +410,66 @@ namespace Test
             return match;
         }
 
+		public bool ValidateDrawNodeAttributesNS(int count, string xpath)
+		{
+			string propertyValue = string.Empty;
+			bool match = true;
+
+			XPath = "//draw:frame[@draw:style-name='" + ClassName + "']";
+			if (xpath.Length <= 0)
+			{
+				xpath = XPath;
+				ClassName = string.Empty;
+			}
+
+			XmlNode node = GetNode(xpath);
+
+			if (node == null)
+			{
+				match = false;
+			}
+			else
+			{
+				int counter = 0;
+				if (count > 0)
+				{
+					foreach (XmlNode xmlNode in node.ChildNodes)
+					{
+						counter++;
+						if (count == counter)
+						{
+							node = xmlNode;
+							break;
+						}
+					}
+				}
+				foreach (string propertyKey in ClassProperty.Keys)
+				{
+					string ns = string.Empty;
+					string key = string.Empty;
+					if (propertyKey.IndexOf(':') > 0)
+					{
+						ns = Common.LeftString(propertyKey, ":");
+						key = Common.RightString(propertyKey, ":");
+					}
+
+					XmlNode att = GetAttibute(node, key, ns);
+					if (att != null)
+					{
+						propertyValue = att.Value;
+						if (propertyValue != ClassProperty[ns + ":" + key])
+						{
+							match = DecimalTest(propertyValue, ClassProperty[ns + ":" + key]);
+							break;
+						}
+					}
+				}
+			}
+
+			ClassProperty.Clear();
+			return match;
+		}
+
         public bool ValidateOfficeTextNode(string value, string paraSpan)
         {
             bool match = true;
@@ -553,6 +613,19 @@ namespace Test
 
             return node;
         }
+
+		public XmlNode GetFrameNode()
+		{
+			string oldXpath = XPath;
+
+			string xpath = "//office:text";
+			XPath = xpath;
+			XmlNode node = ValidateGetNodeNS();
+
+			XPath = oldXpath;
+
+			return node;
+		}
 
         public bool ValidateNodeInnerXmlSubNode(string value)
         {
@@ -712,6 +785,7 @@ namespace Test
                 nsmgr.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
                 nsmgr.AddNamespace("text", "urn:oasis:names:tc:opendocument:xmlns:text:1.0");
                 nsmgr.AddNamespace("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
+				nsmgr.AddNamespace("svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0");
                 nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
                 
             }

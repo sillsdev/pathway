@@ -858,6 +858,21 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue1);
         }
 
+		[Test]
+		public void MaxHeightPictureTest_Node()
+		{
+			const string file = "PictureMaxHeight";
+
+			_projInfo.ProjectInputType = "Dictionary";
+			string styleOutput = GetStyleOutput(file);
+
+			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+			_validate.ClassName = "fr2";
+			_validate.ClassProperty.Add("svg:height", "72pt");
+			bool returnValue1 = _validate.ValidateDrawNodeAttributesNS(0, "");
+			Assert.IsTrue(returnValue1);
+		}
+
         ///<summary>
         /// TD-1607. main.odm format - percentage test
         /// </summary>      
