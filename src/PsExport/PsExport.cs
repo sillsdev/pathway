@@ -228,7 +228,7 @@ namespace SIL.PublishingSolution
 						UserOptionSelectionBasedXsltPreProcess(filename);
 						if (DataType.ToLower() == "dictionary")
 						{
-							Common.RunCommand(cssSimplerExe, filename, 1);
+							Common.RunCommand(cssSimplerExe, String.Format("\"{0}\"",filename), 1);
 						}
 					}
 				}
