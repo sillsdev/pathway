@@ -1,0 +1,187 @@
+﻿.letHead {
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+}
+.letter {
+   line-height: 12pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 10pt;
+   font-weight: bold;
+}
+span[lang|= "en"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 10pt;
+}
+span[lang|= "tpi"]{
+   font-family: 'Andika Basic',serif;
+   font-size: 10pt;
+}
+span[lang|= "fr"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 10pt;
+}
+span[lang|= "es"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 10pt;
+}
+span[lang|= "bzh"]{
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+}
+span[lang|= "bzh-fonipa"]{
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.entry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   font-size: 10pt;
+}
+.entry .mainheadword span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.entry .mainheadword span:last-child:after{
+   content: '  ';
+}
+.entry .mainheadword span {
+   font-weight: bold;
+}
+.entry .pronunciation + .pronunciation:before{
+   content: ', ';
+}
+.entry .pronunciations:after{
+   content: ' ';
+}
+.entry .pronunciation > .form span:first-child:before{
+   content: '[';
+}
+.entry .pronunciation > .form span:last-child:after{
+   content: ']';
+}
+.entry .senses .sensecontent + span:before{
+   content: '  ';
+}
+.entry .senses:after{
+   content: ' ';
+}
+.entry .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry .senses .sensecontent .sensenumber:after{
+   content: ') ';
+}
+.entry .senses .morphosyntaxanalysis:after{
+   content: ' ';
+}
+.entry .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry .senses .partofspeech span:last-child:after{
+   content: ' ';
+}
+.entry .senses .slot + .slot:before{
+   content: ', ';
+}
+.entry .senses .slots:before{
+   content: ': ';
+}
+.entry .senses .slot > .name span:last-child:after{
+   content: ' ';
+}
+.entry .senses .definitionorgloss span:last-child:after{
+   content: ' ';
+}
+.entry .senses .examplescontents > span + span:before{
+   content: '  ';
+}
+.entry .senses .examplescontents:after{
+   content: ' ';
+}
+.entry .senses .example span[lang|= "bzh"]{
+   font-style: italic;
+}
+.entry .senses .example span:last-child:after{
+   content: ' ';
+}
+.entry .senses .example span {
+   font-style: italic;
+}
+.entry .senses .translation span:last-child:after{
+   content: ' ';
+}
+.entry .senses .scientificname:after{
+   content: ' ';
+}
+.entry .senses .semanticdomain + .semanticdomain:before{
+   content: ', ';
+}
+.entry .senses .semanticdomains:before{
+   content: '(sem. domains: ';
+}
+.entry .senses .semanticdomains:after{
+   content: '.) ';
+}
+.entry .senses .abbreviation span:last-child:after{
+   content: ' - ';
+}
+.entry .senses .senses .sensecontent + span:before{
+   content: '  ';
+}
+.entry .senses .senses:after{
+   content: ' ';
+}
+.entry .senses .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry .senses .senses .sensecontent .sensenumber:after{
+   content: ') ';
+}
+.entry .senses .senses .sense {
+   font-size: 10pt;
+}
+.entry .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.entry .picture img {
+   max-height: 1in;
+}
+.entry .pictures > span + span:before{
+   content: '  ';
+}
+.entry .pictures:after{
+   content: ' ';
+}
+.entry .picture {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+}
+.entry .picture > img:after{
+   content: ' ';
+}
+.entry .picture > .sensenumber:after{
+   content: ' ';
+}

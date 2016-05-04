@@ -122,7 +122,7 @@ namespace SIL.PublishingSolution
                     }
                     Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                     preProcessor.GetTempFolderPath();
-                    preProcessor.ImagePreprocess(false);
+                    preProcessor.ImagePreprocess(false, delegate(string s, string to) { ImageMods.ResizeImage(s, to, 1,1); });
                     preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
                     if (projInfo.SwapHeadword)
                         preProcessor.SwapHeadWordAndReversalForm();

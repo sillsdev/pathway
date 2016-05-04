@@ -1327,6 +1327,14 @@ namespace SIL.Tool
         /// <param name="isInDesign"> </param>
         public string ImagePreprocess(bool isInDesign)
         {
+            return ImagePreprocess(isInDesign, delegate(string s, string to) { File.Copy(s, to, true); });
+        }
+
+        public delegate void CopyDelegate(string from, string to);
+
+        public string ImagePreprocess(bool isInDesign, CopyDelegate copyDelegate)
+
+        {
             //if (string.IsNullOrEmpty(sourceFile) || !File.Exists(sourceFile)) return string.Empty;
             //Temp folder and file copy
             string sourcePicturePath = Path.GetDirectoryName(_baseXhtmlFileNameWithPath);
@@ -1368,7 +1376,7 @@ namespace SIL.Tool
                                     {
                                         string ext = Path.GetExtension(fromFileName);
 										string toFileName = Common.PathCombine(tempFolder, pictureCount + ext);
-                                        File.Copy(fromFileName, toFileName, true);
+                                        copyDelegate(fromFileName, toFileName);
 
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;
@@ -1429,7 +1437,7 @@ namespace SIL.Tool
                                         string ext = Path.GetExtension(fromFileName);
 
 										string toFileName = Common.PathCombine(tempFolder, pictureCount + ext);
-                                        File.Copy(fromFileName, toFileName, true);
+                                        copyDelegate(fromFileName, toFileName);
                                         if (isInDesign)
                                         {
                                             string pictureFolderPath = Common.PathCombine(sourcePicturePath, "Pictures");
@@ -1438,7 +1446,7 @@ namespace SIL.Tool
                                                 Directory.CreateDirectory(pictureFolderPath);
                                             }
 											toFileName = Common.PathCombine(pictureFolderPath, pictureCount + ext);
-                                            File.Copy(fromFileName, toFileName, true);
+                                            copyDelegate(fromFileName, toFileName);
                                         }
                                         XmlAttribute xa = xmldoc.CreateAttribute("longdesc");
                                         xa.Value = name.Value;

@@ -88,7 +88,6 @@ src/PwTxEx/obj/*
 src/Sprint/*
 src/Test/bin/*
 src/Test/obj/*
-src/Test*.xml
 src/TestBed/bin/*
 src/TestBed/obj/*
 src/theWordConvert/bin/*

@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using NUnit.Framework;
@@ -54,6 +55,36 @@ namespace Test.PsTool
             output = preExportProcess.ImagePreprocess(false);
             XmlAssert.AreEqual(expected, output, "");
 
+        }
+
+        /// <summary>
+        ///A test for ImagePreprocess
+        ///</summary>
+        [Test]
+        public void ImagePreprocessResizeTest()
+        {
+            string filename = "ImagePreProcessResize.xhtml";
+            string input = GetFileNameWithPath(filename);
+            PublicationInformation projInfo = new PublicationInformation();
+
+            string output = GetFileNameWithOutputPath(filename);
+            CopyToOutput(input, output);
+            FolderTree.Copy(Path.Combine(Path.GetDirectoryName(input), "Pictures"), Path.Combine(Path.GetDirectoryName(output), "pictures"));
+            projInfo.DefaultXhtmlFileWithPath = output;
+            projInfo.ProjectInputType = "Dictionary";
+            preExportProcess = new PreExportProcess(projInfo);
+            Directory.CreateDirectory(preExportProcess.GetCreatedTempFolderPath);
+            preExportProcess.ImagePreprocess(false, delegate (string s, string to)
+            {
+                ImageMods.ResizeImage(s, to, 1, 1);
+            });
+            var xhtmlDoc = Common.DeclareXMLDocument(true);
+            xhtmlDoc.Load(input);
+            var imgSrc = xhtmlDoc.SelectSingleNode("//*/@src");
+            var infoIn = new FileInfo(Path.Combine(Path.GetDirectoryName(input), imgSrc.InnerText));
+            var infoOut = new FileInfo(Path.Combine(preExportProcess.GetCreatedTempFolderPath, "1.jpg"));
+            Assert.Less(infoOut.Length, infoIn.Length);
+            Directory.Delete(preExportProcess.GetCreatedTempFolderPath, true);
         }
 
         /// <summary>
