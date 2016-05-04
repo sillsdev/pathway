@@ -693,9 +693,9 @@ namespace SIL.Tool
 				if (Path.GetFileName(xhtmlFileNameWithPath).IndexOf("Preserve") == 0)
 				{
 					xhtmlFileNameWithPath = xhtmlFileNameWithPath.Replace(Path.GetFileName(xhtmlFileNameWithPath),
-																		  Path.GetFileName(xhtmlFileNameWithPath)
-																			  .Replace(
-																				  "Preserve", ""));
+						Path.GetFileName(xhtmlFileNameWithPath)
+							.Replace(
+								"Preserve", ""));
 				}
 				List<string> langCodeList = new List<string>();
 				XmlDocument xDoc = Common.DeclareXMLDocument(true);
@@ -706,24 +706,43 @@ namespace SIL.Tool
 				var vernacularLang = string.Empty;
 				if (vernagular)
 				{
-					string[] checkXPaths =
-					{
-						"//*[@class='headword']/@*[local-name()='lang']",
-						"//*[@class='headword']/*/@lang",
-						"//*[@class='mainheadword']/@*[local-name()='lang']",
-						"//*[@class='mainheadword']/*/@lang",
-						"//*[@class='headref']/@*[local-name()='lang']",
-						"//*[@class='headref']/*/@lang",
-						"//*[@class='Paragraph']/@*[local-name()='lang']",
-						"//*[@class='Paragraph']/*/@lang"
-					};
+					// Checks for the xpaths - "//*[@class='headword']/@*[local-name()='lang']", "//*[@class='headword']/*/@lang"
+					// 1) @class can be equal to headword, mainheadword, headref, Paragraph  2) lang can also be as xml:lang
 
-					foreach (string anXPath in checkXPaths)
+					var xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, ProhibitDtd = false};
+					string attribute = string.Empty;
+					using (XmlReader xmlReader = XmlReader.Create(xhtmlFileNameWithPath, xmlReaderSettings))
 					{
-						if (((nodes = xDoc.SelectNodes(anXPath)) != null) && nodes.Count > 0)
+						while (xmlReader.Read())
 						{
-							vernacularLang = nodes[0].InnerText;
-							break;
+							if (xmlReader.IsStartElement())
+							{
+								attribute = xmlReader["class"];
+								if (attribute == "headword" || attribute == "mainheadword" || attribute == "headref" || attribute == "Paragraph")
+								{
+									if (xmlReader.Read())
+									{
+										if (xmlReader.IsStartElement())
+										{
+											attribute = xmlReader["lang"];
+											if (attribute != null)
+											{
+												vernacularLang = attribute;
+												break;
+											}
+											else
+											{
+												attribute = xmlReader["xml:lang"];
+												if (attribute != null)
+												{
+													vernacularLang = attribute;
+													break;
+												}
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 				}
