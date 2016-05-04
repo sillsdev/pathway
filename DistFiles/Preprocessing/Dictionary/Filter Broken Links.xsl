@@ -13,6 +13,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="1.0" xmlns:x="http://www.w3.org/1999/xhtml">
     
+    <xsl:key name="ids" match="@id" use="."/>
+
     <xsl:output encoding="UTF-8" method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" 
         doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
     
@@ -34,12 +36,9 @@
             <xsl:value-of select="substring(@href,2)"/>
         </xsl:variable>
         <xsl:choose>
-            <xsl:when test="count(//*[@id = $myRef]) &gt; 0">
+            <xsl:when test="key('ids', $myRef)">
                 <xsl:copy>
-                    <xsl:for-each select="@*">
-                        <xsl:apply-templates select="."/>
-                    </xsl:for-each>
-                    <xsl:apply-templates/>
+                    <xsl:apply-templates select="node()|@*"/>
                 </xsl:copy>
             </xsl:when>
             <xsl:otherwise>
