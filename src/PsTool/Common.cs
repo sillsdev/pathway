@@ -720,26 +720,44 @@ namespace SIL.Tool
 								attribute = xmlReader["class"];
 								if (attribute == "headword" || attribute == "mainheadword" || attribute == "headref" || attribute == "Paragraph")
 								{
-									if (xmlReader.Read())
+									attribute = xmlReader["lang"];
+									if (attribute == null)
 									{
-										if (xmlReader.IsStartElement())
+										attribute = xmlReader["xml:lang"];
+										if (attribute == null)
 										{
-											attribute = xmlReader["lang"];
-											if (attribute != null)
+											if (xmlReader.Read())
 											{
-												vernacularLang = attribute;
-												break;
-											}
-											else
-											{
-												attribute = xmlReader["xml:lang"];
-												if (attribute != null)
+												if (xmlReader.IsStartElement())
 												{
-													vernacularLang = attribute;
-													break;
+													attribute = xmlReader["lang"];
+													if (attribute != null)
+													{
+														vernacularLang = attribute;
+														break;
+													}
+													else
+													{
+														attribute = xmlReader["xml:lang"];
+														if (attribute != null)
+														{
+															vernacularLang = attribute;
+															break;
+														}
+													}
 												}
 											}
 										}
+										else
+										{
+											vernacularLang = attribute;
+											break;
+										}
+									}
+									else
+									{
+										vernacularLang = attribute;
+										break;
 									}
 								}
 							}

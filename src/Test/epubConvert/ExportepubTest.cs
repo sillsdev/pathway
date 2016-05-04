@@ -517,6 +517,39 @@ namespace Test.epubConvert
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
+		public void ExportDictionaryRemoveEntryGUIDFW83Test()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+
+			const string XhtmlName = "entryguid.xhtml";
+			const string CssName = "entryguid.css";
+			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+			projInfo.IsReversalExist = false;
+			projInfo.ProjectName = "Dictionary Test";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"));
+			var target = new Exportepub();
+			var actual = target.Export(projInfo);
+			Assert.IsTrue(actual);
+			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+			var zf = new FastZip();
+			zf.ExtractZip(result, FileOutput("entryguidcomparison"), ".*");
+			var zfExpected = new FastZip();
+			result = result.Replace("Output", "Expected");
+			zfExpected.ExtractZip(result, FileOutput("entryguidexpect"), ".*");
+			FileCompare("entryguidcomparison/OEBPS/PartFile00001_.xhtml", "entryguidexpect/OEBPS/PartFile00001_.xhtml");
+
+		}
+
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
 		public void Epub3ExportTest()
 		{
 			CleanOutputDirectory();
