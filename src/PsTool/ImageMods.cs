@@ -66,12 +66,13 @@ namespace SIL.Tool
             var newHeight = (int) (img.Height / scale);
             var newWidth = (int) (img.Width / scale);
             var result = ResizeImage(img, newWidth, newHeight);
+            img.Dispose();
             if (File.Exists(toFullPath))
             {
                 File.Delete(toFullPath);
             }
             result.Save(toFullPath);
-			img.Dispose ();
+            result.Dispose();
         }
     }
 }
