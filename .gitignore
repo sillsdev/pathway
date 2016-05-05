@@ -12,6 +12,9 @@
 ./pathway_*
 output/*
 BuildStep.exe
+Build/pathway_*
+Build/debs/*
+Build/latest.changes
 src/_*
 releases
 testResults
@@ -88,6 +91,7 @@ src/PwTxEx/obj/*
 src/Sprint/*
 src/Test/bin/*
 src/Test/obj/*
+src/Test/test-results/*
 src/TestBed/bin/*
 src/TestBed/obj/*
 src/theWordConvert/bin/*
@@ -143,6 +147,7 @@ src/Test/Files/*
 src/Test/PsTool/TestFiles/InputFiles/DestinationFolder/*
 src/Test/PsTool/TestFiles/InputFiles/Image*
 src/Test/PsTool/TestFiles/InputFiles/xhtmlMain.xhtml
+src/Test/PsTool/TestFiles/Output/*
 src/CssParser/Jars/*
 src/CssParser/ThirdParty/*
 src/CadreBible*

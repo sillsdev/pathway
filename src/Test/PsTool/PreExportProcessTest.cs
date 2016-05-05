@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="PreExportProcessTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test methods of FlexDePlugin
 // </remarks>
@@ -34,6 +34,11 @@ namespace Test.PsTool
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.Testing = true;
+			var outputFolder = Path.GetDirectoryName (GetFileNameWithOutputPath ("test.tmp"));
+			if (!Directory.Exists(outputFolder))
+		    {
+				Directory.CreateDirectory (outputFolder);
+			}
         }
 
         /// <summary>
@@ -45,7 +50,7 @@ namespace Test.PsTool
             string filename = "ImagePreProcess.xhtml";
             string input = GetFileNameWithPath(filename);
             PublicationInformation projInfo = new PublicationInformation();
-            
+
             string expected = GetFileNameWithExpectedPath(filename);
             string output = GetFileNameWithOutputPath(filename);
             CopyToOutput(input, output);
@@ -81,7 +86,7 @@ namespace Test.PsTool
             var xhtmlDoc = Common.DeclareXMLDocument(true);
             xhtmlDoc.Load(input);
             var imgSrc = xhtmlDoc.SelectSingleNode("//*/@src");
-            var infoIn = new FileInfo(Path.Combine(Path.GetDirectoryName(input), imgSrc.InnerText));
+            var infoIn = new FileInfo(Path.Combine(Path.GetDirectoryName(output), imgSrc.InnerText.Replace(@"\", Path.DirectorySeparatorChar.ToString())));
             var infoOut = new FileInfo(Path.Combine(preExportProcess.GetCreatedTempFolderPath, "1.jpg"));
             Assert.Less(infoOut.Length, infoIn.Length);
             Directory.Delete(preExportProcess.GetCreatedTempFolderPath, true);
@@ -199,7 +204,7 @@ namespace Test.PsTool
         }
 
 		/// <summary>
-		///    
+		///
 		/// </summary>
 		[Test]
 		public void RemovePreserveSpaceForPrincePdf()
@@ -215,7 +220,7 @@ namespace Test.PsTool
 		}
 
 		/// <summary>
-		///    
+		///
 		/// </summary>
 		[Test]
 		public void InsertDisplayInlinePictureForPrincePdf()

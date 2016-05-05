@@ -71,6 +71,7 @@ namespace SIL.Tool
                 File.Delete(toFullPath);
             }
             result.Save(toFullPath);
+			img.Dispose ();
         }
     }
 }
