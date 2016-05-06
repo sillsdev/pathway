@@ -777,7 +777,7 @@ namespace SIL.PublishingSolution
                 propertyValue = "";
             }
             if (propertyValue.Trim().Length > 0)
-                _inlineStyle.Add(propertyValue);
+				_inlineInnerStyle.Add(propertyValue);
         }
 
         public void FontWeight(Dictionary<string, string> cssProperty)

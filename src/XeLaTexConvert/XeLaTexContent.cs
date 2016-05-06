@@ -641,11 +641,6 @@ namespace SIL.PublishingSolution
                     content = " " + content;
                     _isVerseNo = false;
                 }
-
-                if (_childName.ToLower().Contains("sectionhead"))//spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody
-                {
-                    _inlineCount++;
-                }
                 _xetexFile.Write(content);
                 CloseInlineInnerStyle(value);
                 for (int i = 1; i <= _inlineCount; i++) // close braces for inline style
@@ -655,7 +650,6 @@ namespace SIL.PublishingSolution
                 _inlineCount = 0;
 
                 _xetexFile.Write("}");
-
 
                 if (_incrementDropCap != 0)
                 {
@@ -761,11 +755,6 @@ namespace SIL.PublishingSolution
                     int letterInlineCount = 0;
                     foreach (string property in inlineStyle)
                     {
-                        if (property.Contains("\\section*{\\needspace"))
-                        {
-                            letterInlineCount++;
-                        }
-
                         string propName = Common.LeftString(property, " ");
                         if (_paragraphPropertyList.Contains(propName))
                         {
@@ -876,10 +865,7 @@ namespace SIL.PublishingSolution
                             _headerContent = content;
                         }
                     }
-                    if (mergedParaStyle.ToLower().Contains("sectionhead"))//spanzxxSectionHeadMinorscrSectioncolumnsscrBookscrBody
-                        _xetexFile.Write("\\section*{\\needspace {8\\baselineskip}\\" + mergedParaStyle + "{");
-                    else
-                        _xetexFile.Write("\\" + mergedParaStyle + "{");
+					_xetexFile.Write("\\" + mergedParaStyle + "{");
                 }
                 AddUsedStyleName(characterStyle);
             }
@@ -1371,6 +1357,9 @@ namespace SIL.PublishingSolution
 
             Direction();
 
+			if (_className.ToLower().Contains("sectionhead"))
+				_xetexFile.Write("\\section*{\\needspace {8\\baselineskip}");
+			
             WriteParagraphInline();
 
             if (IdAllClass.ContainsKey(_classNameWithLang))
@@ -1688,6 +1677,10 @@ namespace SIL.PublishingSolution
             }
 
             CloseBrace(_closeChildName);
+
+			if (_closeChildName.ToLower().IndexOf("sectionhead") == 0)			
+				_xetexFile.Write("}");
+
             DoNotInheritClassEnd(_closeChildName);
             SetHeadwordFalse();
             ClosefooterNote();
