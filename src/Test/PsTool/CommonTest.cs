@@ -1124,6 +1124,83 @@ namespace Test.PsTool
 			Assert.AreEqual(theLanguageCode, "bzh:Buang, Mapos;");
 	    }
 
+		/// <summary>
+		///A test for GetLanguageCode - (1) With <span class="headword" lang="seh">
+		/// Uses sena3
+		/// Checks whether the Language Code returned is as expected
+		///</summary>
+		[Test]
+		public void GetLanguageCodeTest1()
+		{
+			const string fileName = "LanguageCodeTest1.xhtml";
+			var sourceXhtmlFile = GetFileNameWithPath(fileName);
+			var outputXhtmlFile = Common.PathCombine(_outputBasePath, fileName);
+			CopyToOutput(sourceXhtmlFile, outputXhtmlFile);
+			string theLanguageCode = Common.GetLanguageCode(outputXhtmlFile, "Dictionary", true);
+			Assert.AreEqual(theLanguageCode, "seh:Sena;");
+		}
+
+		/// <summary>
+		///A test for GetLanguageCode - (2) With <span class="headword" lang="ggo-Telu-IN">
+		/// Uses Gondwana Sample
+		/// Checks whether the Language Code returned is as expected
+		///</summary>
+		[Test]
+		public void GetLanguageCodeTest2()
+		{
+			const string fileName = "LanguageCodeTest2.xhtml";
+			var sourceXhtmlFile = GetFileNameWithPath(fileName);
+			var outputXhtmlFile = Common.PathCombine(_outputBasePath, fileName);
+			CopyToOutput(sourceXhtmlFile, outputXhtmlFile);
+			string theLanguageCode = Common.GetLanguageCode(outputXhtmlFile, "Dictionary", true);
+			Assert.AreEqual(theLanguageCode, "ggo-Telu-IN:Gondi, Southern (Telugu, India);");
+		}
+
+		/// <summary>
+		///A test for GetLanguageCode - (3) With <span class="mainheadword"><span lang="bzh">
+		/// Checks whether the Language Code returned is as expected
+		///</summary>
+		[Test]
+		public void GetLanguageCodeTest3()
+		{
+			const string fileName = "LanguageCodeTest3.xhtml";
+			var sourceXhtmlFile = GetFileNameWithPath(fileName);
+			var outputXhtmlFile = Common.PathCombine(_outputBasePath, fileName);
+			CopyToOutput(sourceXhtmlFile, outputXhtmlFile);
+			string theLanguageCode = Common.GetLanguageCode(outputXhtmlFile, "Dictionary", true);
+			Assert.AreEqual(theLanguageCode, "bzh:Buang, Mapos;");
+		}
+
+		/// <summary>
+		///A test for GetLanguageCode - (4) With <span class="mainheadword"><span xm:lang="bzh">
+		/// Checks whether the Language Code returned is as expected
+		///</summary>
+		[Test]
+		public void GetLanguageCodeTest4()
+		{
+			const string fileName = "LanguageCodeTest4.xhtml";
+			var sourceXhtmlFile = GetFileNameWithPath(fileName);
+			var outputXhtmlFile = Common.PathCombine(_outputBasePath, fileName);
+			CopyToOutput(sourceXhtmlFile, outputXhtmlFile);
+			string theLanguageCode = Common.GetLanguageCode(outputXhtmlFile, "Dictionary", true);
+			Assert.AreEqual(theLanguageCode, "bzh:Buang, Mapos;");
+		}
+
+		/// <summary>
+		///A test for GetLanguageCode (Without Vernacular)
+		/// Checks whether the Language Code returned is as expected
+		///</summary>
+		[Test]
+		public void GetLanguageCodeWithOutVernacularTest()
+		{
+			const string fileName = "LanguageCodeTest.xhtml";
+			var sourceXhtmlFile = GetFileNameWithPath(fileName);
+			var outputXhtmlFile = Common.PathCombine(_outputBasePath, fileName);
+			CopyToOutput(sourceXhtmlFile, outputXhtmlFile);
+			string theLanguageCode = Common.GetLanguageCode(outputXhtmlFile, "Dictionary", false);
+			Assert.AreEqual(theLanguageCode, "en:English;tpi:Tok Pisin;bzh:Buang, Mapos;bzh-fonipa:Buang, Mapos;");
+		}
+
         /// <summary>
         ///A test for XML settings file migration
         ///</summary>

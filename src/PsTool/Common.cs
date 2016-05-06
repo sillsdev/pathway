@@ -697,25 +697,31 @@ namespace SIL.Tool
 							.Replace(
 								"Preserve", ""));
 				}
+				// XMLReader used to get the Meta Elements and then if Vernacular, we get the Vernacular Language by
+				// checking for the xpaths - "//*[@class='headword']/@*[local-name()='lang']", "//*[@class='headword']/*/@lang"
+				// 1) @class can be equal to headword, mainheadword, headref, Paragraph  2) lang can also be as xml:lang
 				List<string> langCodeList = new List<string>();
-				XmlDocument xDoc = Common.DeclareXMLDocument(true);
-				XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-				namespaceManager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
-				xDoc.Load(xhtmlFileNameWithPath);
-				XmlNodeList nodes = null;
 				var vernacularLang = string.Empty;
-				if (vernagular)
+				var metaList = new List<KeyValuePair<string, string>>();
+				var xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, ProhibitDtd = false};
+				string attribute = string.Empty;
+				using (XmlReader xmlReader = XmlReader.Create(xhtmlFileNameWithPath, xmlReaderSettings))
 				{
-					// Checks for the xpaths - "//*[@class='headword']/@*[local-name()='lang']", "//*[@class='headword']/*/@lang"
-					// 1) @class can be equal to headword, mainheadword, headref, Paragraph  2) lang can also be as xml:lang
-
-					var xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, ProhibitDtd = false};
-					string attribute = string.Empty;
-					using (XmlReader xmlReader = XmlReader.Create(xhtmlFileNameWithPath, xmlReaderSettings))
+					while (xmlReader.Read())
 					{
-						while (xmlReader.Read())
+						if (xmlReader.IsStartElement())
 						{
-							if (xmlReader.IsStartElement())
+							if (xmlReader.Name == "meta")
+							{
+								if (xmlReader["name"] != null && xmlReader["content"] != null)
+								{
+									var aMetaItem = new KeyValuePair<string, string>(xmlReader["name"], xmlReader["content"]);
+									metaList.Add(aMetaItem);
+								}
+								continue;
+							}
+
+							if (vernagular)
 							{
 								attribute = xmlReader["class"];
 								if (attribute == "headword" || attribute == "mainheadword" || attribute == "headref" || attribute == "Paragraph")
@@ -764,11 +770,12 @@ namespace SIL.Tool
 						}
 					}
 				}
-				XmlNodeList fontList = xDoc.GetElementsByTagName("meta");
-				for (int i = 0; i < fontList.Count; i++)
+
+				int metaCount = 0;
+				foreach (var metaItem in metaList)
 				{
-					string langName = fontList[i].Attributes["name"].Value;
-					string langContent = fontList[i].Attributes["content"].Value;
+					string langName = metaItem.Key;
+					string langContent = metaItem.Value;
 
 					if (langName.ToLower() == "dc.language")
 					{
@@ -790,13 +797,13 @@ namespace SIL.Tool
 						{
 							langCodeList.Add(langContent);
 							languageCode = languageCode + langContent;
-							if (i < fontList.Count - 1)
+							if (metaCount < metaList.Count - 1)
 							{
 								languageCode = languageCode + ";";
 							}
 						}
 					}
-
+					metaCount++;
 				}
 			}
 			else
