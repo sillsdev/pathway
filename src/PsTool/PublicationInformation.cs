@@ -80,6 +80,7 @@ namespace SIL.Tool
         private string _includeFootnoteSymbol;
         private string _splitFileByLetter;
         private string _mainLastFileName;
+	    private bool _isAnchorInherited = false;
 
         #endregion
 
@@ -278,7 +279,13 @@ namespace SIL.Tool
             set { _isODM = value; }
         }
 
-        #endregion
+	    public bool IsAnchorInherited
+	    {
+		    get { return _isAnchorInherited; }
+		    set { _isAnchorInherited = value; }
+	    }
+
+	    #endregion
 
 
         public PublicationInformation()

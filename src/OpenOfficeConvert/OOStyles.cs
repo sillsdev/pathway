@@ -1668,7 +1668,10 @@ namespace SIL.PublishingSolution
 		    }
 
 		    if (aTagColor == string.Empty || aTagColor.ToLower() == "inherit")
+		    {
 			    aTagColor = "#0000ff";
+			    _projInfo.IsAnchorInherited = true;
+		    }
 		    return aTagColor;
 	    }
 

@@ -1395,6 +1395,8 @@ namespace SIL.PublishingSolution
 				{
 					string anchorName = _anchorBookMarkName.Replace("href", "");
 					_writer.WriteStartElement("text:a");
+					if (_projInfo.IsAnchorInherited && _allCharacter.Count > 1)
+						_writer.WriteAttributeString("text:style-name", _allCharacter.Peek());
 					_writer.WriteAttributeString("xlink:type", "simple");
 					_writer.WriteAttributeString("xlink:href", anchorName.ToLower());
 					isAnchorTagOpen = true;
