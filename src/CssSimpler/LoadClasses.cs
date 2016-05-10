@@ -55,10 +55,28 @@ namespace CssSimpler
             if (r.LocalName == "class")
             {
                 var myclass = r.Value;
-                if (!UniqueClasses.Contains(myclass))
+                if (myclass.Contains(" "))
                 {
-                    UniqueClasses.Add(myclass);
+                    foreach (var s in myclass.Split(' '))
+                    {
+                        if (!string.IsNullOrEmpty(s))
+                        {
+                            AddUnique(s);
+                        }
+                    }
                 }
+                else
+                {
+                    AddUnique(myclass);
+                }
+            }
+        }
+
+        private void AddUnique(string myclass)
+        {
+            if (!UniqueClasses.Contains(myclass))
+            {
+                UniqueClasses.Add(myclass);
             }
         }
     }

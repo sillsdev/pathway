@@ -22,6 +22,7 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
 using BuildStep;
+using CssSimpler;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 
@@ -488,6 +489,20 @@ namespace Test.CssSimplerTest
             Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[4]/name[text()='subentry']"), "subentry under subentries missing");
             Assert.IsNotNull(xml.SelectSingleNode("//RULE[2]/*[2]/name[text()='subentries']"), "subentries context in second rule missing");
             Assert.IsNotNull(xml.SelectSingleNode("//RULE[2]/*[3]/name[text()='subentry']"), "subentry not where it would normally be in the second rule");
+        }
+
+        /// <summary>
+        ///A test for multiple class names
+        ///</summary>
+        [Test]
+        public void MultiClassTest()
+        {
+            const string testName = "MultiClass";
+            var fileName = testName + ".xhtml";
+            var result = new LoadClasses(_testFiles.Input(fileName));
+            Assert.AreEqual(47, result.UniqueClasses.Count);
+            // subentry is not a class on its own but is listed with another class and the two names are separated with a space
+            Assert.True(result.UniqueClasses.Contains("subentry"), "subentry class missing");
         }
 
         /// <summary>
