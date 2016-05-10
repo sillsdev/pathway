@@ -234,13 +234,7 @@
 .slotname { }
 .slot-name { }
 .slots { }
-.subentry {
-        text-indent: -12pt;
-        margin-left: 18pt;
-        padding-left: 12pt;
-        padding-bottom: 2pt;
-        padding-top: 1pt;
-}
+.subentry { }
 .subentry-type { }
 .translations { }
 .translations-minor { }
