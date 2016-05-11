@@ -320,9 +320,22 @@ namespace SIL.PublishingSolution
             {
                 return false;
             }
-           
-            _userXml = Common.DeclareXMLDocument(false);
-            _userXml.Load(_userFilePath);
+
+			_userXml = Common.DeclareXMLDocument(false);
+	        bool isLoadOk;
+	        try
+	        {
+				_userXml.Load(_userFilePath);
+		        isLoadOk = true;
+	        }
+	        catch (Exception)
+	        {
+				isLoadOk = false;
+	        }
+	        if (isLoadOk == false)
+	        {
+		        return false;
+	        }
             _userRoot = _userXml.DocumentElement;
             if (_userRoot == null)
             {
