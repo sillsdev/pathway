@@ -80,34 +80,12 @@ namespace SIL.Tool
             set { }
         }
 
-		public override Uri ResolveUri(Uri baseUri, string relativeUri)
-		{
-			Uri theUri = null;
-			if (relativeUri.Trim() == string.Empty)
-			{
-				if (IsAbsoluteUrl(relativeUri))
-				{
-					if (relativeUri.StartsWith(@"file://"))
-					{
-						theUri = base.ResolveUri(baseUri, relativeUri);
-					}
-					else
-					{
-						theUri = new Uri(relativeUri);
-					}
-				}
-				else
-				{
-					theUri = base.ResolveUri(baseUri, relativeUri);
-				}
-			}
-			return theUri;
-		}
+        public override Uri ResolveUri(Uri baseUri, string relativeUri)
+        {
+            if (relativeUri.StartsWith(@"file://"))
+                return base.ResolveUri(baseUri, relativeUri);
 
-		private bool IsAbsoluteUrl(string url)
-		{
-			Uri result;
-			return Uri.TryCreate(url, UriKind.Absolute, out result);
-		}
+            return null;
+        }
     }
 }
