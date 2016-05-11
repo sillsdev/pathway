@@ -85,16 +85,13 @@ namespace SIL.Tool
 			Uri theUri = null;
 			if (relativeUri.Trim() == string.Empty)
 			{
-				if (IsAbsoluteUrl(relativeUri))
+				if (relativeUri.StartsWith(@"file://"))
 				{
-					if (relativeUri.StartsWith(@"file://"))
-					{
-						theUri = base.ResolveUri(baseUri, relativeUri);
-					}
-					else
-					{
-						theUri = new Uri(relativeUri);
-					}
+					theUri = base.ResolveUri(baseUri, relativeUri);
+				}
+				else if (IsAbsoluteUrl(relativeUri))
+				{
+					theUri = new Uri(relativeUri);
 				}
 				else
 				{
