@@ -4005,7 +4005,7 @@ namespace Test.OpenOfficeConvert
         }
 
 		///<summary>
-		/// Indesign MultiClass
+		/// LO MultiClass
 		/// </summary>      
 		[Test]
 		public void SubEntryMultiClass_Node()
@@ -4017,7 +4017,7 @@ namespace Test.OpenOfficeConvert
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
 			_validate.GetInnerText = true;
-			string content = "wirek hen comp. ˈwiɾ.ək ʁɛn earlier, old, pertaining to or belonging to an earlier time.";
+			string content = "wirek hen comp. [ˈwiɾ.ək ʁɛn] earlier, old, pertaining to or belonging to an earlier time.";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
 			Assert.IsTrue(returnValue1);
 
@@ -4036,6 +4036,31 @@ namespace Test.OpenOfficeConvert
 			returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
 		}
+
+		///<summary>
+		/// Indesign MultiClass
+		/// </summary>      
+		[Test]
+		public void PunctuationPseudoChild_Node()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "NewPunctuationPsuedoChild";
+			string styleOutput = GetStyleOutput(file);
+			//Content Test - First
+			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+			_validate.ClassName = "span_.bzh-fonipa_span_mainheadword.-entry_pronunciation_span_mainheadword.-entry_entry_letData_dicBody";
+			_validate.GetInnerText = true;
+			string content = "[ᵐbə.ˈᵑɡoᵑɢ]";
+			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+			Assert.IsTrue(returnValue1);
+
+			_validate.ClassName = "span_.bzh-fonipa_span_mainheadword.-entry_pronunciation_span_mainheadword.-entry_subentry_subentries_entry_letData_dicBody";
+			_validate.GetInnerText = true;
+			content = "[ᵐbə.ˈᵑɡoᵑɢ l̪in]";
+			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+			Assert.IsTrue(returnValue1);
+		}
+		
 
         ///<summary>
         /// Counter 

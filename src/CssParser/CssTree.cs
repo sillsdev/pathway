@@ -425,14 +425,18 @@ namespace SIL.PublishingSolution
 		{
 		    if (styleName != string.Empty && (tagStyleName.IndexOf("span") == 0 || tagStyleName.IndexOf("div") == 0))
 		    {
-			    if (isAncestor)
-			    {
-				    _classInfo.Ancestor = clsAttrib;
-				    styleName = tagStyleName + Common.SepAncestor + styleName;
-				    isAncestor = false;
-				    _classInfo.parent.Clear();
-				    _classInfo.parent.Add(_classInfo.Ancestor);
-			    }
+				if (isAncestor)
+				{
+					_classInfo.Ancestor = clsAttrib;
+					styleName = tagStyleName + Common.SepAncestor + styleName;
+					isAncestor = false;
+					_classInfo.parent.Clear();
+					_classInfo.parent.Add(_classInfo.Ancestor);
+				}
+				else
+				{
+					styleName = tagStyleName + styleName;
+				}
 			    _baseClassName = tagStyleName;
 			    clsAttrib.ClassName = _baseClassName;
 		    }

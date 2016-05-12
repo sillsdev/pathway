@@ -271,7 +271,7 @@ namespace SIL.Tool
             bool contains = false;
             if (_psuedoContainsStyle != null)
             {
-                if (content.IndexOf(_psuedoContainsStyle.Contains) > -1)
+				if (_psuedoContainsStyle.Contains != null && content.IndexOf(_psuedoContainsStyle.Contains) > -1)
                 {
                     content = _psuedoContainsStyle.Content;
                     _characterName = _psuedoContainsStyle.StyleName;

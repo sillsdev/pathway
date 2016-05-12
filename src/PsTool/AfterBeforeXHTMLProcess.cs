@@ -611,6 +611,46 @@ namespace SIL.Tool
 
                     if (cssClassInfo.Pseudo != psuedo) continue;
 
+					if (cssClassInfo.StyleName.IndexOf(".-", System.StringComparison.Ordinal) > 0)
+					{
+						var xhtmlClassInfo = _allStyleInfo.ToArray();
+						var parentStyle = Common.LeftString(cssClassInfo.StyleName, "..");
+						parentStyle = parentStyle.Replace(".-", "_");
+						if (parentStyle.IndexOf("_") == 0)
+						{
+							parentStyle = Common.LeftRemove(parentStyle, "_");
+						}
+						var clsNameList = parentStyle.Split('_').ToList();
+
+						if (clsNameList[0] == cssClassInfo.CoreClass.ClassName)
+						{
+							clsNameList.Remove(cssClassInfo.CoreClass.ClassName);
+						}
+
+						var currClsNameList = new ArrayList();
+
+						foreach (ClassInfo clsName in xhtmlClassInfo)
+						{
+							if (clsName.CoreClass.ClassName.IndexOf(' ') > 0)
+							{
+								string[] mulltiClass = clsName.CoreClass.ClassName.Split(' ');
+								currClsNameList.AddRange(mulltiClass);
+							}
+							else
+							{
+								currClsNameList.Add(clsName.CoreClass.ClassName);
+							}
+						}
+
+						//Consider only the list when is having greater than 2 classes
+						if (clsNameList.Count > 2 && clsNameList.Any(t => !currClsNameList.Contains(t)))
+						{
+							currClsNameList = new ArrayList();
+						}
+
+						if (currClsNameList.Count == 0) continue;
+					}
+
                     resultCoreClass = CompareCoreClass(cssClassInfo.CoreClass, _xhtmlClassAttrib, multiClass);
                     resultTagClass = true;
                     if (cssClassInfo.TagName != string.Empty)
@@ -622,11 +662,10 @@ namespace SIL.Tool
                     }
 
                     resultAncestor = CompareClass(cssClassInfo.Ancestor);
-                    resultParent = CompareParentClass(cssClassInfo.parent);
                     resultParentPrecede = CompareClass(cssClassInfo.ParentPrecede, _parentPrecedeClassAttrib);
                     resultPrecede = CompareClass(cssClassInfo.Precede, _precedeClassAttrib);
 
-                    if (resultCoreClass && resultTagClass && resultAncestor && resultParent && resultParentPrecede &&
+                    if (resultCoreClass && resultTagClass && resultAncestor && resultParentPrecede &&
                         resultPrecede)
                     {
                         AssignProperty(cssClassInfo.StyleName, ancestorFontSize);
