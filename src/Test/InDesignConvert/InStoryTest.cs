@@ -907,6 +907,7 @@ namespace Test.InDesignConvert
         /// <summary>
         /// Tag Test - Ex: span{font-size:8pt;}, span[lang='en']{font-size:18pt;}
         /// </summary>
+        [Ignore]
         [Test]
         public void Tag()
         {
