@@ -82,10 +82,19 @@ namespace SIL.Tool
 
         public override Uri ResolveUri(Uri baseUri, string relativeUri)
         {
-            if (relativeUri.StartsWith(@"file://"))
-                return base.ResolveUri(baseUri, relativeUri);
+			if (relativeUri.StartsWith(@"file://"))
+			{
+				return base.ResolveUri(baseUri, relativeUri);
+			}
 
-            return null;
+			Uri result;
+			bool isCreate = Uri.TryCreate(relativeUri, UriKind.Absolute, out result);
+			if (isCreate)
+			{
+				return result;
+			}
+
+			return null;
         }
     }
 }
