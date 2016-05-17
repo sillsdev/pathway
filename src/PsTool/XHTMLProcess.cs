@@ -1013,11 +1013,12 @@ namespace SIL.Tool
 
                     if (cssClassInfo.Pseudo != psuedo) continue;
 
-	                if (cssClassInfo.StyleName.IndexOf(".-", System.StringComparison.Ordinal) > 0)
+					if (cssClassInfo.StyleName.IndexOf(".-", System.StringComparison.Ordinal) > 0 || cssClassInfo.StyleName.IndexOf("_", System.StringComparison.Ordinal) > 0)
 	                {
 						var xhtmlClassInfo = _allStyleInfo.ToArray();
 
-						var parentStyle = Common.LeftRemove(cssClassInfo.StyleName, ".-").Replace(".-", "_");
+						var parentStyle = cssClassInfo.StyleName.Replace("span_", "");
+						parentStyle = parentStyle.Replace(".-", "_");
 						var clsNameList = parentStyle.Split('_').ToList();
 
 						if (clsNameList[0] != cssClassInfo.CoreClass.ClassName)
@@ -1041,10 +1042,10 @@ namespace SIL.Tool
 						}
 
 						//Consider only the list when is having greater than 2 classes
-						if (clsNameList.Count > 2 && clsNameList.Any(t => !currClsNameList.Contains(t)))
-						{
-							currClsNameList = new ArrayList();
-						}
+		                if (cssClassInfo.StyleName.IndexOf("span") == 0 && clsNameList.Count > 1 && clsNameList.Any(t => !currClsNameList.Contains(t)))
+		                {
+			                currClsNameList = new ArrayList();
+		                }
 
 						if (currClsNameList.Count == 0) continue;
 	                }

@@ -1,3 +1,20 @@
+
+
+.BookTitle {font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookCreator{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookPublisher{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookDescription{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookCopyrightHolder{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
 div[lang='en']{ font-family: "Times New Roman";}
 span[lang='en']{ font-family: "Times New Roman";}
 div[lang='tpi']{ font-family: "Andika Basic";}
@@ -55,13 +72,13 @@ a {
    padding-bottom: 2pt;
    padding-top: 1pt;
 }
-.entry .mainheadword span[lang|= "bzh"]{
+.entry .mainheadword > span[lang|= "bzh"]{
    font-weight: bold;
 }
-.entry .mainheadword span:last-child:after{
+.entry .mainheadword > span:last-child:after{
    content: '  ';
 }
-.entry .mainheadword span {
+.entry .mainheadword > span {
    font-weight: bold;
 }
 .entry .pronunciation + .pronunciation:before{
@@ -70,10 +87,10 @@ a {
 .entry .pronunciations:after{
    content: ' ';
 }
-.entry .pronunciation > .form span:first-child:before{
+.entry .pronunciation > .form > span:first-child:before{
    content: '[';
 }
-.entry .pronunciation > .form span:last-child:after{
+.entry .pronunciation > .form > span:last-child:after{
    content: ']';
 }
 .entry .minimallexreferences > span + span:before{
@@ -82,13 +99,13 @@ a {
 .entry .minimallexreferences:after{
    content: '. ';
 }
-.entry .ownertype_abbreviation span[lang|= "en"]{
+.entry .ownertype_abbreviation > span[lang|= "en"]{
    font-style: italic;
 }
-.entry .ownertype_abbreviation span:last-child:after{
+.entry .ownertype_abbreviation > span:last-child:after{
    content: ': ';
 }
-.entry .ownertype_abbreviation span {
+.entry .ownertype_abbreviation > span {
    font-style: italic;
 }
 .entry .minimallexreference .configtargets > .configtarget + .configtarget:before{
@@ -97,11 +114,11 @@ a {
 .entry .minimallexreference > .configtargets:after{
    content: ' ';
 }
-.entry .minimallexreference > .configtargets .configtarget > .headword span[lang|= "bzh"]{
+.entry .minimallexreference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
    font-weight: bold;
    color: #936;
 }
-.entry .minimallexreference > .configtargets .configtarget > .headword span {
+.entry .minimallexreference > .configtargets .configtarget > .headword > span {
    font-weight: bold;
    color: #936;
 }
@@ -123,7 +140,7 @@ a {
 .entry .senses .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry .senses .mlpartofspeech span:last-child:after{
+.entry .senses .mlpartofspeech > span:last-child:after{
    content: ' ';
 }
 .entry .senses .morphosyntaxanalysis:after{
@@ -132,28 +149,28 @@ a {
 .entry .senses .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry .senses .mlpartofspeech span:last-child:after{
+.entry .senses .mlpartofspeech > span:last-child:after{
    content: ' ';
 }
-.entry .senses .definitionorgloss span:last-child:after{
+.entry .senses .definitionorgloss > span:last-child:after{
    content: ' ';
 }
-.entry .senses .complete + .complete:before{
+.entry .senses .examplescontents > span + span:before{
    content: '  ';
 }
-.entry .senses .examples:after{
+.entry .senses .examplescontents:after{
    content: ' ';
 }
-.entry .senses .example span[lang|= "bzh"]{
+.entry .senses .example > span[lang|= "bzh"]{
    font-style: italic;
 }
-.entry .senses .example span:last-child:after{
+.entry .senses .example > span:last-child:after{
    content: ' ';
 }
-.entry .senses .example span {
+.entry .senses .example > span {
    font-style: italic;
 }
-.entry .senses .translation span:last-child:after{
+.entry .senses .translation > span:last-child:after{
    content: ' ';
 }
 .entry .senses .lexsensereferences > span + span:before{
@@ -162,13 +179,13 @@ a {
 .entry .senses .lexsensereferences:after{
    content: '. ';
 }
-.entry .senses .ownertype_abbreviation span[lang|= "en"]{
+.entry .senses .ownertype_abbreviation > span[lang|= "en"]{
    font-style: italic;
 }
-.entry .senses .ownertype_abbreviation span:last-child:after{
+.entry .senses .ownertype_abbreviation > span:last-child:after{
    content: ': ';
 }
-.entry .senses .ownertype_abbreviation span {
+.entry .senses .ownertype_abbreviation > span {
    font-style: italic;
 }
 .entry .senses .lexsensereference .configtargets > .configtarget + .configtarget:before{
@@ -177,11 +194,11 @@ a {
 .entry .senses .lexsensereference > .configtargets:after{
    content: ' ';
 }
-.entry .senses .lexsensereference > .configtargets .configtarget > .headword span[lang|= "bzh"]{
+.entry .senses .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
    font-weight: bold;
    color: #F60;
 }
-.entry .senses .lexsensereference > .configtargets .configtarget > .headword span {
+.entry .senses .lexsensereference > .configtargets .configtarget > .headword > span {
    font-weight: bold;
    color: #F60;
 }
@@ -197,7 +214,7 @@ a {
 .entry .senses .semanticdomains:after{
    content: '.) ';
 }
-.entry .senses .abbreviation span:last-child:after{
+.entry .senses .abbreviation > span:last-child:after{
    content: ' - ';
 }
 .entry .senses .senses > span + span:before{
@@ -211,66 +228,6 @@ a {
 }
 .entry .senses .senses .sensecontent .sensenumber:after{
    content: ') ';
-}
-.entry .senses .senses .definitionorgloss span:last-child:after{
-   content: ' ';
-}
-.entry .senses .senses .complete + .complete:before{
-   content: '  ';
-}
-.entry .senses .senses .examples:after{
-   content: ' ';
-}
-.entry .senses .senses .example span[lang|= "bzh"]{
-   font-style: italic;
-}
-.entry .senses .senses .example span:last-child:after{
-   content: ' ';
-}
-.entry .senses .senses .example span {
-   font-style: italic;
-}
-.entry .senses .senses .translation span:last-child:after{
-   content: ' ';
-}
-.entry .senses .senses .lexsensereferences > span + span:before{
-   content: '; ';
-}
-.entry .senses .senses .lexsensereferences:after{
-   content: '. ';
-}
-.entry .senses .senses .ownertype_abbreviation span[lang|= "en"]{
-   font-style: italic;
-}
-.entry .senses .senses .ownertype_abbreviation span:last-child:after{
-   content: ': ';
-}
-.entry .senses .senses .ownertype_abbreviation span {
-   font-style: italic;
-}
-.entry .senses .senses .lexsensereference .configtargets > .configtarget + .configtarget:before{
-   content: ', ';
-}
-.entry .senses .senses .lexsensereference > .configtargets .configtarget > .headword span[lang|= "bzh"]{
-   font-weight: bold;
-}
-.entry .senses .senses .lexsensereference > .configtargets .configtarget > .headword span {
-   font-weight: bold;
-}
-.entry .senses .senses .scientificname:after{
-   content: ' ';
-}
-.entry .senses .senses .semanticdomain + .semanticdomain:before{
-   content: ', ';
-}
-.entry .senses .senses .semanticdomains:before{
-   content: '(sem. domains: ';
-}
-.entry .senses .senses .semanticdomains:after{
-   content: '.) ';
-}
-.entry .senses .senses .abbreviation span:last-child:after{
-   content: ' - ';
 }
 .entry .picture {
    float: right;
@@ -301,11 +258,11 @@ a {
 .entry .picture > .sensenumber:after{
    content: ' ';
 }
-.entry .caption span[lang|= "en"]{
+.entry .caption > span[lang|= "en"]{
    font-weight: bold;
    color: #0F0;
 }
-.entry .caption span {
+.entry .caption > span {
    font-weight: bold;
    color: #0F0;
 }
@@ -323,267 +280,7 @@ a {
    line-height: 12pt;
    padding-bottom: 2pt;
    padding-top: 0pt;
-}
-.entry .subentries .subentry > .headword span[lang|= "bzh"]{
-   font-weight: bold;
-}
-.entry .subentries .subentry > .headword span:last-child:after{
-   content: '  ';
-}
-.entry .subentries .subentry > .headword span {
-   font-weight: bold;
-}
-.entry .subentries .complexformtype + .complexformtype:before{
-   content: ', ';
-}
-.entry .subentries .complexformtypes:after{
-   content: ' ';
-}
-.entry .subentries .reverseabbr span:first-child:before{
-   content: '(';
-}
-.entry .subentries .reverseabbr span:last-child:after{
-   content: ')';
-}
-.entry .subentries .pronunciation + .pronunciation:before{
-   content: ', ';
-}
-.entry .subentries .pronunciations:after{
-   content: ' ';
-}
-.entry .subentries .pronunciation > .form span:first-child:before{
-   content: '[';
-}
-.entry .subentries .pronunciation > .form span:last-child:after{
-   content: ']';
-}
-.entry .subentries .minimallexreferences > span + span:before{
-   content: '; ';
-}
-.entry .subentries .minimallexreferences:after{
-   content: '. ';
-}
-.entry .subentries .ownertype_abbreviation span[lang|= "en"]{
-   font-style: italic;
-}
-.entry .subentries .ownertype_abbreviation span:last-child:after{
-   content: ': ';
-}
-.entry .subentries .ownertype_abbreviation span {
-   font-style: italic;
-}
-.entry .subentries .minimallexreference .configtargets > .configtarget + .configtarget:before{
-   content: ', ';
-}
-.entry .subentries .minimallexreference > .configtargets:after{
-   content: ' ';
-}
-.entry .subentries .minimallexreference > .configtargets .configtarget > .headword span[lang|= "bzh"]{
-   font-weight: bold;
-   color: #3CC;
-}
-.entry .subentries .minimallexreference > .configtargets .configtarget > .headword span {
-   font-weight: bold;
-   color: #3CC;
-}
-.entry .subentries .senses .sensecontent + span:before{
-   content: ' ';
-}
-.entry .subentries .senses:after{
-   content: ' ';
-}
-.entry .subentries .senses .sensecontent .sensenumber {
-   font-weight: bold;
-}
-.entry .subentries .senses .sensecontent .sensenumber:after{
-   content: ') ';
-}
-.entry .subentries .senses .morphosyntaxanalysis:after{
-   content: ' ';
-}
-.entry .subentries .senses .morphosyntaxanalysis {
-   font-style: italic;
-}
-.entry .subentries .senses .mlpartofspeech span:last-child:after{
-   content: ' ';
-}
-.entry .subentries .senses .morphosyntaxanalysis:after{
-   content: ' ';
-}
-.entry .subentries .senses .morphosyntaxanalysis {
-   font-style: italic;
-}
-.entry .subentries .senses .mlpartofspeech span:last-child:after{
-   content: ' ';
-}
-.entry .subentries .senses .definitionorgloss span:last-child:after{
-   content: ' ';
-}
-.entry .subentries .senses .complete + .complete:before{
-   content: '  ';
-}
-.entry .subentries .senses .examples:after{
-   content: ' ';
-}
-.entry .subentries .senses .example span[lang|= "bzh"]{
-   font-style: italic;
-}
-.entry .subentries .senses .example span:last-child:after{
-   content: ' ';
-}
-.entry .subentries .senses .example span {
-   font-style: italic;
-}
-.entry .subentries .senses .translation span:last-child:after{
-   content: ' ';
-}
-.entry .subentries .senses .lexsensereferences > span + span:before{
-   content: '; ';
-}
-.entry .subentries .senses .lexsensereferences:after{
-   content: '. ';
-}
-.entry .subentries .senses .ownertype_abbreviation span[lang|= "en"]{
-   font-style: italic;
-}
-.entry .subentries .senses .ownertype_abbreviation span:last-child:after{
-   content: ': ';
-}
-.entry .subentries .senses .ownertype_abbreviation span {
-   font-style: italic;
-}
-.entry .subentries .senses .lexsensereference .configtargets > .configtarget + .configtarget:before{
-   content: ', ';
-}
-.entry .subentries .senses .lexsensereference > .configtargets:after{
-   content: ' ';
-}
-.entry .subentries .senses .lexsensereference > .configtargets .configtarget > .headword span[lang|= "bzh"]{
-   font-weight: bold;
-   color: #008000;
-}
-.entry .subentries .senses .lexsensereference > .configtargets .configtarget > .headword span {
-   font-weight: bold;
-   color: #008000;
-}
-.entry .subentries .senses .scientificname:after{
-   content: ' ';
-}
-.entry .subentries .senses .semanticdomain + .semanticdomain:before{
-   content: ', ';
-}
-.entry .subentries .senses .semanticdomains:before{
-   content: '(sem. domains: ';
-}
-.entry .subentries .senses .semanticdomains:after{
-   content: '.) ';
-}
-.entry .subentries .senses .abbreviation span:last-child:after{
-   content: ' - ';
-}
-.entry .subentries .senses .senses > span + span:before{
-   content: '  ';
-}
-.entry .subentries .senses .senses:after{
-   content: ' ';
-}
-.entry .subentries .senses .senses .sensecontent .sensenumber {
-   font-weight: bold;
-}
-.entry .subentries .senses .senses .sensecontent .sensenumber:after{
-   content: ') ';
-}
-.entry .subentries .senses .senses .definitionorgloss span:last-child:after{
-   content: ' ';
-}
-.entry .subentries .senses .senses .complete + .complete:before{
-   content: '  ';
-}
-.entry .subentries .senses .senses .examples:after{
-   content: ' ';
-}
-.entry .subentries .senses .senses .example span[lang|= "bzh"]{
-   font-style: italic;
-}
-.entry .subentries .senses .senses .example span:last-child:after{
-   content: ' ';
-}
-.entry .subentries .senses .senses .example span {
-   font-style: italic;
-}
-.entry .subentries .senses .senses .translation span:last-child:after{
-   content: ' ';
-}
-.entry .subentries .senses .senses .lexsensereferences > span + span:before{
-   content: '; ';
-}
-.entry .subentries .senses .senses .lexsensereferences:after{
-   content: '. ';
-}
-.entry .subentries .senses .senses .ownertype_abbreviation span[lang|= "en"]{
-   font-style: italic;
-}
-.entry .subentries .senses .senses .ownertype_abbreviation span:last-child:after{
-   content: ': ';
-}
-.entry .subentries .senses .senses .ownertype_abbreviation span {
-   font-style: italic;
-}
-.entry .subentries .senses .senses .lexsensereference .configtargets > .configtarget + .configtarget:before{
-   content: ', ';
-}
-.entry .subentries .senses .senses .lexsensereference > .configtargets .configtarget > .headword span[lang|= "bzh"]{
-   font-weight: bold;
-}
-.entry .subentries .senses .senses .lexsensereference > .configtargets .configtarget > .headword span {
-   font-weight: bold;
-}
-.entry .subentries .senses .senses .scientificname:after{
-   content: ' ';
-}
-.entry .subentries .senses .senses .semanticdomain + .semanticdomain:before{
-   content: ', ';
-}
-.entry .subentries .senses .senses .semanticdomains:before{
-   content: '(sem. domains: ';
-}
-.entry .subentries .senses .senses .semanticdomains:after{
-   content: '.) ';
-}
-.entry .subentries .senses .senses .abbreviation span:last-child:after{
-   content: ' - ';
-}
-.entry .subentries .subentries .subentry {
    display: block;
-}
-.entry .subentries .picture {
-   float: right;
-   text-align: center;
-   margin: 0pt 0pt 4pt 4pt;
-   padding: 2pt;
-   float: right;
-}
-.entry .subentries .picture img {
-   max-height: 1in;
-}
-.entry .subentries .pictures > span + span:before{
-   content: '  ';
-}
-.entry .subentries .pictures:after{
-   content: ' ';
-}
-.entry .subentries .picture {
-   text-indent: 0pt;
-   margin-left: 0pt;
-   line-height: 12pt;
-   padding-bottom: 2pt;
-   padding-top: 0pt;
-}
-.entry .subentries .picture > img:after{
-   content: ' ';
-}
-.entry .subentries .picture > .sensenumber:after{
-   content: ' ';
 }
 .minorentrycomplex {
    clear: both;
@@ -596,13 +293,13 @@ a {
    padding-bottom: 2pt;
    padding-top: 0pt;
 }
-.minorentrycomplex > .headword span[lang|= "bzh"]{
+.minorentrycomplex > .headword > span[lang|= "bzh"]{
    font-weight: bold;
 }
-.minorentrycomplex > .headword span:last-child:after{
+.minorentrycomplex > .headword > span:last-child:after{
    content: '  ';
 }
-.minorentrycomplex > .headword span {
+.minorentrycomplex > .headword > span {
    font-weight: bold;
 }
 .minorentrycomplex .pronunciation + .pronunciation:before{
@@ -611,10 +308,10 @@ a {
 .minorentrycomplex .pronunciations:after{
    content: ' ';
 }
-.minorentrycomplex .pronunciation > .form span:first-child:before{
+.minorentrycomplex .pronunciation > .form > span:first-child:before{
    content: '[';
 }
-.minorentrycomplex .pronunciation > .form span:last-child:after{
+.minorentrycomplex .pronunciation > .form > span:last-child:after{
    content: ']';
 }
 .minorentrycomplex .visiblevariantentryrefs > span + span:before{
@@ -629,14 +326,11 @@ a {
 .minorentrycomplex .referencedentries:before{
    content: ' ';
 }
-.minorentrycomplex .referencedentry > .headword span[lang|= "bzh"]{
+.minorentrycomplex .referencedentry > .headword > span[lang|= "bzh"]{
    font-weight: bold;
 }
-.minorentrycomplex .referencedentry > .headword span {
+.minorentrycomplex .referencedentry > .headword > span {
    font-weight: bold;
-}
-.minorentrycomplex .definitionorgloss:before{
-   content: ' ';
 }
 .minorentrycomplex .complexformentryrefs > span + span:before{
    content: ', ';
@@ -653,7 +347,7 @@ a {
 .minorentrycomplex .complexformtypes:after{
    content: ' ';
 }
-.minorentrycomplex .abbreviation span:last-child:after{
+.minorentrycomplex .abbreviation > span:last-child:after{
    content: ' ';
 }
 .minorentrycomplex .referencedentry + .referencedentry:before{
@@ -662,11 +356,11 @@ a {
 .minorentrycomplex .referencedentries:before{
    content: ' ';
 }
-.minorentrycomplex .referencedentry > .headword span[lang|= "bzh"]{
+.minorentrycomplex .referencedentry > .headword > span[lang|= "bzh"]{
    font-weight: bold;
    color: #F00;
 }
-.minorentrycomplex .referencedentry > .headword span {
+.minorentrycomplex .referencedentry > .headword > span {
    font-weight: bold;
    color: #F00;
 }
@@ -681,13 +375,13 @@ a {
    padding-bottom: 2pt;
    padding-top: 0pt;
 }
-.minorentryvariant > .headword span[lang|= "bzh"]{
+.minorentryvariant > .headword > span[lang|= "bzh"]{
    font-weight: bold;
 }
-.minorentryvariant > .headword span:last-child:after{
+.minorentryvariant > .headword > span:last-child:after{
    content: '  ';
 }
-.minorentryvariant > .headword span {
+.minorentryvariant > .headword > span {
    font-weight: bold;
 }
 .minorentryvariant .pronunciation + .pronunciation:before{
@@ -696,10 +390,10 @@ a {
 .minorentryvariant .pronunciations:after{
    content: ' ';
 }
-.minorentryvariant .pronunciation > .form span:first-child:before{
+.minorentryvariant .pronunciation > .form > span:first-child:before{
    content: '[';
 }
-.minorentryvariant .pronunciation > .form span:last-child:after{
+.minorentryvariant .pronunciation > .form > span:last-child:after{
    content: ']';
 }
 .minorentryvariant .visiblevariantentryrefs > span + span:before{
@@ -714,16 +408,13 @@ a {
 .minorentryvariant .referencedentries:before{
    content: ' ';
 }
-.minorentryvariant .referencedentry > .headword span[lang|= "bzh"]{
+.minorentryvariant .referencedentry > .headword > span[lang|= "bzh"]{
    font-weight: bold;
    color: #00F;
 }
-.minorentryvariant .referencedentry > .headword span {
+.minorentryvariant .referencedentry > .headword > span {
    font-weight: bold;
    color: #00F;
-}
-.minorentryvariant .definitionorgloss:before{
-   content: ' ';
 }
 .minorentryvariant .complexformentryrefs > span + span:before{
    content: ', ';
@@ -740,7 +431,7 @@ a {
 .minorentryvariant .complexformtypes:after{
    content: ' ';
 }
-.minorentryvariant .abbreviation span:last-child:after{
+.minorentryvariant .abbreviation > span:last-child:after{
    content: ' ';
 }
 .minorentryvariant .referencedentry + .referencedentry:before{
@@ -749,11 +440,279 @@ a {
 .minorentryvariant .referencedentries:before{
    content: ' ';
 }
-.minorentryvariant .referencedentry > .headword span[lang|= "bzh"]{
+.minorentryvariant .referencedentry > .headword > span[lang|= "bzh"]{
    font-weight: bold;
 }
-.minorentryvariant .referencedentry > .headword span {
+.minorentryvariant .referencedentry > .headword > span {
    font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span:last-child:after{
+   content: '  ';
+}
+.mainentrysubentries .mainentrysubentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .complexformtype + .complexformtype:before{
+   content: ', ';
+}
+.mainentrysubentries .complexformtypes:after{
+   content: ' ';
+}
+.mainentrysubentries .reverseabbr > span:first-child:before{
+   content: '(';
+}
+.mainentrysubentries .reverseabbr > span:last-child:after{
+   content: ')';
+}
+.mainentrysubentries .pronunciation + .pronunciation:before{
+   content: ', ';
+}
+.mainentrysubentries .pronunciations:after{
+   content: ' ';
+}
+.mainentrysubentries .pronunciation > .form > span:first-child:before{
+   content: '[';
+}
+.mainentrysubentries .pronunciation > .form > span:last-child:after{
+   content: ']';
+}
+.mainentrysubentries .minimallexreferences > span + span:before{
+   content: '; ';
+}
+.mainentrysubentries .minimallexreferences:after{
+   content: '. ';
+}
+.mainentrysubentries .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubentries .ownertype_abbreviation > span:last-child:after{
+   content: ': ';
+}
+.mainentrysubentries .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.mainentrysubentries .minimallexreference .configtargets > .configtarget + .configtarget:before{
+   content: ', ';
+}
+.mainentrysubentries .minimallexreference > .configtargets:after{
+   content: ' ';
+}
+.mainentrysubentries .minimallexreference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #3CC;
+}
+.mainentrysubentries .minimallexreference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+   color: #3CC;
+}
+.mainentrysubentries .senses .sensecontent + span:before{
+   content: ' ';
+}
+.mainentrysubentries .senses:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .senses .sensecontent .sensenumber:after{
+   content: ') ';
+}
+.mainentrysubentries .senses .morphosyntaxanalysis:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .senses .mlpartofspeech > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .morphosyntaxanalysis:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .senses .mlpartofspeech > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .definitionorgloss > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .complete + .complete:before{
+   content: '  ';
+}
+.mainentrysubentries .senses .examples:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.mainentrysubentries .senses .example > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .example > span {
+   font-style: italic;
+}
+.mainentrysubentries .senses .translation > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .lexsensereferences > span + span:before{
+   content: '; ';
+}
+.mainentrysubentries .senses .lexsensereferences:after{
+   content: '. ';
+}
+.mainentrysubentries .senses .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubentries .senses .ownertype_abbreviation > span:last-child:after{
+   content: ': ';
+}
+.mainentrysubentries .senses .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.mainentrysubentries .senses .lexsensereference .configtargets > .configtarget + .configtarget:before{
+   content: ', ';
+}
+.mainentrysubentries .senses .lexsensereference > .configtargets:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #008000;
+}
+.mainentrysubentries .senses .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+   color: #008000;
+}
+.mainentrysubentries .senses .scientificname:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .semanticdomain + .semanticdomain:before{
+   content: ', ';
+}
+.mainentrysubentries .senses .semanticdomains:before{
+   content: '(sem. domains: ';
+}
+.mainentrysubentries .senses .semanticdomains:after{
+   content: '.) ';
+}
+.mainentrysubentries .senses .abbreviation > span:last-child:after{
+   content: ' - ';
+}
+.mainentrysubentries .senses .senses > span + span:before{
+   content: '  ';
+}
+.mainentrysubentries .senses .senses:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .senses .senses .sensecontent .sensenumber:after{
+   content: ') ';
+}
+.mainentrysubentries .senses .senses .definitionorgloss > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .senses .complete + .complete:before{
+   content: '  ';
+}
+.mainentrysubentries .senses .senses .examples:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .senses .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.mainentrysubentries .senses .senses .example > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .senses .example > span {
+   font-style: italic;
+}
+.mainentrysubentries .senses .senses .translation > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .senses .lexsensereferences > span + span:before{
+   content: '; ';
+}
+.mainentrysubentries .senses .senses .lexsensereferences:after{
+   content: '. ';
+}
+.mainentrysubentries .senses .senses .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubentries .senses .senses .ownertype_abbreviation > span:last-child:after{
+   content: ': ';
+}
+.mainentrysubentries .senses .senses .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.mainentrysubentries .senses .senses .lexsensereference .configtargets > .configtarget + .configtarget:before{
+   content: ', ';
+}
+.mainentrysubentries .senses .senses .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .senses .senses .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .senses .senses .scientificname:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .senses .semanticdomain + .semanticdomain:before{
+   content: ', ';
+}
+.mainentrysubentries .senses .senses .semanticdomains:before{
+   content: '(sem. domains: ';
+}
+.mainentrysubentries .senses .senses .semanticdomains:after{
+   content: '.) ';
+}
+.mainentrysubentries .senses .senses .abbreviation > span:last-child:after{
+   content: ' - ';
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
+.mainentrysubentries .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.mainentrysubentries .picture img {
+   max-height: 1in;
+}
+.mainentrysubentries .pictures > span + span:before{
+   content: '  ';
+}
+.mainentrysubentries .pictures:after{
+   content: ' ';
+}
+.mainentrysubentries .picture {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
+.mainentrysubentries .picture > img:after{
+   content: ' ';
+}
+.mainentrysubentries .picture > .sensenumber:after{
+   content: ' ';
 }
 .complexentryform {
         font-weight: bold;
@@ -991,13 +950,7 @@ a {
 .slotname { }
 .slot-name { }
 .slots { }
-.subentry {
-        text-indent: -12pt;
-        margin-left: 18pt;
-        padding-left: 12pt;
-        padding-bottom: 2pt;
-        padding-top: 1pt;
-}
+.subentry { }
 .subentry-type { }
 .translations { }
 .translations-minor { }
@@ -1038,17 +991,20 @@ text-align: justify;
 	font-family: "Charis SIL";
 	font-size: 24pt;
 }
-@page {
-    size: 5.25in 8.25in;
-    counter-increment: page;
-    margin: .5in .5in;
+.minorentry {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
 }
-/* single column dictionary */
-.letData {
-       column-count: 1; -moz-column-count: 1;
+.minorentryvariant {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
 }
-.revData {
-       column-count: 1; -moz-column-count: 1;
+.minorentrycomplex {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
 }
 .entry {
        text-align: left;
@@ -1070,197 +1026,22 @@ text-align: justify;
     counter-reset: complexformpara;
     text-indent: 2pc;
 }
-.dicBody
-{
-  font-size: 11pt;
+@page {
+    size: 16.2cm 22.9cm;
+    marks: crop cross;
+    counter-increment: page;
+    margin: 2cm;
 }
-
-.letData, .revData   { font-size: 11pt; }
-.CmPossibility-publishDomainTypeForReversal-AbbreviationPub,
-.CmPossibility-publishDomainTypeForReversal-NamePub,
-.CmPossibility-publishSenseTypeForReversal-AbbreviationPub,
-.CmPossibility-publishUsageTypeForReversal-AbbreviationPub,
-.CmSemanticDomain-publishSemDomForReversal-AbbreviationPub,
-.CmSemanticDomain-publishSemDomForReversal-NamePub,
-.complexform,
-.complexform-entry-type,
-.complexform-form,
-.complexform-summarydef,
-.complexform-type,
-.crossref-headword,
-.crossref-type-abbr,
-.domain-type-abbr,
-.domain-type-name,
-.encyclopedic-info,
-.entryref-component,
-.entryref-summary,
-.entryref-summary-minor,
-.entryref-type,
-.etymology,
-.etymology-comment,
-.etymology-form,
-.etymology-gloss,
-.LexEntry-publishStemComponentTarget-MLHeadWordPub,
-.LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub,
-.LexEntryType-publishAbbreviationForReversal-AbbreviationPub,
-.LexEntryType-publishStemComplexFormType-ReverseAbbrPub,
-.LexEntryType-publishStemEntryType-AbbreviationPub,
-.LexEntryType-publishStemVariantType-ReverseAbbrPub,
-.lexref,
-.lexref-type-abbr,
-.pictureLabel,
-.pronunciation-form,
-.reversal-form,
-.semantic-domain-abbr,
-.semantic-domain-name,
-.sense-crossref-headword,
-.sense-type,
-.sense-type-abbr,
-.slot,
-.summarydef-minor,
-.usage-type-abbr,
-.variant-headword,
-.variant-summary,
-.variantref,
-.variantref-entry-type,
-.variantref-form,
-.complexentryform    { font-size: 11pt; }
-.crossref            { font-size: 11pt; }
-.crossref > .xitem + .xitem :before { font-size: 11pt; }
-.crossref-targets    { font-size: 11pt; }
-.crossref-targets > .xitem + .xitem :before { font-size: 11pt; }
-.crossref-type       { font-size: 11pt; }
-.crossref-type > .xitem + .xitem :before { font-size: 11pt; }
-.crossrefs		   { font-size: 11pt; }
-.crossreftype        { font-size: 11pt; }
-.crossreftype :after { font-size: 11pt; }
-.definition-minor	   { font-size: 11pt; }
-.definition-sub	   { font-size: 11pt; }
-.definition          { font-size: 11pt; }
-.entry-type-abbr-sub { font-size: 11pt; }
-.entry               { font-size: 11pt; }
-.entryref-primary-minor { font-size: 11pt; }
-.entryref-type-minor { font-size: 11pt; }
-.example-minor	   { font-size: 10pt; }
-.example-sub	   { font-size: 10pt; }
-.example             { font-size: 10pt; }
-.example :after      { font-size: 10pt; }
-.example :before     { font-size: 10pt; }
-.example > .xitem + .xitem :before { font-size: 10pt; }
-.grammatical-info	   { font-size: 11pt; }
-.grammatical-info-minor { font-size: 11pt; }
-.grammatical-info-sub { font-size: 11pt; }
-.grammaticalinfo     { font-size: 11pt; }
-.grammaticalinfo :after { font-size: 11pt; }
-.headword-minor	   { font-size: 11pt; }
-.headword-sub	   { font-size: 11pt; }
-.headword            { font-size: 11pt; }
-.headword :after     { font-size: 11pt; }
-.headword > .xitem + .xitem :before { font-size: 11pt; }
-.headwordminor       { font-size: 11pt; }
-.headwordminor :after { font-size: 11pt; }
-.headwordminor > .xitem + .xitem :before { font-size: 11pt; }
-.letHead             { font-size: 14pt; }
-.letter              { font-size: 14pt; }
-.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub { font-size: 11pt; }
-.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub { font-size: 11pt; }
-.LexEntrypublishStemParaHomographNumber :after { font-size: 11pt; }
-.LexEntrypublishStemParaHomographNumber {font-size: 11pt; }
-.LexEntryRef-publishRootSubEntryType-RootSubEntryType { font-size: 11pt; }
-.LexEntryType-publishRootMinorEntryType-AbbreviationPub { font-size: 11pt; }
-.LexEntryType-publishStemMinorEntryType-AbbreviationPub { font-size: 11pt; }
-.lexref-targets 	   { font-size: 10pt; }
-.lexref-targets-sub  { font-size: 10pt; }
-.lexref-type	   { font-size: 11pt; }
-.lexref-type-sub	   { font-size: 11pt; }
-.lexreftype          { font-size: 11pt; }
-.lexreftype :after   { font-size: 11pt; }
-.mainentryref        { font-size: 11pt; }
-.mainentryref > .xitem + .xitem :before { font-size: 11pt; }
-.mainentryrefminor   { font-size: 11pt; }
-.mainentryrefminor > .xitem + .xitem :before { font-size: 11pt; }
-.partofspeech        { font-size: 11pt; }
-.partofspeech-minor  { font-size: 11pt; }
-.partofspeech-sub    { font-size: 11pt; }
-.pictureCaption      { font-size: 11pt; }
-.primaryrefs-minor   { font-size: 11pt; }
-.pronunciation-minor { font-size: 11pt; }
-.pronunciation-sub   { font-size: 11pt; }
-.pronunciation       { font-size: 11pt; }
-.pronunciationminor  { font-size: 11pt; }
-.pronunciationminor > .xitem + .xitem :before { font-size: 11pt; }
-.revEntry            { font-size: 11pt; }
-.revHeader           { font-size: 11pt; }
-.scientific-name     { font-size: 11pt; }
-.semantic-domain-abbr-sub { font-size: 11pt; }
-.semantic-domain-name-sub { font-size: 11pt; }
-.semantic-domains-sub { font-size: 11pt; }
-.sense-crossref      { font-size: 11pt; }
-.sense-crossref-sub  { font-size: 11pt; }
-.sense               { font-size: 11pt; }
-.sensecomplexentryform { font-size: 11pt; }
-.sensecrossref       { font-size: 10pt; }
-.sensecrossref > .xitem + .xitem :before { font-size: 10pt; }
-.sensemainentryref   { font-size: 11pt; }
-.sensemainentryref > .xitem + .xitem :before { font-size: 11pt; }
-.slot-name           { font-size: 11pt; }
-.subentry            { font-size: 11pt; }
-.subentry-type       { font-size: 11pt; }
-.translation-minor   { font-size: 11pt; }
-.translation-sub     { font-size: 11pt; }
-.translation         { font-size: 11pt; }
-.translation :after  { font-size: 11pt; }
-.translation > .xitem + .xitem :before { font-size: 11pt; }
-.variantrefform      { font-size: 11pt; }
-.xhomographnumber { }
-.xlanguagetag     { }
-.xsensenumber     { font-size: 10pt; }
- span { font-size: 11pt; }
-.LexEntry-publishStemComponentTarget-HeadWordRef{ font-size: 11pt; }
-.LexEntry-publishRootMinorPrimaryTarget-HeadWordRef { font-size: 11pt; }
-.LexEntry-publishStemMinorPrimaryTarget-HeadWordRef { font-size: 11pt; }
-.headword               { font-size: 10pt; }
-.headword :after        { font-size: 10pt; }
-.headword > .xitem + .xitem :before { font-size: 10pt; }
-.headwordminor          { font-size: 10pt; }
-.headwordminor :after   { font-size: 10pt; }
-.headwordminor > .xitem + .xitem :before { font-size: 10pt; }
-.headword-minor          { font-size: 10pt; }
-.headword-minor :after   { font-size: 10pt; }
-.headword-minor > .xitem + .xitem :before { font-size: 10pt; }
-.headword-sub          { font-size: 10pt; }
-.headword-sub :after   { font-size: 10pt; }
-.headword-sub > .xitem + .xitem :before { font-size: 10pt; }
-.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub          { font-size: 10pt; }
-.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub :after   { font-size: 10pt; }
-.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub > .xitem + .xitem :before { font-size: 10pt; }
-.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub          { font-size: 10pt; }
-.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub :after   { font-size: 10pt; }
-.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub > .xitem + .xitem :before { font-size: 10pt; }
-
-.letData, .revData {
-       line-height: 13pt;
-       -ps-fixed-line-height: 13pt;
+/* two column dictionary */
+.letData {
+       column-count: 2; -moz-column-count: 2;
+       column-gap: 12pt; -moz-column-gap: 12pt;
+       column-fill: balance;
 }
-.entry {
-       line-height: 13pt;
-       -ps-fixed-line-height: 13pt;
-}
-.revEntry {
-       line-height: 13pt;
-       -ps-fixed-line-height: 13pt;
-}
-.letHead {
-       line-height: 26pt;
-       -ps-fixed-line-height: 26pt;
-}
-.revHeader {
-       line-height: 26pt;
-       -ps-fixed-line-height: 26pt;
-}
-/* Cascading Style Sheet to set background color to Transparent */
-.entry, .subentry, .xitem[lang='tpi'], .crossref, .crossref-type, .example, .example-sub, .grammatical-info, .grammatical-info-sub, .headword, .headword-minor, .headword-sub, .LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub, .lexref-type, .lexref-type-sub, .pronunciation, .pronunciation-minor, .pronunciation-sub, .sense-crossref, .sense-crossref-sub, .subentries {
-    background-color: transparent;
+.revData {
+       column-count: 2; -moz-column-count: 2;
+       column-gap: 12pt; -moz-column-gap: 12pt;
+       column-fill: balance;
 }
 
 
@@ -1275,6 +1056,40 @@ text-align: justify;
 /* Language_Tag_No.css */
 .xlanguagetag {
        display: none;
+}
+
+
+
+
+
+
+
+.letData, .revData {
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
+}
+.entry {
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
+}
+.revEntry {
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
+}
+.letHead {
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
+}
+.revHeader {
+       line-height: inherit;
+       -ps-fixed-line-height: inherit;
+}
+
+
+
+/* Cascading Style Sheet to set background color to Transparent */
+.entry, .subentry, .xitem[lang='tpi'], .crossref, .crossref-type, .example, .example-sub, .grammatical-info, .grammatical-info-sub, .headword, .headword-minor, .headword-sub, .LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub, .lexref-type, .lexref-type-sub, .pronunciation, .pronunciation-minor, .pronunciation-sub, .sense-crossref, .sense-crossref-sub, .subentries {
+    background-color: transparent;
 }
 
 
@@ -1366,6 +1181,20 @@ text-align: justify;
     @bottom-left {
            content: counter( page);
     }
+}
+.revhomographnumber {
+        font-size: 55%;
+        font-weight: bold;
+        vertical-align: sub;
+}
+.revsensenumber {
+        font-weight: bold;
+}
+
+.minorentry {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
 }
 .BookReferenceDiv {
  display: none;

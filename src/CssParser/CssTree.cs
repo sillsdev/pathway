@@ -436,9 +436,13 @@ namespace SIL.PublishingSolution
 				else
 				{
 					styleName = tagStyleName + styleName;
+					_classInfo.parent.Clear();
+					ClassAttrib cc = new ClassAttrib();
+					cc.ClassName = clsAttrib.ClassName;
+					_classInfo.parent.Add(cc);
 				}
-			    _baseClassName = tagStyleName;
-			    clsAttrib.ClassName = _baseClassName;
+				_baseClassName = tagStyleName;
+				clsAttrib.ClassName = _baseClassName;
 		    }
 		    return styleName;
 	    }

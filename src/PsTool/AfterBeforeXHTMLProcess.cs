@@ -622,9 +622,10 @@ namespace SIL.Tool
 						}
 						var clsNameList = parentStyle.Split('_').ToList();
 
-						if (clsNameList[0] == cssClassInfo.CoreClass.ClassName)
+						string currClassname = Common.LeftString(clsNameList[0], "-");
+						if (currClassname == cssClassInfo.CoreClass.ClassName)
 						{
-							clsNameList.Remove(cssClassInfo.CoreClass.ClassName);
+							clsNameList.Remove(clsNameList[0]);
 						}
 
 						var currClsNameList = new ArrayList();
@@ -643,7 +644,7 @@ namespace SIL.Tool
 						}
 
 						//Consider only the list when is having greater than 2 classes
-						if (clsNameList.Count > 2 && clsNameList.Any(t => !currClsNameList.Contains(t)))
+						if (clsNameList.Count > 0 && clsNameList.Any(t => !currClsNameList.Contains(t)))
 						{
 							currClsNameList = new ArrayList();
 						}
@@ -713,7 +714,7 @@ namespace SIL.Tool
         /// <param name="multiClass"></param>
         private void AddTagProperty(ArrayList cssClassDetail, string multiClass)
         {
-            if (_classFamily.ContainsKey(_tagType))
+            if (_classFamily.ContainsKey(_tagType) && _tagType != "span")
             {
                 if (multiClass != _tagType)
                 {

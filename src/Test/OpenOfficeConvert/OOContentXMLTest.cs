@@ -461,7 +461,7 @@ namespace Test.OpenOfficeConvert
 
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "span.-mainheadword_entry_mainheadword_div.entry_body";
+			_validate.ClassName = "span_.bzh_mainheadword_div.entry_body";
 			string content = "=W=";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
@@ -4048,13 +4048,13 @@ namespace Test.OpenOfficeConvert
 			string styleOutput = GetStyleOutput(file);
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "span_.bzh-fonipa_span_mainheadword.-entry_pronunciation_span_mainheadword.-entry_entry_letData_dicBody";
+			_validate.ClassName = "span_.bzh-fonipa_form_pronunciation_pronunciations_entry_letData_dicBody";
 			_validate.GetInnerText = true;
 			string content = "[ᵐbə.ˈᵑɡoᵑɢ]";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
 
-			_validate.ClassName = "span_.bzh-fonipa_span_mainheadword.-entry_pronunciation_span_mainheadword.-entry_subentry_subentries_entry_letData_dicBody";
+			_validate.ClassName = "span_.bzh-fonipa_form_pronunciation_pronunciations_subentry_subentries_entry_letData_dicBody";
 			_validate.GetInnerText = true;
 			content = "[ᵐbə.ˈᵑɡoᵑɢ l̪in]";
 			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
