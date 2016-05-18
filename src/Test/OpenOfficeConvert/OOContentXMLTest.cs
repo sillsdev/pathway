@@ -461,7 +461,7 @@ namespace Test.OpenOfficeConvert
 
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "span_.bzh_mainheadword_div.entry_body";
+			_validate.ClassName = "span.-mainheadword_entry_mainheadword_div.entry_body";
 			string content = "=W=";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);

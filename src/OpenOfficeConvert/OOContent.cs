@@ -3603,7 +3603,7 @@ namespace SIL.PublishingSolution
 			bool isClassNameMatches = (_classNameWithLang.IndexOf("reversalform", StringComparison.Ordinal) == 0 ||
 					  _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0 ||
 					  _childName.Replace(_classNameWithLang + "_", "").IndexOf("headword", StringComparison.Ordinal) == 0 ||
-					  _childName.Replace("span_", "").IndexOf("headword", StringComparison.Ordinal) == 0 || _childName.Replace("span.-", "").IndexOf("mainheadword", StringComparison.Ordinal) == 0 || _childName.Replace("a_span.-", "").IndexOf("mainheadword", StringComparison.Ordinal) == 0 ||
+					  _childName.Replace("span_", "").IndexOf("headword", StringComparison.Ordinal) == 0 || _childName.Replace("span.-", "").IndexOf("mainheadword", StringComparison.Ordinal) == 0 || _childName.Replace("a_span_", "").IndexOf("mainheadword", StringComparison.Ordinal) == 0 ||
 					  _childName.Replace("span_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousParagraphName string.

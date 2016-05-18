@@ -1017,7 +1017,7 @@ namespace SIL.Tool
 	                {
 						var xhtmlClassInfo = _allStyleInfo.ToArray();
 
-						var parentStyle = cssClassInfo.StyleName.Replace("span_", "");
+						var parentStyle = cssClassInfo.StyleName.Replace("span_", "").Replace("span.-", "");
 						parentStyle = parentStyle.Replace(".-", "_");
 						var clsNameList = parentStyle.Split('_').ToList();
 
