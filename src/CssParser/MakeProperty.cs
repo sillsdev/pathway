@@ -889,8 +889,6 @@ namespace SIL.PublishingSolution
             FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
             for (int counter = 0; counter < fontLength; counter++)
             {
-
-
                 fontName = font[counter].Replace("\"", "").Trim();
                 foreach (FontFamily systemFont in systemFontList)
                 {

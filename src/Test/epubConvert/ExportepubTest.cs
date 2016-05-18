@@ -208,12 +208,12 @@ namespace Test.epubConvert
 			var zf = new FastZip();
 			zf.ExtractZip(result, FileOutput("main"), ".*");
 
-			File.Copy(FileExpected("ExportDictionaryCSSFileComparison.epub"), FileOutput("ExportDictionaryCSSFileComparison.epub"), true);
-			result = FileOutput("ExportDictionaryCSSFileComparison.epub");
+			File.Copy(FileExpected("ExportDictionaryCSSFileComparisonExpected.epub"), FileOutput("ExportDictionaryCSSFileComparisonExpected.epub"), true);
+			result = FileOutput("ExportDictionaryCSSFileComparisonExpected.epub");
 			zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("ExportDictionaryCSSFileComparison"), ".*");
+			zf.ExtractZip(result, FileOutput("ExportDictionaryCSSFileComparisonExpected"), ".*");
 
-			TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparison/OEBPS/book.css"), new ArrayList { 93, 110, 112, 643, 652, 965 });
+			TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparisonExpected/OEBPS/book.css"), new ArrayList { 93, 110, 112, 643, 652, 965 });
 
 		}
 
