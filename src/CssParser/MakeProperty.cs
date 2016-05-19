@@ -890,6 +890,7 @@ namespace SIL.PublishingSolution
             for (int counter = 0; counter < fontLength; counter++)
             {
                 fontName = font[counter].Replace("\"", "").Trim();
+	            fontName = fontName.Replace("'", "");
                 foreach (FontFamily systemFont in systemFontList)
                 {
                     if (fontName.ToLower() == systemFont.Name.ToLower())
