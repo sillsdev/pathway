@@ -180,6 +180,24 @@ namespace Test.OpenOfficeConvert
 
         }
 
+	    [Test]
+	    [Category("SkipOnTeamCity")]
+	    public void ApplySpanFontStyleTest()
+	    {
+			const string file = "ApplySpanFontStyleTest";
+			string input = FileInput(file + ".css");
+			string output = FileOutput(file + "styles.xml");
+			GetCssClass(input, output);
+
+			string xpath = "//style:style[@style:name='span_.bzh']";
+			_validate = new ValidateXMLFile(output);
+			_validate.ClassName = string.Empty;
+			_validate.ClassProperty.Add("fo:font-family", "Charis SIL");
+
+			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
+			Assert.IsTrue(returnValue);
+	    }
+
         ///<summary>
         ///TD55 font-Weigth: 700 syntax in Styles.xml
 

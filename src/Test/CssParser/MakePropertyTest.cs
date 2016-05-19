@@ -579,6 +579,19 @@ namespace Test.CssParserTest
             _expected.Add("font-family", "Modern");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
+
+	    [Test]
+		[Category("SkipOnTeamCity")]
+	    public void FontFamily10()
+	    {
+			_input.Name = "font-family";
+			_input.StringValue = "Charis SIL";
+			_output = _makeProperty.CreateProperty(_input);
+			_expected.Clear();
+			_expected.Add("font-family", "Charis SIL");
+			Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+
+	    }
         #endregion FontFamily
 
 

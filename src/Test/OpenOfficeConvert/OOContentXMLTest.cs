@@ -2914,6 +2914,29 @@ namespace Test.OpenOfficeConvert
 		}
 
 		[Test]
+		[Category("SkipOnTeamCity")]
+		public void ApplySpanFontStyleTestFull()
+		{
+			const string file = "ApplySpanFontStyleTestFull";
+			_projInfo.ProjectInputType = "Dictionary";
+			string styleOutput = GetStyleOutput(file);
+			string xpath = "//style:style[@style:name='span_.bzh-fonipa_form_pronunciation_pronunciations_entry_letData_dicBody']";
+			_validate = new ValidateXMLFile(styleOutput);
+			_validate.ClassName = string.Empty;
+			_validate.ClassProperty.Add("fo:font-family", "Doulos SIL");
+			bool returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
+			Assert.IsTrue(returnValue, "Apply Span Font Doulos SIL Test failed");
+
+			xpath = "//style:style[@style:name='span_mainheadword.-entry_mainheadword_entry_letData_dicBody']";
+			_validate = new ValidateXMLFile(styleOutput);
+			_validate.ClassName = string.Empty;
+			_validate.ClassProperty.Add("fo:font-family", "Charis SIL");
+			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
+			Assert.IsTrue(returnValue, "Apply Span Font Charis SIL Test failed");
+		}
+
+
+		[Test]
 		public void PageDictionaryTest7()
 		{
 			// Mirrored Page - Bottom Center
