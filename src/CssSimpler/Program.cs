@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
 using SIL.PublishingSolution;
@@ -89,8 +90,9 @@ namespace CssSimpler
                 return;
             }
             var lc = new LoadClasses(extra[0]);
+            MakeBaskupIfNecessary(lc.StyleSheet, extra[0]);
             DebugWriteClassNames(lc.UniqueClasses);
-            Debug("Stylesheet: {0}", lc.StyleSheet);
+            Debug("Clean up Stylesheet: {0}", lc.StyleSheet);
             var parser = new CssTreeParser();
             parser.Parse(lc.StyleSheet);
             var r = parser.Root;
@@ -103,13 +105,16 @@ namespace CssSimpler
                 Debug("Writing XML stylesheet");
                 WriteCssXml(lc.StyleSheet, xml);
             }
-            MakeBaskupIfNecessary(lc.StyleSheet, extra[0]);
             WriteSimpleCss(lc.StyleSheet, xml); //reloads xml with simplified version
-            var tmpOut = WriteSimpleXhtml(extra[0]);
-            var inlineStyle = new MoveInlineStyles(tmpOut, extra[0], lc.StyleSheet);
+            var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
+            var tmp2Out = Path.GetTempFileName();
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, lc.StyleSheet);
+            var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
+            RemoveCssPseudo(lc.StyleSheet, xml);
             try
             {
-                File.Delete(tmpOut);
+                File.Delete(tmpXhtmlFullName);
+                File.Delete(tmp2Out);
             }
             catch
             {
@@ -132,9 +137,9 @@ namespace CssSimpler
             writer.Close();
             reader.Close();
             ifs.Close();
-            return outfile;
             //File.Copy(outfile, xhtmlFullName, true);
             //File.Delete(outfile);
+            return outfile;
         }
 
         protected static void WriteSimpleCss(string styleSheet, XmlDocument xml)
@@ -156,6 +161,24 @@ namespace CssSimpler
             xml.RemoveAll();
             memory.Seek(0, 0);
             xml.Load(memory);
+        }
+
+        protected static void RemoveCssPseudo(string styleSheet, XmlDocument xml)
+        {
+            if (string.IsNullOrEmpty(styleSheet) || !File.Exists(styleSheet))
+            {
+                throw new ArgumentNullException("styleSheet");
+            }
+            Debug("Writing Stylesheet without pseudo rules: {0}", styleSheet);
+            var ruleNodes = xml.SelectNodes("//RULE[PSEUDO]");
+            foreach (XmlElement ruleNode in ruleNodes)
+            {
+                ruleNode.RemoveAll();
+            }
+            var cssFile = new FileStream(styleSheet, FileMode.Create);
+            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
+            XmlCss.Transform(xml, null, cssWriter);
+            cssFile.Close();
         }
 
         private static void MakeBaskupIfNecessary(string styleSheet, string xhtmlFullName)
@@ -231,7 +254,7 @@ namespace CssSimpler
         private static string _target;
         private static bool _noData;
         private static int _term;
-        private static readonly List<string> NeedHigher = new List<string> { "form", "sensenumber", "headword", "name", "writingsystemprefix", "xitem", "configtarget", "configtargets", "abbreviation" };
+        protected static readonly SortedSet<string> NeedHigher = new SortedSet<string> { "form", "sensenumber", "headword", "name", "writingsystemprefix", "xitem", "configtarget", "configtargets", "abbreviation" };
 
         protected static void AddSubTree(XmlNode n, CommonTree t, CssTreeParser ctp)
         {

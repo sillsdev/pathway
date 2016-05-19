@@ -228,6 +228,8 @@
     <Compile Include="LoadClasses.cs" />
     <Compile Include="MoveInlineStyles.cs" />
     <Compile Include="Options.cs" />
+    <Compile Include="ProcessContent.cs" />
+    <Compile Include="ProcessPseudo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlCopy.cs" />

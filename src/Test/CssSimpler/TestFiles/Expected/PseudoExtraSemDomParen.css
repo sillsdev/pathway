@@ -1,0 +1,88 @@
+﻿span[lang|= "fr"]{
+   font-family: 'Arial',serif;
+   font-size: 10pt;
+}
+span[lang|= "es"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 10pt;
+}
+span[lang|= "en"]{
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+}
+span[lang|= "tpi"]{
+   font-family: 'Andika Basic',serif;
+   font-size: 10pt;
+}
+span[lang|= "bzh-fonipa"]{
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+}
+span[lang|= "bzh"]{
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.entry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   font-size: 10pt;
+}
+.entry .subentries .subentry {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+   display: block;
+}
+.entry .subentries .subentry {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+   display: block;
+}
+.minorentrycomplex {
+   clear: both;
+   white-space: pre-wrap;
+}
+.minorentrycomplex {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+}
+.minorentrycomplex > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
