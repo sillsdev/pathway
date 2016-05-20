@@ -1136,8 +1136,14 @@ namespace SIL.PublishingSolution
         {
 	        if (File.Exists(strMacroPath))
 	        {
-		        var xmldoc = Common.DeclareXMLDocument(true);
-		        xmldoc.Load(strMacroPath);
+				XmlDocument xmldoc = Common.DeclareXMLDocument(true);
+				var namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
+				namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+				var xmlReader = XmlReader.Create(strMacroPath, xmlReaderSettings);
+				xmldoc.Load(xmlReader);
+				xmlReader.Close();
+
 		        XmlElement ele = xmldoc.DocumentElement;
 		        string autoMacro = "False";
 		        if (Param.Value.Count > 0)
