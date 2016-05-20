@@ -1949,7 +1949,6 @@ namespace SIL.PublishingSolution
                         {
                             isPageNumber = true;
                         }
-                        
                     }
 					else if (_pageHeaderFooter[i]["content"].Length > 0)
 					{
@@ -2041,7 +2040,8 @@ namespace SIL.PublishingSolution
                         if (isFooterCreated) return;
                         type = "Footer";
                         isFooterCreated = true;
-                        break;
+						if (i == 17 && !_isCenterTabStopNeeded) { _isCenterTabStopNeeded = true; }
+		                break;
                 }
             }
 

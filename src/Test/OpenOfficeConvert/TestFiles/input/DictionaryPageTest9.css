@@ -1,0 +1,68 @@
+@page{
+	margin-top:43pt;
+	margin-right:52pt;
+	margin-bottom:43pt;
+	margin-left:52pt;
+	-ps-fileproduce:"One";
+	-ps-fixed-line-height:"False";
+	-ps-split-file-by-letter:"False";
+	-ps-center-title-header:"True";
+	-ps-header-font-size:"Same as headword";
+	-ps-disable-widow-orphan:"False";
+}
+
+/* Running Head Mirrored.css */
+@page :left {
+    @top-left {
+           content: string( guideword, first);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @top-center    { content: ''; }
+    @top-right  { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left   { content: ''; }
+    @top-center { content: ''; }
+    @top-right  {
+           content: string( guideword, last);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: counter(page); }
+    @bottom-right  { content: ''; }
+}
+
+/* Bottom Inside.css */
+@page :left {
+    @bottom-right  {  content: counter( page); }
+}
+@page :right {
+    @bottom-left   {  content: counter( page); }
+
+}
+
+
+@page :first {
+    @bottom-center {
+           content: counter( page);
+    }
+}
+
+
