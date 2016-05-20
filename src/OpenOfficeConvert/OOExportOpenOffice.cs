@@ -522,13 +522,20 @@ namespace SIL.PublishingSolution
             projInfo.OutputExtension = "odt";
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
-            string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
-            projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
-            Common.DeleteDirectory(projInfo.TempOutputFolder);
+
+	        string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "OfficeFiles");
+			strFromOfficeFolder = Common.PathCombine(strFromOfficeFolder, projInfo.ProjectInputType);
+	        string tempPathOfficeFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles");
+			projInfo.TempOutputFolder = Common.PathCombine(tempPathOfficeFolder, projInfo.ProjectInputType);
+
+			Common.DeleteDirectory(projInfo.TempOutputFolder);
             string strStylePath = Common.PathCombine(projInfo.TempOutputFolder, "styles.xml");
             string strContentPath = Common.PathCombine(projInfo.TempOutputFolder, "content.xml");
-            CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
-            string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic/Standard/Module1.xml");
+			CopyOfficeFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
+            string strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Basic");
+			strMacroPath = Common.PathCombine(strMacroPath, "Standard");
+			strMacroPath = Common.PathCombine(strMacroPath, "Module1.xml");
+
             string outputFileName;
             string outputPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             VerboseClass verboseClass = VerboseClass.GetInstance();
@@ -1127,39 +1134,42 @@ namespace SIL.PublishingSolution
 
         private static void IncludeTextinMacro(string strMacroPath, string ReferenceFormat, string saveAsPath, bool runMacroFirstTime, string isCoverImageInserted, string isToc)
         {
-            var xmldoc = Common.DeclareXMLDocument(true);
-            xmldoc.Load(strMacroPath);
-            XmlElement ele = xmldoc.DocumentElement;
-            string autoMacro = "False";
-            if (Param.Value.Count > 0)
-            {
-                if (Param.Value[Param.ExtraProcessing] != "ExtraProcessing")
-                {
-                    autoMacro = Param.Value[Param.ExtraProcessing];
-                }
-            }
-            if (ele != null)
-            {
+	        if (File.Exists(strMacroPath))
+	        {
+		        var xmldoc = Common.DeclareXMLDocument(true);
+		        xmldoc.Load(strMacroPath);
+		        XmlElement ele = xmldoc.DocumentElement;
+		        string autoMacro = "False";
+		        if (Param.Value.Count > 0)
+		        {
+			        if (Param.Value[Param.ExtraProcessing] != "ExtraProcessing")
+			        {
+				        autoMacro = Param.Value[Param.ExtraProcessing];
+			        }
+		        }
+		        if (ele != null)
+		        {
 
-                string seperator = "\n";
-                string line1 = string.Empty;
-                if (publicationInfo.ProjectInputType.ToLower() == "scripture")
-                {
-                    line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
-                            ReferenceFormat + "\"";
-                }
-                line1 = line1 + "\nConst AutoMacro = \"" + autoMacro + "\"";
-                string line2 = "\nConst OutputFormat = \"" + publicationInfo.FinalOutput + "\"" +
-                               "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" +
-                               publicationInfo.JpgPreview + "\"";
-                string line3 = "\nConst RunMacroFirstTime = \"" + runMacroFirstTime + "\"";
-                string line4 = "\nConst IsCoverImageInserted = \"" + isCoverImageInserted + "\"";
-                string line5 = "\nConst IsTOC = \"" + isToc + "\"";
-                string combined = line1 + line2 + line3 + line4 + line5 + seperator;
+			        string seperator = "\n";
+			        string line1 = string.Empty;
+			        if (publicationInfo.ProjectInputType.ToLower() == "scripture")
+			        {
+				        line1 = "\n'Constant ReferenceFormat for User Desire\nConst ReferenceFormat = \"" +
+				                ReferenceFormat + "\"";
+			        }
+			        line1 = line1 + "\nConst AutoMacro = \"" + autoMacro + "\"";
+			        string line2 = "\nConst OutputFormat = \"" + publicationInfo.FinalOutput + "\"" +
+			                       "\nConst FilePath = \"" + saveAsPath + "\"" + "\nConst IsPreview = \"" +
+			                       publicationInfo.JpgPreview + "\"";
+			        string line3 = "\nConst RunMacroFirstTime = \"" + runMacroFirstTime + "\"";
+			        string line4 = "\nConst IsCoverImageInserted = \"" + isCoverImageInserted + "\"";
+			        string line5 = "\nConst IsTOC = \"" + isToc + "\"";
+			        string combined = line1 + line2 + line3 + line4 + line5 + seperator;
 
-                ele.InnerText = combined + ele.InnerText;
-            }
-            xmldoc.Save(strMacroPath);
+			        ele.InnerText = combined + ele.InnerText;
+		        }
+		        xmldoc.Save(strMacroPath);
+	        }
         }
 
 

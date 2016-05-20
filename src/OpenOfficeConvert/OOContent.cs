@@ -3284,11 +3284,14 @@ namespace SIL.PublishingSolution
 
 			if (tableOfContent.ToLower() == "true")
 			{
-				string tocStyle = Common.TempVariable["TOCStyleName"];
+				string tocStyle = string.Empty;
 				TableOfContent toc = new TableOfContent();
 				string strOutlineLevel = "1";
 				if (_projInfo.ProjectInputType.ToLower() == "dictionary")
 				{
+					if (Common.TempVariable["TOCStyleName"] != null)
+						tocStyle = Common.TempVariable["TOCStyleName"];
+
 					if (IdAllClass.ContainsKey("letter") && IdAllClass["letter"].ContainsKey("-ps-outline-level"))
 						strOutlineLevel = IdAllClass["letter"]["-ps-outline-level"];
 				}
@@ -3297,9 +3300,7 @@ namespace SIL.PublishingSolution
 					tocStyle = "TitleMain_scrBook_scrBody";
 					if (IdAllClass.ContainsKey("scrBook") && IdAllClass["scrBook"].ContainsKey("-ps-outline-level"))
 						strOutlineLevel = IdAllClass["scrBook"]["-ps-outline-level"];
-
 				}
-
 				toc.CreateTOC(_writer, _projInfo.ProjectInputType, strOutlineLevel, tocStyle);
 			}
 		}
