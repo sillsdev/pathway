@@ -1880,6 +1880,10 @@ namespace SIL.Tool
 						}
 					}
 				}
+				else
+				{
+					return headerFontSize;
+				}
 			}
 			return defFontSize;
 		}
