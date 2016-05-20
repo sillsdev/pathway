@@ -225,7 +225,7 @@ namespace CssSimpler
         private static string _target;
         private static bool _noData;
         private static int _term;
-        private static readonly List<string> NeedHigher = new List<string> { "form", "sensenumber", "headword", "name", "writingsystemprefix", "xitem", "configtarget", "configtargets" };
+        private static readonly List<string> NeedHigher = new List<string> { "form", "sensenumber", "headword", "name", "writingsystemprefix", "xitem", "configtarget", "configtargets", "abbreviation" };
 
         protected static void AddSubTree(XmlNode n, CommonTree t, CssTreeParser ctp)
         {
