@@ -91,11 +91,6 @@ namespace SIL.PublishingSolution
 			ddlFontSize.Items.Add("20");
 			ddlFontSize.Items.Add("22");
 			ddlFontSize.Items.Add("24");
-			ddlFontSize.Items.Add("26");
-			ddlFontSize.Items.Add("28");
-			ddlFontSize.Items.Add("36");
-			ddlFontSize.Items.Add("48");
-			ddlFontSize.Items.Add("72");
             ddlFontSize.SelectedItem = _fontSize;
         }
 
