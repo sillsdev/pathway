@@ -30,7 +30,7 @@ using SIL.PublishingSolution;
 namespace Test.CssSimplerTest
 {
     [TestFixture]
-    public class CssSimplerTest : CssSimpler.Program
+    public class CssSimplerTest : Program
     {
         #region Private Variables
 
@@ -114,10 +114,10 @@ namespace Test.CssSimplerTest
 			var fileName = testName + ".xhtml";
 			_testFiles.Copy(fileName);
 			string xhtmlFullName = _testFiles.Output(fileName);
-			WriteSimpleXhtml(xhtmlFullName);
+			var tmpOut = WriteSimpleXhtml(xhtmlFullName);
 			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
 			var xhtml = new XmlDocument();
-			xhtml.Load(XmlReader.Create(xhtmlFullName, settings));
+			xhtml.Load(XmlReader.Create(tmpOut, settings));
 			var checkClass = xhtml.SelectSingleNode("//*[local-name()='body'][@class='dicBody']");
 			Assert.IsNotNull(checkClass);
 		}
@@ -310,10 +310,10 @@ namespace Test.CssSimplerTest
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            WriteSimpleXhtml(xhtmlFullName);
+            var tmpOut = WriteSimpleXhtml(xhtmlFullName);
             var settings = new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore};
             var xhtml = new XmlDocument();
-            xhtml.Load(XmlReader.Create(xhtmlFullName, settings));
+            xhtml.Load(XmlReader.Create(tmpOut, settings));
             var translationNodes = xhtml.SelectSingleNode("//translation/translation");
             Assert.IsNull(translationNodes);
         }
@@ -328,10 +328,10 @@ namespace Test.CssSimplerTest
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            WriteSimpleXhtml(xhtmlFullName);
+            var tmpOut = WriteSimpleXhtml(xhtmlFullName);
             var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
             var xhtml = new XmlDocument();
-            xhtml.Load(XmlReader.Create(xhtmlFullName, settings));
+            xhtml.Load(XmlReader.Create(tmpOut, settings));
             var exampeNodes = xhtml.SelectNodes("//*[@class='complete']/*[@class='example']");
             Debug.Assert(exampeNodes != null, "Missing comlete example nodes results!");
             Assert.AreEqual(2, exampeNodes.Count);
@@ -347,10 +347,10 @@ namespace Test.CssSimplerTest
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            WriteSimpleXhtml(xhtmlFullName);
+            var tmpOut = WriteSimpleXhtml(xhtmlFullName);
             var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
             var xhtml = new XmlDocument();
-            xhtml.Load(XmlReader.Create(xhtmlFullName, settings));
+            xhtml.Load(XmlReader.Create(tmpOut, settings));
             var picturesNodes = xhtml.SelectSingleNode("//*[local-name()='span'][@class='pictures']");
             Assert.IsNull(picturesNodes);
             var pictureNode = xhtml.SelectNodes("//*[@class='picture']");
@@ -530,6 +530,59 @@ namespace Test.CssSimplerTest
         }
 
         /// <summary>
+        /// A test of moving inline styles to css
+        /// </summary>
+        [Test]
+        public void InlineStyleTest()
+        {
+            const string testName = "InlineStyle";
+            var xhtmlFile = testName + ".xhtml";
+            var cssFile = testName + ".css";
+            _testFiles.Copy(cssFile);
+            var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), _testFiles.Output(xhtmlFile), _testFiles.Output(cssFile));
+            Assert.IsNotNull(ilst);
+            var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), new XmlReaderSettings {XmlResolver = null, DtdProcessing = DtdProcessing.Ignore});
+            var xhtmlDoc = new XmlDocument();
+            xhtmlDoc.Load(xr);
+            xr.Close();
+            var node1 = xhtmlDoc.SelectSingleNode("//*[contains(@class,'-st')]");
+            Assert.IsNotNull(node1, "style node missing");
+            Assert.IsNotNull(node1.Attributes, "attributes missing");
+            Assert.IsNotNull(node1.Attributes["class"], "class missing");
+            Assert.AreEqual("translation-st", node1.Attributes["class"].InnerText);
+        }
+
+        /// <summary>
+        /// A test of moving inline styles to css
+        /// </summary>
+        [Test]
+        public void InlineStyle2Test()
+        {
+            const string testName = "InlineStyle2";
+            var xhtmlFile = testName + ".xhtml";
+            var cssFile = testName + ".css";
+            _testFiles.Copy(cssFile);
+            var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), _testFiles.Output(xhtmlFile), _testFiles.Output(cssFile));
+            Assert.IsNotNull(ilst);
+            var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Ignore });
+            var xhtmlDoc = new XmlDocument();
+            xhtmlDoc.Load(xr);
+            xr.Close();
+            var node1 = xhtmlDoc.SelectSingleNode("//*[contains(@class,'-st')]");
+            Assert.IsNotNull(node1, "style node missing");
+            Assert.IsNotNull(node1.Attributes, "attributes missing");
+            Assert.IsNotNull(node1.Attributes["class"], "class missing");
+            var nodes = xhtmlDoc.SelectNodes("//*[contains(@class,'-st')]");
+            Assert.AreEqual(26,nodes.Count);
+            var unique = new SortedSet<string>();
+            foreach (XmlElement node in nodes)
+            {
+                unique.Add(node.Attributes["class"].InnerText);
+            }
+            Assert.AreEqual(2, unique.Count);
+        }
+
+        /// <summary>
         ///A test for ValidateXhtml
         /// https://support.microsoft.com/en-us/kb/307379
         /// https://msdn.microsoft.com/en-us/library/system.xml.xmlurlresolver%28v=vs.110%29.aspx
@@ -542,14 +595,14 @@ namespace Test.CssSimplerTest
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            WriteSimpleXhtml(xhtmlFullName);
+            var tmpOut = WriteSimpleXhtml(xhtmlFullName);
             var resolver = new MyUrlResolver();
             var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, ValidationType = ValidationType.DTD, XmlResolver = resolver};
             settings.ValidationEventHandler += delegate(object sender, ValidationEventArgs args)
             {
                 throw new XmlSchemaValidationException(args.Message);
             };
-            var reader = XmlReader.Create(xhtmlFullName, settings);
+            var reader = XmlReader.Create(tmpOut, settings);
             while (reader.Read()) { }
         }
 

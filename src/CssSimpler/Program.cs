@@ -105,14 +105,12 @@ namespace CssSimpler
             }
             MakeBaskupIfNecessary(lc.StyleSheet, extra[0]);
             WriteSimpleCss(lc.StyleSheet, xml); //reloads xml with simplified version
-            WriteSimpleXhtml(extra[0]);
-            //var contClass = new Dictionary<string, List<XmlNode>>();
-            //GetContTargets(xml, contClass);
-            //var outName = extra[0].Replace(".xhtml", "Out.xhtml");
-            //var pc = new ProcessContent(extra[0], outName, contClass);
+            var tmpOut = WriteSimpleXhtml(extra[0]);
+            var inlineStyle = new MoveInlineStyles(tmpOut, extra[0], lc.StyleSheet);
+            File.Delete(tmpOut);
         }
 
-        protected static void WriteSimpleXhtml(string xhtmlFullName)
+        protected static string WriteSimpleXhtml(string xhtmlFullName)
         {
             if (string.IsNullOrEmpty(xhtmlFullName) || !File.Exists(xhtmlFullName))
                 throw new ArgumentException("Missing Xhtml file: {0}", xhtmlFullName);
@@ -127,8 +125,9 @@ namespace CssSimpler
             writer.Close();
             reader.Close();
             ifs.Close();
-            File.Copy(outfile, xhtmlFullName, true);
-            File.Delete(outfile);
+            return outfile;
+            //File.Copy(outfile, xhtmlFullName, true);
+            //File.Delete(outfile);
         }
 
         protected static void WriteSimpleCss(string styleSheet, XmlDocument xml)
