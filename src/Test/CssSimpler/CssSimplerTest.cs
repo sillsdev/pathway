@@ -21,10 +21,11 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
-using BuildStep;
 using CssSimpler;
 using NUnit.Framework;
 using SIL.PublishingSolution;
+using SIL.Tool;
+using FileData = BuildStep.FileData;
 
 // ReSharper disable once CheckNamespace
 namespace Test.CssSimplerTest
@@ -541,7 +542,8 @@ namespace Test.CssSimplerTest
             _testFiles.Copy(cssFile);
             var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), _testFiles.Output(xhtmlFile), _testFiles.Output(cssFile));
             Assert.IsNotNull(ilst);
-            var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), new XmlReaderSettings {XmlResolver = null, DtdProcessing = DtdProcessing.Ignore});
+			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+			var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), settings);
             var xhtmlDoc = new XmlDocument();
             xhtmlDoc.Load(xr);
             xr.Close();
@@ -564,7 +566,8 @@ namespace Test.CssSimplerTest
             _testFiles.Copy(cssFile);
             var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), _testFiles.Output(xhtmlFile), _testFiles.Output(cssFile));
             Assert.IsNotNull(ilst);
-            var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Ignore });
+			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+			var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), settings);
             var xhtmlDoc = new XmlDocument();
             xhtmlDoc.Load(xr);
             xr.Close();
