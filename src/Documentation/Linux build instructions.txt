@@ -1,33 +1,86 @@
 SETTING UP GIT CLIENT
 ---------------------
+The first step is probably to make sure the computer is up to date with:
+sudo apt-get update && sudo apt-get upgrade -y
 In order to make git work on Linux, I had to use
 sudo apt-get -y install git git-gui gitk git-flow
 This installs the git client. (Note that on Lucid git-arch must be used instead of git.)
-Create a .netrc file in your home folder: http://code.google.com/p/pathway/source/checkout.
-Clone the repo (described at the same location)
-Then used: git flow init.
+
+CLONING THE SOURCE REPO
+-----------------------
+mkdir git
+cd git
+git clone https://github.com/sillsdev/pathway.git
+cd pathway
+git flow init
+If you are on xenial, you want to update the build control with:
+cp Build/xenial-pkg/* debian/.
+(Please don't check in debian/control and debian/rules for xenial as the originals are used for release.sh)
+Make sure the dependencies are installed with:
+bash Build/getDependencies.sh
+Let the system know your info for commits
+git config --global user.name yourname
+git config --global user.email youremailaddress@yourdomain.xyz
+gedit .git/config
+(Open the Build/Add2Config file and include it in the .git/config file)
 
 SETTING UP BUILD SYSTEM
 -----------------------
 To set up Linux for building packages, I used:
-sudo apt-get -y install devscripts debhelper autotools-dev mono-complete
-Edit .git/config to include the ../Installer/Add2Config
+sudo apt-get -y install devscripts debhelper autotools-dev cli-common mono-reference-assemblies-4.0
+sudo apt-get -y install mono-xbuild mono-mcs mono-devel
 
 BUILDING PATHWAY
 ----------------
+You will want to make sure you are on the develop branch:
+git checkout develop
 You can use the gui by launching a terminal and using git gui, the build commands are on the Tools menu. Or you can perform the commands from a terminal window:
 If the package has already been installed it can be removed with
 make clean clean-build
+You may want to update the changelog and add a new couplet of three lines with a version, the description and the date:
+gedit debian/changelog
 Once this is all setup, the command to build the package is:
+bash Build/makeDeps.sh 1.15.3.4980
+
+Once the package is built, you can install it with:
+sudo dpkg -i ../*.deb
+(The first time it will likely complain about missing dependencies. You can install them with)
+sudo apt-get install -f -y
+Then use the sudo dpkg command above a second time to install Pathway.
+
+TESTS
+-----
+To run the tests, install the test runner:
+sudo apt-get -y install nunit
+Then build the debug version:
+make debug
+Then run the tests with:
+make tests
+Or you can run the tests from the by creating a project and loading the output/Debug/Tests.dll assembly
+nunit-gui
+(You may want to exclude tests marked "SkipOnLinux" by setting that category as excluded.)
+
+GUI DEVELOPMENT
+---------------
+sudo apt-get -y install monodevelop monodevelop-nunit
+Please make sure, before you commit, to revert changes on DistFiles.csproj with 
+git checkout DistFiles/DistFiles.csproj
+or by useing the git gui command.
+
+OTHER BUILD PROCESSES
+---------------------
+If you want to build something other than the current target. Here are some commands:
 debuild -eBUILD_NUMBER=1.1.2.2205 -etarget=Daily -i -us -uc -b
-It should be executed in the ~/git/pathway/pathway folder (or whereever the PublishingSolution.sln file is located).
+It should be executed in the ~/git/pathway folder (or whereever the Pathway.sln file is located).
 You will replace the build number with the appropriate # for the build you are making.
 You can also change -etarget=Daily (this updates the build # in all the AssemblyInfo.cs files as well as building Release7BTE). You can use Release7SE, Corporate7BTE or Corporate7SE to build these other packages.
 If you put it in another location, you will need to add
--ebinsrc=~/git1/pathway/pathway
+-ebinsrc=~/git1/pathway
 replacing git1 with the folder you have used.
 For 64-bit build the 
 -ePlatform=Any\ CPU
+For 32-bit build
+-ePlatform=x86
 parameter should be given to the build.
 
 INSTALLING

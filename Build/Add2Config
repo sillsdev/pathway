@@ -52,7 +52,7 @@
 [guitool "B1 Clean"]
 	cmd = "cd pathway; make clean clean-build"
 [guitool "B2 Version"]
-	cmd = git log --until=today |grep ^commit |wc |python Installer/first2Ver.py
+	cmd = git log --until=today |grep ^commit |wc |python Build/first2Ver.py
 [guitool "B3 Log"]
 	cmd = gedit pathway/debian/changelog
 	noconsole = yes
