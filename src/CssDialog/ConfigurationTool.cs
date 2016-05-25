@@ -108,7 +108,7 @@ namespace SIL.PublishingSolution
 			//Note: 1 -  Standalone Application
 			//Note: 2 -  The ConfigurationTool.EXE is called by PrintVia dialog from FLEX/TE/etc.,);
 			string entryAssemblyName = string.Empty;
-			if (!(String.IsNullOrEmpty(Assembly.GetEntryAssembly().FullName)))
+			if (!(String.IsNullOrEmpty(Convert.ToString(Assembly.GetEntryAssembly()))))
 			{
 				entryAssemblyName = Assembly.GetEntryAssembly().FullName;
 			}
