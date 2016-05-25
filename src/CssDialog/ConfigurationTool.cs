@@ -107,7 +107,15 @@ namespace SIL.PublishingSolution
 			//Note: Configuration tool can run by two ways
 			//Note: 1 -  Standalone Application
 			//Note: 2 -  The ConfigurationTool.EXE is called by PrintVia dialog from FLEX/TE/etc.,);
-			string entryAssemblyName = Assembly.GetEntryAssembly().FullName;
+			string entryAssemblyName = string.Empty;
+			if (!(String.IsNullOrEmpty(Assembly.GetEntryAssembly().FullName)))
+			{
+				entryAssemblyName = Assembly.GetEntryAssembly().FullName;
+			}
+			else
+			{
+				entryAssemblyName = "configurationtool";
+			}
 			if (entryAssemblyName.Trim().ToLower().Contains("configurationtool"))
 			{
 				//It will call when the Configtool from Application
