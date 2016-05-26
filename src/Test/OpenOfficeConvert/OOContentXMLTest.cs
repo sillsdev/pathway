@@ -4061,7 +4061,7 @@ namespace Test.OpenOfficeConvert
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
 			_validate.GetInnerText = true;
-			string content = "wirek hen comp. [ˈwiɾ.ək ʁɛn] earlier, old, pertaining to or belonging to an earlier time.";
+			string content = "wirek hen comp. [ˈwiɾ.ək ʁɛn] earlier, old, pertaining to or belonging to an earlier time.";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
 			Assert.IsTrue(returnValue1);
 
@@ -4837,6 +4837,31 @@ namespace Test.OpenOfficeConvert
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
+		///<summary>
+		/// Anchor with space Test
+		/// </summary>
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void AnchorSpaceFlex83Test()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "AnchorSpaceFlex83";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+			string style = "";
+			if (Common.UnixVersionCheck())
+			{
+				style = "_Unix";
+			}
+
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 

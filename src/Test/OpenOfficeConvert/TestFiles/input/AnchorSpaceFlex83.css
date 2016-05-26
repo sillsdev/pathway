@@ -1,0 +1,470 @@
+.letHead {
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+}
+.letter {
+   line-height: 12pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 14pt;
+   font-weight: bold;
+}
+span {
+   font-size: 10pt;
+}
+span[lang|= "fr"]{
+   font-family: 'Times New Roman',serif;
+}
+span[lang|= "es"]{
+   font-family: 'Times New Roman',serif;
+}
+span[lang|= "en"]{
+   font-family: 'Times New Roman',serif;
+}
+span[lang|= "tpi"]{
+   font-family: 'Andika Basic',serif;
+}
+span[lang|= "bzh-fonipa"]{
+   font-family: 'Doulos SIL',serif;
+}
+span[lang|= "bzh"]{
+   font-family: 'Charis SIL',serif;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.entry {
+   clear: both;
+   
+}
+.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+}
+.entry .mainheadword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span:last-child:after{
+   content: '  ';
+}
+.entry .mainheadword > span {
+   font-weight: bold;
+}
+.entry .pronunciation + .pronunciation:before{
+   content: ', ';
+}
+.entry .pronunciations:after{
+   content: ' ';
+}
+.entry .pronunciation > .form > span:first-child:before{
+   content: '[';
+}
+.entry .pronunciation > .form > span:last-child:after{
+   content: ']';
+}
+.entry .senses .sensecontent + span:before{
+   content: '  ';
+}
+.entry .senses:after{
+   content: ' ';
+}
+.entry .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry .senses .sensecontent .sensenumber:after{
+   content: ') ';
+}
+.entry .senses .morphosyntaxanalysis:after{
+   content: ' ';
+}
+.entry .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry .senses .mlpartofspeech > span:last-child:after{
+   content: ' ';
+}
+.entry .senses .morphosyntaxanalysis:after{
+   content: ' ';
+}
+.entry .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry .senses .mlpartofspeech > span:last-child:after{
+   content: ' ';
+}
+.entry .senses .definitionorgloss > span:last-child:after{
+   content: ' ';
+}
+.entry .senses .examplescontents > span + span:before{
+   content: '  ';
+}
+.entry .senses .examplescontents:after{
+   content: ' ';
+}
+.entry .senses .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.entry .senses .example > span:last-child:after{
+   content: ' ';
+}
+.entry .senses .example > span {
+   font-style: italic;
+}
+.entry .senses .translation > span:last-child:after{
+   content: ' ';
+}
+.entry .senses .lexsensereferences > span + span:before{
+   content: '; ';
+}
+.entry .senses .lexsensereferences:after{
+   content: '. ';
+}
+.entry .senses .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.entry .senses .ownertype_abbreviation > span:last-child:after{
+   content: ': ';
+}
+.entry .senses .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.entry .senses .lexsensereference .configtargets > .configtarget + .configtarget:before{
+   content: ', ';
+}
+.entry .senses .lexsensereference > .configtargets:after{
+   content: ' ';
+}
+.entry .senses .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #F60;
+}
+.entry .senses .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+   color: #F60;
+}
+.entry .senses .semanticdomain + .semanticdomain:before{
+   content: ', ';
+}
+.entry .senses .semanticdomains:before{
+   content: '(sem. domains: ';
+}
+.entry .senses .semanticdomains:after{
+   content: '.) ';
+}
+.entry .senses .semanticdomain > .abbreviation > span:last-child:after{
+   content: ' - ';
+}
+.entry .senses .senses > span + span:before{
+   content: '  ';
+}
+.entry .senses .senses:after{
+   content: ' ';
+}
+.entry .senses .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry .senses .senses .sensecontent .sensenumber:after{
+   content: ') ';
+}
+.entry .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.entry .picture img {
+   max-height: 1in;
+}
+.entry .pictures > div + div:before{
+   content: '  ';
+}
+.entry .pictures > div:last-child:after{
+   content: ' ';
+}
+.entry .picture {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
+.entry .picture > img:after{
+   content: ' ';
+}
+.entry .captionContent .sensenumber:after{
+   content: ' ';
+}
+.entry .caption > span[lang|= "en"]{
+   font-weight: bold;
+   color: #0F0;
+}
+.entry .caption > span {
+   font-weight: bold;
+   color: #0F0;
+}
+.entry .subentries .subentry {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.entry .subentries .subentry {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.minorentrycomplex {
+   clear: both;
+   
+}
+.minorentrycomplex {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
+.minorentrycomplex > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span:last-child:after{
+   content: '  ';
+}
+.minorentrycomplex > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .pronunciation + .pronunciation:before{
+   content: ', ';
+}
+.minorentrycomplex .pronunciations:after{
+   content: ' ';
+}
+.minorentrycomplex .pronunciation > .form > span:first-child:before{
+   content: '[';
+}
+.minorentrycomplex .pronunciation > .form > span:last-child:after{
+   content: ']';
+}
+.minorentrycomplex .complexformentryrefs > span + span:before{
+   content: ', ';
+}
+.minorentrycomplex .complexformentryrefs:before{
+   content: ' (';
+}
+.minorentrycomplex .complexformentryrefs:after{
+   content: ')';
+}
+.minorentrycomplex .complexformtype + .complexformtype:before{
+   content: ', ';
+}
+.minorentrycomplex .complexformtypes:after{
+   content: ' ';
+}
+.minorentrycomplex .reverseabbr > span:last-child:after{
+   content: ' ';
+}
+.minorentrycomplex .referencedentry + .referencedentry:before{
+   content: ', ';
+}
+.minorentrycomplex .referencedentries:before{
+   content: ' ';
+}
+.minorentrycomplex .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #F00;
+}
+.minorentrycomplex .referencedentry > .headword > span {
+   font-weight: bold;
+   color: #F00;
+}
+.mainentrysubentries .mainentrysubentry {
+   clear: both;
+   
+}
+.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span:last-child:after{
+   content: '  ';
+}
+.mainentrysubentries .mainentrysubentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .complexformtype + .complexformtype:before{
+   content: ', ';
+}
+.mainentrysubentries .complexformtypes:after{
+   content: ' ';
+}
+.mainentrysubentries .complexformtype > .abbreviation > span:first-child:before{
+   content: '(';
+}
+.mainentrysubentries .complexformtype > .abbreviation > span:last-child:after{
+   content: ')';
+}
+.mainentrysubentries .pronunciation + .pronunciation:before{
+   content: ', ';
+}
+.mainentrysubentries .pronunciations:after{
+   content: ' ';
+}
+.mainentrysubentries .pronunciation > .form > span:first-child:before{
+   content: '[';
+}
+.mainentrysubentries .pronunciation > .form > span:last-child:after{
+   content: ']';
+}
+.mainentrysubentries .senses .sensecontent + span:before{
+   content: ' ';
+}
+.mainentrysubentries .senses:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .senses .sensecontent .sensenumber:after{
+   content: ') ';
+}
+.mainentrysubentries .senses .morphosyntaxanalysis:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .senses .mlpartofspeech > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .morphosyntaxanalysis:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .senses .mlpartofspeech > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .definitionorgloss > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .examplescontents > span + span:before{
+   content: '  ';
+}
+.mainentrysubentries .senses .examplescontents:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.mainentrysubentries .senses .example > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .example > span {
+   font-style: italic;
+}
+.mainentrysubentries .senses .translation > span:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .lexsensereferences > span + span:before{
+   content: '; ';
+}
+.mainentrysubentries .senses .lexsensereferences:after{
+   content: '. ';
+}
+.mainentrysubentries .senses .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubentries .senses .ownertype_abbreviation > span:last-child:after{
+   content: ': ';
+}
+.mainentrysubentries .senses .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.mainentrysubentries .senses .lexsensereference .configtargets > .configtarget + .configtarget:before{
+   content: ', ';
+}
+.mainentrysubentries .senses .lexsensereference > .configtargets:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #008000;
+}
+.mainentrysubentries .senses .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+   color: #008000;
+}
+.mainentrysubentries .senses .semanticdomain + .semanticdomain:before{
+   content: ', ';
+}
+.mainentrysubentries .senses .semanticdomains:before{
+   content: '(sem. domains: ';
+}
+.mainentrysubentries .senses .semanticdomains:after{
+   content: '.) ';
+}
+.mainentrysubentries .senses .semanticdomain > .abbreviation > span:last-child:after{
+   content: ' - ';
+}
+.mainentrysubentries .senses .senses > span + span:before{
+   content: '  ';
+}
+.mainentrysubentries .senses .senses:after{
+   content: ' ';
+}
+.mainentrysubentries .senses .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .senses .senses .sensecontent .sensenumber:after{
+   content: ') ';
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
+.mainentrysubentries .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.mainentrysubentries .picture img {
+   max-height: 1in;
+}
+.mainentrysubentries .pictures > div + div:before{
+   content: '  ';
+}
+.mainentrysubentries .pictures > div:last-child:after{
+   content: ' ';
+}
+.mainentrysubentries .picture {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
+.mainentrysubentries .picture > img:after{
+   content: ' ';
+}
+.mainentrysubentries .picture > .sensenumber:after{
+   content: ' ';
+}
+.headword-st { font-weight:bold;font-size:58%;position:relative;top:0.3em; }

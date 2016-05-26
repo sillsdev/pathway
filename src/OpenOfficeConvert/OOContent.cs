@@ -91,6 +91,7 @@ namespace SIL.PublishingSolution
 		private bool _isEmptyPageInsertedForDic = false;
 		private bool _isPageSpaceGiven;
 		private bool _isPageSpaceSingle;
+		private bool _anchorSignificant;
 
 		Dictionary<string, string> _pageSize = new Dictionary<string, string>();
 		private bool _isFromExe = false;
@@ -780,6 +781,14 @@ namespace SIL.PublishingSolution
 				_significant = true;
 				_footnoteSpace = true;
 			}
+			else if (_classNameWithLang.IndexOf("a") == 0)
+			{
+				if (_childName.IndexOf("headword") > 0 || _childName.IndexOf("mainheadword") > 0)
+				{
+					_significant = true;
+					_anchorSignificant = true;
+				}
+			}
 			return content;
 		}
 		private void Write()
@@ -924,6 +933,12 @@ namespace SIL.PublishingSolution
 		{
 			string content = _reader.Value;
 			content = ReplaceString(content);
+			if (_anchorSignificant && _className != "a")
+			{
+				content = " " + content;
+				_significant = false;
+				_anchorSignificant = false;
+			}
 			if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
 			if (_isPictureDisplayNone)
 			{
