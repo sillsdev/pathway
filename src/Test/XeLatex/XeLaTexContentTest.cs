@@ -1229,6 +1229,19 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
+		
+
+		[Test]
+		[Category("ShortTest")]
+		[Category("SkipOnTeamCity")]
+		public void DoubleUnderlineTest()
+		{
+			_projInfo.ProjectInputType = "Scripture";
+			const string file = "DoubleUnderlineTest";
+			ExportProcess(file);
+			FileCompare(file);
+		}
+
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]

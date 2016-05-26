@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article} 
+\usepackage{float}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
+\usepackage{changepage}
+\usepackage{needspace}
+\usepackage{setspace}
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\scrBookscrBody="Cambria" at 12pt
+\font\scrBookNamezxxscrBookscrBody="Cambria" at 12pt
+\font\scrBookCodezxxscrBookscrBody="Cambria" at 12pt
+\font\TitleMainscrBookscrBody="Cambria" at 12pt
+\font\TitleSecondaryzxxTitleMainscrBookscrBody="Cambria" at 12pt
+\font\spanzxxTitleMainscrBookscrBody="Cambria" at 12pt
+\font\scrIntroSectionscrBookscrBody="Cambria" at 12pt
+\font\IntroSectionHeadscrIntroSectionscrBookscrBody="Cambria" at 11pt
+\font\spanzxxIntroSectionHeadscrIntroSectionscrBookscrBody="Cambria" at 11pt
+\font\IntroParagraphscrIntroSectionscrBookscrBody="Cambria" at 12pt
+\font\doubleUnderlineIntroParagraphscrIntroSectionscrBookscrBody="Cambria" at 12pt
+
+\mbox{} 
+\newpage 
+\newpage 
+\setcounter{page}{1} 
+\pagenumbering{arabic} 
+\pagestyle{fancy} 
+
+\scrBookNamezxxscrBookscrBody{
+ \label{PageStock_DoubleUnderlineTest1} Matiu}
+ \label{PageStock_DoubleUnderlineTest1} \scrBookCodezxxscrBookscrBody{MAT}
+
+\TitleSecondaryzxxTitleMainscrBookscrBody{Na Rorongo Ke Toke Eigna A Jisas Krais}\spanzxxTitleMainscrBookscrBody{Sen Matiu Ke Risoa}
+\section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}
+\spanzxxIntroSectionHeadscrIntroSectionscrBookscrBody{\underline{\underline{Na Titiono Eigna Na Buka Iaani}}}\end{spacing}}
+
+\doubleUnderlineIntroParagraphscrIntroSectionscrBookscrBody{\underline{\underline{Test}}}
+
+\end{document}

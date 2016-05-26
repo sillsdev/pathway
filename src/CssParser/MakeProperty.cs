@@ -508,6 +508,11 @@ namespace SIL.PublishingSolution
             {
                 _cssProperty["text-decoration"] = attrValue;
             }
+
+			if(attrValue.ToLower() == "underline,double")
+			{
+				_cssProperty["text-decoration"] = "underlineunderline";
+			}
         }
 
         private void FontWeight(StyleAttribute styleAttributeInfo)
@@ -990,7 +995,6 @@ namespace SIL.PublishingSolution
                     {
                         borderColor = ColorHash(value[i]);
                         GetBorderColorList(borderColor);
-
                     }
                     else if (_dicColorInfo.ContainsKey(value[i])) // red conversion to #ff0000
                     {
