@@ -24,6 +24,7 @@ namespace CssSimpler
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _beforeNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _beforeEndNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _afterNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
+        private readonly StreamReader _sr;
         private readonly XmlReader _rdr;
         private readonly XmlWriter _wtr;
         private bool _finish;
@@ -33,7 +34,8 @@ namespace CssSimpler
         protected XmlCopy(string xmlInFullName, string xmlOutFullName)
         {
             var settings = new XmlReaderSettings(){DtdProcessing = DtdProcessing.Ignore};
-            _rdr = XmlReader.Create(new StreamReader(xmlInFullName), settings);
+            _sr = new StreamReader(xmlInFullName);
+            _rdr = XmlReader.Create(_sr, settings);
             _wtr = XmlWriter.Create(xmlOutFullName);
         }
 
@@ -57,7 +59,14 @@ namespace CssSimpler
                                 BeforeProcessMethods();
                                 if (!SkipAttr)
                                 {
-                                    _wtr.WriteAttributeString(_rdr.Name, _rdr.Value);
+                                    if (_rdr.Name.Length > 4 && _rdr.Name.Substring(0, 4) == "xml:")
+                                    {
+                                        _wtr.WriteAttributeString("xml", _rdr.Name.Substring(4), "http://www.w3.org/XML/1998/namespace", _rdr.Value);
+                                    }
+                                    else
+                                    {
+                                        _wtr.WriteAttributeString(_rdr.Name, _rdr.Value);
+                                    }
                                 }
                                 else
                                 {
@@ -125,6 +134,7 @@ namespace CssSimpler
             }
             _wtr.Close();
             _rdr.Close();
+            _sr.Close();
         }
 
         private void BeforeProcessMethods()

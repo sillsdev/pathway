@@ -107,7 +107,14 @@ namespace CssSimpler
             WriteSimpleCss(lc.StyleSheet, xml); //reloads xml with simplified version
             var tmpOut = WriteSimpleXhtml(extra[0]);
             var inlineStyle = new MoveInlineStyles(tmpOut, extra[0], lc.StyleSheet);
-            File.Delete(tmpOut);
+            try
+            {
+                File.Delete(tmpOut);
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         protected static string WriteSimpleXhtml(string xhtmlFullName)
