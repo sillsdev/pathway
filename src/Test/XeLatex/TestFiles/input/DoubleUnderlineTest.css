@@ -1,0 +1,17 @@
+.Intro_Section_Head {
+    font-size: 11pt;
+    line-height: 13pt;
+    text-decoration: underline double;   
+}
+.doubleUnderline {
+    text-decoration: underline;
+    border-bottom: 1px solid #000;
+}
+.Intro_Paragraph {
+line-height: 0pt;
+-ps-fixed-line-height: 0pt;
+}
+.Intro_Section_Head {
+padding-top: 8pt;
+padding-bottom: 4pt;
+}

@@ -604,9 +604,7 @@ namespace SIL.PublishingSolution
                 LanguageFontCheck(content, _childName);
                 _childName = Common.ReplaceSeperators(_childName);
                 content = Common.ReplaceSymbolToXelatexText(content);
-                List<string> value = CreateInlineInnerStyle(characterStyle);
-
-
+				List<string> value = BeginInlineInnerStyle(characterStyle);
 
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
                 {
@@ -642,7 +640,7 @@ namespace SIL.PublishingSolution
                     _isVerseNo = false;
                 }
                 _xetexFile.Write(content);
-                CloseInlineInnerStyle(value);
+				EndInlineInnerStyle(value);
                 for (int i = 1; i <= _inlineCount; i++) // close braces for inline style
                 {
                     _xetexFile.Write("}");
@@ -690,7 +688,7 @@ namespace SIL.PublishingSolution
             AnchorBookMark();
         }
 
-        private void CloseInlineInnerStyle(List<string> value)
+        private void EndInlineInnerStyle(List<string> value)
         {
             if (value.Count > 0)
             {
@@ -701,27 +699,58 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private List<string> CreateInlineInnerStyle(string characterStyle)
+        private List<string> BeginInlineInnerStyle(string characterStyle)
         {
             if (characterStyle == "$ID/[No character style]")
             {
                 characterStyle = StackPeek(_allStyle);
             }
             List<string> value = new List<string>();
-            if (characterStyle.IndexOf("_") > 0)
-            {
-                string className = characterStyle.Substring(0, characterStyle.IndexOf("_"));
-                if (_classInlineInnerStyle.ContainsKey(className))
-                {
-                    value = _classInlineInnerStyle[className];
-                    for (int i = 0; i < value.Count; i++)
-                    {
-                        _xetexFile.Write(value[i]);
-                        if (value[i].IndexOf("$") == -1)
-                            _xetexFile.Write("{");
-                    }
-                }
-            }
+			if (characterStyle.IndexOf("_") > 0)
+			{
+				string className = characterStyle.Substring(0, characterStyle.IndexOf("_"));
+
+				if (_classInlineInnerStyle.ContainsKey(className))
+				{
+					value = _classInlineInnerStyle[className];
+					for (int i = 0; i < value.Count; i++)
+					{
+						_xetexFile.Write(value[i]);
+						if (value[i].IndexOf("$") == -1)
+							_xetexFile.Write("{");
+					}
+				}
+				else
+				{
+					string[] splitStyle = characterStyle.Split('_');
+					foreach (var styleName in splitStyle)
+					{
+						if (_classInlineInnerStyle.ContainsKey(styleName))
+						{
+							value = _classInlineInnerStyle[styleName];
+							for (int i = 0; i < value.Count; i++)
+							{
+								_xetexFile.Write(value[i]);
+								if (value[i].IndexOf("$") == -1)
+									_xetexFile.Write("{");
+							}
+							break;
+						}
+					}  
+				}
+			}
+
+			//if (_classInlineInnerStyle.ContainsKey(_className))
+			//{
+			//	value = _classInlineInnerStyle[_className];
+			//	for (int i = 0; i < value.Count; i++)
+			//	{
+			//		_xetexFile.Write(value[i]);
+			//		if (value[i].IndexOf("$") == -1)
+			//			_xetexFile.Write("{");
+			//	}
+			//}
+
             return value;
         }
 
@@ -1361,7 +1390,7 @@ namespace SIL.PublishingSolution
 				_xetexFile.Write("\\section*{\\needspace {8\\baselineskip}");
 			
             WriteParagraphInline();
-
+	        
             if (IdAllClass.ContainsKey(_classNameWithLang))
             {
                 bool isPageBreak = false;
@@ -1667,6 +1696,7 @@ namespace SIL.PublishingSolution
         private void EndElement()
         {
             _characterName = null;
+			
             if (_hasImgCloseTag && _imageInserted)
             {
                 _hasImgCloseTag = false;
@@ -1675,12 +1705,10 @@ namespace SIL.PublishingSolution
             {
                 _closeChildName = StackPop(_allStyle);
             }
-
             CloseBrace(_closeChildName);
-
-			if (_closeChildName.ToLower().IndexOf("sectionhead") == 0)			
+			if (_classNameWithLang.ToLower().Contains("sectionhead"))
 				_xetexFile.Write("}");
-
+			
             DoNotInheritClassEnd(_closeChildName);
             SetHeadwordFalse();
             ClosefooterNote();
@@ -1715,6 +1743,7 @@ namespace SIL.PublishingSolution
                 _bookPageBreak = false;
             }
             _classNameWithLang = StackPeek(_allStyle);
+			
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
         }
 

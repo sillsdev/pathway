@@ -59,6 +59,8 @@ namespace SIL.PublishingSolution
                         FontSize(propertyValue);
                         break;
                     case "text-decoration":
+					case "border-bottom":
+					case "border-bottom-style":
                     case "class-text-decoration":
                         TextDecoration(propertyValue);
                         break;
@@ -764,14 +766,21 @@ namespace SIL.PublishingSolution
         }
         public void TextDecoration(string propertyValue)
         {
+			//another package we can use for dotted http://xpt.sourceforge.net/techdocs/language/latex/latex24-SpecialEffectsUnderlining/single/
             if (propertyValue == string.Empty || propertyValue == "inherit")
             {
                 return;
             }
-            if (propertyValue == "underline")
+			if (propertyValue == "underline" || propertyValue == "double" || propertyValue == "solid")
             {
-                propertyValue = "\\underbar";
+				propertyValue = "\\underline";
             }
+			if (propertyValue == "underlineunderline")
+			{
+				propertyValue = "\\underline";
+				if (propertyValue.Trim().Length > 0)
+					_inlineInnerStyle.Add(propertyValue);
+			}
             else if (propertyValue == "none")
             {
                 propertyValue = "";
