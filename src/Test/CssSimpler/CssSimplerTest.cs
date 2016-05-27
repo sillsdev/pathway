@@ -615,6 +615,33 @@ namespace Test.CssSimplerTest
         }
 
         /// <summary>
+        /// A test to see if lexsensereferences > span + span:before works correctly
+        /// </summary>
+        [Test]
+        public void PseudoMultiRelTest()
+        {
+            const string testName = "PseudoMultiRel";
+            var cssFullName = _testFiles.Input(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            NodeTest(outFullName, 3, "//*[@class='lexsensereference-ps']", "node with ; not inserted between lexical relations");
+        }
+
+        /// <summary>
         /// A test for punctuation after sense numbers
         /// </summary>
         [Test]
@@ -667,7 +694,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
+            NodeTest(outFullName, 9, "//*[@class='configtarget-ps']", "missing commas between lexical relation headwords");
         }
 
         /// <summary>
@@ -695,7 +722,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
+            NodeTest(outFullName, 4, "//*[@class='subentrymainentrysubentry-ps']", "subentry punctuation");
         }
 
         /// <summary>
@@ -725,7 +752,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
+            NodeTest(outFullName, 14, "//*[@class='semanticdomains-ps']", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -785,7 +812,24 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
+            NodeTest(outFullName, 21, "//*[@class='configtarget-ps']", "semantic domain punctuation");
+        }
+
+        /// <summary>
+        /// Method to load an XML (XHTML) file and search for the inserted nodes and complain if count isn't right.
+        /// </summary>
+        /// <param name="outFullName">File to search</param>
+        /// <param name="count">Expected number of hits</param>
+        /// <param name="xpath">node to search for</param>
+        /// <param name="msg">message to display on mismatch</param>
+        private static void NodeTest(string outFullName, int count, string xpath, string msg)
+        {
+            var xr = XmlReader.Create(outFullName,
+                new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Ignore });
+            var xDoc = new XmlDocument();
+            xDoc.Load(xr);
+            xr.Close();
+            Assert.AreEqual(count, xDoc.SelectNodes(xpath).Count, msg);
         }
 
         /// <summary>

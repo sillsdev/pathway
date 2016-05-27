@@ -52,9 +52,9 @@ a {
 .entry .senses .example > span {
    font-style: italic;
 }
-.entry .senses .ownertype_abbreviation > span[lang|= "en"]{
+.entry .senses .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
    font-style: italic;
 }
-.entry .senses .ownertype_abbreviation > span {
+.entry .senses .lexsensereference > .ownertype_abbreviation > span {
    font-style: italic;
 }

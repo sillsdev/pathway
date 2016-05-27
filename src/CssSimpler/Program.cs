@@ -254,7 +254,7 @@ namespace CssSimpler
         private static string _target;
         private static bool _noData;
         private static int _term;
-        protected static readonly SortedSet<string> NeedHigher = new SortedSet<string> { "form", "sensenumber", "headword", "name", "writingsystemprefix", "xitem", "configtarget", "configtargets", "abbreviation" };
+        protected static readonly SortedSet<string> NeedHigher = new SortedSet<string> { "form", "sensenumber", "headword", "name", "writingsystemprefix", "xitem", "configtarget", "configtargets", "abbreviation", "ownertype_abbreviation" };
 
         protected static void AddSubTree(XmlNode n, CommonTree t, CssTreeParser ctp)
         {

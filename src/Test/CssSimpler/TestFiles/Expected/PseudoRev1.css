@@ -1,0 +1,77 @@
+﻿span[lang|= "fr"]{
+   font-family: 'Arial',serif;
+   font-size: 10pt;
+}
+span[lang|= "es"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 10pt;
+}
+span[lang|= "en"]{
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+}
+span[lang|= "tpi"]{
+   font-family: 'Andika Basic',serif;
+   font-size: 10pt;
+}
+span[lang|= "bzh-fonipa"]{
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+}
+span[lang|= "bzh"]{
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.reversalindexentry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.reversalindexentry .reversalform > span[lang|= "en"]{
+   font-weight: bold;
+}
+.reversalindexentry .reversalform > span {
+   font-weight: bold;
+}
+.reversalindexentry .referringsense > .headword[lang|= "bzh"]{
+   font-weight: bold;
+}
+.reversalindexentry .referringsense > .headword {
+   font-weight: bold;
+}
+.reversalindexentry .owner_minimallexreferences > .ownertype_abbreviation[lang|= "en"]{
+   font-style: italic;
+}
+.reversalindexentry .owner_minimallexreferences > .ownertype_abbreviation {
+   font-style: italic;
+}
+.reversalindexentry .owner_minimallexreferences > .configtargets > .headword[lang|= "bzh"]{
+   font-weight: bold;
+}
+.reversalindexentry .owner_minimallexreferences > .configtargets > .headword {
+   font-weight: bold;
+}
+.reversalindexentry .morphosyntaxanalysis {
+   font-style: italic;
+}
+.reversalindexentry .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.reversalindexentry .example > span {
+   font-style: italic;
+}
+.reversalindexentry .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.reversalindexentry .lexsensereference > .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.reversalindexentry .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.reversalindexentry .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+}

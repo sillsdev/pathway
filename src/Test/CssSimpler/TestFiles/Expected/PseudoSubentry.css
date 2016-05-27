@@ -52,10 +52,10 @@ a {
 .entry .senses .example > span {
    font-style: italic;
 }
-.entry .senses .ownertype_abbreviation > span[lang|= "en"]{
+.entry .senses .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
    font-style: italic;
 }
-.entry .senses .ownertype_abbreviation > span {
+.entry .senses .lexsensereference > .ownertype_abbreviation > span {
    font-style: italic;
 }
 .entry .senses .senses .sensecontent .sensenumber {
@@ -105,10 +105,10 @@ a {
 .mainentrysubentries .senses .example > span {
    font-style: italic;
 }
-.mainentrysubentries .senses .ownertype_abbreviation > span[lang|= "en"]{
+.mainentrysubentries .senses .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
    font-style: italic;
 }
-.mainentrysubentries .senses .ownertype_abbreviation > span {
+.mainentrysubentries .senses .lexsensereference > .ownertype_abbreviation > span {
    font-style: italic;
 }
 .mainentrysubentries .senses .senses .sensecontent .sensenumber {

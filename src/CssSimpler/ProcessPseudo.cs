@@ -52,6 +52,7 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             if (ApplyBestRule(r.Depth + 1, nextClass, _beforeTargets, nextClass)) return;
+            if (_classes.Count > r.Depth && ApplyBestRule(r.Depth + 1, GetTargetKey(r.Name, KeyClass(r.Depth)), _beforeTargets, nextClass)) return;
             var target = GetTargetKey(r.Name, _lastClass);
             ApplyBestRule(r.Depth, target, _beforeTargets, _lastClass);
         }
@@ -119,7 +120,7 @@ namespace CssSimpler
                         node = node.PreviousSibling;
                         Debug.Assert(node != null, "Nothing preceding PRECEDES");
                         string precedingName = node.ChildNodes[0].InnerText;
-                        if (_classes[index] as string != precedingName) return false;
+                        if (_classes[index] as string != precedingName && precedingName != "span") return false;
                         index -= 1;
                         break;
                     default:
@@ -267,6 +268,7 @@ namespace CssSimpler
         {
             if (target == "span")
             {
+                if (lastClass == null) return null;
                 if (!lastClass.Contains(" "))
                 {
                     target = string.Format("{0}:{1}", target, lastClass);
@@ -291,6 +293,19 @@ namespace CssSimpler
                 }
             }
             return target;
+        }
+
+        private string KeyClass(int depth)
+        {
+            if (_classes.Count <= depth) return null;
+            while (depth > 0)
+            {
+                var proposedClass = _classes[depth] as string;
+                if (proposedClass != null && !_needHigher.Contains(proposedClass))
+                    return proposedClass;
+                depth -= 1;
+            }
+            return null;
         }
 
     }
