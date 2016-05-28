@@ -734,7 +734,6 @@ namespace Test.CssSimplerTest
             const string testName = "BuangKde2";
             _testFiles.Copy(testName + ".css");
             var cssFullName = _testFiles.Output(testName + ".css");
-            CleanUpFieldWorks83CssError(cssFullName);
             var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
             var outFullName = _testFiles.Output(testName + ".xhtml");
             var ctp = new CssTreeParser();
@@ -764,7 +763,6 @@ namespace Test.CssSimplerTest
             const string testName = "PseudoExtraSemDomParen";
             _testFiles.Copy(testName + ".css");
             var cssFullName = _testFiles.Output(testName + ".css");
-            CleanUpFieldWorks83CssError(cssFullName);
             var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
             var outFullName = _testFiles.Output(testName + ".xhtml");
             var ctp = new CssTreeParser();
@@ -794,7 +792,6 @@ namespace Test.CssSimplerTest
             const string testName = "PseudoRev1";
             _testFiles.Copy(testName + ".css");
             var cssFullName = _testFiles.Output(testName + ".css");
-            CleanUpFieldWorks83CssError(cssFullName);
             var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
             var outFullName = _testFiles.Output(testName + ".xhtml");
             var ctp = new CssTreeParser();

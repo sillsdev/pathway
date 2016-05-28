@@ -1180,9 +1180,6 @@ a{
 .sensenumber:after{
 		content:') ';
 	}
-> .{
-		font-size:10pt;
-	}
 .mainentrysubentries .mainentrysubentry{
 		clear:both;
 		white-space:pre-wrap;
