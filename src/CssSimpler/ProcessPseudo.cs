@@ -26,7 +26,6 @@ namespace CssSimpler
         private readonly Dictionary<string, List<XmlElement>> _beforeTargets = new Dictionary<string, List<XmlElement>>();
         private readonly Dictionary<string, List<XmlElement>> _afterTargets = new Dictionary<string, List<XmlElement>>();
         private const int StackSize = 30;
-        private readonly ArrayList _elementNames = new ArrayList(StackSize);
         private readonly ArrayList _classes = new ArrayList(StackSize);
         private readonly ArrayList _savedLastClass = new ArrayList(StackSize);
         private string _lastClass = String.Empty;
@@ -38,7 +37,6 @@ namespace CssSimpler
             _needHigher = needHigher;
             CollectTargets(xmlCss);
             DeclareBefore(XmlNodeType.Attribute, SaveClass);
-            DeclareBefore(XmlNodeType.Element, SaveElements);
             DeclareBefore(XmlNodeType.Element, SaveSibling);
             DeclareBefore(XmlNodeType.Element, InsertBefore);
             DeclareBeforeEnd(XmlNodeType.EndElement, InsertAfter);
@@ -149,22 +147,6 @@ namespace CssSimpler
             Debug.Assert(content != null);
             var val = content.InnerText;
             WriteContent(val.Substring(1,val.Length - 2), myClass.Replace(" ", ""));  // Remove quotes
-        }
-
-        private void SaveElements(XmlReader r)
-        {
-            if (r.Depth >= _elementNames.Count)
-            {
-                while (_elementNames.Count < r.Depth)
-                {
-                    _elementNames.Add(null);
-                }
-                _elementNames.Add(r.Name);
-            }
-            else
-            {
-                _elementNames[r.Depth] = r.Name;
-            }
         }
 
         private void SaveClass(XmlReader r)
