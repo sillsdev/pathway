@@ -64,7 +64,7 @@ namespace CssSimpler
             var endClass = _savedLastClass[index] as string;
             var target1 = GetTargetKey(_classes[index] as string, endClass);
             var target2 = GetTargetKey(r.Name, endClass);
-            if (ApplyBestRule(index, target1, _afterTargets, endClass)) return;
+            if (ApplyBestRule(r.Depth, target1, _afterTargets, endClass)) return;
             if (ApplyBestRule(index, target2, _afterTargets, endClass)) return;
             ApplyBestRule(index, endClass, _afterTargets, endClass);
         }
