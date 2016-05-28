@@ -47,7 +47,8 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             if (ApplyBestRule(r.Depth + 1, nextClass, _beforeTargets, nextClass)) return;
-            if (_classes.Count > r.Depth && ApplyBestRule(r.Depth + 1, GetTargetKey(r.Name, KeyClass(r.Depth)), _beforeTargets, nextClass)) return;
+            var keyClass = KeyClass(r.Depth);
+            if (_classes.Count > r.Depth && ApplyBestRule(r.Depth + 1, GetTargetKey(r.Name, keyClass), _beforeTargets, keyClass)) return;
             var target = GetTargetKey(r.Name, _lastClass);
             ApplyBestRule(r.Depth, target, _beforeTargets, _lastClass);
         }

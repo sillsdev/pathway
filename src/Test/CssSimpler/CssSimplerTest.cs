@@ -638,7 +638,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 5, "//*[@class='lexsensereference-ps']", "node with ; not inserted between lexical relations");
+            NodeTest(outFullName, 4, "//*[@class='lexsensereference-ps']", "node with ; not inserted between lexical relations");
         }
 
         /// <summary>
