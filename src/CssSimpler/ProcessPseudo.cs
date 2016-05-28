@@ -139,7 +139,7 @@ namespace CssSimpler
         private bool RequiredFirst(XmlNode node)
         {
             var firstChild = node.SelectSingleNode("parent::*//PSEUDO[name='first-child']");
-            return firstChild == null ? true : _firstSibling;
+            return firstChild == null || _firstSibling;
         }
 
         private void InsertContent(XmlNode node, string myClass)
