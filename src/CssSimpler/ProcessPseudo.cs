@@ -29,7 +29,6 @@ namespace CssSimpler
         private readonly ArrayList _elementNames = new ArrayList(StackSize);
         private readonly ArrayList _classes = new ArrayList(StackSize);
         private readonly ArrayList _savedLastClass = new ArrayList(StackSize);
-        private ParserMethod _lastCallBack = null;
         private string _lastClass = String.Empty;
         private readonly SortedSet<string> _needHigher;
 
@@ -38,8 +37,6 @@ namespace CssSimpler
         {
             _needHigher = needHigher;
             CollectTargets(xmlCss);
-            DeclareBefore(XmlNodeType.Element, DoLastSibling);
-            DeclareBefore(XmlNodeType.EndElement, DoLastSibling);
             DeclareBefore(XmlNodeType.Attribute, SaveClass);
             DeclareBefore(XmlNodeType.Element, SaveElements);
             DeclareBefore(XmlNodeType.Element, SaveSibling);
@@ -196,24 +193,12 @@ namespace CssSimpler
             }
         }
 
-        private int _previousDepth = -1;
         private int _nextFirst = -1;
         private bool _firstSibling;
         private void SaveSibling(XmlReader r)
         {
             _firstSibling = r.Depth == _nextFirst;
             _nextFirst = r.Depth + 1;
-            _previousDepth = r.Depth;
-        }
-
-        private void DoLastSibling(XmlReader r)
-        {
-            if (r.Depth == _previousDepth) return;
-            if (_lastCallBack != null)
-            {
-                _lastCallBack(r);
-                _lastCallBack = null;
-            }
         }
 
         private void CollectTargets(XmlDocument xmlCss)
