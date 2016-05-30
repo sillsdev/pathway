@@ -854,7 +854,7 @@ namespace Test.CssParserTest
         {
             _methodName = "GetErrorReportTest1";
             target.ErrorList.Clear();
-            inputCSSPath = testPath + "/GetErrorReportTest1.css";
+            inputCSSPath = Common.PathCombine(testPath ,"GetErrorReportTest1.css");
             target.GetErrorReport(inputCSSPath);
             int ErrCount = target.ErrorList.Count;
             Assert.IsTrue(ErrCount > 0, _methodName + "test failed.");
@@ -868,7 +868,7 @@ namespace Test.CssParserTest
         {
             _methodName = "GetErrorReportTest2";
             target.ErrorList.Clear();
-            inputCSSPath = testPath + "/GetErrorReportTest2.css";
+            inputCSSPath = Common.PathCombine(testPath , "GetErrorReportTest2.css");
             target.GetErrorReport(inputCSSPath);
             int ErrCount = target.ErrorList.Count;
             Assert.IsTrue(ErrCount == 0, _methodName + "test failed.");
@@ -882,7 +882,7 @@ namespace Test.CssParserTest
         {
             _methodName = "GetErrorReportTest3";
             target.ErrorList.Clear();
-            inputCSSPath = testPath + "/InValidFilePath.css";
+            inputCSSPath = Common.PathCombine(testPath, "InValidFilePath.css");
             target.GetErrorReport(inputCSSPath);
             int ErrCount = target.ErrorList.Count;
             Assert.IsTrue(ErrCount == 0, _methodName + "test failed.");
@@ -892,7 +892,7 @@ namespace Test.CssParserTest
         public void BuildTreeTest1()
         {
             _methodName = "BuildTreeTest1 - File Not Exist ";
-            inputCSSPath = testPath + "/InValidFilePath.css";
+            inputCSSPath = Common.PathCombine(testPath, "InValidFilePath.css");
             TreeNode actual = target.BuildTree(inputCSSPath);
             Assert.IsTrue(actual.Nodes.Count == 0, _methodName + "test failed.");
         }
@@ -902,7 +902,7 @@ namespace Test.CssParserTest
         {
             _methodName = "BuildTreeTest2 - EmptyCSSValidate ";
             RemoveCSS();
-            inputCSSPath = testPath + "/emptyCSS.css";
+            inputCSSPath = Common.PathCombine(testPath ,"emptyCSS.css");
             OutputNode.Nodes.Add((TreeNode)target.BuildTree(inputCSSPath).Clone());
             Assert.IsTrue(OutputNode.Nodes.Count == 1, _methodName + " test failed");
         }
@@ -913,7 +913,7 @@ namespace Test.CssParserTest
             _methodName = "BuildTreeTest3 - EmptyCSSValidate1 ";
             RemoveCSS();
             var clsCSS = new CssParser();
-            var filePath = testPath + "/emptyCSS.css";
+			var filePath = Common.PathCombine(testPath, "emptyCSS.css");
             var Node = clsCSS.BuildTree(filePath);
             EmptyNode.Nodes.Add((TreeNode)Node.Clone());
             var cnt = EmptyNode.Nodes[0].Nodes.Count;

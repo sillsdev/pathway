@@ -925,6 +925,11 @@ namespace SIL.PublishingSolution
 					{
 						SetAttributesForPaperProperties(writeCss);
 					}
+
+					if (MediaType.ToLower() == "others")
+					{
+						SetAttributesForOtherProperties(writeCss);
+					}
 					// write out the changes
 					writeCss.Flush();
 					writeCss.Close();
@@ -1095,6 +1100,54 @@ namespace SIL.PublishingSolution
 					WriteCssClass(writeCss, "page -top-center", value);
 				}
 			}
+		}
+
+		private void SetAttributesForOtherProperties(StreamWriter writeCss)
+		{
+			string alignment = string.Empty;
+
+			if (cTool.DdlJustified.SelectedItem != null)
+				alignment = ((ComboBoxItem)cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture);
+
+			string epubStyleProperties = "body {  \r\n font-size:" + cTool.TxtBaseFontSize.Text + "pt; \r\n" +
+				" line-height:" + cTool.TxtDefaultLineHeight.Text + "%; \r\n" + "} \r\n";
+
+			string imageWidth = "img{ \r\n width:" + cTool.TxtMaxImageWidth.Text + "px; \r\n }";
+
+			if (inputTypeBL.ToLower() == "dictionary")
+			{
+				string otherStyleProperties = ".entry { line-height:" + cTool.TxtDefaultLineHeight.Text + "%; \r\n" + "} \r\n";
+				otherStyleProperties = otherStyleProperties + "\r\n .entry { line-height:" + cTool.TxtDefaultLineHeight.Text +
+				                       "%; \r\n" + "} \r\n";
+				otherStyleProperties = otherStyleProperties + "\r\n .entry .picture { line-height:" +
+				                       cTool.TxtDefaultLineHeight.Text + "%; \r\n" + "} \r\n";
+				otherStyleProperties = otherStyleProperties + "\r\n .entry .subentries .subentry { line-height:" +
+				                       cTool.TxtDefaultLineHeight.Text + "%; \r\n" + "} \r\n";
+				otherStyleProperties = otherStyleProperties + "\r\n .minorentrycomplex { line-height:" +
+				                       cTool.TxtDefaultLineHeight.Text + "%; \r\n" + "} \r\n";
+				otherStyleProperties = otherStyleProperties + "\r\n .minorentryvariant { line-height:" +
+				                       cTool.TxtDefaultLineHeight.Text + "%; \r\n" + "} \r\n";
+				otherStyleProperties = otherStyleProperties + "\r\n .mainentrysubentries .picture { line-height:" +
+				                       cTool.TxtDefaultLineHeight.Text + "%; \r\n" + "} \r\n";
+				otherStyleProperties = otherStyleProperties + "\r\n .xhomographnumber { line-height:" +
+				                       cTool.TxtDefaultLineHeight.Text + "%; \r\n" + "} \r\n";
+				otherStyleProperties = otherStyleProperties + "\r\n .letter { line-height:" + cTool.TxtDefaultLineHeight.Text +
+				                       "%; \r\n" + "} \r\n";
+
+				
+				if (alignment.ToLower() == "right")
+					writeCss.WriteLine("@import \"" + "epub_DictionaryRightAlign.css" + "\";");
+
+				writeCss.WriteLine(otherStyleProperties);
+			}
+			else
+			{
+				if (alignment.ToLower() == "right")
+					writeCss.WriteLine("@import \"" + "epub_ScriptureRightAlign.css" + "\";");
+			}
+
+			writeCss.WriteLine(imageWidth);			
+			writeCss.WriteLine(epubStyleProperties);
 		}
 
 	    private void SetPageTopCenter(Dictionary<string, string> value)
