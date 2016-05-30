@@ -269,7 +269,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                style = @"\font\" + _className + "=\"" + _fontName;
+				style = @"\font\" + _className + "=\"" + _fontName + "/GR";
                 foreach (string sty in _fontOption)
                 {
                     style += sty;
