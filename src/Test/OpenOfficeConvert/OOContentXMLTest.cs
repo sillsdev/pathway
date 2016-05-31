@@ -4901,6 +4901,39 @@ namespace Test.OpenOfficeConvert
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
+		///<summary>
+		///Subscript property in new FLEX8.3 Test TD-4661
+		///</summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void SubscriptForNewFlexTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "SubscriptForNewFlex";
+			string styleOutput = GetStyleOutput(file);
+
+			//Content Test - First
+			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+			_validate.ClassName = "mainheadwordst_span_mainheadword.-entry_mainheadword_entry_letData_dicBody";
+			_validate.GetInnerText = true;
+			const string content = "1";
+			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+			Assert.IsTrue(returnValue1);
+
+			//Note - The Styles will be created while processing xhtml(content.xml)
+			//Style Test - Second
+			_validate = new ValidateXMLFile(styleOutput);
+			_validate.ClassName = "mainheadwordst_span_mainheadword.-entry_mainheadword_entry_letData_dicBody";
+			_validate.ClassProperty.Add("fo:font-weight", "700");
+			_validate.ClassProperty.Add("style:font-weight-complex", "700");
+			_validate.ClassProperty.Add("fo:font-size", "12pt");
+			_validate.ClassProperty.Add("style:font-size-complex", "12pt");
+			_validate.ClassProperty.Add("style:text-position", "-12% 58%");
+			bool returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
+		}
+
 
 		#endregion
 		#endregion

@@ -222,6 +222,10 @@ namespace SIL.PublishingSolution
                     LineHeight(property.Value, cssProperty);
                     isPropertyWritten = true;
                     break;
+				case "position":
+					PositionTop(property.Value);
+					isPropertyWritten = true;
+					break;
             }
             return isPropertyWritten;
         }
@@ -460,6 +464,43 @@ namespace SIL.PublishingSolution
             {
             }
         }
+
+		public void PositionTop(string propertyValue)
+		{
+			try
+			{
+				if (propertyValue == "relative")
+				{
+					_propertyKey = "text-position";
+					if (_cssProperty.ContainsKey("top"))
+					{
+						//Default value size for top poperty in percentage
+						const string topValue = "-12%";
+						propertyValue = topValue;
+					}
+					if (_cssProperty.ContainsKey("font-size"))
+					{
+						if (_cssProperty["font-size"].IndexOf("%", StringComparison.Ordinal) > 0)
+						{
+							//Apply font-size for the text
+							propertyValue += " " + _cssProperty["font-size"];
+
+							//Change basefont as 100%
+							var value = int.Parse(_cssProperty["font-size"].Replace("%", ""));
+							if (value <= 100)
+							{
+								value = 100;
+							}
+							_idProperty["font-size"] = value + "%";
+						}
+					}
+					_idProperty[_propertyKey] = propertyValue;
+				}
+			}
+			catch
+			{
+			}
+		}
 
         /// <summary>
         /// Superscript and Subscript

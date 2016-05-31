@@ -651,6 +651,7 @@ namespace SIL.PublishingSolution
                 case "-ps-split-file-by-letter":
                 case "-ps-center-title-header":
                 case "-ps-header-font-size":
+				case "top":
                     _cssProperty[styleAttributeInfo.Name] = value;
                     break;
 
