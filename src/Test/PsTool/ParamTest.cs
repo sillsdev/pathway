@@ -71,20 +71,6 @@ namespace Test.CssDialog
         #endregion Setup
 
         /// <summary>
-        ///A test for SettingPath
-        ///</summary>
-        [Test]
-		[Ignore("Currently using the registry to get the executable path")]
-        public void SettingPathTest()
-        {
-            string actual;
-            actual = Param.SettingPath;
-            var appPath = Path.GetDirectoryName(Application.ExecutablePath);
-            var expected = Common.PathCombine(appPath, _StyleSettings);
-            Assert.AreEqual(expected, actual);
-        }
-
-        /// <summary>
         ///A test for SettingOutputPath with ProgBase set and Param loaded.
         ///</summary>
         [Test]
@@ -328,10 +314,9 @@ namespace Test.CssDialog
         ///A test for AddAttrValue
         ///</summary>
         [Test]
-        [Ignore]
         public void AddAttrValueTest()
         {
-            XmlDocument xmlDocument = new XmlDocument();
+            XmlDocument xmlDocument = xmlMap;
             xmlDocument.Load(xmlFile);
             XmlNode node = xmlDocument.CreateNode(XmlNodeType.Element, "newNode", "");
             string attrTag = "newAttrib"; 
@@ -356,20 +341,6 @@ namespace Test.CssDialog
             string actual;
             actual = Param.TaskSheet(task);
             Assert.AreEqual(expected, actual);
-        }
-
-        /// <summary>
-        ///A test for SetAttrValue
-        ///</summary>
-        [Test]
-        [Ignore]
-        public void SetAttrValueTest()
-        {
-            XmlNode node = null; // TODO: Initialize to an appropriate value
-            string name = string.Empty; // TODO: Initialize to an appropriate value
-            string val = string.Empty; // TODO: Initialize to an appropriate value
-            Param.SetAttrValue(node, name, val);
-            // TODO: A method that does not return a value cannot be verified.");
         }
 
         [Test]
