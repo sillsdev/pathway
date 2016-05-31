@@ -592,6 +592,33 @@ namespace Test.CssSimplerTest
         /// A test to use the css to insert pseudo content into xhtml
         /// </summary>
         [Test]
+        public void Bke828Test()
+        {
+            const string testName = "bke828";
+            var cssFullName = _testFiles.Input(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            NodeTest(outFullName, 37, "//*[contains(@class,'-ps')]", "Nodes with pseudo content changed for Fw 8.2.8");
+        }
+
+        /// <summary>
+        /// A test to use the css to insert pseudo content into xhtml
+        /// </summary>
+        [Test]
         public void PseudoProcessTest()
         {
             const string testName = "PseudoProcess";

@@ -234,7 +234,7 @@ namespace CssSimpler
 
         private static string GetTargetKey(string target, string lastClass)
         {
-            if (target == "span")
+            if (target == "span" || target == "xitem")
             {
                 if (lastClass == null) return null;
                 if (!lastClass.Contains(" "))
