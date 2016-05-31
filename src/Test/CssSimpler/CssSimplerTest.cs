@@ -115,10 +115,10 @@ namespace Test.CssSimplerTest
 			var fileName = testName + ".xhtml";
 			_testFiles.Copy(fileName);
 			string xhtmlFullName = _testFiles.Output(fileName);
-			var tmpOut = WriteSimpleXhtml(xhtmlFullName);
+            var outFile = WriteSimpleXhtml(xhtmlFullName);
 			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
 			var xhtml = new XmlDocument();
-			xhtml.Load(XmlReader.Create(tmpOut, settings));
+			xhtml.Load(XmlReader.Create(outFile, settings));
 			var checkClass = xhtml.SelectSingleNode("//*[local-name()='body'][@class='dicBody']");
 			Assert.IsNotNull(checkClass);
 		}
@@ -311,10 +311,10 @@ namespace Test.CssSimplerTest
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            var tmpOut = WriteSimpleXhtml(xhtmlFullName);
+            var outFile = WriteSimpleXhtml(xhtmlFullName);
             var settings = new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore};
             var xhtml = new XmlDocument();
-            xhtml.Load(XmlReader.Create(tmpOut, settings));
+            xhtml.Load(XmlReader.Create(outFile, settings));
             var translationNodes = xhtml.SelectSingleNode("//translation/translation");
             Assert.IsNull(translationNodes);
         }
@@ -329,10 +329,10 @@ namespace Test.CssSimplerTest
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            var tmpOut = WriteSimpleXhtml(xhtmlFullName);
+            var outFile = WriteSimpleXhtml(xhtmlFullName);
             var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
             var xhtml = new XmlDocument();
-            xhtml.Load(XmlReader.Create(tmpOut, settings));
+            xhtml.Load(XmlReader.Create(outFile, settings));
             var exampeNodes = xhtml.SelectNodes("//*[@class='complete']/*[@class='example']");
             Debug.Assert(exampeNodes != null, "Missing comlete example nodes results!");
             Assert.AreEqual(2, exampeNodes.Count);
@@ -348,10 +348,10 @@ namespace Test.CssSimplerTest
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            var tmpOut = WriteSimpleXhtml(xhtmlFullName);
+            var outFile = WriteSimpleXhtml(xhtmlFullName);
             var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
             var xhtml = new XmlDocument();
-            xhtml.Load(XmlReader.Create(tmpOut, settings));
+            xhtml.Load(XmlReader.Create(outFile, settings));
             var picturesNodes = xhtml.SelectSingleNode("//*[local-name()='span'][@class='pictures']");
             Assert.IsNull(picturesNodes);
             var pictureNode = xhtml.SelectNodes("//*[@class='picture']");
@@ -566,7 +566,8 @@ namespace Test.CssSimplerTest
             var xhtmlFile = testName + ".xhtml";
             var cssFile = testName + ".css";
             _testFiles.Copy(cssFile);
-            var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), _testFiles.Output(xhtmlFile), _testFiles.Output(cssFile));
+            var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), _testFiles.Output(xhtmlFile),
+                _testFiles.Output(cssFile));
             Assert.IsNotNull(ilst);
 			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
 			var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), settings);
@@ -578,13 +579,281 @@ namespace Test.CssSimplerTest
             Assert.IsNotNull(node1.Attributes, "attributes missing");
             Assert.IsNotNull(node1.Attributes["class"], "class missing");
             var nodes = xhtmlDoc.SelectNodes("//*[contains(@class,'-st')]");
-            Assert.AreEqual(26,nodes.Count);
+            Assert.AreEqual(26, nodes.Count);
             var unique = new SortedSet<string>();
             foreach (XmlElement node in nodes)
             {
                 unique.Add(node.Attributes["class"].InnerText);
             }
             Assert.AreEqual(2, unique.Count);
+        }
+
+        /// <summary>
+        /// A test to use the css to insert pseudo content into xhtml
+        /// </summary>
+        [Test]
+        public void Bke828Test()
+        {
+            const string testName = "bke828";
+            var cssFullName = _testFiles.Input(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            NodeTest(outFullName, 37, "//*[contains(@class,'-ps')]", "Nodes with pseudo content changed for Fw 8.2.8");
+        }
+
+        /// <summary>
+        /// A test to use the css to insert pseudo content into xhtml
+        /// </summary>
+        [Test]
+        public void PseudoProcessTest()
+        {
+            const string testName = "PseudoProcess";
+            var cssFullName = _testFiles.Input(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+        }
+
+        /// <summary>
+        /// A test to see if lexsensereferences > span + span:before works correctly
+        /// </summary>
+        [Test]
+        public void PseudoMultiRelTest()
+        {
+            const string testName = "PseudoMultiRel";
+            var cssFullName = _testFiles.Input(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            NodeTest(outFullName, 4, "//*[@class='lexsensereference-ps']", "node with ; not inserted between lexical relations");
+        }
+
+        /// <summary>
+        /// A test for punctuation after sense numbers
+        /// </summary>
+        [Test]
+        public void PseudoSenseNumberTest()
+        {
+            const string testName = "PseudoSenseNumber";
+            var cssFullName = _testFiles.Input(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
+        }
+
+        /// <summary>
+        /// A test for punctuation in between list elements
+        /// </summary>
+        [Test]
+        public void PseudoBetweenTest()
+        {
+            const string testName = "PseudoBetween";
+            var cssFullName = _testFiles.Input(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            NodeTest(outFullName, 9, "//*[@class='configtarget-ps']", "missing commas between lexical relation headwords");
+        }
+
+        /// <summary>
+        /// A test for punctuation in between list elements
+        /// </summary>
+        [Test]
+        public void PseudoSubentryTest()
+        {
+            const string testName = "PseudoSubentry";
+            var cssFullName = _testFiles.Input(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            NodeTest(outFullName, 4, "//*[@class='subentrymainentrysubentry-ps']", "subentry punctuation");
+        }
+
+        /// <summary>
+        /// Cleans up bad rule in CSS export.
+        /// </summary>
+        [Test]
+        public void PseudoBuangKde2Test()
+        {
+            const string testName = "BuangKde2";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            NodeTest(outFullName, 14, "//*[@class='semanticdomains-ps']", "semantic domain punctuation");
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void PseudoExtraSemDomParenTest()
+        {
+            const string testName = "PseudoExtraSemDomParen";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void PseudoRev1Test()
+        {
+            const string testName = "PseudoRev1";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            NodeTest(outFullName, 21, "//*[@class='configtarget-ps']", "semantic domain punctuation");
+        }
+
+        /// <summary>
+        /// Method to load an XML (XHTML) file and search for the inserted nodes and complain if count isn't right.
+        /// </summary>
+        /// <param name="outFullName">File to search</param>
+        /// <param name="count">Expected number of hits</param>
+        /// <param name="xpath">node to search for</param>
+        /// <param name="msg">message to display on mismatch</param>
+        private static void NodeTest(string outFullName, int count, string xpath, string msg)
+        {
+            var xr = XmlReader.Create(outFullName,
+                new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Ignore });
+            var xDoc = new XmlDocument();
+            xDoc.Load(xr);
+            xr.Close();
+            Assert.AreEqual(count, xDoc.SelectNodes(xpath).Count, msg);
         }
 
         /// <summary>
@@ -600,14 +869,14 @@ namespace Test.CssSimplerTest
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            var tmpOut = WriteSimpleXhtml(xhtmlFullName);
+            var outFile = WriteSimpleXhtml(xhtmlFullName);
             var resolver = new MyUrlResolver();
             var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, ValidationType = ValidationType.DTD, XmlResolver = resolver};
             settings.ValidationEventHandler += delegate(object sender, ValidationEventArgs args)
             {
                 throw new XmlSchemaValidationException(args.Message);
             };
-            var reader = XmlReader.Create(tmpOut, settings);
+            var reader = XmlReader.Create(outFile, settings);
             while (reader.Read()) { }
         }
 
