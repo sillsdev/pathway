@@ -3669,7 +3669,7 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
-            string xpath = "//text:p/text:span[@text:style-name='span_Paragraph_scrSection_scrBody']";
+			string xpath = "//text:p/text:span[@text:style-name='span_Paragraph_scrSection_scrBody']";
             string content = "1\u00A0Sejay i tonton Jesu Criston edafod David tan si Abraham.";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Hard Space after versenumber test failed");
@@ -4867,7 +4867,7 @@ namespace Test.OpenOfficeConvert
 
 		///<summary>
 		///Space issue fixed for etymology Test TD-4617
-		///</summary>      
+		///</summary>
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
@@ -4875,6 +4875,24 @@ namespace Test.OpenOfficeConvert
 		{   
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "SpaceAfterClosingBrace";
+			DateTime startTime = DateTime.Now;
+			string styleOutput = GetStyleOutput(file);
+			_totalTime = DateTime.Now - startTime;
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
+		///<summary>
+		///Space issue fixed for parentPrecede Test TD-4651
+		///</summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void ParentPrecedeSpaceTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "ParentPrecedeSpace";
 			DateTime startTime = DateTime.Now;
 			string styleOutput = GetStyleOutput(file);
 			_totalTime = DateTime.Now - startTime;

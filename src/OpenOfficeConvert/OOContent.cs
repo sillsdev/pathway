@@ -791,6 +791,7 @@ namespace SIL.PublishingSolution
 			}
 			return content;
 		}
+
 		private void Write()
 		{
 			if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && !_projInfo.IsODM && _childName.ToLower() == "hidediv_dicbody" && !_projInfo.IsFrontMatterEnabled)
@@ -1107,7 +1108,8 @@ namespace SIL.PublishingSolution
 					}
 				}
 
-				content = SignificantSpace(content);
+				if (!IsParentPrecedeSpace())
+					content = SignificantSpace(content);
 
 				if (_isPreviousGlossary)
 				{
@@ -1194,6 +1196,25 @@ namespace SIL.PublishingSolution
 
 
 			}
+		}
+
+		/// <summary>
+		/// Method to check the 2nd item should avoid space, like ".semanticdomain + .semanticdomain"
+		/// Validating the closechildname with next childname, so we can get the first ending position
+		/// </summary>
+		/// <returns></returns>
+		private bool IsParentPrecedeSpace()
+		{
+			bool isParentPrecedeSpace = false;
+			string[] childnames = _closeChildName.Split('_');
+			if (_closeChildName.Trim().Length > 0 && _parentPrecendeSpace.Count > 0 && _parentPrecendeSpace.Contains(childnames[1]))
+			{
+				if (_characterName != null && _characterName.IndexOf(childnames[1], StringComparison.Ordinal) > 0)
+				{
+					isParentPrecedeSpace = true;
+				}
+			}
+			return isParentPrecedeSpace;
 		}
 
 		private string WriteTitleLogo(string content)
@@ -1815,7 +1836,6 @@ namespace SIL.PublishingSolution
 			//{
 			//    if (isPageBreak) return;
 			//}
-
 			if (_reader.Name == "a" && _anchorWrite)
 			{
 				_anchorWrite = false;

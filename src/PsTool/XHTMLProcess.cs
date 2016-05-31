@@ -83,6 +83,7 @@ namespace SIL.Tool
         protected bool _isParagraphClosed = true;
         protected List<string> _divType;
         protected bool _isFirstPictureWritten;
+	    protected List<string> _parentPrecendeSpace = new List<string>();
 
         #region Footnote
         protected string _chapterNo = string.Empty;
@@ -866,7 +867,7 @@ namespace SIL.Tool
             _parentStyleName = StackPeek(_allStyle);
 
             string styleName = MatchCssStyle(ancestorFontSize, "null", multiClassList);
-            if (styleName == string.Empty) // missing style in CSS
+			if (styleName == string.Empty) // missing style in CSS
             {
                 styleName = _className;
                 if (_outputType == Common.OutputType.ODT || _outputType == Common.OutputType.XELATEX)
@@ -876,15 +877,19 @@ namespace SIL.Tool
                 }
 
             }
-            else
-            {
-                if (_outputType == Common.OutputType.XELATEX)
-                {
-                    if (_lang.Length > 0)
-                        styleName = _className + Common.SepAttrib + _lang;
-                }
-            }
-            string newStyleName = GetStyleNumber(styleName);
+			else if (styleName == "span")
+			{
+				styleName = _className;
+			}
+			else
+			{
+				if (_outputType == Common.OutputType.XELATEX)
+				{
+					if (_lang.Length > 0)
+						styleName = _className + Common.SepAttrib + _lang;
+				}
+			}
+	        string newStyleName = GetStyleNumber(styleName);
 
             if (_newProperty.ContainsKey(newStyleName) == false)
             {
@@ -999,10 +1004,10 @@ namespace SIL.Tool
             foreach (string multiClass in multiClassList)
             {
                 ArrayList cssClassDetail = new ArrayList();
-                if (_classFamily.ContainsKey(multiClass))
-                {
-                    cssClassDetail = _classFamily[multiClass];
-                }
+				if (_classFamily.ContainsKey(multiClass))
+				{
+					cssClassDetail = _classFamily[multiClass];
+				}
                 AddTagProperty(cssClassDetail, multiClass);
                 if (cssClassDetail == null) return _matchedCssStyleName;
 
@@ -1026,7 +1031,9 @@ namespace SIL.Tool
 							clsNameList.Remove(cssClassInfo.CoreClass.ClassName);
 						}
 
-						var currClsNameList = new ArrayList();
+						GetParentPrecedeClass(cssClassInfo);
+
+		                var currClsNameList = new ArrayList();
 
 						foreach (ClassInfo clsName in xhtmlClassInfo)
 						{
@@ -1069,7 +1076,8 @@ namespace SIL.Tool
                         resultPrecede)
                     {
 	                    AssignProperty(cssClassInfo.StyleName, ancestorFontSize);
-                        if (_matchedCssStyleName == string.Empty)
+
+						if (_matchedCssStyleName == string.Empty)
                         {
                             _matchedCssStyleName = cssClassInfo.StyleName;
                             if (psuedo == "before")
@@ -1105,7 +1113,22 @@ namespace SIL.Tool
             return _matchedCssStyleName;
         }
 
-        /// <summary>
+		/// <summary>
+		///Method to get the classname which are like ".semanticdomain + .semanticdomain;
+		/// Based on this, Code will avoid default space after the first "semanticdomain"		/// </summary>
+		/// <param name="cssClassInfo"></param>
+	    private void GetParentPrecedeClass(ClassInfo cssClassInfo)
+	    {
+		    string currStyleName = cssClassInfo.StyleName.Replace(".-", "-");
+		    var clsNameList = currStyleName.Split('-').ToList();
+		    if (cssClassInfo.CoreClass.ClassName == clsNameList[0] && clsNameList[0] == clsNameList[1])
+		    {
+			    if (!_parentPrecendeSpace.Contains(cssClassInfo.CoreClass.ClassName))
+				    _parentPrecendeSpace.Add(cssClassInfo.CoreClass.ClassName);
+		    }
+	    }
+
+	    /// <summary>
         /// xhtml - h1 , Get h1,h1[lang='en'],h1[level='1'] from css.
         /// </summary>
         /// <param name="cssClassDetail"></param>
