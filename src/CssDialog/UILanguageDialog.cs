@@ -34,12 +34,12 @@ namespace SIL.PublishingSolution
 			try
 			{
 				_isLinux = Common.IsUnixOS();
-				CreateUserInterfaceLanguagexml();
 				if (_isLinux)
 				{
 					_fontName = "Liberation Serif";
 					_fontSize = "8";
 				}
+				Common.CreateUserInterfaceLanguagexml();
 				Param.LoadUiLanguageFontInfo();
 				UpdateFontOnL10NSharp(_uiLanguage);
 				LoadUiLanguages();
@@ -152,28 +152,6 @@ namespace SIL.PublishingSolution
 			Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage, _fontName.ToString(), ddlFontSize.SelectedItem.ToString());
 			Param.LoadUiLanguageFontInfo();
 			this.Close();
-		}
-
-		private void CreateUserInterfaceLanguagexml()
-		{
-			string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
-			if (!File.Exists(fileName))
-			{
-				using (XmlWriter writer = XmlWriter.Create(fileName))
-				{
-					writer.WriteStartElement("UILanguage");
-					writer.WriteElementString("string", "en");
-					writer.WriteStartElement("fontstyle");
-					writer.WriteStartElement("font");
-					writer.WriteAttributeString("lang", "en");
-					writer.WriteAttributeString("name", _fontName);
-					writer.WriteAttributeString("size", _fontSize);
-					writer.WriteEndElement();
-					writer.WriteEndElement();
-					writer.Flush();
-					writer.Close();
-				}
-			}
 		}
 
 		private void ReadLocalizationSettings(string setting)

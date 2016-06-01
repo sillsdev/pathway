@@ -1411,6 +1411,10 @@ namespace SIL.Tool
 	        if (File.Exists(fileName))
 	        {
 		        var content = File.ReadAllText(fileName);
+
+				if (Common.IsUnixOS() && content.Contains("Microsoft Sans Serif"))
+					content = content.Replace("Microsoft Sans Serif", "Liberation Serif");
+
 		        xmlDoc.LoadXml(content);
 		        var uiFontInfos = xmlDoc.SelectNodes("//UILanguage/fontstyle/font");
 		        foreach (XmlNode fontInfo in uiFontInfos)
@@ -1423,6 +1427,7 @@ namespace SIL.Tool
 				        UiLanguageFontSettings[lang] = new Dictionary<string, string> {{fontName, fontSize}};
 			        }
 		        }
+				xmlDoc.Save(fileName);
 	        }
         }
 

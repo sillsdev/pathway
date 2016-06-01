@@ -648,7 +648,7 @@ namespace SIL.PublishingSolution
 
 				if (Convert.ToBoolean(IncludeBookTitleintheImage))
 				{
-					tableOfContent += "\\font\\CoverPageTitle=\"" + titleFontName + "/B\":color=000000 at " + titleFontSize + "pt \r\n";
+					tableOfContent += "\\font\\CoverPageTitle=\"" + titleFontName + "/B\":color=000000 at 22pt \r\n";
 					tableOfContent += "\\font\\pFrontMatterdiv=\"" + titleFontName + "/B\":color=000000 at " + titleFontSize + "pt \r\n";
 					tableOfContent += "\\vskip 60pt \r\n";
 					tableOfContent += "\\begin{center} \r\n";
@@ -657,7 +657,7 @@ namespace SIL.PublishingSolution
 				}
 				else
 				{
-					tableOfContent += "\\font\\CoverPageTitle=\"" + titleFontName + "/B\":color=000000 at " + titleFontSize + "pt \r\n";
+					tableOfContent += "\\font\\CoverPageTitle=\"" + titleFontName + "/B\":color=000000 at 22pt \r\n";
 					tableOfContent += "\\vskip 60pt \r\n";
 					tableOfContent += "\\begin{center} \r\n";
 					tableOfContent += "\\CoverPageTitle{" + " " + "} \r\n";
