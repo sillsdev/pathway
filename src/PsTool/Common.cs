@@ -4754,16 +4754,71 @@ namespace SIL.Tool
 				}
 				xmlDoc.Save(fileName);
 			}
+			else
+			{
+				CreateUserInterfaceLanguagexml();
+			}
+		}
+
+		public static void CreateUserInterfaceLanguagexml()
+		{
+			string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
+			string fontName = "Microsoft Sans Serif";
+			string fontSize = "8";
+			if (IsUnixOS())
+			{
+				fontName = "Liberation Serif";
+				fontSize = "8";
+			}
+			if (!File.Exists(fileName))
+			{
+				string getDirectoryName = Path.GetDirectoryName(fileName);
+
+				if (Directory.Exists(getDirectoryName))
+				{
+					CreateLanguageFontSettings(fileName, fontName, fontSize);
+				}
+				else
+				{
+					Directory.CreateDirectory(getDirectoryName);
+					CreateLanguageFontSettings(fileName, fontName, fontSize);
+				}
+			}
+		}
+
+		private static void CreateLanguageFontSettings(string fileName, string fontName, string fontSize)
+		{
+			using (XmlWriter writer = XmlWriter.Create(fileName))
+			{
+				writer.WriteStartElement("UILanguage");
+				writer.WriteElementString("string", "en");
+				writer.WriteStartElement("fontstyle");
+				writer.WriteStartElement("font");
+				writer.WriteAttributeString("lang", "en");
+				writer.WriteAttributeString("name", fontName);
+				writer.WriteAttributeString("size", fontSize);
+				writer.WriteEndElement();
+				writer.WriteEndElement();
+				writer.Flush();
+				writer.Close();
+			}
 		}
 
 		public static string GetLocalizationSettings()
 		{
 			try
 			{
+				string fontName = "Microsoft Sans Serif";
+				string fontSize = "8";
+				if (IsUnixOS())
+				{
+					fontName = "Liberation Serif";
+					fontSize = "8";
+				}
 				var fileName = PathCombine(GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
 				if (!File.Exists(fileName))
 				{
-					SaveLocalizationSettings("en", "Microsoft Sans Serif", "8");
+					SaveLocalizationSettings("en", fontName, fontSize);
 				}
 
 				if (File.Exists(fileName))
