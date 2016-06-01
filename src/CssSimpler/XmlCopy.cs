@@ -111,9 +111,6 @@ namespace CssSimpler
                         _wtr.WriteProcessingInstruction( _rdr.Name, _rdr.Value );
                         break;
                     case XmlNodeType.DocumentType: // This code will never execute with DtdProcessing.Ignore (see instantiation)
-                        var sysid = _rdr.GetAttribute("SYSTEM");
-                        Debug.Assert(sysid != null, "sysid != null");
-                        _wtr.WriteDocType( _rdr.Name, _rdr.GetAttribute( "PUBLIC" ), sysid, _rdr.Value );
                         break;
                     case XmlNodeType.Comment:
                         _wtr.WriteComment( _rdr.Value );
