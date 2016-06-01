@@ -692,7 +692,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
         }
 
@@ -720,7 +720,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 9, "//*[@class='configtarget-ps']", "missing commas between lexical relation headwords");
         }
 
@@ -748,7 +748,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 4, "//*[@class='subentrymainentrysubentry-ps']", "subentry punctuation");
         }
 
@@ -777,7 +777,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 14, "//*[@class='semanticdomains-ps']", "semantic domain punctuation");
         }
 
@@ -806,7 +806,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
         }
 
@@ -835,7 +835,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            FileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 21, "//*[@class='configtarget-ps']", "semantic domain punctuation");
         }
 
