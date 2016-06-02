@@ -232,18 +232,19 @@ namespace SIL.PublishingSolution
             _cssProperty.Clear();
             styleAttributeInfo.Name = styleAttributeInfo.Name.ToLower();
             styleAttributeInfo.StringValueLower = styleAttributeInfo.StringValue.ToLower();
-            switch (styleAttributeInfo.Name)
-            {
-                case "padding":
-                case "margin":
-                case "class-margin":
-                    Margin(styleAttributeInfo);
-                    break;
-                case "color":
-                case "background-color":
-                    Color(styleAttributeInfo);
-                    break;
-                case "size":
+	        switch (styleAttributeInfo.Name)
+	        {
+		        case "padding":
+		        case "margin":
+		        case "class-margin":
+			        Margin(styleAttributeInfo);
+			        break;
+		        case "color":
+		        case "background-color":
+				case "text-decoration-color":
+			        Color(styleAttributeInfo);
+			        break;
+		        case "size":
                     Size(styleAttributeInfo);
                     break;
                 case "language":
@@ -504,7 +505,7 @@ namespace SIL.PublishingSolution
         {
             string attrValue = styleAttributeInfo.StringValue;
 
-            if (attrValue == "none" || attrValue == "underline" || attrValue == "inherit")
+            if (attrValue == "none" || attrValue == "underline" || attrValue == "inherit" || attrValue == "line-through")
             {
                 _cssProperty["text-decoration"] = attrValue;
             }
@@ -578,7 +579,7 @@ namespace SIL.PublishingSolution
         /// <param name="styleAttributeInfo">StyleAttribute</param>
         private void Color(StyleAttribute styleAttributeInfo)
         {
-            _cssProperty[styleAttributeInfo.Name] = Color2Hash(styleAttributeInfo);
+			_cssProperty[styleAttributeInfo.Name] = Color2Hash(styleAttributeInfo);
         }
 
         public string Color2Hash(StyleAttribute styleAttributeInfo)

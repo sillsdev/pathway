@@ -187,6 +187,7 @@ namespace SIL.PublishingSolution
                 _allTextProperty.Add("word-spacing", "fo:");
                 _allTextProperty.Add("color", "fo:");
                 _allTextProperty.Add("text-line-through-style", "style:");
+				_allTextProperty.Add("text-line-through-type", "style:");
                 _allTextProperty.Add("text-decoration", "style:");
                 _allTextProperty.Add("text-underline-style", "style:");
                 _allTextProperty.Add("background-color", "fo:");

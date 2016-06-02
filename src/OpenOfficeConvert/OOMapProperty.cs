@@ -163,6 +163,7 @@ namespace SIL.PublishingSolution
                     isPropertyWritten = true;
                     break;
                 case "color":
+				case "text-decoration-color":
                     Color(property.Value);
                     isPropertyWritten = true;
                     break;
@@ -724,8 +725,15 @@ namespace SIL.PublishingSolution
 
         public void Color(string propertyValue)
         {
-            propertyValue = ColorConversion(propertyValue);
-            _idProperty[_propertyKey] = propertyValue;
+			propertyValue = ColorConversion(propertyValue);
+			if (_propertyKey == "text-decoration-color")
+			{
+				_idProperty["color"] = propertyValue;
+			}
+			else
+			{
+				_idProperty[_propertyKey] = propertyValue;
+			}
         }
 
         private string ColorConversion(string propertyValue)
@@ -799,6 +807,12 @@ namespace SIL.PublishingSolution
             {
                 propertyName = "text-line-through-style";
                 propertyValue = "solid";
+
+				_idProperty[propertyName] = propertyValue;
+
+				propertyName = "text-line-through-type";
+				propertyValue = "single";
+
             }
             else if (propertyValue == "none")
             {
