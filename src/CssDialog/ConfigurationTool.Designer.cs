@@ -1116,7 +1116,8 @@ namespace SIL.PublishingSolution
 			this.chkCenterTitleHeader.Name = "chkCenterTitleHeader";
 			this.chkCenterTitleHeader.Size = new System.Drawing.Size(129, 17);
 			this.chkCenterTitleHeader.TabIndex = 110;
-			this.chkCenterTitleHeader.Text = "Center Title in Header";
+			this.chkCenterTitleHeader.Text = "Center Book Title in Header";
+			this.toolTip1.SetToolTip(this.chkCenterTitleHeader, "Include and center the Book Title in the Header");
 			this.chkCenterTitleHeader.UseVisualStyleBackColor = true;
 			this.chkCenterTitleHeader.CheckStateChanged += new System.EventHandler(this.chkCenterTitleHeader_CheckStateChanged);
 			// 
