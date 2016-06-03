@@ -791,6 +791,25 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
         }
 
+		[Test]
+		public void TextDecorationLineThroughTest()
+		{
+			const string file = "TextDecorationLineThroughTest";
+
+			string input = FileInput(file + ".css");
+			string output = FileOutput(file + "styles.xml");
+			GetCssClass(input, output);
+
+			_validate = new ValidateXMLFile(output);
+			_validate.ClassName = "span_.en_definitionorgloss.-senses.-entry";
+			_validate.ClassProperty.Add("style:text-line-through-style", "solid");
+			_validate.ClassProperty.Add("style:text-line-through-type", "single");
+
+			returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
+		}
+
+
         [Test]
         public void Padding_Node()
         {

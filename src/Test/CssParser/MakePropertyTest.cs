@@ -735,6 +735,21 @@ namespace Test.CssParserTest
             _expected.Add("font-weight", "bold");
             Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
         }
+
+		/// <summary>
+		///A test for Text Decoration Property
+		///</summary>
+		[Test]
+		public void TextDecorationPropertyTest()
+		{
+			_input.Name = "text-decoration";
+			_input.StringValue = "line-through";
+			_output = _makeProperty.CreateProperty(_input);
+			_expected.Clear();
+			_expected.Add("text-decoration", "line-through");
+			Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+		}
+
         #endregion Public Functions
 
         
