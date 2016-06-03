@@ -797,6 +797,9 @@ namespace SIL.PublishingSolution
                         }
                         _xetexFile.Write(property);
                         _xetexFile.Write("{");
+
+						if (property.Contains("\\section*{"))
+							letterInlineCount++;
                     }
                     _inlineCount = (inlineStyle.Count - paraStyleCount) + letterInlineCount;
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);

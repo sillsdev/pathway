@@ -491,6 +491,17 @@ namespace Test.XeLatex
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
+		public void MarginBottomTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "MarginBottom";
+			ExportProcess(file);
+			FileCompare(file);
+		}
+
+		[Test]
+		[Category("ShortTest")]
+		[Category("SkipOnTeamCity")]
 		public void DisplayBlockTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
