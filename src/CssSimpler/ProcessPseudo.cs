@@ -55,22 +55,22 @@ namespace CssSimpler
             ApplyBestRule(r.Depth, target, _beforeTargets, _lastClass);
         }
 
-        private void InsertAfter(XmlReader r)
+        private void InsertAfter(int depth, string name)
         {
-            var index = r.Depth + 1;
+            var index = depth + 1;
             if (index >= _savedLastClass.Count) return;
             var endClass = _savedLastClass[index] as string;
             if (endClass == null) return;
             var target1 = GetTargetKey(_classes[index] as string, endClass);
-            var target2 = GetTargetKey(r.Name, endClass);
-            if (ApplyBestRule(r.Depth, target1, _afterTargets, endClass)) return;
+            var target2 = GetTargetKey(name, endClass);
+            if (ApplyBestRule(depth, target1, _afterTargets, endClass)) return;
             if (ApplyBestRule(index, target2, _afterTargets, endClass)) return;
             ApplyBestRule(index, endClass, _afterTargets, endClass);
         }
 
-        private void UnsaveClass(XmlReader r)
+        private void UnsaveClass(int depth, string name)
         {
-            var index = r.Depth + 1;
+            var index = depth + 1;
             if (index >= _savedLastClass.Count) return;
             _savedLastClass[index] = null;
         }

@@ -21,8 +21,9 @@ namespace CssSimpler
     public abstract class XmlCopy
     {
         protected delegate void ParserMethod(XmlReader r);
+        protected delegate void EndTagMethod(int dept, string name);
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _beforeNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
-        private readonly Dictionary<XmlNodeType, List<ParserMethod>> _beforeEndNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
+        private readonly Dictionary<XmlNodeType, List<EndTagMethod>> _beforeEndNodeTypeMap = new Dictionary<XmlNodeType, List<EndTagMethod>>();
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _afterNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly StreamReader _sr;
         private readonly XmlReader _rdr;
@@ -51,6 +52,8 @@ namespace CssSimpler
                     case XmlNodeType.Element:
                         _wtr.WriteStartElement( _rdr.Prefix, _rdr.LocalName, _rdr.NamespaceURI );
                         var empty = _rdr.IsEmptyElement;
+                        var depth = _rdr.Depth;
+                        var name = _rdr.Name;
                         if (_doAttributes)
                         {
                             for (int attrIndex = _rdr.AttributeCount; attrIndex > 0; attrIndex--)
@@ -81,7 +84,7 @@ namespace CssSimpler
                         }
                         if (empty)
                         {
-                            BeforeEndProcessMethods();
+                            BeforeEndProcessMethods(XmlNodeType.EndElement, depth, name);
                             _wtr.WriteEndElement();
                         }
                         break;
@@ -116,7 +119,7 @@ namespace CssSimpler
                         _wtr.WriteComment( _rdr.Value );
                         break;
                     case XmlNodeType.EndElement:
-                        BeforeEndProcessMethods();
+                        BeforeEndProcessMethods(_rdr.NodeType, _rdr.Depth, _rdr.Name);
                         _wtr.WriteFullEndElement();
                         break;
                 }
@@ -126,7 +129,7 @@ namespace CssSimpler
             }
             for (var depth = _rdr.Depth; depth > 0; depth--)
             {
-                BeforeEndProcessMethods();
+                BeforeEndProcessMethods(XmlNodeType.EndElement, _rdr.Depth, _rdr.Name);
                 _wtr.WriteFullEndElement();
             }
             _wtr.Close();
@@ -146,13 +149,13 @@ namespace CssSimpler
             }
         }
 
-        private void BeforeEndProcessMethods()
+        private void BeforeEndProcessMethods(XmlNodeType type, int depth, string name)
         {
-            if (!_beforeEndNodeTypeMap.ContainsKey(_rdr.NodeType)) return;
-            foreach (ParserMethod func in _beforeEndNodeTypeMap[_rdr.NodeType])
+            if (!_beforeEndNodeTypeMap.ContainsKey(type)) return;
+            foreach (EndTagMethod func in _beforeEndNodeTypeMap[type])
             {
                 Debug.Assert(func != null, "func != null");
-                func(_rdr);
+                func(depth, name);
                 if (_finish)
                     break;
             }
@@ -209,15 +212,15 @@ namespace CssSimpler
             }
         }
 
-        protected void DeclareBeforeEnd(XmlNodeType nodeType, ParserMethod parserMethod)
+        protected void DeclareBeforeEnd(XmlNodeType nodeType, EndTagMethod endTagMethod)
         {
             if (_beforeEndNodeTypeMap.ContainsKey(nodeType))
             {
-                _beforeEndNodeTypeMap[nodeType].Add(parserMethod);
+                _beforeEndNodeTypeMap[nodeType].Add(endTagMethod);
             }
             else
             {
-                _beforeEndNodeTypeMap[nodeType] = new List<ParserMethod>() { parserMethod };
+                _beforeEndNodeTypeMap[nodeType] = new List<EndTagMethod>() { endTagMethod };
             }
             if (nodeType == XmlNodeType.Attribute)
             {
