@@ -282,6 +282,7 @@ namespace SIL.Tool
 		{
 			List<string> lstFileName = new List<string>();
 			lstFileName.Add("Add Columns FW83");
+			lstFileName.Add("Letter Header Language");
 			return lstFileName;
 		}
 
