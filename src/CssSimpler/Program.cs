@@ -90,27 +90,23 @@ namespace CssSimpler
                 return;
             }
             var lc = new LoadClasses(extra[0]);
-            MakeBaskupIfNecessary(lc.StyleSheet, extra[0]);
+            var styleSheet = lc.StyleSheet;
+            MakeBaskupIfNecessary(styleSheet, extra[0]);
             DebugWriteClassNames(lc.UniqueClasses);
-            Debug("Clean up Stylesheet: {0}", lc.StyleSheet);
+            Debug("Clean up Stylesheet: {0}", styleSheet);
             var parser = new CssTreeParser();
-            parser.Parse(lc.StyleSheet);
-            var r = parser.Root;
             var xml = new XmlDocument();
-            xml.LoadXml("<ROOT/>");
             UniqueClasses = lc.UniqueClasses;
-            AddSubTree(xml.DocumentElement, r, parser);
-            if (_outputXml)
-            {
-                Debug("Writing XML stylesheet");
-                WriteCssXml(lc.StyleSheet, xml);
-            }
-            WriteSimpleCss(lc.StyleSheet, xml); //reloads xml with simplified version
+            LoadCssXml(parser, styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
-            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, lc.StyleSheet);
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(parser, styleSheet, xml);
             var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
-            RemoveCssPseudo(lc.StyleSheet, xml);
+            RemoveCssPseudo(styleSheet, xml);
             try
             {
                 File.Delete(tmpXhtmlFullName);
@@ -119,6 +115,19 @@ namespace CssSimpler
             catch
             {
                 // ignored
+            }
+        }
+
+        private static void LoadCssXml(CssTreeParser parser, string styleSheet, XmlDocument xml)
+        {
+            parser.Parse(styleSheet);
+            var r = parser.Root;
+            xml.LoadXml("<ROOT/>");
+            AddSubTree(xml.DocumentElement, r, parser);
+            if (_outputXml)
+            {
+                Debug("Writing XML stylesheet");
+                WriteCssXml(styleSheet, xml);
             }
         }
 
@@ -330,7 +339,7 @@ namespace CssSimpler
                     n.AppendChild(node);
                     if (n.Name == "CLASS")
                     {
-                        if (!UniqueClasses.Contains(name))
+                        if (UniqueClasses != null && !UniqueClasses.Contains(name))
                         {
                             _noData = true;
                         }

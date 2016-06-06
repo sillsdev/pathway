@@ -24,7 +24,6 @@ using System.Xml.Schema;
 using CssSimpler;
 using NUnit.Framework;
 using SIL.PublishingSolution;
-using SIL.Tool;
 using FileData = BuildStep.FileData;
 
 // ReSharper disable once CheckNamespace
