@@ -2590,6 +2590,8 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:font-name", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-asian", _projInfo.HeaderFontName);
             _writer.WriteAttributeString("style:font-name-complex", _projInfo.HeaderFontName);
+			string headerFontSize = Common.GetHeaderFontSize(_cssProperty, _projInfo.ProjectInputType);
+			_writer.WriteAttributeString("fo:font-size", headerFontSize);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
@@ -2602,6 +2604,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:font-name", _projInfo.ReversalFontName);
                 _writer.WriteAttributeString("style:font-name-asian", _projInfo.ReversalFontName);
                 _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
+				_writer.WriteAttributeString("fo:font-size", headerFontSize);
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
             }
@@ -2613,6 +2616,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:font-name", "Charis SIL");
             _writer.WriteAttributeString("style:font-name-asian", "Charis SIL");
             _writer.WriteAttributeString("style:font-name-complex", "Charis SIL");
+			_writer.WriteAttributeString("fo:font-size", headerFontSize);
             _writer.WriteEndElement();
             _writer.WriteEndElement();
 
