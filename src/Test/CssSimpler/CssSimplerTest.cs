@@ -57,6 +57,20 @@ namespace Test.CssSimplerTest
         #region Tests
 
         /// <summary>
+        ///A test removing errors from CSS
+        ///</summary>
+        [Test]
+        public void ParseCssRemovingErrorsTest1()
+        {
+            const string testName = "CssErrors";
+            var cssName = testName + ".css";
+            _testFiles.Copy(cssName);
+            var parser = new CssTreeParser();
+            ParseCssRemovingErrors(parser, _testFiles.Output(cssName));
+            TextFileAssert.AreEqual(_testFiles.Expected(cssName), _testFiles.Output(cssName), "Css errors not removed properly");
+        }
+
+        /// <summary>
         ///A test for WriteSimpleXhtml
         ///</summary>
         [Test]

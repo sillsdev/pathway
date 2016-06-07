@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Xsl;
 using SIL.PublishingSolution;
@@ -120,7 +121,7 @@ namespace CssSimpler
 
         private static void LoadCssXml(CssTreeParser parser, string styleSheet, XmlDocument xml)
         {
-            parser.Parse(styleSheet);
+            ParseCssRemovingErrors(parser, styleSheet);
             var r = parser.Root;
             xml.LoadXml("<ROOT/>");
             AddSubTree(xml.DocumentElement, r, parser);
@@ -128,6 +129,76 @@ namespace CssSimpler
             {
                 Debug("Writing XML stylesheet");
                 WriteCssXml(styleSheet, xml);
+            }
+        }
+
+        protected static void ParseCssRemovingErrors(CssTreeParser parser, string styleSheet)
+        {
+            var error = true;
+            while (error)
+            {
+                try
+                {
+                    parser.Parse(styleSheet);
+                    error = false;
+                }
+                catch (Exception e)
+                {
+                    error = true;
+                    RemoveError(parser.Errors, styleSheet);
+                }
+            }
+        }
+
+        private static void RemoveError(List<string> errors, string styleSheet)
+        {
+            List<int> lines = new List<int>();
+            foreach (var error in errors)
+            {
+                var match = Regex.Match(error, @"(\d+)\:", RegexOptions.None);
+                if (match.Success)
+                {
+                    lines.Add(int.Parse(match.Groups[1].Value));
+                }
+            }
+            if (lines.Count > 0)
+            {
+                var sr = new StreamReader(styleSheet, Encoding.UTF8);
+                var folder = Path.GetDirectoryName(styleSheet);
+                var outName = Path.GetFileNameWithoutExtension(styleSheet) + "Out.css";
+                var outFullPath = folder != null ? Path.Combine(folder, outName) : outName;
+                var fw = new FileStream(outFullPath, FileMode.Create);
+                var sw = new StreamWriter(fw, Encoding.UTF8);
+                var rdline = 0;
+                while (!sr.EndOfStream)
+                {
+                    rdline += 1;
+                    if (lines.Contains(rdline))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            var skipLine = sr.ReadLine();
+                            if (skipLine.Trim().EndsWith("}")) break;
+                            rdline += 1;
+                        }
+                    }
+                    else
+                    {
+                        sw.WriteLine(sr.ReadLine());
+                    }
+                }
+                sw.Close();
+                fw.Close();
+                sr.Close();
+                File.Copy(outFullPath, styleSheet, true);
+                try
+                {
+                    File.Delete(outFullPath);
+                }
+                catch
+                {
+                    // Try to delete the temporary file but don't crash if it doesn't work.
+                }
             }
         }
 
