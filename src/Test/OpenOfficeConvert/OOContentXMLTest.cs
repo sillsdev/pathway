@@ -4934,6 +4934,24 @@ namespace Test.OpenOfficeConvert
 			Assert.IsTrue(returnValue);
 		}
 
+		///<summary>
+		///Avoid space after the picture in new FLEX8.3 Test TD-4675
+		///</summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void PictureSpaceAfterTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "PictureSpaceAfter";
+			DateTime startTime = DateTime.Now;
+			string styleOutput = GetStyleOutput(file);
+			_totalTime = DateTime.Now - startTime;
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
 
 		#endregion
 		#endregion
