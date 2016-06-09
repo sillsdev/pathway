@@ -51,15 +51,15 @@ namespace SIL.Tool
             {
                 return;
             }
-            if (executablePath.Contains("FieldWorks 7") || executablePath.Contains("FieldWorks"))
+            if (executablePath.ToLower().Contains("fieldworks"))
             {
                 _hostProgram = HostProgram.FieldWorks;
             }
-            else if (executablePath.Contains("Paratext"))
+            else if (executablePath.ToLower().Contains("paratext"))
             {
                 _hostProgram = HostProgram.Paratext;
             }
-            else if (executablePath.Contains("PathwayB"))
+			else if (executablePath.ToLower().Contains("pathwayb"))
             {
                 _hostProgram = HostProgram.PathwayB;
             }

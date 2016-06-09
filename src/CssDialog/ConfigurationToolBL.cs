@@ -1711,7 +1711,12 @@ namespace SIL.PublishingSolution
 					string task = tn.Text;
 					foreach (TreeNode ctn in tn.Nodes)
 					{
-						PopulateFeatureItemsInDropDownctrl(task, ctn);
+						try
+						{
+							PopulateFeatureItemsInDropDownctrl(task, ctn);
+						}
+						catch{}
+						//Exception handle for linux environment Treenode control for handling null exception raised when localization language is changed.
 					}
 				}
 			}
@@ -1747,9 +1752,12 @@ namespace SIL.PublishingSolution
 
 		private void PopulateFeatureItemsInDropDownctrl(string task, TreeNode ctn)
 		{
-
 			string enText = ctn.Text;
-			ctn.Text = LocalizeItems.LocalizeItem(task, ctn.Text);
+			try
+			{
+				ctn.Text = LocalizeItems.LocalizeItem(task, ctn.Text);
+			}
+			catch{}
 
 			switch (task)
 			{
