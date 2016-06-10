@@ -3296,9 +3296,11 @@ namespace SIL.Tool
 
                     XmlNode getBookName = bookLists[i].ParentNode;
                     XmlNodeList bookNodeList = getBookName.SelectNodes("//span[@class='" + strBookType + "']", namespaceManager);
-                    bookName = bookNodeList.Item(i).InnerText;
-
-                    XmlNode divReferenceNode = xDoc.CreateElement("div");
+	                if (bookNodeList != null && bookNodeList.Count > 0)
+	                {
+		                bookName = bookNodeList.Item(i).InnerText;
+	                }
+	                XmlNode divReferenceNode = xDoc.CreateElement("div");
                     XmlAttribute xmlReferenceAttribute = xDoc.CreateAttribute("class");
                     xmlReferenceAttribute.Value = "BookReferenceDiv";
                     if (divReferenceNode.Attributes != null) divReferenceNode.Attributes.Append(xmlReferenceAttribute);

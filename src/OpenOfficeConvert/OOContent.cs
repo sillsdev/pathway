@@ -122,6 +122,7 @@ namespace SIL.PublishingSolution
 		public bool IsFirstEntry;
 		//private bool isPageBreak;
 		private string _previousContent = "Reversal";
+		private bool _previousSignificant = false;
 		private bool _isWhiteSpaceSkipped = true;
 		private List<string> _entryIdList = new List<string>();
 		private bool _isParaPicture, _isFirstPicture;
@@ -661,7 +662,7 @@ namespace SIL.PublishingSolution
 			}
 
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value);
+			string data = SignificantSpace(_reader.Value, false);
 			if (!whiteSpaceExist && !_pseudoSingleSpace)
 			{
 				_significant = true;
@@ -672,7 +673,7 @@ namespace SIL.PublishingSolution
 		private void InsertWhiteSpace()
 		{
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value);
+			string data = SignificantSpace(_reader.Value, false);
 			if (!whiteSpaceExist && !_pseudoSingleSpace)
 			{
 				IsLastPronunciationform();
@@ -748,11 +749,12 @@ namespace SIL.PublishingSolution
 
 		}
 
-		private string SignificantSpace(string content)
+		private string SignificantSpace(string content, bool skipFirstLetterSpace)
 		{
 			if (content == null) return "";
 			content = content.Replace("\r\n", "");
 			content = content.Replace("\t", "");
+			
 			Char[] charac = content.ToCharArray();
 			StringBuilder builder = new StringBuilder();
 			foreach (char var in charac)
@@ -772,6 +774,16 @@ namespace SIL.PublishingSolution
 				builder.Append(var);
 			}
 			content = builder.ToString();
+
+			if (skipFirstLetterSpace)
+			{
+				_previousSignificant = _significant;
+				if (!String.IsNullOrEmpty(content) && !_previousSignificant && charac[0] == ' ')
+				{
+					content = charac[0] + content;
+				}				
+			}
+
 			if (_classNameWithLang.IndexOf("scrFootnoteMarker") == 0)
 			{
 				_significant = true;
@@ -780,15 +792,7 @@ namespace SIL.PublishingSolution
 			{
 				_significant = true;
 				_footnoteSpace = true;
-			}
-			else if (_classNameWithLang.IndexOf("a") == 0)
-			{
-				if (_childName.IndexOf("headword") > 0 || _childName.IndexOf("mainheadword") > 0)
-				{
-					_significant = true;
-					_anchorSignificant = true;
-				}
-			}
+			}			
 			return content;
 		}
 
@@ -932,14 +936,8 @@ namespace SIL.PublishingSolution
 
 		private void WriteText()
 		{
-			string content = _reader.Value;
-			content = ReplaceString(content);
-			if (_anchorSignificant && _className != "a")
-			{
-				content = " " + content;
-				_significant = false;
-				_anchorSignificant = false;
-			}
+			string content = _reader.Value;			
+			content = ReplaceString(content);			
 			if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
 			if (_isPictureDisplayNone)
 			{
@@ -1109,7 +1107,7 @@ namespace SIL.PublishingSolution
 				}
 
 				if (!IsParentPrecedeSpace())
-					content = SignificantSpace(content);
+					content = SignificantSpace(content, true);
 
 				if (_isPreviousGlossary)
 				{

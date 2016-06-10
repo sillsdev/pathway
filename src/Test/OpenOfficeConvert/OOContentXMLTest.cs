@@ -744,7 +744,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            string content = "\\U8658 A a \". " + Common.ConvertUnicodeToString("\\2666") + "\" B b \". \" C c ' ** ' ** D d # v \" v =\"\" \\ ' E e \"^ F f $@ G g ! ";
+            string content = "\\U8658 A a \". " + Common.ConvertUnicodeToString("\\2666") + "\" B b \".  \" C c '  ** ' ** D d # v \" v =\"\" \\ ' E e \"^ F f $@ G g ! ";
             XmlNode officeNode = _validate.GetOfficeNode();
             Assert.IsNotNull(officeNode, "Office node is null");
             Assert.AreEqual(content, officeNode.InnerText, "PseudoQuotes1 Test failed");
@@ -2652,7 +2652,7 @@ namespace Test.OpenOfficeConvert
             returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "para");
             Assert.IsTrue(returnValue1, "SignificantSpace - Content Failure");
 
-            content = "<text:span text:style-name=\"partofspeech_.en_sense_senses_entry_letData_dicBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"> One end span and start span -------------------------&gt; v</text:span><text:span text:style-name=\"definition_.en_sense_senses_entry_letData_dicBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">light (COMING WITH ONE SPACE)</text:span>";
+            content = "<text:span text:style-name=\"partofspeech_.en_sense_senses_entry_letData_dicBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">  One end span and start span -------------------------&gt; v</text:span><text:span text:style-name=\"definition_.en_sense_senses_entry_letData_dicBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">light (COMING WITH ONE SPACE)</text:span>";
             returnValue1 = _validate.ValidateOfficeTextNodeList(3, content, "para");
             Assert.IsTrue(returnValue1, "SignificantSpace - Content Failure");
 
@@ -3739,7 +3739,7 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
             string xpath = "//text:p[@text:style-name='entry_letData_dicBody'][1]";
-            string content = "bel n 14. 1) war. 2) fighting. 3) bloodshed. 4) spectacle (something which pulls crowds). You can use the add spaces button to separate... because of the trouble which began in the city...";
+            string content = "bel n  14. 1) war. 2) fighting. 3) bloodshed. 4) spectacle (something which pulls crowds). You can use the add spaces button to separate... because of the trouble which began in the city...";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Hard Space after versenumber test failed");
 
@@ -3917,7 +3917,7 @@ namespace Test.OpenOfficeConvert
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             string xpath = "//text:p[@text:style-name='ChapterNumber1']";
-            string content = "<text:span text:style-name=\"ChapterNumber_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">1</text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"Left_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"RLeft_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"Right_Guideword_R\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"RRight_Guideword_R\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:span text:style-name=\"span_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"VerseNumber_Paragraph_scrBook_scrBody\"> 1 </text:span>Yesu Kristo, Owi</text:span><text:span text:style-name=\"SeeInGlossary_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Dawid</text:span><text:span text:style-name=\"span_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"> mv na,</text:span><text:span text:style-name=\"SeeInGlossary_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:span><text:span text:style-name=\"span_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"> mvat sapace invpt</text:span>";
+			string content = "<text:span text:style-name=\"ChapterNumber_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">1</text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"Left_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"RLeft_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"Right_Guideword_R\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"RRight_Guideword_R\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:span text:style-name=\"span_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"VerseNumber_Paragraph_scrBook_scrBody\">  1 </text:span>Yesu Kristo, Owi</text:span><text:span text:style-name=\"SeeInGlossary_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Dawid</text:span><text:span text:style-name=\"span_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"> mv na,</text:span><text:span text:style-name=\"SeeInGlossary_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:span><text:span text:style-name=\"span_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"> mvat sapace invpt</text:span>";
             bool returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue);
 
@@ -4061,7 +4061,7 @@ namespace Test.OpenOfficeConvert
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
 			_validate.GetInnerText = true;
-			string content = "wirek hen comp. [ˈwiɾ.ək ʁɛn] earlier, old, pertaining to or belonging to an earlier time.";
+			string content = "wirek hen comp. [ˈwiɾ.ək ʁɛn] earlier, old, pertaining to or belonging to an earlier time.";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
 			Assert.IsTrue(returnValue1);
 
@@ -4544,6 +4544,30 @@ namespace Test.OpenOfficeConvert
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
+
+		///<summary>
+		/// TD-4673
+		/// </summary>      
+		[Test]
+		[Category("ShortTest")]
+		[Category("SkipOnTeamCity")]
+		public void SelfSpaceTestInDictionary()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "selfspacetest";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
 
         ///<summary>
         /// TD-3607

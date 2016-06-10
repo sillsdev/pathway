@@ -216,7 +216,7 @@ namespace TestBed
         private void BtnInputCSS_Click(object sender, EventArgs e)
         {
 
-            txtCSSInput.Text = GetFilePath("CSS Files|*.css|STY Files|*.sty");
+			txtCSSInput.Text = GetFilePath("STY Files|*.sty|CSS Files|*.css");
         }
 
 
