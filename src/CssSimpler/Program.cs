@@ -28,7 +28,7 @@ namespace CssSimpler
     public class Program
     {
         private static bool _showHelp;
-        private static bool _outputXml;
+        protected static bool OutputXml;
         private static int _verbosity;
         private static bool _makeBackup;
 
@@ -52,7 +52,7 @@ namespace CssSimpler
             {
                 {
                     "x|xml", "produce XML output of CSS",
-                    v => _outputXml = v != null
+                    v => OutputXml = v != null
                 },
                 {
                     "b|backup", "make a backup of the original CSS file",
@@ -119,13 +119,13 @@ namespace CssSimpler
             }
         }
 
-        private static void LoadCssXml(CssTreeParser parser, string styleSheet, XmlDocument xml)
+        protected static void LoadCssXml(CssTreeParser parser, string styleSheet, XmlDocument xml)
         {
             ParseCssRemovingErrors(parser, styleSheet);
             var r = parser.Root;
             xml.LoadXml("<ROOT/>");
             AddSubTree(xml.DocumentElement, r, parser);
-            if (_outputXml)
+            if (OutputXml)
             {
                 Debug("Writing XML stylesheet");
                 WriteCssXml(styleSheet, xml);

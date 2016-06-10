@@ -605,6 +605,46 @@ namespace Test.CssSimplerTest
         /// A test to use the css to insert pseudo content into xhtml
         /// </summary>
         [Test]
+        public void BulletsTest()
+        {
+            const string testName = "bullets";
+            _testFiles.Copy(testName + ".xhtml");
+            var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+            _testFiles.Copy(testName + ".css");
+            var styleSheet = _testFiles.Output(testName + ".css");
+            var lc = new LoadClasses(xhtmlFullName);
+            var parser = new CssTreeParser();
+            var xml = new XmlDocument();
+            UniqueClasses = lc.UniqueClasses;
+            OutputXml = true;
+            LoadCssXml(parser, styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+            var tmp2Out = Path.GetTempFileName();
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(parser, styleSheet, xml);
+            var ps = new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+            RemoveCssPseudo(styleSheet, xml);
+            try
+            {
+                File.Delete(tmpXhtmlFullName);
+                File.Delete(tmp2Out);
+            }
+            catch
+            {
+                // ignored
+            }
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            NodeTest(xhtmlFullName, 3, "//*[@class='visiblecomplexformbackref-ps']", "Wrong number of bullets in output");
+            NodeTest(xhtmlFullName, 3, "//*[@class='visiblecomplexformbackrefs-ps']", "Wrong number of list punctuation");
+        }
+
+        /// <summary>
+        /// A test to use the css to insert pseudo content into xhtml
+        /// </summary>
+        [Test]
         public void Bke828Test()
         {
             const string testName = "bke828";

@@ -50,7 +50,7 @@ namespace CssSimpler
             var nextClass = r.GetAttribute("class");
             if (ApplyBestRule(r.Depth + 1, nextClass, _beforeTargets, nextClass)) return;
             var keyClass = KeyClass(r.Depth);
-            if (_classes.Count > r.Depth && ApplyBestRule(r.Depth + 1, GetTargetKey(r.Name, keyClass), _beforeTargets, keyClass)) return;
+            if (_classes.Count > r.Depth && ApplyBestRule(r.Depth, GetTargetKey(r.Name, keyClass), _beforeTargets, keyClass)) return;
             var target = GetTargetKey(r.Name, _lastClass);
             ApplyBestRule(r.Depth, target, _beforeTargets, _lastClass);
         }
@@ -127,7 +127,7 @@ namespace CssSimpler
                         Debug.Assert(node != null, "Nothing preceding PRECEDES");
                         string precedingName = node.ChildNodes[0].InnerText;
                         if (_classes[index] as string != precedingName && precedingName != "span") return false;
-                        index -= 1;
+                        if (precedingName != "span") index -= 1;
                         break;
                     case "SIBLING":
                         node = node.PreviousSibling;
