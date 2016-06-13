@@ -34,7 +34,7 @@ namespace CssSimpler
 
         protected XmlCopy(string xmlInFullName, string xmlOutFullName)
         {
-            var settings = new XmlReaderSettings(){DtdProcessing = DtdProcessing.Ignore};
+            var settings = new XmlReaderSettings(){DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver()};
             _sr = new StreamReader(xmlInFullName);
             _rdr = XmlReader.Create(_sr, settings);
             _wtr = XmlWriter.Create(xmlOutFullName);

@@ -129,7 +129,7 @@ namespace Test.CssSimplerTest
 			_testFiles.Copy(fileName);
 			string xhtmlFullName = _testFiles.Output(fileName);
             var outFile = WriteSimpleXhtml(xhtmlFullName);
-			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new CssSimpler.NullResolver() };
 			var xhtml = new XmlDocument();
 			xhtml.Load(XmlReader.Create(outFile, settings));
 			var checkClass = xhtml.SelectSingleNode("//*[local-name()='body'][@class='dicBody']");
@@ -325,7 +325,7 @@ namespace Test.CssSimplerTest
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
             var outFile = WriteSimpleXhtml(xhtmlFullName);
-            var settings = new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore};
+            var settings = new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore, XmlResolver = new CssSimpler.NullResolver()};
             var xhtml = new XmlDocument();
             xhtml.Load(XmlReader.Create(outFile, settings));
             var translationNodes = xhtml.SelectSingleNode("//translation/translation");
@@ -343,7 +343,7 @@ namespace Test.CssSimplerTest
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
             var outFile = WriteSimpleXhtml(xhtmlFullName);
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new CssSimpler.NullResolver() };
             var xhtml = new XmlDocument();
             xhtml.Load(XmlReader.Create(outFile, settings));
             var exampeNodes = xhtml.SelectNodes("//*[@class='complete']/*[@class='example']");
@@ -362,7 +362,7 @@ namespace Test.CssSimplerTest
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
             var outFile = WriteSimpleXhtml(xhtmlFullName);
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new CssSimpler.NullResolver() };
             var xhtml = new XmlDocument();
             xhtml.Load(XmlReader.Create(outFile, settings));
             var picturesNodes = xhtml.SelectSingleNode("//*[local-name()='span'][@class='pictures']");
@@ -556,7 +556,7 @@ namespace Test.CssSimplerTest
             _testFiles.Copy(cssFile);
             var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), _testFiles.Output(xhtmlFile), _testFiles.Output(cssFile));
             Assert.IsNotNull(ilst);
-			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new CssSimpler.NullResolver() };
 			var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), settings);
             var xhtmlDoc = new XmlDocument();
             xhtmlDoc.Load(xr);
@@ -582,7 +582,7 @@ namespace Test.CssSimplerTest
             var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), _testFiles.Output(xhtmlFile),
                 _testFiles.Output(cssFile));
             Assert.IsNotNull(ilst);
-			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new CssSimpler.NullResolver() };
 			var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), settings);
             var xhtmlDoc = new XmlDocument();
             xhtmlDoc.Load(xr);
