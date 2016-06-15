@@ -628,6 +628,38 @@ namespace Test.epubConvert
 			FileCompare(tocOutputNCXFile, tocExpectedNCXFile);
 		}
 
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void CreateNcxReversalTest()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+
+			const string XhtmlName = "main.xhtml";
+			const string CssName = "main.css";
+			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+			projInfo.IsReversalExist = true;
+			projInfo.ProjectName = "Dictionary Test";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			CleanOutputDirectory();
+			string inputDataFolder = Common.PathCombine(_inputPath, "CreateNCXTestcaseWithReversal");
+			string outputDataFolder = Common.PathCombine(_outputPath, "CreateNCXTestcaseWithReversal");
+			Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+			string outputDirectory = Path.Combine(outputDataFolder, "OEBPS");
+			EpubToc target = new EpubToc(projInfo.ProjectInputType, "2 - Letter and Entry");
+			var bookId = new Guid("5C3DF448-BADC-4F83-AF5C-B880027FF079");
+			target.CreateNcx(projInfo, outputDirectory, bookId);
+			string tocOutputNCXFile = Path.Combine(outputDirectory, "toc.ncx");
+			string tocExpectedNCXFile = Path.Combine(_expectedPath, "tocwithreversal.ncx");
+
+			FileCompare(tocOutputNCXFile, tocExpectedNCXFile);
+		}
 
 		[Test]
 		[Category("LongTest")]
