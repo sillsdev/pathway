@@ -1417,7 +1417,7 @@ namespace SIL.PublishingSolution
             string getStyleName = StackPeek(_allStyle);
             if (IdAllClass[getStyleName].ContainsKey("direction"))
             {
-                if (IdAllClass[getStyleName]["direction"] == "rtl")
+                if (IdAllClass[getStyleName]["direction"].ToLower() == "rtl")
                 {
                     _directionStart = "\\RL{";
                 }
@@ -1544,7 +1544,7 @@ namespace SIL.PublishingSolution
                     displayNoneStart = "\\begin{comment}";
                     displayNoneEnd = "\\end{comment}\r\n";
                 }
-                if (propName == "RTL")
+                if (propName.ToUpper() == "RTL")
                 {
                     _directionStart = "\\RL{";
                 }
@@ -1640,7 +1640,7 @@ namespace SIL.PublishingSolution
                         displayNoneStart = "\\begin{comment}";
                         displayNoneEnd = "\\end{comment}\r\n";
                     }
-                    else if (propName == "RTL")
+                    else if (propName.ToUpper() == "RTL")
                     {
                         _directionStart = "\\RL{";
                     }
