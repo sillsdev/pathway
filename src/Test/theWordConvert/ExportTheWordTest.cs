@@ -484,7 +484,7 @@ namespace Test.theWordConvert
         public void ExtraMaterialTest()
         {
             var bookNames = "file://" + FileInput("msbBookNames.xml");
-            TestDataCase("MAT", "msbMat.usx", 23, "<PI>“Tandai, may birhen na magabudos tapos magaanak sin lalaki na pagatawagon Emmanuel (na an gusto sabihon, ‘An Dios adi sa aton.’)”<RF q=+>Kitaa sa <a href=\"tw://bible.*?23.7.14\">Isaias 7:14</a><Rf><CM>", bookNames, ":", null, "Kitaa sa ");
+            TestDataCase("MAT", "msbMAT.usx", 23, "<PI>“Tandai, may birhen na magabudos tapos magaanak sin lalaki na pagatawagon Emmanuel (na an gusto sabihon, ‘An Dios adi sa aton.’)”<RF q=+>Kitaa sa <a href=\"tw://bible.*?23.7.14\">Isaias 7:14</a><Rf><CM>", bookNames, ":", null, "Kitaa sa ");
         }
 
         [Test]
