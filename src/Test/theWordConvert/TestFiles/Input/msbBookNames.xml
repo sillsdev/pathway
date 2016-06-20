@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BookNames>
+  <book code="MAT" abbr="MAT" short="Mateo" long="An Maayo Na Barita Manungod Kan Jesu-Cristo Na Ginsurat Ni Mateo" />
+  <book code="MRK" abbr="MRC" short="Marcos" long="An Maayo Na Barita Manungod Kan Jesu-Cristo Na Ginsurat Ni Marcos" />
+  <book code="LUK" abbr="LUC" short="Lucas" long="An Maayo Na Barita Manungod Kan Jesu-Cristo Na Sinurat Ni Lucas" />
+  <book code="JHN" abbr="JUN" short="Juan" long="An Maayo Na Barita Manungod Kan Jesu-Cristo Na Ginsurat Ni Juan" />
+  <book code="ACT" abbr="HIM" short="Mga Himo" long="An Mga Himo San Mga Apostoles" />
+  <book code="ROM" abbr="ROM" short="Roma" long="An Surat Ni Pablo Sa Mga Taga-Roma" />
+  <book code="1CO" abbr="1CO" short="1 Corinto" long="An Una Na Surat Ni Pablo Sa Mga Taga-Corinto" />
+  <book code="2CO" abbr="2CO" short="2 Corinto" long="An Ikaduha Na Surat Ni Pablo Sa Mga Taga-Corinto" />
+  <book code="GAL" abbr="GAL" short="Galacia" long="An Surat Ni Pablo Sa Mga Taga-Galacia" />
+  <book code="EPH" abbr="EFS" short="Efeso" long="An Surat Ni Pablo Sa Mga Taga-Efeso" />
+  <book code="PHP" abbr="FLP" short="Filipos" long="An Surat Ni Pablo Sa Mga Taga-Filipos" />
+  <book code="COL" abbr="COL" short="Colosas" long="An Surat Ni Pablo Sa Mga Taga-Colosas" />
+  <book code="1TH" abbr="1TS" short="1 Tesalonica" long="An Una Na Surat Ni Pablo Sa Mga Taga-Tesalonica" />
+  <book code="2TH" abbr="2TS" short="2 Tesalonica" long="An Ikaduha Na Surat Ni Pablo Sa Mga Taga-Tesalonica" />
+  <book code="1TI" abbr="1TI" short="1 Timoteo" long="An Una Na Surat Ni Pablo Kan Timoteo" />
+  <book code="2TI" abbr="2TI" short="2 Timoteo" long="An Ikaduha Na Surat Ni Pablo Kan Timoteo" />
+  <book code="TIT" abbr="TIT" short="Tito" long="An Surat Ni Pablo Kan Tito" />
+  <book code="PHM" abbr="FLM" short="Felimon" long="An Surat Ni Pablo Kan Felimon" />
+  <book code="HEB" abbr="HEB" short="Hebreo" long="An Surat Sa Mga Hebreo" />
+  <book code="JAS" abbr="SAN" short="Santiao" long="An Surat Ni Santiao" />
+  <book code="1PE" abbr="1PE" short="1 Pedro" long="An Una Na Surat Ni Pedro" />
+  <book code="2PE" abbr="2PE" short="2 Pedro" long="An Ikaduha Na Surat Ni Pedro" />
+  <book code="1JN" abbr="1JN" short="1 Juan" long="An Una Na Surat Ni Juan" />
+  <book code="2JN" abbr="2JN" short="2 Juan" long="An Ikaduha Na Surat Ni Juan" />
+  <book code="3JN" abbr="3JN" short="3 Juan" long="An Ikatulo Na Surat Ni Juan" />
+  <book code="JUD" abbr="JUD" short="Judas" long="An Surat Ni Judas" />
+  <book code="REV" abbr="GIN" short="An Ginhayag" long="An Ginhayag Ni Juan" />
+  <book code="GEN" abbr="Gen" short="Genesis" long="Genesis" />
+  <book code="EXO" abbr="Ex" short="Exodo" long="Exodo" />
+  <book code="LEV" abbr="Lev" short="Levi" long="Levi" />
+  <book code="NUM" abbr="Num" short="Numeros" long="Numeros" />
+  <book code="DEU" abbr="Dt" short="Deuteronomio" long="Deuteronomio" />
+  <book code="JOS" abbr="Jos" short="Josue" long="Josue" />
+  <book code="JDG" abbr="Jc" short="Jueces" long="Jueces" />
+  <book code="RUT" abbr="Rut" short="Rut" long="Rut" />
+  <book code="1SA" abbr="1 Sm" short="1 Samuel" long="1 Samuel" />
+  <book code="2SA" abbr="2 Sm" short="2 Samuel" long="2 Samuel" />
+  <book code="1KI" abbr="1 Re" short="1 Mga Hadi" long="1 Mga Hadi" />
+  <book code="2KI" abbr="2 Re" short="2 Mga Hadi" long="2 Mga Hadi" />
+  <book code="1CH" abbr="1 Cr" short="1 Cronicas" long="1 Cronicas" />
+  <book code="2CH" abbr="2 Cr" short="2 Cronicas" long="2 Cronicas" />
+  <book code="EZR" abbr="Esd" short="Ezdras" long="Ezdras" />
+  <book code="NEH" abbr="Neh" short="Nehemias" long="Nehemias" />
+  <book code="EST" abbr="Est" short="Ester" long="Ester" />
+  <book code="JOB" abbr="Job" short="Job" long="Job" />
+  <book code="PSA" abbr="Sal" short="Salmo" long="Salmos" />
+  <book code="PRO" abbr="Pr" short="Mga Kasabihan" long="Mga Kasabihan" />
+  <book code="ECC" abbr="Ecl" short="Eclesiastes" long="Eclesiastes" />
+  <book code="SNG" abbr="Cant" short="Cantares" long="Cantares" />
+  <book code="ISA" abbr="Is" short="Isaias" long="Isaias" />
+  <book code="JER" abbr="Jer" short="Jeremias" long="Jeremias" />
+  <book code="LAM" abbr="Lam" short="Lamentaciones" long="Lamentaciones" />
+  <book code="EZK" abbr="Ez" short="Ezequiel" long="Ezequiel" />
+  <book code="DAN" abbr="Dan" short="Daniel" long="Daniel" />
+  <book code="HOS" abbr="Os" short="Oseas" long="Oseas" />
+  <book code="JOL" abbr="Joel" short="Joel" long="Joel" />
+  <book code="AMO" abbr="Am" short="Amos" long="Amos" />
+  <book code="OBA" abbr="Ab" short="Abdias" long="Abdias" />
+  <book code="JON" abbr="Jon" short="Jonas" long="Jonas" />
+  <book code="MIC" abbr="Miq" short="Mikas" long="Mikas" />
+  <book code="NAM" abbr="Nah" short="Nahum" long="Nahum" />
+  <book code="HAB" abbr="Hab" short="Habacuc" long="Habacuc" />
+  <book code="ZEP" abbr="Sof" short="Sofonias" long="Sofonias" />
+  <book code="HAG" abbr="Hag" short="Hagai" long="Hagai" />
+  <book code="ZEC" abbr="Zac" short="Zacarias" long="Zacarias" />
+  <book code="MAL" abbr="Ml" short="Malakai" long="Malakai" />
+  <book code="TOB" abbr="" short="" long="" />
+  <book code="JDT" abbr="" short="" long="" />
+  <book code="ESG" abbr="" short="" long="" />
+  <book code="WIS" abbr="" short="" long="" />
+  <book code="SIR" abbr="" short="" long="" />
+  <book code="BAR" abbr="" short="" long="" />
+  <book code="LJE" abbr="" short="" long="" />
+  <book code="S3Y" abbr="" short="" long="" />
+  <book code="SUS" abbr="" short="" long="" />
+  <book code="BEL" abbr="" short="" long="" />
+  <book code="1MA" abbr="" short="" long="" />
+  <book code="2MA" abbr="" short="" long="" />
+  <book code="3MA" abbr="" short="" long="" />
+  <book code="4MA" abbr="" short="" long="" />
+  <book code="1ES" abbr="" short="" long="" />
+  <book code="2ES" abbr="" short="" long="" />
+  <book code="MAN" abbr="" short="" long="" />
+  <book code="PS2" abbr="" short="" long="" />
+  <book code="ODA" abbr="" short="" long="" />
+  <book code="PSS" abbr="" short="" long="" />
+  <book code="JSA" abbr="" short="" long="" />
+  <book code="JDB" abbr="" short="" long="" />
+  <book code="TBS" abbr="" short="" long="" />
+  <book code="SST" abbr="" short="" long="" />
+  <book code="DNT" abbr="" short="" long="" />
+  <book code="BLT" abbr="" short="" long="" />
+  <book code="XXA" abbr="" short="" long="" />
+  <book code="XXB" abbr="" short="" long="" />
+  <book code="XXC" abbr="" short="" long="" />
+  <book code="XXD" abbr="" short="Read the New Testament" long="Read the New Testament" />
+  <book code="XXE" abbr="" short="" long="" />
+  <book code="XXF" abbr="" short="" long="" />
+  <book code="XXG" abbr="" short="" long="" />
+  <book code="FRT" abbr="" short="" long="An Maayo na Barita Hali sa Dios The New Testament in Masbatenyo of the Phillipines" />
+  <book code="BAK" abbr="" short="" long="" />
+  <book code="OTH" abbr="" short="" long="" />
+  <book code="3ES" abbr="" short="" long="" />
+  <book code="EZA" abbr="" short="" long="" />
+  <book code="5EZ" abbr="" short="" long="" />
+  <book code="6EZ" abbr="" short="" long="" />
+  <book code="INT" abbr="" short="" long="" />
+  <book code="CNC" abbr="" short="" long="" />
+  <book code="GLO" abbr="" short="" long="" />
+  <book code="TDX" abbr="" short="" long="" />
+  <book code="NDX" abbr="" short="" long="" />
+  <book code="DAG" abbr="" short="" long="" />
+  <book code="PS3" abbr="" short="" long="" />
+  <book code="2BA" abbr="" short="" long="" />
+  <book code="LBA" abbr="" short="" long="" />
+  <book code="JUB" abbr="" short="" long="" />
+  <book code="ENO" abbr="" short="" long="" />
+  <book code="1MQ" abbr="" short="" long="" />
+  <book code="2MQ" abbr="" short="" long="" />
+  <book code="3MQ" abbr="" short="" long="" />
+  <book code="REP" abbr="" short="" long="" />
+  <book code="4BA" abbr="" short="" long="" />
+  <book code="LAO" abbr="" short="" long="" />
+</BookNames>
