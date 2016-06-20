@@ -434,6 +434,46 @@ namespace SIL.PublishingSolution
 		/// <param name="data">XML Content</param>
 		private string ReplaceString(string data)
 		{
+			List<string> unicodeDiamondString = new List<string>();
+			unicodeDiamondString.Add("\\2B27");
+			unicodeDiamondString.Add("\\29EB");
+
+			foreach (var unicodeString in unicodeDiamondString)
+			{
+				if (data.Contains(unicodeString))
+				{
+					data = data.Replace(data, "\\25C6");
+				}
+			}
+
+			if (data.Contains("\\"))
+			{
+				Char[] charac = data.ToCharArray();
+				int index = 0;
+				foreach (char var in charac)
+				{
+					index++;
+					if(var == '\n')
+					{
+						_writer.WriteRaw(@"<text:line-break/>");
+					}
+					
+					if (var == '\\')
+					{
+						try
+						{
+							string unicodeValue = data;
+							int datalength = data.Length - index;
+							unicodeValue = var + unicodeValue.Substring(index, datalength);
+							data = Common.ConvertUnicodeToString(unicodeValue);
+						}
+						catch
+						{}
+						_writer.WriteRaw(@"<text:line-break/>");
+						return data;
+					}					
+				}
+			}
 			if (_replaceSymbolToText.Count > 0)
 			{
 				if (data.IndexOf("<<<") >= 0)
