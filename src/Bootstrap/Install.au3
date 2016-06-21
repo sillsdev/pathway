@@ -481,13 +481,39 @@ Func InstallEpubReaderIfNecessary()
 	Else
 		$viewer = "C:\Program Files (x86)\Calibre2\ebook-viewer.exe"
 	EndIf
+	if not FileExists($viewer) Then
+		$viewer = CheckForPortable($viewer)
+	Endif
 	If FileExists($viewer) Then
 		RegWrite("HKEY_CURRENT_USER\Software\Classes\.epub", "", "REG_SZ", "ebook-viewer.1")
 		RegWrite("HKEY_CURRENT_USER\Software\Classes\ebook-viewer.1")
 		RegWrite("HKEY_CURRENT_USER\Software\Classes\ebook-viewer.1\shell")
 		RegWrite("HKEY_CURRENT_USER\Software\Classes\ebook-viewer.1\shell\open")
 		RegWrite("HKEY_CURRENT_USER\Software\Classes\ebook-viewer.1\shell\open\command", "", "REG_SZ", """" & $viewer & """ ""%1""")
+	Else
+		Local $viewerKey, $viewerCmd
+		$viewerKey = RegRead("HKEY_CURRENT_USER\Software\Classes\.epub", "")
+		If not @error Then
+			$viewerCmd = RegRead("HKEY_CURRENT_USER\Software\Classes\" & $viewerKey & "\shell\open\command", "")
+			if not @error Then
+				if StringInStr($viewerCmd, "ebook-viewer.exe") Then
+					RegDelete("HKEY_CURRENT_USER\Software\Classes\.epub")
+					RegDelete("HKEY_CURRENT_USER\Software\Classes\" & $viewerKey & "\shell\open\command")
+				Endif
+			Endif
+		Endif
 	EndIf
+EndFunc
+
+Func CheckForPortable($viewer)
+	Local $search = FileFindFirstFile("C:\Users\*")
+	While True
+		Local $file = FileFindNextFile($search)
+		if @error then ExitLoop
+		$viewer = "C:\Users\" & $file & "\Calibre Portable\Calibre\ebook-viewer.exe"
+		if FileExists($viewer) Then ExitLoop
+	Wend
+	return $viewer
 EndFunc
 
 Func XeLaTexInstalled($size)
