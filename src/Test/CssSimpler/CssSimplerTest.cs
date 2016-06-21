@@ -645,6 +645,84 @@ namespace Test.CssSimplerTest
         /// A test to use the css to insert pseudo content into xhtml
         /// </summary>
         [Test]
+        public void PseudoComplexSubentryTest()
+        {
+            const string testName = "PseudoComplexSubentry";
+            _testFiles.Copy(testName + ".xhtml");
+            var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+            _testFiles.Copy(testName + ".css");
+            var styleSheet = _testFiles.Output(testName + ".css");
+            var lc = new LoadClasses(xhtmlFullName);
+            var parser = new CssTreeParser();
+            var xml = new XmlDocument();
+            UniqueClasses = lc.UniqueClasses;
+            OutputXml = true;
+            LoadCssXml(parser, styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+            var tmp2Out = Path.GetTempFileName();
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(parser, styleSheet, xml);
+            var ps = new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+            RemoveCssPseudo(styleSheet, xml);
+            try
+            {
+                File.Delete(tmpXhtmlFullName);
+                File.Delete(tmp2Out);
+            }
+            catch
+            {
+                // ignored
+            }
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            NodeInspect(xhtmlFullName, new Dictionary<string, string> { { "//*[@class='custentry-ps']", "G{" }, { "(//*[@class='custentry-ps'])[3]", "I{" }, { "(//*[@class='custentry-ps'])[5]", "J{" } });
+        }
+
+        /// <summary>
+        /// A test to use the css to insert pseudo content into xhtml
+        /// </summary>
+        [Test]
+        public void PseudoHeadwordRefsTest()
+        {
+            const string testName = "PseudoHeadwordRefs";
+            _testFiles.Copy(testName + ".xhtml");
+            var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+            _testFiles.Copy(testName + ".css");
+            var styleSheet = _testFiles.Output(testName + ".css");
+            var lc = new LoadClasses(xhtmlFullName);
+            var parser = new CssTreeParser();
+            var xml = new XmlDocument();
+            UniqueClasses = lc.UniqueClasses;
+            OutputXml = true;
+            LoadCssXml(parser, styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+            var tmp2Out = Path.GetTempFileName();
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(parser, styleSheet, xml);
+            var ps = new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+            RemoveCssPseudo(styleSheet, xml);
+            try
+            {
+                File.Delete(tmpXhtmlFullName);
+                File.Delete(tmp2Out);
+            }
+            catch
+            {
+                // ignored
+            }
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            NodeInspect(xhtmlFullName, new Dictionary<string, string> { { "(//*[@class='custentry-ps'])[13]", "F(" }, { "(//*[@class='custentry-ps'])[15]", "C(" } });
+        }
+
+        /// <summary>
+        /// A test to use the css to insert pseudo content into xhtml
+        /// </summary>
+        [Test]
         public void Bke828Test()
         {
             const string testName = "bke828";
@@ -965,6 +1043,24 @@ namespace Test.CssSimplerTest
             xDoc.Load(xr);
             xr.Close();
             Assert.AreEqual(count, xDoc.SelectNodes(xpath).Count, msg);
+        }
+
+        /// <summary>
+        /// Method to load an XML (XHTML) check various xpaths for their values.
+        /// </summary>
+        private static void NodeInspect(string outFullName, Dictionary<string, string> nodeValues )
+        {
+            var xr = XmlReader.Create(outFullName,
+                new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Ignore });
+            var xDoc = new XmlDocument();
+            xDoc.Load(xr);
+            xr.Close();
+            foreach (var xpath in nodeValues.Keys)
+            {
+                var node = xDoc.SelectSingleNode(xpath);
+                Assert.IsNotNull(node, "Missing " + xpath);
+                Assert.AreEqual(nodeValues[xpath], node.InnerText);
+            }
         }
 
         /// <summary>

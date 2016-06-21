@@ -73,6 +73,7 @@ namespace CssSimpler
             var index = depth + 1;
             if (index >= _savedLastClass.Count) return;
             _savedLastClass[index] = null;
+            _classes[index] = null;
         }
 
         private bool ApplyBestRule(int index, string target, Dictionary<string, List<XmlElement>> targets, string myClass)

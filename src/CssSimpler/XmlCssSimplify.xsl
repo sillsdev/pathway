@@ -44,7 +44,7 @@
                 </xsl:copy>
             </xsl:when>
             <!-- sub senses can format differently so we need this hierarchy -->
-            <xsl:when test="name='senses' or name='subentries'">
+            <xsl:when test="name='senses' or name='subentries' or contains(name,'mainentrysubentries') or name='complexformsnotsubentries' or name='complexformentryrefs' or name='referencedentries' or name='minimallexreferences'">
                 <xsl:copy>
                     <xsl:apply-templates select="node() | @*"/>
                 </xsl:copy>
