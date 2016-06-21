@@ -286,3 +286,10 @@ text-align: justify;
        margin-left: 12pt;
        text-indent: -12pt;
 }
+
+.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "*"]{
+   font-weight: normal;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span {
+   font-weight: normal;
+}
