@@ -38,6 +38,7 @@ using Palaso.Xml;
 using SIL.Tool.Localization;
 using System.Reflection;
 using Test;
+using SIL.PublishingSolution;
 
 #endregion Using
 
@@ -5046,5 +5047,23 @@ namespace SIL.Tool
 			return langname ?? string.Empty;
 		}
 		#endregion
+
+
+		public static Cursor UseWaitCursor()
+		{
+			var myCursor = Cursor.Current;
+			Cursor.Current = Cursors.WaitCursor;
+			return myCursor;
+		}
+
+		public static InProcess SetupProgressReporting(int steps, string exportMsg)
+		{
+			var inProcess = new InProcess(0, steps) { Text = exportMsg }; // create a progress bar with 7 steps (we'll add more below)
+			inProcess.Text = LocalizationManager.GetString("ProgressTitle.InProcessWindow.Title", exportMsg, "");
+			inProcess.Show();
+			inProcess.ShowStatus = true;
+			return inProcess;
+		}
+
 	}
 }

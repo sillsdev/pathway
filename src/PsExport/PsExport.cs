@@ -35,8 +35,7 @@ namespace SIL.PublishingSolution
     {
         public bool _fromNUnit = false;
         private string _selectedCssFromTemplate = string.Empty;
-        private Progress pb;
-
+        
         #region Properties
         /// <summary>Gets or sets Output format (ODT, PDF, INX, TeX, HTM, PDB, etc.)</summary>
         public string Destination
@@ -66,20 +65,46 @@ namespace SIL.PublishingSolution
         /// </summary>
         public void Export(string outFullName)
         {
+
+			#region Set up progress reporting
+#if (TIME_IT)
+            DateTime dt1 = DateTime.Now;    // time this thing
+#endif
+			var myCursor = Common.UseWaitCursor();
+			var curdir = Environment.CurrentDirectory;
+			var inProcess = Common.SetupProgressReporting(5, "Export Process");
+			#endregion Set up progress reporting
+
+			#region Process start
+			inProcess.SetStatus("Export Process Started");
+			inProcess.PerformStep();
+
 			Common.SetupLocalization();
             Debug.Assert(DataType == "Scripture" || DataType == "Dictionary", "DataType must be Scripture or Dictionary");
             Debug.Assert(outFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "full path for output must be given");
 			string caption = LocalizationManager.GetString("PsExport.ExportClick.Caption", "Pathway Export", "");
-            try
-            {
-                pb = new Progress();
+
+			#endregion
+
+			try
+			{
+				#region Simplify Export Files
+				inProcess.SetStatus("Simplify Export Files");
+				inProcess.PerformStep();
+
                 //get xsltFile from ExportThroughPathway.cs
 				string revFileName = string.Empty;
 				var outDir = Path.GetDirectoryName(outFullName);
 
 				SimplifyExportFiles(outFullName);
 
-	            string supportPath = GetSupportPath();
+				#endregion
+
+				#region Setting up Css and Xhtml
+				inProcess.SetStatus("Setting up Css and Xhtml");
+				inProcess.PerformStep();
+
+				string supportPath = GetSupportPath();
 				Backend.Load(Common.ProgInstall);
                 LoadProgramSettings(supportPath);
                 LoadDataTypeSettings();
@@ -120,6 +145,15 @@ namespace SIL.PublishingSolution
                 SetDefaultLanguageFont(fluffedCssFullName, mainFullName, fluffedRevCssFullName);
 				Common.StreamReplaceInFile(fluffedCssFullName, "\\2B27", "\\25C6");
 	            WritePublishingInformationFontStyleinCSS(fluffedCssFullName);
+				#endregion
+
+				#region Close Reporting
+				inProcess.Close();
+
+				Environment.CurrentDirectory = curdir;
+				Cursor.Current = myCursor;
+				#endregion Close Reporting
+
                 if (DataType == "Scripture")
                 {
                     SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
@@ -132,7 +166,7 @@ namespace SIL.PublishingSolution
             }
             catch (InvalidStyleSettingsException err)
             {
-                if (_fromNUnit)
+				if (_fromNUnit)
                 {
                     Console.WriteLine(string.Format(err.ToString(), err.FullFilePath), "Pathway Export");
                 }
@@ -173,10 +207,7 @@ namespace SIL.PublishingSolution
             }
             finally
             {
-                if (pb != null)
-                {
-                    pb.Close();
-                }
+				
             }
         }
 

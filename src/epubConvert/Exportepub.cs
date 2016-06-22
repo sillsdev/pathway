@@ -138,9 +138,9 @@ namespace SIL.PublishingSolution
 #if (TIME_IT)
             DateTime dt1 = DateTime.Now;    // time this thing
 #endif
-            var myCursor = UseWaitCursor();
+            var myCursor = Common.UseWaitCursor();
             var curdir = Environment.CurrentDirectory;
-            var inProcess = SetupProgressReporting(20);
+			var inProcess = Common.SetupProgressReporting(20, "Export " + ExportType);
             #endregion Set up progress reporting
 
             #region Setup
@@ -644,22 +644,6 @@ namespace SIL.PublishingSolution
 
             projInfo.ProjectPath = projInfo.DictionaryPath;
             projInfo.DictionaryPath = Common.PathCombine(projInfo.DictionaryPath, "Epub2");
-        }
-
-        private static Cursor UseWaitCursor()
-        {
-            var myCursor = Cursor.Current;
-            Cursor.Current = Cursors.WaitCursor;
-            return myCursor;
-        }
-
-        private static InProcess SetupProgressReporting(int steps)
-        {
-            var inProcess = new InProcess(0, steps) { Text = Resources.Exportepub_Export_Exporting__epub_file }; // create a progress bar with 7 steps (we'll add more below)
-			inProcess.Text = LocalizationManager.GetString("Exportepub.InProcessWindow.Title", "Exporting .epub file", "");
-			inProcess.Show();
-            inProcess.ShowStatus = true;
-            return inProcess;
         }
 
         private void LoadOtherFeatures()

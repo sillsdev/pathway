@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -31,7 +32,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile/>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -213,21 +214,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
-    <Reference Include="System"/>
-    <Reference Include="System.Data"/>
-    <Reference Include="System.Drawing"/>
-    <Reference Include="System.Windows.Forms"/>
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmbeddedFont.cs"/>
+    <Compile Include="EmbeddedFont.cs" />
     <Compile Include="EpubExportTypeDlg.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EpubExportTypeDlg.Designer.cs">
       <DependentUpon>EpubExportTypeDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="EpubToc.cs"/>
+    <Compile Include="EpubToc.cs" />
     <Compile Include="EpubValidateTypeDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,21 +238,21 @@
     <Compile Include="Exportepub.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Epub3Transformation.cs"/>
+    <Compile Include="Epub3Transformation.cs" />
     <Compile Include="FontWarningDlg.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FontWarningDlg.Designer.cs">
       <DependentUpon>FontWarningDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="EpubManifest.cs"/>
-    <Compile Include="Properties\AssemblyInfo.cs"/>
+    <Compile Include="EpubManifest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="EpubFont.cs"/>
+    <Compile Include="EpubFont.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -295,10 +296,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CssDialog\CssDialog.csproj">
-      <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
-      <Name>CssDialog</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CssParser\CssParser.csproj">
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
@@ -313,10 +310,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="addRevId.xsl"/>
+    <EmbeddedResource Include="addRevId.xsl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="noXmlSpace.xsl"/>
+    <EmbeddedResource Include="noXmlSpace.xsl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="xhtmltohtml5.xslt">
@@ -324,15 +321,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Epub3CoverPage.xsl"/>
+    <EmbeddedResource Include="Epub3CoverPage.xsl" />
     <EmbeddedResource Include="Epub3Toc.xsl">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NcxToXhtml.xsl"/>
+    <EmbeddedResource Include="NcxToXhtml.xsl" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets"/>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
