@@ -716,7 +716,7 @@ namespace Test.CssSimplerTest
                 // ignored
             }
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeInspect(xhtmlFullName, new Dictionary<string, string> { { "(//*[@class='custentry-ps'])[13]", "F(" }, { "(//*[@class='custentry-ps'])[15]", "C(" } });
+            NodeInspect(xhtmlFullName, new Dictionary<string, string> { { "(//*[@class='custentry-ps'])[19]", "F(" }, { "(//*[@class='custentry-ps'])[22]", "C(" } });
         }
 
         /// <summary>
@@ -743,7 +743,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 37, "//*[contains(@class,'-ps')]", "Nodes with pseudo content changed for Fw 8.2.8");
+            NodeTest(outFullName, 23, "//*[contains(@class,'-ps')]", "Nodes with pseudo content changed for Fw 8.2.8");
         }
 
         /// <summary>
@@ -824,7 +824,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
+            NodeTest(outFullName, 2, "//*[@class='sensecontent-ps']", "Wrong amount of sense number punctuation.");
         }
 
         /// <summary>
@@ -996,7 +996,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 130, "//*[contains(@class,'-ps')]", "semantic domain punctuation");
+            NodeTest(outFullName, 129, "//*[contains(@class,'-ps')]", "semantic domain punctuation");
         }
 
         /// <summary>

@@ -27,9 +27,9 @@ namespace CssSimpler
         private readonly Dictionary<string, List<XmlElement>> _afterTargets = new Dictionary<string, List<XmlElement>>();
         private const int StackSize = 30;
         private readonly ArrayList _classes = new ArrayList(StackSize);
-        private readonly ArrayList _savedLastClass = new ArrayList(StackSize);
         private readonly ArrayList _savedSibling = new ArrayList(StackSize);
         private string _lastClass = String.Empty;
+        private string _precedingClass = String.Empty;
         private readonly SortedSet<string> _needHigher;
 
         public ProcessPseudo(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher)
@@ -58,9 +58,14 @@ namespace CssSimpler
         private void InsertAfter(int depth, string name)
         {
             var index = depth + 1;
-            if (index >= _savedLastClass.Count) return;
-            var endClass = _savedLastClass[index] as string;
-            if (endClass == null) return;
+            if (index >= _classes.Count) return;
+            var endClass = _classes[index] as string;
+            var lookUp = index;
+            while ((endClass == null || _needHigher.Contains(endClass)) && lookUp > 0)
+            {
+                lookUp -= 1;
+                endClass = _classes[lookUp] as string;
+            }
             var target1 = GetTargetKey(_classes[index] as string, endClass);
             var target2 = GetTargetKey(name, endClass);
             if (ApplyBestRule(depth, target1, _afterTargets, endClass)) return;
@@ -71,8 +76,8 @@ namespace CssSimpler
         private void UnsaveClass(int depth, string name)
         {
             var index = depth + 1;
-            if (index >= _savedLastClass.Count) return;
-            _savedLastClass[index] = null;
+            if (index >= _classes.Count) return;
+            _precedingClass = _classes[index] as string;
             _classes[index] = null;
         }
 
@@ -127,7 +132,7 @@ namespace CssSimpler
                         node = node.PreviousSibling;
                         Debug.Assert(node != null, "Nothing preceding PRECEDES");
                         string precedingName = node.ChildNodes[0].InnerText;
-                        if (_classes[index] as string != precedingName && precedingName != "span") return false;
+                        if (_precedingClass != precedingName && precedingName != "span") return false;
                         if (precedingName != "span") index -= 1;
                         break;
                     case "SIBLING":
@@ -181,15 +186,12 @@ namespace CssSimpler
                 {
                     while (_classes.Count < r.Depth)
                     {
-                        _savedLastClass.Add(null);
                         _classes.Add(null);
                     }
-                    _savedLastClass.Add(_lastClass);
                     _classes.Add(r.Value);
                 }
                 else
                 {
-                    _savedLastClass[r.Depth] = _lastClass;
                     _classes[r.Depth] = r.Value;
                 }
             }
