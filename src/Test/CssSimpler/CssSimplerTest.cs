@@ -720,6 +720,45 @@ namespace Test.CssSimplerTest
         }
 
         /// <summary>
+        /// A test for bulleted paragraphs that use the :not() css property
+        /// </summary>
+        [Test]
+        public void BulletParagraphsTest()
+        {
+            const string testName = "BulletParagraphs";
+            _testFiles.Copy(testName + ".xhtml");
+            var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+            _testFiles.Copy(testName + ".css");
+            var styleSheet = _testFiles.Output(testName + ".css");
+            var lc = new LoadClasses(xhtmlFullName);
+            var parser = new CssTreeParser();
+            var xml = new XmlDocument();
+            UniqueClasses = lc.UniqueClasses;
+            OutputXml = true;
+            LoadCssXml(parser, styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+            var tmp2Out = Path.GetTempFileName();
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(parser, styleSheet, xml);
+            var ps = new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+            RemoveCssPseudo(styleSheet, xml);
+            try
+            {
+                File.Delete(tmpXhtmlFullName);
+                File.Delete(tmp2Out);
+            }
+            catch
+            {
+                // ignored
+            }
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            //NodeInspect(xhtmlFullName, new Dictionary<string, string> { { "(//*[@class='custentry-ps'])[19]", "F(" }, { "(//*[@class='custentry-ps'])[22]", "C(" } });
+        }
+
+        /// <summary>
         /// A test to use the css to insert pseudo content into xhtml
         /// </summary>
         [Test]

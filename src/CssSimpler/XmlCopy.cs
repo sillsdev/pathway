@@ -11,6 +11,7 @@
 // File: XmlCopy.cs (from SimpleCss5.cs)
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -23,6 +24,7 @@ namespace CssSimpler
         protected delegate void ParserMethod(XmlReader r);
         protected delegate void EndTagMethod(int dept, string name);
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _beforeNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
+        private readonly Dictionary<XmlNodeType, List<ParserMethod>> _firstChildNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly Dictionary<XmlNodeType, List<EndTagMethod>> _beforeEndNodeTypeMap = new Dictionary<XmlNodeType, List<EndTagMethod>>();
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _afterNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly StreamReader _sr;
@@ -82,6 +84,7 @@ namespace CssSimpler
                         {
                             _wtr.WriteAttributes( _rdr, true );
                         }
+                        FirstChildProcessMethods(XmlNodeType.Element);
                         if (empty)
                         {
                             BeforeEndProcessMethods(XmlNodeType.EndElement, depth, name);
@@ -149,6 +152,18 @@ namespace CssSimpler
             }
         }
 
+        private void FirstChildProcessMethods(XmlNodeType type)
+        {
+            if (!_firstChildNodeTypeMap.ContainsKey(type)) return;
+            foreach (ParserMethod func in _firstChildNodeTypeMap[type])
+            {
+                Debug.Assert(func != null, "func != null");
+                func(_rdr);
+                if (_finish)
+                    break;
+            }
+        }
+
         private void BeforeEndProcessMethods(XmlNodeType type, int depth, string name)
         {
             if (!_beforeEndNodeTypeMap.ContainsKey(type)) return;
@@ -182,7 +197,14 @@ namespace CssSimpler
             {
                 _wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");
             }
-            _wtr.WriteValue(val);
+            if (val.StartsWith(@"\"))
+            {
+                _wtr.WriteCharEntity((char) Convert.ToInt32(val.Substring(1), 16));
+            }
+            else
+            {
+                _wtr.WriteValue(val);
+            }
             _wtr.WriteEndElement();
         }
 
@@ -205,6 +227,22 @@ namespace CssSimpler
             else
             {
                 _beforeNodeTypeMap[nodeType] = new List<ParserMethod>() { parserMethod };
+            }
+            if (nodeType == XmlNodeType.Attribute)
+            {
+                _doAttributes = true;
+            }
+        }
+
+        protected void DeclareFirstChild(XmlNodeType nodeType, ParserMethod parserMethod)
+        {
+            if (_firstChildNodeTypeMap.ContainsKey(nodeType))
+            {
+                _firstChildNodeTypeMap[nodeType].Add(parserMethod);
+            }
+            else
+            {
+                _firstChildNodeTypeMap[nodeType] = new List<ParserMethod>() { parserMethod };
             }
             if (nodeType == XmlNodeType.Attribute)
             {

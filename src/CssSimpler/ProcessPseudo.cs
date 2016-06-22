@@ -40,6 +40,7 @@ namespace CssSimpler
             DeclareBefore(XmlNodeType.Attribute, SaveClass);
             DeclareBefore(XmlNodeType.Element, SaveSibling);
             DeclareBefore(XmlNodeType.Element, InsertBefore);
+            DeclareFirstChild(XmlNodeType.Element, InsertFirstChild);
             DeclareBeforeEnd(XmlNodeType.EndElement, InsertAfter);
             DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveClass);
             Parse();
@@ -53,6 +54,18 @@ namespace CssSimpler
             if (_classes.Count > r.Depth && ApplyBestRule(r.Depth, GetTargetKey(r.Name, keyClass), _beforeTargets, keyClass)) return;
             var target = GetTargetKey(r.Name, _lastClass);
             ApplyBestRule(r.Depth, target, _beforeTargets, _lastClass);
+        }
+
+        private XmlNode _savedFirstNode = null;
+        private string _firstClass = string.Empty;
+        private void InsertFirstChild(XmlReader r)
+        {
+            if (_savedFirstNode != null)
+            {
+                InsertContent(_savedFirstNode, _firstClass);
+                _savedFirstNode = null;
+                _firstClass = string.Empty;
+            }
         }
 
         private void InsertAfter(int depth, string name)
@@ -91,7 +104,15 @@ namespace CssSimpler
                 {
                     if (Applies(node, index))
                     {
-                        InsertContent(node, myClass);
+                        if (LookupNotFirstChild(node) != null)
+                        {
+                            _savedFirstNode = node;
+                            _firstClass = myClass;
+                        }
+                        else
+                        {
+                            InsertContent(node, myClass);
+                        }
                         return true;
                     }
                 }
@@ -102,6 +123,7 @@ namespace CssSimpler
         private bool Applies(XmlNode node, int index)
         {
             if (!RequiredFirst(node)) return false;
+            if (!RequiredNotFirst(node)) return false;
             while (node != null && node.Name == "PSEUDO")
             {
                 node = node.PreviousSibling;
@@ -162,8 +184,19 @@ namespace CssSimpler
 
         private bool RequiredFirst(XmlNode node)
         {
-            var firstChild = node.SelectSingleNode("parent::*//PSEUDO[name='first-child']");
-            return firstChild == null || _firstSibling;
+            var reqFirstChild = node.SelectSingleNode("parent::*//PSEUDO[name='first-child' and not(parent::PSEUDO)]");
+            return reqFirstChild == null || _firstSibling;
+        }
+
+        private bool RequiredNotFirst(XmlNode node)
+        {
+            var reqNotFirstChild = LookupNotFirstChild(node);
+            return reqNotFirstChild == null || !_firstSibling;
+        }
+
+        private static XmlNode LookupNotFirstChild(XmlNode node)
+        {
+            return node.SelectSingleNode("parent::*//PSEUDO[name='first-child' and parent::PSEUDO]");
         }
 
         private void InsertContent(XmlNode node, string myClass)
