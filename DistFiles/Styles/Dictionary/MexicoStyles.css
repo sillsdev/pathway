@@ -67,6 +67,7 @@ a {color: rgb(0,0,255);}
     color: rgb(128,0,0);
 }
 .partofspeech {
+	font-style: italic;	
     color: rgb(128,0,0);
 }
 .partofspeech-complexform {
@@ -85,7 +86,7 @@ a {color: rgb(0,0,255);}
 	color: rgb(0,0,128);
 }
 .translations {
-    color: rgb(0,128,0);    
+    color: rgb(0,128,0); 
 }
 
 .variantref-entry-type {    
@@ -119,7 +120,6 @@ a {color: rgb(0,0,255);}
 .variantrefs1:before{
     content: "\A0\A0";
 }
-
 
 .visiblecomplexformbackrefs .visiblecomplexformbackref-ps
 {
@@ -157,3 +157,20 @@ a {color: rgb(0,0,255);}
 	display: inline-table;
 }
 
+.Emphasized_Text {
+	color: rgb(128,128,0);
+}
+
+.LexSense-publishStem-Comentario--restrictivo {
+	color: rgb(128,128,0);
+}
+	
+.LexSense-publishStem-Definición--descriptiva {
+	color: rgb(128,128,0);
+}
+.variantref-entry-type:before { 
+	content: "[";
+}
+.variantref-form:after { 
+	content: "]";
+}
