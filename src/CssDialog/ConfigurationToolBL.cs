@@ -3087,7 +3087,7 @@ namespace SIL.PublishingSolution
 		/// </summary>
 		public void ShowStyleInGrid(DataGridView grid, ArrayList cssNames)
 		{
-			if (DataSetForGrid.Tables["Styles"] != null)
+			if (DataSetForGrid.Tables.Count > 0)
 				DataSetForGrid.Tables["Styles"].Clear();
 
 			DataRow row;
