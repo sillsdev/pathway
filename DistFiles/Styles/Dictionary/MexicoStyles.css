@@ -108,21 +108,14 @@ a {color: rgb(0,0,255);}
 .complexform-form + .complexform-summarydef:before {
     content: "\A0";
 }
-.partofspeech:before {
-    content: "\A0";
-}
+
 .complexform-summarydef:before {
     content: "\A0";
 }
 .scientific-name:before {
     content: "\A0";
 }
-.example:before{
-	content: "\A0";
-}
-.translations:before{
-	content: "\A0";
-}
+
 .variantrefs1:before{
     content: "\A0\A0";
 }
@@ -163,3 +156,4 @@ a {color: rgb(0,0,255);}
 .headword{
 	display: inline-table;
 }
+
