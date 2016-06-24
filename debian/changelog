@@ -1,4 +1,57 @@
-pathway (1.14.3)  experimental; urgency=high
+pathway (1.15.3)  experimental; urgency=high
+
+  * CSS: TD-4643 handle CssSimpler when multiple classes on an element
+  * CSS: TD-4653 Move inline styles to CSS
+  * CSS: TD-4672 Handle CSS sibling rules for writing system abbreviations
+  * CSS: TD-4681 Handle audio elements in CssSimpler
+  * CSS: TD-4688 make sure right number of bullets show in Akoose data
+  * EPUB:TD-4574 % sign before Font Size pt label
+  * EPUB:TD-4575 Text alignment for epub
+  * EPUB:TD-4610 Reversal TOC doesn't list entries under letters
+  * General:TD-4484 Enable Defaults button in Config Tool
+  * General:TD-4548 Support Paratext extra material in cross reference
+  * General:TD-4612 Resize images when outputting to PrincePDF
+  * General:TD-4613 Two column not producing in xelatex output
+  * General:TD-4684 Handle portable version of Calibre
+  * General:TD-4687 ETP Dialog box dropdown load fails
+  * General:TD-4691 Adjust rules for Flex custom references
+  * General:Handle in between lexical relations and reversals
+  * General:Updated instructions for building packages (especially xenial)
+  * General:work on moving pseudo rule content into xhtml
+  * Linux:TD-4637 Ubuntu 16.04 Xenial Configuration Tool crashes on launch
+  * Linux:TD-4638 Ubuntu 16.04 Xenial Crashes when run from ParaText
+  * Office:TD-4534 Even header has wrong guide word
+  * Office:Character styles : Deleted Text
+  * Office:TD-4599 Language information missing from About This Doc
+  * Office:TD-4621 Missing indent for minor entry
+  * Office:TD-4622 Extra spaces
+  * Office:TD-4623 Stylesheet Modifications
+  * Office:TD-4627 Headword incorrect
+  * Office:TD-4632 Color of the headword
+  * Office:TD-4636 header font won't come out as 10pt
+  * Office:TD-4639 Fixed Nunit testcases fails
+  * Office:TD-4639 Punctuation issues on subentries
+  * Office:TD-4650 spaces added before punctuation
+  * Office:TD-4651 space removed after part of speech
+  * Office:TD-4652 this change cherry picked from the pseudo changes branch
+  * Office:TD-4663 'Header Font Size' and 'Center Title in Header'
+  * Office:TD-4673 Missing space between referenced
+  * Office:TD-4675 blank column left in data
+  * Office:TD-4692 Add Progress bar
+  * Styles:TD-4641 subentry indents
+  * Styles:TD-4632 Running Header None
+  * UI:TD-4457 From UI Language Dialog Font size are set up to 24pt
+  * UI:TD-4655 Crash while clicking on the Properties tab in French UI
+  * UI:TD-4693 Configuration Tool page number dropdown showing empty
+  * XeLaTeX:TD-4648 Exporting to Xelatex characters not appear correct
+  * XeLaTeX:TD-4656,4657,4658 Fix the Title not appear
+  * XeLaTeX:TD-4659 TOC does not work correctly
+  * XeLaTeX:TD-4660 Dictionary content appeared as single page
+  * XeLaTeX:˜FieldworksRighttoLeft as the Custom Stylesheet
+
+ -- Greg Trihus <greg_trihus@sil.org>  Fri, 24 May 2016 14:02:20 -0600
+
+ pathway (1.14.3)  experimental; urgency=high
 
   * Epub:TD-4517 Retain spaces after etymology and usage
 
