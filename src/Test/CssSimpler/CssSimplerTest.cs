@@ -1067,6 +1067,30 @@ namespace Test.CssSimplerTest
             NodeTest(outFullName, 1, "//*[@class='fr-Zxxx-x-audio-ps']", "audio icon");
         }
 
+        [Test]
+        public void WriteValue1Test()
+        {
+            const string testName = "Value1" + ".xml";
+            var value = new ValueTest(_testFiles.Input(testName), _testFiles.Output(testName), @"\2022");
+            TextFileAssert.AreEqual(_testFiles.Expected(testName), _testFiles.Output(testName), "write bullet test");
+        }
+
+        [Test]
+        public void WriteValue2Test()
+        {
+            const string testName = "Value2" + ".xml";
+            var value = new ValueTest(_testFiles.Input(testName), _testFiles.Output(testName), @"Try: \2022 and \34");
+            TextFileAssert.AreEqual(_testFiles.Expected(testName), _testFiles.Output(testName), "write multiple bullet test");
+        }
+
+        [Test]
+        public void WriteValue3Test()
+        {
+            const string testName = "Value3" + ".xml";
+            var value = new ValueTest(_testFiles.Input(testName), _testFiles.Output(testName), @"Try: \2022 and \34.");
+            TextFileAssert.AreEqual(_testFiles.Expected(testName), _testFiles.Output(testName), "write multiple Unicode with text after");
+        }
+
         /// <summary>
         /// Method to load an XML (XHTML) file and search for the inserted nodes and complain if count isn't right.
         /// </summary>
@@ -1260,6 +1284,23 @@ namespace Test.CssSimplerTest
 				case "file://-//W3C//ELEMENTS XHTML Document Structure 1.0//EN": return Assembly.GetExecutingAssembly().GetManifestResourceStream("Test.CssSimpler.xhtml-struct-1.mod");
                 default: return base.GetEntity(absoluteUri, role, ofObjectToReturn);
             }
+        }
+    }
+
+    public class ValueTest : XmlCopy
+    {
+        private readonly string _testValue;
+
+        public ValueTest(string inpTest, string outTest, string testValue) : base(inpTest, outTest)
+        {
+            _testValue = testValue;
+            DeclareBeforeEnd(XmlNodeType.EndElement, WriteValue);
+            Parse();
+        }
+
+        private void WriteValue(int dept, string name)
+        {
+            WriteContent(_testValue, "Test");
         }
     }
 }
