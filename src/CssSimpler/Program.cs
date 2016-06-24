@@ -217,8 +217,6 @@ namespace CssSimpler
             writer.Close();
             reader.Close();
             ifs.Close();
-            //File.Copy(outfile, xhtmlFullName, true);
-            //File.Delete(outfile);
             return outfile;
         }
 
@@ -253,7 +251,27 @@ namespace CssSimpler
             var ruleNodes = xml.SelectNodes("//RULE[PSEUDO]");
             foreach (XmlElement ruleNode in ruleNodes)
             {
-                ruleNode.RemoveAll();
+                var properties = ruleNode.SelectNodes("PROPERTY");
+                if (properties.Count <= 1)
+                {
+                    ruleNode.RemoveAll();
+                }
+                else
+                {
+                    for (var count = ruleNode.ChildNodes.Count - 1; count >= 0; count -= 1)
+                    {
+                        var childNode = ruleNode.ChildNodes[count];
+                        if (childNode.Name != "PROPERTY" || childNode.FirstChild.InnerText == "content")
+                        {
+                            ruleNode.RemoveChild(childNode);
+                        }
+                    }
+                    var classNode = ruleNode.OwnerDocument.CreateElement("CLASS");
+                    var nameNode = ruleNode.OwnerDocument.CreateElement("name");
+                    nameNode.InnerText = ruleNode.GetAttribute("lastClass") + "-ps";
+                    classNode.AppendChild(nameNode);
+                    ruleNode.InsertBefore(classNode, ruleNode.FirstChild);
+                }
             }
             var cssFile = new FileStream(styleSheet, FileMode.Create);
             var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
