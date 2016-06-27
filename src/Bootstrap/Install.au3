@@ -468,7 +468,7 @@ Func InstallEpubReaderIfNecessary()
 	;EndIf
 	$latest = IniRead("PathwayBootstrap.Ini", "Versions", "Calibre", "0.8.31")
 	$pkg = "calibre-" & $latest & ".msi"
-	GetFromUrl($pkg, "http://downloads.sourceforge.net/project/calibre/" & $latest & "/" & $pkg)
+	GetFromUrl($pkg, "http://download.calibre-ebook.com/" & $latest & "/" & $pkg)
 	if FileExists($pkg) Then
 		RunWait(@ComSpec & " /c " & $pkg)  ;.msi files must be launched from command processor
 		CleanUp($pkg)
