@@ -967,41 +967,70 @@ namespace SIL.PublishingSolution
 		private void SetAttributesForPaperProperties(StreamWriter writeCss)
 		{
 			var value = new Dictionary<string, string>();
-			string attribute = "Justified";
-			string key = ((ComboBoxItem)cTool.DdlJustified.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			string attribute = string.Empty;
+			string key = string.Empty;
+			if(cTool.DdlJustified.SelectedItem != null)
+			{
+				attribute = "Justified";
+				key = ((ComboBoxItem) cTool.DdlJustified.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "VerticalJustify";
-			key = ((ComboBoxItem)cTool.DdlVerticalJustify.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlVerticalJustify.SelectedItem != null)
+			{
+				attribute = "VerticalJustify";
+				key = ((ComboBoxItem) cTool.DdlVerticalJustify.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Page Size";
-			key = ((ComboBoxItem)cTool.DdlPagePageSize.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlPagePageSize.SelectedItem != null)
+			{
+				attribute = "Page Size";
+				key = ((ComboBoxItem) cTool.DdlPagePageSize.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Columns";
-			key = ((ComboBoxItem)cTool.DdlPageColumn.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlPageColumn.SelectedItem != null)
+			{
+				attribute = "Columns";
+				key = ((ComboBoxItem) cTool.DdlPageColumn.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Font Size";
-			key = ((ComboBoxItem)cTool.DdlFontSize.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlFontSize.SelectedItem != null)
+			{
+				attribute = "Font Size";
+				key = ((ComboBoxItem) cTool.DdlFontSize.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Leading";
-			key = ((ComboBoxItem)cTool.DdlLeading.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlLeading.SelectedItem != null)
+			{
+				attribute = "Leading";
+				key = ((ComboBoxItem) cTool.DdlLeading.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Pictures";
-			key = ((ComboBoxItem)cTool.DdlPicture.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlPicture.SelectedItem != null)
+			{
+				attribute = "Pictures";
+				key = ((ComboBoxItem) cTool.DdlPicture.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Running Head";
-			key = ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlRunningHead.SelectedItem != null)
+			{
+				attribute = "Running Head";
+				key = ((ComboBoxItem) cTool.DdlRunningHead.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Header Size";
-			key = ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlHeaderFontSize.SelectedItem != null)
+			{
+				attribute = "Header Size";
+				key = ((ComboBoxItem) cTool.DdlHeaderFontSize.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
 			if (inputTypeBL.ToLower() == "scripture" && cTool.DdlReferenceFormat.SelectedItem != null)
 			{
@@ -1010,13 +1039,19 @@ namespace SIL.PublishingSolution
 				WriteAtImport(writeCss, attribute, key);
 			}
 
-			attribute = "Page Number";
-			key = ((ComboBoxItem)cTool.DdlPageNumber.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlPageNumber.SelectedItem != null)
+			{
+				attribute = "Page Number";
+				key = ((ComboBoxItem) cTool.DdlPageNumber.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Rules";
-			key = ((ComboBoxItem)cTool.DdlRules.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlRules.SelectedItem != null)
+			{
+				attribute = "Rules";
+				key = ((ComboBoxItem) cTool.DdlRules.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
 			if (inputTypeBL.ToLower() == "dictionary" && cTool.DdlSense.Items.Count > 0)
 			{
@@ -1056,11 +1091,21 @@ namespace SIL.PublishingSolution
 			value["margin-right"] = cTool.TxtPageOutside.Text;
 			value["margin-bottom"] = cTool.TxtPageBottom.Text;
 			value["margin-left"] = cTool.TxtPageInside.Text;
-			value["-ps-fileproduce"] = "\"" + ((ComboBoxItem)cTool.DdlFileProduceDict.SelectedItem).Value + "\"";
+			var fileProduce = string.Empty;
+			if (cTool.DdlFileProduceDict.SelectedItem != null)
+			{
+				fileProduce = ((ComboBoxItem) cTool.DdlFileProduceDict.SelectedItem).Value;
+			}
+			value["-ps-fileproduce"] = "\"" + fileProduce + "\"";
 			value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
 			value["-ps-split-file-by-letter"] = "\"" + _splitFileByLetter + "\"";
 			value["-ps-center-title-header"] = "\"" + _centerTitleHeader + "\"";
-			value["-ps-header-font-size"] = "\"" + ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value + "\"";
+			var hFontSizeValue = string.Empty;
+			if (cTool.DdlHeaderFontSize.SelectedItem != null)
+			{
+				hFontSizeValue = ((ComboBoxItem) cTool.DdlHeaderFontSize.SelectedItem).Value;
+			}
+			value["-ps-header-font-size"] = "\"" + hFontSizeValue + "\"";
 			if (inputTypeBL.ToLower() == "scripture")
 			{
 				value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
@@ -3087,78 +3132,81 @@ namespace SIL.PublishingSolution
 		/// </summary>
 		public void ShowStyleInGrid(DataGridView grid, ArrayList cssNames)
 		{
-			if (DataSetForGrid.Tables.Count > 0)
+			if (DataSetForGrid.Tables.Count > 0 && DataSetForGrid.Tables.Contains("Styles"))
+			{
 				DataSetForGrid.Tables["Styles"].Clear();
 
-			DataRow row;
-			XmlNodeList cats = Param.GetItems("//styles/" + MediaType + "/style");
-			foreach (XmlNode xml in cats)
-			{
-				XmlAttribute name = xml.Attributes[AttribName];
-				XmlAttribute file = xml.Attributes[AttribFile];
-				XmlAttribute type = xml.Attributes[AttribType];
-				XmlAttribute shown = xml.Attributes[AttribShown];
-				XmlAttribute approvedBy = xml.Attributes[AttribApproved];
-				XmlAttribute previewFile1 = xml.Attributes[AttribPreviewFile1];
-				XmlAttribute previewFile2 = xml.Attributes[AttribPreviewFile2];
-
-				XmlNode xml1 = xml.SelectSingleNode(ElementDesc);
-				string desc = string.Empty;
-				if (xml1 != null)
-					desc = xml1.InnerText;
-
-				xml1 = xml.SelectSingleNode(ElementComment);
-				string comment = string.Empty;
-				if (xml1 != null)
-					comment = xml1.InnerText;
-
-				row = DataSetForGrid.Tables["Styles"].NewRow();
-				row["Name"] = name != null ? name.Value : string.Empty; //name.Value;
-
-				if (row["Name"].ToString().IndexOf("Copy") >= 0 || row["Name"].ToString().IndexOf("Custom") >= 0)
+				DataRow row;
+				XmlNodeList cats = Param.GetItems("//styles/" + MediaType + "/style");
+				foreach (XmlNode xml in cats)
 				{
-					if (!cssNames.Contains(row["Name"]))
-						cssNames.Add(row["Name"]);
+					XmlAttribute name = xml.Attributes[AttribName];
+					XmlAttribute file = xml.Attributes[AttribFile];
+					XmlAttribute type = xml.Attributes[AttribType];
+					XmlAttribute shown = xml.Attributes[AttribShown];
+					XmlAttribute approvedBy = xml.Attributes[AttribApproved];
+					XmlAttribute previewFile1 = xml.Attributes[AttribPreviewFile1];
+					XmlAttribute previewFile2 = xml.Attributes[AttribPreviewFile2];
+
+					XmlNode xml1 = xml.SelectSingleNode(ElementDesc);
+					string desc = string.Empty;
+					if (xml1 != null)
+						desc = xml1.InnerText;
+
+					xml1 = xml.SelectSingleNode(ElementComment);
+					string comment = string.Empty;
+					if (xml1 != null)
+						comment = xml1.InnerText;
+
+
+					row = DataSetForGrid.Tables["Styles"].NewRow();
+					row["Name"] = name != null ? name.Value : string.Empty; //name.Value;
+
+					if (row["Name"].ToString().IndexOf("Copy") >= 0 || row["Name"].ToString().IndexOf("Custom") >= 0)
+					{
+						if (!cssNames.Contains(row["Name"]))
+							cssNames.Add(row["Name"]);
+					}
+					row["File"] = file.Value;
+					row["Description"] = desc;
+					row["Comment"] = comment;
+					row["Type"] = type != null ? type.Value : TypeStandard;
+					row["Shown"] = shown != null ? shown.Value : "Yes"; // shown.Value;
+					row["ApprovedBy"] = approvedBy != null ? approvedBy.Value : string.Empty; //approvedBy.Value;
+					row["previewFile1"] = previewFile1 != null && previewFile1.Value != null ? previewFile1.Value : string.Empty;
+					row["previewFile2"] = previewFile2 != null && previewFile2.Value != null ? previewFile2.Value : string.Empty;
+					DataSetForGrid.Tables["Styles"].Rows.Add(row);
 				}
-				row["File"] = file.Value;
-				row["Description"] = desc;
-				row["Comment"] = comment;
-				row["Type"] = type != null ? type.Value : TypeStandard;
-				row["Shown"] = shown != null ? shown.Value : "Yes"; // shown.Value;
-				row["ApprovedBy"] = approvedBy != null ? approvedBy.Value : string.Empty; //approvedBy.Value;
-				row["previewFile1"] = previewFile1 != null && previewFile1.Value != null ? previewFile1.Value : string.Empty;
-				row["previewFile2"] = previewFile2 != null && previewFile2.Value != null ? previewFile2.Value : string.Empty;
-				DataSetForGrid.Tables["Styles"].Rows.Add(row);
-			}
-			grid.DataSource = DataSetForGrid.Tables["Styles"];
-			grid.Refresh();
+				grid.DataSource = DataSetForGrid.Tables["Styles"];
+				grid.Refresh();
 
-			for (int i = 0; i < grid.Columns.Count; i++)
-			{
-				grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-			}
-
-			ColumnHeaderLocalization(grid);
-			if (grid.Columns.Count > 0)
-			{
-				grid.Columns[5].Visible = false; // Hiding the ApprovedBy column
-				grid.Columns[6].Visible = false; // Hiding the File Name       
-				grid.Columns[7].Visible = false; // Preview File 1
-				grid.Columns[8].Visible = false; // Preview File 2      
-
-			}
-
-			if (grid.SelectedRows.Count <= 0 && IsUnixOs)
-			{
-				Param.LoadSettings();
-				SetPreviousLayoutSelect(grid);
-				if (grid.SelectedRows.Count == 0 || grid.SelectedRows.Count == -1)
+				for (int i = 0; i < grid.Columns.Count; i++)
 				{
-					grid.ClearSelection();
-					grid.Rows[0].Selected = true;
-					SelectedRowIndex = 0;
-					//_screenMode = ScreenMode.View;
-					ShowInfoValue();
+					grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+				}
+
+				ColumnHeaderLocalization(grid);
+				if (grid.Columns.Count > 0)
+				{
+					grid.Columns[5].Visible = false; // Hiding the ApprovedBy column
+					grid.Columns[6].Visible = false; // Hiding the File Name
+					grid.Columns[7].Visible = false; // Preview File 1
+					grid.Columns[8].Visible = false; // Preview File 2
+
+				}
+
+				if (grid.SelectedRows.Count <= 0 && IsUnixOs)
+				{
+					Param.LoadSettings();
+					SetPreviousLayoutSelect(grid);
+					if (grid.SelectedRows.Count == 0 || grid.SelectedRows.Count == -1)
+					{
+						grid.ClearSelection();
+						grid.Rows[0].Selected = true;
+						SelectedRowIndex = 0;
+						//_screenMode = ScreenMode.View;
+						ShowInfoValue();
+					}
 				}
 			}
 		}
@@ -3167,16 +3215,19 @@ namespace SIL.PublishingSolution
 		{
 			if (!Common.Testing)
 			{
-				grid.Columns[0].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Name",
-					grid.Columns[0].HeaderText);
-				grid.Columns[1].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Description",
-					grid.Columns[1].HeaderText);
-				grid.Columns[2].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Comment",
-					grid.Columns[2].HeaderText);
-				grid.Columns[3].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Type",
-					grid.Columns[3].HeaderText);
-				grid.Columns[4].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Shown",
-					grid.Columns[4].HeaderText);
+				if (grid.Columns.Count > 0)
+				{
+					grid.Columns[0].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Name",
+						grid.Columns[0].HeaderText);
+					grid.Columns[1].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Description",
+						grid.Columns[1].HeaderText);
+					grid.Columns[2].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Comment",
+						grid.Columns[2].HeaderText);
+					grid.Columns[3].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Type",
+						grid.Columns[3].HeaderText);
+					grid.Columns[4].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Shown",
+						grid.Columns[4].HeaderText);
+				}
 			}
 		}
 
