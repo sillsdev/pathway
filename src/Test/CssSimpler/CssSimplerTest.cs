@@ -226,7 +226,6 @@ namespace Test.CssSimplerTest
         ///A test for AddSubTree
         ///</summary>
         [Test]
-        [ExpectedException(typeof(NullReferenceException))]
         public void AddSubTreeTest3()
         {
             const string testName = "AddSubTree3";
@@ -234,7 +233,15 @@ namespace Test.CssSimplerTest
             var ctp = new CssTreeParser();
             ctp.Parse(_testFiles.Input(fileName));
             var root = ctp.Root;
-            AddSubTree(null, root, ctp); //when an empty css file is given root == null
+            try
+            {
+                AddSubTree(null, root, ctp); //when an empty css file is given root == null
+                Assert.AreEqual("<error: >", root.ToString(), "unexpected empty parse result" );
+            }
+            catch (NullReferenceException)
+            {
+                // Expected with some versions of Antlr
+            }
         }
 
         /// <summary>
@@ -919,7 +926,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 4, "//*[@class='subentrymainentrysubentry-ps']", "subentry punctuation");
+            NodeTest(outFullName, 4, "//*[@class='subentry-ps']", "subentry punctuation");
         }
 
         /// <summary>
@@ -1065,6 +1072,35 @@ namespace Test.CssSimplerTest
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 1, "//*[@class='fr-Zxxx-x-audio-ps']", "audio icon");
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void SubentryBulletTest()
+        {
+            const string testName = "SubentryBullet";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            NodeTest(outFullName, 1, "//*[contains(@class,'subentry ')]/*[1][.='\x29EB']", "subentry bullet");
         }
 
         [Test]

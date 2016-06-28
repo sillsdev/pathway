@@ -1,0 +1,162 @@
+﻿.letHead {
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+}
+.letter {
+   line-height: 12pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 14pt;
+   font-weight: bold;
+}
+span {
+   font-size: 10pt;
+}
+span[lang|= "es"]{
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: normal;
+   color: #008000;
+}
+span[lang|= "mxb"]{
+   font-family: 'Charis SIL AmArea',serif;
+   font-size: 10pt;
+   font-weight: bold;
+   font-style: normal;
+   color: #000080;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.entry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.entry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   margin-left: 11.339pt;
+   line-height: 12pt;
+   padding-bottom: 0pt;
+   padding-top: 3pt;
+   font-weight: normal;
+   font-style: normal;
+   color: #008000;
+}
+.entry .mainheadword > span[lang|= "mxb"]{
+   font-size: 11pt;
+   font-weight: bold;
+   font-style: normal;
+   color: #00F;
+}
+.entry .mainheadword > span {
+   font-size: 11pt;
+   font-weight: bold;
+   font-style: normal;
+   color: #00F;
+}
+.entry .senses .sensecontent .sensenumber {
+   font-size: 10pt;
+   font-weight: bold;
+   color: #800000;
+}
+.entry .senses .morphosyntaxanalysis {
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+}
+.entry .senses .graminfoabbrev {
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #800000;
+}
+.entry .senses .morphosyntaxanalysis {
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+}
+.entry .senses .graminfoabbrev {
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #800000;
+}
+.entry .senses .senses .sensecontent .sensenumber {
+   font-size: 10pt;
+   font-weight: bold;
+   color: #800000;
+}
+.entry .senses .example > span[lang|= "mxb"]{
+   font-size: 10pt;
+   font-weight: bold;
+   font-style: normal;
+   color: #000080;
+}
+.entry .senses .example > span {
+   font-size: 10pt;
+   font-weight: bold;
+   font-style: normal;
+   color: #000080;
+}
+.entry .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   margin-left: 11.339pt;
+   line-height: 12pt;
+   padding-bottom: 0pt;
+   padding-top: 1pt;
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: normal;
+   color: #000080;
+   display: block;
+}
+.subentry-ps {
+   font-size: 10pt;
+   color: Black;
+}
+.entry .picturesofsense {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 33.661pt;
+   line-height: 12pt;
+   padding-bottom: 0pt;
+   padding-top: 0pt;
+   font-weight: normal;
+   font-style: normal;
+   color: #000;
+}
+.mainentrysubentries .mainentrysubentry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "mxb"]{
+   font-size: 11pt;
+   font-weight: bold;
+   font-style: normal;
+   color: #00F;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span {
+   font-size: 11pt;
+   font-weight: bold;
+   font-style: normal;
+   color: #00F;
+}

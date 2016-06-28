@@ -140,6 +140,8 @@ namespace CssSimpler
                 try
                 {
                     parser.Parse(styleSheet);
+                    if (parser.Errors.Count > 0)
+                        throw new Antlr.Runtime.RecognitionException(string.Format("{0} errors in CSS", parser.Errors.Count));
                     error = false;
                 }
                 catch (Exception e)

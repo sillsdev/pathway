@@ -104,7 +104,12 @@ namespace CssSimpler
                 {
                     if (Applies(node, index))
                     {
-                        if (LookupNotFirstChild(node) != null)
+                        if (myClass.Contains(' '))
+                        {
+                            myClass = myClass.Split(' ')[0];
+                        }
+                        //if (LookupNotFirstChild(node) != null)
+                        if (targets == _beforeTargets)
                         {
                             _savedFirstNode = node;
                             _firstClass = myClass;

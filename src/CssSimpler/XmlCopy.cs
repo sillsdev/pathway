@@ -211,7 +211,7 @@ namespace CssSimpler
 
         private void WriteValueEmbedEntities(string val)
         {
-            var matches = Regex.Matches(val, @"\\(\d+)");
+            var matches = Regex.Matches(val, @"\\([0-9ABCDEF]+)", RegexOptions.IgnoreCase);
             var position = 0;
             foreach (Match match in matches)
             {
