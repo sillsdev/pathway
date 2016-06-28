@@ -84,6 +84,9 @@ namespace SIL.PublishingSolution
         public bool IncludeFontVariants { get; set; }
         public string TocLevel { get; set; }
         public int MaxImageWidth { get; set; }
+		private XslCompiledTransform addRevId;
+	    private XslCompiledTransform noXmlSpace;
+	    private XslCompiledTransform fixEpub;
 
         public int BaseFontSize { get; set; }
         public int DefaultLineHeight { get; set; }
@@ -148,9 +151,9 @@ namespace SIL.PublishingSolution
             var bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
             PageBreak = InputType.ToLower() == "dictionary" && GetPageBreakStatus(projInfo.SelectedTemplateStyle);
             #region LoadXslts
-            var addRevId = LoadAddRevIdXslt();
-            var noXmlSpace = LoadNoXmlSpaceXslt();
-            var fixEpub = LoadFixEpubXslt();
+            addRevId = LoadAddRevIdXslt();
+            noXmlSpace = LoadNoXmlSpaceXslt();
+            fixEpub = LoadFixEpubXslt();
             #endregion
             #region Create EpubFolder
             if (!Common.Testing)
@@ -249,7 +252,7 @@ namespace SIL.PublishingSolution
             var splitFiles = new List<string>();
             splitFiles.AddRange(frontMatter);
             SplittingFrontMatter(projInfo, preProcessor, defaultCss, splitFiles);
-            SplittingReversal(projInfo, addRevId, langArray, defaultCss, splitFiles);
+            SplittingReversal(projInfo, langArray, defaultCss, splitFiles);
             AddBooksMoveNotes(inProcess, htmlFiles, splitFiles);
             inProcess.PerformStep();
             #endregion Add Sections
@@ -927,13 +930,17 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void SplittingReversal(PublicationInformation projInfo, XslCompiledTransform addRevId, string[] langArray, string defaultCss, List<string> splitFiles)
+        private void SplittingReversal(PublicationInformation projInfo, string[] langArray, string defaultCss, List<string> splitFiles)
         {
             // If we are working with a dictionary and have a reversal index, process it now)
             if (projInfo.IsReversalExist)
             {
                 var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                ReversalHacks(addRevId, langArray, defaultCss, revFile);
+
+				Common.ApplyXslt(revFile, noXmlSpace);
+				Common.ApplyXslt(revFile, fixEpub);
+
+				ReversalHacks(addRevId, langArray, defaultCss, revFile);
                 // now split out the html as needed
                 var fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
                 splitFiles.AddRange(fileNameWithPath);
