@@ -520,7 +520,7 @@ namespace Test.CssParserTest
         /// CSS throws error
         /// </summary>
         [Test]
-        [ExpectedException("Antlr.Runtime.Tree.RewriteEarlyExitException")]
+        //[ExpectedException("Antlr.Runtime.Tree.RewriteEarlyExitException")]
         public void CssNoErrorT30b()
         {
             OneTest("T30b", "CSS no error");
