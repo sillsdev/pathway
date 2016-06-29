@@ -209,7 +209,10 @@ namespace CssSimpler
             var content = node.SelectSingleNode("following-sibling::PROPERTY[name='content']/value");
             Debug.Assert(content != null);
             var val = content.InnerText;
-            WriteContent(val.Substring(1,val.Length - 2), myClass.Replace(" ", ""));  // Remove quotes
+            var properties = node.SelectNodes("parent::*/PROPERTY");
+            Debug.Assert(properties != null);
+            myClass = properties.Count <= 1 ? null : myClass.Replace(" ", "");
+            WriteContent(val.Substring(1, val.Length - 2), myClass);  // Remove quotes
         }
 
         private void SaveClass(XmlReader r)
