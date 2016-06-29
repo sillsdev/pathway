@@ -16,6 +16,7 @@
 
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -76,7 +77,7 @@ namespace Test.CssParserTest
             // Output result to disk
             var outFileName = Common.PathCombine(_outPath, testName + ".txt");
             var sw = new StreamWriter(outFileName);
-            sw.Write(strResult);
+            sw.Write(strResult.Replace("\r\n", "\n"));
             sw.Close();
 
             // Compare result to expected result
@@ -91,7 +92,8 @@ namespace Test.CssParserTest
                 var strError = ctp.ErrorText();
                 var outErrorName = Common.PathCombine(_outPath, testName + "Err.txt");
                 var swe = new StreamWriter(outErrorName);
-                swe.Write(strError);
+                var strGenericError = Regex.Replace(strError, @"[\\/a-zA-Z0-9\:]+src", "src");
+                swe.Write(strGenericError.Replace("\r\n", "\n"));
                 swe.Close();
 
                 var expErrorName = Common.PathCombine(_expPath, testName + "Err.txt");
@@ -99,7 +101,7 @@ namespace Test.CssParserTest
                 var strExpError = sre.ReadToEnd();
                 sre.Close();
                 var msgErr = msg + " in Error text";
-                Assert.AreEqual(strError, strExpError, msgErr);
+                Assert.AreEqual(strGenericError, strExpError, msgErr);
             }
             else
             {
