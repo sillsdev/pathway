@@ -77,15 +77,10 @@ namespace Test.CssParserTest
             // Output result to disk
             var outFileName = Common.PathCombine(_outPath, testName + ".txt");
             var sw = new StreamWriter(outFileName);
-            sw.Write(strResult.Replace("\r\n", "\n"));
+            sw.Write(strResult.Replace(@"\", "/"));
             sw.Close();
-
-            // Compare result to expected result
             var expFileName = Common.PathCombine(_expPath, testName + ".txt");
-            var sr = new StreamReader(expFileName);
-            var strExpect = sr.ReadToEnd();
-            sr.Close();
-            Assert.AreEqual(strResult, strExpect, msg);
+            TextFileAssert.AreEqual(expFileName, outFileName, msg);
 
             if (ctp.Errors.Count != 0)
             {
@@ -93,15 +88,11 @@ namespace Test.CssParserTest
                 var outErrorName = Common.PathCombine(_outPath, testName + "Err.txt");
                 var swe = new StreamWriter(outErrorName);
                 var strGenericError = Regex.Replace(strError, @"[\\/a-zA-Z0-9\:]+src", "src");
-                swe.Write(strGenericError.Replace("\r\n", "\n"));
+                swe.Write(strGenericError.Replace(@"\", "/"));
                 swe.Close();
-
                 var expErrorName = Common.PathCombine(_expPath, testName + "Err.txt");
-                var sre = new StreamReader(expErrorName);
-                var strExpError = sre.ReadToEnd();
-                sre.Close();
                 var msgErr = msg + " in Error text";
-                Assert.AreEqual(strGenericError, strExpError, msgErr);
+                TextFileAssert.AreEqual(expErrorName, outErrorName, msgErr);
             }
             else
             {
