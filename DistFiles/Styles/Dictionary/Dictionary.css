@@ -287,9 +287,8 @@ text-align: justify;
        text-indent: -12pt;
 }
 
-.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "*"]{
-   font-weight: normal;
+.configtargets .configtarget .headword > span {
+	font-weight: normal;
 }
-.mainentrysubentries .mainentrysubentry > .headword > span {
-   font-weight: normal;
-}
+
+
