@@ -77,7 +77,7 @@ namespace Test.CssParserTest
             // Output result to disk
             var outFileName = Common.PathCombine(_outPath, testName + ".txt");
             var sw = new StreamWriter(outFileName);
-            sw.Write(strResult.Replace(@"\", "/"));
+            sw.Write(strResult);
             sw.Close();
             var expFileName = Common.PathCombine(_expPath, testName + ".txt");
             TextFileAssert.AreEqual(expFileName, outFileName, msg);
