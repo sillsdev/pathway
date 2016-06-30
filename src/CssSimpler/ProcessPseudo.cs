@@ -56,7 +56,7 @@ namespace CssSimpler
             ApplyBestRule(r.Depth, target, _beforeTargets, _lastClass);
         }
 
-        private XmlNode _savedFirstNode = null;
+        private XmlNode _savedFirstNode;
         private string _firstClass = string.Empty;
         private void InsertFirstChild(XmlReader r)
         {
@@ -232,6 +232,7 @@ namespace CssSimpler
                 {
                     while (_classes.Count < r.Depth)
                     {
+                        // ReSharper disable once AssignNullToNotNullAttribute
                         _classes.Add(null);
                     }
                     _classes.Add(r.Value);
@@ -290,6 +291,7 @@ namespace CssSimpler
                         var targetRule = term.ParentNode as XmlElement;
                         Debug.Assert(targetRule != null, "targetRule != null");
                         var ruleTerms = int.Parse(targetRule.GetAttribute("term"));
+                        // ReSharper disable once TryCastAlwaysSucceeds
                         var curRule = pseudo.ParentNode as XmlElement;
                         var curTerms = int.Parse(curRule.GetAttribute("term"));
                         if (curTerms >= ruleTerms)

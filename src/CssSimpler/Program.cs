@@ -13,6 +13,7 @@
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -94,7 +95,7 @@ namespace CssSimpler
             var styleSheet = lc.StyleSheet;
             MakeBaskupIfNecessary(styleSheet, extra[0]);
             DebugWriteClassNames(lc.UniqueClasses);
-            Debug("Clean up Stylesheet: {0}", styleSheet);
+            VerboseMessage("Clean up Stylesheet: {0}", styleSheet);
             var parser = new CssTreeParser();
             var xml = new XmlDocument();
             UniqueClasses = lc.UniqueClasses;
@@ -102,10 +103,12 @@ namespace CssSimpler
             //WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
+            // ReSharper disable once UnusedVariable
             var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
+            // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
             try
@@ -127,7 +130,7 @@ namespace CssSimpler
             AddSubTree(xml.DocumentElement, r, parser);
             if (OutputXml)
             {
-                Debug("Writing XML stylesheet");
+                VerboseMessage("Writing XML stylesheet");
                 WriteCssXml(styleSheet, xml);
             }
         }
@@ -180,6 +183,7 @@ namespace CssSimpler
                         while (!sr.EndOfStream)
                         {
                             var skipLine = sr.ReadLine();
+                            Debug.Assert(skipLine != null, "skipLine != null");
                             if (skipLine.Trim().EndsWith("}")) break;
                             rdline += 1;
                         }
@@ -230,7 +234,7 @@ namespace CssSimpler
 	        }
             var cssFile = new FileStream(styleSheet, FileMode.Create);
             var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
-            Debug("Writing Simple Stylesheet: {0}", styleSheet);
+            VerboseMessage("Writing Simple Stylesheet: {0}", styleSheet);
             var memory = new MemoryStream();
             SimplifyXmlCss.Transform(xml, null, memory);
             memory.Flush();
@@ -249,11 +253,13 @@ namespace CssSimpler
             {
                 throw new ArgumentNullException("styleSheet");
             }
-            Debug("Writing Stylesheet without pseudo rules: {0}", styleSheet);
+            VerboseMessage("Writing Stylesheet without pseudo rules: {0}", styleSheet);
             var ruleNodes = xml.SelectNodes("//RULE[PSEUDO]");
+            Debug.Assert(ruleNodes != null, "ruleNodes != null");
             foreach (XmlElement ruleNode in ruleNodes)
             {
                 var properties = ruleNode.SelectNodes("PROPERTY");
+                Debug.Assert(properties != null, "properties != null");
                 if (properties.Count <= 1)
                 {
                     ruleNode.RemoveAll();
@@ -268,6 +274,7 @@ namespace CssSimpler
                             ruleNode.RemoveChild(childNode);
                         }
                     }
+                    Debug.Assert(ruleNode.OwnerDocument != null, "ruleNode.OwnerDocument != null");
                     var classNode = ruleNode.OwnerDocument.CreateElement("CLASS");
                     var nameNode = ruleNode.OwnerDocument.CreateElement("name");
                     nameNode.InnerText = ruleNode.GetAttribute("lastClass") + "-ps";
@@ -315,7 +322,7 @@ namespace CssSimpler
                     firstClass = false;
                 }
                 classNames += "]";
-                Debug(classNames);
+                VerboseMessage(classNames);
             }
         }
 
@@ -356,7 +363,7 @@ namespace CssSimpler
                 }
                 if (first >= 'A' && first <= 'Z' && second >= 'A' && second <= 'Z')
                 {
-                    System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
+                    Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
                     var node = n.OwnerDocument.CreateElement(name);
                     if (name == "RULE") // later postion equals greater precedence
                     {
@@ -369,7 +376,7 @@ namespace CssSimpler
                         term = _term;
                         var termAttr = n.OwnerDocument.CreateAttribute("term");
                         termAttr.Value = term.ToString();
-                        System.Diagnostics.Debug.Assert(n.Attributes != null, "Attributes != null");
+                        Debug.Assert(n.Attributes != null, "Attributes != null");
                         n.Attributes.Append(termAttr);
                     }
                     else
@@ -382,12 +389,12 @@ namespace CssSimpler
                     {
                         if (_noData)
                         {
-                            System.Diagnostics.Debug.Assert(node.ParentNode != null, "ParentNode != null");
+                            Debug.Assert(node.ParentNode != null, "ParentNode != null");
                             node.ParentNode.RemoveChild(node);
                             continue;
                         }
                         pos += 1;
-                        System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
+                        Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
                         var posAttr = n.OwnerDocument.CreateAttribute("pos");
                         posAttr.Value = pos.ToString();
                         node.Attributes.Append(posAttr);
@@ -407,7 +414,7 @@ namespace CssSimpler
                 }
                 else
                 {
-                    System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
+                    Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
                     var node = n.OwnerDocument.CreateElement(argState == 0? "name": (argState & 1) == 1? "value": "unit");
                     argState += 1;
                     node.InnerText = name;
@@ -425,7 +432,7 @@ namespace CssSimpler
                         }
                         else
                         {
-                            Debug("skipping: {0}", name);
+                            VerboseMessage("skipping: {0}", name);
                         }
                     }
                     if (n.Name == "TAG")
@@ -448,7 +455,7 @@ namespace CssSimpler
             p.WriteOptionDescriptions(Console.Out);
         }
 
-        static void Debug(string format, params object[] args)
+        static void VerboseMessage(string format, params object[] args)
         {
             if (_verbosity > 0)
             {
