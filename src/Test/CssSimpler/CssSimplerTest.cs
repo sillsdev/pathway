@@ -1084,7 +1084,11 @@ namespace Test.CssSimplerTest
             File.Copy(xmlFullName, _testFiles.Output(testName + "Input.xml"));
             ElaborateMultiSelectorRules(xml);
             WriteCssXml(cssFullName, xml);
-            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".xml"), xmlFullName);
+            var cssFile = new FileStream(cssFullName, FileMode.Create);
+            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
+            XmlCss.Transform(xml, null, cssWriter);
+            cssFile.Close();
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
         }
 
         /// <summary>
@@ -1110,7 +1114,11 @@ namespace Test.CssSimplerTest
             File.Copy(xmlFullName, _testFiles.Output(testName + "Input.xml"));
             ElaborateMultiSelectorRules(xml);
             WriteCssXml(cssFullName, xml);
-            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".xml"), xmlFullName);
+            var cssFile = new FileStream(cssFullName, FileMode.Create);
+            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
+            XmlCss.Transform(xml, null, cssWriter);
+            cssFile.Close();
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
         }
 
         /// <summary>
