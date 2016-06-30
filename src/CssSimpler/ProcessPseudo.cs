@@ -145,7 +145,7 @@ namespace CssSimpler
                         requireParent = true;
                         continue;
                     case "CLASS":
-                        string name = node.ChildNodes[0].InnerText;
+                        string name = node.FirstChild.InnerText;
                         while (!requireParent && index > 0 && !MatchClass(index, name))
                         {
                             index -= 1;
@@ -158,17 +158,22 @@ namespace CssSimpler
                         if (_firstSibling) return false;
                         node = node.PreviousSibling;
                         Debug.Assert(node != null, "Nothing preceding PRECEDES");
-                        string precedingName = node.ChildNodes[0].InnerText;
+                        string precedingName = node.FirstChild.InnerText;
                         if (_precedingClass != precedingName && precedingName != "span") return false;
-                        if (precedingName != "span") index -= 1;
+                        //if (precedingName != "span") index -= 1;
                         break;
                     case "SIBLING":
                         node = node.PreviousSibling;
                         Debug.Assert(node != null, "Nothing preceding SIBLING");
-                        string siblingName = node.ChildNodes[0].InnerText;
+                        string siblingName = node.FirstChild.InnerText;
                         int position = _savedSibling.IndexOf(siblingName);
                         if (position == -1 || position == _savedSibling.Count - 1) return false;
                         index -= 1;
+                        break;
+                    case "TAG":
+                        string tagName = node.FirstChild.InnerText;
+                        if (tagName != "span")
+                            throw new NotImplementedException();
                         break;
                     default:
                         throw new NotImplementedException();

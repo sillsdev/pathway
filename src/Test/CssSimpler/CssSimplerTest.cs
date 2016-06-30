@@ -644,8 +644,8 @@ namespace Test.CssSimplerTest
                 // ignored
             }
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(xhtmlFullName, 3, "//*[@class='visiblecomplexformbackref-ps']", "Wrong number of bullets in output");
-            NodeTest(xhtmlFullName, 3, "//*[@class='visiblecomplexformbackrefs-ps']", "Wrong number of list punctuation");
+            NodeTest(xhtmlFullName, 3, "//*[local-name()='a']/preceding-sibling::*", "Wrong number of bullets in output");
+            NodeTest(xhtmlFullName, 14, "//*[@xml:space]", "Wrong number of list punctuation");
         }
 
         /// <summary>
@@ -665,7 +665,7 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             OutputXml = true;
             LoadCssXml(parser, styleSheet, xml);
-            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            //WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
             var tmp2Out = Path.GetTempFileName();
             var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
@@ -684,7 +684,7 @@ namespace Test.CssSimplerTest
                 // ignored
             }
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeInspect(xhtmlFullName, new Dictionary<string, string> { { "//*[@class='custentry-ps']", "G{" }, { "(//*[@class='custentry-ps'])[3]", "I{" }, { "(//*[@class='custentry-ps'])[5]", "J{" } });
+            NodeInspect(xhtmlFullName, new Dictionary<string, string> { { "(//*[@class='custentry'])[1]/*[1]", "G{" }, { "(//*[@class='custentry'])[2]/*[1]", "I{" }, { "(//*[@class='custentry'])[3]/*[1]", "J{" } });
         }
 
         /// <summary>
@@ -704,7 +704,7 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             OutputXml = true;
             LoadCssXml(parser, styleSheet, xml);
-            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            //WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
             var tmp2Out = Path.GetTempFileName();
             var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
@@ -723,7 +723,7 @@ namespace Test.CssSimplerTest
                 // ignored
             }
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeInspect(xhtmlFullName, new Dictionary<string, string> { { "(//*[@class='custentry-ps'])[19]", "F(" }, { "(//*[@class='custentry-ps'])[22]", "C(" } });
+            NodeInspect(xhtmlFullName, new Dictionary<string, string> { { "(//*[@class='custentry'])[7]/*[1]", "F(" }, { "(//*[@class='custentry'])[8]/*[1]", "C(" } });
         }
 
         /// <summary>
@@ -789,7 +789,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 23, "//*[contains(@class,'-ps')]", "Nodes with pseudo content changed for Fw 8.2.8");
+            NodeTest(outFullName, 3023, "//*[@xml:space]", "Nodes with pseudo content changed for Fw 8.2.8");
         }
 
         /// <summary>
@@ -838,11 +838,11 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 4, "//*[@class='lexsensereference-ps']", "node with ; not inserted between lexical relations");
+            NodeTest(outFullName, 1, "//*[@class='ownertype_abbreviation']/preceding-sibling::*", "node with ; not inserted between lexical relations");
         }
 
         /// <summary>
@@ -870,7 +870,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 2, "//*[@class='sensecontent-ps']", "Wrong amount of sense number punctuation.");
+            NodeTest(outFullName, 2, "//*[@class='sensenumber']/*", "Wrong amount of sense number punctuation.");
         }
 
         /// <summary>
@@ -893,12 +893,12 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 9, "//*[@class='configtarget-ps']", "missing commas between lexical relation headwords");
+            NodeTest(outFullName, 9, "//*[@class='headword']/preceding-sibling::*", "missing commas between lexical relation headwords");
         }
 
         /// <summary>
@@ -921,12 +921,12 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 4, "//*[@class='subentry-ps']", "subentry punctuation");
+            NodeTest(outFullName, 79, "//*[@xml:space]", "subentry punctuation");
         }
 
         /// <summary>
@@ -950,12 +950,12 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 14, "//*[@class='semanticdomains-ps']", "semantic domain punctuation");
+            NodeTest(outFullName, 14, "//*[@class='semanticdomains']/*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -1008,12 +1008,12 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 21, "//*[@class='configtarget-ps']", "semantic domain punctuation");
+            NodeTest(outFullName, 7, "//*[@class='semanticdomain']/*[@class='abbreviation']/preceding-sibling::*", "multiple semantic domain punctuation");
         }
 
         /// <summary>
@@ -1037,7 +1037,7 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
@@ -1071,7 +1071,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 1, "//*[@class='fr-Zxxx-x-audio-ps']", "audio icon");
+            NodeTest(outFullName, 1, "//*[@class='fr-Zxxx-x-audio']/*[string-length(.)=2]", "audio icon");
         }
 
         /// <summary>
@@ -1170,7 +1170,10 @@ namespace Test.CssSimplerTest
             var xDoc = new XmlDocument();
             xDoc.Load(xr);
             xr.Close();
-            Assert.AreEqual(count, xDoc.SelectNodes(xpath).Count, msg);
+            var ns = new XmlNamespaceManager(xDoc.NameTable);
+            ns.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+            ns.AddNamespace("xml", "http://www.w3.org/XML/1998/namespace");
+            Assert.AreEqual(count, xDoc.SelectNodes(xpath, ns).Count, msg);
         }
 
         /// <summary>

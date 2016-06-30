@@ -144,7 +144,7 @@ namespace CssSimpler
                         throw new Antlr.Runtime.RecognitionException(string.Format("{0} errors in CSS", parser.Errors.Count));
                     error = false;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     error = true;
                     RemoveError(parser.Errors, styleSheet);
@@ -318,22 +318,6 @@ namespace CssSimpler
                 Debug(classNames);
             }
         }
-
-        //private static void GetContTargets(XmlDocument xml, Dictionary<string, List<XmlNode>> contClass)
-        //{
-        //    foreach (XmlNode contProp in xml.SelectNodes("//PROPERTY[name='content']"))
-        //    {
-        //        var target = contProp.ParentNode.Attributes["lastClass"];
-        //        if (contClass.ContainsKey(target.InnerText))
-        //        {
-        //            contClass[target.InnerText].Add(contProp);
-        //        }
-        //        else
-        //        {
-        //            contClass[target.InnerText] = new List<XmlNode> { contProp };
-        //        }
-        //    }
-        //}
 
         protected static void WriteCssXml(string styleSheet, XmlDocument xml)
         {
