@@ -138,7 +138,7 @@ namespace CssSimpler
 
         protected static void ElaborateMultiSelectorRules(XmlDocument xml)
         {
-            var multiSelectors = xml.SelectNodes("//RULE/name[.=',']");
+            var multiSelectors = xml.SelectNodes("//RULE/*[.=',']");
             Debug.Assert(multiSelectors != null, "multiSelectors != null");
             foreach (XmlElement multiSelector in multiSelectors)
             {

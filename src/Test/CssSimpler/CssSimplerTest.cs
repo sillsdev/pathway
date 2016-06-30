@@ -1062,12 +1062,38 @@ namespace Test.CssSimplerTest
         }
 
         /// <summary>
-        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// test for multi selector expansion
         /// </summary>
         [Test]
         public void ElaborateMultiSelectorRulesTest()
         {
             const string testName = "MultiSelector";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            var r = ctp.Root;
+            xml.LoadXml("<ROOT/>");
+            AddSubTree(xml.DocumentElement, r, ctp);
+            WriteCssXml(cssFullName, xml);
+            var xmlFullName = _testFiles.Output(testName + ".xml");
+            File.Copy(xmlFullName, _testFiles.Output(testName + "Input.xml"));
+            ElaborateMultiSelectorRules(xml);
+            WriteCssXml(cssFullName, xml);
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".xml"), xmlFullName);
+        }
+
+        /// <summary>
+        /// test for multi selector expansion
+        /// </summary>
+        [Test]
+        public void ElaborateMultiSelectorRules2Test()
+        {
+            const string testName = "MultiSelector2";
             _testFiles.Copy(testName + ".css");
             var cssFullName = _testFiles.Output(testName + ".css");
             var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
