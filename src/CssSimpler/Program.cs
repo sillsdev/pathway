@@ -128,11 +128,93 @@ namespace CssSimpler
             var r = parser.Root;
             xml.LoadXml("<ROOT/>");
             AddSubTree(xml.DocumentElement, r, parser);
+            ElaborateMultiSelectorRules(xml);
             if (OutputXml)
             {
                 VerboseMessage("Writing XML stylesheet");
                 WriteCssXml(styleSheet, xml);
             }
+        }
+
+        protected static void ElaborateMultiSelectorRules(XmlDocument xml)
+        {
+            var multiSelectors = xml.SelectNodes("//RULE/name[.=',']");
+            Debug.Assert(multiSelectors != null, "multiSelectors != null");
+            foreach (XmlElement multiSelector in multiSelectors)
+            {
+                var ruleNode = xml.CreateElement("RULE");
+                var node = multiSelector;
+                var targetClass = string.Empty;
+                var lastClass = string.Empty;
+                while (string.IsNullOrEmpty(targetClass) || string.IsNullOrEmpty(lastClass))
+                {
+                    node = node.PreviousSibling as XmlElement;
+                    if (node == null) break;
+                    if (targetClass == string.Empty)
+                    {
+                        if (node.Name == "CLASS" || node.Name == "TAG")
+                        {
+                            targetClass = node.FirstChild.InnerText;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(lastClass) || node.Name != "CLASS") continue;
+                    var poposedClass = node.FirstChild.InnerText;
+                    if (!NeedHigher.Contains(poposedClass))
+                    {
+                        lastClass = poposedClass;
+                    }
+                }
+                ruleNode.Attributes.Append(xml.CreateAttribute("term"));
+                ruleNode.Attributes.Append(xml.CreateAttribute("pos"));
+                if (!string.IsNullOrEmpty(lastClass))
+                {
+                    var lastClassAttr = xml.CreateAttribute("lastClass");
+                    lastClassAttr.InnerText = lastClass;
+                    ruleNode.Attributes.Append(lastClassAttr);
+                }
+                if (!string.IsNullOrEmpty(targetClass))
+                {
+                    var targetAttr = xml.CreateAttribute("target");
+                    targetAttr.InnerText = targetClass;
+                    ruleNode.Attributes.Append(targetAttr);
+                }
+                node = multiSelector;
+                while (true)
+                {
+                    node = node.NextSibling as XmlElement;
+                    if (node == null) break;
+                    if (node.Name != "PROPERTY") continue;
+                    ruleNode.AppendChild(node.CloneNode(true));
+                }
+                node = multiSelector.PreviousSibling as XmlElement;
+                while (true)
+                {
+                    if (node == null) break;
+                    var previousNode = node.PreviousSibling as XmlElement;
+                    ruleNode.InsertBefore(node, ruleNode.FirstChild);
+                    node = previousNode;
+                }
+                ruleNode.Attributes["term"].InnerText = TermNodes(ruleNode).Count.ToString();
+                var refRule = multiSelector.ParentNode as XmlElement;
+                Debug.Assert(refRule != null, "refRule != null");
+                refRule.Attributes["term"].InnerText = TermNodes(refRule).Count.ToString();
+                Debug.Assert(xml.DocumentElement != null, "xml.DocumentElement != null");
+                xml.DocumentElement.InsertBefore(ruleNode, refRule);
+                Debug.Assert(multiSelector.ParentNode != null, "multiSelector.ParentNode != null");
+                multiSelector.ParentNode.RemoveChild(multiSelector);
+            }
+            Debug.Assert(xml.DocumentElement != null, "xml.DocumentElement != null");
+            var rules = xml.DocumentElement.ChildNodes;
+            for (var index = 0; index < rules.Count; index += 1)
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                rules[index].Attributes["pos"].InnerText = (index + 1).ToString();
+            }
+        }
+
+        private static XmlNodeList TermNodes(XmlElement ruleNode)
+        {
+            return ruleNode.SelectNodes(".//*[local-name() != 'name' and local-name() != 'value' and local-name() != 'unit' and local-name() != 'PROPERTY']");
         }
 
         protected static void ParseCssRemovingErrors(CssTreeParser parser, string styleSheet)

@@ -1046,15 +1046,12 @@ namespace Test.CssSimplerTest
             var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
             var outFullName = _testFiles.Output(testName + ".xhtml");
             var ctp = new CssTreeParser();
-            ctp.Parse(cssFullName);
-            var root = ctp.Root;
-            Assert.True(root != null);
             var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
             var lc = new LoadClasses(xhtmlFullName);
             UniqueClasses = lc.UniqueClasses;
-            AddSubTree(xml.DocumentElement, root, ctp);
+            ctp.Parse(cssFullName);
             _testFiles.Copy(testName + ".css");
+            LoadCssXml(ctp, cssFullName, xml);
             //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             // ReSharper disable once UnusedVariable
@@ -1062,6 +1059,32 @@ namespace Test.CssSimplerTest
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 129, "//*[contains(@class,'-ps')]", "semantic domain punctuation");
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void ElaborateMultiSelectorRulesTest()
+        {
+            const string testName = "MultiSelector";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            var r = ctp.Root;
+            xml.LoadXml("<ROOT/>");
+            AddSubTree(xml.DocumentElement, r, ctp);
+            WriteCssXml(cssFullName, xml);
+            var xmlFullName = _testFiles.Output(testName + ".xml");
+            File.Copy(xmlFullName, _testFiles.Output(testName + "Input.xml"));
+            ElaborateMultiSelectorRules(xml);
+            WriteCssXml(cssFullName, xml);
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".xml"), xmlFullName);
         }
 
         /// <summary>
