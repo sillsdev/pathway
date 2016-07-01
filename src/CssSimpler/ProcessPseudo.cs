@@ -168,7 +168,7 @@ namespace CssSimpler
                         string siblingName = node.FirstChild.InnerText;
                         int position = _savedSibling.IndexOf(siblingName);
                         if (position == -1 || position == _savedSibling.Count - 1) return false;
-                        index -= 1;
+                        //index -= 1;
                         break;
                     case "TAG":
                         string tagName = node.FirstChild.InnerText;
