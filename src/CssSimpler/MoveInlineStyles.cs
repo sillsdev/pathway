@@ -47,9 +47,11 @@ namespace CssSimpler
         }
 
         private string _currentClass = String.Empty;
+        private string _currentLang = string.Empty;
         private void ResetClassName(XmlReader r)
         {
             _currentClass = String.Empty;
+            _currentLang = r.GetAttribute("lang");
         }
 
         protected  Dictionary<string, string> SavedStyles = new Dictionary<string, string>();
@@ -68,6 +70,7 @@ namespace CssSimpler
                 {
                     newClass += "-st";
                 }
+
                 var count = 0;
                 while  (SavedStyles.ContainsKey(newClass))
                 {
@@ -81,9 +84,14 @@ namespace CssSimpler
                         break;
                     }
                 }
-                if (!SavedStyles.ContainsKey(newClass))
+                var saveAs = newClass;
+                if (!string.IsNullOrEmpty(_currentLang))
                 {
-                    SavedStyles[newClass] = r.Value;
+                    saveAs += string.Format("[lang='{0}']", _currentLang.Trim());
+                }
+                if (!SavedStyles.ContainsKey(saveAs))
+                {
+                    SavedStyles[saveAs] = r.Value;
                 }
                 if (_currentClass == string.Empty)
                 {

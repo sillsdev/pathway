@@ -559,12 +559,13 @@ namespace Test.CssSimplerTest
         {
             const string testName = "InlineStyle";
             var xhtmlFile = testName + ".xhtml";
+            var xhtmlFullName = _testFiles.Output(xhtmlFile);
             var cssFile = testName + ".css";
             _testFiles.Copy(cssFile);
-            var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), _testFiles.Output(xhtmlFile), _testFiles.Output(cssFile));
+            var ilst = new MoveInlineStyles(_testFiles.Input(xhtmlFile), xhtmlFullName, _testFiles.Output(cssFile));
             Assert.IsNotNull(ilst);
 			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver() };
-			var xr = XmlReader.Create(_testFiles.Output(xhtmlFile), settings);
+			var xr = XmlReader.Create(xhtmlFullName, settings);
             var xhtmlDoc = new XmlDocument();
             xhtmlDoc.Load(xr);
             xr.Close();
@@ -573,6 +574,16 @@ namespace Test.CssSimplerTest
             Assert.IsNotNull(node1.Attributes, "attributes missing");
             Assert.IsNotNull(node1.Attributes["class"], "class missing");
             Assert.AreEqual("translation-st", node1.Attributes["class"].InnerText);
+
+            var styleSheet = _testFiles.Output(cssFile);
+            var lc = new LoadClasses(xhtmlFullName);
+            var parser = new CssTreeParser();
+            var xml = new XmlDocument();
+            UniqueClasses = lc.UniqueClasses;
+            OutputXml = true;
+            LoadCssXml(parser, styleSheet, xml);
+            var node2 = xml.SelectSingleNode("//name[.='translation-st']/ATTRIB");
+            Assert.IsNull(node2, "Missing attribute on inline translation style");
         }
 
         /// <summary>
