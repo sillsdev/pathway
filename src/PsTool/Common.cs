@@ -5018,6 +5018,10 @@ namespace SIL.Tool
 					if (files.Length > 0)
 					{
 						foreach (var lang in Param.HyphenLang.Split(','))
+						{
+							if (String.IsNullOrEmpty(lang))
+								break;
+
 							foreach (var file in files)
 							{
 								if (file.Split(new char[] { Convert.ToChar("_"), '.' })[1] ==
@@ -5027,6 +5031,7 @@ namespace SIL.Tool
 									Param.HyphenationSelectedLanguagelist.Add(lang);
 								}
 							}
+						}
 					}
 				}
 			}
