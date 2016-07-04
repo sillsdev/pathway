@@ -259,7 +259,6 @@ text-align: justify;
 }
 
 .pictureCenter {
-    text-align: center;
     clear: both;
     margin: 0pt 0pt 4pt 4pt;
     padding: 2pt;
@@ -291,4 +290,11 @@ text-align: justify;
 	font-weight: normal;
 }
 
+.captionContent{
+    clear: both;
+    margin: 0pt 0pt 4pt 4pt;
+    padding-bottom: 20pt;
+    text-indent: 0pt;
+    text-align: center;
+}
 

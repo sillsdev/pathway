@@ -649,6 +649,14 @@ namespace SIL.PublishingSolution
 				_writer.WriteEndElement();
 				_writer.WriteEndElement();
 			}
+			if (_childName.ToLower().Contains("captioncontentps_sensenumber_captioncontent_picture") && _previousParagraphName == "captionContent_picture_letData_dicBody")
+			{
+				_writer.WriteStartElement("text:span");
+				_writer.WriteAttributeString("text:style-name", _childName);
+				_writer.WriteString(" ");
+				_writer.WriteEndElement();
+			}
+
 		}
 
 		/// <summary>
@@ -2724,7 +2732,6 @@ namespace SIL.PublishingSolution
 				rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
 				if (rectHeight == "0" && rectWidth == "0")
 				{
-					clsName = _childName;
 					rectHeight = GetPropertyValue(clsName, "height", rectHeight);
 					rectWidth = GetPropertyValue(clsName, "width", rectWidth);
 				}
