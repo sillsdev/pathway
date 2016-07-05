@@ -243,30 +243,35 @@ namespace Test.theWordConvert
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, bool rtl)
         {
-            TestDataCase(code, fileName, rec, expectedResult, null, null, false, rtl, null);
+            TestDataCase(code, fileName, rec, expectedResult, null, null, false, rtl, null, null);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult)
         {
-            TestDataCase(code, fileName, rec, expectedResult, null, null, false, false, null);
+            TestDataCase(code, fileName, rec, expectedResult, null, null, false, false, null, null);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc)
         {
-            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false, null);
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false, null, null);
+        }
+
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, string glossary, string extraMaterial)
+        {
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false, null, extraMaterial);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, string glossary)
         {
-            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false, glossary);
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, false, false, glossary, null);
         }
 
         private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo)
         {
-            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, starSaltillo, false, null);
+            TestDataCase(code, fileName, rec, expectedResult, bookNames, punc, starSaltillo, false, null, null);
         }
 
-        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo, bool rtl, string glossary)
+        private static void TestDataCase(string code, string fileName, int rec, string expectedResult, string bookNames, string punc, bool starSaltillo, bool rtl, string glossary, string extraMaterial)
         {
             LoadMyXslt();
             IEnumerable<string> books = new List<string>(1) { code };
@@ -297,6 +302,10 @@ namespace Test.theWordConvert
             if (glossary != null)
             {
                 xsltArgs.AddParam("glossary", "", glossary);
+            }
+            if (extraMaterial != null)
+            {
+                xsltArgs.AddParam("refMaterial", "", extraMaterial);
             }
             var temp = Path.GetTempFileName();
             var sw = new StreamWriter(temp);
@@ -469,6 +478,13 @@ namespace Test.theWordConvert
         {
             var bookNames = "file://" + FileInput("BookNames-refList.xml");
             TestDataCase("MAT", "040MAT-refList.usx", 27, "<RF q=*><a href=\"tw://bible.*?2.37.11\">Tav 37:11</a>, <a href=\"tw://bible.*?2.37.28\">28</a>; <a href=\"tw://bible.*?2.39.2\">39:2</a>, <a href=\"tw://bible.*?2.39.21-23\">21-23</a><Rf>Verse two.", bookNames, ":");
+        }
+
+        [Test]
+        public void ExtraMaterialTest()
+        {
+            var bookNames = "file://" + FileInput("msbBookNames.xml");
+            TestDataCase("MAT", "msbMAT.usx", 23, "<PI>“Tandai, may birhen na magabudos tapos magaanak sin lalaki na pagatawagon Emmanuel (na an gusto sabihon, ‘An Dios adi sa aton.’)”<RF q=+>Kitaa sa <a href=\"tw://bible.*?23.7.14\">Isaias 7:14</a><Rf><CM>", bookNames, ":", null, "Kitaa sa ");
         }
 
         [Test]

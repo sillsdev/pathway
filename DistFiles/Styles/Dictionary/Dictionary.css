@@ -59,10 +59,6 @@
         font-weight: bold;
         string-set: guideword content();
 }
-.headword {
-        font-weight: bold;
-        string-set: guideword content();
-}
 .headwordminor {
         font-weight: bold;
 }
@@ -263,7 +259,6 @@ text-align: justify;
 }
 
 .pictureCenter {
-    text-align: center;
     clear: both;
     margin: 0pt 0pt 4pt 4pt;
     padding: 2pt;
@@ -290,3 +285,16 @@ text-align: justify;
        margin-left: 12pt;
        text-indent: -12pt;
 }
+
+.configtargets .configtarget .headword > span {
+	font-weight: normal;
+}
+
+.captionContent{
+    clear: both;
+    margin: 0pt 0pt 4pt 4pt;
+    padding-bottom: 20pt;
+    text-indent: 0pt;
+    text-align: center;
+}
+

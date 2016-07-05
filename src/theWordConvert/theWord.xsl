@@ -14,6 +14,7 @@
     
     <xsl:param name="missing">(-)</xsl:param>
     <xsl:param name="refPunc">.</xsl:param>
+    <xsl:param name="refMaterial"></xsl:param>
     <xsl:param name="bridgePunc">-</xsl:param>
     <xsl:param name="sequencePunc">,</xsl:param>
     <xsl:param name="bookSequencePunc">;</xsl:param>
@@ -882,9 +883,19 @@
         <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=]]></xsl:text>
         <xsl:value-of select="@caller"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text>
-        <xsl:call-template name="CrossReferenceIter">
-            <xsl:with-param name="textLeft" select="normalize-space($text)"/>
-        </xsl:call-template>
+        <xsl:choose>
+            <xsl:when test="starts-with($text, $refMaterial)">
+                <xsl:value-of select="$refMaterial"/>
+                <xsl:call-template name="CrossReferenceIter">
+                    <xsl:with-param name="textLeft" select="normalize-space(substring-after($text,$refMaterial))"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="CrossReferenceIter">
+                    <xsl:with-param name="textLeft" select="normalize-space($text)"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
         <xsl:apply-templates select="following::node()[1]" mode="t">
             <xsl:with-param name="space" select="$space"/>

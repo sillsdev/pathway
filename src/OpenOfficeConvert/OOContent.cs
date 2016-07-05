@@ -122,6 +122,7 @@ namespace SIL.PublishingSolution
 		public bool IsFirstEntry;
 		//private bool isPageBreak;
 		private string _previousContent = "Reversal";
+		private bool _previousSignificant = false;
 		private bool _isWhiteSpaceSkipped = true;
 		private List<string> _entryIdList = new List<string>();
 		private bool _isParaPicture, _isFirstPicture;
@@ -433,6 +434,46 @@ namespace SIL.PublishingSolution
 		/// <param name="data">XML Content</param>
 		private string ReplaceString(string data)
 		{
+			List<string> unicodeDiamondString = new List<string>();
+			unicodeDiamondString.Add("\\2B27");
+			unicodeDiamondString.Add("\\29EB");
+
+			foreach (var unicodeString in unicodeDiamondString)
+			{
+				if (data.Contains(unicodeString))
+				{
+					data = data.Replace(data, "\\25C6");
+				}
+			}
+
+			if (data.Contains("\\"))
+			{
+				Char[] charac = data.ToCharArray();
+				int index = 0;
+				foreach (char var in charac)
+				{
+					index++;
+					if(var == '\n')
+					{
+						_writer.WriteRaw(@"<text:line-break/>");
+					}
+					
+					if (var == '\\')
+					{
+						try
+						{
+							string unicodeValue = data;
+							int datalength = data.Length - index;
+							unicodeValue = var + unicodeValue.Substring(index, datalength);
+							data = Common.ConvertUnicodeToString(unicodeValue);
+						}
+						catch
+						{}
+						_writer.WriteRaw(@"<text:line-break/>");
+						return data;
+					}					
+				}
+			}
 			if (_replaceSymbolToText.Count > 0)
 			{
 				if (data.IndexOf("<<<") >= 0)
@@ -608,6 +649,14 @@ namespace SIL.PublishingSolution
 				_writer.WriteEndElement();
 				_writer.WriteEndElement();
 			}
+			if (_childName.ToLower().Contains("captioncontentps_sensenumber_captioncontent_picture") && _previousParagraphName == "captionContent_picture_letData_dicBody")
+			{
+				_writer.WriteStartElement("text:span");
+				_writer.WriteAttributeString("text:style-name", _childName);
+				_writer.WriteString(" ");
+				_writer.WriteEndElement();
+			}
+
 		}
 
 		/// <summary>
@@ -661,7 +710,7 @@ namespace SIL.PublishingSolution
 			}
 
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value);
+			string data = SignificantSpace(_reader.Value, false);
 			if (!whiteSpaceExist && !_pseudoSingleSpace)
 			{
 				_significant = true;
@@ -672,7 +721,7 @@ namespace SIL.PublishingSolution
 		private void InsertWhiteSpace()
 		{
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value);
+			string data = SignificantSpace(_reader.Value, false);
 			if (!whiteSpaceExist && !_pseudoSingleSpace)
 			{
 				IsLastPronunciationform();
@@ -748,11 +797,12 @@ namespace SIL.PublishingSolution
 
 		}
 
-		private string SignificantSpace(string content)
+		private string SignificantSpace(string content, bool skipFirstLetterSpace)
 		{
 			if (content == null) return "";
 			content = content.Replace("\r\n", "");
 			content = content.Replace("\t", "");
+			
 			Char[] charac = content.ToCharArray();
 			StringBuilder builder = new StringBuilder();
 			foreach (char var in charac)
@@ -772,6 +822,16 @@ namespace SIL.PublishingSolution
 				builder.Append(var);
 			}
 			content = builder.ToString();
+
+			if (skipFirstLetterSpace)
+			{
+				_previousSignificant = _significant;
+				if (!String.IsNullOrEmpty(content) && !_previousSignificant && charac[0] == ' ')
+				{
+					content = charac[0] + content;
+				}				
+			}
+
 			if (_classNameWithLang.IndexOf("scrFootnoteMarker") == 0)
 			{
 				_significant = true;
@@ -780,15 +840,7 @@ namespace SIL.PublishingSolution
 			{
 				_significant = true;
 				_footnoteSpace = true;
-			}
-			else if (_classNameWithLang.IndexOf("a") == 0)
-			{
-				if (_childName.IndexOf("headword") > 0 || _childName.IndexOf("mainheadword") > 0)
-				{
-					_significant = true;
-					_anchorSignificant = true;
-				}
-			}
+			}			
 			return content;
 		}
 
@@ -932,14 +984,8 @@ namespace SIL.PublishingSolution
 
 		private void WriteText()
 		{
-			string content = _reader.Value;
-			content = ReplaceString(content);
-			if (_anchorSignificant && _className != "a")
-			{
-				content = " " + content;
-				_significant = false;
-				_anchorSignificant = false;
-			}
+			string content = _reader.Value;			
+			content = ReplaceString(content);			
 			if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
 			if (_isPictureDisplayNone)
 			{
@@ -1109,7 +1155,7 @@ namespace SIL.PublishingSolution
 				}
 
 				if (!IsParentPrecedeSpace())
-					content = SignificantSpace(content);
+					content = SignificantSpace(content, true);
 
 				if (_isPreviousGlossary)
 				{
@@ -2686,7 +2732,6 @@ namespace SIL.PublishingSolution
 				rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
 				if (rectHeight == "0" && rectWidth == "0")
 				{
-					clsName = _childName;
 					rectHeight = GetPropertyValue(clsName, "height", rectHeight);
 					rectWidth = GetPropertyValue(clsName, "width", rectWidth);
 				}

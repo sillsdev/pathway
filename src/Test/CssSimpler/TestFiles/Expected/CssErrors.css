@@ -1,0 +1,4 @@
+﻿
+.entry> .senses > .sensecontent > .sense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}

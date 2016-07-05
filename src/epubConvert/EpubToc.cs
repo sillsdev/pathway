@@ -341,7 +341,7 @@ namespace epubConvert
 
 	        if (InputType.ToLower() == "dictionary")
 	        {
-				xPath = string.Format("//xhtml:div[@class='{0}']|//xhtml:div[@class='{1}']|//xhtml:div[@class='{2}']", "entry", "minorentryvariant", "minorentrycomplex");
+				xPath = string.Format("//xhtml:div[@class='{0}']|//xhtml:div[@class='{1}']|//xhtml:div[@class='{2}']|//xhtml:div[@class='{3}']", "entry", "minorentryvariant", "minorentrycomplex", "reversalindexentry");
 	        }
 	        else
 	        {

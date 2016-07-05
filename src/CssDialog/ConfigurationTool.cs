@@ -870,7 +870,7 @@ namespace SIL.PublishingSolution
             UpdateFontOnL10NSharp(LocalizationManager.UILanguageId);
 
 			_cToolBL = new ConfigurationToolBL();
-			_cToolBL.inputTypeBL = InputType;
+			 InputType = _cToolBL.inputTypeBL;
 			_cToolBL.MediaTypeEXE = MediaType;
 			_cToolBL.StyleEXE = Style.Replace('&', ' '); //
 			_cToolBL.SetClassReference(this);

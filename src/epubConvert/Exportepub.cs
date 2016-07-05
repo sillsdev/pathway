@@ -84,6 +84,9 @@ namespace SIL.PublishingSolution
         public bool IncludeFontVariants { get; set; }
         public string TocLevel { get; set; }
         public int MaxImageWidth { get; set; }
+		private XslCompiledTransform addRevId;
+	    private XslCompiledTransform noXmlSpace;
+	    private XslCompiledTransform fixEpub;
 
         public int BaseFontSize { get; set; }
         public int DefaultLineHeight { get; set; }
@@ -138,9 +141,9 @@ namespace SIL.PublishingSolution
 #if (TIME_IT)
             DateTime dt1 = DateTime.Now;    // time this thing
 #endif
-            var myCursor = UseWaitCursor();
+            var myCursor = Common.UseWaitCursor();
             var curdir = Environment.CurrentDirectory;
-            var inProcess = SetupProgressReporting(20);
+			var inProcess = Common.SetupProgressReporting(20, "Export " + ExportType);
             #endregion Set up progress reporting
 
             #region Setup
@@ -148,9 +151,9 @@ namespace SIL.PublishingSolution
             var bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
             PageBreak = InputType.ToLower() == "dictionary" && GetPageBreakStatus(projInfo.SelectedTemplateStyle);
             #region LoadXslts
-            var addRevId = LoadAddRevIdXslt();
-            var noXmlSpace = LoadNoXmlSpaceXslt();
-            var fixEpub = LoadFixEpubXslt();
+            addRevId = LoadAddRevIdXslt();
+            noXmlSpace = LoadNoXmlSpaceXslt();
+            fixEpub = LoadFixEpubXslt();
             #endregion
             #region Create EpubFolder
             if (!Common.Testing)
@@ -249,7 +252,7 @@ namespace SIL.PublishingSolution
             var splitFiles = new List<string>();
             splitFiles.AddRange(frontMatter);
             SplittingFrontMatter(projInfo, preProcessor, defaultCss, splitFiles);
-            SplittingReversal(projInfo, addRevId, langArray, defaultCss, splitFiles);
+            SplittingReversal(projInfo, langArray, defaultCss, splitFiles);
             AddBooksMoveNotes(inProcess, htmlFiles, splitFiles);
             inProcess.PerformStep();
             #endregion Add Sections
@@ -646,22 +649,6 @@ namespace SIL.PublishingSolution
             projInfo.DictionaryPath = Common.PathCombine(projInfo.DictionaryPath, "Epub2");
         }
 
-        private static Cursor UseWaitCursor()
-        {
-            var myCursor = Cursor.Current;
-            Cursor.Current = Cursors.WaitCursor;
-            return myCursor;
-        }
-
-        private static InProcess SetupProgressReporting(int steps)
-        {
-            var inProcess = new InProcess(0, steps) { Text = Resources.Exportepub_Export_Exporting__epub_file }; // create a progress bar with 7 steps (we'll add more below)
-			inProcess.Text = LocalizationManager.GetString("Exportepub.InProcessWindow.Title", "Exporting .epub file", "");
-			inProcess.Show();
-            inProcess.ShowStatus = true;
-            return inProcess;
-        }
-
         private void LoadOtherFeatures()
         {
             string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
@@ -943,13 +930,17 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void SplittingReversal(PublicationInformation projInfo, XslCompiledTransform addRevId, string[] langArray, string defaultCss, List<string> splitFiles)
+        private void SplittingReversal(PublicationInformation projInfo, string[] langArray, string defaultCss, List<string> splitFiles)
         {
             // If we are working with a dictionary and have a reversal index, process it now)
             if (projInfo.IsReversalExist)
             {
                 var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                ReversalHacks(addRevId, langArray, defaultCss, revFile);
+
+				Common.ApplyXslt(revFile, noXmlSpace);
+				Common.ApplyXslt(revFile, fixEpub);
+
+				ReversalHacks(addRevId, langArray, defaultCss, revFile);
                 // now split out the html as needed
                 var fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
                 splitFiles.AddRange(fileNameWithPath);

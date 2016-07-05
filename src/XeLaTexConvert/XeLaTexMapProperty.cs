@@ -714,7 +714,7 @@ namespace SIL.PublishingSolution
             if (propertyValue.ToLower() == "rtl")
             {
                 propertyValue = "RTL";
-                _inlineStyle.Add(propertyValue);
+                //_inlineStyle.Add(propertyValue);
             }
             _idProperty["direction"] = propertyValue;
             propertyValue = "\\usepackage{bidi} ";

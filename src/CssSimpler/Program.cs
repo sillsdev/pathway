@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Xsl;
 using SIL.PublishingSolution;
@@ -27,7 +28,7 @@ namespace CssSimpler
     public class Program
     {
         private static bool _showHelp;
-        private static bool _outputXml;
+        protected static bool OutputXml;
         private static int _verbosity;
         private static bool _makeBackup;
 
@@ -51,7 +52,7 @@ namespace CssSimpler
             {
                 {
                     "x|xml", "produce XML output of CSS",
-                    v => _outputXml = v != null
+                    v => OutputXml = v != null
                 },
                 {
                     "b|backup", "make a backup of the original CSS file",
@@ -90,27 +91,23 @@ namespace CssSimpler
                 return;
             }
             var lc = new LoadClasses(extra[0]);
-            MakeBaskupIfNecessary(lc.StyleSheet, extra[0]);
+            var styleSheet = lc.StyleSheet;
+            MakeBaskupIfNecessary(styleSheet, extra[0]);
             DebugWriteClassNames(lc.UniqueClasses);
-            Debug("Clean up Stylesheet: {0}", lc.StyleSheet);
+            Debug("Clean up Stylesheet: {0}", styleSheet);
             var parser = new CssTreeParser();
-            parser.Parse(lc.StyleSheet);
-            var r = parser.Root;
             var xml = new XmlDocument();
-            xml.LoadXml("<ROOT/>");
             UniqueClasses = lc.UniqueClasses;
-            AddSubTree(xml.DocumentElement, r, parser);
-            if (_outputXml)
-            {
-                Debug("Writing XML stylesheet");
-                WriteCssXml(lc.StyleSheet, xml);
-            }
-            WriteSimpleCss(lc.StyleSheet, xml); //reloads xml with simplified version
+            LoadCssXml(parser, styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
-            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, lc.StyleSheet);
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(parser, styleSheet, xml);
             var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
-            RemoveCssPseudo(lc.StyleSheet, xml);
+            RemoveCssPseudo(styleSheet, xml);
             try
             {
                 File.Delete(tmpXhtmlFullName);
@@ -119,6 +116,91 @@ namespace CssSimpler
             catch
             {
                 // ignored
+            }
+        }
+
+        protected static void LoadCssXml(CssTreeParser parser, string styleSheet, XmlDocument xml)
+        {
+            ParseCssRemovingErrors(parser, styleSheet);
+            var r = parser.Root;
+            xml.LoadXml("<ROOT/>");
+            AddSubTree(xml.DocumentElement, r, parser);
+            if (OutputXml)
+            {
+                Debug("Writing XML stylesheet");
+                WriteCssXml(styleSheet, xml);
+            }
+        }
+
+        protected static void ParseCssRemovingErrors(CssTreeParser parser, string styleSheet)
+        {
+            var error = true;
+            while (error)
+            {
+                try
+                {
+                    parser.Parse(styleSheet);
+                    if (parser.Errors.Count > 0)
+                        throw new Antlr.Runtime.RecognitionException(string.Format("{0} errors in CSS", parser.Errors.Count));
+                    error = false;
+                }
+                catch (Exception e)
+                {
+                    error = true;
+                    RemoveError(parser.Errors, styleSheet);
+                }
+            }
+        }
+
+        private static void RemoveError(List<string> errors, string styleSheet)
+        {
+            List<int> lines = new List<int>();
+            foreach (var error in errors)
+            {
+                var match = Regex.Match(error, @"(\d+)\:", RegexOptions.None);
+                if (match.Success)
+                {
+                    lines.Add(int.Parse(match.Groups[1].Value));
+                }
+            }
+            if (lines.Count > 0)
+            {
+                var sr = new StreamReader(styleSheet, Encoding.UTF8);
+                var folder = Path.GetDirectoryName(styleSheet);
+                var outName = Path.GetFileNameWithoutExtension(styleSheet) + "Out.css";
+                var outFullPath = folder != null ? Path.Combine(folder, outName) : outName;
+                var fw = new FileStream(outFullPath, FileMode.Create);
+                var sw = new StreamWriter(fw, Encoding.UTF8);
+                var rdline = 0;
+                while (!sr.EndOfStream)
+                {
+                    rdline += 1;
+                    if (lines.Contains(rdline))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            var skipLine = sr.ReadLine();
+                            if (skipLine.Trim().EndsWith("}")) break;
+                            rdline += 1;
+                        }
+                    }
+                    else
+                    {
+                        sw.WriteLine(sr.ReadLine());
+                    }
+                }
+                sw.Close();
+                fw.Close();
+                sr.Close();
+                File.Copy(outFullPath, styleSheet, true);
+                try
+                {
+                    File.Delete(outFullPath);
+                }
+                catch
+                {
+                    // Try to delete the temporary file but don't crash if it doesn't work.
+                }
             }
         }
 
@@ -137,8 +219,6 @@ namespace CssSimpler
             writer.Close();
             reader.Close();
             ifs.Close();
-            //File.Copy(outfile, xhtmlFullName, true);
-            //File.Delete(outfile);
             return outfile;
         }
 
@@ -173,7 +253,27 @@ namespace CssSimpler
             var ruleNodes = xml.SelectNodes("//RULE[PSEUDO]");
             foreach (XmlElement ruleNode in ruleNodes)
             {
-                ruleNode.RemoveAll();
+                var properties = ruleNode.SelectNodes("PROPERTY");
+                if (properties.Count <= 1)
+                {
+                    ruleNode.RemoveAll();
+                }
+                else
+                {
+                    for (var count = ruleNode.ChildNodes.Count - 1; count >= 0; count -= 1)
+                    {
+                        var childNode = ruleNode.ChildNodes[count];
+                        if (childNode.Name != "PROPERTY" || childNode.FirstChild.InnerText == "content")
+                        {
+                            ruleNode.RemoveChild(childNode);
+                        }
+                    }
+                    var classNode = ruleNode.OwnerDocument.CreateElement("CLASS");
+                    var nameNode = ruleNode.OwnerDocument.CreateElement("name");
+                    nameNode.InnerText = ruleNode.GetAttribute("lastClass") + "-ps";
+                    classNode.AppendChild(nameNode);
+                    ruleNode.InsertBefore(classNode, ruleNode.FirstChild);
+                }
             }
             var cssFile = new FileStream(styleSheet, FileMode.Create);
             var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
@@ -330,7 +430,7 @@ namespace CssSimpler
                     n.AppendChild(node);
                     if (n.Name == "CLASS")
                     {
-                        if (!UniqueClasses.Contains(name))
+                        if (UniqueClasses != null && !UniqueClasses.Contains(name))
                         {
                             _noData = true;
                         }

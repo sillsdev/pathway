@@ -1,0 +1,2094 @@
+
+.letHead{
+	-moz-column-count:1;
+	-webkit-column-count:1;
+	column-count:1;
+	clear:both;
+	text-align:center;
+	width:100%;
+}
+
+.letter{
+	line-height:12pt;
+	padding-bottom:3pt;
+	padding-top:12pt;
+	font-size:14pt;
+	font-weight:bold;
+}
+span{
+		font-size:10pt;
+	}
+span[lang|="en"]{
+		font-family:'Doulos SIL',serif;
+	}
+span[lang|="fr"]{
+		font-family:'Arial',serif;
+	}
+span[lang|="ru"]{
+		font-family:'Times New Roman',serif;
+	}
+span[lang|="fr-Zxxx-x-audio"]{
+		font-family:'Charis SIL',serif;
+	}
+div.entry{
+		text-indent:-36pt;
+		margin-left:45pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+div.minorentrycomplex{
+		text-indent:-36pt;
+		margin-left:45pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+div.minorentryvariant{
+		text-indent:-36pt;
+		margin-left:45pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+a{
+		text-decoration:inherit;
+		color:inherit;
+	}
+a.fr-Zxxx-x-audio:after{
+		content:'🔊';
+	}
+a.fr-Zxxx-x-audio{
+		text-decoration:none;
+	}
+.entry{
+		clear:both;
+		white-space:pre-wrap;
+	}
+.entry{
+		text-indent:-36pt;
+		margin-left:45pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+.entry> .mainheadword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.entry .mainheadword> .mainheadwor+ .mainheadwor:before{
+		content:' ';
+	}
+.entry> .mainheadword> span:last-child:after{
+		content:'  ';
+	}
+.entry> .mainheadword> span{
+		font-weight:bold;
+	}
+.entry .lexemeform> .lexemefor+ .lexemefor:before{
+		content:' ';
+	}
+.entry> .lexemeform> span:last-child:after{
+		content:' ';
+	}
+.entry .pronunciations> .pronunciation+ .pronunciation:before{
+		content:', ';
+	}
+.entry> .pronunciations:after{
+		content:' ';
+	}
+.entry> .pronunciations .pronunciation .form> .for+ .for:before{
+		content:' ';
+	}
+.entry> .pronunciations .pronunciation> .form> span:first-child:before{
+		content:'[';
+	}
+.entry> .pronunciations .pronunciation> .form> span:last-child:after{
+		content:']';
+	}
+.entry> .variantformentrybackrefs> span+ span:before{
+		content:'; ';
+	}
+.entry> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.entry> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
+		content:' ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.entry> .minimallexreferences> span+ span:before{
+		content:'; ';
+	}
+.entry> .minimallexreferences:after{
+		content:'. ';
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .minimallexreferences .minimallexreference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.entry> .minimallexreferences .minimallexreference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets:after{
+		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.entry> .senses> span.sensecontent+ span:before{
+		content:'  ';
+	}
+.entry> .senses:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
+		content:' ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype:before{
+		content:'(';
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype:after{
+		content:') ';
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .definitionorgloss> span[lang|='ru']:before,.entry> .senses > .sensecontent > .sense> .definitionorgloss> span[lang|='fr']:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .definitionorgloss> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span[lang|="fr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span[lang|="fr-Zxxx-x-audio"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span[lang|='fr-Zxxx-x-audio']:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .restrictions> span[lang|='ru']:before,.entry> .senses > .sensecontent > .sense> .restrictions> span[lang|='fr']:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .restrictions> span:first-child:before{
+		content:' Restrictions: ';
+	}
+.entry> .senses > .sensecontent > .sense> .restrictions> span:last-child:after{
+		content:'] ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences> span+ span:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences:after{
+		content:'. ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense .grammarnote> .grammarnot+ .grammarnot:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .grammarnote> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense .generalnote> .generalnot+ .generalnot:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .generalnote> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .scientificname:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense .usages> .usage+ .usage:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .usages:before{
+		content:'{';
+	}
+.entry> .senses > .sensecontent > .sense> .usages:after{
+		content:'} ';
+	}
+.entry> .senses > .sensecontent > .sense> .usages .usage .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense .complexformsnotsubentries> .complexformsnotsubentry+ .complexformsnotsubentry:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry .nontrivialentryroots> .nontrivialentryroot+ .nontrivialentryroot:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots:before{
+		content:' (see under ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots:after{
+		content:')  ';
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .senses> span+ span:before{
+		content:'  ';
+	}
+.entry> .senses > .sensecontent > .sense> .senses:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.entry .complexformsnotsubentries> .complexformsnotsubentry+ .complexformsnotsubentry:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries:after{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes:after{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry .nontrivialentryroots> .nontrivialentryroot+ .nontrivialentryroot:before{
+		content:', ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots:before{
+		content:' (see under ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots:after{
+		content:') ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot{
+		font-weight:bold;
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry .morphosyntaxanalyses> .morphosyntaxanalysis+ .morphosyntaxanalysis:before{
+		content:', ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses:after{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.entry .pictures .picture{
+		float:right;
+		text-align:center;
+		margin:0pt 0pt 4pt 4pt;
+		padding:2pt;
+		float:right;
+	}
+.entry .pictures .picture img{
+		max-height:1in;
+	}
+.entry> .pictures> div+ div:before{
+		content:'  ';
+	}
+.entry> .pictures> div:last-child:after{
+		content:' ';
+	}
+.entry> .pictures .picture{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+	}
+.entry> .pictures .picture>  img:after{
+		content:' ';
+	}
+.entry> .pictures .picture .caption> .captio+ .captio:before{
+		content:' ';
+	}
+.entry> .subentries .subentry{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.entry> .subentries .subentry{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.minorentrycomplex{
+		clear:both;
+		white-space:pre-wrap;
+	}
+.minorentrycomplex{
+		text-indent:-36pt;
+		margin-left:45pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+.minorentrycomplex> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentrycomplex .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentrycomplex> .headword> span:last-child:after{
+		content:'  ';
+	}
+.minorentrycomplex> .headword> span{
+		font-weight:bold;
+	}
+.minorentrycomplex .pronunciations> .pronunciation+ .pronunciation:before{
+		content:', ';
+	}
+.minorentrycomplex> .pronunciations:after{
+		content:' ';
+	}
+.minorentrycomplex> .pronunciations .pronunciation .form> .for+ .for:before{
+		content:' ';
+	}
+.minorentrycomplex> .pronunciations .pronunciation> .form> span:first-child:before{
+		content:'[';
+	}
+.minorentrycomplex> .pronunciations .pronunciation> .form> span:last-child:after{
+		content:']';
+	}
+.minorentrycomplex> .variantformentrybackrefs> span+ span:before{
+		content:'; ';
+	}
+.minorentrycomplex> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.minorentrycomplex> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
+		content:' ';
+	}
+.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs> span+ span:before{
+		content:', ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs:after{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes:after{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:', ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .glossorsummary> .glossorsummar+ .glossorsummar:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .glossorsummary> span:first-child:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref .summary> .summar+ .summar:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .summary> span:first-child:before{
+		content:' ';
+	}
+.minorentrycomplex> .complexformentryrefs> span+ span:before{
+		content:', ';
+	}
+.minorentrycomplex> .complexformentryrefs:before{
+		content:' (';
+	}
+.minorentrycomplex> .complexformentryrefs:after{
+		content:') ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref .complexformtypes> .complexformtype+ .complexformtype:before{
+		content:', ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes:after{
+		content:' ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype> .reverseabbr> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:', ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries:before{
+		content:' ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref .summary> .summar+ .summar:before{
+		content:' ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .summary> span:first-child:before{
+		content:' ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref .nontrivialentryroots> .nontrivialentryroot+ .nontrivialentryroot:before{
+		content:', ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .nontrivialentryroots:before{
+		content:', see under ';
+	}
+.minorentrycomplex> .senses> span.sensecontent+ span:before{
+		content:'  ';
+	}
+.minorentrycomplex> .senses:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.minorentrycomplex> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.minorentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.minorentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.minorentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.minorentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .sensetype:before{
+		content:'(';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .sensetype:after{
+		content:') ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .sensetype{
+		font-style:italic;
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .sensetype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense .encyclopedicinfo> .encyclopedicinf+ .encyclopedicinf:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .encyclopedicinfo> span:first-child:before{
+		content:' [';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .encyclopedicinfo> span:last-child:after{
+		content:']';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .restrictions> span:first-child:before{
+		content:' Restrictions: ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .restrictions> span:last-child:after{
+		content:'] ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences> span+ span:before{
+		content:'; ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences:after{
+		content:'. ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .scientificname:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense .usages> .usage+ .usage:before{
+		content:', ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .usages:before{
+		content:'{';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .usages:after{
+		content:'} ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .usages .usage .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .nontrivialentryroots> .nontrivialentryroot+ .nontrivialentryroot:before{
+		content:', ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots:before{
+		content:' (see under ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots:after{
+		content:') ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots .nontrivialentryroot{
+		font-weight:bold;
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .senses> span+ span:before{
+		content:'  ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .senses:after{
+		content:' ';
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.minorentrycomplex> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes:after{
+		content:' ';
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span{
+		font-weight:bold;
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref .definitionorglosses> .definitionorgloss+ .definitionorgloss:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .definitionorglosses:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .definitionorglosses:after{
+		content:' ';
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant{
+		clear:both;
+		white-space:pre-wrap;
+	}
+.minorentryvariant{
+		text-indent:-36pt;
+		margin-left:45pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+.minorentryvariant> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentryvariant .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .headword> span:last-child:after{
+		content:'  ';
+	}
+.minorentryvariant> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant .pronunciations> .pronunciation+ .pronunciation:before{
+		content:', ';
+	}
+.minorentryvariant> .pronunciations:after{
+		content:' ';
+	}
+.minorentryvariant> .pronunciations .pronunciation .form> .for+ .for:before{
+		content:' ';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .form> span:first-child:before{
+		content:'[';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .form> span:last-child:after{
+		content:']';
+	}
+.minorentryvariant> .variantformentrybackrefs> span+ span:before{
+		content:'; ';
+	}
+.minorentryvariant> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.minorentryvariant> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
+		content:' ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs> span+ span:before{
+		content:', ';
+	}
+.minorentryvariant> .visiblevariantentryrefs:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:', ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .glossorsummary> .glossorsummar+ .glossorsummar:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .glossorsummary> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref .summary> .summar+ .summar:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .summary> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .complexformentryrefs> span+ span:before{
+		content:', ';
+	}
+.minorentryvariant> .complexformentryrefs:before{
+		content:' (';
+	}
+.minorentryvariant> .complexformentryrefs:after{
+		content:') ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref .complexformtypes> .complexformtype+ .complexformtype:before{
+		content:', ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .complexformtypes:after{
+		content:' ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype> .reverseabbr> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:', ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .referencedentries:before{
+		content:' ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref .summary> .summar+ .summar:before{
+		content:' ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .summary> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref .nontrivialentryroots> .nontrivialentryroot+ .nontrivialentryroot:before{
+		content:', ';
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .nontrivialentryroots:before{
+		content:', see under ';
+	}
+.minorentryvariant> .senses> span.sensecontent+ span:before{
+		content:'  ';
+	}
+.minorentryvariant> .senses:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype:before{
+		content:'(';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype:after{
+		content:') ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .encyclopedicinfo> .encyclopedicinf+ .encyclopedicinf:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .encyclopedicinfo> span:first-child:before{
+		content:' [';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .encyclopedicinfo> span:last-child:after{
+		content:']';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .restrictions> span:first-child:before{
+		content:' Restrictions: ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .restrictions> span:last-child:after{
+		content:'] ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences> span+ span:before{
+		content:'; ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences:after{
+		content:'. ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .scientificname:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .usages> .usage+ .usage:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .usages:before{
+		content:'{';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .usages:after{
+		content:'} ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .usages .usage .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .nontrivialentryroots> .nontrivialentryroot+ .nontrivialentryroot:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots:before{
+		content:' (see under ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots:after{
+		content:') ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots .nontrivialentryroot{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .senses> span+ span:before{
+		content:'  ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .senses:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref .definitionorglosses> .definitionorgloss+ .definitionorgloss:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .definitionorglosses:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .definitionorglosses:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense{
+		clear:both;
+		white-space:pre-wrap;
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype:before{
+		content:'(';
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype:after{
+		content:') ';
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense .definitionorgloss> .definitionorglos+ .definitionorglos:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .definitionorgloss> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span[lang|="fr"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense .encyclopedicinfo> .encyclopedicinf+ .encyclopedicinf:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .encyclopedicinfo> span:first-child:before{
+		content:' [';
+	}
+.mainentrysubsenses .mainentrysubsense> .encyclopedicinfo> span:last-child:after{
+		content:']';
+	}
+.mainentrysubsenses .mainentrysubsense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .restrictions> span:first-child:before{
+		content:'Restrictions: ';
+	}
+.mainentrysubsenses .mainentrysubsense> .restrictions> span:last-child:after{
+		content:'. ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences> span+ span:before{
+		content:'; ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences:after{
+		content:'. ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .scientificname:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense .semanticdomains> .semanticdomain+ .semanticdomain:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .semanticdomains:before{
+		content:'(sem. domains: ';
+	}
+.mainentrysubsenses .mainentrysubsense> .semanticdomains:after{
+		content:'.) ';
+	}
+.mainentrysubsenses .mainentrysubsense> .semanticdomains .semanticdomain .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .semanticdomains .semanticdomain> .abbreviation> span:last-child:after{
+		content:' - ';
+	}
+.mainentrysubsenses .mainentrysubsense> .semanticdomains .semanticdomain .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense .academicdomains> .academicdomain+ .academicdomain:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains:before{
+		content:'ac. domains: ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains .academicdomain .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains .academicdomain .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains .academicdomain> .name> span:first-child:before{
+		content:' (';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains .academicdomain> .name> span:last-child:after{
+		content:')';
+	}
+.mainentrysubsenses .mainentrysubsense .usages> .usage+ .usage:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .usages:before{
+		content:'{';
+	}
+.mainentrysubsenses .mainentrysubsense> .usages:after{
+		content:'} ';
+	}
+.mainentrysubsenses .mainentrysubsense> .usages .usage .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense .complexformsnotsubentries> .complexformsnotsubentry+ .complexformsnotsubentry:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry .nontrivialentryroots> .nontrivialentryroot+ .nontrivialentryroot:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots:before{
+		content:' (see under ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots:after{
+		content:') ';
+	}
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .subsenses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .subsenses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry{
+		clear:both;
+		white-space:pre-wrap;
+	}
+.mainentrysubentries .mainentrysubentry> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .headword> span[lang|="fr-Zxxx-x-audio"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .headword> span[lang|='fr-Zxxx-x-audio']:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .headword> span:last-child:after{
+		content:'  ';
+	}
+.mainentrysubentries .mainentrysubentry> .headword> span{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry .complexformtypes> .complexformtype+ .complexformtype:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformtypes .complexformtype> .abbreviation> span:first-child:before{
+		content:'(';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformtypes .complexformtype> .abbreviation> span:last-child:after{
+		content:')';
+	}
+.mainentrysubentries .mainentrysubentry .pronunciations> .pronunciation+ .pronunciation:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .pronunciations:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .pronunciations .pronunciation .form> .for+ .for:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .pronunciations .pronunciation> .form> span:first-child:before{
+		content:'[';
+	}
+.mainentrysubentries .mainentrysubentry> .pronunciations .pronunciation> .form> span:last-child:after{
+		content:']';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs> span+ span:before{
+		content:'; ';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymology:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymology:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymology .form> .for+ .for:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymology> .form> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymology .gloss> .glos+ .glos:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymology> .gloss> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymology .comment> .commen+ .commen:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymology> .comment> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences> span+ span:before{
+		content:'; ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences:after{
+		content:'. ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses> span.sensecontent+ span:before{
+		content:'  ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .morphosyntaxanalysis:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .sensetype:before{
+		content:'(';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .sensetype:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .sensetype{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .sensetype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense .definitionorgloss> .definitionorglos+ .definitionorglos:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .definitionorgloss> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .examplescontents:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span[lang|="fr"]{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span[lang|="fr-Zxxx-x-audio"]{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span[lang|='fr-Zxxx-x-audio']:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense .encyclopedicinfo> .encyclopedicinf+ .encyclopedicinf:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .encyclopedicinfo> span:first-child:before{
+		content:' [';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .encyclopedicinfo> span:last-child:after{
+		content:']';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .restrictions> span:first-child:before{
+		content:' Restrictions: ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .restrictions> span:last-child:after{
+		content:'] ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences> span+ span:before{
+		content:'; ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences:after{
+		content:'. ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="fr"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .variantentrytypes> .variantentrytype+ .variantentrytype:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .scientificname:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense .academicdomains> .academicdomain+ .academicdomain:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .academicdomains:before{
+		content:'ac. domains: ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .academicdomains:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .academicdomains .academicdomain .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .academicdomains .academicdomain .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .academicdomains .academicdomain> .name> span:first-child:before{
+		content:' (';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .academicdomains .academicdomain> .name> span:last-child:after{
+		content:')';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense .usages> .usage+ .usage:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .usages:before{
+		content:'{';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .usages:after{
+		content:'} ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .usages .usage .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .nontrivialentryroots> .nontrivialentryroot+ .nontrivialentryroot:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots:before{
+		content:' (see under ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots .nontrivialentryroot{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .senses> span+ span:before{
+		content:'  ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .senses:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .subentries .subentry{
+		display:block;
+	}
+.mainentrysubentries .mainentrysubentry> .subentries .subentry{
+		display:block;
+	}
+.mainentrysubentries .mainentrysubentry .complexformsnotsubentries> .complexformsnotsubentry+ .complexformsnotsubentry:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry .nontrivialentryroots> .nontrivialentryroot+ .nontrivialentryroot:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots:before{
+		content:' (see under ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry .pictures .picture{
+		float:right;
+		text-align:center;
+		margin:0pt 0pt 4pt 4pt;
+		padding:2pt;
+		float:right;
+	}
+.mainentrysubentries .mainentrysubentry .pictures .picture img{
+		max-height:1in;
+	}
+.mainentrysubentries .mainentrysubentry> .pictures> div+ div:before{
+		content:'  ';
+	}
+.mainentrysubentries .mainentrysubentry> .pictures> div:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture>  img:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture> .sensenumber:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture .caption> .captio+ .captio:before{
+		content:' ';
+	}

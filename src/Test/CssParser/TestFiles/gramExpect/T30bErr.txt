@@ -1,3 +1,3 @@
-line 2:13 mismatched input ';' expecting ':'
-line 2:15 mismatched input '2' expecting '}'
-line 2:18 no viable alternative at input ';'
+src/Test/CssParser/TestFiles/gramInput/T30b.css line 2:14 mismatched input ';' expecting ':'
+src/Test/CssParser/TestFiles/gramInput/T30b.css line 2:16 mismatched input '2' expecting '}'
+src/Test/CssParser/TestFiles/gramInput/T30b.css line 2:19 mismatched input ';' expecting '{'

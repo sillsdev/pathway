@@ -11,9 +11,11 @@
 // File: XmlCopy.cs (from SimpleCss5.cs)
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace CssSimpler
@@ -21,8 +23,10 @@ namespace CssSimpler
     public abstract class XmlCopy
     {
         protected delegate void ParserMethod(XmlReader r);
+        protected delegate void EndTagMethod(int dept, string name);
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _beforeNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
-        private readonly Dictionary<XmlNodeType, List<ParserMethod>> _beforeEndNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
+        private readonly Dictionary<XmlNodeType, List<ParserMethod>> _firstChildNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
+        private readonly Dictionary<XmlNodeType, List<EndTagMethod>> _beforeEndNodeTypeMap = new Dictionary<XmlNodeType, List<EndTagMethod>>();
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _afterNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly StreamReader _sr;
         private readonly XmlReader _rdr;
@@ -33,7 +37,7 @@ namespace CssSimpler
 
         protected XmlCopy(string xmlInFullName, string xmlOutFullName)
         {
-            var settings = new XmlReaderSettings(){DtdProcessing = DtdProcessing.Ignore};
+            var settings = new XmlReaderSettings(){DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver()};
             _sr = new StreamReader(xmlInFullName);
             _rdr = XmlReader.Create(_sr, settings);
             _wtr = XmlWriter.Create(xmlOutFullName);
@@ -51,6 +55,8 @@ namespace CssSimpler
                     case XmlNodeType.Element:
                         _wtr.WriteStartElement( _rdr.Prefix, _rdr.LocalName, _rdr.NamespaceURI );
                         var empty = _rdr.IsEmptyElement;
+                        var depth = _rdr.Depth;
+                        var name = _rdr.Name;
                         if (_doAttributes)
                         {
                             for (int attrIndex = _rdr.AttributeCount; attrIndex > 0; attrIndex--)
@@ -79,9 +85,10 @@ namespace CssSimpler
                         {
                             _wtr.WriteAttributes( _rdr, true );
                         }
+                        FirstChildProcessMethods(XmlNodeType.Element);
                         if (empty)
                         {
-                            BeforeEndProcessMethods();
+                            BeforeEndProcessMethods(XmlNodeType.EndElement, depth, name);
                             _wtr.WriteEndElement();
                         }
                         break;
@@ -116,7 +123,7 @@ namespace CssSimpler
                         _wtr.WriteComment( _rdr.Value );
                         break;
                     case XmlNodeType.EndElement:
-                        BeforeEndProcessMethods();
+                        BeforeEndProcessMethods(_rdr.NodeType, _rdr.Depth, _rdr.Name);
                         _wtr.WriteFullEndElement();
                         break;
                 }
@@ -126,7 +133,7 @@ namespace CssSimpler
             }
             for (var depth = _rdr.Depth; depth > 0; depth--)
             {
-                BeforeEndProcessMethods();
+                BeforeEndProcessMethods(XmlNodeType.EndElement, _rdr.Depth, _rdr.Name);
                 _wtr.WriteFullEndElement();
             }
             _wtr.Close();
@@ -146,13 +153,25 @@ namespace CssSimpler
             }
         }
 
-        private void BeforeEndProcessMethods()
+        private void FirstChildProcessMethods(XmlNodeType type)
         {
-            if (!_beforeEndNodeTypeMap.ContainsKey(_rdr.NodeType)) return;
-            foreach (ParserMethod func in _beforeEndNodeTypeMap[_rdr.NodeType])
+            if (!_firstChildNodeTypeMap.ContainsKey(type)) return;
+            foreach (ParserMethod func in _firstChildNodeTypeMap[type])
             {
                 Debug.Assert(func != null, "func != null");
                 func(_rdr);
+                if (_finish)
+                    break;
+            }
+        }
+
+        private void BeforeEndProcessMethods(XmlNodeType type, int depth, string name)
+        {
+            if (!_beforeEndNodeTypeMap.ContainsKey(type)) return;
+            foreach (EndTagMethod func in _beforeEndNodeTypeMap[type])
+            {
+                Debug.Assert(func != null, "func != null");
+                func(depth, name);
                 if (_finish)
                     break;
             }
@@ -179,8 +198,36 @@ namespace CssSimpler
             {
                 _wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");
             }
-            _wtr.WriteValue(val);
+            if (val.Contains(@"\"))
+            {
+                WriteValueEmbedEntities(val);
+            }
+            else
+            {
+                _wtr.WriteValue(val);
+            }
             _wtr.WriteEndElement();
+        }
+
+        private void WriteValueEmbedEntities(string val)
+        {
+            var matches = Regex.Matches(val, @"\\([0-9ABCDEF]+)", RegexOptions.IgnoreCase);
+            var position = 0;
+            foreach (Match match in matches)
+            {
+                var index = match.Groups[0].Index;
+                if (index > position)
+                {
+                    _wtr.WriteValue(val.Substring(position, index - position));
+                    position = index;
+                }
+                _wtr.WriteCharEntity((char) Convert.ToInt32(match.Groups[1].ToString(), 16));
+                position += match.Length;
+            }
+            if (position < val.Length)
+            {
+                _wtr.WriteValue(val.Substring(position));
+            }
         }
 
         protected void WriteAttr(string myClass)
@@ -209,15 +256,31 @@ namespace CssSimpler
             }
         }
 
-        protected void DeclareBeforeEnd(XmlNodeType nodeType, ParserMethod parserMethod)
+        protected void DeclareFirstChild(XmlNodeType nodeType, ParserMethod parserMethod)
         {
-            if (_beforeEndNodeTypeMap.ContainsKey(nodeType))
+            if (_firstChildNodeTypeMap.ContainsKey(nodeType))
             {
-                _beforeEndNodeTypeMap[nodeType].Add(parserMethod);
+                _firstChildNodeTypeMap[nodeType].Add(parserMethod);
             }
             else
             {
-                _beforeEndNodeTypeMap[nodeType] = new List<ParserMethod>() { parserMethod };
+                _firstChildNodeTypeMap[nodeType] = new List<ParserMethod>() { parserMethod };
+            }
+            if (nodeType == XmlNodeType.Attribute)
+            {
+                _doAttributes = true;
+            }
+        }
+
+        protected void DeclareBeforeEnd(XmlNodeType nodeType, EndTagMethod endTagMethod)
+        {
+            if (_beforeEndNodeTypeMap.ContainsKey(nodeType))
+            {
+                _beforeEndNodeTypeMap[nodeType].Add(endTagMethod);
+            }
+            else
+            {
+                _beforeEndNodeTypeMap[nodeType] = new List<EndTagMethod>() { endTagMethod };
             }
             if (nodeType == XmlNodeType.Attribute)
             {

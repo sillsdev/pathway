@@ -585,6 +585,7 @@ namespace SIL.PublishingSolution
         {
             var xsltArgs = new XsltArgumentList();
             xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
+            xsltArgs.AddParam("refMaterial", "", GetSsfValue("//ReferenceExtraMaterial", ""));
             xsltArgs.AddParam("bookNames", "", GetBookNamesUri(path));
             xsltArgs.AddParam("glossary", "", GetGlossaryUri(path));
             xsltArgs.AddParam("versification", "", VrsName);

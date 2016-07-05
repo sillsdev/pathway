@@ -877,7 +877,7 @@ namespace SIL.Tool
                 }
 
             }
-			else if (styleName == "span")
+			else if (styleName == "span" && _outputType == Common.OutputType.ODT)
 			{
 				styleName = _className;
 			}

@@ -399,7 +399,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_TitleMain_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_Paragraph_scrSection_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\u00A0This is a sample text,"),
-                new ODet(ODet.Chk, "Punctuation after Glossary entry (TD-3719)", "mat21-23.odt", ODet.Content, "//text:p[26]", "24 This is sample, text to get the correct content. 25 If you can see the text test, Coding is correct"),
+                new ODet(ODet.Chk, "Punctuation after Glossary entry (TD-3719)", "mat21-23.odt", ODet.Content, "//text:p[26]", " 24 This is sample, text to get the correct content.  25 If you can see the text test, Coding is correct"),
                 new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1\u20112\u00A0"),
                 
             };
@@ -468,7 +468,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "headword right variable", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[4]//@text:name", "Right_Guideword_R"),
                 new ODet(ODet.Chk, "headword left variable value", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[2]//@office:string-value", "anon"),
                 new ODet(ODet.Chk, "headword right variable value", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[4]//@office:string-value", "anon"),
-                new ODet(ODet.Chk, "pronunciation", ODet.Main, ODet.Content, "//text:span[@text:style-name='pronunciation_pronunciations_entry_letData_dicBody']", "[a."+ Common.ConvertUnicodeToString("\\02c8") + "non]"),
+                new ODet(ODet.Chk, "pronunciation", ODet.Main, ODet.Content, "//text:span[@text:style-name='pronunciation_pronunciations_entry_letData_dicBody']", "a."+ Common.ConvertUnicodeToString("\\02c8") + "non"),
                 new ODet(ODet.Chk, "pronunciation font", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@fo:font-family", "Times New Roman"),
                 new ODet(ODet.Chk, "pronunciation complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@style:font-name-complex", "Times New Roman"),
                 new ODet(ODet.Chk, "pronunciation font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='pronunciation_pronunciations_entry_letData_dicBody']//@fo:font-weight", "400"),
@@ -583,7 +583,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "part of speech", ODet.Main, ODet.Content, "//text:span[@text:style-name='span_.en_partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody']", "N(inal)"),
                 new ODet(ODet.Chk, "part of speech language", ODet.Main, ODet.Styles, "//style:style[@style:name='span_.en_partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody']//@fo:language", "en"),
                 new ODet(ODet.Chk, "part of speech country", ODet.Main, ODet.Styles, "//style:style[@style:name='span_.en_partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody']//@fo:country", "US"),
-                new ODet(ODet.Chk, "sense number", ODet.Main, ODet.Content, "//text:span[@text:style-name='xsensenumber_sense_senses_entry_letData_dicBody']", "1) "),
+                new ODet(ODet.Chk, "sense number", ODet.Main, ODet.Content, "//text:span[@text:style-name='xsensenumber_sense_senses_entry_letData_dicBody']", "1"),
                 new ODet(ODet.Chk, "definition", ODet.Main, ODet.Content, "//text:span[@text:style-name='span_.en_xitem_.en_definition_.en_sense_senses_entry_letData_dicBody']", "Sunday morning church service."),
                 new ODet(ODet.Chk, "definition language", ODet.Main, ODet.Styles, "//style:style[@style:name='span_.en_xitem_.en_definition_.en_sense_senses_entry_letData_dicBody']//@fo:language", "en"),
                 new ODet(ODet.Chk, "definition country", ODet.Main, ODet.Styles, "//style:style[@style:name='span_.en_xitem_.en_definition_.en_sense_senses_entry_letData_dicBody']//@fo:country", "US"),

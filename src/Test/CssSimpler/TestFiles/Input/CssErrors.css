@@ -1,0 +1,10 @@
+
+.entry> .senses > .sensecontent > .sense> .literal-meaning-of-ex.:before{
+		content:'Lit. ';
+	}
+.entry> .senses > .sensecontent > .sense> .literal-meaning-of-ex.:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}

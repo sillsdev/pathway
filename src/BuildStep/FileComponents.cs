@@ -93,6 +93,7 @@ namespace BuildStep
             }
             foreach (FileInfo fileInfo in info.GetFiles())
             {
+                if (fileInfo.FullName.Contains(".vshost.")) continue;
                 var compElem = XDoc.CreateElement("Component", Wixns);
                 var fileElem = CreateFileSystemElement("File", fileInfo);
                 AddAttribute("Checksum", "yes", fileElem);

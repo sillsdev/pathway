@@ -1,0 +1,42 @@
+﻿span {
+   font-size: 10pt;
+}
+span[lang|= "en"]{
+   font-family: 'Doulos SIL',serif;
+}
+span[lang|= "fr"]{
+   font-family: 'Arial',serif;
+}
+span[lang|= "ru"]{
+   font-family: 'Times New Roman',serif;
+}
+span[lang|= "fr-Zxxx-x-audio"]{
+   font-family: 'Charis SIL',serif;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.fr-Zxxx-x-audio {
+   text-decoration: none;
+}
+.entry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+}
+.entry .mainheadword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span {
+   font-weight: bold;
+}
+.entry .senses .morphosyntaxanalysis {
+   font-style: italic;
+}

@@ -1,7 +1,8 @@
 grammar csst3;
-// See setup information: http://www.antlr.org/wiki/display/ANTLR3/Antlr3CSharpReleases
+// See setup information: http://www.antlr3.org/wiki/display/ANTLR3/Antlr3CSharpReleases
+// Last parsed with version Antlr3 version 3.5.0.2
 options {
-        language=CSharp;
+        language=CSharp3;
         output=AST;
         ASTLabelType=CommonTree;
 	}
@@ -143,10 +144,10 @@ function
 UNIT      :	'em'|'px'|'cm'|'mm'|'in'|'pt'|'pc'|'ex'|'deg'|'rad'|'grad'|'ms'|'s'|'hz'|'khz';	
 
 IDENT
-	:	('_' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' ) 
-		('_' | '-' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' | '0'..'9')*
-	|	'-' ('_' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' ) 
-		('_' | '-' | 'a'..'z'| 'A'..'Z' | '\u0100'..'\ufffe' | '0'..'9')*
+	:	('_' | 'a'..'z'| 'A'..'Z' | '\u00A0'..'\ufffe' ) 
+		('_' | '-' | 'a'..'z'| 'A'..'Z' | '\u00A0'..'\ufffe' | '0'..'9')*
+	|	'-' ('_' | 'a'..'z'| 'A'..'Z' | '\u00A0'..'\ufffe' ) 
+		('_' | '-' | 'a'..'z'| 'A'..'Z' | '\u00A0'..'\ufffe' | '0'..'9')*
 	;
 
 // string literals

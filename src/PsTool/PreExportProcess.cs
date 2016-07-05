@@ -2556,13 +2556,28 @@ namespace SIL.Tool
             xDoc.Load(fileName);
             string xPath = "//div[@class='entry']/div[@class= 'pictureRight']";
             XmlNodeList entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
-            if (entryNodeList == null) return;
-            for (int i = 0; i < entryNodeList.Count; i++)
-            {
-                XmlNode entryNode = entryNodeList[i].ParentNode;
-                if (entryNode != null) entryNode.InsertAfter(entryNodeList[i], entryNode.LastChild);
-            }
-            xDoc.Save(fileName);
+	        if (entryNodeList != null && entryNodeList.Count > 0)
+	        {
+		        for (int i = 0; i < entryNodeList.Count; i++)
+		        {
+			        XmlNode entryNode = entryNodeList[i].ParentNode;
+			        if (entryNode != null) entryNode.InsertAfter(entryNodeList[i], entryNode.LastChild);
+		        }
+	        }
+	        else
+	        {
+				xPath = "//div[@class='entry']/div[@class= 'picture']";
+				entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+				if (entryNodeList != null)
+				{
+					for (int i = 0; i < entryNodeList.Count; i++)
+					{
+						XmlNode entryNode = entryNodeList[i].ParentNode;
+						if (entryNode != null) entryNode.ParentNode.InsertAfter(entryNodeList[i], entryNode);
+					}
+				}
+	        }
+	        xDoc.Save(fileName);
         }
 
         /// <summary>
@@ -3281,9 +3296,11 @@ namespace SIL.Tool
 
                     XmlNode getBookName = bookLists[i].ParentNode;
                     XmlNodeList bookNodeList = getBookName.SelectNodes("//span[@class='" + strBookType + "']", namespaceManager);
-                    bookName = bookNodeList.Item(i).InnerText;
-
-                    XmlNode divReferenceNode = xDoc.CreateElement("div");
+	                if (bookNodeList != null && bookNodeList.Count > 0)
+	                {
+		                bookName = bookNodeList.Item(i).InnerText;
+	                }
+	                XmlNode divReferenceNode = xDoc.CreateElement("div");
                     XmlAttribute xmlReferenceAttribute = xDoc.CreateAttribute("class");
                     xmlReferenceAttribute.Value = "BookReferenceDiv";
                     if (divReferenceNode.Attributes != null) divReferenceNode.Attributes.Append(xmlReferenceAttribute);

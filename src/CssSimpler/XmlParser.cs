@@ -11,6 +11,7 @@
 // File: XmlParser.cs (from SimpleCss5.cs)
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -29,7 +30,7 @@ namespace CssSimpler
 
         protected XmlParser(string xmlFullName)
         {
-            var settings = new XmlReaderSettings(){DtdProcessing = DtdProcessing.Ignore};
+            var settings = new XmlReaderSettings(){DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver()};
             _srdr = new StreamReader(xmlFullName);
             _rdr = XmlReader.Create(_srdr, settings);
         }

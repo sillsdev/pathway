@@ -123,7 +123,7 @@
 
     <xsl:template match="unit" mode="inRule">
         <xsl:choose>
-            <xsl:when test="contains(text(), 'serif')">
+            <xsl:when test="preceding-sibling::name[1]='font-family'">
                 <xsl:text>,</xsl:text>
             </xsl:when>
             <xsl:when test="string-length(text()) > 2">

@@ -51,15 +51,15 @@ namespace SIL.Tool
             {
                 return;
             }
-            if (executablePath.Contains("FieldWorks 7") || executablePath.Contains("FieldWorks"))
+            if (executablePath.ToLower().Contains("fieldworks"))
             {
                 _hostProgram = HostProgram.FieldWorks;
             }
-            else if (executablePath.Contains("Paratext"))
+            else if (executablePath.ToLower().Contains("paratext"))
             {
                 _hostProgram = HostProgram.Paratext;
             }
-            else if (executablePath.Contains("PathwayB"))
+			else if (executablePath.ToLower().Contains("pathwayb"))
             {
                 _hostProgram = HostProgram.PathwayB;
             }
@@ -185,13 +185,13 @@ namespace SIL.Tool
 							if (Directory.Exists(Common.PathCombine(registryPath, "7")))
 								registryPath = Common.PathCombine(registryPath, "7");
 						}
-						while (Directory.Exists(registryPath))
+						if (Directory.Exists(registryPath))
 						{
 							if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
 							{
 								XmlDocument doc = new XmlDocument();
 								doc.Load(Common.PathCombine(registryPath, "values.xml"));
-								fwprojectPath = doc.SelectSingleNode("/values/value[@name=='ProjectsDir'");
+								fwprojectPath = doc.SelectSingleNode("//values/value[@name='ProjectsDir']");
 								if (fwprojectPath == null) return string.Empty;
 								Environment.SetEnvironmentVariable("FieldworksProjPath", fwprojectPath.ToString());
 								return Common.PathCombine(fwprojectPath.ToString(), fwdataFile);

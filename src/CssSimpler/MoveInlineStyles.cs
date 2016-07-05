@@ -12,6 +12,7 @@
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -24,6 +25,7 @@ namespace CssSimpler
         public MoveInlineStyles(string input, string output, string cssName)
             : base(input, output)
         {
+            DeclareBefore(XmlNodeType.Element, ResetClassName);
             DeclareBefore(XmlNodeType.Attribute, LookForStyle);
             Parse();
             var sr = new StreamReader(cssName);
@@ -44,6 +46,12 @@ namespace CssSimpler
             File.Delete(outName);
         }
 
+        private string _currentClass = String.Empty;
+        private void ResetClassName(XmlReader r)
+        {
+            _currentClass = String.Empty;
+        }
+
         protected  Dictionary<string, string> SavedStyles = new Dictionary<string, string>();
         protected string LastClass = string.Empty;
         private void LookForStyle(XmlReader r)
@@ -51,10 +59,15 @@ namespace CssSimpler
             if (r.Name == "class")
             {
                 LastClass = r.Value;
+                _currentClass = LastClass;
             }
             else if (r.Name == "style")
             {
-                var newClass = LastClass + "-st";
+                var newClass = LastClass;
+                if (_currentClass == string.Empty)
+                {
+                    newClass += "-st";
+                }
                 var count = 0;
                 while  (SavedStyles.ContainsKey(newClass))
                 {
@@ -72,7 +85,10 @@ namespace CssSimpler
                 {
                     SavedStyles[newClass] = r.Value;
                 }
-                WriteAttr(newClass);
+                if (_currentClass == string.Empty)
+                {
+                    WriteAttr(newClass);
+                }
                 SkipAttr = true;
             }
         }
