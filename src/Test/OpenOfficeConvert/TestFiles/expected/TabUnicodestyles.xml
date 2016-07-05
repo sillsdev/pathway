@@ -281,7 +281,7 @@
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-style="italic" fo:color="#800000" />
     </style:style>
-    <style:style style:name="LexEntrypublishStemMinorParaDescripci" style:family="paragraph" style:parent-style-name="none">
+    <style:style style:name="LexEntrypublishStemMinorParaDescripciónbreve" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" fo:font-style="italic" fo:color="#000080" />
     </style:style>
@@ -293,7 +293,7 @@
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-style="italic" fo:color="#800000" />
     </style:style>
-    <style:style style:name="LexEntrypublishStemParaRegi" style:family="paragraph" style:parent-style-name="none">
+    <style:style style:name="LexEntrypublishStemParaRegióndelavariante" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" fo:font-style="italic" fo:color="#000080" />
     </style:style>
@@ -313,7 +313,7 @@
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-style="italic" fo:color="#800000" />
     </style:style>
-    <style:style style:name="LexSensepublishStemDefinici" style:family="paragraph" style:parent-style-name="none">
+    <style:style style:name="LexSensepublishStemDefinicióndescriptiva" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" fo:font-style="italic" fo:color="#000080" />
     </style:style>

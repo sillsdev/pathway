@@ -242,7 +242,9 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="crossref_a_crossreftargets_crossrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="a_crossreftargets_crossrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:color="#000080" fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexSensepublishStemDefinicióndescriptiva_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexSensepublishStemDefinicióndescriptiva_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="italic" fo:color="#000080" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_LexSensepublishStemDefinicióndescriptiva_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="LexSensepublishStemDefinicióndescriptiva_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
     </style:style>
@@ -439,7 +441,7 @@
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-style="italic" fo:color="#800000" />
     </style:style>
-    <style:style style:name="LexEntrypublishStemMinorParaDescripci" style:family="paragraph" style:parent-style-name="none">
+    <style:style style:name="LexEntrypublishStemMinorParaDescripciónbreve" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" fo:font-style="italic" fo:color="#000080" />
     </style:style>
@@ -451,7 +453,7 @@
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-style="italic" fo:color="#800000" />
     </style:style>
-    <style:style style:name="LexEntrypublishStemParaRegi" style:family="paragraph" style:parent-style-name="none">
+    <style:style style:name="LexEntrypublishStemParaRegióndelavariante" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" fo:font-style="italic" fo:color="#000080" />
     </style:style>
@@ -471,7 +473,7 @@
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-style="italic" fo:color="#800000" />
     </style:style>
-    <style:style style:name="LexSensepublishStemDefinici" style:family="paragraph" style:parent-style-name="none">
+    <style:style style:name="LexSensepublishStemDefinicióndescriptiva" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" fo:font-style="italic" fo:color="#000080" />
     </style:style>
