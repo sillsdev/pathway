@@ -51,7 +51,7 @@ pathway (1.15.3)  experimental; urgency=high
 
  -- Greg Trihus <greg_trihus@sil.org>  Fri, 24 May 2016 14:02:20 -0600
 
- pathway (1.14.3)  experimental; urgency=high
+pathway (1.14.3)  experimental; urgency=high
 
   * Epub:TD-4517 Retain spaces after etymology and usage
 
