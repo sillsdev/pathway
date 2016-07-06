@@ -100,7 +100,6 @@ namespace CssSimpler
             var xml = new XmlDocument();
             UniqueClasses = lc.UniqueClasses;
             LoadCssXml(parser, styleSheet, xml);
-            //WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
             // ReSharper disable once UnusedVariable
@@ -111,6 +110,7 @@ namespace CssSimpler
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             try
             {
                 File.Delete(tmpXhtmlFullName);
