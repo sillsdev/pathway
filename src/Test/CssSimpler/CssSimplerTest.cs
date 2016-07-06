@@ -1146,6 +1146,124 @@ namespace Test.CssSimplerTest
         }
 
         /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void FlattenStylesTest()
+        {
+            const string testName = "FlattenStyles";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            _testFiles.Copy(testName + ".css");
+            LoadCssXml(ctp, cssFullName, xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            var fs = new FlattenStyles(outFullName, _testFiles.Output(testName +"Flat.xhtml"), xml, NeedHigher);
+            //TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            //NodeTest(outFullName, 128, "//*[@xml:space]", "semantic domain punctuation");
+        }
+
+        /// <summary>
+        /// test for multi selector expansion
+        /// </summary>
+        [Test]
+        public void ElaborateMultiSelectorRulesTest()
+        {
+            const string testName = "MultiSelector";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            var r = ctp.Root;
+            xml.LoadXml("<ROOT/>");
+            AddSubTree(xml.DocumentElement, r, ctp);
+            WriteCssXml(cssFullName, xml);
+            var xmlFullName = _testFiles.Output(testName + ".xml");
+            File.Copy(xmlFullName, _testFiles.Output(testName + "Input.xml"));
+            ElaborateMultiSelectorRules(xml);
+            WriteCssXml(cssFullName, xml);
+            var cssFile = new FileStream(cssFullName, FileMode.Create);
+            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
+            XmlCss.Transform(xml, null, cssWriter);
+            cssFile.Close();
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
+        }
+
+        /// <summary>
+        /// test for multi selector expansion
+        /// </summary>
+        [Test]
+        public void ElaborateMultiSelectorRules2Test()
+        {
+            const string testName = "MultiSelector2";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            var r = ctp.Root;
+            xml.LoadXml("<ROOT/>");
+            AddSubTree(xml.DocumentElement, r, ctp);
+            WriteCssXml(cssFullName, xml);
+            var xmlFullName = _testFiles.Output(testName + ".xml");
+            File.Copy(xmlFullName, _testFiles.Output(testName + "Input.xml"));
+            ElaborateMultiSelectorRules(xml);
+            WriteCssXml(cssFullName, xml);
+            var cssFile = new FileStream(cssFullName, FileMode.Create);
+            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
+            XmlCss.Transform(xml, null, cssWriter);
+            cssFile.Close();
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void AudioTest()
+        {
+            const string testName = "Audio";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            _testFiles.Copy(testName + ".css");
+            LoadCssXml(ctp, cssFullName, xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            NodeTest(outFullName, 128, "//*[@xml:space]", "semantic domain punctuation");
+        }
+
+        /// <summary>
         /// test for multi selector expansion
         /// </summary>
         [Test]
