@@ -548,7 +548,7 @@ namespace Test.CssSimplerTest
             WriteSimpleCss(resultFile, xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[3]/name[text()='senses']"), "expeted senses retained");
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[4]/name[text()='sensecontent']"), "expected sensecontent (w/o span tag)");
+            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[5]/name[text()='sensecontent']"), "expected sensecontent (w/o span tag)");
         }
 
         /// <summary>

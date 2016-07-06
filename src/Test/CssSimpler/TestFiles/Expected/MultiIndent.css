@@ -46,13 +46,13 @@ a {
 .entry .mainheadword > span {
    font-weight: bold;
 }
-.entry > .senses .sensecontent .sensenumber {
+.entry > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.entry > .senses .sense {
+.entry > .senses > .sensecontent .sense {
    font-size: 11pt;
 }
-.entry > .senses .sensecontent {
+.entry > .senses > .sensecontent {
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -64,13 +64,13 @@ a {
    padding-top: 0pt;
    display: block;
 }
-.entry > .senses .morphosyntaxanalysis {
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry > .senses .morphosyntaxanalysis {
+.entry > .senses > .sensecontent .sense .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry > .senses .examplescontent {
+.entry > .senses > .sensecontent .sense .examplescontents .examplescontent {
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -86,7 +86,7 @@ a {
    font-size: 10pt;
    color: Black;
 }
-.entry > .senses .sensecontent + .sensecontent .examplescontent {
+.entry > .senses > .sensecontent + .sensecontent .sense .examplescontents .examplescontent {
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -102,16 +102,16 @@ a {
    font-size: 10pt;
    color: Black;
 }
-.entry > .senses .example > span[lang|= "fr"]{
+.entry > .senses > .sensecontent .sense .examplescontents .example > span[lang|= "fr"]{
    font-style: italic;
 }
-.entry > .senses .example > span {
+.entry > .senses > .sensecontent .sense .examplescontents .example > span {
    font-style: italic;
 }
-.entry > .senses .sense > .senses .sensecontent .sensenumber {
+.entry > .senses > .sensecontent .sense > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.entry > .senses .sense > .senses .sensecontent {
+.entry > .senses > .sensecontent .sense > .senses > .sensecontent {
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -194,13 +194,13 @@ a {
    font-size: 11pt;
    color: #800080;
 }
-.mainentrysubsenses .mainentrysubsense > .senses .sensecontent .sensenumber {
+.mainentrysubsenses .mainentrysubsense > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.mainentrysubsenses .mainentrysubsense > .senses .sense {
+.mainentrysubsenses .mainentrysubsense > .senses > .sensecontent .sense {
    font-size: 11pt;
 }
-.mainentrysubsenses .mainentrysubsense > .senses .sensecontent {
+.mainentrysubsenses .mainentrysubsense > .senses > .sensecontent {
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -221,21 +221,21 @@ a {
 .mainentrysubentries .mainentrysubentry > .headword > span {
    font-weight: bold;
 }
-.mainentrysubentries .mainentrysubentry > .senses .sensecontent .sensenumber {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.mainentrysubentries .mainentrysubentry > .senses .morphosyntaxanalysis {
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
    font-style: italic;
 }
-.mainentrysubentries .mainentrysubentry > .senses .morphosyntaxanalysis {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .morphosyntaxanalysis {
    font-style: italic;
 }
-.mainentrysubentries .mainentrysubentry > .senses .examplescontent {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .examplescontent {
    font-size: 11pt;
 }
-.mainentrysubentries .mainentrysubentry > .senses .example > span[lang|= "fr"]{
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .example > span[lang|= "fr"]{
    font-style: italic;
 }
-.mainentrysubentries .mainentrysubentry > .senses .example > span {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .example > span {
    font-style: italic;
 }
