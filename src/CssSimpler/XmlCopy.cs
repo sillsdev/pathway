@@ -33,6 +33,8 @@ namespace CssSimpler
         private readonly XmlWriter _wtr;
         private bool _finish;
         protected bool SkipAttr;
+        protected bool SkipNode;
+        protected string Suffix = "-ps";
         private bool _doAttributes;
 
         protected XmlCopy(string xmlInFullName, string xmlOutFullName)
@@ -47,13 +49,22 @@ namespace CssSimpler
         {
             while (_rdr.Read())
             {
+                SkipAttr = SkipNode;
                 BeforeProcessMethods();
                 if (_finish)
                     break;
                 switch ( _rdr.NodeType )
                 {
                     case XmlNodeType.Element:
-                        _wtr.WriteStartElement( _rdr.Prefix, _rdr.LocalName, _rdr.NamespaceURI );
+                        if (!SkipNode)
+                        {
+                            Debug.Print("start " + _rdr.LocalName);
+                            _wtr.WriteStartElement(_rdr.Prefix, _rdr.LocalName, _rdr.NamespaceURI);
+                        }
+                        else
+                        {
+                            SkipAttr = true;
+                        }
                         var empty = _rdr.IsEmptyElement;
                         var depth = _rdr.Depth;
                         var name = _rdr.Name;
@@ -62,6 +73,7 @@ namespace CssSimpler
                             for (int attrIndex = _rdr.AttributeCount; attrIndex > 0; attrIndex--)
                             {
                                 _rdr.MoveToNextAttribute();
+                                SkipAttr = SkipNode;
                                 BeforeProcessMethods();
                                 if (!SkipAttr)
                                 {
@@ -93,14 +105,14 @@ namespace CssSimpler
                         }
                         break;
                     case XmlNodeType.Text:
-                        if (_rdr.Value == "a cabo")
+                        if (!SkipNode)
                         {
-                            Debug.Print("pause");
+                            _wtr.WriteString(_rdr.Value);
                         }
-                        _wtr.WriteString( _rdr.Value );
                         break;
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
+                        Debug.Print("space");
                         _wtr.WriteWhitespace(_rdr.Value);
                         break;
                     case XmlNodeType.CDATA:
@@ -127,8 +139,12 @@ namespace CssSimpler
                         _wtr.WriteComment( _rdr.Value );
                         break;
                     case XmlNodeType.EndElement:
+                        Debug.Print("End " + _rdr.Name);
                         BeforeEndProcessMethods(_rdr.NodeType, _rdr.Depth, _rdr.Name);
-                        _wtr.WriteFullEndElement();
+                        if (!SkipNode)
+                        {
+                            _wtr.WriteFullEndElement();
+                        }
                         break;
                 }
                 AfterProcessMethods();
@@ -199,7 +215,7 @@ namespace CssSimpler
             _wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
             if (!string.IsNullOrEmpty(myClass))
             {
-            WriteAttr(myClass + "-ps");
+            WriteAttr(myClass + Suffix);
             }
             if (val.Contains(" "))
             {
@@ -214,9 +230,13 @@ namespace CssSimpler
                 _wtr.WriteValue(val);
             }
             _wtr.WriteEndElement();
+            //if (val == "car area for suitcases")
+            //{
+            //    Debug.Print("found it");
+            //}
         }
 
-        private void WriteValueEmbedEntities(string val)
+        protected void WriteValueEmbedEntities(string val)
         {
             var matches = Regex.Matches(val, @"\\([0-9ABCDEF]+)", RegexOptions.IgnoreCase);
             var position = 0;
