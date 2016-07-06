@@ -1,0 +1,241 @@
+﻿.letHead {
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+}
+.letter {
+   line-height: 12pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 11pt;
+   font-weight: bold;
+}
+span {
+   font-size: 11pt;
+}
+span[lang|= "en"]{
+   font-family: 'Doulos SIL',serif;
+   font-size: 11pt;
+}
+span[lang|= "fr"]{
+   font-family: 'Charis SIL',serif;
+   font-size: 11pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.entry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   font-size: 11pt;
+}
+.entry .mainheadword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span {
+   font-weight: bold;
+}
+.entry > .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry > .senses .sense {
+   font-size: 11pt;
+}
+.entry > .senses .sensecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 18pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.entry > .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses .examplescontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   line-height: 12pt;
+   padding-bottom: 6pt;
+   font-size: 11pt;
+   margin-left: 0pt;
+   display: block;
+}
+.examplescontent-ps {
+   font-size: 10pt;
+   color: Black;
+}
+.entry > .senses .sensecontent + .sensecontent .examplescontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   margin-left: -18pt;
+   line-height: 12pt;
+   padding-bottom: 6pt;
+   font-size: 11pt;
+   display: block;
+}
+.examplescontent-ps {
+   font-size: 10pt;
+   color: Black;
+}
+.entry > .senses .example > span[lang|= "fr"]{
+   font-style: italic;
+}
+.entry > .senses .example > span {
+   font-style: italic;
+}
+.entry > .senses .sense > .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry > .senses .sense > .senses .sensecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 9.142pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.entry .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #800080;
+   display: block;
+}
+.entry .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #800080;
+   display: block;
+}
+.minorentrycomplex {
+   clear: both;
+   white-space: pre-wrap;
+}
+.minorentrycomplex {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #F00;
+}
+.minorentrycomplex > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubsenses .mainentrysubsense {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubsenses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubsenses .subentries .subentry {
+   font-size: 11pt;
+   color: #800080;
+}
+.mainentrysubsenses .subentries .subentry {
+   font-size: 11pt;
+   color: #800080;
+}
+.mainentrysubsenses .mainentrysubsense > .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubsenses .mainentrysubsense > .senses .sense {
+   font-size: 11pt;
+}
+.mainentrysubsenses .mainentrysubsense > .senses .sensecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   margin-left: 0.07100171pt;
+   line-height: 12pt;
+   padding-bottom: 6pt;
+   display: block;
+}
+.mainentrysubentries .mainentrysubentry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses .examplescontent {
+   font-size: 11pt;
+}
+.mainentrysubentries .mainentrysubentry > .senses .example > span[lang|= "fr"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses .example > span {
+   font-style: italic;
+}

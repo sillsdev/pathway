@@ -193,7 +193,10 @@ namespace CssSimpler
         {
             //var ns = new XmlNamespaceManager(_rdr.NameTable);
             _wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
+            if (!string.IsNullOrEmpty(myClass))
+            {
             WriteAttr(myClass + "-ps");
+            }
             if (val.Contains(" "))
             {
                 _wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");

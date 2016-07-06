@@ -22,6 +22,12 @@ span[lang|= "bzh"]{
    font-family: 'Charis SIL',serif;
    font-size: 10pt;
 }
+div.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+}
 a {
    text-decoration: inherit;
    color: inherit;
@@ -37,24 +43,24 @@ a {
    padding-top: 1pt;
    font-size: 10pt;
 }
-.entry .mainheadword > span[lang|= "bzh"]{
+.entry > .mainheadword > span[lang|= "bzh"]{
    font-weight: bold;
 }
-.entry .mainheadword > span {
+.entry > .mainheadword > span {
    font-weight: bold;
 }
-.entry .senses .morphosyntaxanalysis {
+.entry > .senses > .sensecontent > .sense > .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry .senses .example > span[lang|= "bzh"]{
+.entry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span[lang|= "bzh"]{
    font-style: italic;
 }
-.entry .senses .example > span {
+.entry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span {
    font-style: italic;
 }
-.entry .senses .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
+.entry > .senses > .sensecontent > .sense > .lexsensereferences .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
    font-style: italic;
 }
-.entry .senses .lexsensereference > .ownertype_abbreviation > span {
+.entry > .senses > .sensecontent > .sense > .lexsensereferences .lexsensereference > .ownertype_abbreviation > span {
    font-style: italic;
 }
