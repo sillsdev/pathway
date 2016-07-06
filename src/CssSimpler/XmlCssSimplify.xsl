@@ -50,7 +50,7 @@
                 </xsl:copy>
             </xsl:when>
             <!-- In order to retain sense hierarchy -->
-            <xsl:when test="local-name(.) = 'PARENTOF' and following-sibling::*[1]/name='senses' or following-sibling::*[2]/name='senses'">
+            <xsl:when test="local-name(.) = 'PARENTOF' and following-sibling::*[1]/name='senses' or local-name(following-sibling::*[1]) = 'PARENTOF' and following-sibling::*[2]/name='senses' or local-name(.) = 'PARENTOF' and preceding-sibling::*[1]/name='senses' or local-name(preceding-sibling::*[1]) = 'PARENTOF'">
                <xsl:copy>
                   <xsl:apply-templates select="node() | @*"/>
                </xsl:copy>
