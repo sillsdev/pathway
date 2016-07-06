@@ -479,10 +479,11 @@ namespace Test.CssSimplerTest
             var resultFile = _testFiles.Output(fileName);
             WriteSimpleCss(resultFile, xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[2]/name[text()='senses']"));
+            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[2][local-name()='PARENTOF']"));
             Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[3]/name[text()='senses']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[4][local-name()='PARENTOF']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[5]/name[text()='span']"));
+            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[6]/name[text()='senses']"));
+            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[7][local-name()='PARENTOF']"));
+            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[8]/name[text()='span']"));
         }
 
         /// <summary>
@@ -546,8 +547,8 @@ namespace Test.CssSimplerTest
             var resultFile = _testFiles.Output(fileName);
             WriteSimpleCss(resultFile, xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[2]/name[text()='senses']"), "expeted senses retained");
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[3]/name[text()='sensecontent']"), "expected sensecontent (w/o span tag)");
+            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[3]/name[text()='senses']"), "expeted senses retained");
+            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[4]/name[text()='sensecontent']"), "expected sensecontent (w/o span tag)");
         }
 
         /// <summary>
@@ -893,7 +894,6 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 2, "//*[@class='sensenumber']/*", "Wrong amount of sense number punctuation.");
         }
 
@@ -1073,6 +1073,32 @@ namespace Test.CssSimplerTest
         }
 
         /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void MultiIndentTest()
+        {
+            const string testName = "MultiIndent";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            _testFiles.Copy(testName + ".css");
+            LoadCssXml(ctp, cssFullName, xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+        }
+
+        /// <summary>
         /// test for multi selector expansion
         /// </summary>
         [Test]
@@ -1158,7 +1184,6 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 1, "//*[@class='fr-Zxxx-x-audio']/*[string-length(.)=2]", "audio icon");
         }
 
@@ -1188,7 +1213,6 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 1, "//*[contains(@class,'subentry ')]/*[1][.='\x29EB']", "subentry bullet");
         }
 
