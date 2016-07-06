@@ -242,7 +242,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmbedStyles.cs" />
     <Compile Include="FlattenStyles.cs" />
     <Compile Include="LoadClasses.cs" />
     <Compile Include="MoveInlineStyles.cs" />
