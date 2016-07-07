@@ -317,14 +317,14 @@
         <xsl:choose>
             <xsl:when test="starts-with($normText, '(')">
                 <xsl:text>(</xsl:text>
-                <xsl:call-template name="CrossReferenceIter">
-                    <xsl:with-param name="textLeft" select="substring-before(substring-after($normText, '('), ')')"/>
+                <xsl:call-template name="RemoveRefMaterial">
+                    <xsl:with-param name="text" select="substring-before(substring-after($normText, '('), ')')"/>
                 </xsl:call-template>
                 <xsl:text>)</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="CrossReferenceIter">
-                    <xsl:with-param name="textLeft" select="$normText"/>
+                <xsl:call-template name="RemoveRefMaterial">
+                    <xsl:with-param name="text" select="$normText"/>
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
@@ -883,11 +883,24 @@
         <xsl:text disable-output-escaping="yes"><![CDATA[<RF q=]]></xsl:text>
         <xsl:value-of select="@caller"/>
         <xsl:text disable-output-escaping="yes"><![CDATA[>]]></xsl:text>
+        <xsl:call-template name="RemoveRefMaterial">
+            <xsl:with-param name="text" select="$text"/>
+        </xsl:call-template>
+        <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
+        <xsl:apply-templates select="following::node()[1]" mode="t">
+            <xsl:with-param name="space" select="$space"/>
+            <xsl:with-param name="indent" select="$indent"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template name="RemoveRefMaterial">
+        <xsl:param name="text"/>
         <xsl:choose>
             <xsl:when test="starts-with($text, $refMaterial)">
                 <xsl:value-of select="$refMaterial"/>
                 <xsl:call-template name="CrossReferenceIter">
-                    <xsl:with-param name="textLeft" select="normalize-space(substring-after($text,$refMaterial))"/>
+                    <xsl:with-param name="textLeft"
+                        select="normalize-space(substring-after($text,$refMaterial))"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -896,11 +909,6 @@
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:text disable-output-escaping="yes"><![CDATA[<Rf>]]></xsl:text>
-        <xsl:apply-templates select="following::node()[1]" mode="t">
-            <xsl:with-param name="space" select="$space"/>
-            <xsl:with-param name="indent" select="$indent"/>
-        </xsl:apply-templates>
     </xsl:template>
     
     <xsl:template name="CrossReferenceIter">
