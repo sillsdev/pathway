@@ -207,8 +207,26 @@ namespace CssSimpler
             var rules = xml.DocumentElement.ChildNodes;
             for (var index = 0; index < rules.Count; index += 1)
             {
-                // ReSharper disable once PossibleNullReferenceException
-                rules[index].Attributes["pos"].InnerText = (index + 1).ToString();
+                var rule = rules[index] as XmlElement;
+                Debug.Assert(rule != null, "rule != null");
+                try
+                {
+                    rule.Attributes["pos"].InnerText = (index + 1).ToString();
+                }
+                catch (NullReferenceException)
+                {
+                    // ReSharper disable once PossibleNullReferenceException
+                    var attr = rule.OwnerDocument.CreateAttribute("pos");
+                    attr.InnerText = (index + 1).ToString();
+                    if (rule.HasAttributes)
+                    {
+                        rule.Attributes.InsertBefore(attr, rule.Attributes[0]);
+                    }
+                    else
+                    {
+                        rule.Attributes.Append(attr);
+                    }
+                }
             }
         }
 
