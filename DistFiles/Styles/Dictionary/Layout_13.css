@@ -19,7 +19,7 @@
 @import "PageNumber_TopInside.css"; 
 @import "Reversal_Reference_Numbers.css";
 
-.body {
+.dicBody {
 	direction: rtl;
 }
 
