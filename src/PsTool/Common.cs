@@ -5070,5 +5070,14 @@ namespace SIL.Tool
 			return inProcess;
 		}
 
+		public static void CopyContent(string sourceFile, string destinationFile)
+		{
+			using (Stream input = File.OpenRead(destinationFile))
+			using (Stream output = new FileStream(sourceFile, FileMode.Append,
+				FileAccess.Write, FileShare.None))
+			{
+				input.CopyTo(output); // Using .NET 4
+			}
+		}
 	}
 }

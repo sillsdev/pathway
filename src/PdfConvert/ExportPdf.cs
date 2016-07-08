@@ -133,7 +133,14 @@ namespace SIL.PublishingSolution
                     string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
                     string tempFolderName = Path.GetFileName(tempFolder);
                     var mc = new MergeCss { OutputLocation = tempFolderName };
-                    string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
+
+	                if (projInfo.IsReversalExist && File.Exists(projInfo.DefaultRevCssFileWithPath))
+	                {
+		                Common.CopyContent(projInfo.DefaultCssFileWithPath, projInfo.DefaultRevCssFileWithPath);
+	                }
+
+	                string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
+					
                     preProcessor.ReplaceStringInCss(mergedCSS);
                     preProcessor.InsertPropertyInCSS(mergedCSS);
                     preProcessor.RemoveDeclaration(mergedCSS, ".pictureRight > .picture");
@@ -171,7 +178,15 @@ namespace SIL.PublishingSolution
                     string xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                     string defaultCSS = Path.GetFileName(mergedCSS);
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
+
                     _processedXhtml = preProcessor.ProcessedXhtml;
+					if (projInfo.IsReversalExist)
+					{
+						var reversalFile = Path.GetDirectoryName(_processedXhtml);
+						reversalFile = Common.PathCombine(reversalFile, "FlexRev.xhtml");
+						Common.SetDefaultCSS(reversalFile, defaultCSS);
+					}
+
                     if (!ExportPrince(projInfo, xhtmlFileName, isUnixOS, regPrinceKey, defaultCSS)) 
                         return false;
 
@@ -214,20 +229,34 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-        private static bool ExportPrince(PublicationInformation projInfo, string xhtmlFileName, bool isUnixOS,
+	    private static bool ExportPrince(PublicationInformation projInfo, string xhtmlFileName, bool isUnixOS,
                                    RegistryKey regPrinceKey, string defaultCSS)
         {
             if (!isUnixOS)
             {
                 Object princePath = regPrinceKey.GetValue("InstallLocation");
                 _fullPrincePath = Common.PathCombine((string) princePath, "Engine/bin/prince.exe");
+				var myPrince = new Prince(_fullPrincePath);
+	            if (projInfo.IsReversalExist)
+	            {
+		            string[] xhtmlFiles = new string[2];
+		            var reversalFile = Path.GetDirectoryName(_processedXhtml);
+		            xhtmlFiles[0] = _processedXhtml;
+		            xhtmlFiles[1] = Common.PathCombine(reversalFile, "FlexRev.xhtml");
+		            myPrince.AddStyleSheet(defaultCSS);
+					myPrince.ConvertMultiple(xhtmlFiles, xhtmlFileName + ".pdf");
 
-                if (File.Exists(_fullPrincePath))
-                {
-                    var myPrince = new Prince(_fullPrincePath);
-                    myPrince.AddStyleSheet(defaultCSS);
-                    myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
-                }
+	            }
+	            else
+	            {
+		            if (File.Exists(_fullPrincePath))
+		            {
+			            myPrince.AddStyleSheet(defaultCSS);
+			            myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
+
+		            }
+	            }
+
             }
             else
             {
