@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Policy;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -270,8 +271,18 @@ namespace SIL.PublishingSolution
                 Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                 Directory.SetCurrentDirectory(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath));
                 string p1Error = string.Empty;
-                string inputArguments = "";
-                inputArguments = _processedXhtml + " -o " + xhtmlFileName + ".pdf";
+                string inputArguments;
+	            if (projInfo.IsReversalExist)
+				{
+					var reversalFile = Path.GetDirectoryName(_processedXhtml);
+					var reversalFilename = Common.PathCombine(reversalFile, "FlexRev.xhtml");
+					inputArguments = "-s " + defaultCSS + " " + _processedXhtml + " " + reversalFilename + " " + " -o " + xhtmlFileName + ".pdf";
+				}
+				else
+				{
+					inputArguments = "-s " + defaultCSS + " " + _processedXhtml + " -o " + xhtmlFileName + ".pdf";	
+				}
+                
                 using (Process p1 = new Process())
                 {
                     p1.StartInfo.FileName = "prince";
