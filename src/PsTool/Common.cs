@@ -284,6 +284,8 @@ namespace SIL.Tool
 			List<string> lstFileName = new List<string>();
 			lstFileName.Add("Add Columns FW83");
 			lstFileName.Add("Letter Header Language");
+			lstFileName.Add("Filter Broken Links");
+			lstFileName.Add("Fix Duplicate ids");
 			return lstFileName;
 		}
 
