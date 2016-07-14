@@ -1086,6 +1086,14 @@ namespace SIL.Tool
 			{
 				value = value.Replace(value, Common.ConvertUnicodeToString("\\" + value)) + " ";
 			}
+			if (value.Contains("{"))
+			{
+				value = value.Replace("{", "\\{");
+			}
+			if (value.Contains("}"))
+			{
+				value = value.Replace("}", "\\}");
+			}
 			return value;
 		}
 
