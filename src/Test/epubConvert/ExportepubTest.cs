@@ -378,12 +378,12 @@ namespace Test.epubConvert
 		}
 
 		[Test]
-		public void RemoveEmptyHrefTest()
+		public void ReplaceEmptyHrefandXmlLangtoLangChangeTest()
 		{
 			CleanOutputDirectory();
 			const string folderName = "RemoveEmptyHrefTest";
 			FolderTree.Copy(FileInput(folderName), FileOutput(folderName));
-			ReplaceEmptyHref(FileOutput(folderName));
+			ReplaceEmptyHrefandXmlLangtoLang(FileOutput(folderName));
 			string expectedFilesPath = FileExpected(folderName.Replace("Test", "Expected"));
 			FileCompare(FileOutput(folderName) + "/PartFile00001_01.xhtml", expectedFilesPath + "/PartFile00001_01.xhtml");
 			FileCompare(FileOutput(folderName) + "/PartFile00001_03.xhtml", expectedFilesPath + "/PartFile00001_03.xhtml");
