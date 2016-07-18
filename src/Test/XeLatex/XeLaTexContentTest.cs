@@ -1162,6 +1162,16 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
+		[Test]
+		[Category("ShortTest")]
+		[Category("SkipOnTeamCity")]
+		public void MissingCurlyBracesTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "MissingCurlyBracesTest";
+			ExportProcess(file);
+			FileCompare(file);
+		}
 
 		[Ignore]
 		[Test]

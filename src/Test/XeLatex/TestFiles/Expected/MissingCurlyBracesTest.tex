@@ -1,0 +1,289 @@
+\documentclass[a4paper,twoside]{article} 
+\usepackage{float}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=1.27cm,right=1.27cm,top=1.27cm,bottom=1.27cm,includeheadfoot]{geometry}
+\usepackage{changepage}
+\usepackage{setspace}
+\usepackage{needspace}
+\usepackage{multicol}
+\usepackage{bidi} 
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\dives="Charis SIL/GR" at 12pt
+\font\spanes="Charis SIL/GR":color=008000 at 10pt
+\font\divmxb="Times New Roman/GR" at 12pt
+\font\spanmxb="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanmxbmainheadwordentry="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanmainheadwordentry="Times New Roman/GR/B":color=0000FF at 11pt
+\font\sensenumbersensecontentsensesentry="Times New Roman/GR/B" at 12pt
+\font\spanespartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanespartofspeechmorphosyntaxanalysissensesensecontentsensesentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanesdefinitionsensesensecontentsensesentry="Times New Roman/GR":color=008000 at 10pt
+\font\spandefinitionsensesensecontentsensesentry="Times New Roman/GR":color=008000 at 10pt
+\font\comentariorestrictivosensesensecontentsensesentry="Times New Roman/GR/I":color=808000 at 10pt
+\font\definicióndescriptivasensesensecontentsensesentry="Times New Roman/GR/I":color=808000 at 10pt
+\font\scientificnamesensesensecontentsensesentry="Times New Roman/GR/I":color=808000 at 10pt
+\font\sensenumbersensecontentsensessensesensecontentsensesentry="Times New Roman/GR/B":color=800000 at 10pt
+\font\spanmxbexampleexamplescontentssensesensecontentsensesentry="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanexampleexamplescontentssensesensecontentsensesentry="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanesencyclopedicinfosensesensecontentsensesentry="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanencyclopedicinfosensesensecontentsensesentry="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanescommententry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spancommententry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanesabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordvariantformentrybackrefvariantformentrybackrefsentry="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanheadwordvariantformentrybackrefvariantformentrybackrefsentry="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanesabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsbentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsbentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordvariantformentrybackrefbvariantformentrybackrefsbentry="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanheadwordvariantformentrybackrefbvariantformentrybackrefsbentry="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanesownertypeabbreviationminimallexreferenceminimallexreferencesentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanownertypeabbreviationminimallexreferenceminimallexreferencesentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencesentry="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencesentry="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanesliteralmeaningentry="Times New Roman/GR":color=800080 at 12pt
+\font\spanliteralmeaningentry="Times New Roman/GR":color=800080 at 12pt
+\font\spanmxbheadwordvisiblecomplexformbackrefvisiblecomplexformbackrefsentry="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanheadwordvisiblecomplexformbackrefvisiblecomplexformbackrefsentry="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanespartofspeechmorphosyntaxanalysesvisiblecomplexformbackrefsentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysesvisiblecomplexformbackrefsentry="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanessummaryvisiblecomplexformbackrefsentry="Times New Roman/GR/I":color=808000 at 10pt
+\font\spansummaryvisiblecomplexformbackrefsentry="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanmxbheadwordmainentrycomplex="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanheadwordmainentrycomplex="Times New Roman/GR/B":color=0000FF at 11pt
+\font\sensenumbersensecontentsensesmainentrycomplex="Times New Roman/GR/B" at 12pt
+\font\spanespartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanespartofspeechmorphosyntaxanalysissensesensecontentsensesmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysissensesensecontentsensesmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanesdefinitionsensesensecontentsensesmainentrycomplex="Times New Roman/GR":color=008000 at 10pt
+\font\spandefinitionsensesensecontentsensesmainentrycomplex="Times New Roman/GR":color=008000 at 10pt
+\font\comentariorestrictivosensesensecontentsensesmainentrycomplex="Times New Roman/GR/I":color=808000 at 10pt
+\font\definicióndescriptivasensesensecontentsensesmainentrycomplex="Times New Roman/GR/I":color=808000 at 10pt
+\font\scientificnamesensesensecontentsensesmainentrycomplex="Times New Roman/GR/I":color=808000 at 10pt
+\font\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplex="Times New Roman/GR/B":color=800000 at 10pt
+\font\spanmxbexampleexamplescontentssensesensecontentsensesmainentrycomplex="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanexampleexamplescontentssensesensecontentsensesmainentrycomplex="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanesencyclopedicinfosensesensecontentsensesmainentrycomplex="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanencyclopedicinfosensesensecontentsensesmainentrycomplex="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanesreverseabbrcomplexformtypescomplexformentryrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanreverseabbrcomplexformtypescomplexformentryrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordreferencedentryreferencedentriescomplexformentryrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanheadwordreferencedentryreferencedentriescomplexformentryrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanescommentmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spancommentmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanesabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordvariantformentrybackrefvariantformentrybackrefsmainentrycomplex="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanheadwordvariantformentrybackrefvariantformentrybackrefsmainentrycomplex="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanesabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsbmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsbmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordvariantformentrybackrefbvariantformentrybackrefsbmainentrycomplex="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanheadwordvariantformentrybackrefbvariantformentrybackrefsbmainentrycomplex="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanesownertypeabbreviationminimallexreferenceminimallexreferencesmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanownertypeabbreviationminimallexreferenceminimallexreferencesmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencesmainentrycomplex="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencesmainentrycomplex="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanesliteralmeaningmainentrycomplex="Times New Roman/GR":color=800080 at 12pt
+\font\spanliteralmeaningmainentrycomplex="Times New Roman/GR":color=800080 at 12pt
+\font\spanmxbheadwordvisiblecomplexformbackrefvisiblecomplexformbackrefsmainentrycomplex="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanheadwordvisiblecomplexformbackrefvisiblecomplexformbackrefsmainentrycomplex="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanespartofspeechmorphosyntaxanalysesvisiblecomplexformbackrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysesvisiblecomplexformbackrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanessummaryvisiblecomplexformbackrefsmainentrycomplex="Times New Roman/GR/I":color=808000 at 10pt
+\font\spansummaryvisiblecomplexformbackrefsmainentrycomplex="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanmxbheadwordreferencedentryreferencedentriesvisiblevariantentryrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefsmainentrycomplex="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordminorentryvariant="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanheadwordminorentryvariant="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanesreverseabbrvariantentrytypesvisiblevariantentryrefsminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanreverseabbrvariantentrytypesvisiblevariantentryrefsminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordreferencedentryreferencedentriesvisiblevariantentryrefsminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefsminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanesrestrictionsminorentryvariant="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanrestrictionsminorentryvariant="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanescommentminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spancommentminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanesabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordvariantformentrybackrefvariantformentrybackrefsminorentryvariant="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanheadwordvariantformentrybackrefvariantformentrybackrefsminorentryvariant="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanesabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsbminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsbminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordvariantformentrybackrefbvariantformentrybackrefsbminorentryvariant="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanheadwordvariantformentrybackrefbvariantformentrybackrefsbminorentryvariant="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanesownertypeabbreviationminimallexreferenceminimallexreferencesminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanownertypeabbreviationminimallexreferenceminimallexreferencesminorentryvariant="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanmxbheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencesminorentryvariant="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencesminorentryvariant="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanesliteralmeaningminorentryvariant="Times New Roman/GR":color=800080 at 12pt
+\font\spanliteralmeaningminorentryvariant="Times New Roman/GR":color=800080 at 12pt
+\font\spanmxbexampleexamplescontentsmainentrysubsenses="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanexampleexamplescontentsmainentrysubsenses="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanesownertypeabbreviationlexsensereferencelexsensereferencesmainentrysubsenses="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanownertypeabbreviationlexsensereferencelexsensereferencesmainentrysubsenses="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanmxbheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencesmainentrysubsenses="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencesmainentrysubsenses="Times New Roman/GR/I":color=800000 at 10pt
+\font\translationstes="Times New Roman/GR/I":color=808000 at 12pt
+\font\spanheadwordconfigtargetconfigtargets="Times New Roman/GR" at 12pt
+\font\letHeaddicBody="Times New Roman/GR/B" at 12pt
+\font\lettermxbletHeaddicBody="Times New Roman/GR/B":color=000080 at 18pt
+\font\letDatadicBody="Times New Roman/GR" at 12pt
+\font\entryletDatadicBody="Times New Roman/GR":color=008000 at 12pt
+\font\spanentryletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanmxbspanentryletDatadicBody="Times New Roman/GR/B":color=0000FF at 11pt
+\font\aspanmxbspanentryletDatadicBody="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanmainheadwordentryspanentryletDatadicBody="Times New Roman/GR/B":color=0000FF at 11pt
+\font\homographnumberentryentryletDatadicBody="Times New Roman/GR/B":color=008000 at 6.96pt
+\font\spanhomographnumberentryentryletDatadicBody="Times New Roman/GR/B":color=008000 at 10pt
+\font\spanspanentryletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanspanspanentryletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\partofspeechspanspanspanentryletDatadicBody="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanespartofspeechspanspanspanentryletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesentryspanespartofspeechspanspanspanentryletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesentrypartofspeechspanspanspanentryletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody="Times New Roman/GR/B":color=800000 at 10pt
+\font\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody="Times New Roman/GR/B":color=800000 at 10pt
+\font\sensespanspanentryletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\definicióndescriptivasensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody="Times New Roman/GR/I":color=808000 at 10pt
+\font\spandefinicióndescriptivasensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanesdefinicióndescriptivasensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanspansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanspanspansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanmxbspanspanspansensespanspanentryletDatadicBody="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanexampleexamplescontentssensesensecontentsensesentryspanspanspansensespanspanentryletDatadicBody="Times New Roman/GR/B":color=000080 at 10pt
+\font\spanspanspanspansensespanspanentryletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanspanspanspanspansensespanspanentryletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanesspanspanspanspanspansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanspanesspanspanspanspanspansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanspanspanspanspanspansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanesspanesspanspanspanspanspansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\translationstesspanesspanspanspanspanspansensespanspanentryletDatadicBody="Charis SIL/GR/I":color=808000 at 10pt
+\font\minorentryvariantletDatadicBody="Charis SIL/GR":color=008000 at 12pt
+\font\headwordminorentryvariantletDatadicBody="Charis SIL/GR":color=0000FF at 10pt
+\font\spanmxbheadwordminorentryvariantletDatadicBody="Times New Roman/GR/B":color=0000FF at 11pt
+\font\aspanmxbheadwordminorentryvariantletDatadicBody="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanheadwordminorentryvariantheadwordminorentryvariantletDatadicBody="Times New Roman/GR/B":color=0000FF at 11pt
+\font\spanminorentryvariantletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanspanminorentryvariantletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanspanspanminorentryvariantletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanspanspanspanminorentryvariantletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanspanspanspanspanminorentryvariantletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanesspanspanspanspanspanminorentryvariantletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\spanreverseabbrvariantentrytypesvisiblevariantentryrefsminorentryvariantspanspanspanspanspanminorentryvariantletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\headwordspanspanspanspanminorentryvariantletDatadicBody="Charis SIL/GR":color=0000FF at 10pt
+\font\spanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefsminorentryvariantspanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefsminorentryvariantheadwordspanspanspanspanminorentryvariantletDatadicBody="Times New Roman/GR/I":color=800000 at 10pt
+\font\spanesspanminorentryvariantletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanspanesspanminorentryvariantletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\partofspeechspansensespanspanentryletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\spanespartofspeechspansensespanspanentryletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentryspanespartofspeechspansensespanspanentryletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentrypartofspeechspansensespanspanentryletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\spanesspansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spandefinitionsensesensecontentsensesentryspanesspansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spandefinitionsensesensecontentsensesentryspansensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\pictureentryentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\pictureentrypictureentryentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\captionContentpictureentryentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spancaptionContentpictureentryentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanmxbspancaptionContentpictureentryentryletDatadicBody="Times New Roman/GR/B":color=000080 at 10pt
+\font\comentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody="Times New Roman/GR/I":color=808000 at 10pt
+\font\spancomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody="Times New Roman/GR/I":color=808000 at 10pt
+\font\spanescomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\mainentrysubsensessensessensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanmainentrysubsensessensessensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanmainentrysubsensessensessensespanspanentryletDatadicBody="Times New Roman/GR/B":color=800000 at 10pt
+\font\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanmainentrysubsensessensessensespanspanentryletDatadicBody="Times New Roman/GR/B":color=800000 at 10pt
+\font\sensespanmainentrysubsensessensessensespanspanentryletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spansensespanmainentrysubsensessensessensespanspanentryletDatadicBody="Times New Roman/GR":color=008000 at 10pt
+\font\spanesspansensespanmainentrysubsensessensessensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanspansensespanmainentrysubsensessensessensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\restrictionssensespanmainentrysubsensessensessensespanspanentryletDatadicBody="Charis SIL/GR":color=808000 at 10pt
+\font\spanesrestrictionssensespanmainentrysubsensessensessensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanspanesrestrictionssensespanmainentrysubsensessensessensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanrestrictionssensespanmainentrysubsensessensessensespanspanentryletDatadicBody="Charis SIL/GR":color=808000 at 10pt
+\font\spanspanmainentrysubsensessensessensespanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanspanspanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanspanspanspanspanentryletDatadicBody="Charis SIL/GR":color=008000 at 10pt
+\font\spanesspanspanspanspanspanentryletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\spanabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsentryspanspanspanspanspanentryletDatadicBody="Charis SIL/GR/I":color=800000 at 10pt
+\font\headwordspanspanentryletDatadicBody="Charis SIL/GR":color=0000FF at 10pt
+\font\spanmxbheadwordspanspanentryletDatadicBody="Times New Roman/GR/B":color=000080 at 10pt
+
+\mbox{} 
+\newpage 
+\newpage 
+\setcounter{page}{1} 
+\pagenumbering{arabic} 
+\pagestyle{fancy} 
+\begin{spacing}{1}\begin{center}
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettermxbletHeaddicBody{\underline{A a}}}}}
+ \label{PageStock_MissingCurlyBracesTest1} \end{center}\end{spacing}
+\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}\begin{spacing}{0.5}{\raggedright} \begin{spacing}{0.5}
+\hangindent= 12pt
+\hangafter=1
+\spanmxbspanentryletDatadicBody{á} \homographnumberentryentryletDatadicBody{0} \spanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesentryspanespartofspeechspanspanspanentryletDatadicBody{ }\spanespartofspeechspanspanspanentryletDatadicBody{adv.} \spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{ }\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{1}\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{.}\spandefinicióndescriptivasensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{ }\spanesdefinicióndescriptivasensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{Indica pregunta sam cuya respuesta es sí o no.} \spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody{ }\spanmxbspanspanspansensespanspanentryletDatadicBody{¿Á ni̱ kuitá ní?} \spanspanesspanspanspanspanspansensespanspanentryletDatadicBody{ }\spanesspanspanspanspanspansensespanspanentryletDatadicBody{¿Ya se cansó usted?} \spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{ }\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{2}\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{.}\spandefinicióndescriptivasensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{ }\spanesdefinicióndescriptivasensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{Puede presentarse dentro de la oración.} \spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody{ }\spanmxbspanspanspansensespanspanentryletDatadicBody{Ni̱ saꞌa̱n xi̱ ni̱ sa̱ nde̱ꞌé xí á ndéi che̱e.} \spanspanesspanspanspanspanspansensespanspanentryletDatadicBody{ }\spanesspanesspanspanspanspanspansensespanspanentryletDatadicBody{Fue a ver si están los toros. }\translationstesspanesspanspanspanspanspansensespanspanentryletDatadicBody{(Lit. Fue a ver: ¿Están los toros?)} \end{spacing}
+\begin{spacing}{0.5}{\raggedright} 
+\spanmxbheadwordminorentryvariantletDatadicBody{a̱}\spanheadwordminorentryvariantheadwordminorentryvariantletDatadicBody{ }\spanspanminorentryvariantletDatadicBody{ \{}\spanesspanspanspanspanspanminorentryvariantletDatadicBody{var. de} \spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefsminorentryvariantspanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody{ }\spanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody{o̱} \spanspanminorentryvariantletDatadicBody{\} }\spanspanesspanminorentryvariantletDatadicBody{ }\spanesspanminorentryvariantletDatadicBody{no}  \end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 12pt
+\hangafter=1
+\spanmxbspanentryletDatadicBody{achá} \homographnumberentryentryletDatadicBody{0} \spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentryspanespartofspeechspansensespanspanentryletDatadicBody{ }\spanespartofspeechspansensespanspanentryletDatadicBody{s. esp.} \spandefinitionsensesensecontentsensesentryspanesspansensespanspanentryletDatadicBody{ }\spanesspansensespanspanentryletDatadicBody{hacha} \spanmxbspancaptionContentpictureentryentryletDatadicBody{achá}\end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 12pt
+\hangafter=1
+\spanmxbspanentryletDatadicBody{ada̱} \homographnumberentryentryletDatadicBody{0} \spanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesentryspanespartofspeechspanspanspanentryletDatadicBody{ }\spanespartofspeechspanspanspanentryletDatadicBody{adj.} \spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{ }\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{1}\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{.}\spandefinitionsensesensecontentsensesentryspanesspansensespanspanentryletDatadicBody{ }\spanesspansensespanspanentryletDatadicBody{simple} \spancomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{(}\spanescomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{sabor, que le falta dulce o sal}\spancomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{) }\spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody{ }\spanmxbspanspanspansensespanspanentryletDatadicBody{Ada̱ ndava̱ꞌo yíki̱ ni̱ da̱chóꞌo̱ ná, chi̱ ko̱ ta̱ꞌón suká ña̱.} \spanspanesspanspanspanspanspansensespanspanentryletDatadicBody{ }\spanesspanspanspanspanspansensespanspanentryletDatadicBody{Está muy simple la calabaza que hizo, porque no tiene azúcar.} \spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{ }\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{2}\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{.}\spandefinitionsensesensecontentsensesentryspanesspansensespanspanentryletDatadicBody{ }\spanesspansensespanspanentryletDatadicBody{desagradable} \spancomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{(}\spanescomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{olor}\spancomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{) }\spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody{ }\spanmxbspanspanspansensespanspanentryletDatadicBody{Ada̱ ndava̱ꞌo sáꞌa̱n no̱ó ñóꞌo kíti̱.} \spanspanesspanspanspanspanspansensespanspanentryletDatadicBody{ }\spanesspanspanspanspanspansensespanspanentryletDatadicBody{Huele muy desagradable el lugar de los chivos.} \end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 12pt
+\hangafter=1
+\spanmxbspanentryletDatadicBody{á dáá vá} \homographnumberentryentryletDatadicBody{0} \spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentryspanespartofspeechspansensespanspanentryletDatadicBody{ }\spanespartofspeechspansensespanspanentryletDatadicBody{interj.} \spandefinitionsensesensecontentsensesentryspanesspansensespanspanentryletDatadicBody{ }\spanesspansensespanspanentryletDatadicBody{¿de veras?} \spancomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{(}\spanescomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{indica asombro}\spancomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{) }\spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody{ }\spanmxbspanspanspansensespanspanentryletDatadicBody{—Kanaꞌá ndó chi̱ ni̱ noo va ya̱ꞌi mvélo̱. —¿Á dáá vá? ¡Ndeí koo ví ri̱!} \spanspanesspanspanspanspanspansensespanspanentryletDatadicBody{ }\spanesspanspanspanspanspansensespanspanentryletDatadicBody{—Sepan ustedes que el precio de los sombreros bajó. —¿De veras? ¡Qué lamentable!} \end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 12pt
+\hangafter=1
+\spanmxbspanentryletDatadicBody{adi̱} \homographnumberentryentryletDatadicBody{0} \spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{ }\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{1}\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanspanentryletDatadicBody{.}\spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentryspanespartofspeechspansensespanspanentryletDatadicBody{ }\spanespartofspeechspansensespanspanentryletDatadicBody{adj.} \spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanmainentrysubsensessensessensespanspanentryletDatadicBody{ }\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanmainentrysubsensessensessensespanspanentryletDatadicBody{1.1}\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanmainentrysubsensessensessensespanspanentryletDatadicBody{.}\spanesspansensespanmainentrysubsensessensessensespanspanentryletDatadicBody{rico} \spanspanesrestrictionssensespanmainentrysubsensessensessensespanspanentryletDatadicBody{Restrictions: }\spanesrestrictionssensespanmainentrysubsensessensessensespanspanentryletDatadicBody{de sabor}\spanrestrictionssensespanmainentrysubsensessensessensespanspanentryletDatadicBody{. }\spanspanmainentrysubsensessensessensespanspanentryletDatadicBody{, }\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanmainentrysubsensessensessensespanspanentryletDatadicBody{ }\sensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanmainentrysubsensessensessensespanspanentryletDatadicBody{1.2}\spansensenumbersensecontentsensessensesensecontentsensesmainentrycomplexspanmainentrysubsensessensessensespanspanentryletDatadicBody{.}\spanesspansensespanmainentrysubsensessensessensespanspanentryletDatadicBody{sabroso} \spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody{ }\spanmxbspanspanspansensespanspanentryletDatadicBody{Adi̱ ndava̱ꞌo ti̱yiki.} \spanspanesspanspanspanspanspansensespanspanentryletDatadicBody{ }\spanesspanspanspanspanspansensespanspanentryletDatadicBody{Son muy sabrosas las semillas de calabaza.} \end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 12pt
+\hangafter=1
+\spanmxbspanentryletDatadicBody{adi̱ ini­na̱} \homographnumberentryentryletDatadicBody{0} \spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentryspanespartofspeechspansensespanspanentryletDatadicBody{ }\spanespartofspeechspansensespanspanentryletDatadicBody{adj.} \spandefinitionsensesensecontentsensesentryspanesspansensespanspanentryletDatadicBody{ }\spanesspansensespanspanentryletDatadicBody{con apetito} \spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody{ }\spanmxbspanspanspansensespanspanentryletDatadicBody{Adi̱ ndava̱ꞌo ini taleé ndu̱, va̱ꞌa nda̱ꞌo seí xi ña̱ꞌa.} \spanspanesspanspanspanspanspansensespanspanentryletDatadicBody{ }\spanesspanspanspanspanspansensespanspanentryletDatadicBody{Nuestro niño está con apetito; come muy bien.} \end{spacing}
+\begin{spacing}{0.5}{\raggedright} 
+\spanmxbheadwordminorentryvariantletDatadicBody{a̱ du̱ú}\spanheadwordminorentryvariantheadwordminorentryvariantletDatadicBody{ }\spanspanminorentryvariantletDatadicBody{ \{}\spanesspanspanspanspanspanminorentryvariantletDatadicBody{var. de} \spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefsminorentryvariantspanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody{ }\spanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody{o̱ du̱ú} \spanspanminorentryvariantletDatadicBody{\} }\spanspanesspanminorentryvariantletDatadicBody{ }\spanesspanminorentryvariantletDatadicBody{no}  \end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 12pt
+\hangafter=1
+\spanmxbspanentryletDatadicBody{amigó} \homographnumberentryentryletDatadicBody{0} \spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentryspanespartofspeechspansensespanspanentryletDatadicBody{ }\spanespartofspeechspansensespanspanentryletDatadicBody{s. esp.} \spandefinitionsensesensecontentsensesentryspanesspansensespanspanentryletDatadicBody{ }\spanesspansensespanspanentryletDatadicBody{amigo} \spanspanentryletDatadicBody{[}\spanesspanspanspanspanspanentryletDatadicBody{voc.}\spanabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsentryspanspanspanspanspanentryletDatadicBody{ }\spanmxbheadwordspanspanentryletDatadicBody{migóo̱}\spanspanentryletDatadicBody{] }\end{spacing}
+\begin{spacing}{0.5}{\raggedright} 
+\spanmxbheadwordminorentryvariantletDatadicBody{ánío̱}\spanheadwordminorentryvariantheadwordminorentryvariantletDatadicBody{ }\spanspanminorentryvariantletDatadicBody{ \{}\spanesspanspanspanspanspanminorentryvariantletDatadicBody{var. de} \spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefsminorentryvariantspanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody{ }\spanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody{nío̱} \spanspanminorentryvariantletDatadicBody{\} }\spanspanesspanminorentryvariantletDatadicBody{ }\spanesspanminorentryvariantletDatadicBody{corazón}  \end{spacing}
+\begin{spacing}{0.5}{\raggedright} 
+\spanmxbheadwordminorentryvariantletDatadicBody{a̱ ñáꞌa̱}\spanheadwordminorentryvariantheadwordminorentryvariantletDatadicBody{ }\spanspanminorentryvariantletDatadicBody{ \{}\spanesspanspanspanspanspanminorentryvariantletDatadicBody{var. de} \spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefsminorentryvariantspanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody{ }\spanmxbheadwordspanspanspanspanminorentryvariantletDatadicBody{o̱ ñáꞌa̱} \spanspanminorentryvariantletDatadicBody{\} }\spanspanesspanminorentryvariantletDatadicBody{ }\spanesspanminorentryvariantletDatadicBody{todavía no}  \end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 12pt
+\hangafter=1
+\spanmxbspanentryletDatadicBody{ao} \homographnumberentryentryletDatadicBody{0} \spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentryspanespartofspeechspansensespanspanentryletDatadicBody{ }\spanespartofspeechspansensespanspanentryletDatadicBody{adv.} \spandefinitionsensesensecontentsensesentryspanesspansensespanspanentryletDatadicBody{ }\spanesspansensespanspanentryletDatadicBody{año pasado} \spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody{ }\spanmxbspanspanspansensespanspanentryletDatadicBody{Ao ni̱ xiti na ndúchi̱, tído ko̱ ní xíti ka̱ na̱ ñá kuia̱ viti.} \spanspanesspanspanspanspanspansensespanspanentryletDatadicBody{ }\spanesspanspanspanspanspansensespanspanentryletDatadicBody{El año pasado sembraron frijol, pero este año ya no.} \spanesspanspanspanspanspanentryletDatadicBody{Var.}\spanabbreviationvariantentrytypevariantentrytypesvariantformentrybackrefsentryspanspanspanspanspanentryletDatadicBody{ }\spanmxbheadwordspanspanentryletDatadicBody{kuia̱ ao}\spanspanentryletDatadicBody{ }\end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 12pt
+\hangafter=1
+\spanmxbspanentryletDatadicBody{ati} \homographnumberentryentryletDatadicBody{0} \spanpartofspeechmorphosyntaxanalysissensesensecontentsensesentryspanespartofspeechspansensespanspanentryletDatadicBody{ }\spanespartofspeechspansensespanspanentryletDatadicBody{adj.} \spandefinitionsensesensecontentsensesentryspanesspansensespanspanentryletDatadicBody{ }\spanesspansensespanspanentryletDatadicBody{de sabor fuerte} \spancomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{(}\spanescomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{que deja la lengua escaldada}\spancomentariorestrictivosensesensecontentsensesmainentrycomplexsensespanspanentryletDatadicBody{) }\spanexampleexamplescontentssensesensecontentsensesentryspanmxbspanspanspansensespanspanentryletDatadicBody{ }\spanmxbspanspanspansensespanspanentryletDatadicBody{Ati ndava̱ꞌo mangó chi̱ yúta̱ ri̱.} \spanspanesspanspanspanspanspansensespanspanentryletDatadicBody{ }\spanesspanspanspanspanspansensespanspanentryletDatadicBody{El mango, cuando está tierno, tiene un sabor fuerte.} \end{spacing}
+ \end{spacing}\end{multicols}
+\end{document}
