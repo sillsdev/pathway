@@ -44,7 +44,7 @@ namespace SIL.PublishingSolution
 		private string _lastSelectedLayout = string.Empty;
 		private TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
 		private static List<Exception> _pendingExceptionsToReportToAnalytics = new List<Exception>();
-
+		public bool IsExportOptionFromFlexOrParatext = false;
 		#endregion
 
 		#region Public Variable
@@ -61,7 +61,6 @@ namespace SIL.PublishingSolution
 		public ConfigurationTool()
 		{
 			Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
-			Common.InitializeOtherProjects();
 			Common.SetupLocalization();
 			InitializeComponent();
 			if (Common.IsUnixOS())
@@ -108,6 +107,7 @@ namespace SIL.PublishingSolution
 			//Note: 1 -  Standalone Application
 			//Note: 2 -  The ConfigurationTool.EXE is called by PrintVia dialog from FLEX/TE/etc.,);
 			string entryAssemblyName = string.Empty;
+			string exportFrom = string.Empty;
 			if (!(String.IsNullOrEmpty(Convert.ToString(Assembly.GetEntryAssembly()))))
 			{
 				entryAssemblyName = Assembly.GetEntryAssembly().FullName;
@@ -128,9 +128,25 @@ namespace SIL.PublishingSolution
 			else
 			{
 				//It will call when the Configtool from exe(FLEX/TE/etc.,)
+				if (!string.IsNullOrEmpty(entryAssemblyName))
+				{
+					if (entryAssemblyName.Trim().ToLower().Contains("paratext"))
+					{
+						exportFrom = "Scripture";
+					}
+					else if (entryAssemblyName.Trim().ToLower().Contains("fieldwork"))
+					{
+						exportFrom = "Dictionary";
+					}
+				}
 				Param.LoadSettings(); // Load StyleSetting.xml
+				if (_cToolBL.inputTypeBL == String.Empty && exportFrom != string.Empty)
+				{
+					_cToolBL.inputTypeBL = exportFrom;
+				}
 				Param.SetLoadType = _cToolBL.inputTypeBL;
 				tsDefault.Enabled = false;
+				
 			}
 		}
 
@@ -868,9 +884,18 @@ namespace SIL.PublishingSolution
 			SetUpErrorHandling();
             Param.LoadUiLanguageFontInfo();
             UpdateFontOnL10NSharp(LocalizationManager.UILanguageId);
-
+			
 			_cToolBL = new ConfigurationToolBL();
-			 InputType = _cToolBL.inputTypeBL;
+			LoadSettings();
+			if (!IsExportOptionFromFlexOrParatext)
+			{
+				InputType = _cToolBL.inputTypeBL;
+			}
+			else
+			{
+				_cToolBL.inputTypeBL = InputType;
+			}
+
 			_cToolBL.MediaTypeEXE = MediaType;
 			_cToolBL.StyleEXE = Style.Replace('&', ' '); //
 			_cToolBL.SetClassReference(this);

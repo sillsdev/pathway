@@ -75,7 +75,7 @@ namespace SIL.PublishingSolution
 		public string AttrDbName = "dbname";
 		public string AttrDbUid = "dbuserid";
 		public string AttrDbPwd = "dbpwd";
-		public string inputTypeBL = "Dictionary";
+		public string inputTypeBL = string.Empty;
 		public string ElementDesc = "description";
 		public string ElementAvailable = "available";
 		public string ElementComment = "comment";
@@ -152,57 +152,7 @@ namespace SIL.PublishingSolution
 		protected bool _disableWidowOrphan;
 
 		#endregion
-
-		#region Constructor
-		public ConfigurationToolBL()
-		{
-			standardSize["595x842"] = "A4";
-			standardSize["420x595"] = "A5";
-			standardSize["499x709"] = "B5";
-			standardSize["459x649"] = "C5";
-			standardSize["298x420"] = "A6";
-			standardSize["612x792"] = "Letter";
-			standardSize["396x612"] = "Half letter";
-			standardSize["378x594"] = "5.25in x 8.25in";
-			standardSize["418x626"] = "5.8in x 8.7in";
-			standardSize["432x648"] = "6in x 9in";
-			standardSize["468x648"] = "6.5in x 9in on letter";
-
-			_screenMode = ScreenMode.Load;
-
-			//Mirrored
-			pageDict.Add("@page:none-none", "None");
-			pageDict.Add("@page:left-top-right", "Top Inside Margin");
-			pageDict.Add("@page:left-top-left", "Top Outside Margin");
-			pageDict.Add("@page:left-top-center", "Top Center");
-			pageDict.Add("@page:left-bottom-right", "Bottom Inside Margin");
-			pageDict.Add("@page:left-bottom-left", "Bottom Outside Margin");
-			pageDict.Add("@page:left-bottom-center", "Bottom Center");
-			//Every Page
-			pageDict.Add("@page-top-left", "Top Left Margin");
-			pageDict.Add("@page-top-right", "Top Right Margin");
-			pageDict.Add("@page-top-center", "Top Center");
-			pageDict.Add("@page-bottom-right", "Bottom Right Margin");
-			pageDict.Add("@page-bottom-left", "Bottom Left Margin");
-			pageDict.Add("@page-bottom-center", "Bottom Center");
-			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
-			ColumnHeaderAddLocalization();
-		}
-		public ConfigurationToolBL(ConfigurationTool ctool):this()
-		{
-			 cTool = ctool;
-		}
-		private static void ColumnHeaderAddLocalization()
-		{
-			if (!Common.Testing)
-			{
-				Common.SetupLocalization();
-				InitializeGridColumnHeader();
-			}
-		}
-
-		#endregion
-
+		
 		#region Properties
 
 		public string MarginLeft
@@ -667,7 +617,133 @@ namespace SIL.PublishingSolution
 
 		#endregion
 
+		#region Constructor
+		public ConfigurationToolBL()
+		{
+			standardSize["595x842"] = "A4";
+			standardSize["420x595"] = "A5";
+			standardSize["499x709"] = "B5";
+			standardSize["459x649"] = "C5";
+			standardSize["298x420"] = "A6";
+			standardSize["612x792"] = "Letter";
+			standardSize["396x612"] = "Half letter";
+			standardSize["378x594"] = "5.25in x 8.25in";
+			standardSize["418x626"] = "5.8in x 8.7in";
+			standardSize["432x648"] = "6in x 9in";
+			standardSize["468x648"] = "6.5in x 9in on letter";
+
+			_screenMode = ScreenMode.Load;
+
+			//Mirrored
+			pageDict.Add("@page:none-none", "None");
+			pageDict.Add("@page:left-top-right", "Top Inside Margin");
+			pageDict.Add("@page:left-top-left", "Top Outside Margin");
+			pageDict.Add("@page:left-top-center", "Top Center");
+			pageDict.Add("@page:left-bottom-right", "Bottom Inside Margin");
+			pageDict.Add("@page:left-bottom-left", "Bottom Outside Margin");
+			pageDict.Add("@page:left-bottom-center", "Bottom Center");
+			//Every Page
+			pageDict.Add("@page-top-left", "Top Left Margin");
+			pageDict.Add("@page-top-right", "Top Right Margin");
+			pageDict.Add("@page-top-center", "Top Center");
+			pageDict.Add("@page-bottom-right", "Bottom Right Margin");
+			pageDict.Add("@page-bottom-left", "Bottom Left Margin");
+			pageDict.Add("@page-bottom-center", "Bottom Center");
+			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
+			ColumnHeaderAddLocalization();
+		}
+
+		public ConfigurationToolBL(ConfigurationTool ctool)
+			: this()
+		{
+			cTool = ctool;
+		}
+		private static void ColumnHeaderAddLocalization()
+		{
+			if (!Common.Testing)
+			{
+				Common.SetupLocalization();
+				InitializeGridColumnHeader();
+			}
+		}
+
+		#endregion
+
 		#region Methods
+
+		public void ConfigurationTool_LoadBL()
+		{
+			IsUnixOs = Common.UnixVersionCheck();
+			_screenMode = ScreenMode.Load;
+			_lastSelectedLayout = StyleEXE;
+			Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
+			if (cTool.TabControl1.TabPages["tabdisplay"] != null)
+				tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
+			if (cTool.TabControl1.TabPages["tabPreview"] != null)
+				tabpreview = cTool.TabControl1.TabPages["tabPreview"];
+			if (cTool.TabControl1.TabPages.Count > 2)
+			{
+				if (cTool.TabControl1.TabPages["tabmobile"] != null)
+					tabmob = cTool.TabControl1.TabPages["tabmobile"];
+				if (cTool.TabControl1.TabPages["tabothers"] != null)
+					tabothers = cTool.TabControl1.TabPages["tabothers"];
+				if (cTool.TabControl1.TabPages["tabweb"] != null)
+					tabweb = cTool.TabControl1.TabPages["tabweb"];
+				if (cTool.TabControl1.TabPages["tabDict4Mids"] != null)
+					tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
+
+				string[] removeTabs = { "tabmobile", "tabothers", "tabweb", "tabPicture", "tabDict4Mids" };
+
+				foreach (var removeTab in removeTabs)
+				{
+					if (cTool.TabControl1.TabPages[removeTab] != null)
+					{
+						cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[removeTab]);
+					}
+				}
+			}
+
+			if (IsUnixOs)
+			{
+				cTool.WindowState = FormWindowState.Maximized;
+			}
+			else
+			{
+				cTool.MinimumSize = new Size(497, 183);
+				cTool.Width = Screen.PrimaryScreen.WorkingArea.Size.Width;
+				cTool.Width = cTool.Width < 1175 ? cTool.Width : 1175;
+			}
+			if (cTool.IsExportOptionFromFlexOrParatext)
+			{
+				cTool.BtnScripture.Visible = false;
+				cTool.BtnDictionary.Visible = false;
+			}
+			cTool.LoadSettings();
+			SetInputTypeButton();
+			ShowInputTypeButton();
+			CreateGridColumn();
+			LoadParam(); // Load DictionaryStyleSettings / ScriptureStyleSettings
+			ShowDataInGrid();
+
+			SetPreviousLayoutSelect(cTool.StylesGrid);
+			PopulateFeatureSheet(); //For TD-1194 // Load Default Values
+			SetMediaType();
+
+			// Window title (includes the version and edition (BTE / SE))
+			var sb = new StringBuilder();
+			sb.Append("Pathway Configuration Tool");
+			sb.Append(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")) ? " - BTE " : " - SE ");
+			sb.Append(AssemblyFileVersion);
+			cTool.Text = sb.ToString();
+			SetFocusToName();
+			SetMenuToolStrip();
+			//For the task TD-1481
+			cTool.BtnOthers.Enabled = true;
+
+			_screenMode = ScreenMode.View;
+			ShowInfoValue();
+			_screenMode = ScreenMode.Edit;
+		}
 
 		private static void InitializeGridColumnHeader()
 		{
@@ -731,15 +807,8 @@ namespace SIL.PublishingSolution
 				else
 				{
 					btnDictionary_ClickBL();
-				}
-				cTool.BtnScripture.Visible = false;
-				cTool.BtnDictionary.Visible = false;
-			}
-			else
-			{
-				cTool.BtnScripture.Visible = true;
-				cTool.BtnDictionary.Visible = true;
-			}
+				}				
+			}			
 		}
 
 		public string AssemblyFileVersion
@@ -4609,86 +4678,6 @@ namespace SIL.PublishingSolution
 				}
 			}
 			catch { }
-		}
-
-		public void ConfigurationTool_LoadBL()
-		{
-			IsUnixOs = Common.UnixVersionCheck();
-			_screenMode = ScreenMode.Load;
-			_lastSelectedLayout = StyleEXE;
-			Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
-			if (cTool.TabControl1.TabPages["tabdisplay"] != null)
-				tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
-			if (cTool.TabControl1.TabPages["tabPreview"] != null)
-				tabpreview = cTool.TabControl1.TabPages["tabPreview"];
-			if (cTool.TabControl1.TabPages.Count > 2)
-			{
-				if (cTool.TabControl1.TabPages["tabmobile"] != null)
-					tabmob = cTool.TabControl1.TabPages["tabmobile"];
-				if (cTool.TabControl1.TabPages["tabothers"] != null)
-					tabothers = cTool.TabControl1.TabPages["tabothers"];
-				if (cTool.TabControl1.TabPages["tabweb"] != null)
-					tabweb = cTool.TabControl1.TabPages["tabweb"];
-				if (cTool.TabControl1.TabPages["tabDict4Mids"] != null)
-					tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
-
-				string[] removeTabs = { "tabmobile", "tabothers", "tabweb", "tabPicture", "tabDict4Mids" };
-
-				foreach (var removeTab in removeTabs)
-				{
-					if (cTool.TabControl1.TabPages[removeTab] != null)
-					{
-						cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[removeTab]);
-					}
-				}
-			}
-
-			if (IsUnixOs)
-			{
-				cTool.WindowState = FormWindowState.Maximized;
-			}
-			else
-			{
-				cTool.MinimumSize = new Size(497, 183);
-				cTool.Width = Screen.PrimaryScreen.WorkingArea.Size.Width;
-				cTool.Width = cTool.Width < 1175 ? cTool.Width : 1175;
-			}
-
-			cTool.LoadSettings();
-			SetInputTypeButton();
-			ShowInputTypeButton();
-			CreateGridColumn();
-			LoadParam(); // Load DictionaryStyleSettings / ScriptureStyleSettings
-			ShowDataInGrid();
-
-			SetPreviousLayoutSelect(cTool.StylesGrid);
-			PopulateFeatureSheet(); //For TD-1194 // Load Default Values
-			SetMediaType();
-			// sanity check - if the ScriptureStyleSettings file isn't there, make sure
-			// the dictionary styles are selected (and the buttons are hidden)
-			if (!File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")))
-			{
-				// select the dictionary styles
-				//btnDictionary_ClickBL();
-				// hide the Scripture / Dictionary buttons (they don't apply)
-				cTool.BtnScripture.Enabled = false;
-				cTool.BtnScripture.Visible = false;
-				cTool.BtnDictionary.Visible = false;
-			}
-			// Window title (includes the version and edition (BTE / SE))
-			var sb = new StringBuilder();
-			sb.Append("Pathway Configuration Tool");
-			sb.Append(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")) ? " - BTE " : " - SE ");
-			sb.Append(AssemblyFileVersion);
-			cTool.Text = sb.ToString();
-			SetFocusToName();
-			SetMenuToolStrip();
-			//For the task TD-1481
-			cTool.BtnOthers.Enabled = true;
-
-			_screenMode = ScreenMode.View;
-			ShowInfoValue();
-			_screenMode = ScreenMode.Edit;
 		}
 
 		private void SetMenuToolStrip()

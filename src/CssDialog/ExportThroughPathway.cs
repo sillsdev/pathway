@@ -762,6 +762,7 @@ namespace SIL.PublishingSolution
             OperatingSystem OS = Environment.OSVersion;
             string BackendsPath = Common.ProgInstall;
             Backend.Load(BackendsPath);
+			Console.WriteLine( @"InputType from : {0}", InputType);
             ArrayList exportType = Backend.GetExportType(InputType);
             exportType.Sort();
             if (exportType.Count > 0)
