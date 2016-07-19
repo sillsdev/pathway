@@ -93,6 +93,10 @@ namespace CssSimpler
                         }
                         break;
                     case XmlNodeType.Text:
+                        if (_rdr.Value == "a cabo")
+                        {
+                            Debug.Print("pause");
+                        }
                         _wtr.WriteString( _rdr.Value );
                         break;
                     case XmlNodeType.Whitespace:
