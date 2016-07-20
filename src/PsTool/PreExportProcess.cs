@@ -2554,28 +2554,24 @@ namespace SIL.Tool
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(fileName);
-            string xPath = "//div[@class='entry']/div[@class= 'pictureRight']";
-            XmlNodeList entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
-	        if (entryNodeList != null && entryNodeList.Count > 0)
+
+			List<string> lstPictureXpath = new List<string>();
+			lstPictureXpath.Add("//div[@class='entry']/div[@class= 'pictureRight']");
+			lstPictureXpath.Add("//div[@class='entry']/div[@class= 'picture']");
+			lstPictureXpath.Add("//div[@class='entry']/span[@class= 'picture']");
+
+	        foreach (var xPath in lstPictureXpath)
 	        {
-		        for (int i = 0; i < entryNodeList.Count; i++)
+		        XmlNodeList entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+		        if (entryNodeList != null && entryNodeList.Count > 0)
 		        {
-			        XmlNode entryNode = entryNodeList[i].ParentNode;
-			        if (entryNode != null) entryNode.InsertAfter(entryNodeList[i], entryNode.LastChild);
+			        for (int i = 0; i < entryNodeList.Count; i++)
+			        {
+				        XmlNode entryNode = entryNodeList[i].ParentNode;
+				        if (entryNode != null) entryNode.ParentNode.InsertAfter(entryNodeList[i], entryNode);
+
+			        }
 		        }
-	        }
-	        else
-	        {
-				xPath = "//div[@class='entry']/div[@class= 'picture']";
-				entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
-				if (entryNodeList != null)
-				{
-					for (int i = 0; i < entryNodeList.Count; i++)
-					{
-						XmlNode entryNode = entryNodeList[i].ParentNode;
-						if (entryNode != null) entryNode.ParentNode.InsertAfter(entryNodeList[i], entryNode);
-					}
-				}
 	        }
 	        xDoc.Save(fileName);
         }

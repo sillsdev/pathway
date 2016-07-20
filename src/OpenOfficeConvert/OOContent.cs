@@ -656,7 +656,6 @@ namespace SIL.PublishingSolution
 				_writer.WriteString(" ");
 				_writer.WriteEndElement();
 			}
-
 		}
 
 		/// <summary>
@@ -1202,10 +1201,10 @@ namespace SIL.PublishingSolution
 						content = content.Trim();
 					}
 				}
-
-
 				if (_imageClass.Length > 0)
 				{
+					_writer.WriteStartElement("text:p");
+					_writer.WriteAttributeString("text:style-name", _childName);
 					_writer.WriteString(content);
 				}
 				else if (_isVerseNumberContent)
@@ -1418,8 +1417,11 @@ namespace SIL.PublishingSolution
 				content = content.Replace(Common.ConvertUnicodeToString("\\0009"), @"text:tab/");
 				if (_isVerseNumberContent == false)
 				{
-					_writer.WriteStartElement("text:span");
-					_writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+					if (string.IsNullOrEmpty(_imageClass))
+					{
+						_writer.WriteStartElement("text:span");
+						_writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+					}
 				}
 				else
 				{
