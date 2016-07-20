@@ -99,131 +99,132 @@ namespace SIL.Tool
         /// <returns></returns>
         public string GetSettingsFilename(string database)
         {
-            // sanity check
+			// sanity check
             if (database.Trim().Length < 1)
             {
                 return string.Empty;
             }
-
             // Paratext (or PathwayB)
             if (_hostProgram == HostProgram.Paratext || _hostProgram == HostProgram.PathwayB)
             {
-                // (Note that PathwayB _might_ have a project file we can poke at - no guarantee)
-                object paraTextprojectPath;
-                string ssfFile = database + ".ssf";
-                if (Common.UnixVersionCheck())
-                {
-                    var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
-                    if (windowsIdentity != null)
-                    {
-                        string userName = windowsIdentity.Name;
-                        string registryPath = "/home/" + userName + "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
-                        while (Directory.Exists(registryPath))
-                        {
-                            if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
-                            {
-                                XmlDocument doc = new XmlDocument();
-                                doc.Load(Common.PathCombine(registryPath, "values.xml"));
-                                paraTextprojectPath = doc.InnerText;
-                                Environment.SetEnvironmentVariable("ParatextProjPath", paraTextprojectPath.ToString());
-                                return Common.PathCombine(paraTextprojectPath.ToString(), ssfFile);
-                            }
-                            //string ParatextProjectPath = Environment.GetEnvironmentVariable("ParatextProjPath");
-                        }
-                    }
-                }
-                else
-                {
-                    if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey,
-                                                          "Settings_Directory", "", out paraTextprojectPath))
-                    {
-                        string settingFilePath = Common.PathCombine((string) paraTextprojectPath, ssfFile);
-                        if (File.Exists(settingFilePath))
-                            return settingFilePath;
-                        else
-                            return string.Empty;
-                    }
-                }
-                // not found on logical drives. 
-                Debug.WriteLine(ssfFile + " does not exist.");
-                return string.Empty;
+                return GetSettingFilePathForParatext(database);
             }
             if (_hostProgram == HostProgram.FieldWorks)
             {
-
-				// For Fieldworks, the <databasename>.fwdata file contains the list of writing systems
-				// in use, in a format like this:
-				//<AnalysisWss>                 << not in use
-				//<Uni>en pt</Uni>
-				//</AnalysisWss>
-				//<CurVernWss>                  << in use
-				//<Uni>seh</Uni>
-				//</CurVernWss>
-				//<CurAnalysisWss>              << in use
-				//<Uni>pt en</Uni>
-				//</CurAnalysisWss>
-				//<CurPronunWss>                << in use (but I don't think this is exported?)
-				//<Uni>seh-fonipa-x-etic</Uni>
-				//</CurPronunWss>
-				//<VernWss>                     << not in use
-				//<Uni>seh seh-fonipa-x-etic</Uni>
-				//</VernWss>
-
-				object fwprojectPath;
-	            string fwdataFile = database + "/" + database + ".fwdata";
-				if (Common.UnixVersionCheck())
-				{
-					var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
-					if (windowsIdentity != null)
-					{
-						string userName = windowsIdentity.Name;
-						string registryPath = "/home/" + userName + "/.config/fieldworks/registry/LocalMachine/software/sil/fieldworks/";
-						if (Directory.Exists(Common.PathCombine(registryPath, "8")))
-							registryPath = Common.PathCombine(registryPath, "8");
-						else
-						{
-							if (Directory.Exists(Common.PathCombine(registryPath, "7")))
-								registryPath = Common.PathCombine(registryPath, "7");
-						}
-						if (Directory.Exists(registryPath))
-						{
-							if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
-							{
-								XmlDocument doc = new XmlDocument();
-								doc.Load(Common.PathCombine(registryPath, "values.xml"));
-								fwprojectPath = doc.SelectSingleNode("//values/value[@name='ProjectsDir']");
-								if (fwprojectPath == null) return string.Empty;
-								Environment.SetEnvironmentVariable("FieldworksProjPath", fwprojectPath.ToString());
-								return Common.PathCombine(fwprojectPath.ToString(), fwdataFile);
-							}
-						}
-					}
-				}
-				else
-				{
-					fwprojectPath = SilTools.Utils.FwProjectsPath;
-					if (Directory.Exists((string)fwprojectPath))
-					{
-						string settingFilePath = Common.PathCombine((string)fwprojectPath, fwdataFile);
-						if (File.Exists(settingFilePath))
-							return settingFilePath;
-						else
-							return string.Empty;
-					}
-				}
-
-				Debug.WriteLine(fwdataFile + " does not exist.");
-				return string.Empty;
-            }
-			// not found on logical drives. 
-            if (_hostProgram == HostProgram.Other)
-            {
-                
+				return GetSettingFilePathForFieldworks(database);
             }
             return string.Empty;
         }
 
-        /// <summary>
+	    private static string GetSettingFilePathForFieldworks(string database)
+	    {
+			// For Fieldworks, the <databasename>.fwdata file contains the list of writing systems
+		    // in use, in a format like this:
+		    //<AnalysisWss>                 << not in use
+		    //<Uni>en pt</Uni>
+		    //</AnalysisWss>
+		    //<CurVernWss>                  << in use
+		    //<Uni>seh</Uni>
+		    //</CurVernWss>
+		    //<CurAnalysisWss>              << in use
+		    //<Uni>pt en</Uni>
+		    //</CurAnalysisWss>
+		    //<CurPronunWss>                << in use (but I don't think this is exported?)
+		    //<Uni>seh-fonipa-x-etic</Uni>
+		    //</CurPronunWss>
+		    //<VernWss>                     << not in use
+		    //<Uni>seh seh-fonipa-x-etic</Uni>
+		    //</VernWss>
+
+		    object fwprojectPath;
+		    string fwdataFile = database + "/" + database + ".fwdata";
+		    if (Common.UnixVersionCheck())
+		    {
+			    string userName = Environment.UserName;
+			    string registryPath = "/home/" + userName +
+			                          "/.config/fieldworks/registry/LocalMachine/software/sil/fieldworks/";
+			    if (Directory.Exists(Common.PathCombine(registryPath, "8")))
+				    registryPath = Common.PathCombine(registryPath, "8");
+			    else
+			    {
+				    if (Directory.Exists(Common.PathCombine(registryPath, "7")))
+					    registryPath = Common.PathCombine(registryPath, "7");
+			    }
+			    if (Directory.Exists(registryPath))
+			    {
+				    if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
+				    {
+					    XmlDocument doc = new XmlDocument();
+					    doc.Load(Common.PathCombine(registryPath, "values.xml"));
+					    fwprojectPath = doc.SelectSingleNode("//values/value[@name='ProjectsDir']");
+					    if (fwprojectPath == null) return string.Empty;
+					    Environment.SetEnvironmentVariable("FieldworksProjPath", fwprojectPath.ToString());
+					    return Common.PathCombine(fwprojectPath.ToString(), fwdataFile);
+				    }
+			    }
+		    }
+		    else
+		    {
+			    fwprojectPath = SilTools.Utils.FwProjectsPath;
+			    if (Directory.Exists((string) fwprojectPath))
+			    {
+				    string settingFilePath = Common.PathCombine((string) fwprojectPath, fwdataFile);
+				    if (File.Exists(settingFilePath))
+					    return settingFilePath;
+				    else
+					    return string.Empty;
+			    }
+		    }
+
+		    Debug.WriteLine(fwdataFile + " does not exist.");
+		    return string.Empty;
+	    }
+
+	    private static string GetSettingFilePathForParatext(string database)
+	    {
+			// (Note that PathwayB _might_ have a project file we can poke at - no guarantee)
+		    object paraTextprojectPath;
+		    string ssfFile = database + ".ssf";
+		    if (Common.UnixVersionCheck())
+		    {
+			    var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
+			    if (windowsIdentity != null)
+			    {
+				    string userName = windowsIdentity.Name;
+				    string registryPath = "/home/" + userName +
+				                          "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
+				    while (Directory.Exists(registryPath))
+				    {
+					    if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
+					    {
+						    XmlDocument doc = new XmlDocument();
+						    doc.Load(Common.PathCombine(registryPath, "values.xml"));
+						    paraTextprojectPath = doc.InnerText;
+						    Environment.SetEnvironmentVariable("ParatextProjPath", paraTextprojectPath.ToString());
+						    return Common.PathCombine(paraTextprojectPath.ToString(), ssfFile);
+					    }
+					    //string ParatextProjectPath = Environment.GetEnvironmentVariable("ParatextProjPath");
+				    }
+			    }
+		    }
+		    else
+		    {
+			    if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey,
+				    "Settings_Directory", "", out paraTextprojectPath))
+			    {
+				    string settingFilePath = Common.PathCombine((string) paraTextprojectPath, ssfFile);
+				    if (File.Exists(settingFilePath))
+					    return settingFilePath;
+				    else
+					    return string.Empty;
+			    }
+		    }
+		    // not found on logical drives. 
+		    Debug.WriteLine(ssfFile + " does not exist.");
+		    return string.Empty;
+	    }
+
+	    /// <summary>
         /// Clears out the Value dictionary
         /// </summary>
         public void ClearValues()
