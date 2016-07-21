@@ -50,6 +50,6 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="*[@class='letData'] |*[@class='entry'] | *[@class='reversalindexentry'] |*[starts-with(@class,'minorentry')]"/>
+    <xsl:template match="*[@class='letData'] |*[@class='entry'] | *[@class='reversalindexentry'] |*[starts-with(@class,'minorentry')] |*[starts-with(@class,'mainentry')]"/>
     
 </xsl:stylesheet>
