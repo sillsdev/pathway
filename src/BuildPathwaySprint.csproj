@@ -505,7 +505,7 @@
   <ItemGroup>
     <modules Include="latex l3kernel l3packages etoolbox"/>
     <modules Include="lm fontspec euenc tipa xkeyval xunicode"/>
-    <modules Include="fancyhdr float graphics hanging mdframed oberdiek"/>
+    <modules Include="fancyhdr float wrapfig graphics hanging mdframed oberdiek"/>
     <modules Include="setspace tools xcolor eso-pic geometry lettrine"/>
     <modules Include="bidi iftex xetex xetex-def needspace"/>
   </ItemGroup>
