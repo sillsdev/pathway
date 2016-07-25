@@ -1123,6 +1123,19 @@ namespace Test.PsExport
 		}
 
 		[Test]
+		public void XsltPreProcessAddColumnsFW83Test()
+		{
+			DataType = "Dictionary";
+			const string data = "main.xhtml";
+			var infile = TestDataSetup("Pre5", data);
+			Param.Value["Preprocessing"] = "Add Columns FW83";
+			UserOptionSelectionBasedXsltPreProcess(infile);
+			var files = Directory.GetFiles(_outputTestPath, "*.*");
+			Assert.AreEqual(2, files.Length);
+			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "main Preprocess produced different results");
+		}
+
+		[Test]
 		public void XsltPreProcessReversalLetterHeaderLanguageTest()
 		{
 			DataType = "Dictionary";
