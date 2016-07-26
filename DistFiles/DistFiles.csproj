@@ -408,14 +408,14 @@
     <XeLaTexConfig Include="..\src\XeLaTexConvert\XeLaTexExe\texmf-config\**\*.*" />
     <XeLaTexDist Include="..\src\XeLaTexConvert\XeLaTexExe\texmf-dist\**\*.*" />
     <XeLaTexVar Include="..\src\XeLaTexConvert\XeLaTexExe\texmf-var\**\*.*" />
-    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe;..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe;..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe;..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\icudt*.dll" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\kpathsea*.dll" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\mktexlsr.exe" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\teckit_compile.exe" />
-    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\tex.dll;..\XeLaTexConvert\XeLaTexExe\bin\win32\tex.exe" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\tex.dll;..\src\XeLaTexConvert\XeLaTexExe\bin\win32\tex.exe" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\xdvipdfmx.exe" />
-    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.exe;..\XeLaTexConvert\XeLaTexExe\bin\win32\xelatex.exe" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.exe;..\src\XeLaTexConvert\XeLaTexExe\bin\win32\xelatex.exe" />
     <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\kpse*" />
     <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\xdvipdf*" />
     <XeLaTexLinBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\i386-linux\xe*" />

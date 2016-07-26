@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <UsingTask TaskName="UpdateAssemblies" AssemblyFile="../DistFiles/BuildTasks.dll"/>
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
   <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
@@ -229,7 +228,8 @@
   </Target>
   <Target Name="BuildAll">
     <CallTarget Targets="Clean"/>
-    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <Exec Command="BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) != 'Linux' " />
+    <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
     <CallTarget Targets="Corporate7BTE"/>
     <CallTarget Targets="Release7BTE"/>
     <CallTarget Targets="Release7SE"/>
@@ -252,14 +252,16 @@
   </Target>
   <Target Name="Build">
     <CallTarget Targets="Clean"/>
-    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <Exec Command="BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) != 'Linux' " />
+    <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
     <CallTarget Targets="Corporate7BTE"/>
     <CallTarget Targets="Release7BTE"/>
     <CallTarget Targets="Release7SE"/>
     <CallTarget Targets="Corporate7SE"/>
   </Target>
   <Target Name="Build60">
-    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <Exec Command="BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) != 'Linux' " />
+    <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
     <Copy SourceFiles="@(Dll604)" DestinationFiles=".\PsExport\Dlls601\%(Filename)%(Extension)"
       OverwriteReadOnlyFiles="true"/>
     <CallTarget Targets="CorporateBTE604"/>
@@ -277,12 +279,14 @@
   </Target>
   <Target Name="Daily">
     <CallTarget Targets="Clean"/>
-    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <Exec Command="BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) != 'Linux' " />
+    <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
     <CallTarget Targets="Release7BTE"/>
   </Target>
   <Target Name="DailySE">
     <CallTarget Targets="Clean"/>
-    <UpdateAssemblies RootFolder="." BuildNumber="$(BUILD_NUMBER)"/>
+    <Exec Command="BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) != 'Linux' " />
+    <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
     <CallTarget Targets="Release7SE"/>
   </Target>
   <Target Name="BeforeBuild"/>
@@ -298,8 +302,9 @@
   </Target>
   <ItemGroup>
     <TestOutput Include="**\TestFiles\output\**"/>
-    <PathwayProjects Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;BookletBuilder;Installer;BuildTasks;ConfigurationTool;CssSimpler;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExe;SwordConvert;TestBed;Test;theWordConvert;WordPressConvert;XeLaTexConvert;XslProcess" />
+    <PathwayProjects Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;BookletBuilder;Installer;BuildStep;BuildTasks;ConfigurationTool;CssSimpler;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;epubValidator;GoBibleConvert;HelpImprove;InDesignConvert;LiftPrepare;OpenOfficeConvert;OpenOfficeConvert_OLD;ParatextSupport;PathwayB;PdfConvert;PdfLicense;PsExport;PsTool;PublishingSolutionExe;SwordConvert;TestBed;Test;theWordConvert;WordPressConvert;XeLaTexConvert;XslProcess" />
     <PathwayTests Include="PdfLicense;ApplyPDFLicenseInfo;ApplyXslt;Build;ConfigurationTool;CssSimpler;CssDialog;CssParser;DictionaryForMIDsConvert;epubConvert;GoBibleConvert;InDesignConvert;LiftPrepare;OpenOfficeConvert;OpenOfficeConvert_OLD;PathwayB;PdfConvert;PsExport;PsTool;PublishingSolutionExeUi;SwordConvert;theWordConvert;WordPressConvert;XeLatex;XhtmlExport"/>
+	<PathwayBaseProjects Include="DistFiles;Installer;InstallerXeLaTeX" />
     <RampTests Include="PathwayB;epubConvert" />
   </ItemGroup>
   <Target Name="RemoveSprint">
@@ -315,6 +320,11 @@
     <RemoveDir Directories="%(PathwayProjects.Identity)\bin" Condition="Exists('%(PathwayProjects.Identity)\bin')"/>
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="%(PathwayProjects.Identity)\obj" Condition="Exists('%(PathwayProjects.Identity)\obj')"/>
     <RemoveDir Directories="%(PathwayProjects.Identity)\obj" Condition="Exists('%(PathwayProjects.Identity)\obj')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="..\%(PathwayBaseProjects.Identity)\bin" Condition="Exists('..\%(PathwayBaseProjects.Identity)\bin')"/>
+    <RemoveDir Directories="..\%(PathwayBaseProjects.Identity)\bin" Condition="Exists('..\%(PathwayBaseProjects.Identity)\bin')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="..\%(PathwayBaseProjects.Identity)\obj" Condition="Exists('..\%(PathwayBaseProjects.Identity)\obj')"/>
+    <RemoveDir Directories="..\%(PathwayBaseProjects.Identity)\obj" Condition="Exists('..\%(PathwayBaseProjects.Identity)\obj')"/>
+    <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="..\output" Condition="Exists('..\output')"/>
   </Target>
   <Target Name="RemoveBuild">
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="RemoveContent" Path="..\Installer\Files" Condition="Exists('..\Installer\Files')"/>
@@ -337,42 +347,42 @@
   </Target>
   <Target Name="Corporate7BTE">
     <Message Text="Status: $(Status)" Importance="high" />
-    <MSBuild Projects="PublishingSolution.sln" Targets="Build"
+    <MSBuild Projects="..\Pathway.sln" Targets="Build"
       Properties="Configuration=Corporate7BTE;Platform=$(Platform)"/>
     <Message Text="Status: $(Status)" Importance="high" />
   </Target>
   <Target Name="Corporate7EPUB">
     <Message Text="Status: $(Status)" Importance="high" />
-    <MSBuild Projects="PublishingSolution.sln" Targets="Build"
+    <MSBuild Projects="..\Pathway.sln" Targets="Build"
       Properties="Configuration=Corporate7EPUB;Platform=$(Platform)"/>
     <Message Text="Status: $(Status) / OutputPath: $(OutputPath)" Importance="high" />
   </Target>
   <Target Name="Corporate7SE">
-    <MSBuild Projects="PublishingSolution.sln" Targets="Build"
+    <MSBuild Projects="..\Pathway.sln" Targets="Build"
       Properties="Configuration=Corporate7SE;Platform=$(Platform)"/>
   </Target>
   <Target Name="Release7BTE">
-    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+    <MSBuild Projects="..\Pathway.sln" Targets="Rebuild"
       Properties="Configuration=Release7BTE;Platform=$(Platform)"/>
   </Target>
   <Target Name="Release7SE">
-    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+    <MSBuild Projects="..\Pathway.sln" Targets="Rebuild"
       Properties="Configuration=Release7SE;Platform=$(Platform)"/>
   </Target>
   <Target Name="PwCtx">
-    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+    <MSBuild Projects="..\Pathway.sln" Targets="Rebuild"
       Properties="Configuration=PwCtx;Platform=$(Platform)"/>
   </Target>
   <Target Name="PathwayXeLaTeX" DependsOnTargets="">
-    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+    <MSBuild Projects="..\Pathway.sln" Targets="Rebuild"
       Properties="Configuration=PathwayXeLaTeX;Platform=$(Platform)"/>
   </Target>
   <Target Name="PathwayYouVersion">
-    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+    <MSBuild Projects="..\Pathway.sln" Targets="Rebuild"
       Properties="Configuration=PathwayYouVersion;Platform=$(Platform)"/>
   </Target>
   <Target Name="Checking">
-    <MSBuild Projects="PublishingSolution.sln" Targets="Rebuild"
+    <MSBuild Projects="..\Pathway.sln" Targets="Rebuild"
       Properties="Configuration=Checking;Platform=$(Platform)"/>
   </Target>
   <Target Name="CorporateBTE">

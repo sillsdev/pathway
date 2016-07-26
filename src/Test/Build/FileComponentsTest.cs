@@ -55,6 +55,7 @@ namespace Test.Build
             ResetIds();
             var inputGuids = _tf.Input("FileLibrary.xml");
             LoadGuids(inputGuids);
+            ApplicationFileName = "Application.wxs";
             DirectoryInfo directoryInfo = new DirectoryInfo(_tf.Input(@"output\Release"));
             foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
             {

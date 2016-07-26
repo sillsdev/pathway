@@ -23,13 +23,14 @@ namespace BuildStep
 {
     class Program
     {
-        private static int _verbosity = 0;
+        private static int _verbosity;
         private static readonly Regex Exp = new Regex(@"([0-9]+\.[0-9]+\.[0-9]+)\.[0-9]+");
 
         static void Main(string[] args)
         {
             string action = null;
             string rootFolder = null;
+            string releaseFolder = "../output/Release";
             string product = null;
             string buildNumber = null;
             string edition = "BTE";
@@ -56,6 +57,17 @@ namespace BuildStep
                         else
                             throw new ArgumentException("RootFolder missing");
                         DebugMessage("RootFoler: {0}", rootFolder);
+                    }},
+                {"o|ReleaseFolder=", "path to output release files (optionally relative to base path)",
+                    v =>
+                    {
+                        if (!string.IsNullOrEmpty(basePath) && Directory.Exists(Path.Combine(basePath, v)))
+                            releaseFolder = v;
+                        else if (Directory.Exists(v))
+                            releaseFolder = v;
+                        else
+                            throw new ArgumentException("ReleaseFolder missing");
+                        DebugMessage("ReleaseFoler: {0}", releaseFolder);
                     }},
                 {"p|Product=", "name of the product (ex. 'Pathway')", v => { product = v; DebugMessage("Product: {0}", product); }},
                 {"n|BuildNumber=", "the build number (ex. 1.13.4.4657)",
@@ -118,7 +130,7 @@ namespace BuildStep
                         throw new ApplicationException("UpdateAssemblies Failed.");
                     break;
                 case "filecomponents":
-                    var componentsAct = new FileComponents{ApplicationFileName = applicationFileName, BasePath = basePath};
+                    var componentsAct = new FileComponents{ApplicationFileName = applicationFileName, BasePath = basePath, ReleaseFolder = releaseFolder};
                     if (!componentsAct.Execute())
                         throw new ApplicationException("FileComponents action failed.");
                     break;

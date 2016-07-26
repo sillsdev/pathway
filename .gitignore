@@ -39,6 +39,8 @@ Installer/bin/*
 Installer/obj/*
 Installer/Files/*
 Installer/Wix/*
+InstallerXeLaTeX/bin/*
+InstallerXeLaTeX/obj/*
 src/BuildStep/bin/*
 src/BuildStep/obj/*
 src/CadreBibleConvert/bin/*
