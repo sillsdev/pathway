@@ -3410,12 +3410,10 @@ namespace SIL.Tool
         {
             string sourcePicturePath = Path.GetDirectoryName(_baseXhtmlFileNameWithPath);
             string metaname = Common.GetBaseValue(_baseXhtmlFileNameWithPath);
-            string paraTextprojectPath = Common.GetParatextProjectPath();
             if (metaname.Length == 0)
             {
                 metaname = Common.GetMetaValue(_baseXhtmlFileNameWithPath);
             }
-
             try
             {
                 XmlDocument xDoc = Common.DeclareXMLDocument(false);
@@ -3445,6 +3443,7 @@ namespace SIL.Tool
                                     string pictureFile = pNode.Attributes["src"].Value;
                                     if (_projInfo.ProjectInputType.ToLower() == "scripture")
                                     {
+										var paraTextprojectPath = Common.GetParatextProjectPath();
                                         pictureFile = Common.PathCombine(paraTextprojectPath, pictureFile);
                                     }
 

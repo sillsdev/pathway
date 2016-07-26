@@ -4339,22 +4339,17 @@ namespace SIL.Tool
 
 		public static string GetParatextProjectPath()
 		{
-			var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
-			if (windowsIdentity != null)
+			string userName = Environment.UserName;
+			string registryPath = "/home/" + userName + "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
+			while (Directory.Exists(registryPath))
 			{
-				string userName = windowsIdentity.Name;
-				string registryPath = "/home/" + userName + "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
-				while (Directory.Exists(registryPath))
+				if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
 				{
-					if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
-					{
-						XmlDocument doc = new XmlDocument();
-						doc.Load(Common.PathCombine(registryPath, "values.xml"));
-						return doc.InnerText;
-					}
+					XmlDocument doc = new XmlDocument();
+					doc.Load(Common.PathCombine(registryPath, "values.xml"));
+					return doc.InnerText;
 				}
 			}
-
 			return string.Empty;
 		}
 

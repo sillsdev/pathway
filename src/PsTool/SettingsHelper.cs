@@ -187,25 +187,23 @@ namespace SIL.Tool
 		    string ssfFile = database + ".ssf";
 		    if (Common.UnixVersionCheck())
 		    {
-			    var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
-			    if (windowsIdentity != null)
-			    {
-				    string userName = windowsIdentity.Name;
-				    string registryPath = "/home/" + userName +
-				                          "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
-				    while (Directory.Exists(registryPath))
-				    {
-					    if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
-					    {
-						    XmlDocument doc = new XmlDocument();
-						    doc.Load(Common.PathCombine(registryPath, "values.xml"));
-						    paraTextprojectPath = doc.InnerText;
-						    Environment.SetEnvironmentVariable("ParatextProjPath", paraTextprojectPath.ToString());
-						    return Common.PathCombine(paraTextprojectPath.ToString(), ssfFile);
-					    }
-					    //string ParatextProjectPath = Environment.GetEnvironmentVariable("ParatextProjPath");
-				    }
-			    }
+			 
+				string userName = Environment.UserName;
+				string registryPath = "/home/" + userName +
+				                        "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
+				while (Directory.Exists(registryPath))
+				{
+					if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
+					{
+						XmlDocument doc = new XmlDocument();
+						doc.Load(Common.PathCombine(registryPath, "values.xml"));
+						paraTextprojectPath = doc.InnerText;
+						Environment.SetEnvironmentVariable("ParatextProjPath", paraTextprojectPath.ToString());
+						return Common.PathCombine(paraTextprojectPath.ToString(), ssfFile);
+					}
+					//string ParatextProjectPath = Environment.GetEnvironmentVariable("ParatextProjPath");
+				}
+			 
 		    }
 		    else
 		    {
