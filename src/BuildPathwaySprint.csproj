@@ -441,15 +441,15 @@
     <CallTarget Targets="TlGetUnxInstaller" Condition="$(OS) == 'Linux'"/>
   </Target>
   <ItemGroup>
-    <repo Include="http://ftp.math.purdue.edu/mirrors/ctan.org/systems/texlive/tlnet"/>
-    <!-- repo Include="http://mirror.math.ku.edu/tex-archive/systems/texlive/tlnet"/>
-    <repo Include="http://mirror.ctan.org/systems/texlive/tlnet"/ -->
+    <!-- repo Include="http://ftp.math.purdue.edu/mirrors/ctan.org/systems/texlive/tlnet"/>
+    <repo Include="http://mirror.math.ku.edu/tex-archive/systems/texlive/tlnet"/ -->
+    <repo Include="http://mirror.ctan.org/systems/texlive/tlnet"/>
   </ItemGroup>
   <Target Name="TlGetWinInstaller">
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert" Match="TexLive">
       <Output TaskParameter="Folders" ItemName="InstallerDir"/>
     </MSBuild.ExtensionPack.FileSystem.Folder>
-    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@InstallerDir@/install-tl.zip" OldValue="@InstallerDir@" NewValue="%(InstallerDir.Identity)">
+    <MSBuild.ExtensionPack.Framework.TextString TaskAction="Replace" OldString="@InstallerDir@\install-tl.zip" OldValue="@InstallerDir@" NewValue="%(InstallerDir.Identity)">
       <Output PropertyName="RepoZip" TaskParameter="NewString"/>
     </MSBuild.ExtensionPack.Framework.TextString>
     <Message Text="cmd: $(cmd2)" Importance="high" />
@@ -471,7 +471,7 @@
       <Output PropertyName="ArchiveName" TaskParameter="NewString"/>
     </MSBuild.ExtensionPack.Framework.TextString>
     <Message Text="ArchiveName: $(ArchiveName)" Importance="high" />
-    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://ftp.math.purdue.edu/mirrors/ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz" FileName="$(ArchiveName)"/>
+    <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="%(repo.Identity)/install-tl.zip" FileName="$(ArchiveName)"/>
     <Exec Command="tar -xzf install-tl-unx.tar.gz" WorkingDirectory="%(InstallerWorkDir.Identity)"/>
   </Target>
 
