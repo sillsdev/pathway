@@ -455,7 +455,7 @@
     <Message Text="InstallerDir: %(InstallerDir.Identity)" Importance="high" />
 
     <!-- MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="%(repo.Identity)/install-tl.zip" FileName="$(RepoZip)"/ -->
-	<Exec Command="wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" WorkingDirectory="%(InstallerDir.Identity)"/>
+	<Exec Command="..\..\Bootstrap\res\wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" WorkingDirectory="%(InstallerDir.Identity)"/>
     <Exec Command="dir %(InstallerDir.Identity)"/>
     <MSBuild.ExtensionPack.Compression.Zip TaskAction="Extract" ExtractPath="%(InstallerDir.Identity)" ZipFileName="%(InstallerDir.Identity)\install-tl.zip"/>
     <Exec Command="dir %(InstallerDir.Identity)\*.bat /s"/>
