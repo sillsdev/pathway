@@ -47,7 +47,7 @@ namespace SIL.Tool
         protected ClassAttrib _precedeClassAttrib = new ClassAttrib();
         protected ClassAttrib _xhtmlClassAttrib = new ClassAttrib();
         protected ClassAttrib _parentPrecedeClassAttrib = new ClassAttrib();
-
+		protected Dictionary<string, string> IdAllClassWithandWithoutSeperator = new Dictionary<string, string>();
         protected Dictionary<string, string> _childStyle;
         protected Dictionary<string, ClassInfo> _existingPsuedoBeforeStyle = new Dictionary<string, ClassInfo>();
         protected ClassInfo _psuedoBeforeStyle = new ClassInfo();
@@ -891,49 +891,49 @@ namespace SIL.Tool
 			}
 	        string newStyleName = GetStyleNumber(styleName);
 
-            if (_newProperty.ContainsKey(newStyleName) == false)
+			if (_newProperty.ContainsKey(newStyleName) == false)
             {
                 _newProperty[newStyleName] = _tempStyle;
             }
 
-            IdAllClass[newStyleName] = _tempStyle;
-            string tagType = _tagType;
-            if (_divType.Contains(_tagType)) tagType = "div";
-            ParentClass[newStyleName] = _parentStyleName + "|" + tagType;
+			IdAllClass[newStyleName] = _tempStyle;
+			string tagType = _tagType;
+			if (_divType.Contains(_tagType)) tagType = "div";
+			ParentClass[newStyleName] = _parentStyleName + "|" + tagType;
 
-            _psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
-            string styleBefore = MatchCssStyle(ancestorFontSize, "before", multiClassList);
-            if (styleBefore != string.Empty)
-            {
-                string tag = "span"; //  always character styles
-                string newStyleBefore = GetStyleNumber(styleBefore);
-                _newProperty[newStyleBefore] = _tempStyle;
-                IdAllClass[newStyleBefore] = _tempStyle;
-                _psuedoBeforeStyle.StyleName = newStyleBefore;
-                ParentClass[newStyleBefore] = _parentStyleName + "|" + tag;
+			_psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
+			string styleBefore = MatchCssStyle(ancestorFontSize, "before", multiClassList);
+			if (styleBefore != string.Empty)
+			{
+				string tag = "span"; //  always character styles
+				string newStyleBefore = GetStyleNumber(styleBefore);
+				_newProperty[newStyleBefore] = _tempStyle;
+				IdAllClass[newStyleBefore] = _tempStyle;
+				_psuedoBeforeStyle.StyleName = newStyleBefore;
+				ParentClass[newStyleBefore] = _parentStyleName + "|" + tag;
 
-            }
+			}
 
-            string styleAfter = MatchCssStyle(ancestorFontSize, "after", multiClassList);
-            if (styleAfter != string.Empty)
-            {
-                string tag = "span"; //  always character styles
-                string newStyleAfter = GetStyleNumber(styleAfter);
-                _newProperty[newStyleAfter] = _tempStyle;
-                IdAllClass[newStyleAfter] = _tempStyle;
-                _psuedoAfterStyle.StyleName = newStyleAfter;
-                ParentClass[newStyleAfter] = _parentStyleName + "|" + tag;
-            }
+			string styleAfter = MatchCssStyle(ancestorFontSize, "after", multiClassList);
+			if (styleAfter != string.Empty)
+			{
+				string tag = "span"; //  always character styles
+				string newStyleAfter = GetStyleNumber(styleAfter);
+				_newProperty[newStyleAfter] = _tempStyle;
+				IdAllClass[newStyleAfter] = _tempStyle;
+				_psuedoAfterStyle.StyleName = newStyleAfter;
+				ParentClass[newStyleAfter] = _parentStyleName + "|" + tag;
+			}
 
-            string styleContains = MatchCssStyle(ancestorFontSize, "contains", multiClassList);
-            if (styleContains != string.Empty)
-            {
-                string newStyleContains = GetStyleNumber(styleContains);
-                _newProperty[newStyleContains] = _tempStyle;
-                IdAllClass[newStyleContains] = _tempStyle;
-                _psuedoContainsStyle.StyleName = newStyleContains;
-                ParentClass[newStyleContains] = _parentStyleName + "|" + _tagType;
-            }
+			string styleContains = MatchCssStyle(ancestorFontSize, "contains", multiClassList);
+			if (styleContains != string.Empty)
+			{
+				string newStyleContains = GetStyleNumber(styleContains);
+				_newProperty[newStyleContains] = _tempStyle;
+				IdAllClass[newStyleContains] = _tempStyle;
+				_psuedoContainsStyle.StyleName = newStyleContains;
+				ParentClass[newStyleContains] = _parentStyleName + "|" + _tagType;
+			}
 
             return newStyleName;
         }
@@ -1115,7 +1115,8 @@ namespace SIL.Tool
 
 		/// <summary>
 		///Method to get the classname which are like ".semanticdomain + .semanticdomain;
-		/// Based on this, Code will avoid default space after the first "semanticdomain"		/// </summary>
+		/// Based on this, Code will avoid default space after the first "semanticdomain"
+		/// </summary>
 		/// <param name="cssClassInfo"></param>
 	    private void GetParentPrecedeClass(ClassInfo cssClassInfo)
 	    {
@@ -1317,6 +1318,34 @@ namespace SIL.Tool
                         _tempStyle[property.Key] = property.Value;
                 }
             }
+			string parentStyle = StackPeek(_allStyle);
+			if (_outputType == Common.OutputType.ODT && cssStyleName.Contains("_") && !String.IsNullOrEmpty(parentStyle) && parentStyle.Contains("_letData_dicBody"))
+			{				
+				var idAllCssClassName = string.Empty;
+				string matchStyle = cssStyleName.Replace(".", "") + Common.SepParent + parentStyle.Replace("_letData_dicBody", "");
+				bool styleMatch = false;
+				foreach (KeyValuePair<string, string> property in IdAllClassWithandWithoutSeperator)
+				{
+					string propertyValue = property.Value;
+					if (matchStyle == propertyValue)
+					{
+						styleMatch = true;
+						idAllCssClassName = property.Key;
+						break;
+					}
+				}
+				if (styleMatch)
+				{
+					foreach (KeyValuePair<string, string> property in IdAllClass[idAllCssClassName])
+					{
+						if (_tempStyle.ContainsKey(property.Key))
+							continue;
+
+						_tempStyle[property.Key] = property.Value;
+					}
+				}
+			}
+
             WordCharSpace(ancestorFontSize);
         }
 

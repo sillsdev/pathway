@@ -4298,7 +4298,28 @@ namespace Test.OpenOfficeConvert
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
-		
+		///<summary>
+		///Dictionary Insert HardSpace Test
+		///</summary>      
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void EntryStyleTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "EntryStyle";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
 
         ///<summary>
         ///B1pe Full Scripture Test

@@ -716,8 +716,8 @@ namespace SIL.PublishingSolution
 
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
 
-            AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
-            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+			//AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
+			//afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
 			#endregion
 
@@ -838,17 +838,17 @@ namespace SIL.PublishingSolution
                 isCoverImageInserted = "true";
             }
 
-            // If chapternumber found in css, vertical-align = "auto"
-            foreach (string cls in idAllClass.Keys)
-            {
-                if (cls.ToLower().IndexOf("chapternumber") == 0 && cls.ToLower().IndexOf("chapternumber_") != 0)
-                {
-                    if (idAllClass.ContainsKey(cls) && idAllClass[cls].ContainsKey("vertical-align"))
-                    {
-                        //idAllClass[cls]["vertical-align"] = "auto";
-                    }
-                }
-            }
+			//// If chapternumber found in css, vertical-align = "auto"
+			//foreach (string cls in idAllClass.Keys)
+			//{
+			//	if (cls.ToLower().IndexOf("chapternumber") == 0 && cls.ToLower().IndexOf("chapternumber_") != 0)
+			//	{
+			//		if (idAllClass.ContainsKey(cls) && idAllClass[cls].ContainsKey("vertical-align"))
+			//		{
+			//			//idAllClass[cls]["vertical-align"] = "auto";
+			//		}
+			//	}
+			//}
 
             return isCoverImageInserted;
         }

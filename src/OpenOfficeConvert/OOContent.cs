@@ -499,8 +499,15 @@ namespace SIL.PublishingSolution
 
 		private void ProcessXHTML(ProgressBar pb, string Sourcefile, string targetPath)
 		{
-			if (_outputExtension == "odm") return;
-
+			if (_outputExtension == "odm") 
+				return;
+			
+			foreach(string className in IdAllClass.Keys)
+			{
+				if (!IdAllClassWithandWithoutSeperator.ContainsKey(className))
+					IdAllClassWithandWithoutSeperator.Add(className, className.Replace("-","_").Replace(".",""));
+			}
+			
 			_styleFilePath = targetPath + "styles.xml";
 			try
 			{
