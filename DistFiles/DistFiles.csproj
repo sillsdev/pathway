@@ -310,7 +310,7 @@
     <Copy SourceFiles="@(BteSamples)" DestinationFiles="@(BteSamples->'$(OutputPath)Samples\Scripture\%(RecursiveDir)\%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(copyrightFiles)" DestinationFiles="@(copyrightFiles->'$(OutputPath)Copyrights\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(epubFiles)" DestinationFiles="@(epubFiles->'$(OutputPath)epub\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)epubcheck-3.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(EpubCheck)" DestinationFiles="@(EpubCheck->'$(OutputPath)epubcheck-4.0.1\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(PdfLicenseManager)" DestinationFiles="@(PdfLicenseManager->'$(OutputPath)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ApplyPdfLicense)" DestinationFiles="@(ApplyPdfLicense->'$(OutputPath)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(PdfLicense)" DestinationFiles="@(PdfLicense->'$(OutputPath)%(Filename)%(Extension)')" />
@@ -329,7 +329,7 @@
   <ItemGroup>
     <AllDebugOutput Include="..\output\Debug\**\*.*" Exclude="..\output\Debug\*.vshost.exe"/>
 	<AllReleaseOutput Include="..\output\Release\**\*.*" Exclude="..\output\Release\*.vshost.exe"/>
-    <EpubCheck Include="epubcheck-3.0.1\**\*.*" />
+    <EpubCheck Include="epubcheck-4.0.1\**\*.*" />
     <PdfLicenseManager Include="pdflicensemanager-2.3.jar" />
     <Paratexmf Include="..\src\XeLaTexConvert\Paratexmf\**\*.*" />
     <InstallTex Include="..\src\XeLaTexConvert\InstallPathwayXeLaTeX.sh" />
