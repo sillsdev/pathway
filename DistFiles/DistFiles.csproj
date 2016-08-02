@@ -411,6 +411,8 @@
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cache.exe;..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-cat.exe;..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-list.exe;..\src\XeLaTexConvert\XeLaTexExe\bin\win32\fc-match.exe" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\icudt*.dll" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\kpathsea*.dll" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\xetex.dll" />
+    <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\dvipdfmx.dll" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\mktexlsr.exe" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\teckit_compile.exe" />
     <XeLaTexBin Include="..\src\XeLaTexConvert\XeLaTexExe\bin\win32\tex.dll;..\src\XeLaTexConvert\XeLaTexExe\bin\win32\tex.exe" />
