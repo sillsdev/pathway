@@ -127,6 +127,7 @@ namespace epubValidator
                         sb.Append(Path.DirectorySeparatorChar);
 						sb.Append("epubcheck.jar");
 						sb.Append("\" ");
+	                    sb.Append(" -e "); // Include only error and fatal severity messages in output
                         // filename to run it against (the .epub file)
                         sb.Append("\"");
                         sb.Append(Filename);
