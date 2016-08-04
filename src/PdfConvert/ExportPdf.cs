@@ -18,7 +18,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Security.Policy;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -132,8 +131,8 @@ namespace SIL.PublishingSolution
                     preProcessor.ReplaceDoubleSlashToLineBreak(preProcessor.ProcessedXhtml);
                     preProcessor.MoveCallerToPrevText(preProcessor.ProcessedXhtml);
                     string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
-                    string tempFolderName = Path.GetFileName(tempFolder);
-                    var mc = new MergeCss { OutputLocation = tempFolderName };
+                    //string tempFolderName = Path.GetFileName(tempFolder);
+                    var mc = new MergeCss { OutputLocation = tempFolder };
 
 	                if (projInfo.IsReversalExist && File.Exists(projInfo.DefaultRevCssFileWithPath))
 	                {
@@ -141,13 +140,11 @@ namespace SIL.PublishingSolution
 	                }
 
 	                string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
-					
                     preProcessor.ReplaceStringInCss(mergedCSS);
                     preProcessor.InsertPropertyInCSS(mergedCSS);
                     preProcessor.RemoveDeclaration(mergedCSS, ".pictureRight > .picture");
                     preProcessor.RemoveDeclaration(mergedCSS, "div.pictureLeft > img.picture");
-					preProcessor.HandleNewFieldworksChangeInXhtml(preProcessor.ProcessedXhtml);
-					preProcessor.HandleNewFieldworksChangeInCss(mergedCSS);
+                    preProcessor.HandleNewFieldworksChangeInCss(mergedCSS);
                     mergedCSS = preProcessor.RemoveTextIndent(mergedCSS);
 
                     if (isUnixOS)
