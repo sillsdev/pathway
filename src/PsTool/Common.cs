@@ -2870,6 +2870,9 @@ namespace SIL.Tool
 			int count = arrayCssFile.Count;
 			for (int i = count - 1; i >= 0; i--)
 			{
+				removeMirrorPage = false;
+				removeEveryPage = false;
+				removePageNumber = false;
 				string cssFile = arrayCssFile[i].ToString();
 				//For Remove Mirrored Page
 				if (cssFile.IndexOf("Running_Head_Every_Page") >= 0)
