@@ -3808,7 +3808,7 @@ namespace SIL.Tool
 				if (root != null)
 				{
 					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
+					returnNode.InnerText = DateTimeOffset.UtcNow.ToString("o");
 				}
 
 				xPath = "//xap:CreatorTool";
@@ -3824,7 +3824,7 @@ namespace SIL.Tool
 				if (root != null)
 				{
 					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
+					returnNode.InnerText = DateTimeOffset.UtcNow.ToString("o");
 				}
 
 				xPath = "//xap:MetadataDate";
@@ -3832,7 +3832,7 @@ namespace SIL.Tool
 				if (root != null)
 				{
 					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
+					returnNode.InnerText = DateTimeOffset.UtcNow.ToString("o");
 				}
 
 				nsmgr.AddNamespace("pdf", "http://ns.adobe.com/pdf/1.3/");
