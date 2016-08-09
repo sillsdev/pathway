@@ -173,7 +173,7 @@ namespace CssSimpler
                         break;
                     case "TAG":
                         string tagName = node.FirstChild.InnerText;
-                        if (tagName != "span")
+                        if (tagName != "span" && tagName != "a")
                             throw new NotImplementedException();
                         break;
                     default:

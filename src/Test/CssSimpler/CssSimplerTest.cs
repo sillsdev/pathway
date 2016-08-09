@@ -1217,6 +1217,35 @@ namespace Test.CssSimplerTest
         /// Remove extra parenthesis in Semantic domaain before abbreviation
         /// </summary>
         [Test]
+        public void Audio2Test()
+        {
+            const string testName = "Audio2";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            ctp.Parse(cssFullName);
+            var root = ctp.Root;
+            Assert.True(root != null);
+            var xml = new XmlDocument();
+            xml.LoadXml("<root/>");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            AddSubTree(xml.DocumentElement, root, ctp);
+            _testFiles.Copy(testName + ".css");
+            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            NodeTest(outFullName, 1, "//*[@class='seh-Zxxx-x-audio']/*[string-length(.)=2]", "audio icon");
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
         public void SubentryBulletTest()
         {
             const string testName = "SubentryBullet";
