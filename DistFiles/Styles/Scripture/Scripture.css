@@ -344,3 +344,8 @@ content: " ";}
 .Chapter_Number {
     string-set: chapter content();
 }
+
+.scrBook {
+page-break-before: always;
+string-set: chapter '1';
+}
