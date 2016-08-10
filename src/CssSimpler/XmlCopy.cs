@@ -262,17 +262,15 @@ namespace CssSimpler
 
         protected void WriteContent(string val, string myClass, string myLang)
         {
-            WriteContent(val, myClass, myLang, true);
-        }
-
-        protected void WriteContent(string val, string myClass, string myLang, bool quotedEntities)
-        {
-            var localName = string.IsNullOrEmpty(ReplaceLocalName) ? "span" : ReplaceLocalName;
-            ReplaceLocalName = null;
-            _wtr.WriteStartElement(localName, "http://www.w3.org/1999/xhtml");
+            //var ns = new XmlNamespaceManager(_rdr.NameTable);
+            _wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
             if (!string.IsNullOrEmpty(myClass))
             {
-            WriteAttr(myClass + Suffix);
+                WriteClassAttr(myClass + Suffix);
+            }
+            if (!string.IsNullOrEmpty(myLang))
+            {
+                WriteLangAttr(myLang);
             }
             if (val.StartsWith(" ") || val.EndsWith(" "))
             {
