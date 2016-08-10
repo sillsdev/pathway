@@ -26,8 +26,10 @@ namespace CssSimpler
         private readonly Dictionary<string, List<XmlElement>> _styleTargets = new Dictionary<string, List<XmlElement>>();
         private const int StackSize = 30;
         private readonly ArrayList _classes = new ArrayList(StackSize);
+        private readonly ArrayList _langs = new ArrayList(StackSize); 
         private readonly ArrayList _savedSibling = new ArrayList(StackSize);
         private string _lastClass = String.Empty;
+        private string _lastLang = String.Empty;
         private string _precedingClass = String.Empty;
         private readonly SortedSet<string> _needHigher;
 
@@ -163,7 +165,9 @@ namespace CssSimpler
 
         private void TextNode(XmlReader r)
         {
-            WriteContent(r.Value, _lastClass);
+            var lang = _langs.Count > r.Depth ? (string)_langs[r.Depth] : null;
+            WriteContent(r.Value, _lastClass, lang);
+            SkipNode = true;
             if (ApplyBestRule(r.Depth, _lastClass, _styleTargets, _lastClass)) return;
             var keyClass = KeyClass(r.Depth);
             if (_classes.Count > r.Depth && ApplyBestRule(r.Depth, GetTargetKey(r.Name, keyClass), _styleTargets, keyClass)) return;
@@ -209,10 +213,27 @@ namespace CssSimpler
                     _classes[r.Depth] = r.Value;
                 }
             }
+            else if (r.Name == "lang")
+            {
+                if (r.Depth >= _langs.Count)
+                {
+                    while (_langs.Count < r.Depth)
+                    {
+                        // ReSharper disable once AssignNullToNotNullAttribute
+                        _langs.Add(null);
+                    }
+                    _langs.Add(r.Value);
+                }
+                else
+                {
+                    _langs[r.Depth] = r.Value;
+                }
+            }
         }
 
         private int _nextFirst = -1;
         private bool _firstSibling;
+
         private void SaveSibling(XmlReader r)
         {
             _firstSibling = r.Depth == _nextFirst;
@@ -231,11 +252,7 @@ namespace CssSimpler
         private void CollectTargets(XmlDocument xmlCss)
         {
             Debug.Assert(xmlCss != null, "xmlCss != null");
-            GetPseudoRuleTargets(xmlCss, _styleTargets);
-        }
-
-        private static void GetPseudoRuleTargets(XmlDocument xmlCss, Dictionary<string, List<XmlElement>> targets)
-        {
+            var targets = _styleTargets;
             var styleRules = xmlCss.SelectNodes("//RULE/PROPERTY[1]");
             Debug.Assert(styleRules != null, "styleRules != null");
             foreach (XmlElement styleRule in styleRules)
