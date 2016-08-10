@@ -96,7 +96,7 @@ namespace CssSimpler
                 }
                 if (_currentClass == string.Empty)
                 {
-                    WriteAttr(newClass);
+                    WriteClassAttr(newClass);
                 }
                 SkipAttr = true;
             }
