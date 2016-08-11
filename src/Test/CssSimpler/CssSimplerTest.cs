@@ -1169,6 +1169,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             var fs = new FlattenStyles(outFullName, _testFiles.Output(testName +"Flat.xhtml"), xml, NeedHigher);
+            WriteXmlAsCss(_testFiles.Output(testName + "Flat.css"), fs.MakeFlatCss());
             //TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             //NodeTest(outFullName, 128, "//*[@xml:space]", "semantic domain punctuation");
         }

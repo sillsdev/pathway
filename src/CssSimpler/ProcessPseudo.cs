@@ -144,7 +144,7 @@ namespace CssSimpler
                 {
                     case "PARENTOF":
                         requireParent = true;
-                        continue;
+                        break;
                     case "CLASS":
                         string name = node.FirstChild.InnerText;
                         while (!requireParent && index > 0 && !MatchClass(index, name))

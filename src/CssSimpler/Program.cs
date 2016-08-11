@@ -389,6 +389,11 @@ namespace CssSimpler
                     ruleNode.InsertBefore(classNode, ruleNode.FirstChild);
                 }
             }
+            WriteXmlAsCss(styleSheet, xml);
+        }
+
+        protected static void WriteXmlAsCss(string styleSheet, XmlDocument xml)
+        {
             var cssFile = new FileStream(styleSheet, FileMode.Create);
             var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
             XmlCss.Transform(xml, null, cssWriter);

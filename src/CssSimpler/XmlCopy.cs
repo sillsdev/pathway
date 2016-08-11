@@ -58,7 +58,7 @@ namespace CssSimpler
                     case XmlNodeType.Element:
                         if (!SkipNode)
                         {
-                            Debug.Print("start " + _rdr.LocalName);
+                            //Debug.Print("start " + _rdr.LocalName);
                             _wtr.WriteStartElement(_rdr.Prefix, _rdr.LocalName, _rdr.NamespaceURI);
                         }
                         else
@@ -112,7 +112,7 @@ namespace CssSimpler
                         break;
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
-                        Debug.Print("space");
+                        //Debug.Print("space");
                         _wtr.WriteWhitespace(_rdr.Value);
                         break;
                     case XmlNodeType.CDATA:
@@ -139,7 +139,7 @@ namespace CssSimpler
                         _wtr.WriteComment( _rdr.Value );
                         break;
                     case XmlNodeType.EndElement:
-                        Debug.Print("End " + _rdr.Name);
+                        //Debug.Print("End " + _rdr.Name);
                         BeforeEndProcessMethods(_rdr.NodeType, _rdr.Depth, _rdr.Name);
                         if (!SkipNode)
                         {
