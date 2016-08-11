@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace CssSimpler
@@ -27,9 +28,9 @@ namespace CssSimpler
         private const int StackSize = 30;
         private readonly ArrayList _classes = new ArrayList(StackSize);
         private readonly ArrayList _langs = new ArrayList(StackSize); 
+        private readonly ArrayList _rules = new ArrayList(StackSize);
         private readonly ArrayList _savedSibling = new ArrayList(StackSize);
         private string _lastClass = String.Empty;
-        private string _lastLang = String.Empty;
         private string _precedingClass = String.Empty;
         private readonly SortedSet<string> _needHigher;
 
@@ -38,8 +39,9 @@ namespace CssSimpler
         {
             _needHigher = needHigher;
             CollectTargets(xmlCss);
+            _xmlCss = xmlCss;
             Suffix = string.Empty;
-            DeclareBefore(XmlNodeType.Attribute, SaveClass);
+            DeclareBefore(XmlNodeType.Attribute, SaveClassLang);
             DeclareBefore(XmlNodeType.Element, SaveSibling);
             DeclareBefore(XmlNodeType.Element, InsertBefore);
             DeclareBefore(XmlNodeType.EndElement, SetForEnd);
@@ -57,9 +59,17 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             SkipNode = r.Name == "span";
-            if (SkipNode)
+            //if (nextClass == "letter")
+            //{
+            //    Debug.Print("break;");
+            //}
+            CollectRules(r, GetTargetKey(r.Name, nextClass));
+            CollectRules(r, GetTargetKey(r.Name, _lastClass));
+            CollectRules(r, nextClass);
+            CollectRules(r, GetTargetKey(r.Name, ""));
+            if (!SkipNode)
             {
-                Debug.Print("skip " + nextClass);
+                GetStyle(r);
             }
         }
 
@@ -68,9 +78,13 @@ namespace CssSimpler
             SkipNode = r.Name == "span";
         }
 
-        private void DivEnds(int dept, string name)
+        private void DivEnds(int depth, string name)
         {
             SkipNode = name == "span";
+            if (_rules.Count > depth)
+            {
+                _rules[depth] = null;
+            }
         }
 
         private void UnsaveClass(int depth, string name)
@@ -81,45 +95,51 @@ namespace CssSimpler
             _classes[index] = null;
         }
 
-        private bool ApplyBestRule(int index, string target, Dictionary<string, List<XmlElement>> targets, string myClass)
+        private void CollectRules(XmlReader r, string target)
         {
-            if (target == null) return false;
+            if (target == null) return;
+            var dirty = false;
+            var index = r.Depth;
+            var found = _rules.Count > index && _rules[index] != null ? (List<XmlElement>)_rules[index] : new List<XmlElement>();
             foreach (var t in target.Split(' '))
             {
+                var targets = _styleTargets;
                 if (!targets.ContainsKey(t)) continue;
                 foreach (var node in targets[t])
                 {
-                    if (Applies(node, index))
+                    if (Applies(node, r))
                     {
-                        if (myClass.Contains(' '))
-                        {
-                            myClass = myClass.Split(' ')[0];
-                        }
-                        //InsertContent(node, myClass);
-                        return true;
+                        found.Add(node);
+                        dirty = true;
                     }
                 }
             }
-            return false;
+            if (dirty)
+            {
+                AddInHierarchy(_rules, index, found);
+            }
         }
 
-        private bool Applies(XmlNode node, int index)
+        private bool Applies(XmlNode node, XmlReader r)
         {
-            while (node != null && node.Name == "PSEUDO")
+            var index = r.Depth;
+            while (node != null && node.Name == "PROPERTY")
             {
                 node = node.PreviousSibling;
             }
             var requireParent = false;
             // We should be at the tag / class for the rule being applied so look before it.
-            while (node != null)
-            { 
+            if (node.ChildNodes.Count == 1)
+            {
                 node = node.PreviousSibling;
-                if (node == null) break;
+            }
+            while (node != null)
+            {
                 switch (node.Name)
                 {
                     case "PARENTOF":
                         requireParent = true;
-                        continue;
+                        break;
                     case "CLASS":
                         string name = node.FirstChild.InnerText;
                         while (!requireParent && index > 0 && !MatchClass(index, name))
@@ -145,13 +165,50 @@ namespace CssSimpler
                         if (position == -1 || position == _savedSibling.Count - 1) return false;
                         break;
                     case "TAG":
+                        if (!CheckAttrib(node, r)) return false;
                         break;
                     default:
                         throw new NotImplementedException();
                 }
+                node = node.PreviousSibling;
             }
             return true;
 
+        }
+
+        private static bool CheckAttrib(XmlNode node, XmlReader r)
+        {
+            if (node.ChildNodes.Count > 1)
+            {
+                var attrNode = node.ChildNodes[1];
+                if (attrNode.Name == "ATTRIB")
+                {
+                    if (!AttribEval(r, attrNode)) return false;
+                }
+                else
+                {
+                    throw new NotImplementedException("non-ATTRIB modifier");
+                }
+            }
+            return true;
+        }
+
+        private static readonly char[] Quotes = {'\'', '"'};
+        private static bool AttribEval(XmlReader r, XmlNode attrNode)
+        {
+            var attrName = attrNode.FirstChild.InnerText;
+            var actualVal = r.GetAttribute(attrName);
+            var attrOp = attrNode.ChildNodes[1].Name;
+            switch (attrOp)
+            {
+                case "BEGINSWITH":
+                    var expVal = attrNode.ChildNodes[2].InnerText.Trim(Quotes);
+                    if (actualVal != expVal) return false;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+            return true;
         }
 
         private bool MatchClass(int index, string name)
@@ -165,14 +222,132 @@ namespace CssSimpler
 
         private void TextNode(XmlReader r)
         {
-            var lang = _langs.Count > r.Depth ? (string)_langs[r.Depth] : null;
-            WriteContent(r.Value, _lastClass, lang);
+            WriteContent(r.Value, GetStyle(r, 1), GetLang(r));
             SkipNode = true;
-            if (ApplyBestRule(r.Depth, _lastClass, _styleTargets, _lastClass)) return;
-            var keyClass = KeyClass(r.Depth);
-            if (_classes.Count > r.Depth && ApplyBestRule(r.Depth, GetTargetKey(r.Name, keyClass), _styleTargets, keyClass)) return;
-            var target = GetTargetKey(r.Name, _lastClass);
-            ApplyBestRule(r.Depth, target, _styleTargets, _lastClass);
+        }
+
+        public readonly Dictionary<string, string> RuleStyleMap = new Dictionary<string, string>();
+        private readonly Dictionary<string, int> _usedStyles = new Dictionary<string, int>();
+
+        private string GetStyle(XmlReader r)
+        {
+            return GetStyle(r, 0);
+        }
+
+        private string GetStyle(XmlReader r, int adjustLevel)
+        {
+            var myClass = GetClass(r);
+            if (myClass == null) return null;
+            //if (myClass == "letter")
+            //{
+            //    Debug.Print("break;");
+            //}
+            var ruleNums = GetRuleNumbers(r, adjustLevel);
+            var key = myClass + ":" + ruleNums;
+            if (_usedStyles.ContainsKey(myClass))
+            {
+                if (RuleStyleMap.ContainsKey(key))
+                {
+                    myClass = RuleStyleMap[key];
+                }
+                else
+                {
+                    _usedStyles[myClass] += 1;
+                    myClass += _usedStyles[myClass];
+                    RuleStyleMap[key] = myClass;
+                }
+            }
+            else
+            {
+                _usedStyles[myClass] = 1;
+                RuleStyleMap[key] = myClass;
+            }
+            return myClass;
+        }
+
+        private readonly List<int> _ruleNums = new List<int>();
+        private string GetRuleNumbers(XmlReader r, int adjustLevel)
+        {
+            _ruleNums.Clear();
+            var inherited = false;
+            for (int i = r.Depth - adjustLevel; i >= 0; i -= 1)
+            {
+                if (_rules.Count <= i) continue;
+                var levelList = _rules[i] as List<XmlElement>;
+                if (levelList == null) continue;
+                foreach (XmlElement node in levelList)
+                {
+                    var numNode = node.SelectSingleNode("parent::*/@pos");
+                    if (numNode == null) continue;
+                    var num = int.Parse(numNode.InnerText);
+                    if (!_ruleNums.Contains(num))
+                    {
+                        _ruleNums.Add(num);
+                    }
+                }
+                if (!inherited)
+                {
+                    inherited = true;
+                    _ruleNums.Add(-1);
+                }
+            }
+            return string.Join(",", _ruleNums);
+        }
+
+        private readonly SortedDictionary<string, string> _reverseMap = new SortedDictionary<string, string>();
+        private readonly XmlDocument _flatCss = new XmlDocument();
+        private readonly XmlDocument _xmlCss;
+        private readonly string[] _notInherted = {"column-count", "clear", "width", "margin-left", "padding-bottom", "padding-top", "display"};
+        public XmlDocument MakeFlatCss()
+        {
+            _flatCss.RemoveAll();
+            _flatCss.LoadXml("<ROOT/>");
+            var tagNodes = _xmlCss.SelectNodes("//*[@term='1' and count(TAG) = 1]");
+            foreach (XmlElement node in tagNodes)
+            {
+                _flatCss.DocumentElement.AppendChild(_flatCss.ImportNode(node, true));
+            }
+            foreach (var key in RuleStyleMap.Keys)
+            {
+                _reverseMap[RuleStyleMap[key]] = key;
+            }
+            var pos = 1;
+            foreach (var style in _reverseMap.Keys)
+            {
+                //if (style == "letter")
+                //{
+                //    Debug.Print("break;");
+                //}
+                var ruleNode = _flatCss.CreateElement("RULE");
+                var classNode = _flatCss.CreateElement("CLASS");
+                var nameNode = _flatCss.CreateElement("name");
+                nameNode.InnerText = style;
+                classNode.AppendChild(nameNode);
+                ruleNode.AppendChild(classNode);
+                _flatCss.DocumentElement.AppendChild(ruleNode);
+                ruleNode.SetAttribute("pos", pos.ToString());
+                var incProps = new SortedSet<string>();
+                var activeRules = _reverseMap[style];
+                var inherited = false;
+                foreach (Match m in Regex.Matches(activeRules.Substring(activeRules.IndexOf(":")), @"[\d-]+"))
+                {
+                    if (m.Value == "-1")
+                    {
+                        inherited = true;
+                        continue;
+                    }
+                    var pattern = string.Format("//*[@pos='{0}']/PROPERTY", m.Value);
+                    foreach (XmlElement node in _xmlCss.SelectNodes(pattern))
+                    {
+                        var name = node.SelectSingleNode(".//name").InnerText;
+                        if (incProps.Contains(name)) continue;
+                        if (inherited && (_notInherted.Contains(name) || name.StartsWith("-"))) continue;
+                        incProps.Add(name);
+                        ruleNode.AppendChild(_flatCss.ImportNode(node, true));
+                    }
+                }
+            }
+            return _flatCss;
         }
 
         private void OtherNode(XmlReader r)
@@ -180,18 +355,7 @@ namespace CssSimpler
             SkipNode = false;
         }
 
-        private void InsertContent(XmlNode node, string myClass)
-        {
-            var content = node.SelectSingleNode("following-sibling::PROPERTY[name='content']/value");
-            Debug.Assert(content != null);
-            var val = content.InnerText;
-            var properties = node.SelectNodes("parent::*/PROPERTY");
-            Debug.Assert(properties != null);
-            myClass = properties.Count <= 1 ? null : myClass.Replace(" ", "");
-            WriteContent(val.Substring(1, val.Length - 2), myClass);  // Remove quotes
-        }
-
-        private void SaveClass(XmlReader r)
+        private void SaveClassLang(XmlReader r)
         {
             if (r.Name == "class")
             {
@@ -199,36 +363,58 @@ namespace CssSimpler
                 {
                     _lastClass = r.Value;
                 }
-                if (r.Depth >= _classes.Count)
-                {
-                    while (_classes.Count < r.Depth)
-                    {
-                        // ReSharper disable once AssignNullToNotNullAttribute
-                        _classes.Add(null);
-                    }
-                    _classes.Add(r.Value);
-                }
-                else
-                {
-                    _classes[r.Depth] = r.Value;
-                }
+                AddInHierarchy(r, _classes);
             }
             else if (r.Name == "lang")
             {
-                if (r.Depth >= _langs.Count)
-                {
-                    while (_langs.Count < r.Depth)
-                    {
-                        // ReSharper disable once AssignNullToNotNullAttribute
-                        _langs.Add(null);
-                    }
-                    _langs.Add(r.Value);
-                }
-                else
-                {
-                    _langs[r.Depth] = r.Value;
-                }
+                AddInHierarchy(r, _langs);
             }
+        }
+
+        private static void AddInHierarchy(XmlReader r, IList arrayList)
+        {
+            AddInHierarchy(arrayList, r.Depth, r.Value);
+        }
+
+        private static void AddInHierarchy(IList arrayList, int index, object value)
+        {
+            if (index >= arrayList.Count)
+            {
+                while (arrayList.Count < index)
+                {
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    arrayList.Add(null);
+                }
+                arrayList.Add(value);
+            }
+            else
+            {
+                arrayList[index] = value;
+            }
+        }
+
+        private string GetClass(XmlReader r)
+        {
+            var myClass = r.GetAttribute("class");
+            var depth = r.Depth;
+            while (string.IsNullOrEmpty(myClass) && depth > 0)
+            {
+                myClass = _classes.Count > depth? (string)_classes[depth]: null;
+                depth -= 1;
+            }
+            return myClass;
+        }
+
+        private string GetLang(XmlReader r)
+        {
+            var myLang = r.GetAttribute("lang");
+            var depth = r.Depth;
+            while (string.IsNullOrEmpty(myLang) && depth > 0)
+            {
+                myLang = _langs.Count > depth ? (string)_langs[depth] : null;
+                depth -= 1;
+            }
+            return myLang;
         }
 
         private int _nextFirst = -1;
