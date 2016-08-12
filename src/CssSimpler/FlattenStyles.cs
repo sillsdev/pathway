@@ -25,12 +25,13 @@ namespace CssSimpler
     public class FlattenStyles : XmlCopy
     {
         private readonly Dictionary<string, List<XmlElement>> _ruleIndex = new Dictionary<string, List<XmlElement>>();
+        private readonly List<int> _displayBlockRuleNum = new List<int>();
         private const int StackSize = 30;
         private readonly ArrayList _classes = new ArrayList(StackSize);
         private readonly ArrayList _langs = new ArrayList(StackSize); 
         private readonly ArrayList _levelRules = new ArrayList(StackSize);
         private readonly ArrayList _savedSibling = new ArrayList(StackSize);
-        private string _lastClass = String.Empty;
+        //private string _lastClass = String.Empty;
         private string _precedingClass = String.Empty;
         private readonly SortedSet<string> _needHigher;
 
@@ -39,6 +40,7 @@ namespace CssSimpler
         {
             _needHigher = needHigher;
             MakeRuleIndex(xmlCss);
+            IdentifyDisplayBlockRules(xmlCss);
             _xmlCss = xmlCss;
             Suffix = string.Empty;
             DeclareBefore(XmlNodeType.Attribute, SaveClassLang);
@@ -55,22 +57,47 @@ namespace CssSimpler
             Parse();
         }
 
+        private void IdentifyDisplayBlockRules(XmlDocument xmlCss)
+        {
+            var dispBlockNodes = xmlCss.SelectNodes("//*[name='display' and value='block']/parent::*/@pos");
+            Debug.Assert(dispBlockNodes != null, "dispBlockNodes != null");
+            foreach (XmlAttribute pos in dispBlockNodes)
+            {
+                _displayBlockRuleNum.Add(int.Parse(pos.InnerText));
+            }
+        }
+
         private void InsertBefore(XmlReader r)
         {
             var nextClass = r.GetAttribute("class");
             SkipNode = r.Name == "span";
-            //if (nextClass == "letter")
+            //if (nextClass != null && nextClass.StartsWith("captionContent"))
             //{
             //    Debug.Print("break;");
             //}
             CollectRules(r, GetRuleKey(r.Name, nextClass));
-            CollectRules(r, GetRuleKey(r.Name, _lastClass));
+            CollectRules(r, GetRuleKey(r.Name, KeyClass(r.Depth)));
             CollectRules(r, nextClass);
             CollectRules(r, GetRuleKey(r.Name, ""));
+            SkipNode = IsNotBlockRule(r.Depth);
             if (!SkipNode)
             {
                 GetStyle(r);
             }
+        }
+
+        private bool IsNotBlockRule(int depth)
+        {
+            _ruleNums.Clear();
+            if (GetLevelRules(depth))
+            {
+                foreach (var num in _ruleNums)
+                {
+                    if (!_displayBlockRuleNum.Contains(num)) continue;
+                    return false;
+                }
+            }
+            return SkipNode;
         }
 
         private void SetForEnd(XmlReader r)
@@ -81,6 +108,7 @@ namespace CssSimpler
         private void DivEnds(int depth, string name)
         {
             SkipNode = name == "span";
+            SkipNode = IsNotBlockRule(depth);
             if (_levelRules.Count > depth)
             {
                 _levelRules[depth] = null;
@@ -237,6 +265,10 @@ namespace CssSimpler
         {
             var myClass = GetClass(r);
             if (myClass == null) return null;
+            if (myClass.Contains(" "))
+            {
+                myClass = myClass.Split(' ')[0];
+            }
             //if (myClass == "letter")
             //{
             //    Debug.Print("break;");
@@ -271,17 +303,7 @@ namespace CssSimpler
             var inherited = false;
             for (var i = r.Depth - adjustLevel; i >= 0; i -= 1)
             {
-                if (_levelRules.Count <= i) continue;
-                var levelList = _levelRules[i] as List<XmlElement>;
-                if (levelList == null) continue;
-                foreach (XmlElement node in levelList)
-                {
-                    var numNode = node.SelectSingleNode("parent::*/@pos");
-                    if (numNode == null) continue;
-                    var num = int.Parse(numNode.InnerText);
-                    if (_ruleNums.Contains(num)) continue;
-                    _ruleNums.Add(num);
-                }
+                GetLevelRules(i);
                 if (inherited) continue;
                 inherited = true;
                 _ruleNums.Add(-1);
@@ -289,10 +311,26 @@ namespace CssSimpler
             return string.Join(",", _ruleNums);
         }
 
+        private bool GetLevelRules(int i)
+        {
+            if (_levelRules.Count <= i) return false;
+            var levelList = _levelRules[i] as List<XmlElement>;
+            if (levelList == null) return false;
+            foreach (XmlElement node in levelList)
+            {
+                var numNode = node.SelectSingleNode("parent::*/@pos");
+                if (numNode == null) continue;
+                var num = int.Parse(numNode.InnerText);
+                if (_ruleNums.Contains(num)) continue;
+                _ruleNums.Add(num);
+            }
+            return true;
+        }
+
         private readonly SortedDictionary<string, string> _reverseMap = new SortedDictionary<string, string>();
         private readonly XmlDocument _flatCss = new XmlDocument();
         private readonly XmlDocument _xmlCss;
-        private readonly string[] _notInherted = {"column-count", "clear", "width", "margin-left", "padding-bottom", "padding-top", "display"};
+        private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column-count", "float", "clear", "width", "margin-left", "padding-bottom", "padding-top", "display"};
         public XmlDocument MakeFlatCss()
         {
             _flatCss.RemoveAll();
@@ -311,17 +349,23 @@ namespace CssSimpler
                 //}
                 var ruleNode = _flatCss.CreateElement("RULE");
                 var classNode = _flatCss.CreateElement("CLASS");
-                var nameNode = _flatCss.CreateElement("name");
-                nameNode.InnerText = style;
-                classNode.AppendChild(nameNode);
+                var classNameNode = _flatCss.CreateElement("name");
+                classNameNode.InnerText = style;
+                classNode.AppendChild(classNameNode);
                 ruleNode.AppendChild(classNode);
                 Debug.Assert(_flatCss.DocumentElement != null, "_flatCss.DocumentElement != null");
                 _flatCss.DocumentElement.AppendChild(ruleNode);
                 ruleNode.SetAttribute("pos", pos.ToString());
                 var incProps = new SortedSet<string>();
                 var activeRules = _reverseMap[style];
+                var ruleListText = activeRules.Substring(activeRules.IndexOf(":", StringComparison.Ordinal) + 1);
+                var commentNode = _flatCss.CreateElement("COMMENT");
+                var commentValueNode = _flatCss.CreateElement("value");
+                commentValueNode.InnerText = "Rule List: " + ruleListText;
+                commentNode.AppendChild(commentValueNode);
+                ruleNode.AppendChild(commentNode);
                 var inherited = false;
-                foreach (Match m in Regex.Matches(activeRules.Substring(activeRules.IndexOf(":", StringComparison.Ordinal)), @"[\d-]+"))
+                foreach (Match m in Regex.Matches(ruleListText, @"[\d-]+"))
                 {
                     if (m.Value == "-1")
                     {
@@ -367,10 +411,10 @@ namespace CssSimpler
         {
             if (r.Name == "class")
             {
-                if (!_needHigher.Contains(r.Value))
-                {
-                    _lastClass = r.Value;
-                }
+                //if (!_needHigher.Contains(r.Value))
+                //{
+                //    _lastClass = r.Value;
+                //}
                 AddInHierarchy(r, _classes);
             }
             else if (r.Name == "lang")
@@ -516,6 +560,19 @@ namespace CssSimpler
                 }
             }
             return target;
+        }
+
+        private string KeyClass(int depth)
+        {
+            if (_classes.Count <= depth) return null;
+            while (depth > 0)
+            {
+                var proposedClass = _classes[depth] as string;
+                if (proposedClass != null && !_needHigher.Contains(proposedClass))
+                    return proposedClass;
+                depth -= 1;
+            }
+            return null;
         }
     }
 }
