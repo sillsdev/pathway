@@ -24,11 +24,11 @@ namespace CssSimpler
 {
     public class FlattenStyles : XmlCopy
     {
-        private readonly Dictionary<string, List<XmlElement>> _styleTargets = new Dictionary<string, List<XmlElement>>();
+        private readonly Dictionary<string, List<XmlElement>> _ruleIndex = new Dictionary<string, List<XmlElement>>();
         private const int StackSize = 30;
         private readonly ArrayList _classes = new ArrayList(StackSize);
         private readonly ArrayList _langs = new ArrayList(StackSize); 
-        private readonly ArrayList _rules = new ArrayList(StackSize);
+        private readonly ArrayList _levelRules = new ArrayList(StackSize);
         private readonly ArrayList _savedSibling = new ArrayList(StackSize);
         private string _lastClass = String.Empty;
         private string _precedingClass = String.Empty;
@@ -38,7 +38,7 @@ namespace CssSimpler
             : base(input, output)
         {
             _needHigher = needHigher;
-            CollectTargets(xmlCss);
+            MakeRuleIndex(xmlCss);
             _xmlCss = xmlCss;
             Suffix = string.Empty;
             DeclareBefore(XmlNodeType.Attribute, SaveClassLang);
@@ -63,10 +63,10 @@ namespace CssSimpler
             //{
             //    Debug.Print("break;");
             //}
-            CollectRules(r, GetTargetKey(r.Name, nextClass));
-            CollectRules(r, GetTargetKey(r.Name, _lastClass));
+            CollectRules(r, GetRuleKey(r.Name, nextClass));
+            CollectRules(r, GetRuleKey(r.Name, _lastClass));
             CollectRules(r, nextClass);
-            CollectRules(r, GetTargetKey(r.Name, ""));
+            CollectRules(r, GetRuleKey(r.Name, ""));
             if (!SkipNode)
             {
                 GetStyle(r);
@@ -81,9 +81,9 @@ namespace CssSimpler
         private void DivEnds(int depth, string name)
         {
             SkipNode = name == "span";
-            if (_rules.Count > depth)
+            if (_levelRules.Count > depth)
             {
-                _rules[depth] = null;
+                _levelRules[depth] = null;
             }
         }
 
@@ -100,23 +100,21 @@ namespace CssSimpler
             if (target == null) return;
             var dirty = false;
             var index = r.Depth;
-            var found = _rules.Count > index && _rules[index] != null ? (List<XmlElement>)_rules[index] : new List<XmlElement>();
+            var found = _levelRules.Count > index && _levelRules[index] != null ? (List<XmlElement>)_levelRules[index] : new List<XmlElement>();
             foreach (var t in target.Split(' '))
             {
-                var targets = _styleTargets;
+                var targets = _ruleIndex;
                 if (!targets.ContainsKey(t)) continue;
                 foreach (var node in targets[t])
                 {
-                    if (Applies(node, r))
-                    {
-                        found.Add(node);
-                        dirty = true;
-                    }
+                    if (!Applies(node, r)) continue;
+                    found.Add(node);
+                    dirty = true;
                 }
             }
             if (dirty)
             {
-                AddInHierarchy(_rules, index, found);
+                AddInHierarchy(_levelRules, index, found);
             }
         }
 
@@ -273,8 +271,8 @@ namespace CssSimpler
             var inherited = false;
             for (var i = r.Depth - adjustLevel; i >= 0; i -= 1)
             {
-                if (_rules.Count <= i) continue;
-                var levelList = _rules[i] as List<XmlElement>;
+                if (_levelRules.Count <= i) continue;
+                var levelList = _levelRules[i] as List<XmlElement>;
                 if (levelList == null) continue;
                 foreach (XmlElement node in levelList)
                 {
@@ -445,17 +443,17 @@ namespace CssSimpler
             _nextFirst = r.Depth + 1;
         }
 
-        private void CollectTargets(XmlDocument xmlCss)
+        private void MakeRuleIndex(XmlDocument xmlCss)
         {
             Debug.Assert(xmlCss != null, "xmlCss != null");
-            var targets = _styleTargets;
+            var targets = _ruleIndex;
             var styleRules = xmlCss.SelectNodes("//RULE/PROPERTY[1]");
             Debug.Assert(styleRules != null, "styleRules != null");
             foreach (XmlElement styleRule in styleRules)
             {
                 var rule = styleRule.ParentNode as XmlElement;
                 Debug.Assert(rule != null, "rule is null");
-                var target = GetTargetKey(rule.GetAttribute("target"), rule.GetAttribute("lastClass"));
+                var target = GetRuleKey(rule.GetAttribute("target"), rule.GetAttribute("lastClass"));
                 if (!targets.ContainsKey(target))
                 {
                     targets[target] = new List<XmlElement> {styleRule};
@@ -489,7 +487,7 @@ namespace CssSimpler
             }
         }
 
-        private static string GetTargetKey(string target, string lastClass)
+        private static string GetRuleKey(string target, string lastClass)
         {
             if (target == "span" || target == "xitem")
             {
