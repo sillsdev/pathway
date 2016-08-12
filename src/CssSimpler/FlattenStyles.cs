@@ -129,7 +129,7 @@ namespace CssSimpler
             }
             var requireParent = false;
             // We should be at the tag / class for the rule being applied so look before it.
-            if (node.ChildNodes.Count == 1)
+            if (node != null && node.ChildNodes.Count == 1)
             {
                 node = node.PreviousSibling;
             }
@@ -229,6 +229,7 @@ namespace CssSimpler
         public readonly Dictionary<string, string> RuleStyleMap = new Dictionary<string, string>();
         private readonly Dictionary<string, int> _usedStyles = new Dictionary<string, int>();
 
+        // ReSharper disable once UnusedMethodReturnValue.Local
         private string GetStyle(XmlReader r)
         {
             return GetStyle(r, 0);
@@ -270,7 +271,7 @@ namespace CssSimpler
         {
             _ruleNums.Clear();
             var inherited = false;
-            for (int i = r.Depth - adjustLevel; i >= 0; i -= 1)
+            for (var i = r.Depth - adjustLevel; i >= 0; i -= 1)
             {
                 if (_rules.Count <= i) continue;
                 var levelList = _rules[i] as List<XmlElement>;
@@ -280,16 +281,12 @@ namespace CssSimpler
                     var numNode = node.SelectSingleNode("parent::*/@pos");
                     if (numNode == null) continue;
                     var num = int.Parse(numNode.InnerText);
-                    if (!_ruleNums.Contains(num))
-                    {
-                        _ruleNums.Add(num);
-                    }
+                    if (_ruleNums.Contains(num)) continue;
+                    _ruleNums.Add(num);
                 }
-                if (!inherited)
-                {
-                    inherited = true;
-                    _ruleNums.Add(-1);
-                }
+                if (inherited) continue;
+                inherited = true;
+                _ruleNums.Add(-1);
             }
             return string.Join(",", _ruleNums);
         }
@@ -302,11 +299,7 @@ namespace CssSimpler
         {
             _flatCss.RemoveAll();
             _flatCss.LoadXml("<ROOT/>");
-            var tagNodes = _xmlCss.SelectNodes("//*[@term='1' and count(TAG) = 1]");
-            foreach (XmlElement node in tagNodes)
-            {
-                _flatCss.DocumentElement.AppendChild(_flatCss.ImportNode(node, true));
-            }
+            CopyTagNodes();
             foreach (var key in RuleStyleMap.Keys)
             {
                 _reverseMap[RuleStyleMap[key]] = key;
@@ -324,12 +317,13 @@ namespace CssSimpler
                 nameNode.InnerText = style;
                 classNode.AppendChild(nameNode);
                 ruleNode.AppendChild(classNode);
+                Debug.Assert(_flatCss.DocumentElement != null, "_flatCss.DocumentElement != null");
                 _flatCss.DocumentElement.AppendChild(ruleNode);
                 ruleNode.SetAttribute("pos", pos.ToString());
                 var incProps = new SortedSet<string>();
                 var activeRules = _reverseMap[style];
                 var inherited = false;
-                foreach (Match m in Regex.Matches(activeRules.Substring(activeRules.IndexOf(":")), @"[\d-]+"))
+                foreach (Match m in Regex.Matches(activeRules.Substring(activeRules.IndexOf(":", StringComparison.Ordinal)), @"[\d-]+"))
                 {
                     if (m.Value == "-1")
                     {
@@ -337,9 +331,14 @@ namespace CssSimpler
                         continue;
                     }
                     var pattern = string.Format("//*[@pos='{0}']/PROPERTY", m.Value);
-                    foreach (XmlElement node in _xmlCss.SelectNodes(pattern))
+                    var propNodes = _xmlCss.SelectNodes(pattern);
+                    if (propNodes == null) continue;
+                    foreach (XmlElement node in propNodes)
                     {
-                        var name = node.SelectSingleNode(".//name").InnerText;
+                        Debug.Assert(node != null, "node != null");
+                        var propNameNode = node.SelectSingleNode(".//name");
+                        if (propNameNode == null) continue;
+                        var name = propNameNode.InnerText;
                         if (incProps.Contains(name)) continue;
                         if (inherited && (_notInherted.Contains(name) || name.StartsWith("-"))) continue;
                         incProps.Add(name);
@@ -348,6 +347,17 @@ namespace CssSimpler
                 }
             }
             return _flatCss;
+        }
+
+        private void CopyTagNodes()
+        {
+            var tagNodes = _xmlCss.SelectNodes("//*[@term='1' and count(TAG) = 1]");
+            Debug.Assert(tagNodes != null, "tagNodes != null");
+            foreach (XmlElement node in tagNodes)
+            {
+                Debug.Assert(_flatCss.DocumentElement != null, "_flatCss.DocumentElement != null");
+                _flatCss.DocumentElement.AppendChild(_flatCss.ImportNode(node, true));
+            }
         }
 
         private void OtherNode(XmlReader r)
@@ -509,19 +519,5 @@ namespace CssSimpler
             }
             return target;
         }
-
-        private string KeyClass(int depth)
-        {
-            if (_classes.Count <= depth) return null;
-            while (depth > 0)
-            {
-                var proposedClass = _classes[depth] as string;
-                if (proposedClass != null && !_needHigher.Contains(proposedClass))
-                    return proposedClass;
-                depth -= 1;
-            }
-            return null;
-        }
-
     }
 }
