@@ -31,28 +31,28 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-style="italic" fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.pt_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_span_.pt_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_span_.pt_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_span_.pt_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_xitem_.en_span_.pt_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_span_.pt_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -64,28 +64,28 @@
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_example_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="example_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_span_.pt_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_span_.pt_translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.pt_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_span_.pt_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_xitem_.en_span_.pt_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_span_.pt_translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_headword_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10" style:font-size-complex="10" fo:font-weight="700" style:font-weight-complex="700" style:text-position="sub 55%" />
@@ -95,58 +95,58 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="slots_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_slots_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="slots_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_slots_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="slots_grammaticalinfo_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_xitem_slots_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_slots_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_xitem_slots_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_xitem_slots_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_slots_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="slots_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_slots_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_slots_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-style="italic" fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="slots_MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_slots_MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="slots_MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_slots_MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="slots_MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_slots_MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_slots_MoInflAffMsa_grammaticalinfo_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantrefentrytype_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_variantrefentrytype_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefentrytype_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_variantrefentrytype_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_variantrefentrytype_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantrefform_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
@@ -158,37 +158,37 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_complexformtype_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformtype_complexformrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_complexformtype_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_complexformtype_complexformrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformform_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_grammaticalinfo_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="etymology_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_etymology_entry_letData_dicBody" style:family="text" style:parent-style-name="etymology_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_etymology_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_etymology_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_etymology_entry_letData_dicBody" style:family="text" style:parent-style-name="etymology_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.en_etymology_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_etymology_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="example_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData_dicBody">
@@ -198,16 +198,16 @@
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_example_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="example_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -220,25 +220,25 @@
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="relations_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entryreftype_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="primaryrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_entryreftype_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entryreftype_primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_entryreftype_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_entryreftype_primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_entryreftype_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entryreftype_primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entryrefcomponent_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="primaryrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -251,35 +251,35 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_scientificname_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="scientificname_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.en_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_span_.pt_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_span_.pt_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_span_.pt_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_xitem_.en_span_.pt_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_span_.pt_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_complexformtype_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformtype_complexformrefs_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_xitem_complexformtype_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_complexformtype_complexformrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_xitem_complexformtype_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_xitem_complexformtype_complexformrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.seh_span_.pt_span_.pt_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_span_.pt_translations_examples_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
@@ -291,10 +291,10 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="restrictionsL2_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_restrictionsL2_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="restrictionsL2_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="relations_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="lexreftargets_xitem_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_relations_sense_senses_entry_letData_dicBody">
@@ -315,11 +315,11 @@
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_crossrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="crossrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="MoDerivAffMsa_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_MoDerivAffMsa_grammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="MoDerivAffMsa_grammaticalinfo_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.seh_etymology_entry_letData_dicBody" style:family="text" style:parent-style-name="etymology_entry_letData_dicBody">
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
@@ -337,25 +337,25 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_span_.pt_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_span_.pt_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_span_.pt_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_xitem_.en_span_.pt_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_span_.pt_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.en_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minorentry_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
       <style:paragraph-properties fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:line-height-at-least="10pt" fo:padding-bottom="2pt" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
@@ -371,10 +371,10 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_varianttypeminor_primaryrefsminor_minorentry_letData_dicBody" style:family="text" style:parent-style-name="varianttypeminor_primaryrefsminor_minorentry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_varianttypeminor_primaryrefsminor_minorentry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_varianttypeminor_primaryrefsminor_minorentry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantprimaryminor_primaryrefsminor_minorentry_letData_dicBody" style:family="text" style:parent-style-name="primaryrefsminor_minorentry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -393,13 +393,13 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_usagetypes_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="usagetypes_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_usagetypes_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="usagetypes_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_usagetypes_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_usagetypes_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_entryrefcomponent_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entryrefcomponent_primaryrefs_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="a_xitem_entryrefcomponent_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_entryrefcomponent_primaryrefs_entry_letData_dicBody" />
@@ -407,49 +407,49 @@
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_entryrefcomponent_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entryrefcomponent_primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_LexEntrypublishStemComponentTargetHeadWordRef_a_xitem_entryrefcomponent_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="LexEntrypublishStemComponentTargetHeadWordRef_a_xitem_entryrefcomponent_primaryrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10" style:font-size-complex="10" fo:font-weight="700" style:font-weight-complex="700" style:text-position="sub 55%" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.pt_span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_xitem_.en_span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_span_.pt_xitem_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_xitem_.en_span_.pt_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_span_.pt_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_entryreftype_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entryreftype_primaryrefs_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_xitem_entryreftype_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_entryreftype_primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_xitem_entryreftype_primaryrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_xitem_entryreftype_primaryrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformrefs_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformtype_xitem_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_complexformrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_complexformtype_xitem_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformtype_xitem_complexformrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_complexformtype_xitem_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_complexformtype_xitem_complexformrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformform_xitem_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_complexformrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
@@ -458,10 +458,10 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-style="italic" fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_grammaticalinfo_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_grammaticalinfo_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_grammaticalinfo_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examples_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_subsenses_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -476,22 +476,22 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_span_.pt_span_.pt_translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_span_.pt_translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_span_.pt_translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.pt_translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_xitem_.en_span_.pt_translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_span_.pt_translations_examples_sense_subsenses_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.pt_xitem_.en_span_.pt_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_span_.pt_translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="pt" fo:country="BR" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">

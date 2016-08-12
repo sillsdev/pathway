@@ -603,12 +603,12 @@ namespace SIL.Tool
 							{
 								if (xmlReader.IsStartElement() && xmlReader.Name == "div" && xmlReader["class"] == "letter")
 								{
-									styleName = "letter_letHead_dicBody";
+									styleName = "letter_letHead_body";
 									break;
 								}
 								else if (xmlReader.IsStartElement() && xmlReader.Name == "span" && xmlReader["class"] == "letter")
 								{
-									styleName = "letHead_dicBody";
+									styleName = "letHead_body";
 									break;
 								}
 							}

@@ -1001,102 +1001,104 @@ namespace SIL.Tool
             bool resultTagClass, resultCoreClass, resultAncestor, resultParent, resultParentPrecede, resultPrecede;
             _tempStyle = new Dictionary<string, string>();
             _matchedCssStyleName = string.Empty;
-            foreach (string multiClass in multiClassList)
-            {
-                ArrayList cssClassDetail = new ArrayList();
-				if (_classFamily.ContainsKey(multiClass))
-				{
-					cssClassDetail = _classFamily[multiClass];
-				}
-                AddTagProperty(cssClassDetail, multiClass);
-                if (cssClassDetail == null) return _matchedCssStyleName;
+	        foreach (string multiClass in multiClassList)
+	        {
+		        ArrayList cssClassDetail = new ArrayList();
+		        if (_classFamily.ContainsKey(multiClass))
+		        {
+			        cssClassDetail = _classFamily[multiClass];
+		        }
+		        AddTagProperty(cssClassDetail, multiClass);
+		        if (cssClassDetail == null)
+			        return _matchedCssStyleName;
 
-                foreach (ClassInfo cssClassInfo in cssClassDetail)
-                {
-                    if (cssClassInfo.Pseudo == "footnote-call")
-                        _footnoteMarkerClass = cssClassInfo;
+		        foreach (ClassInfo cssClassInfo in cssClassDetail)
+		        {
+			        if (cssClassInfo.Pseudo == "footnote-call")
+				        _footnoteMarkerClass = cssClassInfo;
 
-                    if (cssClassInfo.Pseudo != psuedo) continue;
+			        if (cssClassInfo.Pseudo != psuedo) continue;
 
-					if (cssClassInfo.StyleName.IndexOf(".-", System.StringComparison.Ordinal) > 0 || cssClassInfo.StyleName.IndexOf("_", System.StringComparison.Ordinal) > 0)
-	                {
-						var xhtmlClassInfo = _allStyleInfo.ToArray();
+			        if (cssClassInfo.StyleName.IndexOf(".-", System.StringComparison.Ordinal) > 0 ||
+			            cssClassInfo.StyleName.IndexOf("_", System.StringComparison.Ordinal) > 0)
+			        {
+				        var xhtmlClassInfo = _allStyleInfo.ToArray();
 
-						var parentStyle = cssClassInfo.StyleName.Replace("span_", "").Replace("span.-", "");
-						parentStyle = parentStyle.Replace(".-", "_");
-						var clsNameList = parentStyle.Split('_').ToList();
+				        var parentStyle = cssClassInfo.StyleName.Replace("span_", "").Replace("span.-", "");
+				        parentStyle = parentStyle.Replace(".-", "_");
+				        var clsNameList = parentStyle.Split('_').ToList();
 
-						if (clsNameList[0] != cssClassInfo.CoreClass.ClassName)
-						{
-							clsNameList.Remove(cssClassInfo.CoreClass.ClassName);
-						}
+				        if (clsNameList[0] != cssClassInfo.CoreClass.ClassName)
+				        {
+					        clsNameList.Remove(cssClassInfo.CoreClass.ClassName);
+				        }
 
-						GetParentPrecedeClass(cssClassInfo);
+				        GetParentPrecedeClass(cssClassInfo);
 
-		                var currClsNameList = new ArrayList();
+				        var currClsNameList = new ArrayList();
 
-						foreach (ClassInfo clsName in xhtmlClassInfo)
-						{
-							if (clsName.CoreClass.ClassName.IndexOf(' ') > 0)
-							{
-								string[] mulltiClass = clsName.CoreClass.ClassName.Split(' ');
-								currClsNameList.AddRange(mulltiClass);
-							}
-							else
-							{
-								currClsNameList.Add(clsName.CoreClass.ClassName);
-							}
-						}
+				        foreach (ClassInfo clsName in xhtmlClassInfo)
+				        {
+					        if (clsName.CoreClass.ClassName.IndexOf(' ') > 0)
+					        {
+						        string[] mulltiClass = clsName.CoreClass.ClassName.Split(' ');
+						        currClsNameList.AddRange(mulltiClass);
+					        }
+					        else
+					        {
+						        currClsNameList.Add(clsName.CoreClass.ClassName);
+					        }
+				        }
 
-						//Consider only the list when is having greater than 2 classes
-		                if (cssClassInfo.StyleName.IndexOf("span") == 0 && clsNameList.Count > 1 && clsNameList.Any(t => !currClsNameList.Contains(t)))
-		                {
-			                currClsNameList = new ArrayList();
-		                }
+				        //Consider only the list when is having greater than 2 classes
+				        if (cssClassInfo.StyleName.IndexOf("span") == 0 && clsNameList.Count > 1 &&
+				            clsNameList.Any(t => !currClsNameList.Contains(t)))
+				        {
+					        currClsNameList = new ArrayList();
+				        }
 
-						if (currClsNameList.Count == 0) continue;
-	                }
+				        if (currClsNameList.Count == 0) continue;
+			        }
 
-	                resultCoreClass = CompareCoreClass(cssClassInfo.CoreClass, _xhtmlClassAttrib, multiClass);
-                    resultTagClass = true;
-                    if (cssClassInfo.TagName != string.Empty)
-                    {
-                        if (cssClassInfo.TagName != _tagType)
-                        {
-                            resultTagClass = false;
-                        }
-                    }
+			        resultCoreClass = CompareCoreClass(cssClassInfo.CoreClass, _xhtmlClassAttrib, multiClass);
+			        resultTagClass = true;
+			        if (cssClassInfo.TagName != string.Empty)
+			        {
+				        if (cssClassInfo.TagName != _tagType)
+				        {
+					        resultTagClass = false;
+				        }
+			        }
 
-                    resultAncestor = CompareClass(cssClassInfo.Ancestor);
-                    resultParent = CompareParentClass(cssClassInfo.parent);
-                    resultParentPrecede = CompareClass(cssClassInfo.ParentPrecede, _parentPrecedeClassAttrib);
-                    resultPrecede = CompareClass(cssClassInfo.Precede, _precedeClassAttrib);
+			        resultAncestor = CompareClass(cssClassInfo.Ancestor);
+			        resultParent = CompareParentClass(cssClassInfo.parent);
+			        resultParentPrecede = CompareClass(cssClassInfo.ParentPrecede, _parentPrecedeClassAttrib);
+			        resultPrecede = CompareClass(cssClassInfo.Precede, _precedeClassAttrib);
 
-                    if (resultCoreClass && resultTagClass && resultAncestor && resultParent && resultParentPrecede &&
-                        resultPrecede)
-                    {
-	                    AssignProperty(cssClassInfo.StyleName, ancestorFontSize);
-
-						if (_matchedCssStyleName == string.Empty)
-                        {
-                            _matchedCssStyleName = cssClassInfo.StyleName;
-                            if (psuedo == "before")
-                            {
-                                _psuedoBeforeStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
-                            }
-                            else if (psuedo == "after")
-                            {
-                                _psuedoAfterStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
-                            }
-                            else if (psuedo == "contains")
-                            {
-                                _psuedoContainsStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
-                            }
-                        }
-                    }
-                }
-            }
-            if (_outputType != Common.OutputType.ODT)
+			        if (resultCoreClass && resultTagClass && resultAncestor && resultParent && resultParentPrecede &&
+			            resultPrecede)
+			        {
+				        AssignProperty(cssClassInfo.StyleName, ancestorFontSize);
+				        if (_matchedCssStyleName == string.Empty)
+				        {
+					        _matchedCssStyleName = cssClassInfo.StyleName;
+					        if (psuedo == "before")
+					        {
+						        _psuedoBeforeStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
+					        }
+					        else if (psuedo == "after")
+					        {
+						        _psuedoAfterStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
+					        }
+					        else if (psuedo == "contains")
+					        {
+						        _psuedoContainsStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
+					        }
+				        }
+			        }
+		        }
+	        }
+	        if (_outputType != Common.OutputType.ODT)
             {
                 AppendParentProperty();
             }
@@ -1255,7 +1257,19 @@ namespace SIL.Tool
             {
                 return;
             }
-            foreach (KeyValuePair<string, string> property in IdAllClass[cssStyleName])
+
+	        if (cssStyleName.Contains("body"))
+	        {
+		        foreach (KeyValuePair<string, string> property in IdAllClass["body"])
+		        {
+			        if (_tempStyle.ContainsKey(property.Key))
+				        continue;
+
+			        _tempStyle[property.Key] = property.Value;
+		        }
+	        }
+
+	        foreach (KeyValuePair<string, string> property in IdAllClass[cssStyleName])
             {
                 if (_tempStyle.ContainsKey(property.Key)) continue;
 
@@ -1293,16 +1307,14 @@ namespace SIL.Tool
                                 _dictColumnGapEm[secClass]["columnGap"] = _tempStyle[property.Key] + "pt";
                                 _tempStyle[property.Key] = (-ancestorFontSize * value / 100).ToString();
 
-                                if (true)
-                                {
-                                    int counter;
-                                    string colGapValue = _dictColumnGapEm[secClass]["columnGap"];
-                                    string columnGap = Common.GetNumericChar(colGapValue, out counter);
-                                    float columnGapInch = Common.ConvertToInch(columnGap);
-                                    float expColumnGap = Common.ConvertToInch(_dictColumnGapEm[secClass]["pageWidth"]) - columnGapInch - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"])
-                                                 - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"]) / 2.0F;
-                                    Common.ColumnWidth = float.Parse(Common.UnitConverter(expColumnGap + "in", "pt"));
-                                }
+                                int counter;
+                                string colGapValue = _dictColumnGapEm[secClass]["columnGap"];
+                                string columnGap = Common.GetNumericChar(colGapValue, out counter);
+                                float columnGapInch = Common.ConvertToInch(columnGap);
+                                float expColumnGap = Common.ConvertToInch(_dictColumnGapEm[secClass]["pageWidth"]) - columnGapInch - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"])
+                                                - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"]) / 2.0F;
+                                Common.ColumnWidth = float.Parse(Common.UnitConverter(expColumnGap + "in", "pt"));
+                                
                             }
                         }
                         else
@@ -1318,11 +1330,12 @@ namespace SIL.Tool
                         _tempStyle[property.Key] = property.Value;
                 }
             }
+
 			string parentStyle = StackPeek(_allStyle);
-			if (_outputType == Common.OutputType.ODT && cssStyleName.Contains("_") && !String.IsNullOrEmpty(parentStyle) && parentStyle.Contains("_letData_dicBody"))
-			{				
+			if (_outputType == Common.OutputType.ODT)
+			{
 				var idAllCssClassName = string.Empty;
-				string matchStyle = cssStyleName.Replace(".", "") + Common.SepParent + parentStyle.Replace("_letData_dicBody", "");
+				string matchStyle = cssStyleName.Replace(".", "") + Common.SepParent + parentStyle.Replace("_letData_body", "");
 				bool styleMatch = false;
 				foreach (KeyValuePair<string, string> property in IdAllClassWithandWithoutSeperator)
 				{
@@ -1345,7 +1358,6 @@ namespace SIL.Tool
 					}
 				}
 			}
-
             WordCharSpace(ancestorFontSize);
         }
 

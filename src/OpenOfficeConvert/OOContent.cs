@@ -3299,7 +3299,7 @@ namespace SIL.PublishingSolution
 
 			if (_projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") > 0 && _projInfo.IsODM) return;
 
-			if (ChildName.IndexOf("letter_lethead_dicbody") == 0)
+			if (ChildName.IndexOf("letter_lethead_dicbody") == 0 || ChildName.IndexOf("letter_lethead_body") == 0)
 			{
 				_isEmptyPageInserted = true;
 				byte count = 0;

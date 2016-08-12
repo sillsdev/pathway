@@ -1119,7 +1119,8 @@ namespace SIL.PublishingSolution
 
                 if (retValue.Length != 7)
                 {
-                    throw new Exception("Parameter Length - Not Valid");
+                    //throw new Exception("Parameter Length - Not Valid");
+					return string.Empty;
                 }
 
                 return (retValue.Trim());
@@ -1127,7 +1128,8 @@ namespace SIL.PublishingSolution
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
-                throw new Exception(ex.Message);
+				return string.Empty;
+                //throw new Exception(ex.Message);
             }
         }
 

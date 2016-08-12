@@ -17,10 +17,10 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="reversalform_.en_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_reversalform_.en_entry_letData_dicBody" style:family="text" style:parent-style-name="reversalform_.en_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">

@@ -270,6 +270,7 @@ text-align: justify;
 	font-family: "Charis SIL";
 	font-size: 24pt;
 }
+
 .minorentry {
        text-align: left;
        margin-left: 12pt;
@@ -298,3 +299,23 @@ text-align: justify;
     text-align: center;
 }
 
+
+
+.entry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+display: inline;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .examplescontent {
+display: inline;
+}
+.mainentrysubsenses .extendednotecontents .extendednotecontent {
+display: inline;
+}
+.mainentrysubsenses .extendednotecontents .examplescontents .examplescontent {
+display: inline;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+display: inline;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .examplescontent {
+display: inline;
+}
