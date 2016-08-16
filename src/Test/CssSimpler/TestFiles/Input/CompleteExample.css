@@ -1,4 +1,4 @@
-
+﻿
 .letHead{
 	-moz-column-count:1;
 	-webkit-column-count:1;
@@ -9,52 +9,89 @@
 }
 
 .letter{
+	line-height:12pt;
 	padding-bottom:3pt;
 	padding-top:12pt;
-	font-size:10pt;
+	font-size:14pt;
 	font-weight:bold;
 }
-span[lang|="fr"]{
-		font-family:'Arial',serif;
+body{
 		font-size:10pt;
+	}
+span[lang|="fr"]{
+		font-family:'Times New Roman',serif;
 	}
 span[lang|="es"]{
 		font-family:'Times New Roman',serif;
-		font-size:10pt;
 	}
 span[lang|="en"]{
-		font-family:'Doulos SIL',serif;
-		font-size:10pt;
+		font-family:'Times New Roman',serif;
 	}
 span[lang|="tpi"]{
 		font-family:'Andika Basic',serif;
-		font-size:10pt;
 	}
 span[lang|="bzh-fonipa"]{
 		font-family:'Doulos SIL',serif;
-		font-size:10pt;
 	}
 span[lang|="bzh"]{
 		font-family:'Charis SIL',serif;
-		font-size:10pt;
 	}
 div.entry{
 		text-indent:-36pt;
 		margin-left:45pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:1pt;
+	}
+div.entry span[lang|="fr"]{
+	}
+div.entry span[lang|="es"]{
+	}
+div.entry span[lang|="en"]{
+	}
+div.entry span[lang|="tpi"]{
+	}
+div.entry span[lang|="bzh-fonipa"]{
+	}
+div.entry span[lang|="bzh"]{
 	}
 div.minorentrycomplex{
 		text-indent:-36pt;
 		margin-left:45pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:0pt;
+	}
+div.minorentrycomplex span[lang|="fr"]{
+	}
+div.minorentrycomplex span[lang|="es"]{
+	}
+div.minorentrycomplex span[lang|="en"]{
+	}
+div.minorentrycomplex span[lang|="tpi"]{
+	}
+div.minorentrycomplex span[lang|="bzh-fonipa"]{
+	}
+div.minorentrycomplex span[lang|="bzh"]{
 	}
 div.minorentryvariant{
 		text-indent:-36pt;
 		margin-left:45pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:0pt;
+	}
+div.minorentryvariant span[lang|="fr"]{
+	}
+div.minorentryvariant span[lang|="es"]{
+	}
+div.minorentryvariant span[lang|="en"]{
+	}
+div.minorentryvariant span[lang|="tpi"]{
+	}
+div.minorentryvariant span[lang|="bzh-fonipa"]{
+	}
+div.minorentryvariant span[lang|="bzh"]{
 	}
 a{
 		text-decoration:inherit;
@@ -67,9 +104,9 @@ a{
 .entry{
 		text-indent:-36pt;
 		margin-left:45pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:1pt;
-		font-size:10pt;
 	}
 .entry> .mainheadword> span[lang|="bzh"]{
 		font-weight:bold;
@@ -113,10 +150,10 @@ a{
 .entry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
 		content:' ';
 	}
-.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
 		content:' ';
 	}
 .entry> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
@@ -128,28 +165,49 @@ a{
 .entry> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
 		content:' ';
 	}
-.entry> .etymology:before{
+.entry .etymologies> .etymology+ .etymology:before{
 		content:' ';
 	}
-.entry> .etymology:after{
+.entry> .etymologies:before{
+		content:'(';
+	}
+.entry> .etymologies:after{
+		content:') ';
+	}
+.entry> .etymologies .etymology .preccomment> .preccommen+ .preccommen:before{
 		content:' ';
 	}
-.entry> .etymology .form> .for+ .for:before{
+.entry> .etymologies .etymology> .preccomment> span:last-child:after{
 		content:' ';
 	}
-.entry> .etymology> .form> span:last-child:after{
+.entry> .etymologies .etymology .language> .languag+ .languag:before{
 		content:' ';
 	}
-.entry> .etymology .gloss> .glos+ .glos:before{
+.entry> .etymologies .etymology> .language:after{
 		content:' ';
 	}
-.entry> .etymology> .gloss> span:last-child:after{
+.entry> .etymologies .etymology> .language .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.entry> .etymology .comment> .commen+ .commen:before{
+.entry> .etymologies .etymology> .language> .abbreviation:after{
 		content:' ';
 	}
-.entry> .etymology> .comment> span:last-child:after{
+.entry> .etymologies .etymology .form> .for+ .for:before{
+		content:' ';
+	}
+.entry> .etymologies .etymology> .form> span:last-child:after{
+		content:' ';
+	}
+.entry> .etymologies .etymology .gloss> .glos+ .glos:before{
+		content:' ';
+	}
+.entry> .etymologies .etymology> .gloss> span:last-child:after{
+		content:' ';
+	}
+.entry> .etymologies .etymology .bibliography> .bibliograph+ .bibliograph:before{
+		content:' ';
+	}
+.entry> .etymologies .etymology> .bibliography> span:last-child:after{
 		content:' ';
 	}
 .entry> .minimallexreferences> span+ span:before{
@@ -176,8 +234,43 @@ a{
 .entry> .minimallexreferences .minimallexreference> .configtargets:after{
 		content:' ';
 	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+		color:#936;
+	}
 .entry> .minimallexreferences .minimallexreference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
 		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+		color:#936;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .entrytypes> .entrytype+ .entrytype:before{
+		content:',';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes:after{
+		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes .entrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
 	}
 .entry> .senses> span.sensecontent+ span:before{
 		content:'  ';
@@ -191,28 +284,28 @@ a{
 .entry> .senses > .sensecontent .sensenumber:after{
 		content:') ';
 	}
-.entry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
 		content:' ';
 	}
-.entry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis{
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis{
 		font-style:italic;
 	}
-.entry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis .mlpartofspeech> .mlpartofspeec+ .mlpartofspeec:before{
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .mlpartofspeech> .mlpartofspeec+ .mlpartofspeec:before{
 		content:' ';
 	}
-.entry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis> .mlpartofspeech> span:last-child:after{
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .mlpartofspeech> span:last-child:after{
 		content:' ';
 	}
-.entry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
 		content:', ';
 	}
-.entry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
 		content:': ';
 	}
-.entry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
 		content:' ';
 	}
-.entry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
 		content:' ';
 	}
 .entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis:after{
@@ -323,8 +416,43 @@ a{
 .entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets:after{
 		content:' ';
 	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+		color:#F60;
+	}
 .entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
 		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+		color:#F60;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .entrytypes> .entrytype+ .entrytype:before{
+		content:',';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes .entrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
 	}
 .entry> .senses > .sensecontent > .sense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
 		content:'; ';
@@ -341,10 +469,10 @@ a{
 .entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
 		content:' ';
 	}
-.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
 		content:' ';
 	}
 .entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
@@ -357,6 +485,58 @@ a{
 		content:' ';
 	}
 .entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:-18pt;
+		margin-left:18pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:-18pt;
+		margin-left:18pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .discussion> span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent .discussion> .discussio+ .discussio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .discussion> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .discussion> span{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span[lang|="bzh"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
 		content:' ';
 	}
 .entry> .senses > .sensecontent > .sense> .scientificname:after{
@@ -422,7 +602,7 @@ a{
 .entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes:after{
 		content:' ';
 	}
-.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
 .entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry .headword> .headwor+ .headwor:before{
@@ -449,6 +629,12 @@ a{
 .entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot{
 		font-weight:bold;
 	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot> .headword> span{
+		font-weight:bold;
+	}
 .entry> .senses > .sensecontent > .sense> .senses> span+ span:before{
 		content:'  ';
 	}
@@ -470,10 +656,37 @@ a{
 .entry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes:after{
 		content:' ';
 	}
-.entry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
 .entry> .complexformsnotsubentries .complexformsnotsubentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry .morphosyntaxanalyses> .morphosyntaxanalysis+ .morphosyntaxanalysis:before{
+		content:', ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses:after{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .morphosyntaxanalyses .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
 		content:' ';
 	}
 .entry> .complexformsnotsubentries .complexformsnotsubentry .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
@@ -497,6 +710,12 @@ a{
 .entry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot{
 		font-weight:bold;
 	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.entry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot> .headword> span{
+		font-weight:bold;
+	}
 .entry .pictures .picture{
 		float:right;
 		text-align:center;
@@ -507,41 +726,59 @@ a{
 .entry .pictures .picture img{
 		max-height:1in;
 	}
-.entry> .pictures> span+ span:before{
+.entry> .pictures> div+ div:before{
 		content:'  ';
 	}
-.entry> .pictures:after{
+.entry> .pictures> div:last-child:after{
 		content:' ';
 	}
 .entry> .pictures .picture{
 		text-indent:0pt;
 		margin-left:0pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:0pt;
 	}
-.entry> .pictures .picture>  img:after{
+.entry> .pictures .picture> .captionContent  img:after{
 		content:' ';
 	}
-.entry> .pictures .picture> .captionContent .sensenumber:after{
-		content:' ';
+.entry> .pictures .picture> .captionContent .caption> span[lang|="en"]{
+		font-weight:bold;
+		color:#0F0;
 	}
 .entry> .pictures .picture .caption> .captio+ .captio:before{
 		content:' ';
 	}
+.entry> .pictures .picture> .captionContent .caption> span:first-child:before{
+		content:' ';
+	}
+.entry> .pictures .picture> .captionContent .caption> span{
+		font-weight:bold;
+		color:#0F0;
+	}
+.entry> .pictures .picture .owner_gloss> .owner_glos+ .owner_glos:before{
+		content:' ';
+	}
+.entry> .pictures .picture> .captionContent .owner_gloss:before{
+		content:' ';
+	}
+.entry> .pictures .picture> .captionContent .owner_gloss:after{
+		content:' ';
+	}
 .entry> .subentries .subentry{
 		text-indent:0pt;
-		margin-left:0pt;
+		margin-left:11.693pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:0pt;
-		font-size:10pt;
 		display:block;
 	}
 .entry> .subentries .subentry{
 		text-indent:0pt;
-		margin-left:0pt;
+		margin-left:11.693pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:0pt;
-		font-size:10pt;
 		display:block;
 	}
 .minorentrycomplex{
@@ -551,6 +788,7 @@ a{
 .minorentrycomplex{
 		text-indent:-36pt;
 		margin-left:45pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:0pt;
 	}
@@ -596,10 +834,10 @@ a{
 .minorentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
 		content:' ';
 	}
-.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+.minorentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
 		content:' ';
 	}
 .minorentrycomplex> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
@@ -623,10 +861,10 @@ a{
 .minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes:after{
 		content:' ';
 	}
-.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
 		content:' ';
 	}
-.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+.minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
 		content:' ';
 	}
 .minorentrycomplex> .visiblevariantentryrefs .visiblevariantentryref .referencedentries> .referencedentry+ .referencedentry:before{
@@ -671,10 +909,10 @@ a{
 .minorentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes:after{
 		content:' ';
 	}
-.minorentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
 		content:' ';
 	}
-.minorentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype> .abbreviation> span:last-child:after{
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype> .reverseabbr> span:last-child:after{
 		content:' ';
 	}
 .minorentrycomplex> .complexformentryrefs .complexformentryref .referencedentries> .referencedentry+ .referencedentry:before{
@@ -683,8 +921,16 @@ a{
 .minorentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries:before{
 		content:' ';
 	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+		color:#F00;
+	}
 .minorentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry .headword> .headwor+ .headwor:before{
 		content:' ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+		color:#F00;
 	}
 .minorentrycomplex> .complexformentryrefs .complexformentryref .summary> .summar+ .summar:before{
 		content:' ';
@@ -697,6 +943,12 @@ a{
 	}
 .minorentrycomplex> .complexformentryrefs .complexformentryref> .nontrivialentryroots:before{
 		content:', see under ';
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .nontrivialentryroots .nontrivialentryroot> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.minorentrycomplex> .complexformentryrefs .complexformentryref> .nontrivialentryroots .nontrivialentryroot> .headword> span{
+		font-weight:bold;
 	}
 .minorentrycomplex .summarydefinition> .summarydefinitio+ .summarydefinitio:before{
 		content:' ';
@@ -716,7 +968,7 @@ a{
 .minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes:after{
 		content:' ';
 	}
-.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+.minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
 .minorentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="bzh"]{
@@ -753,6 +1005,7 @@ a{
 .minorentryvariant{
 		text-indent:-36pt;
 		margin-left:45pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:0pt;
 	}
@@ -798,10 +1051,10 @@ a{
 .minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
 		content:' ';
 	}
-.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
 		content:' ';
 	}
 .minorentryvariant> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
@@ -825,10 +1078,10 @@ a{
 .minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes:after{
 		content:' ';
 	}
-.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
 		content:' ';
 	}
-.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
 		content:' ';
 	}
 .minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref .referencedentries> .referencedentry+ .referencedentry:before{
@@ -837,8 +1090,16 @@ a{
 .minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries:before{
 		content:' ';
 	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+		color:#00F;
+	}
 .minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .headword> .headwor+ .headwor:before{
 		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+		color:#00F;
 	}
 .minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .glossorsummary> .glossorsummar+ .glossorsummar:before{
 		content:' ';
@@ -867,10 +1128,10 @@ a{
 .minorentryvariant> .complexformentryrefs .complexformentryref> .complexformtypes:after{
 		content:' ';
 	}
-.minorentryvariant> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+.minorentryvariant> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
 		content:' ';
 	}
-.minorentryvariant> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype> .abbreviation> span:last-child:after{
+.minorentryvariant> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype> .reverseabbr> span:last-child:after{
 		content:' ';
 	}
 .minorentryvariant> .complexformentryrefs .complexformentryref .referencedentries> .referencedentry+ .referencedentry:before{
@@ -900,6 +1161,12 @@ a{
 .minorentryvariant> .complexformentryrefs .complexformentryref> .nontrivialentryroots:before{
 		content:', see under ';
 	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .nontrivialentryroots .nontrivialentryroot> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .complexformentryrefs .complexformentryref> .nontrivialentryroots .nontrivialentryroot> .headword> span{
+		font-weight:bold;
+	}
 .minorentryvariant .summarydefinition> .summarydefinitio+ .summarydefinitio:before{
 		content:' ';
 	}
@@ -918,7 +1185,7 @@ a{
 .minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes:after{
 		content:' ';
 	}
-.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
 .minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="bzh"]{
@@ -1042,6 +1309,33 @@ a{
 .mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
 		font-weight:bold;
 	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .complexformtypes> .complexformtype+ .complexformtype:before{
+		content:',';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
 .mainentrysubsenses .mainentrysubsense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
 		content:'; ';
 	}
@@ -1057,10 +1351,10 @@ a{
 .mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
 		content:' ';
 	}
-.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
 		content:' ';
 	}
 .mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
@@ -1070,6 +1364,58 @@ a{
 		content:' ';
 	}
 .mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent{
+		text-indent:-18pt;
+		margin-left:18pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent{
+		text-indent:-18pt;
+		margin-left:18pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .discussion> span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent .discussion> .discussio+ .discussio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .discussion> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .discussion> span{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span[lang|="bzh"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
 		content:' ';
 	}
 .mainentrysubsenses .mainentrysubsense> .scientificname:after{
@@ -1135,7 +1481,7 @@ a{
 .mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes:after{
 		content:' ';
 	}
-.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
 .mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry .headword> .headwor+ .headwor:before{
@@ -1162,10 +1508,16 @@ a{
 .mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot{
 		font-weight:bold;
 	}
-.sensenumber{
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot> .headword> span[lang|="bzh"]{
 		font-weight:bold;
 	}
-.sensenumber:after{
+.mainentrysubsenses .mainentrysubsense> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot> .headword> span{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .subsenses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .subsenses > .sensecontent .sensenumber:after{
 		content:') ';
 	}
 .mainentrysubentries .mainentrysubentry{
@@ -1190,13 +1542,13 @@ a{
 .mainentrysubentries .mainentrysubentry> .complexformtypes:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+.mainentrysubentries .mainentrysubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .complexformtypes .complexformtype> .reverseabbr> span:first-child:before{
+.mainentrysubentries .mainentrysubentry> .complexformtypes .complexformtype> .abbreviation> span:first-child:before{
 		content:'(';
 	}
-.mainentrysubentries .mainentrysubentry> .complexformtypes .complexformtype> .reverseabbr> span:last-child:after{
+.mainentrysubentries .mainentrysubentry> .complexformtypes .complexformtype> .abbreviation> span:last-child:after{
 		content:')';
 	}
 .mainentrysubentries .mainentrysubentry .pronunciations> .pronunciation+ .pronunciation:before{
@@ -1229,10 +1581,10 @@ a{
 .mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+.mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
@@ -1244,28 +1596,49 @@ a{
 .mainentrysubentries .mainentrysubentry> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .etymology:before{
+.mainentrysubentries .mainentrysubentry .etymologies> .etymology+ .etymology:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .etymology:after{
+.mainentrysubentries .mainentrysubentry> .etymologies:before{
+		content:'(';
+	}
+.mainentrysubentries .mainentrysubentry> .etymologies:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology .preccomment> .preccommen+ .preccommen:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .etymology .form> .for+ .for:before{
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology> .preccomment> span:last-child:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .etymology> .form> span:last-child:after{
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology .language> .languag+ .languag:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .etymology .gloss> .glos+ .glos:before{
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology> .language:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .etymology> .gloss> span:last-child:after{
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology> .language .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .etymology .comment> .commen+ .commen:before{
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology> .language> .abbreviation:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .etymology> .comment> span:last-child:after{
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology .form> .for+ .for:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology> .form> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology .gloss> .glos+ .glos:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology> .gloss> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology .bibliography> .bibliograph+ .bibliograph:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .etymologies .etymology> .bibliography> span:last-child:after{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .minimallexreferences> span+ span:before{
@@ -1292,8 +1665,43 @@ a{
 .mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets:after{
 		content:' ';
 	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+		color:#3CC;
+	}
 .mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
 		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+		color:#3CC;
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .entrytypes> .entrytype+ .entrytype:before{
+		content:',';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes .entrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
 	}
 .mainentrysubentries .mainentrysubentry> .senses> span.sensecontent+ span:before{
 		content:' ';
@@ -1307,28 +1715,28 @@ a{
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent .sensenumber:after{
 		content:') ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis{
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis{
 		font-style:italic;
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis .mlpartofspeech> .mlpartofspeec+ .mlpartofspeec:before{
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .mlpartofspeech> .mlpartofspeec+ .mlpartofspeec:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis> .mlpartofspeech> span:last-child:after{
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .mlpartofspeech> span:last-child:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
 		content:', ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
 		content:': ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+.mainentrysubentries .mainentrysubentry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .morphosyntaxanalysis:after{
@@ -1439,8 +1847,43 @@ a{
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets:after{
 		content:' ';
 	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+		color:#008000;
+	}
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
 		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+		color:#008000;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .entrytypes> .entrytype+ .entrytype:before{
+		content:',';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes .entrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
 	}
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
 		content:'; ';
@@ -1457,10 +1900,10 @@ a{
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
@@ -1473,6 +1916,58 @@ a{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:-18pt;
+		margin-left:6.306999pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:-18pt;
+		margin-left:6.306999pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+		display:block;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .discussion> span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent .discussion> .discussio+ .discussio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .discussion> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .discussion> span{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span[lang|="bzh"]{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .scientificname:after{
@@ -1538,7 +2033,7 @@ a{
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
@@ -1563,6 +2058,12 @@ a{
 		content:') ';
 	}
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots .nontrivialentryroot{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots .nontrivialentryroot> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .nontrivialentryroots .nontrivialentryroot> .headword> span{
 		font-weight:bold;
 	}
 .mainentrysubentries .mainentrysubentry> .senses > .sensecontent > .sense> .senses> span+ span:before{
@@ -1592,7 +2093,7 @@ a{
 .mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes:after{
 		content:' ';
 	}
-.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry .headword> .headwor+ .headwor:before{
@@ -1619,6 +2120,12 @@ a{
 .mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot{
 		font-weight:bold;
 	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot> .headword> span[lang|="bzh"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .complexformsnotsubentries .complexformsnotsubentry> .nontrivialentryroots .nontrivialentryroot> .headword> span{
+		font-weight:bold;
+	}
 .mainentrysubentries .mainentrysubentry .pictures .picture{
 		float:right;
 		text-align:center;
@@ -1629,24 +2136,40 @@ a{
 .mainentrysubentries .mainentrysubentry .pictures .picture img{
 		max-height:1in;
 	}
-.mainentrysubentries .mainentrysubentry> .pictures> span+ span:before{
+.mainentrysubentries .mainentrysubentry> .pictures> div+ div:before{
 		content:'  ';
 	}
-.mainentrysubentries .mainentrysubentry> .pictures:after{
+.mainentrysubentries .mainentrysubentry> .pictures> div:last-child:after{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .pictures .picture{
 		text-indent:0pt;
-		margin-left:0pt;
+		margin-left:-11.693pt;
+		line-height:12pt;
 		padding-bottom:2pt;
 		padding-top:0pt;
 	}
-.mainentrysubentries .mainentrysubentry> .pictures .picture>  img:after{
-		content:' ';
-	}
-.mainentrysubentries .mainentrysubentry> .pictures .picture> .sensenumber:after{
+.mainentrysubentries .mainentrysubentry> .pictures .picture> .captionContent  img:after{
 		content:' ';
 	}
 .mainentrysubentries .mainentrysubentry> .pictures .picture .caption> .captio+ .captio:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture> .captionContent .headword[lang|="bzh"]{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture> .captionContent .headword:after{
+		content:'  ';
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture> .captionContent .headword{
+		font-weight:bold;
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture .owner_gloss> .owner_glos+ .owner_glos:before{
+		content:' ';
+	}
+.mainentrysubentries .mainentrysubentry> .pictures .picture> .captionContent .owner_gloss:after{
 		content:' ';
 	}

@@ -34,7 +34,6 @@ namespace CssSimpler
         private static bool _makeBackup;
 
         protected static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
-        protected static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
         protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
         protected static List<string> UniqueClasses;
         private static readonly XmlReaderSettings ReaderSettings = new XmlReaderSettings { XmlResolver = new NullResolver(), DtdProcessing = DtdProcessing.Ignore };
@@ -43,9 +42,7 @@ namespace CssSimpler
         static void Main(string[] args)
         {
             XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"CssSimpler.XmlCss.xsl"), ReaderSettings), XsltSettings, new NullResolver());
-            SimplifyXmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"CssSimpler.XmlCssSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
+				"CssSimpler.XmlCss.xsl")));
             SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "CssSimpler.XhtmlSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
             // see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
@@ -112,7 +109,6 @@ namespace CssSimpler
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
-            //WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var fs = new FlattenStyles(tmp3Out, extra[0], xml, NeedHigher);
             WriteXmlAsCss(styleSheet, fs.MakeFlatCss());
             try
@@ -338,32 +334,6 @@ namespace CssSimpler
             reader.Close();
             ifs.Close();
             return outfile;
-        }
-
-        protected static void WriteSimpleCss(string styleSheet, XmlDocument xml)
-        {
-			if (string.IsNullOrEmpty(styleSheet) || !File.Exists(styleSheet))
-	        {
-				throw new ArgumentNullException("styleSheet");
-	        }
-            VerboseMessage("Writing Simple Stylesheet: {0}", styleSheet);
-            var xmlStream = new MemoryStream();
-            xml.Save(xmlStream);
-            xmlStream.Flush();
-            xmlStream.Position = 0;
-            var xmlReader = XmlReader.Create(xmlStream, ReaderSettings);
-            var memory = new MemoryStream();
-            SimplifyXmlCss.Transform(xmlReader, null, memory);
-            memory.Flush();
-            memory.Position = 0;
-            var cssReader = XmlReader.Create(memory, ReaderSettings);
-            var cssFile = new FileStream(styleSheet, FileMode.Create);
-            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
-            XmlCss.Transform(cssReader, null, cssWriter);
-            cssFile.Close();
-            xml.RemoveAll();
-            memory.Position = 0;
-            xml.Load(memory);
         }
 
         protected static void RemoveCssPseudo(string styleSheet, XmlDocument xml)

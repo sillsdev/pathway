@@ -46,8 +46,7 @@ namespace Test.CssSimplerTest
             SimplifyXhtml.Load(XmlReader.Create(new StreamReader(xhtmlSimplifyName)));
             var xmlCssName = _testFiles.Input(@"..\..\..\..\CssSimpler\XmlCss.xsl");
             XmlCss.Load(XmlReader.Create(new StreamReader(xmlCssName)));
-            var xmlCssSimplifyName = _testFiles.Input(@"..\..\..\..\CssSimpler\XmlCssSimplify.xsl");
-            SimplifyXmlCss.Load(XmlReader.Create(new StreamReader(xmlCssSimplifyName)));
+            // ReSharper restore AssignNullToNotNullAttribute
         }
         #endregion Setup
 
@@ -67,53 +66,6 @@ namespace Test.CssSimplerTest
             TextFileAssert.AreEqual(_testFiles.Expected(cssName), _testFiles.Output(cssName), "Css errors not removed properly");
         }
 
-        /// <summary>
-        ///A test for WriteSimpleXhtml
-        ///</summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void WriteSimpleXhtmlTest1()
-        {
-            WriteSimpleXhtml(null);
-        }
-
-        /// <summary>
-        ///A test for WriteSimpleXhtml
-        ///</summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void WriteSimpleXhtmlTest2()
-        {
-            const string testName = "WriteSimpleXhtmlTest2";
-            string xhtmlFullName = testName + ".xhtml";
-            WriteSimpleXhtml(xhtmlFullName);
-        }
-
-        /// <summary>
-        ///A test for WriteSimpleXhtml
-        ///</summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void WriteSimpleXhtmlTest3()
-        {
-            const string testName = "WriteSimpleXhtmlTest3";
-            string xhtmlFullName = _testFiles.Output(testName + ".xhtml");
-            WriteSimpleXhtml(xhtmlFullName);
-        }
-
-        /// <summary>
-        ///A test for WriteSimpleXhtml
-        ///</summary>
-        [Test]
-        public void WriteSimpleXhtmlTest4()
-        {
-            const string testName = "WriteSimpleXhtmlTest4";
-            var fileName = testName + ".xhtml";
-            _testFiles.Copy(fileName);
-            string xhtmlFullName = _testFiles.Output(fileName);
-            WriteSimpleXhtml(xhtmlFullName);
-        }
-
 		/// <summary>
 		///A test for WriteSimpleXhtml
 		/// Checks whether the body tag has the class dicBody
@@ -125,78 +77,9 @@ namespace Test.CssSimplerTest
 			var fileName = testName + ".xhtml";
 			_testFiles.Copy(fileName);
 			string xhtmlFullName = _testFiles.Output(fileName);
-            var outFile = WriteSimpleXhtml(xhtmlFullName);
-			var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver() };
-			var xhtml = new XmlDocument();
-			xhtml.Load(XmlReader.Create(outFile, settings));
-			var checkClass = xhtml.SelectSingleNode("//*[local-name()='body'][@class='dicBody']");
-			Assert.IsNotNull(checkClass);
+		    var outXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+            NodeTest(outXhtmlFullName, 1, "//*[local-name()='body'][@class='dicBody']", "missing dicBody class");
 		}
-
-        /// <summary>
-        ///A test for WriteSimpleCss
-        ///</summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void WriteSimpleCssTest1()
-        {
-            WriteSimpleCss(null, null);
-        }
-
-        /// <summary>
-        ///A test for WriteSimpleCss
-        ///</summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void WriteSimpleCssTest2()
-        {
-            var stylesheet = string.Empty;
-            var xml = new XmlDocument();
-            WriteSimpleCss(stylesheet, xml);
-        }
-
-        /// <summary>
-        ///A test for WriteSimpleCss
-        ///</summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void WriteSimpleCssTest3()
-        {
-            const string testName = "WriteSimpleCssTest3";
-            var stylesheet = testName + ".css";
-            var xml = new XmlDocument();
-            WriteSimpleCss(stylesheet, xml);
-        }
-
-        /// <summary>
-        ///A test for WriteSimpleCss
-        ///</summary>
-        [Test]
-        [ExpectedException(typeof(XmlException))]
-        public void WriteSimpleCssTest4()
-        {
-            const string testName = "WriteSimpleCssTest4";
-            var fileName = testName + ".css";
-            _testFiles.Copy(fileName);
-            var stylesheet = _testFiles.Output(fileName);
-            var xml = new XmlDocument();
-            WriteSimpleCss(stylesheet, xml);
-        }
-
-        /// <summary>
-        ///A test for WriteSimpleCss
-        ///</summary>
-        [Test]
-        public void WriteSimpleCssTest5()
-        {
-            const string testName = "WriteSimpleCssTest5";
-            var fileName = testName + ".css";
-            _testFiles.Copy(fileName);
-            var stylesheet = _testFiles.Output(fileName);
-            var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
-            WriteSimpleCss(stylesheet, xml);
-        }
 
         /// <summary>
         ///A test for AddSubTree
@@ -342,17 +225,26 @@ namespace Test.CssSimplerTest
         [Test]
         public void CompleteExampleTest()
         {
-            const string testName = "completeExample";
+            const string testName = "CompleteExample";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            var outFile = WriteSimpleXhtml(xhtmlFullName);
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver() };
-            var xhtml = new XmlDocument();
-            xhtml.Load(XmlReader.Create(outFile, settings));
-            var exampeNodes = xhtml.SelectNodes("//*[@class='complete']/*[@class='example']");
-            Debug.Assert(exampeNodes != null, "Missing comlete example nodes results!");
-            Assert.AreEqual(2, exampeNodes.Count);
+            var outFullName = WriteSimpleXhtml(xhtmlFullName);
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            LoadCssXml(ctp, cssFullName, xml);
+            var tmpOut = Path.GetTempFileName();
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml, NeedHigher);
+            RemoveCssPseudo(cssFullName, xml);
+            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher);
+            WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
+            NodeTest(outFullName, 2, "//*[starts-with(@class,'example')]", "wrong number of example nodes");
         }
 
         /// <summary>
@@ -362,166 +254,26 @@ namespace Test.CssSimplerTest
         public void PicturesXhtmlTest()
         {
             const string testName = "pictures";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
             var fileName = testName + ".xhtml";
             _testFiles.Copy(fileName);
             string xhtmlFullName = _testFiles.Output(fileName);
-            var outFile = WriteSimpleXhtml(xhtmlFullName);
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver() };
-            var xhtml = new XmlDocument();
-            xhtml.Load(XmlReader.Create(outFile, settings));
-            var picturesNodes = xhtml.SelectSingleNode("//*[local-name()='span'][@class='pictures']");
-            Assert.IsNull(picturesNodes);
-            var pictureNode = xhtml.SelectNodes("//*[@class='picture']");
-            Debug.Assert(pictureNode != null, "missing picture node results!");
-            Assert.AreEqual(1, pictureNode.Count);
-        }
-
-        /// <summary>
-        ///A test for removal of rules beginning with div at root.
-        ///</summary>
-        [Test]
-        public void DivEntryTest()
-        {
-            const string testName = "divEntry";
-            var fileName = testName + ".css";
+            var outFullName = WriteSimpleXhtml(xhtmlFullName);
             var ctp = new CssTreeParser();
-            ctp.Parse(_testFiles.Input(fileName));
-            var root = ctp.Root;
-            Assert.True(root != null);
             var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
-            UniqueClasses = new List<string> {"entry"};
-            AddSubTree(xml.DocumentElement, root, ctp);
-            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            _testFiles.Copy(fileName);
-            var resultFile = _testFiles.Output(fileName);
-            WriteSimpleCss(resultFile, xml);
-            var result = FileData.Get(resultFile);
-            Assert.True(result.StartsWith(".entry"));
-        }
-
-        /// <summary>
-        ///A test for removal of pictures from rules
-        ///</summary>
-        [Test]
-        public void PicturesCssTest()
-        {
-            const string testName = "pictures";
-            var fileName = testName + ".css";
-            var ctp = new CssTreeParser();
-            ctp.Parse(_testFiles.Input(fileName));
-            var root = ctp.Root;
-            Assert.True(root != null);
-            var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
-            UniqueClasses = new List<string> { "entry", "pictures", "picture" };
-            AddSubTree(xml.DocumentElement, root, ctp);
-            _testFiles.Copy(fileName);
-            var resultFile = _testFiles.Output(fileName);
-            WriteSimpleCss(resultFile, xml);
-            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            Assert.IsNull(xml.SelectSingleNode("//RULE[1]//name[text()='pictures']"));
-            Assert.IsNull(xml.SelectSingleNode("//RULE[2]//name[text()='pictures']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[3]//name[text()='pictures']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[4]//name[text()='pictures']"));
-        }
-
-        /// <summary>
-        ///A test for removal of pictures from rules
-        ///</summary>
-        [Test]
-        public void ExampleCssTest()
-        {
-            const string testName = "exampleCss";
-            var fileName = testName + ".css";
-            var ctp = new CssTreeParser();
-            ctp.Parse(_testFiles.Input(fileName));
-            var root = ctp.Root;
-            Assert.True(root != null);
-            var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
-            UniqueClasses = new List<string> { "entry", "senses", "sense", "examples", "example", "translations", "translation" };
-            AddSubTree(xml.DocumentElement, root, ctp);
-            _testFiles.Copy(fileName);
-            var resultFile = _testFiles.Output(fileName);
-            WriteSimpleCss(resultFile, xml);
-            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            Assert.IsNull(xml.SelectSingleNode("//RULE[1]//name[text()='example']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]//name[text()='complete']"));
-            Assert.IsNull(xml.SelectSingleNode("//RULE[2]//name[text()='example']"));
-            Assert.IsNull(xml.SelectSingleNode("//RULE[2]//name[text()='complete']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[3]//name[text()='example']"));
-            Assert.IsNull(xml.SelectSingleNode("//RULE[3]//name[text()='complete']"));
-            Assert.IsNull(xml.SelectSingleNode("//RULE[6]//name[text()='example']"));
-            Assert.IsNull(xml.SelectSingleNode("//RULE[6]//name[text()='complete']"));
-        }
-
-        [Test]
-        public void AnyTest()
-        {
-            const string testName = "Any";
-            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver() };
-            var xml = new XmlDocument();
-            var inFullName = _testFiles.Input(testName + ".xml");
-            xml.Load(XmlReader.Create(inFullName, settings));
-            var outFullName = _testFiles.Output(testName + ".css");
-            File.Copy(inFullName, outFullName);
-            WriteSimpleCss(outFullName, xml);
-            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), outFullName);
-        }
-
-        /// <summary>
-        ///A test for senses within senses
-        ///</summary>
-        [Test]
-        public void SenseSenseCssTest()
-        {
-            const string testName = "senseSenseCss";
-            var fileName = testName + ".css";
-            var ctp = new CssTreeParser();
-            ctp.Parse(_testFiles.Input(fileName));
-            var root = ctp.Root;
-            Assert.True(root != null);
-            var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
-            UniqueClasses = new List<string> { "entry", "senses", "sense", "sensecontent", "sensenumber", "sensetype"};
-            AddSubTree(xml.DocumentElement, root, ctp);
-            _testFiles.Copy(fileName);
-            var resultFile = _testFiles.Output(fileName);
-            WriteSimpleCss(resultFile, xml);
-            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[2][local-name()='PARENTOF']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[3]/name[text()='senses']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[6]/name[text()='senses']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[7][local-name()='PARENTOF']"));
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[8]/name[text()='span']"));
-        }
-
-        /// <summary>
-        ///A test for subentry within subentry
-        ///</summary>
-        [Test]
-        public void SubentryCssTest()
-        {
-            const string testName = "subentryCss";
-            var fileName = testName + ".css";
-            var ctp = new CssTreeParser();
-            ctp.Parse(_testFiles.Input(fileName));
-            var root = ctp.Root;
-            Assert.True(root != null);
-            var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
-            UniqueClasses = new List<string> { "entry", "subentries", "subentry" };
-            AddSubTree(xml.DocumentElement, root, ctp);
-            _testFiles.Copy(fileName);
-            var resultFile = _testFiles.Output(fileName);
-            WriteSimpleCss(resultFile, xml);
-            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[2]/name[text()='subentries']"), "first subentries level missing");
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[3]/name[text()='subentries']"), "second subentries level missing");
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[4]/name[text()='subentry']"), "subentry under subentries missing");
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[2]/*[2]/name[text()='subentries']"), "subentries context in second rule missing");
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[2]/*[3]/name[text()='subentry']"), "subentry not where it would normally be in the second rule");
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            LoadCssXml(ctp, cssFullName, xml);
+            var tmpOut = Path.GetTempFileName();
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml, NeedHigher);
+            RemoveCssPseudo(cssFullName, xml);
+            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher);
+            WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
+            NodeTest(outFullName, 0, "//*[local-name()='span'][@class='pictures']", "pictures node present when it shouldn't be");
+            NodeTest(outFullName, 1, "//*[@class='picture']", "picture node missing");
         }
 
         /// <summary>
@@ -536,30 +288,6 @@ namespace Test.CssSimplerTest
             Assert.AreEqual(47, result.UniqueClasses.Count);
             // subentry is not a class on its own but is listed with another class and the two names are separated with a space
             Assert.True(result.UniqueClasses.Contains("subentry"), "subentry class missing");
-        }
-
-        /// <summary>
-        ///A test for subentry within subentry
-        ///</summary>
-        [Test]
-        public void TagClassTest()
-        {
-            const string testName = "tagClass";
-            var fileName = testName + ".css";
-            var ctp = new CssTreeParser();
-            ctp.Parse(_testFiles.Input(fileName));
-            var root = ctp.Root;
-            Assert.True(root != null);
-            var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
-            UniqueClasses = new List<string> { "entry", "senses", "sensecontent" };
-            AddSubTree(xml.DocumentElement, root, ctp);
-            _testFiles.Copy(fileName);
-            var resultFile = _testFiles.Output(fileName);
-            WriteSimpleCss(resultFile, xml);
-            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[3]/name[text()='senses']"), "expeted senses retained");
-            Assert.IsNotNull(xml.SelectSingleNode("//RULE[1]/*[5]/name[text()='sensecontent']"), "expected sensecontent (w/o span tag)");
         }
 
         /// <summary>
@@ -649,7 +377,6 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             OutputXml = true;
             LoadCssXml(parser, styleSheet, xml);
-            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
             var tmp2Out = Path.GetTempFileName();
             new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
@@ -804,7 +531,6 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             OutputXml = true;
             LoadCssXml(parser, styleSheet, xml);
-            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
             var tmp2Out = Path.GetTempFileName();
             new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
@@ -845,37 +571,10 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 3023, "//*[@xml:space]", "Nodes with pseudo content changed for Fw 8.2.8");
-        }
-
-        /// <summary>
-        /// A test to use the css to insert pseudo content into xhtml
-        /// </summary>
-        [Test]
-        public void PseudoProcessTest()
-        {
-            const string testName = "PseudoProcess";
-            var cssFullName = _testFiles.Input(testName + ".css");
-            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
-            var outFullName = _testFiles.Output(testName + ".xhtml");
-            var ctp = new CssTreeParser();
-            ctp.Parse(cssFullName);
-            var root = ctp.Root;
-            Assert.True(root != null);
-            var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
-            var lc = new LoadClasses(xhtmlFullName);
-            UniqueClasses = lc.UniqueClasses;
-            AddSubTree(xml.DocumentElement, root, ctp);
-            _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
-            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
-            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
         }
 
         /// <summary>
@@ -924,7 +623,6 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
@@ -1034,12 +732,15 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
-            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), _testFiles.Output(testName + ".xhtml"), "Xhtml file not converted as expected");
+            var tmp2OutFullName = Path.GetTempFileName();
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(xhtmlFullName, tmp2OutFullName, xml, NeedHigher);
+            RemoveCssPseudo(cssFullName, xml);
+            var fs = new FlattenStyles(tmp2OutFullName, outFullName, xml, NeedHigher);
+            WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
+            XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), outFullName, "Xhtml file not converted as expected");
         }
 
         /// <summary>
@@ -1114,10 +815,13 @@ namespace Test.CssSimplerTest
             _testFiles.Copy(testName + ".css");
             LoadCssXml(ctp, cssFullName, xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
-            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
-            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+            var tmp2Out = Path.GetTempFileName();
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(xhtmlFullName, tmp2Out, xml, NeedHigher);
+            RemoveCssPseudo(cssFullName, xml);
+            var fs = new FlattenStyles(tmp2Out, outFullName, xml, NeedHigher);
+            WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
         }
 
         /// <summary>
@@ -1141,7 +845,6 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 1, "//*[@class='sensecontent']/*[@xml:space]", "comma between sense content");
         }
 
@@ -1178,12 +881,11 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
-            WriteSimpleCss(cssFullName, xml); //reloads xml with simplified version
             var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
             var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher);
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
-            //NodeTest(flatFullName, 4, "//*[starts-with(@class,'headword-st')]", "headword with styles");
-            //TextFileAssert.AreEqual(_testFiles.Expected(flatCssName), _testFiles.Output(flatCssName));
+            NodeTest(flatFullName, 1, "//*[starts-with(@class,'picture')]", "picture node missing");
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
         }
 
         /// <summary>
@@ -1204,7 +906,6 @@ namespace Test.CssSimplerTest
             ctp.Parse(cssFullName);
             _testFiles.Copy(testName + ".css");
             LoadCssXml(ctp, cssFullName, xml);
-            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
@@ -1367,7 +1068,6 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
@@ -1395,7 +1095,6 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
