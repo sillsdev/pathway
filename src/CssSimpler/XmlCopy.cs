@@ -216,6 +216,11 @@ namespace CssSimpler
 
         protected void WriteContent(string val, string myClass, string myLang)
         {
+            WriteContent(val, myClass, myLang, true);
+        }
+
+        protected void WriteContent(string val, string myClass, string myLang, bool quotedEntities)
+        {
             //var ns = new XmlNamespaceManager(_rdr.NameTable);
             _wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
             if (!string.IsNullOrEmpty(myClass))
@@ -230,7 +235,7 @@ namespace CssSimpler
             {
                 _wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");
             }
-            if (val.Contains(@"\"))
+            if (quotedEntities && val.Contains(@"\"))
             {
                 WriteValueEmbedEntities(val);
             }

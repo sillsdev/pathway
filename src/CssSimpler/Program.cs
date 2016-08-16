@@ -93,7 +93,7 @@ namespace CssSimpler
             }
             var lc = new LoadClasses(extra[0]);
             var styleSheet = lc.StyleSheet;
-            MakeBaskupIfNecessary(styleSheet, extra[0]);
+            MakeBackupIfNecessary(styleSheet, extra[0]);
             DebugWriteClassNames(lc.UniqueClasses);
             VerboseMessage("Clean up Stylesheet: {0}", styleSheet);
             var parser = new CssTreeParser();
@@ -107,14 +107,18 @@ namespace CssSimpler
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
+            var tmp3Out = Path.GetTempFileName();
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
+            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
             WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            var fs = new FlattenStyles(tmp3Out, extra[0], xml, NeedHigher);
+            WriteXmlAsCss(styleSheet, fs.MakeFlatCss());
             try
             {
                 File.Delete(tmpXhtmlFullName);
                 File.Delete(tmp2Out);
+                File.Delete(tmp3Out);
             }
             catch
             {
@@ -393,7 +397,7 @@ namespace CssSimpler
             cssFile.Close();
         }
 
-        private static void MakeBaskupIfNecessary(string styleSheet, string xhtmlFullName)
+        private static void MakeBackupIfNecessary(string styleSheet, string xhtmlFullName)
         {
             if (_makeBackup)
             {

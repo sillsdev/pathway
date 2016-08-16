@@ -1128,6 +1128,47 @@ namespace Test.CssSimplerTest
         /// Remove extra parenthesis in Semantic domaain before abbreviation
         /// </summary>
         [Test]
+        public void BirdPictureTest()
+        {
+            const string testName = "BirdPicture";
+            _testFiles.Copy(testName + ".xhtml");
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(outFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            LoadCssXml(ctp, cssFullName, xml);
+
+            var tmpXhtmlFullName = WriteSimpleXhtml(outFullName);
+            var tmp2Out = _testFiles.Output(testName + "T2.xhtml");
+            var tmp2Css = _testFiles.Output(testName + "T2.css");
+            File.Copy(cssFullName, tmp2Css, true);
+            // ReSharper disable once UnusedVariable
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, tmp2Css);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(ctp, tmp2Css, xml);
+            WriteCssXml(_testFiles.Output(testName + "T2.xml"), xml);
+            var tmp3Out = _testFiles.Output(testName + "T3.xhtml");
+
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+            RemoveCssPseudo(cssFullName, xml);
+            WriteSimpleCss(cssFullName, xml); //reloads xml with simplified version
+            var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher);
+            WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
+            //NodeTest(flatFullName, 4, "//*[starts-with(@class,'headword-st')]", "headword with styles");
+            //TextFileAssert.AreEqual(_testFiles.Expected(flatCssName), _testFiles.Output(flatCssName));
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
         public void FlattenStylesTest()
         {
             const string testName = "FlattenStyles";
@@ -1147,10 +1188,52 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            var fs = new FlattenStyles(outFullName, _testFiles.Output(testName +"Flat.xhtml"), xml, NeedHigher);
-            WriteXmlAsCss(_testFiles.Output(testName + "Flat.css"), fs.MakeFlatCss());
-            //TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            //NodeTest(outFullName, 128, "//*[@xml:space]", "semantic domain punctuation");
+            var flatFullName = _testFiles.Output(testName +"Flat.xhtml");
+            var fs = new FlattenStyles(outFullName, flatFullName, xml, NeedHigher);
+            var flatCssName = testName + "Flat.css";
+            WriteXmlAsCss(_testFiles.Output(flatCssName), fs.MakeFlatCss());
+            NodeTest(flatFullName, 6, "//*[starts-with(@id, 'gb9403660')]/*[starts-with(@class,'reverse')]", "Wrong number of first entry fields");
+            TextFileAssert.AreEqual(_testFiles.Expected(flatCssName), _testFiles.Output(flatCssName));
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void FlattenInlineStylesTest()
+        {
+            const string testName = "FlattenInlineStyles";
+            _testFiles.Copy(testName + ".xhtml");
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(outFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            LoadCssXml(ctp, cssFullName, xml);
+
+            var tmpXhtmlFullName = WriteSimpleXhtml(outFullName);
+            var tmp2Out = _testFiles.Output(testName + "T2.xhtml");
+            var tmp2Css = _testFiles.Output(testName + "T2.css");
+            File.Copy(cssFullName, tmp2Css, true);
+            // ReSharper disable once UnusedVariable
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, tmp2Css);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(ctp, tmp2Css, xml);
+            WriteCssXml(_testFiles.Output(testName + "T2.xml"), xml);
+            var tmp3Out = _testFiles.Output(testName + "T3.xhtml");
+
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+            RemoveCssPseudo(cssFullName, xml);
+            var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher);
+            WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
+            NodeTest(flatFullName, 4, "//*[starts-with(@class,'headword-st')]", "headword with styles");
+            //TextFileAssert.AreEqual(_testFiles.Expected(flatCssName), _testFiles.Output(flatCssName));
         }
 
         /// <summary>
@@ -1239,8 +1322,7 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 128, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 7, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
