@@ -1,88 +1,81 @@
-﻿span[lang|= "fr"]{
-   font-family: 'Arial',serif;
-   font-size: 10pt;
-}
-span[lang|= "es"]{
-   font-family: 'Times New Roman',serif;
-   font-size: 10pt;
-}
-span[lang|= "en"]{
-   font-family: 'Doulos SIL',serif;
-   font-size: 10pt;
-}
-span[lang|= "tpi"]{
-   font-family: 'Andika Basic',serif;
-   font-size: 10pt;
-}
-span[lang|= "bzh-fonipa"]{
-   font-family: 'Doulos SIL',serif;
-   font-size: 10pt;
-}
-span[lang|= "bzh"]{
-   font-family: 'Charis SIL',serif;
-   font-size: 10pt;
-}
-a {
+﻿a {
    text-decoration: inherit;
    color: inherit;
 }
-.entry {
-   clear: both;
+.abbreviation {
+   /* Rule List: 3,-1,21,20,35,7,11,10 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.abbreviation2 {
+   /* Rule List: -1,21,20,35,7,11,10 */
+   text-indent: 0pt;
+   font-size: 10pt;
+   white-space: pre-wrap;
+}
+.complexformentryrefs {
+   /* Rule List: -1,8,23,22 */
+   text-indent: -36pt;
+   font-size: 10pt;
    white-space: pre-wrap;
 }
 .entry {
+   /* Rule List: 7,11,10,-1 */
    text-indent: -36pt;
    margin-left: 45pt;
    padding-bottom: 2pt;
    padding-top: 1pt;
    font-size: 10pt;
-}
-.entry .subentries .subentry {
-   text-indent: 0pt;
-   margin-left: 0pt;
-   padding-bottom: 2pt;
-   padding-top: 0pt;
-   font-size: 10pt;
-   display: block;
-}
-.entry .subentries .subentry {
-   text-indent: 0pt;
-   margin-left: 0pt;
-   padding-bottom: 2pt;
-   padding-top: 0pt;
-   font-size: 10pt;
-   display: block;
-}
-.minorentrycomplex {
    clear: both;
    white-space: pre-wrap;
 }
+.headword {
+   /* Rule List: 9,-1,6,8,23,22 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
 .minorentrycomplex {
+   /* Rule List: 8,23,22,-1 */
    text-indent: -36pt;
    margin-left: 45pt;
    padding-bottom: 2pt;
    padding-top: 0pt;
    font-size: 10pt;
-}
-.minorentrycomplex > .headword > span[lang|= "bzh"]{
-   font-weight: bold;
-}
-.minorentrycomplex > .headword > span {
-   font-weight: bold;
-}
-.mainentrysubentries .mainentrysubentry {
    clear: both;
    white-space: pre-wrap;
 }
-.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "bzh"]{
-   font-weight: bold;
+.name {
+   /* Rule List: 3,-1,21,20,35,7,11,10 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
 }
-.mainentrysubentries .mainentrysubentry > .headword > span {
-   font-weight: bold;
+.reverseabbr {
+   /* Rule List: 3,-1,8,23,22 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
 }
-.mainentrysubentries .subentries .subentry {
+.semanticdomains {
+   /* Rule List: -1,21,20,35,7,11,10 */
+   text-indent: 0pt;
+   font-size: 10pt;
+   white-space: pre-wrap;
+}
+.subentry {
+   /* Rule List: 21,20,35,-1,7,11,10 */
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
    display: block;
-}
-.mainentrysubentries .subentries .subentry {
-   display: block;
+   clear: both;
+   white-space: pre-wrap;
 }

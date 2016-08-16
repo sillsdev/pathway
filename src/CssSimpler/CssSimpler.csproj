@@ -242,11 +242,6 @@
     <EmbeddedResource Include="XmlCss.xsl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="XmlCssSimplify.xsl">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
