@@ -111,7 +111,7 @@ namespace CssSimpler
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
-            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            //WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var fs = new FlattenStyles(tmp3Out, extra[0], xml, NeedHigher);
             WriteXmlAsCss(styleSheet, fs.MakeFlatCss());
             try
@@ -142,6 +142,13 @@ namespace CssSimpler
 
         protected static void ElaborateMultiSelectorRules(XmlDocument xml)
         {
+            var emptyRules = xml.SelectNodes("//RULE[count(@term)=0]");
+            Debug.Assert(emptyRules != null, "emptyRules != null");
+            foreach (XmlElement emptyRule in emptyRules)
+            {
+                Debug.Assert(xml.DocumentElement != null, "xml.DocumentElement != null");
+                xml.DocumentElement.RemoveChild(emptyRule);
+            }
             var multiSelectors = xml.SelectNodes("//RULE/*[.=',']");
             Debug.Assert(multiSelectors != null, "multiSelectors != null");
             foreach (XmlElement multiSelector in multiSelectors)
