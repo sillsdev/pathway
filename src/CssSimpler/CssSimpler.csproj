@@ -227,6 +227,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlattenStyles.cs" />
     <Compile Include="LoadClasses.cs" />
     <Compile Include="MoveInlineStyles.cs" />
     <Compile Include="Options.cs" />

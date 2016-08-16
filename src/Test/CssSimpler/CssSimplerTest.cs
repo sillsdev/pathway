@@ -1125,6 +1125,118 @@ namespace Test.CssSimplerTest
         }
 
         /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void BirdPictureTest()
+        {
+            const string testName = "BirdPicture";
+            _testFiles.Copy(testName + ".xhtml");
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(outFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            LoadCssXml(ctp, cssFullName, xml);
+
+            var tmpXhtmlFullName = WriteSimpleXhtml(outFullName);
+            var tmp2Out = _testFiles.Output(testName + "T2.xhtml");
+            var tmp2Css = _testFiles.Output(testName + "T2.css");
+            File.Copy(cssFullName, tmp2Css, true);
+            // ReSharper disable once UnusedVariable
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, tmp2Css);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(ctp, tmp2Css, xml);
+            WriteCssXml(_testFiles.Output(testName + "T2.xml"), xml);
+            var tmp3Out = _testFiles.Output(testName + "T3.xhtml");
+
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+            RemoveCssPseudo(cssFullName, xml);
+            WriteSimpleCss(cssFullName, xml); //reloads xml with simplified version
+            var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher);
+            WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
+            //NodeTest(flatFullName, 4, "//*[starts-with(@class,'headword-st')]", "headword with styles");
+            //TextFileAssert.AreEqual(_testFiles.Expected(flatCssName), _testFiles.Output(flatCssName));
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void FlattenStylesTest()
+        {
+            const string testName = "FlattenStyles";
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(xhtmlFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            _testFiles.Copy(testName + ".css");
+            LoadCssXml(ctp, cssFullName, xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+            var flatFullName = _testFiles.Output(testName +"Flat.xhtml");
+            var fs = new FlattenStyles(outFullName, flatFullName, xml, NeedHigher);
+            var flatCssName = testName + "Flat.css";
+            WriteXmlAsCss(_testFiles.Output(flatCssName), fs.MakeFlatCss());
+            NodeTest(flatFullName, 6, "//*[starts-with(@id, 'gb9403660')]/*[starts-with(@class,'reverse')]", "Wrong number of first entry fields");
+            TextFileAssert.AreEqual(_testFiles.Expected(flatCssName), _testFiles.Output(flatCssName));
+        }
+
+        /// <summary>
+        /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// </summary>
+        [Test]
+        public void FlattenInlineStylesTest()
+        {
+            const string testName = "FlattenInlineStyles";
+            _testFiles.Copy(testName + ".xhtml");
+            _testFiles.Copy(testName + ".css");
+            var cssFullName = _testFiles.Output(testName + ".css");
+            var outFullName = _testFiles.Output(testName + ".xhtml");
+            var ctp = new CssTreeParser();
+            var xml = new XmlDocument();
+            var lc = new LoadClasses(outFullName);
+            UniqueClasses = lc.UniqueClasses;
+            ctp.Parse(cssFullName);
+            LoadCssXml(ctp, cssFullName, xml);
+
+            var tmpXhtmlFullName = WriteSimpleXhtml(outFullName);
+            var tmp2Out = _testFiles.Output(testName + "T2.xhtml");
+            var tmp2Css = _testFiles.Output(testName + "T2.css");
+            File.Copy(cssFullName, tmp2Css, true);
+            // ReSharper disable once UnusedVariable
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, tmp2Css);
+            xml.RemoveAll();
+            UniqueClasses = null;
+            LoadCssXml(ctp, tmp2Css, xml);
+            WriteCssXml(_testFiles.Output(testName + "T2.xml"), xml);
+            var tmp3Out = _testFiles.Output(testName + "T3.xhtml");
+
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+            RemoveCssPseudo(cssFullName, xml);
+            var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher);
+            WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
+            NodeTest(flatFullName, 4, "//*[starts-with(@class,'headword-st')]", "headword with styles");
+            //TextFileAssert.AreEqual(_testFiles.Expected(flatCssName), _testFiles.Output(flatCssName));
+        }
+
+        /// <summary>
         /// test for multi selector expansion
         /// </summary>
         [Test]
@@ -1200,17 +1312,17 @@ namespace Test.CssSimplerTest
             var root = ctp.Root;
             Assert.True(root != null);
             var xml = new XmlDocument();
-            xml.LoadXml("<root/>");
             var lc = new LoadClasses(xhtmlFullName);
             UniqueClasses = lc.UniqueClasses;
-            AddSubTree(xml.DocumentElement, root, ctp);
+            ctp.Parse(cssFullName);
             _testFiles.Copy(testName + ".css");
-            WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
+            LoadCssXml(ctp, cssFullName, xml);
+            //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 1, "//*[@class='fr-Zxxx-x-audio']/*[string-length(.)=2]", "audio icon");
+            NodeTest(outFullName, 7, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
