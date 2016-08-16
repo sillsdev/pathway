@@ -43,22 +43,4 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- Matches translation in translation and just puts one level -->
-    <xsl:template match="*[@class='translation'][child::*[@class='translation']]">
-        <xsl:apply-templates select="*"/>
-    </xsl:template>
-
-    <!-- Matches span pictures and puts out its children (which are divs) to correct structure -->
-    <xsl:template match="x:span[@class='pictures']">
-        <xsl:apply-templates select="*"/>
-    </xsl:template>
-
-    <!-- Matches example within example and changes internal name to text (of example) -->
-    <xsl:template match="*[@class='example' and child::*/@class='example']">
-        <xsl:copy>
-            <xsl:attribute name="class">complete</xsl:attribute>
-            <xsl:apply-templates select="node()"/>
-        </xsl:copy>
-    </xsl:template>
-
 </xsl:stylesheet>

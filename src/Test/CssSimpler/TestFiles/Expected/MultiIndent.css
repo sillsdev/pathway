@@ -1,4 +1,194 @@
-﻿.letHead {
+﻿span {
+   font-size: 11pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.abbreviation {
+   /* Rule List: 4,3,-1,37,36,63,6,10,9 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   line-height: 12pt;
+   color: #800080;
+   white-space: pre-wrap;
+}
+.complexformentryrefs {
+   /* Rule List: 3,-1,7,39,38 */
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   line-height: 12pt;
+   color: #F00;
+   white-space: pre-wrap;
+}
+.definitionorgloss {
+   /* Rule List: 4,3,-1,16,17,6,10,9 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.definitionorgloss2 {
+   /* Rule List: 4,3,-1,37,36,63,6,10,9 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   line-height: 12pt;
+   color: #800080;
+   white-space: pre-wrap;
+}
+.definitionorgloss3 {
+   /* Rule List: 4,3,-1,52,35,16,17,6,10,9 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 11pt;
+   white-space: pre-wrap;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+}
+.definitionorgloss4 {
+   /* Rule List: 4,3,-1,61,52,62,35,16,17,6,10,9 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 11pt;
+   white-space: pre-wrap;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   line-height: 12pt;
+}
+.entry {
+   /* Rule List: 6,10,9,-1 */
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   font-size: 11pt;
+   clear: both;
+   white-space: pre-wrap;
+}
+.example {
+   /* Rule List: 29,31,5,3,-1,28,26,25,16,17,6,10,9 */
+   font-style: italic;
+   font-family: 'Charis SIL',serif;
+   font-size: 11pt;
+   color: Black;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.example2 {
+   /* Rule List: 82,84,5,3,-1,28,79,26,37,36,63,6,10,9 */
+   font-style: italic;
+   font-family: 'Charis SIL',serif;
+   font-size: 11pt;
+   color: Black;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.examplescontent {
+   /* Rule List: 28,26,25,3,-1,16,17,6,10,9 */
+   font-size: 10pt;
+   color: Black;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   line-height: 12pt;
+   padding-bottom: 6pt;
+   margin-left: 0pt;
+   display: block;
+   white-space: pre-wrap;
+}
+.examplescontent-ps {
+   /* Rule List: 3,-1,28,26,25,16,17,6,10,9 */
+   font-size: 11pt;
+   color: Black;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword {
+   /* Rule List: 8,-1,64,66,5,3,37,36,63,6,10,9 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   line-height: 12pt;
+   color: #800080;
+   white-space: pre-wrap;
+}
+.headword2 {
+   /* Rule List: 8,-1,40,42,5,3,7,39,38 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   line-height: 12pt;
+   color: #F00;
+   white-space: pre-wrap;
+}
+.headword3 {
+   /* Rule List: 8,-1,50,51,5,3,7,39,38 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   line-height: 12pt;
+   color: #F00;
+   white-space: pre-wrap;
+}
+.letHead {
+   /* Rule List: 1,-1 */
    -moz-column-count: 1;
    -webkit-column-count: 1;
    column-count: 1;
@@ -7,154 +197,26 @@
    width: 100%;
 }
 .letter {
+   /* Rule List: 2,5,3,-1,1 */
    line-height: 12pt;
    padding-bottom: 3pt;
    padding-top: 12pt;
    font-size: 11pt;
    font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   text-align: center;
 }
-span {
-   font-size: 11pt;
-}
-span[lang|= "en"]{
-   font-family: 'Doulos SIL',serif;
-   font-size: 11pt;
-}
-span[lang|= "fr"]{
+.mainheadword {
+   /* Rule List: 8,-1,11,13,5,3,6,10,9 */
+   font-weight: bold;
    font-family: 'Charis SIL',serif;
    font-size: 11pt;
-}
-a {
-   text-decoration: inherit;
-   color: inherit;
-}
-.entry {
-   clear: both;
-   white-space: pre-wrap;
-}
-.entry {
    text-indent: -36pt;
-   margin-left: 45pt;
    line-height: 12pt;
-   padding-bottom: 2pt;
-   padding-top: 1pt;
-   font-size: 11pt;
-}
-.entry .mainheadword > span[lang|= "fr"]{
-   font-weight: bold;
-}
-.entry .mainheadword > span {
-   font-weight: bold;
-}
-.entry > .senses > .sensecontent .sensenumber {
-   font-weight: bold;
-}
-.entry > .senses > .sensecontent .sense {
-   font-size: 11pt;
-}
-.entry > .senses > .sensecontent {
-   border-left-width: 0pt;
-   border-right-width: 0pt;
-   border-top-width: 0pt;
-   border-bottom-width: 0pt;
-   text-indent: -18pt;
-   margin-left: 18pt;
-   line-height: 12pt;
-   padding-bottom: 2pt;
-   padding-top: 0pt;
-   display: block;
-}
-.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
-   font-style: italic;
-}
-.entry > .senses > .sensecontent .sense .morphosyntaxanalysis {
-   font-style: italic;
-}
-.entry > .senses > .sensecontent .sense .examplescontents .examplescontent {
-   border-left-width: 0pt;
-   border-right-width: 0pt;
-   border-top-width: 0pt;
-   border-bottom-width: 0pt;
-   text-indent: -9pt;
-   line-height: 12pt;
-   padding-bottom: 6pt;
-   font-size: 11pt;
-   margin-left: 0pt;
-   display: block;
-}
-.examplescontent-ps {
-   font-size: 10pt;
-   color: Black;
-}
-.entry > .senses > .sensecontent + .sensecontent .sense .examplescontents .examplescontent {
-   border-left-width: 0pt;
-   border-right-width: 0pt;
-   border-top-width: 0pt;
-   border-bottom-width: 0pt;
-   text-indent: -9pt;
-   margin-left: -18pt;
-   line-height: 12pt;
-   padding-bottom: 6pt;
-   font-size: 11pt;
-   display: block;
-}
-.examplescontent-ps {
-   font-size: 10pt;
-   color: Black;
-}
-.entry > .senses > .sensecontent .sense .examplescontents .example > span[lang|= "fr"]{
-   font-style: italic;
-}
-.entry > .senses > .sensecontent .sense .examplescontents .example > span {
-   font-style: italic;
-}
-.entry > .senses > .sensecontent .sense > .senses > .sensecontent .sensenumber {
-   font-weight: bold;
-}
-.entry > .senses > .sensecontent .sense > .senses > .sensecontent {
-   border-left-width: 0pt;
-   border-right-width: 0pt;
-   border-top-width: 0pt;
-   border-bottom-width: 0pt;
-   text-indent: -18pt;
-   margin-left: 9.142pt;
-   padding-bottom: 2pt;
-   padding-top: 0pt;
-   display: block;
-}
-.entry .subentries .subentry {
-   border-left-width: 0pt;
-   border-right-width: 0pt;
-   border-top-width: 0pt;
-   border-bottom-width: 0pt;
-   text-indent: 0pt;
-   margin-left: 0pt;
-   line-height: 12pt;
-   padding-bottom: 2pt;
-   padding-top: 0pt;
-   font-size: 11pt;
-   color: #800080;
-   display: block;
-}
-.entry .subentries .subentry {
-   border-left-width: 0pt;
-   border-right-width: 0pt;
-   border-top-width: 0pt;
-   border-bottom-width: 0pt;
-   text-indent: 0pt;
-   margin-left: 0pt;
-   line-height: 12pt;
-   padding-bottom: 2pt;
-   padding-top: 0pt;
-   font-size: 11pt;
-   color: #800080;
-   display: block;
-}
-.minorentrycomplex {
-   clear: both;
    white-space: pre-wrap;
 }
 .minorentrycomplex {
+   /* Rule List: 7,39,38,-1 */
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -166,41 +228,90 @@ a {
    padding-top: 0pt;
    font-size: 11pt;
    color: #F00;
-}
-.minorentrycomplex > .headword > span[lang|= "fr"]{
-   font-weight: bold;
-}
-.minorentrycomplex > .headword > span {
-   font-weight: bold;
-}
-.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "fr"]{
-   font-weight: bold;
-}
-.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span {
-   font-weight: bold;
-}
-.mainentrysubsenses .mainentrysubsense {
    clear: both;
    white-space: pre-wrap;
 }
-.mainentrysubsenses .morphosyntaxanalysis {
+.partofspeech {
+   /* Rule List: 4,3,-1,19,6,10,9 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 11pt;
    font-style: italic;
+   text-indent: -36pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
 }
-.mainentrysubsenses .subentries .subentry {
+.partofspeech2 {
+   /* Rule List: 4,3,-1,22,16,17,6,10,9 */
+   font-family: 'Doulos SIL',serif;
    font-size: 11pt;
+   font-style: italic;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.partofspeech3 {
+   /* Rule List: 4,3,-1,76,37,36,63,6,10,9 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 11pt;
+   font-style: italic;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   line-height: 12pt;
    color: #800080;
+   white-space: pre-wrap;
 }
-.mainentrysubsenses .subentries .subentry {
+.reverseabbr {
+   /* Rule List: 4,3,-1,7,39,38 */
+   font-family: 'Doulos SIL',serif;
    font-size: 11pt;
-   color: #800080;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   line-height: 12pt;
+   color: #F00;
+   white-space: pre-wrap;
 }
-.mainentrysubsenses .mainentrysubsense > .senses > .sensecontent .sensenumber {
-   font-weight: bold;
-}
-.mainentrysubsenses .mainentrysubsense > .senses > .sensecontent .sense {
+.sensecontent {
+   /* Rule List: 17,3,-1,6,10,9 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 18pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
    font-size: 11pt;
+   white-space: pre-wrap;
 }
-.mainentrysubsenses .mainentrysubsense > .senses > .sensecontent {
+.sensecontent2 {
+   /* Rule List: 35,3,-1,16,17,6,10,9 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 9.142pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+   font-size: 11pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.sensecontent3 {
+   /* Rule List: 62,3,-1,52,35,16,17,6,10,9 */
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -210,32 +321,121 @@ a {
    line-height: 12pt;
    padding-bottom: 6pt;
    display: block;
+   font-size: 11pt;
+   white-space: pre-wrap;
 }
-.mainentrysubentries .mainentrysubentry {
+.sensenumber {
+   /* Rule List: 14,3,-1,17,6,10,9 */
+   font-weight: bold;
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.sensenumber2 {
+   /* Rule List: 3,-1,14,17,6,10,9 */
+   font-size: 11pt;
+   font-weight: bold;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.sensenumber3 {
+   /* Rule List: 33,3,-1,35,16,17,6,10,9 */
+   font-weight: bold;
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.sensenumber4 {
+   /* Rule List: 3,-1,33,35,16,17,6,10,9 */
+   font-size: 11pt;
+   font-weight: bold;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.sensenumber5 {
+   /* Rule List: 59,3,-1,62,52,35,16,17,6,10,9 */
+   font-weight: bold;
+   font-size: 11pt;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.sensenumber6 {
+   /* Rule List: 3,-1,59,62,52,35,16,17,6,10,9 */
+   font-size: 11pt;
+   font-weight: bold;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
+}
+.subentry {
+   /* Rule List: 37,36,63,3,-1,6,10,9 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #800080;
+   display: block;
    clear: both;
    white-space: pre-wrap;
 }
-.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "fr"]{
-   font-weight: bold;
-}
-.mainentrysubentries .mainentrysubentry > .headword > span {
-   font-weight: bold;
-}
-.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sensenumber {
-   font-weight: bold;
-}
-.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
-   font-style: italic;
-}
-.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .morphosyntaxanalysis {
-   font-style: italic;
-}
-.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .examplescontent {
+.translation {
+   /* Rule List: 4,3,-1,28,26,25,16,17,6,10,9 */
+   font-family: 'Doulos SIL',serif;
    font-size: 11pt;
+   color: Black;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
 }
-.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .example > span[lang|= "fr"]{
-   font-style: italic;
-}
-.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .example > span {
-   font-style: italic;
+.translation2 {
+   /* Rule List: 4,3,-1,28,79,26,37,36,63,6,10,9 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 11pt;
+   color: Black;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   line-height: 12pt;
+   white-space: pre-wrap;
 }
