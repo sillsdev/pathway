@@ -91,10 +91,11 @@ a {
    white-space: pre-wrap;
 }
 .example {
-   /* Rule List: 29,31,5,3,-1,25,16,17,6,10,9 */
+   /* Rule List: 29,31,5,3,-1,28,26,25,16,17,6,10,9 */
    font-style: italic;
    font-family: 'Charis SIL',serif;
    font-size: 11pt;
+   color: Black;
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -104,21 +105,23 @@ a {
    white-space: pre-wrap;
 }
 .example2 {
-   /* Rule List: 82,84,5,3,-1,79,37,36,63,6,10,9 */
+   /* Rule List: 82,84,5,3,-1,28,79,26,37,36,63,6,10,9 */
    font-style: italic;
    font-family: 'Charis SIL',serif;
    font-size: 11pt;
+   color: Black;
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
    border-bottom-width: 0pt;
    text-indent: 0pt;
    line-height: 12pt;
-   color: #800080;
    white-space: pre-wrap;
 }
 .examplescontent {
-   /* Rule List: 25,3,-1,16,17,6,10,9 */
+   /* Rule List: 28,26,25,3,-1,16,17,6,10,9 */
+   font-size: 10pt;
+   color: Black;
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -126,14 +129,13 @@ a {
    text-indent: -9pt;
    line-height: 12pt;
    padding-bottom: 6pt;
-   font-size: 11pt;
    margin-left: 0pt;
    display: block;
    white-space: pre-wrap;
 }
 .examplescontent-ps {
-   /* Rule List: 28,26,3,-1,25,16,17,6,10,9 */
-   font-size: 10pt;
+   /* Rule List: 3,-1,28,26,25,16,17,6,10,9 */
+   font-size: 11pt;
    color: Black;
    border-left-width: 0pt;
    border-right-width: 0pt;
@@ -412,9 +414,10 @@ a {
    white-space: pre-wrap;
 }
 .translation {
-   /* Rule List: 4,3,-1,25,16,17,6,10,9 */
+   /* Rule List: 4,3,-1,28,26,25,16,17,6,10,9 */
    font-family: 'Doulos SIL',serif;
    font-size: 11pt;
+   color: Black;
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
@@ -424,15 +427,15 @@ a {
    white-space: pre-wrap;
 }
 .translation2 {
-   /* Rule List: 4,3,-1,79,37,36,63,6,10,9 */
+   /* Rule List: 4,3,-1,28,79,26,37,36,63,6,10,9 */
    font-family: 'Doulos SIL',serif;
    font-size: 11pt;
+   color: Black;
    border-left-width: 0pt;
    border-right-width: 0pt;
    border-top-width: 0pt;
    border-bottom-width: 0pt;
    text-indent: 0pt;
    line-height: 12pt;
-   color: #800080;
    white-space: pre-wrap;
 }

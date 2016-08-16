@@ -144,7 +144,6 @@ namespace CssSimpler
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
-            //WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var fs = new FlattenStyles(tmp3Out, extra[0], xml, NeedHigher);
             WriteXmlAsCss(styleSheet, fs.MakeFlatCss());
             try
