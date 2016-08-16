@@ -71,7 +71,7 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             SkipNode = r.Name == "span";
-            //if (nextClass != null && nextClass.StartsWith("captionContent"))
+            //if (nextClass != null && nextClass.StartsWith("translation-st"))
             //{
             //    Debug.Print("break;");
             //}
@@ -89,7 +89,7 @@ namespace CssSimpler
         private bool IsNotBlockRule(int depth)
         {
             _ruleNums.Clear();
-            if (GetLevelRules(depth))
+            if (!SkipNode && GetLevelRules(depth))
             {
                 foreach (var num in _ruleNums)
                 {
@@ -167,6 +167,11 @@ namespace CssSimpler
                         requireParent = true;
                         break;
                     case "CLASS":
+                        if (node.ChildNodes.Count > 1)
+                        {
+                            if (!CheckAttrib(node, r)) return false;
+                            break;
+                        }
                         string name = node.FirstChild.InnerText;
                         while (!requireParent && index > 0 && !MatchClass(index, name))
                         {
@@ -204,17 +209,15 @@ namespace CssSimpler
 
         private static bool CheckAttrib(XmlNode node, XmlReader r)
         {
-            if (node.ChildNodes.Count > 1)
+            if (node.ChildNodes.Count <= 1) return true;
+            var attrNode = node.ChildNodes[1];
+            if (attrNode.Name == "ATTRIB")
             {
-                var attrNode = node.ChildNodes[1];
-                if (attrNode.Name == "ATTRIB")
-                {
-                    if (!AttribEval(r, attrNode)) return false;
-                }
-                else
-                {
-                    throw new NotImplementedException("non-ATTRIB modifier");
-                }
+                if (!AttribEval(r, attrNode)) return false;
+            }
+            else
+            {
+                throw new NotImplementedException("non-ATTRIB modifier");
             }
             return true;
         }
@@ -228,7 +231,8 @@ namespace CssSimpler
             switch (attrOp)
             {
                 case "BEGINSWITH":
-                    var expVal = attrNode.ChildNodes[2].InnerText.Trim(Quotes);
+                case "ATTRIBEQUAL":
+                    var expVal = attrNode.LastChild.InnerText.Trim(Quotes);
                     if (actualVal != expVal) return false;
                     break;
                 default:
@@ -248,7 +252,7 @@ namespace CssSimpler
 
         private void TextNode(XmlReader r)
         {
-            WriteContent(r.Value, GetStyle(r, 1), GetLang(r));
+            WriteContent(r.Value, GetStyle(r, 1), GetLang(r), false);
             SkipNode = true;
         }
 
@@ -343,7 +347,7 @@ namespace CssSimpler
             var pos = 1;
             foreach (var style in _reverseMap.Keys)
             {
-                //if (style == "letter")
+                //if (style == "translation-st")
                 //{
                 //    Debug.Print("break;");
                 //}
@@ -378,6 +382,8 @@ namespace CssSimpler
                     foreach (XmlElement node in propNodes)
                     {
                         Debug.Assert(node != null, "node != null");
+                        var propValueNode = node.SelectSingleNode(".//value");
+                        if (propValueNode != null && propValueNode.InnerText == "inherit") continue;
                         var propNameNode = node.SelectSingleNode(".//name");
                         if (propNameNode == null) continue;
                         var name = propNameNode.InnerText;

@@ -38,7 +38,7 @@ namespace CssSimpler
             }
             foreach (var key in SavedStyles.Keys)
             {
-                sw.WriteLine("." + key + " { " + SavedStyles[key] + " }");
+                sw.WriteLine("span > span." + key + " { " + SavedStyles[key] + " }");
             }
             sw.Close();
             sr.Close();
