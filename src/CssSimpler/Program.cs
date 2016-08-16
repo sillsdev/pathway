@@ -140,20 +140,13 @@ namespace CssSimpler
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
-            RemoveCssPseudo(styleSheet, xml);
             var tmp3Out = Path.GetTempFileName();
-            if (_flatten)
-            {
-                var fs = new FlattenStyles(extra[0], tmp3Out, xml, NeedHigher, _noXmlHeader);
-                fs.Structure = _headerStyles;
-                fs.DivBlocks = _divBlocks;
-                MetaData(fs);
-                fs.Parse();
-                File.Copy(tmp3Out, extra[0], true);
-                OutputFlattenedStylesheet(extra[0], styleSheet, fs);
-            }
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+            RemoveCssPseudo(styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            var fs = new FlattenStyles(tmp3Out, extra[0], xml, NeedHigher);
+            WriteXmlAsCss(styleSheet, fs.MakeFlatCss());
             try
             {
                 File.Delete(tmpXhtmlFullName);
