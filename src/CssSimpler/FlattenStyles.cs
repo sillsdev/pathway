@@ -71,7 +71,7 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             SkipNode = r.Name == "span";
-            //if (nextClass != null && nextClass.StartsWith("translation-st"))
+            //if (nextClass != null && nextClass.StartsWith("examplescontent"))
             //{
             //    Debug.Print("break;");
             //}
@@ -89,7 +89,7 @@ namespace CssSimpler
         private bool IsNotBlockRule(int depth)
         {
             _ruleNums.Clear();
-            if (!SkipNode && GetLevelRules(depth))
+            if (SkipNode && GetLevelRules(depth))
             {
                 foreach (var num in _ruleNums)
                 {

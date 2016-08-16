@@ -467,6 +467,17 @@ a {
    text-indent: -36pt;
    white-space: pre-wrap;
 }
+.subentry {
+   /* Rule List: 106,105,190,3,-1,8,13,12 */
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+   clear: both;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
 .thumbnail {
    /* Rule List: 99,-1,102,98,3,8,13,12 */
    max-height: 1in;
