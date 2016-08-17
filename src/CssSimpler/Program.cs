@@ -140,12 +140,20 @@ namespace CssSimpler
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            var tmp3Out = Path.GetTempFileName();
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+            var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
-            var fs = new FlattenStyles(tmp3Out, extra[0], xml, NeedHigher);
-            WriteXmlAsCss(styleSheet, fs.MakeFlatCss());
+            var tmp3Out = Path.GetTempFileName();
+            if (_flatten)
+            {
+                var fs = new FlattenStyles(extra[0], tmp3Out, xml, NeedHigher, _noXmlHeader);
+                fs.Structure = _headerStyles;
+                fs.DivBlocks = _divBlocks;
+                MetaData(fs);
+                fs.Parse();
+                File.Copy(tmp3Out, extra[0], true);
+                OutputFlattenedStylesheet(extra[0], styleSheet, fs);
+            }
             try
             {
                 File.Delete(tmpXhtmlFullName);
@@ -207,20 +215,7 @@ namespace CssSimpler
             }
             if (valNode != null && !string.IsNullOrEmpty(valNode.InnerText))
             {
-                var val = valNode.InnerText;
-                var pos = 0;
-                var sb = new StringBuilder();
-                foreach (Match match in Regex.Matches(val, @"_x([0-9A-F]{4})_"))
-                {
-                    sb.Append(val.Substring(pos, match.Index - pos));
-                    sb.Append(Convert.ToChar(Convert.ToUInt32(match.Groups[1].Value, 16)));
-                    pos = match.Index + match.Length;
-                }
-                if (pos < val.Length)
-                {
-                    sb.Append(val.Substring(pos));
-                }
-                return sb.ToString();
+                return Regex.Replace(valNode.InnerText, @"_x([0-9A-F]{4})_", @"&#x$1;");
             }
             return null;
         }
