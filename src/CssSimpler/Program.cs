@@ -355,6 +355,9 @@ namespace CssSimpler
                 }
                 else
                 {
+                    var newClass = ruleNode.GetAttribute("lastClass") + "-ps";
+                    ruleNode.Attributes["lastClass"].InnerText = newClass;
+                    ruleNode.Attributes["target"].InnerText = newClass;
                     for (var count = ruleNode.ChildNodes.Count - 1; count >= 0; count -= 1)
                     {
                         var childNode = ruleNode.ChildNodes[count];
@@ -366,7 +369,7 @@ namespace CssSimpler
                     Debug.Assert(ruleNode.OwnerDocument != null, "ruleNode.OwnerDocument != null");
                     var classNode = ruleNode.OwnerDocument.CreateElement("CLASS");
                     var nameNode = ruleNode.OwnerDocument.CreateElement("name");
-                    nameNode.InnerText = ruleNode.GetAttribute("lastClass") + "-ps";
+                    nameNode.InnerText = newClass;
                     classNode.AppendChild(nameNode);
                     ruleNode.InsertBefore(classNode, ruleNode.FirstChild);
                 }
