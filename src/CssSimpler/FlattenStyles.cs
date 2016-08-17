@@ -24,6 +24,8 @@ namespace CssSimpler
 {
     public class FlattenStyles : XmlCopy
     {
+        public int Structure;
+        public bool DivBlocks;
         private readonly Dictionary<string, List<XmlElement>> _ruleIndex = new Dictionary<string, List<XmlElement>>();
         private readonly List<int> _displayBlockRuleNum = new List<int>();
         private const int StackSize = 30;
@@ -34,9 +36,10 @@ namespace CssSimpler
         //private string _lastClass = String.Empty;
         private string _precedingClass = String.Empty;
         private readonly SortedSet<string> _needHigher;
+        private string _headerTag;
 
-        public FlattenStyles(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher)
-            : base(input, output)
+        public FlattenStyles(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher, bool noXmlHeader)
+            : base(input, output, noXmlHeader)
         {
             _needHigher = needHigher;
             MakeRuleIndex(xmlCss);
@@ -54,7 +57,6 @@ namespace CssSimpler
             DeclareBefore(XmlNodeType.CDATA, OtherNode);
             DeclareBeforeEnd(XmlNodeType.EndElement, DivEnds);
             DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveClass);
-            Parse();
         }
 
         private void IdentifyDisplayBlockRules(XmlDocument xmlCss)
@@ -83,6 +85,10 @@ namespace CssSimpler
             if (!SkipNode)
             {
                 GetStyle(r);
+                if (r.Name == "span" && DivBlocks)
+                {
+                    ReplaceLocalName = "div";
+                }
             }
         }
 
@@ -252,6 +258,8 @@ namespace CssSimpler
 
         private void TextNode(XmlReader r)
         {
+            ReplaceLocalName = _headerTag;
+            _headerTag = null;
             WriteContent(r.Value, GetStyle(r, 1), GetLang(r), false);
             SkipNode = true;
         }
@@ -417,11 +425,22 @@ namespace CssSimpler
         {
             if (r.Name == "class")
             {
-                //if (!_needHigher.Contains(r.Value))
-                //{
-                //    _lastClass = r.Value;
-                //}
                 AddInHierarchy(r, _classes);
+                switch (r.Value)
+                {
+                    case "entry":
+                        if (Structure >= 3)
+                        {
+                            _headerTag = "h3";
+                        }
+                        break;
+                    case "letter":
+                        if (Structure >= 2)
+                        {
+                            _headerTag = "h2";
+                        }
+                        break;
+                }
             }
             else if (r.Name == "lang")
             {
