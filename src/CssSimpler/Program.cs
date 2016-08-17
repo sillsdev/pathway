@@ -32,6 +32,13 @@ namespace CssSimpler
         protected static bool OutputXml;
         private static int _verbosity;
         private static bool _makeBackup;
+        private static bool _flatten;
+        private static int _headerStyles;
+        private static bool _embedStyles;
+        private static bool _combineMainRev;
+        private static bool _incMeta;
+        private static bool _noXmlHeader;
+        private static bool _divBlocks;
 
         protected static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
         protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
@@ -50,19 +57,47 @@ namespace CssSimpler
             {
                 {
                     "x|xml", "produce XML output of CSS",
-                    v => OutputXml = v != null
+                    v => OutputXml = !OutputXml
                 },
                 {
                     "b|backup", "make a backup of the original CSS file",
-                    v => _makeBackup = v != null
+                    v => _makeBackup = !_makeBackup
                 },
                 {
-                    "v", "increase debug message verbosity",
+                    "v|verbose", "increase debug message verbosity",
                     v => { if (v != null) ++_verbosity; }
                 },
                 {
                     "h|help", "show this message and exit",
-                    v => _showHelp = v != null
+                    v => _showHelp = !_showHelp
+                },
+                {
+                    "f|flat", "flattens the hierarchy simplifies the css required for -secmrd",
+                    v => _flatten = !_flatten
+                },
+                {
+                    "s|structure", "Use header tags for structure (1-3)",
+                    v => _headerStyles += 1
+                },
+                {
+                    "e|embed", "embed styles in output",
+                    v => _embedStyles = !_embedStyles
+                },
+                //{
+                //    "c|combine", "combine main and reversal(s) in a single output",
+                //    v => _combineMainRev = !_combineMainRev
+                //},
+                {
+                    "m|meta", "include title and author meta data",
+                    v => _incMeta = !_incMeta
+                },
+                {
+                    "r|remove", "remove Xml header and DOCTYPE",
+                    v => _noXmlHeader = !_noXmlHeader
+                },
+                {
+                    "d|div", "replace span with div for display block",
+                    v => _divBlocks = !_divBlocks
                 },
             };
 
@@ -105,12 +140,20 @@ namespace CssSimpler
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            var tmp3Out = Path.GetTempFileName();
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+            var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
-            var fs = new FlattenStyles(tmp3Out, extra[0], xml, NeedHigher);
-            WriteXmlAsCss(styleSheet, fs.MakeFlatCss());
+            var tmp3Out = Path.GetTempFileName();
+            if (_flatten)
+            {
+                var fs = new FlattenStyles(extra[0], tmp3Out, xml, NeedHigher, _noXmlHeader);
+                fs.Structure = _headerStyles;
+                fs.DivBlocks = _divBlocks;
+                MetaData(fs);
+                fs.Parse();
+                File.Copy(tmp3Out, extra[0], true);
+                OutputFlattenedStylesheet(extra[0], styleSheet, fs);
+            }
             try
             {
                 File.Delete(tmpXhtmlFullName);
@@ -121,6 +164,60 @@ namespace CssSimpler
             {
                 // ignored
             }
+        }
+
+        private static void OutputFlattenedStylesheet(string outFullName, string styleSheet, FlattenStyles fs)
+        {
+            if (_embedStyles)
+            {
+                var ms = new MemoryStream();
+                MapXmlCssToStream(fs.MakeFlatCss(), ms);
+                ms.Seek(0, 0);
+                var tmp4Out = Path.GetTempFileName();
+                var es = new EmbedStyles(outFullName, tmp4Out, ms, _noXmlHeader);
+                es.Parse();
+                File.Copy(tmp4Out, outFullName, true);
+                try
+                {
+                    File.Delete(styleSheet);
+                    File.Delete(tmp4Out);
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+            else
+            {
+                WriteXmlAsCss(styleSheet, fs.MakeFlatCss());
+            }
+        }
+
+        private static readonly XmlDocument SettingsXml = new XmlDocument();
+        private static void MetaData(FlattenStyles fs)
+        {
+            if (!_incMeta) return;
+            var settingFullName = Path.Combine(Environment.GetEnvironmentVariable("LOCALAPPDATA"), "SIL", "Pathway",
+                "Dictionary", "DictionaryStyleSettings.xml");
+            if (!File.Exists(settingFullName)) return;
+            SettingsXml.Load(settingFullName);
+            fs.TitleDefault = SetValue("Title");
+            fs.AuthorDefault = SetValue("Creator");
+        }
+
+
+        private static string SetValue(string cls)
+        {
+            var valNode = SettingsXml.SelectSingleNode(string.Format("//Metadata/*[@name='{0}']/currentValue/text()", cls));
+            if (valNode == null || string.IsNullOrEmpty(valNode.InnerText))
+            {
+                valNode = SettingsXml.SelectSingleNode(string.Format("//Metadata/*[@name='{0}']/defaultValue/text()", cls));
+            }
+            if (valNode != null && !string.IsNullOrEmpty(valNode.InnerText))
+            {
+                return Regex.Replace(valNode.InnerText, @"_x([0-9A-F]{4})_", @"&#x$1;");
+            }
+            return null;
         }
 
         protected static void LoadCssXml(CssTreeParser parser, string styleSheet, XmlDocument xml)
@@ -380,9 +477,15 @@ namespace CssSimpler
         protected static void WriteXmlAsCss(string styleSheet, XmlDocument xml)
         {
             var cssFile = new FileStream(styleSheet, FileMode.Create);
+            MapXmlCssToStream(xml, cssFile);
+            cssFile.Close();
+        }
+
+        private static void MapXmlCssToStream(XmlDocument xml, Stream cssFile)
+        {
             var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
             XmlCss.Transform(xml, null, cssWriter);
-            cssFile.Close();
+            cssWriter.Flush();
         }
 
         private static void MakeBackupIfNecessary(string styleSheet, string xhtmlFullName)

@@ -23,7 +23,7 @@ namespace CssSimpler
     {
 
         public MoveInlineStyles(string input, string output, string cssName)
-            : base(input, output)
+            : base(input, output, false)
         {
             DeclareBefore(XmlNodeType.Element, ResetClassName);
             DeclareBefore(XmlNodeType.Attribute, LookForStyle);

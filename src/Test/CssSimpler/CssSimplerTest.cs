@@ -242,7 +242,8 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher);
+            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher, false);
+            fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(outFullName, 2, "//*[starts-with(@class,'example')]", "wrong number of example nodes");
         }
@@ -270,7 +271,8 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher);
+            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher, false);
+            fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(outFullName, 0, "//*[local-name()='span'][@class='pictures']", "pictures node present when it shouldn't be");
             NodeTest(outFullName, 1, "//*[@class='picture']", "picture node missing");
@@ -737,7 +739,8 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, tmp2OutFullName, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmp2OutFullName, outFullName, xml, NeedHigher);
+            var fs = new FlattenStyles(tmp2OutFullName, outFullName, xml, NeedHigher, false);
+            fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
             XmlAssert.AreEqual(_testFiles.Expected(testName + ".xhtml"), outFullName, "Xhtml file not converted as expected");
@@ -819,7 +822,8 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, tmp2Out, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmp2Out, outFullName, xml, NeedHigher);
+            var fs = new FlattenStyles(tmp2Out, outFullName, xml, NeedHigher, false);
+            fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
         }
@@ -882,7 +886,8 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
             var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
-            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher);
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher, false);
+            fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(flatFullName, 1, "//*[starts-with(@class,'picture')]", "picture node missing");
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
@@ -911,7 +916,8 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             var flatFullName = _testFiles.Output(testName +"Flat.xhtml");
-            var fs = new FlattenStyles(outFullName, flatFullName, xml, NeedHigher);
+            var fs = new FlattenStyles(outFullName, flatFullName, xml, NeedHigher, false);
+            fs.Parse();
             var flatCssName = testName + "Flat.css";
             WriteXmlAsCss(_testFiles.Output(flatCssName), fs.MakeFlatCss());
             NodeTest(flatFullName, 6, "//*[starts-with(@id, 'gb9403660')]/*[starts-with(@class,'reverse')]", "Wrong number of first entry fields");
@@ -952,7 +958,8 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
             var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
-            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher);
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher, false);
+            fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(flatFullName, 4, "//*[starts-with(@class,'headword-st')]", "headword with styles");
             //TextFileAssert.AreEqual(_testFiles.Expected(flatCssName), _testFiles.Output(flatCssName));
@@ -1356,7 +1363,7 @@ namespace Test.CssSimplerTest
     {
         private readonly string _testValue;
 
-        public ValueTest(string inpTest, string outTest, string testValue) : base(inpTest, outTest)
+        public ValueTest(string inpTest, string outTest, string testValue) : base(inpTest, outTest, false)
         {
             _testValue = testValue;
             DeclareBeforeEnd(XmlNodeType.EndElement, WriteValue);
