@@ -32,20 +32,27 @@ namespace CssSimpler
         private readonly XmlReader _rdr;
         private readonly XmlWriter _wtr;
         private bool _finish;
+        private bool _noXmlHeader;
         protected bool SkipAttr;
         protected bool SkipNode;
         protected string Suffix = "-ps";
+        protected string ReplaceLocalName;
+        public string TitleDefault;
+        public string AuthorDefault;
+        public bool DebugPrint;
         private bool _doAttributes;
 
-        protected XmlCopy(string xmlInFullName, string xmlOutFullName)
+        protected XmlCopy(string xmlInFullName, string xmlOutFullName, bool noXmlHeader)
         {
-            var settings = new XmlReaderSettings(){DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver()};
+            var settings = new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver()};
             _sr = new StreamReader(xmlInFullName);
             _rdr = XmlReader.Create(_sr, settings);
-            _wtr = XmlWriter.Create(xmlOutFullName);
+            _noXmlHeader = noXmlHeader;
+            var wrtSettings = new XmlWriterSettings {OmitXmlDeclaration = noXmlHeader};
+            _wtr = XmlWriter.Create(xmlOutFullName, wrtSettings);
         }
 
-        protected void Parse()
+        public void Parse()
         {
             while (_rdr.Read())
             {
@@ -58,8 +65,19 @@ namespace CssSimpler
                     case XmlNodeType.Element:
                         if (!SkipNode)
                         {
-                            //Debug.Print("start " + _rdr.LocalName);
-                            _wtr.WriteStartElement(_rdr.Prefix, _rdr.LocalName, _rdr.NamespaceURI);
+                            if (DebugPrint)
+                            {
+                                Debug.Print("start " + _rdr.LocalName);
+                            }
+                            if (string.IsNullOrEmpty(ReplaceLocalName))
+                            {
+                                _wtr.WriteStartElement(_rdr.Prefix, _rdr.LocalName, _rdr.NamespaceURI);
+                            }
+                            else
+                            {
+                                _wtr.WriteStartElement(_rdr.Prefix, ReplaceLocalName, _rdr.NamespaceURI);
+                                ReplaceLocalName = null;
+                            }
                         }
                         else
                         {
@@ -86,22 +104,32 @@ namespace CssSimpler
                                         _wtr.WriteAttributeString(_rdr.Name, _rdr.Value);
                                     }
                                 }
-                                else
-                                {
-                                    SkipAttr = false;
-                                }
                                 AfterProcessMethods();
                             }
+                            SkipAttr = false;
                         }
                         else
                         {
-                            _wtr.WriteAttributes( _rdr, true );
+                            if (!SkipAttr)
+                            {
+                                _wtr.WriteAttributes(_rdr, true);
+                            }
                         }
                         FirstChildProcessMethods(XmlNodeType.Element);
                         if (empty)
                         {
                             BeforeEndProcessMethods(XmlNodeType.EndElement, depth, name);
-                            _wtr.WriteEndElement();
+                            if (name == "title" && !string.IsNullOrEmpty(TitleDefault))
+                            {
+                                AddTitle();
+                            }
+                            else
+                            {
+                                if (!SkipNode)
+                                {
+                                    _wtr.WriteEndElement();
+                                }
+                            }
                         }
                         break;
                     case XmlNodeType.Text:
@@ -122,13 +150,16 @@ namespace CssSimpler
                         _wtr.WriteEntityRef(_rdr.Name);
                         break;
                     case XmlNodeType.XmlDeclaration:
-                        _wtr.WriteProcessingInstruction(_rdr.Name, _rdr.Value);
-                        _wtr.WriteDocType("html", "-//W3C//DTD XHTML 1.1//EN", "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd", @"
+                        if (!_noXmlHeader)
+                        {
+                            _wtr.WriteProcessingInstruction(_rdr.Name, _rdr.Value);
+                            _wtr.WriteDocType("html", "-//W3C//DTD XHTML 1.1//EN", "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd", @"
 <!ATTLIST html lang CDATA #REQUIRED >
 <!ATTLIST span lang CDATA #IMPLIED >
 <!ATTLIST span entryguid CDATA #IMPLIED >
 <!ATTLIST img alt CDATA #IMPLIED >
 ");
+                        }
                         break;
                     case XmlNodeType.ProcessingInstruction:
                         _wtr.WriteProcessingInstruction( _rdr.Name, _rdr.Value );
@@ -159,6 +190,28 @@ namespace CssSimpler
             _wtr.Close();
             _rdr.Close();
             _sr.Close();
+        }
+
+        private void AddTitle()
+        {
+            _wtr.WriteString(TitleDefault);
+            _wtr.WriteEndElement();
+            if (!string.IsNullOrEmpty(AuthorDefault))
+            {
+                AddAuthor();
+            }
+        }
+
+        private void AddAuthor()
+        {
+            _wtr.WriteStartElement(_rdr.Prefix, "meta", _rdr.NamespaceURI);
+            _wtr.WriteAttributeString("name", "author");
+            _wtr.WriteAttributeString("content", AuthorDefault);
+            _wtr.WriteEndElement();
+            _wtr.WriteStartElement(_rdr.Prefix, "meta", _rdr.NamespaceURI);
+            _wtr.WriteAttributeString("name", "DC.author");
+            _wtr.WriteAttributeString("content", AuthorDefault);
+            _wtr.WriteEndElement();
         }
 
         private void BeforeProcessMethods()
@@ -209,6 +262,14 @@ namespace CssSimpler
             }
         }
 
+        protected void WriteEmbddedStyle(string val)
+        {
+            _wtr.WriteStartElement("style", "http://www.w3.org/1999/xhtml");
+            _wtr.WriteAttributeString("type", "text/css");
+            _wtr.WriteValue(val);
+            _wtr.WriteEndElement();
+        }
+
         protected void WriteContent(string val, string myClass)
         {
             WriteContent(val, myClass, "");
@@ -221,8 +282,9 @@ namespace CssSimpler
 
         protected void WriteContent(string val, string myClass, string myLang, bool quotedEntities)
         {
-            //var ns = new XmlNamespaceManager(_rdr.NameTable);
-            _wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
+            var localName = string.IsNullOrEmpty(ReplaceLocalName) ? "span" : ReplaceLocalName;
+            ReplaceLocalName = null;
+            _wtr.WriteStartElement(localName, "http://www.w3.org/1999/xhtml");
             if (!string.IsNullOrEmpty(myClass))
             {
                 WriteClassAttr(myClass + Suffix);

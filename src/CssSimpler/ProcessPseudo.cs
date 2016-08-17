@@ -33,7 +33,7 @@ namespace CssSimpler
         private readonly SortedSet<string> _needHigher;
 
         public ProcessPseudo(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher)
-            : base(input, output)
+            : base(input, output, false)
         {
             _needHigher = needHigher;
             CollectTargets(xmlCss);
