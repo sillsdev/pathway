@@ -266,7 +266,7 @@ namespace CssSimpler
         {
             _wtr.WriteStartElement("style", "http://www.w3.org/1999/xhtml");
             _wtr.WriteAttributeString("type", "text/css");
-            _wtr.WriteValue(val);
+            _wtr.WriteRaw(val);
             _wtr.WriteEndElement();
         }
 
