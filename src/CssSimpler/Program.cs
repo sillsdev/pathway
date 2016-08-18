@@ -214,7 +214,20 @@ namespace CssSimpler
             }
             if (valNode != null && !string.IsNullOrEmpty(valNode.InnerText))
             {
-                return Regex.Replace(valNode.InnerText, @"_x([0-9A-F]{4})_", @"&#x$1;");
+                var val = valNode.InnerText;
+                var pos = 0;
+                var sb = new StringBuilder();
+                foreach (Match match in Regex.Matches(val, @"_x([0-9A-F]{4})_"))
+                {
+                    sb.Append(val.Substring(pos, match.Index - pos));
+                    sb.Append(Convert.ToChar(Convert.ToUInt32(match.Groups[1].Value, 16)));
+                    pos = match.Index + match.Length;
+                }
+                if (pos < val.Length)
+                {
+                    sb.Append(val.Substring(pos));
+                }
+                return sb.ToString();
             }
             return null;
         }
