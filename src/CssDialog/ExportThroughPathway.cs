@@ -38,8 +38,6 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
-using Palaso.UI.WindowsForms.WritingSystems;
-using Palaso.WritingSystems;
 using SilTools;
 using SIL.Tool;
 

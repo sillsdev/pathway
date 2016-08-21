@@ -19,19 +19,14 @@ using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Xml;
 using DesktopAnalytics;
 using L10NSharp;
-using Palaso.UI.WindowsForms;
-using SIL.PublishingSolution.Properties;
 using SIL.Tool;
-using Palaso.Reporting;
 using System.Collections.Generic;
+using SIL.Reporting;
 
 namespace SIL.PublishingSolution
 {
@@ -952,8 +947,8 @@ namespace SIL.PublishingSolution
 		{
 			_cToolBL.ConfigurationTool_FormClosingBL();
 			Style = _cToolBL.StyleEXE.ToString();
-			Settings.Default.Save();
-			Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage, null, null);
+			Properties.Settings.Default.Save();
+			Common.SaveLocalizationSettings(Properties.Settings.Default.UserInterfaceLanguage, null, null);
 		}
 		private void btnDictionary_Click(object sender, EventArgs e)
 		{

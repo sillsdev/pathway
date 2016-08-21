@@ -18,15 +18,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Xml;
-using System.Xml.XPath;
 using NUnit.Framework;
-using Palaso.Data;
 using SIL.PublishingSolution;
 using SIL.Tool;
-using Test;
 
 namespace Test.XeLatex
 {
