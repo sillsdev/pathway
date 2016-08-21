@@ -232,18 +232,20 @@
     <Reference Include="L10NSharp">
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Palaso">
-      <HintPath>..\..\lib\Palaso.dll</HintPath>
-    </Reference>
-    <Reference Include="Palaso.Media">
-      <HintPath>..\..\lib\Palaso.Media.dll</HintPath>
-    </Reference>
-    <Reference Include="PalasoUIWindowsForms">
-      <HintPath>..\..\lib\PalasoUIWindowsForms.dll</HintPath>
-    </Reference>
     <Reference Include="Prince, Version=1.0.3835.23744, Culture=neutral, PublicKeyToken=8d9b0a8b53aaa3c7">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Prince.dll</HintPath>
+    </Reference>
+    <Reference Include="SIL.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SIL.Windows.Forms">
+      <HintPath>..\..\lib\SIL.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="SIL.WritingSystems, Version=3.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SIL.WritingSystems.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

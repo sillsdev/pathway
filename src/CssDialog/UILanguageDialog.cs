@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
-using SIL.PublishingSolution.Properties;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -147,9 +143,9 @@ namespace SIL.PublishingSolution
 		{
 			var lang = ((ComboBoxItem)ddlUILanguage.SelectedItem).Value;
 			LocalizationManager.SetUILanguage(lang, true);
-			Settings.Default.UserInterfaceLanguage = lang;
+			Properties.Settings.Default.UserInterfaceLanguage = lang;
 			LocalizationManager.ReapplyLocalizationsToAllObjects(Common.L10NMngr.Id);
-			Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage, _fontName.ToString(), ddlFontSize.SelectedItem.ToString());
+			Common.SaveLocalizationSettings(Properties.Settings.Default.UserInterfaceLanguage, _fontName.ToString(), ddlFontSize.SelectedItem.ToString());
 			Param.LoadUiLanguageFontInfo();
 			this.Close();
 		}

@@ -33,12 +33,11 @@ using System.Xml;
 using System.Xml.Xsl;
 using L10NSharp;
 using Microsoft.Win32;
-using Palaso.WritingSystems;
-using Palaso.Xml;
 using SIL.Tool.Localization;
 using System.Reflection;
 using Test;
 using SIL.PublishingSolution;
+using SIL.WritingSystems;
 
 #endregion Using
 
@@ -4880,8 +4879,8 @@ namespace SIL.Tool
 
 				//var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
 				var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-				string installedLocalizationsFolder = InstalledLocalizations();
-				var desiredUiLangId = GetLocalizationSettings();
+                var installedLocalizationsFolder = InstalledLocalizationsFolder;
+			    var desiredUiLangId = GetLocalizationSettings();
 				if (desiredUiLangId == string.Empty)
 					desiredUiLangId = "en";
 				if (string.IsNullOrEmpty(productVersion))
@@ -4904,7 +4903,19 @@ namespace SIL.Tool
 			}
 		}
 
-		public static void InitializeOtherProjects()
+	    private static string InstalledLocalizationsFolder
+	    {
+	        get
+	        {
+	            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+	            UriBuilder uri = new UriBuilder(codeBase);
+	            string path = Uri.UnescapeDataString(uri.Path);
+	            string installedLocalizationsFolder = Path.GetDirectoryName(path);
+	            return installedLocalizationsFolder;
+	        }
+	    }
+
+	    public static void InitializeOtherProjects()
 		{
 			string pathwayDirectory = PathwayPath.GetPathwayDir();
 			if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory)) return;
@@ -5052,7 +5063,7 @@ namespace SIL.Tool
 		#endregion
 		public static string GetPalasoLanguageName(string lang)
 		{
-			var lpModel = new EthnologueLookup();
+			var lpModel = new LanguageLookup();
 			var matchLang = lpModel.SuggestLanguages(lang.ToLower()).FirstOrDefault();
 			string langname = null;
 			if (matchLang != null)
