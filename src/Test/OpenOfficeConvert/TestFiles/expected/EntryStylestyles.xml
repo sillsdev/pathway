@@ -8,7 +8,7 @@
       <style:text-properties fo:font-style="normal" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_letHead_dicBody" style:family="text" style:parent-style-name="letHead_dicBody" style:default-outline-level="2" style:list-style-name="" style:master-page-name="">
-      <style:text-properties fo:font-size="18pt" style:font-size-complex="18pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="18pt" style:font-size-complex="18pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letData_dicBody" style:family="paragraph" style:parent-style-name="dicBody">
       <style:paragraph-properties fo:text-align="left" style:line-height-at-least="12pt" />
@@ -21,7 +21,7 @@
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="mainheadword_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="11pt" style:font-size-complex="11pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantformentrybackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -42,25 +42,25 @@
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_abbreviation_variantentrytype_variantentrytypes_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="abbreviation_variantentrytype_variantentrytypes_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_variantentrytype_variantentrytypes_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantentrytype_variantentrytypes_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_abbreviation_variantentrytype_variantentrytypes_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="abbreviation_variantentrytype_variantentrytypes_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody">
       <style:text-properties fo:color="#0000FF" text:display="inline" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_headword_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="owningentrysummarydefinition_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_owningentrysummarydefinition_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="owningentrysummarydefinition_variantformentrybackref_variantformentrybackrefs_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="senses_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -78,13 +78,13 @@
       <style:text-properties fo:font-style="italic" fo:color="#800000" text:display="inline" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_partofspeech_morphosyntaxanalysis.-sense.-sensecontent_senses_mainentrysubentry.-mainentrysubentries_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_morphosyntaxanalysis.-sense.-sensecontent_senses_mainentrysubentry.-mainentrysubentries_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definitionorgloss_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_definitionorgloss_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="definitionorgloss_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -96,7 +96,7 @@
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_example.-examplescontents.-sense.-sensecontent_senses_entry_example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000080" fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#000080" fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationcontents_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -108,7 +108,7 @@
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_translation_translationcontent_translationcontents_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translation_translationcontent_translationcontents_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minorentryvariant_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
       <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
@@ -118,7 +118,7 @@
       <style:text-properties fo:color="#0000FF" text:display="inline" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_headword_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="headword_minorentryvariant_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="11pt" style:font-size-complex="11pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="minorentryvariant_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -136,13 +136,13 @@
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_reverseabbr_variantentrytype_variantentrytypes_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="reverseabbr_variantentrytype_variantentrytypes_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_variantentrytype_variantentrytypes_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="variantentrytype_variantentrytypes_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_reverseabbr_variantentrytype_variantentrytypes_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="reverseabbr_variantentrytype_variantentrytypes_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -154,13 +154,13 @@
       <style:text-properties fo:color="#0000FF" text:display="inline" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_headword_referencedentry.-referencedentries.-visiblevariantentryrefs.-minorentryvariant_headword_referencedentry_referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="headword_referencedentry_referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody">
-      <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" fo:font-style="italic" fo:color="#800000" fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" fo:font-style="italic" fo:color="#800000" fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="summarydefinition_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="minorentryvariant_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_summarydefinition_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="summarydefinition_minorentryvariant_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -172,7 +172,7 @@
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_ownertypeabbreviation_minimallexreference.-minimallexreferences.-entry_ownertypeabbreviation_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="ownertypeabbreviation_minimallexreference_minimallexreferences_entry_letData_dicBody">
-      <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" fo:font-style="italic" fo:color="#808000" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" fo:font-style="italic" fo:color="#808000" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="minimallexreference_minimallexreferences_entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -184,7 +184,7 @@
       <style:text-properties fo:color="#0000FF" text:display="inline" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_headword_configtarget.-configtargets_minimallexreference.-minimallexreferences.-entry_headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody">
-      <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" fo:font-style="italic" fo:color="#800000" fo:font-weight="400" style:font-weight-complex="400" fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" fo:font-style="italic" fo:color="#800000" fo:font-weight="400" style:font-weight-complex="400" fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="minimallexreferences_entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -193,7 +193,7 @@
       <style:text-properties fo:color="#808000" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_restrictions_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="restrictions_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_span_.es_restrictions_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.es_restrictions_sense_sensecontent_senses_entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -217,13 +217,13 @@
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_abbreviation_complexformtype_complexformtypes_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody" style:family="text" style:parent-style-name="abbreviation_complexformtype_complexformtypes_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody">
       <style:text-properties fo:color="#0000FF" text:display="inline" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_headword_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="nontrivialentryroots_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -238,7 +238,7 @@
       <style:text-properties fo:color="#0000FF" text:display="inline" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_headword_nontrivialentryroot.-nontrivialentryroots.-complexformsnotsubentries.-mainentrysubentries_nontrivialentryroots_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_nontrivialentryroot.-nontrivialentryroots.-complexformsnotsubentries.-mainentrysubentries_nontrivialentryroots_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:color="#000080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalyses_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody">
       <style:text-properties text:display="inline" fo:font-size="10pt" style:font-size-complex="10pt" />
@@ -250,7 +250,7 @@
       <style:text-properties fo:font-style="italic" fo:color="#800000" text:display="inline" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_partofspeech_morphosyntaxanalysis.-morphosyntaxanalyses.-complexformsnotsubentries.-entry_morphosyntaxanalyses_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_morphosyntaxanalysis.-morphosyntaxanalyses.-complexformsnotsubentries.-entry_morphosyntaxanalyses_complexformsnotsubentry_complexformsnotsubentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
