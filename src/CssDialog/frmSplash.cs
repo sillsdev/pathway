@@ -15,18 +15,12 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 using DesktopAnalytics;
-using L10NSharp;
-using Palaso.Reporting;
-using SIL.PublishingSolution.Properties;
+using SIL.Reporting;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution

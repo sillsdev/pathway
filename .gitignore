@@ -173,3 +173,5 @@ lib/lame*
 lib/saxon*
 lib/xml*
 lib/L10NSharp.*
+lib/SIL.*
+lib/icu*.*

@@ -212,8 +212,11 @@
     <Reference Include="L10NSharp">
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Palaso">
-      <HintPath>..\..\lib\Palaso.dll</HintPath>
+    <Reference Include="SIL.Core">
+      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SIL.WritingSystems">
+      <HintPath>..\..\lib\SIL.WritingSystems.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -233,7 +236,9 @@
     <Compile Include="Backend.cs" />
     <Compile Include="CheckUserFileAccessRights.cs" />
     <Compile Include="ClassInfo.cs" />
-    <Compile Include="ComboBoxItem.cs" />
+    <Compile Include="ComboBoxItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Common.cs">
       <SubType>Code</SubType>
     </Compile>
