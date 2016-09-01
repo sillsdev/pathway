@@ -403,7 +403,9 @@ namespace SIL.PublishingSolution
                 }
                 _classInfo.SpecificityWeightage = _specificityWeightage;
                 _classInfo.StyleName = styleName;
-                CssClassOrder.Add(_classInfo.CoreClass.ClassName);
+				if (!CssClassOrder.Contains(_classInfo.CoreClass.ClassName))
+					CssClassOrder.Add(_classInfo.CoreClass.ClassName);
+
                 if (_baseClassName != null)
                     SetSpecificityClass(_baseClassName,_classInfo);
             }

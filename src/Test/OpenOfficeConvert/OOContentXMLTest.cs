@@ -87,6 +87,7 @@ namespace Test.OpenOfficeConvert
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFIles");
             Common.ProgBase = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles"); // for masterDocument
+	        Common.UseAfterBeforeProcess = true;
             _styleFile = "styles.xml";
             _contentFile = "content.xml";
             _isLinux = Common.IsUnixOS();
@@ -371,7 +372,7 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(styleOutput);
 
-            string xpath = "//style:style[@style:name='p.first_body']/style:paragraph-properties";
+			string xpath = "//style:style[@style:name='first_body']/style:paragraph-properties";
             string content = "<style:paragraph-properties fo:padding-top=\"12pt\" fo:border-bottom=\"0.5pt solid #ffffff\" fo:border-top=\"0.5pt solid #ffffff\" fo:border-left=\"0.5pt solid #ffffff\" fo:border-right=\"0.5pt solid #ffffff\" fo:padding-bottom=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" />";
             _validate.GetOuterXml = true;
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
@@ -398,22 +399,22 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "letter.-locator_locator_dictionary";
+			_validate.ClassName = "firstoftype_letter_firstoftype_lastoftype_locator_dictionary";
             string content = "a";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
 
-            _validate.ClassName = "letter.-locator_xitem_locator_dictionary";
+			_validate.ClassName = "letter_xitem_firstoftype_lastoftype_locator_dictionary";
             content = "c";
             returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
 
-            _validate.ClassName = "locator_dictionary";
+			_validate.ClassName = "letter1_firstoftype_lastoftype_locator_dictionary";
             content = "j orange";
-            returnValue1 = _validate.ValidateOfficeTextNode(11, content, "para");
+            returnValue1 = _validate.ValidateOfficeTextNode(11, content, "span");
             Assert.IsTrue(returnValue1);
 
-            _validate.ClassName = "letter.-current_locator_dictionary";
+			_validate.ClassName = "current_letter_firstoftype_lastoftype_locator_dictionary";
             content = "w";
             returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
@@ -421,7 +422,7 @@ namespace Test.OpenOfficeConvert
             //Note - The Styles will be created while processing xhtml(content.xml)
             //Style Test - Second
             _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "letter.-locator_locator_dictionary";
+			_validate.ClassName = "letter_firstoftype_lastoftype_locator_dictionary";
             _validate.ClassProperty.Add("fo:font-weight", "700");
             _validate.ClassProperty.Add("style:font-weight-complex", "700");
             _validate.ClassProperty.Add("fo:font-size", "20pt");
@@ -430,7 +431,7 @@ namespace Test.OpenOfficeConvert
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
-            _validate.ClassName = "letter.-locator_xitem_locator_dictionary";
+			_validate.ClassName = "letter_xitem_firstoftype_lastoftype_locator_dictionary";
             _validate.ClassProperty.Add("fo:font-weight", "700");
             _validate.ClassProperty.Add("style:font-weight-complex", "700");
             _validate.ClassProperty.Add("fo:font-size", "20pt");
@@ -439,7 +440,7 @@ namespace Test.OpenOfficeConvert
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
-            _validate.ClassName = "letter.-current_locator_dictionary";
+			_validate.ClassName = "current_letter_firstoftype_lastoftype_locator_dictionary";
             _validate.ClassProperty.Add("fo:color", "#ff0000");
             _validate.ClassProperty.Add("fo:background-color", "#aaff00");
 
@@ -461,11 +462,11 @@ namespace Test.OpenOfficeConvert
 
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "span.-mainheadword_entry_mainheadword_div.entry_body";
+			_validate.ClassName = "span_.bzh_mainheadword_entry_body";
 			string content = "=W=";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
-			_validate.ClassName = "span_.en_definitionorgloss_sense_sensecontent_senses_div.entry_body";
+			_validate.ClassName = "span_.en_definitionorgloss_sense_sensecontent_senses_entry_body";
 			content = "Second person; labialisation of the initial consonant of Class 3 verbs beginning with gg";
 			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
@@ -473,7 +474,7 @@ namespace Test.OpenOfficeConvert
 			//Note - The Styles will be created while processing xhtml(content.xml)
 			//Style Test - Second
 			_validate = new ValidateXMLFile(styleOutput);
-			_validate.ClassName = "span.-mainheadword_entry_mainheadword_div.entry_body";
+			_validate.ClassName = "span_.bzh_mainheadword_entry_body";
 			_validate.ClassProperty.Add("fo:font-weight", "700");
 			_validate.ClassProperty.Add("style:font-weight-complex", "700");
 			_validate.ClassProperty.Add("fo:font-size", "10pt");
@@ -481,7 +482,7 @@ namespace Test.OpenOfficeConvert
 			bool returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
 
-			_validate.ClassName = "span_.en_definitionorgloss_sense_sensecontent_senses_div.entry_body";
+			_validate.ClassName = "span_.en_definitionorgloss_sense_sensecontent_senses_entry_body";
 			_validate.ClassProperty.Add("fo:font-size", "10pt");
 			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
 			returnValue = _validate.ValidateNodeAttributesNS(false);
@@ -503,11 +504,11 @@ namespace Test.OpenOfficeConvert
 
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "span_.en_partofspeech_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			_validate.ClassName = "span_.en_partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_body";
 			string content = "v";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
-			_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_body";
 			content = "Person";
 			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
@@ -515,23 +516,23 @@ namespace Test.OpenOfficeConvert
 			//Note - The Styles will be created while processing xhtml(content.xml)
 			//Style Test - Second
 			_validate = new ValidateXMLFile(styleOutput);
-			_validate.ClassName = "span_.en_partofspeech_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			_validate.ClassName = "span_.en_partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_body";
 			_validate.ClassProperty.Add("fo:font-size", "10pt");
 			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
 			bool returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
 
-			_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_body";
 			_validate.ClassProperty.Add("fo:font-size", "10pt");
 			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
 			returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
 
-			//Parent style for the above two test, which applied to all chile tags
-			_validate.ClassName = "morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
-			_validate.ClassProperty.Add("fo:font-style", "italic");
-			returnValue = _validate.ValidateNodeAttributesNS(false);
-			Assert.IsTrue(returnValue);
+			////Parent style for the above two test, which applied to all chile tags
+			//_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_body";
+			//_validate.ClassProperty.Add("fo:font-style", "italic");
+			//returnValue = _validate.ValidateNodeAttributesNS(false);
+			//Assert.IsTrue(returnValue);
 
 		}
 
@@ -549,7 +550,7 @@ namespace Test.OpenOfficeConvert
 
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense.-senses_entry_sense_sensecontent_senses_div.entry_letData_body";
+			_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_body";
 			string content = ": Person";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
@@ -843,7 +844,7 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "letter.-current_locator_dictionary";
+			_validate.ClassName = "current_letter_firstoftype_lastoftype_locator_dictionary";
 
             _validate.ClassProperty.Add("fo:color", "#ff0000");
             _validate.ClassProperty.Add("fo:background-color", "#aaff00");
@@ -852,7 +853,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "letter.-current_locator_dictionary";
+			_validate.ClassName = "current_letter_firstoftype_lastoftype_locator_dictionary";
             string content = "w";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
@@ -1182,7 +1183,7 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "xsensenumber_sense_senses_entry_letData_dicBody";
+			_validate.ClassName = "xsensenumber_.en_sense_senses_entry_letData_dicBody";
             string content = Common.ConvertUnicodeToString("\\25ba") + "1)";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
@@ -1195,16 +1196,16 @@ namespace Test.OpenOfficeConvert
             //Assert.IsTrue(returnValue1, "VisibilityTest - Content 1 Failure");
 
 
-            //Note - The Styles will be created while processing xhtml(content.xml)
-            //Style Test - Second
-            _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "xsensenumber_sense_senses_entry_letData_dicBody";
+			////Note - The Styles will be created while processing xhtml(content.xml)
+			////Style Test - Second
+			//_validate = new ValidateXMLFile(styleOutput);
+			//_validate.ClassName = "xsensenumber_.en_sense_senses_entry_letData_dicBody";
 
-            _validate.ClassProperty.Add("fo:font-size", "12pt");
-            _validate.ClassProperty.Add("fo:font-size-complex", "12pt");
+			//_validate.ClassProperty.Add("fo:font-size", "12pt");
+			//_validate.ClassProperty.Add("fo:font-size-complex", "12pt");
 
-            bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue, "VisibilityTest - Style Failure");
+			//bool returnValue = _validate.ValidateNodeAttributesNS(false);
+			//Assert.IsTrue(returnValue, "VisibilityTest - Style Failure");
         }
 
         ///<summary>
@@ -1217,24 +1218,26 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "sense_article_sectionletter_dictionary";
+			_validate.ClassName = "firstoftype_sense_article_sectionletter_dictionary";
             _validate.GetInnerText = true;
             string content = "1.21";
             bool returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "span");
             Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
 
-            content = "1.42";
+            content = "2.21";
             returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "span");
             Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
 
-            content = "2.21";
-            returnValue1 = _validate.ValidateOfficeTextNodeList(3, content, "span");
-            Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
+			_validate.ClassName = "lastoftype_sense_article_sectionletter_dictionary";
+			
 
             content = "2.42";
-            returnValue1 = _validate.ValidateOfficeTextNodeList(4, content, "span");
+            returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "span");
             Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
 
+			content = "1.42";
+            returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "span");
+            Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
             ////Note - The Styles will be created while processing xhtml(content.xml)
             ////Style Test - Second
             //_validate = new ValidateXMLFile(styleOutput);
@@ -1257,12 +1260,12 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Scripture";
             string styleOutput = GetStyleOutput(file);
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            string xpath = "//text:p[1]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+			string xpath = "//text:p[1]/text:span[@text:style-name='SeeInGlossary_.nko_Paragraph_scrSection_scrBook_scrBody']";
             string content = "<text:bookmark-start text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"w_2\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNote - Content Failure");
 
-            xpath = "//text:p[2]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+			xpath = "//text:p[2]/text:span[@text:style-name='SeeInGlossary_.nko_Paragraph_scrSection_scrBook_scrBody']";
             content = "<text:bookmark-start text:name=\"w_2\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"w_2\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNote - Content Failure");
@@ -1277,12 +1280,12 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Scripture";
             string styleOutput = GetStyleOutput(file);
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            string xpath = "//text:p[1]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+			string xpath = "//text:p[1]/text:span[@text:style-name='SeeInGlossary_.nko_Paragraph_scrSection_scrBook_scrBody']";
             string content = "<text:bookmark-start text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNote - Content Failure");
 
-            xpath = "//text:p[2]/text:span[@text:style-name='SeeInGlossary_Paragraph_scrSection_scrBook_scrBody']";
+			xpath = "//text:p[2]/text:span[@text:style-name='SeeInGlossary_.nko_Paragraph_scrSection_scrBook_scrBody']";
             content = "<text:bookmark-start text:name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNote - Content Failure");
@@ -1298,22 +1301,23 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "sense_article_sectionletter_dictionary";
+			_validate.ClassName = "firstoftype_sense_article_sectionletter_dictionary";
             _validate.GetInnerText = true;
             string content = "1.0.01";
             bool returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "span");
             Assert.IsTrue(returnValue1, "Counter2 - Content Failure");
 
-            content = "1.0.02";
+			content = "2.0.41";
             returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "span");
             Assert.IsTrue(returnValue1, "Counter2 - Content Failure");
 
-            content = "2.0.41";
-            returnValue1 = _validate.ValidateOfficeTextNodeList(3, content, "span");
-            Assert.IsTrue(returnValue1, "Counter2 - Content Failure");
+			_validate.ClassName = "lastoftype_sense_article_sectionletter_dictionary";
+			content = "1.0.02";
+			returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "span");
+			Assert.IsTrue(returnValue1, "Counter2 - Content Failure");
 
             content = "2.0.52";
-            returnValue1 = _validate.ValidateOfficeTextNodeList(4, content, "span");
+            returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "span");
             Assert.IsTrue(returnValue1, "Counter2 - Content Failure");
 
             ////Style Test - Second
@@ -1338,23 +1342,26 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "sense_article_sectionletter_dictionary";
+			_validate.ClassName = "firstoftype_sense_article_sectionletter_dictionary";
             _validate.GetInnerText = true;
             string content = "1.11";
             bool returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "span");
             Assert.IsTrue(returnValue1, "Counter3 - Content Failure");
-
-            content = "1.22";
+			
+            content = "2.11";
             returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "span");
             Assert.IsTrue(returnValue1, "Counter3 - Content Failure");
 
-            content = "2.11";
-            returnValue1 = _validate.ValidateOfficeTextNodeList(3, content, "span");
-            Assert.IsTrue(returnValue1, "Counter3 - Content Failure");
+			_validate.ClassName = "lastoftype_sense_article_sectionletter_dictionary";
 
             content = "2.22";
-            returnValue1 = _validate.ValidateOfficeTextNodeList(4, content, "span");
+            returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "span");
             Assert.IsTrue(returnValue1, "Counter3 - Content Failure");
+
+			content = "1.22";
+			returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "span");
+			Assert.IsTrue(returnValue1, "Counter3 - Content Failure");
+
 
             ////Style Test - Second
             //_validate = new ValidateXMLFile(styleOutput);
@@ -1382,7 +1389,7 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = string.Empty;
             _validate.GetOuterXml = true;
             string uni = Common.ConvertUnicodeToString("\\2021");
-            string content = "<text:note text:id=\"ftn1\" text:note-class=\"footnote\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:note-citation text:label=\"" + uni + " \">" + uni + " </text:note-citation><text:note-body><text:p text:style-name=\"footnote\"><text:span text:style-name=\"footnote..footnote-marker\"></text:span><text:span text:style-name=\"footnote_p.first_section_div.scriptureText_scrBody\">1:1: You can use the add spaces button to separate the Unicode characters.</text:span></text:p></text:note-body></text:note>";
+            string content = "<text:note text:id=\"ftn1\" text:note-class=\"footnote\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:note-citation text:label=\"‡ \">‡ </text:note-citation><text:note-body><text:p text:style-name=\"footnote\"><text:span text:style-name=\"footnote..footnote-marker\"></text:span><text:span text:style-name=\"footnote_first_section_scriptureText_scrBody\">1:1: You can use the add spaces button to separate the Unicode characters.</text:span></text:p></text:note-body></text:note>";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNote - Content Failure");
 
@@ -1424,7 +1431,7 @@ namespace Test.OpenOfficeConvert
             string xpath = "//text:note/text:note-body/text:p[@text:style-name='NoteGeneralParagraph']";
             _validate.ClassName = string.Empty;
             _validate.GetOuterXml = true;
-            string content = "<text:p text:style-name=\"NoteGeneralParagraph\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">21:1 </text:span><text:span text:style-name=\"AlternateReading_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">converted-values </text:span><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">You can use the add spaces button to separate the Unicode characters.</text:span></text:p>";
+			string content = "<text:p text:style-name=\"NoteGeneralParagraph\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">21:1 </text:span><text:span text:style-name=\"AlternateReading_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">converted-values </text:span><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">You can use the add spaces button to separate the Unicode characters.</text:span></text:p>";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNote - Content Failure");
         }
@@ -1440,10 +1447,10 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            string xpath = "//text:p[@text:style-name='cover_body']";
+			string xpath = "//text:p[@text:style-name='cover_dicBody']";
             _validate.ClassName = string.Empty;
             _validate.GetOuterXml = true;
-            string content = "<text:p text:style-name=\"cover_body\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">body </text:p>";
+			string content = "<text:p text:style-name=\"cover_dicBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">body </text:p>";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Body - Content Failure");
         }
@@ -1459,8 +1466,8 @@ namespace Test.OpenOfficeConvert
             string xpath = "//text:note[@text:id='ftn1']";
             _validate.ClassName = string.Empty;
             _validate.GetOuterXml = true;
-
-            string content = "<text:note text:id=\"ftn1\" text:note-class=\"footnote\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:note-citation text:label=\"a\">a</text:note-citation><text:note-body><text:p text:style-name=\"NoteGeneralParagraph\"><text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">1:1 = </text:span><text:span text:style-name=\"AlternateReading_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">Les juges:</text:span><text:span text:style-name=\"span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">poque de leur histoire, les par des juges. des personnes par Dieu. Dieu les chargeait plus de une ou plusieurs tribus en guerre et de diriger le peuple. Ils rendaient aussi la justice. </text:span><text:span text:style-name=\"AlternateReading_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">Moab:</text:span><text:span text:style-name=\"span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">pays fertile situest de la mer Morte.</text:span></text:p></text:note-body></text:note>";
+			            
+			string content = "<text:note text:id=\"ftn1\" text:note-class=\"footnote\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:note-citation text:label=\"a\">a</text:note-citation><text:note-body><text:p text:style-name=\"NoteGeneralParagraph\"><text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">1:1 = </text:span><text:span text:style-name=\"AlternateReading_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">Les juges:</text:span><text:span text:style-name=\"span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">poque de leur histoire, les par des juges. des personnes par Dieu. Dieu les chargeait plus de une ou plusieurs tribus en guerre et de diriger le peuple. Ils rendaient aussi la justice. </text:span><text:span text:style-name=\"AlternateReading_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">Moab:</text:span><text:span text:style-name=\"span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">pays fertile situest de la mer Morte.</text:span></text:p></text:note-body></text:note>";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNoteFormat - Content Failure");
         }
@@ -1683,13 +1690,13 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "xlanguagetag_xitem_.pt_definitionL2_sense_senses_entry_letData_dicBody";
+			_validate.ClassName = "xlanguagetag_.en_xitem_.pt_definitionL2_.pt_sense_senses_entry_letData_dicBody";
             _validate.ClassNameTrim = false;
             string content = "Por ";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1, "LanguageColor - Content 1 Failure");
 
-            _validate.ClassName = "xitem_.en_definitionL2_sense_senses_entry_letData_dicBody";
+			_validate.ClassName = "xitem_.en_definitionL2_.pt_sense_senses_entry_letData_dicBody";
             _validate.ClassNameTrim = true;
             content = "he";
             returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
@@ -1698,12 +1705,12 @@ namespace Test.OpenOfficeConvert
             //Note - The Styles will be created while processing xhtml(content.xml)
             //Style Test - Second
             _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "xlanguagetag_xitem_.pt_definitionL2_sense_senses_entry_letData_dicBody";
+			_validate.ClassName = "xlanguagetag_.en_xitem_.pt_definitionL2_.pt_sense_senses_entry_letData_dicBody";
             _validate.ClassProperty.Add("fo:color", "#2F60FF");
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue, "LanguageColor - Style Failure");
 
-            _validate.ClassName = "xitem_.en_definitionL2_sense_senses_entry_letData_dicBody";
+			_validate.ClassName = "xitem_.en_definitionL2_.pt_sense_senses_entry_letData_dicBody";
             _validate.ClassProperty.Add("fo:color", "#FF00FF");
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue, "LanguageColor - Style Failure");
@@ -1730,7 +1737,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "pronunciation_pronunciations_entry_letData_dicBody";
+			_validate.ClassName = "pronunciation_.bzh-fonipa_pronunciations_entry_letData_dicBody";
             string content = "text]";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
@@ -1752,7 +1759,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "partofspeech_entry_letData_dicBody";
+			_validate.ClassName = "partofspeech_.tam_entry_letData_dicBody";
             string content = "Select a destination";
             bool returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "para");
             Assert.IsTrue(returnValue1);
@@ -2022,7 +2029,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "div.header_main";
+			_validate.ClassName = "header_main";
             _validate.ClassNameTrim = true;
             string content = "Main Title";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
@@ -2031,7 +2038,7 @@ namespace Test.OpenOfficeConvert
             //Note - The Styles will be created while processing xhtml(content.xml)
             //Style Test - Second
             _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "div.header_main";
+			_validate.ClassName = "header_main";
             _validate.ClassProperty.Add("fo:font-size", "24pt");
             _validate.ClassProperty.Add("style:font-size-complex", "24pt");
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
@@ -2077,42 +2084,42 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = string.Empty;
             _validate.ClassNameTrim = false;
             string content = "one1 ";
-            string xpath = "//text:list[@text:style-name='ol.a2']/text:list-item/text:p[@text:style-name='li.ol_ol.a2_section_body']";
+			string xpath = "//text:list[@text:style-name='ol']/text:list-item/text:p[@text:style-name='li.ol_a1_section_body']";
             _validate.GetInnerText = true;
             bool returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue, "ListOlUl - Content 1 Failure");
 
-            xpath = "//text:list[@text:style-name='ol.a3']/text:list-item/text:p[@text:style-name='li.ol_ol.a3_section_body']";
+			xpath = "//text:list[@text:style-name='ol']/text:list-item/text:p[@text:style-name='li.ol_a2_section_body']";
             _validate.GetInnerText = true;
             returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue, "ListOlUl - Content 1 Failure");
 
-            xpath = "//text:list[@text:style-name='ol.a4']/text:list-item/text:p[@text:style-name='li.ol_ol.a4_section_body']";
+			xpath = "//text:list[@text:style-name='ol']/text:list-item/text:p[@text:style-name='li.ol_a3_section_body']";
             _validate.GetInnerText = true;
             returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue, "ListOlUl - Content 1 Failure");
 
-            xpath = "//text:list[@text:style-name='ol.a5']/text:list-item/text:p[@text:style-name='li.ol_ol.a5_section_body']";
+			xpath = "//text:list[@text:style-name='ol']/text:list-item/text:p[@text:style-name='li.ol_a4_section_body']";
             _validate.GetInnerText = true;
             returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue, "ListOlUl - Content 1 Failure");
 
-            xpath = "//text:list[@text:style-name='ol.a6']/text:list-item/text:p[@text:style-name='li.ol_ol.a6_section_body']";
+			xpath = "//text:list[@text:style-name='ol']/text:list-item/text:p[@text:style-name='li.ol_a5_section_body']";
             _validate.GetInnerText = true;
             returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue, "ListOlUl - Content 1 Failure");
 
-            xpath = "//text:list[@text:style-name='ol.a7']/text:list-item/text:p[@text:style-name='li.ol_ol.a7_section_body']";
+			xpath = "//text:list[@text:style-name='ol']/text:list-item/text:p[@text:style-name='li.ol_a6_section_body']";
             _validate.GetInnerText = true;
             returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue, "ListOlUl - Content 1 Failure");
 
-            xpath = "//text:list[@text:style-name='ol.a8']/text:list-item/text:p[@text:style-name='li.ol_ol.a8_section_body']";
+			xpath = "//text:list[@text:style-name='ol']/text:list-item/text:p[@text:style-name='li.ol_a7_section_body']";
             _validate.GetInnerText = true;
             returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue, "ListOlUl - Content 1 Failure");
 
-            xpath = "//text:list[@text:style-name='ol.a9']/text:list-item/text:p[@text:style-name='li.ol_ol.a9_section_body']";
+			xpath = "//text:list[@text:style-name='ol']/text:list-item/text:p[@text:style-name='li.ol_a8_section_body']";
             _validate.GetInnerText = true;
             returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue, "ListOlUl - Content 1 Failure");
@@ -2186,8 +2193,8 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
             _validate.GetOuterXml = true;
-            _validate.XPath = "//draw:frame[@draw:style-name='fr2']";
-            string content = "<draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"288pt\" svg:height=\"144pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"288pt\" svg:height=\"144pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/1.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>1.jpg</svg:title></draw:frame><text:p text:style-name=\"img_image_firstoftype sense_article_sectionletter_dictionary\"> Flea </text:p></draw:text-box></draw:frame>";
+            _validate.XPath = "//draw:frame[@draw:style-name='fr2']";            
+			string content = "<draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"288pt\" svg:height=\"144pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"288pt\" svg:height=\"144pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/1.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>1.jpg</svg:title></draw:frame><text:p text:style-name=\"img_image_firstoftype_sense_article_sectionletter_dictionary\"> Flea </text:p></draw:text-box></draw:frame>";
             bool returnValue = _validate.ValidateOfficeTextNode(0, content, "para");
             Assert.IsTrue(returnValue);
 
@@ -2364,19 +2371,19 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "span_.tpi_definition_.en_sense_senses_entry_letData_dicBody";
+			_validate.ClassName = "xitem_.tpi_definition_.en_sense_senses_entry_letData_dicBody";
             _validate.ClassNameTrim = false;
             string content = "spirit/ tewel em i lusim bodi long nait long driman";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1, "spacebefore - Content 1 Failure");
 
-            //Note - The Styles will be created while processing xhtml(content.xml)
-            //Style Test - Second
-            _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "span_.tpi_definition_.en_sense_senses_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:color", "#0000ff");
-            bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue, "spacebefore - Style Failure");
+			//Note - The Styles will be created while processing xhtml(content.xml)
+			//Style Test - Second
+			_validate = new ValidateXMLFile(styleOutput);
+			_validate.ClassName = "span_.bzh_xitem_.en_definition_.en_sense_senses_entry_letData_dicBody";
+			_validate.ClassProperty.Add("fo:color", "#ff0000");
+			bool returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue, "spacebefore - Style Failure");
         }
 
         ///<summary>
@@ -2412,13 +2419,13 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "span_Line1_columns_scrBook_scrBody";
+			_validate.ClassName = "span_.bgt_Line1_columns_scrBook_scrBody";
             _validate.ClassNameTrim = true;
             string content = "I Jerusalem, inau ku tutua sina ghahira kori hidigna na vathe.";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1, "ReplacePrinceQuote - Content 1 Failure");
 
-            _validate.ClassName = "span_Line2_columns_scrBook_scrBody";
+			_validate.ClassName = "span_.bgt_Line2_columns_scrBook_scrBody";
             _validate.ClassNameTrim = true;
             content = "Ahai ke vaututunia, imanea teo keda toatogha ke boi toke ke vaututunia.";
             returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
@@ -2473,7 +2480,7 @@ namespace Test.OpenOfficeConvert
             //
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody";
+			_validate.ClassName = "VerseNumber_.cwa_Paragraph_scrSection_columns_scrBook_scrBody";
             string content = "1";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
@@ -2481,7 +2488,7 @@ namespace Test.OpenOfficeConvert
             //Note - The Styles will be created while processing xhtml(content.xml)
             //Style Test - Second
             _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody";
+			_validate.ClassName = "VerseNumber_.cwa_Paragraph_scrSection_columns_scrBook_scrBody";
 
             _validate.ClassProperty.Add("fo:font-family", "Charis SIL");
             _validate.ClassProperty.Add("style:font-name-complex", "Charis SIL");
@@ -2927,7 +2934,7 @@ namespace Test.OpenOfficeConvert
 			bool returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
 			Assert.IsTrue(returnValue, "Apply Span Font Doulos SIL Test failed");
 
-			xpath = "//style:style[@style:name='span_mainheadword.-entry_mainheadword_entry_letData_dicBody']";
+			xpath = "//style:style[@style:name='span_.bzh_mainheadword_entry_letData_dicBody']";
 			_validate = new ValidateXMLFile(styleOutput);
 			_validate.ClassName = string.Empty;
 			_validate.ClassProperty.Add("fo:font-family", "Charis SIL");
@@ -3448,8 +3455,8 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = string.Empty;
             string xpath = "//draw:frame";
             //_validate.GetInnerText = true;
-            _validate.GetOuterXml = true;
-            string content = "<draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/nowaitress.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>nowaitress.jpg</svg:title></draw:frame><text:p text:style-name=\"caption_image_sense_article_sectionletter_dictionary\">a waitress</text:p></draw:text-box></draw:frame>";
+            _validate.GetOuterXml = true;            
+			string content = "<draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/nowaitress.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>nowaitress.jpg</svg:title></draw:frame><text:p text:style-name=\"caption_image_firstoftype_sense_article_sectionletter_dictionary\">a waitress</text:p></draw:text-box></draw:frame>";
             bool returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue);
         }
@@ -3583,12 +3590,12 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 
-            string xpath = "//text:span[@text:style-name='scrFootnoteMarker_Paragraph_scrSection_columns_scrBook_scrBody']/text:a[@xlink:href='#fbcf3087e-dcad-43bc-ba61-1ca2f4ffbb63']";
+			string xpath = "//text:span[@text:style-name='scrFootnoteMarker_Paragraph_scrSection_columns_scrBook_scrBody']/text:a[@xlink:href='#fbcf3087e-dcad-43bc-ba61-1ca2f4ffbb63']";
             string content = "Reference here";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Reference with text test failed");
 
-            xpath = "//text:span[@text:style-name='AlternateReading_Test3_Paragraph_scrSection_columns_scrBook_scrBody']";
+			xpath = "//text:span[@text:style-name='AlternateReading_.nko_Test3_Paragraph_scrSection_columns_scrBook_scrBody']";
             content = "<text:bookmark-start text:name=\"fbcf3087e-dcad-43bc-ba61-1ca2f4ffbb36\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-end text:name=\"fbcf3087e-dcad-43bc-ba61-1ca2f4ffbb36\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />Child";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Reference without text test failed");
@@ -3669,7 +3676,7 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
-			string xpath = "//text:p/text:span[@text:style-name='span_Paragraph_scrSection_scrBody']";
+			string xpath = "//text:p/text:span[@text:style-name='span_.zxx_Paragraph_scrSection_scrBody']";
             string content = "1\u00A0Sejay i tonton Jesu Criston edafod David tan si Abraham.";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Hard Space after versenumber test failed");
@@ -3766,7 +3773,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "span_NoteGeneralParagraph_scrSection_scrBook_scrBody";
+			_validate.ClassName = "span_.bgt_NoteGeneralParagraph_scrSection_scrBook_scrBody";
             string content = "Kori haghore Grik " + Common.ConvertUnicodeToString("\\201C") + "Oti veikisighi." + Common.ConvertUnicodeToString("\\201D") + " Na puhi kena eia mara i hau bali tateli aua nidia na dotho, imarea kena kisia na bakodia ara kuladia kiloau.";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
@@ -3783,13 +3790,13 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            string xpath = "//text:span[@text:style-name='span_.kup_example_examples_sense_senses_entry_letData_dicBody']";
+			string xpath = "//text:span[@text:style-name='span_.kup_example_.kup_examples_sense_senses_entry_letData_dicBody']";
             _validate.ClassName = string.Empty;
             string content = "<text:line-break xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />Ne aban horip emahan barezat soh.";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "KeepLine Seperator test failed");
 
-            xpath = "//text:span[@text:style-name='span_.tpi_span_.en_translations_examples_sense_senses_entry_letData_dicBody']";
+			xpath = "//text:span[@text:style-name='span_.tpi_translation_.en_translations_examples_sense_senses_entry_letData_dicBody']";
             _validate.ClassName = string.Empty;
             content = "<text:line-break xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />When the bad man came I ran away.";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
@@ -3829,12 +3836,12 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "letHead_dicBody";
+			_validate.ClassName = "a_b_letHead_dicBody";
             string content = Common.ConvertUnicodeToString("\\2666") + "let Head";
             bool returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "para");
             Assert.IsTrue(returnValue1);
 
-            _validate.ClassName = "letData_dicBody";
+			_validate.ClassName = "a_b_letData_dicBody";
             content = ": let Data";
             returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "para");
             Assert.IsTrue(returnValue1);
@@ -3852,7 +3859,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "xitem_main_main_body";
+			_validate.ClassName = "xitem_.en_main_body";
             string content = "sample text file";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1);
@@ -3860,7 +3867,7 @@ namespace Test.OpenOfficeConvert
             //Note - The Styles will be created while processing xhtml(content.xml)
             //Style Test - Second
             _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "xitem_main_main_body";
+			_validate.ClassName = "xitem_.en_main_body";
             _validate.ClassProperty.Add("fo:color", "#ff0000");
 
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
@@ -3879,12 +3886,12 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "xitem-xitem_main_body";
+			_validate.ClassName = "xitem_main_body";
             string content = "sample text file";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1);
 
-            _validate.ClassName = "xitem_.en-xitem_main_body";
+			_validate.ClassName = "xitem_.en_main_body";
             content = "sample text file";
             returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1);
@@ -3892,13 +3899,13 @@ namespace Test.OpenOfficeConvert
             //Note - The Styles will be created while processing xhtml(content.xml)
             //Style Test - Second
             _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "xitem-xitem_main_body";
+			_validate.ClassName = "xitem_main_body";
             _validate.ClassProperty.Add("fo:color", "#0000ff");
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
-            _validate.ClassName = "xitem_.en-xitem_main_body";
-            _validate.ClassProperty.Add("fo:color", "#008000");
+			_validate.ClassName = "xitem_.en_main_body";
+			_validate.ClassProperty.Add("fo:color", "#ffa500");
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
@@ -3916,8 +3923,8 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            string xpath = "//text:p[@text:style-name='ChapterNumber1']";
-			string content = "<text:span text:style-name=\"ChapterNumber_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">1</text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"Left_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"RLeft_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"Right_Guideword_R\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"RRight_Guideword_R\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:span text:style-name=\"span_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"VerseNumber_Paragraph_scrBook_scrBody\">  1 </text:span>Yesu Kristo, Owi</text:span><text:span text:style-name=\"SeeInGlossary_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Dawid</text:span><text:span text:style-name=\"span_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"> mv na,</text:span><text:span text:style-name=\"SeeInGlossary_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:span><text:span text:style-name=\"span_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"> mvat sapace invpt</text:span>";
+			string xpath = "//text:p[@text:style-name='ChapterNumber1']";
+			string content = "<text:span text:style-name=\"ChapterNumber_.zxx_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">1</text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"Left_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"RLeft_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"Right_Guideword_R\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"ChapterNumber_.zxx\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:variable-set text:name=\"RRight_Guideword_R\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:span text:style-name=\"span_.zxx_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"VerseNumber_.zxx_Paragraph_scrBook_scrBody\">  1 </text:span>Yesu Kristo, Owi</text:span><text:span text:style-name=\"SeeInGlossary_.zxx_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Dawid</text:span><text:span text:style-name=\"span_.zxx_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"> mv na,</text:span><text:span text:style-name=\"SeeInGlossary_.zxx_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:span><text:span text:style-name=\"span_.zxx_Paragraph_scrBook_scrBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"> mvat sapace invpt</text:span>";
             bool returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue);
 
@@ -3935,7 +3942,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "xitem_main_main_body";
+			_validate.ClassName = "xitem_main_body";
             string content = "contain";
             bool returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "para");
             Assert.IsTrue(returnValue1);
@@ -3944,8 +3951,10 @@ namespace Test.OpenOfficeConvert
             returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "para");
             Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
 
+
+			_validate.ClassName = "xitem_.en_main_body";
             content = "sakple text file lang";
-            returnValue1 = _validate.ValidateOfficeTextNodeList(3, content, "para");
+            returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "para");
             Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
 
             //Content Test - First
@@ -3992,7 +4001,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "a.-b.-c_main_body";
+			_validate.ClassName = "a_b_c_main_body";
             string content = "sample text file b a c";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1);
@@ -4007,7 +4016,7 @@ namespace Test.OpenOfficeConvert
             returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1);
 
-            _validate.ClassName = "a.-c_main_body";
+            _validate.ClassName = "a_c_main_body";
             content = "sample text file a c";
             returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1);
@@ -4018,7 +4027,7 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(styleOutput);
 
 
-            _validate.ClassName = "a.-b.-c_main_body";
+			_validate.ClassName = "a_b_c_main_body";
             _validate.ClassProperty.Add("fo:color", "#ffa500");
             _validate.ClassProperty.Add("fo:font-size", "24pt");
 
@@ -4040,7 +4049,7 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
 
-            _validate.ClassName = "a.-c_main_body";
+            _validate.ClassName = "a_c_main_body";
             _validate.ClassProperty.Add("fo:color", "#ffa500");
             _validate.ClassProperty.Add("fo:font-size", "18pt");
 
@@ -4059,7 +4068,7 @@ namespace Test.OpenOfficeConvert
 			string styleOutput = GetStyleOutput(file);
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
+			_validate.ClassName = "mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_body";
 			_validate.GetInnerText = true;
 			string content = "wirek hen comp. [ˈwiɾ.ək ʁɛn] earlier, old, pertaining to or belonging to an earlier time.";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
@@ -4069,13 +4078,13 @@ namespace Test.OpenOfficeConvert
 			//Style Test - Second
 			_validate = new ValidateXMLFile(styleOutput);
 
-			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
+			_validate.ClassName = "mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_body";
 			_validate.ClassProperty.Add("fo:text-indent", "0pt");
 			_validate.ClassProperty.Add("fo:margin-left", "57pt");
 			bool returnValue = _validate.ValidateNodeAttributesNS(true);
 			Assert.IsTrue(returnValue);
 
-			_validate.ClassName = "subentry.-subentries_entry_subentries_div.entry_letData_body";
+			_validate.ClassName = "subentry.-subentries_entry";
 			_validate.ClassProperty.Add("text:display", "block");
 			returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
@@ -4098,7 +4107,7 @@ namespace Test.OpenOfficeConvert
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
 
-			_validate.ClassName = "span_.bzh-fonipa_form_pronunciation_pronunciations_subentry_subentries_entry_letData_dicBody";
+			_validate.ClassName = "span_.bzh-fonipa_form_pronunciation_pronunciations_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody";
 			_validate.GetInnerText = true;
 			content = "[ᵐbə.ˈᵑɡoᵑɢ l̪in]";
 			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
@@ -4986,7 +4995,7 @@ namespace Test.OpenOfficeConvert
 
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "mainheadwordst_span_mainheadword.-entry_mainheadword_entry_letData_dicBody";
+			_validate.ClassName = "mainheadwordst_.bzh_span_.bzh_mainheadword_entry_letData_dicBody";
 			_validate.GetInnerText = true;
 			const string content = "1";
 			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
@@ -4995,7 +5004,7 @@ namespace Test.OpenOfficeConvert
 			//Note - The Styles will be created while processing xhtml(content.xml)
 			//Style Test - Second
 			_validate = new ValidateXMLFile(styleOutput);
-			_validate.ClassName = "mainheadwordst_span_mainheadword.-entry_mainheadword_entry_letData_dicBody";
+			_validate.ClassName = "mainheadwordst_.bzh_span_.bzh_mainheadword_entry_letData_dicBody";
 			_validate.ClassProperty.Add("fo:font-weight", "700");
 			_validate.ClassProperty.Add("style:font-weight-complex", "700");
 			_validate.ClassProperty.Add("fo:font-size", "12pt");

@@ -75,6 +75,7 @@ namespace Test.XeLatex
 			Param.LoadSettings();
 			Param.SetValue(Param.InputType, "Scripture");
 			Param.LoadSettings();
+			Common.UseAfterBeforeProcess = true;
 		}
 
 		#endregion Setup

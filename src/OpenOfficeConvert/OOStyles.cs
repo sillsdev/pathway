@@ -65,7 +65,7 @@ namespace SIL.PublishingSolution
 		            IsHyphenEnabled = true;
 	            }
                 //EnableHyphenation();
-                GetGuidewordLength(cssProperty);
+				GetGuidewordLength(_cssProperty);
                 GetHeaderRule();
                 InitializeObject(outputFile); // Creates new Objects
                 LoadAllProperty();  // Loads all properties
@@ -122,7 +122,11 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void HandleSubEntryIndent()
         {
+
 			if (_projInfo.ProjectInputType.ToLower() != "dictionary") return;
+
+	        int subEntrySize = 0;
+	        int entrySize = 0;
 			string styelName = "entry";
 			if (_cssProperty.ContainsKey("div." + styelName))
 	        {
@@ -132,8 +136,8 @@ namespace SIL.PublishingSolution
 			{
 				if (_cssProperty.ContainsKey(styelName) && _cssProperty["entry"].ContainsKey("class-margin-left"))
 				{
-					int subEntrySize = Int16.Parse(_cssProperty["subentry"]["class-margin-left"]);
-					int entrySize = Int16.Parse(_cssProperty[styelName]["class-margin-left"]);
+					subEntrySize = Int16.Parse(_cssProperty["subentry"]["class-margin-left"]);
+					entrySize = Int16.Parse(_cssProperty[styelName]["class-margin-left"]);
 					if (subEntrySize <= entrySize)
 					{
 						foreach (string styleName in _cssProperty.Keys)
@@ -142,10 +146,39 @@ namespace SIL.PublishingSolution
 							{
 								_cssProperty[styleName]["class-margin-left"] = (subEntrySize + entrySize).ToString();
 							}
+							if (styleName.IndexOf("entry", StringComparison.Ordinal) == 0 && _cssProperty[styleName].ContainsKey("class-margin-left"))
+							{
+								_cssProperty[styleName]["class-margin-left"] = (subEntrySize + entrySize).ToString();
+							}
 						}
 					}
 				}
 			}
+
+			if (_cssProperty.ContainsKey("sensecontent_senses_entry") && _cssProperty["sensecontent_senses_entry"].ContainsKey("class-margin-left"))
+			{
+				if (_cssProperty.ContainsKey(styelName) && _cssProperty["entry"].ContainsKey("class-margin-left"))
+				{
+					subEntrySize = Int16.Parse(_cssProperty["sensecontent_senses_entry"]["class-margin-left"]);
+					entrySize = Int16.Parse(_cssProperty[styelName]["class-margin-left"]);
+					foreach (string styleName in _cssProperty.Keys)
+					{
+						if (styleName.IndexOf("sensecontent", StringComparison.Ordinal) == 0 && _cssProperty[styleName].ContainsKey("class-margin-left"))
+						{
+							_cssProperty["sensecontent_senses_entry"]["class-margin-left"] = (subEntrySize + entrySize).ToString();
+						}
+
+						if (styleName.IndexOf("examplescontent", StringComparison.Ordinal) == 0 &&
+							_cssProperty[styleName].ContainsKey("class-margin-left"))
+						{
+							subEntrySize = Int16.Parse(_cssProperty[styleName]["text-indent"]);
+							_cssProperty[styleName]["class-margin-left"] = (subEntrySize + entrySize).ToString();
+							_cssProperty[styleName]["text-indent"] = (subEntrySize + entrySize).ToString();
+						}
+					}					
+				}
+			}
+	      
         }
 
         /// <summary>

@@ -716,10 +716,13 @@ namespace SIL.PublishingSolution
 
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
 
-			//AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
-			//afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+	        if (Common.UseAfterBeforeProcess)
+	        {
+		        AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
+		        afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+	        }
 
-			#endregion
+	        #endregion
 
 
 			#region 11. Create ODT Content
@@ -1033,6 +1036,12 @@ namespace SIL.PublishingSolution
 
             string xpath = "//style:style[@style:name='letter_letHead_dicBody']";
             XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+	        if (list.Count == 0)
+	        {
+				xpath = "//style:style[@style:name='letter_letHead_body']";
+				list = xdoc.SelectNodes(xpath, nsmgr1);
+	        }
+
             if (list.Count > 0)
             {
                 XmlNode copyNode = list[0].Clone();
@@ -1294,31 +1303,31 @@ namespace SIL.PublishingSolution
                 Common.CleanDirectory(di);
             }
             Directory.CreateDirectory(destFolder);
-            string[] files = Directory.GetFiles(sourceFolder);
-            try
-            {
-                foreach (string file in files)
-                {
-                    string name = Path.GetFileName(file);
-                    string dest = Common.PathCombine(destFolder, name);
-                    File.Copy(file, dest, true);
-                }
+	        if (Directory.Exists(sourceFolder))
+	        {
+		        string[] files = Directory.GetFiles(sourceFolder);
+		        try
+		        {
+			        foreach (string file in files)
+			        {
+				        string name = Path.GetFileName(file);
+				        string dest = Common.PathCombine(destFolder, name);
+				        File.Copy(file, dest, true);
+			        }
 
-                string[] folders = Directory.GetDirectories(sourceFolder);
-                foreach (string folder in folders)
-                {
-                    string name = Path.GetFileName(folder);
-                    string dest = Common.PathCombine(destFolder, name);
-                    if (name != ".svn")
-                    {
-                        CopyOfficeFolder(folder, dest);
-                    }
-                }
-            }
-            catch
-            {
-                return;
-            }
+			        string[] folders = Directory.GetDirectories(sourceFolder);
+			        foreach (string folder in folders)
+			        {
+				        string name = Path.GetFileName(folder);
+				        string dest = Common.PathCombine(destFolder, name);
+				        if (name != ".svn")
+				        {
+					        CopyOfficeFolder(folder, dest);
+				        }
+			        }
+		        }
+		        catch {}
+	        }
         }
         #endregion
     }

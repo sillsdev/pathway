@@ -200,8 +200,8 @@ namespace SIL.PublishingSolution
         {
             string newClassName = className.Key;
 
-			if (_parentClass.Count == 0 || String.IsNullOrEmpty(_parentClass[newClassName]))
-				return;
+			//if (_parentClass.Count == 0 || String.IsNullOrEmpty(_parentClass[newClassName]))
+			//	return;
 
             string[] parent_Type = _parentClass[newClassName].Split('|');
 

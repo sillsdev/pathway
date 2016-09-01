@@ -75,7 +75,7 @@ namespace SIL.Tool
 		public static string Space = " ";
 		/* Non Breaking Space. It has differerence from normal space and the non breaking space */
 		public static string NonBreakingSpace = Common.ConvertUnicodeToString("\\00a0");
-
+		public static bool UseAfterBeforeProcess = false;
 		private static readonly ArrayList _units = new ArrayList();
 		public static ErrorProvider _errProvider = new ErrorProvider();
 		public static Font UIFont;

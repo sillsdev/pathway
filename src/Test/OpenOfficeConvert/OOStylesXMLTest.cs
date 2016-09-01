@@ -60,14 +60,14 @@ namespace Test.OpenOfficeConvert
             Common.ProgInstall = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../../../DistFiles");
             projInfo.ProjectInputType = "Dictionary";
 
+	        Common.UseAfterBeforeProcess = true;
+	        //Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
+	        //CssTree cssTree = new CssTree();
+	        //cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
-            //Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            //CssTree cssTree = new CssTree();
-            //cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            //Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            //LOStyles inStyles = new LOStyles();
-            //idAllClass = inStyles.CreateStyles(projInfo, cssClass);
+	        //Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
+	        //LOStyles inStyles = new LOStyles();
+	        //idAllClass = inStyles.CreateStyles(projInfo, cssClass);
         }
         #endregion Setup
 

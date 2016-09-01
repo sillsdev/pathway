@@ -1647,7 +1647,7 @@ namespace SIL.Tool
                     if (_reader.Name == "div" || _reader.Name == "span")
                     {
                         string name = _reader.GetAttribute("class");
-                        if (name != null && name.ToLower() == "headword")
+                        if (name != null && ( name.ToLower() == "headword" || name.ToLower() == "mainheadword"))
                         {
                             isHeadword = true;
                         }
