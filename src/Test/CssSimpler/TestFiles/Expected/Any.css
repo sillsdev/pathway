@@ -1,0 +1,26 @@
+﻿*[dir= 'ltr']{
+   unicode-bidi: -webkit-isolate;
+   unicode-bidi: -moz-isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: isolate;
+}
+*[dir= 'rtl']{
+   unicode-bidi: -webkit-isolate;
+   unicode-bidi: -moz-isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: isolate;
+}
+bdo[dir= 'ltr']{
+   unicode-bidi: bidi-override;
+   unicode-bidi: -webkit-isolate-override;
+   unicode-bidi: -moz-isolate-override;
+   unicode-bidi: -ms-isolate-override;
+   unicode-bidi: isolate-override;
+}
+bdo[dir= 'rtl']{
+   unicode-bidi: bidi-override;
+   unicode-bidi: -webkit-isolate-override;
+   unicode-bidi: -moz-isolate-override;
+   unicode-bidi: -ms-isolate-override;
+   unicode-bidi: isolate-override;
+}

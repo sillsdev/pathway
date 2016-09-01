@@ -459,6 +459,20 @@ namespace Test.CssSimplerTest
             Assert.IsNull(xml.SelectSingleNode("//RULE[6]//name[text()='complete']"));
         }
 
+        [Test]
+        public void AnyTest()
+        {
+            const string testName = "Any";
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver() };
+            var xml = new XmlDocument();
+            var inFullName = _testFiles.Input(testName + ".xml");
+            xml.Load(XmlReader.Create(inFullName, settings));
+            var outFullName = _testFiles.Output(testName + ".css");
+            File.Copy(inFullName, outFullName);
+            WriteSimpleCss(outFullName, xml);
+            TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), outFullName);
+        }
+
         /// <summary>
         ///A test for senses within senses
         ///</summary>

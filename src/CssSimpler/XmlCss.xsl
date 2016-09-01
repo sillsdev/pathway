@@ -44,6 +44,11 @@
         </xsl:if>
     </xsl:template>
 
+    <xsl:template match="ANY" mode="inRule">
+        <xsl:text>*</xsl:text>
+        <xsl:apply-templates select="*" mode="inRule"/>
+    </xsl:template>
+
     <xsl:template match="TAG/name" mode="inRule">
         <xsl:value-of select="."/>
         <xsl:if test="not(following-sibling::*[1][local-name()='ATTRIB'] or parent::*/following-sibling::*[1][local-name()='CLASS' or local-name()='PSEUDO'])">
