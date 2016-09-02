@@ -1626,8 +1626,8 @@ namespace SIL.PublishingSolution
 				_writer.WriteString(marker);
 				_writer.WriteEndElement();
 			}
-			//TD-3343
-			content = NoteCrossHyphenReferenceContentNodeMissing(content);
+			//TD-3343 TD-4717
+			content = SpanTagCorrection(content);
 
 			_writer.WriteRaw(content);
 			_writer.WriteEndElement();
@@ -1642,13 +1642,31 @@ namespace SIL.PublishingSolution
 			}
 		}
 
-		private static string NoteCrossHyphenReferenceContentNodeMissing(string content)
+		private static string SpanTagCorrection(string content)
 		{
-			string pattern = "<text:span text:style-name=\"NoteCrossHYPHENReferenceParagraph..footnote-marker\">\\s?<|<text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">\\s?<";
-			MatchCollection matches = Regex.Matches(content, pattern);
-			if (matches.Count == 1)
+			var regexStartTag = new Regex(@"<(!--\u002E\u002E\u002E--|!DOCTYPE|text:span|wbr)\s?");
+			var startTagCollection = regexStartTag.Matches(content);
+			var regexCloseTag = new Regex(@"</(!--\u002E\u002E\u002E--|!DOCTYPE|text:span|wbr)>");
+			var closeTagCollection = regexCloseTag.Matches(content);
+			var startTagList = new List<string>();
+			var closeTagList = new List<string>();
+
+			foreach (Match startTag in startTagCollection)
 			{
-				content = content + "</text:span>";
+				startTagList.Add(startTag.Value);
+			}
+			foreach (Match closeTag in closeTagCollection)
+			{
+				closeTagList.Add(closeTag.Value);
+			}
+			if (startTagList.Count > closeTagList.Count)
+			{
+				int remainingCloseingTag = startTagList.Count - closeTagList.Count;
+				while (remainingCloseingTag > 0)
+				{
+					content = content + "</text:span>";
+					remainingCloseingTag--;
+				}
 			}
 			return content;
 		}
