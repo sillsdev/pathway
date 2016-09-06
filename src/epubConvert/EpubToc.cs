@@ -509,6 +509,7 @@ namespace epubConvert
 			else
 				textString = node.FirstChild.InnerText;
 
+	        bool writeHeadwordEndNavPoint = false;
 	        if (textString.Trim().Length > 0)
             {
                 // write out the node
@@ -522,6 +523,7 @@ namespace epubConvert
                 ncx.WriteAttributeString("src", sb.ToString());
                 ncx.WriteEndElement(); // meta
                 playOrder++;
+				writeHeadwordEndNavPoint = true;
             }
 
             // If this is a dictionary with TOC level 3, gather the senses for this entry
@@ -582,9 +584,9 @@ namespace epubConvert
                     }
                 }
             }
-            if (textString.Trim().Length > 0)
+			if (writeHeadwordEndNavPoint == true)
             {
-                ncx.WriteEndElement(); // navPoint
+                ncx.WriteEndElement(); // navPoint of headword
             }
             return true;
         }
