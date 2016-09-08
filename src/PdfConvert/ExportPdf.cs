@@ -107,8 +107,8 @@ namespace SIL.PublishingSolution
         {
             bool success;
             bool isUnixOS = Common.UnixVersionCheck();
-            try
-            {
+            //try
+            //{
                 var regPrinceKey = RegPrinceKey;
                 if (regPrinceKey != null || isUnixOS)
                 {
@@ -121,6 +121,7 @@ namespace SIL.PublishingSolution
                             Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath,"pdfconvert");
                     }
                     Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+                    preProcessor.IncludeHyphenWordsOnXhtml(preProcessor.ProcessedXhtml);
                     preProcessor.GetTempFolderPath();
                     preProcessor.ImagePreprocess(false, delegate(string s, string to) { ImageMods.ResizeImage(s, to, 1,1); });
                     preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
@@ -219,11 +220,11 @@ namespace SIL.PublishingSolution
                         success = true;
                     }
                 }
-            }
-            catch (Exception)
-            {
-                success = false;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    success = false;
+            //}
             return success;
         }
 

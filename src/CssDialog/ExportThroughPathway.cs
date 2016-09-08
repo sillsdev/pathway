@@ -633,7 +633,7 @@ namespace SIL.PublishingSolution
                 chkReversalIndexes.Visible = false;
                 chkGrammarSketch.Visible = false; // currently this is false anyways (it's not implemented)
             }
-			if (ddlLayout.Text.Contains("LibreOffice"))
+			if (ddlLayout.Text.Contains("LibreOffice") || ddlLayout.Text.Contains("Prince"))
 			{
 				chkHyphen.Enabled = Param.IsHyphen;
 				chkHyphen.Checked = Param.HyphenEnable;
