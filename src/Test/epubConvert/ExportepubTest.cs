@@ -628,6 +628,126 @@ namespace Test.epubConvert
 			FileCompare(tocOutputNCXFile, tocExpectedNCXFile);
 		}
 
+		/// <summary>
+		/// Test for Creating the toc.ncx File for EPub Output - Level 1
+		/// TOC Level - 1. Letter Only
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void EPubTOCCreationTest_Level1_FW83()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+
+			const string XhtmlName = "main.xhtml";
+			const string CssName = "main.css";
+			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+			projInfo.IsReversalExist = false;
+			projInfo.ProjectName = "Dictionary Test";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			CleanOutputDirectory();
+			string inputDataFolder = Common.PathCombine(_inputPath, "EPubTOCCreationTest_Level1_FW83");
+			string outputDataFolder = Common.PathCombine(_outputPath, "EPubTOCCreationTest_Level1_FW83");
+			string expectedDataFolder = Common.PathCombine(_expectedPath, "EPubTOCCreationTest_Level1_FW83");
+			string inputDirectory = Path.Combine(inputDataFolder, "OEBPS");
+			string outputDirectory = Path.Combine(outputDataFolder, "OEBPS");
+			string expectedDirectory = Path.Combine(expectedDataFolder, "OEBPS");
+			Common.CopyFolderandSubFolder(inputDirectory, outputDirectory, true);
+			EpubToc target = new EpubToc(projInfo.ProjectInputType, "1 - Letter Only");
+			var bookId = new Guid("1CA29FE3-C044-405F-82AA-F6F577999125");
+			target.CreateNcx(projInfo, outputDirectory, bookId);
+			string tocOutputNCXFile = Path.Combine(outputDirectory, "toc.ncx");
+			string tocExpectedNCXFile = Path.Combine(expectedDirectory, "toc.ncx");
+
+			XmlAssert.AreEqual(tocOutputNCXFile, tocExpectedNCXFile, "NCX Files not Matching");
+		}
+
+		/// <summary>
+		/// Test for Creating the toc.ncx File for EPub Output - Level 2
+		/// TOC Level - 2. Letter and Entry
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void EPubTOCCreationTest_Level2_FW83()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+
+			const string XhtmlName = "main.xhtml";
+			const string CssName = "main.css";
+			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+			projInfo.IsReversalExist = false;
+			projInfo.ProjectName = "Dictionary Test";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			CleanOutputDirectory();
+			string inputDataFolder = Common.PathCombine(_inputPath, "EPubTOCCreationTest_Level2_FW83");
+			string outputDataFolder = Common.PathCombine(_outputPath, "EPubTOCCreationTest_Level2_FW83");
+			string expectedDataFolder = Common.PathCombine(_expectedPath, "EPubTOCCreationTest_Level2_FW83");
+			string inputDirectory = Path.Combine(inputDataFolder, "OEBPS");
+			string outputDirectory = Path.Combine(outputDataFolder, "OEBPS");
+			string expectedDirectory = Path.Combine(expectedDataFolder, "OEBPS");
+			Common.CopyFolderandSubFolder(inputDirectory, outputDirectory, true);
+			EpubToc target = new EpubToc(projInfo.ProjectInputType, "2 - Letter and Entry");
+			var bookId = new Guid("A9168BD8-E76E-43F3-97FC-4688CBFA82DA");
+			target.CreateNcx(projInfo, outputDirectory, bookId);
+			string tocOutputNCXFile = Path.Combine(outputDirectory, "toc.ncx");
+			string tocExpectedNCXFile = Path.Combine(expectedDirectory, "toc.ncx");
+
+			XmlAssert.AreEqual(tocOutputNCXFile, tocExpectedNCXFile, "NCX Files not Matching");
+		}
+
+		/// <summary>
+		/// Test for Creating the toc.ncx File for EPub Output - Level 3
+		/// TOC Level - 3. Letter, Entry and Sense
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void EPubTOCCreationTest_Level3_FW83()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+
+			const string XhtmlName = "main.xhtml";
+			const string CssName = "main.css";
+			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+			projInfo.IsReversalExist = false;
+			projInfo.ProjectName = "Dictionary Test";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			CleanOutputDirectory();
+			string inputDataFolder = Common.PathCombine(_inputPath, "EPubTOCCreationTest_Level3_FW83");
+			string outputDataFolder = Common.PathCombine(_outputPath, "EPubTOCCreationTest_Level3_FW83");
+			string expectedDataFolder = Common.PathCombine(_expectedPath, "EPubTOCCreationTest_Level3_FW83");
+			string inputDirectory = Path.Combine(inputDataFolder, "OEBPS");
+			string outputDirectory = Path.Combine(outputDataFolder, "OEBPS");
+			string expectedDirectory = Path.Combine(expectedDataFolder, "OEBPS");
+			Common.CopyFolderandSubFolder(inputDirectory, outputDirectory, true);
+			EpubToc target = new EpubToc(projInfo.ProjectInputType, "3 - Letter, Entry and Sense");
+			var bookId = new Guid("78239FF9-73E9-4B6A-8CDF-2074BFFFAF4E");
+			target.CreateNcx(projInfo, outputDirectory, bookId);
+			string tocOutputNCXFile = Path.Combine(outputDirectory, "toc.ncx");
+			string tocExpectedNCXFile = Path.Combine(expectedDirectory, "toc.ncx");
+
+			XmlAssert.AreEqual(tocOutputNCXFile, tocExpectedNCXFile, "NCX Files not Matching");
+		}
+
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
