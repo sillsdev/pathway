@@ -54,25 +54,34 @@
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="li_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_.zxx_span_.zxx_li_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="li_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_li_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="li_scrSection_columns_scrBook_scrBody">
+      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_.zxx_span_.zxx_li_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="span_.zxx_li_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_span_.zxx_li_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="li_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_span_.zxx_li_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="span_.zxx_li_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteTargetReference_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+      <style:text-properties text:display="prince-footnote" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteTargetReference_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteTargetReference_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+      <style:text-properties text:display="prince-footnote" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteTargetReference_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ReferencedText_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ReferencedText_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Line1_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody">
@@ -102,29 +111,35 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="rq_.zxx_Line1_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteTargetReference_.zxx_NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line2_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line2_scrSection_columns_scrBook_scrBody">
+      <style:text-properties text:display="prince-footnote" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteTargetReference_.zxx_NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ftc_.zxx_NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Line2_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ftc_.zxx_NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_.zxx_ParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ftc_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ftc_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteTargetReference_.zxx_NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
+      <style:text-properties text:display="prince-footnote" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NoteTargetReference_.zxx_NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ReferencedText_.zxx_NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ReferencedText_.zxx_NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_EmbeddedTextParagraphContinuation_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Inscription_.zxx_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">

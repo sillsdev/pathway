@@ -16,7 +16,10 @@
       <style:paragraph-properties fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:text-indent="-36pt" fo:margin-left="36pt" style:line-height-at-least="10pt" fo:padding-bottom="2pt" fo:padding-top="1pt" fo:orphans="2" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_reversalform_.en_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="reversalform_.en_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
+      <style:text-properties fo:language="en" fo:country="US" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_reversalform_.en_entry_letData_dicBody" style:family="text" style:parent-style-name="reversalform_.en_entry_letData_dicBody">
       <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />

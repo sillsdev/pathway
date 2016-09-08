@@ -201,8 +201,7 @@ namespace SIL.Tool
             _childName = FindStyleName();
             GetHeadwordStyles(isHeadword);
 
-			if(!_allStyleInfo.Contains(classInfo))
-				_allStyleInfo.Push(classInfo);
+			_allStyleInfo.Push(classInfo);
 
             if (_divType.Contains(_tagType))
             {
@@ -909,7 +908,7 @@ namespace SIL.Tool
             ArrayList multiClassList = MultiClassCombination(_className);
 
             float ancestorFontSize = FindAncestorFontSize();
-            _parentStyleName = StackPeek(_allParagraph);
+			_parentStyleName = StackPeek(_allStyle);
 
             string styleName = MatchCssStyle(ancestorFontSize, "null", multiClassList);
 			if (styleName == string.Empty) // missing style in CSS

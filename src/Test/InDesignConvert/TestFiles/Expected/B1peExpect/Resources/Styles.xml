@@ -122,14 +122,6 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scrSection_2" Name="scrSection_2" Imported="false" NextStyle="CharacterStyle/scrSection_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="11" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">12</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/SectionHeadMajor_1" Name="SectionHeadMajor_1" Imported="false" NextStyle="CharacterStyle/SectionHeadMajor_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" SpaceBefore="8" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -138,12 +130,28 @@
         <Leading type="unit">11</Leading>
       </Properties>
     </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/NoteGeneralParagraph_1" Name="NoteGeneralParagraph_1" Imported="false" NextStyle="CharacterStyle/NoteGeneralParagraph_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="unit">8</Leading>
+      </Properties>
+    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/SectionHeadMajor_2" Name="SectionHeadMajor_2" Imported="false" NextStyle="CharacterStyle/SectionHeadMajor_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" TextColumnGutter="14.17323" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="unit">11</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1" Name="NoteCrossHYPHENReferenceParagraph_1" Imported="false" NextStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="unit">8</Leading>
       </Properties>
     </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/Line1_1" Name="Line1_1" Imported="false" NextStyle="CharacterStyle/Line1_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="11" Justification="LeftAlign" FirstLineIndent="-18" LeftIndent="0" TextColumnGutter="14.17323" clear="both">
@@ -395,14 +403,6 @@
         <Leading type="unit">12</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrSection_2" Name="scrSection_2" Imported="false" NextStyle="ParagraphStyle/scrSection_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="11" FirstLineIndent="12" LeftIndent="0" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">12</Leading>
-      </Properties>
-    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/SectionHeadMajor_1" Name="SectionHeadMajor_1" Imported="false" NextStyle="ParagraphStyle/SectionHeadMajor_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" SpaceBefore="8" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
@@ -411,12 +411,28 @@
         <Leading type="unit">11</Leading>
       </Properties>
     </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/NoteGeneralParagraph_1" Name="NoteGeneralParagraph_1" Imported="false" NextStyle="ParagraphStyle/NoteGeneralParagraph_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="unit">8</Leading>
+      </Properties>
+    </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/SectionHeadMajor_2" Name="SectionHeadMajor_2" Imported="false" NextStyle="ParagraphStyle/SectionHeadMajor_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="10" FontStyle="Bold" Justification="CenterAlign" FirstLineIndent="0" LeftIndent="0" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
         <Leading type="unit">11</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/NoteCrossHYPHENReferenceParagraph_1" Name="NoteCrossHYPHENReferenceParagraph_1" Imported="false" NextStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="8" FirstLineIndent="0" LeftIndent="0" display="prince-footnote" Justification="LeftAlign" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Charis SIL</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="unit">8</Leading>
       </Properties>
     </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/Line1_1" Name="Line1_1" Imported="false" NextStyle="ParagraphStyle/Line1_1" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="11" Justification="LeftAlign" FirstLineIndent="-18" LeftIndent="0" TextColumnGutter="14.17323" clear="both" AppliedLanguage="$ID/English: USA">

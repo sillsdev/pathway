@@ -114,14 +114,6 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scrSection_2" Name="scrSection_2" Imported="false" NextStyle="CharacterStyle/scrSection_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/VerseNumber_.tpi_1" Name="VerseNumber_.tpi_1" Imported="false" NextStyle="CharacterStyle/VerseNumber_.tpi_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
@@ -370,14 +362,6 @@
       </Properties>
     </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/PWHide_.tpi_1" Name="PWHide_.tpi_1" Imported="false" NextStyle="ParagraphStyle/PWHide_.tpi_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Charis SIL</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="unit">20</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrSection_2" Name="scrSection_2" Imported="false" NextStyle="ParagraphStyle/scrSection_2" KeyboardShortcut="0 0" AppliedFont="Charis SIL" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>

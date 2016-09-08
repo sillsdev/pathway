@@ -103,7 +103,7 @@ namespace Test.InDesignConvert
             _expected.Clear();
 			styleName = "xsensenumber_2";
             _expected.Add(styleName, "2.1) ");
-            XPath = "//ParagraphStyleRange[4]/CharacterStyleRange[3][@AppliedCharacterStyle = \"CharacterStyle/" +
+            XPath = "//ParagraphStyleRange[2]/CharacterStyleRange[8][@AppliedCharacterStyle = \"CharacterStyle/" +
                     styleName + "\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, styleName + " test Failed");
@@ -664,7 +664,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-			styleName = "scrSection_2";
+			styleName = "NoteGeneralParagraph_1";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
             content = "Keep in mind that text wrap options apply to the object being wrapped.";
             result = ValidateNodeContent(_outputStory, content);
@@ -1687,7 +1687,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, _inputCSS + " test Failed");
 
             _expected.Add("Content", " Reghia kori Diksonari.");
-			XPath = "//ParagraphStyleRange/CharacterStyleRange/Footnote/ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/scrSection_2\"]";
+			XPath = "//ParagraphStyleRange/CharacterStyleRange/Footnote/ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/NoteGeneralParagraph_1\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, _inputCSS + " test Failed");
         }

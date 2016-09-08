@@ -29,7 +29,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Leghuagna nigna na toatogha ke mono itagna i hau, a God a Mama ke vahighamu eigna kotida nigna na komi tinoni. Ma na Tarunga ke Tabu ke agutu kori havimiu eigna kotida mono tabu. A God ke vahighamu eigna kotida leghua a Jisas Krais, ma na ghaughabuagna imanea ke vararahaghamu kori koakoa. Inau ku tarai gi a God keda vatokeghamu me heghamu hahali na soleana kori havimiu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -46,9 +46,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ati veletokea nigna na God ma a Tamagna nida a Lod, Jisas Krais. Na vunegna nigna na rarovi vanighita ke hutu puala, imanea ke heghita na havi mathangani. Mi ikageeni ighita kati adoa a God keda eia vanighita na komi fata ke toke. A God ke heghita na havi mathangani iaani eigna a Jisas Krais ke havi tabiru kori thehe. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>1</Content>
       </CharacterStyleRange>
@@ -58,7 +59,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ikageeni ighita kati pitua na komi fata ke toke a God ke kaikaliti vanira nigna na komi tinoni. Imanea ke kalitira na komi fata iraani i popo, tagna keda boi boto ba dika, keana keda talu mono thovohaliu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -70,7 +71,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>5</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na vunegna ighamu koti vaututunia a God, imanea keda sokara peoghamu kori nigna na mana me ghieghilei jufu mai na vagougovui maghavu. Kori vido iangeni imanea keda vahavighamu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -82,7 +83,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>6</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ighamu koti totogo hutu puala eigna na komi fata irangeni. Toke kotida dikahehe sina ghathi vido iso eigna na komi thagi papara ke padaghamu ikageeni, ighamu koti totogo eigna na komi fata ke toke a God ke eia vanighamu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -94,7 +95,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>7</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na komi papara iraani kena padaghamu bali tateli aua nimiu na vaututuni ke pukuni tutuni ba teo. Nimiu na vaututuni ke vaghagna na gol kena pughulia kori joto bali hati aua na komi fata ke dika itagna.</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call" Position="Superscript">
@@ -102,8 +103,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 1:7 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Imarea kena kukia na gol kori joto, mi                                                 kori vido na gol ke bea na komi garu itagna kena                                                 tatave mena hati aua eigna na pukuni gol vamua keda                                                 mono. Vaghagna iangeni, na komi papara ke padaghita                                                 ke hatheghita na auagna na komi fata ke dika kori                                                 havida eigna keda pukuni heta nida na                                           vaututuni.</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1"><Content>Imarea kena kukia na gol kori joto, mi                                                 kori vido na gol ke bea na komi garu itagna kena                                                 tatave mena hati aua eigna na pukuni gol vamua keda                                                 mono. Vaghagna iangeni, na komi papara ke padaghita                                                 ke hatheghita na auagna na komi fata ke dika kori                                                 havida eigna keda pukuni heta nida na                                           vaututuni.</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1">
+        <Content />
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> Ma nimiu na vaututuni ke nagho vano tagna na gol ke boi mono thovohaliu. Gi keda talu heta nimiu na vaututuni leghugna ke govu na komi papara, a God keda veletokeghamu me ghaghana boheghamu tagna na maghavu a Jisas Krais keda tabiru mai.</Content>
@@ -118,9 +122,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>8</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ighamu koti boi reghia a Jisas i hau moti boi reghia ikageeni. Keana ighamu koti dothovia moti vaututunia imanea. Ma na vunegna koti vaututunia, ighamu koti totogo hutu puala moti hahi nimiu na veleagna sa fata ke nabagna na totogo iangeni. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>1</Content>
       </CharacterStyleRange>
@@ -130,7 +135,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>9</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na tabamiu eigna koti vaututunia a Jisas Krais, na vahavighamugna a God ke eia.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -143,9 +148,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>10-11</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>I hau, mara na profet kena kidi titionoa ghohi a God keda vatokeghamu kori nigna na dotho me vahavighamu. Na Tarunga ke Tabu nigna a Krais ke mono ikoradia mara na profet, me tatelia vanira a Krais keda kidi papara, gi a God keda abe hadia. Imarea kena hiohiroa puala tadia na komi Rioriso ke Tabu eigna kena magnahaghinia kedana adoa na maghavu ma na puhi keda tate mai na komi fata iraani. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>1</Content>
       </CharacterStyleRange>
@@ -155,7 +161,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>12</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na Tarunga ke Tabu ke tatelia vanira na komi profet na komi titiono kena eia eigna a Krais, boi bali hathera ghehedia, keana bali hatheghamu. Mi ikageeni ighamu koti rongovia ghohi na komi titiono iraani tadia arahai kena titiono vanighamu na Rorongo ke Toke. Imarea kena titionoa kori nigna na mana na Tarunga ke Tabu a God ke vetula horu maia i popo. Na vunegna na komi fata a God ke eia bali vahavighita ke toke puala, na komi enjel huju kena magnahaghinia puala mua kedana thaothadoghagna.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -172,9 +178,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>13</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na vunegna a God ke eia vanighamu na komi fata ke toke irangeni, oti mono kaikaliti kori ghaghanamiu eigna kotida agutu vania. Moti reireghighamu ghehemiu tagna na koakoa. Oti vaututuni hahalia a God keda heghamu na komi fata ke toke kori vido a Jisas Krais keda tabiru mai. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>1</Content>
       </CharacterStyleRange>
@@ -184,7 +191,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>14</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na vunegna ighamu ara dathegna a God moti leghua, oti saghoi eia na komi puhi ke dika koti magnahaghinia na eiagna kori vido koti boi adoa mua a God. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -196,7 +203,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>15</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Keana ikageeni, na havimiu keda pukuni tabu, eigna a God ke vahighamu ke tabu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -208,7 +215,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>16</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A God ke velea tadia na komi Rioriso ke Tabu, “Oti mono tabu eigna inau ku tabu.”</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph..footnote-call" Position="Superscript">
@@ -216,8 +223,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 1:16 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Levitikas 11:44-45, 19:2, 20:7</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1"><Content>Levitikas 11:44-45, 19:2, 20:7</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1">
+        <Content />
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -229,9 +239,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>17</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A God, koti kiloagna a Tamamiu kori vido koti tarai, imanea ke boi thevu tagna ahai kori vido ke fatera na komi tinoni eigna na komi fata kena eia. Na vunegna iangeni, oti ghaghana bohea a God kori vido koti mono tadia na komi meleha ke boi na pukuni melehamiu. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>1</Content>
       </CharacterStyleRange>
@@ -241,7 +252,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>18</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti ghaghana bohea a God eigna ighamu koti adoa imanea ke volighamu au eigna kotida mamaluha tagna na komi puhi ke boi tangomana na hatheghamugna. Ighamu koti pipilia tadia ara hutumiu na komi puhi ke dika irangeni. A God ke boi volighamu au tagna sa fata keda govu vaghagna na silva ba na gol. Teo. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -253,7 +264,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>19</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Imanea ke volighamu au tagna na fata ke nagho vano, na pukuni ghaughabuagna a Krais. A Krais ke vaghagna sina dathei sip kena havughaghia ke teo sa fata ke dika itagna. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -265,7 +276,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>20</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Gi e vavuha na maramagna a God, imanea ke kidi vahia ghohi a Krais eigna keda vamamaluhaghamu kori koakoa. A God ke boi vetula maia a Krais i hau, keana tadia na komi dani iraani gi e govu na maramagna, a God ke vetula maia imanea eimiu ghamu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -277,7 +288,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>21</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ighamu koti vaututunia a God eigna na hava ke eia a Krais. Ma na vunegna a God ke vahavi tabirua imanea kori thehe me vathaba, ighamu koti vaututunia a God moti vaututunia imanea keda heghamu na komi fata ke toke ke taluhaghorea vanighamu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -290,9 +301,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>22</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ighamu koti vararaha na havimiu kori vido koti vaututunia na velepuhi ke tutuni eigna a Jisas Krais, ma na vunegna iangeni ighamu koti turughu na dothoviragna ara kulamiu kiloau. Mi inau ku magnahaghinighamu kotida veidothovighi hahali kori hetamiu doudolu. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>1</Content>
       </CharacterStyleRange>
@@ -302,7 +314,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>23</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti veidothovighi eigna a God ke heghamu na havi mathangani. Na havimiu ke mathangani iangeni e boi mai tadia ara idomiu mara tamamiu kedana thehe, keana tagna na haghoregna a God. Ma na haghoregna a God keda mono thovohaliu, me mono nigna na mana bali vamathangania na havimiu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -314,7 +326,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>24</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na komi Rioriso ke Tabu kena velea,</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_1">
@@ -348,8 +360,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 1:25 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Aesaea 40:6-8</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1"><Content>Aesaea 40:6-8</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1">
+        <Content />
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ParagraphContinuation_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ParagraphContinuation_1">
@@ -385,7 +400,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti vaghagna na komi meomeo kena eu havi kena rofo mena haga susuu ghadia. Oti rofo eigna na haghoregna a God eigna nimiu na vaututuni keda heta, ma a God keda vahavighamu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -397,7 +412,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti eia vaghagna iaani eigna koti reghia ghohi kori havimiu a Lod ke eia na komi fata ke toke vanighamu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -410,21 +425,24 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti mai tagna a Lod Jisas Krais ke heghita na havi mathangani. Imanea ke vaghagna na naghoi ghahira kori hidigna na vathe.</Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call" Position="Superscript">
         <Footnote>
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 2:4 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_.bgt_1"><Content>Na naghoi ghahira kori                                                 hidigna na vathe:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content> Reghia kori Diksonari.</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_.bgt_1"><Content>Na naghoi ghahira kori                                                 hidigna na vathe:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1"><Content> Reghia kori Diksonari.</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1">
+        <Content />
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> Na ghahira iangeni, na komi tinoni kena bosi magnahaghinia, kari a God ke vahia me toatogha ke nagho vano. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -434,7 +452,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>5</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ighamu koti hatia na havi mathangani, koti vaghagna na komi ghahira a God ke hatia bali agutua nigna na vathe. Na vathe iangeni hiri, ighamu koti leghua a God. Na Tarunga ke Tabu ke agutua na vathe iangeni itamiu. Ighamu koti hatia na havi mathangani, a God ke eighamu eigna kotida nigna na booi pris bali agutu vania. Ma na vunegna na hava ke eia a Jisas Krais, imanea keda totogo eidia na komi fata koti eia vania. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -446,7 +464,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>6</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Iaani ke vaghagna na hava a God ke velea ke mono tadia na komi Rioriso ke Tabu,</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_1">
@@ -467,8 +485,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 2:6 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Aesaea 28:16</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1"><Content>Aesaea 28:16</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1">
+        <Content />
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ParagraphContinuation_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -497,8 +518,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 2:7 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Psalm 118:22</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1"><Content>Psalm 118:22</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1">
+        <Content />
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ParagraphContinuation_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -523,8 +547,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 2:8 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Aesaea 8:14</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1"><Content>Aesaea 8:14</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1">
+        <Content />
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ParagraphContinuation_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/ParagraphContinuation_1">
@@ -540,9 +567,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>9</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Keana ighamu na booi tinoni ke vahighamu a God. Ighamu na komi pris bali agutu vania a God na King. Ighamu na komi tinoni ke tabu nigna imanea ghehegna. Ma a God ke vahighamu eigna kotida titiono aua itadia na komi tinoni na komi fata ke toke ke eia. Imanea ke kiloghamu au kori puni me hatighamu kori nigna na raraha ke toke puala. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -552,7 +580,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>10</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>I hau, ighamu boi na komi tinoni nigna a God, kari ikageeni ighamu na nigna imanea. I hau a God ke boi rarovighamu, kari ikageeni imanea ke rarovighamu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -569,9 +597,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>11</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ara kulagu kiloau ku dothovighamu, na vunegna ighamu koti mono tadia na komi meleha kena boi pukuni melehamiu, inau ku haghore heta vanighamu eigna kotida saghoi leghua nimiu na komi vanohehe ke dika ke rihu pungusighamu. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -581,7 +610,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>12</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ighamu koti mono duadia na komi tinoni bongihehe, mi kekeha maghavu imarea kena toroghamu mena velea ighamu koti eia na komi puhi ke dika. Oti leghu hahalia na puhi ke jino eigna kedana reghia na komi fata ke toke koti eia. Gi kotida eia iangeni, imarea kedana veletokea a God kori maghavu imanea keda mai itadia.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -594,21 +623,24 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>13</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A Lod ke magnahaghinighamu kotida leghua na haghoredia arahai kena vunaghi pungusighamu kori maramagna, haluhadi na King gna i Rom,</Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call" Position="Superscript">
         <Footnote>
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 2:13 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_.bgt_1"><Content>King gna i Rom:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content> Reghia kori Diksonari.</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_.bgt_1"><Content>King gna i Rom:</Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1"><Content> Reghia kori Diksonari.</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1">
+        <Content />
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> eigna imanea ke vunaghi pungusira na komi tinoni gougovu. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -618,7 +650,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>14</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Moti leghua mua na haghoredia na komi primia eigna na king ke vahira bali vaparara arahai kena eia na komi fata ke dika mena kilothabara arahai kena leghua na puhi ke jino. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -630,7 +662,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>15</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>God ke magnahaghinighamu kotida eia na komi fata ke toke eigna na komi tinoni kena hahi kedana soto na haghore diadikalaghamugna. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -642,7 +674,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>16</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na vunegna ighamu koti vaututunia a Krais, ighamu koti mamaluha tagna na papara ke nabamiu eigna na komi paluhamiu. Kari oti saghoi toatogha gi e toke vamua kotida eia na komi fata ke dika eigna ighamu koti mamaluha. Keana oti leghua na puhi ke nabagna na komi tinoni agutu nigna a God. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -654,7 +686,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>17</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti ghaghana bohera na komi tinoni gougovu moti dothovira ara kulamiu kiloau. Ghaghana bohea a God moti ghaghana bohea mua na King gna i Rom.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -671,21 +703,24 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>18</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ighamu na komi tinoni seka,</Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call" Position="Superscript">
         <Footnote>
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 2:18 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_.bgt_1"><Content>Tinoni seka: </Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Reghia kori Diksonari.</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Emphasis_.bgt_1"><Content>Tinoni seka: </Content></CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1"><Content>Reghia kori Diksonari.</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1">
+        <Content />
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> oti leghua na haghoredia na komi vunaghimiu moti ghaghana bohera hahali. Kekeha vunaghimiu ke toke mena eia vanighamu na komi puhi ke toke. Keana kekeha kena eia na hava ke dika itamiu. Oti leghura gougovu vamua. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -695,7 +730,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>19</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Kekeha maghavu na komi vunaghimiu, toke kotida boi eia sa fata ke dika, imarea kena vaparaghamu. Gi kotida ghathapaku eigna koti togha hahalia a God kori vido kena vaparaghamu, a God keda totogo eimiu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -707,7 +742,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>20</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Keana, gi kotida ghathapaku kori vido kena thabuhighamu eigna na fata ke dika koti eia, a God keda boi totogo eimiu. A God keda totogo vamua gi kotida ghathapaku kori vido kena vaparaghamu eigna na fata ke toke koti eia. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -719,7 +754,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>21</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A God ke kiloghamu eigna kotida papara vaghagna iangeni eigna a Krais ke papara eimiu ighamu me tateli vanighamu na puhi kotida leghua. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -731,7 +766,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>22</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A Krais ke boi eia sa koakoa me teo sa piapilau ke au mai kori livogna. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -743,7 +778,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>23</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Kori vido imarea kena titiono diadikala a Jisas, imanea ke boi haghore tughura tagna sa haghore ke dika. Kori vido imarea kena vapara, imanea ke boi velea keda raghe leghura. Teo. A Jisas ke vaututunia a God keda reireghia, eigna a God ke fatera na komi tinoni kori puhi ke jino hahali. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -755,7 +790,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>24</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Kori vido a Krais ke thehe kori ghaibabala, imanea ke hatia na komi paluhada kori tonogna eigna ighita katida taveti sania na koakoa mati mono hahali kori puhi ke jino. Na komi ngeso kori tonogna ke vajinoghamu kori matagna a God. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -767,7 +802,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>25</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>I hau, ighamu koti vaghagna na komi sip ke jefe kori hangana, kari ikageeni ighamu koti tabiru mai tagna ahai ke reireghighamu me kalitighamu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -800,7 +835,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>eigna imarea kedana reghi leghua na puhimiu ke jino mena reghia mua ighamu koti ghaghana bohea a God. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -812,7 +847,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Boi na fata ke nagho na eiagna na komi fata bali vatoetokelaghagna na dodoromiu, vaghagna na pijiriagna na sesehumiu, ba na vahagheagna na komi fata bali gniagnilau kena agutua kori gol, ba na pipisiagna na komi pohe ke vahotha. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -824,7 +859,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na fata ke nagho keda vatoetokelaghagna na dodoromiu, na hava keda au mai kori havimiu. Na mono taluleghu ma na mono bughoro, e rua na fata ke ulaghagna thovohaliu ma a God ke toatogha ke nagho vano. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -836,7 +871,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>5</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>I hau na koi vaivine kena maimanihihia a God mena vaututunia imanea keda eia na hava ke taluhaghorea, iira kena vatoetokelaghagna na dodorodia kori puhi iangeni. Iira kena leghua na haghoredia ara taudia. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -848,7 +883,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>6</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A Sera sikei itadia. Iia ke leghua na haghoregna a Ebraham me kiloa na vunaghigna. Gi kotida eia na komi fata ke jino moti boi mataghu, ighamu ara dathegna a Sera.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -861,7 +896,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>7</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ighamu na komi mane koti taulaghi, na vunegna ara taumiu kena boi heta vaghagna ighamu, oti togha hahalia na hava ke toke kotida eia vanira. Oti ghaghana bohera, eigna iira kedana hatia duamiu na havi ke teo na govugna a God ke hera nigna na komi tinoni. Gi kotida boi eia iaani, a God keda boi rongovia nimiu na tarai.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -878,9 +913,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>8</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Iaani nigua na vagovui velepuhi itamiu. Inau ku magnahaghinighamu kotida sikei na ghaghanamiu moti veirarovighi. Oti veidothovighi vaghagna koti tamatahi, moti veihatheghi kori hehei dotho moti mono taluleghu. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>3</Content>
       </CharacterStyleRange>
@@ -890,7 +926,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>9</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Saghoi eia na dika vanira arahai kena eia na dika itamiu, moti saghoi haghore diadikalara arahai kena haghore diadikalaghamu. Keana oti kaea a God eigna keda vatokera. A God ke magnahaghinighamu kotida eia iangeni, mi imanea ke taluhaghorea keda vatokeghamu gi kotida eia. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -902,7 +938,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>10</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Vaghagna na komi Rioriso ke Tabu kena velea,</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_1">
@@ -953,8 +989,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 3:12 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Psalm 34:12-16</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1"><Content>Psalm 34:12-16</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1">
+        <Content />
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/SectionHeadMajor_2">
@@ -970,9 +1009,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>13</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Gi kotida agutu heta bali eia na komi fata ke toke, da teo ahai keda vaparaghamu. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>3</Content>
       </CharacterStyleRange>
@@ -982,7 +1022,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>14</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Keana, gi kedana vaparaghamu eigna ighamu koti eia na komi fata ke jino, a God keda vatokeghamu. Oti saghoi mataghunira arahai kena vaparaghamu moti saghoi lubatia na ghaghanamiu keda horuhaihadi. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -994,7 +1034,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>15</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Keana oti ghaghana bohea a Krais moti lubatia eigna keda vunaghi pungusia na havimiu. Oti mono kaikaliti hahali bali haghore tughura arahai kedana huatighamu na vunegna gi koti vaututunia a Krais. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1006,7 +1046,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>16</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Moti mono taluleghu moti ghaghana bohera kori vido koti haghore tughura. Oti leghu hahalia na puhi koti adoa ke jino. Gi kotida eia iangeni, arahai kena velea na komi fata ke dika eigna na puhimiu ke toke, imarea kedana maomamo nidia. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1018,7 +1058,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>17</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Gi a God keda lubatighamu eigna kotida papara eigna na fata ke toke koti eia, a God keda totogo eimiu. Keana gi kotida papara eigna koti eia na fata ke dika, a God keda boi totogo eimiu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -1031,9 +1071,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>18</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A Krais huju ke papara kori vido ke thehe eigna na komi paluhada. Imanea ke sikei vamua na theheagna me teo keda ghoi thehe eigna mua na komi paluhada. Imanea ke teo sa paluhagna kari imanea ke thehe eida ighita na komi tinoni koakoa bali hatighita atu tagna a God. Imarea kena vathehea na tonogna a Krais, keana na Tarunga ke Tabu ke vahavi tabirua. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>3</Content>
       </CharacterStyleRange>
@@ -1043,7 +1084,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>19</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Mi kori nigna na mana na Tarunga ke Tabu, a Krais ke vano me titiono tadia na komi tarunga kena mono kori meleha papara. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1055,7 +1096,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>20</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na komi tarunga iangeni, na komi tarungadia arahai kena huhughua a God kori vido a Noa ke agutua na vaka. Kori vido iangeni a God ke boi saisami na vapararagna eigna ke magnahaghinia kedana tughua na havidia ke dika. E alu vamua na tinoni kena hahaghe kori vaka kena boi bilomo eigna na vaka ke tatave kori bea. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1067,7 +1108,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>21</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ma na bea iangeni, na totoghalegna na vahavighamugna a God ke eia vanighamu tagna na siuvitabu. Na pukuni siuvitabu, boi na lumiagna na garu kori tono. Teo. Na pukuni siuvitabu, na kaekae kati eia tagna a God gi keda talutavogha na paluhada me vararaha na havida. Na siuvitabu iaani ke tangomana na vahavighitagna eigna a Jisas Krais ke sokara tabiru kori thehe. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1079,7 +1120,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>22</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A Jisas ke hadi i popo mi ikageeni ke sopou kori madothogna a God. Ingengeni imanea ke vunaghi pungusira na komi enjel ma na komi tidatho ma na komi tarunga gougovu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -1112,7 +1153,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Imanea ke taveti sania na koakoa eigna keda boi leghua mua nigna na komi vanohehe ke dika kori vido ke talu havi mua kori maramagna. Keana imanea keda leghua vamua nigna na vanohehe a God. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1124,7 +1165,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Kori vido koti boi vaututunia mua a Krais, ighamu koti eia na komi puhi ke dika kena eia na komi tinoni bongihehe. Kori vido iangeni, ighamu koti nere duadia arahai kena boi ara taumiu, moti mamagna, moti kou memee, moti eia na komi haidu bali eia na komi puhi ke dika. Sina fata ke dika puala koti eia mua, ighamu koti maimanihihira na komi ngunguju.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -1137,9 +1178,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Keana ikageeni na komi tinoni bongihehe kena vere nidia itamiu eigna koti boi eia duadia na komi thagi puhi ke dika irangeni, mena haghore diadikalaghamu. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>4</Content>
       </CharacterStyleRange>
@@ -1149,7 +1191,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>5</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Keana oti saghoi vaovarongo itadia eigna ivughei valiha imarea kedana titiono aua tagna a God na komi fata kena eia. Ma a God ke kaikaliti bali fatera arahai kena havi ma arahai kena thehe ghohi. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1161,7 +1203,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>6</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Iangeni na vunegna imarea kena titionoa na Rorongo ke Toke tadia arahai itamiu kena thehe ghohi ikageeni. Toke na tonodia ke thehe eigna na koakoa kena eia, imarea kena rongovia na Rorongo ke Toke eigna na tarungadia kedana tangomana na havi vaghagna a God ke havi.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -1174,7 +1216,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>7</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na maghavu keda govu na maramagna iaani ke gharani mai ghohi. Na vunegna iangeni, oti reireghighamu ghehemiu tagna na koakoa moti mono kaikaliti hahali eigna kotida tangomana na tarai.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -1187,9 +1229,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>8</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na fata ke nagho vano, oti veidothovighi kori hehemiu doudolu. Gi kotida dothovira na komi tinoni, ighamu kotida talutavogha na paluhadia kori vido kena eia na dika itamiu. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>4</Content>
       </CharacterStyleRange>
@@ -1199,7 +1242,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>9</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti kalitira ara kulamiu kiloau kori vathemiu. E boi toke kotida bosi nimiu na eiagna iangeni. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1211,7 +1254,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>10</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A God ke heghamu soasopa sonihathavu bali eia na agutu keda hathera arahai tavogha. Moti agutu toetoke kori sonihathavu ke heghamu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1223,7 +1266,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>11</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Arahai a God ke hera na sonihathavu bali titiono, imarea kedana titionoa na komi haghore ke mai tagna a God. Ma arahai a God ke hera na sonihathavu bali hathera arahai tavogha, imarea kedana eia kori heta ke hera a God. Oti ei toetokea na agutu ke heghamu a God eigna na komi tinoni kedana veletokea a God kori vido kena reghia na komi fata koti eia ke toke eigna koti mono haidu duagna a Jisas Krais. God ke mono nigna na mana ma na ghaghana bohe ke hutu ke hau me hau. Amen.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -1240,9 +1283,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>12</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ara kulagu, oti saghoi nia vere tadia na komi papara hutu ke padaghamu, eigna na papara boi na fata mathangani itamiu. Na komi papara irangeni kena mai itamiu bali pipilia nimiu na vaututuni. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>4</Content>
       </CharacterStyleRange>
@@ -1252,7 +1296,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>13</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti totogo eigna ighamu koti tangomana na papara vaghagna a Krais ke papara. Oti eia iangeni eigna nimiu na totogo keda hutu vano mua kori vido a Krais keda tabiru mai kori nigna na mana ke hutu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1264,7 +1308,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>14</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Kori vido na komi tinoni kena haghore diadikalaghamu eigna koti leghua a Krais, oti totogo eigna na haghore diadikalaghamugna kena eia ke tateli aua nigna na Tarunga a God ke pukuni mana puala ke mono duamiu. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1276,7 +1320,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>15</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>E boi toke gi kotida hatia na papara eigna koti thabu vathehea na tinoni, ba oti biabilau, ba oti boi leghua kekeha mua na vetula, ba oti diadikala nidia na agutu arahai tavogha. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1288,7 +1332,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>16</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Keana gi kedana vaparaghamu eigna ighamu koti leghua a Krais, oti saghoi maomamo. Oti veletokea vamua a God eigna na komi tinoni kena adoa ighamu koti nigna a Krais.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -1301,9 +1345,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>17</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na maghavu a God keda fatera na komi tinoni ke jufu mai ghohi, mi imanea keda kidi fatera nigna na komi tinoni. Na vunegna a God keda kidi fateghita ighita kati vaututuni, ighita kati adoa na fate imanea keda eia itadia arahai kena boi vaututunia na Rorongo ke Toke, kenughua e tahu vano tagna na fate keda eia itada. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>4</Content>
       </CharacterStyleRange>
@@ -1313,7 +1358,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>18</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na komi Rioriso ke Tabu kena velea,</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_1">
@@ -1330,8 +1375,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 4:18 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Provebs 11:31</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1"><Content>Provebs 11:31</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1">
+        <Content />
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1343,7 +1391,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>19</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Gi ighamu kotida papara leghuagna nigna na vanohehe a God, saghoi soto na eiagna na komi fata ke toke, moti lubatia na havimiu kori limagna a God, eigna imanea ke vavuhaghamu me ei hahalia na hava ke velea keda eia.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -1376,7 +1424,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>2</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Inau ku magnahaghinighamu kotida reireghi toetokera na komi tinoni kiloau a God ke boa kori limamiu. Oti reireghira vaghagna na mane reireghi sip ke reireghi toetokera nigna na komi sip. Oti saghoi reireghira eigna koti toatogha arahai kena vahighamu kena hurughamu vamua. Teo. Oti sasaa na reireghiragna eigna a God ke magnahaghinighamu kotida eia. E boi toke gi kotida baubatu kori kiloau eigna ighamu koti magnahaghinia vamua na rongo. Saghoi eia vaghagna iangeni. Keana oti eia eigna koti pukuni magnahaghinia na hatheragna arahai koti reireghira. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1388,7 +1436,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>3</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Saghoi hurura arahai koti batura vaghagna ighamu koti vunaghidia, keana oti tateli vanira na puhimiu ke nabagna kedana leghua. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1400,7 +1448,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>4</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Mi kori vido a Krais, na vunaghidia mara kena reireghi sip keda tabiru mai, imanea keda heghamu na taba keda boi govu. Ighamu kotida mono hahali duagna koragna nigna na mana ke hutu.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -1413,7 +1461,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>5</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ighamu mara mathangani, inau ku magnahaghinighamu kotida leghua na haghoredia mara puhi. Ighamu gougovu koti vaututuni, oti mono taluleghu moti veihatheghi. Eigna na komi Rioriso ke Tabu kena velea,</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Line1_1">
@@ -1430,8 +1478,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteCrossHYPHENReferenceParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 5:5 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Provebs 3:34</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1"><Content>Provebs 3:34</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteCrossHYPHENReferenceParagraph_1">
+        <Content />
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/ParagraphContinuation_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
@@ -1515,9 +1566,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>8</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti reireghighamu ghehemiu tagna na koakoa moti mono kaikaliti hahali, eigna a Satan nimiu na thevuioka, imanea ke hiro hahalia na tinoni kiloau eigna keda diadikala nigna na vaututuni. Imanea ke vaghagna na laion ke nguru eigna ke magnahaghinia na vanga.</Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>5</Content>
       </CharacterStyleRange>
@@ -1527,7 +1579,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>9</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti sokara pungusia a Satan moti sokara ngasi kori nimiu na vaututuni, eigna ighamu koti adoa na komi thagi papara ke padaghamu ke padara mua ara kulamiu kiloau kena mono ivei mi vei kori maramagna.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -1540,9 +1592,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>10</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ikageeni ighamu koti papara sina ghathi vido vamua, keana a God ke dothovighita hahali keda hatheghamu. Imanea keda vajinoa na havimiu, me vaheta nimiu na vaututuni, me heghamu na mana eigna kotida sokara ngasi hahali. A God ke kiloghamu eigna kotida totho itagna a Krais koragna nigna na mana ke hutu. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>5</Content>
       </CharacterStyleRange>
@@ -1552,7 +1605,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>11</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A God keda vunaghi pungusira na komi fata gougovu ke hau me hau. Amen.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHeadMajor_1">
@@ -1569,7 +1622,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>12</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>A Sailas ke hatheu na risoagna na letasi kudo iaani. Imanea a kulada kori vaututuni mu adoa ke leghua a Krais hahali. Inau ku riso atua na letasi iaani vanighamu bali vaheta nimiu na vaututuni. Mu magnahaghinia kuda veleghamu na komi fata gougovu ku risoa kori letasi iaani ke tateli aua na puhi a God ke dothovighamu. Oti sokara ngasi kori nigna na dotho a God iangeni.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -1582,9 +1635,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>13</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na komi tinoni kena vaututuni kena mono eeni i Rom, imarea kena vetula atua itamiu nidia na haghore dotho. A God ke vahira vaghagna vamua imanea ke vahighamu. A Mak ke vaghagna a dathegu, imanea huju ke vetula atua mua nigna na haghore dotho. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.bgt_1">
         <Content>5</Content>
       </CharacterStyleRange>
@@ -1594,7 +1648,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumber_.bgt_1">
         <Content>14</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Oti veikubaeghi</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph..footnote-call" Position="Superscript">
@@ -1602,8 +1656,11 @@
           <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/NoteGeneralParagraph..footnote-marker">
             <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
               <Content><?ACE 4?> 5:14 = </Content>
-            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_2"><Content>Kori haghore Grik “Oti                                                 veikisighi.” Na puhi kena eia mara i                                                 hau bali tateli aua nidia na dotho, imarea kena                                                 kisia na bakodia ara kuladia kiloau. Ikageeni, tadia                                                 sethe na meleha, na puhi kubae ke tughua na puhi                                                 kisi iangeni. Keana, tadia kekeha meleha imarea kena                                                 talu leghua na puhi kisi iangeni.</Content></CharacterStyleRange></ParagraphStyleRange>
+            </CharacterStyleRange><CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1"><Content>Kori haghore Grik “Oti                                                 veikisighi.” Na puhi kena eia mara i                                                 hau bali tateli aua nidia na dotho, imarea kena                                                 kisia na bakodia ara kuladia kiloau. Ikageeni, tadia                                                 sethe na meleha, na puhi kubae ke tughua na puhi                                                 kisi iangeni. Keana, tadia kekeha meleha imarea kena                                                 talu leghua na puhi kisi iangeni.</Content></CharacterStyleRange></ParagraphStyleRange>
         </Footnote>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/NoteGeneralParagraph_1">
+        <Content />
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> kori dotho. Inau ku tarai gi a God keda heghamu ighamu koti mono haidu toetoke duagna a Krais na soleana kori havimiu.</Content>

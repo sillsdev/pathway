@@ -43,7 +43,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Dispela †  em i tok long ol lain tumbuna bilong Jisas Krais. Jisas em i bilong lain bilong Devit na Devit em i bilong lain bilong Abraham. replace text here</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -65,7 +65,7 @@
           <Content>a</Content>
         </HyperlinkTextSource>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>. Na Aisak em i papa bilong Jekop. Na Jekop em i papa bilong Juda wantaim ol brata bilong en. ‡ </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
@@ -121,7 +121,7 @@
           <Content>b</Content>
         </HyperlinkTextSource>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/pictureCaption_1">
@@ -392,7 +392,7 @@
         <Content>Stori †  bilong Jisas Krais i kamap, em i olsem. Mama bilong en, Maria, ol i makim em pinis bilong maritim Josep. </Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Tasol taim tupela i no i stap wantaim yet, ol i lukim Maria i gat bel. Holi Spirit tasol i bin mekim na Maria i gat bel. </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
@@ -500,9 +500,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Maria i karim Jisas long taun Betlehem long distrik Judia long taim Herot i stap king. ‡ Em i karim Jisas pinis, na bihain sampela saveman bilong hap sankamap i kam long Jerusalem na ol i askim nabaut olsem, </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -514,8 +515,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>“Nupela †  pikinini em king bilong ol Juda, em i stap we? Mipela i lukim sta bilong en long hap sankamap, na mipela i kam bilong lotu long em.” </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>2</Content>
       </CharacterStyleRange>
@@ -665,7 +665,7 @@
           <Content>c</Content>
         </HyperlinkTextSource>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> Na yu mas i stap long Isip inap long taim mi givim tok gen long yu, long wanem, Herot i laik painim pikinini na kilim em i dai.” </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
@@ -826,9 +826,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Long †  dispela taim Jon, man bilong givim baptais, em i kamap. Em i stap long ples i no gat man long distrik Judia, na em i autim tok long ol manmeri. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>3</Content>
       </CharacterStyleRange>
@@ -840,8 +841,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Em †  i tok olsem, “Yupela tanim bel. Kingdom bilong heven em i kam klostu pinis.” ‡ </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>3</Content>
       </CharacterStyleRange>
@@ -1053,9 +1053,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Long †  dispela taim Holi Spirit i bringim Jisas i go long ples i no gat man, bai Satan i traim em. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>4</Content>
       </CharacterStyleRange>
@@ -1067,8 +1068,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na †  Jisas i no kisim kaikai inap 40 san na 40 nait. Na bihain em i hangre. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>4</Content>
       </CharacterStyleRange>
@@ -1397,7 +1397,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas i lukim ol bikpela lain manmeri i kam, na em i go antap long maunten. Em i sindaun, ‡ na ol disaipel bilong en i kam long em.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/SectionHead_2">
@@ -2051,7 +2051,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas †  i tok moa olsem, “Yupela lukaut. Yupela i no ken mekim ol gutpela gutpela pasin bilong yupela long ai bilong ol manmeri, bai ol i lukim. Sapos yupela i mekim olsem, yupela bai i no inap kisim pe long Papa bilong yupela i stap long heven.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -2563,9 +2563,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas †  i tok moa olsem, “Yupela i no ken skelim pasin bilong ol arapela na tok ol i man nogut. Nogut God i mekim wankain pasin long yupela tu. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>7</Content>
       </CharacterStyleRange>
@@ -2577,8 +2578,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>God †  bai i skelim pasin bilong yupela long wankain pasin olsem yupela i save mekim long ol arapela man. Na skel yupela i save givim long ol arapela man, long dispela skel tasol God bai i bekim long yupela. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>7</Content>
       </CharacterStyleRange>
@@ -2950,9 +2950,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas i lusim maunten na i go [ksldkdssdfffffsdfsdfsf ksllkdjflakd ksldf sd] daun, na planti manmeri moa i bihainim em i go. ‡ </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>8</Content>
       </CharacterStyleRange>
@@ -2964,8 +2965,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Na †  wanpela man i gat sik lepra i kam long Jisas na i brukim skru na i tok, “Bikpela, sapos yu laik, yu inap long mekim mi i kamap klin long ai bilong God.” ‡ </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>8</Content>
       </CharacterStyleRange>
@@ -3409,9 +3409,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Orait Jisas i kalap long wanpela bot, na i go bek long hapsait bilong raunwara, na i kamap long ples bilong em stret. ‡ </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>9</Content>
       </CharacterStyleRange>
@@ -3921,7 +3922,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas †  i singautim ol 12-pela disaipel bilong en i kam, na em i givim strong long ol bilong rausim ol spirit nogut i stap long ol manmeri, na bilong mekim orait olgeta kain sik bilong ol manmeri.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -4487,7 +4488,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas i autim pinis dispela tok em i givim bilong skulim ol 12-pela disaipel bilong en, orait em i lusim dispela ples na i go long ol taun bilong dispela hap na i skulim ol manmeri na i autim tok bilong God long ol.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -4879,9 +4880,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Bihain, †  long wanpela de Sabat Jisas i wokabaut namel long ol gaden wit. Na ol disaipel bilong en i hangre, na ol i wok long kisim ol pikinini bilong wit, na ol i kaikai. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>12</Content>
       </CharacterStyleRange>
@@ -4893,8 +4895,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> Ol †  Farisi i lukim, na ol i tokim Jisas olsem, “Lukim, dispela pasin ol disaipel bilong yu i mekim, em i tambu long mekim long de Sabat.” ‡ </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>12</Content>
       </CharacterStyleRange>
@@ -5539,9 +5540,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Long dispela de yet Jisas i lusim haus na i go ausait. Na em i sindaun long arere bilong raunwara. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>13</Content>
       </CharacterStyleRange>
@@ -5553,8 +5555,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> Na †  planti lain manmeri tru i kam long em. Olsem na em i kalap long wanpela bot na i sindaun, na olgeta manmeri i sanap i stap long nambis. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>13</Content>
       </CharacterStyleRange>
@@ -6343,9 +6344,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Long dispela taim namba wan gavman Herot ‡ i harim stori bilong ol samting Jisas i mekim, </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>14</Content>
       </CharacterStyleRange>
@@ -6802,9 +6804,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Long dispela taim sampela Farisi na saveman bilong lo ol i lusim Jerusalem na ol i kam long Jisas. Na ol i askim em olsem, </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>15</Content>
       </CharacterStyleRange>
@@ -7315,9 +7318,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Ol †  Farisi na Sadyusi i kam long Jisas na ol i laik traim em. Ol i tokim em long wokim wanpela mirakel olsem mak bilong soim ol olsem em i mekim wok bilong God. ‡ </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>16</Content>
       </CharacterStyleRange>
@@ -7329,8 +7333,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> Tasol em i bekim tok bilong ol olsem, “Long apinun yupela i save tok, ‘Skai i retpela. Bai gutpela taim nau.’ </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>16</Content>
       </CharacterStyleRange>
@@ -7654,7 +7657,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/VerseNumberAlternate_.tpi_1">
         <Content> </Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Sapos †  wanpela man i kisim olgeta samting bilong graun, tasol laip bilong em yet i lus, orait dispela olgeta samting bai i helpim em olsem wanem? Bai man i givim wanem pe bilong baim bek laip bilong en? </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
@@ -7698,9 +7701,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>6-pela †  de i go pinis, orait Jisas i kisim Pita na Jems wantaim brata bilong en Jon, na em i bringim ol i go long wanpela maunten i antap moa. Na ol tasol i stap. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>17</Content>
       </CharacterStyleRange>
@@ -7712,8 +7716,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> Na taim ol i lukluk i stap, bodi bilong Jisas i senis na i kamap narakain. Na pes bilong en i lait olsem san, na laplap samting bilong en i kamap waitpela olsem lait. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>17</Content>
       </CharacterStyleRange>
@@ -8053,7 +8056,7 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Long †  dispela taim ol disaipel i kam long Jisas na ol i askim em olsem, “Husat bai i gat biknem tru long kingdom bilong heven?”</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Paragraph_1">
@@ -8509,9 +8512,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas i pinisim ol dispela tok, na em i lusim distrik Galili na i go long distrik Judia long hapsait bilong wara Jordan. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>19</Content>
       </CharacterStyleRange>
@@ -8910,9 +8914,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas †  i tok moa olsem, “Mi mekim dispela tok long ol man bai i stap namba wan, long wanem, kingdom bilong heven em i olsem wanpela man i gat planti graun. Long moningtaim tru em i go bilong kisim ol wokboi long wok long gaden wain bilong en. </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>20</Content>
       </CharacterStyleRange>
@@ -8924,8 +8929,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> Ol dispela wokboi i orait long kisim wan kina wan kina long dispela de, na bikman i salim ol i go wok long gaden wain bilong en. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>20</Content>
       </CharacterStyleRange>
@@ -9362,9 +9366,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas wantaim ol disaipel bilong en i kamap klostu long Jerusalem, na ol i kamap long ples Betfage long maunten Oliv. Na Jisas i salim tupela disaipel </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>21</Content>
       </CharacterStyleRange>
@@ -9376,8 +9381,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> na em i tokim tupela olsem, “Yutupela go long dispela ples nau yumi lukluk long en. Na wantu bai yutupela i lukim wanpela donki ol i pasim i stap, na pikinini bilong en i stap wantaim em. Lusim rop na bringim tupela i kam long mi. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>21</Content>
       </CharacterStyleRange>
@@ -10014,9 +10018,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>Jisas i mekim narapela tok piksa gen long ol bikman olsem, </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -10028,8 +10033,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content> “Kingdom bilong heven em i olsem pasin bilong wanpela king. Pikinini man bilong en i laik marit, na king i mekim bikpela kaikai. </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>22</Content>
       </CharacterStyleRange>
@@ -10618,9 +10622,10 @@
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/PWHide_.tpi_1">
         <Content>1</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrSection_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>sajflskdfj ;salkjdf ;salkfj </Content>
-      </CharacterStyleRange>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>23</Content>
       </CharacterStyleRange>
@@ -10632,8 +10637,7 @@
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/Paragraph_1">
         <Content>s;lkdfjs ;ldkf klasdkasd as;flkfjas ;flk </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrSection_1">
+      </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/hideChapterNumber_.tpi_1">
         <Content>23</Content>
       </CharacterStyleRange>
