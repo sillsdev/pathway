@@ -3823,6 +3823,24 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue1, "Keep Image Extension test failed");
         }
 
+		/// <summary>
+		/// Test for the SpanTagCorrection Function
+		/// TD-4717 - Default Scripture Export Crashes
+		/// </summary>
+		[Test]
+	    public void SpanTagCorrectionTest()
+		{
+			string contentInput1 = "<text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">1.1 </text:span><text:span text:style-name=\"QuotedText_.zxx_NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody\">the heavens and the earth</text:span><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody\">: “The heavens and the earth” stood for the universe.</text:span>";
+			string contentExpected1 = "<text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">1.1 </text:span><text:span text:style-name=\"QuotedText_.zxx_NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody\">the heavens and the earth</text:span><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Line2_scrSection_columns_scrBook_scrBody\">: “The heavens and the earth” stood for the universe.</text:span>";
+			string contentOutput1 = LOContent.SpanTagCorrection(contentInput1);
+			Assert.AreEqual(contentExpected1, contentOutput1);
+
+			string contentInput2 = "<text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\"><text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\"><text:span text:style-name=\"NoteCrossHYPHENReferenceParagraph..footnote-marker\">1.3: </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">2 Cor 4.6.</text:span>";
+			string contentExpected2 = "<text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\"><text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\"><text:span text:style-name=\"NoteCrossHYPHENReferenceParagraph..footnote-marker\">1.3: </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">2 Cor 4.6.</text:span></text:span></text:span>";
+			string contentOutput2 = LOContent.SpanTagCorrection(contentInput2);
+			Assert.AreEqual(contentExpected2, contentOutput2);
+		}
+
         #region Indesign TestCases
         ///<summary>
         /// Indesign PseudoBefore

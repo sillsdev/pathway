@@ -1642,7 +1642,7 @@ namespace SIL.PublishingSolution
 			}
 		}
 
-		private static string SpanTagCorrection(string content)
+		public static string SpanTagCorrection(string content)
 		{
 			var regexStartTag = new Regex(@"<(!--\u002E\u002E\u002E--|!DOCTYPE|text:span|wbr)\s?");
 			var startTagCollection = regexStartTag.Matches(content);
