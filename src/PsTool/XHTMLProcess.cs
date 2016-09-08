@@ -201,7 +201,8 @@ namespace SIL.Tool
             _childName = FindStyleName();
             GetHeadwordStyles(isHeadword);
 
-			_allStyleInfo.Push(classInfo);
+			if (!_allStyleInfo.Contains(classInfo))
+				_allStyleInfo.Push(classInfo);
 
             if (_divType.Contains(_tagType))
             {
