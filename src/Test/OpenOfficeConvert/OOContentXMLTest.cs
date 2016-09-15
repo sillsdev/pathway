@@ -4416,7 +4416,50 @@ namespace Test.OpenOfficeConvert
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
+		///<summary>
+		///MexicoStyle Dictionary main export Test TD-4708
+        /// </summary>      
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+		public void StyleChangesinMexicoMainExport()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+			const string file = "StyleChangesinMexico";
+            DateTime startTime = DateTime.Now;
+
+            string styleOutput = GetStyleOutput(file);
+
+            _totalTime = DateTime.Now - startTime;
+
+            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+        }
 		
+		
+		///<summary>
+		///MexicoStyle Dictionary reversal export Test TD-4708
+        /// </summary>      
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+		public void StyleChangesinMexicoReversalExport()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+			const string file = "StyleChangesinMexicoReversal";
+            DateTime startTime = DateTime.Now;
+
+            string styleOutput = GetStyleOutput(file);
+
+            _totalTime = DateTime.Now - startTime;
+
+            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+        }
 
         ///<summary>
         ///Table structure Test

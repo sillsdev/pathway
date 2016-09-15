@@ -1126,6 +1126,9 @@ namespace SIL.Tool
                     if (resultCoreClass && resultTagClass && resultAncestor && resultParent && resultParentPrecede &&
                         resultPrecede)
                     {
+						if (cssClassInfo.StyleName == string.Empty)
+							return _matchedCssStyleName;
+
 	                    AssignProperty(cssClassInfo.StyleName, ancestorFontSize);
 
 						if (_matchedCssStyleName == string.Empty)
@@ -1332,70 +1335,117 @@ namespace SIL.Tool
 
 	    private void AddTempStyleToCssStyle(string cssStyleName, float ancestorFontSize)
 	    {
-			foreach (KeyValuePair<string, string> property in IdAllClass[cssStyleName])
+			//inlinestyle first option
+		    if (_className.Contains("stxfin"))
+		    {
+			    if (_className.StartsWith("stxfin"))
+			    {
+				    if (!string.IsNullOrEmpty(_lang))
+				    {
+					    string tagTypeLang = string.Empty;
+					    tagTypeLang = _className + Common.SepAttrib + _lang;
+					    foreach (KeyValuePair<string, string> property in IdAllClass[tagTypeLang])
+					    {
+						    if (_tempStyle.ContainsKey(property.Key))
+							    continue;
+						    if (property.Key != "prince-text-replace")
+							    _tempStyle[property.Key] = property.Value;
+					    }
+				    }
+			    }
+		    }
+
+			//tag and lang second option
+			if (!string.IsNullOrEmpty(_lang))
 			{
-				if (_tempStyle.ContainsKey(property.Key))
-					continue;
-
-				if (_outputType == Common.OutputType.ODT && property.Key == "line-spacing")
+				string tagTypeLang = string.Empty;
+				tagTypeLang = _tagType + Common.SepAttrib + _lang;
+				string value = GetDisplayBlock(cssStyleName, "display");
+				if (value == "block")
 				{
-					string without_pt = property.Value.Replace("pt", "");
-					float value = float.Parse(without_pt.Replace("%", ""));
-					float lineHeight = 0;
-					if (property.Value.IndexOf("%") > 0)
-					{
-						lineHeight = (value - 100) * ancestorFontSize / 100;
-						lineHeight = lineHeight / 2;
-					}
-					else if (property.Value.IndexOf("pt") > 0)
-					{
-						lineHeight = (value - ancestorFontSize) / 2;
-					}
-					if (lineHeight > 0)
-					{
-						_tempStyle[property.Key] = lineHeight + "pt";
-					}
+					tagTypeLang = "span" + Common.SepAttrib + _lang;
 				}
-				else if (property.Value.IndexOf("%") > 0 && property.Key != "text-position")
+				if (IdAllClass.ContainsKey(tagTypeLang))
 				{
-					float value = float.Parse(property.Value.Replace("%", ""));
-					_tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString();
-					const string point = "pt";
-					if (_outputType == Common.OutputType.ODT)
+					foreach (KeyValuePair<string, string> property in IdAllClass[tagTypeLang])
 					{
-						if (property.Key == "column-gap") // For column-gap: 2em; change the value as (-ve)
-						{
-							string secClass = "Sect_" + _className.Trim();
-							if (_dictColumnGapEm.ContainsKey(secClass) && _dictColumnGapEm[secClass].ContainsKey("columnGap"))
-							{
-								_dictColumnGapEm[secClass]["columnGap"] = _tempStyle[property.Key] + "pt";
-								_tempStyle[property.Key] = (-ancestorFontSize * value / 100).ToString();
-
-								if (true)
-								{
-									int counter;
-									string colGapValue = _dictColumnGapEm[secClass]["columnGap"];
-									string columnGap = Common.GetNumericChar(colGapValue, out counter);
-									float columnGapInch = Common.ConvertToInch(columnGap);
-									float expColumnGap = Common.ConvertToInch(_dictColumnGapEm[secClass]["pageWidth"]) - columnGapInch - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"])
-												 - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"]) / 2.0F;
-									Common.ColumnWidth = float.Parse(Common.UnitConverter(expColumnGap + "in", "pt"));
-								}
-							}
-						}
-						else
-						{
-							float size = ancestorFontSize * value / 100;
-							_tempStyle[property.Key] = size + point;
-						}
+						if (_tempStyle.ContainsKey(property.Key))
+							continue;
+						if (property.Key != "prince-text-replace")
+							_tempStyle[property.Key] = property.Value;
 					}
-				}
-				else
-				{
-					if (property.Key != "prince-text-replace")
-						_tempStyle[property.Key] = property.Value;
 				}
 			}
+
+			if (IdAllClass.ContainsKey(cssStyleName))
+			{
+				foreach (KeyValuePair<string, string> property in IdAllClass[cssStyleName])
+				{
+					if (_tempStyle.ContainsKey(property.Key))
+						continue;
+
+					if (_outputType == Common.OutputType.ODT && property.Key == "line-spacing")
+					{
+						string without_pt = property.Value.Replace("pt", "");
+						float value = float.Parse(without_pt.Replace("%", ""));
+						float lineHeight = 0;
+						if (property.Value.IndexOf("%") > 0)
+						{
+							lineHeight = (value - 100) * ancestorFontSize / 100;
+							lineHeight = lineHeight / 2;
+						}
+						else if (property.Value.IndexOf("pt") > 0)
+						{
+							lineHeight = (value - ancestorFontSize) / 2;
+						}
+						if (lineHeight > 0)
+						{
+							_tempStyle[property.Key] = lineHeight + "pt";
+						}
+					}
+					else if (property.Value.IndexOf("%") > 0 && property.Key != "text-position")
+					{
+						float value = float.Parse(property.Value.Replace("%", ""));
+						_tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString();
+						const string point = "pt";
+						if (_outputType == Common.OutputType.ODT)
+						{
+							if (property.Key == "column-gap") // For column-gap: 2em; change the value as (-ve)
+							{
+								string secClass = "Sect_" + _className.Trim();
+								if (_dictColumnGapEm.ContainsKey(secClass) && _dictColumnGapEm[secClass].ContainsKey("columnGap"))
+								{
+									_dictColumnGapEm[secClass]["columnGap"] = _tempStyle[property.Key] + "pt";
+									_tempStyle[property.Key] = (-ancestorFontSize * value / 100).ToString();
+
+									if (true)
+									{
+										int counter;
+										string colGapValue = _dictColumnGapEm[secClass]["columnGap"];
+										string columnGap = Common.GetNumericChar(colGapValue, out counter);
+										float columnGapInch = Common.ConvertToInch(columnGap);
+										float expColumnGap = Common.ConvertToInch(_dictColumnGapEm[secClass]["pageWidth"]) - columnGapInch - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"])
+													 - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"]) / 2.0F;
+										Common.ColumnWidth = float.Parse(Common.UnitConverter(expColumnGap + "in", "pt"));
+									}
+								}
+							}
+							else
+							{
+								float size = ancestorFontSize * value / 100;
+								_tempStyle[property.Key] = size + point;
+							}
+						}
+					}
+					else
+					{
+						if (property.Key != "prince-text-replace")
+							_tempStyle[property.Key] = property.Value;
+					}
+				}
+			}
+
+			
 	    }
 
 

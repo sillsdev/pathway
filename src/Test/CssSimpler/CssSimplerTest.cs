@@ -584,11 +584,11 @@ namespace Test.CssSimplerTest
             var xhtmlDoc = new XmlDocument();
             xhtmlDoc.Load(xr);
             xr.Close();
-            var node1 = xhtmlDoc.SelectSingleNode("//*[contains(@class,'-st')]");
+			var node1 = xhtmlDoc.SelectSingleNode("//*[contains(@class,'stxfin')]");
             Assert.IsNotNull(node1, "style node missing");
             Assert.IsNotNull(node1.Attributes, "attributes missing");
             Assert.IsNotNull(node1.Attributes["class"], "class missing");
-            Assert.AreEqual("translation-st", node1.Attributes["class"].InnerText);
+			Assert.AreEqual("stxfintranslation", node1.Attributes["class"].InnerText);
 
             var styleSheet = _testFiles.Output(cssFile);
             var lc = new LoadClasses(xhtmlFullName);
@@ -597,7 +597,7 @@ namespace Test.CssSimplerTest
             UniqueClasses = lc.UniqueClasses;
             OutputXml = true;
             LoadCssXml(parser, styleSheet, xml);
-            var node2 = xml.SelectSingleNode("//name[.='translation-st']/ATTRIB");
+			var node2 = xml.SelectSingleNode("//name[.='translationstxfin']/ATTRIB");
             Assert.IsNull(node2, "Missing attribute on inline translation style");
         }
 
@@ -620,11 +620,11 @@ namespace Test.CssSimplerTest
             var xhtmlDoc = new XmlDocument();
             xhtmlDoc.Load(xr);
             xr.Close();
-            var node1 = xhtmlDoc.SelectSingleNode("//*[contains(@class,'-st')]");
+			var node1 = xhtmlDoc.SelectSingleNode("//*[contains(@class,'stxfin')]");
             Assert.IsNotNull(node1, "style node missing");
             Assert.IsNotNull(node1.Attributes, "attributes missing");
             Assert.IsNotNull(node1.Attributes["class"], "class missing");
-            var nodes = xhtmlDoc.SelectNodes("//*[contains(@class,'-st')]");
+			var nodes = xhtmlDoc.SelectNodes("//*[contains(@class,'stxfin')]");
             Debug.Assert(nodes != null, "nodes != null");
             Assert.AreEqual(26, nodes.Count);
             var unique = new SortedSet<string>();

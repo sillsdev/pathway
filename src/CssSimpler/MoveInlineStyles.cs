@@ -66,18 +66,19 @@ namespace CssSimpler
             else if (r.Name == "style")
             {
                 var newClass = LastClass;
-                if (_currentClass == string.Empty)
-                {
-                    newClass += "-st";
-                }
+	            if (_currentClass == string.Empty)
+	            {
+		            //Style in xhtml file inline style
+					newClass = "stxfin" + newClass;
+	            }
 
-                var count = 0;
+	            var count = 0;
                 while  (SavedStyles.ContainsKey(newClass))
                 {
                     if (SavedStyles[newClass] != r.Value)
                     {
                         count += 1;
-                        newClass = string.Format("{0}{1}-st", LastClass, count);
+						newClass = string.Format("stxfin{0}{1}", LastClass, count);
                     }
                     else
                     {
