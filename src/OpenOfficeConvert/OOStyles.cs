@@ -58,7 +58,6 @@ namespace SIL.PublishingSolution
                 _isFromExe = Common.CheckExecutionPath();
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
-				HandleSubEntryIndent();
                 HandleMexioStyleSheet();
                 if (Param.HyphenEnable)
 	            {
@@ -114,71 +113,6 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// For TD-4471 and TD-4536
-        /// Method to add the  entry's margin-left value to the SubEntry's margin-left to get the box effect.
-        /// </summary>
-        private void HandleSubEntryIndent()
-        {
-
-			if (_projInfo.ProjectInputType.ToLower() != "dictionary") return;
-
-	        int subEntrySize = 0;
-	        int entrySize = 0;
-			string styelName = "entry";
-			if (_cssProperty.ContainsKey("div." + styelName))
-	        {
-				styelName = "div.entry";
-	        }
-	        if (_cssProperty.ContainsKey("subentry") && _cssProperty["subentry"].ContainsKey("class-margin-left"))
-			{
-				if (_cssProperty.ContainsKey(styelName) && _cssProperty["entry"].ContainsKey("class-margin-left"))
-				{
-					subEntrySize = Int16.Parse(_cssProperty["subentry"]["class-margin-left"]);
-					entrySize = Int16.Parse(_cssProperty[styelName]["class-margin-left"]);
-					if (subEntrySize <= entrySize)
-					{
-						foreach (string styleName in _cssProperty.Keys)
-						{
-							if (styleName.IndexOf("subentry", StringComparison.Ordinal) == 0 && _cssProperty[styleName].ContainsKey("class-margin-left"))
-							{
-								_cssProperty[styleName]["class-margin-left"] = (subEntrySize + entrySize).ToString();
-							}
-							if (styleName.IndexOf("entry", StringComparison.Ordinal) == 0 && _cssProperty[styleName].ContainsKey("class-margin-left"))
-							{
-								_cssProperty[styleName]["class-margin-left"] = (subEntrySize + entrySize).ToString();
-							}
-						}
-					}
-				}
-			}
-
-			if (_cssProperty.ContainsKey("sensecontent_senses_entry") && _cssProperty["sensecontent_senses_entry"].ContainsKey("class-margin-left"))
-			{
-				if (_cssProperty.ContainsKey(styelName) && _cssProperty["entry"].ContainsKey("class-margin-left"))
-				{
-					subEntrySize = Int16.Parse(_cssProperty["sensecontent_senses_entry"]["class-margin-left"]);
-					entrySize = Int16.Parse(_cssProperty[styelName]["class-margin-left"]);
-					foreach (string styleName in _cssProperty.Keys)
-					{
-						if (styleName.IndexOf("sensecontent", StringComparison.Ordinal) == 0 && _cssProperty[styleName].ContainsKey("class-margin-left"))
-						{
-							_cssProperty["sensecontent_senses_entry"]["class-margin-left"] = (subEntrySize + entrySize).ToString();
-						}
-
-						if (styleName.IndexOf("examplescontent", StringComparison.Ordinal) == 0 &&
-							_cssProperty[styleName].ContainsKey("class-margin-left"))
-						{
-							subEntrySize = Int16.Parse(_cssProperty[styleName]["text-indent"]);
-							_cssProperty[styleName]["class-margin-left"] = (subEntrySize + entrySize).ToString();
-							_cssProperty[styleName]["text-indent"] = (subEntrySize + entrySize).ToString();
-						}
-					}					
-				}
-			}
-	      
         }
 
         /// <summary>

@@ -4097,8 +4097,8 @@ namespace Test.OpenOfficeConvert
 			_validate = new ValidateXMLFile(styleOutput);
 
 			_validate.ClassName = "mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_body";
-			_validate.ClassProperty.Add("fo:text-indent", "0pt");
-			_validate.ClassProperty.Add("fo:margin-left", "57pt");
+			_validate.ClassProperty.Add("fo:text-indent", "33pt");
+			_validate.ClassProperty.Add("fo:margin-left", "33pt");
 			bool returnValue = _validate.ValidateNodeAttributesNS(true);
 			Assert.IsTrue(returnValue);
 
@@ -4256,6 +4256,62 @@ namespace Test.OpenOfficeConvert
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
+		///<summary>
+		///DivEntrySubEntrySameMargin Dictionary Test
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void DivEntrySubEntrySameMarginLeft_NodeTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "DivEntrySubEntryMarginLeft";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+			string style = "";
+			if (Common.UnixVersionCheck())
+			{
+				style = "_Unix";
+			}
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+
+		///<summary>
+		///DivEntrySubEntryMarginLeft2 Dictionary Test
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void DivEntrySubEntryMarginLeft2Test()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "DivEntrySubEntryMarginLeft2";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+			string style = "";
+			if (Common.UnixVersionCheck())
+			{
+				style = "_Unix";
+			}
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
+		
         ///<summary>
         ///Kabwa Full Scripture Test
         /// </summary>      
