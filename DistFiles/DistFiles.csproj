@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <UsingTask TaskName="MSBuild.ExtensionPack.UI.Dialog" AssemblyFile="MSBuild.ExtensionPack.dll" />
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
@@ -34,7 +34,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -50,6 +50,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
     <OutputPath>..\output\Release\</OutputPath>
@@ -64,6 +65,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
     <OutputPath>..\output\Release\</OutputPath>
@@ -78,6 +80,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
     <OutputPath>..\output\Release\</OutputPath>
@@ -93,6 +96,7 @@
     <Status>
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
     <OutputPath>..\output\Release\</OutputPath>
@@ -108,6 +112,7 @@
     <Status>
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -123,6 +128,7 @@
     <Status>Testing</Status>
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
     <OutputPath>..\output\Release\</OutputPath>
@@ -137,6 +143,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
     <OutputPath>..\output\Release\</OutputPath>
@@ -151,6 +158,7 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
     <OutputPath>..\output\Release\</OutputPath>
@@ -166,6 +174,7 @@
     <Status>
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
     <OutputPath>..\output\Release\</OutputPath>
@@ -181,6 +190,7 @@
     <Status>
     </Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <OutputPath>..\output\PathwayXeLaTeX\</OutputPath>
@@ -193,6 +203,7 @@
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
     <OutputPath>..\output\PathwayXeLaTeX\</OutputPath>
@@ -205,6 +216,7 @@
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
     <OutputPath>..\output\Release\</OutputPath>
@@ -225,6 +237,7 @@
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
     <OutputPath>..\output\Release\</OutputPath>
@@ -247,6 +260,7 @@
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\Installer\License.rtf" />
@@ -264,10 +278,10 @@
   <Target Name="GetBuildNumber">
     <MSBuild.ExtensionPack.UI.Dialog TaskAction="Prompt" Title="Enter Build Number" Text="BuildNumber: $(BUILD_NUMBER)" Button1Text="Ok" Button2Text="Cancel">
       <Output PropertyName="BUILD_NUMBER" TaskParameter="UserText" />
-      <Output PropertyName="Result" TaskParameter="ButtonClickedText"/>
+      <Output PropertyName="Result" TaskParameter="ButtonClickedText" />
     </MSBuild.ExtensionPack.UI.Dialog>
     <Message Text="Button: $(Result)" Importance="high" />
-    <Error Text="Cancelled by User" Condition="'$(Result)' == 'Cancel'"/>
+    <Error Text="Cancelled by User" Condition="'$(Result)' == 'Cancel'" />
     <Message Text="User entered BuildNumber: $(BUILD_NUMBER)" Importance="high" />
     <Exec Command="BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --Product=$(SolutionDir)Installer\Pathway.wxs --BuildNumber=$(BUILD_NUMBER) --Edition=$(Edition) " WorkingDirectory="$(SolutionDir)" Condition="$(OS) != 'Linux' " />
     <Exec Command="mono BuildStep.exe -v:1 -a:UpdateAssemblies --RootFolder=$(SolutionDir) --BuildNumber=$(BUILD_NUMBER)" WorkingDirectory="$(SolutionDir)" Condition="$(OS) == 'Linux' " />
@@ -278,8 +292,8 @@
   </Target>
   <Target Name="BeforeBuild">
     <!-- validator is referenced even if not called -->
-	<Delete Files="@(AllDebugOutput)" Condition="'$(Configuration)' == 'Debug'"/>
-	<Delete Files="@(AllReleaseOutput)" Condition="'$(Configuration)' != 'Debug'"/>
+    <Delete Files="@(AllDebugOutput)" Condition="'$(Configuration)' == 'Debug'" />
+    <Delete Files="@(AllReleaseOutput)" Condition="'$(Configuration)' != 'Debug'" />
     <Copy SourceFiles="..\lib\Devart.Data.dll" DestinationFiles="$(OutputPath)Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="..\lib\Devart.Data.xml" DestinationFiles="$(OutputPath)Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="..\lib\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
@@ -327,8 +341,8 @@
   </Target>
   <Target Name="AfterBuild" />
   <ItemGroup>
-    <AllDebugOutput Include="..\output\Debug\**\*.*" Exclude="..\output\Debug\*.vshost.exe"/>
-	<AllReleaseOutput Include="..\output\Release\**\*.*" Exclude="..\output\Release\*.vshost.exe"/>
+    <AllDebugOutput Include="..\output\Debug\**\*.*" Exclude="..\output\Debug\*.vshost.exe" />
+    <AllReleaseOutput Include="..\output\Release\**\*.*" Exclude="..\output\Release\*.vshost.exe" />
     <EpubCheck Include="epubcheck-4.0.1\**\*.*" />
     <PdfLicenseManager Include="pdflicensemanager-2.3.jar" />
     <Paratexmf Include="..\src\XeLaTexConvert\Paratexmf\**\*.*" />
