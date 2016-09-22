@@ -46,6 +46,12 @@ namespace SIL.PublishingSolution
             preProcessor.ReplaceStringInFile(cssFile, "direction:", "dir:");
             //preProcessor.RemoveStringInCss(cssFile, "direction:");
 
+			//Comment out the unicode-bidi property in the css file - As Epub3 does not support the unicode-bidi property
+			string[] unicodeBidiStrings = new string[] {"unicode-bidi: isolate;", "unicode-bidi: -ms-isolate;", "unicode-bidi: -moz-isolate;"};
+	        foreach (string s in unicodeBidiStrings)
+	        {
+				preProcessor.ReplaceStringInFile(cssFile, s, string.Format("/*{0}*/",s));
+	        }
 
             var xhmltohtml5Space = Loadxhmltohtml5Xslt(projInfo.ProjectInputType.ToLower());
 
