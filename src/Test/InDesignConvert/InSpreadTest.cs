@@ -266,6 +266,7 @@ namespace Test.InDesignConvert
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
             projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+	        projInfo.ProjectInputType = "Dictionary";
             _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
             _xPath = "//TextFrame[@Self=\"TF2\"]/TextFramePreference";

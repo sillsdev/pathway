@@ -55,7 +55,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecontent_senses_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="senses_entry_letData_dicBody">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="30pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
+      <style:paragraph-properties fo:margin-left="30pt" fo:text-indent="-6pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
       <style:text-properties text:display="block" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensenumber_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecontent_senses_entry_letData_dicBody">
@@ -80,7 +80,7 @@
       <style:text-properties fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="12pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
+      <style:paragraph-properties fo:margin-left="12pt" fo:text-indent="12pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" fo:color="#800080" text:display="block" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
@@ -161,7 +161,7 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:paragraph-properties fo:text-indent="3pt" fo:margin-left="3pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:margin-left="12pt" fo:text-indent="21pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" text:display="block" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplescontentps_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
@@ -384,7 +384,7 @@
       <style:text-properties fo:font-size="11pt" />
     </style:style>
     <style:style style:name="sensecontent_senses_entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="30pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
+      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="18pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
       <style:text-properties text:display="block" />
     </style:style>
     <style:style style:name="morphosyntaxanalysis.-sharedgrammaticalinfo_senses_entry" style:family="paragraph" style:parent-style-name="none">
@@ -397,7 +397,7 @@
       <style:text-properties fo:font-style="italic" />
     </style:style>
     <style:style style:name="examplescontent.-examplescontents.-sense.-sensecontent_senses_entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="3pt" fo:margin-left="3pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:text-indent="-9pt" fo:margin-left="-18pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
       <style:text-properties fo:font-size="11pt" text:display="block" />
     </style:style>
     <style:style style:name="examplescontentps" style:family="paragraph" style:parent-style-name="none">
@@ -444,7 +444,7 @@
       <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="examplescontent.-examplescontents.-extendednotecontents.-sense.-sensecontent_senses_entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="3pt" fo:margin-left="3pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:text-indent="-9pt" fo:margin-left="-18pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
       <style:text-properties fo:font-size="11pt" text:display="block" />
     </style:style>
     <style:style style:name="span_.fr_example.-examplescontents.-extendednotecontents.-sense.-sensecontent_senses_entry" style:family="paragraph" style:parent-style-name="none">
@@ -469,7 +469,7 @@
       <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="subentry.-subentries.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="12pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:background-color="transparent" fo:text-align="left" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:background-color="transparent" fo:text-align="left" />
       <style:text-properties fo:font-size="11pt" fo:color="#800080" text:display="block" fo:background-color="transparent" />
     </style:style>
     <style:style style:name="picture.-entry" style:family="paragraph" style:parent-style-name="none">
@@ -555,7 +555,7 @@
       <style:text-properties fo:font-style="italic" fo:font-size="11pt" fo:color="#FF0000" />
     </style:style>
     <style:style style:name="subentry.-subentries.-minorentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="12pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" />
       <style:text-properties fo:font-size="11pt" fo:color="#800080" text:display="block" />
     </style:style>
     <style:style style:name="span_.fr_headword_subentry.-subentries.-minorentrycomplex" style:family="paragraph" style:parent-style-name="none">
@@ -675,7 +675,7 @@
       <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="examplescontent.-examplescontents.-extendednotecontents.-mainentrysubsenses" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="3pt" fo:margin-left="3pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:text-indent="-9pt" fo:margin-left="-18pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
       <style:text-properties fo:font-size="11pt" text:display="block" />
     </style:style>
     <style:style style:name="span_.fr_example.-examplescontents.-extendednotecontents.-mainentrysubsenses" style:family="paragraph" style:parent-style-name="none">
@@ -735,7 +735,7 @@
       <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="examplescontent.-examplescontents.-extendednotecontents.-sense.-sensecontent_senses_mainentrysubentry.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="3pt" fo:margin-left="3pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:text-indent="-9pt" fo:margin-left="-18pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
       <style:text-properties fo:font-size="11pt" text:display="block" />
     </style:style>
     <style:style style:name="span_.fr_example.-examplescontents.-extendednotecontents.-sense.-sensecontent_senses_mainentrysubentry.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
@@ -903,7 +903,7 @@
       <style:paragraph-properties fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-bottom="20pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:text-indent="0pt" fo:text-align="center" />
     </style:style>
     <style:style style:name="subentry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" fo:text-align="left" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:background-color="transparent" fo:text-align="left" fo:margin-left="0pt" />
       <style:text-properties text:display="block" fo:background-color="transparent" />
     </style:style>
     <style:style style:name="complexform" style:family="paragraph" style:parent-style-name="none">

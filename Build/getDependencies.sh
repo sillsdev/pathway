@@ -121,26 +121,26 @@ elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
 		mkdir -p ../lib
 
 		# download artifact dependencies
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/icu.net.dll ../lib/icu.net.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/icu.net.dll.config ../lib/icu.net.dll.config
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/icudt54.dll ../lib/icudt54.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/icuin54.dll ../lib/icuin54.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/icuuc54.dll ../lib/icuuc54.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/L10NSharp.dll ../lib/L10NSharp.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/L10NSharp.pdb ../lib/L10NSharp.pdb
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Core.dll ../lib/SIL.Core.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Core.dll.config ../lib/SIL.Core.dll.config
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Core.pdb ../lib/SIL.Core.pdb
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Media.dll ../lib/SIL.Media.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Media.dll.config ../lib/SIL.Media.dll.config
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Media.pdb ../lib/SIL.Media.pdb
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Windows.Forms.dll ../lib/SIL.Windows.Forms.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Windows.Forms.dll.config ../lib/SIL.Windows.Forms.dll.config
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Windows.Forms.pdb ../lib/SIL.Windows.Forms.pdb
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Windows.Forms.WritingSystems.dll ../lib/SIL.Windows.Forms.WritingSystems.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.Windows.Forms.WritingSystems.pdb ../lib/SIL.Windows.Forms.WritingSystems.pdb
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.WritingSystems.dll ../lib/SIL.WritingSystems.dll
-		copy_auto http://build.palaso.org/guestAuth/repository/download/bt436/pathway.tcbuildtag/SIL.WritingSystems.pdb ../lib/SIL.WritingSystems.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/icu.net.dll ../lib/icu.net.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/icu.net.dll.config ../lib/icu.net.dll.config
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/icudt54.dll ../lib/icudt54.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/icuin54.dll ../lib/icuin54.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/icuuc54.dll ../lib/icuuc54.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/L10NSharp.dll ../lib/L10NSharp.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/L10NSharp.pdb ../lib/L10NSharp.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Core.dll ../lib/SIL.Core.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Core.dll.config ../lib/SIL.Core.dll.config
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Core.pdb ../lib/SIL.Core.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Media.dll ../lib/SIL.Media.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Media.dll.config ../lib/SIL.Media.dll.config
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Media.pdb ../lib/SIL.Media.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Windows.Forms.dll ../lib/SIL.Windows.Forms.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Windows.Forms.dll.config ../lib/SIL.Windows.Forms.dll.config
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Windows.Forms.pdb ../lib/SIL.Windows.Forms.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Windows.Forms.WritingSystems.dll ../lib/SIL.Windows.Forms.WritingSystems.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Windows.Forms.WritingSystems.pdb ../lib/SIL.Windows.Forms.WritingSystems.pdb
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.WritingSystems.dll ../lib/SIL.WritingSystems.dll
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.WritingSystems.pdb ../lib/SIL.WritingSystems.pdb
 		# End of script
 else
 echo "Unknown."

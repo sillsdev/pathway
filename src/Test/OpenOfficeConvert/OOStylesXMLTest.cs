@@ -1369,47 +1369,7 @@ namespace Test.OpenOfficeConvert
 			string xpath = "//style:style[@style:name='subentry']";
 			_validate = new ValidateXMLFile(output);
 			_validate.ClassName = string.Empty;
-			_validate.ClassProperty.Add("fo:margin-left", "24pt");
-
-			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
-			Assert.IsTrue(returnValue);
-		}
-
-		///<summary>
-		/// When SubEntry have same/less than div.Entry's margin-left, calculate part add entry value to SubEntry to maintain indent.
-		/// </summary>
-		[Test]
-		public void DivEntrySubEntrySameMarginLeft_Node()
-		{
-			const string file = "DivEntrySubEntryMarginLeft";
-			string input = FileInput(file + ".css");
-			string output = FileOutput(file + "styles.xml");
-			GetCssClass(input, output);
-
-			string xpath = "//style:style[@style:name='subentry']";
-			_validate = new ValidateXMLFile(output);
-			_validate.ClassName = string.Empty;
-			_validate.ClassProperty.Add("fo:margin-left", "57pt");
-
-			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
-			Assert.IsTrue(returnValue);
-		}
-
-		///<summary>
-		/// When SubEntry have same/less than div.Entry's margin-left, calculate part add entry value to SubEntry to maintain indent.
-		/// </summary>
-		[Test]
-		public void DivEntrySubEntrySameMarginLeft2_Node()
-		{
-			const string file = "DivEntrySubEntryMarginLeft2";
-			string input = FileInput(file + ".css");
-			string output = FileOutput(file + "styles.xml");
-			GetCssClass(input, output);
-
-			string xpath = "//style:style[@style:name='subentry.-subentries_entry']";
-			_validate = new ValidateXMLFile(output);
-			_validate.ClassName = string.Empty;
-			_validate.ClassProperty.Add("fo:margin-left", "57pt");
+			_validate.ClassProperty.Add("fo:margin-left", "12pt");
 
 			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
 			Assert.IsTrue(returnValue);

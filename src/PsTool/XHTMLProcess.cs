@@ -1322,16 +1322,68 @@ namespace SIL.Tool
 					break;
 				}
 			}
-
             if (!IdAllClass.ContainsKey(cssStyleName))
             {
                 return;
             }
-
+			HandleIndent(cssStyleName);
 			AddTempStyleToCssStyle(cssStyleName, ancestorFontSize);
-
             WordCharSpace(ancestorFontSize);
         }
+
+		/// <summary>
+		/// For TD-4471 and TD-4536
+		/// Method to add the  entry's margin-left value to the SubEntry's margin-left to get the box effect.
+		/// </summary>
+		private void HandleIndent(string cssStyleName)
+		{
+			decimal subEntrySize = 0;
+			decimal entrySize = 0;
+			string currentStyleName = string.Empty;
+			string parentStyleNameStyle = string.Empty;
+
+			currentStyleName = cssStyleName;
+			parentStyleNameStyle = StackPeek(_allParagraph);
+
+			if (!_newProperty.ContainsKey(parentStyleNameStyle))
+				return;
+
+			Dictionary<string, string> previousStyleProperty = new Dictionary<string, string>();
+			previousStyleProperty = _newProperty[parentStyleNameStyle];
+
+			if (IdAllClass.ContainsKey(currentStyleName) && IdAllClass[currentStyleName].ContainsKey("margin-left"))
+			{
+				if (previousStyleProperty.ContainsKey("margin-left"))
+				{
+					if (IdAllClass[currentStyleName]["margin-left"].Contains("%") || previousStyleProperty["margin-left"].Contains("%"))
+						return;
+
+					subEntrySize = Math.Round(Convert.ToDecimal(IdAllClass[currentStyleName]["margin-left"].Replace("pt", "")));
+					entrySize = Math.Round(Convert.ToDecimal(previousStyleProperty["margin-left"].Replace("pt","")));
+					foreach (string styleName in IdAllClass.Keys)
+					{
+						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("margin-left"))
+						{
+							string stylePropertyValue = (subEntrySize + entrySize).ToString();
+							_tempStyle["margin-left"] = stylePropertyValue + "pt";
+						}
+
+						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("text-indent"))
+						{
+							if (IdAllClass[currentStyleName].ContainsKey("text-indent"))
+							{
+								if (IdAllClass[currentStyleName]["text-indent"].Contains("%"))
+									return;
+
+								subEntrySize = Math.Round(Convert.ToDecimal(IdAllClass[currentStyleName]["text-indent"].Replace("pt", "")));
+								string stylePropertyValue = (subEntrySize + entrySize).ToString();
+								_tempStyle["text-indent"] = stylePropertyValue + "pt";
+							}
+						}
+					}
+				}
+			}
+		}
 
 	    private void AddTempStyleToCssStyle(string cssStyleName, float ancestorFontSize)
 	    {
