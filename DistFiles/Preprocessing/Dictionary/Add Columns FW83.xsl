@@ -26,19 +26,35 @@
     <xsl:template match="x:head/@profile"/>
     <xsl:template match="x:html/@version"/>
     
+    <xsl:template match="x:body">
+        <xsl:copy>
+            <xsl:choose>
+                <xsl:when test="*[1]/@class='letHead'">
+                    <xsl:apply-templates/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
+                        <xsl:attribute name="class">letData</xsl:attribute>
+                        <xsl:apply-templates mode="inCol"/>
+                    </xsl:element>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:copy>
+    </xsl:template>
+
     <xsl:template match="*[@class='letHead']">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
-            <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
-                <xsl:attribute name="class">letData</xsl:attribute>
-                <xsl:if test="following-sibling::*[1]/@class!='letData'">
+        <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
+            <xsl:attribute name="class">letData</xsl:attribute>
+            <xsl:if test="following-sibling::*[1]/@class!='letData'">
                 <xsl:apply-templates select="following-sibling::*[1]" mode="inCol"/>
-                </xsl:if>
-                <xsl:if test="following-sibling::*[1]/@class='letData'">
-                    <xsl:apply-templates select="following-sibling::*[1]/child::*[1]" mode="inCol"/>
-                </xsl:if>
-            </xsl:element>
+            </xsl:if>
+            <xsl:if test="following-sibling::*[1]/@class='letData'">
+                <xsl:apply-templates select="following-sibling::*[1]/child::*[1]" mode="inCol"/>
+            </xsl:if>
+        </xsl:element>
     </xsl:template>
     
     <xsl:template match="*" mode="inCol">
