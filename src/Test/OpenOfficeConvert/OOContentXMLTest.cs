@@ -745,7 +745,7 @@ namespace Test.OpenOfficeConvert
 
             //Content Test 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            string content = "\\U8658 A a \". " + Common.ConvertUnicodeToString("\\2666") + "\" B b \".  \" C c '  ** ' ** D d # v \" v =\"\" \\ ' E e \"^ F f $@ G g ! ";
+			string content = "∖U8658 A a \". " + Common.ConvertUnicodeToString("\\2666") + "\" B b \".  \" C c '  ** ' ** D d # v \" v =\"\" ∖ ' E e \"^ F f $@ G g ! ";
             XmlNode officeNode = _validate.GetOfficeNode();
             Assert.IsNotNull(officeNode, "Office node is null");
             Assert.AreEqual(content, officeNode.InnerText, "PseudoQuotes1 Test failed");
@@ -4516,6 +4516,28 @@ namespace Test.OpenOfficeConvert
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
+
+		///<summary>
+		///MexicoStyle Dictionary Slash symbol
+        /// </summary>      
+        [Test]
+        [Category("SkipOnTeamCity")]
+		public void SlashSymbolExport()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+			const string file = "SlashSymbol";
+            DateTime startTime = DateTime.Now;
+
+            string styleOutput = GetStyleOutput(file);
+
+            _totalTime = DateTime.Now - startTime;
+
+            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+        }
+		
 
         ///<summary>
         ///Table structure Test

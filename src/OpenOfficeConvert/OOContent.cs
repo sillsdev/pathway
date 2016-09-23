@@ -448,6 +448,8 @@ namespace SIL.PublishingSolution
 
 			if (data.Contains("\\"))
 			{
+				data = data.Replace("\\", Common.ConvertUnicodeToString("\\2216"));
+
 				Char[] charac = data.ToCharArray();
 				int index = 0;
 				foreach (char var in charac)
@@ -457,21 +459,6 @@ namespace SIL.PublishingSolution
 					{
 						_writer.WriteRaw(@"<text:line-break/>");
 					}
-					
-					if (var == '\\')
-					{
-						try
-						{
-							string unicodeValue = data;
-							int datalength = data.Length - index;
-							unicodeValue = var + unicodeValue.Substring(index, datalength);
-							data = Common.ConvertUnicodeToString(unicodeValue);
-						}
-						catch
-						{}
-						_writer.WriteRaw(@"<text:line-break/>");
-						return data;
-					}					
 				}
 			}
 			if (_replaceSymbolToText.Count > 0)
