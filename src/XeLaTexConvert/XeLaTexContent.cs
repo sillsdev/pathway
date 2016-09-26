@@ -335,6 +335,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
+				foreach (string className in IdAllClass.Keys)
+				{
+					if (!IdAllClassWithandWithoutSeperator.ContainsKey(className))
+						IdAllClassWithandWithoutSeperator.Add(className, className.Replace("-", "_").Replace(".", ""));
+				}
+
                 _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
                 bool headXML = true;
                 while (_reader.Read())
