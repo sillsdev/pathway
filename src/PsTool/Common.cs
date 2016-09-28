@@ -3793,115 +3793,9 @@ namespace SIL.Tool
 				}
 
 				File.Copy(licenseXml, destLicenseXml);
-				XmlDocument xDoc = Common.DeclareXMLDocument(true);
-				xDoc.Load(destLicenseXml);
+				string utcDateTime = DateTimeOffset.UtcNow.ToString("o");
 
-				XmlNamespaceManager nsmgr = new XmlNamespaceManager(xDoc.NameTable);
-				nsmgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-				nsmgr.AddNamespace("xap", "http://ns.adobe.com/xap/1.0/");
-				nsmgr.AddNamespace("cc", "http://creativecommons.org/ns#");
-				nsmgr.AddNamespace("xapRights", "http://ns.adobe.com/xap/1.0/rights/");
-
-				string xPath = "//xap:CreateDate";
-				XmlElement root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTimeOffset.UtcNow.ToString("o");
-				}
-
-				xPath = "//xap:CreatorTool";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = creatorTool;
-				}
-
-				xPath = "//xap:ModifyDate";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTimeOffset.UtcNow.ToString("o");
-				}
-
-				xPath = "//xap:MetadataDate";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTimeOffset.UtcNow.ToString("o");
-				}
-
-				nsmgr.AddNamespace("pdf", "http://ns.adobe.com/pdf/1.3/");
-
-				xPath = "//pdf:Producer";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
-				}
-
-				nsmgr.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
-
-				xPath = "//dc:description/rdf:Alt/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Param.GetMetadataValue(Param.Description, organization);
-				}
-
-				xPath = "//dc:creator/rdf:Seq/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Param.GetMetadataValue(Param.Creator, organization);
-				}
-
-				xPath = "//dc:title/rdf:Alt/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = exportTitle;
-				}
-
-				xPath = "//dc:subject/rdf:Bag/rdf:li[3]";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Param.Value["InputType"];
-				}
-
-				xPath = "//dc:rights/rdf:Alt/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Common.ConvertUnicodeToString("\\00a9") + " " + organization + Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
-				}
-
-				xPath = "//cc:license";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = copyrightURL;
-				}
-
-				xPath = "//xapRights:WebStatement";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = copyrightURL;
-				}
-				xDoc.Save(destLicenseXml);
+				UpdateLicenseAttributes(creatorTool, Param.Value["InputType"], destLicenseXml, organization, exportTitle, copyrightURL, utcDateTime);
 
 				string sourceJarFile = Common.PathCombine(getPsApplicationPath, "pdflicensemanager-2.3.jar");
 				string destJarFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "pdflicensemanager-2.3.jar");
@@ -3931,6 +3825,121 @@ namespace SIL.Tool
 			// Ends the coding part for Copyright information added in PDF files
 
 			return pdfFileName;
+		}
+
+		public static void UpdateLicenseAttributes(string creatorTool, string inputType, string destLicenseXml, string organization,
+			string exportTitle, string copyrightURL, string utcDateTime)
+		{
+			XmlDocument xDoc = Common.DeclareXMLDocument(true);
+			xDoc.Load(destLicenseXml);
+
+			XmlNamespaceManager nsmgr = new XmlNamespaceManager(xDoc.NameTable);
+			nsmgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+			nsmgr.AddNamespace("xap", "http://ns.adobe.com/xap/1.0/");
+			nsmgr.AddNamespace("cc", "http://creativecommons.org/ns#");
+			nsmgr.AddNamespace("xapRights", "http://ns.adobe.com/xap/1.0/rights/");
+
+			string xPath = "//xap:CreateDate";
+			XmlElement root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = utcDateTime;
+			}
+
+			xPath = "//xap:CreatorTool";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = creatorTool;
+			}
+
+			xPath = "//xap:ModifyDate";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = utcDateTime;
+			}
+
+			xPath = "//xap:MetadataDate";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = utcDateTime;
+			}
+
+			nsmgr.AddNamespace("pdf", "http://ns.adobe.com/pdf/1.3/");
+
+			xPath = "//pdf:Producer";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = DateTime.Now.Date.ToString();
+			}
+
+			nsmgr.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
+
+			xPath = "//dc:description/rdf:Alt/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = Param.GetMetadataValue(Param.Description, organization);
+			}
+
+			xPath = "//dc:creator/rdf:Seq/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = Param.GetMetadataValue(Param.Creator, organization);
+			}
+
+			xPath = "//dc:title/rdf:Alt/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = exportTitle;
+			}
+
+			xPath = "//dc:subject/rdf:Bag/rdf:li[3]";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = inputType;
+			}
+
+			xPath = "//dc:rights/rdf:Alt/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = Common.ConvertUnicodeToString("\\00a9") + " " + organization +
+				                       Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
+			}
+
+			xPath = "//cc:license";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = copyrightURL;
+			}
+
+			xPath = "//xapRights:WebStatement";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = copyrightURL;
+			}
+			xDoc.Save(destLicenseXml);
 		}
 
 		private static string CopyrightUrlValue()
