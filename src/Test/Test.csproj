@@ -289,6 +289,7 @@
     </Compile>
     <Compile Include="GoBibleConvert\PartialBookTest.cs" />
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
+    <Compile Include="InDesignConvert\InStylesTest2.cs" />
     <Compile Include="OpenOfficeConvert\LOTest.cs">
       <SubType>Form</SubType>
     </Compile>
