@@ -290,6 +290,8 @@
     <Compile Include="GoBibleConvert\PartialBookTest.cs" />
     <Compile Include="GoBibleConvert\UsxToSFMTest.cs" />
     <Compile Include="InDesignConvert\InStylesTest2.cs" />
+    <Compile Include="OpenOfficeConvert\LOContentExportTest.cs" />
+    <Compile Include="OpenOfficeConvert\LOContentTest.cs" />
     <Compile Include="OpenOfficeConvert\LOTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,7 +334,7 @@
     <Compile Include="CssParser\CssParserTest.cs" />
     <Compile Include="CssParser\GramTest.cs" />
     <Compile Include="CssParser\MakePropertyTest.cs" />
-    <Compile Include="OpenOfficeConvert\OOContentXMLTest.cs" />
+    <Compile Include="OpenOfficeConvert\LOContentXMLTest.cs" />
     <Compile Include="OpenOfficeConvert\OOStylesXMLTest.cs" />
     <Compile Include="PsExport\PsExportTest.cs" />
     <Compile Include="PsTool\CommonCssTest.cs" />
