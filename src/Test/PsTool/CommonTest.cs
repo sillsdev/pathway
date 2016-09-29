@@ -890,7 +890,7 @@ namespace Test.PsTool
         }
 
         #region LanguageTests
-        [Test]
+		[Ignore]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         // If unit fails, please confirm the below file exist,
@@ -1222,6 +1222,41 @@ namespace Test.PsTool
 
             FileAssert.AreEqual(expectedNewFile, outputNewFile, "Configuration Tool - Migration Test failed");
         }
+
+		/// <summary>
+		/// Test for the function UpdateLicenseAttributesTest
+		/// </summary>
+	    [Test]
+	    public void UpdateLicenseAttributesTest()
+	    {
+			string creatorTool = "XeLaTex";
+		    string destLicenseXml = "SIL_License.xml";
+		    string organization = "SIL International";
+			string exportTitle = "Gondwana Sample";
+		    string copyrightURL = "http://creativecommons.org/licenses/by-nc-sa/4.0/";
+
+		    string testFolderName = "UpdateLicenseAttributesTest";
+
+		    string inputDataFolder = Common.PathCombine(_inputBasePath, testFolderName);
+			string outputDataFolder = Common.PathCombine(_outputBasePath, testFolderName);
+			string expectedDataFolder = Common.PathCombine(_expectBasePath, testFolderName);
+
+		    string inputFile = Common.PathCombine(inputDataFolder, destLicenseXml);
+			string expectedFile = Common.PathCombine(expectedDataFolder, destLicenseXml);
+		    string outputFile = Common.PathCombine(outputDataFolder, destLicenseXml);
+
+			Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+
+			string utcDateTime = DateTimeOffset.UtcNow.ToString("o");
+			Common.UpdateLicenseAttributes(creatorTool, "Dictionary", outputFile, organization, exportTitle, copyrightURL, utcDateTime);
+
+			TextFileAssert.CheckLineAreEqualEx(expectedFile, outputFile, new ArrayList { 6, 19, 45, 50});
+
+			string fileData = FileData.Get(outputFile);
+
+			StringAssert.Contains(utcDateTime, fileData);
+
+	    }
 
         #endregion
 
