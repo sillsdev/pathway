@@ -35,7 +35,7 @@
                 <xsl:otherwise>
                     <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
                         <xsl:attribute name="class">letData</xsl:attribute>
-                        <xsl:apply-templates mode="inCol"/>
+                        <xsl:apply-templates select="*[1]" mode="inCol"/>
                     </xsl:element>
                 </xsl:otherwise>
             </xsl:choose>
