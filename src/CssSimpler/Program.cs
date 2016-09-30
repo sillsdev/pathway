@@ -37,16 +37,18 @@ namespace CssSimpler
         protected static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
         protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
         protected static List<string> UniqueClasses;
+        private static readonly XmlReaderSettings ReaderSettings = new XmlReaderSettings { XmlResolver = new NullResolver(), DtdProcessing = DtdProcessing.Ignore };
+        private static readonly XsltSettings XsltSettings = new XsltSettings{EnableDocumentFunction = false, EnableScript = false};
 
         static void Main(string[] args)
         {
             // ReSharper disable AssignNullToNotNullAttribute
             XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"CssSimpler.XmlCss.xsl")));
+				"CssSimpler.XmlCss.xsl"), ReaderSettings), XsltSettings, new NullResolver());
             SimplifyXmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"CssSimpler.XmlCssSimplify.xsl")));
+				"CssSimpler.XmlCssSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
             SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                "CssSimpler.XhtmlSimplify.xsl")));
+                "CssSimpler.XhtmlSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
             // ReSharper restore AssignNullToNotNullAttribute
             // see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
             var p = new OptionSet
@@ -100,6 +102,7 @@ namespace CssSimpler
             var xml = new XmlDocument();
             UniqueClasses = lc.UniqueClasses;
             LoadCssXml(parser, styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
             // ReSharper disable once UnusedVariable
@@ -332,18 +335,23 @@ namespace CssSimpler
 	        {
 				throw new ArgumentNullException("styleSheet");
 	        }
+            VerboseMessage("Writing Simple Stylesheet: {0}", styleSheet);
+            var xmlStream = new MemoryStream();
+            xml.Save(xmlStream);
+            xmlStream.Flush();
+            xmlStream.Position = 0;
+            var xmlReader = XmlReader.Create(xmlStream, ReaderSettings);
+            var memory = new MemoryStream();
+            SimplifyXmlCss.Transform(xmlReader, null, memory);
+            memory.Flush();
+            memory.Position = 0;
+            var cssReader = XmlReader.Create(memory, ReaderSettings);
             var cssFile = new FileStream(styleSheet, FileMode.Create);
             var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
-            VerboseMessage("Writing Simple Stylesheet: {0}", styleSheet);
-            var memory = new MemoryStream();
-            SimplifyXmlCss.Transform(xml, null, memory);
-            memory.Flush();
-            memory.Seek(0, 0);
-            var cssReader = XmlReader.Create(memory, null);
             XmlCss.Transform(cssReader, null, cssWriter);
             cssFile.Close();
             xml.RemoveAll();
-            memory.Seek(0, 0);
+            memory.Position = 0;
             xml.Load(memory);
         }
 

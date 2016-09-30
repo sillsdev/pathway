@@ -31,7 +31,7 @@
     <xsl:template match="*[name='first-child']"/ -->
 
     <!-- Eliminates part of selector -->
-    <xsl:template match="RULE/*[position() > 1][following-sibling::*[name=parent::*/@lastClass]]">
+    <xsl:template match="RULE/*[position() > 1 and local-name() != 'TAG' and following-sibling::*[name=parent::*/@lastClass]]">
         <xsl:choose>
             <!-- remove pictures span -->
             <xsl:when test="name='pictures'"/>
