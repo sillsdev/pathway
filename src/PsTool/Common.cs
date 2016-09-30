@@ -2420,7 +2420,15 @@ namespace SIL.Tool
 
 		public static string GetProductName()
 		{
-			return Application.ProductName;
+			if (Common.Testing)
+			{
+				return "UnitTesting";
+			}
+			else
+			{
+				return Application.ProductName;
+			}
+			
 		}
 
 		public static void OpenOutput(string outputPathWithFileName)

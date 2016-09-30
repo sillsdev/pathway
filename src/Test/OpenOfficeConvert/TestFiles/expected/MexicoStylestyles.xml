@@ -45,6 +45,9 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="mainheadword_entry_letData_dicBody">
       <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
     </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="a_span_.mxb_mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.mxb_mainheadword_entry_letData_dicBody">
+      <style:text-properties fo:color="#0000FF" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="senses_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensenumberps_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecontent_senses_entry_letData_dicBody" />
@@ -56,7 +59,9 @@
       <style:text-properties fo:font-weight="400" style:font-weight-complex="400" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody">
+      <style:text-properties fo:color="#800000" text:display="inline" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeechps_partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody">
       <style:text-properties text:display="inline" />
     </style:style>
@@ -111,11 +116,16 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_headword_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
     </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="a_span_.mxb_headword_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.mxb_headword_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody">
+      <style:text-properties fo:color="#0000FF" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody">
       <style:text-properties text:display="inline" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody">
+      <style:text-properties fo:color="#800000" text:display="inline" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_partofspeech_morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
@@ -139,7 +149,9 @@
       <style:text-properties fo:font-weight="400" style:font-weight-complex="400" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalysis_sense_sensecontent_senses_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_mainentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sense_sensecontent_senses_mainentrycomplex_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sense_sensecontent_senses_mainentrycomplex_letData_dicBody">
+      <style:text-properties fo:color="#800000" text:display="inline" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeechps_partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_morphosyntaxanalysis_sense_sensecontent_senses_mainentrycomplex_letData_dicBody">
       <style:text-properties text:display="inline" />
     </style:style>
@@ -182,6 +194,9 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_letData_dicBody">
       <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
     </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="a_span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_letData_dicBody">
+      <style:text-properties fo:color="#0000FF" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="referencedentryps_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_letData_dicBody">
       <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
@@ -220,11 +235,16 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_headword_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="headword_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody">
       <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
     </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="a_span_.mxb_headword_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="span_.mxb_headword_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody">
+      <style:text-properties fo:color="#0000FF" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody">
       <style:text-properties text:display="inline" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody">
+      <style:text-properties fo:color="#800000" text:display="inline" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_partofspeech_morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_morphosyntaxanalysis_morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
@@ -295,7 +315,9 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sharedgrammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalysis_sharedgrammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sharedgrammaticalinfo_senses_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sharedgrammaticalinfo_senses_entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sharedgrammaticalinfo_senses_entry_letData_dicBody">
+      <style:text-properties fo:color="#800000" text:display="inline" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeechps_partofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_entry_letData_dicBody">
       <style:text-properties text:display="inline" />
     </style:style>
@@ -471,7 +493,9 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minimallexreferencesps_minimallexreferences_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="minimallexreferences_mainentrycomplex_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sharedgrammaticalinfo_senses_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="senses_mainentrycomplex_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="sharedgrammaticalinfo_senses_mainentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrycomplex_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrycomplex_letData_dicBody">
+      <style:text-properties fo:color="#800000" text:display="inline" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeechps_partofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrycomplex_letData_dicBody">
       <style:text-properties text:display="inline" />
     </style:style>
@@ -574,6 +598,9 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_dicBody" style:family="text" style:parent-style-name="headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_dicBody">
       <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
     </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="a_span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_dicBody" style:family="text" style:parent-style-name="span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_dicBody">
+      <style:text-properties fo:color="#0000FF" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="referencedentryps_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_dicBody" style:family="text" style:parent-style-name="referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_dicBody" style:family="text" style:parent-style-name="span_.mxb_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_mainentrycomplex_dicBody">
       <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
@@ -611,6 +638,9 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_headword_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_dicBody" style:family="text" style:parent-style-name="headword_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_dicBody">
       <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="a_span_.mxb_headword_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_dicBody" style:family="text" style:parent-style-name="span_.mxb_headword_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_dicBody">
+      <style:text-properties fo:color="#0000FF" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalyses_visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_dicBody" style:family="text" style:parent-style-name="visiblecomplexformbackref_visiblecomplexformbackrefs_mainentrycomplex_dicBody">
       <style:text-properties text:display="inline" />

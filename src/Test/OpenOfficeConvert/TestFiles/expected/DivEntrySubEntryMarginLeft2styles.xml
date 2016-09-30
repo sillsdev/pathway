@@ -114,8 +114,9 @@
       <style:paragraph-properties fo:margin-left="33pt" fo:text-indent="33pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:padding-left="12pt" fo:text-align="left" fo:background-color="transparent" />
       <style:text-properties text:display="block" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_subentry_subentries_entry_letData_body" style:family="text" style:parent-style-name="subentry_subentries_entry_letData_body">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="10pt" style:font-size-complex="10pt" fo:background-color="transparent" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_subentry_subentries_entry_letData_body" style:family="paragraph" style:parent-style-name="subentry_subentries_entry_letData_body">
+      <style:paragraph-properties fo:background-color="transparent" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_subentry_subentries_entry_letData_body" style:family="text" style:parent-style-name="headword_subentry_subentries_entry_letData_body">
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />

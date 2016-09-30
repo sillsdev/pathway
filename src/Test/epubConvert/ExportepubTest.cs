@@ -83,61 +83,7 @@ namespace Test.epubConvert
 			Assert.IsTrue(actual);
 		}
 
-		/// <summary>
-		///A test for Export
-		///</summary>
-		[Test]
-		public void ExportNullTest()
-		{
-			var target = new Exportepub();
-			PublicationInformation projInfo = null;
-			var actual = target.Export(projInfo);
-			Assert.IsFalse(actual);
-		}
-
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void ExportDictionaryPassTest()
-		{
-			// clean out old files
-			foreach (var file in Directory.GetFiles(_outputPath))
-			{
-				if (File.Exists(file))
-					File.Delete(file);
-			}
-			string appDataDir = Common.GetAllUserPath();
-			if (Directory.Exists(appDataDir))
-			{
-				Directory.Delete(appDataDir, true);
-			}
-
-
-			const string XhtmlName = "main.xhtml";
-			const string CssName = "main.css";
-			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
-			File.Copy(FileInput("FlexRev.xhtml"), FileOutput("FlexRev.xhtml"), true);
-			File.Copy(FileInput("FlexRev.css"), FileOutput("FlexRev.css"), true);
-			File.Copy(FileProg(@"Styles\Dictionary\book.css"), FileOutput("book.css"), true);
-			projInfo.IsReversalExist = true;
-			projInfo.IsLexiconSectionExist = true;
-			projInfo.ProjectInputType = "Dictionary";
-			projInfo.DefaultRevCssFileWithPath = Common.PathCombine(_inputPath, "FlexRev.css");
-			projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
-								   DateTime.Now.Date.ToShortTimeString();
-			var target = new Exportepub();
-			var actual = target.Export(projInfo);
-			Assert.IsTrue(actual);
-			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("main"), ".*");
-			var resultDoc = Common.DeclareXMLDocument(false);
-			resultDoc.Load(FileOutput(Common.DirectoryPathReplace("main/OEBPS/PartFile00001_.xhtml")));
-			var nsmgr = new XmlNamespaceManager(resultDoc.NameTable);
-			nsmgr.AddNamespace("x", "http://www.w3.org/1999/xhtml");
-			var node = resultDoc.SelectSingleNode("//x:span[@class='translation_L2']/x:span[2]/x:span", nsmgr);
-			Assert.AreEqual(node.InnerText.Trim(), "child of Fatima"); // Fail if content is gone (TD-2814)
-		}
+		
 
 		[Test]
 		[Category("LongTest")]
@@ -175,48 +121,7 @@ namespace Test.epubConvert
 			var next = nodes[nodes.Count - 1].NextSibling.NextSibling;
 			Assert.AreEqual("Section_Head", next.Attributes.GetNamedItem("class").InnerText, "Section head should follow chapter links");
 		}
-
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void ExportDictionaryCssFileComparisonTest()
-		{
-			// clean out old files
-			CleanOutputDirectory();
-			if (!Directory.Exists(FileOutput("ExportDictionary")))
-				Directory.CreateDirectory(FileOutput("ExportDictionary"));
-
-			const string XhtmlName = "main.xhtml";
-			const string CssName = "main.css";
-			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
-			File.Copy(FileInput("FlexRev.xhtml"), FileOutput("FlexRev.xhtml"), true);
-			File.Copy(FileInput("FlexRev.css"), FileOutput("FlexRev.css"), true);
-			File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"), true);
-			projInfo.IsReversalExist = true;
-			projInfo.IsLexiconSectionExist = true;
-			projInfo.ProjectInputType = "Dictionary";
-			projInfo.DefaultRevCssFileWithPath = Common.PathCombine(_inputPath, "FlexRev.css");
-			string expCssLine = "@import \"" + Path.GetFileName(projInfo.DefaultRevCssFileWithPath) + "\";";
-			Common.FileInsertText(FileOutput("epub.css"), expCssLine);
-			Param.LoadSettings();
-			projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
-								   DateTime.Now.Date.ToShortTimeString();
-			var target = new Exportepub();
-			var actual = target.Export(projInfo);
-			Assert.IsTrue(actual);
-			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("main"), ".*");
-
-			File.Copy(FileExpected("ExportDictionaryCSSFileComparisonExpected.epub"), FileOutput("ExportDictionaryCSSFileComparisonExpected.epub"), true);
-			result = FileOutput("ExportDictionaryCSSFileComparisonExpected.epub");
-			zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("ExportDictionaryCSSFileComparisonExpected"), ".*");
-
-			TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparisonExpected/OEBPS/book.css"), new ArrayList { 93, 110, 112, 643, 652, 965 });
-
-		}
-
+		
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]

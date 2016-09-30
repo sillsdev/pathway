@@ -30,7 +30,6 @@ using SIL.Tool;
 namespace Test.OpenOfficeConvert
 {
 	[TestFixture]
-	[Category("BatchTest")]
 	public class LOContentTest
 	{
 		#region Private Variables
@@ -87,7 +86,8 @@ namespace Test.OpenOfficeConvert
 			Common.SupportFolder = "";
 			Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFIles");
 			Common.ProgBase = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles"); // for masterDocument
-			Common.UseAfterBeforeProcess = true;
+			Common.UseAfterBeforeProcess = false;
+
 			_styleFile = "styles.xml";
 			_contentFile = "content.xml";
 			_isLinux = Common.IsUnixOS();
@@ -195,35 +195,6 @@ namespace Test.OpenOfficeConvert
 
 		//#region Nodes_Test
 		#region FileTest
-		
-		///<summary>
-		///RunningHeaderNone Full Scripture Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void RunningHeaderNoneTest()
-		{
-			_projInfo.ProjectInputType = "Scripture";
-			const string file = "RunningHeaderNone";
-			DateTime startTime = DateTime.Now;
-
-			string styleOutput = GetStyleOutput(file);
-
-			_totalTime = DateTime.Now - startTime;
-			string style = "";
-			if (Common.UnixVersionCheck())
-			{
-				style = "_Unix";
-			}
-
-			string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
-			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
-			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-		}
-
 		///<summary>
 		///DivEntrySubEntrySameMargin Dictionary Test
 		/// </summary>
@@ -302,51 +273,8 @@ namespace Test.OpenOfficeConvert
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
-		
-
 		#endregion
-
-		private void CopyInputToOutput()
-		{
-			string[] files = new[] { "main.odt", "flexrev.odt", "main.odm", "flexrev.css", "main.xhtml", "flexrev.xhtml", "main.css", "flexrev.css" };
-			foreach (string file in files)
-			{
-				string outputfile = FileOutput(file);
-				File.Delete(outputfile);
-			}
-
-			files = new[] { "main.xhtml", "FlexRev.xhtml", "main.css", "FLExRev.css" };
-			foreach (string file in files)
-			{
-				CopyExistingFile(file);
-			}
-		}
-
-		///<summary>
-		/// Buang Ws Test
-		/// </summary>      
-		[Test]
-		[Category("SkipOnTeamCity")]
-		public void NewGuidewordStyleTest()
-		{
-			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "NewGuidewordStyle";
-			DateTime startTime = DateTime.Now;
-
-			string styleOutput = GetStyleOutput(file);
-
-			_totalTime = DateTime.Now - startTime;
-			string style = "";
-			if (Common.UnixVersionCheck())
-			{
-				style = "_Unix";
-			}
-
-			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
-			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-		}
-
+		
 		///<summary>
 		///Subscript property in new FLEX8.3 Test TD-4661
 		///</summary>
@@ -378,32 +306,6 @@ namespace Test.OpenOfficeConvert
 			_validate.ClassProperty.Add("style:text-position", "-12% 58%");
 			bool returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
-		}
-
-		private bool CheckFileExist()
-		{
-			bool returnValue = true;
-			string[] files = new[] { "main.odt", "FlexRev.odt", "main.odm" };
-			foreach (string file in files)
-			{
-				string outputfile = FileOutput(file);
-				if (!File.Exists(outputfile))
-				{
-					returnValue = false;
-					break;
-				}
-			}
-			return returnValue;
-		}
-
-		/// <summary>
-		/// Copies a file if it exists from the input test path to the output
-		/// </summary>
-		/// <param name="fileName">file to be copied if it exists</param>
-		private void CopyExistingFile(string fileName)
-		{
-			if (File.Exists(FileInput(fileName)))
-				File.Copy(FileInput(fileName), FileOutput(fileName), true);
 		}
 
 		private string GetStyleOutput(string file)
@@ -448,31 +350,58 @@ namespace Test.OpenOfficeConvert
 			return styleOutput;
 		}
 
-		private string GetStyleOutput(PublicationInformation projInfo)
+		///<summary>
+		///RunningHeaderNone Full Scripture Test
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void RunningHeaderNoneTest()
 		{
-			LOContent contentXML = new LOContent();
-			LOStyles stylesXML = new LOStyles();
-			projInfo.TempOutputFolder = _outputPath;
-			string file = Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath);
+			_projInfo.ProjectInputType = "Scripture";
+			const string file = "RunningHeaderNone";
+			DateTime startTime = DateTime.Now;
+			Common.UseAfterBeforeProcess = false;
+			string styleOutput = GetStyleOutput(file);
 
-			Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-			CssTree cssTree = new CssTree();
-			cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+			_totalTime = DateTime.Now - startTime;
+			string style = "";
+			if (Common.UnixVersionCheck())
+			{
+				style = "_Unix";
+			}
 
-			//StyleXML
-			string fileOutput = _index > 0 ? file + _index + _styleFile : file + _styleFile;
-			//string styleOutput = FileOutput(file + _styleFile);
-			string styleOutput = FileOutput(fileOutput);
-			Dictionary<string, Dictionary<string, string>> idAllClass = stylesXML.CreateStyles(_projInfo, cssClass, styleOutput);
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		}
 
-			// ContentXML
-			var pageSize = new Dictionary<string, string>();
-			pageSize["height"] = cssClass["@page"]["page-height"];
-			pageSize["width"] = cssClass["@page"]["page-width"];
-			_projInfo.TempOutputFolder = FileOutput(file);
-			contentXML.CreateStory(_projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 325, pageSize);
-			_projInfo.TempOutputFolder = _projInfo.TempOutputFolder + _contentFile;
-			return styleOutput;
+		///<summary>
+		/// Buang Ws Test
+		/// </summary>      
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void NewGuidewordStyleTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "NewGuidewordStyle";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+			string style = "";
+			if (Common.UnixVersionCheck())
+			{
+				style = "_Unix";
+			}
+
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
 		private static void LoadParam(string inputType, string tocTrueFalse)

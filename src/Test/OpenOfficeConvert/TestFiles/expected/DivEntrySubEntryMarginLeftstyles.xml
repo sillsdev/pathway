@@ -62,7 +62,7 @@
       <style:paragraph-properties fo:text-indent="0pt" style:line-height-at-least="10pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" text:display="block" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headwordsub_.iba_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="subentry_subentries_entry_letData_dicBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headwordsub_.iba_subentry_subentries_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="subentry_subentries_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="subentrytype_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="subentry_subentries_entry_letData_dicBody" />
