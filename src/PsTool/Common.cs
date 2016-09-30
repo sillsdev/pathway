@@ -3641,8 +3641,11 @@ namespace SIL.Tool
 					XmlNode node =
 						xmlDocument.SelectSingleNode(
 							"/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='defaultFontFamily'][1]/@value");
-					newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
-					newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+				    if (node != null)
+				    {
+                        newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+                        newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+                    }
 				}
 
 				using (StreamWriter sw = File.CreateText(teDefaultFilePath))
