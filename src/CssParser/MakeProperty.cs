@@ -692,7 +692,7 @@ namespace SIL.PublishingSolution
 				case "-webkit-column-count":
                     break;
                 default:
-                    throw new Exception("Not a valid CSS Command");
+                    throw new Exception("Not a valid CSS Command: " + styleAttributeInfo.Name);
             }
         }
 
