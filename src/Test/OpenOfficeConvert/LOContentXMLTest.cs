@@ -4328,7 +4328,7 @@ namespace Test.OpenOfficeConvert
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
-		public void MainStyleChangesinMexicoExport()
+		public void StyleChangesinMexicoMainExport()
         {
             _projInfo.ProjectInputType = "Dictionary";
 			const string file = "StyleChangesinMexico";
@@ -4351,7 +4351,7 @@ namespace Test.OpenOfficeConvert
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
-		public void ReversalStyleChangesinMexicoExport()
+		public void StyleChangesinMexicoReversalExport()
         {
             _projInfo.ProjectInputType = "Dictionary";
 			const string file = "StyleChangesinMexicoReversal";
