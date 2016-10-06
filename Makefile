@@ -13,6 +13,25 @@ endif
 ifndef Platform
 Platform=Any CPU
 endif
+ifndef MONO_PREFIX
+MONO_PREFIX=/opt/mono4-sil
+endif
+ifndef GDK_SHARP
+GDK_SHARP=$(MONO_PREFIX)/lib/mono/gtk-sharp-3.0
+endif
+ifndef LD_LIBRARY_PATH
+LD_LIBRARY_PATH=$(MONO_PREFIX)/lib
+endif
+ifndef PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$(MONO_PREFIX)/lib/pkgconfig
+endif
+ifndef MONO_GAC_PREFIX
+MONO_GAC_PREFIX=$(MONO_PREFIX)
+endif
+ifndef MONO_MWF_SCALING
+MONO_MWF_SCALING=disable
+endif
+PATH := $(MONO_PREFIX)/bin:$(PATH)
 
 build:
 	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Release\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln

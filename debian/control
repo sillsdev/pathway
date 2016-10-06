@@ -2,12 +2,8 @@ Source: pathway
 Section: cli-mono
 Priority: extra
 Maintainer: Greg Trihus <greg_trihus@sil.org>
-Build-Depends: debhelper (>= 7), autotools-dev, cli-common, mono-xbuild, mono-mcs,
- mono-devel, libmono-microsoft-csharp4.0-cil, libmono-microsoft-build-engine4.0-cil, 
- libmono-microsoft-build-framework4.0-cil,
- libmono-microsoft-build-tasks-v4.0-4.0-cil, 
- libmono-microsoft-build-utilities-v4.0-4.0-cil, libmono-system-data4.0-cil,
- libmono-system-data-linq4.0-cil, libmono-system-data-datasetextensions4.0-cil
+Build-Depends: debhelper (>= 7), autotools-dev, cli-common, mono-xbuild,
+ mono4-sil, mono-basic4-sil, libgdiplus4-sil, gtk-sharp4-sil
 Standards-Version: 3.9.6
 Homepage: http://pathway.sil.org
 Vcs-Git: git://github.com/sillsdev/pathway.git
