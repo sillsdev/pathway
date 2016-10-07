@@ -19,14 +19,11 @@
 \pagestyle{plain}
 \sloppy
 \setlength{\parfillskip}{0pt plus 1fil}
-\font\div="Charis SIL":color=ff0000 at 12pt
-\font\divdiv="Charis SIL":color=ff0000 at 12pt
-\font\divheaderdiv="Charis SIL":color=ff0000 at 24pt
-\font\spandiv="Charis SIL":color=0000ff at 12pt
-\font\spanheaderdiv="Charis SIL":color=ff0000 at 18pt
+\font\main="Charis SIL/GR" at 12pt
+\font\divmain="Charis SIL/GR":color=ff0000 at 12pt
+\font\headermain="Charis SIL/GR" at 18pt
+\font\spanmain="Charis SIL/GR":color=0000ff at 12pt
 
-\newpage 
-\thispagestyle{empty} 
 \mbox{} 
 \newpage 
 \newpage 
@@ -34,10 +31,10 @@
 \pagenumbering{arabic} 
 \pagestyle{fancy} 
 
-\divdiv{Div Tag }
+\divmain{Div Tag }
 
-\divheaderdiv{Div Header}
+\headermain{Div Header}
 
-\spandiv{ span Tag }\spanheaderdiv{span Header}
+\spanmain{ span Tag }\headermain{span Header}
 
 \end{document}
