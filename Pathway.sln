@@ -90,6 +90,11 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "InstallerXeLaTeX", "Install
 		{168871A6-2191-4E4A-85E1-E2BB8592265E} = {168871A6-2191-4E4A-85E1-E2BB8592265E}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D3FEB5E9-31D7-4EC8-9160-6EFAF8B44C8C}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Checking|Any CPU = Checking|Any CPU
