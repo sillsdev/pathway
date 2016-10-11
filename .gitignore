@@ -9,15 +9,19 @@
 *.resources
 *.userprefs
 *Thumbs.db
+*.VisualState.xml
 ./pathway_*
 output/*
+Build/*.exe
 BuildStep.exe
 Build/pathway_*
 Build/debs/*
 Build/latest.changes
 src/_*
+packages/*
 releases
 testResults
+Test-*
 src/Reference
 src/bin
 src/debian/files
@@ -79,3 +83,4 @@ lib/xml*
 lib/L10NSharp.*
 lib/SIL.*
 lib/icu*.*
+lib/Palaso.*

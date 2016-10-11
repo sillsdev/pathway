@@ -96,6 +96,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	   mkdir -p ../lib
 
 		# download artifact dependencies
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt324/pathway.tcbuildtag/Palaso.BuildTasks.dll ../lib/Palaso.BuildTasks.dll
 		copy_auto http://build.palaso.org/guestAuth/repository/download/bt324/pathway.tcbuildtag/icu.net.dll ../lib/icu.net.dll
 		copy_auto http://build.palaso.org/guestAuth/repository/download/bt324/pathway.tcbuildtag/icu.net.dll.config ../lib/icu.net.dll.config
 		copy_auto http://build.palaso.org/guestAuth/repository/download/bt324/pathway.tcbuildtag/icudt54.dll ../lib/icudt54.dll
@@ -121,6 +122,7 @@ elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
 		mkdir -p ../lib
 
 		# download artifact dependencies
+		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/Palaso.BuildTasks.dll ../lib/Palaso.BuildTasks.dll
 		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/icu.net.dll ../lib/icu.net.dll
 		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/icu.net.dll.config ../lib/icu.net.dll.config
 		copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/icudt54.dll ../lib/icudt54.dll
