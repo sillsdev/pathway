@@ -4,6 +4,7 @@
 		<RootDir Condition="'$(teamcity_build_checkoutDir)' != ''">$(teamcity_build_checkoutDir)</RootDir>
 		<BuilTaskDir Condition="'$(BuilTaskDir)'==''">build</BuilTaskDir>
 		<TestNamePat Condition="'$(TestNamePat)'==''">*.Tests</TestNamePat>
+		<StampIt Condition="'$(StampIt)'==''">true</StampIt>
 		<BUILD_NUMBER Condition="'$(BUILD_NUMBER)'==''">1.2.3.4</BUILD_NUMBER>
 		<!-- Note, after some thought, we've decided this is the best place to keep the version number (not on TeamCity, not in the assemblies). -->
 		<Version>3.0</Version>
@@ -68,7 +69,7 @@
 
 	<Target Name="Build">
 		<CallTarget Targets="Clean"/>
-		<CallTarget Targets="SetAssemblyVersion"/>
+		<CallTarget Targets="SetAssemblyVersion" Condition="'$(StampIt)'=='true'"/>
 		<CallTarget Targets="Compile"/>
 		<Message Text="Build Complete"/>
 	</Target>
