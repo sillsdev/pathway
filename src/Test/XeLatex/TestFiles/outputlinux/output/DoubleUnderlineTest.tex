@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article} 
+\usepackage{float}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
+\usepackage{changepage}
+\usepackage{needspace}
+\usepackage{setspace}
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\scrBookscrBody="Charis SIL/GR" at 12pt
+\font\scrBookNamezxxscrBookscrBody="Charis SIL/GR" at 12pt
+\font\scrBookCodezxxscrBookscrBody="Charis SIL/GR" at 12pt
+\font\TitleMainscrBookscrBody="Charis SIL/GR" at 12pt
+\font\TitleSecondaryzxxTitleMainscrBookscrBody="Charis SIL/GR" at 12pt
+\font\spanzxxTitleMainscrBookscrBody="Charis SIL/GR" at 12pt
+\font\scrIntroSectionscrBookscrBody="Charis SIL/GR" at 12pt
+\font\IntroSectionHeadscrIntroSectionscrBookscrBody="Charis SIL/GR" at 11pt
+\font\spanzxxIntroSectionHeadscrIntroSectionscrBookscrBody="Charis SIL/GR" at 11pt
+\font\IntroParagraphscrIntroSectionscrBookscrBody="Charis SIL/GR" at 12pt
+\font\doubleUnderlineIntroParagraphscrIntroSectionscrBookscrBody="Charis SIL/GR" at 12pt
+
+\mbox{} 
+\newpage 
+\newpage 
+\setcounter{page}{1} 
+\pagenumbering{arabic} 
+\pagestyle{fancy} 
+
+\scrBookNamezxxscrBookscrBody{
+ \label{PageStock_DoubleUnderlineTest1} Matiu}
+ \label{PageStock_DoubleUnderlineTest1} \scrBookCodezxxscrBookscrBody{MAT}
+
+\TitleSecondaryzxxTitleMainscrBookscrBody{Na Rorongo Ke Toke Eigna A Jisas Krais}\spanzxxTitleMainscrBookscrBody{Sen Matiu Ke Risoa}
+\section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}
+\spanzxxIntroSectionHeadscrIntroSectionscrBookscrBody{\underline{\underline{Na Titiono Eigna Na Buka Iaani}}}\end{spacing}}
+
+\doubleUnderlineIntroParagraphscrIntroSectionscrBookscrBody{\underline{\underline{Test}}}
+
+\end{document}

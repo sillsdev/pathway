@@ -1,0 +1,38 @@
+\documentclass[a4paper]{article} 
+\usepackage{float}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
+\usepackage{changepage}
+\usepackage{needspace}
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\pa="Charis SIL/GR" at 80pt
+\font\childapa="Charis SIL/GR" at 120pt
+\font\childbpa="Charis SIL/GR" at 53pt
+\font\childaenpa="Charis SIL/GR" at 120pt
+
+\mbox{} 
+\newpage 
+\newpage 
+\setcounter{page}{1} 
+\pagenumbering{arabic} 
+\pagestyle{fancy} 
+
+\childapa{text1 }\childbpa{text2 }
+
+\childaenpa{text3 }\childbpa{text4 }
+
+\end{document}

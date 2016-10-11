@@ -1,0 +1,55 @@
+\documentclass[a4paper]{article} 
+\usepackage{float}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
+\usepackage{changepage}
+\usepackage{needspace}
+\usepackage{verbatim} 
+\usepackage{multicol}
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\divzxx="Charis SIL/GR" at 12pt
+\font\spanzxx="Charis SIL/GR" at 12pt
+\font\scrBookscrBody="Charis SIL/GR" at 12pt
+\font\scrBookNamezxxscrBookscrBody="Charis SIL/GR/I":color=400000 at 12pt
+\font\scrBookCodezxxscrBookscrBody="Charis SIL/GR/BI":color=400000 at 12pt
+\font\columnsscrBody="Charis SIL/GR" at 12pt
+\font\scrSectioncolumnsscrBody="Charis SIL/GR" at 12pt
+\font\ParagraphscrSectioncolumnsscrBody="Charis SIL/GR" at 12pt
+\font\ChapterNumberzxxParagraphscrSectioncolumnsscrBody="Charis SIL/GR/B" at 18pt
+\font\VerseNumberzxxParagraphscrSectioncolumnsscrBody="Charis SIL/GR" at 12pt
+\font\spanzxxParagraphscrSectioncolumnsscrBody="Charis SIL/GR" at 12pt
+
+\mbox{} 
+\newpage 
+\newpage 
+\setcounter{page}{1} 
+\pagenumbering{arabic} 
+\pagestyle{fancy} 
+\begin{comment}
+
+\scrBookNamezxxscrBookscrBody{
+ \label{PageStock_ChapterNumberOnHeader1} Buka Tango}\end{comment}
+ 
+ \label{PageStock_ChapterNumberOnHeader1} \begin{comment}
+\scrBookCodezxxscrBookscrBody{ACT}\end{comment}
+ 
+\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}
+\ChapterNumberzxxParagraphscrSectioncolumnsscrBody{1}\VerseNumberzxxParagraphscrSectioncolumnsscrBody{$^{1}$}\spanzxxParagraphscrSectioncolumnsscrBody{ Toke nighe Tiofilus, }
+\end{multicols}
+\end{document}

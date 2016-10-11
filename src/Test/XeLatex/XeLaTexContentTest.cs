@@ -214,7 +214,7 @@ namespace Test.XeLatex
 		public void TextIndentTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "TextIndent";
+			const string file = "Textindent";
 			ExportProcess(file);
 			FileCompare(file);
 		}
@@ -678,7 +678,7 @@ namespace Test.XeLatex
 		public void TextIndentPcTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "TextIndentPC";
+			const string file = "TextindentPC";
 			ExportProcess(file);
 			FileCompare(file);
 		}
@@ -962,7 +962,7 @@ namespace Test.XeLatex
 		public void FootNote1Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "FootNote";
+			const string file = "Footnote";
 			ExportProcess(file);
 			FileCompare(file);
 		}
@@ -974,7 +974,7 @@ namespace Test.XeLatex
 		public void FootNote2Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "FootNote2";
+			const string file = "Footnote2";
 			ExportProcess(file);
 			FileCompare(file);
 		}
