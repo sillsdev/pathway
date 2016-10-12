@@ -3702,7 +3702,7 @@ namespace SIL.PublishingSolution
                       _childName.Replace("span_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousParagraphName string.
-			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0);
+			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0 || _previousParagraphName.IndexOf("reversalindexentry", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousChildName string.
 			bool isPrevChildNameMatches = (_previousChildName.IndexOf("headword", StringComparison.Ordinal) == -1 && _previousChildName.IndexOf("reversalform", StringComparison.Ordinal) == -1);

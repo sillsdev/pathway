@@ -407,6 +407,34 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
+        ///RunningHeader Reversal Test
+        /// </summary>
+        [Test]
+        [Category("LongTest")]
+        [Category("SkipOnTeamCity")]
+        public void RunningHeaderReversalTest()
+        {
+            _projInfo.ProjectInputType = "Dictionary";
+            const string file = "Headword_Reversal";
+            DateTime startTime = DateTime.Now;
+            Common.UseAfterBeforeProcess = false;
+            string styleOutput = GetStyleOutput(file);
+
+            _totalTime = DateTime.Now - startTime;
+            string style = "";
+            if (Common.UnixVersionCheck())
+            {
+                style = "_Unix";
+            }
+
+            string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
+            string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+        }
+
+        ///<summary>
         /// Buang Ws Test
         /// </summary>
         [Test]
