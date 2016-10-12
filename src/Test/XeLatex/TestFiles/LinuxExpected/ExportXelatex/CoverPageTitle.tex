@@ -1,3 +1,270 @@
+\documentclass[a4paper,twoside]{article} 
+\usepackage{float}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=1.85cm,right=1.85cm,top=1.49cm,bottom=1.49cm,includeheadfoot]{geometry}
+\usepackage{eso-pic}
+\usepackage{changepage}
+\usepackage{needspace}
+\usepackage{setspace}
+\usepackage{multicol}
+\usepackage{bidi} 
+\pagestyle{plain}\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0.4pt} 
+
+\fancyhead[LO]{\rightmark}
+\fancyhead[RO]{\thepage}
+\fancyhead[LE]{\thepage}
+\fancyhead[RE]{\leftmark}
+\renewcommand{\thefootnote}{\alphalph{\value{footnote}}} 
+
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\diven="Charis SIL/GR" at 12pt
+\font\spanen="Charis SIL/GR" at 12pt
+\font\divpt="Times New Roman/GR" at 12pt
+\font\spanpt="Times New Roman/GR" at 12pt
+\font\divseh="Charis SIL/GR" at 12pt
+\font\spanseh="Charis SIL/GR" at 12pt
+\font\divsehfonipaxetic="Charis SIL/GR" at 12pt
+\font\spansehfonipaxetic="Charis SIL/GR" at 12pt
+\font\xitemen="Charis SIL/GR" at 10pt
+\font\xitemxitemcomplexformrefsbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemdefinitionbefore="Charis SIL/GR" at 12pt
+\font\xitemxitemdefinitionLcbefore="Charis SIL/GR" at 12pt
+\font\xitemxitementryrefcomponentbefore="Charis SIL/GR" at 10pt
+\font\xitemxitementryreftypebefore="Charis SIL/GR" at 10pt
+\font\xitemxitemexamplebefore="Charis SIL/GR/I" at 10pt
+\font\xitemxitemexamplesbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemheadwordbefore="Charis SIL/GR/B" at 10pt
+\font\xitemxitemLexEntrypublishStemComponentTargetHeadWordRefbefore="Charis SIL/GR/B" at 10pt
+\font\xitemxitemlexreftargetsbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemprimaryrefsbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemrelationsbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemsensecrossrefbefore="Charis SIL/GR/B" at 10pt
+\font\sensesensesensesbefore="Charis SIL/GR" at 10pt
+\font\sensesensesubsensesbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemtranslationbefore="Charis SIL/GR" at 12pt
+\font\xitemxitemtranslationLcbefore="Charis SIL/GR" at 12pt
+\font\xitemxitemvariantrefentrytypebefore="Charis SIL/GR" at 10pt
+\font\xitemxitemvariantrefformbefore="Charis SIL/GR/B" at 10pt
+\font\xitemxitemvariantrefsbefore="Charis SIL/GR" at 10pt
+\font\xitemtpi="Charis SIL/GR" at 12pt
+\font\letHeaddicBody="Charis SIL/GR/B" at 12pt
+\font\lettersehletHeaddicBody="Charis SIL/GR/B" at 18pt
+\font\letDatadicBody="Charis SIL/GR" at 12pt
+\font\entryletDatadicBody="Times New Roman/GR" at 10pt
+\font\headwordsehentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanenheadwordsehentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\sensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\sensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\grammaticalinfosensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\partofspeechptgrammaticalinfosensesensesentryletDatadicBody="Times New Roman/GR/I" at 10pt
+\font\spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody="Times New Roman/GR/I" at 10pt
+\font\spanenpartofspeechptgrammaticalinfosensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanengrammaticalinfosensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\definitionLcptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\xitemptdefinitionLcptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanendefinitionLcptsensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitemendefinitionLcptsensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenxitemendefinitionLcptsensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\examplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\examplesehexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spansehexamplesehexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanenexamplesehexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanenexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\variantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenvariantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\variantrefentrytypevariantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntryTypepublishStemVariantTypeReverseAbbrPubptvariantrefentrytypevariantrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptLexEntryTypepublishStemVariantTypeReverseAbbrPubptvariantrefentrytypevariantrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanenLexEntryTypepublishStemVariantTypeReverseAbbrPubptvariantrefentrytypevariantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenvariantrefentrytypevariantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\variantrefformsehvariantrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\pictureRightentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\picturepictureRightentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\pictureCaptionpictureRightentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\pictureSensepictureCaptionpictureRightentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenpictureSensepictureCaptionpictureRightentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\pictureLabelsehpictureCaptionpictureRightentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spansehpictureLabelsehpictureCaptionpictureRightentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\boldxsensenumbersensesensesentryletDatadicBody="Times New Roman/GR/B" at 10pt
+\font\spanensensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\etymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\etymologyformptetymologyentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptetymologyformptetymologyentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanenetymologyformptetymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenetymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\etymologyformenetymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenetymologyformenetymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanentranslationpttranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\grammaticalinfosensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\partofspeechptgrammaticalinfosensesentryletDatadicBody="Times New Roman/GR/I" at 10pt
+\font\spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody="Times New Roman/GR/I" at 10pt
+\font\spanenpartofspeechptgrammaticalinfosensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanengrammaticalinfosensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\xhomographnumberheadwordsehentryletDatadicBody="Charis SIL/GR/B" at 5.5pt
+\font\definitionLcensensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanendefinitionLcensensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\primaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\entryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntryTypepublishStemEntryTypeAbbreviationPubptentryreftypeprimaryrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptLexEntryTypepublishStemEntryTypeAbbreviationPubptentryreftypeprimaryrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanenLexEntryTypepublishStemEntryTypeAbbreviationPubptentryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenentryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\entryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\aentryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntrypublishStemComponentTargetHeadWordRefsehaentryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\subsensessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\sensesubsensessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\boldxsensenumbersensesubsensessensesensesentryletDatadicBody="Times New Roman/GR/B" at 10pt
+\font\definitionLcensensesubsensessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanendefinitionLcensensesubsensessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\examplesehxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spansehexamplesehxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanenexamplesehxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\translationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\xitempttranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptxitempttranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanentranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitementranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenxitementranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitementryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntryTypepublishStemEntryTypeAbbreviationPubptxitementryreftypeprimaryrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptLexEntryTypepublishStemEntryTypeAbbreviationPubptxitementryreftypeprimaryrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanenLexEntryTypepublishStemEntryTypeAbbreviationPubptxitementryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\relationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\lexreftargetsrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\alexreftargetsrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\sensecrossrefsehalexreftargetsrelationssensesensesentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\xsensexrefnumbersensecrossrefsehalexreftargetsrelationssensesensesentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanenrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\definitionptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptdefinitionptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanendefinitionptsensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanentranslationpttranslationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationLcpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\xitempttranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptxitempttranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanentranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitementranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenxitementranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\complexformrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\complexformtypecomplexformrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntryTypepublishStemComplexFormTypeReverseAbbrPubptcomplexformtypecomplexformrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptLexEntryTypepublishStemComplexFormTypeReverseAbbrPubptcomplexformtypecomplexformrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanencomplexformtypecomplexformrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\complexformformsehcomplexformrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanencomplexformformsehcomplexformrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanencomplexformrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitementryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\axitementryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntrypublishStemComponentTargetHeadWordRefsehaxitementryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanenentryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationLcentranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanentranslationLcentranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitemrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\lexreftargetsxitemrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\alexreftargetsxitemrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\sensecrossrefsehalexreftargetsxitemrelationssensesensesentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\xsensexrefnumbersensecrossrefsehalexreftargetsxitemrelationssensesensesentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\color{black} 
+\AddToShipoutPicture*{% 
+\put(0,0){\rule{\paperwidth}{\paperheight}}{\includegraphics[width=\paperwidth, height=\paperheight]{cover.png}}% 
+} 
+\thispagestyle{empty} 
+\font\CoverPageTitle="Liberation Serif/B":color=000000 at 22pt 
+\font\pFrontMatterdiv="Liberation Serif/B":color=000000 at 8pt 
+\vskip 60pt 
+\begin{center} 
+\CoverPageTitle{XelatexExport} 
+\end{center} 
+\newpage 
+\newpage 
+\thispagestyle{empty} 
+\mbox{} 
+\begin{titlepage}
+\begin{center}
+\textsc{\LARGE \CoverPageTitle{XelatexExport}}\\[1.5cm] 
+\vspace{110 mm} 
+\textsc{ \CoverPageTitle{XelatexPublisher}}\\[0.5cm] 
+\includegraphics[width=0.10 \textwidth]{./}\\[1cm]    
+\end{center} 
+\end{titlepage} 
+\pagenumbering{roman}  
+\setcounter{page}{3} 
+\input{} 
+\pagestyle{plain} 
+\newpage 
+
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{A a} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle1}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{B b} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle2}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{C c} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle3}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{D d} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle4}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{F f} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle5}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{G g} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle6}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{K k} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle7}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{L l} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle8}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{M m} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle9}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{N n} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle10}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{P p} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle11}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{S s} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle12}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{T t} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle13}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{U u} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle14}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{W w} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle15}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{X x} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle16}}}{}}
+
+\newpage 
+
+\mbox{} 
+\newpage 
+\newpage 
+\setcounter{page}{1} 
+\pagenumbering{arabic} 
+\pagestyle{plain} 
+\tableofcontents 
+\newpage 
+
+\pagestyle{fancy} 
 \begin{center}\begin{center}\widowpenalty=300
 \clubpenalty=300
 
