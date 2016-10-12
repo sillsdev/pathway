@@ -294,11 +294,6 @@
     <!-- validator is referenced even if not called -->
     <Delete Files="@(AllDebugOutput)" Condition="'$(Configuration)' == 'Debug'" />
     <Delete Files="@(AllReleaseOutput)" Condition="'$(Configuration)' != 'Debug'" />
-    <Copy SourceFiles="..\lib\Devart.Data.dll" DestinationFiles="$(OutputPath)Devart.Data.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\lib\Devart.Data.xml" DestinationFiles="$(OutputPath)Devart.Data.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\lib\Devart.Data.SQLite.dll" DestinationFiles="$(OutputPath)Devart.Data.SQLite.dll" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\lib\Devart.Data.SQLite.xml" DestinationFiles="$(OutputPath)Devart.Data.SQLite.xml" Condition=" '$(Edition)' == 'BTE' " />
-    <Copy SourceFiles="..\lib\sqlite3.dll" DestinationFiles="$(OutputPath)sqlite3.dll" Condition=" '$(Edition)' == 'BTE' and $(OS) != 'Linux' " />
     <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
     <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'$(OutputPath)Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -347,7 +342,6 @@
     <PdfLicenseManager Include="pdflicensemanager-2.3.jar" />
     <Paratexmf Include="..\src\XeLaTexConvert\Paratexmf\**\*.*" />
     <InstallTex Include="..\src\XeLaTexConvert\InstallPathwayXeLaTeX.sh" />
-    <TestBackend Include="..\WordPressConvert\$(OutputPath)MySql*.dll" />
     <DicStyles Include="Styles\Dictionary\**\*.*" />
     <ScrStyles Include="Styles\Scripture\**\*.*" />
     <DictionaryForMIDs Include="Dic4Mid\**\*.*" />
