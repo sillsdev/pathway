@@ -634,7 +634,7 @@ namespace SIL.PublishingSolution
 				string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
 				if (CoverPageImagePath.Trim() != "")
 				{
-					if (CoverPageImagePath != destinctionPath && Directory.Exists(xeLaTexInstallationPath))
+					if (File.Exists(CoverPageImagePath) &&  CoverPageImagePath != destinctionPath && Directory.Exists(xeLaTexInstallationPath)))
 						File.Copy(CoverPageImagePath, destinctionPath, true);
 
 					tableOfContent += "\\color{black} \r\n";
