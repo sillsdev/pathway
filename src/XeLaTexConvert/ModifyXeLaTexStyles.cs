@@ -613,7 +613,7 @@ namespace SIL.PublishingSolution
 				titleFontName = fontName;
 				titleFontSize = fontSize.ToString();
 			}
-			
+
 			if (Convert.ToBoolean(CoverImage) || Convert.ToBoolean(TitleInCoverPage))
 			{
 				xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
@@ -628,13 +628,13 @@ namespace SIL.PublishingSolution
 					xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
 				}
 			}
-			
+
 			if (Convert.ToBoolean(CoverImage))
 			{
 				string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
 				if (CoverPageImagePath.Trim() != "")
 				{
-					if (File.Exists(CoverPageImagePath) &&  CoverPageImagePath != destinctionPath && Directory.Exists(xeLaTexInstallationPath)))
+					if (File.Exists(CoverPageImagePath) && CoverPageImagePath != destinctionPath && Directory.Exists(xeLaTexInstallationPath))
 						File.Copy(CoverPageImagePath, destinctionPath, true);
 
 					tableOfContent += "\\color{black} \r\n";
