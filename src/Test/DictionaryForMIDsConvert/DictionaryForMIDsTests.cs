@@ -219,6 +219,7 @@ namespace Test.DictionaryForMIDsConvert
             projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outDir, "main.xhtml");
             var curTesting = Common.Testing;
             Common.Testing = false;
+	        _isUnixOS = Common.UsingMonoVM;
             CreateDictionaryForMIDs(projInfo);
             Assert.True(Directory.Exists(Common.PathCombine(outDir, "DfM_lojen_SIL")));
             Common.Testing = curTesting;
