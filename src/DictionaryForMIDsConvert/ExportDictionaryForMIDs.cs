@@ -242,16 +242,11 @@ namespace SIL.PublishingSolution
             var DictionaryForMIDsPath = Common.FromRegistry("Dic4Mid");
             var creatorPath = Common.PathCombine(DictionaryForMIDsPath, "DfM-Creator");
             FolderTree.Copy(creatorPath, output.Directory);
-            const string redirectOutputFileName = LogName;
-            SubProcess.RedirectOutput = redirectOutputFileName;
-            if (_isUnixOS)
-            {
-                SubProcess.RunCommand(output.Directory, "wineconsole", processFullPath, true);
-            }
-            else
-            {
-                SubProcess.Run(output.Directory, processFullPath, ".", true);
-            }
+
+            const string prog = "java";
+            SubProcess.RedirectOutput = LogName;
+            SubProcess.RunCommand(output.Directory, prog, @"-jar DfM-Creator.jar -DictionaryGeneration .\main.txt . .", true);
+            SubProcess.RunCommand(output.Directory, prog, @"-jar DfM-Creator.jar -JarCreator .\\Dictionary\\ .\\Empty_Jar-Jad\\ .", true);
         }
 
         protected void CreateSubmission(PublicationInformation projInfo)
