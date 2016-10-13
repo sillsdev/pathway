@@ -291,18 +291,6 @@ namespace epubConvert
                 n += 1;
             }
 
-            if (_isUnixOs)
-            {
-                nodes = tocDoc.SelectNodes("//@id");
-                Debug.Assert(nodes != null);
-                n = 1;
-                foreach (XmlAttribute node in nodes)
-                {
-                    node.InnerText = node.InnerText + n.ToString(CultureInfo.InvariantCulture);
-                    n += 1;
-                }
-            }
-
             var xmlFile = new FileStream(tocFullPath, FileMode.Create);
             XmlWriter writer = XmlWriter.Create(xmlFile);
             tocDoc.Save(writer);

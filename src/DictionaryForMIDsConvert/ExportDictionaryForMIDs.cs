@@ -36,7 +36,7 @@ namespace SIL.PublishingSolution
         protected static string WorkDir;
         protected static Dictionary<string, Dictionary<string, string>> CssClass;
         protected static DictionaryForMIDsStyle ContentStyles = new DictionaryForMIDsStyle();
-        private static bool _isUnixOS = false;
+		protected static bool _isUnixOS = false;
 
         #region Properties
         #region ExportType
