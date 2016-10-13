@@ -49,9 +49,9 @@ Pathway is currently running under .net 4.0.
 
 *Before building Pathway*
 
-Before building Pathway, the developer should install the latest L10NSharp library. This is done with
-`Installer/getDependencies.sh`
-This command runs a bash script. (On Windows, make sure you have git installed and run from the bash window.) This will go to Team City and download the latest successful build of L10NSharp and put it in the lib folder.
+Before building Pathway, the developer should install the latest dependencies. This is done with
+`Build/getDependencies.sh`
+This command runs a bash script. (On Windows, make sure you have git installed and run from the bash window.) This will go to Team City and download the tagged dependencies from libpalaso and put it in the lib folder.
 It is very important when building the Windows version to have the Configuration Manager Active solution platform set to x86. If this is not done, a dependency error will be reported when trying to run the localization code even though the build will succeed without error.
 
 *Building on Windows*
@@ -66,14 +66,20 @@ The user interface elements are kept in the CssDialog project. The BuildTasks pr
 
 *Building on Linux*
 
-[Building on Linux](https://github.com/sillsdev/pathway/blob/develop/pathway/Documentation/Linux%20build%20instructions.txt). The Makefile in the pathway folder is used for development on Linux so:
+[Building on Linux](https://github.com/sillsdev/pathway/blob/develop/pathway/Documentation/Linux%20build%20instructions.txt). The command:
 
-`make compile`
+`./buildTest.sh`
+
+will download the NuGet packages and build Pathway. Once the NuGet packages are in place, the Makefile in the pathway folder is used for development on Linux so:
+
+`make debug`
 
 will build the Debug build and 
 
-`make test`
+`./nunit-mono4-sil.sh`
 
-will run the unit tests.
+will run the unit tests. As you can see Pathway requires mono4-sil to be installed to have access to the latest patched version of mono.
+
+NB: Pathway can also be built with mono-sil and one of the build processes does this for Paratext and FieldWorks versions that are not using the latest mono4-sil yet.
 
 
