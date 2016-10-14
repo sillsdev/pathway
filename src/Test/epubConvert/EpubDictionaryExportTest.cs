@@ -71,17 +71,41 @@ namespace Test.epubConvert
 								   DateTime.Now.Date.ToShortTimeString();
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
+
 			Assert.IsTrue(actual);
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("main"), ".*");
+			ExtractzipFilesBasedOnOS(result, "main");
+			string expFileName = "ExportDictionaryCSSFileComparisonExpected";
+			if (Common.UsingMonoVM)
+			{
+				expFileName = "ExportDictionaryCSSFileComparisonExpected_Linux";
+			}
+			File.Copy(FileExpected(expFileName + ".epub"), FileOutput(expFileName + ".epub"), true);
+			result = FileOutput(expFileName + ".epub");
+			ExtractzipFilesBasedOnOS(result, expFileName);
 
-			File.Copy(FileExpected("ExportDictionaryCSSFileComparisonExpected.epub"), FileOutput("ExportDictionaryCSSFileComparisonExpected.epub"), true);
-			result = FileOutput("ExportDictionaryCSSFileComparisonExpected.epub");
-			zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("ExportDictionaryCSSFileComparisonExpected"), ".*");
-
-			TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput("ExportDictionaryCSSFileComparisonExpected/OEBPS/book.css"), new ArrayList { 93, 110, 112, 643, 652, 965 });
+			if (Common.UsingMonoVM)
+			{
+				TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput(expFileName + "/OEBPS/book.css"), new ArrayList {
+					69,
+					86,
+					88,
+					619,
+					628,
+					941
+				});
+			}
+			else
+			{
+				TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput(expFileName + "/OEBPS/book.css"), new ArrayList {
+					93,
+					110,
+					112,
+					643,
+					652,
+					965
+				});
+			}
 
 		}
 
@@ -109,8 +133,7 @@ namespace Test.epubConvert
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("main"), ".*");
+			ExtractzipFilesBasedOnOS(result, "main");
 			var resultDoc = Common.DeclareXMLDocument(false);
 			resultDoc.Load(FileOutput(Common.DirectoryPathReplace("main/OEBPS/PartFile00001_.xhtml")));
 			var nsmgr = new XmlNamespaceManager(resultDoc.NameTable);
@@ -168,6 +191,23 @@ namespace Test.epubConvert
 			projInfo.IsOpenOutput = false;
 			return projInfo;
 		}
+
+		private void ExtractzipFilesBasedOnOS(string result, string folderName)
+		{
+			if (Common.UsingMonoVM)
+			{
+				var resultFileNamePathWithoutExtension = Path.Combine(Path.GetDirectoryName(result),
+					Path.GetFileNameWithoutExtension(result));
+				File.Copy(result, resultFileNamePathWithoutExtension + ".zip");
+				ZipUtil.UnZipFiles(resultFileNamePathWithoutExtension + ".zip", resultFileNamePathWithoutExtension, "", true);
+			}
+			else
+			{
+				var zf = new FastZip();
+				zf.ExtractZip(result, FileOutput(folderName), ".*");
+			}
+		}
+
 		#endregion PrivateFunctions
 	}
 }

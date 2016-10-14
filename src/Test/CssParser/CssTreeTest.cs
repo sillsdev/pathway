@@ -64,6 +64,10 @@ namespace Test.CssParserTest
 				expectedFontList.Add("ARIAL_BOLD.TTF");
 				expectedFontList.Add("ARIAL_ITALIC.TTF");
 				expectedFontList.Add("ARIALBI.TTF");
+				expectedFontList.Add("TIMES.TTF");
+				expectedFontList.Add("TIMESBD.TTF");
+				expectedFontList.Add("TIMESI.TTF");
+				expectedFontList.Add("TIMES_NEW_ROMAN_BOLD_ITALIC.TTF");
 			}
 			else 
 			{
