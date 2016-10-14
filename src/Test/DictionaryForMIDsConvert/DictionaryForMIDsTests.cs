@@ -264,7 +264,11 @@ namespace Test.DictionaryForMIDsConvert
             Launch("dictionary", projInfo);
             Assert.True(File.Exists(_testFiles.Output("DfM copyright notice.txt")));
             TextFileAssert.AreEqual(_testFiles.Expected("main.txt"), _testFiles.Output("main.txt"), "main.txt");
-            TextFileAssert.AreEqualEx(_testFiles.Expected("DictionaryForMIDs.properties"), _testFiles.Output("DictionaryForMIDs.properties"), new ArrayList{ 1 }, "DictionaryForMIDs.properties");
+	        if (!Common.UsingMonoVM)
+	        {
+		        TextFileAssert.AreEqualEx(_testFiles.Expected("DictionaryForMIDs.properties"),
+			        _testFiles.Output("DictionaryForMIDs.properties"), new ArrayList {1}, "DictionaryForMIDs.properties");
+	        }
         }
 
         [Test]

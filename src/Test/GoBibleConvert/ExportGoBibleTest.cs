@@ -44,9 +44,9 @@ namespace Test.GoBibleConvert
             Common.Testing = true;
             _projInfo = new PublicationInformation();
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/GoBibleConvert/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "input");
+            _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
+            _expectedPath = Common.PathCombine(testPath, "Expected");
 
             string pathwayDirectory = PathwayPath.GetPathwayDir();
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
