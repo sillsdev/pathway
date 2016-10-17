@@ -52,7 +52,7 @@ namespace Test.epubConvert
 			string testPath = PathPart.Bin(Environment.CurrentDirectory, "/epubConvert/TestFiles");
 			_inputPath = Common.PathCombine(testPath, "Input");
 			_outputPath = Common.PathCombine(testPath, "Output");
-			_expectedPath = Common.PathCombine(testPath, Common.UsingMonoVM ? "LinuxExpected" : "Expected");
+			_expectedPath = Common.PathCombine(testPath, Common.UsingMonoVM ? "ExpectedLinux" : "Expected");
 			//            if (Directory.Exists(_outputPath))
 			//                Directory.Delete(_outputPath, true);
 			Directory.CreateDirectory(_outputPath);
