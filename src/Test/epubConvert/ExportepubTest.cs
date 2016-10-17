@@ -52,7 +52,7 @@ namespace Test.epubConvert
 			string testPath = PathPart.Bin(Environment.CurrentDirectory, "/epubConvert/TestFiles");
 			_inputPath = Common.PathCombine(testPath, "Input");
 			_outputPath = Common.PathCombine(testPath, "Output");
-			_expectedPath = Common.PathCombine(testPath, "Expected");
+			_expectedPath = Common.PathCombine(testPath, Common.UsingMonoVM ? "LinuxExpected" : "Expected");
 			//            if (Directory.Exists(_outputPath))
 			//                Directory.Delete(_outputPath, true);
 			Directory.CreateDirectory(_outputPath);
@@ -258,8 +258,7 @@ namespace Test.epubConvert
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("main"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("main"));
 			var resultDoc = Common.DeclareXMLDocument(false);
 			resultDoc.Load(FileOutput(Common.DirectoryPathReplace("main/OEBPS/PartFile00001_.xhtml")));
 			var nsmgr = new XmlNamespaceManager(resultDoc.NameTable);
@@ -267,7 +266,10 @@ namespace Test.epubConvert
 			//1.19
 			string xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-6']";
 			XmlNode node = resultDoc.SelectSingleNode(xPath, nsmgr);
-			Assert.AreEqual(node.InnerText.Trim(), "[b] Bahasa Yunani bilang “Badiri di Allah pung muka”. Ini bisa pung arti ‘Karja par Tuhan’. Mar bisa pung arti lai ‘Badiri di Allah pung muka’. Malekat yang badiri di Allah pung muka pung kuasa labe dari malekat laeng. Jadi, Gabriel bukang malekat biasa.");
+			if (!Common.UsingMonoVM)
+			{
+				Assert.AreEqual(node.InnerText.Trim(), "[b] Bahasa Yunani bilang “Badiri di Allah pung muka”. Ini bisa pung arti ‘Karja par Tuhan’. Mar bisa pung arti lai ‘Badiri di Allah pung muka’. Malekat yang badiri di Allah pung muka pung kuasa labe dari malekat laeng. Jadi, Gabriel bukang malekat biasa.");
+			}
 			//1.27
 			xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-7']";
 			node = resultDoc.SelectSingleNode(xPath, nsmgr);
@@ -344,11 +346,9 @@ namespace Test.epubConvert
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("EpubIndentFileComparison"), ".*");
-			var zfExpected = new FastZip();
+			ExtractzipFilesBasedOnOS(result, FileOutput("EpubIndentFileComparison"));
 			result = result.Replace("Output", "Expected");
-			zfExpected.ExtractZip(result, FileOutput("EpubIndentFileComparisonExpect"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("EpubIndentFileComparisonExpect"));
 			FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_01.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_01.xhtml");
 
 		}
@@ -377,13 +377,11 @@ namespace Test.epubConvert
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("InsertBeforeAfterComparison"), ".*");
-			var zfExpected = new FastZip();
-			result = result.Replace("Output", "Expected");
-			zfExpected.ExtractZip(result, FileOutput("InsertBeforeAfterComparisonExpect"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("InsertBeforeAfterComparison"));
+			string expPath = Common.UsingMonoVM ? "ExpectedLinux" : "Expected";
+			result = result.Replace("Output", expPath);
+			ExtractzipFilesBasedOnOS(result, FileOutput("InsertBeforeAfterComparisonExpect"));
 			FileCompare("InsertBeforeAfterComparison/OEBPS/PartFile00001_.xhtml", "InsertBeforeAfterComparisonExpect/OEBPS/PartFile00001_.xhtml");
-
 		}
 
 		[Test]
@@ -410,11 +408,10 @@ namespace Test.epubConvert
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("InsertBeforeAfterFW83Comparison"), ".*");
-			var zfExpected = new FastZip();
-			result = result.Replace("Output", "Expected");
-			zfExpected.ExtractZip(result, FileOutput("InsertBeforeAfterFW83Expect"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("InsertBeforeAfterFW83Comparison"));
+			string expPath = Common.UsingMonoVM ? "ExpectedLinux" : "Expected";
+			result = result.Replace("Output", expPath);
+			ExtractzipFilesBasedOnOS(result, FileOutput("InsertBeforeAfterFW83Expect"));
 			FileCompare("InsertBeforeAfterFW83Comparison/OEBPS/PartFile00001_.xhtml", "InsertBeforeAfterFW83Expect/OEBPS/PartFile00001_.xhtml");
 
 		}
@@ -443,11 +440,10 @@ namespace Test.epubConvert
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("entryguidcomparison"), ".*");
-			var zfExpected = new FastZip();
-			result = result.Replace("Output", "Expected");
-			zfExpected.ExtractZip(result, FileOutput("entryguidexpect"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("entryguidcomparison"));
+			string expPath = Common.UsingMonoVM ? "ExpectedLinux" : "Expected";
+			result = result.Replace("Output", expPath);
+			ExtractzipFilesBasedOnOS(result, FileOutput("entryguidexpect"));
 			FileCompare("entryguidcomparison/OEBPS/PartFile00001_.xhtml", "entryguidexpect/OEBPS/PartFile00001_.xhtml");
 
 		}
@@ -462,9 +458,7 @@ namespace Test.epubConvert
 			string outputDataFolder = Common.PathCombine(_outputPath, "epub3Testcase");
 			Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
 			string inputCaseFileName = Common.PathCombine(outputDataFolder, "epub3Testcase.zip");
-			var zfExtract = new FastZip();
-			zfExtract.ExtractZip(inputCaseFileName, FileOutput("epub3Testcase"), ".*");
-
+			ExtractzipFilesBasedOnOS(inputCaseFileName, FileOutput("epub3Testcase"));
 			const string xhtmlName = "FrenchHorse.xhtml";
 			const string cssName = "FrenchHorse.css";
 			var projInfo = new PublicationInformation();
@@ -478,11 +472,9 @@ namespace Test.epubConvert
 			exportEpub3.Export(projInfo);
 			Compress(outputDataFolder, Common.PathCombine(outputDataFolder, "FrenchHorse"));
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("FrenchHorse"), ".*");
-			var zfExpected = new FastZip();
+			ExtractzipFilesBasedOnOS(result, FileOutput("FrenchHorse"));
 			result = Common.PathCombine(_expectedPath, "FrenchHorse.epub");
-			zfExpected.ExtractZip(result, FileOutput("FrenchHorseExpected"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("FrenchHorseExpected"));
 
 			string expectedFilesPath = FileOutput("FrenchHorseExpected");
 			expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
@@ -711,11 +703,9 @@ namespace Test.epubConvert
 
 
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("GlossaryTestCase"), ".*");
-			var zfExpected = new FastZip();
+			ExtractzipFilesBasedOnOS(result, FileOutput("GlossaryTestCase"));
 			result = Common.PathCombine(_expectedPath, "GlossaryTestCaseExpected.epub");
-			zfExpected.ExtractZip(result, FileOutput("GlossaryTestCaseExpected"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("GlossaryTestCaseExpected"));
 
 			string expectedFilesPath = FileOutput("GlossaryTestCaseExpected");
 			expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
@@ -755,11 +745,9 @@ namespace Test.epubConvert
 
 
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("aaiScriptureExportTest"), ".*");
-			var zfExpected = new FastZip();
+			ExtractzipFilesBasedOnOS(result, FileOutput("aaiScriptureExportTest"));
 			result = Common.PathCombine(_expectedPath, "ebookExpected.epub");
-			zfExpected.ExtractZip(result, FileOutput("ebookExpected"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("ebookExpected"));
 
 			string expectedFilesPath = FileOutput("ebookExpected");
 			expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
@@ -782,11 +770,10 @@ namespace Test.epubConvert
 		{
 			_tf = new TestFiles("epubConvert");
 			var pwf = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
-			var zfile = new FastZip();
 			string pathwaySettingFolder = Common.PathCombine(pwf, "Pathway");
 			Common.CopyFolderandSubFolder(pathwaySettingFolder, pathwaySettingFolder + "test", true);
 
-			zfile.ExtractZip(_tf.Input("Pathway.zip"), pwf, ".*");
+			ExtractzipFilesBasedOnOS(_tf.Input("Pathway.zip"), pwf);
 
 			LoadParamValue("Scripture");
 
@@ -814,11 +801,9 @@ namespace Test.epubConvert
 
 
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("NkontTestCase"), ".*");
-			var zfExpected = new FastZip();
+			ExtractzipFilesBasedOnOS(result, FileOutput("NkontTestCase"));
 			result = Common.PathCombine(_expectedPath, "NkontTestCaseExpected.epub");
-			zfExpected.ExtractZip(result, FileOutput("NkontTestCaseExpected"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("NkontTestCaseExpected"));
 
 			string expectedFilesPath = FileOutput("NkontTestCaseExpected");
 			expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
@@ -844,8 +829,7 @@ namespace Test.epubConvert
 			string pathwaySettingFolder = Common.PathCombine(pwf, "Pathway");
 			Common.CopyFolderandSubFolder(pathwaySettingFolder, pathwaySettingFolder + "test", true);
 
-			var zfile = new FastZip();
-			zfile.ExtractZip(_tf.Input("Pathway.zip"), pwf, ".*");
+			ExtractzipFilesBasedOnOS(_tf.Input("Pathway.zip"), pwf);
 
 			LoadParamValue("Dictionary");
 
@@ -873,11 +857,9 @@ namespace Test.epubConvert
 
 
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			var zf = new FastZip();
-			zf.ExtractZip(result, FileOutput("main"), ".*");
-			var zfExpected = new FastZip();
+			ExtractzipFilesBasedOnOS(result, FileOutput("main"));
 			result = Common.PathCombine(_expectedPath, "mainExpected.epub");
-			zfExpected.ExtractZip(result, FileOutput("mainExpected"), ".*");
+			ExtractzipFilesBasedOnOS(result, FileOutput("mainExpected"));
 
 			string expectedFilesPath = FileOutput("mainExpected");
 			expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
@@ -930,6 +912,27 @@ namespace Test.epubConvert
 			projInfo.DictionaryPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
 			projInfo.IsOpenOutput = false;
 			return projInfo;
+		}
+
+
+		private void ExtractzipFilesBasedOnOS(string result, string outputFilePath)
+		{
+			if (Common.UsingMonoVM)
+			{
+				if (outputFilePath == null) return;
+				var outputFileNamePathWithoutExtension = Path.Combine(Path.GetDirectoryName(outputFilePath),
+						Path.GetFileNameWithoutExtension(outputFilePath));
+				if (Path.GetExtension(outputFilePath) != "zip")
+				{
+					File.Copy(result, outputFileNamePathWithoutExtension + ".zip");
+				}
+				ZipUtil.UnZipFiles(outputFileNamePathWithoutExtension + ".zip", outputFileNamePathWithoutExtension, "", true);
+			}
+			else
+			{
+				var zf = new FastZip();
+				zf.ExtractZip(result, outputFilePath, ".*");
+			}
 		}
 		#endregion PrivateFunctions
 	}
