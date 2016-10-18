@@ -48,7 +48,7 @@ namespace Test.UIConfigurationToolBLTest
         protected void Initialize()
         {
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");
-            _inputBasePath = Common.PathCombine(testPath, "Input");
+            _inputBasePath = Common.PathCombine(testPath, "input");
             _expectBasePath = Common.PathCombine(testPath, "Expected");
             _outputBasePath = Common.PathCombine(testPath, "Output");
 
