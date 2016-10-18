@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="http://pathway.sil.org/" />
+    <meta name="epub-creator" content="Ignore" />
+    <meta name="dtb:depth" content="1" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text>Dictionary Test</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="np1" playOrder="1">
+      <navLabel>
+        <text>Cover Page</text>
+      </navLabel>
+      <content src="File0Cvr00000_.xhtml" />
+    </navPoint>
+    <navPoint id="np2" playOrder="2">
+      <navLabel>
+        <text>Table of Content</text>
+      </navLabel>
+      <content src="File3TOC00000_.xhtml" />
+      <navPoint id="np3" playOrder="3">
+        <navLabel>
+          <text>Main</text>
+        </navLabel>
+        <content src="PartFile00001_.xhtml#body" />
+        <navPoint id="np4" playOrder="4">
+          <navLabel>
+            <text>W w</text>
+          </navLabel>
+          <content src="PartFile00001_.xhtml" />
+          <navPoint id="np5" playOrder="5">
+            <navLabel>
+              <text>=W= </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#gf2613bd5-e866-4ac7-9101-a43ab1d4adcd" />
+          </navPoint>
+          <navPoint id="np6" playOrder="6">
+            <navLabel>
+              <text>waain </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#gca26b453-4696-4aa1-9e28-1f5121e9b066" />
+          </navPoint>
+          <navPoint id="np7" playOrder="7">
+            <navLabel>
+              <text>waaḳ </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g054e93d5-d3cf-410e-a4cf-3edfa0993bd7" />
+          </navPoint>
+          <navPoint id="np8" playOrder="8">
+            <navLabel>
+              <text>wabeenġ </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g937b7e8c-37df-4874-91e1-8c8a387951b7" />
+          </navPoint>
+          <navPoint id="np9" playOrder="9">
+            <navLabel>
+              <text>waing </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g9d94538b-12c1-455e-b56b-db97a3c7fe21" />
+          </navPoint>
+          <navPoint id="np10" playOrder="10">
+            <navLabel>
+              <text>wanġ </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#ga9ecdaf5-64d9-4d7b-aa63-df1eaa06ae3e" />
+          </navPoint>
+          <navPoint id="np11" playOrder="11">
+            <navLabel>
+              <text>warak </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#gf6d42fca-8ca2-46a9-86cd-b138eff391a7" />
+          </navPoint>
+          <navPoint id="np12" playOrder="12">
+            <navLabel>
+              <text>warwar </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g1419b146-83c8-4d98-b109-488b8ec5feda" />
+          </navPoint>
+          <navPoint id="np13" playOrder="13">
+            <navLabel>
+              <text>warwid </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g7be9f171-4b4a-4142-9100-9cdc9a8edc49" />
+          </navPoint>
+          <navPoint id="np14" playOrder="14">
+            <navLabel>
+              <text>weeḳ </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g78ad5974-5d29-4730-a9be-344b192fb681" />
+          </navPoint>
+          <navPoint id="np15" playOrder="15">
+            <navLabel>
+              <text>weḳ </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#gdd06270f-1782-4300-9663-0eb2f2bd32f4" />
+          </navPoint>
+          <navPoint id="np16" playOrder="16">
+            <navLabel>
+              <text>wéleng </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#ga57ba6f7-1ced-47ed-9bdb-b38fe1d8b3ad" />
+          </navPoint>
+          <navPoint id="np17" playOrder="17">
+            <navLabel>
+              <text>wes </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g8fe561f0-e537-45fa-8a00-010f85f7a7cd" />
+          </navPoint>
+          <navPoint id="np18" playOrder="18">
+            <navLabel>
+              <text>wëëj </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g80a577ff-6f1a-4087-a397-a16516cf1fd1" />
+          </navPoint>
+          <navPoint id="np19" playOrder="19">
+            <navLabel>
+              <text>wëëk </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#gdacef7a9-5f26-4def-8658-0036ebae831f" />
+          </navPoint>
+          <navPoint id="np20" playOrder="20">
+            <navLabel>
+              <text>wëh </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g3dd4e8ab-544f-4704-a641-d2173e60ad7c" />
+          </navPoint>
+          <navPoint id="np21" playOrder="21">
+            <navLabel>
+              <text>Wij </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#gf0e4773e-9e6f-4cb4-8c1a-adf7fdf2d1d7" />
+          </navPoint>
+          <navPoint id="np22" playOrder="22">
+            <navLabel>
+              <text>wirek </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#gdb3a2e18-2134-4614-946c-528a83593d1f" />
+          </navPoint>
+          <navPoint id="np23" playOrder="23">
+            <navLabel>
+              <text>wöhbuum </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g685cc6be-08c9-436b-803d-8f007444e98f" />
+          </navPoint>
+          <navPoint id="np24" playOrder="24">
+            <navLabel>
+              <text>wöp-o </text>
+            </navLabel>
+            <content src="PartFile00001_.xhtml#g66d7064c-4dd4-4ba2-9140-f0f232d502c2" />
+          </navPoint>
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

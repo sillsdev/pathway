@@ -861,6 +861,8 @@ namespace SIL.PublishingSolution
                     var inputExtension = Path.GetExtension(file);
                     Debug.Assert(inputExtension != null);
                     var xhtmlOutputFile = file.Replace(inputExtension, outputExtension);
+					if (!File.Exists(file))
+						continue;
                     if (_isUnixOs)
                     {
                         if (file.Contains("File2Cpy"))
