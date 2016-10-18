@@ -690,6 +690,7 @@ namespace SIL.PublishingSolution
                 case "unicode-bidi":
                 case "pathway":
 				case "-webkit-column-count":
+                case "overflow-wrap":
                     break;
                 default:
                     throw new Exception("Not a valid CSS Command: " + styleAttributeInfo.Name);
