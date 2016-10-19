@@ -311,7 +311,6 @@ namespace SIL.PublishingSolution
 
         private string OpenIDStyles()
         {
-            string projType = "scripture";
             string targetFolder = Common.RightRemove(_projectPath, Path.DirectorySeparatorChar.ToString());
             targetFolder = Common.PathCombine(targetFolder, "Resources");
             string styleFilePath = Common.PathCombine(targetFolder, "Styles.xml");

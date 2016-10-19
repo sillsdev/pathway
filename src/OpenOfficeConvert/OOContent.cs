@@ -91,7 +91,6 @@ namespace SIL.PublishingSolution
 		private bool _isEmptyPageInsertedForDic = false;
 		private bool _isPageSpaceGiven;
 		private bool _isPageSpaceSingle;
-		private bool _anchorSignificant;
 
 		Dictionary<string, string> _pageSize = new Dictionary<string, string>();
 		private bool _isFromExe = false;

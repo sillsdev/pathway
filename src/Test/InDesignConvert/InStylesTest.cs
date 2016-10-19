@@ -37,7 +37,6 @@ namespace Test.InDesignConvert
         private InStory _storyXML;
         private string _outputPath;
         private string _outputStyles;
-        private string _fileNameWithPath;
         private Dictionary<string, Dictionary<string, string>> _idAllClass = new Dictionary<string, Dictionary<string, string>>();
         PublicationInformation projInfo = new PublicationInformation();
         #endregion

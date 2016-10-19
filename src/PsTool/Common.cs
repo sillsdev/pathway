@@ -590,7 +590,7 @@ namespace SIL.Tool
 				XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
 				var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
 				namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
 				string styleName = string.Empty;
 				using (XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings))
 				{
@@ -706,7 +706,7 @@ namespace SIL.Tool
 				List<string> langCodeList = new List<string>();
 				var vernacularLang = string.Empty;
 				var metaList = new List<KeyValuePair<string, string>>();
-				var xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, ProhibitDtd = false};
+				var xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, DtdProcessing = DtdProcessing.Parse};
 				string attribute = string.Empty;
 				using (XmlReader xmlReader = XmlReader.Create(xhtmlFileNameWithPath, xmlReaderSettings))
 				{
@@ -3367,33 +3367,29 @@ namespace SIL.Tool
 		public static string GetOsName()
 		{
 			OperatingSystem osInfo = Environment.OSVersion;
-
+			var versionString = osInfo.VersionString;
 			switch (osInfo.Platform)
 			{
 				case System.PlatformID.Win32NT:
 					switch (osInfo.Version.Major)
 					{
 						case 3:
-							return "Windows NT 3.51";
+							versionString = "Windows NT 3.51";
 							break;
 						case 4:
-							return "Windows NT 4.0";
+							versionString = "Windows NT 4.0";
 							break;
 						case 5:
-							if (osInfo.Version.Minor == 0)
-								return "Windows 2000";
-							else
-								return "Windows XP";
+							versionString = osInfo.Version.Minor == 0 ? "Windows 2000" : "Windows XP";
 							break;
 						case 6:
-							if (osInfo.Version.Minor == 1)
-								return "Windows7";
-							return "Windows8";
+							versionString = osInfo.Version.Minor == 1 ? "Windows7" : "Windows8";
+							break;
 					}
 					break;
 
 			}
-			return osInfo.VersionString.ToString();
+			return versionString;
 		}
 
 		/// <summary>
@@ -3684,6 +3680,7 @@ namespace SIL.Tool
 				}
 				catch (Exception e)
 				{
+					Console.WriteLine(e.Message);
 					return null;
 				}
 			}
@@ -3979,8 +3976,6 @@ namespace SIL.Tool
 			{
 				return string.Empty;
 			}
-
-			return string.Empty;
 		}
 
 		private static string GetUrlFromCopyrightxhtmlFile(string xhtmlfileName)
@@ -4444,6 +4439,7 @@ namespace SIL.Tool
 			}
 			catch (System.Security.SecurityException ex)
 			{
+				Console.WriteLine(ex.Message);
 				isPermission = false;
 			}
 			return isPermission;

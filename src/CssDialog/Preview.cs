@@ -14,6 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -186,6 +187,7 @@ namespace SIL.PublishingSolution
             }
             catch (XmlException e)
             {
+				Console.WriteLine(e.Message);
             }
             return xhtmlPreviewFilePath;
         }

@@ -128,7 +128,9 @@ namespace SilTools
 	        {
 		        if (hHook != IntPtr.Zero)
 			        return;
+				#pragma warning disable 618
 		        hHook = SetWindowsHookEx(WH_CALLWNDPROCRET, hookProc, IntPtr.Zero, AppDomain.GetCurrentThreadId());
+				#pragma warning restore 618
 	        }
 	        catch
 	        {

@@ -82,7 +82,6 @@ namespace Test.PsTool
         [Test]
         public void MakeSingleCSSTest4()
         {
-            string fileName = "";
             string input = GetFileNameWithPath("Layout_02.css");
             string expected = "tempcssfile.css";
 

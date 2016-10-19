@@ -494,54 +494,44 @@ namespace SIL.PublishingSolution
         /// <param name="listType">Type Name</param>
         private void CreateListType(string className, string listType)
         {
-            string listName = "Listdecimal";
-            string numFormat = "1";
+	        string numFormat = "1";
             string numSuffix = ".";
             if (listType == "none")
             {
-                listName = "Listnone";
-                numFormat = string.Empty;
+	            numFormat = string.Empty;
                 numSuffix = string.Empty;
             }
             else if (listType == "disc")
             {
-                listName = "Listdisc";
-                numFormat = "\u2022"; // solid bullet
+	            numFormat = "\u2022"; // solid bullet
             }
             else if (listType == "circle")
             {
-                listName = "Listcircle";
-                numFormat = "\u25e6"; // open bullet
+	            numFormat = "\u25e6"; // open bullet
             }
             else if (listType == "square")
             {
-                listName = "Listsquare";
-                numFormat = "\u25aa"; // square bullet
+	            numFormat = "\u25aa"; // square bullet
             }
             else if (listType == "decimal")
             {
-                listName = "Listdecimal";
-                numFormat = "1";
+	            numFormat = "1";
             }
             else if (listType == "lower-roman")
             {
-                listName = "Listlowerroman";
-                numFormat = "i";
+	            numFormat = "i";
             }
             else if (listType == "upper-roman")
             {
-                listName = "Listupperroman";
-                numFormat = "I";
+	            numFormat = "I";
             }
             else if (listType == "lower-alpha")
             {
-                listName = "Listloweralpha";
-                numFormat = "a";
+	            numFormat = "a";
             }
             else if (listType == "upper-alpha")
             {
-                listName = "Listupperalpha";
-                numFormat = "A";
+	            numFormat = "A";
             }
 
             switch (listType)

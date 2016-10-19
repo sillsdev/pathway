@@ -24,7 +24,6 @@ namespace Test.epubConvert
 		private string _inputPath;
 		private string _outputPath;
 		private string _expectedPath;
-		private static TestFiles _tf;
 
 		[TestFixtureSetUp]
 		public void Setup()

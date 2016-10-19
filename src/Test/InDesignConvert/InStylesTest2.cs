@@ -27,10 +27,8 @@ namespace Test.InDesignConvert
 	public class InStylesTest2 : ValidateXMLFile
 	{
 		#region Private Variables
-		private string _input;
 		private string _output;
 		private Dictionary<string, string> _expected = new Dictionary<string, string>();
-		private string _className = "a";
 		private string _testFolderPath = string.Empty;
 		private InStyles _stylesXML;
 		private string _outputStory;

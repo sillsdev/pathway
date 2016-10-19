@@ -55,7 +55,6 @@ namespace Test.UIConfigurationToolTest
             _inputBasePath = Common.PathCombine(testPath, "input");
             _expectBasePath = Common.PathCombine(testPath, "Expected");
             _outputBasePath = Common.PathCombine(testPath, "Output");
-            const bool recursiveDelete = true;
             if (Directory.Exists(_outputBasePath))
             {
                 DirectoryInfo di = new DirectoryInfo(_outputBasePath);

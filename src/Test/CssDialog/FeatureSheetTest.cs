@@ -64,7 +64,6 @@ namespace Test.CssDialog
         public void WriteTest()
         {
             FeatureSheet target = new FeatureSheet(); // TODO: Initialize to an appropriate value
-            long expected = 0; // TODO: Initialize to an appropriate value
             long actual;
             CommonTestMethod.DisableDebugAsserts();
             try
@@ -116,7 +115,6 @@ namespace Test.CssDialog
         public void ReadToEndTest()
         {
             FeatureSheet target = new FeatureSheet(); // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
             bool actual;
             // TODO: Sheet parameter must be set
             CommonTestMethod.DisableDebugAsserts();

@@ -30,9 +30,6 @@ namespace SIL.Tool
 
         string _outputExtension = string.Empty;
         private string _sourcePicturePath;
-
-        private bool _imageParaForCaption = false;
-        private bool isFileEmpty = true;
         
         private ArrayList _psuedoBefore = new ArrayList();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
@@ -223,11 +220,6 @@ namespace SIL.Tool
 
                 ClosePara(false);
 
-                {
-
-                    if (_imageInserted)
-                        _imageParaForCaption = true;
-                }
                 _previousParagraphName = _paragraphName;
                 _paragraphName = null;
                 _isNewParagraph = false;
@@ -235,7 +227,6 @@ namespace SIL.Tool
                 _textWritten = false;
             }
             WriteText();
-            isFileEmpty = false;
         }
 
         private void WriteText()
@@ -267,8 +258,6 @@ namespace SIL.Tool
             {
                 _characterName = StackPeekCharStyle(_allCharacter);
             }
-            //content = whiteSpacePre(content);
-            bool contains = false;
             if (_psuedoContainsStyle != null)
             {
 				if (_psuedoContainsStyle.Contains != null && content.IndexOf(_psuedoContainsStyle.Contains) > -1)

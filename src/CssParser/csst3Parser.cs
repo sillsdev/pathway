@@ -31,7 +31,6 @@ using RewriteRuleITokenStream = Antlr.Runtime.Tree.RewriteRuleTokenStream;
 namespace SIL.PublishingSolution.Compiler
 {
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.5.0.2")]
-[System.CLSCompliant(false)]
 public partial class csst3Parser : Antlr.Runtime.Parser
 {
 	internal static readonly string[] tokenNames = new string[] {

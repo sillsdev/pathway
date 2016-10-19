@@ -175,9 +175,9 @@ namespace SIL.Tool
             {
                 if (wait)
                 {
-					if (p1 == null || p1.Id == null && p1.Id <= 0)
+					if (p1 == null)
 	                {
-		                MessageBox.Show(name + " process not available. Kindly install the required application");
+						MessageBox.Show(string.Format("{0} process not available. Kindly install the required application", name));
 		                return;
 	                }
 

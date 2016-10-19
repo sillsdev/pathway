@@ -111,7 +111,7 @@ namespace Test.epubConvert
 			XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
 			XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
 			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-			XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse};
 			var filePath = Common.PathCombine(FolderName, "PartFile00001_.xhtml");
 			XmlReader xmlReader = XmlReader.Create(FileOutput(filePath), xmlReaderSettings);
 			xmlDocument.Load(xmlReader);
@@ -152,7 +152,7 @@ namespace Test.epubConvert
 			XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
 			XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
 			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-			XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
 			var filePath = Common.PathCombine(FolderName, "PartFile00002_.xhtml");
 			XmlReader xmlReader = XmlReader.Create(FileOutput(filePath), xmlReaderSettings);
 			xmlDocument.Load(xmlReader);

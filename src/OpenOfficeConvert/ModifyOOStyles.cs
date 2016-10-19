@@ -626,7 +626,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void LoadSpellCheck()
+        private new void LoadSpellCheck()
         {
             const string sKey = @"SOFTWARE\classes\.odt";
             RegistryKey key;
@@ -1258,8 +1258,7 @@ namespace SIL.PublishingSolution
 
         private string OpenIDStyles()
         {
-            string projType = "scripture";
-            string targetFolder = Common.RightRemove(_projectPath, Path.DirectorySeparatorChar.ToString());
+	        string targetFolder = Common.RightRemove(_projectPath, Path.DirectorySeparatorChar.ToString());
             string fileName = Path.GetFileNameWithoutExtension(_projectPath);
             string styleFilePath = Common.PathCombine(targetFolder, fileName + "styles.xml");
 

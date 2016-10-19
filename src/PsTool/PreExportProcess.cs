@@ -749,7 +749,7 @@ namespace SIL.Tool
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse};
             XmlReader xmlReader = XmlReader.Create(_xhtmlFileNameWithPath, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -1807,7 +1807,6 @@ namespace SIL.Tool
             bool isNewNode = false;
             if (nodeList.Count > 0)
             {
-                XmlNode newNode = null;
                 int counter = nodeList.Count + 1;
                 string alpha = string.Empty;
                 for (int i = 0; i < counter; i++)
@@ -1902,7 +1901,6 @@ namespace SIL.Tool
             XmlNodeList nodeList = xDoc.GetElementsByTagName("span");
             if (nodeList.Count > 0)
             {
-                XmlNode newNode = null;
                 int counter = nodeList.Count + 1;
                 for (int i = 0; i < counter; i++)
                 {
@@ -1923,7 +1921,6 @@ namespace SIL.Tool
 
             if (nodeList.Count > 0)
             {
-                XmlNode newNode = null;
                 int counter = nodeList.Count + 1;
                 for (int i = 0; i < counter; i++)
                 {
@@ -2487,7 +2484,6 @@ namespace SIL.Tool
                 {
                     if (_reader.NodeType == XmlNodeType.Element)
                     {
-                        string st;
                         if (_reader.Name == "a")
                         {
                             string href = _reader.GetAttribute("href");
@@ -2716,7 +2712,7 @@ namespace SIL.Tool
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse};
             XmlReader xmlReader = XmlReader.Create(xhtmlFile, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();

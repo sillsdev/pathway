@@ -175,7 +175,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
             if (!File.Exists(file))
                 return null;
 
@@ -224,7 +224,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
             if (!File.Exists(tocFiletoUpdate))
                 return;
             xmlDoc.Load(tocFiletoUpdate);
@@ -1246,7 +1246,7 @@ namespace SIL.PublishingSolution
 				XmlDocument xmldoc = Common.DeclareXMLDocument(true);
 				var namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
 				namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse}; //Common.DeclareXmlReaderSettings(false);
 				var xmlReader = XmlReader.Create(strMacroPath, xmlReaderSettings);
 				xmldoc.Load(xmlReader);
 				xmlReader.Close();

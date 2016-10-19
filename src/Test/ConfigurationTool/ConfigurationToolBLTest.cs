@@ -31,7 +31,7 @@ namespace Test.UIConfigurationToolBLTest
     [TestFixture]
     public class ConfigurationToolBLTest : ConfigurationToolBL
     {
-        private ConfigurationTool cTool;
+        private new ConfigurationTool cTool;
         private ConfigurationToolBL cToolBL;
         /// <summary>holds path to input folder for all tests</summary>
         private static string _inputBasePath = string.Empty;
@@ -52,7 +52,6 @@ namespace Test.UIConfigurationToolBLTest
             _expectBasePath = Common.PathCombine(testPath, "Expected");
             _outputBasePath = Common.PathCombine(testPath, "Output");
 
-            const bool recursive = true;
             if (Directory.Exists(_outputBasePath))
             {
                 DirectoryInfo di = new DirectoryInfo(_outputBasePath);
@@ -134,7 +133,7 @@ namespace Test.UIConfigurationToolBLTest
             FolderTree.Copy(fromFileName, toFileName);
         }
 
-        private static void LoadParam()
+        private new static void LoadParam()
         {
             // Verifying the input setting file and css file - in Input Folder
             const string settingFile = "DictionaryStyleSettings.xml";

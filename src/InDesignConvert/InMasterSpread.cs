@@ -95,6 +95,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
+				Console.WriteLine(ex.Message);
                 return _masterPageList;
             }
         }

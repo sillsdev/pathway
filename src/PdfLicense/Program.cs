@@ -131,7 +131,6 @@ namespace PdfLicense
         {
             string fileLoc = PathCombine(allUserPath, "License.txt");
             string executePath = string.Empty;
-            int countRead = 0;
 
             if (File.Exists(fileLoc))
             {

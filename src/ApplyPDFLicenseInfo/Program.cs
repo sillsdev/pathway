@@ -169,8 +169,6 @@ namespace ApplyPDFLicenseInfo
         {
             string fileLoc = Path.Combine(allUserPath, "License.txt");
             string executePath = string.Empty;
-            int countRead = 0;
-
             if (File.Exists(fileLoc))
             {
                 using (StreamReader reader = new StreamReader(fileLoc))

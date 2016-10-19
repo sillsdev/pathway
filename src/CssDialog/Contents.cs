@@ -134,7 +134,7 @@ namespace SIL.PublishingSolution
         }
         #endregion Properties
 
-        public DialogResult ShowDialog()
+        public new DialogResult ShowDialog()
         {
             return _realClass.ShowDialog();
         }

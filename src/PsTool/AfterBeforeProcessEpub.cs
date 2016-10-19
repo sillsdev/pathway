@@ -37,8 +37,6 @@ namespace SIL.Tool
 		private bool _significant;
 		private bool _anchorWrite;
 		private bool _isPictureDisplayNone = false;
-		private bool _imageParaForCaption = false;
-		private bool isFileEmpty = true;
 		string _outputExtension = string.Empty;
 		private string _sourcePicturePath;
 		private int _counter = 0;
@@ -234,10 +232,6 @@ namespace SIL.Tool
 					_paragraphName = StackPeek(_allParagraph); // _allParagraph.Pop();
 				}
 				ClosePara(false);
-				if (_imageInserted)
-				{
-					_imageParaForCaption = true;
-				}
 				_previousParagraphName = _paragraphName;
 				_paragraphName = null;
 				_isNewParagraph = false;
@@ -245,7 +239,6 @@ namespace SIL.Tool
 				_textWritten = false;
 			}
 			WriteText();
-			isFileEmpty = false;
 		}
 
 		private void WriteText()
@@ -301,7 +294,6 @@ namespace SIL.Tool
 			{
 				_characterName = StackPeekCharStyle(_allCharacter);
 			}
-			bool contains = false;
 			if (_psuedoContainsStyle != null)
 			{
 				if (content.IndexOf(_psuedoContainsStyle.Contains) > -1)

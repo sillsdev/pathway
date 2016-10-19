@@ -1204,6 +1204,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
+				Console.WriteLine(ex.Message);
                 throw new Exception("Parameter Length - Not Valid");
             }
         }

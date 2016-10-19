@@ -190,6 +190,7 @@ namespace SIL.Tool
             {
                 //Deal with IO exceptions if you want
                 //throw e;
+				Console.WriteLine(e.Message);
                 AccessDenied();
             }
         }

@@ -375,7 +375,7 @@ namespace SIL.PublishingSolution
 
             
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings.ProhibitDtd = false;
+            settings.DtdProcessing = DtdProcessing.Parse;
 
             // Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles) and 
             //       include the Scripture sections within columns.
@@ -420,8 +420,7 @@ namespace SIL.PublishingSolution
 #if (TIME_IT)
                 DateTime dt1 = DateTime.Now;    // time this thing
 #endif
-            bool success;
-            var inProcess = new InProcess(0, 6);
+	        var inProcess = new InProcess(0, 6);
             var curdir = Environment.CurrentDirectory;
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
@@ -475,8 +474,7 @@ namespace SIL.PublishingSolution
                 return;
             }
             ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml, fileName);
-            success = true;
-            Cursor.Current = myCursor;
+	        Cursor.Current = myCursor;
             inProcess.PerformStep();
             inProcess.Close();
 

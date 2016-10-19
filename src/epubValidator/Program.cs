@@ -169,6 +169,7 @@ namespace epubValidator
                 }
                 catch (System.ComponentModel.Win32Exception w32e)
                 {
+					Console.WriteLine(w32e.Message);
                     return "No errors or warnings detected";
                 }
                 catch (Exception e)

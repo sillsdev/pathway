@@ -45,7 +45,6 @@ namespace SIL.PublishingSolution
         private const string Space = " ";
         private const string Bar = "|";
 
-        private bool _isclassNameExist;
         private List<string> _xhtmlAttribute = new List<string>();
 
         #endregion
@@ -93,6 +92,7 @@ namespace SIL.PublishingSolution
             }
             catch (XmlException e)
             {
+				Console.WriteLine(e.Message);
             }
 
             _reader.Close();
@@ -392,7 +392,6 @@ namespace SIL.PublishingSolution
         private void StartElement()
         {
             _xhtmlAttribute.Clear();
-            _isclassNameExist = false;
             _number = string.Empty;
 
             _parentStyleName = StackPeek(_allStyle);
@@ -414,7 +413,6 @@ namespace SIL.PublishingSolution
                     {
                         if (_reader.Name == "style")
                         {
-                            _isclassNameExist = true;
                             _style = _reader.Value;
                         }
                         else if (_reader.Name == "number")
@@ -512,7 +510,6 @@ namespace SIL.PublishingSolution
                 {
                     if (_reader.Name == "style")
                     {
-                        _isclassNameExist = true;
                         _style = _reader.Value;
                     }
                     else if (_reader.Name == "desc")

@@ -46,10 +46,9 @@ namespace SIL.PublishingSolution
 
 		private string _bookCodeName;
 
-		private Dictionary<string, string> _cssProp;
 		private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
 
-		private string _tagName, _style, _number, _code, _caller, _content;
+		private string _tagName, _style, _number, _caller, _content;
 		private string _parentTagName = string.Empty, _parentStyleName = string.Empty;
 		private string _verseNumber, _chapterNumber;
 		private string _paraStyle = string.Empty;
@@ -60,7 +59,6 @@ namespace SIL.PublishingSolution
 		private const string Space = " ";
 		private const string Bar = "|";
 
-		private bool _isclassNameExist;
 		private List<string> _xhtmlAttribute = new List<string>();
 		private bool _listItemOpen = false;
 		private int _openDivCount = 0;
@@ -143,6 +141,7 @@ namespace SIL.PublishingSolution
 			}
 			catch (XmlException e)
 			{
+				Console.WriteLine(e.Message);
 			}
 
 			_reader.Close();
@@ -457,7 +456,6 @@ namespace SIL.PublishingSolution
 		private void StartElement()
 		{
 			_xhtmlAttribute.Clear();
-			_isclassNameExist = false;
 			_number = string.Empty;
 
 			_parentStyleName = StackPeek(_allStyle);
@@ -552,7 +550,6 @@ namespace SIL.PublishingSolution
 			{
 				if (_reader.Name == "style")
 				{
-					_isclassNameExist = true;
 					_style = _reader.Value;
 				}
 				else if (_reader.Name == "number")
@@ -754,7 +751,6 @@ namespace SIL.PublishingSolution
 				{
 					if (_reader.Name == "style")
 					{
-						_isclassNameExist = true;
 						_style = _reader.Value;
 					}
 					else if (_reader.Name == "desc")

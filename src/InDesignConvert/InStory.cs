@@ -476,8 +476,7 @@ namespace SIL.PublishingSolution
                 string srcFile;
                 string wrapMode = "BoundingBoxTextWrap";
                 string HoriAlignment = "LeftAlign";
-                const string HoriRefPoint = "ColumnEdge";
-                string VertAlignment = "CenterAlign";
+	            string VertAlignment = "CenterAlign";
                 string VertRefPoint = "LineBaseline";
                 string AnchorPoint = "TopLeftAnchor";
                 int height = 72; //1 in
