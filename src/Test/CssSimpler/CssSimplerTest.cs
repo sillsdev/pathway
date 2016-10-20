@@ -1338,8 +1338,8 @@ namespace Test.CssSimplerTest
         {
             const string testName = "Value3" + ".xml";
             // ReSharper disable once UnusedVariable
-            var value = new ValueTest(_testFiles.Input(testName), _testFiles.Output(testName), @"Try: \2022 and \34.");
-            TextFileAssert.AreEqual(_testFiles.Expected(testName), _testFiles.Output(testName), "write multiple Unicode with text after");
+	        var value = new ValueTest(_testFiles.Input(testName), _testFiles.Output(testName), @"Try: \2022 and \34.");
+	        TextFileAssert.AreEqual(_testFiles.Expected(testName), _testFiles.Output(testName), "write multiple Unicode with text after");
         }
 
         /// <summary>

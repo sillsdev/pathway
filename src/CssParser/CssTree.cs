@@ -294,11 +294,9 @@ namespace SIL.PublishingSolution
 
         private void Page(TreeNode tree)
         {
-            StyleAttribute _attributeInfo = new StyleAttribute();
             string pageName = "@page";
             string pseudoName = "@page";
-            string regionName;
-            try
+	        try
             {
                 _classInfo = new ClassInfo();
                 foreach (TreeNode node in tree.Nodes)
@@ -309,7 +307,7 @@ namespace SIL.PublishingSolution
                             pseudoName = pageName + ":" + node.FirstNode.Text;
                             break;
                         case "REGION":
-                            regionName = pseudoName + "-" + node.FirstNode.Text;
+                            var regionName = pseudoName + "-" + node.FirstNode.Text;
                             foreach (TreeNode property in node.Nodes)
                             {
                                 if (property.Text == "PROPERTY")
@@ -320,8 +318,6 @@ namespace SIL.PublishingSolution
                             break;
                         case "PROPERTY":
                             Property(node, pseudoName);
-                            break;
-                        default:
                             break;
                     }
                 }

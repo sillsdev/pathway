@@ -46,7 +46,8 @@ namespace Test.DictionaryForMIDsConvert
         [ExpectedException("System.NullReferenceException")]
         public void DictionaryForMIDsInputNullTest()
         {
-            var result = new DictionaryForMIDsInput(null);
+	        // ReSharper disable once UnusedVariable
+			var result = new DictionaryForMIDsInput(null);
         }
 
         /// <summary>

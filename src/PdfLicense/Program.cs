@@ -16,7 +16,7 @@ namespace PdfLicense
         {
 
             string allUserPath = GetAllUserPath();
-            string licenseFileName = ReadPathinLicenseFile(allUserPath);
+            ReadPathinLicenseFile(allUserPath);
             if (_readLicenseFilesBylines.Count < 0)
             {
                 return;

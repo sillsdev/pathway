@@ -84,7 +84,7 @@ namespace SIL.PublishingSolution
             projInfo.OutputExtension = "odt";
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
-			VerboseClass verboseClass = VerboseClass.GetInstance();
+			
 			Common.CheckAndGetStyle(defaultXhtml, projInfo.ProjectInputType);
             _isFromExe = Common.CheckExecutionPath();
             var glossorywords = WriteGlossaryLink(projInfo);
@@ -224,7 +224,6 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
             if (!File.Exists(tocFiletoUpdate))
                 return;
             xmlDoc.Load(tocFiletoUpdate);
@@ -840,19 +839,6 @@ namespace SIL.PublishingSolution
             {
                 isCoverImageInserted = "true";
             }
-
-			//// If chapternumber found in css, vertical-align = "auto"
-			//foreach (string cls in idAllClass.Keys)
-			//{
-			//	if (cls.ToLower().IndexOf("chapternumber") == 0 && cls.ToLower().IndexOf("chapternumber_") != 0)
-			//	{
-			//		if (idAllClass.ContainsKey(cls) && idAllClass[cls].ContainsKey("vertical-align"))
-			//		{
-			//			//idAllClass[cls]["vertical-align"] = "auto";
-			//		}
-			//	}
-			//}
-
             return isCoverImageInserted;
         }
 

@@ -191,11 +191,11 @@ namespace Test.PsTool
             const string fileName = "InsertHyphenationWords.xhtml";
             var input = GetFileNameWithPath(fileName);
             var output = GetFileNameWithOutputPath(fileName);
-            var projInfo = new PublicationInformation
-            {
-                ProjectInputType = "Scripture"
-            };
-            Param.HyphenEnable = true;
+	        new PublicationInformation
+	        {
+		        ProjectInputType = "Scripture"
+	        };
+	        Param.HyphenEnable = true;
             CopyToOutput(input, output);
             preExportProcess = new PreExportProcess();
             preExportProcess.IncludeHyphenWordsOnXhtml(output);

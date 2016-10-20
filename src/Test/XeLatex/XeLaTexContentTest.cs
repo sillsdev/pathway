@@ -1377,7 +1377,7 @@ namespace Test.XeLatex
 			EnableConfigurationSettings(outputDirectory);
 
 			var target = new ExportXeLaTex();
-			bool actual = target.Export(_projInfo);
+			target.Export(_projInfo);
 
 			string outputResultFile = _projInfo.ProjectPath;
 			outputResultFile = Path.Combine(outputResultFile, "CoverPageTitle.tex");

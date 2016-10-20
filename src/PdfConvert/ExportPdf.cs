@@ -194,7 +194,7 @@ namespace SIL.PublishingSolution
                     {
                         //Copyright information added in PDF files
                         #pragma warning disable 168
-                        string pdfFileName = Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML", projInfo.ProjectInputType);
+                        Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML", projInfo.ProjectInputType);
                         #pragma warning restore 168
                     }
                     else
@@ -255,7 +255,6 @@ namespace SIL.PublishingSolution
 
 		            }
 	            }
-
             }
             else
             {
@@ -268,7 +267,7 @@ namespace SIL.PublishingSolution
                 }
                 Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                 Directory.SetCurrentDirectory(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath));
-                string p1Error = string.Empty;
+
                 string inputArguments;
 	            if (projInfo.IsReversalExist)
 				{
@@ -293,7 +292,6 @@ namespace SIL.PublishingSolution
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                     p1.Start();
                     p1.WaitForExit();
-                    p1Error = p1.StandardError.ReadToEnd();
                 }
             }
             return true;

@@ -48,7 +48,6 @@ namespace SIL.PublishingSolution
                                       IsOpenOutput = false,
                                       ProjectName = "main",
                                   };
-            var backendPath = Common.ProgInstall;
             var exportType = "OpenOffice/LibreOffice";
             bool bOutputSpecified = false;
             var files = new List<string>();
@@ -661,6 +660,7 @@ namespace SIL.PublishingSolution
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+	                // ReSharper disable once UnusedVariable
                     Object oResult = tStyToCSS.InvokeMember("ConvertStyToCss",
                                                             BindingFlags.Default | BindingFlags.InvokeMethod, null,
                                                             oScrStylesheet, args);
@@ -692,6 +692,7 @@ namespace SIL.PublishingSolution
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
                     argsConvert[1] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
+	                // ReSharper disable once UnusedVariable
                     var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile",
                                                  BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL,
                                                  argsConvert);
@@ -755,6 +756,7 @@ namespace SIL.PublishingSolution
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
+	                // ReSharper disable once UnusedVariable
                     Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
                 }
                 projInfo.DefaultCssFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
@@ -808,6 +810,7 @@ namespace SIL.PublishingSolution
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
                     argsConvert[1] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ","_") + ".xhtml");
+	                // ReSharper disable once UnusedVariable
                     var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
                 }
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ", "_") + ".xhtml");

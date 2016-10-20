@@ -107,7 +107,7 @@ namespace SIL.PublishingSolution
 		private bool _isEmptyPageInserted;
 		private bool _isH2Complaint;
 		private string _h3Book = string.Empty;
-		private string _displayProperty, _floatProperty;
+		private string _displayProperty;
 		private bool _nextVerse;
 		private string _previousGuideword = string.Empty;
 		private string _firstText = string.Empty;
@@ -656,10 +656,8 @@ namespace SIL.PublishingSolution
 		/// </summary>
 		private void InsertFlexRevFirstGuidewordOnMainForOdm()
 		{
-			//if (_projInfo.MainLastFileName != null && _projInfo.MainLastFileName.Length > 0 && _projInfo.IsODM)
 			if (_projInfo.IsODM)
 			{
-				//if (Path.GetFileNameWithoutExtension(_projInfo.MainLastFileName) == Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath.Replace("Preservemain", "main")))
 				if (Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath).IndexOf("main") >= 0)
 				{
 					string flexFileName = Common.PathCombine(Path.GetDirectoryName(_projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
@@ -702,7 +700,7 @@ namespace SIL.PublishingSolution
 			}
 
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value, false);
+			SignificantSpace(_reader.Value, false);
 			if (!whiteSpaceExist && !_pseudoSingleSpace)
 			{
 				_significant = true;
@@ -713,7 +711,7 @@ namespace SIL.PublishingSolution
 		private void InsertWhiteSpace()
 		{
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value, false);
+			SignificantSpace(_reader.Value, false);
 			if (!whiteSpaceExist && !_pseudoSingleSpace)
 			{
 				IsLastPronunciationform();
@@ -1891,10 +1889,6 @@ namespace SIL.PublishingSolution
 
 		private void EndElement()
 		{
-			//if (_closeChildName.IndexOf("scrBookName") == 0)
-			//{
-			//    if (isPageBreak) return;
-			//}
 			if (_reader.Name == "a" && _anchorWrite)
 			{
 				_anchorWrite = false;
@@ -3128,7 +3122,6 @@ namespace SIL.PublishingSolution
 
 			if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey("display"))
 			{
-				_floatProperty = "center";
 				if (IdAllClass[className]["display"] == "none")
 				{
 					_isPictureDisplayNone = true;
@@ -3143,10 +3136,8 @@ namespace SIL.PublishingSolution
 			else
 			{
 				_displayProperty = "frame";
-				_floatProperty = "right";
 				if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey("float"))
 				{
-					_floatProperty = IdAllClass[className]["float"];
 				}
 			}
 		}

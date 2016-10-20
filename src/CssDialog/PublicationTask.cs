@@ -170,7 +170,6 @@ namespace SIL.PublishingSolution
         {
             List<string> roles = Param.GetListofAttr("roles/role", "name");
             List<string> roleIcon = Param.GetListofAttr("roles/role", "icon");
-            string currentRole = Param.GetRole();
             ImageList imageList = new ImageList { ImageSize = new Size(32, 32) }; 
             try
             {

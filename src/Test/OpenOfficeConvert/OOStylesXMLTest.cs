@@ -35,8 +35,7 @@ namespace Test.OpenOfficeConvert
     public class LOStylesXMLTest
     {
         #region Private Variables
-        LOStyles _stylesXML;
-        string _errorFile;
+        //LOStyles _stylesXML;
         private string _inputPath;
         private string _outputPath;
         private ValidateXMLFile _validate;
@@ -48,8 +47,7 @@ namespace Test.OpenOfficeConvert
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            _stylesXML = new LOStyles();
-            _errorFile = Common.PathCombine(Path.GetTempPath(), "temp.odt");
+            //_stylesXML = new LOStyles();
             Common.Testing = true;
             returnValue = false;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
@@ -61,13 +59,6 @@ namespace Test.OpenOfficeConvert
             projInfo.ProjectInputType = "Dictionary";
 
 	        Common.UseAfterBeforeProcess = true;
-	        //Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-	        //CssTree cssTree = new CssTree();
-	        //cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-	        //Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-	        //LOStyles inStyles = new LOStyles();
-	        //idAllClass = inStyles.CreateStyles(projInfo, cssClass);
         }
         #endregion Setup
 
@@ -84,69 +75,6 @@ namespace Test.OpenOfficeConvert
         #endregion Private Functions
 
         //#region File Comparision
-        ///<summary>
-        ///TD-244 (Update CSSParser to handle revised grammar)
-        /// </summary>      
-        /*       [Test]
-        public void OxesCSSTest()
-        {
-            const string file = "Oxes";
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "styles.xml");
-            projInfo.DefaultCssFileWithPath = input;
-            projInfo.TempOutputFolder = _outputPath;
-                
-            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            CssTree cssTree = new CssTree();
-            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            LOStyles loStyles = new LOStyles();
-
-            idAllClass = loStyles.CreateStyles(projInfo, cssClass);
-
-
-            //_stylesXML.CreateStyles(input, output, _errorFile, true);
-
-            string expected = FileExpected(file + "styles.xml");
-            XmlAssert.AreEqual(expected, output, "OxesCSSTest failed in styles.xml");
-        }*/
-        
-        /*
-
-        #region NODE Comparision
-
-        /// <summary>
-        /// TD86 .xitem[lang='en'] syntax in Styles.xml
-        /// </summary>
-        [Test]
-        public void LanguageTest_Node()
-        {
-            const string file = "LanguageTest";
-
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
-
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "xitem_.en";
-            _validate.ClassProperty.Add("fo:font-size", "50%");
-            _validate.ClassProperty.Add("fo:font-size-complex", "50%");
-
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue, "LanguageTest syntax failed in Styles.xml");
-
-            _validate.ClassName = "xitem_.pt";
-            _validate.ClassProperty.Add("fo:font-size", "30pt");
-            _validate.ClassProperty.Add("fo:font-size-complex", "30pt");
-
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue, "LanguageTest syntax failed in Styles.xml");
-        }
-
-*/
         ///<summary>
         ///TD100 text-transform syntax in Styles.xml
         /// 

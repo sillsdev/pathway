@@ -740,14 +740,11 @@ namespace SIL.PublishingSolution
                         {
                             try
                             {
-                                int convertToEm = int.Parse(columnGap.Replace("%", "")) / 100;
                                 pageProperties["columnGap"] = columnGap;
-
                             }
                             catch (Exception)
                             {
                                 pageProperties["columnGap"] = "1em";
-
                             }
                         }
                         _LOAllClass["Sect_" + className.Trim()] = pageProperties;
@@ -991,7 +988,6 @@ namespace SIL.PublishingSolution
                                 {
                                     prefix = "";
                                 }
-                                string check = prefix + para.Key;
                                 if (!para.Key.StartsWith("-")) // user defined functions not allowed now
                                     _pageHeaderFooter[i + headerFooterIndex][prefix + para.Key] = para.Value.Replace(
                                         "'", "");
@@ -1572,7 +1568,6 @@ namespace SIL.PublishingSolution
                 {
                     string className = Common.LeftString(keyValue, "..");
                     string callclassName = Common.LeftString(keyValue, "..") + "..footnote-call";
-                    string markerclassName = Common.LeftString(keyValue, "..") + "..footnote-marker";
                     _writer.WriteStartElement("text:notes-configuration");
                     _writer.WriteAttributeString("text:note-class", className);
                     _writer.WriteAttributeString("text:citation-style-name", callclassName);

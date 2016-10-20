@@ -36,7 +36,6 @@ namespace epubConvert
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
         private readonly XslCompiledTransform _fixEpubToc = new XslCompiledTransform();
         private string _currentChapterNumber = string.Empty;
-        private readonly bool _isUnixOs = Common.UnixVersionCheck();
 
         public EpubToc(string inputType, string tocLevel)
         {
@@ -170,11 +169,6 @@ namespace epubConvert
                 ncx.WriteAttributeString("src", name);
                 ncx.WriteEndElement(); // meta
                 index++;
-                //// chapters within the books (nested as a subhead)
-                //if (!skipChapterInfo)
-                //{
-                //    WriteEndNoteLinks(file, ref index, ncx);
-                //}
             }
             else
             {

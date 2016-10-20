@@ -44,10 +44,8 @@ namespace SIL.PublishingSolution
 		private string _previewFileName1 = string.Empty;
 		private string _previewFileName2 = string.Empty;
 		private static string _helpTopic = string.Empty;
-		private string _media;
 		private bool _showEdit = false;
 		private string _path;
-		private string _cssFile = string.Empty;
 
 		public string InputType;
 		public PreviewPrintVia()
@@ -58,7 +56,6 @@ namespace SIL.PublishingSolution
 		public PreviewPrintVia(string media, string path, bool showEdit)
 		{
 			InitializeComponent();
-			_media = media;
 			_path = path;
 			_helpTopic = "User_Interface/Dialog_boxes/Select_Layout_dialog_box.htm";
 			_showEdit = showEdit;
@@ -271,7 +268,6 @@ namespace SIL.PublishingSolution
 						string file1 = grid[2, rowid].Value.ToString();
 						_previewFileName1 = Common.PathCombine(_path, file1);
 						pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-						_cssFile = grid[5, rowid].Value.ToString();
 						SelectedStyle = grid[0, rowid].Value.ToString();
 						string file2 = grid[3, rowid].Value.ToString();
 						_previewFileName2 = Common.PathCombine(_path, file2);
@@ -483,20 +479,6 @@ namespace SIL.PublishingSolution
 
 			Param.LoadSettings();
 			LoadGridValues(sender);
-		}
-
-		private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-			//if (grid.RowCount > 0)
-			//{
-			//    try
-			//    {
-			//        ShowPreview(1);
-			//    }
-			//    catch
-			//    {
-			//    }
-			//}
 		}
 
 		private void PreviewPrintVia_KeyUp(object sender, KeyEventArgs e)

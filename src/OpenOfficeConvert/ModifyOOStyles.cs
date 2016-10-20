@@ -35,9 +35,7 @@ namespace SIL.PublishingSolution
         private string _xPath;
         private XmlElement _nameElement;
         private string _tagName;
-        private bool _isHeadword;
-        private ArrayList _textVariables = new ArrayList();
-        Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
+	    Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
         Dictionary<string, Dictionary<string, string>> _childStyle = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _parentClass;
         private Dictionary<string, ArrayList> _spellCheck = new Dictionary<string, ArrayList>();
@@ -53,8 +51,7 @@ namespace SIL.PublishingSolution
             
             _childStyle = childStyle;
             _projectPath = projectPath;
-            _isHeadword = isHeadword;
-            _languageStyleName = languageStyleName;
+	        _languageStyleName = languageStyleName;
             _parentClass = parentClass;
             string styleFilePath = OpenIDStyles(); //todo change name
             SetHeaderFontName(styleFilePath, odmMTFont);
@@ -199,12 +196,7 @@ namespace SIL.PublishingSolution
         private void InsertNode(KeyValuePair<string, Dictionary<string, string>> className)
         {
             string newClassName = className.Key;
-
-			//if (_parentClass.Count == 0 || String.IsNullOrEmpty(_parentClass[newClassName]))
-			//	return;
-
             string[] parent_Type = _parentClass[newClassName].Split('|');
-
             string familyType = parent_Type[1] == "div" ? "paragraph" : "text";
 
             XmlNode node = _root.SelectSingleNode(_xPath, nsmgr);
@@ -762,16 +754,6 @@ namespace SIL.PublishingSolution
 		            styleNode.InnerXml = node.OuterXml;
 		            node.ParentNode.InsertAfter(styleNode, node);
 	            }
-
-	            //        <style:style style:name="fr4" style:family="graphic" style:parent-style-name="Graphics">
-                //    <style:graphic-properties fo:margin-left="0in" fo:margin-right="0in" fo:margin-top="0in"
-                //        fo:margin-bottom="0in" style:run-through="foreground" style:wrap="none"
-                //        style:vertical-pos="top" style:vertical-rel="paragraph-content"
-                //        style:horizontal-pos="center" style:horizontal-rel="paragraph-content"
-                //        style:mirror="none" fo:clip="rect(0in, 0in, 0in, 0in)" draw:luminance="0%"
-                //        draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%"
-                //        draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard"/>
-                //</style:style>
 
                 _nameElement = (XmlElement)node;
 

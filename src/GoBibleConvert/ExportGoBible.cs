@@ -86,7 +86,6 @@ namespace SIL.PublishingSolution
             var inProcess = new InProcess(0, 7);
             try
             {
-                var curdir = Environment.CurrentDirectory;
                 var myCursor = Cursor.Current;
                 Cursor.Current = Cursors.WaitCursor;
                 inProcess.Text = "GoBible Export";
@@ -185,7 +184,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception ex)
             {
-                var msg = ex.Message;
+                Console.WriteLine(ex.Message);
                 success = false;
                 inProcess.PerformStep();
                 inProcess.Close();

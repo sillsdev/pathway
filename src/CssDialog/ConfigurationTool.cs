@@ -36,7 +36,6 @@ namespace SIL.PublishingSolution
 
 		public ConfigurationToolBL _cToolBL = new ConfigurationToolBL();
 		public string _previousTxtName;
-		private string _lastSelectedLayout = string.Empty;
 		private TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
 		private static List<Exception> _pendingExceptionsToReportToAnalytics = new List<Exception>();
 		public bool IsExportOptionFromFlexOrParatext = false;
@@ -157,7 +156,6 @@ namespace SIL.PublishingSolution
 				{
 					if (Param.Value != null && Param.Value.Count > 0)
 					{
-						_lastSelectedLayout = Param.Value["LayoutSelected"];
 						this.Close();
 					}
 				}

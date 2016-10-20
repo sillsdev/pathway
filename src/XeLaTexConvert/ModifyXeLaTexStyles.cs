@@ -44,9 +44,7 @@ namespace SIL.PublishingSolution
 		private bool _xelatexDocumentOpenClosedRequired = false;
 		private bool _copyrightTexCreated = false;
 		private string _copyrightTexFilename = string.Empty;
-		private string _reversalIndexTexFilename = string.Empty;
-		private bool _reversalIndexExist = false;
-		private bool _isMirrored = false;
+		private string _reversalIndexTexFilename = string.Empty;		private bool _reversalIndexExist = false;		private bool _isMirrored = false;
 		private Dictionary<string, string> _langFontDictionary;
 		private Dictionary<string, Dictionary<string, string>> _tocList;
 		private List<string> _xeLaTexPropertyFontStyleList = new List<string>();
@@ -103,23 +101,23 @@ namespace SIL.PublishingSolution
 			get { return _copyrightTexCreated; }
 			set { _copyrightTexCreated = value; }
 		}
-
 		public bool ReversalIndexExist
 		{
-			set { _reversalIndexExist = value; }
-		}
 
+			set { _reversalIndexExist = value; }
+
+		}
 		public string ReversalIndexTexFilename
 		{
-			set { _reversalIndexTexFilename = value; }
-		}
 
+			set { _reversalIndexTexFilename = value; }
+
+		}
 		public string CopyrightTexFilename
 		{
 			get { return _copyrightTexFilename; }
 			set { _copyrightTexFilename = value; }
 		}
-
 		public bool XelatexDocumentOpenClosedRequired
 		{
 			get { return _xelatexDocumentOpenClosedRequired; }

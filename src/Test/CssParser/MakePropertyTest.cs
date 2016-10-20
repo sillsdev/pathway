@@ -36,14 +36,12 @@ namespace Test.CssParserTest
         private Dictionary<string, string> _expected;
         private Dictionary<string, string> _output;
         private string[] _position;
-        private bool _isLinux;
         #endregion Private Variables
 
         #region Setup
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            _isLinux = Common.IsUnixOS();
             _input = new StyleAttribute();
             _makeProperty = new MakeProperty();
             _expected = new Dictionary<string, string>();

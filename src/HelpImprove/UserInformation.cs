@@ -673,12 +673,6 @@ namespace SIL.PublishingSolution
                 // now send it
                 requestStream.Write(postBytes, 0, postBytes.Length);
                 requestStream.Close();
-
-                // grab te response and print it out to the console along with the status code
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                var consoleString = (new StreamReader(response.GetResponseStream()).ReadToEnd());
-                var consoleStatusString = (response.StatusCode);
             }
             catch { }
 

@@ -2297,7 +2297,6 @@ namespace SIL.Tool
 
 		public static string GetLDMLPath()
 		{
-			string path = string.Empty;
 			object regObj;
 			try
 			{
@@ -3488,8 +3487,6 @@ namespace SIL.Tool
 
 		public static string ConvertTifftoImage(string pathwithFileName, string convertFormatType)
 		{
-			string fileName = Path.GetFileName(pathwithFileName);
-			string fileNameWithOutExtension = Path.GetFileNameWithoutExtension(fileName);
 			string fileOutputPath = pathwithFileName.Replace(".tif", "." + convertFormatType); //Common.PathCombine(Path.GetDirectoryName(fileName), Path.GetFileNameWithoutExtension(fileNameWithOutExtension)) + "." + convertFormatType;
 			if (!File.Exists(fileOutputPath))
 			{
@@ -3765,13 +3762,6 @@ namespace SIL.Tool
 			//Copyright information added in PDF files
 			try
 			{
-				string tempPdfFileName = string.Empty;
-				if (creatorTool != "LibreOffice")
-				{
-					tempPdfFileName = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), Path.GetFileName(xhtmlFileName));
-				}
-
-
 				string getPsApplicationPath = Common.GetPSApplicationPath();
 				string licenseXml = Common.PathCombine(getPsApplicationPath, "Copyrights");
 				licenseXml = Common.PathCombine(licenseXml, "SIL_License.xml");
@@ -4469,14 +4459,6 @@ namespace SIL.Tool
 
 			string allUserPath = GetAllUserPath();
 			string fileLoc = Common.PathCombine(allUserPath, "License.txt");
-			FileStream fs = null;
-			if (!File.Exists(fileLoc))
-			{
-				using (fs = File.Create(fileLoc))
-				{
-
-				}
-			}
 			if (File.Exists(fileLoc))
 			{
 				using (StreamWriter sw = new StreamWriter(fileLoc))

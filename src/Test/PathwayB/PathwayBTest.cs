@@ -18,7 +18,6 @@ using System.Diagnostics;
 using System.Text;
 using System.IO;
 using NUnit.Framework;
-using SIL.PublishingSolution;
 using SIL.Tool;
 
 namespace Test
@@ -61,7 +60,6 @@ namespace Test
         private string RunPathwayB(InputFormat inFormat, string files, string project, string layout, string inputType, string backend, string message)
         {
             var arg = new StringBuilder();
-            var inPath = Common.PathCombine(_inputPath, project);
             if (project.Length < 1 || layout.Length < 1 || inputType.Length < 1 || backend.Length < 1)
             {
                 // missing some args -- call usage on PathwayB

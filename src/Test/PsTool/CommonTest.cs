@@ -58,10 +58,6 @@ namespace Test.PsTool
             _outputBasePath = Common.PathCombine(GetTestPath(), "Output");
             _inputBasePath = Common.PathCombine(GetTestPath(), "InputFiles");
             _expectBasePath = Common.PathCombine(GetTestPath(), "Expected");
-            //string currentFolder = PathPart.Bin(Environment.CurrentDirectory, "/CssDialog/TestFiles");
-            //_inputBasePath = Common.PathCombine(currentFolder, "Input");
-            //_expectBasePath = Common.PathCombine(currentFolder, "Expected");
-            //_expectBasePath = Common.PathCombine(currentFolder, "Output");
             if (Directory.Exists(_outputBasePath))
                 Directory.Delete(_outputBasePath, true);
             Directory.CreateDirectory(_outputBasePath);
@@ -1241,7 +1237,6 @@ namespace Test.PsTool
 			string outputDataFolder = Common.PathCombine(_outputBasePath, testFolderName);
 			string expectedDataFolder = Common.PathCombine(_expectBasePath, testFolderName);
 
-		    string inputFile = Common.PathCombine(inputDataFolder, destLicenseXml);
 			string expectedFile = Common.PathCombine(expectedDataFolder, destLicenseXml);
 		    string outputFile = Common.PathCombine(outputDataFolder, destLicenseXml);
 

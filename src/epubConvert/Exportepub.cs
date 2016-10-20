@@ -505,8 +505,6 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
-            //Common.DeclareXmlReaderSettings(false);
 
             if (!File.Exists(tocFiletoUpdate))
                 return;
@@ -618,11 +616,6 @@ namespace SIL.PublishingSolution
                             glossorywordsDictionaries.Add(booknodeid,glossorywordsDictionary);
                         }
                     }
-                    //var nodeInnerText = new StringBuilder();
-                    //nodeInnerText.Append(nodes[0].InnerXml);
-                    //nodeInnerText = nodeInnerText.Replace(titleMainInnerText + "</div>" + titleMainInnerText,
-                    //    titleMainInnerText + "</div>");
-                    //nodes[0].InnerXml = nodeInnerText.ToString();
                 }
             }
             return glossorywordsDictionaries;

@@ -38,10 +38,6 @@ namespace SIL.PublishingSolution
         private XmlNode settingsPNode;
         private XmlNode settingsDictPNode;
         private XmlNode settingsScriPNode;
-        private XmlNodeList customPaper;
-        private XmlNodeList customMobile;
-        private XmlNodeList customWeb;
-        private XmlNodeList customOther;
         private static readonly Dictionary<string, string> replaceString = new Dictionary<string, string>();
         private readonly ArrayList boolValue = new ArrayList();
         private readonly ArrayList mediaList = new ArrayList();
@@ -123,9 +119,7 @@ namespace SIL.PublishingSolution
             bool isValidScriSettings = ProcessValidator(settingsScriPNode, true);
             if (!isValidScriSettings)
             {
-                //CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.ScriptureStyleSettings.ToString(), inputtype, fileNamewithPath);
-                //RestoreCustomStyles(fileNamewithPath);
             }
         }
 
@@ -141,7 +135,6 @@ namespace SIL.PublishingSolution
             bool isValidDictSettings = ProcessValidator(settingsDictPNode, true);
             if (!isValidDictSettings)
             {
-                CopyCustomStyles(fileNamewithPath);
                 CopySettingsFile(FileName.DictionaryStyleSettings.ToString(), inputtype, fileNamewithPath);
             }
         }
@@ -158,32 +151,6 @@ namespace SIL.PublishingSolution
             XmlDocumentFragment docFrag = settingsXML.CreateDocumentFragment();
             docFrag.InnerXml = toInsert;
             childNode.AppendChild(docFrag);
-        }
-
-        /// <summary>
-        /// To copy the customs syles to the Dictionary/ Scripture stylesettings.xml file
-        /// </summary>
-        /// <param name="cssFilePath">Settings file path</param>
-        protected void CopyCustomStyles(string cssFilePath)
-        {
-            var settingsXML = new XmlDocument();
-            settingsXML.Load(cssFilePath);
-            XmlElement parentNode = settingsXML.DocumentElement;
-            foreach (string media in mediaList)
-            {
-                string xPathMStyles = "//stylePick/styles/" + media + "/style[@type='Custom']";
-                if (parentNode != null)
-                {
-                    XmlNodeList childNode = parentNode.SelectNodes(xPathMStyles);
-                    if (childNode != null)
-                    {
-                        if (media == "paper") { customPaper = childNode; }
-                        else if (media == "mobile") { customMobile = childNode; }
-                        else if (media == "web") { customWeb = childNode; }
-                        else if (media == "others") { customOther = childNode; }
-                    }
-                }
-            }
         }
 
         protected void ProcessSettingsFile(string fileNamewithPath)
@@ -208,14 +175,12 @@ namespace SIL.PublishingSolution
                 msg = LocalizationManager.GetString("SettingsValidator.CopySettingsFile.Message1",
                     "Settings file  \"{0}\".xml" + " is invalid. Do you want to overwrite it with the setting file previously installed? \r\n (Specifically, \"{1}\" property has an invalid path.)", "");
                 msg = String.Format(msg, filePath, errMessage[0]);
-                //msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errMessage[0] + "\" property has an invalid path.)";
             }
             else
             {
                 msg = LocalizationManager.GetString("SettingsValidator.CopySettingsFile.Message2",
                    "Settings file  \"{0}\".xml" + " is invalid. Do you want to overwrite it with the setting file previously installed? \r\n (Specifically, \"{1}\" property has an invalid value.)", "");
                 msg = String.Format(msg, filePath, errorTag);
-                //msg = "Settings file  \"" + filePath + "\".xml" + " is invalid, do you want to overwrite it with the setting file previously installed. \r\n (Specifically, \"" + errorTag + "\" property has an invalid value.)";
             }
 
             DialogResult result;

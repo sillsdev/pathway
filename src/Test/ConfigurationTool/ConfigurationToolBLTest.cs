@@ -35,8 +35,6 @@ namespace Test.UIConfigurationToolBLTest
         private ConfigurationToolBL cToolBL;
         /// <summary>holds path to input folder for all tests</summary>
         private static string _inputBasePath = string.Empty;
-        /// <summary>holds path to expected results folder for all tests</summary>
-        private static string _expectBasePath = string.Empty;
         /// <summary>holds path to output folder for all tests</summary>
         private static string _outputBasePath = string.Empty;
         private string _supportSource = string.Empty;
@@ -49,7 +47,6 @@ namespace Test.UIConfigurationToolBLTest
         {
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");
             _inputBasePath = Common.PathCombine(testPath, "input");
-            _expectBasePath = Common.PathCombine(testPath, "Expected");
             _outputBasePath = Common.PathCombine(testPath, "Output");
 
             if (Directory.Exists(_outputBasePath))

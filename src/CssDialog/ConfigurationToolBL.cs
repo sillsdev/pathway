@@ -2435,7 +2435,6 @@ namespace SIL.PublishingSolution
 		/// <returns>True/False</returns>
 		protected bool ValidateStyleName(string stringValue)
 		{
-			string result1 = string.Empty;
 			var validateStringMessage = string.Empty;
 			bool valid = true;
 			if (!Common.ValidateStartsWithAlphabet(stringValue))
@@ -3130,7 +3129,6 @@ namespace SIL.PublishingSolution
 		{
 			bool result = false;
 			if (PreviousValue.ToLower() == styleName.ToLower()) return result;
-			string selectedGridName = string.Empty;
 			styleName = styleName.Trim().ToLower();
 			for (int row = 0; row < grid.Rows.Count - 1; row++)
 			{
@@ -4475,7 +4473,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageTop, null);
+				Common.AssignValuePageUnit(cTool.TxtPageTop, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageTop) != "")
 				{
@@ -4493,7 +4491,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageOutside, null);
+				Common.AssignValuePageUnit(cTool.TxtPageOutside, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageOutside) != "")
 				{
@@ -4536,7 +4534,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageInside, null);
+				Common.AssignValuePageUnit(cTool.TxtPageInside, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageInside) != "")
 				{
@@ -4554,7 +4552,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageGutterWidth, null);
+				Common.AssignValuePageUnit(cTool.TxtPageGutterWidth, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageGutterWidth) != "")
 				{
@@ -4666,7 +4664,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageBottom, null);
+				Common.AssignValuePageUnit(cTool.TxtPageBottom, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageBottom) != "")
 				{

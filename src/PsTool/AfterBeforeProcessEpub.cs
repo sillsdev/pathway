@@ -37,8 +37,6 @@ namespace SIL.Tool
 		private bool _significant;
 		private bool _anchorWrite;
 		private bool _isPictureDisplayNone = false;
-		string _outputExtension = string.Empty;
-		private string _sourcePicturePath;
 		private int _counter = 0;
 		public ArrayList _psuedoClassName = new ArrayList();
 
@@ -71,7 +69,6 @@ namespace SIL.Tool
 									Dictionary<string, Dictionary<string, string>> idAllClass,
 									Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
 		{
-			_outputExtension = projInfo.OutputExtension;
 			_allStyle = new Stack<string>();
 			_allParagraph = new Stack<string>();
 			_allCharacter = new Stack<string>();
@@ -83,7 +80,6 @@ namespace SIL.Tool
 			_displayBlock = new Dictionary<string, string>();
 			_cssClassOrder = cssClassOrder;
 
-			_sourcePicturePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
 			_projectPath = projInfo.TempOutputFolder;
 
 			IdAllClass = idAllClass;
@@ -194,7 +190,7 @@ namespace SIL.Tool
 			}
 
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value);
+			SignificantSpace(_reader.Value);
 			if (!whiteSpaceExist)
 			{
 				_writer.WriteStartElement("span");
@@ -207,7 +203,7 @@ namespace SIL.Tool
 		private void InsertWhiteSpace()
 		{
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value);
+			SignificantSpace(_reader.Value);
 			if (!whiteSpaceExist)
 			{
 				_writer.WriteStartElement("span");
@@ -382,8 +378,7 @@ namespace SIL.Tool
 			_characterName = null;
 			_closeChildName = StackPop(_allStyle);
 			if (_closeChildName == string.Empty) return;
-			string closeChild = Common.LeftString(_closeChildName, "_");
-
+			
 			// Psuedo After
 			PseudoAfter();
 			EndElementBase(false);

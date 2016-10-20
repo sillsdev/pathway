@@ -33,14 +33,10 @@ namespace Test.OpenOfficeConvert
 	public class LOContentTest
 	{
 		#region Private Variables
-		//Styles _styleName;
-		//Utility _util;
-		string _errorFile;
 		private string _inputPath;
 		private string _outputPath;
 		private string _expectedPath;
 		ProgressBar _progressBar;
-		private TimeSpan _totalTime;
 		private PublicationInformation _projInfo;
 
 		private ValidateXMLFile _validate;
@@ -65,7 +61,6 @@ namespace Test.OpenOfficeConvert
 			//_styleName = new Styles();
 			//_util = new Utility();
 			_projInfo = new PublicationInformation();
-			_errorFile = Common.PathCombine(Path.GetTempPath(), "temp.odt");
 			_progressBar = new ProgressBar();
 			string testPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
 			_inputPath = Common.PathCombine(testPath, "input");
@@ -209,7 +204,6 @@ namespace Test.OpenOfficeConvert
 
 			string styleOutput = GetStyleOutput(file);
 
-			_totalTime = DateTime.Now - startTime;
 			string style = "";
 			if (Common.UnixVersionCheck())
 			{
@@ -237,7 +231,6 @@ namespace Test.OpenOfficeConvert
 
 			string styleOutput = GetStyleOutput(file);
 
-			_totalTime = DateTime.Now - startTime;
 			string style = "";
 			if (Common.UnixVersionCheck())
 			{
@@ -264,8 +257,6 @@ namespace Test.OpenOfficeConvert
 			DateTime startTime = DateTime.Now;
 
 			string styleOutput = GetStyleOutput(file);
-
-			_totalTime = DateTime.Now - startTime;
 
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
@@ -364,7 +355,6 @@ namespace Test.OpenOfficeConvert
 			Common.UseAfterBeforeProcess = false;
 			string styleOutput = GetStyleOutput(file);
 
-			_totalTime = DateTime.Now - startTime;
 			string style = "";
 			if (Common.UnixVersionCheck())
 			{
@@ -392,7 +382,6 @@ namespace Test.OpenOfficeConvert
             Common.UseAfterBeforeProcess = false;
             string styleOutput = GetStyleOutput(file);
 
-            _totalTime = DateTime.Now - startTime;
             string style = "";
             if (Common.UnixVersionCheck())
             {
@@ -420,7 +409,6 @@ namespace Test.OpenOfficeConvert
             Common.UseAfterBeforeProcess = false;
             string styleOutput = GetStyleOutput(file);
 
-            _totalTime = DateTime.Now - startTime;
             string style = "";
             if (Common.UnixVersionCheck())
             {
@@ -448,7 +436,6 @@ namespace Test.OpenOfficeConvert
 
 			string styleOutput = GetStyleOutput(file);
 
-			_totalTime = DateTime.Now - startTime;
 			string style = "";
 			if (Common.UnixVersionCheck())
 			{

@@ -105,12 +105,14 @@ namespace CssSimpler
             WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
-            // ReSharper disable once UnusedVariable
+            
+	        // ReSharper disable once UnusedVariable
             var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            // ReSharper disable once UnusedVariable
+            
+	        // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
             WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version

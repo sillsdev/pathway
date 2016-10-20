@@ -34,14 +34,10 @@ namespace Test.OpenOfficeConvert
 	public class LOContentXMLTest
     {
         #region Private Variables
-        //Styles _styleName;
-        //Utility _util;
-        string _errorFile;
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
         ProgressBar _progressBar;
-        private TimeSpan _totalTime;
         private PublicationInformation _projInfo;
 
         private ValidateXMLFile _validate;
@@ -66,7 +62,6 @@ namespace Test.OpenOfficeConvert
             //_styleName = new Styles();
             //_util = new Utility();
             _projInfo = new PublicationInformation();
-            _errorFile = Common.PathCombine(Path.GetTempPath(), "temp.odt");
             _progressBar = new ProgressBar();
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "input");
@@ -200,7 +195,7 @@ namespace Test.OpenOfficeConvert
 
             const string file = "NestedDivCase1";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -226,7 +221,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "NestedDivCase2";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "t1_body";
@@ -255,7 +250,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "NestedDivCase3";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -281,7 +276,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "NestedDivCase4";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -325,7 +320,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "EMTest1";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "letData_body";
@@ -339,7 +334,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "EMTest2";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -354,7 +349,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "EMTest3";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "entry_none";
@@ -546,7 +541,7 @@ namespace Test.OpenOfficeConvert
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "PseudoBeforeOnOnFlex83";
 
-			string styleOutput = GetStyleOutput(file);
+			GetStyleOutput(file);
 
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -730,18 +725,7 @@ namespace Test.OpenOfficeConvert
             const string file = "PseudoQuotes1";
 
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
-
-            //_validate = new ValidateXMLFile(styleOutput);
-            //_validate.ClassName = "d..before_letHead_letHead1_dicBody";
-            //_validate.ClassProperty.Add("fo:color", "#ff0000");
-            //bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue);
-
-            //_validate.ClassName = "d..after_letHead_letHead1_dicBody";
-            //_validate.ClassProperty.Add("fo:color", "#ff0000");
-            //returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue);
+            GetStyleOutput(file);
 
             //Content Test 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -760,35 +744,20 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "AnchorTag";
             _projInfo.ProjectInputType = "Scripture";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
-            //<text:span text:style-name="a_scrFootnoteMarker_Paragraph_scrSection_scrBook">
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
-            //text:note text:id="ftn1"
             string xpath = "//text:span[@text:style-name='scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody']";
-            //string xpath = "//text:note[@text:id='ftn1']";
             string content = "<text:a xlink:type=\"simple\" xlink:href=\"#f7be51147-aa97-40a2-ba86-4df84849e9f9\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">a</text:a>";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "reference-ref failed");
             // ="
             xpath = "//text:span[@text:style-name='scrFootnoteMarker_Paragraph_scrSection_scrBook_scrBody']";
-            //xpath = "//text:span[@text:style-name='scrFootnoteMarker_NoteGeneralParagraph_scrSection_scrBook_scrBody']/text:reference-mark[@text:name='f7be51147-aa97-40a2-ba86-4df84849e9f9']";
-            //content = "<text:reference-mark text:name=\"f7be51147-aa97-40a2-ba86-4df84849e9f9\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />a";
             content = "<text:a xlink:type=\"simple\" xlink:href=\"#f7be51147-aa97-40a2-ba86-4df84849e9f9\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">a</text:a>";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "reference - mark failed");
-
-            //TODO  - ANCHOR blue color should be merged
-            //Style Test - Second
-            //_validate = new ValidateXMLFile(styleOutput);
-            //_validate.ClassName = "scrFootnoteMarker_Paragraph_scrSection_scrBook";
-            //_validate.ClassProperty.Add("fo:color", "#0000ff");
-            //_validate.ClassProperty.Add("style:text-underline-style", "solid");
-
-            //returnValue1 = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue1, "AnchorTag - Style property Failure");
         }
 
         [Test]
@@ -796,7 +765,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "CrossRef";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -818,7 +787,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "CrossRef";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             if (!_isLinux)
             {
@@ -865,7 +834,7 @@ namespace Test.OpenOfficeConvert
 			const string file = "PictureMaxHeight";
 
 			_projInfo.ProjectInputType = "Dictionary";
-			string styleOutput = GetStyleOutput(file);
+			GetStyleOutput(file);
 
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "fr2";
@@ -882,7 +851,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "ColumnGapPercent";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -962,7 +931,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "ColumnGap";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -1038,7 +1007,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "ColumnGapLong";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -1119,7 +1088,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Scripture";
             const string fileCallTOCScriptureTrue = "CallTOCScripture";
 
-            string styleOutput = GetStyleOutput(fileCallTOCScriptureTrue);
+            GetStyleOutput(fileCallTOCScriptureTrue);
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
             string xpath = "//text:table-of-content[@text:style-name='Sect3']/text:table-of-content-source";
@@ -1131,7 +1100,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Scripture";
             const string fileCallTOCScriptureFalse = "CallTOCScripture";
 
-            styleOutput = GetStyleOutput(fileCallTOCScriptureFalse);
+            GetStyleOutput(fileCallTOCScriptureFalse);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -1145,7 +1114,7 @@ namespace Test.OpenOfficeConvert
             LoadParam("Dictionary", "true");
             _projInfo.ProjectInputType = "Dictionary";
             const string fileCallTOCDictionaryTrue = "CallTOCDictionary";
-            styleOutput = GetStyleOutput(fileCallTOCDictionaryTrue);
+           GetStyleOutput(fileCallTOCDictionaryTrue);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -1158,7 +1127,7 @@ namespace Test.OpenOfficeConvert
             LoadParam("Dictionary", "false");
             _projInfo.ProjectInputType = "Dictionary";
             const string fileCallTOCDictionaryFalse = "CallTOCDictionary";
-            styleOutput = GetStyleOutput(fileCallTOCDictionaryFalse);
+            GetStyleOutput(fileCallTOCDictionaryFalse);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -1180,32 +1149,13 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "VisibilityTest";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+           GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "xsensenumber_.en_sense_senses_entry_letData_dicBody";
             string content = Common.ConvertUnicodeToString("\\25ba") + "1)";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
-
-            //_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            //_validate.ClassName = "xsensenumber_sense_senses_entry_letData_dicBody";
-            //content = "<text:s text:c=\"2\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
-            //_validate.ClassNameTrim = false;
-            //returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            //Assert.IsTrue(returnValue1, "VisibilityTest - Content 1 Failure");
-
-
-			////Note - The Styles will be created while processing xhtml(content.xml)
-			////Style Test - Second
-			//_validate = new ValidateXMLFile(styleOutput);
-			//_validate.ClassName = "xsensenumber_.en_sense_senses_entry_letData_dicBody";
-
-			//_validate.ClassProperty.Add("fo:font-size", "12pt");
-			//_validate.ClassProperty.Add("fo:font-size-complex", "12pt");
-
-			//bool returnValue = _validate.ValidateNodeAttributesNS(false);
-			//Assert.IsTrue(returnValue, "VisibilityTest - Style Failure");
         }
 
         ///<summary>
@@ -1215,7 +1165,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "Counter1";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "firstoftype_sense_article_sectionletter_dictionary";
@@ -1238,17 +1188,6 @@ namespace Test.OpenOfficeConvert
 			content = "1.42";
             returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "span");
             Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
-            ////Note - The Styles will be created while processing xhtml(content.xml)
-            ////Style Test - Second
-            //_validate = new ValidateXMLFile(styleOutput);
-            //_validate.ClassName = "sense..before_article_sectionletter_dictionary";
-
-            //_validate.ClassProperty.Add("fo:font-weight", "700");
-            //_validate.ClassProperty.Add("fo:font-weight-complex", "700");
-            //_validate.ClassProperty.Add("fo:color", "#ff0000");
-
-            //bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue, "Counter1 - Style Failure");
         }
 
         ///<summary>
@@ -1258,7 +1197,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "GlossaryReference";
             _projInfo.ProjectInputType = "Scripture";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			string xpath = "//text:p[1]/text:span[@text:style-name='SeeInGlossary_.nko_Paragraph_scrSection_scrBook_scrBody']";
             string content = "<text:bookmark-start text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"w_2\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
@@ -1278,7 +1217,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "GlossaryReferenceTitle";
             _projInfo.ProjectInputType = "Scripture";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			string xpath = "//text:p[1]/text:span[@text:style-name='SeeInGlossary_.nko_Paragraph_scrSection_scrBook_scrBody']";
             string content = "<text:bookmark-start text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-ref text:reference-format=\"text\" text:ref-name=\"sample text\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">Abraham</text:bookmark-ref><text:bookmark-end text:name=\"k_3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />";
@@ -1298,7 +1237,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "Counter2";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "firstoftype_sense_article_sectionletter_dictionary";
@@ -1319,17 +1258,6 @@ namespace Test.OpenOfficeConvert
             content = "2.0.52";
             returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "span");
             Assert.IsTrue(returnValue1, "Counter2 - Content Failure");
-
-            ////Style Test - Second
-            //_validate = new ValidateXMLFile(styleOutput);
-            //_validate.ClassName = "sense..before_article_sectionletter_dictionary";
-
-            //_validate.ClassProperty.Add("fo:font-weight", "700");
-            //_validate.ClassProperty.Add("fo:font-weight-complex", "700");
-            //_validate.ClassProperty.Add("fo:color", "#ff0000");
-
-            //bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue, "Counter2 - Style Failure");
         }
 
         ///<summary>
@@ -1339,7 +1267,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "Counter3";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "firstoftype_sense_article_sectionletter_dictionary";
@@ -1361,18 +1289,6 @@ namespace Test.OpenOfficeConvert
 			content = "1.22";
 			returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "span");
 			Assert.IsTrue(returnValue1, "Counter3 - Content Failure");
-
-
-            ////Style Test - Second
-            //_validate = new ValidateXMLFile(styleOutput);
-            //_validate.ClassName = "sense..before_article_sectionletter_dictionary";
-
-            //_validate.ClassProperty.Add("fo:font-weight", "700");
-            //_validate.ClassProperty.Add("fo:font-weight-complex", "700");
-            //_validate.ClassProperty.Add("fo:color", "#ff0000");
-
-            //bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue, "Counter3 - Style Failure");
         }
 
         ///<summary>
@@ -1425,7 +1341,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "FootnoteSpanContent";
             _projInfo.ProjectInputType = "Scripture";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             string xpath = "//text:note/text:note-body/text:p[@text:style-name='NoteGeneralParagraph']";
@@ -1444,7 +1360,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "body";
             _projInfo.ProjectInputType = "Scripture";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			string xpath = "//text:p[@text:style-name='cover_dicBody']";
@@ -1460,7 +1376,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "FootNoteFormat";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
             //text:n ote text:id="ftn1"
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             string xpath = "//text:note[@text:id='ftn1']";
@@ -1577,7 +1493,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "whitespace";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+           GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -1617,7 +1533,7 @@ namespace Test.OpenOfficeConvert
             const string file = "TeluguGondwana";
 
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -1625,23 +1541,6 @@ namespace Test.OpenOfficeConvert
             string content = Common.ConvertUnicodeToString("\\C06");
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
-
-
-            ////Note - The Styles will be created while processing xhtml(content.xml)
-            ////Commented because of ldml files.
-            ////Style Test - Second
-            //_validate = new ValidateXMLFile(styleOutput);
-            //_validate.ClassName = "span_.ggo-Telu-IN_TitleMain_scrBook_scrBody";
-            //_validate.ClassProperty.Add("fo:font-name", "Gautami");
-            //_validate.ClassProperty.Add("style:font-name-complex", "Gautami");
-            //bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue);
-
-            //string xpath = "//office:font-face-decls";
-            //_validate.ClassName = string.Empty;
-            //_validate.ClassProperty.Add("svg:font-family", "Gautami");
-            //returnValue = _validate.ValidateNodeAttributesNS(9, xpath);
-            //Assert.IsTrue(returnValue);
         }
         ///<summary>
         ///TD130 (Remove AutoWidth and set Column Width for columns)
@@ -1652,7 +1551,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "RemoveAutoWidth";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             string xpath = "//style:style[@style:name='Sect_letData']";
@@ -1672,8 +1571,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "InlineBlock";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
-
+            GetStyleOutput(file);
             InLineMethod();
         }
 
@@ -1725,15 +1623,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "PseudoAfter";
 
-            string styleOutput = GetStyleOutput(file);
-
-            //_validate = new ValidateXMLFile(styleOutput);
-            //_validate.ClassName = "headword..after_entry_letData_dicBody";
-            //_validate.ClassProperty.Add("fo:font-size", "12pt");
-            //_validate.ClassProperty.Add("style:font-size-complex", "12pt");
-            //_validate.ClassProperty.Add("fo:color", "#000000");
-            //bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue);
+            GetStyleOutput(file);
 
             //Content Test 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -1755,7 +1645,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "LanguageInline";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -1780,21 +1670,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "PseudoAfter1";
 
-            string styleOutput = GetStyleOutput(file);
-            //_validate = new ValidateXMLFile(styleOutput);
-            //_validate.ClassName = "letHead..after_div_dicBody";
-            //_validate.ClassProperty.Add("fo:font-size", "18pt");
-            //_validate.ClassProperty.Add("style:font-size-complex", "18pt");
-            //_validate.ClassProperty.Add("fo:color", "#ffa500");
-            //bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue);
-
-            //_validate.ClassName = "letHead-letHead..after_div_dicBody";
-            //_validate.ClassProperty.Add("fo:font-size", "25pt");
-            //_validate.ClassProperty.Add("style:font-size-complex", "25pt");
-            //_validate.ClassProperty.Add("fo:color", "#ffa500");
-            //returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue);
+            GetStyleOutput(file);
 
             //Content Test 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -1849,7 +1725,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "PictureWidth";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -1859,15 +1735,6 @@ namespace Test.OpenOfficeConvert
             string content = "<text:p text:style-name=\"entry1_letData_dicBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Graphics1\" draw:name=\"Graphics1\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"45pt\" svg:height=\"33.75pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"0in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"Graphics1\" draw:name=\"Graphics1\" text:anchor-type=\"paragraph\" svg:width=\"45pt\" svg:height=\"33.75pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuatet=\"onLoad\" xlink:href=\"Pictures/leftindexmacro1.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>leftindexmacro1.jpg</svg:title></draw:frame><text:p text:style-name=\"pictureCaption_pictureRight_entry1_letData_dicBody\"><text:span text:style-name=\"CmPicturepublishStemCaptionSenseNumber_pictureCaption_pictureRight_entry1_letData_dicBody\">1</text:span><text:span text:style-name=\"CmPicturepublishStemCaptionCaptionPub_.pt_pictureCaption_pictureRight_entry1_letData_dicBody\">cala</text:span></text:p></draw:text-box></draw:frame><text:span text:style-name=\"headword_entry1_letData_dicBody\">cala</text:span><text:span text:style-name=\"headword..after_entry1_letData_dicBody\"><text:s text:c=\"1\" /></text:span><text:span text:style-name=\"partofspeech_.pt_grammaticalinfo_sense_senses_entry1_letData_dicBody\">N</text:span><text:span text:style-name=\"xlanguagetag_xitem_.pt_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">Por </text:span><text:span text:style-name=\"xitem_.pt_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">dedo</text:span><text:span text:style-name=\"xlanguagetag_xitem_.en_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">Eng </text:span><text:span text:style-name=\"xitem_.en_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">finger</text:span></text:p>";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1, "PictureWidth - Content 1 Failure");
-
-            // Display:None
-            //_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            //_validate.ClassName = "pictureRightNone_entry2_letData_dicBody";
-            //_validate.ClassNameTrim = true;
-            //_validate.GetInnerText = true;
-            //content = "cadu";
-            //returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
-            //Assert.IsTrue(returnValue1, "PictureWidth - Content 2 Failure");
         }
 
         ///<summary>
@@ -1879,7 +1746,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "mrk";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -1899,7 +1766,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "ImageNoCaption";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -2055,7 +1922,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "ContentNormalTest";
 
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -2217,21 +2084,6 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("wrap-contour", "false");
 
             _validate.ClassProperty.Add("text:anchor-type", "paragraph");
-            //_validate.ClassProperty.Add("svg:x", "0in");
-            //_validate.ClassProperty.Add("svg:y", "0in");
-            //_validate.ClassProperty.Add("style:mirror", "none");
-            //_validate.ClassProperty.Add("fo:clip", "rect(0in 0in 0in 0in)");
-            //_validate.ClassProperty.Add("draw:luminance", "0%");
-
-            //_validate.ClassProperty.Add("draw:red", "0%");
-            //_validate.ClassProperty.Add("draw:green", "0%");
-            //_validate.ClassProperty.Add("draw:blue", "0%");
-            //_validate.ClassProperty.Add("draw:gamma", "100%");
-            //_validate.ClassProperty.Add("draw:color-inversion", "false");
-
-            //_validate.ClassProperty.Add("draw:image-opacity", "100%");
-            //_validate.ClassProperty.Add("draw:color-mode", "standard");
-            //_validate.ClassProperty.Add("style:wrap", "parallel");
 
             returnValue = _validate.ValidateNodeAttributesNS(1, string.Empty);
             Assert.IsTrue(returnValue);
@@ -2247,21 +2099,6 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("wrap-contour", "false");
 
             _validate.ClassProperty.Add("text:anchor-type", "paragraph");
-            //_validate.ClassProperty.Add("svg:x", "0in");
-            //_validate.ClassProperty.Add("svg:y", "0in");
-            //_validate.ClassProperty.Add("style:mirror", "none");
-            //_validate.ClassProperty.Add("fo:clip", "rect(0in 0in 0in 0in)");
-            //_validate.ClassProperty.Add("draw:luminance", "0%");
-
-            //_validate.ClassProperty.Add("draw:red", "0%");
-            //_validate.ClassProperty.Add("draw:green", "0%");
-            //_validate.ClassProperty.Add("draw:blue", "0%");
-            //_validate.ClassProperty.Add("draw:gamma", "100%");
-            //_validate.ClassProperty.Add("draw:color-inversion", "false");
-
-            //_validate.ClassProperty.Add("draw:image-opacity", "100%");
-            //_validate.ClassProperty.Add("draw:color-mode", "standard");
-            //_validate.ClassProperty.Add("style:wrap", "parallel");
 
             returnValue = _validate.ValidateNodeAttributesNS(1, string.Empty);
             Assert.IsTrue(returnValue);
@@ -2309,7 +2146,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "ColumnCount";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -2396,8 +2233,7 @@ namespace Test.OpenOfficeConvert
             const string file = "spacebefore";
 
             //StyleXML
-            string styleOutput = GetStyleOutput(file);
-            //revSense_.bss_revEntry_revData
+            GetStyleOutput(file);
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "revEntry_revData_revAppendix";
@@ -2415,7 +2251,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "ReplacePrinceQuote";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -2511,7 +2347,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "AutoWidth";
 
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //First Node
             string xpath = "//text:p[@text:style-name='pictureCaption_scrBody']";
@@ -2563,7 +2399,6 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:font-size", "12pt");
             _validate.ClassProperty.Add("style:font-size-complex", "12pt");
             _validate.ClassProperty.Add("fo:color", "#ff0000");
-            //_validate.ClassProperty.Add("fo:background-color", "#008000");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
@@ -2592,7 +2427,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Scripture";
             const string file = "RemoveScrSectionClass";
 
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -2621,7 +2456,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Scripture";
             const string file = "TableProperty";
 
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
@@ -2646,7 +2481,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "SignificantSpace";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "entry_letData_dicBody";
@@ -2763,10 +2598,6 @@ namespace Test.OpenOfficeConvert
             //Note - The Styles will be created while processing xhtml(content.xml)
             //Style Test - Second
             _validate = new ValidateXMLFile(styleOutput);
-            //_validate.ClassName = "divColor1_body";
-            //_validate.ClassProperty.Add("fo:background-color", "#008000");
-            //bool returnValue = _validate.ValidateNodeAttributesNS(true);
-            //Assert.IsFalse(returnValue, "div does not have background color");
 
             _validate.ClassName = "spanColor2_divColor2_body";
             _validate.ClassProperty.Add("fo:background-color", "#ff0000");
@@ -2782,7 +2613,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "DisplayInline";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "letter_letHead_dicBody";
@@ -3448,7 +3279,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "t9";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -3586,7 +3417,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "ReferenceMark";
             _projInfo.ProjectInputType = "Scripture";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 
@@ -3608,7 +3439,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "FootnoteVerseNumber";
             _projInfo.ProjectInputType = "Scripture";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
@@ -3630,7 +3461,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "FootnoteVerse2";
             _projInfo.ProjectInputType = "Scripture";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetOuterXml = true;
@@ -3672,7 +3503,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "HardSpaceAfterVerseNumber";
             _projInfo.ProjectInputType = "Scripture";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
@@ -3688,7 +3519,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "NoImage";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+           GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
@@ -3704,7 +3535,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "HomographSpace";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
             string xpath = "//text:p[@text:style-name='letData_dicBody']";
@@ -3742,7 +3573,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "SpaceIssueOnSense";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
             string xpath = "//text:p[@text:style-name='entry_letData_dicBody'][1]";
@@ -3769,7 +3600,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "TextReplace";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -3787,7 +3618,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "KeepLineSeperator";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			string xpath = "//text:span[@text:style-name='span_.kup_example_.kup_examples_sense_senses_entry_letData_dicBody']";
@@ -3812,7 +3643,7 @@ namespace Test.OpenOfficeConvert
         {
             const string file = "KeepImageExtension";
             _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             string xpath = "//draw:frame[@draw:style-name='gr2']/draw:image";
@@ -3850,7 +3681,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "PseudoBefore";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -3937,7 +3768,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "SpaceTest";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -3956,7 +3787,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "PseudoContains";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -3974,37 +3805,6 @@ namespace Test.OpenOfficeConvert
             content = "sakple text file lang";
             returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "para");
             Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
-
-            //Content Test - First
-            //_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            //_validate.ClassName = "xitem..contains_main_body";
-            //string content = "contain";
-            //bool returnValue1 = _validate.v.ValidateOfficeTextNode(content, "span");
-            //Assert.IsTrue(returnValue1);
-
-            //_validate.ClassName = "xitem-xitem..contains_main_body";
-            //content = "XXcontain";
-            //returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            //Assert.IsTrue(returnValue1);
-
-            ////Note - The Styles will be created while processing xhtml(content.xml)
-            ////Style Test - Second
-            //_validate = new ValidateXMLFile(styleOutput);
-
-            //_validate.ClassName = "xitem-xitem..contains_main_body";
-            //_validate.ClassProperty.Add("fo:color", "#008000");
-            //_validate.ClassProperty.Add("fo:font-size", "18pt");
-
-            //bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue);
-
-            //_validate.ClassName = "xitem..contains_main_body";
-            //_validate.ClassProperty.Add("fo:color", "#ff0000");
-            //_validate.ClassProperty.Add("fo:font-size", "36pt");
-
-            //returnValue = _validate.ValidateNodeAttributesNS(false);
-            //Assert.IsTrue(returnValue);
-
         }
 
         ///<summary>
@@ -4116,7 +3916,7 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "NewPunctuationPsuedoChild";
-			string styleOutput = GetStyleOutput(file);
+			GetStyleOutput(file);
 			//Content Test - First
 			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "span_.bzh-fonipa_form_pronunciation_pronunciations_entry_letData_dicBody";
@@ -4141,7 +3941,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "CounterPart";
-            string styleOutput = GetStyleOutput(file);
+            GetStyleOutput(file);
 
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
@@ -4164,12 +3964,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "Bughotu-gospels";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, "Bughotu-gospelsstyles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, "Bughotu-gospelscontent.xml");
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
@@ -4186,12 +3981,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "TeluguFootnoteMarkerTest";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, "TeluguFootnoteMarkerTeststyles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, "TeluguFootnoteMarkerTestcontent.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } }); 
@@ -4209,18 +3999,12 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "TokPisin";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
             string style = "";
             if (Common.UnixVersionCheck())
             {
                 style = "_Unix";
             }
-
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4239,12 +4023,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "Kabwa";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4262,12 +4041,7 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "InsertHardSpace";
-			DateTime startTime = DateTime.Now;
-
 			string styleOutput = GetStyleOutput(file);
-
-			_totalTime = DateTime.Now - startTime;
-
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4285,12 +4059,7 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "EntryStyle";
-			DateTime startTime = DateTime.Now;
-
 			string styleOutput = GetStyleOutput(file);
-
-			_totalTime = DateTime.Now - startTime;
-
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4308,12 +4077,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "B1pe";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
@@ -4332,12 +4096,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
 			const string file = "StyleChangesinMexico";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
@@ -4355,12 +4114,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
 			const string file = "StyleChangesinMexicoReversal";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
@@ -4376,12 +4130,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
 			const string file = "SlashSymbol";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
@@ -4501,12 +4250,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "TeTest";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4524,18 +4268,12 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "BuangExport";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
             string style = string.Empty;
             if (_isLinux)
             {
                 style = "_Unix";
             }
-
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4553,12 +4291,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "InsertWhiteSpace";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4576,12 +4309,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "BookNameChanged";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4599,12 +4327,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "SpacesInDictionary";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4622,12 +4345,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "GuidewordLength";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4645,12 +4363,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "OutlineLevel";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4669,12 +4382,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "FrontMatterDirection";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4692,12 +4400,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "RevarsalHeader";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4715,12 +4418,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "RightToLeftHeader";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4739,12 +4437,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "RevarsalEmptyPage";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4763,12 +4456,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Scripture";
             const string file = "MainTitleDisplay";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4787,12 +4475,7 @@ namespace Test.OpenOfficeConvert
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "KeepWithNextTest";
-            DateTime startTime = DateTime.Now;
-
             string styleOutput = GetStyleOutput(file);
-
-            _totalTime = DateTime.Now - startTime;
-
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4822,8 +4505,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Scripture";
             const string file = "HyphenationRuleLO";
             Param.HyphenEnable = true;
-            string styleOutput = GetStyleOutput(file);
-
+            GetStyleOutput(file);
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
             _validate.ClassName = "Paragraph_scrBook_scrBody";
@@ -4844,17 +4526,12 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "NewGuidewordStyle2";
-			DateTime startTime = DateTime.Now;
-
 			string styleOutput = GetStyleOutput(file);
-
-			_totalTime = DateTime.Now - startTime;
 			string style = "";
 			if (Common.UnixVersionCheck())
 			{
 				style = "_Unix";
 			}
-
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4870,12 +4547,7 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "NewFlexBuangColor";
-			DateTime startTime = DateTime.Now;
-
 			string styleOutput = GetStyleOutput(file);
-
-			_totalTime = DateTime.Now - startTime;
-
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4892,17 +4564,12 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "AnchorSpaceFlex83";
-			DateTime startTime = DateTime.Now;
-
 			string styleOutput = GetStyleOutput(file);
-
-			_totalTime = DateTime.Now - startTime;
 			string style = "";
 			if (Common.UnixVersionCheck())
 			{
 				style = "_Unix";
 			}
-
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4918,12 +4585,7 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "selfspacetest";
-			DateTime startTime = DateTime.Now;
-
 			string styleOutput = GetStyleOutput(file);
-
-			_totalTime = DateTime.Now - startTime;
-
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
@@ -4941,9 +4603,7 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "SpaceAfterClosingBrace";
-			DateTime startTime = DateTime.Now;
 			string styleOutput = GetStyleOutput(file);
-			_totalTime = DateTime.Now - startTime;
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4959,9 +4619,7 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "ParentPrecedeSpace";
-			DateTime startTime = DateTime.Now;
 			string styleOutput = GetStyleOutput(file);
-			_totalTime = DateTime.Now - startTime;
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4977,9 +4635,7 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "PictureSpaceAfter";
-			DateTime startTime = DateTime.Now;
 			string styleOutput = GetStyleOutput(file);
-			_totalTime = DateTime.Now - startTime;
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -5086,7 +4742,6 @@ namespace Test.OpenOfficeConvert
 
             //StyleXML
             string fileOutput = _index > 0 ? file + _index + _styleFile : file + _styleFile;
-            //string styleOutput = FileOutput(file + _styleFile);
             string styleOutput = FileOutput(fileOutput);
             Dictionary<string, Dictionary<string, string>> idAllClass = stylesXML.CreateStyles(_projInfo, cssClass, styleOutput);
 
@@ -5120,40 +4775,5 @@ namespace Test.OpenOfficeConvert
             Param.Value["OutputPath"] = _outputBasePath;
             Param.Value["UserSheetPath"] = _outputBasePath;
         }
-
-        /*
-
-
-                /////<summary>
-                ///// TD98 (Clear:both)
-                ///// <summary>
-                ///// </summary>      
-                /////[Test]
-                //public void ClearTest_Clarification()
-                //{
-                //    //Note - CLARIFIATION - no input files available
-                //    var contentXML = new ContentXML();
-                //    var stylesXML = new StylesXML();
-                //    _projInfo.ProjectInputType = "Dictionary";
-                //    const string file = "ClearTest";
-
-                //    //StyleXML
-                //    string input = FileInput(file + ".css");
-                //    string styleOutput = FileOutput(file +_styleFile);
-                //    _styleName = stylesXML.CreateStyles(input, styleOutput, _errorFile, true);
-                //    string styleExpected = FileExpected(file +_styleFile);
-
-                //    // ContentXML
-                //    _projInfo.DefaultXhtmlFileWithPath = FileInput(file + ".xhtml");
-                //    _projInfo.TempOutputFolder = FileOutput(file);
-                //    contentXML.CreateContent(_projInfo, _styleName);
-                //    _projInfo.TempOutputFolder = _projInfo.TempOutputFolder + _contentFile;
-                //    string contentExpected = FileExpected(file + _contentFile);
-
-                //    XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-                //    XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-                //}
-
-         * */
     }
 }

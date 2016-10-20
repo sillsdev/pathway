@@ -92,10 +92,12 @@ namespace SIL.Tool
                 if(Common.ShowMessage && !Common.Testing)
                 {
                     string strMessage = "File has been exported successfully";
+	                // ReSharper disable once NotAccessedVariable
                     var msg = new[] { strMessage + ". "};
 
                     if(errCount > 0)
                     {
+	                    // ReSharper disable once RedundantAssignment
                         msg = new[] {strMessage + " with " + errCount + "error(s)."};
                     }
                 }
@@ -104,7 +106,7 @@ namespace SIL.Tool
             {
                 if (e.Message != null)
                 {
-                    var msg = new[] {e.Message};
+                    Console.WriteLine(new[] {e.Message});
                 }
             }
         }

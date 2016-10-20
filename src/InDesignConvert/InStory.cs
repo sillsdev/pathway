@@ -194,7 +194,7 @@ namespace SIL.PublishingSolution
             }
             catch (XmlException e)
             {
-                var msg = new[] { e.Message, xhtmlFileWithPath };
+                Console.WriteLine(new[] { e.Message, xhtmlFileWithPath });
             }
         }
 
@@ -547,9 +547,6 @@ namespace SIL.PublishingSolution
                 string yMinus = "-" + yPlus;
 
                 //To get Image details
-                int xx = GCD(width, height);
-                string xxw = string.Format("{0}:{1}", width/xx, height/xx);
-
                 string imageFloatLeftRightOrCenter = string.Empty;
                 string anchorPoint = string.Empty;
                 string horizontalAlignment = string.Empty;
@@ -1003,11 +1000,6 @@ namespace SIL.PublishingSolution
                                 break;
                         }
                         wrapSide = GetPropertyValue(clsName, "clear", wrapSide);
-                        //if (pos != "left" && wrapSide != "none")
-                        //{
-                        //    break;
-                        //}
-                        //return;
                         if (result)
                         {
                             break;
@@ -1092,7 +1084,6 @@ namespace SIL.PublishingSolution
             string classNameWOLang = _classNameWithLang;
             if (classNameWOLang.IndexOf("_.") > 0)
                 classNameWOLang = Common.LeftString(classNameWOLang, "_.");
-            string inner = string.Empty; //_reader.ReadString();
 
             if (classNameWOLang == "ChapterNumber")
                 _chapterNo = _reader.ReadString();

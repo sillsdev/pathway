@@ -34,8 +34,7 @@ namespace Test.OpenOfficeConvert
         #region Private Variables
         private string _inputPath;
         private string _outputPath;
-        private string _expectedPath;
-        private string _testFolderPath = string.Empty;
+	    private string _testFolderPath = string.Empty;
         private PublicationInformation _projInfo;
         #endregion
 
@@ -52,7 +51,6 @@ namespace Test.OpenOfficeConvert
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
             _inputPath = Common.PathCombine(_testFolderPath, "input");
             _outputPath = Common.PathCombine(_testFolderPath, "output");
-            _expectedPath = Common.PathCombine(_testFolderPath, "expected");
 
             if (Directory.Exists(_outputPath))
                 Directory.Delete(_outputPath, true);

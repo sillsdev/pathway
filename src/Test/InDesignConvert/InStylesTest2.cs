@@ -27,11 +27,9 @@ namespace Test.InDesignConvert
 	public class InStylesTest2 : ValidateXMLFile
 	{
 		#region Private Variables
-		private string _output;
 		private Dictionary<string, string> _expected = new Dictionary<string, string>();
 		private string _testFolderPath = string.Empty;
 		private InStyles _stylesXML;
-		private string _outputStory;
 		private InStory _storyXML;
 		private string _outputPath;
 		private string _outputStyles;
@@ -53,10 +51,8 @@ namespace Test.InDesignConvert
 			_storyXML = new InStory();
 			_testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
 			ClassProperty = _expected;  //Note: All Reference address initialized here
-			_output = Common.PathCombine(_testFolderPath, "output");
 			_outputPath = Common.PathCombine(_testFolderPath, "output");
 			_outputStyles = Common.PathCombine(_outputPath, "Resources");
-			_outputStory = Common.PathCombine(_outputPath, "Stories");
 			projInfo.TempOutputFolder = _outputPath;
 			_cssProperty = new Dictionary<string, Dictionary<string, string>>();
 			_cssTree = new CssTree();

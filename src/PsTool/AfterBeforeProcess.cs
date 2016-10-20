@@ -27,10 +27,6 @@ namespace SIL.Tool
     public class AfterBeforeProcess : AfterBeforeXHTMLProcess
     {
         #region Private Variable
-
-        string _outputExtension = string.Empty;
-        private string _sourcePicturePath;
-        
         private ArrayList _psuedoBefore = new ArrayList();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
 
@@ -64,7 +60,6 @@ namespace SIL.Tool
 
         private void InitializeData(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
-            _outputExtension = projInfo.OutputExtension;
             _allStyle = new Stack<string>();
             _allParagraph = new Stack<string>();
             _allCharacter = new Stack<string>();
@@ -76,7 +71,6 @@ namespace SIL.Tool
             _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
            
-            _sourcePicturePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             _projectPath = projInfo.TempOutputFolder;
 
             IdAllClass = idAllClass;
@@ -319,7 +313,6 @@ namespace SIL.Tool
             _characterName = null;
             _closeChildName = StackPop(_allStyle);
             if (_closeChildName == string.Empty) return;
-            string closeChild = Common.LeftString(_closeChildName, "_");
 
             // Psuedo After
             PseudoAfter();

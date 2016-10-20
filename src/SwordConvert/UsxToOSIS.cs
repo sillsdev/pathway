@@ -39,9 +39,6 @@ namespace SIL.PublishingSolution
 		private XmlTextReader _reader;
 		private XmlTextWriter _writer;
 
-		private Dictionary<string, Dictionary<string, string>> _styleInfo =
-			new Dictionary<string, Dictionary<string, string>>();
-
 		private Dictionary<string, string> _bookCode = new Dictionary<string, string>();
 
 		private string _bookCodeName;
@@ -422,8 +419,8 @@ namespace SIL.PublishingSolution
 		/// </summary>
 		private void EndElement()
 		{
-			string style = StackPop(_allStyle);
-			string tag = StackPop(_alltagName);
+			StackPop(_allStyle);
+			StackPop(_alltagName);
 			if (_skipTag)
 			{
 				_skipTag = false;

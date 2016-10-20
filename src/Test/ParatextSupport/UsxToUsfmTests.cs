@@ -126,20 +126,12 @@ namespace Test.ParatextSupport
             if (Directory.Exists(outputFolder))
                 Directory.Delete(outputFolder, true);
             Directory.CreateDirectory(outputFolder);
-            
             converter.ExportToPathway(usxBooksToExport);
-
             usxBooksToExport.Clear();
             const string TestName = "ScripturenkoNT";
-            var cssFile = TestName + ".css";
             var xhtmlFile = TestName + ".xhtml";
-
-            string expectedCssFile = Common.PathCombine(expectedFolder, cssFile);
             string expectedXhtmlFile = Common.PathCombine(expectedFolder, xhtmlFile);
-
-            string outputCssFile = Common.PathCombine(outputFolder, cssFile);
-            string outputXhtmlFile = Common.PathCombine(outputFolder, xhtmlFile);
-
+			string outputXhtmlFile = Common.PathCombine(outputFolder, xhtmlFile);
             TextFileAssert.AreEqual(expectedXhtmlFile, outputXhtmlFile, FileData.Get(outputXhtmlFile));
         }
 
@@ -166,13 +158,8 @@ namespace Test.ParatextSupport
 
             usxBooksToExport.Clear();
             const string TestName = "ScripturenkoNT";
-            var cssFile = TestName + ".css";
             var xhtmlFile = TestName + ".xhtml";
-
-            string expectedCssFile = Common.PathCombine(expectedFolder, cssFile);
             string expectedXhtmlFile = Common.PathCombine(expectedFolder, xhtmlFile);
-
-            string outputCssFile = Common.PathCombine(outputFolder, cssFile);
             string outputXhtmlFile = Common.PathCombine(outputFolder, xhtmlFile);
 
             TextFileAssert.AreEqual(expectedXhtmlFile, outputXhtmlFile, FileData.Get(outputXhtmlFile));
