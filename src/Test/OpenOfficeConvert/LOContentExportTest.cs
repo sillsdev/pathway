@@ -15,9 +15,7 @@
 
 #region Using
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using NUnit.Framework;
@@ -52,28 +50,17 @@ namespace Test.OpenOfficeConvert
 
 		#region SetUp
 
-		//public Utility M_util
-		//{
-		//    get { return _util; }
-		//}
-
 		[TestFixtureSetUp]
 		protected void SetUp()
 		{
 			Common.Testing = true;
-			//_styleName = new Styles();
-			//_util = new Utility();
 			_projInfo = new PublicationInformation();
-			_errorFile = Common.PathCombine(Path.GetTempPath(), "temp.odt");
 			_progressBar = new ProgressBar();
 			string testPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
 			_inputPath = Common.PathCombine(testPath, "input");
 			_outputPath = Common.PathCombine(testPath, "output");
 			_expectedPath = Common.PathCombine(testPath, "expected");
-			//if (Directory.Exists(_outputPath))
-			//{
-			//    Directory.Delete(_outputPath, true);
-			//}
+			
 			Common.DeleteDirectory(_outputPath);
 			Directory.CreateDirectory(_outputPath);
 			FolderTree.Copy(FileInput("Pictures"), FileOutput("Pictures"));
@@ -367,8 +354,6 @@ namespace Test.OpenOfficeConvert
 			// setup - ensure that there is a current organization in the StyleSettings xml
 			Param.UpdateMetadataValue(Param.TableOfContents, tocTrueFalse);
 			Param.Write();
-
-
 			Param.LoadValues(sFileName);
 			Param.SetLoadType = inputType;
 			Param.Value["OutputPath"] = _outputBasePath;
