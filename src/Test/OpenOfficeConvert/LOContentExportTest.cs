@@ -34,14 +34,12 @@ namespace Test.OpenOfficeConvert
 	public class LOContentExportTest
 	{
 		#region Private Variables
-		//Styles _styleName;
-		//Utility _util;
-		string _errorFile;
+		
 		private string _inputPath;
 		private string _outputPath;
 		private string _expectedPath;
 		ProgressBar _progressBar;
-		private TimeSpan _totalTime;
+		protected TimeSpan _totalTime;
 		private PublicationInformation _projInfo;
 
 		private ValidateXMLFile _validate;

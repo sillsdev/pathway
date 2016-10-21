@@ -1304,7 +1304,6 @@ namespace Test.OpenOfficeConvert
             string xpath = "//text:note[@text:id='ftn1']";
             _validate.ClassName = string.Empty;
             _validate.GetOuterXml = true;
-            string uni = Common.ConvertUnicodeToString("\\2021");
             string content = "<text:note text:id=\"ftn1\" text:note-class=\"footnote\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:note-citation text:label=\"‡ \">‡ </text:note-citation><text:note-body><text:p text:style-name=\"footnote\"><text:span text:style-name=\"footnote..footnote-marker\"></text:span><text:span text:style-name=\"footnote_first_section_scriptureText_scrBody\">1:1: You can use the add spaces button to separate the Unicode characters.</text:span></text:p></text:note-body></text:note>";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNote - Content Failure");

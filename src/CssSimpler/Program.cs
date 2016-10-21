@@ -42,14 +42,12 @@ namespace CssSimpler
 
         static void Main(string[] args)
         {
-            // ReSharper disable AssignNullToNotNullAttribute
             XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"CssSimpler.XmlCss.xsl"), ReaderSettings), XsltSettings, new NullResolver());
             SimplifyXmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"CssSimpler.XmlCssSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
             SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "CssSimpler.XhtmlSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
-            // ReSharper restore AssignNullToNotNullAttribute
             // see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
             var p = new OptionSet
             {
@@ -106,14 +104,11 @@ namespace CssSimpler
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
             
-	        // ReSharper disable once UnusedVariable
-            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+            new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            
-	        // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
+            new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
             WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             try
@@ -220,17 +215,19 @@ namespace CssSimpler
                 }
                 catch (NullReferenceException)
                 {
-                    // ReSharper disable once PossibleNullReferenceException
-                    var attr = rule.OwnerDocument.CreateAttribute("pos");
-                    attr.InnerText = (index + 1).ToString();
-                    if (rule.HasAttributes)
-                    {
-                        rule.Attributes.InsertBefore(attr, rule.Attributes[0]);
-                    }
-                    else
-                    {
-                        rule.Attributes.Append(attr);
-                    }
+	                if (rule.OwnerDocument != null)
+	                {
+		                var attr = rule.OwnerDocument.CreateAttribute("pos");
+		                attr.InnerText = (index + 1).ToString();
+		                if (rule.HasAttributes)
+		                {
+			                rule.Attributes.InsertBefore(attr, rule.Attributes[0]);
+		                }
+		                else
+		                {
+			                rule.Attributes.Append(attr);
+		                }
+	                }
                 }
             }
         }

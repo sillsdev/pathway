@@ -21,14 +21,12 @@ using SIL.Tool;
 namespace SIL.PublishingSolution
 {
 //This class is used as part of the linkage from Fieldworks to Pathway. It is accessed by reflection.
-// ReSharper disable UnusedMember.Global
+
     public class Contents : Form, IExportContents
-// ReSharper restore UnusedMember.Global
     {
         private static IExportContents _realClass;
         public Contents()
         {
-            //Common.SupportFolder = "PathwaySupport";
 			Common.ProgBase = Common.GetPSApplicationPath();
             // EDB - for testing only
             _realClass = new ExportThroughPathway();
@@ -138,6 +136,5 @@ namespace SIL.PublishingSolution
         {
             return _realClass.ShowDialog();
         }
-
     }
 }

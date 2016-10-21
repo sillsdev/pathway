@@ -103,13 +103,13 @@ namespace SIL.PublishingSolution
 		}
 		public bool ReversalIndexExist
 		{
-
+			get { return _reversalIndexExist; }
 			set { _reversalIndexExist = value; }
 
 		}
 		public string ReversalIndexTexFilename
 		{
-
+			get { return _reversalIndexTexFilename; }
 			set { _reversalIndexTexFilename = value; }
 
 		}

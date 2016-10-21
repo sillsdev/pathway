@@ -6,8 +6,6 @@ namespace SIL.PublishingSolution
 {
     static class Program
     {
-        private static readonly TraceSwitch TraceOn = new TraceSwitch("General", "Trace level for application");
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
