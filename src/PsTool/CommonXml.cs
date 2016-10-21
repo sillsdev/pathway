@@ -1056,8 +1056,8 @@ namespace SIL.Tool
 			}
 			catch (XmlException ex)
 			{
-				// ReSharper disable once UnusedVariable
 				var msg = new[] { ex.Message, xhtmlFileWithPath };
+				Console.WriteLine(msg.ToString());
 			}
 			books.AddRange(writers.Keys);
 			return books;

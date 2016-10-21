@@ -367,7 +367,7 @@ namespace Test.OpenOfficeConvert
             const string file = "TextAlignTestA";
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            Dictionary<string, Dictionary<string, string>> cssClass = GetCssClass(input, output);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -386,11 +386,9 @@ namespace Test.OpenOfficeConvert
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
+			
             LOStyles ooStyles = new LOStyles();
-
-            idAllClass = ooStyles.CreateStyles(projInfo, cssClass, output);
+            ooStyles.CreateStyles(projInfo, cssClass, output);
             return cssClass;
         }
 
