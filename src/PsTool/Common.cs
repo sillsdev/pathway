@@ -3103,8 +3103,8 @@ namespace SIL.Tool
 			try
 			{
 				var pathwayFolder = FromRegistry("");
-				var directoryInfo = new DirectoryInfo(pathwayFolder);
-				var fileInfoList = directoryInfo.GetFiles("Pathway_Student_Manual_*.pdf");
+				var directoryInfo = new DirectoryInfo(Path.Combine(pathwayFolder, "Help"));
+				var fileInfoList = directoryInfo.GetFiles("Pathway_Student_Manual*.pdf");
 				using (Process process = new Process())
 				{
 					process.StartInfo.FileName = fileInfoList[0].FullName;
