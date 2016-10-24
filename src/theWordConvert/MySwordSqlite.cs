@@ -18,11 +18,7 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-#if __MonoCS__
-using Mono.Data.Sqlite;
-#else
 using Devart.Data.SQLite;
-#endif
 using System.IO;
 using System.Xml;
 using System.Reflection;
@@ -36,7 +32,7 @@ namespace SIL.PublishingSolution
     {
         private readonly XmlDocument _vrs = new XmlDocument();
         private readonly Regex _vrsPat = new Regex(@"[0-9]+\:([0-9]+)");
-        protected readonly Dictionary<string, string> _dbParams = new Dictionary<string, string>();
+        protected readonly Dictionary<string, string> DbParams = new Dictionary<string, string>();
         private StreamReader _sr;
 
         public MySwordSqlite()
@@ -77,7 +73,7 @@ namespace SIL.PublishingSolution
                 throw new ArgumentException("Unable to process encrypted files");
             }
             var nameOnly = Path.GetFileNameWithoutExtension(inName);
-            var filename = string.Format("{0}.bbl.mybible", nameOnly);
+            var filename = nameOnly + ".bbl.mybible";
             var inPath = Path.GetDirectoryName(inName);
             if (!string.IsNullOrEmpty(inPath))
             {
@@ -86,27 +82,15 @@ namespace SIL.PublishingSolution
             return filename;
         }
 
-#if __MonoCS__
-        private SqliteConnection NewMyBible(string filename)
-#else
         private SQLiteConnection NewMyBible(string filename)
-#endif
         {
             var basePath = Common.FromRegistry("TheWord");
             var templateFilename = Path.Combine(basePath, "biblebase.sqlite");
             File.Copy(templateFilename, filename, true);
-#if __MonoCS__
-            return new SqliteConnection("Data Source=" + filename + ";Version=3;");
-#else
             return new SQLiteConnection("Data Source=" + filename + ";Version=3;");
-#endif
         }
 
-#if __MonoCS__
-		private void UpdateScripture (SqliteConnection updConn, bool ot)
-#else
         private void UpdateScripture(SQLiteConnection updConn, bool ot)
-#endif
         {
             var books = _vrs.SelectNodes("//bk");
             Debug.Assert(books != null);
@@ -125,7 +109,8 @@ namespace SIL.PublishingSolution
                         Debug.Assert(line != null);
                         var cmd = updConn.CreateCommand();
                         line = line.Replace("\"", "\"\"");
-                        cmd.CommandText = string.Format(@"update Bible SET Scripture = ""{0}"" WHERE Book = {1} AND Chapter = {2} AND Verse = {3};", line, bkn, chn, vrsn);
+                        cmd.CommandText =
+                            $@"update Bible SET Scripture = ""{line}"" WHERE Book = {bkn} AND Chapter = {chn} AND Verse = {vrsn};";
                         int result = cmd.ExecuteNonQuery();
                         Debug.Assert(result == 1);
                     }
@@ -155,23 +140,19 @@ namespace SIL.PublishingSolution
                     pLine = _sr.ReadLine();
                     vValue = vValue.Substring(0, vValue.Length - 1) + "\n" + pLine;
                 }
-                _dbParams[vName] = vValue;
+                DbParams[vName] = vValue;
             }
         }
 
-#if __MonoCS__
-		private void PostDbParams(string inName, SqliteConnection updConn)
-#else
         private void PostDbParams(string inName, SQLiteConnection updConn)
-#endif
         {
-            _dbParams["version"] = _dbParams["version.major"] + "." + _dbParams["version.minor"];
-            _dbParams["ot"] = inName.EndsWith(".ont") ? "1" : "0";
-            _dbParams["nt"] = "1";
-            _dbParams["strong"] = "0";
-            if (!_dbParams.ContainsKey("rtl"))
+            DbParams["version"] = DbParams["version.major"] + "." + DbParams["version.minor"];
+            DbParams["ot"] = inName.EndsWith(".ont") ? "1" : "0";
+            DbParams["nt"] = "1";
+            DbParams["strong"] = "0";
+            if (!DbParams.ContainsKey("rtl"))
             {
-                _dbParams["rtl"] = "0";
+                DbParams["rtl"] = "0";
             }
             var detailTrx = updConn.BeginTransaction();
             const string map = "Description=description,Abbreviation=short.title,Comments=about,Version=version,VersionDate=version.date,PublishDate=publish.date,RightToLeft=rtl,OT=ot,NT=nt,Strong=strong";
@@ -179,12 +160,12 @@ namespace SIL.PublishingSolution
             foreach (Match match in mapPat.Matches(map))
             {
                 var key = match.Groups[2].Value;
-                if (_dbParams.ContainsKey(key))
+                if (DbParams.ContainsKey(key))
                 {
                     var detailCmd = updConn.CreateCommand();
-                    var newValue = string.Format(@"""{0}""", _dbParams[key]);
+                    var newValue = $@"""{DbParams[key]}""";
                     newValue = ParseDateIfNecessary(key, newValue);
-                    detailCmd.CommandText = string.Format("update Details SET {0} = {1}", match.Groups[1].Value, newValue);
+                    detailCmd.CommandText = $"update Details SET {match.Groups[1].Value} = {newValue}";
                     int result = detailCmd.ExecuteNonQuery();
                     Debug.Assert(result == 1, match.Groups[0].Value);
                 }
@@ -202,7 +183,7 @@ namespace SIL.PublishingSolution
                 {
                     var monthValue = 1;
                     var dayValue = 1;
-                    var dateMatch = _datePat.Match(_dbParams[key]);
+                    var dateMatch = _datePat.Match(DbParams[key]);
                     if (dateMatch.Success)
                     {
                         monthValue = int.Parse(dateMatch.Groups[2].Value);
@@ -210,14 +191,14 @@ namespace SIL.PublishingSolution
                     }
                     else
                     {
-                        dateMatch = _yearPat.Match(_dbParams[key]);
+                        dateMatch = _yearPat.Match(DbParams[key]);
                     }
-                    newValue = string.Format(@"date('{0}-{1:00}-{2:00}')", dateMatch.Groups[1].Value, monthValue, dayValue);
+                    newValue = $@"date('{dateMatch.Groups[1].Value}-{monthValue:00}-{dayValue:00}')";
                 }
             }
             catch (Exception)
             {
-                throw new FormatException(string.Format("error parsing date {0} with value {1}", key, _dbParams[key]));
+                throw new FormatException($"error parsing date {key} with value {DbParams[key]}");
             }
             return newValue;
         }
