@@ -48,7 +48,6 @@ namespace SIL.PublishingSolution
                                       IsOpenOutput = false,
                                       ProjectName = "main",
                                   };
-            var backendPath = Common.ProgInstall;
             var exportType = "OpenOffice/LibreOffice";
             bool bOutputSpecified = false;
             var files = new List<string>();
@@ -656,14 +655,11 @@ namespace SIL.PublishingSolution
                     // new styToCss
                     oScrStylesheet = Activator.CreateInstance(tStyToCSS);
                     // styToCss.StyFullPath = styFile
-                    PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath",
-                                                                       BindingFlags.Public | BindingFlags.Instance);
+                    PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath", BindingFlags.Public | BindingFlags.Instance);
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
-                    Object oResult = tStyToCSS.InvokeMember("ConvertStyToCss",
-                                                            BindingFlags.Default | BindingFlags.InvokeMethod, null,
-                                                            oScrStylesheet, args);
+                    tStyToCSS.InvokeMember("ConvertStyToCss", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
                 }
                 projInfo.DefaultCssFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
 
@@ -692,7 +688,7 @@ namespace SIL.PublishingSolution
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
                     argsConvert[1] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
-                    var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile",
+                    tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile",
                                                  BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL,
                                                  argsConvert);
                 }
@@ -755,7 +751,7 @@ namespace SIL.PublishingSolution
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
-                    Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
+	                tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
                 }
                 projInfo.DefaultCssFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
 
@@ -808,7 +804,7 @@ namespace SIL.PublishingSolution
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
                     argsConvert[1] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ","_") + ".xhtml");
-                    var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
+	                tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
                 }
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ", "_") + ".xhtml");
 

@@ -219,6 +219,7 @@ namespace Test.DictionaryForMIDsConvert
             projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outDir, "main.xhtml");
             var curTesting = Common.Testing;
             Common.Testing = false;
+	        _isUnixOS = Common.UsingMonoVM;
             CreateDictionaryForMIDs(projInfo);
             Assert.True(Directory.Exists(Common.PathCombine(outDir, "DfM_lojen_SIL")));
             Common.Testing = curTesting;
@@ -263,7 +264,11 @@ namespace Test.DictionaryForMIDsConvert
             Launch("dictionary", projInfo);
             Assert.True(File.Exists(_testFiles.Output("DfM copyright notice.txt")));
             TextFileAssert.AreEqual(_testFiles.Expected("main.txt"), _testFiles.Output("main.txt"), "main.txt");
-            TextFileAssert.AreEqualEx(_testFiles.Expected("DictionaryForMIDs.properties"), _testFiles.Output("DictionaryForMIDs.properties"), new ArrayList{ 1 }, "DictionaryForMIDs.properties");
+	        if (!Common.UsingMonoVM)
+	        {
+		        TextFileAssert.AreEqualEx(_testFiles.Expected("DictionaryForMIDs.properties"),
+			        _testFiles.Output("DictionaryForMIDs.properties"), new ArrayList {1}, "DictionaryForMIDs.properties");
+	        }
         }
 
         [Test]

@@ -46,9 +46,9 @@ namespace Test.ParatextSupport
             Common.Testing = true;
 
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ParatextSupport/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "input");
+            _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
+            _expectedPath = Common.PathCombine(testPath, "Expected");
         }
         #endregion
 

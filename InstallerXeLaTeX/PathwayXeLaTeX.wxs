@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?define Product="PathwayXeLaTeX"?>
+<?define UpgradeCode="474DE565-D67B-4042-9012-40A4663B0AE1"?>
+<?define Edition="BTE"?>
+<?define BUILD_NUMBER="1.15.3"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="$(var.Product) $(var.Edition) $(var.BUILD_NUMBER)" Language="1033" Version="$(var.BUILD_NUMBER)" Manufacturer="SIL International" UpgradeCode="$(var.UpgradeCode)">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.BUILD_NUMBER)" OnlyDetect="yes" Property="NEWVERSIONDETECTED" />
+      <UpgradeVersion Minimum="0.0.0" IncludeMinimum="yes" Maximum="$(var.BUILD_NUMBER)" IncludeMaximum="no" OnlyDetect="no" Property="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade>
+    <!-- 
+		"from the list: Don't use Advertise="yes" Advertised shortcuts are designed to allow
+		users to install just the shortcut for your app, then demand-install the
+		rest of the app the first time the icon is run.  If this is not behavior you
+		are trying to support, you're better off using non-advertised shortcuts. "
+		-->
+    <PropertyRef Id="NETFRAMEWORK40FULL" />
+    <Condition Message="Before Pathway can install, you need to install Microsoft's free .NET Framework 4.0.">
+			Installed OR NETFRAMEWORK40FULL
+		</Condition>
+    <Media Id="1" Cabinet="xelatex.cab" EmbedCab="yes" CompressionLevel="high" />
+    <Property Id="DISABLEADVTSHORTCUTS" Value="1" />
+    <Feature Id="ProgramFiles" Level="1" Absent="disallow" Title="Program Files">
+      <ComponentGroupRef Id="Application" />
+    </Feature>
+    <DirectoryRef Id="TARGETDIR">
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      <Component Id="RegistryEntries" Guid="6CD90256-90DF-4C34-B349-3CBFBE589FBB" KeyPath="yes">
+        <RegistryValue Root="HKLM" Key="Software\SIL\PathwayXeLaTeX" Name="XeLaTexDir" Type="string" Value="[APPLICATIONFOLDER]" />
+        <RegistryValue Root="HKLM" Key="Software\SIL\PathwayXeLaTeX" Name="XeLaTexVer" Type="string" Value="$(var.BUILD_NUMBER)" />
+      </Component>
+    </DirectoryRef>
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="bannrbmp.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="dlgbmp.bmp" />
+    <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+      <RegisterFonts />
+      <!--We need the condition here so that we only launch the executable when we make an installation but not when we remove the product-->
+    </InstallExecuteSequence>
+  </Product>
+</Wix>

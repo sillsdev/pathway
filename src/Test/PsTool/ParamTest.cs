@@ -96,7 +96,7 @@ namespace Test.CssDialog
             try
             {
                 var value = Param.Value[Param.InputType];
-                Assert.Fail("Values available after UnLoadValues");
+                Assert.Fail(value + " Values available after UnLoadValues");
             }
             catch (Exception e)
             {

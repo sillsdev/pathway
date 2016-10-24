@@ -2,8 +2,8 @@ Source: pathway
 Section: cli-mono
 Priority: extra
 Maintainer: Greg Trihus <greg_trihus@sil.org>
-Build-Depends: debhelper (>= 7), autotools-dev, devscripts, cli-common-dev (>=0.8~),
- libasound2, libsndfile1
+Build-Depends: debhelper (>= 7), autotools-dev, cli-common, mono-xbuild,
+ mono4-sil, mono-basic4-sil, libgdiplus4-sil, gtk-sharp4-sil
 Standards-Version: 3.9.6
 Homepage: http://pathway.sil.org
 Vcs-Git: git://github.com/sillsdev/pathway.git
@@ -11,9 +11,8 @@ Vcs-Browser: http://github.com/sillsdev/pathway/
 
 Package: pathway
 Architecture: all
-Depends: default-jre-headless, mono-basic-sil, fonts-sil-charissil,
- lame, xchm, libsword-utils, nautilus,
- ${misc:Depends}, ${cli:Depends}
+Depends: default-jre-headless, fonts-sil-charissil, mono4-sil, mono-basic4-sil,
+ libgdiplus4-sil, gtk-sharp4-sil, lame, xchm, libsword-utils, nautilus
 Recommends: libreoffice-writer, prince, calibre, evince
 Description: Prepare dictionary and Scripture data for distribution in various formats
  Pathway prepares dictionary and Scripture data in open document (odf), e-book

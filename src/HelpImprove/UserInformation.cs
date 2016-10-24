@@ -584,6 +584,7 @@ namespace SIL.PublishingSolution
                 }
                 catch (Exception e)
                 {
+					Console.WriteLine(e.Message);
                     return null;
                 }
             }
@@ -594,33 +595,28 @@ namespace SIL.PublishingSolution
             try
             {
                 OperatingSystem osInfo = Environment.OSVersion;
+	            var versionString = osInfo.Platform.ToString();
                 switch (osInfo.Platform)
                 {
                     case System.PlatformID.Win32NT:
                         switch (osInfo.Version.Major)
                         {
                             case 3:
-                                return "Windows NT 3.51";
+                                versionString = "Windows NT 3.51";
                                 break;
                             case 4:
-                                return "Windows NT 4.0";
+								versionString = "Windows NT 4.0";
                                 break;
                             case 5:
-                                if (osInfo.Version.Minor == 0)
-                                    return "Windows 2000";
-                                else
-                                    return "Windows XP";
+                                versionString = osInfo.Version.Minor == 0 ? "Windows 2000" : "Windows XP";
                                 break;
                             case 6:
-                                if (osInfo.Version.Minor == 1)
-                                    return "Windows7";
-                                return "Windows8";
+		                        versionString = osInfo.Version.Minor == 1 ? "Windows7" : "Windows8";
+								break;
                         }
                         break;
-
                 }
-                return osInfo.Platform.ToString();
-
+                return versionString;
             }
             catch
             {
@@ -677,12 +673,6 @@ namespace SIL.PublishingSolution
                 // now send it
                 requestStream.Write(postBytes, 0, postBytes.Length);
                 requestStream.Close();
-
-                // grab te response and print it out to the console along with the status code
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                var consoleString = (new StreamReader(response.GetResponseStream()).ReadToEnd());
-                var consoleStatusString = (response.StatusCode);
             }
             catch { }
 

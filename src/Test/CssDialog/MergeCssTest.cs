@@ -34,8 +34,6 @@ namespace Test.CssDialog
         string _inputBasePath = string.Empty;
         /// <summary>holds path to expect folder for all tests</summary>
         string _expectBasePath = string.Empty;
-        /// <summary>path to all users output</summary>
-        string _publishingSolutionsData = string.Empty;
 
         [TestFixtureSetUp]
         protected void SetUp()
@@ -44,8 +42,6 @@ namespace Test.CssDialog
             string currentFolder = PathPart.Bin(Environment.CurrentDirectory, "/CssDialog/TestFiles");
             _inputBasePath = Common.PathCombine(currentFolder, "Input");
             _expectBasePath = Common.PathCombine(currentFolder, "Expected");
-            var allUsersDataDir = Common.GetAllUserAppPath();
-            _publishingSolutionsData = Common.PathCombine(allUsersDataDir, Common.PathCombine("SIL", "Pathway"));
         }
 
         [TestFixtureTearDown]

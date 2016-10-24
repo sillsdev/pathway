@@ -19,19 +19,14 @@ using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Xml;
 using DesktopAnalytics;
 using L10NSharp;
-using Palaso.UI.WindowsForms;
-using SIL.PublishingSolution.Properties;
 using SIL.Tool;
-using Palaso.Reporting;
 using System.Collections.Generic;
+using SIL.Reporting;
 
 namespace SIL.PublishingSolution
 {
@@ -41,10 +36,9 @@ namespace SIL.PublishingSolution
 
 		public ConfigurationToolBL _cToolBL = new ConfigurationToolBL();
 		public string _previousTxtName;
-		private string _lastSelectedLayout = string.Empty;
 		private TraceSwitch _traceOn = new TraceSwitch("General", "Trace level for application");
 		private static List<Exception> _pendingExceptionsToReportToAnalytics = new List<Exception>();
-
+		public bool IsExportOptionFromFlexOrParatext = false;
 		#endregion
 
 		#region Public Variable
@@ -61,7 +55,6 @@ namespace SIL.PublishingSolution
 		public ConfigurationTool()
 		{
 			Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool Constructor");
-			Common.InitializeOtherProjects();
 			Common.SetupLocalization();
 			InitializeComponent();
 			if (Common.IsUnixOS())
@@ -108,6 +101,7 @@ namespace SIL.PublishingSolution
 			//Note: 1 -  Standalone Application
 			//Note: 2 -  The ConfigurationTool.EXE is called by PrintVia dialog from FLEX/TE/etc.,);
 			string entryAssemblyName = string.Empty;
+			string exportFrom = string.Empty;
 			if (!(String.IsNullOrEmpty(Convert.ToString(Assembly.GetEntryAssembly()))))
 			{
 				entryAssemblyName = Assembly.GetEntryAssembly().FullName;
@@ -128,9 +122,25 @@ namespace SIL.PublishingSolution
 			else
 			{
 				//It will call when the Configtool from exe(FLEX/TE/etc.,)
+				if (!string.IsNullOrEmpty(entryAssemblyName))
+				{
+					if (entryAssemblyName.Trim().ToLower().Contains("paratext"))
+					{
+						exportFrom = "Scripture";
+					}
+					else if (entryAssemblyName.Trim().ToLower().Contains("fieldwork"))
+					{
+						exportFrom = "Dictionary";
+					}
+				}
 				Param.LoadSettings(); // Load StyleSetting.xml
+				if (_cToolBL.inputTypeBL == String.Empty && exportFrom != string.Empty)
+				{
+					_cToolBL.inputTypeBL = exportFrom;
+				}
 				Param.SetLoadType = _cToolBL.inputTypeBL;
 				tsDefault.Enabled = false;
+				
 			}
 		}
 
@@ -146,7 +156,6 @@ namespace SIL.PublishingSolution
 				{
 					if (Param.Value != null && Param.Value.Count > 0)
 					{
-						_lastSelectedLayout = Param.Value["LayoutSelected"];
 						this.Close();
 					}
 				}
@@ -868,9 +877,18 @@ namespace SIL.PublishingSolution
 			SetUpErrorHandling();
             Param.LoadUiLanguageFontInfo();
             UpdateFontOnL10NSharp(LocalizationManager.UILanguageId);
-
+			
 			_cToolBL = new ConfigurationToolBL();
-			 InputType = _cToolBL.inputTypeBL;
+			LoadSettings();
+			if (!IsExportOptionFromFlexOrParatext)
+			{
+				InputType = _cToolBL.inputTypeBL;
+			}
+			else
+			{
+				_cToolBL.inputTypeBL = InputType;
+			}
+
 			_cToolBL.MediaTypeEXE = MediaType;
 			_cToolBL.StyleEXE = Style.Replace('&', ' '); //
 			_cToolBL.SetClassReference(this);
@@ -927,8 +945,8 @@ namespace SIL.PublishingSolution
 		{
 			_cToolBL.ConfigurationTool_FormClosingBL();
 			Style = _cToolBL.StyleEXE.ToString();
-			Settings.Default.Save();
-			Common.SaveLocalizationSettings(Settings.Default.UserInterfaceLanguage, null, null);
+			Properties.Settings.Default.Save();
+			Common.SaveLocalizationSettings(Properties.Settings.Default.UserInterfaceLanguage, null, null);
 		}
 		private void btnDictionary_Click(object sender, EventArgs e)
 		{

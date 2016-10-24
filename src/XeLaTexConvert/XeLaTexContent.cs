@@ -335,6 +335,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
+				foreach (string className in IdAllClass.Keys)
+				{
+					if (!IdAllClassWithandWithoutSeperator.ContainsKey(className))
+						IdAllClassWithandWithoutSeperator.Add(className, className.Replace("-", "_").Replace(".", ""));
+				}
+
                 _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
                 bool headXML = true;
                 while (_reader.Read())
@@ -1178,18 +1184,18 @@ namespace SIL.PublishingSolution
 
                 _xetexFile.WriteLine("\r\n");
 
-                string p1 = @"\begin{wrapfigure}";
+                //string p1 = @"\begin{wrapfigure}";
                 string p2 = @"\begin{center}";
                 string p3 = @"\includegraphics[angle=0,width=" + width + "mm,height=" + height + "mm]{" + picFile + "} ";
-                _xetexFile.WriteLine(p1);
+                //_xetexFile.WriteLine(p1);
                 _xetexFile.WriteLine(p2);
                 _xetexFile.WriteLine(p3);
-                string p4 = @"\caption{}";
+                //string p4 = @"\caption{}";
                 string p5 = @"\end{center}";
-                string p6 = @"\end{wrapfigure}";
-                _xetexFile.WriteLine(p4);
+                //string p6 = @"\end{wrapfigure}";
+                //_xetexFile.WriteLine(p4);
                 _xetexFile.WriteLine(p5);
-                _xetexFile.WriteLine(p6);
+                //_xetexFile.WriteLine(p6);
                 _xetexFile.WriteLine("\r\n");
             }
         }

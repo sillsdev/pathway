@@ -28,7 +28,6 @@ namespace SIL.PublishingSolution
 
         Dictionary<string, Dictionary<string, string>> _cssProperty = new Dictionary<string, Dictionary<string, string>>();
         XeLaTexMapProperty mapProperty = new XeLaTexMapProperty();
-        private StreamWriter _xetexFile;
         private List<string> _inlineStyle;
         private List<string> _inlineText;
         private List<string> _includePackageList;
@@ -59,7 +58,6 @@ namespace SIL.PublishingSolution
             {
                 _includePackageList = new List<string>();
                 _inlineText = new List<string>();
-                _xetexFile = xetexFile;
                 _cssProperty = cssProperty;
                 _projInfo = projInfo;
                 LoadPageStyleFormat();

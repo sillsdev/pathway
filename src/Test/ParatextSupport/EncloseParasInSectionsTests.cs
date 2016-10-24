@@ -78,11 +78,6 @@ namespace Test.ParatextSupport
             xslParams.Add("fontName", "Times");
             xslParams.Add("fontSize", "12");
 
-            if (Common.IsUnixOS())
-            {
-                _htmlHeader = "<head><title></title></head>";
-            }
-
             ParatextPathwayLink converter = new ParatextPathwayLink("testDb", xslParams);
             encloseParasInSections = ParatextSupportExtensions.EncloseParasInSectionsXslt(converter);
         }

@@ -154,7 +154,6 @@
 			this.grid.Size = new System.Drawing.Size(524, 612);
 			this.grid.TabIndex = 7;
 			this.grid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellClick);
-			this.grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellContentClick);
 			this.grid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_RowEnter);
 			// 
 			// pictureBox1

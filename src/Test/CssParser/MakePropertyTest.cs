@@ -36,14 +36,12 @@ namespace Test.CssParserTest
         private Dictionary<string, string> _expected;
         private Dictionary<string, string> _output;
         private string[] _position;
-        private bool _isLinux;
         #endregion Private Variables
 
         #region Setup
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            _isLinux = Common.IsUnixOS();
             _input = new StyleAttribute();
             _makeProperty = new MakeProperty();
             _expected = new Dictionary<string, string>();
@@ -490,8 +488,8 @@ namespace Test.CssParserTest
             _input.StringValue = "\"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", _isLinux ? "serif" : "Times New Roman");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            _expected.Add("font-family", "Times New Roman");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
         [Test]
@@ -503,7 +501,7 @@ namespace Test.CssParserTest
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
             _expected.Add("font-family", "Verdana");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
         [Test]
@@ -513,8 +511,8 @@ namespace Test.CssParserTest
             _input.StringValue = "Georgia, \"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", _isLinux ? "Times New Roman" : "Georgia");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            _expected.Add("font-family", "Georgia");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
         [Test]
@@ -524,8 +522,8 @@ namespace Test.CssParserTest
             _input.StringValue = "dummyfont, Georgia,\"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", _isLinux ? "Times New Roman" : "Georgia");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            _expected.Add("font-family", "Georgia");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
         [Test]
@@ -536,7 +534,7 @@ namespace Test.CssParserTest
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
             _expected.Add("font-family", "dummyfont");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
         [Test]
         public void FontFamily6()
@@ -546,7 +544,7 @@ namespace Test.CssParserTest
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
             _expected.Add("font-family", "dummyfamily");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
         [Test]
         public void FontFamily7()
@@ -555,8 +553,8 @@ namespace Test.CssParserTest
             _input.StringValue = "Arial, sans-serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", _isLinux ? "Verdana" : "Arial");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            _expected.Add("font-family", "Arial");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
         [Test]
@@ -577,7 +575,7 @@ namespace Test.CssParserTest
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
             _expected.Add("font-family", "Modern");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
 	    [Test]
@@ -589,7 +587,7 @@ namespace Test.CssParserTest
 			_output = _makeProperty.CreateProperty(_input);
 			_expected.Clear();
 			_expected.Add("font-family", "Charis SIL");
-			Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+			Assert.IsTrue(CompareDictionary(), CompareMessage());
 
 	    }
         #endregion FontFamily
@@ -609,13 +607,13 @@ namespace Test.CssParserTest
             _makeProperty.Font(_input);
             _expected.Clear();
             _expected.Add("font-size", "24");
-            _expected.Add("font-family", _isLinux ? "serif" : "Times New Roman");
+            _expected.Add("font-family", "Times New Roman");
             _expected.Add("font-style", "italic");
             _expected.Add("font-variant", "small-caps");
             _expected.Add("font-weight", "bold");
             _expected.Add("line-height", "100%");
             _output = _makeProperty.GetProperty;
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
         /// <summary>
@@ -711,7 +709,7 @@ namespace Test.CssParserTest
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
             _expected.Add("font-weight", "bold");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
         [Test]
@@ -722,7 +720,7 @@ namespace Test.CssParserTest
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
             _expected.Add("font-weight", "normal");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
         [Test]
@@ -733,7 +731,7 @@ namespace Test.CssParserTest
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
             _expected.Add("font-weight", "bold");
-            Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+            Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
 		/// <summary>
@@ -747,7 +745,7 @@ namespace Test.CssParserTest
 			_output = _makeProperty.CreateProperty(_input);
 			_expected.Clear();
 			_expected.Add("text-decoration", "line-through");
-			Assert.IsTrue(CompareDictionary(), _input.Name + " : " + _input.StringValue + " test Failed");
+			Assert.IsTrue(CompareDictionary(), CompareMessage());
 		}
 
         #endregion Public Functions
@@ -766,8 +764,10 @@ namespace Test.CssParserTest
             }
         }
 
+        private string _compareExpected;
+        private string _compareActual;
         /// <summary>
-        /// 
+        /// Compare each value for keys in the dictionary
         /// </summary>
         /// <returns></returns>
         private bool CompareDictionary()
@@ -777,11 +777,23 @@ namespace Test.CssParserTest
             {
                 if (dicData.Value != _output[dicData.Key])
                 {
+                    _compareExpected = dicData.Value;
+                    _compareActual = _output[dicData.Key];
                     compare = false;
                     break;
                 }
             }
             return compare;
+        }
+
+        /// <summary>
+        /// Return the results of failed compare operations as a string.
+        /// </summary>
+        /// <returns>Formatted result message</returns>
+        private string CompareMessage()
+        {
+            return _input.Name + " : expected '" + _compareExpected + "' but was actually '" + _compareActual +
+                   "'. Test Failed.";
         }
 
         #endregion private Functions

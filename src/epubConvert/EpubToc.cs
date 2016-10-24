@@ -36,7 +36,6 @@ namespace epubConvert
         private readonly XslCompiledTransform _addDicTocHeads = new XslCompiledTransform();
         private readonly XslCompiledTransform _fixEpubToc = new XslCompiledTransform();
         private string _currentChapterNumber = string.Empty;
-        private readonly bool _isUnixOs = Common.UnixVersionCheck();
 
         public EpubToc(string inputType, string tocLevel)
         {
@@ -170,11 +169,6 @@ namespace epubConvert
                 ncx.WriteAttributeString("src", name);
                 ncx.WriteEndElement(); // meta
                 index++;
-                //// chapters within the books (nested as a subhead)
-                //if (!skipChapterInfo)
-                //{
-                //    WriteEndNoteLinks(file, ref index, ncx);
-                //}
             }
             else
             {
@@ -291,18 +285,6 @@ namespace epubConvert
                 n += 1;
             }
 
-            if (_isUnixOs)
-            {
-                nodes = tocDoc.SelectNodes("//@id");
-                Debug.Assert(nodes != null);
-                n = 1;
-                foreach (XmlAttribute node in nodes)
-                {
-                    node.InnerText = node.InnerText + n.ToString(CultureInfo.InvariantCulture);
-                    n += 1;
-                }
-            }
-
             var xmlFile = new FileStream(tocFullPath, FileMode.Create);
             XmlWriter writer = XmlWriter.Create(xmlFile);
             tocDoc.Save(writer);
@@ -331,7 +313,7 @@ namespace epubConvert
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
             var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -509,6 +491,7 @@ namespace epubConvert
 			else
 				textString = node.FirstChild.InnerText;
 
+	        bool writeHeadwordEndNavPoint = false;
 	        if (textString.Trim().Length > 0)
             {
                 // write out the node
@@ -522,6 +505,7 @@ namespace epubConvert
                 ncx.WriteAttributeString("src", sb.ToString());
                 ncx.WriteEndElement(); // meta
                 playOrder++;
+				writeHeadwordEndNavPoint = true;
             }
 
             // If this is a dictionary with TOC level 3, gather the senses for this entry
@@ -582,9 +566,9 @@ namespace epubConvert
                     }
                 }
             }
-            if (textString.Trim().Length > 0)
+			if (writeHeadwordEndNavPoint == true)
             {
-                ncx.WriteEndElement(); // navPoint
+                ncx.WriteEndElement(); // navPoint of headword
             }
             return true;
         }
@@ -594,7 +578,7 @@ namespace epubConvert
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
             XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -729,7 +713,7 @@ namespace epubConvert
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
             var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();

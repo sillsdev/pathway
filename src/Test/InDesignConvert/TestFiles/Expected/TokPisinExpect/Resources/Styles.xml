@@ -10,7 +10,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scrBookName_1" Name="scrBookName_1" Imported="false" NextStyle="CharacterStyle/scrBookName_1" KeyboardShortcut="0 0" clear="both">
+    <CharacterStyle Self="CharacterStyle/scrBookName_.en_1" Name="scrBookName_.en_1" Imported="false" NextStyle="CharacterStyle/scrBookName_.en_1" KeyboardShortcut="0 0" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -74,7 +74,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="CharacterStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="36" FontStyle="Bold" BaselineShift="0" float="left" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/ChapterNumber_.tpi_1" Name="ChapterNumber_.tpi_1" Imported="false" NextStyle="CharacterStyle/ChapterNumber_.tpi_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="36" FontStyle="Bold" BaselineShift="0" float="left" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -90,7 +90,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideChapterNumber" Name="hideChapterNumber" Imported="false" NextStyle="CharacterStyle/hideChapterNumber" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/hideChapterNumber_.tpi_1" Name="hideChapterNumber_.tpi_1" Imported="false" NextStyle="CharacterStyle/hideChapterNumber_.tpi_1" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -98,7 +98,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/hideVerseNumber" Name="hideVerseNumber" Imported="false" NextStyle="CharacterStyle/hideVerseNumber" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
+    <CharacterStyle Self="CharacterStyle/hideVerseNumber_.tpi_1" Name="hideVerseNumber_.tpi_1" Imported="false" NextStyle="CharacterStyle/hideVerseNumber_.tpi_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -106,7 +106,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/PWHide_1" Name="PWHide_1" Imported="false" NextStyle="CharacterStyle/PWHide_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
+    <CharacterStyle Self="CharacterStyle/PWHide_.tpi_1" Name="PWHide_.tpi_1" Imported="false" NextStyle="CharacterStyle/PWHide_.tpi_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -114,7 +114,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="CharacterStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumber_.tpi_1" Name="VerseNumber_.tpi_1" Imported="false" NextStyle="CharacterStyle/VerseNumber_.tpi_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -202,7 +202,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/VerseNumberAlternate_1" Name="VerseNumberAlternate_1" Imported="false" NextStyle="CharacterStyle/VerseNumberAlternate_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" Position="Superscript" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both">
+    <CharacterStyle Self="CharacterStyle/VerseNumberAlternate_.tpi_1" Name="VerseNumberAlternate_.tpi_1" Imported="false" NextStyle="CharacterStyle/VerseNumberAlternate_.tpi_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" Position="Superscript" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -265,7 +265,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scrBookName_1" Name="scrBookName_1" Imported="false" NextStyle="ParagraphStyle/scrBookName_1" KeyboardShortcut="0 0" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/scrBookName_.en_1" Name="scrBookName_.en_1" Imported="false" NextStyle="ParagraphStyle/scrBookName_.en_1" KeyboardShortcut="0 0" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -329,7 +329,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_1" Name="ChapterNumber_1" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="36" FontStyle="Bold" BaselineShift="9" float="left" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/ChapterNumber_.tpi_1" Name="ChapterNumber_.tpi_1" Imported="false" NextStyle="ParagraphStyle/ChapterNumber_.tpi_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="36" FontStyle="Bold" BaselineShift="9" float="left" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -345,7 +345,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber" Name="hideChapterNumber" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/hideChapterNumber_.tpi_1" Name="hideChapterNumber_.tpi_1" Imported="false" NextStyle="ParagraphStyle/hideChapterNumber_.tpi_1" KeyboardShortcut="0 0" PointSize="0.1" FirstLineIndent="0" LeftIndent="0" float="left" AppliedFont="Charis SIL" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -353,7 +353,7 @@
         <Leading type="unit">0.1</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber" Name="hideVerseNumber" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/hideVerseNumber_.tpi_1" Name="hideVerseNumber_.tpi_1" Imported="false" NextStyle="ParagraphStyle/hideVerseNumber_.tpi_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -361,7 +361,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/PWHide_1" Name="PWHide_1" Imported="false" NextStyle="ParagraphStyle/PWHide_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/PWHide_.tpi_1" Name="PWHide_.tpi_1" Imported="false" NextStyle="ParagraphStyle/PWHide_.tpi_1" KeyboardShortcut="0 0" PointSize="0.1" AppliedFont="Charis SIL" FirstLineIndent="12" Justification="LeftAlign" clear="both" FillColor="Color/Paper" StrokeColor="Color/Paper" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Charis SIL</AppliedFont>
@@ -369,7 +369,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumber_1" Name="VerseNumber_1" Imported="false" NextStyle="ParagraphStyle/VerseNumber_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber_.tpi_1" Name="VerseNumber_.tpi_1" Imported="false" NextStyle="ParagraphStyle/VerseNumber_.tpi_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="18" Position="Superscript" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -457,7 +457,7 @@
         <Leading type="unit">20</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/VerseNumberAlternate_1" Name="VerseNumberAlternate_1" Imported="false" NextStyle="ParagraphStyle/VerseNumberAlternate_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" Position="Superscript" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumberAlternate_.tpi_1" Name="VerseNumberAlternate_.tpi_1" Imported="false" NextStyle="ParagraphStyle/VerseNumberAlternate_.tpi_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" Position="Superscript" PointSize="18" FirstLineIndent="12" Justification="LeftAlign" clear="both" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>

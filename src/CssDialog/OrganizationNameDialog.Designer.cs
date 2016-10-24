@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrganizationNameDialog));
             this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
 
             this.btnOK = new System.Windows.Forms.Button();

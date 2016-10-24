@@ -1275,7 +1275,6 @@ namespace SIL.Tool
         public static string GetMetadataCurrentValue(string name)
         {
             XmlNode node;
-            string lastSavedDatabase = string.Empty;
             try
             {
                 node = GetItem("//stylePick/Metadata/meta[@name='" + name + "']/currentValue");

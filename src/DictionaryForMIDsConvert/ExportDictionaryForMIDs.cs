@@ -36,7 +36,7 @@ namespace SIL.PublishingSolution
         protected static string WorkDir;
         protected static Dictionary<string, Dictionary<string, string>> CssClass;
         protected static DictionaryForMIDsStyle ContentStyles = new DictionaryForMIDsStyle();
-        private static bool _isUnixOS = false;
+		protected static bool _isUnixOS = false;
 
         #region Properties
         #region ExportType
@@ -238,20 +238,16 @@ namespace SIL.PublishingSolution
         {
             var output = new DictionaryForMIDsStreamWriter(projInfo);
             Debug.Assert(output.Directory != null);
-            var processFullPath = Common.PathCombine(output.Directory, "go.bat");
             var DictionaryForMIDsPath = Common.FromRegistry("Dic4Mid");
             var creatorPath = Common.PathCombine(DictionaryForMIDsPath, "DfM-Creator");
             FolderTree.Copy(creatorPath, output.Directory);
-            const string redirectOutputFileName = LogName;
-            SubProcess.RedirectOutput = redirectOutputFileName;
-            if (_isUnixOS)
-            {
-                SubProcess.RunCommand(output.Directory, "wineconsole", processFullPath, true);
-            }
-            else
-            {
-                SubProcess.Run(output.Directory, processFullPath, ".", true);
-            }
+
+            const string prog = "java";
+            SubProcess.RedirectOutput = LogName;
+			var args1 = string.Format (@"-jar DfM-Creator.jar -DictionaryGeneration .{0}main.txt . .", Path.DirectorySeparatorChar);
+            SubProcess.RunCommand(output.Directory, prog, args1, true);
+			var args2 = string.Format (@"-jar DfM-Creator.jar -JarCreator .{0}dictionary{0} .{0}Empty_Jar-Jad{0} .", Path.DirectorySeparatorChar);
+            SubProcess.RunCommand(output.Directory, prog, args2, true);
         }
 
         protected void CreateSubmission(PublicationInformation projInfo)

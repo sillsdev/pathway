@@ -49,14 +49,15 @@ namespace CssSimpler
         private void InsertBefore(XmlReader r)
         {
             var nextClass = r.GetAttribute("class");
-            if (ApplyBestRule(r.Depth + 1, nextClass, _beforeTargets, nextClass)) return;
+            if (ApplyBestRule(r.Depth, nextClass, _beforeTargets, nextClass)) return;
+            if (ApplyBestRule(r.Depth, GetTargetKey(r.Name, nextClass), _beforeTargets, nextClass)) return;
             var keyClass = KeyClass(r.Depth);
             if (_classes.Count > r.Depth && ApplyBestRule(r.Depth, GetTargetKey(r.Name, keyClass), _beforeTargets, keyClass)) return;
             var target = GetTargetKey(r.Name, _lastClass);
             ApplyBestRule(r.Depth, target, _beforeTargets, _lastClass);
         }
 
-        private XmlNode _savedFirstNode = null;
+        private XmlNode _savedFirstNode;
         private string _firstClass = string.Empty;
         private void InsertFirstChild(XmlReader r)
         {
@@ -145,7 +146,7 @@ namespace CssSimpler
                         requireParent = true;
                         continue;
                     case "CLASS":
-                        string name = node.ChildNodes[0].InnerText;
+                        string name = node.FirstChild.InnerText;
                         while (!requireParent && index > 0 && !MatchClass(index, name))
                         {
                             index -= 1;
@@ -158,17 +159,22 @@ namespace CssSimpler
                         if (_firstSibling) return false;
                         node = node.PreviousSibling;
                         Debug.Assert(node != null, "Nothing preceding PRECEDES");
-                        string precedingName = node.ChildNodes[0].InnerText;
+                        string precedingName = node.FirstChild.InnerText;
                         if (_precedingClass != precedingName && precedingName != "span") return false;
-                        if (precedingName != "span") index -= 1;
+                        //if (precedingName != "span") index -= 1;
                         break;
                     case "SIBLING":
                         node = node.PreviousSibling;
                         Debug.Assert(node != null, "Nothing preceding SIBLING");
-                        string siblingName = node.ChildNodes[0].InnerText;
+                        string siblingName = node.FirstChild.InnerText;
                         int position = _savedSibling.IndexOf(siblingName);
                         if (position == -1 || position == _savedSibling.Count - 1) return false;
-                        index -= 1;
+                        //index -= 1;
+                        break;
+                    case "TAG":
+                        string tagName = node.FirstChild.InnerText;
+                        if (tagName != "span" && tagName != "a")
+                            throw new NotImplementedException();
                         break;
                     default:
                         throw new NotImplementedException();
@@ -209,7 +215,10 @@ namespace CssSimpler
             var content = node.SelectSingleNode("following-sibling::PROPERTY[name='content']/value");
             Debug.Assert(content != null);
             var val = content.InnerText;
-            WriteContent(val.Substring(1,val.Length - 2), myClass.Replace(" ", ""));  // Remove quotes
+            var properties = node.SelectNodes("parent::*/PROPERTY");
+            Debug.Assert(properties != null);
+            myClass = properties.Count <= 1 ? null : myClass.Replace(" ", "");
+            WriteContent(val.Substring(1, val.Length - 2), myClass);  // Remove quotes
         }
 
         private void SaveClass(XmlReader r)
@@ -224,6 +233,7 @@ namespace CssSimpler
                 {
                     while (_classes.Count < r.Depth)
                     {
+                        // ReSharper disable once AssignNullToNotNullAttribute
                         _classes.Add(null);
                     }
                     _classes.Add(r.Value);
@@ -282,6 +292,7 @@ namespace CssSimpler
                         var targetRule = term.ParentNode as XmlElement;
                         Debug.Assert(targetRule != null, "targetRule != null");
                         var ruleTerms = int.Parse(targetRule.GetAttribute("term"));
+                        // ReSharper disable once TryCastAlwaysSucceeds
                         var curRule = pseudo.ParentNode as XmlElement;
                         var curTerms = int.Parse(curRule.GetAttribute("term"));
                         if (curTerms >= ruleTerms)

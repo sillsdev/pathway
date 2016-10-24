@@ -1,6 +1,6 @@
 ﻿@page {
     size: 10.5cm 14.8cm;
-    marks: crop cross;
+    /* marks: crop cross; */
     counter-increment: page;
     margin: 1.25cm 1.4cm;
 }

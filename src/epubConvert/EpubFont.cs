@@ -88,7 +88,7 @@ namespace epubConvert
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
             var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();

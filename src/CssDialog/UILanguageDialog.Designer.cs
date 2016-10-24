@@ -44,7 +44,6 @@ namespace SIL.PublishingSolution
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.rtbPreview = new System.Windows.Forms.RichTextBox();
 			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-			this.printDocument1 = new System.Drawing.Printing.PrintDocument();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			((System.ComponentModel.ISupportInitialize)(this.l10NSharpExtender1)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -259,7 +258,6 @@ namespace SIL.PublishingSolution
         private System.Windows.Forms.Label lblUserInterface;
         private System.Windows.Forms.ComboBox ddlUILanguage;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.Label lblFontName;
         private System.Windows.Forms.ComboBox ddlFontName;
         private System.Windows.Forms.Label lblFontSize;

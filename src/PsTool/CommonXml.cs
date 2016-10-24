@@ -781,7 +781,7 @@ namespace SIL.Tool
 					}
 
 				//Transform the file. and writing to temporary File
-				var setting = new XmlReaderSettings { ProhibitDtd = false, XmlResolver = null };
+				var setting = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = null };
 				XmlReader reader = XmlReader.Create(inputFile, setting);
 				var writerSettings = new XmlWriterSettings();
 				if (!IncludeUtf8BomIdentifier || !ext.ToLower().Contains("xhtml"))
@@ -1057,6 +1057,7 @@ namespace SIL.Tool
 			catch (XmlException ex)
 			{
 				var msg = new[] { ex.Message, xhtmlFileWithPath };
+				Console.WriteLine(msg.ToString());
 			}
 			books.AddRange(writers.Keys);
 			return books;

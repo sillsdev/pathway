@@ -123,10 +123,11 @@ namespace epubValidator
                         }
                         sb.Append(strAppDir.Substring(6)); // Remove the leading file:/ from the CodeBase result
                         sb.Append(Path.DirectorySeparatorChar);
-                        sb.Append("epubcheck-3.0.1");
+                        sb.Append("epubcheck-4.0.1");
                         sb.Append(Path.DirectorySeparatorChar);
-                        sb.Append("epubcheck-3.0.1.jar");
-                        sb.Append("\" ");
+						sb.Append("epubcheck.jar");
+						sb.Append("\" ");
+	                    sb.Append(" -e "); // Include only error and fatal severity messages in output
                         // filename to run it against (the .epub file)
                         sb.Append("\"");
                         sb.Append(Filename);
@@ -168,6 +169,7 @@ namespace epubValidator
                 }
                 catch (System.ComponentModel.Win32Exception w32e)
                 {
+					Console.WriteLine(w32e.Message);
                     return "No errors or warnings detected";
                 }
                 catch (Exception e)

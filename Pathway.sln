@@ -73,6 +73,7 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "Installer\Inst
 	ProjectSection(ProjectDependencies) = postProject
 		{C1ED7E03-C92E-4223-909B-E9C35A4D98E2} = {C1ED7E03-C92E-4223-909B-E9C35A4D98E2}
 		{DCD48287-7F36-4DBB-94CF-4FF617BF1F78} = {DCD48287-7F36-4DBB-94CF-4FF617BF1F78}
+		{168871A6-2191-4E4A-85E1-E2BB8592265E} = {168871A6-2191-4E4A-85E1-E2BB8592265E}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistFiles", "DistFiles\DistFiles.csproj", "{168871A6-2191-4E4A-85E1-E2BB8592265E}"
@@ -83,6 +84,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildStep", "src\BuildStep\BuildStep.csproj", "{B3C7BD82-538F-421D-89DB-991A4F0F65E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CssSimpler", "src\CssSimpler\CssSimpler.csproj", "{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "InstallerXeLaTeX", "InstallerXeLaTeX\InstallerXeLaTeX.wixproj", "{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}"
+	ProjectSection(ProjectDependencies) = postProject
+		{168871A6-2191-4E4A-85E1-E2BB8592265E} = {168871A6-2191-4E4A-85E1-E2BB8592265E}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D3FEB5E9-31D7-4EC8-9160-6EFAF8B44C8C}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1601,6 +1612,7 @@ Global
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Corporate7BTE|x86.ActiveCfg = Corporate7BTE|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Corporate7BTE|x86.Build.0 = Corporate7BTE|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Corporate7EPUB|Any CPU.ActiveCfg = Release|x86
+		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Corporate7EPUB|Any CPU.Build.0 = Release|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Corporate7EPUB|Mixed Platforms.ActiveCfg = Release|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Corporate7EPUB|Mixed Platforms.Build.0 = Release|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Corporate7EPUB|x86.ActiveCfg = Release|x86
@@ -1613,13 +1625,10 @@ Global
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Corporate7SE|x86.Build.0 = Corporate7SE|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.Debug|x86.ActiveCfg = Debug|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.PathwayXeLaTeX|Any CPU.ActiveCfg = Release|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.PathwayXeLaTeX|Mixed Platforms.ActiveCfg = Release|x86
-		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.PathwayXeLaTeX|Mixed Platforms.Build.0 = Release|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.PathwayXeLaTeX|x86.ActiveCfg = Release|x86
-		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.PathwayXeLaTeX|x86.Build.0 = Release|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.PathwayYouVersion|Any CPU.ActiveCfg = Release|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.PathwayYouVersion|Mixed Platforms.ActiveCfg = Release|x86
 		{ED6722BE-05EC-4683-A55F-BC305CEFC453}.PathwayYouVersion|Mixed Platforms.Build.0 = Release|x86
@@ -1830,7 +1839,6 @@ Global
 		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.PathwayXeLaTeX|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
 		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.PathwayXeLaTeX|Mixed Platforms.Build.0 = PathwayXeLaTeX|x86
 		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.PathwayXeLaTeX|x86.ActiveCfg = PathwayXeLaTeX|x86
-		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.PathwayXeLaTeX|x86.Build.0 = PathwayXeLaTeX|x86
 		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.PathwayYouVersion|Any CPU.ActiveCfg = PathwayXeLaTeX|Any CPU
 		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.PathwayYouVersion|Any CPU.Build.0 = PathwayXeLaTeX|Any CPU
 		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.PathwayYouVersion|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
@@ -1867,6 +1875,52 @@ Global
 		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.Release7SE|Mixed Platforms.Build.0 = Release7SE|x86
 		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.Release7SE|x86.ActiveCfg = Release7SE|x86
 		{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}.Release7SE|x86.Build.0 = Release7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Checking|Any CPU.ActiveCfg = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Checking|Mixed Platforms.ActiveCfg = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Checking|Mixed Platforms.Build.0 = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Checking|x86.ActiveCfg = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Checking|x86.Build.0 = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Corporate7BTE|Any CPU.ActiveCfg = Corporate7BTE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Corporate7BTE|Mixed Platforms.ActiveCfg = Corporate7BTE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Corporate7BTE|x86.ActiveCfg = Corporate7BTE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Corporate7EPUB|Any CPU.ActiveCfg = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Corporate7EPUB|Mixed Platforms.ActiveCfg = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Corporate7EPUB|x86.ActiveCfg = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Corporate7SE|Any CPU.ActiveCfg = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Corporate7SE|Mixed Platforms.ActiveCfg = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Corporate7SE|x86.ActiveCfg = Corporate7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Debug|x86.ActiveCfg = Debug|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayXeLaTeX|Any CPU.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayXeLaTeX|Any CPU.Build.0 = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayXeLaTeX|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayXeLaTeX|Mixed Platforms.Build.0 = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayXeLaTeX|x86.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayXeLaTeX|x86.Build.0 = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayYouVersion|Any CPU.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayYouVersion|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayYouVersion|Mixed Platforms.Build.0 = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PathwayYouVersion|x86.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwCtx|Any CPU.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwCtx|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwCtx|Mixed Platforms.Build.0 = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwCtx|x86.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwCtx|x86.Build.0 = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwTxEx|Any CPU.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwTxEx|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwTxEx|Mixed Platforms.Build.0 = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwTxEx|x86.ActiveCfg = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.PwTxEx|x86.Build.0 = PathwayXeLaTeX|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Release|Any CPU.ActiveCfg = Release|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Release|x86.ActiveCfg = Release|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Release7BTE|Any CPU.ActiveCfg = Release7BTE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Release7BTE|Mixed Platforms.ActiveCfg = Release7BTE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Release7BTE|x86.ActiveCfg = Release7BTE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Release7SE|Any CPU.ActiveCfg = Release7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Release7SE|Mixed Platforms.ActiveCfg = Release7SE|x86
+		{6566ECFD-6CE5-4B56-AD42-BFFF6DF64D44}.Release7SE|x86.ActiveCfg = Release7SE|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

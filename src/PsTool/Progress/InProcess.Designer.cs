@@ -32,8 +32,6 @@ namespace SIL.PublishingSolution
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InProcess));
-
             this.l10NSharpExtender1 = new L10NSharp.UI.L10NSharpExtender(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblDetails = new System.Windows.Forms.Label();

@@ -30,7 +30,6 @@ namespace Test.GoBibleConvert
         #region Private Variables
         private string _inputPath;
         private string _outputPath;
-        private string _expectedPath;
         private PublicationInformation _projInfo;
         #endregion
 
@@ -44,9 +43,8 @@ namespace Test.GoBibleConvert
             Common.Testing = true;
             _projInfo = new PublicationInformation();
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/GoBibleConvert/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "input");
+            _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
 
             string pathwayDirectory = PathwayPath.GetPathwayDir();
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");

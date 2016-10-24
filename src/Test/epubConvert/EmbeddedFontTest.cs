@@ -33,6 +33,7 @@ namespace Test.epubConvert
         /// Test a known Free font
         /// </summary>
         [Test]
+		[Ignore]
         [Category("SkipOnTeamCity")]
         public void FreeFontTest()
         {
@@ -183,6 +184,7 @@ namespace Test.epubConvert
         /// Test the SIL Scheharazade) font
         /// </summary>
         [Test]
+		[Ignore]
         [Category("SkipOnTeamCity")]
         public void ScheharazadeTest()
         {
@@ -195,6 +197,7 @@ namespace Test.epubConvert
         /// Test the SIL Sophia Nubian font
         /// </summary>
         [Test]
+		[Ignore]
         [Category("SkipOnTeamCity")]
         public void SophiaNubianTest()
         {

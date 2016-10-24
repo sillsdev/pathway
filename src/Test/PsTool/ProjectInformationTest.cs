@@ -273,41 +273,6 @@ namespace Test.PsTool
         }
 
         /// <summary>
-        ///A test for CopyDirectory
-        ///</summary>
-        [Test]
-        [Ignore]
-        public void CopyDirectoryTest()
-        {
-            string fileName = "DictionarySave.de";
-            string sourceFile = GetFileNameWithPath(fileName);
-            fileName = "dummy.de"; // nothing to do with xml, but addfiletoxml uses this
-            string output = GetFileNameWithOutputPath(fileName);
-            CopyToOutput(sourceFile, output);
-            _target.LoadProjectFile(output);
-
-            string inputPath = Common.PathCombine(GetTestPath(),Common.PathCombine("Inputfiles","CopyFolder"));
-            var sourceFolder = new DirectoryInfo(inputPath);
-
-            string outputPath = Common.PathCombine(GetTestPath(), Common.PathCombine("Output", "CopyFolder"));
-            var destinationFolder = new DirectoryInfo(outputPath);
-
-            string parentRecursivePath = Path.GetDirectoryName(outputPath); 
-            _target.CopyDirectory(sourceFolder, destinationFolder, parentRecursivePath);
-
-            string expectedPath = Common.PathCombine(GetTestPath(), Common.PathCombine("Expected", "CopyFolder"));
-            var expectedFolder = new DirectoryInfo(expectedPath);
-
-
-            destinationFolder = new DirectoryInfo(outputPath);
-
-            //Assert.AreEqual(expectedFolder,destinationFolder);
-            // TODO1 comparing the folder should be added.
-            
-        }
-
-
-        /// <summary>
         ///A test for PopulateDicExplorerNode
         ///</summary>
         [Test]
@@ -356,7 +321,6 @@ namespace Test.PsTool
         public void PopulateDicExplorerTest()
         {
             TreeView outputTv = new TreeView();
-            TreeView expectedTreeView = new TreeView(); // TODO LOAD EXPECTED VALUE
             TreeNode expectedNode = new TreeNode();
             TreeNode childNode = new TreeNode();
             childNode.Text = "main.xhtml";

@@ -27,7 +27,6 @@ using Antlr.Runtime.Misc;
 namespace SIL.PublishingSolution.Compiler
 {
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.5.0.2")]
-[System.CLSCompliant(false)]
 public partial class csst3Lexer : Antlr.Runtime.Lexer
 {
 	public const int EOF=-1;

@@ -91,7 +91,7 @@ namespace Test.epubConvert
         private void FileCompare(string file)
         {
             string htmlOutput = FileOutput(file + ".html");
-            string htmlExpected = _isUnix ? FileExpected(file + "_linux.html") : FileExpected(file + ".html");
+            string htmlExpected = FileExpected(file + ".html");
             TextFileAssert.AreEqual(htmlOutput, htmlExpected, file + " in xhtml to html ");
         }
 

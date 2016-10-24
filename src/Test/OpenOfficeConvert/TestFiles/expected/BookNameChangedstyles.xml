@@ -4,19 +4,19 @@
   <office:styles>
     <style:style style:name="scrBody" style:family="paragraph" style:parent-style-name="" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrBookName_scrBook_scrBody" style:family="text" style:parent-style-name="scrBook_scrBody">
-      <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#400000" text:display="none" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrBookName_.zxx_scrBook_scrBody" style:family="text" style:parent-style-name="scrBook_scrBody">
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:color="#400000" text:display="none" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrBookCode_scrBook_scrBody" style:family="text" style:parent-style-name="scrBook_scrBody">
-      <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:font-weight="700" style:font-weight-complex="700" fo:color="#400000" text:display="none" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="scrBookCode_.zxx_scrBook_scrBody" style:family="text" style:parent-style-name="scrBook_scrBody">
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" fo:font-style="italic" fo:font-weight="700" style:font-weight-complex="700" fo:color="#400000" text:display="none" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="TitleMain_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody">
       <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="36pt" fo:keep-with-next="always" fo:orphans="5" />
       <style:text-properties fo:font-size="18pt" style:font-size-complex="18pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="TitleSecondary_TitleMain_scrBook_scrBody" style:family="paragraph" style:parent-style-name="TitleMain_scrBook_scrBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="TitleSecondary_.zxx_TitleMain_scrBook_scrBody" style:family="paragraph" style:parent-style-name="TitleMain_scrBook_scrBody">
       <style:paragraph-properties fo:text-align="center" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
-      <style:text-properties fo:font-size="16pt" style:font-size-complex="16pt" fo:font-style="italic" text:display="block" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="16pt" style:font-size-complex="16pt" fo:font-style="italic" text:display="block" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_TitleMain_scrBook_scrBody" style:family="text" style:parent-style-name="TitleMain_scrBook_scrBody">
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
@@ -40,11 +40,11 @@
       <style:paragraph-properties fo:text-indent="12pt" fo:margin-left="0pt" fo:orphans="2" fo:widows="2" />
       <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber_.zxx_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_.zxx_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" style:font-size-complex="12pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
@@ -478,7 +478,7 @@
       <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
     </style:style>
     <style:style style:name="MT1" style:family="text">
-      <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Charis SIL" fo:font-size="12pt" />
+      <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="MT3" style:family="text">
       <style:text-properties style:font-name="Charis SIL" style:font-name-asian="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" />

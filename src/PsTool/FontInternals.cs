@@ -162,18 +162,21 @@ namespace SIL.Tool
 		// Windows only - Guid for Fonts folder
         public static readonly Guid FontsFolder = new Guid("FD228CB7-AE11-4AE3-864C-16F3910AB8FE");
 
+		#pragma warning disable 649
         private static TT_OFFSET_TABLE ttOffsetTable;
+		
         private static SFNT sFnt;
         private static OT_OFFSET_TABLE otOffsetTable;
         private static TTC_HEADER_1 ttcHeader;
-        private static UInt32 uIntOffset;
+        private static UInt32 uIntOffset = 0;
         private static UInt32[] ttcOffsets;
         private static TT_TABLE_DIRECTORY tblDir;
         private static TT_NAME_TABLE_HEADER ttNTHeader;
         private static TT_NAME_RECORD ttNMRecord;
 		private static TT_OS2_RECORD ttOs2Record;
+		#pragma warning restore 649
 
-        public static string GetPostscriptName(string familyName, string style)
+		public static string GetPostscriptName(string familyName, string style)
         {
             string fontName = GetFontFileName(familyName, style);
             return GetPostscriptName(fontName);

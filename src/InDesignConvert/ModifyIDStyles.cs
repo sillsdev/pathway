@@ -35,7 +35,6 @@ namespace SIL.PublishingSolution
         private string _xPath;
         private XmlElement _nameElement;
         private string _tagName;
-        private bool _isHeadword;
         private ArrayList _textVariables = new ArrayList();
         Dictionary<string, string> _languageStyleName = new Dictionary<string, string>();
         Dictionary<string, Dictionary<string, string>> _childStyle = new Dictionary<string, Dictionary<string, string>>();
@@ -44,7 +43,6 @@ namespace SIL.PublishingSolution
         {
             _childStyle = childStyle;
             _projectPath = projectPath;
-            _isHeadword = isHeadword;
             _languageStyleName = languageStyleName;
             string styleFilePath = OpenIDStyles();
 
@@ -290,19 +288,13 @@ namespace SIL.PublishingSolution
             if (className.ContainsKey("BaselineShift"))
             {
                 if (sourceClassName.IndexOf("CharacterStyle/ChapterNumber") >= 0) 
-                //if (sourceClassName.IndexOf("ParagraphStyle/ChapterNumber") >= 0 || sourceClassName.IndexOf("CharacterStyle/ChapterNumber") >= 0)
                 {
                     string style = "//" + _tagType + "[@Self='" + sourceClassName + "']";
                     XmlNode baselineShift = _root.SelectSingleNode(style, nsmgr);
                     if (baselineShift != null && className.ContainsKey("PointSize"))
                     {
                         var nameElement = (XmlElement)baselineShift;
-                        string pointSize = className["PointSize"];
-                        string point2 = Common.LeftString(pointSize, ".");
-                        int pt = int.Parse(point2);
-                        //int baseshift = pt - 12;
-                        int baseshift = 0;// pt * 2 / 3;
-                        //int point = pt * 2/3;
+                        int baseshift = 0;
                         nameElement.SetAttribute("BaselineShift", baseshift.ToString());
                     }
                 }
@@ -311,7 +303,6 @@ namespace SIL.PublishingSolution
 
         private string OpenIDStyles()
         {
-            string projType = "scripture";
             string targetFolder = Common.RightRemove(_projectPath, Path.DirectorySeparatorChar.ToString());
             targetFolder = Common.PathCombine(targetFolder, "Resources");
             string styleFilePath = Common.PathCombine(targetFolder, "Styles.xml");

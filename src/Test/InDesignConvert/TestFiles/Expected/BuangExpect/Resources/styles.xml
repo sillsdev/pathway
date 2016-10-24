@@ -18,7 +18,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/headword" Name="headword" Imported="false" NextStyle="CharacterStyle/headword" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/headword_.bzh" Name="headword_.bzh" Imported="false" NextStyle="CharacterStyle/headword_.bzh" KeyboardShortcut="0 0" content="  " AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -26,7 +26,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/headword..after" Name="headword..after" Imported="false" NextStyle="CharacterStyle/headword..after" KeyboardShortcut="0 0" content="  " AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/pronunciations" Name="pronunciations" Imported="false" NextStyle="CharacterStyle/pronunciations" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -34,7 +34,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/xhomographnumber" Name="xhomographnumber" Imported="false" NextStyle="CharacterStyle/xhomographnumber" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="12" Position="Subscript" AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/pronunciation_.bzh-fonipa" Name="pronunciation_.bzh-fonipa" Imported="false" NextStyle="CharacterStyle/pronunciation_.bzh-fonipa" KeyboardShortcut="0 0" content="]" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -42,7 +42,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pronunciations..after_1" Name="pronunciations..after_1" Imported="false" NextStyle="CharacterStyle/pronunciations..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/sense" Name="sense" Imported="false" NextStyle="CharacterStyle/sense" KeyboardShortcut="0 0" content="  " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -50,7 +50,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pronunciation_1" Name="pronunciation_1" Imported="false" NextStyle="CharacterStyle/pronunciation_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/grammaticalinfo" Name="grammaticalinfo" Imported="false" NextStyle="CharacterStyle/grammaticalinfo" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -58,7 +58,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pronunciation..before_1" Name="pronunciation..before_1" Imported="false" NextStyle="CharacterStyle/pronunciation..before_1" KeyboardShortcut="0 0" content="[" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/partofspeech" Name="partofspeech" Imported="false" NextStyle="CharacterStyle/partofspeech" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -66,7 +66,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pronunciation..after_1" Name="pronunciation..after_1" Imported="false" NextStyle="CharacterStyle/pronunciation..after_1" KeyboardShortcut="0 0" content="]" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/partofspeech_.en" Name="partofspeech_.en" Imported="false" NextStyle="CharacterStyle/partofspeech_.en" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -74,7 +74,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/grammaticalinfo..after_1" Name="grammaticalinfo..after_1" Imported="false" NextStyle="CharacterStyle/grammaticalinfo..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/definition" Name="definition" Imported="false" NextStyle="CharacterStyle/definition" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -82,7 +82,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/partofspeech_1" Name="partofspeech_1" Imported="false" NextStyle="CharacterStyle/partofspeech_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/definition_.en" Name="definition_.en" Imported="false" NextStyle="CharacterStyle/definition_.en" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -90,7 +90,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/partofspeech..after_1" Name="partofspeech..after_1" Imported="false" NextStyle="CharacterStyle/partofspeech..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/xitem" Name="xitem" Imported="false" NextStyle="CharacterStyle/xitem" KeyboardShortcut="0 0" content="; " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -98,7 +98,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/definition_1" Name="definition_1" Imported="false" NextStyle="CharacterStyle/definition_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/xlanguagetag_.en" Name="xlanguagetag_.en" Imported="false" NextStyle="CharacterStyle/xlanguagetag_.en" KeyboardShortcut="0 0" PointSize="8" FillColor="Color/#2F60FF" FontStyle="Regular" AppliedFont="Times New Roman" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -106,7 +106,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/definition..after_1" Name="definition..after_1" Imported="false" NextStyle="CharacterStyle/definition..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/xitem_.tpi" Name="xitem_.tpi" Imported="false" NextStyle="CharacterStyle/xitem_.tpi" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -114,7 +114,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/xlanguagetag_1" Name="xlanguagetag_1" Imported="false" NextStyle="CharacterStyle/xlanguagetag_1" KeyboardShortcut="0 0" PointSize="8" FillColor="Color/#2F60FF" FontStyle="Regular" AppliedFont="Times New Roman" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/examples" Name="examples" Imported="false" NextStyle="CharacterStyle/examples" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -122,7 +122,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/definition_2" Name="definition_2" Imported="false" NextStyle="CharacterStyle/definition_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FontStyle="Regular" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/example_.bzh" Name="example_.bzh" Imported="false" NextStyle="CharacterStyle/example_.bzh" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -130,7 +130,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/examples..after_1" Name="examples..after_1" Imported="false" NextStyle="CharacterStyle/examples..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/translation" Name="translation" Imported="false" NextStyle="CharacterStyle/translation" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -138,7 +138,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/example_1" Name="example_1" Imported="false" NextStyle="CharacterStyle/example_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/translation_.en" Name="translation_.en" Imported="false" NextStyle="CharacterStyle/translation_.en" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -146,7 +146,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/example..after_1" Name="example..after_1" Imported="false" NextStyle="CharacterStyle/example..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/entry" Name="entry" Imported="false" NextStyle="CharacterStyle/entry" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -154,7 +154,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/xlanguagetag_2" Name="xlanguagetag_2" Imported="false" NextStyle="CharacterStyle/xlanguagetag_2" KeyboardShortcut="0 0" PointSize="8" FillColor="Color/#2F60FF" AppliedFont="Times New Roman" FontStyle="Italic" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/slots" Name="slots" Imported="false" NextStyle="CharacterStyle/slots" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -162,7 +162,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/translation_1" Name="translation_1" Imported="false" NextStyle="CharacterStyle/translation_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/slotname" Name="slotname" Imported="false" NextStyle="CharacterStyle/slotname" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -170,7 +170,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/translation..after_1" Name="translation..after_1" Imported="false" NextStyle="CharacterStyle/translation..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/semanticdomains" Name="semanticdomains" Imported="false" NextStyle="CharacterStyle/semanticdomains" KeyboardShortcut="0 0" content=".) " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -178,7 +178,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/examples_2" Name="examples_2" Imported="false" NextStyle="CharacterStyle/examples_2" KeyboardShortcut="0 0" content="  " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/semanticdomainabbr" Name="semanticdomainabbr" Imported="false" NextStyle="CharacterStyle/semanticdomainabbr" KeyboardShortcut="0 0" content=".) " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -186,7 +186,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/entry_3" Name="entry_3" Imported="false" NextStyle="CharacterStyle/entry_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" SpaceBefore="1" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/semanticdomainabbr_.en" Name="semanticdomainabbr_.en" Imported="false" NextStyle="CharacterStyle/semanticdomainabbr_.en" KeyboardShortcut="0 0" content=" - " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -194,7 +194,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/slots..before_1" Name="slots..before_1" Imported="false" NextStyle="CharacterStyle/slots..before_1" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/semanticdomainname" Name="semanticdomainname" Imported="false" NextStyle="CharacterStyle/semanticdomainname" KeyboardShortcut="0 0" content=".) " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -202,7 +202,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/slotname_1" Name="slotname_1" Imported="false" NextStyle="CharacterStyle/slotname_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/xsensenumber_.en" Name="xsensenumber_.en" Imported="false" NextStyle="CharacterStyle/xsensenumber_.en" KeyboardShortcut="0 0" FontStyle="Bold" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -210,7 +210,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/semanticdomains..before_1" Name="semanticdomains..before_1" Imported="false" NextStyle="CharacterStyle/semanticdomains..before_1" KeyboardShortcut="0 0" content="(sem. domains: " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/complexformrefs" Name="complexformrefs" Imported="false" NextStyle="CharacterStyle/complexformrefs" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -218,7 +218,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/semanticdomains..after_1" Name="semanticdomains..after_1" Imported="false" NextStyle="CharacterStyle/semanticdomains..after_1" KeyboardShortcut="0 0" content=".) " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/complexentrytype" Name="complexentrytype" Imported="false" NextStyle="CharacterStyle/complexentrytype" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -226,7 +226,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/semanticdomainabbr_1" Name="semanticdomainabbr_1" Imported="false" NextStyle="CharacterStyle/semanticdomainabbr_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/complexentryform_.bzh" Name="complexentryform_.bzh" Imported="false" NextStyle="CharacterStyle/complexentryform_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=" " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -234,7 +234,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/semanticdomainabbr..after_1" Name="semanticdomainabbr..after_1" Imported="false" NextStyle="CharacterStyle/semanticdomainabbr..after_1" KeyboardShortcut="0 0" content=" - " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/primaryrefs" Name="primaryrefs" Imported="false" NextStyle="CharacterStyle/primaryrefs" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -242,7 +242,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/semanticdomainname_1" Name="semanticdomainname_1" Imported="false" NextStyle="CharacterStyle/semanticdomainname_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/entrytypeabbr" Name="entrytypeabbr" Imported="false" NextStyle="CharacterStyle/entrytypeabbr" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -250,7 +250,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/semanticdomains_2" Name="semanticdomains_2" Imported="false" NextStyle="CharacterStyle/semanticdomains_2" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/entrytypeabbr_.en" Name="entrytypeabbr_.en" Imported="false" NextStyle="CharacterStyle/entrytypeabbr_.en" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -258,7 +258,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/xsensenumber_1" Name="xsensenumber_1" Imported="false" NextStyle="CharacterStyle/xsensenumber_1" KeyboardShortcut="0 0" FontStyle="Bold" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/mainentryref_.bzh" Name="mainentryref_.bzh" Imported="false" NextStyle="CharacterStyle/mainentryref_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=") " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -266,7 +266,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/sense-sense_senses..before_1" Name="sense-sense_senses..before_1" Imported="false" NextStyle="CharacterStyle/sense-sense_senses..before_1" KeyboardShortcut="0 0" content="  " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/relations" Name="relations" Imported="false" NextStyle="CharacterStyle/relations" KeyboardShortcut="0 0" content=". " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -274,7 +274,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/complexformrefs..after_1" Name="complexformrefs..after_1" Imported="false" NextStyle="CharacterStyle/complexformrefs..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/lexreftype_.en" Name="lexreftype_.en" Imported="false" NextStyle="CharacterStyle/lexreftype_.en" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -282,7 +282,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/complexentrytype_1" Name="complexentrytype_1" Imported="false" NextStyle="CharacterStyle/complexentrytype_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/sensecrossref_.bzh" Name="sensecrossref_.bzh" Imported="false" NextStyle="CharacterStyle/sensecrossref_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=". " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -290,7 +290,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/complexentrytype..after_1" Name="complexentrytype..after_1" Imported="false" NextStyle="CharacterStyle/complexentrytype..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/xhomographnumber_.bzh" Name="xhomographnumber_.bzh" Imported="false" NextStyle="CharacterStyle/xhomographnumber_.bzh" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="12" Position="Subscript" content="  " AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -298,7 +298,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/complexentryform_1" Name="complexentryform_1" Imported="false" NextStyle="CharacterStyle/complexentryform_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/scientificname" Name="scientificname" Imported="false" NextStyle="CharacterStyle/scientificname" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -306,7 +306,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/primaryrefs..before_1" Name="primaryrefs..before_1" Imported="false" NextStyle="CharacterStyle/primaryrefs..before_1" KeyboardShortcut="0 0" content="(" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/crossrefs" Name="crossrefs" Imported="false" NextStyle="CharacterStyle/crossrefs" KeyboardShortcut="0 0" content=". " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -314,7 +314,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/primaryrefs..after_1" Name="primaryrefs..after_1" Imported="false" NextStyle="CharacterStyle/primaryrefs..after_1" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/crossreftype_.en" Name="crossreftype_.en" Imported="false" NextStyle="CharacterStyle/crossreftype_.en" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -322,7 +322,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/entrytypeabbr_1" Name="entrytypeabbr_1" Imported="false" NextStyle="CharacterStyle/entrytypeabbr_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/crossref_.bzh" Name="crossref_.bzh" Imported="false" NextStyle="CharacterStyle/crossref_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=". " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -330,7 +330,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/entrytypeabbr..after_1" Name="entrytypeabbr..after_1" Imported="false" NextStyle="CharacterStyle/entrytypeabbr..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/sensecomplexformrefs" Name="sensecomplexformrefs" Imported="false" NextStyle="CharacterStyle/sensecomplexformrefs" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -338,7 +338,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/mainentryref_1" Name="mainentryref_1" Imported="false" NextStyle="CharacterStyle/mainentryref_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/sensecomplexentrytype" Name="sensecomplexentrytype" Imported="false" NextStyle="CharacterStyle/sensecomplexentrytype" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -346,7 +346,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/relations..after_1" Name="relations..after_1" Imported="false" NextStyle="CharacterStyle/relations..after_1" KeyboardShortcut="0 0" content=". " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/sensecomplexentryform_.bzh" Name="sensecomplexentryform_.bzh" Imported="false" NextStyle="CharacterStyle/sensecomplexentryform_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=" " FontStyle="Regular" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -354,7 +354,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/lexreftype_1" Name="lexreftype_1" Imported="false" NextStyle="CharacterStyle/lexreftype_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/sensemainentryref_.bzh" Name="sensemainentryref_.bzh" Imported="false" NextStyle="CharacterStyle/sensemainentryref_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=") " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -362,7 +362,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/lexreftype..after_1" Name="lexreftype..after_1" Imported="false" NextStyle="CharacterStyle/lexreftype..after_1" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/xhomographnumber_.en" Name="xhomographnumber_.en" Imported="false" NextStyle="CharacterStyle/xhomographnumber_.en" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="12" Position="Subscript" content="  " AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -370,7 +370,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/sensecrossref_1" Name="sensecrossref_1" Imported="false" NextStyle="CharacterStyle/sensecrossref_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/headwordminor_.bzh" Name="headwordminor_.bzh" Imported="false" NextStyle="CharacterStyle/headwordminor_.bzh" KeyboardShortcut="0 0" content="  " AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -378,7 +378,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/lexreftargets_2" Name="lexreftargets_2" Imported="false" NextStyle="CharacterStyle/lexreftargets_2" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/pronunciationsminor" Name="pronunciationsminor" Imported="false" NextStyle="CharacterStyle/pronunciationsminor" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -386,7 +386,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/relations_2" Name="relations_2" Imported="false" NextStyle="CharacterStyle/relations_2" KeyboardShortcut="0 0" content="; " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/pronunciationminor_.bzh-fonipa" Name="pronunciationminor_.bzh-fonipa" Imported="false" NextStyle="CharacterStyle/pronunciationminor_.bzh-fonipa" KeyboardShortcut="0 0" content="]" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -394,7 +394,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scientificname_1" Name="scientificname_1" Imported="false" NextStyle="CharacterStyle/scientificname_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/primaryrefsminor" Name="primaryrefsminor" Imported="false" NextStyle="CharacterStyle/primaryrefsminor" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -402,7 +402,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/scientificname..after_1" Name="scientificname..after_1" Imported="false" NextStyle="CharacterStyle/scientificname..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/entrytypeabbrminor" Name="entrytypeabbrminor" Imported="false" NextStyle="CharacterStyle/entrytypeabbrminor" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -410,7 +410,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/crossrefs..after_1" Name="crossrefs..after_1" Imported="false" NextStyle="CharacterStyle/crossrefs..after_1" KeyboardShortcut="0 0" content=". " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/entrytypeabbrminor_.en" Name="entrytypeabbrminor_.en" Imported="false" NextStyle="CharacterStyle/entrytypeabbrminor_.en" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -418,7 +418,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/crossreftype_1" Name="crossreftype_1" Imported="false" NextStyle="CharacterStyle/crossreftype_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/mainentryrefminor_.bzh" Name="mainentryrefminor_.bzh" Imported="false" NextStyle="CharacterStyle/mainentryrefminor_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=" " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -426,7 +426,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/crossreftype..after_1" Name="crossreftype..after_1" Imported="false" NextStyle="CharacterStyle/crossreftype..after_1" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/variantrefs" Name="variantrefs" Imported="false" NextStyle="CharacterStyle/variantrefs" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -434,7 +434,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/crossref_1" Name="crossref_1" Imported="false" NextStyle="CharacterStyle/crossref_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/variantrefentrytype" Name="variantrefentrytype" Imported="false" NextStyle="CharacterStyle/variantrefentrytype" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -442,199 +442,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/complexformrefs_2" Name="complexformrefs_2" Imported="false" NextStyle="CharacterStyle/complexformrefs_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/crossreftargets_2" Name="crossreftargets_2" Imported="false" NextStyle="CharacterStyle/crossreftargets_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/sensecomplexformrefs..after_1" Name="sensecomplexformrefs..after_1" Imported="false" NextStyle="CharacterStyle/sensecomplexformrefs..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/sensecomplexentrytype_1" Name="sensecomplexentrytype_1" Imported="false" NextStyle="CharacterStyle/sensecomplexentrytype_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/sensecomplexentrytype..after_1" Name="sensecomplexentrytype..after_1" Imported="false" NextStyle="CharacterStyle/sensecomplexentrytype..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/sensecomplexentryform_1" Name="sensecomplexentryform_1" Imported="false" NextStyle="CharacterStyle/sensecomplexentryform_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FontStyle="Regular" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/sensemainentryref_1" Name="sensemainentryref_1" Imported="false" NextStyle="CharacterStyle/sensemainentryref_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/primaryrefs_2" Name="primaryrefs_2" Imported="false" NextStyle="CharacterStyle/primaryrefs_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/crossrefs_2" Name="crossrefs_2" Imported="false" NextStyle="CharacterStyle/crossrefs_2" KeyboardShortcut="0 0" content="; " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/translation_2" Name="translation_2" Imported="false" NextStyle="CharacterStyle/translation_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FontStyle="Regular" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/headwordminor_1" Name="headwordminor_1" Imported="false" NextStyle="CharacterStyle/headwordminor_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/headwordminor..after_1" Name="headwordminor..after_1" Imported="false" NextStyle="CharacterStyle/headwordminor..after_1" KeyboardShortcut="0 0" content="  " AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pronunciationsminor..after_1" Name="pronunciationsminor..after_1" Imported="false" NextStyle="CharacterStyle/pronunciationsminor..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pronunciationminor_1" Name="pronunciationminor_1" Imported="false" NextStyle="CharacterStyle/pronunciationminor_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pronunciationminor..before_1" Name="pronunciationminor..before_1" Imported="false" NextStyle="CharacterStyle/pronunciationminor..before_1" KeyboardShortcut="0 0" content="[" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/pronunciationminor..after_1" Name="pronunciationminor..after_1" Imported="false" NextStyle="CharacterStyle/pronunciationminor..after_1" KeyboardShortcut="0 0" content="]" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/primaryrefsminor..after_1" Name="primaryrefsminor..after_1" Imported="false" NextStyle="CharacterStyle/primaryrefsminor..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/entrytypeabbrminor_1" Name="entrytypeabbrminor_1" Imported="false" NextStyle="CharacterStyle/entrytypeabbrminor_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/entrytypeabbrminor..after_1" Name="entrytypeabbrminor..after_1" Imported="false" NextStyle="CharacterStyle/entrytypeabbrminor..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/mainentryrefminor_1" Name="mainentryrefminor_1" Imported="false" NextStyle="CharacterStyle/mainentryrefminor_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/variantrefs..before_1" Name="variantrefs..before_1" Imported="false" NextStyle="CharacterStyle/variantrefs..before_1" KeyboardShortcut="0 0" content="(" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/variantrefs..after_1" Name="variantrefs..after_1" Imported="false" NextStyle="CharacterStyle/variantrefs..after_1" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/variantrefentrytype_1" Name="variantrefentrytype_1" Imported="false" NextStyle="CharacterStyle/variantrefentrytype_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/variantrefentrytype..after_1" Name="variantrefentrytype..after_1" Imported="false" NextStyle="CharacterStyle/variantrefentrytype..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">CharacterStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/variantrefform_1" Name="variantrefform_1" Imported="false" NextStyle="CharacterStyle/variantrefform_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <CharacterStyle Self="CharacterStyle/variantrefform_.bzh" Name="variantrefform_.bzh" Imported="false" NextStyle="CharacterStyle/variantrefform_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=") " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -705,7 +513,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/headword" Name="headword" Imported="false" NextStyle="ParagraphStyle/headword" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/headword_.bzh" Name="headword_.bzh" Imported="false" NextStyle="ParagraphStyle/headword_.bzh" KeyboardShortcut="0 0" content="  " AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -713,7 +521,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/headword..after" Name="headword..after" Imported="false" NextStyle="ParagraphStyle/headword..after" KeyboardShortcut="0 0" content="  " AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/pronunciations" Name="pronunciations" Imported="false" NextStyle="ParagraphStyle/pronunciations" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -721,7 +529,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/xhomographnumber" Name="xhomographnumber" Imported="false" NextStyle="ParagraphStyle/xhomographnumber" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="12" Position="Subscript" AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/pronunciation_.bzh-fonipa" Name="pronunciation_.bzh-fonipa" Imported="false" NextStyle="ParagraphStyle/pronunciation_.bzh-fonipa" KeyboardShortcut="0 0" content="]" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -729,7 +537,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pronunciations..after_1" Name="pronunciations..after_1" Imported="false" NextStyle="ParagraphStyle/pronunciations..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/sense" Name="sense" Imported="false" NextStyle="ParagraphStyle/sense" KeyboardShortcut="0 0" content="  " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -737,7 +545,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pronunciation_1" Name="pronunciation_1" Imported="false" NextStyle="ParagraphStyle/pronunciation_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/grammaticalinfo" Name="grammaticalinfo" Imported="false" NextStyle="ParagraphStyle/grammaticalinfo" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -745,7 +553,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pronunciation..before_1" Name="pronunciation..before_1" Imported="false" NextStyle="ParagraphStyle/pronunciation..before_1" KeyboardShortcut="0 0" content="[" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/partofspeech" Name="partofspeech" Imported="false" NextStyle="ParagraphStyle/partofspeech" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -753,7 +561,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pronunciation..after_1" Name="pronunciation..after_1" Imported="false" NextStyle="ParagraphStyle/pronunciation..after_1" KeyboardShortcut="0 0" content="]" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/partofspeech_.en" Name="partofspeech_.en" Imported="false" NextStyle="ParagraphStyle/partofspeech_.en" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -761,7 +569,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/grammaticalinfo..after_1" Name="grammaticalinfo..after_1" Imported="false" NextStyle="ParagraphStyle/grammaticalinfo..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/definition" Name="definition" Imported="false" NextStyle="ParagraphStyle/definition" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -769,7 +577,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/partofspeech_1" Name="partofspeech_1" Imported="false" NextStyle="ParagraphStyle/partofspeech_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/definition_.en" Name="definition_.en" Imported="false" NextStyle="ParagraphStyle/definition_.en" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -777,7 +585,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/partofspeech..after_1" Name="partofspeech..after_1" Imported="false" NextStyle="ParagraphStyle/partofspeech..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/xitem" Name="xitem" Imported="false" NextStyle="ParagraphStyle/xitem" KeyboardShortcut="0 0" content="; " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -785,7 +593,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/definition_1" Name="definition_1" Imported="false" NextStyle="ParagraphStyle/definition_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/xlanguagetag_.en" Name="xlanguagetag_.en" Imported="false" NextStyle="ParagraphStyle/xlanguagetag_.en" KeyboardShortcut="0 0" PointSize="8" FillColor="Color/#2F60FF" FontStyle="Regular" AppliedFont="Times New Roman" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -793,7 +601,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/definition..after_1" Name="definition..after_1" Imported="false" NextStyle="ParagraphStyle/definition..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/xitem_.tpi" Name="xitem_.tpi" Imported="false" NextStyle="ParagraphStyle/xitem_.tpi" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -801,7 +609,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/xlanguagetag_1" Name="xlanguagetag_1" Imported="false" NextStyle="ParagraphStyle/xlanguagetag_1" KeyboardShortcut="0 0" PointSize="8" FillColor="Color/#2F60FF" FontStyle="Regular" AppliedFont="Times New Roman" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/examples" Name="examples" Imported="false" NextStyle="ParagraphStyle/examples" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -809,7 +617,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/definition_2" Name="definition_2" Imported="false" NextStyle="ParagraphStyle/definition_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FontStyle="Regular" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/example_.bzh" Name="example_.bzh" Imported="false" NextStyle="ParagraphStyle/example_.bzh" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -817,7 +625,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/examples..after_1" Name="examples..after_1" Imported="false" NextStyle="ParagraphStyle/examples..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/translation" Name="translation" Imported="false" NextStyle="ParagraphStyle/translation" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -825,7 +633,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/example_1" Name="example_1" Imported="false" NextStyle="ParagraphStyle/example_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/translation_.en" Name="translation_.en" Imported="false" NextStyle="ParagraphStyle/translation_.en" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -833,7 +641,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/example..after_1" Name="example..after_1" Imported="false" NextStyle="ParagraphStyle/example..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/entry" Name="entry" Imported="false" NextStyle="ParagraphStyle/entry" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -841,7 +649,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/xlanguagetag_2" Name="xlanguagetag_2" Imported="false" NextStyle="ParagraphStyle/xlanguagetag_2" KeyboardShortcut="0 0" PointSize="8" FillColor="Color/#2F60FF" AppliedFont="Times New Roman" FontStyle="Italic" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/slots" Name="slots" Imported="false" NextStyle="ParagraphStyle/slots" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -849,7 +657,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/translation_1" Name="translation_1" Imported="false" NextStyle="ParagraphStyle/translation_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/slotname" Name="slotname" Imported="false" NextStyle="ParagraphStyle/slotname" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -857,7 +665,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/translation..after_1" Name="translation..after_1" Imported="false" NextStyle="ParagraphStyle/translation..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/semanticdomains" Name="semanticdomains" Imported="false" NextStyle="ParagraphStyle/semanticdomains" KeyboardShortcut="0 0" content=".) " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -865,7 +673,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/examples_2" Name="examples_2" Imported="false" NextStyle="ParagraphStyle/examples_2" KeyboardShortcut="0 0" content="  " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/semanticdomainabbr" Name="semanticdomainabbr" Imported="false" NextStyle="ParagraphStyle/semanticdomainabbr" KeyboardShortcut="0 0" content=".) " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -873,7 +681,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/entry_3" Name="entry_3" Imported="false" NextStyle="ParagraphStyle/entry_3" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" SpaceBefore="1" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/semanticdomainabbr_.en" Name="semanticdomainabbr_.en" Imported="false" NextStyle="ParagraphStyle/semanticdomainabbr_.en" KeyboardShortcut="0 0" content=" - " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -881,7 +689,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/slots..before_1" Name="slots..before_1" Imported="false" NextStyle="ParagraphStyle/slots..before_1" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/semanticdomainname" Name="semanticdomainname" Imported="false" NextStyle="ParagraphStyle/semanticdomainname" KeyboardShortcut="0 0" content=".) " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -889,7 +697,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/slotname_1" Name="slotname_1" Imported="false" NextStyle="ParagraphStyle/slotname_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/xsensenumber_.en" Name="xsensenumber_.en" Imported="false" NextStyle="ParagraphStyle/xsensenumber_.en" KeyboardShortcut="0 0" FontStyle="Bold" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -897,7 +705,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/semanticdomains..before_1" Name="semanticdomains..before_1" Imported="false" NextStyle="ParagraphStyle/semanticdomains..before_1" KeyboardShortcut="0 0" content="(sem. domains: " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/complexformrefs" Name="complexformrefs" Imported="false" NextStyle="ParagraphStyle/complexformrefs" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -905,7 +713,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/semanticdomains..after_1" Name="semanticdomains..after_1" Imported="false" NextStyle="ParagraphStyle/semanticdomains..after_1" KeyboardShortcut="0 0" content=".) " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/complexentrytype" Name="complexentrytype" Imported="false" NextStyle="ParagraphStyle/complexentrytype" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -913,7 +721,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/semanticdomainabbr_1" Name="semanticdomainabbr_1" Imported="false" NextStyle="ParagraphStyle/semanticdomainabbr_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/complexentryform_.bzh" Name="complexentryform_.bzh" Imported="false" NextStyle="ParagraphStyle/complexentryform_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=" " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -921,7 +729,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/semanticdomainabbr..after_1" Name="semanticdomainabbr..after_1" Imported="false" NextStyle="ParagraphStyle/semanticdomainabbr..after_1" KeyboardShortcut="0 0" content=" - " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/primaryrefs" Name="primaryrefs" Imported="false" NextStyle="ParagraphStyle/primaryrefs" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -929,7 +737,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/semanticdomainname_1" Name="semanticdomainname_1" Imported="false" NextStyle="ParagraphStyle/semanticdomainname_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/entrytypeabbr" Name="entrytypeabbr" Imported="false" NextStyle="ParagraphStyle/entrytypeabbr" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -937,7 +745,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/semanticdomains_2" Name="semanticdomains_2" Imported="false" NextStyle="ParagraphStyle/semanticdomains_2" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/entrytypeabbr_.en" Name="entrytypeabbr_.en" Imported="false" NextStyle="ParagraphStyle/entrytypeabbr_.en" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -945,7 +753,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/xsensenumber_1" Name="xsensenumber_1" Imported="false" NextStyle="ParagraphStyle/xsensenumber_1" KeyboardShortcut="0 0" FontStyle="Bold" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/mainentryref_.bzh" Name="mainentryref_.bzh" Imported="false" NextStyle="ParagraphStyle/mainentryref_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=") " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -953,7 +761,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/sense-sense_senses..before_1" Name="sense-sense_senses..before_1" Imported="false" NextStyle="ParagraphStyle/sense-sense_senses..before_1" KeyboardShortcut="0 0" content="  " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/relations" Name="relations" Imported="false" NextStyle="ParagraphStyle/relations" KeyboardShortcut="0 0" content=". " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -961,7 +769,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/complexformrefs..after_1" Name="complexformrefs..after_1" Imported="false" NextStyle="ParagraphStyle/complexformrefs..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/lexreftype_.en" Name="lexreftype_.en" Imported="false" NextStyle="ParagraphStyle/lexreftype_.en" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -969,7 +777,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/complexentrytype_1" Name="complexentrytype_1" Imported="false" NextStyle="ParagraphStyle/complexentrytype_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/sensecrossref_.bzh" Name="sensecrossref_.bzh" Imported="false" NextStyle="ParagraphStyle/sensecrossref_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=". " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -977,7 +785,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/complexentrytype..after_1" Name="complexentrytype..after_1" Imported="false" NextStyle="ParagraphStyle/complexentrytype..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/xhomographnumber_.bzh" Name="xhomographnumber_.bzh" Imported="false" NextStyle="ParagraphStyle/xhomographnumber_.bzh" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="12" Position="Subscript" content="  " AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -985,7 +793,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/complexentryform_1" Name="complexentryform_1" Imported="false" NextStyle="ParagraphStyle/complexentryform_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/scientificname" Name="scientificname" Imported="false" NextStyle="ParagraphStyle/scientificname" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -993,7 +801,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/primaryrefs..before_1" Name="primaryrefs..before_1" Imported="false" NextStyle="ParagraphStyle/primaryrefs..before_1" KeyboardShortcut="0 0" content="(" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/crossrefs" Name="crossrefs" Imported="false" NextStyle="ParagraphStyle/crossrefs" KeyboardShortcut="0 0" content=". " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1001,7 +809,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/primaryrefs..after_1" Name="primaryrefs..after_1" Imported="false" NextStyle="ParagraphStyle/primaryrefs..after_1" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/crossreftype_.en" Name="crossreftype_.en" Imported="false" NextStyle="ParagraphStyle/crossreftype_.en" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1009,7 +817,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/entrytypeabbr_1" Name="entrytypeabbr_1" Imported="false" NextStyle="ParagraphStyle/entrytypeabbr_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/crossref_.bzh" Name="crossref_.bzh" Imported="false" NextStyle="ParagraphStyle/crossref_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=". " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1017,7 +825,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/entrytypeabbr..after_1" Name="entrytypeabbr..after_1" Imported="false" NextStyle="ParagraphStyle/entrytypeabbr..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/sensecomplexformrefs" Name="sensecomplexformrefs" Imported="false" NextStyle="ParagraphStyle/sensecomplexformrefs" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1025,7 +833,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/mainentryref_1" Name="mainentryref_1" Imported="false" NextStyle="ParagraphStyle/mainentryref_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/sensecomplexentrytype" Name="sensecomplexentrytype" Imported="false" NextStyle="ParagraphStyle/sensecomplexentrytype" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1033,7 +841,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/relations..after_1" Name="relations..after_1" Imported="false" NextStyle="ParagraphStyle/relations..after_1" KeyboardShortcut="0 0" content=". " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/sensecomplexentryform_.bzh" Name="sensecomplexentryform_.bzh" Imported="false" NextStyle="ParagraphStyle/sensecomplexentryform_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=" " FontStyle="Regular" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1041,7 +849,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/lexreftype_1" Name="lexreftype_1" Imported="false" NextStyle="ParagraphStyle/lexreftype_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/sensemainentryref_.bzh" Name="sensemainentryref_.bzh" Imported="false" NextStyle="ParagraphStyle/sensemainentryref_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=") " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1049,7 +857,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/lexreftype..after_1" Name="lexreftype..after_1" Imported="false" NextStyle="ParagraphStyle/lexreftype..after_1" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/xhomographnumber_.en" Name="xhomographnumber_.en" Imported="false" NextStyle="ParagraphStyle/xhomographnumber_.en" KeyboardShortcut="0 0" FontStyle="Bold" PointSize="12" Position="Subscript" content="  " AppliedFont="Times New Roman" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1057,7 +865,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/sensecrossref_1" Name="sensecrossref_1" Imported="false" NextStyle="ParagraphStyle/sensecrossref_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/headwordminor_.bzh" Name="headwordminor_.bzh" Imported="false" NextStyle="ParagraphStyle/headwordminor_.bzh" KeyboardShortcut="0 0" content="  " AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1065,7 +873,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/lexreftargets_2" Name="lexreftargets_2" Imported="false" NextStyle="ParagraphStyle/lexreftargets_2" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/pronunciationsminor" Name="pronunciationsminor" Imported="false" NextStyle="ParagraphStyle/pronunciationsminor" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1073,7 +881,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/relations_2" Name="relations_2" Imported="false" NextStyle="ParagraphStyle/relations_2" KeyboardShortcut="0 0" content="; " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/pronunciationminor_.bzh-fonipa" Name="pronunciationminor_.bzh-fonipa" Imported="false" NextStyle="ParagraphStyle/pronunciationminor_.bzh-fonipa" KeyboardShortcut="0 0" content="]" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1081,7 +889,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scientificname_1" Name="scientificname_1" Imported="false" NextStyle="ParagraphStyle/scientificname_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/primaryrefsminor" Name="primaryrefsminor" Imported="false" NextStyle="ParagraphStyle/primaryrefsminor" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1089,7 +897,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/scientificname..after_1" Name="scientificname..after_1" Imported="false" NextStyle="ParagraphStyle/scientificname..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/entrytypeabbrminor" Name="entrytypeabbrminor" Imported="false" NextStyle="ParagraphStyle/entrytypeabbrminor" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1097,7 +905,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/crossrefs..after_1" Name="crossrefs..after_1" Imported="false" NextStyle="ParagraphStyle/crossrefs..after_1" KeyboardShortcut="0 0" content=". " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/entrytypeabbrminor_.en" Name="entrytypeabbrminor_.en" Imported="false" NextStyle="ParagraphStyle/entrytypeabbrminor_.en" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1105,7 +913,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/crossreftype_1" Name="crossreftype_1" Imported="false" NextStyle="ParagraphStyle/crossreftype_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/mainentryrefminor_.bzh" Name="mainentryrefminor_.bzh" Imported="false" NextStyle="ParagraphStyle/mainentryrefminor_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=" " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1113,7 +921,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/crossreftype..after_1" Name="crossreftype..after_1" Imported="false" NextStyle="ParagraphStyle/crossreftype..after_1" KeyboardShortcut="0 0" content=": " AppliedFont="Times New Roman" PointSize="12" FontStyle="Italic" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
+    <ParagraphStyle Self="ParagraphStyle/variantrefs" Name="variantrefs" Imported="false" NextStyle="ParagraphStyle/variantrefs" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1121,7 +929,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/crossref_1" Name="crossref_1" Imported="false" NextStyle="ParagraphStyle/crossref_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/variantrefentrytype" Name="variantrefentrytype" Imported="false" NextStyle="ParagraphStyle/variantrefentrytype" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
@@ -1129,199 +937,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/complexformrefs_2" Name="complexformrefs_2" Imported="false" NextStyle="ParagraphStyle/complexformrefs_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/crossreftargets_2" Name="crossreftargets_2" Imported="false" NextStyle="ParagraphStyle/crossreftargets_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/sensecomplexformrefs..after_1" Name="sensecomplexformrefs..after_1" Imported="false" NextStyle="ParagraphStyle/sensecomplexformrefs..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/sensecomplexentrytype_1" Name="sensecomplexentrytype_1" Imported="false" NextStyle="ParagraphStyle/sensecomplexentrytype_1" KeyboardShortcut="0 0" FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/sensecomplexentrytype..after_1" Name="sensecomplexentrytype..after_1" Imported="false" NextStyle="ParagraphStyle/sensecomplexentrytype..after_1" KeyboardShortcut="0 0" content=" " FontStyle="Regular" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/sensecomplexentryform_1" Name="sensecomplexentryform_1" Imported="false" NextStyle="ParagraphStyle/sensecomplexentryform_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FontStyle="Regular" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/sensemainentryref_1" Name="sensemainentryref_1" Imported="false" NextStyle="ParagraphStyle/sensemainentryref_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/primaryrefs_2" Name="primaryrefs_2" Imported="false" NextStyle="ParagraphStyle/primaryrefs_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/crossrefs_2" Name="crossrefs_2" Imported="false" NextStyle="ParagraphStyle/crossrefs_2" KeyboardShortcut="0 0" content="; " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/translation_2" Name="translation_2" Imported="false" NextStyle="ParagraphStyle/translation_2" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FontStyle="Regular" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/headwordminor_1" Name="headwordminor_1" Imported="false" NextStyle="ParagraphStyle/headwordminor_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/headwordminor..after_1" Name="headwordminor..after_1" Imported="false" NextStyle="ParagraphStyle/headwordminor..after_1" KeyboardShortcut="0 0" content="  " AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pronunciationsminor..after_1" Name="pronunciationsminor..after_1" Imported="false" NextStyle="ParagraphStyle/pronunciationsminor..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pronunciationminor_1" Name="pronunciationminor_1" Imported="false" NextStyle="ParagraphStyle/pronunciationminor_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pronunciationminor..before_1" Name="pronunciationminor..before_1" Imported="false" NextStyle="ParagraphStyle/pronunciationminor..before_1" KeyboardShortcut="0 0" content="[" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/pronunciationminor..after_1" Name="pronunciationminor..after_1" Imported="false" NextStyle="ParagraphStyle/pronunciationminor..after_1" KeyboardShortcut="0 0" content="]" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/primaryrefsminor..after_1" Name="primaryrefsminor..after_1" Imported="false" NextStyle="ParagraphStyle/primaryrefsminor..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/entrytypeabbrminor_1" Name="entrytypeabbrminor_1" Imported="false" NextStyle="ParagraphStyle/entrytypeabbrminor_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/entrytypeabbrminor..after_1" Name="entrytypeabbrminor..after_1" Imported="false" NextStyle="ParagraphStyle/entrytypeabbrminor..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/mainentryrefminor_1" Name="mainentryrefminor_1" Imported="false" NextStyle="ParagraphStyle/mainentryrefminor_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FontStyle="Bold" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/variantrefs..before_1" Name="variantrefs..before_1" Imported="false" NextStyle="ParagraphStyle/variantrefs..before_1" KeyboardShortcut="0 0" content="(" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/variantrefs..after_1" Name="variantrefs..after_1" Imported="false" NextStyle="ParagraphStyle/variantrefs..after_1" KeyboardShortcut="0 0" content=") " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/variantrefentrytype_1" Name="variantrefentrytype_1" Imported="false" NextStyle="ParagraphStyle/variantrefentrytype_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/variantrefentrytype..after_1" Name="variantrefentrytype..after_1" Imported="false" NextStyle="ParagraphStyle/variantrefentrytype..after_1" KeyboardShortcut="0 0" content=" " AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign">
-      <Properties>
-        <BasedOn type="object">ParagraphStyle/None</BasedOn>
-        <AppliedFont type="string">Times New Roman</AppliedFont>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-        <Leading type="enumeration">Auto</Leading>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/variantrefform_1" Name="variantrefform_1" Imported="false" NextStyle="ParagraphStyle/variantrefform_1" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
+    <ParagraphStyle Self="ParagraphStyle/variantrefform_.bzh" Name="variantrefform_.bzh" Imported="false" NextStyle="ParagraphStyle/variantrefform_.bzh" KeyboardShortcut="0 0" AppliedFont="Times New Roman" PointSize="12" FillColor="Color/#000000" StrokeColor="Color/#FFFFFF" StrokeWeight="1" EndJoin="BevelEndJoin" content=") " FirstLineIndent="-36" LeftIndent="9" clear="both" TextColumnGutter="12" Justification="LeftAlign" AppliedLanguage="$ID/English: USA">
       <Properties>
         <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>

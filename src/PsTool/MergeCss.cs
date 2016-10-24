@@ -140,6 +140,7 @@ namespace SIL.Tool
                     }
                     catch (KeyNotFoundException ex)
                     {
+						Console.WriteLine(ex.Message);
                         return arrayCssFile;
                     }
                     if (!File.Exists(validName)) return arrayCssFile;

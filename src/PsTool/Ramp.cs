@@ -33,7 +33,6 @@ namespace SIL.Tool
     {
         #region Private variable
 
-        private string _rampId;
         private string _createdOn;
         private string _modifiedDate;
         private string _ready;
@@ -45,15 +44,12 @@ namespace SIL.Tool
         private string _versionType;
         private string _typeScholarlyWork;
         private List<string> _subjectLanguage = new List<string>();
-        private string _coverageSpacialRegionHas;
-        private List<string> _coverageSpacialCountry = new List<string>();
+	    private List<string> _coverageSpacialCountry = new List<string>();
         private string _subjectLanguageHas;
         private List<string> _languageScript = new List<string>();
         private string _formatExtentText;
         private string _formatExtentImages;
-        private string _descSponsership;
-        private string _descTableofContentsHas;
-        private string _silDomain;
+	    private string _silDomain;
         private string _domainSubTypeLing;
         private List<string> _subject = new List<string>();
         private string _relRequiresHas;

@@ -84,7 +84,7 @@ namespace SIL.PublishingSolution
             projInfo.OutputExtension = "odt";
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
-			VerboseClass verboseClass = VerboseClass.GetInstance();
+			
 			Common.CheckAndGetStyle(defaultXhtml, projInfo.ProjectInputType);
             _isFromExe = Common.CheckExecutionPath();
             var glossorywords = WriteGlossaryLink(projInfo);
@@ -175,7 +175,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
             if (!File.Exists(file))
                 return null;
 
@@ -224,7 +224,6 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
             if (!File.Exists(tocFiletoUpdate))
                 return;
             xmlDoc.Load(tocFiletoUpdate);
@@ -716,10 +715,13 @@ namespace SIL.PublishingSolution
 
             projInfo.DefaultXhtmlFileWithPath = preProcessor.ProcessedXhtml;
 
-            AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
-            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+	        if (Common.UseAfterBeforeProcess)
+	        {
+		        AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
+		        afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+	        }
 
-			#endregion
+	        #endregion
 
 
 			#region 11. Create ODT Content
@@ -837,19 +839,6 @@ namespace SIL.PublishingSolution
             {
                 isCoverImageInserted = "true";
             }
-
-            // If chapternumber found in css, vertical-align = "auto"
-            foreach (string cls in idAllClass.Keys)
-            {
-                if (cls.ToLower().IndexOf("chapternumber") == 0 && cls.ToLower().IndexOf("chapternumber_") != 0)
-                {
-                    if (idAllClass.ContainsKey(cls) && idAllClass[cls].ContainsKey("vertical-align"))
-                    {
-                        //idAllClass[cls]["vertical-align"] = "auto";
-                    }
-                }
-            }
-
             return isCoverImageInserted;
         }
 
@@ -1033,6 +1022,12 @@ namespace SIL.PublishingSolution
 
             string xpath = "//style:style[@style:name='letter_letHead_dicBody']";
             XmlNodeList list = xdoc.SelectNodes(xpath, nsmgr1);
+	        if (list.Count == 0)
+	        {
+				xpath = "//style:style[@style:name='letter_letHead_body']";
+				list = xdoc.SelectNodes(xpath, nsmgr1);
+	        }
+
             if (list.Count > 0)
             {
                 XmlNode copyNode = list[0].Clone();
@@ -1237,7 +1232,7 @@ namespace SIL.PublishingSolution
 				XmlDocument xmldoc = Common.DeclareXMLDocument(true);
 				var namespaceManager = new XmlNamespaceManager(xmldoc.NameTable);
 				namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse}; //Common.DeclareXmlReaderSettings(false);
 				var xmlReader = XmlReader.Create(strMacroPath, xmlReaderSettings);
 				xmldoc.Load(xmlReader);
 				xmlReader.Close();
@@ -1294,31 +1289,31 @@ namespace SIL.PublishingSolution
                 Common.CleanDirectory(di);
             }
             Directory.CreateDirectory(destFolder);
-            string[] files = Directory.GetFiles(sourceFolder);
-            try
-            {
-                foreach (string file in files)
-                {
-                    string name = Path.GetFileName(file);
-                    string dest = Common.PathCombine(destFolder, name);
-                    File.Copy(file, dest, true);
-                }
+	        if (Directory.Exists(sourceFolder))
+	        {
+		        string[] files = Directory.GetFiles(sourceFolder);
+		        try
+		        {
+			        foreach (string file in files)
+			        {
+				        string name = Path.GetFileName(file);
+				        string dest = Common.PathCombine(destFolder, name);
+				        File.Copy(file, dest, true);
+			        }
 
-                string[] folders = Directory.GetDirectories(sourceFolder);
-                foreach (string folder in folders)
-                {
-                    string name = Path.GetFileName(folder);
-                    string dest = Common.PathCombine(destFolder, name);
-                    if (name != ".svn")
-                    {
-                        CopyOfficeFolder(folder, dest);
-                    }
-                }
-            }
-            catch
-            {
-                return;
-            }
+			        string[] folders = Directory.GetDirectories(sourceFolder);
+			        foreach (string folder in folders)
+			        {
+				        string name = Path.GetFileName(folder);
+				        string dest = Common.PathCombine(destFolder, name);
+				        if (name != ".svn")
+				        {
+					        CopyOfficeFolder(folder, dest);
+				        }
+			        }
+		        }
+		        catch {}
+	        }
         }
         #endregion
     }

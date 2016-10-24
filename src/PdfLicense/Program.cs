@@ -16,7 +16,7 @@ namespace PdfLicense
         {
 
             string allUserPath = GetAllUserPath();
-            string licenseFileName = ReadPathinLicenseFile(allUserPath);
+            ReadPathinLicenseFile(allUserPath);
             if (_readLicenseFilesBylines.Count < 0)
             {
                 return;
@@ -131,7 +131,6 @@ namespace PdfLicense
         {
             string fileLoc = PathCombine(allUserPath, "License.txt");
             string executePath = string.Empty;
-            int countRead = 0;
 
             if (File.Exists(fileLoc))
             {

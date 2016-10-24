@@ -1,0 +1,778 @@
+.cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;font-family: 'Times New Roman', serif; } .title{margin-top: 112pt; text-align: center; font-family: 'Times New Roman', serif; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;font-family: 'Times New Roman', serif; } .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}.copyright{text-align: left; font-size:1pt;visibility:hidden;font-family: 'Times New Roman', serif;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;font-family: 'Times New Roman', serif;}.LText{font-size:12pt;font-style:italic;font-family: 'Times New Roman', serif;}.LText:before{content: "\2028"}.dummyTOC{font-size:1pt; page-break-after: always;} .TableOfContentLO{visibility:hidden;}.dummypage{page-break-after: always;} 
+
+.BookTitle {font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookCreator{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookPublisher{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookDescription{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookCopyrightHolder{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+div[lang='en']{ font-family: "Times New Roman";}
+span[lang='en']{ font-family: "Times New Roman";}
+div[lang='ggo-fonipa-x-emic']{ font-family: "Tahoma";}
+span[lang='ggo-fonipa-x-emic']{ font-family: "Tahoma";}
+div[lang='te']{ font-family: "Gautami";}
+span[lang='te']{ font-family: "Gautami";}
+div[lang='hi']{ font-family: "Mangal";}
+span[lang='hi']{ font-family: "Mangal";}
+div[lang='ggo-Telu-IN']{ font-family: "Gautami";}
+span[lang='ggo-Telu-IN']{ font-family: "Gautami";}
+
+.letHead {
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+}
+.letter {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 10pt;
+   font-weight: bold;
+}
+body {
+   font-size: 10pt;
+}
+span[lang|= "en"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 10pt;
+}
+span[lang|= "ggo-fonipa-x-emic"]{
+   font-family: 'Tahoma',serif;
+   font-size: 10pt;
+}
+span[lang|= "te"]{
+   font-family: 'Gautami',serif;
+   font-size: 10pt;
+}
+span[lang|= "hi"]{
+   font-family: 'Mangal',serif;
+   font-size: 10pt;
+}
+span[lang|= "ggo-Telu-IN"]{
+   font-family: 'Gautami',serif;
+   font-size: 10pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+*[dir= 'ltr']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: -moz-isolate;
+}
+*[dir= 'rtl']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: -moz-isolate;
+}
+.entry span[lang|= "en"]{
+   font-size: 10pt;
+}
+.entry span[lang|= "ggo-fonipa-x-emic"]{
+   font-size: 10pt;
+}
+.entry span[lang|= "te"]{
+   font-size: 10pt;
+}
+.entry span[lang|= "hi"]{
+   font-size: 10pt;
+}
+.entry span[lang|= "ggo-Telu-IN"]{
+   font-size: 10pt;
+}
+.entry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   font-size: 10pt;
+}
+.entry .mainheadword > span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span span[lang|= "en"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span span[lang|= "ggo-fonipa-x-emic"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span span[lang|= "te"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span span[lang|= "hi"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense {
+   font-size: 10pt;
+}
+.entry > .senses > .sensecontent {
+   text-indent: -18pt;
+   margin-left: 18pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.sensecontent-ps {
+   font-size: 10pt;
+   color: Black;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "ggo-fonipa-x-emic"]{
+   font-style: italic;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "te"]{
+   font-style: italic;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "hi"]{
+   font-style: italic;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "ggo-Telu-IN"]{
+   font-style: italic;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "ggo-fonipa-x-emic"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "te"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "hi"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "ggo-Telu-IN"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span[lang|= "ggo-Telu-IN"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span span[lang|= "ggo-fonipa-x-emic"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span span[lang|= "te"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span span[lang|= "hi"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span span[lang|= "ggo-Telu-IN"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.entry .picture img {
+   max-height: 1in;
+}
+.entry .picture span[lang|= "en"]{
+   font-size: 10pt;
+}
+.entry .picture span[lang|= "ggo-fonipa-x-emic"]{
+   font-size: 10pt;
+}
+.entry .picture span[lang|= "te"]{
+   font-size: 10pt;
+}
+.entry .picture span[lang|= "hi"]{
+   font-size: 10pt;
+}
+.entry .picture span[lang|= "ggo-Telu-IN"]{
+   font-size: 10pt;
+}
+.entry .picture {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+}
+.entry .captionContent .headword[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword span[lang|= "en"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword span[lang|= "ggo-fonipa-x-emic"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword span[lang|= "te"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword span[lang|= "hi"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword {
+   font-weight: bold;
+}
+.entry .subentries .subentry span[lang|= "en"]{
+   font-size: 10pt;
+}
+.entry .subentries .subentry span[lang|= "ggo-fonipa-x-emic"]{
+   font-size: 10pt;
+}
+.entry .subentries .subentry span[lang|= "te"]{
+   font-size: 10pt;
+}
+.entry .subentries .subentry span[lang|= "hi"]{
+   font-size: 10pt;
+}
+.entry .subentries .subentry span[lang|= "ggo-Telu-IN"]{
+   font-size: 10pt;
+}
+.entry .subentries .subentry {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+   display: block;
+}
+.entry .subentries .subentry {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+   display: block;
+}
+.minorentrycomplex span[lang|= "en"]{
+   font-size: 10pt;
+}
+.minorentrycomplex span[lang|= "ggo-fonipa-x-emic"]{
+   font-size: 10pt;
+}
+.minorentrycomplex span[lang|= "te"]{
+   font-size: 10pt;
+}
+.minorentrycomplex span[lang|= "hi"]{
+   font-size: 10pt;
+}
+.minorentrycomplex span[lang|= "ggo-Telu-IN"]{
+   font-size: 10pt;
+}
+.minorentrycomplex {
+   clear: both;
+   white-space: pre-wrap;
+}
+.minorentrycomplex {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+}
+.minorentrycomplex > .headword > span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span span[lang|= "en"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span span[lang|= "ggo-fonipa-x-emic"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span span[lang|= "te"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span span[lang|= "hi"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span span[lang|= "en"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span span[lang|= "ggo-fonipa-x-emic"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span span[lang|= "te"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span span[lang|= "hi"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span span[lang|= "en"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span span[lang|= "ggo-fonipa-x-emic"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span span[lang|= "te"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span span[lang|= "hi"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "ggo-fonipa-x-emic"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "te"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "hi"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "ggo-Telu-IN"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "ggo-fonipa-x-emic"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "te"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "hi"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "ggo-Telu-IN"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .example > span[lang|= "ggo-Telu-IN"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .example > span span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .example > span span[lang|= "ggo-fonipa-x-emic"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .example > span span[lang|= "te"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .example > span span[lang|= "hi"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .example > span span[lang|= "ggo-Telu-IN"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .example > span {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
+.mainentrysubentries .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.mainentrysubentries .picture img {
+   max-height: 1in;
+}
+.mainentrysubentries .picture span[lang|= "en"]{
+   font-size: 10pt;
+}
+.mainentrysubentries .picture span[lang|= "ggo-fonipa-x-emic"]{
+   font-size: 10pt;
+}
+.mainentrysubentries .picture span[lang|= "te"]{
+   font-size: 10pt;
+}
+.mainentrysubentries .picture span[lang|= "hi"]{
+   font-size: 10pt;
+}
+.mainentrysubentries .picture span[lang|= "ggo-Telu-IN"]{
+   font-size: 10pt;
+}
+.mainentrysubentries .picture {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+}
+.mainentrysubentries .captionContent .headword[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.mainentrysubentries .captionContent .headword span[lang|= "en"]{
+   font-weight: bold;
+}
+.mainentrysubentries .captionContent .headword span[lang|= "ggo-fonipa-x-emic"]{
+   font-weight: bold;
+}
+.mainentrysubentries .captionContent .headword span[lang|= "te"]{
+   font-weight: bold;
+}
+.mainentrysubentries .captionContent .headword span[lang|= "hi"]{
+   font-weight: bold;
+}
+.mainentrysubentries .captionContent .headword span[lang|= "ggo-Telu-IN"]{
+   font-weight: bold;
+}
+.mainentrysubentries .captionContent .headword {
+   font-weight: bold;
+}
+.complexentryform {
+        font-weight: bold;
+}
+.complexentrytype { }
+.complexformrefs :after {
+        content: " ";
+}
+.complexformrefs { }
+.crossref {
+        font-weight: bold;
+}
+.crossrefs { }
+.crossreftargets { }
+.crossref-targets { }
+.crossreftype {
+        font-style: italic;
+        font-weight: bold;
+}
+.crossref-type {
+        font-style: italic;
+        font-weight: bold;
+}
+.definition { }
+.definition-minor { }
+.definition-sub { }
+.dicBody { }
+.entry {
+        padding-bottom: 2pt;
+        padding-top: 1pt;
+        margin-left: 12pt;
+        text-indent: -12pt;
+}
+.entryref-primary-minor { }
+.entryref-type-minor { }
+.entryreftype { }
+.entrytypeabbr-minor { }
+.entrytypeabbr { }
+.entry-type-abbr-sub { }
+.entrytypeabbrminor { }
+.examples { }
+.examples-minor { }
+.examples-sub { }
+.grammaticalinfo {
+        font-style: italic;
+}
+.grammatical-info {
+        font-style: italic;
+}
+.grammatical-info-minor {
+        font-style: italic;
+}
+.grammatical-info-sub {
+        font-style: italic;
+}
+.headword-minor {
+        font-weight: bold;
+}
+.headword-sub {
+        font-weight: bold;
+        string-set: guideword content();
+}
+.headwordminor {
+        font-weight: bold;
+}
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub {
+        font-weight: bold;
+}
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub {
+        font-weight: bold;
+}
+.letData {
+        column-count: 2;
+        column-fill: balance;
+        column-gap: 18pt;
+        column-rule: solid 1pt #aa0000;
+        text-align: left;
+}
+.letHead {
+        border-bottom: .5pt solid #a00;
+        clear: both;
+        column-count: 1;
+        font-style: normal;
+        font-weight: bold;
+        line-height: 26pt;
+        margin: 18pt 9pt;
+        margin-left: .75in;
+        margin-right: .75in;
+        /* padding-bottom: 36pt; */
+        /* padding-top: 36pt; */
+        text-align: center;
+}
+.letter {
+        direction: ltr;
+        font-size: 18pt;
+        font-weight: bold;
+        margin-bottom: 18pt;
+        margin-top: 18pt;
+        text-align: center;
+        width: 100%;
+		/*page-break-after:avoid;*/
+		page-break-inside:avoid;
+		orphans:5;
+		widows:5;
+        -ps-outline-level:2;
+}
+.entry {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
+
+@page {
+    size: 16.2cm 22.9cm;
+    marks: crop cross;
+    counter-increment: page;
+    margin: 2cm;
+}
+/* two column dictionary */
+.letData {
+       column-count: 2; -moz-column-count: 2;
+       column-gap: 12pt; -moz-column-gap: 12pt;
+       column-fill: balance;
+       overflow-wrap: break-word;
+}
+
+/* Leading_nc.css */
+
+.letData, .revData {
+       
+}
+.entry {
+ 
+}
+.revEntry {
+ 
+}
+.letHead {
+ 
+}
+.revHeader {
+ 
+}
+/* Cascading Style Sheet to set background color to Transparent */
+.entry, .subentry, .xitem[lang='tpi'], .crossref, .crossref-type, .example, .example-sub, .grammatical-info, .grammatical-info-sub, .headword, .headword-minor, .headword-sub, .LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub, .lexref-type, .lexref-type-sub, .pronunciation, .pronunciation-minor, .pronunciation-sub, .sense-crossref, .sense-crossref-sub, .subentries {
+    background-color: transparent;
+}
+
+
+
+.pictureRight {
+    display: block;
+}
+.pictureLeft {
+    display: block;
+}
+.pictureCenter {
+    display: block;
+}
+/* Running Head Mirrored.css */
+@page :left {
+    @top-left {
+           content: string( guideword, first);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @top-center    { content: ''; }
+    @top-right  { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left   { content: ''; }
+    @top-center { content: ''; }
+    @top-right  {
+           content: string( guideword, last);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+
+
+
+.letData {
+       column-rule: solid 1pt #808080;
+}
+.letHead {
+       border-bottom: .5pt solid #808080;
+       margin: 18pt 9pt;
+       /* padding-bottom: 36pt; */
+       /* padding-top: 36pt; */
+}
+.revData {
+       column-rule: solid 1pt #808080;
+}
+.revHeader {
+       border-bottom: .5pt solid #808080;
+       margin: 18pt 9pt;
+       /* padding-bottom: 36pt; */
+       /* padding-top: 36pt; */
+}
+/* Page number  Top Inside.css */
+@page :left {
+    @top-right {
+          content: counter( page);
+           margin-top: 1cm;
+    }
+}
+
+@page :right {
+    @top-left {
+           content: counter( page);
+           margin-top: 1cm;
+    }
+}
+
+
+@page :first {
+    @bottom-left {
+           content: counter( page);
+    }
+}
+.revhomographnumber {
+        font-size: 55%;
+        font-weight: bold;
+        vertical-align: sub;
+}
+.revsensenumber {
+        font-weight: bold;
+}
+
+.minorentry {
+       text-align: left;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
+.BookReferenceDiv {
+ display: none;
+}
+.Front_Matter {
+margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;
+}
+.hideDiv {
+page-break-before:always;
+display: none;
+}
+.BookReferenceDiv {
+ display: none;
+}
+.BookReferenceDiv {
+ display: none;
+}
+.Front_Matter {
+margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;
+}
+.hideDiv {
+page-break-before:always;
+display: none;
+}

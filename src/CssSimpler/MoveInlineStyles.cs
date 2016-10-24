@@ -47,9 +47,11 @@ namespace CssSimpler
         }
 
         private string _currentClass = String.Empty;
+        private string _currentLang = string.Empty;
         private void ResetClassName(XmlReader r)
         {
             _currentClass = String.Empty;
+            _currentLang = r.GetAttribute("lang");
         }
 
         protected  Dictionary<string, string> SavedStyles = new Dictionary<string, string>();
@@ -64,26 +66,33 @@ namespace CssSimpler
             else if (r.Name == "style")
             {
                 var newClass = LastClass;
-                if (_currentClass == string.Empty)
-                {
-                    newClass += "-st";
-                }
-                var count = 0;
+	            if (_currentClass == string.Empty)
+	            {
+		            //Style in xhtml file inline style
+					newClass = "stxfin" + newClass;
+	            }
+
+	            var count = 0;
                 while  (SavedStyles.ContainsKey(newClass))
                 {
                     if (SavedStyles[newClass] != r.Value)
                     {
                         count += 1;
-                        newClass = string.Format("{0}{1}-st", LastClass, count);
+						newClass = string.Format("stxfin{0}{1}", LastClass, count);
                     }
                     else
                     {
                         break;
                     }
                 }
-                if (!SavedStyles.ContainsKey(newClass))
+                var saveAs = newClass;
+                if (!string.IsNullOrEmpty(_currentLang))
                 {
-                    SavedStyles[newClass] = r.Value;
+                    saveAs += string.Format("[lang='{0}']", _currentLang.Trim());
+                }
+                if (!SavedStyles.ContainsKey(saveAs))
+                {
+                    SavedStyles[saveAs] = r.Value;
                 }
                 if (_currentClass == string.Empty)
                 {

@@ -91,7 +91,6 @@ namespace SIL.PublishingSolution
 		private bool _isEmptyPageInsertedForDic = false;
 		private bool _isPageSpaceGiven;
 		private bool _isPageSpaceSingle;
-		private bool _anchorSignificant;
 
 		Dictionary<string, string> _pageSize = new Dictionary<string, string>();
 		private bool _isFromExe = false;
@@ -108,7 +107,7 @@ namespace SIL.PublishingSolution
 		private bool _isEmptyPageInserted;
 		private bool _isH2Complaint;
 		private string _h3Book = string.Empty;
-		private string _displayProperty, _floatProperty;
+		private string _displayProperty;
 		private bool _nextVerse;
 		private string _previousGuideword = string.Empty;
 		private string _firstText = string.Empty;
@@ -448,6 +447,8 @@ namespace SIL.PublishingSolution
 
 			if (data.Contains("\\"))
 			{
+				data = data.Replace("\\", Common.ConvertUnicodeToString("\\2216"));
+
 				Char[] charac = data.ToCharArray();
 				int index = 0;
 				foreach (char var in charac)
@@ -457,21 +458,6 @@ namespace SIL.PublishingSolution
 					{
 						_writer.WriteRaw(@"<text:line-break/>");
 					}
-					
-					if (var == '\\')
-					{
-						try
-						{
-							string unicodeValue = data;
-							int datalength = data.Length - index;
-							unicodeValue = var + unicodeValue.Substring(index, datalength);
-							data = Common.ConvertUnicodeToString(unicodeValue);
-						}
-						catch
-						{}
-						_writer.WriteRaw(@"<text:line-break/>");
-						return data;
-					}					
 				}
 			}
 			if (_replaceSymbolToText.Count > 0)
@@ -499,8 +485,15 @@ namespace SIL.PublishingSolution
 
 		private void ProcessXHTML(ProgressBar pb, string Sourcefile, string targetPath)
 		{
-			if (_outputExtension == "odm") return;
-
+			if (_outputExtension == "odm") 
+				return;
+			
+			foreach(string className in IdAllClass.Keys)
+			{
+				if (!IdAllClassWithandWithoutSeperator.ContainsKey(className))
+					IdAllClassWithandWithoutSeperator.Add(className, className.Replace("-","_").Replace(".",""));
+			}
+			
 			_styleFilePath = targetPath + "styles.xml";
 			try
 			{
@@ -656,7 +649,6 @@ namespace SIL.PublishingSolution
 				_writer.WriteString(" ");
 				_writer.WriteEndElement();
 			}
-
 		}
 
 		/// <summary>
@@ -664,10 +656,8 @@ namespace SIL.PublishingSolution
 		/// </summary>
 		private void InsertFlexRevFirstGuidewordOnMainForOdm()
 		{
-			//if (_projInfo.MainLastFileName != null && _projInfo.MainLastFileName.Length > 0 && _projInfo.IsODM)
 			if (_projInfo.IsODM)
 			{
-				//if (Path.GetFileNameWithoutExtension(_projInfo.MainLastFileName) == Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath.Replace("Preservemain", "main")))
 				if (Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath).IndexOf("main") >= 0)
 				{
 					string flexFileName = Common.PathCombine(Path.GetDirectoryName(_projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
@@ -710,7 +700,7 @@ namespace SIL.PublishingSolution
 			}
 
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value, false);
+			SignificantSpace(_reader.Value, false);
 			if (!whiteSpaceExist && !_pseudoSingleSpace)
 			{
 				_significant = true;
@@ -721,7 +711,7 @@ namespace SIL.PublishingSolution
 		private void InsertWhiteSpace()
 		{
 			bool whiteSpaceExist = _significant;
-			string data = SignificantSpace(_reader.Value, false);
+			SignificantSpace(_reader.Value, false);
 			if (!whiteSpaceExist && !_pseudoSingleSpace)
 			{
 				IsLastPronunciationform();
@@ -1202,10 +1192,10 @@ namespace SIL.PublishingSolution
 						content = content.Trim();
 					}
 				}
-
-
 				if (_imageClass.Length > 0)
 				{
+					_writer.WriteStartElement("text:p");
+					_writer.WriteAttributeString("text:style-name", _childName);
 					_writer.WriteString(content);
 				}
 				else if (_isVerseNumberContent)
@@ -1418,8 +1408,11 @@ namespace SIL.PublishingSolution
 				content = content.Replace(Common.ConvertUnicodeToString("\\0009"), @"text:tab/");
 				if (_isVerseNumberContent == false)
 				{
-					_writer.WriteStartElement("text:span");
-					_writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+					if (string.IsNullOrEmpty(_imageClass))
+					{
+						_writer.WriteStartElement("text:span");
+						_writer.WriteAttributeString("text:style-name", characterStyle); //_util.ChildName
+					}
 				}
 				else
 				{
@@ -1617,8 +1610,8 @@ namespace SIL.PublishingSolution
 				_writer.WriteString(marker);
 				_writer.WriteEndElement();
 			}
-			//TD-3343
-			content = NoteCrossHyphenReferenceContentNodeMissing(content);
+			//TD-3343 TD-4717
+			content = SpanTagCorrection(content);
 
 			_writer.WriteRaw(content);
 			_writer.WriteEndElement();
@@ -1633,13 +1626,31 @@ namespace SIL.PublishingSolution
 			}
 		}
 
-		private static string NoteCrossHyphenReferenceContentNodeMissing(string content)
+		public static string SpanTagCorrection(string content)
 		{
-			string pattern = "<text:span text:style-name=\"NoteCrossHYPHENReferenceParagraph..footnote-marker\">\\s?<|<text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">\\s?<";
-			MatchCollection matches = Regex.Matches(content, pattern);
-			if (matches.Count == 1)
+			var regexStartTag = new Regex(@"<(!--\u002E\u002E\u002E--|!DOCTYPE|text:span|wbr)\s?");
+			var startTagCollection = regexStartTag.Matches(content);
+			var regexCloseTag = new Regex(@"</(!--\u002E\u002E\u002E--|!DOCTYPE|text:span|wbr)>");
+			var closeTagCollection = regexCloseTag.Matches(content);
+			var startTagList = new List<string>();
+			var closeTagList = new List<string>();
+
+			foreach (Match startTag in startTagCollection)
 			{
-				content = content + "</text:span>";
+				startTagList.Add(startTag.Value);
+			}
+			foreach (Match closeTag in closeTagCollection)
+			{
+				closeTagList.Add(closeTag.Value);
+			}
+			if (startTagList.Count > closeTagList.Count)
+			{
+				int remainingCloseingTag = startTagList.Count - closeTagList.Count;
+				while (remainingCloseingTag > 0)
+				{
+					content = content + "</text:span>";
+					remainingCloseingTag--;
+				}
 			}
 			return content;
 		}
@@ -1878,10 +1889,6 @@ namespace SIL.PublishingSolution
 
 		private void EndElement()
 		{
-			//if (_closeChildName.IndexOf("scrBookName") == 0)
-			//{
-			//    if (isPageBreak) return;
-			//}
 			if (_reader.Name == "a" && _anchorWrite)
 			{
 				_anchorWrite = false;
@@ -3115,7 +3122,6 @@ namespace SIL.PublishingSolution
 
 			if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey("display"))
 			{
-				_floatProperty = "center";
 				if (IdAllClass[className]["display"] == "none")
 				{
 					_isPictureDisplayNone = true;
@@ -3130,10 +3136,8 @@ namespace SIL.PublishingSolution
 			else
 			{
 				_displayProperty = "frame";
-				_floatProperty = "right";
 				if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey("float"))
 				{
-					_floatProperty = IdAllClass[className]["float"];
 				}
 			}
 		}
@@ -3684,11 +3688,11 @@ namespace SIL.PublishingSolution
 			bool isClassNameMatches = (_classNameWithLang.IndexOf("reversalform", StringComparison.Ordinal) == 0 ||
 					  _childName.Replace(_classNameWithLang + "_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0 ||
 					  _childName.Replace(_classNameWithLang + "_", "").IndexOf("headword", StringComparison.Ordinal) == 0 ||
-					  _childName.Replace("span_", "").IndexOf("headword", StringComparison.Ordinal) == 0 || _childName.Replace("span.-", "").IndexOf("mainheadword", StringComparison.Ordinal) == 0 || _childName.Replace("a_span_", "").IndexOf("mainheadword", StringComparison.Ordinal) == 0 ||
-					  _childName.Replace("span_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0);
+					  _childName.Replace("span_", "").IndexOf("headword", StringComparison.Ordinal) == 0 || _childName.IndexOf("mainheadword", StringComparison.Ordinal) >= 0 ||
+                      _childName.Replace("span_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousParagraphName string.
-			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0);
+			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0 || _previousParagraphName.IndexOf("reversalindexentry", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousChildName string.
 			bool isPrevChildNameMatches = (_previousChildName.IndexOf("headword", StringComparison.Ordinal) == -1 && _previousChildName.IndexOf("reversalform", StringComparison.Ordinal) == -1);

@@ -256,8 +256,8 @@
     margin-top: 8pt;
 }
 .Section_Head_Minor {
-    font-weight: bold;	/* cascaded environment */
-    font-style: normal;	/* cascaded environment */
+    font-weight: normal;	/* cascaded environment */
+    font-style: italic;	/* cascaded environment */
     text-align: center;
     text-indent: 0pt;
     margin-left: 0pt;
@@ -343,4 +343,20 @@ content: " ";}
 
 .Chapter_Number {
     string-set: chapter content();
+}
+
+.Section_Head {
+	page-break-after:avoid;
+}
+.Section_Head_Minor {
+	page-break-after:avoid;
+}
+.s3 {
+	page-break-after: avoid;
+}
+.scrBookName {
+page-break-before: always;
+}
+.scrBook {
+string-set: chapter '1';
 }

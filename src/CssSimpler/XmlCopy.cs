@@ -93,6 +93,10 @@ namespace CssSimpler
                         }
                         break;
                     case XmlNodeType.Text:
+                        if (_rdr.Value == "a cabo")
+                        {
+                            Debug.Print("pause");
+                        }
                         _wtr.WriteString( _rdr.Value );
                         break;
                     case XmlNodeType.Whitespace:
@@ -193,7 +197,10 @@ namespace CssSimpler
         {
             //var ns = new XmlNamespaceManager(_rdr.NameTable);
             _wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
+            if (!string.IsNullOrEmpty(myClass))
+            {
             WriteAttr(myClass + "-ps");
+            }
             if (val.Contains(" "))
             {
                 _wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");

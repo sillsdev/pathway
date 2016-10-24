@@ -38,8 +38,6 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
-using Palaso.UI.WindowsForms.WritingSystems;
-using Palaso.WritingSystems;
 using SilTools;
 using SIL.Tool;
 
@@ -635,7 +633,7 @@ namespace SIL.PublishingSolution
                 chkReversalIndexes.Visible = false;
                 chkGrammarSketch.Visible = false; // currently this is false anyways (it's not implemented)
             }
-			if (ddlLayout.Text.Contains("LibreOffice"))
+			if (ddlLayout.Text.Contains("LibreOffice") || ddlLayout.Text.Contains("Prince"))
 			{
 				chkHyphen.Enabled = Param.IsHyphen;
 				chkHyphen.Checked = Param.HyphenEnable;
@@ -762,6 +760,7 @@ namespace SIL.PublishingSolution
             OperatingSystem OS = Environment.OSVersion;
             string BackendsPath = Common.ProgInstall;
             Backend.Load(BackendsPath);
+			Console.WriteLine( @"InputType from : {0}", InputType);
             ArrayList exportType = Backend.GetExportType(InputType);
             exportType.Sort();
             if (exportType.Count > 0)

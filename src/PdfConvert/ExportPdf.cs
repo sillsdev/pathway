@@ -107,8 +107,8 @@ namespace SIL.PublishingSolution
         {
             bool success;
             bool isUnixOS = Common.UnixVersionCheck();
-            try
-            {
+            //try
+            //{
                 var regPrinceKey = RegPrinceKey;
                 if (regPrinceKey != null || isUnixOS)
                 {
@@ -121,6 +121,7 @@ namespace SIL.PublishingSolution
                             Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath,"pdfconvert");
                     }
                     Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+                    preProcessor.IncludeHyphenWordsOnXhtml(preProcessor.ProcessedXhtml);
                     preProcessor.GetTempFolderPath();
                     preProcessor.ImagePreprocess(false, delegate(string s, string to) { ImageMods.ResizeImage(s, to, 1,1); });
                     preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
@@ -131,15 +132,20 @@ namespace SIL.PublishingSolution
                     preProcessor.ReplaceDoubleSlashToLineBreak(preProcessor.ProcessedXhtml);
                     preProcessor.MoveCallerToPrevText(preProcessor.ProcessedXhtml);
                     string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
-                    string tempFolderName = Path.GetFileName(tempFolder);
-                    var mc = new MergeCss { OutputLocation = tempFolderName };
-                    string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
+                    //string tempFolderName = Path.GetFileName(tempFolder);
+                    var mc = new MergeCss { OutputLocation = tempFolder };
+
+	                if (projInfo.IsReversalExist && File.Exists(projInfo.DefaultRevCssFileWithPath))
+	                {
+		                Common.CopyContent(projInfo.DefaultCssFileWithPath, projInfo.DefaultRevCssFileWithPath);
+	                }
+
+	                string mergedCSS = mc.Make(projInfo.DefaultCssFileWithPath, "Temp1.css");
                     preProcessor.ReplaceStringInCss(mergedCSS);
                     preProcessor.InsertPropertyInCSS(mergedCSS);
                     preProcessor.RemoveDeclaration(mergedCSS, ".pictureRight > .picture");
                     preProcessor.RemoveDeclaration(mergedCSS, "div.pictureLeft > img.picture");
-					preProcessor.HandleNewFieldworksChangeInXhtml(preProcessor.ProcessedXhtml);
-					preProcessor.HandleNewFieldworksChangeInCss(mergedCSS);
+                    preProcessor.HandleNewFieldworksChangeInCss(mergedCSS);
                     mergedCSS = preProcessor.RemoveTextIndent(mergedCSS);
 
                     if (isUnixOS)
@@ -171,7 +177,15 @@ namespace SIL.PublishingSolution
                     string xhtmlFileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
                     string defaultCSS = Path.GetFileName(mergedCSS);
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
+
                     _processedXhtml = preProcessor.ProcessedXhtml;
+					if (projInfo.IsReversalExist)
+					{
+						var reversalFile = Path.GetDirectoryName(_processedXhtml);
+						reversalFile = Common.PathCombine(reversalFile, "FlexRev.xhtml");
+						Common.SetDefaultCSS(reversalFile, defaultCSS);
+					}
+
                     if (!ExportPrince(projInfo, xhtmlFileName, isUnixOS, regPrinceKey, defaultCSS)) 
                         return false;
 
@@ -180,7 +194,7 @@ namespace SIL.PublishingSolution
                     {
                         //Copyright information added in PDF files
                         #pragma warning disable 168
-                        string pdfFileName = Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML", projInfo.ProjectInputType);
+                        Common.InsertCopyrightInPdf(Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), xhtmlFileName + ".pdf"), "Prince XML", projInfo.ProjectInputType);
                         #pragma warning restore 168
                     }
                     else
@@ -206,28 +220,41 @@ namespace SIL.PublishingSolution
                         success = true;
                     }
                 }
-            }
-            catch (Exception)
-            {
-                success = false;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    success = false;
+            //}
             return success;
         }
 
-        private static bool ExportPrince(PublicationInformation projInfo, string xhtmlFileName, bool isUnixOS,
+	    private static bool ExportPrince(PublicationInformation projInfo, string xhtmlFileName, bool isUnixOS,
                                    RegistryKey regPrinceKey, string defaultCSS)
         {
             if (!isUnixOS)
             {
                 Object princePath = regPrinceKey.GetValue("InstallLocation");
                 _fullPrincePath = Common.PathCombine((string) princePath, "Engine/bin/prince.exe");
+				var myPrince = new Prince(_fullPrincePath);
+	            if (projInfo.IsReversalExist)
+	            {
+		            string[] xhtmlFiles = new string[2];
+		            var reversalFile = Path.GetDirectoryName(_processedXhtml);
+		            xhtmlFiles[0] = _processedXhtml;
+		            xhtmlFiles[1] = Common.PathCombine(reversalFile, "FlexRev.xhtml");
+		            myPrince.AddStyleSheet(defaultCSS);
+					myPrince.ConvertMultiple(xhtmlFiles, xhtmlFileName + ".pdf");
 
-                if (File.Exists(_fullPrincePath))
-                {
-                    var myPrince = new Prince(_fullPrincePath);
-                    myPrince.AddStyleSheet(defaultCSS);
-                    myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
-                }
+	            }
+	            else
+	            {
+		            if (File.Exists(_fullPrincePath))
+		            {
+			            myPrince.AddStyleSheet(defaultCSS);
+			            myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
+
+		            }
+	            }
             }
             else
             {
@@ -240,9 +267,19 @@ namespace SIL.PublishingSolution
                 }
                 Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
                 Directory.SetCurrentDirectory(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath));
-                string p1Error = string.Empty;
-                string inputArguments = "";
-                inputArguments = _processedXhtml + " -o " + xhtmlFileName + ".pdf";
+
+                string inputArguments;
+	            if (projInfo.IsReversalExist)
+				{
+					var reversalFile = Path.GetDirectoryName(_processedXhtml);
+					var reversalFilename = Common.PathCombine(reversalFile, "FlexRev.xhtml");
+					inputArguments = "-s " + defaultCSS + " " + _processedXhtml + " " + reversalFilename + " " + " -o " + xhtmlFileName + ".pdf";
+				}
+				else
+				{
+					inputArguments = "-s " + defaultCSS + " " + _processedXhtml + " -o " + xhtmlFileName + ".pdf";	
+				}
+                
                 using (Process p1 = new Process())
                 {
                     p1.StartInfo.FileName = "prince";
@@ -255,7 +292,6 @@ namespace SIL.PublishingSolution
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                     p1.Start();
                     p1.WaitForExit();
-                    p1Error = p1.StandardError.ReadToEnd();
                 }
             }
             return true;

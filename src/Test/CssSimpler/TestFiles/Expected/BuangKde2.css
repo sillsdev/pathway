@@ -30,6 +30,12 @@ span[lang|= "bzh"]{
    font-family: 'Charis SIL',serif;
    font-size: 10pt;
 }
+div.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+}
 a {
    text-decoration: inherit;
    color: inherit;
@@ -45,54 +51,54 @@ a {
    padding-top: 1pt;
    font-size: 10pt;
 }
-.entry .mainheadword > span[lang|= "bzh"]{
+.entry > .mainheadword > span[lang|= "bzh"]{
    font-weight: bold;
 }
-.entry .mainheadword > span {
+.entry > .mainheadword > span {
    font-weight: bold;
 }
-.entry .senses .sensecontent .sensenumber {
+.entry > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.entry .senses .morphosyntaxanalysis {
+.entry > .senses > .sensecontent > .sharedgrammaticalinfo > .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry .senses .morphosyntaxanalysis {
+.entry > .senses > .sensecontent > .sense > .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry .senses .example > span[lang|= "bzh"]{
+.entry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span[lang|= "bzh"]{
    font-style: italic;
 }
-.entry .senses .example > span {
+.entry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span {
    font-style: italic;
 }
-.entry .senses .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
+.entry > .senses > .sensecontent > .sense > .lexsensereferences .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
    font-style: italic;
 }
-.entry .senses .lexsensereference > .ownertype_abbreviation > span {
+.entry > .senses > .sensecontent > .sense > .lexsensereferences .lexsensereference > .ownertype_abbreviation > span {
    font-style: italic;
 }
-.entry .senses .senses .sensecontent .sensenumber {
+.entry > .senses > .sensecontent > .sense > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.entry .picture {
+.entry .pictures .picture {
    float: right;
    text-align: center;
    margin: 0pt 0pt 4pt 4pt;
    padding: 2pt;
    float: right;
 }
-.entry .picture img {
+.entry .pictures .picture img {
    max-height: 1in;
 }
-.entry .picture {
+.entry > .pictures .picture {
    text-indent: 0pt;
    margin-left: 0pt;
    padding-bottom: 2pt;
    padding-top: 0pt;
    font-size: 10pt;
 }
-.entry .subentries .subentry {
+.entry > .subentries .subentry {
    text-indent: 0pt;
    margin-left: 0pt;
    padding-bottom: 2pt;
@@ -100,7 +106,7 @@ a {
    font-size: 10pt;
    display: block;
 }
-.entry .subentries .subentry {
+.entry > .subentries .subentry {
    text-indent: 0pt;
    margin-left: 0pt;
    padding-bottom: 2pt;
@@ -121,47 +127,47 @@ a {
 .mainentrysubentries .mainentrysubentry > .headword > span {
    font-weight: bold;
 }
-.mainentrysubentries .senses .sensecontent .sensenumber {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.mainentrysubentries .senses .morphosyntaxanalysis {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sharedgrammaticalinfo > .morphosyntaxanalysis {
    font-style: italic;
 }
-.mainentrysubentries .senses .morphosyntaxanalysis {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .morphosyntaxanalysis {
    font-style: italic;
 }
-.mainentrysubentries .senses .example > span[lang|= "bzh"]{
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span[lang|= "bzh"]{
    font-style: italic;
 }
-.mainentrysubentries .senses .example > span {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span {
    font-style: italic;
 }
-.mainentrysubentries .senses .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .lexsensereferences .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
    font-style: italic;
 }
-.mainentrysubentries .senses .lexsensereference > .ownertype_abbreviation > span {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .lexsensereferences .lexsensereference > .ownertype_abbreviation > span {
    font-style: italic;
 }
-.mainentrysubentries .senses .senses .sensecontent .sensenumber {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.mainentrysubentries .subentries .subentry {
+.mainentrysubentries .mainentrysubentry > .subentries .subentry {
    display: block;
 }
-.mainentrysubentries .subentries .subentry {
+.mainentrysubentries .mainentrysubentry > .subentries .subentry {
    display: block;
 }
-.mainentrysubentries .picture {
+.mainentrysubentries .mainentrysubentry .pictures .picture {
    float: right;
    text-align: center;
    margin: 0pt 0pt 4pt 4pt;
    padding: 2pt;
    float: right;
 }
-.mainentrysubentries .picture img {
+.mainentrysubentries .mainentrysubentry .pictures .picture img {
    max-height: 1in;
 }
-.mainentrysubentries .picture {
+.mainentrysubentries .mainentrysubentry > .pictures .picture {
    text-indent: 0pt;
    margin-left: 0pt;
    padding-bottom: 2pt;

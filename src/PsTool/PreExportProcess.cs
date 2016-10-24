@@ -749,7 +749,7 @@ namespace SIL.Tool
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse};
             XmlReader xmlReader = XmlReader.Create(_xhtmlFileNameWithPath, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -1647,7 +1647,7 @@ namespace SIL.Tool
                     if (_reader.Name == "div" || _reader.Name == "span")
                     {
                         string name = _reader.GetAttribute("class");
-                        if (name != null && name.ToLower() == "headword")
+                        if (name != null && ( name.ToLower() == "headword" || name.ToLower() == "mainheadword"))
                         {
                             isHeadword = true;
                         }
@@ -1807,7 +1807,6 @@ namespace SIL.Tool
             bool isNewNode = false;
             if (nodeList.Count > 0)
             {
-                XmlNode newNode = null;
                 int counter = nodeList.Count + 1;
                 string alpha = string.Empty;
                 for (int i = 0; i < counter; i++)
@@ -1902,7 +1901,6 @@ namespace SIL.Tool
             XmlNodeList nodeList = xDoc.GetElementsByTagName("span");
             if (nodeList.Count > 0)
             {
-                XmlNode newNode = null;
                 int counter = nodeList.Count + 1;
                 for (int i = 0; i < counter; i++)
                 {
@@ -1923,7 +1921,6 @@ namespace SIL.Tool
 
             if (nodeList.Count > 0)
             {
-                XmlNode newNode = null;
                 int counter = nodeList.Count + 1;
                 for (int i = 0; i < counter; i++)
                 {
@@ -2487,7 +2484,6 @@ namespace SIL.Tool
                 {
                     if (_reader.NodeType == XmlNodeType.Element)
                     {
-                        string st;
                         if (_reader.Name == "a")
                         {
                             string href = _reader.GetAttribute("href");
@@ -2554,28 +2550,24 @@ namespace SIL.Tool
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
             xDoc.Load(fileName);
-            string xPath = "//div[@class='entry']/div[@class= 'pictureRight']";
-            XmlNodeList entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
-	        if (entryNodeList != null && entryNodeList.Count > 0)
+
+			List<string> lstPictureXpath = new List<string>();
+			lstPictureXpath.Add("//div[@class='entry']/div[@class= 'pictureRight']");
+			lstPictureXpath.Add("//div[@class='entry']/div[@class= 'picture']");
+			lstPictureXpath.Add("//div[@class='entry']/span[@class= 'picture']");
+
+	        foreach (var xPath in lstPictureXpath)
 	        {
-		        for (int i = 0; i < entryNodeList.Count; i++)
+		        XmlNodeList entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
+		        if (entryNodeList != null && entryNodeList.Count > 0)
 		        {
-			        XmlNode entryNode = entryNodeList[i].ParentNode;
-			        if (entryNode != null) entryNode.InsertAfter(entryNodeList[i], entryNode.LastChild);
+			        for (int i = 0; i < entryNodeList.Count; i++)
+			        {
+				        XmlNode entryNode = entryNodeList[i].ParentNode;
+				        if (entryNode != null) entryNode.ParentNode.InsertAfter(entryNodeList[i], entryNode);
+
+			        }
 		        }
-	        }
-	        else
-	        {
-				xPath = "//div[@class='entry']/div[@class= 'picture']";
-				entryNodeList = xDoc.SelectNodes(xPath, namespaceManager);
-				if (entryNodeList != null)
-				{
-					for (int i = 0; i < entryNodeList.Count; i++)
-					{
-						XmlNode entryNode = entryNodeList[i].ParentNode;
-						if (entryNode != null) entryNode.ParentNode.InsertAfter(entryNodeList[i], entryNode);
-					}
-				}
 	        }
 	        xDoc.Save(fileName);
         }
@@ -2720,7 +2712,7 @@ namespace SIL.Tool
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse};
             XmlReader xmlReader = XmlReader.Create(xhtmlFile, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -3414,12 +3406,10 @@ namespace SIL.Tool
         {
             string sourcePicturePath = Path.GetDirectoryName(_baseXhtmlFileNameWithPath);
             string metaname = Common.GetBaseValue(_baseXhtmlFileNameWithPath);
-            string paraTextprojectPath = Common.GetParatextProjectPath();
             if (metaname.Length == 0)
             {
                 metaname = Common.GetMetaValue(_baseXhtmlFileNameWithPath);
             }
-
             try
             {
                 XmlDocument xDoc = Common.DeclareXMLDocument(false);
@@ -3449,6 +3439,7 @@ namespace SIL.Tool
                                     string pictureFile = pNode.Attributes["src"].Value;
                                     if (_projInfo.ProjectInputType.ToLower() == "scripture")
                                     {
+										var paraTextprojectPath = Common.GetParatextProjectPath();
                                         pictureFile = Common.PathCombine(paraTextprojectPath, pictureFile);
                                     }
 

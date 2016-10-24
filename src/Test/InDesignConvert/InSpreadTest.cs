@@ -37,7 +37,6 @@ namespace Test.InDesignConvert
         private string _outputPath;
         private string _methodName;
         private string _outputStyles;
-        private string _outputStory;
         private string _outputSpread;
         private string _fileNameWithPath;
         private string _testFolderPath;
@@ -63,7 +62,6 @@ namespace Test.InDesignConvert
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
             _outputPath = Common.PathCombine(_testFolderPath, "output");
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
-            _outputStory = Common.PathCombine(_outputPath, "Stories");
             _outputSpread = Common.PathCombine(_outputPath, "Spreads");
             projInfo.TempOutputFolder = _outputPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
@@ -266,6 +264,7 @@ namespace Test.InDesignConvert
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
             projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+	        projInfo.ProjectInputType = "Dictionary";
             _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
             _xPath = "//TextFrame[@Self=\"TF2\"]/TextFramePreference";

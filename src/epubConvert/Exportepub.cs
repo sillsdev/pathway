@@ -327,7 +327,7 @@ namespace SIL.PublishingSolution
             _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
             epubToc.CreateNcx(projInfo, contentFolder, bookId);
             ModifyTOCFile(contentFolder);
-            ReplaceEmptyHref(contentFolder);
+			ReplaceEmptyHrefandXmlLangtoLang(contentFolder);
             if (File.Exists(tempCssFile))
             {
                 File.Delete(tempCssFile);
@@ -490,19 +490,13 @@ namespace SIL.PublishingSolution
             return newEpubFileName;
         }
 
-        protected void ReplaceEmptyHref(string contentFolder)
+        protected void ReplaceEmptyHrefandXmlLangtoLang(string contentFolder)
         {
             string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
             foreach (string file in files)
             {
-                var reader = new StreamReader(file);
-                var content = new StringBuilder();
-                content.Append(reader.ReadToEnd());
-                reader.Close();
-                content.Replace("a href=\"#\"", "a");
-                var writer = new StreamWriter(file);
-                writer.Write(content);
-                writer.Close();
+				Common.StreamReplaceInFile(file, " xml:lang=\"", " lang=\"");
+				Common.StreamReplaceInFile(file, "a href=\"#\"", "a");
             }
         }
         private void GlossaryLinkReferencing(PublicationInformation projInfo,Dictionary<string,Dictionary<string,string>> glossoryreferncelist)
@@ -511,8 +505,6 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            //Common.DeclareXmlReaderSettings(false);
 
             if (!File.Exists(tocFiletoUpdate))
                 return;
@@ -584,7 +576,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
             //Common.DeclareXmlReaderSettings(false);
 
             if (!File.Exists(file))
@@ -624,11 +616,6 @@ namespace SIL.PublishingSolution
                             glossorywordsDictionaries.Add(booknodeid,glossorywordsDictionary);
                         }
                     }
-                    //var nodeInnerText = new StringBuilder();
-                    //nodeInnerText.Append(nodes[0].InnerXml);
-                    //nodeInnerText = nodeInnerText.Replace(titleMainInnerText + "</div>" + titleMainInnerText,
-                    //    titleMainInnerText + "</div>");
-                    //nodes[0].InnerXml = nodeInnerText.ToString();
                 }
             }
             return glossorywordsDictionaries;
@@ -867,6 +854,8 @@ namespace SIL.PublishingSolution
                     var inputExtension = Path.GetExtension(file);
                     Debug.Assert(inputExtension != null);
                     var xhtmlOutputFile = file.Replace(inputExtension, outputExtension);
+					if (!File.Exists(file))
+						continue;
                     if (_isUnixOs)
                     {
                         if (file.Contains("File2Cpy"))
@@ -1569,7 +1558,7 @@ namespace SIL.PublishingSolution
                 XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
                 var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
                 namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
                 var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
@@ -2094,7 +2083,7 @@ namespace SIL.PublishingSolution
                 XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
                 var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
                 namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
                 var xmlReader = XmlReader.Create(file, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
@@ -2150,7 +2139,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
             var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -2507,7 +2496,7 @@ namespace SIL.PublishingSolution
             var xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };//Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };//Common.DeclareXmlReaderSettings(false);
             foreach (string sourceFile in files)
             {
                 if (!File.Exists(sourceFile)) return;
@@ -2604,7 +2593,7 @@ namespace SIL.PublishingSolution
             var xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
             
             foreach (string sourceFile in files)
             {
@@ -2649,7 +2638,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
             foreach (string sourceFile in files)
             {
                 if (!File.Exists(sourceFile)) return;

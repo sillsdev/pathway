@@ -143,7 +143,7 @@ namespace SIL.PublishingSolution
                 }
                 DestinationSetup();
                 SetDefaultLanguageFont(fluffedCssFullName, mainFullName, fluffedRevCssFullName);
-				Common.StreamReplaceInFile(fluffedCssFullName, "\\2B27", "\\25C6");
+				//Common.StreamReplaceInFile(fluffedCssFullName, "\\2B27", "\\25C6");
 	            WritePublishingInformationFontStyleinCSS(fluffedCssFullName);
 				#endregion
 
@@ -251,6 +251,10 @@ namespace SIL.PublishingSolution
 			var outDir = Path.GetDirectoryName(exportedDirectory);
 			if (outDir != null)
 			{
+				foreach (string filename in Directory.GetFiles(outDir, "*.css"))
+				{
+					ReplaceUnicodeString(filename);
+				}
 				foreach (string filename in Directory.GetFiles(outDir, "*.xhtml"))
 				{
 					if (File.Exists(filename))
@@ -262,6 +266,21 @@ namespace SIL.PublishingSolution
 							Common.RunCommand(cssSimplerExe, String.Format("\"{0}\"",filename), 1);
 						}
 					}
+				}
+			}
+		}
+
+		private void ReplaceUnicodeString(string filename)
+		{
+			if (File.Exists(filename))
+			{
+				List<string> unicodeDiamondString = new List<string>();
+				unicodeDiamondString.Add("\\2B27");
+				unicodeDiamondString.Add("\\29EB");
+
+				foreach (var unicodeString in unicodeDiamondString)
+				{
+					Common.StreamReplaceInFile(filename, unicodeString, "\\25C6");
 				}
 			}
 		}
@@ -417,9 +436,9 @@ namespace SIL.PublishingSolution
             {
                 Common.StreamReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
                 Common.StreamReplaceInFile(revFullName, "</ReversalIndexEntry_Self>", "");
-                Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
-                string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
-                Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
+				Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
+				string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
+				Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
                 AddHomographAndSenseNumClassNames.Execute(revFullName, revFullName);
             }
             return revFullName;

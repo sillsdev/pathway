@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Xml;
 using System.Xml.Xsl;
 using SIL.Tool;
@@ -44,8 +42,13 @@ namespace SIL.PublishingSolution
             var preProcessor = new PreExportProcess();
             preProcessor.ReplaceStringInFile(cssFile, "{direction:ltr}", "{direction:ltr;}");
             preProcessor.ReplaceStringInFile(cssFile, "direction:", "dir:");
-            //preProcessor.RemoveStringInCss(cssFile, "direction:");
 
+			//Comment out the unicode-bidi property in the css file - As Epub3 does not support the unicode-bidi property
+			string[] unicodeBidiStrings = new string[] {"unicode-bidi: isolate;", "unicode-bidi: -ms-isolate;", "unicode-bidi: -moz-isolate;"};
+	        foreach (string s in unicodeBidiStrings)
+	        {
+				preProcessor.ReplaceStringInFile(cssFile, s, string.Format("/*{0}*/",s));
+	        }
 
             var xhmltohtml5Space = Loadxhmltohtml5Xslt(projInfo.ProjectInputType.ToLower());
 
@@ -121,8 +124,6 @@ namespace SIL.PublishingSolution
         private void Convertxhtmltohtml5(string oebpsPath, XslCompiledTransform xhmltohtml5Space)
         {
             string[] filesList = null;
-            //XslCompiledTransform _xhtmlXelatexXslProcess = new XslCompiledTransform();
-            //_xhtmlXelatexXslProcess.Load(XmlReader.Create(Common.UsersXsl("AddBidi.xsl")));
             if (Directory.Exists(oebpsPath))
             {
                 filesList = Directory.GetFiles(oebpsPath);
@@ -132,11 +133,9 @@ namespace SIL.PublishingSolution
                     if (fileInfo.Extension == ".xhtml")
                     {
                         Common.ApplyXslt(curFile, xhmltohtml5Space);
-                        //Common.ApplyXslt(curFile, _xhtmlXelatexXslProcess);
 
                         if (File.Exists(curFile))
                         {
-                            string fileName = Path.GetFileName(curFile);
                             File.Copy(curFile, curFile.Replace(".xhtml", ".html"), true);
                             File.Delete(curFile);
                         }
@@ -153,9 +152,6 @@ namespace SIL.PublishingSolution
         public static XslCompiledTransform Loadxhmltohtml5Xslt(string projectInputType)
         {
             string xsltName = "epubConvert.xhtmltohtml5.xslt";
-            //xsltName = (projectInputType == "dictionary")
-            //               ? "epubConvert.xhtmltohtml5.xslt"
-            //              : "epubConvert.xhtmltohtml5.xslt";
 
             var xhmltohtml5Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(xsltName);
             Debug.Assert(xhmltohtml5Stream != null);

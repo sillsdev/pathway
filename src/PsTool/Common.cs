@@ -33,12 +33,11 @@ using System.Xml;
 using System.Xml.Xsl;
 using L10NSharp;
 using Microsoft.Win32;
-using Palaso.WritingSystems;
-using Palaso.Xml;
 using SIL.Tool.Localization;
 using System.Reflection;
 using Test;
 using SIL.PublishingSolution;
+using SIL.WritingSystems;
 
 #endregion Using
 
@@ -76,7 +75,7 @@ namespace SIL.Tool
 		public static string Space = " ";
 		/* Non Breaking Space. It has differerence from normal space and the non breaking space */
 		public static string NonBreakingSpace = Common.ConvertUnicodeToString("\\00a0");
-
+		public static bool UseAfterBeforeProcess = false;
 		private static readonly ArrayList _units = new ArrayList();
 		public static ErrorProvider _errProvider = new ErrorProvider();
 		public static Font UIFont;
@@ -284,6 +283,8 @@ namespace SIL.Tool
 			List<string> lstFileName = new List<string>();
 			lstFileName.Add("Add Columns FW83");
 			lstFileName.Add("Letter Header Language");
+			lstFileName.Add("Filter Broken Links");
+			lstFileName.Add("Fix Duplicate ids");
 			return lstFileName;
 		}
 
@@ -589,7 +590,7 @@ namespace SIL.Tool
 				XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
 				var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
 				namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
 				string styleName = string.Empty;
 				using (XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings))
 				{
@@ -705,7 +706,7 @@ namespace SIL.Tool
 				List<string> langCodeList = new List<string>();
 				var vernacularLang = string.Empty;
 				var metaList = new List<KeyValuePair<string, string>>();
-				var xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, ProhibitDtd = false};
+				var xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, DtdProcessing = DtdProcessing.Parse};
 				string attribute = string.Empty;
 				using (XmlReader xmlReader = XmlReader.Create(xhtmlFileNameWithPath, xmlReaderSettings))
 				{
@@ -1083,6 +1084,14 @@ namespace SIL.Tool
 			if (value.IndexOf("25CF") >= 0 || value.IndexOf("274D") >= 0)
 			{
 				value = value.Replace(value, Common.ConvertUnicodeToString("\\" + value)) + " ";
+			}
+			if (value.Contains("{"))
+			{
+				value = value.Replace("{", "\\{");
+			}
+			if (value.Contains("}"))
+			{
+				value = value.Replace("}", "\\}");
 			}
 			return value;
 		}
@@ -2288,7 +2297,6 @@ namespace SIL.Tool
 
 		public static string GetLDMLPath()
 		{
-			string path = string.Empty;
 			object regObj;
 			try
 			{
@@ -2411,7 +2419,15 @@ namespace SIL.Tool
 
 		public static string GetProductName()
 		{
-			return Application.ProductName;
+			if (Common.Testing)
+			{
+				return "UnitTesting";
+			}
+			else
+			{
+				return Application.ProductName;
+			}
+			
 		}
 
 		public static void OpenOutput(string outputPathWithFileName)
@@ -2860,6 +2876,9 @@ namespace SIL.Tool
 			int count = arrayCssFile.Count;
 			for (int i = count - 1; i >= 0; i--)
 			{
+				removeMirrorPage = false;
+				removeEveryPage = false;
+				removePageNumber = false;
 				string cssFile = arrayCssFile[i].ToString();
 				//For Remove Mirrored Page
 				if (cssFile.IndexOf("Running_Head_Every_Page") >= 0)
@@ -3347,33 +3366,29 @@ namespace SIL.Tool
 		public static string GetOsName()
 		{
 			OperatingSystem osInfo = Environment.OSVersion;
-
+			var versionString = osInfo.VersionString;
 			switch (osInfo.Platform)
 			{
 				case System.PlatformID.Win32NT:
 					switch (osInfo.Version.Major)
 					{
 						case 3:
-							return "Windows NT 3.51";
+							versionString = "Windows NT 3.51";
 							break;
 						case 4:
-							return "Windows NT 4.0";
+							versionString = "Windows NT 4.0";
 							break;
 						case 5:
-							if (osInfo.Version.Minor == 0)
-								return "Windows 2000";
-							else
-								return "Windows XP";
+							versionString = osInfo.Version.Minor == 0 ? "Windows 2000" : "Windows XP";
 							break;
 						case 6:
-							if (osInfo.Version.Minor == 1)
-								return "Windows7";
-							return "Windows8";
+							versionString = osInfo.Version.Minor == 1 ? "Windows7" : "Windows8";
+							break;
 					}
 					break;
 
 			}
-			return osInfo.VersionString.ToString();
+			return versionString;
 		}
 
 		/// <summary>
@@ -3472,8 +3487,6 @@ namespace SIL.Tool
 
 		public static string ConvertTifftoImage(string pathwithFileName, string convertFormatType)
 		{
-			string fileName = Path.GetFileName(pathwithFileName);
-			string fileNameWithOutExtension = Path.GetFileNameWithoutExtension(fileName);
 			string fileOutputPath = pathwithFileName.Replace(".tif", "." + convertFormatType); //Common.PathCombine(Path.GetDirectoryName(fileName), Path.GetFileNameWithoutExtension(fileNameWithOutExtension)) + "." + convertFormatType;
 			if (!File.Exists(fileOutputPath))
 			{
@@ -3621,8 +3634,11 @@ namespace SIL.Tool
 					XmlNode node =
 						xmlDocument.SelectSingleNode(
 							"/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='defaultFontFamily'][1]/@value");
-					newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
-					newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+				    if (node != null)
+				    {
+                        newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+                        newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+                    }
 				}
 
 				using (StreamWriter sw = File.CreateText(teDefaultFilePath))
@@ -3661,6 +3677,7 @@ namespace SIL.Tool
 				}
 				catch (Exception e)
 				{
+					Console.WriteLine(e.Message);
 					return null;
 				}
 			}
@@ -3745,13 +3762,6 @@ namespace SIL.Tool
 			//Copyright information added in PDF files
 			try
 			{
-				string tempPdfFileName = string.Empty;
-				if (creatorTool != "LibreOffice")
-				{
-					tempPdfFileName = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), Path.GetFileName(xhtmlFileName));
-				}
-
-
 				string getPsApplicationPath = Common.GetPSApplicationPath();
 				string licenseXml = Common.PathCombine(getPsApplicationPath, "Copyrights");
 				licenseXml = Common.PathCombine(licenseXml, "SIL_License.xml");
@@ -3781,115 +3791,9 @@ namespace SIL.Tool
 				}
 
 				File.Copy(licenseXml, destLicenseXml);
-				XmlDocument xDoc = Common.DeclareXMLDocument(true);
-				xDoc.Load(destLicenseXml);
+				string utcDateTime = DateTimeOffset.UtcNow.ToString("o");
 
-				XmlNamespaceManager nsmgr = new XmlNamespaceManager(xDoc.NameTable);
-				nsmgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-				nsmgr.AddNamespace("xap", "http://ns.adobe.com/xap/1.0/");
-				nsmgr.AddNamespace("cc", "http://creativecommons.org/ns#");
-				nsmgr.AddNamespace("xapRights", "http://ns.adobe.com/xap/1.0/rights/");
-
-				string xPath = "//xap:CreateDate";
-				XmlElement root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
-				}
-
-				xPath = "//xap:CreatorTool";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = creatorTool;
-				}
-
-				xPath = "//xap:ModifyDate";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
-				}
-
-				xPath = "//xap:MetadataDate";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
-				}
-
-				nsmgr.AddNamespace("pdf", "http://ns.adobe.com/pdf/1.3/");
-
-				xPath = "//pdf:Producer";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
-				}
-
-				nsmgr.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
-
-				xPath = "//dc:description/rdf:Alt/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Param.GetMetadataValue(Param.Description, organization);
-				}
-
-				xPath = "//dc:creator/rdf:Seq/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Param.GetMetadataValue(Param.Creator, organization);
-				}
-
-				xPath = "//dc:title/rdf:Alt/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = exportTitle;
-				}
-
-				xPath = "//dc:subject/rdf:Bag/rdf:li[3]";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Param.Value["InputType"];
-				}
-
-				xPath = "//dc:rights/rdf:Alt/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Common.ConvertUnicodeToString("\\00a9") + " " + organization + Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
-				}
-
-				xPath = "//cc:license";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = copyrightURL;
-				}
-
-				xPath = "//xapRights:WebStatement";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = copyrightURL;
-				}
-				xDoc.Save(destLicenseXml);
+				UpdateLicenseAttributes(creatorTool, Param.Value["InputType"], destLicenseXml, organization, exportTitle, copyrightURL, utcDateTime);
 
 				string sourceJarFile = Common.PathCombine(getPsApplicationPath, "pdflicensemanager-2.3.jar");
 				string destJarFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "pdflicensemanager-2.3.jar");
@@ -3921,6 +3825,121 @@ namespace SIL.Tool
 			return pdfFileName;
 		}
 
+		public static void UpdateLicenseAttributes(string creatorTool, string inputType, string destLicenseXml, string organization,
+			string exportTitle, string copyrightURL, string utcDateTime)
+		{
+			XmlDocument xDoc = Common.DeclareXMLDocument(true);
+			xDoc.Load(destLicenseXml);
+
+			XmlNamespaceManager nsmgr = new XmlNamespaceManager(xDoc.NameTable);
+			nsmgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+			nsmgr.AddNamespace("xap", "http://ns.adobe.com/xap/1.0/");
+			nsmgr.AddNamespace("cc", "http://creativecommons.org/ns#");
+			nsmgr.AddNamespace("xapRights", "http://ns.adobe.com/xap/1.0/rights/");
+
+			string xPath = "//xap:CreateDate";
+			XmlElement root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = utcDateTime;
+			}
+
+			xPath = "//xap:CreatorTool";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = creatorTool;
+			}
+
+			xPath = "//xap:ModifyDate";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = utcDateTime;
+			}
+
+			xPath = "//xap:MetadataDate";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = utcDateTime;
+			}
+
+			nsmgr.AddNamespace("pdf", "http://ns.adobe.com/pdf/1.3/");
+
+			xPath = "//pdf:Producer";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = DateTime.Now.Date.ToString();
+			}
+
+			nsmgr.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
+
+			xPath = "//dc:description/rdf:Alt/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = Param.GetMetadataValue(Param.Description, organization);
+			}
+
+			xPath = "//dc:creator/rdf:Seq/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = Param.GetMetadataValue(Param.Creator, organization);
+			}
+
+			xPath = "//dc:title/rdf:Alt/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = exportTitle;
+			}
+
+			xPath = "//dc:subject/rdf:Bag/rdf:li[3]";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = inputType;
+			}
+
+			xPath = "//dc:rights/rdf:Alt/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = Common.ConvertUnicodeToString("\\00a9") + " " + organization +
+				                       Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
+			}
+
+			xPath = "//cc:license";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = copyrightURL;
+			}
+
+			xPath = "//xapRights:WebStatement";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = copyrightURL;
+			}
+			xDoc.Save(destLicenseXml);
+		}
+
 		private static string CopyrightUrlValue()
 		{
 			string copyRightFilePath = Param.GetMetadataValue(Param.CopyrightPageFilename);
@@ -3947,8 +3966,6 @@ namespace SIL.Tool
 			{
 				return string.Empty;
 			}
-
-			return string.Empty;
 		}
 
 		private static string GetUrlFromCopyrightxhtmlFile(string xhtmlfileName)
@@ -4329,22 +4346,17 @@ namespace SIL.Tool
 
 		public static string GetParatextProjectPath()
 		{
-			var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
-			if (windowsIdentity != null)
+			string userName = Environment.UserName;
+			string registryPath = "/home/" + userName + "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
+			while (Directory.Exists(registryPath))
 			{
-				string userName = windowsIdentity.Name;
-				string registryPath = "/home/" + userName + "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
-				while (Directory.Exists(registryPath))
+				if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
 				{
-					if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
-					{
-						XmlDocument doc = new XmlDocument();
-						doc.Load(Common.PathCombine(registryPath, "values.xml"));
-						return doc.InnerText;
-					}
+					XmlDocument doc = new XmlDocument();
+					doc.Load(Common.PathCombine(registryPath, "values.xml"));
+					return doc.InnerText;
 				}
 			}
-
 			return string.Empty;
 		}
 
@@ -4417,6 +4429,7 @@ namespace SIL.Tool
 			}
 			catch (System.Security.SecurityException ex)
 			{
+				Console.WriteLine(ex.Message);
 				isPermission = false;
 			}
 			return isPermission;
@@ -4446,14 +4459,6 @@ namespace SIL.Tool
 
 			string allUserPath = GetAllUserPath();
 			string fileLoc = Common.PathCombine(allUserPath, "License.txt");
-			FileStream fs = null;
-			if (!File.Exists(fileLoc))
-			{
-				using (fs = File.Create(fileLoc))
-				{
-
-				}
-			}
 			if (File.Exists(fileLoc))
 			{
 				using (StreamWriter sw = new StreamWriter(fileLoc))
@@ -4872,8 +4877,8 @@ namespace SIL.Tool
 
 				//var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
 				var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-				string installedLocalizationsFolder = InstalledLocalizations();
-				var desiredUiLangId = GetLocalizationSettings();
+                var installedLocalizationsFolder = InstalledLocalizationsFolder;
+			    var desiredUiLangId = GetLocalizationSettings();
 				if (desiredUiLangId == string.Empty)
 					desiredUiLangId = "en";
 				if (string.IsNullOrEmpty(productVersion))
@@ -4896,7 +4901,19 @@ namespace SIL.Tool
 			}
 		}
 
-		public static void InitializeOtherProjects()
+	    private static string InstalledLocalizationsFolder
+	    {
+	        get
+	        {
+	            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+	            UriBuilder uri = new UriBuilder(codeBase);
+	            string path = Uri.UnescapeDataString(uri.Path);
+	            string installedLocalizationsFolder = Path.GetDirectoryName(path);
+	            return installedLocalizationsFolder;
+	        }
+	    }
+
+	    public static void InitializeOtherProjects()
 		{
 			string pathwayDirectory = PathwayPath.GetPathwayDir();
 			if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory)) return;
@@ -5044,7 +5061,7 @@ namespace SIL.Tool
 		#endregion
 		public static string GetPalasoLanguageName(string lang)
 		{
-			var lpModel = new EthnologueLookup();
+			var lpModel = new LanguageLookup();
 			var matchLang = lpModel.SuggestLanguages(lang.ToLower()).FirstOrDefault();
 			string langname = null;
 			if (matchLang != null)
@@ -5070,5 +5087,14 @@ namespace SIL.Tool
 			return inProcess;
 		}
 
+		public static void CopyContent(string sourceFile, string destinationFile)
+		{
+			using (Stream input = File.OpenRead(destinationFile))
+			using (Stream output = new FileStream(sourceFile, FileMode.Append,
+				FileAccess.Write, FileShare.None))
+			{
+				input.CopyTo(output); // Using .NET 4
+			}
+		}
 	}
 }

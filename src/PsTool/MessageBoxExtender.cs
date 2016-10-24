@@ -1,9 +1,7 @@
 using System;
 using System.Text;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
 
-[assembly: SecurityPermission(SecurityAction.RequestMinimum, UnmanagedCode = true)]
 namespace SilTools
 {
 	public class MessageBoxExtender
@@ -12,12 +10,9 @@ namespace SilTools
         private delegate bool EnumChildProc(IntPtr hWnd, IntPtr lParam);
 
         private const int WH_CALLWNDPROCRET = 12;
-        private const int WM_DESTROY = 0x0002;
+        
         private const int WM_INITDIALOG = 0x0110;
-        private const int WM_TIMER = 0x0113;
-        private const int WM_USER = 0x400;
-        private const int DM_GETDEFID = WM_USER + 0;
-
+        
         private const int MBOK = 1;
         private const int MBCancel = 2;
         private const int MBAbort = 3;
@@ -130,7 +125,9 @@ namespace SilTools
 	        {
 		        if (hHook != IntPtr.Zero)
 			        return;
+				#pragma warning disable 618
 		        hHook = SetWindowsHookEx(WH_CALLWNDPROCRET, hookProc, IntPtr.Zero, AppDomain.GetCurrentThreadId());
+				#pragma warning restore 618
 	        }
 	        catch
 	        {
@@ -164,7 +161,6 @@ namespace SilTools
 
             if (msg.message == WM_INITDIALOG)
             {
-                int nLength = GetWindowTextLength(msg.hwnd);
                 StringBuilder className = new StringBuilder(10);
                 GetClassName(msg.hwnd, className, className.Capacity);
                 if (className.ToString() == "#32770")

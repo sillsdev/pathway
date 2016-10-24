@@ -682,7 +682,6 @@ namespace SIL.PublishingSolution
 
         private void ExecuteXelatexProcess(string xeLatexFullFile, string name, string arguments)
         {
-            string p1Error = string.Empty;
             using (Process p1 = new Process())
             {
                 p1.StartInfo.FileName = name;
@@ -693,7 +692,6 @@ namespace SIL.PublishingSolution
                 p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                 p1.Start();
                 p1.WaitForExit();
-                p1Error = p1.StandardError.ReadToEnd();
             }
 
             if (Convert.ToBoolean(_tableOfContent))
@@ -708,7 +706,6 @@ namespace SIL.PublishingSolution
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                     p1.Start();
                     p1.WaitForExit();
-                    p1Error = p1.StandardError.ReadToEnd();
                 }
 
                 using (Process p1 = new Process())
@@ -721,7 +718,6 @@ namespace SIL.PublishingSolution
                     p1.StartInfo.UseShellExecute = !p1.StartInfo.RedirectStandardOutput;
                     p1.Start();
                     p1.WaitForExit();
-                    p1Error = p1.StandardError.ReadToEnd();
                 }
             }
 

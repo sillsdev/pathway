@@ -85,7 +85,7 @@ namespace SIL.PublishingSolution
         }
         #endregion Properties
 
-        public DialogResult ShowDialog()
+        public new DialogResult ShowDialog()
         {
             System.Windows.Forms.DialogResult dialogResult = _realClass.ShowDialog();
             if (dialogResult != DialogResult.Cancel)

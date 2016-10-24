@@ -591,7 +591,7 @@ namespace SIL.Tool
 
         private string MatchCssStyle(float ancestorFontSize, string psuedo, ArrayList multiClassList)
         {
-            bool resultTagClass, resultCoreClass, resultAncestor, resultParent, resultParentPrecede, resultPrecede;
+            bool resultTagClass, resultCoreClass, resultAncestor, resultParentPrecede, resultPrecede;
             _tempStyle = new Dictionary<string, string>();
             _matchedCssStyleName = string.Empty;
             foreach (string multiClass in multiClassList)
