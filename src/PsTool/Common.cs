@@ -4847,22 +4847,6 @@ namespace SIL.Tool
 			}
 		}
 
-		private static string InstalledLocalizations()
-		{
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
-			var installedLocalizationsFolder = string.Empty;
-			if (pathwayDirectory != null)
-			{
-				installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
-			}
-			else
-			{
-				installedLocalizationsFolder = Path.Combine(Application.StartupPath, "localizations");
-			}
-
-			return installedLocalizationsFolder;
-		}
-
 		public static void SetupLocalization()
 		{
 			if (!Testing)
@@ -4908,7 +4892,7 @@ namespace SIL.Tool
 	            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
 	            UriBuilder uri = new UriBuilder(codeBase);
 	            string path = Uri.UnescapeDataString(uri.Path);
-	            string installedLocalizationsFolder = Path.GetDirectoryName(path);
+                string installedLocalizationsFolder = Path.Combine(Path.GetDirectoryName(path), "localizations");
 	            return installedLocalizationsFolder;
 	        }
 	    }
