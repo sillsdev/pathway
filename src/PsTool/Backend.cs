@@ -84,40 +84,40 @@ namespace SIL.Tool
             var localType = type.Replace(@"\", "/").ToLower();
 	        try
 	        {
-                //foreach (IExportProcess process in _backend)
-                //{
-                //    if (process.ExportType.ToLower() == "openoffice/libreoffice")
-                //        localType = OpenOfficeClassifier(publicationInformation, localType); // Cross checking for OpenOffice
+                foreach (IExportProcess process in _backend)
+                {
+                    if (process.ExportType.ToLower() == "openoffice/libreoffice")
+                        localType = OpenOfficeClassifier(publicationInformation, localType); // Cross checking for OpenOffice
 
-                //    if (process.ExportType.ToLower() == localType.ToLower())
-                //        return process.Export(publicationInformation);
-                //}
+                    if (process.ExportType.ToLower() == localType.ToLower())
+                        return process.Export(publicationInformation);
+                }
 
                 //Code to call PathwayExport Commandline Utility - commented for now
-             //   StringBuilder sb = new StringBuilder();
-             //   sb.Append("\"");
-             //   sb.Append(publicationInformation.DefaultXhtmlFileWithPath);
-             //   sb.Append(",\" ");
-             //   sb.Append("\"");
-             //   sb.Append(publicationInformation.DefaultCssFileWithPath);
-	            //if (publicationInformation.IsReversalExist)
-	            //{
-	            //    sb.Append(",\" ");
-	            //    sb.Append("\"");
-	            //    sb.Append(Path.Combine(Path.GetDirectoryName(publicationInformation.DefaultXhtmlFileWithPath), "FlexRev.xhtml"));
-	            //    sb.Append(",\" ");
-	            //    sb.Append("\"");
-	            //    sb.Append(publicationInformation.DefaultRevCssFileWithPath);
-	            //    sb.Append("\"");
-	            //}
-	            //else
-	            //{
-             //       sb.Append("\"");
-             //   }
+                //   StringBuilder sb = new StringBuilder();
+                //   sb.Append("\"");
+                //   sb.Append(publicationInformation.DefaultXhtmlFileWithPath);
+                //   sb.Append(",\" ");
+                //   sb.Append("\"");
+                //   sb.Append(publicationInformation.DefaultCssFileWithPath);
+                //if (publicationInformation.IsReversalExist)
+                //{
+                //    sb.Append(",\" ");
+                //    sb.Append("\"");
+                //    sb.Append(Path.Combine(Path.GetDirectoryName(publicationInformation.DefaultXhtmlFileWithPath), "FlexRev.xhtml"));
+                //    sb.Append(",\" ");
+                //    sb.Append("\"");
+                //    sb.Append(publicationInformation.DefaultRevCssFileWithPath);
+                //    sb.Append("\"");
+                //}
+                //else
+                //{
+                //       sb.Append("\"");
+                //   }
 
-	            //string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString());
+                //string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString());
 
-             //   CommandLineRunner.Run(Common.PathCombine(Common.GetApplicationPath(), "PathwayExport.exe"), argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
+                //   CommandLineRunner.Run(Common.PathCombine(Common.GetApplicationPath(), "PathwayExport.exe"), argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
             }
 	        catch(Exception ex)
 	        {
