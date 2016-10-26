@@ -132,7 +132,6 @@ namespace Test
                     //Assert.AreEqual(ClassProperty[ns + ":" + key], propertyValue);
                     if (propertyValue.TrimEnd() != ClassProperty[ns + ":" + key])
                     {
-						Assert.Fail("Assert failed: Expected - " + propertyKey + ":" + propertyValue );
                         match = false;
                         break;
                     }
@@ -399,7 +398,7 @@ namespace Test
                         if (inner != value)
                         {
                             match = false;
-							Assert.Fail(inner);
+							Assert.Fail("Exception - TC Output :" + inner);
                         }
                     }
                 }

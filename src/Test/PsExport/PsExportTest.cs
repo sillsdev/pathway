@@ -173,6 +173,8 @@ namespace Test.PsExport
         /// <param name="msg">message to identify test if error occurs</param>
         protected void SeExportTest(string testName, string mainXhtml, string jobFileName, string target, string msg)
         {
+	        Common.Testing = true;
+
             CommonOutputSetup(testName);
             File.Copy(FileInput(mainXhtml), FileOutput(mainXhtml), true);
             string cssPath = Path.GetFileNameWithoutExtension(mainXhtml);
@@ -345,6 +347,7 @@ namespace Test.PsExport
         /// Test PDF export
         /// </summary>
         [Test]
+		[Category("SkipOnTeamCity")]
         public void SeExportT3()
         {
             SeExportTest("T3", "1pe.xhtml", "Layout_02.css", "Pdf (using Prince)", "T3: PDF Export Test");
