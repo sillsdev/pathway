@@ -16,16 +16,12 @@
 
 using System;
 using System.IO;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml;
-using System.Reflection;
-using System.Xml.Xsl;
-using ICSharpCode.SharpZipLib.Zip;
 using SIL.Tool;
 using System.Collections.Generic;
+using System.Reflection;
+using SIL.PublishingSolution;
 
-namespace PathwayExport
+namespace SIL.PublishingSolution
 {
     internal class Program
     {
@@ -43,6 +39,13 @@ namespace PathwayExport
             Dictionary,
             Scripture
         }
+        private static string exportType;
+        private static string exportDirectory;
+        private static List<string> files = new List<string>();
+        private static bool filledExportType;
+        private static bool filledDirectory;
+        private static bool filledCss;
+        private static PublicationInformation projectInfo;
 
         private static void Main(string[] args)
         {
@@ -61,15 +64,71 @@ namespace PathwayExport
             }
             else
             {
+                projectInfo = new PublicationInformation();
                 ArgumentUsage(args);
+                //Console.WriteLine("Arguments Okay");
+                //Console.Read();
+                //ExportLibreOffice exp = new ExportLibreOffice();
+                
+                projectInfo.ProjectPath = exportDirectory;
+                foreach (string f in files)
+                {
+                    if (f.EndsWith(".css"))
+                    {
+                        if (f.Contains("flexrev"))
+                        {
+                            projectInfo.DefaultRevCssFileWithPath = f;
+                        }
+                        else
+                        {
+                            projectInfo.DefaultCssFileWithPath = f;
+                        }
+
+                    }
+                    if (f.EndsWith(".xhtml"))
+                    {
+                        if (f.Contains("flexrev"))
+                        {
+                            //projectInfo.DefaultXhtmlFileWithPath = f;
+                            projectInfo.IsReversalExist = true;
+                            //projectInfo.ProjectName = f;
+                        }
+                        else
+                        {
+                            projectInfo.DefaultXhtmlFileWithPath = f;
+                            projectInfo.IsLexiconSectionExist = true;
+                        }
+                    }
+                }
+                FindExportFormat();
+                //projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
+                if (projectInfo.IsLexiconSectionExist == true)
+                    projectInfo.ProjectName = "main";
+                else if (projectInfo.IsReversalExist == true)
+                    projectInfo.ProjectName = "flexrev";
+                SetFileName();
+                projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
+                IExportProcess process = new ExportLibreOffice();
+                if (exportType.Replace("'","") == "openoffice/libreoffice")
+                {
+                    process = new SIL.PublishingSolution.ExportLibreOffice();
+                    process.Export(projectInfo);
+                }
+                else if (exportType.Replace("'", "") == "e-book (epub2 and epub3)")
+                {
+                    process = new SIL.PublishingSolution.Exportepub();
+                    process.Export(projectInfo);
+                }
             }
         }
 
         private static void ArgumentUsage(string[] args)
         {
-            string exportType = string.Empty;
-            string exportDirectory = string.Empty;
-            List<string> files = new List<string>();
+            bool argFilledExportType = false;
+            bool argFilledDirectory = false;
+            bool argFilledFiles = false;
+            bool argFilledCss = false;
+           
             int i = 0;
             while (i < args.Length)
             {
@@ -78,17 +137,22 @@ namespace PathwayExport
                     case "--target":
                     case "-t":
                         exportType = args[i++];
-                        if (!CheckExportType(exportType))
+                        argFilledExportType = true;
+                        if (!CheckExportType())
                         {
                             Console.Write(@"PathwayExport : Unknown Export Type");
                             Console.WriteLine(@"Try 'PathwayExport --help' for more information.");
                             Console.Read();
                             Environment.Exit(0);
                         }
+                        if (argFilledExportType) ;
+                            
                         break;
                     case "--directory":
                     case "-d":
                         exportDirectory = args[i++];
+                        exportDirectory = exportDirectory.Replace("'", "").Replace("\\\\", "\\");
+                        argFilledDirectory = true;
                         if (!Directory.Exists(exportDirectory))
                         {
                             Console.Write(@"PathwayExport : Export directory not exists");
@@ -96,27 +160,95 @@ namespace PathwayExport
                             Console.Read();
                             Environment.Exit(0);
                         }
+                        projectInfo.ProjectPath = exportDirectory;
                         break;
                     case "--files":
                     case "-f":
+                        argFilledFiles = true;
                         i = CaptureFileList(args, i, files);
                         break;
                     case "--css":
                     case "-c":
+                        argFilledCss = true;
                         files.Add(args[i++]);
                         break;
                 }
             }
+
+            CheckArgumentMissing(argFilledExportType, argFilledDirectory, argFilledFiles, argFilledCss);
         }
 
-        private static bool CheckExportType(string exportType)
+        /// <summary>
+        /// //if (!argFilledExportType || !argFilledDirectory || !argFilledFiles || !argFilledCss)
+        /// </summary>
+        /// <param name="argFilledExportType"></param>
+        /// <param name="argFilledDirectory"></param>
+        /// <param name="argFilledFiles"></param>
+        /// <param name="argFilledCss"></param>
+        private static void CheckArgumentMissing(bool argFilledExportType, bool argFilledDirectory, bool argFilledFiles, bool argFilledCss)
+        {
+            // If Files to process is missing, then we cannot proceed
+            if (!argFilledFiles)
+            {
+                Console.Write("PathwayExport: Files Missing. Cannot Proceed.");
+                Console.WriteLine("Try 'PathwayExport --help' for more information.");
+                Console.Read();
+                Environment.Exit(0);
+            }
+            else
+            {
+                // If target export type is not mentioned, 
+                if (!argFilledExportType)
+                {
+                    //  get the default export type from the settings file and store it in the exportType
+                    exportType = GetDefaultExportFileFromSettingsFile();
+                    // set filledExportType to true
+                    filledExportType = true;
+                }
+
+                if (!argFilledDirectory)
+                {
+                    foreach (string f in files)
+                    {
+                        if (Directory.Exists(Path.GetDirectoryName(f)))
+                        {
+                            exportDirectory = Path.GetDirectoryName(f);
+                            filledDirectory = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!argFilledCss)
+                {
+                    foreach (string f in files)
+                    {
+                        if (f.EndsWith(".css"))
+                        {
+                            filledCss = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!filledCss)
+            {
+                Console.Write("PathwayExport: CSS Files not mentioned");
+                Console.WriteLine("Try 'PathwayExport --help' for more information.");
+                Console.Read();
+                Environment.Exit(0);
+            }
+        }
+
+        private static bool CheckExportType()
         {
             bool isCorrectExportType = false;
-            switch (exportType.ToLower())
+            switch (exportType.Replace("'","").ToLower())
             {
                 case "e-book (.epub)":
+                case "e-book (epub2 and epub3)":
                 case "gobible":
-                case "pdf (using openoffice/libreoffice":
+                case "pdf (using openoffice/libreoffice)":
                 case "pdf (using prince)":
                 case "indesign":
                 case "openoffice/libreoffice":
@@ -133,9 +265,11 @@ namespace PathwayExport
         {
             // store the files in our internal list for now 
             // (single filenames and * will end up as a single element in the list)
+            string fname = string.Empty;
             while (args[i].EndsWith(","))
             {
-                files.Add(args[i].Substring(0, args[i].Length - 1));
+                fname = args[i].Substring(0, args[i].Length - 1);
+                files.Add(fname);
                 i++;
             }
             files.Add(args[i++]);
@@ -178,59 +312,59 @@ namespace PathwayExport
             Console.Write(val);
             val = "   --css | -c                stylesheet file name (required for xhtml only).\r\n";
             Console.Write(val);
-            val = "   --showdialog | -s         Show the Export Through Pathway dialog, and take\r\n";
-            Console.Write(val);
-            val = "                             the values for target format, style, etc. from\r\n";
-            Console.Write(val);
-            val = "                             the user's input on the dialog.\r\n";
-            Console.Write(val);
-            val = "   --launch | -l             launch resulting output in target back end.\r\n";
-            Console.Write(val);
-            val = "   --name | -n               [main] Project name.\r\n\r\n\r\n";
-            Console.Write(val);
-            val = "Examples:\r\n\r\n";
-            Console.Write(val);
-            val = "   PathwayB.exe -d \"D:\\MyProject\" -if usfm -f * -t \"E-Book (.epub)\" \r\n";
-            Console.Write(val);
-            val = "                             -i \"Scripture\" -n \"SEN\" \r\n";
-            Console.Write(val);
-            val = "      Creates an .epub file from the USFM project found in D:\\MyProject.\r\n\r\n";
-            Console.Write(val);
-            val = "   PathwayB.exe -d \"D:\\MyDict\" -if xhtml -c \"D:\\MyDict\\main.css\" \r\n";
-            Console.Write(val);
-            val = "                             -f \"main.xhtml\", \"FlexRev.xhtml\" \r\n";
-            Console.Write(val);
-            val = "                             -t \"E-Book (.epub)\" -i \"Dictionary\" \r\n";
-            Console.Write(val);
-            val = "                             -n \"Sena 3-01\" \r\n";
-            Console.Write(val);
-            val = "      Creates an .epub file from the xhtml dictionary found in D:\\MyDict.\r\n";
-            Console.Write(val);
-            val = "      Both main and reversal index files are included in the output.\r\n\r\n";
-            Console.Write(val);
-            val = "   PathwayB.exe -d \"D:\\Project2\" -if usfm -f * -i \"Scripture\" -n \"SEN\"-s\r\n";
-            Console.Write(val);
-            val = "      Displays the Export Through Pathway dialog, then generates output from\r\n";
-            Console.Write(val);
-            val = "      the USFM project found in D:\\Project2 to the user-specified output \r\n";
-            Console.Write(val);
-            val = "      format and style.\r\n\r\n";
-            Console.Write(val);
-            val = "Notes:\r\n\r\n";
-            Console.Write(val);
-            val = "-  Not all output types may be available, depending on your installation\r\n";
-            Console.Write(val);
-            val = "   Package. To verify the available output types, open the Configuration\r\n";
-            Console.Write(val);
-            val = "   Tool, click the Defaults button and click on the Destination drop-down.\r\n";
-            Console.Write(val);
-            val = "   The available outputs match the selections in this list.\r\n\r\n";
-            Console.Write(val);
-            val = "-  For dictionary output, the reversal index file needs to be named\r\n";
-            Console.Write(val);
-            val = "   \"FlexRev.xhtml\". this is to maintain consistency with the file naming\r\n";
-            Console.Write(val);
-            val = "   convention used in Pathway.\r\n\r\n";
+            //val = "   --showdialog | -s         Show the Export Through Pathway dialog, and take\r\n";
+            //Console.Write(val);
+            //val = "                             the values for target format, style, etc. from\r\n";
+            //Console.Write(val);
+            //val = "                             the user's input on the dialog.\r\n";
+            //Console.Write(val);
+            //val = "   --launch | -l             launch resulting output in target back end.\r\n";
+            //Console.Write(val);
+            //val = "   --name | -n               [main] Project name.\r\n\r\n\r\n";
+            //Console.Write(val);
+            //val = "Examples:\r\n\r\n";
+            //Console.Write(val);
+            //val = "   PathwayB.exe -d \"D:\\MyProject\" -if usfm -f * -t \"E-Book (.epub)\" \r\n";
+            //Console.Write(val);
+            //val = "                             -i \"Scripture\" -n \"SEN\" \r\n";
+            //Console.Write(val);
+            //val = "      Creates an .epub file from the USFM project found in D:\\MyProject.\r\n\r\n";
+            //Console.Write(val);
+            //val = "   PathwayB.exe -d \"D:\\MyDict\" -if xhtml -c \"D:\\MyDict\\main.css\" \r\n";
+            //Console.Write(val);
+            //val = "                             -f \"main.xhtml\", \"FlexRev.xhtml\" \r\n";
+            //Console.Write(val);
+            //val = "                             -t \"E-Book (.epub)\" -i \"Dictionary\" \r\n";
+            //Console.Write(val);
+            //val = "                             -n \"Sena 3-01\" \r\n";
+            //Console.Write(val);
+            //val = "      Creates an .epub file from the xhtml dictionary found in D:\\MyDict.\r\n";
+            //Console.Write(val);
+            //val = "      Both main and reversal index files are included in the output.\r\n\r\n";
+            //Console.Write(val);
+            //val = "   PathwayB.exe -d \"D:\\Project2\" -if usfm -f * -i \"Scripture\" -n \"SEN\"-s\r\n";
+            //Console.Write(val);
+            //val = "      Displays the Export Through Pathway dialog, then generates output from\r\n";
+            //Console.Write(val);
+            //val = "      the USFM project found in D:\\Project2 to the user-specified output \r\n";
+            //Console.Write(val);
+            //val = "      format and style.\r\n\r\n";
+            //Console.Write(val);
+            //val = "Notes:\r\n\r\n";
+            //Console.Write(val);
+            //val = "-  Not all output types may be available, depending on your installation\r\n";
+            //Console.Write(val);
+            //val = "   Package. To verify the available output types, open the Configuration\r\n";
+            //Console.Write(val);
+            //val = "   Tool, click the Defaults button and click on the Destination drop-down.\r\n";
+            //Console.Write(val);
+            //val = "   The available outputs match the selections in this list.\r\n\r\n";
+            //Console.Write(val);
+            //val = "-  For dictionary output, the reversal index file needs to be named\r\n";
+            //Console.Write(val);
+            //val = "   \"FlexRev.xhtml\". this is to maintain consistency with the file naming\r\n";
+            //Console.Write(val);
+            //val = "   convention used in Pathway.\r\n\r\n";
             Console.Write(val);
         }
 
@@ -253,6 +387,97 @@ namespace PathwayExport
                     break;
             }
             return inFormat;
+        }
+
+        private static void FindExportFormat()
+        {
+            ExportFormat expFormat = ExportFormat.Dictionary;
+            string entryAssemblyName = GetEntryAssemblyName();
+            if (!string.IsNullOrEmpty(entryAssemblyName))
+            {
+                if (entryAssemblyName.Contains("paratext"))
+                {
+                    expFormat = ExportFormat.Scripture;
+
+                }
+                else if (entryAssemblyName.Contains("fieldwork"))
+                {
+                    expFormat = ExportFormat.Dictionary;
+                }
+                else if (entryAssemblyName.Contains("pathwayexport"))
+                {
+                    
+                }
+                else if (entryAssemblyName.Contains("pathwayexport"))
+                {
+
+                }
+            }
+            projectInfo.ProjectInputType = expFormat == ExportFormat.Dictionary? "Dictionary":"Scripture";
+        }
+
+        private static string GetEntryAssemblyName()
+        {
+            string entryAssemblyName = string.Empty;
+            if (!(String.IsNullOrEmpty(Convert.ToString(Assembly.GetEntryAssembly()))))
+            {
+                entryAssemblyName = Assembly.GetEntryAssembly().FullName;
+            }
+            else
+            {
+                entryAssemblyName = "configurationtool";
+            }
+
+            return entryAssemblyName.Trim().ToLower();
+        }
+        
+        private static void SetFileName()
+        {
+            if (projectInfo.ProjectInputType == "Dictionary")
+            {
+                // dictionary
+                // main - if there's a file name of "main" in the list, we'll use it as the default xhtml; 
+                // if not, we'll use the first item in the list
+                int indexMain = files.FindIndex(
+                    something => (something.ToLower().EndsWith("main.xhtml"))
+                    );
+                projectInfo.DefaultXhtmlFileWithPath = (indexMain >= 0)
+                                                           ? Common.PathCombine(projectInfo.ProjectPath,
+                                                                                files[indexMain])
+                                                           : Common.PathCombine(projectInfo.ProjectPath, files[0]);
+                // reversal index - needs to be named "flexrev.xhtml" 
+                // (for compatibility with transforms in Pathway)
+                int indexRev = files.FindIndex(
+                    something => (something.ToLower().EndsWith("flexrev.xhtml"))
+                    );
+                projectInfo.IsReversalExist = (indexRev >= 0);
+
+                projectInfo.IsLexiconSectionExist = File.Exists(projectInfo.DefaultXhtmlFileWithPath);
+                projectInfo.ProjectFileWithPath = projectInfo.DefaultXhtmlFileWithPath;
+                projectInfo.SwapHeadword = false;
+                projectInfo.FromPlugin = true;
+                if(indexMain >= 0 && indexRev >= 0)
+                    projectInfo.IsODM = true;
+                projectInfo.DefaultRevCssFileWithPath =
+                    Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
+                projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.ProjectPath);
+            }
+            else if (projectInfo.ProjectInputType == "Scripture")
+            {
+                if (projectInfo.DefaultXhtmlFileWithPath == null)
+                {
+                    projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, files[0]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the default export type from the Dictionary / Scripture Settings File
+        /// </summary>
+        /// <returns></returns>
+        private static string GetDefaultExportFileFromSettingsFile()
+        {
+            return "openoffice/libreoffice";
         }
 
 

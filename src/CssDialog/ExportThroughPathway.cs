@@ -35,10 +35,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
 using SilTools;
+using SIL.CommandLineProcessing;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -909,6 +911,18 @@ namespace SIL.PublishingSolution
                 Param.SetValue(Param.Preprocessing, preprocessing);
             }
             Param.Write();
+
+
+            //StringBuilder sb =new StringBuilder();
+            //sb.Append("file1.xhtml");
+            //sb.Append(", ");
+            //sb.Append("file2.xhtml");
+
+            //string argument = string.Format("--target '{0}' --directory '{1}' --files '{2}'", ddlLayout.SelectedItem.ToString() , OutputFolder, sb.ToString());
+
+            //CommandLineRunner.Run(Common.PathCombine(Common.GetApplicationPath(), "PathwayExport.exe"), argument,
+            //    OutputFolder, 50000, null);
+
             this.Close();
         }
 

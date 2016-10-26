@@ -222,10 +222,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -235,12 +231,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CssDialog\CssDialog.csproj">
-      <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
-      <Name>CssDialog</Name>
+    <ProjectReference Include="..\epubConvert\epubConvert.csproj">
+      <Project>{b19037f2-26f7-48a2-9301-b5ca335c6824}</Project>
+      <Name>epubConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
+      <Project>{f91c8f61-9dfa-42f0-84ef-fe64b47ff433}</Project>
+      <Name>OpenOfficeConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport.csproj">
-      <Project>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</Project>
+      <Project>{dcd48287-7f36-4dbb-94cf-4ff617bf1f78}</Project>
       <Name>PsExport</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool.csproj">
@@ -264,9 +264,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ptx2css.xsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
