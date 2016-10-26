@@ -171,7 +171,6 @@ namespace Test.PsTool
         }
 
         [Test]
-        [Ignore]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampRightsTest()
@@ -181,7 +180,7 @@ namespace Test.PsTool
             _projInputType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
-            Assert.True(Rights == "( c ) 2013 SIL International®. DRAFT DOCUMENTPlease note that this document is not in its final form. This document was printed during the normal course of a review process by the creator or editor, and will likely be superceded in both content and format by a...", "CopyRight Information is wrong!");
+			Assert.True(Rights == "© 2016 SIL International®. ");
         }
 
         [Test]

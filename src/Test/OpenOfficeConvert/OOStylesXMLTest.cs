@@ -301,7 +301,6 @@ namespace Test.OpenOfficeConvert
 
         /// </summary>      
         [Test]
-        [Ignore("India team has to figure out why this fails")]
         public void FontFamily_Node()
         {
             const string file = "FontFamily";
@@ -318,7 +317,7 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
             _validate.ClassName = "letter2";
-            _validate.ClassProperty.Add("fo:font-family", "Verdana");
+			_validate.ClassProperty.Add("fo:font-family", "sans-serif");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
@@ -351,7 +350,7 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
             _validate.ClassName = "letter8";
-            _validate.ClassProperty.Add("fo:font-family", "Times New Roman");
+			_validate.ClassProperty.Add("fo:font-family", "serif");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
@@ -667,7 +666,6 @@ namespace Test.OpenOfficeConvert
 
         /// </summary>      
         [Test]
-        [Ignore("India team has to figure out why this fails")]
         public void Font_Node()
         {
             const string file = "Font";
@@ -682,9 +680,9 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:font-weight-complex", "700");
             _validate.ClassProperty.Add("fo:font-size", "24pt");
             _validate.ClassProperty.Add("fo:font-size-complex", "24pt");
-            _validate.ClassProperty.Add("fo:font-family", "Times New Roman");
+			_validate.ClassProperty.Add("fo:font-family", "serif");
 
-            _validate.ClassProperty.Add("fo:font-name-complex", "Times New Roman");
+			_validate.ClassProperty.Add("fo:font-name-complex", "serif");
             _validate.ClassProperty.Add("fo:font-style", "italic");
             _validate.ClassProperty.Add("fo:font-variant", "small-caps");
 
@@ -917,9 +915,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-425 Impliment Start and Last References in same page
-
         /// </summary>
-        [Ignore]      
         [Test]
         public void SinglePageRefTest_Node()
         {
@@ -945,52 +941,9 @@ namespace Test.OpenOfficeConvert
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
-            //style:master-page style:name="First_20_Page"
-            //Third Node
-            //XPath = "//style:style[@style:name='" + ClassName + "']";
-            //string xpath = "//style:master-page[style:name=\"First_20_Page\"]";
-            string xpath = "//style:master-page[@style:name='Left_20_Page']";
+			string xpath = "//style:master-page[@style:name='XHTML']";
             _validate.ClassName = string.Empty;
-            string inner =
-                //"<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
-                "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<text:span text:style-name=\"PageHeaderFooter12\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"PageHeaderFooter13\">" +
-                "<text:page-number text:select-page=\"current\">4</text:page-number>" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"PageHeaderFooter14\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"10\" />" +
-                "</text:span>" +
-                "</text:p>" +
-                "</style:header>";
-
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
-            Assert.IsTrue(returnValue);
-
-            xpath = "//style:master-page[@style:name='Right_20_Page']";
-            _validate.ClassName = string.Empty;
-            inner =
-                //"<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
-                "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<text:span text:style-name=\"PageHeaderFooter18\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"PageHeaderFooter19\">" +
-                "<text:page-number text:select-page=\"current\">4</text:page-number>" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"PageHeaderFooter20\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"10\" />" +
-                "</text:span>" +
-                "</text:p>" +
-                "</style:header>";
+			string inner = "<text:span text:style-name=\"MT1\" style:horizontal-pos=\"center\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">|counter(page)|</text:span><style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"31.84842pt\" fo:min-width=\"100pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame></text:p></style:footer>";
 
             returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
             Assert.IsTrue(returnValue);
@@ -1001,7 +954,6 @@ namespace Test.OpenOfficeConvert
 
         /// </summary>      
         [Test]
-        [Ignore]
         public void MirroredPageRefTest_Node()
         {
             const string file = "MirroredPageRef";
@@ -1020,18 +972,18 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
             xpath = "samenode";
-            _validate.ClassProperty.Add("fo:page-width", "14.8cm");
-            _validate.ClassProperty.Add("fo:page-height", "21cm");
+            _validate.ClassProperty.Add("fo:page-width", "419.5276pt");
+            _validate.ClassProperty.Add("fo:page-height", "595.2756pt");
             _validate.ClassProperty.Add("style:num-format", "1");
             _validate.ClassProperty.Add("style:print-orientation", "portrait");
             _validate.ClassProperty.Add("style:writing-mode", "lr-tb");
             _validate.ClassProperty.Add("style:footnote-max-height", "0in");
 
-            _validate.ClassProperty.Add("fo:margin-top", "1.15cm");
-            _validate.ClassProperty.Add("fo:margin-right", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-bottom", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-left", "1.5cm");
-
+            _validate.ClassProperty.Add("fo:margin-top", "32.59842pt");
+            _validate.ClassProperty.Add("fo:margin-right", "42.51968pt");
+            _validate.ClassProperty.Add("fo:margin-bottom", "32.59842pt");
+            _validate.ClassProperty.Add("fo:margin-left", "42.51968pt");
+						
             returnValue = _validate.ValidateNodeAttributesNS(1, xpath); // style:page-layout-properties
             Assert.IsTrue(returnValue);
 
@@ -1044,45 +996,28 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
             xpath = "samenode";
-            _validate.ClassProperty.Add("fo:page-width", "14.8cm");
-            _validate.ClassProperty.Add("fo:page-height", "21cm");
+			_validate.ClassProperty.Add("fo:page-width", "419.5276pt");
+			_validate.ClassProperty.Add("fo:page-height", "595.2756pt");
             _validate.ClassProperty.Add("style:num-format", "1");
             _validate.ClassProperty.Add("style:print-orientation", "portrait");
             _validate.ClassProperty.Add("style:writing-mode", "lr-tb");
             _validate.ClassProperty.Add("style:footnote-max-height", "0in");
 
-            _validate.ClassProperty.Add("fo:margin-top", "1.15cm");
-            _validate.ClassProperty.Add("fo:margin-right", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-bottom", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-left", "1.5cm");
+			_validate.ClassProperty.Add("fo:margin-top", "32.59842pt");
+			_validate.ClassProperty.Add("fo:margin-right", "42.51968pt");
+			_validate.ClassProperty.Add("fo:margin-bottom", "32.59842pt");
+			_validate.ClassProperty.Add("fo:margin-left", "42.51968pt");
 
             returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
             Assert.IsTrue(returnValue);
-
-            //Third Node
-            xpath = "//style:header-left";
-            _validate.ClassName = string.Empty;
-            string inner = "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-            "<text:span text:style-name=\"AllHeaderPageLeft\">" +
-            "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
-            "</text:span>" +
-            "<text:tab />" +
-            "<text:span text:style-name=\"AllHeaderPageNumber\">" +
-            "<text:page-number text:select-page=\"current\">4</text:page-number>" +
-            "</text:span>" +
-            "<text:tab />" +
-            "<text:span text:style-name=\"AllHeaderPageRight\" />" +
-            "</text:p>";
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
-            Assert.IsTrue(returnValue);
-
+			
             //Fourth Node
             xpath = "//style:master-page[@style:name='";
             _validate.ClassName = "First_20_Page";
 
             _validate.ClassProperty.Add("style:display-name", "First Page");
-            _validate.ClassProperty.Add("style:page-layout-name", "pm2");
-            _validate.ClassProperty.Add("style:next-style-name", "Standard");
+            _validate.ClassProperty.Add("style:page-layout-name", "pm3");
+			_validate.ClassProperty.Add("style:next-style-name", "Left_20_Page");
 
             returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
             Assert.IsTrue(returnValue);
@@ -1229,7 +1164,6 @@ namespace Test.OpenOfficeConvert
         ///TD-663 Space between header and text  
 
         /// </summary> 
-        [Ignore]     
         [Test]
         public void HeaderSpace_Node()
         {
@@ -1249,7 +1183,7 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
             //second Node
-            xpath = "//style:page-layout[@style:name='pm4']";
+			xpath = "//style:page-layout[@style:name='pm6']";
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = string.Empty;
             _validate.ClassProperty.Add("fo:padding-top=", "72pt");

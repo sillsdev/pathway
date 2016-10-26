@@ -126,8 +126,11 @@ namespace SIL.PublishingSolution
             }
             UpdateXeLaTexFontCacheIfNecessary();
             CallXeLaTex(projInfo, xeLatexFullFile, true, imgPath);
-            ProcessRampFile(projInfo, xeLatexFullFile, organization);
-            return true;
+	        if (!Common.Testing)
+	        {
+		        ProcessRampFile(projInfo, xeLatexFullFile, organization);
+	        }
+	        return true;
         }
 
         private Dictionary<string, Dictionary<string, string>> WrittingTexFile(PublicationInformation projInfo, string fileName, out string xeLatexFullFile,
@@ -595,11 +598,6 @@ namespace SIL.PublishingSolution
 
         public void CallXeLaTex(PublicationInformation projInfo, string xeLatexFullFile, bool openFile, Dictionary<string, string> ImageFilePath)
         {
-			if(Common.Testing)
-			{
-				return;
-			}
-
             string originalDirectory = Directory.GetCurrentDirectory();
             string[] pdfFiles = Directory.GetFiles(Path.GetDirectoryName(xeLatexFullFile), "*.pdf");
             foreach (string pdfFile in pdfFiles)
@@ -745,7 +743,7 @@ namespace SIL.PublishingSolution
                 {
                     try
                     {
-                        if (File.Exists(pdfFullName))
+						if (File.Exists(pdfFullName) && !Common.Testing)
                         {
                             Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex", _inputType);
                         }
@@ -765,7 +763,7 @@ namespace SIL.PublishingSolution
                 {
                     try
                     {
-                        if (File.Exists(pdfFullName))
+						if (File.Exists(pdfFullName) && !Common.Testing)
                         {
                             pdfFullName = Common.InsertCopyrightInPdf(pdfFullName, "XeLaTex", _inputType);
                         }
@@ -786,6 +784,11 @@ namespace SIL.PublishingSolution
                 }
                 try
                 {
+					if (Common.Testing)
+					{
+						return;
+					}
+
                     File.Delete(Common.PathCombine(xeLaTexInstallationPath, texNameOnly + ".log"));
                     File.Delete(Common.PathCombine(xeLaTexInstallationPath, texNameOnly + ".pdf"));
                     File.Delete(Common.PathCombine(xeLaTexInstallationPath, texNameOnly + ".aux"));

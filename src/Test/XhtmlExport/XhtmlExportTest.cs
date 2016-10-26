@@ -24,7 +24,9 @@ using System.Text;
 using ICSharpCode.SharpZipLib.Zip;
 using Microsoft.Win32;
 using System.IO;
+using System.Xml;
 using NUnit.Framework;
+using SIL.PublishingSolution;
 using SIL.Tool;
 
 #endregion Using
@@ -71,51 +73,6 @@ namespace Test.XhtmlExport
 		}
 		#endregion Setup
 
-		#region Internal
-		/// <summary>
-		/// Launch the AutoIt subprocess to export the Xhtml from FieldWorks
-		/// </summary>
-		private static void FieldWorksXhtmlExport(string app, string proj, string backup, string message, bool reversal = false)
-		{
-			FieldWorksXhtmlExport(app, proj, backup, message, null, reversal);
-		}
-
-		/// <summary>
-		/// Launch the AutoIt subprocess to export the Xhtml from FieldWorks
-		/// </summary>
-		private static void FieldWorksXhtmlExport(string app, string proj, string backup, string message, string incOpt, bool reversal = false)
-		{
-			var p1 = new Process();
-			p1.StartInfo.UseShellExecute = false;
-			p1.StartInfo.EnvironmentVariables.Add("proj", proj);
-			p1.StartInfo.EnvironmentVariables.Add("Backup", backup);
-			p1.StartInfo.EnvironmentVariables.Add("InputPath", _tf.Input(null));
-			p1.StartInfo.EnvironmentVariables.Add("OutputPath", _tf.Output(null));
-			p1.StartInfo.EnvironmentVariables.Add("IncOpt", incOpt);
-            p1.StartInfo.EnvironmentVariables.Add("Rev", reversal? "True":"False");
-			p1.StartInfo.Arguments = Common.PathCombine(_scriptPath, app + "XhtmlExport.au3");
-			p1.StartInfo.WorkingDirectory = _scriptPath;
-			p1.StartInfo.FileName = _autoIt;
-			p1.Start();
-			if (p1.Id <= 0)
-				throw new MissingSatelliteAssemblyException(proj);
-			p1.WaitForExit();
-			var xhtmlName = proj + ".xhtml";
-			var xhtmlExpect = _tf.Expected(xhtmlName);
-			var xhtmlOutput = _tf.Output(xhtmlName);
-			var ns = new Dictionary<string, string> { { "x", "http://www.w3.org/1999/xhtml" } };
-			XmlAssert.Ignore(xhtmlOutput, "/x:html/x:head/x:meta[@name='description']/@content", ns);
-			XmlAssert.Ignore(xhtmlOutput, "/x:html/x:head/x:meta[@name='linkedFilesRootDir']/@content", ns);
-			XmlAssert.Ignore(xhtmlOutput, "//@id", ns);
-            XmlAssert.Ignore(xhtmlOutput, "//@src", ns);
-            XmlAssert.Ignore(xhtmlOutput, "//@href", ns);
-			XmlAssert.AreEqual(xhtmlExpect, xhtmlOutput, message + ": " + xhtmlName);
-			var cssName = proj + ".css";
-			var cssExpect = _tf.Expected(cssName);
-			var cssOutput = _tf.Output(cssName);
-			TextFileAssert.AreEqualEx(cssExpect, cssOutput, new ArrayList { 1 }, message + ": " + cssName);
-		}
-
 		/// <summary>
 		/// Runs Pathway on the data and applies the back end
 		/// </summary>
@@ -145,6 +102,24 @@ namespace Test.XhtmlExport
 				FolderTree.Copy(_tf.Input("gather"), Common.PathCombine(_tf.Output("NKOu3"), "gather"));
 				FolderTree.Copy(_tf.Input("figures"), Common.PathCombine(_tf.Output("NKOu3"), "figures"));
 				workingFolder = Path.GetDirectoryName(xhtmlOutput);
+				List<XmlDocument> usxBooksToExport = new List<XmlDocument>();
+				usxBooksToExport.Add(xmlInnerText(xhtmlOutput));
+
+				Dictionary<string, object> xslParams;
+				xslParams = new Dictionary<string, object>();
+				DateTime dateTime = new DateTime(2013, 8, 27);
+				xslParams.Add("dateTime", dateTime.Date);
+				xslParams.Add("user", "Tester");
+				xslParams.Add("projName", "NKOu3");
+				xslParams.Add("stylesheet", "usfm");
+				xslParams.Add("ws", "en");
+				xslParams.Add("fontName", "Times");
+				xslParams.Add("fontSize", "12");
+
+				ParatextPathwayLink converter = new ParatextPathwayLink("NKOu3", xslParams);
+				converter.ConvertUsxToPathwayXhtmlFile(usxBooksToExport[0].InnerXml, xhtmlOutput.Replace(".usx", ".xhtml"));
+
+
 			}
 			var p1 = new Process();
 			p1.StartInfo.UseShellExecute = false;
@@ -180,11 +155,17 @@ namespace Test.XhtmlExport
 					break;
 				case "XeLaTex":
 					FileCheck(project, ".tex", message.Length > 0 ? message : "Tex file mismatch");
-					TextCheck(project, ".log", new ArrayList { 1 }, message.Length > 0 ? message : "Log file mismatch");
 					break;
 				default:
 					throw new AssertionException("Unrecognized backend type");
 			}
+		}
+
+		private static XmlDocument xmlInnerText(string usxfileName)
+		{
+			XmlDocument xmlDoc = new XmlDocument();
+			xmlDoc.Load(usxfileName);
+			return xmlDoc;
 		}
 
 		private static void TextCheck(string project, string ext, ArrayList ex, string message)
@@ -215,86 +196,11 @@ namespace Test.XhtmlExport
 			OdtTest.AreEqual(odtExpectDir, odtOutputDir, message);
 		}
 
-		#endregion Internal
-
-		#region YCE-Test
-		/// <summary>
-		/// Export Yce-Test Flex data from Fieldworks, compare results to previous exports
-		/// </summary>
-		[Test]
-		[Ignore]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void YceTestExportTest()
-		{
-			FieldWorksXhtmlExport("Flex", "YCE-Test", "YCE-Test 2010-11-04 1357.fwbackup", "YCE-Test Export changed");
-		}
-		#endregion YCE-Test
-
-		#region Buang-Test
-		/// <summary>
-		/// Export Buang-Test Flex data from Fieldworks, compare results to previous exports
-		/// </summary>
-		[Test]
-		[Ignore]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void BuangTestExportTest()
-		{
-			FieldWorksXhtmlExport("Flex", "Buang-Test", "Buang-Test 2010-11-04 0844.fwbackup", "Export changed", "cl");
-		}
-		#endregion Buang-Test
-
-		#region Nkonya Sample
-		/// <summary>
-		/// Export Nkonya Sample TE data from Fieldworks, compare results to previous exports
-		/// </summary>
-		[Test]
-		[Ignore]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void NkonyaSampleExportTest()
-		{
-			FieldWorksXhtmlExport("Te", "Nkonya Sample", "Nkonya Sample 2011-02-10 1347.fwbackup", "Export changed", "c");
-		}
-		#endregion Nkonya Sample
-
-		#region Gondwana Sample
-		/// <summary>
-		/// Export Gondwana Sample Flex data from Fieldworks, compare results to previous exports
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void GondwanaSampleExportTest()
-		{
-		    var fwver = FileVersionInfo.GetVersionInfo(@"C:\Program Files (x86)\SIL\FieldWorks 8\FieldWorks.exe");
-		    var suffix = (fwver.FileMajorPart > 8 || fwver.FileMajorPart == 8 && fwver.FileMinorPart >= 3) ? "-Fw83" : "";
-            FieldWorksXhtmlExport("Flex", "Gondwana Sample" + suffix, "Gondwana Sample 2011-02-09 0709.fwbackup", "Main Xhtml Export changed");
-        }
-        #endregion Gondwana Sample
-
-        #region Gondwana Sample Reversal
-        /// <summary>
-        /// Export Gondwana Sample Reversal Flex data from Fieldworks, compare results to previous exports
-        /// </summary>
-        [Test]
-        [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
-        public void BuangExportReversalTest()
-        {
-            var fwver = FileVersionInfo.GetVersionInfo(@"C:\Program Files (x86)\SIL\FieldWorks 8\FieldWorks.exe");
-            var suffix = (fwver.FileMajorPart > 8 || fwver.FileMajorPart == 8 && fwver.FileMinorPart >= 3) ? "-Fw83" : "";
-            FieldWorksXhtmlExport("Flex", "FlexRev" + suffix, "Gondwana Sample 2016-04-20 1129.fwbackup", "Reversal Export changed", "cl", true);
-        }
-        #endregion Gondwana Sample
-
-        #region Gondwana Sample Open Office
+		#region Gondwana Sample Open Office
 		/// <summary>
 		/// Gondwana Sample Open Office Back End Test
 		/// </summary>
 		[Test]
-		[Ignore]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void GondwanaSampleOpenOfficeTest()
@@ -308,7 +214,6 @@ namespace Test.XhtmlExport
 		/// Nkonya Sample Open Office Back End Test
 		/// </summary>
 		[Test]
-		[Ignore]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void NkonyaSampleOpenOfficeTest()
@@ -322,7 +227,6 @@ namespace Test.XhtmlExport
 		/// Paratext NKOu3 Open Office Back End Test
 		/// </summary>
 		[Test]
-		[Ignore]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void NKOu3OpenOfficeTest()
@@ -336,7 +240,6 @@ namespace Test.XhtmlExport
 		/// Gondwana Sample InDesign Back End Test
 		/// </summary>
 		[Test]
-		[Ignore]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void GondwanaSampleInDesignTest()
@@ -350,7 +253,6 @@ namespace Test.XhtmlExport
 		/// Nkonya Sample InDesign Back End Test
 		/// </summary>
 		[Test]
-		[Ignore]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void NkonyaSampleInDesignTest()
@@ -364,7 +266,6 @@ namespace Test.XhtmlExport
 		/// Paratext NKOu3 InDesign Back End Test
 		/// </summary>
 		[Test]
-		[Ignore]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void NKOu3InDesignTest()
@@ -373,66 +274,11 @@ namespace Test.XhtmlExport
 		}
 		#endregion Nkonya Sample Open Office
 
-		//#region Gondwana Sample Epub
-		///// <summary>
-		///// Gondwana Sample E-Book Back End Test
-		///// </summary>
-		//[Test]
-		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
-		//public void GondwanaSampleEpubTest()
-		//{
-		//    PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "E-Book (.epub)");
-		//}
-		//#endregion Gondwana Sample Epub
-
-		//#region Paratext NKOu3 E-Book
-		///// <summary>
-		///// Paratext NKOu3 E-Book Back End Test
-		///// </summary>
-		//[Test]
-		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
-		//public void NKOu3EpubTest()
-		//{
-		//    PathawyB("NKOu3", "NKOu3", "Scripture", "E-Book (.epub)");
-		//}
-		//#endregion Nkonya Sample E-Book
-
-		//Dictionaries can not be output with Go Bible!
-		//#region Gondwana Sample Go Bible
-		///// <summary>
-		///// Gondwana Sample Go Bible Back End Test
-		///// </summary>
-		//[Test]
-		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
-		//public void GondwanaSampleGoBibleTest()
-		//{
-		//    PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "Go Bible");
-		//}
-		//#endregion Gondwana Sample Go Bible
-
-		//Todo: PathwayB must be tested with .sfm for new GoBible
-		//#region Paratext NKOu3 Go Bible
-		///// <summary>
-		///// Paratext NKOu3 Go Bible Back End Test
-		///// </summary>
-		//[Test]
-		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
-		//public void NKOu3GoBibleTest()
-		//{
-		//    PathawyB("NKOu3", "NKOu3", "Scripture", "Go Bible");
-		//}
-		//#endregion Nkonya Sample Go Bible
-
 		#region Gondwana Sample XeLaTex
 		/// <summary>
 		/// Gondwana Sample XeLaTex Back End Test
 		/// </summary>
 		[Test]
-		[Ignore]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void GondwanaSampleXeLaTexTest()
@@ -446,7 +292,6 @@ namespace Test.XhtmlExport
 		/// Paratext NKOu3 XeLaTex Back End Test
 		/// </summary>
 		[Test]
-		[Ignore]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void NKOu3XeLaTexTest()

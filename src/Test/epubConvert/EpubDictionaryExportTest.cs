@@ -111,7 +111,7 @@ namespace Test.epubConvert
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
-		public void ExportDictionaryPassTest()
+		public async void ExportDictionaryPassTest()
 		{
 			// clean out old files
 			CleanOutputDirectory();

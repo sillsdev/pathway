@@ -117,8 +117,6 @@ namespace SIL.PublishingSolution
                 Debug.Assert(mainFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "Path for input file missing");
                 if (string.IsNullOrEmpty(mainFullName) || !File.Exists(mainFullName))
                 {
-                    var msg = new[] { "Input File(main.xhtml) is not Found" };
-                    LocDB.Message("errFnFound", "Input File(main.xhtml) is not Found.", msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                     return;
                 }
                 string cssFullName = GetCssFullName(outDir, mainFullName);

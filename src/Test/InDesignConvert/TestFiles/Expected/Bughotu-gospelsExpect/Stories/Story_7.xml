@@ -3,73 +3,10 @@
   <Story Self="7" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_2">
-        <Content />
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_107">
-        <Content>Sen Jon Ke Risoa</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_108">
-        <Content>Na Titiono Eigna Na Buka Iaani</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_109">
-        <Content>Mane ke risoa na buka iaani e boi vele aua na ahagna, keana mara puhidia na komi tinoni kiloau i hau kena velea a Jon, nigna na mane vaovarongo a Jisas, ke risoa. Imanea ke risoa mua tolu na letasi nigna a Jon ma na buka Tate Au.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Kori turughugna na buka iaani a Jon ke vele aua a Jisas na Haghoregna a God ke vuhai tinoni me mono duada kori maramagna. Imanea ke magnahaghinira na komi tinoni kedana vaututunia a Jisas a Dathegna God eigna kedana hatia na havi ke tutuni ke teo na govugna.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Jon ke titionoa e vitu na reghithehe ke eia a Jisas. Na komi reghithehe irangeni ke tatelia aua na komi puhigna a Jisas. Vaghagna na vatoke tabiruagna na mane ke thehe na naegna (5:1-8) ke tateli aua a Jisas ke agutu hahali, vaghagna vamua a God a Tamagna ke agutu hahali. Tadia na komi reghithehe irangeni a Jon ke tateli aua a Jisas a Vahavi, a Dathegna a God.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Kori buka iaani, a Jon ke risoa na komi fata a Jisas ke velera nigna na komi vaovarongo kori vido ke eia na vangagna na Thovoliungi duadia. Nigna na tarai eidia nigna na komi vaovarongo kori lavi iangeni ke mono vamua kori buka iaani.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Kori buka iaani vamua ke mono na komi totoghale a Jisas ke velea bali tateli aua imanea ke mai tagna a God. A Jisas ke velea imanea ghehegna na bea, ma na bred, ma na raraha, ma na hagetha, mi kekeha mua na totoghale.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_110">
-        <Content>Jon ke titiono mua eigna na havi ke tutuni kati hatia tagna a Krais. Na havi ke tutuni iangeni e turughu kori vido kati vaututuni me teo keda govu.</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_111">
-        <Content>Na Komi Fata Ke Nagho Kori Buka Iaani:</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_3">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_112">
-        <Content>A Jisas na Haghoregna a God (1:1-18)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Nigna na titiono a Jon Siuvitabu (1:19-34)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>A Jisas ke vahira kekeha nigna na komi mane vaovarongo (1:35-51)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Nigna na agutu a Jisas (2:1--12:50)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>Na vagougovui wik a Jisas ke mono i Jerusalem (13:1--19:42)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>A Jisas ke ghoi havi tabiru (20:1-10)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_4">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_113">
-        <Content>A Jisas ke tate vanira nigna na komi vaovarongo (20:11--21:25)</Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/t1_body">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]">
+        <Content>T1 class</Content>
+      </CharacterStyleRange>
+    </ParagraphStyleRange>
   </Story>
 </idPkg:Story>

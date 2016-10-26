@@ -329,7 +329,7 @@ namespace SIL.Tool
 						if (executablePath.Contains("ReSharper") || executablePath.Contains("NUnit"))
 						{
 							//This code will work when this method call from NUnit Test case
-						    executablePath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles/input");
+							executablePath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles/input");
 						}
 						else if (executablePath.ToLower().Contains("fieldworks") ||
 								 executablePath.ToLower().Contains("configurationtool") ||
@@ -706,7 +706,7 @@ namespace SIL.Tool
 				List<string> langCodeList = new List<string>();
 				var vernacularLang = string.Empty;
 				var metaList = new List<KeyValuePair<string, string>>();
-				var xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, DtdProcessing = DtdProcessing.Parse};
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
 				string attribute = string.Empty;
 				using (XmlReader xmlReader = XmlReader.Create(xhtmlFileNameWithPath, xmlReaderSettings))
 				{
@@ -2427,7 +2427,7 @@ namespace SIL.Tool
 			{
 				return Application.ProductName;
 			}
-			
+
 		}
 
 		public static void OpenOutput(string outputPathWithFileName)
@@ -3634,11 +3634,11 @@ namespace SIL.Tool
 					XmlNode node =
 						xmlDocument.SelectSingleNode(
 							"/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='defaultFontFamily'][1]/@value");
-				    if (node != null)
-				    {
-                        newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
-                        newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
-                    }
+					if (node != null)
+					{
+						newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+						newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+					}
 				}
 
 				using (StreamWriter sw = File.CreateText(teDefaultFilePath))
@@ -3919,7 +3919,7 @@ namespace SIL.Tool
 			{
 				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
 				returnNode.InnerText = Common.ConvertUnicodeToString("\\00a9") + " " + organization +
-				                       Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
+									   Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
 			}
 
 			xPath = "//cc:license";
@@ -4861,8 +4861,8 @@ namespace SIL.Tool
 
 				//var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
 				var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-                var installedLocalizationsFolder = InstalledLocalizationsFolder;
-			    var desiredUiLangId = GetLocalizationSettings();
+				var installedLocalizationsFolder = InstalledLocalizationsFolder;
+				var desiredUiLangId = GetLocalizationSettings();
 				if (desiredUiLangId == string.Empty)
 					desiredUiLangId = "en";
 				if (string.IsNullOrEmpty(productVersion))
@@ -4897,7 +4897,7 @@ namespace SIL.Tool
 	        }
 	    }
 
-	    public static void InitializeOtherProjects()
+		public static void InitializeOtherProjects()
 		{
 			string pathwayDirectory = PathwayPath.GetPathwayDir();
 			if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory)) return;

@@ -125,7 +125,7 @@
   </TextDefault>
   <DictionaryPreference Composition="Both" MergeUserDictionary="false" RecomposeWhenChanged="true" />
   <AnchoredObjectDefault AnchorContent="Unassigned" InitialAnchorHeight="72" InitialAnchorWidth="72" AnchoredParagraphStyle="ParagraphStyle/$ID/[No paragraph style]" AnchoredObjectStyle="ObjectStyle/$ID/[None]" />
-  <AnchoredObjectSetting AnchoredPosition="InlinePosition" SpineRelative="false" LockPosition="false" PinPosition="true" AnchorPoint="BottomRightAnchor" HorizontalAlignment="LeftAlign" HorizontalReferencePoint="TextFrame" VerticalAlignment="TopAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="0" />
+  <AnchoredObjectSetting AnchoredPosition="Anchored" SpineRelative="false" LockPosition="false" PinPosition="false" AnchorPoint="TopCenterAnchor" HorizontalAlignment="CenterAlign" HorizontalReferencePoint="ColumnEdge" VerticalAlignment="CenterAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="4" />
   <BaselineFrameGridOption UseCustomBaselineFrameGrid="false" StartingOffsetForBaselineFrameGrid="0" BaselineFrameGridRelativeOption="TopOfInset" BaselineFrameGridIncrement="12">
     <Properties>
       <BaselineFrameGridColor type="enumeration">LightBlue</BaselineFrameGridColor>

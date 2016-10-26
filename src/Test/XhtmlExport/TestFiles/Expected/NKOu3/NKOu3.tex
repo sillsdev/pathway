@@ -1,8 +1,4 @@
 \documentclass[c5paper,twoside]{article} 
-\usepackage{texthanglist}
-\usepackage{verbatim} 
-\usepackage{multicol}
-\usepackage{changepage}
 \usepackage{float}
 \usepackage{grffile}
 \usepackage{graphicx}
@@ -11,547 +7,547 @@
 \usepackage{fancyhdr}
 \usepackage{multicol}
 \usepackage{calc}
-\usepackage[margin=1cm,includeheadfoot]{geometry}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=1.5cm,right=1.5cm,top=1.15cm,bottom=1.15cm,includeheadfoot]{geometry}
 \usepackage{eso-pic}
+\usepackage{changepage}
+\usepackage{needspace}
+\usepackage{multicol}
+\usepackage{verbatim} 
+\usepackage{setspace}
 \pagestyle{plain}\pagestyle{fancy}
 \fancyhead{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0.4pt} 
+
 \fancyhead[LO]{\rightmark}
 \fancyhead[CO]{\thepage}
 \fancyhead[CE]{\thepage}
 \fancyhead[RE]{\leftmark}
-\renewcommand{\headrulewidth}{0.4pt} \renewcommand{\footrulewidth}{0.4pt}
-\fancyfoot{}
+\renewcommand{\thefootnote}{\alphalph{\value{footnote}}} 
 
-\begin{document} 
-\pagestyle{plain} 
-\font\AlternateReadingzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/I" at 12pt
-\font\spanzxxParagraphContinuationscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\VerseNumberzxxParagraphContinuationscrSectioncolumnsscrBookscrBody="Times New Roman" at 6pt
-\font\ParagraphContinuationscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanreferenceafterpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanreferencebeforepictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\referencezxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanzxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\pictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\picturepictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\pictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanreferenceafterpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanreferencebeforepictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\referencezxxpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanzxxpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\pictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\picturepicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\picturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman":color=0000ff at 12pt
-\font\spanzxxLinecscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\LinecscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\SeeInGlossaryzxxLinebscrSectioncolumnsscrBookscrBody="Times New Roman":color=0000ff at 12pt
-\font\spanzxxLinebscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\VerseNumberzxxLinebscrSectioncolumnsscrBookscrBody="Times New Roman" at 6pt
-\font\LinebscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\QuotedTextzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\NoteTargetReferencezxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
-\font\NoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 6pt
-\font\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 18pt
-\font\ParagraphscrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody="Times New Roman/I" at 12pt
-\font\ParallelPassageReferencescrSectioncolumnsscrBookscrBody="Times New Roman/I" at 12pt
-\font\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
-\font\SectionHeadscrSectioncolumnsscrBookscrBody="Times New Roman/B" at 12pt
-\font\scrSectioncolumnsscrBookscrBody="Times New Roman" at 12pt
-\font\columnsscrBookscrBody="Times New Roman" at 12pt
-\font\spanzxxTitleMainscrBookscrBody="Times New Roman/B" at 18pt
-\font\TitleSecondaryzxxTitleMainscrBookscrBody="Times New Roman/BI" at 16pt
-\font\TitleMainscrBookscrBody="Times New Roman/B" at 18pt
-\font\scrBookCodezxxscrBookscrBody="Times New Roman/BI" at 12pt
-\font\scrBookNamezxxscrBookscrBody="Times New Roman/I" at 12pt
-\font\scrBookscrBody="Times New Roman" at 12pt
-\font\imgpicturedivpictureLeft="Times New Roman" at 12pt
-\font\picturepictureRight="Times New Roman" at 12pt
-\font\spanzhCN="SimSun" at 12pt
-\font\divzhCN="SimSun" at 12pt
-\font\spanvi="Charis SIL" at 12pt
-\font\divvi="Charis SIL" at 12pt
-\font\spantsi="Segoe UI" at 12pt
-\font\divtsi="Segoe UI" at 12pt
-\font\spantsiZxxxxaudio="Charis SIL" at 12pt
-\font\divtsiZxxxxaudio="Charis SIL" at 12pt
-\font\spantsixstr="Segoe UI" at 12pt
-\font\divtsixstr="Segoe UI" at 12pt
-\font\spantsifonipa="Segoe UI" at 12pt
-\font\divtsifonipa="Segoe UI" at 12pt
-\font\spantr="Charis SIL" at 12pt
-\font\divtr="Charis SIL" at 12pt
-\font\spantrfonipa="Doulos SIL" at 12pt
-\font\divtrfonipa="Doulos SIL" at 12pt
-\font\spantrfonipaxemic="Times New Roman" at 12pt
-\font\divtrfonipaxemic="Times New Roman" at 12pt
-\font\spantpi="Andika Basic" at 12pt
-\font\divtpi="Andika Basic" at 12pt
-\font\spanth="Angsana New" at 12pt
-\font\divth="Angsana New" at 12pt
-\font\spante="Gautami" at 12pt
-\font\divte="Gautami" at 12pt
-\font\spanswc="Times New Roman" at 12pt
-\font\divswc="Times New Roman" at 12pt
-\font\spanseh="Doulos SIL" at 12pt
-\font\divseh="Doulos SIL" at 12pt
-\font\spansehfonipaxetic="Doulos SIL" at 12pt
-\font\divsehfonipaxetic="Doulos SIL" at 12pt
-\font\spanru="Times New Roman" at 12pt
-\font\divru="Times New Roman" at 12pt
-\font\spanqaaxlel="Times New Roman" at 12pt
-\font\divqaaxlel="Times New Roman" at 12pt
-\font\spanpt="Times New Roman" at 12pt
-\font\divpt="Times New Roman" at 12pt
-\font\spannko="Charis SIL" at 12pt
-\font\divnko="Charis SIL" at 12pt
-\font\spanne="Mangal" at 12pt
-\font\divne="Mangal" at 12pt
-\font\spanmy="Padauk" at 12pt
-\font\divmy="Padauk" at 12pt
-\font\spanms="Charis SIL" at 12pt
-\font\divms="Charis SIL" at 12pt
-\font\spanlv="Times New Roman" at 12pt
-\font\divlv="Times New Roman" at 12pt
-\font\spankup="Charis SIL" at 12pt
-\font\divkup="Charis SIL" at 12pt
-\font\spanko="Gulim" at 12pt
-\font\divko="Gulim" at 12pt
-\font\spankm="DaunPenh" at 12pt
-\font\divkm="DaunPenh" at 12pt
-\font\spanid="Times New Roman" at 12pt
-\font\divid="Times New Roman" at 12pt
-\font\spanhi="Mangal" at 12pt
-\font\divhi="Mangal" at 12pt
-\font\spanhe="Ezra SIL" at 12pt
-\font\divhe="Ezra SIL" at 12pt
-\font\spanhbo="Ezra SIL" at 12pt
-\font\divhbo="Ezra SIL" at 12pt
-\font\spangrc="Galatia SIL" at 12pt
-\font\divgrc="Galatia SIL" at 12pt
-\font\spanggoTeluIN="Gautami" at 12pt
-\font\divggoTeluIN="Gautami" at 12pt
-\font\spanggofonipaxemic="Tahoma" at 12pt
-\font\divggofonipaxemic="Tahoma" at 12pt
-\font\spanfr="Times New Roman" at 12pt
-\font\divfr="Times New Roman" at 12pt
-\font\spanfrZxxxxaudio="Charis SIL" at 12pt
-\font\divfrZxxxxaudio="Charis SIL" at 12pt
-\font\spanflr="Doulos SIL" at 12pt
-\font\divflr="Doulos SIL" at 12pt
-\font\spanflrZxxxxaudio="Charis SIL" at 12pt
-\font\divflrZxxxxaudio="Charis SIL" at 12pt
-\font\spanflrQaaaxtone="Doulos SIL" at 12pt
-\font\divflrQaaaxtone="Doulos SIL" at 12pt
-\font\spanfa="Times New Roman" at 12pt
-\font\divfa="Times New Roman" at 12pt
-\font\spanes="Times New Roman" at 12pt
-\font\dives="Times New Roman" at 12pt
-\font\spanen="Times New Roman" at 12pt
-\font\diven="Times New Roman" at 12pt
-\font\spanenfonipa="Doulos SIL" at 12pt
-\font\divenfonipa="Doulos SIL" at 12pt
-\font\spande="Times New Roman" at 12pt
-\font\divde="Times New Roman" at 12pt
-\font\spanbzh="Charis SIL" at 12pt
-\font\divbzh="Charis SIL" at 12pt
-\font\spanbzhfonipa="Doulos SIL" at 12pt
-\font\divbzhfonipa="Doulos SIL" at 12pt
-\font\spanbn="Vrinda" at 12pt
-\font\divbn="Vrinda" at 12pt
-\font\spanbdu="Doulos SIL" at 12pt
-\font\divbdu="Doulos SIL" at 12pt
-\color{black} 
-\AddToShipoutPicture*{% 
-\put(0,0){\rule{\paperwidth}{\paperheight}}{\includegraphics[width=\paperwidth, height=\paperheight]{cover.png}}% 
-} 
-\thispagestyle{empty} 
-\font\CoverPageHeading="Times New Roman/B":color=000000 at 22pt 
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\divarIQ="Times New Roman/GR" at 12pt
+\font\spanarIQ="Times New Roman/GR" at 12pt
+\font\divbn="Charis SIL/GR" at 12pt
+\font\spanbn="Charis SIL/GR" at 12pt
+\font\divbzhfonipa="Doulos SIL/GR" at 12pt
+\font\spanbzhfonipa="Doulos SIL/GR" at 12pt
+\font\divbzh="Charis SIL/GR" at 12pt
+\font\spanbzh="Charis SIL/GR" at 12pt
+\font\divde="Times New Roman/GR" at 12pt
+\font\spande="Times New Roman/GR" at 12pt
+\font\diven="Times New Roman/GR" at 12pt
+\font\spanen="Times New Roman/GR" at 12pt
+\font\divesaab="Charis SIL AmArea/GR" at 12pt
+\font\spanesaab="Charis SIL AmArea/GR" at 12pt
+\font\dives="Times New Roman/GR" at 12pt
+\font\spanes="Times New Roman/GR" at 12pt
+\font\divfa="Times New Roman/GR" at 12pt
+\font\spanfa="Times New Roman/GR" at 12pt
+\font\divfrZxxxxaudio="Charis SIL/GR" at 12pt
+\font\spanfrZxxxxaudio="Charis SIL/GR" at 12pt
+\font\divfr="Times New Roman/GR" at 12pt
+\font\spanfr="Times New Roman/GR" at 12pt
+\font\divggofonipaxemic="Tahoma/GR" at 12pt
+\font\spanggofonipaxemic="Tahoma/GR" at 12pt
+\font\divggoINxaheri="Arial Unicode MS/GR" at 12pt
+\font\spanggoINxaheri="Arial Unicode MS/GR" at 12pt
+\font\divggoTeluIN="Gautami/GR" at 12pt
+\font\spanggoTeluIN="Gautami/GR" at 12pt
+\font\divgrc="Galatia SIL/GR" at 12pt
+\font\spangrc="Galatia SIL/GR" at 12pt
+\font\divhbo="Ezra SIL/GR" at 12pt
+\font\spanhbo="Ezra SIL/GR" at 12pt
+\font\divhi="Arial Unicode MS/GR" at 12pt
+\font\spanhi="Arial Unicode MS/GR" at 12pt
+\font\divhu="Charis SIL/GR" at 12pt
+\font\spanhu="Charis SIL/GR" at 12pt
+\font\divibafonipa="Charis SIL/GR" at 12pt
+\font\spanibafonipa="Charis SIL/GR" at 12pt
+\font\diviba="Charis SIL AmArea/GR" at 12pt
+\font\spaniba="Charis SIL AmArea/GR" at 12pt
+\font\dividZxxxxaudio="Charis SIL/GR" at 12pt
+\font\spanidZxxxxaudio="Charis SIL/GR" at 12pt
+\font\divid="Times New Roman/GR" at 12pt
+\font\spanid="Times New Roman/GR" at 12pt
+\font\divkm="Charis SIL/GR" at 12pt
+\font\spankm="Charis SIL/GR" at 12pt
+\font\divko="Gulim/GR" at 12pt
+\font\spanko="Gulim/GR" at 12pt
+\font\divlv="Tahoma/GR" at 12pt
+\font\spanlv="Tahoma/GR" at 12pt
+\font\divmiz="Charis SIL AmArea/GR" at 12pt
+\font\spanmiz="Charis SIL AmArea/GR" at 12pt
+\font\divms="Charis SIL/GR" at 12pt
+\font\spanms="Charis SIL/GR" at 12pt
+\font\divmxbfonipa="Charis SIL AmArea/GR" at 12pt
+\font\spanmxbfonipa="Charis SIL AmArea/GR" at 12pt
+\font\divmxb="Charis SIL AmArea/GR" at 12pt
+\font\spanmxb="Charis SIL AmArea/GR" at 12pt
+\font\divne="Charis SIL/GR" at 12pt
+\font\spanne="Charis SIL/GR" at 12pt
+\font\divpt="Times New Roman/GR" at 12pt
+\font\spanpt="Times New Roman/GR" at 12pt
+\font\divqaaxlel="Times New Roman/GR" at 12pt
+\font\spanqaaxlel="Times New Roman/GR" at 12pt
+\font\divro="Charis SIL/GR" at 12pt
+\font\spanro="Charis SIL/GR" at 12pt
+\font\divru="Times New Roman/GR" at 12pt
+\font\spanru="Times New Roman/GR" at 12pt
+\font\divsehfonipaxetic="Doulos SIL/GR" at 12pt
+\font\spansehfonipaxetic="Doulos SIL/GR" at 12pt
+\font\divsehfonipa="Doulos SIL/GR" at 12pt
+\font\spansehfonipa="Doulos SIL/GR" at 12pt
+\font\divsehZxxxxaudio="Charis SIL/GR" at 12pt
+\font\spansehZxxxxaudio="Charis SIL/GR" at 12pt
+\font\divseh="Charis SIL/GR" at 12pt
+\font\spanseh="Charis SIL/GR" at 12pt
+\font\divstp="Charis SIL AmArea/GR" at 12pt
+\font\spanstp="Charis SIL AmArea/GR" at 12pt
+\font\divta="Latha/GR" at 12pt
+\font\spanta="Latha/GR" at 12pt
+\font\divte="Gautami/GR" at 12pt
+\font\spante="Gautami/GR" at 12pt
+\font\divth="Charis SIL/GR" at 12pt
+\font\spanth="Charis SIL/GR" at 12pt
+\font\divtpi="Andika Basic/GR" at 12pt
+\font\spantpi="Andika Basic/GR" at 12pt
+\font\divtrfonipaxemic="Times New Roman/GR" at 12pt
+\font\spantrfonipaxemic="Times New Roman/GR" at 12pt
+\font\divtrfonipa="Doulos SIL/GR" at 12pt
+\font\spantrfonipa="Doulos SIL/GR" at 12pt
+\font\divtr="Charis SIL/GR" at 12pt
+\font\spantr="Charis SIL/GR" at 12pt
+\font\divurArab="Scheherazade Graphite Alpha/GR" at 12pt
+\font\spanurArab="Scheherazade Graphite Alpha/GR" at 12pt
+\font\divurxind="Times New Roman/GR" at 12pt
+\font\spanurxind="Times New Roman/GR" at 12pt
+\font\divur="Scheherazade Graphite Alpha/GR" at 12pt
+\font\spanur="Scheherazade Graphite Alpha/GR" at 12pt
+\font\divvi="Charis SIL/GR" at 12pt
+\font\spanvi="Charis SIL/GR" at 12pt
+\font\divzhCN="SimSun/GR" at 12pt
+\font\spanzhCN="SimSun/GR" at 12pt
+\font\picturepictureRight="Times New Roman/GR" at 12pt
+\font\imgpicturedivpictureLeft="Times New Roman/GR" at 12pt
+\font\scrBookscrBody="Times New Roman/GR" at 12pt
+\font\scrBookNamezxxscrBookscrBody="Times New Roman/GR/I" at 12pt
+\font\scrBookCodezxxscrBookscrBody="Times New Roman/GR/BI" at 12pt
+\font\TitleMainscrBookscrBody="Times New Roman/GR/B" at 22pt
+\font\TitleSecondaryzxxTitleMainscrBookscrBody="Times New Roman/GR/BI" at 16pt
+\font\spanzxxTitleMainscrBookscrBody="Times New Roman/GR/B" at 22pt
+\font\columnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\scrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\SectionHeadscrSectioncolumnsscrBookscrBody="Times New Roman/GR/B" at 11pt
+\font\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody="Times New Roman/GR/B" at 11pt
+\font\ParallelPassageReferencescrSectioncolumnsscrBookscrBody="Times New Roman/GR/I" at 11pt
+\font\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody="Times New Roman/GR/I" at 11pt
+\font\ParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR/B" at 27.5pt
+\font\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 6pt
+\font\spanzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\scrFootnoteMarkerParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\NoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 9pt
+\font\NoteTargetReferencezxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR/B" at 12pt
+\font\QuotedTextzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR/I" at 9pt
+\font\spanzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 9pt
+\font\LinebscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\VerseNumberzxxLinebscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 6pt
+\font\spanzxxLinebscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\SeeInGlossaryzxxLinebscrSectioncolumnsscrBookscrBody="Times New Roman/GR":color=0000ff at 12pt
+\font\GlossaryKeySeeInGlossaryzxxLinebscrSectioncolumnsscrBookscrBody="Times New Roman/GR":color=0000ff at 12pt
+\font\LinecscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\spanzxxLinecscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR":color=0000ff at 12pt
+\font\GlossaryKeySeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR":color=0000ff at 12pt
+\font\picturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\picturepicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\pictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\spanzxxpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\referencezxxpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\pictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\picturepictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\pictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\spanzxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\referencezxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\ParagraphContinuationscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\VerseNumberzxxParagraphContinuationscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 6pt
+\font\spanzxxParagraphContinuationscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
+\font\AlternateReadingzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR/I" at 12pt
+\font\CoverPageTitle="Microsoft Sans Serif/B":color=000000 at 22pt 
+\font\pFrontMatterdiv="Microsoft Sans Serif/B":color=000000 at 8pt 
 \vskip 60pt 
 \begin{center} 
-\CoverPageHeading{Sample} 
+\CoverPageTitle{} 
 \end{center} 
 \newpage 
 \newpage 
 \thispagestyle{empty} 
-\mbox{} 
-\begin{titlepage}
-\begin{center}
-\textsc{\LARGE Sample}\\[1.5cm] 
-\vspace{140 mm} 
-\textsc{Wycliffe Inc.}\\[0.5cm] 
-\includegraphics[width=0.05 \textwidth]{./WBT_H_RGB_red.png}\\[1cm]    
-\end{center} 
-\end{titlepage} 
-\newpage 
-\newpage 
 \mbox{} 
 \pagenumbering{roman}  
 \setcounter{page}{3} 
-\input{SIL_CC-by-nc-nd.tex} 
 \pagestyle{plain} 
 \newpage 
 \newpage 
 \thispagestyle{empty} 
 \mbox{} 
 
-\pagestyle{plain} 
-\tableofcontents 
+\mbox{} 
+\newpage 
 \newpage 
 \setcounter{page}{1} 
-\pagenumbering{arabic}  
-
+\pagenumbering{arabic} 
 \pagestyle{fancy} 
 \begin{comment}
 
 \scrBookNamezxxscrBookscrBody{
- \section{Mateo} }\end{comment}
-  \begin{comment}
-\scrBookCodezxxscrBookscrBody{MAT}\end{comment}
-  \begin{adjustwidth}{36pt}{0pt}{12pt}{0pt}\begin{center}\clubpenalty=300
-\begin{adjustwidth}{0pt}{0pt}{2pt}{0pt}\begin{center}
-
-\TitleSecondaryzxxTitleMainscrBookscrBody{Asʋn Wankláán Ánɩ́}\end{center}\end{adjustwidth} 
+ \label{PageStock_PreserveNKOu31} Mateo}\end{comment}
  
-\spanzxxTitleMainscrBookscrBody{Mateo} \begin{adjustwidth}{0pt}{0pt}{2pt}{0pt}\begin{center}
+ \label{PageStock_PreserveNKOu31}  \begin{comment}
+\scrBookCodezxxscrBookscrBody{MAT}\end{comment}
+  \begin{spacing}{1.08333333333333}\begin{center}\clubpenalty=300
+\begin{center}
 
-\TitleSecondaryzxxTitleMainscrBookscrBody{Lɔ́wanlɩ́n}\end{center}\end{adjustwidth} 
- \end{center}\end{adjustwidth} \setlength{\columnsep}{12pt} 
+\TitleSecondaryzxxTitleMainscrBookscrBody{Asʋn Wankláán Ánɩ́}\end{center}
+ 
+\spanzxxTitleMainscrBookscrBody{Mateo} \begin{center}
+
+\TitleSecondaryzxxTitleMainscrBookscrBody{Lɔ́wanlɩ́n}\end{center}
+ \end{center}\end{spacing}\setlength{\columnsep}{12pt} 
 \setlength\columnseprule{0.4pt} 
-\begin{multicols}{2}{\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Bɔhɔ Yesu Fɛ́ Owíe Yerusalem} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 11:1-11; Luka 19:28-40; Yohane 12:12-19)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
+\begin{multicols}{2}\begin{spacing}{0.541666666666667}{\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Bɔhɔ Yesu Fɛ́ Owíe Yerusalem} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 11:1-11; Luka 19:28-40; Yohane 12:12-19)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+\lettrine{
+\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody{21}}{ \VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{1-2}$}}\markboth{ \ParagraphscrSectioncolumnsscrBookscrBody Mateo 21}{ \ParagraphscrSectioncolumnsscrBookscrBody Mateo 21} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Brɛ́á Yesu mʋa mʋ akasɩ́pʋ́ bɛbɛ́ɛn Yerusalem wúlu, bɛta Betfage wúlu ánɩ́ ɩbʋ Nfɔ-nyíbʋ} \footnote {\spanzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody{21:1 Nfɔ-nyíbʋ igyi obubwí kʋá ɩbʋ mantáa Yerusalem, bʋtɛtɩ́ mʋ́ Olifbʋ.}}\spanzxxParagraphscrSectioncolumnsscrBookscrBody{ámʋ asɩ wie tá á, ɔlɔwa mʋ akasɩ́pʋ́ abanyɔ́ gyankpá. Ɔlɛbláa amʋ́ ɔbɛ́ɛ, $“$Mlɩyɔ wúlu anfɩ́ ɩda mlɩ ansɩ́tɔ́ ánfɩsʋ. Nɩ́ mlowíé wúlu amʋ ɔnɔ́ á, mlówun afrímú tsɩ́hɛ́ ɔkʋá ɔda ɔfɛ́tɔ́, mʋ bi lɩ́ɩ́ mʋ wá. Mlɩsankɩ mʋ, amlɩkpa amʋ́ ba mɩ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{3}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Nɩ́ ɔkʋ ɔfɩ́tɛ́ mlɩ asʋankʋ á, mlɩbla mʋ mlɩaa, $‘$Anɩ Wíe dɛ́ amʋ́ hián.$’$ Ɩnʋnʋ ɔbɛ́ha mlɔ́pʋ amʋ́ ba mɩ.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\markboth{ \ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody Mateo 21}{ \ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody Mateo 21}\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody{21}}\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{1-2}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Brɛ́á Yesu mʋa mʋ akasɩ́pʋ́ bɛbɛ́ɛn Yerusalem wúlu, bɛta Betfage wúlu ánɩ́ ɩbʋ Nfɔ-nyíbʋ}   \footnote {21:1 Nfɔ-nyíbʋ igyi obubwí kʋá ɩbʋ mantáa Yerusalem, bʋtɛtɩ́ mʋ́ Olifbʋ.} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ámʋ asɩ wie tá á, ɔlɔwa mʋ akasɩ́pʋ́ abanyɔ́ gyankpá. Ɔlɛbláa amʋ́ ɔbɛ́ɛ, $“$Mlɩyɔ wúlu anfɩ́ ɩda mlɩ ansɩ́tɔ́ ánfɩsʋ. Nɩ́ mlowíé wúlu amʋ ɔnɔ́ á, mlówun afrímú tsɩ́hɛ́ ɔkʋá ɔda ɔfɛ́tɔ́, mʋ bi lɩ́ɩ́ mʋ wá. Mlɩsankɩ mʋ, amlɩkpa amʋ́ ba mɩ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{3}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Nɩ́ ɔkʋ ɔfɩ́tɛ́ mlɩ asʋankʋ á, mlɩbla mʋ mlɩaa, $‘$Anɩ Wíe dɛ́ amʋ́ hián.$’$ Ɩnʋnʋ ɔbɛ́ha mlɔ́pʋ amʋ́ ba mɩ.$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{4}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɩ́nɩ lɛ́ha Bulu asʋ́n ámʋ́ʋ́ ɔlɛblɩ́ tsʋn mʋ ɔnɔ́sʋ́ ɔtɔɩ́pʋ́sʋ ámʋ lɛ́ba mʋ́tɔ́. Ɔbɛ́ɛ,} \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\VerseNumberzxxLinebscrSectioncolumnsscrBookscrBody{$^{5}$} \spanzxxLinebscrSectioncolumnsscrBookscrBody{ $“$Mlɩbla }\SeeInGlossaryzxxLinebscrSectioncolumnsscrBookscrBody{Sionfɔ} \spanzxxLinebscrSectioncolumnsscrBookscrBody{mlɩaa,}  \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\spanzxxLinecscrSectioncolumnsscrBookscrBody{Mlɩkɩ, mlɩ Wíe ɔbá mlɩ wá.}  \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\spanzxxLinebscrSectioncolumnsscrBookscrBody{Ololwií, ɔdɩn afrímúsʋ́.}  \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\spanzxxLinecscrSectioncolumnsscrBookscrBody{Ɔdɩn afrímú ibí yínhɛ́sʋ́ ɔbá.$”$}  \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{4}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɩ́nɩ lɛ́ha Bulu asʋ́n ámʋ́ʋ́ ɔlɛblɩ́ tsʋn mʋ ɔnɔ́sʋ́ ɔtɔɩ́pʋ́sʋ ámʋ lɛ́ba mʋ́tɔ́. Ɔbɛ́ɛ,} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\leftmargin 0pt{\VerseNumberzxxLinebscrSectioncolumnsscrBookscrBody{$^{5}$}} \spanzxxLinebscrSectioncolumnsscrBookscrBody{$“$Mlɩbla }\SeeInGlossaryzxxLinebscrSectioncolumnsscrBookscrBody{Sionfɔ} \spanzxxLinebscrSectioncolumnsscrBookscrBody{mlɩaa,}  \end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\spanzxxLinecscrSectioncolumnsscrBookscrBody{Mlɩkɩ, mlɩ Wíe ɔbá mlɩ wá.}  \end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\spanzxxLinebscrSectioncolumnsscrBookscrBody{Ololwií, ɔdɩn afrímúsʋ́.}  \end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\spanzxxLinecscrSectioncolumnsscrBookscrBody{Ɔdɩn afrímú ibí yínhɛ́sʋ́ ɔbá.$”$}  \end{adjustwidth} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{6}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yesu akasɩ́pʋ́ abanyɔ́ ámʋ bɔyɔ́bwɛ alɩ ámʋ́ʋ́ Yesu lɛ́bláa amʋ́ ámʋ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{7}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Bɛkpa afrímú mʋa mʋ bi ámʋ ba, bɛyaɩ́ amʋ́ atati dɩ́nká amʋ́sʋ́, ɔlɔdʋ bian mʋsʋ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{8}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔdɔm kpɔnkpɔɔnkpɔntɩ bɛyaɩ́ amʋ́ atati tswɩ ɔkpatɔ, akʋ ɛ́ bebiabía afɩtáa bunbun ɔkpa ámʋtɔ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{9}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔdɔm amʋ́ʋ́ bʋgya Yesu nkpá mʋ́a ɔma amʋ bɔsʋrá okitikíti bɛɛ, $“$} \SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Hosiána} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{há Dawid mʋ na ámʋ! Bulu oyúla owíe anfɩ ɔbá mʋ dátɔ́ ánfɩ! Hosiána bʋ ɔsʋ́sʋ́ʋ́sʋ́!$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{6}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu akasɩ́pʋ́ abanyɔ́ ámʋ bɔyɔ́bwɛ alɩ ámʋ́ʋ́ Yesu lɛ́bláa amʋ́ ámʋ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{7}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bɛkpa afrímú mʋa mʋ bi ámʋ ba, bɛyaɩ́ amʋ́ atati dɩ́nká amʋ́sʋ́, ɔlɔdʋ bian mʋsʋ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{8}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔdɔm kpɔnkpɔɔnkpɔntɩ bɛyaɩ́ amʋ́ atati tswɩ ɔkpatɔ, akʋ ɛ́ bebiabía afɩtáa bunbun ɔkpa ámʋtɔ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{9}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔdɔm amʋ́ʋ́ bʋgya Yesu nkpá mʋ́a ɔma amʋ bɔsʋrá okitikíti bɛɛ, $“$} \SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Hosiána} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{há Dawid mʋ na ámʋ! Bulu oyúla owíe anfɩ ɔbá mʋ dátɔ́ ánfɩ! Hosiána bʋ ɔsʋ́sʋ́ʋ́sʋ́!$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{10}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Brɛ́á Yesu lówie Yerusalem a, wúlu amʋtɔ fɛ́ɛ́ lɛda kpokiti, bʋdɛfɩtɛ́ bɛɛ, $“$Ma gyí ɔhá ánfɩ?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{10}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Brɛ́á Yesu lówie Yerusalem a, wúlu amʋtɔ fɛ́ɛ́ lɛda kpokiti, bʋdɛfɩtɛ́ bɛɛ, $“$Ma gyí ɔhá ánfɩ?$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{11}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔdɔm amʋ́ʋ́ bʋbuo mʋ amʋ bɛlɛ mʋ́ ɔnɔ́ bɛɛ, $“$Ɔ́nɩ gyí Yesu, Bulu ɔnɔ́sʋ́ ɔtɔɩ́pʋ́ amʋ́ʋ́ otsú Nasaret wúluá ɩbʋ Galilea ɔmátɔ́ ámʋ nɩ.$”$} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Yesu Bulu Ɔtswɛ́kpa Yɔ} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 11:15-19; Luka 19:45-48; Yohane 2:13-22)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{11}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔdɔm amʋ́ʋ́ bʋbuo mʋ amʋ bɛlɛ mʋ́ ɔnɔ́ bɛɛ, $“$Ɔ́nɩ gyí Yesu, Bulu ɔnɔ́sʋ́ ɔtɔɩ́pʋ́ amʋ́ʋ́ otsú Nasaret wúluá ɩbʋ Galilea ɔmátɔ́ ámʋ nɩ.$”$} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Yesu Bulu Ɔtswɛ́kpa Yɔ} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 11:15-19; Luka 19:45-48; Yohane 2:13-22)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{12}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ʋ́ Yesu lɔ́yɔ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Bulu ɔtswɛ́kpa} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{wunsɩnɛ́sʋ́ ɩnʋ, yégya atɔ́ afɛpʋ́ pʋ́ atɔ́ ahɔ́pʋ fɛ́ɛ́ dalɩ. Olowuwúta kɔ́ba atsɛ́pʋ mpʋ́nʋ́ dá, súnsúnki abrɔ́dʋma afɛpʋ́ ɛ́ mbíá dá. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{13}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔlɛbláa amʋ́ ɔbɛ́ɛ, $“$Bɔwanlɩ́n wá Bulu asʋ́n ámʋtɔ bɛɛ, $‘$Bɛ́tɩ mɩ́ ɔtswɛ́kpa bɛɛ, mpáɩ ɔbɔkpá.$’$ Támɛ mlɩlapʋ́ ɩnʋ mlí awikplu ɔŋaínkpá.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{12}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ Yesu lɔ́yɔ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Bulu ɔtswɛ́kpa} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{wunsɩnɛ́sʋ́ ɩnʋ, yégya atɔ́ afɛpʋ́ pʋ́ atɔ́ ahɔ́pʋ fɛ́ɛ́ dalɩ. Olowuwúta kɔ́ba atsɛ́pʋ mpʋ́nʋ́ dá, súnsúnki abrɔ́dʋma afɛpʋ́ ɛ́ mbíá dá. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{13}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔlɛbláa amʋ́ ɔbɛ́ɛ, $“$Bɔwanlɩ́n wá Bulu asʋ́n ámʋtɔ bɛɛ, $‘$Bɛ́tɩ mɩ́ ɔtswɛ́kpa bɛɛ, mpáɩ ɔbɔkpá.$’$ Támɛ mlɩlapʋ́ ɩnʋ mlí awikplu ɔŋaínkpá.$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{14}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ansibi abwiepʋ́ pʋ́ abubúpʋ akʋ bɛba mʋ wá Bulu ɔtswɛ́kpa wunsɩnɛ́sʋ́ ɩnʋ, ɔlɛtsa amʋ́ ɩlɔ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{15}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Brɛ́á Bulu }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{igyí} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ahapʋ́ dɛhɛn pʋ́ Mose mbla asunápʋ́ amʋ bowun ofúla ánɩ́ Yesu dɛ́bwɛ, pʋ́ alɩá nyebí bʋdɛkplʋ́n Bulu ɔtswɛ́kpa wunsɩnɛ́sʋ́ ɩnʋ bɛɛ, $“$Hosiána há Dawid mʋ na ámʋ!$”$ a, ɔblɔ́ lɛkɩtá amʋ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{16}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ bɛfɩtɛ́ Yesu bɛɛ, $“$Fʋmedénu asʋ́n ánɩ́ nyebí ánfɩ bʋdɛblɩ́?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{14}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ansibi abwiepʋ́ pʋ́ abubúpʋ akʋ bɛba mʋ wá Bulu ɔtswɛ́kpa wunsɩnɛ́sʋ́ ɩnʋ, ɔlɛtsa amʋ́ ɩlɔ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{15}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Brɛ́á Bulu }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{igyí} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ahapʋ́ dɛhɛn pʋ́ Mose mbla asunápʋ́ amʋ bowun ofúla ánɩ́ Yesu dɛ́bwɛ, pʋ́ alɩá nyebí bʋdɛkplʋ́n Bulu ɔtswɛ́kpa wunsɩnɛ́sʋ́ ɩnʋ bɛɛ, $“$Hosiána há Dawid mʋ na ámʋ!$”$ a, ɔblɔ́ lɛkɩtá amʋ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{16}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ bɛfɩtɛ́ Yesu bɛɛ, $“$Fʋmedénu asʋ́n ánɩ́ nyebí ánfɩ bʋdɛblɩ́?$”$} 
-\widowpenalty=300
+\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu lɛ́lɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, $“$Ndenu. Mlɩmɔ́kʋ́kla asʋ́n ánɩ́ Bulu asʋ́n wanlɩ́nhɛ́ amʋ lɛ́blɩ́? Ɔbɛ́ɛ, $‘$Fasúná nyebí pʋ́ amʋ́á bʋmɔkʋ́tɩn nyɔ́pʋ alɩá bʋkánfʋ fʋ́.$’$ $”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu lɛ́lɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, $“$Ndenu. Mlɩmɔ́kʋ́kla asʋ́n ánɩ́ Bulu asʋ́n wanlɩ́nhɛ́ amʋ lɛ́blɩ́? Ɔbɛ́ɛ, $‘$Fasúná nyebí pʋ́ amʋ́á bʋmɔkʋ́tɩn nyɔ́pʋ alɩá bʋkánfʋ fʋ́.$’$ $”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{17}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yesu lɛ́dalɩ wúlu amʋtɔ sí amʋ́ yɔ́ Betania. Ɩnʋ́ ɔlɛdɩ ɛkɛ ámʋ nɩ.} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Pɔntɔ Oyí Lwɩɩ́} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 11:12-14, 20-24)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{17}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu lɛ́dalɩ wúlu amʋtɔ sí amʋ́ yɔ́ Betania. Ɩnʋ́ ɔlɛdɩ ɛkɛ ámʋ nɩ.} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Pɔntɔ Oyí Lwɩɩ́} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 11:12-14, 20-24)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{18}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔyɩ kɛhɛ nyankɩ, brɛ́á Yesu léyinkí ɔbá Yerusalem a, akʋ́n dɛ mʋ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{19}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ brɛ́á olowun pɔntɔ kʋá ɩlɩɩ́ mantáa ɔkpa á, ɔlɛbaɩ́ yɔ́ mʋ́ asɩ. Ɔlɔyɔ á, omowun abí kʋkʋ mʋ́tɔ́, afɩtáa sɔ́ɔ́n bʋ mʋ́sʋ́. Ɩnʋ ɔlɛbláa pɔntɔ ámʋ ɔbɛ́ɛ, $“$Tsú ndɛ fʋmɛ́ɛtrá swie abí ɛkɛkɛɛkɛ!$”$ Ɩnʋnʋ oyí ámʋ lówu.} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{18}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔyɩ kɛhɛ nyankɩ, brɛ́á Yesu léyinkí ɔbá Yerusalem a, akʋ́n dɛ mʋ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{19}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ brɛ́á olowun pɔntɔ kʋá ɩlɩɩ́ mantáa ɔkpa á, ɔlɛbaɩ́ yɔ́ mʋ́ asɩ. Ɔlɔyɔ á, omowun abí kʋkʋ mʋ́tɔ́, afɩtáa sɔ́ɔ́n bʋ mʋ́sʋ́. Ɩnʋ ɔlɛbláa pɔntɔ ámʋ ɔbɛ́ɛ, $“$Tsú ndɛ fʋmɛ́ɛtrá swie abí ɛkɛkɛɛkɛ!$”$ Ɩnʋnʋ oyí ámʋ lówu.} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{20}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ akasɩ́pʋ́ amʋ bowun alɩá oyí ámʋ labwɛ́ á, ɔnɔ́ lobwie amʋ́. Mʋ́ sʋ bɛfɩtɛ́ bɛɛ $“$Ntogyi sʋ́ oyí ánfɩ lawú ɔtsáwʋlɛ pɛ́ alɩ?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{20}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ akasɩ́pʋ́ amʋ bowun alɩá oyí ámʋ labwɛ́ á, ɔnɔ́ lobwie amʋ́. Mʋ́ sʋ bɛfɩtɛ́ bɛɛ $“$Ntogyi sʋ́ oyí ánfɩ lawú ɔtsáwʋlɛ pɛ́ alɩ?$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{21}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yesu lɛ́bláa amʋ́ ɔbɛ́ɛ, $“$Ɔnɔkwalɩ ndɛ mlɩ bláa. Nɩ́ mlɔhɔ Bulu gyi, mlɩmégyi nwɛ́ɛn a, mlɛ́talɩ́ bwɛ́ ɩtɔ́ ánfɩ nabwɛ́ oyí ánfɩ pʋ́ mʋ́á ɩdʋn mʋ́. Mlɛ́talɩ́ bláa ɩbʋ ánfɩ mlɩaa, $‘$Puli yowie ɔpʋtɔ.$’$ Ibópulí yɔ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{22}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Nɩ́ mlɔhɔ Bulu gyi, mlɔkʋ́lɩ́ mʋ tógyítɔ́ á, mlɩ ɩbɩ bɛ́da mʋ́.$”$} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Yesu Túmi Ɩwɩ Asʋn Fɩtɛ́hɛ́} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 11:27-33; Luka 20:1-8)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{21}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu lɛ́bláa amʋ́ ɔbɛ́ɛ, $“$Ɔnɔkwalɩ ndɛ mlɩ bláa. Nɩ́ mlɔhɔ Bulu gyi, mlɩmégyi nwɛ́ɛn a, mlɛ́talɩ́ bwɛ́ ɩtɔ́ ánfɩ nabwɛ́ oyí ánfɩ pʋ́ mʋ́á ɩdʋn mʋ́. Mlɛ́talɩ́ bláa ɩbʋ ánfɩ mlɩaa, $‘$Puli yowie ɔpʋtɔ.$’$ Ibópulí yɔ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{22}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Nɩ́ mlɔhɔ Bulu gyi, mlɔkʋ́lɩ́ mʋ tógyítɔ́ á, mlɩ ɩbɩ bɛ́da mʋ́.$”$} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Yesu Túmi Ɩwɩ Asʋn Fɩtɛ́hɛ́} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 11:27-33; Luka 20:1-8)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{23}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yesu léyinkí bowie Bulu ɔtswɛ́kpa wunsɩnɛ́sʋ́ ɩnʋ. Brɛ́á ɔdɛ atɔ́ suná á, Bulu igyi ahapʋ́ dɛhɛn pʋ́ Yudafɔ ahandɛ amʋ bɛba mʋ wá. Bɛfɩtɛ́ mʋ bɛɛ, $“$Ma lɛ́ha fʋ́ ɔkpa, fʋ́dɛ ntobí ánfɩ bwɛ? Ma lɛ́ha fʋ́ túmi?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{23}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu léyinkí bowie Bulu ɔtswɛ́kpa wunsɩnɛ́sʋ́ ɩnʋ. Brɛ́á ɔdɛ atɔ́ suná á, Bulu igyi ahapʋ́ dɛhɛn pʋ́ Yudafɔ ahandɛ amʋ bɛba mʋ wá. Bɛfɩtɛ́ mʋ bɛɛ, $“$Ma lɛ́ha fʋ́ ɔkpa, fʋ́dɛ ntobí ánfɩ bwɛ? Ma lɛ́ha fʋ́ túmi?$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{24}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yesu lɛ́lɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, $“$Mɩ́ ɛ́ nfɩ́tɛ mlɩ asʋn kua kʋlɛ. Nɩ́ mlɛlɛ́ mʋ́ ɔnɔ́ á, nɛ́bláa mlɩ túmi oduá ndɛpʋbwɛ́ ntobí ánfɩ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{25}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Bulu wá Asú Ɔbɔpʋ́ Yohane lénya túmi pʋ́bɔ́ ahá }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{asú} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{, ntɛ́ɛ nyankpʋsa?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{24}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu lɛ́lɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, $“$Mɩ́ ɛ́ nfɩ́tɛ mlɩ asʋn kua kʋlɛ. Nɩ́ mlɛlɛ́ mʋ́ ɔnɔ́ á, nɛ́bláa mlɩ túmi oduá ndɛpʋbwɛ́ ntobí ánfɩ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{25}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bulu wá Asú Ɔbɔpʋ́ Yohane lénya túmi pʋ́bɔ́ ahá }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{asú} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{, ntɛ́ɛ nyankpʋsa?$”$} 
-\widowpenalty=300
+\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Amʋ́ wʋlɛwʋlɛ bɔyɔ asʋ́n ánfɩtɔ bɛɛ, $“$Nɩ́ ablɩ́ anɩaa itsú Bulu wá á, ɔbɛ́fɩtɛ́ anɩ ɔbɛ́ɛ, mʋ́ ntogyi sʋ́ anɩmɔ́hɔ mʋ gyi? }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{26}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ntɛ́ɛ ablɩ́ɩ anɩaa, anyánkpʋ́sa wá itsú.$”$ Támɛ bʋdɛ tɔ́á ahá tsɔtsɔɔtsɔ ámʋ bɔ́bwɛ amʋ́ ifú nya. Tsúfɛ́ amʋ́ fɛ́ɛ́ bohogyi ánɩ́ Bulu ɔnɔ́sʋ́ ɔtɔɩ́pʋ́ Yohane gyí. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{27}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ bɛlɛ mʋ́ ɔnɔ́ bɛɛ, $“$Ohwée! Anɩméyín ɔtɩ́nɛ́á olenya mʋ túmi tsú.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Amʋ́ wʋlɛwʋlɛ bɔyɔ asʋ́n ánfɩtɔ bɛɛ, $“$Nɩ́ ablɩ́ anɩaa itsú Bulu wá á, ɔbɛ́fɩtɛ́ anɩ ɔbɛ́ɛ, mʋ́ ntogyi sʋ́ anɩmɔ́hɔ mʋ gyi? }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{26}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ntɛ́ɛ ablɩ́ɩ anɩaa, anyánkpʋ́sa wá itsú.$”$ Támɛ bʋdɛ tɔ́á ahá tsɔtsɔɔtsɔ ámʋ bɔ́bwɛ amʋ́ ifú nya. Tsúfɛ́ amʋ́ fɛ́ɛ́ bohogyi ánɩ́ Bulu ɔnɔ́sʋ́ ɔtɔɩ́pʋ́ Yohane gyí. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{27}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ bɛlɛ mʋ́ ɔnɔ́ bɛɛ, $“$Ohwée! Anɩméyín ɔtɩ́nɛ́á olenya mʋ túmi tsú.$”$} 
-\widowpenalty=300
+\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ Yesu ɛ́ lɛ́bláa amʋ́ ɔbɛ́ɛ, $“$Mʋ́mʋ́ mɩ́ ɛ́ mmɛ́ɛbláa mlɩ túmi oduá ndɛpʋbwɛ́ ntobí ánfɩ.$”$} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Oyin Ɔkʋ Abi Anyɔ Ɩwɩ Yébi} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ Yesu ɛ́ lɛ́bláa amʋ́ ɔbɛ́ɛ, $“$Mʋ́mʋ́ mɩ́ ɛ́ mmɛ́ɛbláa mlɩ túmi oduá ndɛpʋbwɛ́ ntobí ánfɩ.$”$} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Oyin Ɔkʋ Abi Anyɔ Ɩwɩ Yébi} \end{center}\end{adjustwidth} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{28}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mlɩyɔ asʋ́n ánfɩtɔ amlɩkɩ. Oyin ɔkʋ mʋa mʋ abi anyɔ betsiá. Ɛkɛ ɔkʋ ɔlɔyɔ yɛ́bláa ɔdɛ́hɛn ɔbɛ́ɛ, $‘$Mɩ́ bí, ndɛ yɔyɔ agyʋ́má mɩ́ ndɔtɔ ha mɩ.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{29}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔlɛbláa mʋ sɩ ɔbɛ́ɛ, $‘$Mmɔ́ɔyɔ.$’$ Mʋ́ ɔma a, ɔlɛlatsɛ mʋ agywɩɩn, yɔ́ ndɔ ámʋtɔ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{30}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Amʋ́ sɩ́ lɛ́natɩ́ yɔ́ ɔkʋsʋ amʋ ɛ́ wá yɛ́bláa mʋ alɩ kɛ́n. Ɔkʋsʋ amʋ lótsulá ɔbɛ́ɛ, $‘$Mɩ́ sɩ́, nɔ́yɔ.$’$ Támɛ ɔmɔyɔ.$”$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{31}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɩnʋ Yesu lɛ́fɩtɛ́ ahá ámʋ ɔbɛ́ɛ, $“$Abi anyɔ ámʋtɔ ɔmɔmʋ lɔ́bwɛ dɩ́nká mʋ sɩ asʋ́nsʋ́?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{28}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mlɩyɔ asʋ́n ánfɩtɔ amlɩkɩ. Oyin ɔkʋ mʋa mʋ abi anyɔ betsiá. Ɛkɛ ɔkʋ ɔlɔyɔ yɛ́bláa ɔdɛ́hɛn ɔbɛ́ɛ, $‘$Mɩ́ bí, ndɛ yɔyɔ agyʋ́má mɩ́ ndɔtɔ ha mɩ.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{29}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔlɛbláa mʋ sɩ ɔbɛ́ɛ, $‘$Mmɔ́ɔyɔ.$’$ Mʋ́ ɔma a, ɔlɛlatsɛ mʋ agywɩɩn, yɔ́ ndɔ ámʋtɔ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{30}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Amʋ́ sɩ́ lɛ́natɩ́ yɔ́ ɔkʋsʋ amʋ ɛ́ wá yɛ́bláa mʋ alɩ kɛ́n. Ɔkʋsʋ amʋ lótsulá ɔbɛ́ɛ, $‘$Mɩ́ sɩ́, nɔ́yɔ.$’$ Támɛ ɔmɔyɔ.$”$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{31}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɩnʋ Yesu lɛ́fɩtɛ́ ahá ámʋ ɔbɛ́ɛ, $“$Abi anyɔ ámʋtɔ ɔmɔmʋ lɔ́bwɛ dɩ́nká mʋ sɩ asʋ́nsʋ́?$”$} 
-\widowpenalty=300
+\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yudafɔ igyí ahapʋ́ dɛhɛn pʋ́ Yudafɔ ahandɛ amʋ bɛbláa mʋ bɛɛ, $“$Ɔdɛ́hɛn amʋ.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yudafɔ igyí ahapʋ́ dɛhɛn pʋ́ Yudafɔ ahandɛ amʋ bɛbláa mʋ bɛɛ, $“$Ɔdɛ́hɛn amʋ.$”$} 
-\widowpenalty=300
+\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ Yesu lɛ́bláa amʋ́ ɔbɛ́ɛ, $“$Ɔnɔkwalɩ ndɛ mlɩ bláa. Lampóo ahɔ́pʋ pʋ́ obu-ɔnɔ́ atsiápʋ́ bówie Bulu iwíegyí ámʋtɔ sí mlɩ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{32}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Tsúfɛ́ Asú Ɔbɔpʋ́ Yohane lóbosuná mlɩ tsiátɔ́ oduá ɩda ɔkpa Bulu ansɩ́tɔ́, támɛ mlɩmɔ́hɔ mʋ gyi. Lampóo ahɔ́pʋ pʋ́ obu-ɔnɔ́ atsiápʋ́ bɔhɔ mʋ gyi. Ɔma mlɩlówun ánɩ́ amʋ́ kʋ́ráá batsɛ a, mlɩmɛ́tsɛ mlɩ agywɩɩn hɔ mʋ gyi.} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Apafɔ Laláhɛ Akʋ} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:1-12; Luka 20:9-19)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ Yesu lɛ́bláa amʋ́ ɔbɛ́ɛ, $“$Ɔnɔkwalɩ ndɛ mlɩ bláa. Lampóo ahɔ́pʋ pʋ́ obu-ɔnɔ́ atsiápʋ́ bówie Bulu iwíegyí ámʋtɔ sí mlɩ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{32}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Tsúfɛ́ Asú Ɔbɔpʋ́ Yohane lóbosuná mlɩ tsiátɔ́ oduá ɩda ɔkpa Bulu ansɩ́tɔ́, támɛ mlɩmɔ́hɔ mʋ gyi. Lampóo ahɔ́pʋ pʋ́ obu-ɔnɔ́ atsiápʋ́ bɔhɔ mʋ gyi. Ɔma mlɩlówun ánɩ́ amʋ́ kʋ́ráá batsɛ a, mlɩmɛ́tsɛ mlɩ agywɩɩn hɔ mʋ gyi.} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Apafɔ Laláhɛ Akʋ} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:1-12; Luka 20:9-19)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{33}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mlɩnu yébi ɩkʋ ɛ́. Ɔdɔtɔpʋ ɔkʋ lɔ́dɔ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{wáɩn} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ndɔ. Olegyi ɩban bómlí mʋ́. Olokwi wáɩn amʋ onyimɛ́kpá. Ɔlɔpwɛ obu fʋ́áhɛ́ kʋ há ndɔ ámʋ agyópʋ. Mʋ́ʋ́ ɔlɔpʋ ndɔ ámʋ wá apafɔ ɩbɩtɔ, olotu ɔkpa yɔ́ ɔmá ɩkʋtɔ. }\begin{center}
-
-\begin{wrapfigure}
-\begin{center}
-\includegraphics[angle=0,width=6mm,height=4mm]{1.jpg} 
-\caption{}
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{33}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mlɩnu yébi ɩkʋ ɛ́. Ɔdɔtɔpʋ ɔkʋ lɔ́dɔ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{wáɩn} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ndɔ. Olegyi ɩban bómlí mʋ́. Olokwi wáɩn amʋ onyimɛ́kpá. Ɔlɔpwɛ obu fʋ́áhɛ́ kʋ há ndɔ ámʋ agyópʋ. Mʋ́ʋ́ ɔlɔpʋ ndɔ ámʋ wá apafɔ ɩbɩtɔ, olotu ɔkpa yɔ́ ɔmá ɩkʋtɔ. }\begin{center}\begin{center}
+\spanzxxpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody{Wáɩn Ndɔ nɩ́.}
+ 
+\referencezxxpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody{Mateo 21:33} \end{center} 
 \end{center}
-\end{wrapfigure}
 
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{34}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Brɛ́á wáɩn-abí amʋ kpɔtɩ́bɩ lɔ́fʋn a, ɔlɔwa mʋ asúmpʋ́ apafɔ ámʋ wá ɔbɛ́ɛ, bʋyɔ́hɔ mʋ ogyíkpá ba mʋ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{35}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Támɛ apafɔ ámʋ bɛkɩtá amʋ́, dá ɔkʋlɛ, mɔ́ ɔkʋlɛ, dá ɔkʋlɛ ɛ́ abwi. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{36}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ndɔ mʋ wie amʋ lɛ́trá wa mʋ asúmpʋ́ bámbá ánɩ́ bʋtsɔ dʋn agyankpapʋ amʋ. Apafɔ ámʋ bɔbwɛ amʋ́ ɛ́ alɩ kɛ́n. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{37}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ tráhɛ kʋ́ráá á, ɔlɛblɩ́ ɔbɛ́ɛ, $‘$Oo, bóbu mɩ́ bí kwɩ́ɩ́hɛ́ mʋ́.$’$ Mʋ́ sʋ ɔlɔwa mʋ ɛ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{38}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Támɛ brɛ́á apafɔ ámʋ bowun mʋ bi ámʋ sɩ́sɩ́ á, bɛbláa aba bɛɛ, $‘$Ɔ́nɩ obégyi mʋ sɩ atɔ́ nɩ́. Mlɩha amɔ mʋ, mɛ́nɩ ndɔ ámʋ ibémlí anɩ klɛ́.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{39}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ bɛkɩtá mʋ, bɩ́tɩ́a mʋ dálɩ ndɔ ámʋtɔ yɔ́mɔ mʋ.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
 
-\begin{center}
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{40}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Nɩ́ ndɔ mʋ wie ɔbá á, ntɔ mlɩlahogyi mlɩaa, ɔbɔ́bwɛ apafɔ ánfɩ?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
 
-\spanzxxpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody{Wáɩn Ndɔ nɩ́.} \spanreferencebeforepictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody{(}\referencezxxpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody{Mateo 21:33}\spanreferenceafterpictureCaptionpicturePageParagraphscrSectioncolumnsscrBookscrBody{)} \end{center} 
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{41}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yudafɔ igyi ahapʋ́ dɛhɛn pʋ́ Yudafɔ ahandɛ amʋ bɛlɛ mʋ́ ɔnɔ́ bɛɛ, $“$Ɔbɛ́ha aha laláhɛ anfɩ bówu lowu sɩ́nsɩ́n, ɔbɛ́lapʋ́ ndɔ ámʋ wá apafɔ bámbá ɩbɩtɔ. Amʋ́á bétsiá pʋ́ mʋ atɔ́-abí ba mʋ mʋ́ kpɔtɩ́bɩ.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{42}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ʋ́ Yesu lɛ́fɩtɛ́ amʋ́ ɔbɛ́ɛ, $“$Ntɛ́ɛ mlɩmɔ́kʋ́kla Bulu asʋn wanlɩ́nhɛ́ amʋ kɩ? Bɔwanlɩ́n bɛɛ,} \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\spanzxxLinebscrSectioncolumnsscrBookscrBody{$‘$Ibwi ámʋ́ʋ́ obu ayípʋ bekiná ámʋ}  \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\spanzxxLinecscrSectioncolumnsscrBookscrBody{lébemlí okonkísʋ́bwi nɩ́.}  \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\spanzxxLinebscrSectioncolumnsscrBookscrBody{Bulu lɔ́bwɛ mʋ́ alɩ.}  \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\spanzxxLinecscrSectioncolumnsscrBookscrBody{Ɩbʋ wánwan.$’$}  \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{43}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mʋ́ sʋ ndɛ mlɩ bláa mbɛ́ɛ, Bulu ɔbɔ́hɔ mʋ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{iwíegyí} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ámʋ lɛ́ mlɩ ɩbɩtɔ pʋ́há ɔmá ánɩ́ bɔbwɛ tɔ́á otekle.} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{44}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Ɩ́nɩ sʋ ɔhá ánɩ́ ɔlɛdɩda ibwi ámʋsʋ obébiabía blúblúblúblú. Nɩ́ ibwi ámʋ isúnkí dá ɔkʋsʋ ɛ́ á, ɩbɔ́kwɛ mʋ fɩ́kɔ́fɩ́kɔ́fɩ́kɔ́ fɛ́ nfúó.} \footnote {\spanzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody{21:44 Mʋ́tɔ́ yée 44 ɩma nwʋlʋ́ dada amʋ akʋtɔ.}}\spanzxxParagraphscrSectioncolumnsscrBookscrBody{$”$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{45}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Brɛ́á Bulu igyi ahapʋ́ dɛhɛn pʋ́ Farisifɔ ámʋ bonu Yesu ayébi anfɩ á, ɩlɔwankɩ́ amʋ́ ánɩ́ amʋ́ ɔdɛ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{46}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Tɛkɩ bekleá bɛ́kɩtá mʋ, támɛ benya ifú, tsúfɛ́ ɔdɔm amʋ bʋtobú Yesu ánɩ́ Bulu ɔnɔ́sʋ́ ɔtɔɩ́pʋ́ ogyi.} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Ɔtsɩkpaɩ́n Ɩwɩ Yébi} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Luka 14:15-24)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+\lettrine{
+\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody{22}}{ \VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{1-2}$}}\markboth{ \ParagraphscrSectioncolumnsscrBookscrBody Mateo 22}{ \ParagraphscrSectioncolumnsscrBookscrBody Mateo 22} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yesu lɛ́trá bláa Yudafɔ igyi ahapʋ́ pʋ́ Yudafɔ ahandɛ amʋ asʋ́n yébitɔ ɔbɛ́ɛ, $“$Bulu iwíegyí ámʋ igyi fɛ́ asʋ́n ánfɩ. Owíe ɔkʋ dɛ́ ɔtsɩ kpaɩ́n há mʋ bi, }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{3}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ ɔlɛtɩ ahá ɔbɛ́ɛ, bʋbá nkɛ ámʋ asɩ. Brɛ́á owíe ámʋ lɔ́bwɛ tá á, ɔlɔwa mʋ asúmpʋ́ ɔbɛ́ɛ, bʋyɛ́tɩ ahá ámʋ abʋba, támɛ bekiná bá. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{4}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ ɔlɛlawá mʋ asúmpʋ́ bámbá ɔbɛ́ɛ, $‘$Mlɩtra yɛbláa ahá ámʋ mlɩaa, nabwɛ́ tógyítɔ́ tá. Bamɔ́ mɩ́ nnantswie akpɔnkpɔntɩ ámʋ pʋ́ amʋ́á bawá nfɔ, nɩ́ná atɔ́ ámʋ fɛ́ɛ́ tá. Mʋ́ sʋ bʋbá ɔtsɩ ɔkpaɩ́nkpá ɩnʋ.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{5}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Támɛ ahá ámʋ́ʋ́ bɛyɛ́tɩ ámʋ bʋmɛkplá amʋ́. Bɛnatɩ́ sí amʋ́ yɔ́ amʋ́ agyʋ́másʋ́. Akʋ bɛnatɩ́ yɔ́ amʋ́ ndɔtɔ. Akʋ ɛ́ bɛnatɩ́ yɔ́ amʋ́ ibíá ogyíkpá. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{6}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Amʋ́ atráhɛ bɛkɩtá asúmpʋ́ amʋ, dá amʋ́, mɔ́ amʋ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{7}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Brɛ́á owíe amʋ lónu asʋ́n ánfɩ á, ɔblɔ́ lɛhɩɛ́ kɩ́tá mʋ. Mʋ́ sʋ ɔlɔwa mʋ ɩsá akɔpʋ́, bɔyɔ́mɔ ahá ámʋ́ʋ́ bɔmɔ mʋ asúmpʋ́ amʋ, wá amʋ́ wúlu ogyá. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{8}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ʋ́ ɔlɛbláa mʋ asúmpʋ́ bámbá ɔbɛ́ɛ, $‘$Banɩ́ná ɔtsɩkpaɩ́n atogyihɛ amʋ tá, támɛ ahá ámʋ́ʋ́ nɛtɩ ámʋ bʋmɔfʋn ha mɩ́ wóyítɔ́ ba. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{9}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ mlɩwie awúlutɔ, amlɩtɩ ɔhagyíɔha ánɩ́ mlówun, ɔba ɔtsɩ ɔkpaɩ́nkpá ɩnʋ.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{10}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɩnʋ asúmpʋ́ amʋ bowie awúlutɔ. Bɛtɩ ɔhagyíɔha ánɩ́ bowun, aha wankláán pʋ́ aha laláhɛ fɛ́ɛ́. Mʋ́ sʋ ahá bɔbʋlá ɔtsɩ ɔkpaɩ́nkpá ɩnʋ dɛ́dɛ́ɛ́dɛ́.} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{11}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Támɛ brɛ́á owíe amʋ lɛ́bɛkɩ ahá ámʋ́ʋ́ batɩ́ ámʋ a, olowun oyin ɔkʋá ɔmɔwa ɔtsɩkpaɩ́n nkɛtɔ atadɩɛ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{12}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ʋ́ ɔlɛfɩtɛ́ mʋ ɔbɛ́ɛ, $‘$Agya, nkálɩ ɩlɔbwɛ fʋmɔwa ɔtsɩkpaɩ́n nkɛtɔ atadɩɛ asa fɛba nfɩ?$’$ Oyin ámʋ mɛ́talɩ́ lɛ́ mʋ́ ɔnɔ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{13}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ʋ́ owíe amʋ lɛ́labláa mʋ asúmpʋ́ ɔbɛ́ɛ, $‘$Mlɩklɩ mʋ ayabi pʋ́ mʋ ɩbɩ, amlɩtswɩ mʋ wa oklún amʋtɔ. Ɩnʋ́ isú mʋ́a kpisíi bʋ nɩ.$’$ $”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{14}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yesu lɔ́mɔ mʋ asʋ́n ɔnɔ́ ɔbɛ́ɛ, $“$Bulu tɛtɩ́ ahá tsɔtsɔɔtsɔ, támɛ ahá kpalobí pɛ́ ɔtɛlɛ́.$”$} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Lampóoka} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:13-17; Luka 20:20-26)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{15}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Farisifɔ ámʋ bɔyɔ́bwɛ ɔnɔ-ɔkʋlɛ ánɩ́ bɛ́tɛtɛ́ɛ Yesu ɔnɔ́tɔ́ asʋ́n nú, abʋnya mʋ akɩtálɛ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{16}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ bɔwa amʋ́ akasɩ́pʋ́ pʋ́ Owíe }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Herode} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ahá Yesu wá bɛɛ bʋyɛ́fɩtɛ́ mʋ bɛɛ, $“$Osunápʋ́, anɩyin ánɩ́ ɔnɔkwalɩpʋ fʋgyi, fʋ́tosúná Bulu asʋ́n ámʋ ɛ́ ɔnɔkwalɩsʋ. Fʋtamahá ɔhaa ɔtsɛ fʋ́ agywɩɩn, tsúfɛ́ fʋtamakɩ ɔhaa ansɩ́tɔ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{17}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ anɩdɛ́ fʋ́ fɩtɛ́ anu. Anɩ mbla lɛ́ha ɔkpa ánɩ́ akáa lampóo ha Roma owíe dɛhɛn Kaesare, ntɛ́ɛ anɩmáka?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{18}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Támɛ Yesu lówun amʋ́ agywɩɩn laláhɛ amʋ. Mʋ́ sʋ ɔlɛfɩtɛ́ amʋ́ ɔbɛ́ɛ, $“$Apinabwɛbí abwɛpʋ́, ntogyi sʋ́ mlɩdɛ́ mɩ́ sɔ́ɔ kɩ? }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{19}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mlɩtsu kɔ́ba amʋ́ʋ́ bʋtɔpʋ́ká lampóo amʋ ɩkʋ ba mɩ ankɩ.$”$} \begin{center}\begin{center}
+\spanzxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{Lampóoka kɔ́ba nɩ.}
+ 
+\referencezxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{Mateo 22:19} \end{center} 
 \end{center}
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{34}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Brɛ́á wáɩn-abí amʋ kpɔtɩ́bɩ lɔ́fʋn a, ɔlɔwa mʋ asúmpʋ́ apafɔ ámʋ wá ɔbɛ́ɛ, bʋyɔ́hɔ mʋ ogyíkpá ba mʋ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{35}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Támɛ apafɔ ámʋ bɛkɩtá amʋ́, dá ɔkʋlɛ, mɔ́ ɔkʋlɛ, dá ɔkʋlɛ ɛ́ abwi. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{36}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ndɔ mʋ wie amʋ lɛ́trá wa mʋ asúmpʋ́ bámbá ánɩ́ bʋtsɔ dʋn agyankpapʋ amʋ. Apafɔ ámʋ bɔbwɛ amʋ́ ɛ́ alɩ kɛ́n. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{37}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ tráhɛ kʋ́ráá á, ɔlɛblɩ́ ɔbɛ́ɛ, $‘$Oo, bóbu mɩ́ bí kwɩ́ɩ́hɛ́ mʋ́.$’$ Mʋ́ sʋ ɔlɔwa mʋ ɛ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{38}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Támɛ brɛ́á apafɔ ámʋ bowun mʋ bi ámʋ sɩ́sɩ́ á, bɛbláa aba bɛɛ, $‘$Ɔ́nɩ obégyi mʋ sɩ atɔ́ nɩ́. Mlɩha amɔ mʋ, mɛ́nɩ ndɔ ámʋ ibémlí anɩ klɛ́.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{39}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ bɛkɩtá mʋ, bɩ́tɩ́a mʋ dálɩ ndɔ ámʋtɔ yɔ́mɔ mʋ.$”$} 
-\widowpenalty=300
+\end{spacing}\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{40}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Nɩ́ ndɔ mʋ wie ɔbá á, ntɔ mlɩlahogyi mlɩaa, ɔbɔ́bwɛ apafɔ ánfɩ?$”$} 
-\widowpenalty=300
+\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bɔpʋba mʋ, }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{20}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ ɔlɛfɩtɛ́ amʋ́ ɔbɛ́ɛ, $“$Ma nwun pʋ́ mʋ dá dɩ́n mʋ́sʋ́?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{41}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yudafɔ igyi ahapʋ́ dɛhɛn pʋ́ Yudafɔ ahandɛ amʋ bɛlɛ mʋ́ ɔnɔ́ bɛɛ, $“$Ɔbɛ́ha aha laláhɛ anfɩ bówu lowu sɩ́nsɩ́n, ɔbɛ́lapʋ́ ndɔ ámʋ wá apafɔ bámbá ɩbɩtɔ. Amʋ́á bétsiá pʋ́ mʋ atɔ́-abí ba mʋ mʋ́ kpɔtɩ́bɩ.$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{21}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Bɛlɛ mʋ́ ɔnɔ́ bɛɛ, $“$Kaesare.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{42}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ Yesu lɛ́fɩtɛ́ amʋ́ ɔbɛ́ɛ, $“$Ntɛ́ɛ mlɩmɔ́kʋ́kla Bulu asʋn wanlɩ́nhɛ́ amʋ kɩ? Bɔwanlɩ́n bɛɛ,} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\spanzxxLinebscrSectioncolumnsscrBookscrBody{$‘$Ibwi ámʋ́ʋ́ obu ayípʋ bekiná ámʋ}  \end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\spanzxxLinecscrSectioncolumnsscrBookscrBody{lébemlí okonkísʋ́bwi nɩ́.}  \end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\spanzxxLinebscrSectioncolumnsscrBookscrBody{Bulu lɔ́bwɛ mʋ́ alɩ.}  \end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\spanzxxLinecscrSectioncolumnsscrBookscrBody{Ɩbʋ wánwan.$’$}  \end{adjustwidth} 
-\widowpenalty=300
+\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ ɔlɛbláa amʋ́ ɔbɛ́ɛ, $“$Mʋ́mʋ́ mlɩpʋ tɔ́á igyi Kaesare klɛ́ ha Kaesare, amlɩpʋ mʋ́á igyi Bulu klɛ́ ɛ́ ha Bulu.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{43}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mʋ́ sʋ ndɛ mlɩ bláa mbɛ́ɛ, Bulu ɔbɔ́hɔ mʋ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{iwíegyí} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ámʋ lɛ́ mlɩ ɩbɩtɔ pʋ́há ɔmá ánɩ́ bɔbwɛ tɔ́á otekle.} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{22}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yesu mbuaɩ ánfɩ lóbwie amʋ́ ɔnɔ́. Mʋ́ sʋ bɛnatɩ́.} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Kʋsʋ́ Tsú Afúlitɔ Ɩwɩ Asʋn Fɩtɛ́hɛ́} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:18-27; Luka 20:27-40)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{44}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Ɩ́nɩ sʋ ɔhá ánɩ́ ɔlɛdɩda ibwi ámʋsʋ obébiabía blúblúblúblú. Nɩ́ ibwi ámʋ isúnkí dá ɔkʋsʋ ɛ́ á, ɩbɔ́kwɛ mʋ fɩ́kɔ́fɩ́kɔ́fɩ́kɔ́ fɛ́ nfúó.}   \footnote {21:44 Mʋ́tɔ́ yée 44 ɩma nwʋlʋ́ dada amʋ akʋtɔ.} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$”$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{45}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Brɛ́á Bulu igyi ahapʋ́ dɛhɛn pʋ́ Farisifɔ ámʋ bonu Yesu ayébi anfɩ á, ɩlɔwankɩ́ amʋ́ ánɩ́ amʋ́ ɔdɛ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{46}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Tɛkɩ bekleá bɛ́kɩtá mʋ, támɛ benya ifú, tsúfɛ́ ɔdɔm amʋ bʋtobú Yesu ánɩ́ Bulu ɔnɔ́sʋ́ ɔtɔɩ́pʋ́ ogyi.} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Ɔtsɩkpaɩ́n Ɩwɩ Yébi} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Luka 14:15-24)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{23}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɛkɛ ámʋ kɛ́n á, }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Sadukifɔ} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{akʋ bɛba Yesu wá. Bʋgyi ɔpasua kʋá bʋtɛblɩ́ bɛɛ, kʋsʋ́ tsú afúlitɔ má ɩnʋ. Bɛfɩtɛ́ mʋ bɛɛ, }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{24}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Osunápʋ́, Mose lɔ́wanlɩ́n tswɩ anɩ ɔbɛ́ɛ, $‘$Nɩ́ ɔkʋ mʋa mʋ ka bʋmɔkwɩɩ́ asa olowu sí mʋ ka ámʋ a, mʋ pio otsú mʋ ka ámʋ tsia, fɛ́kɩ ɔkwɩɩ ha owupʋ́ ámʋ.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{25}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Oyin ɔkʋlɛ abí abasíénɔ́ akʋ betsiá. Amʋ́tɔ́ ogyankpapʋ létsiá ɔká, támɛ ɔmɔkwɩɩ́ asa olowu. Mʋ pio lótsu ɔsʋrapʋka amʋ tsía, }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{26}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ támɛ mʋ ɛ́ ɔmɔkwɩɩ́. Ɔsaasɩ lótsu ɔtsɩ ámʋ tsía. Mʋ ɛ́ ɔmɔkwɩɩ́. Alɩɩ yɔ́tʋ osienɔ́sɩ́ amʋ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{27}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔma-ɔma a, ɔsʋrapʋ mʋ ɛ́ lóbowu. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{28}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Afúli ɔkʋsʋ́kɛ́ a, amʋ́tɔ́ ɔmɔmʋ ɔbɔ́bwɛ mʋ kulu? Tsúfɛ́ amʋ́ abasíénɔ́ ámʋ fɛ́ɛ́ betsiá mʋ.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\markboth{ \ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody Mateo 22}{ \ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody Mateo 22}\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody{22}}\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{1-2}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu lɛ́trá bláa Yudafɔ igyi ahapʋ́ pʋ́ Yudafɔ ahandɛ amʋ asʋ́n yébitɔ ɔbɛ́ɛ, $“$Bulu iwíegyí ámʋ igyi fɛ́ asʋ́n ánfɩ. Owíe ɔkʋ dɛ́ ɔtsɩ kpaɩ́n há mʋ bi, }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{3}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ɔlɛtɩ ahá ɔbɛ́ɛ, bʋbá nkɛ ámʋ asɩ. Brɛ́á owíe ámʋ lɔ́bwɛ tá á, ɔlɔwa mʋ asúmpʋ́ ɔbɛ́ɛ, bʋyɛ́tɩ ahá ámʋ abʋba, támɛ bekiná bá. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{4}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ ɔlɛlawá mʋ asúmpʋ́ bámbá ɔbɛ́ɛ, $‘$Mlɩtra yɛbláa ahá ámʋ mlɩaa, nabwɛ́ tógyítɔ́ tá. Bamɔ́ mɩ́ nnantswie akpɔnkpɔntɩ ámʋ pʋ́ amʋ́á bawá nfɔ, nɩ́ná atɔ́ ámʋ fɛ́ɛ́ tá. Mʋ́ sʋ bʋbá ɔtsɩ ɔkpaɩ́nkpá ɩnʋ.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{5}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Támɛ ahá ámʋ́ʋ́ bɛyɛ́tɩ ámʋ bʋmɛkplá amʋ́. Bɛnatɩ́ sí amʋ́ yɔ́ amʋ́ agyʋ́másʋ́. Akʋ bɛnatɩ́ yɔ́ amʋ́ ndɔtɔ. Akʋ ɛ́ bɛnatɩ́ yɔ́ amʋ́ ibíá ogyíkpá. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{6}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Amʋ́ atráhɛ bɛkɩtá asúmpʋ́ amʋ, dá amʋ́, mɔ́ amʋ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{7}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Brɛ́á owíe amʋ lónu asʋ́n ánfɩ á, ɔblɔ́ lɛhɩɛ́ kɩ́tá mʋ. Mʋ́ sʋ ɔlɔwa mʋ ɩsá akɔpʋ́, bɔyɔ́mɔ ahá ámʋ́ʋ́ bɔmɔ mʋ asúmpʋ́ amʋ, wá amʋ́ wúlu ogyá. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{8}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ ɔlɛbláa mʋ asúmpʋ́ bámbá ɔbɛ́ɛ, $‘$Banɩ́ná ɔtsɩkpaɩ́n atogyihɛ amʋ tá, támɛ ahá ámʋ́ʋ́ nɛtɩ ámʋ bʋmɔfʋn ha mɩ́ wóyítɔ́ ba. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{9}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ mlɩwie awúlutɔ, amlɩtɩ ɔhagyíɔha ánɩ́ mlówun, ɔba ɔtsɩ ɔkpaɩ́nkpá ɩnʋ.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{10}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɩnʋ asúmpʋ́ amʋ bowie awúlutɔ. Bɛtɩ ɔhagyíɔha ánɩ́ bowun, aha wankláán pʋ́ aha laláhɛ fɛ́ɛ́. Mʋ́ sʋ ahá bɔbʋlá ɔtsɩ ɔkpaɩ́nkpá ɩnʋ dɛ́dɛ́ɛ́dɛ́.} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{29}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ʋ́ Yesu lɛ́lɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, $“$Megyí mlɩ ológyi. Mlɩméyín Bulu asʋn wanlɩ́nhɛ́ amʋ ntɛ́ɛ Bulu túmi. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{30}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Nɩ́ afúli bɔkʋ́sʋ́ á, bɔ́bwɛ fɛ́ Bulu-abɔpʋ. Bʋméetsiá aká mʋ́a akúlu. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{31}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mlɩmɔ́kʋ́kla asʋ́n ánɩ́ Bulu onutó lɛ́bláa mlɩ tsú afúlikʋsʋ́ ɩwɩ? }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{32}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Bulu asʋn wanlɩ́nhɛ́ lɛ́blɩ́ ɔbɛ́ɛ, $‘$Mɩ́gyí mlɩ anáin }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Abraham} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{mʋa }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Isak} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{pʋ́ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Yakob} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bulu ámʋ nɩ.$’$ Ɩ́nɩ sʋ megyí awupʋ́ Bulu ógyi, akɩankpapʋ Bulu ógyi.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{11}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Támɛ brɛ́á owíe amʋ lɛ́bɛkɩ ahá ámʋ́ʋ́ batɩ́ ámʋ a, olowun oyin ɔkʋá ɔmɔwa ɔtsɩkpaɩ́n nkɛtɔ atadɩɛ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{12}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ ɔlɛfɩtɛ́ mʋ ɔbɛ́ɛ, $‘$Agya, nkálɩ ɩlɔbwɛ fʋmɔwa ɔtsɩkpaɩ́n nkɛtɔ atadɩɛ asa fɛba nfɩ?$’$ Oyin ámʋ mɛ́talɩ́ lɛ́ mʋ́ ɔnɔ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{13}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ owíe amʋ lɛ́labláa mʋ asúmpʋ́ ɔbɛ́ɛ, $‘$Mlɩklɩ mʋ ayabi pʋ́ mʋ ɩbɩ, amlɩtswɩ mʋ wa oklún amʋtɔ. Ɩnʋ́ isú mʋ́a kpisíi bʋ nɩ.$’$ $”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{33}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Brɛ́á ɔdɔm amʋ bonu asʋ́n ánfɩ á, mʋ atosunáhɛ́ anfɩ lɛha ɔnɔ́ lobwie amʋ́.} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Bulu Mbla Ámʋtɔ Mʋ́á Ɩdʋn} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:28-34; Luka 10:25-28)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{14}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu lɔ́mɔ mʋ asʋ́n ɔnɔ́ ɔbɛ́ɛ, $“$Bulu tɛtɩ́ ahá tsɔtsɔɔtsɔ, támɛ ahá kpalobí pɛ́ ɔtɛlɛ́.$”$} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Lampóoka} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:13-17; Luka 20:20-26)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{34}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Brɛ́á Farisifɔ bowun ánɩ́ Yesu lalɛ́ Sadukifɔ ámʋ asʋ́n ɔnɔ́, asʋ́n lawú wá amʋ́ ɔnɔ́ á, bɛkpa aba ya Yesu wá. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{35}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Amʋ́tɔ́ ɔkʋlɛá ogyi mbla osunápʋ́ lɛ́fɩtɛ́ Yesu asʋ́n, ɔpʋsɔ mʋ kɩ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{36}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔlɛfɩtɛ́ Yesu ɔbɛ́ɛ, $“$Osunápʋ́, Bulu mbla ámʋtɔ mɔmʋ dʋ́n?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{15}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Farisifɔ ámʋ bɔyɔ́bwɛ ɔnɔ-ɔkʋlɛ ánɩ́ bɛ́tɛtɛ́ɛ Yesu ɔnɔ́tɔ́ asʋ́n nú, abʋnya mʋ akɩtálɛ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{16}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ bɔwa amʋ́ akasɩ́pʋ́ pʋ́ Owíe }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Herode} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ahá Yesu wá bɛɛ bʋyɛ́fɩtɛ́ mʋ bɛɛ, $“$Osunápʋ́, anɩyin ánɩ́ ɔnɔkwalɩpʋ fʋgyi, fʋ́tosúná Bulu asʋ́n ámʋ ɛ́ ɔnɔkwalɩsʋ. Fʋtamahá ɔhaa ɔtsɛ fʋ́ agywɩɩn, tsúfɛ́ fʋtamakɩ ɔhaa ansɩ́tɔ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{17}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ anɩdɛ́ fʋ́ fɩtɛ́ anu. Anɩ mbla lɛ́ha ɔkpa ánɩ́ akáa lampóo ha Roma owíe dɛhɛn Kaesare, ntɛ́ɛ anɩmáka?$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{37}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Yesu lɛ́bláa mʋ ɔbɛ́ɛ, $“$ $‘$Pʋ fʋ́ klʋn, fʋ́ ɔkláa pʋ́ fʋ́ agywɩɩn fɛ́ɛ́ dwɛ fʋ́ Wíe Bulu.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{38}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɩ́nɩ gyí mbla ámʋtɔ gyankpapʋ ánɩ́ ɩdʋn mʋ́ fɛ́ɛ́ nɩ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{39}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Nyɔɔsɩ ɛ́ igyi fɛ́ mʋ́. $‘$Dwɛ fʋ́ bá fɛ́ fʋ́ ɩwɩ.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{40}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mose Mbla pʋ́ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́ amʋ atosunáhɛ́ fɛ́ɛ́ ɩlɩɩ́ mbla anyɔ ánfɩsʋ.$”$} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Ma Gyí Kristo Amʋ?} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:35-37; Luka 20:41-44)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{18}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Támɛ Yesu lówun amʋ́ agywɩɩn laláhɛ amʋ. Mʋ́ sʋ ɔlɛfɩtɛ́ amʋ́ ɔbɛ́ɛ, $“$Apinabwɛbí abwɛpʋ́, ntogyi sʋ́ mlɩdɛ́ mɩ́ sɔ́ɔ kɩ? }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{19}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mlɩtsu kɔ́ba amʋ́ʋ́ bʋtɔpʋ́ká lampóo amʋ ɩkʋ ba mɩ ankɩ.$”$} \begin{center}
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{41}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɩ́nɩá Farisifɔ ámʋ bebefia sí bʋlɩɩ́ sʋ á, Yesu lɛ́fɩtɛ́ amʋ́ ɔbɛ́ɛ, }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{42}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Nkálɩ mlɩdɛ́ Kristo, (ɔhá ámʋ́ʋ́ Bulu ladá mʋ ofúli amʋ) ɩwɩ gywɩɩ́n? Ma mʋ na nɩ́?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
 
-\begin{wrapfigure}
-\begin{center}
-\includegraphics[angle=0,width=6mm,height=3mm]{2.jpg} 
-\caption{}
+\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bɛbláa mʋ bɛɛ, $“$Owíe Dawid mʋ na nɩ́.$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{43}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔlɛlafɩ́tɛ́ amʋ́ ɔbɛ́ɛ, $“$Mʋ́ ntogyi sʋ́ Ɔŋɛ Wankɩ́hɛ́ lɛ́ha Owíe Dawid lɛ́tɩ mʋ ɔbɛ́ɛ $‘$Mɩ́ Wíé?$’$ Tsúfɛ́ Owíe Dawid lɛ́blɩ́ ɔbɛ́ɛ,} \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\VerseNumberzxxLinebscrSectioncolumnsscrBookscrBody{$^{44}$} \spanzxxLinebscrSectioncolumnsscrBookscrBody{ $‘$Anɩ Wíe Bulu lɛ́bláa mɩ́ Wíe ɔbɛ́ɛ,}  \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\spanzxxLinecscrSectioncolumnsscrBookscrBody{Tsia mɩ́ gyɔpɩsʋ nfɩ}  \end{spacing}
+\begin{spacing}{0.541666666666667}
+\hangindent= 24pt
+\hangafter=1
+\spanzxxLinecscrSectioncolumnsscrBookscrBody{yɔ́fʋn brɛ́á nɛ́ha fɛ́tsatsáa fʋ́ alupʋ́sʋ́?$’$}  \end{spacing}
+\begin{spacing}{0.541666666666667}
+\VerseNumberzxxParagraphContinuationscrSectioncolumnsscrBookscrBody{$^{45}$} \spanzxxParagraphContinuationscrSectioncolumnsscrBookscrBody{ Nɩ́ Owíe Dawid onutó lɛ́tɩ ɔhá ánfɩ Bulu ladá ofúli anfɩ ɔbɛ́ɛ, mʋ wie a, nkálɩ sʋ́ ɔtráa ogyi mʋ na?$”$} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{46}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Amʋ́tɔ́ ɔkʋkʋ mɛ́talɩ́ lɛ́ mʋ́ ɔnɔ́. Tsú ɛkɛ ámʋ a, ɔhaa mɛ́trá wa klʋn fɩtɛ́ mʋ asʋansʋ.} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Mose Mbla Asunápʋ́ Pʋ́ Farisifɔ Tsiátɔ́} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:38-39; Luka 11:43, 46; 20:45-46)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
+\clubpenalty=300
+\lettrine{
+\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody{23}}{ \VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{1}$}}\markboth{ \ParagraphscrSectioncolumnsscrBookscrBody Mateo 23}{ \ParagraphscrSectioncolumnsscrBookscrBody Mateo 23} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Asʋ́n ánfɩ ɔma a, Yesu lɛ́bláa ɔdɔm amʋ pʋ́ mʋ akasɩ́pʋ́ amʋ ɔbɛ́ɛ, }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{2}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mose mbla Farisifɔ pʋ́ Mbla asunápʋ́ amʋ bʋdesuná. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{3}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ mlɩgyi amʋ́ asʋn blɩ́hɛ́ fɛ́ɛ́sʋ́, támɛ mlɩmátsiá amʋ́ atsiábi. Tsúfɛ́ bʋtamagyi amʋ́ onutó asʋn blɩ́hɛ́sʋ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{4}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Bʋtɔpʋ́ atɔ dwindwín sʋ́rá ahá, támɛ amʋ́ onutó bʋtamapʋ́ osrebi ɔkʋlɛ kʋ́ráá tsá amʋ́ tsu. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{5}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Bʋtɔbwɛ́ amʋ́ tógyítɔ́ ahá ansɩ́sʋ́. Bʋtɔwánlɩ́n Bulu asʋ́n dɩ́nká tati tɛ́ɩ́hɛ́sʋ, pʋ́klɩ́ amʋ́ ɔsʋkpɩ pʋ́ amʋ́ bɩna ɩbasʋ. Bʋtɔlʋ́ nfɛ́ tɩ́ntɩ́ɩ́ntɩ́n síánsían amʋ́ atadɩɛ ɔnɔ́. }\begin{center}\begin{center}
+\spanzxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{Farisiyin nɩ.} \referencezxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{Mateo 23:5} \end{center} 
 \end{center}
-\end{wrapfigure}
 
-
-\begin{center}
-
-\spanzxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{Lampóoka kɔ́ba nɩ.} \spanreferencebeforepictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{(}\referencezxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{Mateo 22:19}\spanreferenceafterpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{)} \end{center} 
-\end{center}\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{6}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Bʋtekle otsiákpá yilé tsiá nkɛ ogyíkpá pʋ́ Yudafɔ Ofíakpa. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{7}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Bɛdálɩ yɔ dɩnsʋ á, bʋtekle bɛɛ ahá bʋtɩ́ɩ amʋ́ bɛɛ, $‘$Asunápʋ́,$’$ abʋbun ha amʋ́ itsiá. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{8}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mlɩ fɛ́ɛ́ á, apíó mlɩgyí. Mʋ́ sʋ mlɩmáha abʋtɩ mlɩtɔ ɔhaa osunápʋ́. Ɔbakʋ́lɛ pɛ́ gyí mlɩ osunápʋ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{9}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Alɩ kɛ́n mlɩmátɩ ɔhaa mlɩ sɩ́ ɔsʋlʋ́ʋ anfɩsʋ nɩ́. Tsúfɛ́ Ɔsɩ́ ɔkʋlɛ pɛ́ mlɩbʋ, ɔbʋ ɔsʋ́sʋ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{10}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Tráhɛtráhɛ a, mlɩtɔ ɔhaa máha abʋtɩ mʋ nkpá ogyápʋ. Tsúfɛ́ nkpá ogyápʋ ɔkʋlɛ pɛ́ mlɩbʋ. Mʋgyí Kristo, (ɔhá ámʋ́ʋ́ Bulu ladá mʋ ofúli amʋ). }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{11}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mlɩtɔ ɔhandɛ ɔbwɛ́ɛ mlɩ osúmpʋ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{12}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Tsúfɛ́ fʋ́á fotsu ɩwɩ á, Bulu ɔbɛ́ba fʋ asɩ. Fʋ́á fɛba ɩwɩasɩ ɛ́ á, Bulu obótsu fʋ fʋ́á.} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Apinabwɛbí Abwɛpʋ́} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:40; Luka 11:39-42, 44, 52; 20:47)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bɔpʋba mʋ, }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{20}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ɔlɛfɩtɛ́ amʋ́ ɔbɛ́ɛ, $“$Ma nwun pʋ́ mʋ dá dɩ́n mʋ́sʋ́?$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{13-14}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Mlɩlatin Bulu iwíegyí ámʋ ɔkpa wá ahá. Mlɩ onutó mlɩmédékléá mlówie ɩnʋ, mlɩdɛ́ ahá ánɩ́ bʋdɛ mbɔ́dɩ́ bɔ bɛɛ bówie ɩnʋ ɛ́ ɔkpa tíin.} \footnote {\AlternateReadingzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody{23:14 Mʋ́tɔ́ yée 14 bʋ nwʋlʋ́ dada amʋ akʋtɔ: Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Mlɩtɛlɩ́ɩ́ ahátɔ bɔ́ mpáɩ tɩ́ntɩ́ɩ́ntɩ́n, támɛ mlɩtɔswɩ́ɩ́ asʋrapʋ amʋ́ wóyí pʋ́ amʋ́ atɔ́ fɛ́ɛ́ ɛ́. Ɩ́nɩ sʋ Bulu ɔbɛ́bɩtɩ́ mlɩ ɩsʋ dʋn aha tráhɛ. }}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{21}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bɛlɛ mʋ́ ɔnɔ́ bɛɛ, $“$Kaesare.$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{15}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Tsúfɛ́ mlɩtɛfá ɩlɩn fá ɔpʋ, dʋ́ ɩbʋ kplɩ́ ɩbʋ há ɔha tɛdámlí klʋntɔ. Támɛ nɩ́ ɔdámlí klʋntɔ tá á, mlɩtɛlábwɛ́ mʋ otemlí ɩsʋbɩtɩ́ ogyá ánɩ́ ɩtamaduntɔ ɔyɔpʋ́ dʋn mlɩ onutó.} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ ɔlɛbláa amʋ́ ɔbɛ́ɛ, $“$Mʋ́mʋ́ mlɩpʋ tɔ́á igyi Kaesare klɛ́ ha Kaesare, amlɩpʋ mʋ́á igyi Bulu klɛ́ ɛ́ ha Bulu.$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{16}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Ansibi abwiepʋ́ ánɩ́ mlɩdɛ́ ahá kpa, mlɩgyɔwɩ nɩ́. Mlɩtɛblɩ́ mlɩaa, $‘$Nɩ́ ɔkʋ ɔká Bulu ɔtswɛ́kpa obu ámʋ ntam a, imehián ánɩ́ obégyi mʋ́sʋ́. Támɛ nɩ́ ɔká sika pɛpɛ atɔ́á ɩbʋ ɔtswɛ́kpa obuto ɩnʋ mʋ́ ntam a, ilehián ánɩ́ obégyi mʋ́sʋ́.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{17}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ansibi abwiepʋ́! Aha mimláhɛ! Mʋ́tɔ́ mɔmʋ bʋ labi dʋn? Sika pɛpɛ atɔ́ ámʋ lóó, ntɛ́ɛ Bulu ɔtswɛ́kpa obu ámʋ́ʋ́ ɩlahá sika ámʋ lamlí Bulu klɛ́ amʋ? }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{18}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mlɩtɛtráa blɩ́ mlɩaa, $‘$Nɩ́ ɔkʋ ɔká }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{afɔdɩɛ-asubwi} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ntam a, imehián ánɩ́ obégyi mʋ́sʋ́. Támɛ nɩ́ ɔká afɔdɩɛ-abɔtɔ́ ámʋ ntam mʋ́ á, ilehián ánɩ́ obégyi mʋ́sʋ́.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{19}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ansibi abwiepʋ́! Mʋ́tɔ́ mɔmʋ bʋ labi dʋn? Afɔdɩɛ-abɔtɔ́ ámʋ ntɛ́ɛ afɔdɩɛ-asubwi ámʋ́ʋ́ ɩlahá mʋ́ ɩlamlí Bulu klɛ́ amʋ? }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{20}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Nɩ́ fɛká afɔdɩɛ-asubwi amʋ ntam a, faká ibwi ámʋ pʋ́ atɔ́á ɩdɩn mʋ́sʋ́ fɛ́ɛ́ ntam. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{21}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Nɩ́ fɛká Bulu ɔtswɛ́kpa amʋ ntam a, faká Bulu mʋa mʋ otsiákpá ntam. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{22}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Nɩ́ fɛká ɔsʋ́sʋ́ ntam a, faká Bulu mʋa mʋ owíe obíá ntam.} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{22}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu mbuaɩ ánfɩ lóbwie amʋ́ ɔnɔ́. Mʋ́ sʋ bɛnatɩ́.} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Kʋsʋ́ Tsú Afúlitɔ Ɩwɩ Asʋn Fɩtɛ́hɛ́} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:18-27; Luka 20:27-40)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{23}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Mlɩteye mlɩ ɔtsʋtsʋ́ pʋ́ kpántánkplámá aná fɛ́ɛ́tɔ́ idú, pʋ́ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{idúsɩ́} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{há Bulu. Támɛ mlɩmɛ́dɛ́ Bulu mbla amʋ́ʋ́ ɩhɩ́ɛ́ dehián, igyi asʋ́ngyí ɔnɔkwalɩsʋ, aba nwewúun pʋ́ ɔnɔkwalɩwa ámʋsʋ gyi. Mʋ́déhián nɩ, támɛ mlɩmákiná iyétɔ dúsɩ́ amʋ ɛ́ ha. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{24}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ansibi abwiepʋ́ ánɩ́ mlɩdɛ́ ahá kpa, mlɩgyɔwɩ nɩ́. Mlɩtɔtsrɔ́ mbépi lɛ́ oputsútɔ́, támɛ mlɩtɛmɛ́ mbéwun.} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{23}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɛkɛ ámʋ kɛ́n á, }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Sadukifɔ} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{akʋ bɛba Yesu wá. Bʋgyi ɔpasua kʋá bʋtɛblɩ́ bɛɛ, kʋsʋ́ tsú afúlitɔ má ɩnʋ. Bɛfɩtɛ́ mʋ bɛɛ, }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{24}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Osunápʋ́, Mose lɔ́wanlɩ́n tswɩ anɩ ɔbɛ́ɛ, $‘$Nɩ́ ɔkʋ mʋa mʋ ka bʋmɔkwɩɩ́ asa olowu sí mʋ ka ámʋ a, mʋ pio otsú mʋ ka ámʋ tsia, fɛ́kɩ ɔkwɩɩ ha owupʋ́ ámʋ.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{25}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Oyin ɔkʋlɛ abí abasíénɔ́ akʋ betsiá. Amʋ́tɔ́ ogyankpapʋ létsiá ɔká, támɛ ɔmɔkwɩɩ́ asa olowu. Mʋ pio lótsu ɔsʋrapʋka amʋ tsía, }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{26}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{támɛ mʋ ɛ́ ɔmɔkwɩɩ́. Ɔsaasɩ lótsu ɔtsɩ ámʋ tsía. Mʋ ɛ́ ɔmɔkwɩɩ́. Alɩɩ yɔ́tʋ osienɔ́sɩ́ amʋ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{27}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔma-ɔma a, ɔsʋrapʋ mʋ ɛ́ lóbowu. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{28}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Afúli ɔkʋsʋ́kɛ́ a, amʋ́tɔ́ ɔmɔmʋ ɔbɔ́bwɛ mʋ kulu? Tsúfɛ́ amʋ́ abasíénɔ́ ámʋ fɛ́ɛ́ betsiá mʋ.$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{25}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Tsúfɛ́ mlɩtɔfwɩ́ mlɩ nwɛ pʋ́ mlɩ nlɛpɛ ɔma wankláán, támɛ atɔ́á mlɩlapʋ́ owi mʋ́a ɔnsɩpɛ swɩ́ɩ́ ahá sɔ́ɔ́n bʋ mʋ́tɔ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{26}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Farisifɔ ansibi abwiepʋ́, mlɩgyankpa fwɩ nwɛ mʋ́a nlɛpɛ ámʋtɔ, mʋ́ ɔma ɛ́ bɛ́tɩn.} \end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{29}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ʋ́ Yesu lɛ́lɛ mʋ́ ɔnɔ́ ɔbɛ́ɛ, $“$Megyí mlɩ ológyi. Mlɩméyín Bulu asʋn wanlɩ́nhɛ́ amʋ ntɛ́ɛ Bulu túmi. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{30}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Nɩ́ afúli bɔkʋ́sʋ́ á, bɔ́bwɛ fɛ́ Bulu-abɔpʋ. Bʋméetsiá aká mʋ́a akúlu. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{31}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mlɩmɔ́kʋ́kla asʋ́n ánɩ́ Bulu onutó lɛ́bláa mlɩ tsú afúlikʋsʋ́ ɩwɩ? }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{32}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bulu asʋn wanlɩ́nhɛ́ lɛ́blɩ́ ɔbɛ́ɛ, $‘$Mɩ́gyí mlɩ anáin }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Abraham} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{mʋa }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Isak} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{pʋ́ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Yakob} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bulu ámʋ nɩ.$’$ Ɩ́nɩ sʋ megyí awupʋ́ Bulu ógyi, akɩankpapʋ Bulu ógyi.$”$} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{27}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Mlɩlabwɛ́ fɛ́ ntsán ánɩ́ bakpá mʋ́ afá futútúútú, mʋ́ ɩwɩ lawá akɩ́lɛ. Támɛ mʋ́tɔ́ mʋ́ á, afúli awú pʋ́ atɔ plɔ́hɛ́ sɔ́ɔ́n bɔ́ mʋ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{28}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Alɩ kɛ́n mlɩgyí nɩ́. Ahá bʋtɛkɩ mlɩ ánɩ́ mlɩgyí yilé abwɛpʋ́. Támɛ mlɩ klʋntɔ mʋ́ á, apinabwɛbíbwɛ mʋ́a lalahɛbwɛ sɔ́ɔ́n bɔ́ mʋ́.} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Bulu Ɩsʋbɩtɩ́} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Luka 11:47-51)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{33}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Brɛ́á ɔdɔm amʋ bonu asʋ́n ánfɩ á, mʋ atosunáhɛ́ anfɩ lɛha ɔnɔ́ lobwie amʋ́.} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Bulu Mbla Ámʋtɔ Mʋ́á Ɩdʋn} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:28-34; Luka 10:25-28)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{29-30}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Tsúfɛ́ mlɩtɔpwɛ́ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́ pʋ́ yilé abwɛpʋ́ ámʋ́ʋ́ betsiá ámʋ ntsán, lá mʋ́ ɩwɩ wankláán, blɩ́ mlɩaa, $‘$Nɩ́ anɩlétsiá anɩ anáin brɛ́sʋ́ asa bɔmɔ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́ anfɩ á, tɛkɩ anɩmɔ́wa ɩbɩ mʋ́tɔ́.$’$ }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{31}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mlɩ asʋn blɩ́hɛ́ anfɩ désuná ánɩ́ mlɩgyí Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́ amɔpʋ́ ámʋ abí-aná nɩ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{32}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mlɩwuna yɔ mʋ́sʋ́, amlɩmɔ mlɩ anáin bwɛhɛ́ ámʋ ɔnɔ́. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{33}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Awɔ, abɛ abí-aná! Mlɛ́talɩ́ srɩ́ sí ɩpɔ́n ámʋ́ʋ́ Bulu ɔbɛ́ha mlɩ, kpá mlɩ wá ɩsʋbɩtɩ́ ogyá ámʋ́ʋ́ ɩtamaduntɔ ámʋ? }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{34}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mʋ́ sʋ ndɛ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́, anyansapʋ pʋ́ Mose mbla asunápʋ́ wa sɩ́sɩ́ mlɩ. Támɛ mlɔ́mɔ akʋ, dá amʋ́tɔ́ akʋ mántá oyikpalíhɛsʋ. Mlɔ́nwɛn amʋ́tɔ́ akʋ mplɩ mlɩ ofíakpa, dɩ́nká akʋsʋ tsú awúlusʋ yɔ́ awúlusʋ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{35}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɩ́nɩ sʋ yilé abwɛpʋ́ ámʋ́ʋ́ mlɩa mlɩ anáin mlɩlamɔ́ tsú }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Habelsʋ} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{bɔfʋn Sakaria, ogyi Barakia mʋ bi ámʋ́ʋ́ mlɩlɔ́mɔ Bulu ɔtswɛ́kpa obu mʋ́a }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{afɔdɩɛ-asubwi} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{amʋ nsɩnɛ́ ámʋ fɛ́ɛ́ obugya bɛ́ba mlɩsʋ. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{36}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Ɔnɔkwalɩ ndɛ mlɩ bláa. Ɩ́nɩ aná fɛ́ɛ́ sʋ Bulu ɩsʋbɩtɩ́ bɛ́ba mlɩ ndɛmba-abí ánfɩsʋ nɩ́.} \end{spacing}
+ {\raggedright} \section*{\needspace {8\baselineskip}\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Yerusalemfɔ Ɩwɩ Ɔdwɛ} \end{center}\end{spacing}}
+\begin{spacing}{0.541666666666667}\begin{center}
+\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Luka 13:34-35)} \end{center}\end{spacing}
+\begin{spacing}{0.541666666666667}\widowpenalty=300
 \clubpenalty=300
 
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{34}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Brɛ́á Farisifɔ bowun ánɩ́ Yesu lalɛ́ Sadukifɔ ámʋ asʋ́n ɔnɔ́, asʋ́n lawú wá amʋ́ ɔnɔ́ á, bɛkpa aba ya Yesu wá. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{35}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Amʋ́tɔ́ ɔkʋlɛá ogyi mbla osunápʋ́ lɛ́fɩtɛ́ Yesu asʋ́n, ɔpʋsɔ mʋ kɩ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{36}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔlɛfɩtɛ́ Yesu ɔbɛ́ɛ, $“$Osunápʋ́, Bulu mbla ámʋtɔ mɔmʋ dʋ́n?$”$} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{37}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Yesu lɛ́bláa mʋ ɔbɛ́ɛ, $“$ $‘$Pʋ fʋ́ klʋn, fʋ́ ɔkláa pʋ́ fʋ́ agywɩɩn fɛ́ɛ́ dwɛ fʋ́ Wíe Bulu.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{38}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɩ́nɩ gyí mbla ámʋtɔ gyankpapʋ ánɩ́ ɩdʋn mʋ́ fɛ́ɛ́ nɩ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{39}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Nyɔɔsɩ ɛ́ igyi fɛ́ mʋ́. $‘$Dwɛ fʋ́ bá fɛ́ fʋ́ ɩwɩ.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{40}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mose Mbla pʋ́ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́ amʋ atosunáhɛ́ fɛ́ɛ́ ɩlɩɩ́ mbla anyɔ ánfɩsʋ.$”$} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Ma Gyí Kristo Amʋ?} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:35-37; Luka 20:41-44)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{41}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɩ́nɩá Farisifɔ ámʋ bebefia sí bʋlɩɩ́ sʋ á, Yesu lɛ́fɩtɛ́ amʋ́ ɔbɛ́ɛ, }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{42}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Nkálɩ mlɩdɛ́ Kristo, (ɔhá ámʋ́ʋ́ Bulu ladá mʋ ofúli amʋ) ɩwɩ gywɩɩ́n? Ma mʋ na nɩ́?$”$} 
-\widowpenalty=300
-\clubpenalty=300
-
-\spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bɛbláa mʋ bɛɛ, $“$Owíe Dawid mʋ na nɩ́.$”$} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{43}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔlɛlafɩ́tɛ́ amʋ́ ɔbɛ́ɛ, $“$Mʋ́ ntogyi sʋ́ Ɔŋɛ Wankɩ́hɛ́ lɛ́ha Owíe Dawid lɛ́tɩ mʋ ɔbɛ́ɛ $‘$Mɩ́ Wíé?$’$ Tsúfɛ́ Owíe Dawid lɛ́blɩ́ ɔbɛ́ɛ,} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\leftmargin 0pt{\VerseNumberzxxLinebscrSectioncolumnsscrBookscrBody{$^{44}$}} \spanzxxLinebscrSectioncolumnsscrBookscrBody{$‘$Anɩ Wíe Bulu lɛ́bláa mɩ́ Wíe ɔbɛ́ɛ,}  \end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\spanzxxLinecscrSectioncolumnsscrBookscrBody{Tsia mɩ́ gyɔpɩsʋ nfɩ}  \end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}{\raggedright} 
-\spanzxxLinecscrSectioncolumnsscrBookscrBody{yɔ́fʋn brɛ́á nɛ́ha fɛ́tsatsáa fʋ́ alupʋ́sʋ́?$’$}  \end{adjustwidth} 
-
-\leftmargin 0pt{\VerseNumberzxxParagraphContinuationscrSectioncolumnsscrBookscrBody{$^{45}$}} \spanzxxParagraphContinuationscrSectioncolumnsscrBookscrBody{Nɩ́ Owíe Dawid onutó lɛ́tɩ ɔhá ánfɩ Bulu ladá ofúli anfɩ ɔbɛ́ɛ, mʋ wie a, nkálɩ sʋ́ ɔtráa ogyi mʋ na?$”$} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{46}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Amʋ́tɔ́ ɔkʋkʋ mɛ́talɩ́ lɛ́ mʋ́ ɔnɔ́. Tsú ɛkɛ ámʋ a, ɔhaa mɛ́trá wa klʋn fɩtɛ́ mʋ asʋansʋ.} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Mose Mbla Asunápʋ́ Pʋ́ Farisifɔ Tsiátɔ́} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:38-39; Luka 11:43, 46; 20:45-46)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\markboth{ \ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody Mateo 23}{ \ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody Mateo 23}\ChapterNumberzxxParagraphscrSectioncolumnsscrBookscrBody{23}}\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{1}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Asʋ́n ánfɩ ɔma a, Yesu lɛ́bláa ɔdɔm amʋ pʋ́ mʋ akasɩ́pʋ́ amʋ ɔbɛ́ɛ, }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{2}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mose mbla Farisifɔ pʋ́ Mbla asunápʋ́ amʋ bʋdesuná. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{3}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ mlɩgyi amʋ́ asʋn blɩ́hɛ́ fɛ́ɛ́sʋ́, támɛ mlɩmátsiá amʋ́ atsiábi. Tsúfɛ́ bʋtamagyi amʋ́ onutó asʋn blɩ́hɛ́sʋ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{4}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bʋtɔpʋ́ atɔ dwindwín sʋ́rá ahá, támɛ amʋ́ onutó bʋtamapʋ́ osrebi ɔkʋlɛ kʋ́ráá tsá amʋ́ tsu. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{5}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bʋtɔbwɛ́ amʋ́ tógyítɔ́ ahá ansɩ́sʋ́. Bʋtɔwánlɩ́n Bulu asʋ́n dɩ́nká tati tɛ́ɩ́hɛ́sʋ, pʋ́klɩ́ amʋ́ ɔsʋkpɩ pʋ́ amʋ́ bɩna ɩbasʋ. Bʋtɔlʋ́ nfɛ́ tɩ́ntɩ́ɩ́ntɩ́n síánsían amʋ́ atadɩɛ ɔnɔ́. }\begin{center}
-
-\begin{wrapfigure}
-\begin{center}
-\includegraphics[angle=0,width=6mm,height=7mm]{3.jpg} 
-\caption{}
-\end{center}
-\end{wrapfigure}
-
-
-\begin{center}
-
-\spanzxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{Farisiyin nɩ.} \spanreferencebeforepictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{(}\referencezxxpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{Mateo 23:5}\spanreferenceafterpictureCaptionpictureColumnParagraphscrSectioncolumnsscrBookscrBody{)} \end{center} 
-\end{center}
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{6}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bʋtekle otsiákpá yilé tsiá nkɛ ogyíkpá pʋ́ Yudafɔ Ofíakpa. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{7}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Bɛdálɩ yɔ dɩnsʋ á, bʋtekle bɛɛ ahá bʋtɩ́ɩ amʋ́ bɛɛ, $‘$Asunápʋ́,$’$ abʋbun ha amʋ́ itsiá. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{8}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mlɩ fɛ́ɛ́ á, apíó mlɩgyí. Mʋ́ sʋ mlɩmáha abʋtɩ mlɩtɔ ɔhaa osunápʋ́. Ɔbakʋ́lɛ pɛ́ gyí mlɩ osunápʋ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{9}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Alɩ kɛ́n mlɩmátɩ ɔhaa mlɩ sɩ́ ɔsʋlʋ́ʋ anfɩsʋ nɩ́. Tsúfɛ́ Ɔsɩ́ ɔkʋlɛ pɛ́ mlɩbʋ, ɔbʋ ɔsʋ́sʋ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{10}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Tráhɛtráhɛ a, mlɩtɔ ɔhaa máha abʋtɩ mʋ nkpá ogyápʋ. Tsúfɛ́ nkpá ogyápʋ ɔkʋlɛ pɛ́ mlɩbʋ. Mʋgyí Kristo, (ɔhá ámʋ́ʋ́ Bulu ladá mʋ ofúli amʋ). }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{11}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mlɩtɔ ɔhandɛ ɔbwɛ́ɛ mlɩ osúmpʋ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{12}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Tsúfɛ́ fʋ́á fotsu ɩwɩ á, Bulu ɔbɛ́ba fʋ asɩ. Fʋ́á fɛba ɩwɩasɩ ɛ́ á, Bulu obótsu fʋ fʋ́á.} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Apinabwɛbí Abwɛpʋ́} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Marko 12:40; Luka 11:39-42, 44, 52; 20:47)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{13-14}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Mlɩlatin Bulu iwíegyí ámʋ ɔkpa wá ahá. Mlɩ onutó mlɩmédékléá mlówie ɩnʋ, mlɩdɛ́ ahá ánɩ́ bʋdɛ mbɔ́dɩ́ bɔ bɛɛ bówie ɩnʋ ɛ́ ɔkpa tíin.}   \footnote {23:14 Mʋ́tɔ́ yée 14 bʋ nwʋlʋ́ dada amʋ akʋtɔ: Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Mlɩtɛlɩ́ɩ́ ahátɔ bɔ́ mpáɩ tɩ́ntɩ́ɩ́ntɩ́n, támɛ mlɩtɔswɩ́ɩ́ asʋrapʋ amʋ́ wóyí pʋ́ amʋ́ atɔ́ fɛ́ɛ́ ɛ́. Ɩ́nɩ sʋ Bulu ɔbɛ́bɩtɩ́ mlɩ ɩsʋ dʋn aha tráhɛ. } 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{15}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Tsúfɛ́ mlɩtɛfá ɩlɩn fá ɔpʋ, dʋ́ ɩbʋ kplɩ́ ɩbʋ há ɔha tɛdámlí klʋntɔ. Támɛ nɩ́ ɔdámlí klʋntɔ tá á, mlɩtɛlábwɛ́ mʋ otemlí ɩsʋbɩtɩ́ ogyá ánɩ́ ɩtamaduntɔ ɔyɔpʋ́ dʋn mlɩ onutó.} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{16}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Ansibi abwiepʋ́ ánɩ́ mlɩdɛ́ ahá kpa, mlɩgyɔwɩ nɩ́. Mlɩtɛblɩ́ mlɩaa, $‘$Nɩ́ ɔkʋ ɔká Bulu ɔtswɛ́kpa obu ámʋ ntam a, imehián ánɩ́ obégyi mʋ́sʋ́. Támɛ nɩ́ ɔká sika pɛpɛ atɔ́á ɩbʋ ɔtswɛ́kpa obuto ɩnʋ mʋ́ ntam a, ilehián ánɩ́ obégyi mʋ́sʋ́.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{17}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ansibi abwiepʋ́! Aha mimláhɛ! Mʋ́tɔ́ mɔmʋ bʋ labi dʋn? Sika pɛpɛ atɔ́ ámʋ lóó, ntɛ́ɛ Bulu ɔtswɛ́kpa obu ámʋ́ʋ́ ɩlahá sika ámʋ lamlí Bulu klɛ́ amʋ? }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{18}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mlɩtɛtráa blɩ́ mlɩaa, $‘$Nɩ́ ɔkʋ ɔká }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{afɔdɩɛ-asubwi} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ntam a, imehián ánɩ́ obégyi mʋ́sʋ́. Támɛ nɩ́ ɔká afɔdɩɛ-abɔtɔ́ ámʋ ntam mʋ́ á, ilehián ánɩ́ obégyi mʋ́sʋ́.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{19}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ansibi abwiepʋ́! Mʋ́tɔ́ mɔmʋ bʋ labi dʋn? Afɔdɩɛ-abɔtɔ́ ámʋ ntɛ́ɛ afɔdɩɛ-asubwi ámʋ́ʋ́ ɩlahá mʋ́ ɩlamlí Bulu klɛ́ amʋ? }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{20}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Nɩ́ fɛká afɔdɩɛ-asubwi amʋ ntam a, faká ibwi ámʋ pʋ́ atɔ́á ɩdɩn mʋ́sʋ́ fɛ́ɛ́ ntam. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{21}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Nɩ́ fɛká Bulu ɔtswɛ́kpa amʋ ntam a, faká Bulu mʋa mʋ otsiákpá ntam. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{22}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Nɩ́ fɛká ɔsʋ́sʋ́ ntam a, faká Bulu mʋa mʋ owíe obíá ntam.} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{23}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Mlɩteye mlɩ ɔtsʋtsʋ́ pʋ́ kpántánkplámá aná fɛ́ɛ́tɔ́ idú, pʋ́ }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{idúsɩ́} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{há Bulu. Támɛ mlɩmɛ́dɛ́ Bulu mbla amʋ́ʋ́ ɩhɩ́ɛ́ dehián, igyi asʋ́ngyí ɔnɔkwalɩsʋ, aba nwewúun pʋ́ ɔnɔkwalɩwa ámʋsʋ gyi. Mʋ́déhián nɩ, támɛ mlɩmákiná iyétɔ dúsɩ́ amʋ ɛ́ ha. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{24}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ansibi abwiepʋ́ ánɩ́ mlɩdɛ́ ahá kpa, mlɩgyɔwɩ nɩ́. Mlɩtɔtsrɔ́ mbépi lɛ́ oputsútɔ́, támɛ mlɩtɛmɛ́ mbéwun.} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{25}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Tsúfɛ́ mlɩtɔfwɩ́ mlɩ nwɛ pʋ́ mlɩ nlɛpɛ ɔma wankláán, támɛ atɔ́á mlɩlapʋ́ owi mʋ́a ɔnsɩpɛ swɩ́ɩ́ ahá sɔ́ɔ́n bʋ mʋ́tɔ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{26}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Farisifɔ ansibi abwiepʋ́, mlɩgyankpa fwɩ nwɛ mʋ́a nlɛpɛ ámʋtɔ, mʋ́ ɔma ɛ́ bɛ́tɩn.} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{27}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Mlɩlabwɛ́ fɛ́ ntsán ánɩ́ bakpá mʋ́ afá futútúútú, mʋ́ ɩwɩ lawá akɩ́lɛ. Támɛ mʋ́tɔ́ mʋ́ á, afúli awú pʋ́ atɔ plɔ́hɛ́ sɔ́ɔ́n bɔ́ mʋ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{28}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Alɩ kɛ́n mlɩgyí nɩ́. Ahá bʋtɛkɩ mlɩ ánɩ́ mlɩgyí yilé abwɛpʋ́. Támɛ mlɩ klʋntɔ mʋ́ á, apinabwɛbíbwɛ mʋ́a lalahɛbwɛ sɔ́ɔ́n bɔ́ mʋ́.} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Bulu Ɩsʋbɩtɩ́} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Luka 11:47-51)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{29-30}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Mlɩ Farisifɔ pʋ́ Mose mbla asunápʋ́, apinabwɛbí abwɛpʋ́, mlɩgyɔwɩ nɩ́. Tsúfɛ́ mlɩtɔpwɛ́ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́ pʋ́ yilé abwɛpʋ́ ámʋ́ʋ́ betsiá ámʋ ntsán, lá mʋ́ ɩwɩ wankláán, blɩ́ mlɩaa, $‘$Nɩ́ anɩlétsiá anɩ anáin brɛ́sʋ́ asa bɔmɔ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́ anfɩ á, tɛkɩ anɩmɔ́wa ɩbɩ mʋ́tɔ́.$’$ }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{31}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mlɩ asʋn blɩ́hɛ́ anfɩ désuná ánɩ́ mlɩgyí Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́ amɔpʋ́ ámʋ abí-aná nɩ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{32}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mlɩwuna yɔ mʋ́sʋ́, amlɩmɔ mlɩ anáin bwɛhɛ́ ámʋ ɔnɔ́. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{33}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Awɔ, abɛ abí-aná! Mlɛ́talɩ́ srɩ́ sí ɩpɔ́n ámʋ́ʋ́ Bulu ɔbɛ́ha mlɩ, kpá mlɩ wá ɩsʋbɩtɩ́ ogyá ámʋ́ʋ́ ɩtamaduntɔ ámʋ? }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{34}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mʋ́ sʋ ndɛ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́, anyansapʋ pʋ́ Mose mbla asunápʋ́ wa sɩ́sɩ́ mlɩ. Támɛ mlɔ́mɔ akʋ, dá amʋ́tɔ́ akʋ mántá oyikpalíhɛsʋ. Mlɔ́nwɛn amʋ́tɔ́ akʋ mplɩ mlɩ ofíakpa, dɩ́nká akʋsʋ tsú awúlusʋ yɔ́ awúlusʋ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{35}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɩ́nɩ sʋ yilé abwɛpʋ́ ámʋ́ʋ́ mlɩa mlɩ anáin mlɩlamɔ́ tsú }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{Habelsʋ} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{bɔfʋn Sakaria, ogyi Barakia mʋ bi ámʋ́ʋ́ mlɩlɔ́mɔ Bulu ɔtswɛ́kpa obu mʋ́a }\SeeInGlossaryzxxParagraphscrSectioncolumnsscrBookscrBody{afɔdɩɛ-asubwi} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{amʋ nsɩnɛ́ ámʋ fɛ́ɛ́ obugya bɛ́ba mlɩsʋ. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{36}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Ɔnɔkwalɩ ndɛ mlɩ bláa. Ɩ́nɩ aná fɛ́ɛ́ sʋ Bulu ɩsʋbɩtɩ́ bɛ́ba mlɩ ndɛmba-abí ánfɩsʋ nɩ́.} 
- {\raggedright} \begin{adjustwidth}{0pt}{0pt}{0pt}{0pt}\begin{center}
-\spanzxxSectionHeadscrSectioncolumnsscrBookscrBody{Yerusalemfɔ Ɩwɩ Ɔdwɛ} \end{center}\end{adjustwidth} 
-\begin{adjustwidth}{0pt}{0pt}{4pt}{0pt}\begin{center}
-\spanzxxParallelPassageReferencescrSectioncolumnsscrBookscrBody{(Luka 13:34-35)} \end{center}\end{adjustwidth} 
-\widowpenalty=300
-\clubpenalty=300
-
-\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{37}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{$“$Óo Yerusalemfɔ, Yerusalemfɔ! Mlɩtɔ́mɔ́ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́, dá abí ánɩ́ Bulu lawá sɩ́sɩ́ mlɩ abwi mɔ́ nɩ́. Ntekleá nóbun mlɩ abísʋ́ brégyíbrɛ́, fɛ́ alɩá batɛ tobun mʋ abísʋ́, támɛ mlɩtamahá mɩ́ ɔkpa. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{38}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Mlɩkɩ, Bulu obési mlɩ ɔtswɛ́kpa tswɩ mlɩ, ɩbɛ́dɩ kpan. }\leftmargin 0pt{\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{39}$}} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{Tsúfɛ́ ndɛ mlɩ bláa mbɛ́ɛ, mlɩmɛ́ɛtrá wun mɩ ɛkɛkɛɛkɛ, yɔ́fʋn ɛkɛá mlɛ́blɩ́ mlɩaa, $‘$Bulu oyúla ɔhá ámʋ́ʋ́ ɔbá mʋ ɩdátɔ́.$’$ ámʋ.$”$} 
- \end{multicols}
+\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{37}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ $“$Óo Yerusalemfɔ, Yerusalemfɔ! Mlɩtɔ́mɔ́ Bulu ɔnɔ́sʋ́ atɔɩ́pʋ́, dá abí ánɩ́ Bulu lawá sɩ́sɩ́ mlɩ abwi mɔ́ nɩ́. Ntekleá nóbun mlɩ abísʋ́ brégyíbrɛ́, fɛ́ alɩá batɛ tobun mʋ abísʋ́, támɛ mlɩtamahá mɩ́ ɔkpa. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{38}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Mlɩkɩ, Bulu obési mlɩ ɔtswɛ́kpa tswɩ mlɩ, ɩbɛ́dɩ kpan. }\VerseNumberzxxParagraphscrSectioncolumnsscrBookscrBody{$^{39}$} \spanzxxParagraphscrSectioncolumnsscrBookscrBody{ Tsúfɛ́ ndɛ mlɩ bláa mbɛ́ɛ, mlɩmɛ́ɛtrá wun mɩ ɛkɛkɛɛkɛ, yɔ́fʋn ɛkɛá mlɛ́blɩ́ mlɩaa, $‘$Bulu oyúla ɔhá ámʋ́ʋ́ ɔbá mʋ ɩdátɔ́.$’$ ámʋ.$”$} \end{spacing}
+ \end{spacing}\end{multicols}
 \end{document}

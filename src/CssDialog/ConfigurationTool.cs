@@ -42,8 +42,7 @@ namespace SIL.PublishingSolution
 		#endregion
 
 		#region Public Variable
-
-		public bool _fromNunit = false;
+		
 		public string InputType = string.Empty;
 		public string MediaType = string.Empty;
 		public string Style = string.Empty;
@@ -114,7 +113,7 @@ namespace SIL.PublishingSolution
 			{
 				//It will call when the Configtool from Application
 				RemoveSettingsFile();
-				if (!_fromNunit)
+				if (!Common.Testing)
 					ValidateXMLVersion(Param.SettingPath);
 				Param.LoadSettings(); // Load StyleSetting.xml
 				_cToolBL.inputTypeBL = _cToolBL.LoadInputType();

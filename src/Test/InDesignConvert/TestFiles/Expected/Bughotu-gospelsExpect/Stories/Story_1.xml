@@ -3,60 +3,63 @@
   <Story Self="1" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+      <Content>Bughotu-gospels</Content>
+    </CharacterStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_1">
-        <Content />
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_.bgt_1">
+        <Content>Sen Matiu Ke Risoa</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/TitleMain_1">
         <Content>Sen Matiu Ke Risoa</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_2">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroSectionHead_1">
         <Content>Na Titiono Eigna Na Buka Iaani</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_3">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroParagraph_1">
         <Content>A Matiu sikei itadia e salaghe rua na mane vaovarongo nigna a Jisas. Gi e kiloa a Jisas bali nigna na mane vaovarongo, imanea sina mane bali oho takis tadia mara Jiu vania na gaumane gna i Rom. Kori vido a Mak ma a Luk koro titiono eigna imanea kori rodia na rioriso, romara koro kiloagna Livae. Reghia Mak 2:14; Luk 5:27.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_4">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroParagraph_1">
         <Content>Matiu ke risoa na buka iaani vanira nigna na komi tinoni, mara Jiu. Sethe na vinogha gi e mai a Jisas, na komi profet kena risoa tadia na komi Rioriso ke Tabu a God keda vetula maia sina mane kena kiloagna &lt;&lt;Mesaea&gt;&gt; ba &lt;&lt;Vahavi&gt;&gt; bali hathera na komi tinoni Jiu. Keana kori vido a Jisas ke mai, na komi tinoni Jiu kena ghaghana ruarua eigna imanea. Mara na Farise mi mara na Sadiusi mi mara puhidia mara Jiu kena siriuhaghinia a Jisas. Mara Jiu kena toatogha a Vahavi keda mai duagna na mana ke hutu me keda rihura nidia na komi thevuioka me keda vunaghi pungusira thovohaliu. Imarea kena toatogha e boi jino a Vahavi keda thehe kori ghaibabala eigna iangeni keda tateli aua e teo sa nigna na mana.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_4">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroParagraph_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroParagraph_1">
         <Content>Matiu ke risoa na buka iaani eigna na komi tinoni Jiu kedana reghivaughithatha a Jisas a pukuni Vahavi, mi imanea nidia na king. Matiu ke titionora na komi rioriso eigna a Vahavi ke mono tadia na komi Rioriso ke Tabu. Imanea ke tateli aua na komi rioriso irangeni ke tate mai tutuni kori vido a Jisas ke mai me mono kori maramagna.</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_5">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroSectionHead_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroSectionHead_1">
         <Content>Na Komi Fata Ke Nagho Kori Buka Iaani:</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_6">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>Na havigna mai a Jisas (1:1--2:23)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>Nigna na titiono a Jon Siuvitabu (3:1-12)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>Na siuvitabu ma na auaugna a Jisas (3:13--4:11)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>Nigna na agutu a Jisas i Galili (4:12--18:35)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>A Jisas ke taveti au i Galili me vano i Jerusalem (19:1--20:34)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>Na vagougovui wik a Jisas ke mono i Jerusalem (21:1--25:46)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_2">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_7">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/IntroListItem1_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/IntroListItem1_1">
         <Content>A Jisas ke thehe me ghoi havi tabiru (26:1--28:20)</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
   </Story>

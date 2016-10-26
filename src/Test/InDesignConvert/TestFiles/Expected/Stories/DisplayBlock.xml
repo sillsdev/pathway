@@ -3,28 +3,5 @@
   <Story Self="1" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/t1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]" ParagraphBreakType="NextPage">
-        <Content> T1 class </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/t2_t1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]" ParagraphBreakType="NextPage">
-        <Content> T2 class </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/t3_t2_t1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]" ParagraphBreakType="NextPage">
-        <Content> T3 class </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/t2_t1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]" ParagraphBreakType="NextPage">
-        <Content> T2  class </Content>
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/t1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]" ParagraphBreakType="NextPage">
-        <Content> T1 class </Content>
-      </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/t1..after">
-        <Content />
-      </CharacterStyleRange><Br/></ParagraphStyleRange>
   </Story>
 </idPkg:Story>

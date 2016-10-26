@@ -3,15 +3,18 @@
   <Story Self="1" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+    <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+      <Content>Kabwa</Content>
+    </CharacterStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/scrBook_1">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/scrBookName_.cwa_1">
         <Content>Ruka</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/TitleMain_1">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/TitleSecondary_1">
         <Content>Amang'ana amajomu ga Yesu kyego gang'orwa na</Content>
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/span_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/TitleMain_1">
         <Content> RUKA</Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
   </Story>

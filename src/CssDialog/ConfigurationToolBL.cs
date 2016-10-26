@@ -677,6 +677,7 @@ namespace SIL.PublishingSolution
 			_screenMode = ScreenMode.Load;
 			_lastSelectedLayout = StyleEXE;
 			Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
+
 			if (cTool.TabControl1.TabPages["tabdisplay"] != null)
 				tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
 			if (cTool.TabControl1.TabPages["tabPreview"] != null)
@@ -4812,7 +4813,7 @@ namespace SIL.PublishingSolution
 			string caption = "Delete Stylesheet";
 			var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message1", "Are you sure you want to delete the {0} stylesheet?", "");
 			confirmationStringMessage = string.Format(confirmationStringMessage, name);
-			if (!cTool._fromNunit)
+			if (!Common.Testing)
 			{
 				DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
 													  MessageBoxDefaultButton.Button2);
@@ -4963,7 +4964,7 @@ namespace SIL.PublishingSolution
 				confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabResetClick1.Message",
 					"Are you sure you want to remove all custom style sheets and restore \r\n settings to their initial values? (This cannot be undone.)", "");
 				const string caption = "Reset Settings";
-				if (!cTool._fromNunit)
+				if (!Common.Testing)
 				{
 					DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
 														  MessageBoxDefaultButton.Button2);
