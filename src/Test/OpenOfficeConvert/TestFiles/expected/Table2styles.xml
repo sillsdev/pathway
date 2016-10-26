@@ -33,7 +33,7 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="rtlColumn_tr_table_dicBody" style:family="paragraph" style:parent-style-name="tr_table_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="b_rtlColumn_tr_table_dicBody" style:family="text" style:parent-style-name="rtlColumn_tr_table_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_.ur_b_rtlColumn_tr_table_dicBody" style:family="text" style:parent-style-name="b_rtlColumn_tr_table_dicBody">
-      <style:text-properties fo:font-family="Scheherazade Graphite Alpha" style:font-name-complex="Scheherazade Graphite Alpha" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_headword_.ur_b_rtlColumn_tr_table_dicBody" style:family="text" style:parent-style-name="headword_.ur_b_rtlColumn_tr_table_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10" style:font-size-complex="10" fo:font-weight="700" style:font-weight-complex="700" style:text-position="sub 55%" />
@@ -90,7 +90,7 @@
     <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="letter" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="center" fo:margin-top="18pt" fo:margin-bottom="18pt" style:writing-mode="rl-tb" />
-      <style:text-properties fo:font-family="Scheherazade Graphite Alpha" fo:font-weight="700" fo:font-size="24pt" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-weight="700" fo:font-size="24pt" />
     </style:style>
     <style:style style:name="letData" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="right" />
@@ -110,7 +110,7 @@
     </style:style>
     <style:style style:name="example" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Scheherazade Graphite Alpha" fo:font-size="10pt" fo:font-style="italic" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-style="italic" />
     </style:style>
     <style:style style:name="grammaticalinfo" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
@@ -118,15 +118,15 @@
     </style:style>
     <style:style style:name="headword" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Scheherazade Graphite Alpha" fo:font-size="10pt" fo:font-weight="700" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="headwordminor" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Scheherazade Graphite Alpha" fo:font-size="10pt" fo:font-weight="700" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="LexEntrypublishRootMinorPrimaryTargetHeadWordRef" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Scheherazade Graphite Alpha" fo:font-size="10pt" fo:font-weight="700" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="lexreftype" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
@@ -134,11 +134,11 @@
     </style:style>
     <style:style style:name="sensecrossref" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Scheherazade Graphite Alpha" fo:font-size="10pt" fo:font-weight="700" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="variantrefform" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:text-indent="-36pt" fo:margin-left="36pt" fo:padding-bottom="2pt" fo:padding-top="1pt" />
-      <style:text-properties fo:font-family="Scheherazade Graphite Alpha" fo:font-size="10pt" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" />
     </style:style>
     <style:style style:name="SectionHead" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:keep-with-next="always" />

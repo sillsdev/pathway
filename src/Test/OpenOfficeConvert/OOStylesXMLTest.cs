@@ -322,33 +322,6 @@ namespace Test.OpenOfficeConvert
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
 
-
-            _validate.ClassName = "letter3"; // Inherit
-            _validate.ClassProperty.Add("fo:font-family", "Tahoma");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "letter4";
-            _validate.ClassProperty.Add("fo:font-family", "Tahoma");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "letter5";
-            _validate.ClassProperty.Add("fo:font-family", "dummyfont");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            // letter6 no style
-
-            _validate.ClassName = "letter7";
-            _validate.ClassProperty.Add("fo:font-family", "dummyfamily");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
             _validate.ClassName = "letter8";
 			_validate.ClassProperty.Add("fo:font-family", "serif");
 
@@ -919,7 +892,6 @@ namespace Test.OpenOfficeConvert
         [Test]
         public void SinglePageRefTest_Node()
         {
-
             const string file = "SinglePageRef";
 
             string input = FileInput(file + ".css");
@@ -939,13 +911,6 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:font-weight", "700");
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-			string xpath = "//style:master-page[@style:name='XHTML']";
-            _validate.ClassName = string.Empty;
-			string inner = "<text:span text:style-name=\"MT1\" style:horizontal-pos=\"center\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">|counter(page)|</text:span><style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"31.84842pt\" fo:min-width=\"100pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame></text:p></style:footer>";
-
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
             Assert.IsTrue(returnValue);
         }
 

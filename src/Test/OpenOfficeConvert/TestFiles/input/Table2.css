@@ -18,7 +18,7 @@ body
     margin-top: 18pt;
     margin-bottom: 18pt;
     direction: rtl;
-    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-family:  serif;	/* default Serif font */
     font-weight: bold;
     font-size: 24pt;
 }
@@ -29,7 +29,7 @@ body
     text-align: right;
 }
 .entry {
-    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-family: Times New Roman, serif;	/* default Serif font */
     font-size: 10pt;	/* inherited */
     padding-left: 9pt;
     text-indent: -36pt;
@@ -39,7 +39,7 @@ body
     counter-reset: sense;
 }
 .xhomographnumber {
-    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-family: Times New Roman, serif;	/* default Serif font */
     font-size: 55%;
     font-weight: bold;
     vertical-align: sub;
@@ -48,7 +48,7 @@ body
     font-weight: normal;
 }
 .xsensenumber {
-    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-family: Times New Roman, serif;	/* default Serif font */
 }
 .xitem {
     /* placeholder for adding list separators */
@@ -62,7 +62,7 @@ body
 .example {
     /* lang = 'ur' */
     /* explicit FieldWorks style = 'Dictionary-Vernacular' */
-    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-family:  serif;	/* default Serif font */
     font-size: 10pt;	/* cascaded environment */
     font-style: italic;
     text-indent: 0pt;
@@ -76,7 +76,7 @@ body
 .examples>.xitem + .xitem:before { content: "  " }
 .grammatical-info {
     /* explicit FieldWorks style = 'Dictionary-Contrasting' */
-    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-family: Times New Roman, serif;	/* default Serif font */
     font-size: 10pt;	/* cascaded environment */
     font-style: italic;
     text-indent: 0pt;
@@ -86,7 +86,7 @@ body
 .headword {
     /* lang = 'ur' */
     /* explicit FieldWorks style = 'Dictionary-Headword' */
-    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-family:  serif;	/* default Serif font */
     font-size: 10pt;	/* cascaded environment */
     font-weight: bold;
     text-indent: 0pt;
@@ -98,7 +98,7 @@ body
 .headword-minor {
     /* lang = 'ur' */
     /* explicit FieldWorks style = 'Dictionary-Headword' */
-    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-family:  serif;	/* default Serif font */
     font-size: 10pt;	/* cascaded environment */
     font-weight: bold;
     text-indent: 0pt;
@@ -110,7 +110,7 @@ body
 .LexEntry-publishRootMinorPrimaryTarget-HeadWordRef {
     /* lang = 'ur' */
     /* explicit FieldWorks style = 'Dictionary-CrossReferences' */
-    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-family:  serif;	/* default Serif font */
     font-size: 10pt;	/* cascaded environment */
     font-weight: bold;
     text-indent: 0pt;
@@ -132,7 +132,7 @@ body
 .lexref-type {
     /* lang = 'en' */
     /* explicit FieldWorks style = 'Dictionary-Contrasting' */
-    font-family: "Times New Roman", serif;	/* default Serif font */
+    font-family: Times New Roman, serif;	/* default Serif font */
     font-size: 10pt;	/* cascaded environment */
     font-style: italic;
     text-indent: 0pt;
@@ -154,7 +154,7 @@ body
 .sense-crossref {
     /* lang = 'ur' */
     /* explicit FieldWorks style = 'Dictionary-CrossReferences' */
-    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-family:  serif;	/* default Serif font */
     font-size: 10pt;	/* cascaded environment */
     font-weight: bold;
     text-indent: 0pt;
@@ -190,7 +190,7 @@ body
 .variantref-form {
     /* lang = 'ur' */
     /* cascaded environment FieldWorks style = 'Dictionary-Normal' */
-    font-family: "Scheherazade Graphite Alpha", serif;	/* default Serif font */
+    font-family:  serif;	/* default Serif font */
     font-size: 10pt;	/* cascaded environment */
     padding-left: 9pt;
     text-indent: -36pt;
