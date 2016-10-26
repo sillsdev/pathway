@@ -39,7 +39,7 @@ namespace Test
                     var outputLine = outputStream.ReadLine();
                     if (ex != null && ex.Contains(line)) continue;
                     if (expectLine != outputLine)
-                        Assert.Fail(msg);
+						Assert.Fail(msg + ":" + expectLine);
                 }
                 if (!outputStream.EndOfStream)
                     Assert.Fail(msg);

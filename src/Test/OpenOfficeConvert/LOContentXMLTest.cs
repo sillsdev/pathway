@@ -1507,6 +1507,7 @@ namespace Test.OpenOfficeConvert
         /// TD-1855 Picture / PictureBox error
         /// </summary>
         [Test]
+		[Category("SkipOnTeamCity")]
         public void Picture_Mrk_Node()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -3914,6 +3915,7 @@ namespace Test.OpenOfficeConvert
         ///Table structure Test
         /// </summary>      
         [Test]
+		[Category("SkipOnTeamCity")]
         public void Table2Test()
         {
             _projInfo.ProjectInputType = "Scripture";

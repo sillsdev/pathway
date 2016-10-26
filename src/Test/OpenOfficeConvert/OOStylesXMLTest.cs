@@ -890,6 +890,7 @@ namespace Test.OpenOfficeConvert
         ///TD-425 Impliment Start and Last References in same page
         /// </summary>
         [Test]
+		[Category("SkipOnTeamCity")]
         public void SinglePageRefTest_Node()
         {
             const string file = "SinglePageRef";
