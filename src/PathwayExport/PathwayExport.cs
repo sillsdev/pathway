@@ -73,27 +73,27 @@ namespace SIL.PublishingSolution
                 projectInfo.ProjectPath = exportDirectory;
                 foreach (string f in files)
                 {
-                    if (f.EndsWith(".css"))
+                    if (f.ToLower().Contains(".css"))
                     {
-                        if (f.Contains("flexrev"))
+                        if (f.ToLower().Contains("flexrev"))
                         {
                             projectInfo.DefaultRevCssFileWithPath = f;
                         }
-                        else
+                        else if (f.ToLower().Contains("main"))
                         {
                             projectInfo.DefaultCssFileWithPath = f;
                         }
 
                     }
-                    if (f.EndsWith(".xhtml"))
+                    if (f.ToLower().EndsWith(".xhtml"))
                     {
-                        if (f.Contains("flexrev"))
+                        if (f.ToLower().Contains("flexrev"))
                         {
                             //projectInfo.DefaultXhtmlFileWithPath = f;
                             projectInfo.IsReversalExist = true;
                             //projectInfo.ProjectName = f;
                         }
-                        else
+                        else if (f.ToLower().Contains("main"))
                         {
                             projectInfo.DefaultXhtmlFileWithPath = f;
                             projectInfo.IsLexiconSectionExist = true;
@@ -458,9 +458,9 @@ namespace SIL.PublishingSolution
                 projectInfo.FromPlugin = true;
                 if(indexMain >= 0 && indexRev >= 0)
                     projectInfo.IsODM = true;
-                projectInfo.DefaultRevCssFileWithPath =
-                    Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
-                projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.ProjectPath);
+                //projectInfo.DefaultRevCssFileWithPath =
+                //    Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
+                projectInfo.DictionaryPath = projectInfo.ProjectPath;
             }
             else if (projectInfo.ProjectInputType == "Scripture")
             {
