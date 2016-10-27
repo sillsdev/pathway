@@ -37,9 +37,11 @@ namespace Test
                     line += 1;
                     var expectLine = expectStream.ReadLine();
                     var outputLine = outputStream.ReadLine();
-                    if (ex != null && ex.Contains(line)) continue;
-                    if (expectLine != outputLine)
-						Assert.Fail(msg + ":" + expectLine);
+					if (ex != null && ex.Contains(line))
+					{
+						if (expectLine != outputLine)
+							Assert.Fail(msg + ":" + expectLine);
+					}
                 }
                 if (!outputStream.EndOfStream)
                     Assert.Fail(msg);

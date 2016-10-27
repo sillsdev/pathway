@@ -4472,7 +4472,7 @@ namespace SIL.Tool
 					sw.WriteLine(tempDirectoryFolder);
 					sw.WriteLine(workingDirectoryXhtmlFileName);
 					if (string.IsNullOrEmpty(exportTitle))
-						exportTitle = GetFileNameWithoutExtension(fileLoc);
+						exportTitle = GetFileNameWithoutExtension(workingDirectoryXhtmlFileName);
 
 					sw.WriteLine(exportTitle);
 					sw.WriteLine(creatorTool);
