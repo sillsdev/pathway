@@ -295,8 +295,6 @@
   </Target>
   <Target Name="BeforeBuild">
     <!-- validator is referenced even if not called -->
-    <Delete Files="@(AllDebugOutput)" Condition="'$(Configuration)' == 'Debug'" />
-    <Delete Files="@(AllReleaseOutput)" Condition="'$(Configuration)' != 'Debug'" />
     <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
     <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'$(OutputPath)Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -339,8 +337,6 @@
   </Target>
   <Target Name="AfterBuild" />
   <ItemGroup>
-    <AllDebugOutput Include="..\output\Debug\**\*.*" Exclude="..\output\Debug\*.vshost.exe" />
-    <AllReleaseOutput Include="..\output\Release\**\*.*" Exclude="..\output\Release\*.vshost.exe" />
     <EpubCheck Include="epubcheck-4.0.1\**\*.*" />
     <PdfLicenseManager Include="pdflicensemanager-2.3.jar" />
     <Paratexmf Include="..\src\XeLaTexConvert\Paratexmf\**\*.*" />

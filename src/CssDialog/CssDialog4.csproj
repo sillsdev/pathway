@@ -226,6 +226,10 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CssParser, Version=1.13.4.4657, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\CssParser.dll</HintPath>
+    </Reference>
     <Reference Include="DesktopAnalytics">
       <HintPath>..\..\packages\DesktopAnalytics.1.2.3\lib\net40\DesktopAnalytics.dll</HintPath>
     </Reference>
@@ -234,6 +238,10 @@
     </Reference>
     <Reference Include="Prince">
       <HintPath>..\..\packages\PrinceXML.10.7\lib\net20\Prince.dll</HintPath>
+    </Reference>
+    <Reference Include="PsTool, Version=1.13.4.4657, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\PsTool.dll</HintPath>
     </Reference>
     <Reference Include="SIL.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -397,21 +405,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\LayoutTableTwoColumn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CssParser\CssParser.csproj">
-      <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
-      <Name>CssParser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PsTool\PsTool.csproj">
-      <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
-      <Name>PsTool</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\epub_logo_color.png" />
