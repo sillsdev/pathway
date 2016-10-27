@@ -58,7 +58,7 @@
         <RegistryValue Root="HKLM" Key="Software\SIL\Pathway" Name="WritingSystemStore" Type="string" Value="[CommonAppDataFolder]SIL\WritingSystemStore\" />
       </Component>
     </DirectoryRef>
-    <Icon Id="configurationtool.exe" SourceFile="..\output\Release\ConfigurationTool.exe" />
+    <Icon Id="configurationtool.exe" SourceFile="..\output\Release\Export\ConfigurationTool.exe" />
     <Property Id="ARPPRODUCTICON" Value="configurationtool.exe" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
     <WixVariable Id="WixUIDialogBmp" Value="bannrbmp.bmp" />
