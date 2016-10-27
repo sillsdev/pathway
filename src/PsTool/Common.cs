@@ -4459,12 +4459,21 @@ namespace SIL.Tool
 
 			string allUserPath = GetAllUserPath();
 			string fileLoc = Common.PathCombine(allUserPath, "License.txt");
+
+			if (!File.Exists(fileLoc))
+			{
+				string text = "";
+				File.WriteAllText(fileLoc, text);
+			}
 			if (File.Exists(fileLoc))
 			{
 				using (StreamWriter sw = new StreamWriter(fileLoc))
 				{
 					sw.WriteLine(tempDirectoryFolder);
 					sw.WriteLine(workingDirectoryXhtmlFileName);
+					if (string.IsNullOrEmpty(exportTitle))
+						exportTitle = GetFileNameWithoutExtension(fileLoc);
+
 					sw.WriteLine(exportTitle);
 					sw.WriteLine(creatorTool);
 					sw.WriteLine(inputType);
@@ -4472,7 +4481,6 @@ namespace SIL.Tool
 				}
 				isCreated = true;
 			}
-
 			return isCreated;
 		}
 
@@ -4585,14 +4593,6 @@ namespace SIL.Tool
 			{
 				string fontSize = string.Empty;
 				Dictionary<string, string> xhtmlMetaLanguage = new Dictionary<string, string>();
-				//var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-				//if (fileNameWithoutExtension != null)
-				//{
-				//    string fileName = fileNameWithoutExtension.ToLower();
-				//    if (fileName != "main" && fileName != "main1")
-				//        return;
-				//}
-
 				var xDoc = Common.DeclareXMLDocument(true);
 				xDoc.Load(projInfo.DefaultXhtmlFileWithPath);
 				XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
