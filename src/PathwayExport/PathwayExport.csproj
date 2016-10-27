@@ -231,13 +231,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DictionaryForMIDsConvert\DictionaryForMIDsConvert.csproj">
+      <Project>{d4afca5b-4c8a-4478-a08f-75540be0d3b0}</Project>
+      <Name>DictionaryForMIDsConvert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\epubConvert\epubConvert.csproj">
       <Project>{b19037f2-26f7-48a2-9301-b5ca335c6824}</Project>
       <Name>epubConvert</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InDesignConvert\InDesignConvert.csproj">
+      <Project>{8d0d307d-3785-4561-a923-ff3ddf6c2f14}</Project>
+      <Name>InDesignConvert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenOfficeConvert\OpenOfficeConvert.csproj">
       <Project>{f91c8f61-9dfa-42f0-84ef-fe64b47ff433}</Project>
       <Name>OpenOfficeConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PdfConvert\PdfConvert.csproj">
+      <Project>{e75bc85c-6240-45f0-adbf-f0f80eefd6d8}</Project>
+      <Name>PdfConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsExport\PsExport.csproj">
       <Project>{dcd48287-7f36-4dbb-94cf-4ff617bf1f78}</Project>
@@ -246,6 +258,10 @@
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XeLaTexConvert\XeLaTexConvert.csproj">
+      <Project>{65d64c80-2aa4-4bd0-ac87-b4c2b3720012}</Project>
+      <Name>XeLaTexConvert</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

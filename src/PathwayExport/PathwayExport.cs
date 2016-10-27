@@ -66,9 +66,6 @@ namespace SIL.PublishingSolution
             {
                 projectInfo = new PublicationInformation();
                 ArgumentUsage(args);
-                //Console.WriteLine("Arguments Okay");
-                //Console.Read();
-                //ExportLibreOffice exp = new ExportLibreOffice();
                 
                 projectInfo.ProjectPath = exportDirectory;
                 foreach (string f in files)
@@ -108,17 +105,40 @@ namespace SIL.PublishingSolution
                     projectInfo.ProjectName = "flexrev";
                 SetFileName();
                 projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
+
                 IExportProcess process = new ExportLibreOffice();
                 if (exportType.Replace("'","") == "openoffice/libreoffice")
                 {
-                    process = new SIL.PublishingSolution.ExportLibreOffice();
-                    process.Export(projectInfo);
+                    projectInfo.FinalOutput = "odt";
+                    process = new ExportLibreOffice();
                 }
-                else if (exportType.Replace("'", "") == "e-book (epub2 and epub3)")
+                else if (exportType.ToLower() == "e-book (epub2 and epub3)")
                 {
-                    process = new SIL.PublishingSolution.Exportepub();
-                    process.Export(projectInfo);
+                    process = new Exportepub();
                 }
+                else if (exportType.ToLower() == "pdf (using openoffice/libreoffice)")
+                {
+                    projectInfo.FinalOutput = "pdf";
+                    process = new ExportLibreOffice();
+                }
+                else if (exportType.ToLower() == "pdf (using prince)")
+                {
+                    process = new ExportPdf();
+                }
+                else if (exportType.ToLower() == "xelatex")
+                {
+                    process = new ExportXeLaTex();
+                }
+                else if (exportType.ToLower() == "dictionaryformids")
+                {
+                    process = new ExportDictionaryForMIDs();
+                }
+                else if (exportType.ToLower() == "indesign")
+                {
+                    process = new ExportInDesign();
+                }
+
+                process.Export(projectInfo);
             }
         }
 
@@ -145,8 +165,6 @@ namespace SIL.PublishingSolution
                             Console.Read();
                             Environment.Exit(0);
                         }
-                        if (argFilledExportType) ;
-                            
                         break;
                     case "--directory":
                     case "-d":
@@ -248,6 +266,7 @@ namespace SIL.PublishingSolution
                 case "e-book (.epub)":
                 case "e-book (epub2 and epub3)":
                 case "gobible":
+                case "dictionaryformids":
                 case "pdf (using openoffice/libreoffice)":
                 case "pdf (using prince)":
                 case "indesign":
