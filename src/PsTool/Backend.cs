@@ -117,7 +117,7 @@ namespace SIL.Tool
 
                 string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString());
 
-                CommandLineRunner.Run(Common.PathCombine(Common.GetApplicationPath(), "PathwayExport.exe"), argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
+                CommandLineRunner.Run(Path.Combine(Common.GetApplicationPath(), "Export" ,"PathwayExport.exe"), argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
             }
 	        catch(Exception ex)
 	        {
