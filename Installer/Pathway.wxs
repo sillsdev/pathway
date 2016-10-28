@@ -33,6 +33,7 @@
             <Shortcut Id="desktopShortcutApp" Directory="DesktopFolder" Name="Pathway Configuration Tool" Target="[!configurationtool.exe]" IconIndex="0" />
             <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
             <RegistryValue Root="HKCU" Key="Software\SIL\Pathway" Name="PathwayDir" Type="string" Value="[APPLICATIONFOLDER]" />
+            <RegistryValue Root="HKCU" Key="Software\SIL\Pathway" Name="PathwayDir46" Type="string" Value="[export]" />
           </Component>
           <Component Id="AddReadmeShortcut" Guid="23575D91-3CF8-41dc-96FC-D2466EDE125C">
             <Shortcut Id="ShortcutReadme" Name="Read Me" Target="[!readmepw.rtf]" Hotkey="0" IconIndex="0" Show="normal" />
@@ -55,6 +56,7 @@
       <Directory Id="DesktopFolder" Name="Desktop" />
       <Component Id="RegistryEntries" Guid="371D3AFA-C611-4928-89E5-6BC00EDA2EAB" KeyPath="yes">
         <RegistryValue Root="HKLM" Key="Software\SIL\Pathway" Name="PathwayDir" Type="string" Value="[APPLICATIONFOLDER]" />
+        <RegistryValue Root="HKLM" Key="Software\SIL\Pathway" Name="PathwayDir46" Type="string" Value="[export]" />
         <RegistryValue Root="HKLM" Key="Software\SIL\Pathway" Name="WritingSystemStore" Type="string" Value="[CommonAppDataFolder]SIL\WritingSystemStore\" />
       </Component>
     </DirectoryRef>
