@@ -1,6 +1,8 @@
 <values>
 <value name="PathwayDir"
 type="string">/usr/lib/pathway/</value>
+<value name="PathwayDir46"
+type="string">/usr/lib/pathway/Export/</value>
 <value name="WritingSystemStore"
 type="string">/var/lib/fieldworks/SIL/WritingSystemStore/</value>
 </values>

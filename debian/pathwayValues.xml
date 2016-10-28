@@ -1,4 +1,6 @@
 <values>
 <value name="PathwayDir"
 type="string">/usr/lib/pathway/</value>
+<value name="PathwayDir46"
+type="string">/usr/lib/pathway/Export/</value>
 </values>

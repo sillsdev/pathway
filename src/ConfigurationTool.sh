@@ -6,5 +6,5 @@ export PKG_CONFIG_PATH=${MONO_PREFIX}/lib/pkgconfig:${PKG_CONFIG_PATH}
 export MONO_GAC_PREFIX=${MONO_PREFIX}:${MONO_GAC_PREFIX}
 export MONO_MWF_SCALING=disable
 export PATH=${MONO_PREFIX}/bin:$PATH
-exec mono /usr/lib/pathway/ConfigurationTool.exe "$@"
+exec mono /usr/lib/pathway/Export/ConfigurationTool.exe "$@"
 

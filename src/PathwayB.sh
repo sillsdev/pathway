@@ -1,3 +1,3 @@
 #!/bin/sh
-exec /usr/bin/mono /usr/lib/pathway/PathwayB.exe "$@"
+exec /usr/bin/mono /usr/lib/pathway/Export/PathwayB.exe "$@"
 

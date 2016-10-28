@@ -10,5 +10,5 @@ MONO_GAC_PREFIX="${MONO_PREFIX}:/usr"
 export MONO_PREFIX LD_LIBRARY_PATH PKG_CONFIG_PATH MONO_GAC_PREFIX
 
 #xbuild /t:Build /property:Configuration=Debug\;Solution=Pathway.sln Build/Palaso.proj
-AssertUiEnabled=false xbuild /t:${TARGET} /property:Configuration=Debug\;Solution=Pathway.sln\;BuildTaskDir=lib\;ApplicationName=Pathway\;ApplicationNameLC=pathway\;ExtraExcludeCategories=SkipOnLinux\;TestNamePat=Test\;StampIt=false\;BUILD_NUMBER=${RELEASE} Build/Palaso.proj
+AssertUiEnabled=false xbuild /t:${TARGET} /property:Configuration=Debug\;Solution=Pathway.sln\;BuildTaskDir=lib\;ApplicationName=Pathway\;ApplicationNameLC=pathway\;ExtraExcludeCategories=SkipOnLinux\;TestNamePat=Export\\Test\;StampIt=false\;BUILD_NUMBER=${RELEASE} Build/Palaso.proj
 
