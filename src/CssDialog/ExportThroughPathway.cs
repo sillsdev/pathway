@@ -760,7 +760,7 @@ namespace SIL.PublishingSolution
         protected void LoadAvailFormats()
         {
             OperatingSystem OS = Environment.OSVersion;
-            string BackendsPath = Common.ProgInstall;
+            string BackendsPath = Path.Combine(Common.ProgInstall, "Export");
             Backend.Load(BackendsPath);
 			Console.WriteLine( @"InputType from : {0}", InputType);
             ArrayList exportType = Backend.GetExportType(InputType);

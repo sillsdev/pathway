@@ -76,10 +76,11 @@ namespace SIL.PublishingSolution
                         {
                             projectInfo.DefaultRevCssFileWithPath = f;
                         }
-                        else if (f.ToLower().Contains("main"))
+                        else
                         {
                             projectInfo.DefaultCssFileWithPath = f;
                         }
+
 
                     }
                     if (f.ToLower().EndsWith(".xhtml"))

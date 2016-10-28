@@ -1,19 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="12.0">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{403F8C54-4154-4D79-AED7-326B976875B4}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{422C5127-260D-4F16-B476-33AA38DBF919}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>epubValidator</RootNamespace>
-    <AssemblyName>epubValidator</AssemblyName>
+    <RootNamespace>SIL.Tool</RootNamespace>
+    <AssemblyName>PsTool</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ApplicationIcon>Resources\epub_logo_color.ico</ApplicationIcon>
-    <StartupObject>epubValidator.Program</StartupObject>
+    <SignAssembly>true</SignAssembly>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -31,16 +29,17 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\output\Debug\Export</OutputPath>
+    <OutputPath>..\..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,10 +47,9 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -62,10 +60,9 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -76,10 +73,9 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -89,10 +85,9 @@
     <Edition>BTE</Edition>
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -102,11 +97,10 @@
     <Edition>SE</Edition>
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\output\Debug\Export</OutputPath>
+    <OutputPath>..\..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -117,10 +111,9 @@
     <Status>Testing</Status>
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -131,10 +124,9 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -145,10 +137,9 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -158,10 +149,9 @@
     <Edition>BTE</Edition>
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -171,115 +161,195 @@
     <Edition>SE</Edition>
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Corporate7BTE\epubValidator.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Corporate7BTE\PsTool.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\epubValidator.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\PsTool.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Analytics.NET, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Analytics.2.0.2\lib\Analytics.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="L10NSharp">
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SIL.Core">
+      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SIL.WritingSystems">
+      <HintPath>..\..\lib\SIL.WritingSystems.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ValidateEpub.cs" />
-    <Compile Include="ValidationDlg.cs">
+    <Compile Include="AfterBeforeProcess.cs" />
+    <Compile Include="AfterBeforeProcessEpub.cs" />
+    <Compile Include="AfterBeforeXHTMLProcess.cs" />
+    <Compile Include="Backend.cs" />
+    <Compile Include="CheckUserFileAccessRights.cs" />
+    <Compile Include="ClassInfo.cs" />
+    <Compile Include="ComboBoxItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CommonXml.cs" />
+    <Compile Include="CreatingHyphenationSettings.cs" />
+    <Compile Include="FileStreamXmlResolver.cs" />
+    <Compile Include="ImageMods.cs" />
+    <Compile Include="Json.cs" />
+    <Compile Include="FontInternals.cs">
+    </Compile>
+    <Compile Include="HashUtilities.cs" />
+    <Compile Include="MergeCss.cs" />
+    <Compile Include="MessageBoxExtender.cs" />
+    <Compile Include="Param.cs" />
+    <Compile Include="PathPart.cs" />
+    <Compile Include="PathwayPath.cs" />
+    <Compile Include="Progress.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ValidationDlg.Designer.cs">
-      <DependentUpon>ValidationDlg.cs</DependentUpon>
+    <Compile Include="Progress.Designer.cs">
+      <DependentUpon>Progress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Progress\IExportContents.cs" />
+    <Compile Include="Progress\IExporter.cs" />
+    <Compile Include="Progress\IInProcess.cs" />
+    <Compile Include="Progress\InProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Progress\InProcess.Designer.cs">
+      <DependentUpon>InProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Ramp.cs" />
+    <Compile Include="RampFile.cs" />
+    <Compile Include="ReflectionHelper.cs" />
+    <Compile Include="RegistryHelperLite.cs" />
+    <Compile Include="SettingsHelper.cs" />
+    <Compile Include="ShowHelp.cs" />
+    <Compile Include="StyleCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StyleCategories.Designer.cs">
+      <DependentUpon>StyleCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils.cs" />
+    <Compile Include="VerboseClass.cs" />
+    <Compile Include="XeLaTexInstallation.cs" />
+    <Compile Include="FileData.cs" />
+    <Compile Include="FolderTree.cs" />
+    <Compile Include="IExportProcess.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Localization\JW_Localization.cs" />
+    <Compile Include="Localization\JW_Registry.cs" />
+    <Compile Include="Localization\JW_Xml.cs" />
+    <Compile Include="Localization\Localizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Localization\Localizer.designer.cs">
+      <DependentUpon>Localizer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\NewLanguageDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Localization\NewLanguageDlg.designer.cs">
+      <DependentUpon>NewLanguageDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreExportProcess.cs" />
+    <Compile Include="PublicationInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ValidationDlg.resx">
-      <DependentUpon>ValidationDlg.cs</DependentUpon>
+    <Compile Include="RegistryAccess.cs" />
+    <Compile Include="SubProcess.cs" />
+    <Compile Include="Substitution.cs" />
+    <Compile Include="XHTMLProcess.cs" />
+    <Compile Include="ZipFolder.cs" />
+    <Compile Include="ZipUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\Localizer.resx">
+      <DependentUpon>Localizer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\NewLanguageDlg.resx">
+      <DependentUpon>NewLanguageDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Progress.resx">
+      <DependentUpon>Progress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Progress\InProcess.resx">
+      <DependentUpon>InProcess.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="results.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="results.Designer.cs">
-      <DependentUpon>results.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="results.resx">
-      <DependentUpon>results.cs</DependentUpon>
+    <EmbeddedResource Include="StyleCategories.resx">
+      <DependentUpon>StyleCategories.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -289,41 +359,15 @@
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\epub_logo_color.ico" />
-    <Content Include="Resources\epub_logo_color.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PsTool\PsTool.csproj">
-      <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
-      <Name>PsTool</Name>
-    </ProjectReference>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -333,4 +377,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

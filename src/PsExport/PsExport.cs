@@ -245,7 +245,7 @@ namespace SIL.PublishingSolution
 
 		private void SimplifyExportFiles(string exportedDirectory)
 		{
-			string cssSimplerExe = Path.Combine(Common.GetApplicationPath(), "CssSimpler.exe");
+			string cssSimplerExe = Path.Combine(Common.GetApplicationPath(), "Export","CssSimpler.exe");
 			var outDir = Path.GetDirectoryName(exportedDirectory);
 			if (outDir != null)
 			{

@@ -1,24 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="12.0">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
   <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{403F8C54-4154-4D79-AED7-326B976875B4}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{749D4FCD-5100-46C8-AE73-50873CB5CEC0}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>epubValidator</RootNamespace>
-    <AssemblyName>epubValidator</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ApplicationIcon>Resources\epub_logo_color.ico</ApplicationIcon>
-    <StartupObject>epubValidator.Program</StartupObject>
+    <RootNamespace>SIL.PublishingSolution</RootNamespace>
+    <AssemblyName>CssDialog</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -33,14 +32,14 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\output\Debug\Export</OutputPath>
+    <OutputPath>..\..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,10 +47,10 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -62,10 +61,10 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -76,10 +75,10 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -89,10 +88,10 @@
     <Edition>BTE</Edition>
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -102,11 +101,11 @@
     <Edition>SE</Edition>
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\output\Debug\Export</OutputPath>
+    <OutputPath>..\..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -117,10 +116,10 @@
     <Status>Testing</Status>
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -131,10 +130,10 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -145,10 +144,10 @@
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -158,10 +157,10 @@
     <Edition>BTE</Edition>
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -171,51 +170,53 @@
     <Edition>SE</Edition>
     <ConfTag>Pw7</ConfTag>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Corporate7BTE\epubValidator.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Corporate7BTE\CssDialog.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
-    <OutputPath>..\..\output\Release\Export</OutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\epubValidator.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\x86\Corporate7BTE\CssDialog.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
@@ -223,65 +224,202 @@
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CssParser, Version=1.13.4.4657, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\CssParser.dll</HintPath>
+    </Reference>
+    <Reference Include="DesktopAnalytics">
+      <HintPath>..\..\packages\DesktopAnalytics.1.2.3\lib\net40\DesktopAnalytics.dll</HintPath>
+    </Reference>
     <Reference Include="L10NSharp">
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Prince">
+      <HintPath>..\..\packages\PrinceXML.10.7\lib\net20\Prince.dll</HintPath>
+    </Reference>
+    <Reference Include="PsTool, Version=1.13.4.4657, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\PsTool.dll</HintPath>
+    </Reference>
+    <Reference Include="SIL.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ValidateEpub.cs" />
-    <Compile Include="ValidationDlg.cs">
+    <Compile Include="AboutPw.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ValidationDlg.Designer.cs">
-      <DependentUpon>ValidationDlg.cs</DependentUpon>
+    <Compile Include="AboutPw.Designer.cs">
+      <DependentUpon>AboutPw.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="ConfigurationTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigurationTool.Designer.cs">
+      <DependentUpon>ConfigurationTool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigurationToolBL.cs" />
+    <Compile Include="Contents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComboBoxItem.cs" />
+    <Compile Include="ExportDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportDlg.Designer.cs">
+      <DependentUpon>ExportDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportThroughPathway.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportThroughPathway.Designer.cs">
+      <DependentUpon>ExportThroughPathway.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FeatureSheet.cs" />
+    <Compile Include="FileHead.cs" />
+    <Compile Include="frmSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSplash.designer.cs">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IScriptureContents.cs" />
+    <Compile Include="LocalizeItems.cs" />
+    <Compile Include="OrganizationNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrganizationNameDialog.Designer.cs">
+      <DependentUpon>OrganizationNameDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pdf.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Preview.cs" />
+    <Compile Include="PreviewConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewConfig.Designer.cs">
+      <DependentUpon>PreviewConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreviewPrintVia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewPrintVia.Designer.cs">
+      <DependentUpon>PreviewPrintVia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintVia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintVia.Designer.cs">
+      <DependentUpon>PrintVia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ValidationDlg.resx">
-      <DependentUpon>ValidationDlg.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="results.cs">
+    <Compile Include="PublicationTask.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="results.Designer.cs">
-      <DependentUpon>results.cs</DependentUpon>
+    <Compile Include="PublicationTask.Designer.cs">
+      <DependentUpon>PublicationTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptureContents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectOrganizationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectOrganizationDialog.Designer.cs">
+      <DependentUpon>SelectOrganizationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsValidator.cs" />
+    <Compile Include="SettingsVersionControl.cs" />
+    <Compile Include="UILanguageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UILanguageDialog.Designer.cs">
+      <DependentUpon>UILanguageDialog.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="results.resx">
-      <DependentUpon>results.cs</DependentUpon>
+    <EmbeddedResource Include="AboutPw.resx">
+      <DependentUpon>AboutPw.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ConfigurationTool.resx">
+      <DependentUpon>ConfigurationTool.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportDlg.resx">
+      <DependentUpon>ExportDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportThroughPathway.resx">
+      <DependentUpon>ExportThroughPathway.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplash.resx">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrganizationNameDialog.resx">
+      <DependentUpon>OrganizationNameDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewConfig.resx">
+      <DependentUpon>PreviewConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewPrintVia.resx">
+      <DependentUpon>PreviewPrintVia.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintVia.resx">
+      <DependentUpon>PrintVia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources2.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PublicationTask.resx">
+      <DependentUpon>PublicationTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectOrganizationDialog.resx">
+      <DependentUpon>SelectOrganizationDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UILanguageDialog.resx">
+      <DependentUpon>UILanguageDialog.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\LayoutTableTwoColumn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\epub_logo_color.png" />
+    <None Include="Resources\DocumentTools.png" />
+    <None Include="Resources\draw-text.png" />
+    <None Include="Resources\cell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SIL-Logo-No-Tag-Color.gif" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -289,25 +427,10 @@
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
+      <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
       <Visible>False</Visible>
@@ -316,14 +439,31 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\epub_logo_color.ico" />
-    <Content Include="Resources\epub_logo_color.png" />
+    <None Include="Resources\go-down.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PsTool\PsTool.csproj">
-      <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
-      <Name>PsTool</Name>
-    </ProjectReference>
+    <None Include="Resources\go-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SIL_Color_Logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\configure.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sil-bw-logoBig.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sil-bw-logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Help.Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2014_sil_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -333,4 +473,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

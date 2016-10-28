@@ -3902,8 +3902,9 @@ namespace SIL.PublishingSolution
 		private bool PrincePreview(PublicationInformation projInfo)
 		{
 			bool success = false;
-			ExportPdf exportPdf = new ExportPdf();
-			success = exportPdf.Export(projInfo);
+            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
+			//ExportPdf exportPdf = new ExportPdf();
+			//success = exportPdf.Export(projInfo);
 			// copy to preview folder *******************
 			return success;
 		}
@@ -3911,9 +3912,10 @@ namespace SIL.PublishingSolution
 		private bool LOPreview(PublicationInformation projInfo)
 		{
 			bool success = false;
-			ExportLibreOffice openOffice = new ExportLibreOffice();
-			success = openOffice.Export(projInfo);
-			return success;
+            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
+            //ExportLibreOffice openOffice = new ExportLibreOffice();
+            //success = openOffice.Export(projInfo);
+            return success;
 		}
 
 		/// <summary>
