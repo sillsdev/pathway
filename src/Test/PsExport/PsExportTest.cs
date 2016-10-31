@@ -322,6 +322,7 @@ namespace Test.PsExport
         /// Simple test where no changes are made to the settings.
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void AcquireUserSettingsT1()
         {
             AcquireUserSettingsTest("T1", "1pe.xhtml", "Layout_02.css", "T1: Style sheet default preparation");

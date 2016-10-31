@@ -31,7 +31,8 @@ namespace Test.OpenOfficeConvert
 {
     [TestFixture]
     [Category("BatchTest")]
-	public class LOContentXMLTest
+    [Category("SkipOnTeamCity")]
+    public class LOContentXMLTest
     {
         #region Private Variables
         private string _inputPath;
