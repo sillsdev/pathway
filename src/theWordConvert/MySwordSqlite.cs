@@ -110,7 +110,9 @@ namespace SIL.PublishingSolution
                         var cmd = updConn.CreateCommand();
                         line = line.Replace("\"", "\"\"");
                         cmd.CommandText =
-                            $@"update Bible SET Scripture = ""{line}"" WHERE Book = {bkn} AND Chapter = {chn} AND Verse = {vrsn};";
+	                        string.Format(
+		                        @"update Bible SET Scripture = ""{0}"" WHERE Book = {1} AND Chapter = {2} AND Verse = {3};",
+		                        line, bkn, chn, vrsn);
                         int result = cmd.ExecuteNonQuery();
                         Debug.Assert(result == 1);
                     }
@@ -163,9 +165,10 @@ namespace SIL.PublishingSolution
                 if (DbParams.ContainsKey(key))
                 {
                     var detailCmd = updConn.CreateCommand();
-                    var newValue = $@"""{DbParams[key]}""";
+                    var newValue = string.Format(@"""{0}""", DbParams[key]);
                     newValue = ParseDateIfNecessary(key, newValue);
-                    detailCmd.CommandText = $"update Details SET {match.Groups[1].Value} = {newValue}";
+                    detailCmd.CommandText = string.Format("update Details SET {0} = {1}", match.Groups[1].Value,
+	                    newValue);
                     int result = detailCmd.ExecuteNonQuery();
                     Debug.Assert(result == 1, match.Groups[0].Value);
                 }
@@ -193,12 +196,13 @@ namespace SIL.PublishingSolution
                     {
                         dateMatch = _yearPat.Match(DbParams[key]);
                     }
-                    newValue = $@"date('{dateMatch.Groups[1].Value}-{monthValue:00}-{dayValue:00}')";
+                    newValue = string.Format(@"date('{0}-{1:00}-{2:00}')", dateMatch.Groups[1].Value, monthValue,
+	                    dayValue);
                 }
             }
             catch (Exception)
             {
-                throw new FormatException($"error parsing date {key} with value {DbParams[key]}");
+                throw new FormatException(string.Format("error parsing date {0} with value {1}", key, DbParams[key]));
             }
             return newValue;
         }

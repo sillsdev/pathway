@@ -347,7 +347,8 @@ namespace Test.epubConvert
 			Assert.IsTrue(actual);
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
 			ExtractzipFilesBasedOnOS(result, FileOutput("EpubIndentFileComparison"));
-			result = result.Replace("Output", "Expected");
+			string expPath = Common.UsingMonoVM ? "ExpectedLinux" : "Expected";
+			result = result.Replace("Output", expPath);
 			ExtractzipFilesBasedOnOS(result, FileOutput("EpubIndentFileComparisonExpect"));
 			FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_01.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_01.xhtml");
 
