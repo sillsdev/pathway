@@ -23,6 +23,7 @@ namespace PdfLicense
             }
             string creatorTool = _readLicenseFilesBylines[3];
             string getPsApplicationPath = GetPSApplicationPath();
+			getPsApplicationPath = Path.Combine(getPsApplicationPath, "Export");
             getPsApplicationPath = Path.Combine(getPsApplicationPath, "ApplyPDFLicenseInfo.exe");
             if (File.Exists(getPsApplicationPath))
             {

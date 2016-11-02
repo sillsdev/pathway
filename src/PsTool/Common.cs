@@ -3803,7 +3803,7 @@ namespace SIL.Tool
 					File.Copy(sourceJarFile, destJarFile, true);
 				}
 
-				string sourceExeFile = Common.PathCombine(getPsApplicationPath, "PdfLicense.exe");
+				string sourceExeFile = Common.PathCombine(executablePath, "PdfLicense.exe");
 				string destExeFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "PdfLicense.exe");
 
 				if (!File.Exists(destExeFile))
