@@ -93,6 +93,10 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
                 inProcess.ShowStatus = true;
                 inProcess.SetStatus("Processing GoBible Export");
+				Param.LoadSettings();
+				Param.SetValue(Param.InputType, "Scripture");
+				Param.LoadSettings();
+
                 string fileTitle = "GoBibleOutput" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() +
                                    DateTime.Now.Year.ToString();
 
@@ -223,6 +227,7 @@ namespace SIL.PublishingSolution
             }
             catch
             {
+
             }
         }
 
@@ -301,7 +306,12 @@ namespace SIL.PublishingSolution
                 sw.WriteLine("Source-FileExtension: sfm");
                 sw.WriteLine("Phone-Icon-Filepath: Icon.png");
                 //sw.WriteLine("Application-Name: " + GetInfo(Param.Title)); - this line makes output unusable (bug in GoBibleCreator?)
+
+				if (string.IsNullOrEmpty(GetInfo(Param.Publisher)))
                 sw.WriteLine("MIDlet-Vendor: " + GetInfo(Param.Publisher));
+				else
+					sw.WriteLine("MIDlet-Vendor: SIL International");
+
                 //sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org"); - we need to find out best place to post Go Bible modules
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
