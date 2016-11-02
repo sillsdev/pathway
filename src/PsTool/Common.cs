@@ -4885,17 +4885,46 @@ namespace SIL.Tool
 			}
 		}
 
-	    private static string InstalledLocalizationsFolder
-	    {
-	        get
-	        {
-	            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-	            UriBuilder uri = new UriBuilder(codeBase);
-	            string path = Uri.UnescapeDataString(uri.Path);
-                string installedLocalizationsFolder = Path.Combine(Path.GetDirectoryName(path), "localizations");
-	            return installedLocalizationsFolder;
-	        }
-	    }
+		private static string InstalledLocalizationsFolder
+		{
+			get
+			{
+				string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+				UriBuilder uri = new UriBuilder(codeBase);
+				string path = Uri.UnescapeDataString(uri.Path);
+				string installedLocalizationsFolder = Path.Combine(Path.GetDirectoryName(path), "localizations");
+
+				if (Directory.Exists(installedLocalizationsFolder))
+				{
+					return installedLocalizationsFolder;
+				}
+				else
+				{
+					string changePath = Path.GetDirectoryName(path);
+					changePath = Path.GetDirectoryName(changePath);
+					installedLocalizationsFolder = Path.Combine(changePath, "localizations");
+
+					if (Directory.Exists(installedLocalizationsFolder))
+					{
+						return installedLocalizationsFolder;
+					}
+					else
+					{
+						var pathwayFolder = FromRegistry("");
+						installedLocalizationsFolder = Path.Combine(pathwayFolder, "localizations");
+
+						if (Directory.Exists(installedLocalizationsFolder))
+						{
+							return installedLocalizationsFolder;
+						}
+						else
+						{
+							return string.Empty;
+						}
+					}
+				}
+			}
+		}
 
 		public static void InitializeOtherProjects()
 		{
