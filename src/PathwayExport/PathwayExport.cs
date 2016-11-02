@@ -66,7 +66,7 @@ namespace SIL.PublishingSolution
             {
                 projectInfo = new PublicationInformation();
                 ArgumentUsage(args);
-                
+
                 projectInfo.ProjectPath = exportDirectory;
                 foreach (string f in files)
                 {
@@ -91,10 +91,12 @@ namespace SIL.PublishingSolution
                             projectInfo.IsReversalExist = true;
                             //projectInfo.ProjectName = f;
                         }
-                        else if (f.ToLower().Contains("main"))
+                        //else if (f.ToLower().Contains("main"))
+                        else
                         {
                             projectInfo.DefaultXhtmlFileWithPath = f;
-                            projectInfo.IsLexiconSectionExist = true;
+                            if (f.ToLower().Contains("main"))
+                                projectInfo.IsLexiconSectionExist = true;
                         }
                     }
                 }
@@ -104,39 +106,54 @@ namespace SIL.PublishingSolution
                     projectInfo.ProjectName = "main";
                 else if (projectInfo.IsReversalExist == true)
                     projectInfo.ProjectName = "flexrev";
+
                 SetFileName();
                 projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
 
                 IExportProcess process = new ExportLibreOffice();
-                if (exportType.Replace("'","") == "openoffice/libreoffice")
+                if (exportType == "openoffice/libreoffice")
                 {
                     projectInfo.FinalOutput = "odt";
                     process = new ExportLibreOffice();
                 }
-                else if (exportType.ToLower() == "e-book (epub2 and epub3)")
+                else if (exportType == "e-book (.epub)" || exportType == "e-book (epub2 and epub3)")
                 {
                     process = new Exportepub();
                 }
-                else if (exportType.ToLower() == "pdf (using openoffice/libreoffice)")
+                else if (exportType == "pdf (using openoffice/libreoffice)")
                 {
                     projectInfo.FinalOutput = "pdf";
                     process = new ExportLibreOffice();
                 }
-                else if (exportType.ToLower() == "pdf (using prince)")
+                else if (exportType == "pdf (using prince)")
                 {
                     process = new ExportPdf();
                 }
-                else if (exportType.ToLower() == "xelatex")
+                else if (exportType == "xelatex")
                 {
                     process = new ExportXeLaTex();
                 }
-                else if (exportType.ToLower() == "dictionaryformids")
+                else if (exportType == "dictionaryformids")
                 {
                     process = new ExportDictionaryForMIDs();
                 }
-                else if (exportType.ToLower() == "indesign")
+                else if (exportType == "indesign")
                 {
                     process = new ExportInDesign();
+                }
+                else if (exportType == "gobible" || exportType == "go bible")
+                {
+                    projectInfo.ProjectName = "Go_Bible";
+                    projectInfo.SelectedTemplateStyle = "GoBible";
+                    process = new ExportGoBible();
+                }
+                else if (exportType == "sword")
+                {
+                    process = new ExportSword();
+                }
+                else if (exportType == "theword/mysword")
+                {
+                    process = new ExportSword();
                 }
 
                 process.Export(projectInfo);
@@ -149,7 +166,7 @@ namespace SIL.PublishingSolution
             bool argFilledDirectory = false;
             bool argFilledFiles = false;
             bool argFilledCss = false;
-           
+
             int i = 0;
             while (i < args.Length)
             {
@@ -158,6 +175,7 @@ namespace SIL.PublishingSolution
                     case "--target":
                     case "-t":
                         exportType = args[i++];
+                        exportType = exportType.Replace("'", "").Trim().ToLower();
                         argFilledExportType = true;
                         if (!CheckExportType())
                         {
@@ -262,11 +280,12 @@ namespace SIL.PublishingSolution
         private static bool CheckExportType()
         {
             bool isCorrectExportType = false;
-            switch (exportType.Replace("'","").ToLower())
+            switch (exportType)
             {
                 case "e-book (.epub)":
                 case "e-book (epub2 and epub3)":
                 case "gobible":
+                case "go bible":
                 case "dictionaryformids":
                 case "pdf (using openoffice/libreoffice)":
                 case "pdf (using prince)":
@@ -289,7 +308,7 @@ namespace SIL.PublishingSolution
             while (args[i].EndsWith(","))
             {
                 fname = args[i].Substring(0, args[i].Length - 1);
-                files.Add(fname);
+                files.Add(fname.Replace("\\\\","\\"));
                 i++;
             }
             files.Add(args[i++]);
@@ -424,17 +443,25 @@ namespace SIL.PublishingSolution
                 {
                     expFormat = ExportFormat.Dictionary;
                 }
-                else if (entryAssemblyName.Contains("pathwayexport"))
+                else if (entryAssemblyName.Contains("configurationtool"))
                 {
-                    
+                    if (exportType.Contains("gobible") || exportType.Contains("go bible") ||
+                        exportType.Contains("sword") || exportType.Contains("theword/mysword"))
+                    {
+                        expFormat = ExportFormat.Scripture;
+                    }
                 }
                 else if (entryAssemblyName.Contains("pathwayexport"))
                 {
-
+                    if (exportType.Contains("gobible") || exportType.Contains("go bible") ||
+                        exportType.Contains("sword") || exportType.Contains("theword/mysword"))
+                    {
+                        expFormat = ExportFormat.Scripture;
+                    }
                 }
             }
-            projectInfo.ProjectInputType = expFormat == ExportFormat.Dictionary? "Dictionary":"Scripture";
-        }
+            projectInfo.ProjectInputType = expFormat == ExportFormat.Dictionary ? "Dictionary" : "Scripture";
+            }
 
         private static string GetEntryAssemblyName()
         {
@@ -450,7 +477,7 @@ namespace SIL.PublishingSolution
 
             return entryAssemblyName.Trim().ToLower();
         }
-        
+
         private static void SetFileName()
         {
             if (projectInfo.ProjectInputType == "Dictionary")
@@ -476,7 +503,7 @@ namespace SIL.PublishingSolution
                 projectInfo.ProjectFileWithPath = projectInfo.DefaultXhtmlFileWithPath;
                 projectInfo.SwapHeadword = false;
                 projectInfo.FromPlugin = true;
-                if(indexMain >= 0 && indexRev >= 0)
+                if (indexMain >= 0 && indexRev >= 0)
                     projectInfo.IsODM = true;
                 //projectInfo.DefaultRevCssFileWithPath =
                 //    Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
@@ -488,6 +515,11 @@ namespace SIL.PublishingSolution
                 {
                     projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, files[0]);
                 }
+                projectInfo.ProjectFileWithPath = projectInfo.DefaultXhtmlFileWithPath;
+                projectInfo.DictionaryPath = projectInfo.ProjectPath;
+                projectInfo.FromPlugin = true;
+                projectInfo.IsLexiconSectionExist = false;
+
             }
         }
 

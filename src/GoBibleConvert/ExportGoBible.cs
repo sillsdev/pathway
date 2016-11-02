@@ -93,15 +93,17 @@ namespace SIL.PublishingSolution
                 inProcess.PerformStep();
                 inProcess.ShowStatus = true;
                 inProcess.SetStatus("Processing GoBible Export");
+                string fileTitle = "GoBibleOutput" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() +
+                                   DateTime.Now.Year.ToString();
 
                 _isLinux = Common.UnixVersionCheck();
 
                 string exportGoBibleInputPath = string.Empty;
-                exportGoBibleInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath);
+                exportGoBibleInputPath = Path.GetDirectoryName(projInfo.DefaultCssFileWithPath).Replace("\\\\","\\");
                 processFolder = exportGoBibleInputPath;
                 PartialBooks.AddChapters(Common.PathCombine(processFolder, "SFM"));
                 inProcess.PerformStep();
-                CreateCollectionsTextFile(exportGoBibleInputPath);
+                CreateCollectionsTextFile(exportGoBibleInputPath, fileTitle);
                 inProcess.PerformStep();
                 var iconFullName = Common.FromRegistry(Common.PathCombine("GoBible/GoBibleCore", "Icon.png"));
                 var iconDirectory = Path.GetDirectoryName(iconFullName);
@@ -136,8 +138,17 @@ namespace SIL.PublishingSolution
                 UIPropertiesCopyToTempFolder(goBibleCreatorPath, filePaths);
 
                 BuildApplication(tempGoBibleCreatorPath);
+
+                string jarFile = string.Empty;
+                if (String.IsNullOrEmpty(NoSp(GetInfo(Param.Title))))
+                {
+                    jarFile = Common.PathCombine(processFolder, fileTitle + ".jar");
+                }
+                else
+                {
+                    jarFile = Common.PathCombine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
+                }
                 
-                string jarFile = Common.PathCombine(processFolder, NoSp(GetInfo(Param.Title)) + ".jar");
                 inProcess.PerformStep();
 				string caption = LocalizationManager.GetString("ExportGoBible.ExportClick.Caption", "Go Bible Export", "");
                 if (File.Exists(jarFile))
@@ -244,7 +255,7 @@ namespace SIL.PublishingSolution
                 {
                     string name = Path.GetFileName(file);
                     string dest = Common.PathCombine(destFolder, name);
-                    File.Copy(file, dest);
+                    File.Copy(file, dest, true);
                 }
 
                 string[] folders = Directory.GetDirectories(sourceFolder);
@@ -264,7 +275,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        public void CreateCollectionsTextFile(string exportGoBiblePath)
+        public void CreateCollectionsTextFile(string exportGoBiblePath, string fileTitle)
         {
             string fileLoc = Common.PathCombine(exportGoBiblePath, "Collections.txt");
 
@@ -294,18 +305,28 @@ namespace SIL.PublishingSolution
                 //sw.WriteLine("MIDlet-Info-URL: http://wap.mygbdomain.org"); - we need to find out best place to post Go Bible modules
                 sw.WriteLine("Codepage: UTF-8");
                 sw.WriteLine("RedLettering: false");
+                if (string.IsNullOrEmpty(Common.BookNameTag))
+                    Common.BookNameTag = "id";
+
+                string title = GetInfo(Param.Title);
+
+                if (String.IsNullOrEmpty(title))
+                    title = fileTitle;
+
                 sw.WriteLine(@"USFM-TitleTag: \" + Common.BookNameTag);
-                sw.WriteLine("Collection: " + GetInfo(Param.Title));
+                sw.WriteLine("Collection: " + title);
 
                 string sfmFiles = Common.PathCombine(exportGoBiblePath, "SFM");
 
                 if (Directory.Exists(sfmFiles))
                 {
-                    foreach (string name in Common.BookNameCollection)
+                    string[] filesList = Directory.GetFiles(sfmFiles);
+                    foreach (var name in filesList)
                     {
-                        sw.WriteLine("Book: " + name);
+                        string fileName = Path.GetFileNameWithoutExtension(name);
+                        sw.WriteLine("Book: " + fileName);
                     }
-                    Common.BookNameCollection.Clear();
+                    //Common.BookNameCollection.Clear();
                 }
                 sw.Flush();
                 sw.Close();

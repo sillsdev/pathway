@@ -239,6 +239,10 @@
       <Project>{b19037f2-26f7-48a2-9301-b5ca335c6824}</Project>
       <Name>epubConvert</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GoBibleConvert\GoBibleConvert.csproj">
+      <Project>{c7a3f4e5-1f86-4d22-ab4f-5bea0d923ddd}</Project>
+      <Name>GoBibleConvert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InDesignConvert\InDesignConvert.csproj">
       <Project>{8d0d307d-3785-4561-a923-ff3ddf6c2f14}</Project>
       <Name>InDesignConvert</Name>
@@ -258,6 +262,14 @@
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SwordConvert\SwordConvert.csproj">
+      <Project>{448fdd03-71c0-4c86-9878-bc81acc440c0}</Project>
+      <Name>SwordConvert</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\theWordConvert\TheWordConvert.csproj">
+      <Project>{c08b9a1c-c204-4fde-a290-ae567688d67d}</Project>
+      <Name>TheWordConvert</Name>
     </ProjectReference>
     <ProjectReference Include="..\XeLaTexConvert\XeLaTexConvert.csproj">
       <Project>{65d64c80-2aa4-4bd0-ac87-b4c2b3720012}</Project>

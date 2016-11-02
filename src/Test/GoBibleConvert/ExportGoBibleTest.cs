@@ -97,7 +97,7 @@ namespace Test.GoBibleConvert
             ExportGoBible target = new ExportGoBible();
             string xx = Common.GetApplicationPath();
             string exportGoBiblePath = xx; 
-            target.CreateCollectionsTextFile(exportGoBiblePath);
+            target.CreateCollectionsTextFile(exportGoBiblePath,string.Empty);
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
