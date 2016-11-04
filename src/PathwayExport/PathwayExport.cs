@@ -153,7 +153,7 @@ namespace SIL.PublishingSolution
                 }
                 else if (exportType == "theword/mysword")
                 {
-                    process = new ExportSword();
+					process = new ExportTheWord();
                 }
 
                 process.Export(projectInfo);
