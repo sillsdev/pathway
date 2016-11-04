@@ -336,6 +336,13 @@ page-break-after: avoid;
 .pn :after{
 content: " ";}
 
+.pn
+{
+font-size: 12pt;
+font-weight: bold;
+text-decoration: underline;
+}
+
 .CoverPageTitle {
 	font-family: "Charis SIL";
 	font-size: 24pt;
