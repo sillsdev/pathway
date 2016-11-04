@@ -655,6 +655,9 @@ namespace SIL.PublishingSolution
 
                 _xetexFile.Write("}");
 
+                if(characterStyle.IndexOf("mainheadword") >= 0 || characterStyle.IndexOf("reversalindexentry") >= 0)
+                    WriteGuideword(characterStyle, content);
+
                 if (_incrementDropCap != 0)
                 {
                     _xetexFile.Write("}");
@@ -809,6 +812,31 @@ namespace SIL.PublishingSolution
                     }
                     _inlineCount = (inlineStyle.Count - paraStyleCount) + letterInlineCount;
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
+                    _xetexFile.Write("\\" + mergedParaStyle + "{");
+                }
+                AddUsedStyleName(characterStyle);
+            }
+            return footerClassName;
+        }
+
+        private void WriteGuideword(string characterStyle, string content)
+        {
+                //Note - Xetex paragraph new line
+                if (_xetexNewLine)
+                {
+                    _xetexFile.Write("\r\n");
+                    _xetexNewLine = false;
+                }
+
+                string paraStyle;
+
+                paraStyle = characterStyle.IndexOf("No character style") > 0 ? _previousParagraphName : characterStyle;
+                string mergedParaStyle = MergeInlineStyle(paraStyle);
+
+                string getStyleName = StackPeek(_allStyle);
+                if (_classInlineStyle.ContainsKey(mergedParaStyle))
+                {
+                    mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
                     if (_projInfo.ProjectInputType.ToLower() == "scripture")
                     {
                         string headerStyle = Common.ReplaceSeperators(_previousParagraphName);
@@ -868,7 +896,7 @@ namespace SIL.PublishingSolution
                             }
                         }
 
-                        if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
+                        if (mergedParaStyle.IndexOf("mainheadword") >= 0 || mergedParaStyle.IndexOf("headword") == 0 && content != null)
                         {
                             _headerContent = content;
 
@@ -903,11 +931,7 @@ namespace SIL.PublishingSolution
                             _headerContent = content;
                         }
                     }
-					_xetexFile.Write("\\" + mergedParaStyle + "{");
                 }
-                AddUsedStyleName(characterStyle);
-            }
-            return footerClassName;
         }
 
         private string MergeInlineStyle(string paraStyle)
@@ -1675,7 +1699,7 @@ namespace SIL.PublishingSolution
         private void SetHeadwordTrue()
         {
             var attribute = _reader.GetAttribute("class");
-            if (attribute != null && (attribute != null && attribute.ToLower() == "headword"))
+            if (attribute != null && attribute != null && attribute.ToLower() == "headword")
             {
                 _isHeadword = true;
                 _headwordStyles = true;
