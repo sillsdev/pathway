@@ -1542,5 +1542,16 @@ namespace SIL.PublishingSolution
 			_cToolBL.txtMaxImageWidth_ValidatedBL(sender);
 		}
 
-	}
+        private void ConfigurationTool_Resize(object sender, EventArgs e)
+        {
+            if (((ConfigurationTool)sender).Width >= 1280 || ((ConfigurationTool)sender).Height >= 853)
+            {
+                panel3.AutoScroll = false;
+            }
+            else
+            {
+                panel3.AutoScroll = true;
+            }
+        }
+    }
 }
