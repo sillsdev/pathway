@@ -98,6 +98,23 @@ namespace Test.ParatextSupport
             TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
         }
 
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void StytoCSSPnCSSTest()
+		{
+			const string TestName = "aai";
+			var cssFile = TestName + ".css";
+			string cssFileOutput = FileOutput(cssFile);
+			string ssfFileInputPath = FileInput(TestName);
+			ssfFileInputPath = Common.PathCombine(ssfFileInputPath, "gather");
+			ssfFileInputPath = Common.PathCombine(ssfFileInputPath, TestName + ".ssf");
+
+			StyToCss styToCssObj = new StyToCss();
+			styToCssObj.ConvertStyToCss("aai", cssFileOutput, ssfFileInputPath);
+
+			TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
+		}
+
         #region Private Functions
         private static string FileInput(string fileName)
         {

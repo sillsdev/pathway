@@ -468,6 +468,7 @@ namespace SIL.PublishingSolution
             _mapClassName["m"] = "Paragraph_Continuation";
             _mapClassName["fqa"] = "fqa";
             _mapClassName["sc"] = "Inscription";
+			_mapClassName["pn"] = "pn";
         }
     }
 }
