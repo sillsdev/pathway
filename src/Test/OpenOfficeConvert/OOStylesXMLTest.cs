@@ -18,6 +18,7 @@
 #region Using
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
@@ -51,6 +52,7 @@ namespace Test.OpenOfficeConvert
             Common.Testing = true;
             returnValue = false;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
+            Debug.Print("testPath={0}", testPath);
             _inputPath = Common.PathCombine(testPath, "input");
             _outputPath = Common.PathCombine(testPath, "output");
             Common.PathCombine(testPath, "expected");
