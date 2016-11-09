@@ -55,6 +55,10 @@ namespace Test.OpenOfficeConvert
             Debug.Print("testPath={0}", testPath);
             _inputPath = Common.PathCombine(testPath, "input");
             _outputPath = Common.PathCombine(testPath, "output");
+            if (!Directory.Exists(_outputPath))
+            {
+                Directory.CreateDirectory(_outputPath);
+            }
             Common.PathCombine(testPath, "expected");
             Common.SupportFolder = "";
             Common.ProgInstall = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../../../DistFiles");
