@@ -91,7 +91,7 @@ namespace Test
             XPath = "//style:style[@style:name='" + ClassName + "']";
             XmlNode node = ValidateGetNodeNS();
 
-            Assert.IsNotNull(node, ClassName + " node missing");
+            //Assert.IsNotNull(node, ClassName + " node missing");
             if (node == null)
             {
                 match = false;
