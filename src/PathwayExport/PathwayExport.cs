@@ -80,8 +80,6 @@ namespace SIL.PublishingSolution
                         {
                             projectInfo.DefaultCssFileWithPath = f;
                         }
-
-
                     }
                     if (f.ToLower().EndsWith(".xhtml"))
                     {
@@ -107,45 +105,55 @@ namespace SIL.PublishingSolution
                 else if (projectInfo.IsReversalExist == true)
                     projectInfo.ProjectName = "flexrev";
 
+	            projectInfo.IsOpenOutput = !Common.Testing;
+
                 SetFileName();
                 projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
-
+				LoadParameters(projectInfo.ProjectInputType);
                 IExportProcess process = new ExportLibreOffice();
                 if (exportType == "openoffice/libreoffice")
                 {
+	                Common._outputType = Common.OutputType.ODT;
                     projectInfo.FinalOutput = "odt";
                     process = new ExportLibreOffice();
                 }
                 else if (exportType == "e-book (.epub)" || exportType == "e-book (epub2 and epub3)")
                 {
                     process = new Exportepub();
+					Common._outputType = Common.OutputType.EPUB;
                 }
                 else if (exportType == "pdf (using openoffice/libreoffice)")
                 {
                     projectInfo.FinalOutput = "pdf";
                     process = new ExportLibreOffice();
+					Common._outputType = Common.OutputType.PDF;
                 }
                 else if (exportType == "pdf (using prince)")
                 {
                     process = new ExportPdf();
+					Common._outputType = Common.OutputType.PDF;
                 }
                 else if (exportType == "xelatex")
                 {
                     process = new ExportXeLaTex();
+					Common._outputType = Common.OutputType.XELATEX;
                 }
                 else if (exportType == "dictionaryformids")
                 {
                     process = new ExportDictionaryForMIDs();
+					Common._outputType = Common.OutputType.MOBILE;
                 }
                 else if (exportType == "indesign")
                 {
                     process = new ExportInDesign();
+					Common._outputType = Common.OutputType.IDML;
                 }
                 else if (exportType == "gobible" || exportType == "go bible")
                 {
                     projectInfo.ProjectName = "Go_Bible";
                     projectInfo.SelectedTemplateStyle = "GoBible";
                     process = new ExportGoBible();
+					Common._outputType = Common.OutputType.MOBILE;
                 }
                 else if (exportType == "sword")
                 {
@@ -156,9 +164,12 @@ namespace SIL.PublishingSolution
 					process = new ExportTheWord();
                 }
 
+	            
                 process.Export(projectInfo);
             }
         }
+
+		private static void LoadParameters(string inputType)		{			Param.LoadSettings();			Param.SetValue(Param.InputType, inputType);			Param.LoadSettings();		}
 
         private static void ArgumentUsage(string[] args)
         {
@@ -209,6 +220,12 @@ namespace SIL.PublishingSolution
                         argFilledCss = true;
                         files.Add(args[i++]);
                         break;
+					case "--nunit":
+		                if (args[i++].ToLower() == "true")
+		                {
+			                Common.Testing = true;
+		                }
+		                break;
                 }
             }
 
@@ -497,15 +514,29 @@ namespace SIL.PublishingSolution
                 int indexRev = files.FindIndex(
                     something => (something.ToLower().EndsWith("flexrev.xhtml"))
                     );
-                projectInfo.IsReversalExist = (indexRev >= 0);
+				projectInfo.IsReversalExist = (indexMain >= 0 && indexRev >= 0);
 
-                projectInfo.IsLexiconSectionExist = File.Exists(projectInfo.DefaultXhtmlFileWithPath);
+	            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(projectInfo.DefaultXhtmlFileWithPath);
+	            if (fileNameWithoutExtension != null &&
+	                (File.Exists(projectInfo.DefaultXhtmlFileWithPath) && fileNameWithoutExtension.ToLower() == "main"))
+		            projectInfo.IsLexiconSectionExist = true;
+
                 projectInfo.ProjectFileWithPath = projectInfo.DefaultXhtmlFileWithPath;
                 projectInfo.SwapHeadword = false;
                 projectInfo.FromPlugin = true;
-                if (indexMain >= 0 && indexRev >= 0)
-                    projectInfo.IsODM = true;
-                //projectInfo.DefaultRevCssFileWithPath =
+	            if (indexMain >= 0 && indexRev >= 0)
+	            {
+		            projectInfo.IsODM = true;
+	            }
+				else
+	            {
+		            if (string.IsNullOrEmpty(projectInfo.DefaultCssFileWithPath))
+		            {
+			            projectInfo.DefaultCssFileWithPath = projectInfo.DefaultRevCssFileWithPath;
+			            projectInfo.DefaultRevCssFileWithPath = null;
+		            }
+	            }
+	            //projectInfo.DefaultRevCssFileWithPath =
                 //    Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
                 projectInfo.DictionaryPath = projectInfo.ProjectPath;
             }

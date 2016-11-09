@@ -153,7 +153,12 @@ namespace Test.epubConvert
 		#region Private Functions
 		private string FileProg(string fileName)
 		{
-			return Common.PathCombine(Common.GetPSApplicationPath(), fileName);
+			string file = Common.PathCombine(Common.GetPSApplicationPath(), fileName);
+			if (!File.Exists(file))
+			{
+				file = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), fileName);
+			}
+			return file;
 		}
 
 		private string FileInput(string fileName)

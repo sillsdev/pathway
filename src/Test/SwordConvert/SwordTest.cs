@@ -48,8 +48,15 @@ namespace Test.SwordConvert
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "Expected");
 
-            string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+
+			if (!File.Exists(styleSettingFile))
+			{
+				styleSettingFile = Path.GetDirectoryName(Common.AssemblyPath);
+				styleSettingFile = Common.PathCombine(styleSettingFile, "StyleSettings.xml");
+			}
+			
             Common.Testing = true;
             ValidateXMLVersion(styleSettingFile);
             InputType = "Scripture";

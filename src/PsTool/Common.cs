@@ -353,6 +353,8 @@ namespace SIL.Tool
 						if (!File.Exists(PathCombine(cssPath, cssFile)) && SamplePath.Length > 0)
 						{
 							cssPath = PathCombine(executablePath, SamplePath);
+
+
 						}
 						arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), baseCssFileWithPath));
 					}
@@ -2334,9 +2336,9 @@ namespace SIL.Tool
 
 		public static string GetApplicationPath()
 		{
-			string pathwayDir = PathwayPath.GetPathwayDir();
+			string pathwayDir = AssemblyPath;
 			if (string.IsNullOrEmpty(pathwayDir))
-				return Path.GetDirectoryName(Application.ExecutablePath);
+				return PathwayPath.GetPathwayDir();
 			return pathwayDir;
 		}
 
@@ -2353,7 +2355,7 @@ namespace SIL.Tool
 				return file;
 			if (string.IsNullOrEmpty(ProgBase))
 			{
-				ProgBase = PathwayPath.GetPathwayDir();
+				ProgBase = Common.AssemblyPath;
 				if (string.IsNullOrEmpty(ProgBase))
 				{
 					if (!Testing)
@@ -2365,7 +2367,32 @@ namespace SIL.Tool
 
 				}
 			}
-			return Common.PathCombine(ProgBase, file);
+
+			string styleFileName = Common.PathCombine(ProgBase, file);
+
+			if (Directory.Exists(styleFileName))
+			{
+				return styleFileName;
+			}
+
+			if (!File.Exists(styleFileName))
+			{
+				styleFileName = Common.PathCombine(Path.GetDirectoryName(ProgBase), file);
+			}
+
+			return styleFileName;
+		}
+
+		public static string InstallerPathFromRegistry(string file)
+		{
+			string progBase = Common.AssemblyPath;
+			string fileName = Common.PathCombine(progBase, file);
+			if (!File.Exists(fileName))
+			{
+				fileName = Path.GetDirectoryName(Common.AssemblyPath);
+				fileName = Common.PathCombine(fileName, file);
+			}
+			return fileName;
 		}
 
 		/// <summary>
@@ -2469,7 +2496,8 @@ namespace SIL.Tool
 		public static string GetAllUserPath()
 		{
 			string allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-			allUserPath += "/SIL/Pathway";
+			allUserPath = Path.Combine(allUserPath, "SIL");
+			allUserPath = Path.Combine(allUserPath, "Pathway");
 			return DirectoryPathReplace(allUserPath);
 		}
 
@@ -3764,6 +3792,10 @@ namespace SIL.Tool
 			{
 				string getPsApplicationPath = Common.GetPSApplicationPath();
 				string licenseXml = Common.PathCombine(getPsApplicationPath, "Copyrights");
+				if (!Directory.Exists(licenseXml))
+				{
+					licenseXml = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+				}
 				licenseXml = Common.PathCombine(licenseXml, "SIL_License.xml");
 				string destLicenseXml = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "SIL_License.xml");
 				Param.LoadSettings();
@@ -4556,6 +4588,10 @@ namespace SIL.Tool
 			string tempXmlFile = string.Empty;
 			string psSupportPath = GetPSApplicationPath();
 			string xmlFileNameWithPath = Common.PathCombine(psSupportPath, fileName);
+			if (!File.Exists(xmlFileNameWithPath))
+			{
+				xmlFileNameWithPath = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), fileName);
+			}
 			if (File.Exists(xmlFileNameWithPath))
 			{
 				string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
@@ -4885,6 +4921,19 @@ namespace SIL.Tool
 			}
 		}
 
+
+		public static string AssemblyPath
+		{
+			get
+			{
+				string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+				UriBuilder uri = new UriBuilder(codeBase);
+				string path = Uri.UnescapeDataString(uri.Path);
+				return Path.GetDirectoryName(path);
+			}
+		}
+
+
 		private static string InstalledLocalizationsFolder
 		{
 			get
@@ -4928,7 +4977,7 @@ namespace SIL.Tool
 
 		public static void InitializeOtherProjects()
 		{
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory)) return;
 
 			foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
@@ -4965,7 +5014,7 @@ namespace SIL.Tool
 		public static string[] GetnamespacestoLocalize()
 		{
 			var namespacestoLocalize = new List<string>();
-			var pathwayDirectory = PathwayPath.GetPathwayDir();
+			var pathwayDirectory = Common.AssemblyPath;
 			if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory))
 				return new[] { "SIL.PublishingSolution" };
 			foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$"))

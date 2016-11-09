@@ -104,6 +104,11 @@ namespace SIL.PublishingSolution
 			Dictionary<string, string> dictSecName = new Dictionary<string, string>();
 			Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
+			if(projInfo.IsODM)
+				cssTree.OutputType = Common.OutputType.ODM;
+			else
+				cssTree.OutputType = Common.OutputType.ODT;
+
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
             if (cssClass.ContainsKey("@page") && cssClass["@page"].ContainsKey("-ps-fileproduce"))
@@ -490,7 +495,6 @@ namespace SIL.PublishingSolution
             publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
             publicationInfo.ProgressBar = statusProgressBar;
             publicationInfo.FileSequence = _odtFiles;
-            publicationInfo.IsOpenOutput = true;
 			ExportODT(publicationInfo, progressDialogProcess);
         }
 
@@ -568,6 +572,12 @@ namespace SIL.PublishingSolution
             bool returnValue = false;
 
 	        string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "OfficeFiles");
+						
+			if (!Directory.Exists(strFromOfficeFolder))
+			{
+				strFromOfficeFolder = Path.GetDirectoryName(Common.AssemblyPath);
+				strFromOfficeFolder = Common.PathCombine(strFromOfficeFolder, "OfficeFiles");
+			}
 			strFromOfficeFolder = Common.PathCombine(strFromOfficeFolder, projInfo.ProjectInputType);
 	        string tempPathOfficeFolder = Common.PathCombine(Path.GetTempPath(), "OfficeFiles");
 			projInfo.TempOutputFolder = Common.PathCombine(tempPathOfficeFolder, projInfo.ProjectInputType);
@@ -762,7 +772,7 @@ namespace SIL.PublishingSolution
                 if (File.Exists(fileNameNoPath))
                 {
                     returnValue = true;
-                    if (projInfo.IsOpenOutput)
+                    if (projInfo.IsOpenOutput && !Common.Testing)
                     {
                         Common.OpenOutput(fileNameNoPath);
                     }

@@ -112,6 +112,15 @@ namespace Test
             Debug.WriteLine("Calling PathwayB.exe " + arg.ToString());
             var sb = new StringBuilder();
             string errorMessage = "", outputMessage = "";
+			string pathwayDirectory = Common.AssemblyPath;
+			string pathwayExportDir = Path.Combine(pathwayDirectory, "Export");
+
+			if (!Directory.Exists(pathwayExportDir))
+			{
+				pathwayExportDir = Path.GetDirectoryName(Common.AssemblyPath);
+				pathwayExportDir = Path.Combine(pathwayExportDir, "Export");
+			}
+
             const int timeout = 60;
             try
             {
@@ -119,7 +128,7 @@ namespace Test
                 {
                     StartInfo =
                     {
-                        FileName = Common.PathCombine(PathwayPath.GetPathwayDir(), "PathwayB.exe"),
+						FileName = Common.PathCombine(pathwayExportDir, "PathwayB.exe"),
                         Arguments = arg.ToString(),
                         RedirectStandardError = true,
                         RedirectStandardOutput = true,
@@ -369,7 +378,7 @@ namespace Test
             }
             DirectoryCopy(Common.PathCombine(_inputPath, "Pathway"), targetSettings, true);
             // run the test
-            RunPathwayB(InputFormat.USFM, "*", "KFY", "KFY", "Scripture", "E-Book (Epub2 and Epub3)", "usfmTest");
+            RunPathwayB(InputFormat.USFM, "*", "KFY", "KFY", "Scripture", "xhtml", "usfmTest");
         }
 
 		/// <summary>

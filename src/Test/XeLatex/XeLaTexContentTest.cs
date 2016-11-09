@@ -67,8 +67,14 @@ namespace Test.XeLatex
 			Directory.CreateDirectory(_outputPath);
 			_projInfo.ProjectPath = testPath;
 			_classInlineStyle = new Dictionary<string, List<string>>();
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+
+			if (!File.Exists(styleSettingFile))
+			{
+				styleSettingFile = Path.GetDirectoryName(Common.AssemblyPath);
+				styleSettingFile = Common.PathCombine(styleSettingFile, "StyleSettings.xml");
+			}
 
 			ValidateXMLVersion(styleSettingFile);
 			Common.ProgInstall = pathwayDirectory;
@@ -142,8 +148,15 @@ namespace Test.XeLatex
 			Param.UpdateMetadataValue(Param.Date, DateTime.Today.ToString("yyyy-MM-dd"));
 			Param.UpdateMetadataValue(Param.CoverPage, "True");
 
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			string coverImageFilePath = Common.PathCombine(pathwayDirectory, "Graphic");
+
+			if (!Directory.Exists(coverImageFilePath))
+			{
+				coverImageFilePath = Path.GetDirectoryName(Common.AssemblyPath);
+				coverImageFilePath = Common.PathCombine(coverImageFilePath, "Graphic");
+			}
+
 			coverImageFilePath = Common.PathCombine(coverImageFilePath, "cover.png");
 			Param.UpdateMetadataValue(Param.CoverPageFilename, coverImageFilePath);
 

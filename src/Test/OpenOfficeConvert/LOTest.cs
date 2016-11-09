@@ -57,7 +57,7 @@ namespace Test.OpenOfficeConvert
             Directory.CreateDirectory(_outputPath);
             _projInfo.ProjectPath = _testFolderPath;
             _projInfo.OutputExtension = "odt";
-            string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Path.GetDirectoryName(Common.AssemblyPath);
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
            
             ValidateXMLVersion(styleSettingFile);
@@ -130,8 +130,8 @@ namespace Test.OpenOfficeConvert
             Param.UpdateMetadataValue(Param.Subject, "Bible");
             Param.UpdateMetadataValue(Param.Date, DateTime.Today.ToString("yyyy-MM-dd"));
             Param.UpdateMetadataValue(Param.CoverPage, "True");
-            
-            string pathwayDirectory = PathwayPath.GetPathwayDir();
+
+			string pathwayDirectory = Path.GetDirectoryName(Common.AssemblyPath);
             string coverImageFilePath = Common.PathCombine(pathwayDirectory, "Graphic");
             coverImageFilePath = Common.PathCombine(coverImageFilePath, "cover.png");
             Param.UpdateMetadataValue(Param.CoverPageFilename, coverImageFilePath);

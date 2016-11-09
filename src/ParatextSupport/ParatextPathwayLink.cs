@@ -38,7 +38,6 @@ namespace SIL.PublishingSolution
         private string _mOutputLocationPath;
         private string _mFormat;
         private string _mPublicationName;
-        private bool _isTesting;
         private readonly XslCompiledTransform _mCleanUsx = new XslCompiledTransform();
         private readonly XslCompiledTransform _mSeparateIntoBooks = new XslCompiledTransform();
         private readonly XslCompiledTransform _mUsxToXhtml = new XslCompiledTransform();
@@ -48,13 +47,7 @@ namespace SIL.PublishingSolution
         #endregion
 
         #region public variables
-
-        public bool IsTesting
-        {
-            get { return _isTesting; }
-            set { _isTesting = value; }
-        }
-
+		
         public string MOutputLocationPath
         {
             get { return _mOutputLocationPath; }
@@ -162,7 +155,7 @@ namespace SIL.PublishingSolution
         // ReSharper restore UnusedMember.Global
         {
             DialogResult result;
-            if (!IsTesting)
+            if (!Common.Testing)
             {
                 ScriptureContents dlg = new ScriptureContents();
                 dlg.DatabaseName = MDatabaseName;
@@ -421,7 +414,6 @@ namespace SIL.PublishingSolution
                 DateTime dt1 = DateTime.Now;    // time this thing
 #endif
 	        var inProcess = new InProcess(0, 6);
-            var curdir = Environment.CurrentDirectory;
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             inProcess.Text = "Scripture Export";
@@ -452,7 +444,6 @@ namespace SIL.PublishingSolution
 
             if (File.Exists(fileName))
             {
-                // TODO: Localize string
                 var msg = LocalizationManager.GetString("ParatextPathwayLink.ExportProcess.Message1", " already exists. Overwrite?", "");
                 result = MessageBox.Show(string.Format("{0}" + Environment.NewLine + msg, fileName), string.Empty, MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)

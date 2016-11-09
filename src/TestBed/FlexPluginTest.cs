@@ -155,7 +155,7 @@ namespace TestBed
         {
             var plugin = new PsExport {DataType = "Scripture"};
             string outputpath = "c:/1pe/1pe";
-            plugin.Export(outputpath);
+			plugin.Export(outputpath);
 
         }
 
@@ -167,7 +167,7 @@ namespace TestBed
 
             string target = printVia.BackEnd; //"OpenOffice";
             var tpe = new PsExport {Destination = target, DataType = printVia.InputType};
-            tpe.Export(txtInputPath.Text);
+			tpe.Export(txtInputPath.Text);
         }
 
         private void InDesign_Click(object sender, EventArgs e)
@@ -465,7 +465,7 @@ namespace TestBed
 
             string target = dlg.Format; //"OpenOffice";
             var tpe = new PsExport {Destination = target, DataType = dlg.InputType};
-            tpe.Export(txtInputPath.Text);
+			tpe.Export(txtInputPath.Text);
 
         }
 

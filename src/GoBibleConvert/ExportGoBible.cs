@@ -116,9 +116,6 @@ namespace SIL.PublishingSolution
                 if (iconDirectory != exportGoBibleInputPath)
                     File.Copy(iconFullName, Common.PathCombine(exportGoBibleInputPath, _iconFile), overwrite);
 
-                Param.LoadSettings();
-                Param.SetValue(Param.InputType, "Scripture");
-                Param.LoadSettings();
                 string layout = Param.GetItem("//settings/property[@name='LayoutSelected']/@value").Value;
                 Dictionary<string, string> mobilefeature = Param.GetItemsAsDictionary("//stylePick/styles/mobile/style[@name='" + layout + "']/styleProperty");
                 string languageSelection = string.Empty;

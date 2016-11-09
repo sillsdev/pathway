@@ -88,11 +88,11 @@ namespace Test.ParatextSupport
             xslParams.Add("fontName", "Times");
             xslParams.Add("fontSize", "12");
 
-
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
+			Common.Testing = true;
+            Common.ProgInstall = PathPart.Bin(Path.GetDirectoryName(Environment.CurrentDirectory), @"/../../DistFiles");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
-            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ParatextSupport/TestFiles");
+            string testPath = PathPart.Bin(Path.GetDirectoryName(Environment.CurrentDirectory), "\\ParatextSupport\\TestFiles");
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "Expected");
@@ -116,17 +116,17 @@ namespace Test.ParatextSupport
             usxBooksToExport.Add(xmlInnerText());
             string outputFolder = FileOutput("nkoNT");
             string expectedFolder = FileExpected("nkoNT");
-
-            converter.MFormat = "E-Book (Epub2 and Epub3)";
+			converter.MFormat = "E-Book (Epub2 and Epub3)";
             converter.MDatabaseName = "nkoNT";
             converter.MOutputLocationPath = outputFolder;
             converter.MPublicationName = "ScripturenkoNT";
-            converter.IsTesting = true;
+			Common.Testing = true;
 
             if (Directory.Exists(outputFolder))
                 Directory.Delete(outputFolder, true);
             Directory.CreateDirectory(outputFolder);
             converter.ExportToPathway(usxBooksToExport);
+			
             usxBooksToExport.Clear();
             const string TestName = "ScripturenkoNT";
             var xhtmlFile = TestName + ".xhtml";
@@ -148,7 +148,7 @@ namespace Test.ParatextSupport
             converter.MDatabaseName = "nkoNT";
             converter.MOutputLocationPath = outputFolder;
             converter.MPublicationName = "ScripturenkoNT";
-            converter.IsTesting = true;
+			Common.Testing = true;
 
             if (Directory.Exists(outputFolder))
                 Directory.Delete(outputFolder, true);

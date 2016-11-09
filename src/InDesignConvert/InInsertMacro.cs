@@ -58,11 +58,21 @@ namespace SIL.PublishingSolution
 
             //Create and copy file to temp folder
             supportFileFolder = Common.PathCombine(Common.GetPSApplicationPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+
+			if (!Directory.Exists(supportFileFolder))
+			{
+				supportFileFolder = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "InDesignFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
+			}
+
             projInfo.TempOutputFolder = Common.PathCombine(Path.GetTempPath(), "InDesignFiles" + Path.DirectorySeparatorChar + projInfo.ProjectInputType);
             CopyFolderWithFiles(supportFileFolder, projInfo.TempOutputFolder);
 
             //Same macro is used for dictionary and scripture
             var scriptsFolder = Common.PathCombine(Common.GetPSApplicationPath(), "InDesignFiles/Dictionary/Scripts");
+			if (!Directory.Exists(scriptsFolder))
+			{
+				scriptsFolder = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "InDesignFiles/Dictionary/Scripts");
+			}
             CopyFolderWithFiles(scriptsFolder, Common.PathCombine(projInfo.TempOutputFolder, "scripts"));
 
             strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Scripts/Startup Scripts/PlaceFrames.jsx");

@@ -132,15 +132,14 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-	        Common.SetupLocalization();
+			Common.SetupLocalization();
             if (projInfo == null)
                 return false;
             const bool success = true;
-
             #region Set up progress reporting
-#if (TIME_IT)
-            DateTime dt1 = DateTime.Now;    // time this thing
-#endif
+			#if (TIME_IT)
+						DateTime dt1 = DateTime.Now;    // time this thing
+			#endif
             var myCursor = Common.UseWaitCursor();
             var curdir = Environment.CurrentDirectory;
 			var inProcess = Common.SetupProgressReporting(20, "Export " + ExportType);
@@ -482,7 +481,7 @@ namespace SIL.PublishingSolution
 
             return success;
         }
-
+		
         private static string RenameEpubFileName(string oldEpubFileName, string epubVersion)
         {
             string newEpubFileName = oldEpubFileName.Replace(".epub", "_" + epubVersion + ".epub");
@@ -827,6 +826,12 @@ namespace SIL.PublishingSolution
             sb.Append(Path.DirectorySeparatorChar);
             sb.Append("epub");
             string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "epub");
+			if (!Directory.Exists(strFromOfficeFolder))
+			{
+				strFromOfficeFolder = Path.GetDirectoryName(Common.AssemblyPath);
+				strFromOfficeFolder = Common.PathCombine(strFromOfficeFolder, "epub");
+			}
+
             projInfo.TempOutputFolder = sb.ToString();
             CopyFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
             // set the folder where our epub content goes
@@ -843,8 +848,14 @@ namespace SIL.PublishingSolution
         private void AddBooksMoveNotes(InProcess inProcess, List<string> htmlFiles, IEnumerable<string> splitFiles)
         {
             string xsltFullName = GetXsltFile();
-            string getPsApplicationPath = Common.GetPSApplicationPath();
-            string xsltProcessExe = Common.PathCombine(getPsApplicationPath, "XslProcess.exe");
+			string getPsApplicationPath = Common.AssemblyPath;
+	        string xsltProcessExe = Common.PathCombine(getPsApplicationPath, "XslProcess.exe");
+			if (!File.Exists(xsltProcessExe))
+			{
+				getPsApplicationPath = Path.GetDirectoryName(Common.AssemblyPath);
+				xsltProcessExe = Common.PathCombine(getPsApplicationPath, "XslProcess.exe");
+			}
+
             inProcess.SetStatus("Apply Xslt Process in html file");
             if (File.Exists(xsltProcessExe))
             {

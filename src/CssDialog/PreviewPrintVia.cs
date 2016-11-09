@@ -331,8 +331,13 @@ namespace SIL.PublishingSolution
 
 		private void ShowImageForPreviewLayout(string imageFileName, string message)
 		{
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+			if (!Directory.Exists(pathwayDirectory))
+			{
+				pathwayDirectory = Path.GetDirectoryName(Common.AssemblyPath);
+				pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+			}
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, Param.Value["InputType"]);
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
 			string preview = Common.PathCombine(pathwayDirectory, imageFileName);

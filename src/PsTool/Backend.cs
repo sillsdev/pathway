@@ -39,7 +39,10 @@ namespace SIL.Tool
             {
                 return;
             }
-
+			if (Directory.Exists(path) && !path.Contains("Export"))
+			{
+				path = Common.PathCombine(path, "Export");
+			}
             _backend.Clear();
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
@@ -94,6 +97,11 @@ namespace SIL.Tool
                 //}
 
                 //Code to call PathwayExport Commandline Utility -commented for now
+		        string mainXhtmlFile = Path.GetFileNameWithoutExtension(publicationInformation.DefaultXhtmlFileWithPath);
+
+		        if (mainXhtmlFile.ToLower() == "flexrev")
+			        publicationInformation.IsReversalExist = false;
+
                 StringBuilder sb = new StringBuilder();
                 sb.Append("\"");
                 sb.Append(publicationInformation.DefaultXhtmlFileWithPath);
@@ -115,11 +123,15 @@ namespace SIL.Tool
                     sb.Append("\"");
                 }
 
-                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString());
+                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString());
+
+				string pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "PathwayExport.exe");
+
+				if (!File.Exists(pathwayExportFile))
+					pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "Export", "PathwayExport.exe");
 
 				var cmd = Common.IsUnixOS()?
-					"/usr/bin/PathwayExport":
-					Path.Combine(Common.GetApplicationPath(), "Export" ,"PathwayExport.exe");
+					"/usr/bin/PathwayExport": pathwayExportFile;
 				
                 CommandLineRunner.Run(cmd, argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
             }
@@ -132,7 +144,7 @@ namespace SIL.Tool
                 publicationInformation.DefaultXhtmlFileWithPath = xhtmlFile;
                 ShowVerbose(publicationInformation);
             } 
-            return false;
+            return true;
         }
 
         private static void ShowVerbose(PublicationInformation publicationInformation)

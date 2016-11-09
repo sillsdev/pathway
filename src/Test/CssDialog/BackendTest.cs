@@ -27,7 +27,7 @@ namespace Test.CssDialog
         protected void SetUp()
         {
             Common.Testing = true;
-            Common.ProgInstall = PathwayPath.GetPathwayDir();
+			Common.ProgInstall = Common.AssemblyPath;
             Backend.Load(Common.ProgInstall);
         }
         #endregion Setup

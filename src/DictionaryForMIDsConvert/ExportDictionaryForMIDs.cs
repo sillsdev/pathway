@@ -238,7 +238,16 @@ namespace SIL.PublishingSolution
         {
             var output = new DictionaryForMIDsStreamWriter(projInfo);
             Debug.Assert(output.Directory != null);
-            var DictionaryForMIDsPath = Common.FromRegistry("Dic4Mid");
+
+	        string assemblyPath = Common.AssemblyPath;
+			
+			var DictionaryForMIDsPath = Path.Combine(assemblyPath, "Dic4Mid");
+
+			if(!Directory.Exists(DictionaryForMIDsPath))
+			{
+				DictionaryForMIDsPath = Path.Combine(Path.GetDirectoryName(assemblyPath), "Dic4Mid"); 
+			}
+
             var creatorPath = Common.PathCombine(DictionaryForMIDsPath, "DfM-Creator");
             FolderTree.Copy(creatorPath, output.Directory);
 

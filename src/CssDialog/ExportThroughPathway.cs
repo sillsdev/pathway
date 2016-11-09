@@ -513,6 +513,12 @@ namespace SIL.PublishingSolution
             }
 
             string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\");// + xsltFile[0]
+
+			if (!Directory.Exists(xsltFullName))
+			{
+				xsltFullName = Path.GetDirectoryName(Common.GetApplicationPath());
+				xsltFullName = Common.PathCombine(xsltFullName, "Preprocessing\\");
+			}
             xsltFullName = Common.PathCombine(xsltFullName, InputType + "\\"); //TD-2871 - separate dictionary and Scripture xslt
             if (Directory.Exists(xsltFullName))
             {
@@ -877,6 +883,11 @@ namespace SIL.PublishingSolution
             if (!File.Exists(CoverPageImagePath))
             {
                 CoverPageImagePath = Common.PathCombine(Common.GetApplicationPath(), "Graphic\\cover.png");
+				if (!File.Exists(CoverPageImagePath))
+				{
+					CoverPageImagePath = Path.GetDirectoryName(Common.GetApplicationPath());
+					CoverPageImagePath = Common.PathCombine(CoverPageImagePath, "Graphic\\cover.png");
+				}
             }
 
             // attempt to save the properties - if it doesn't work, leave the dialog open
@@ -944,6 +955,13 @@ namespace SIL.PublishingSolution
         {
             string getApplicationPath = Common.GetApplicationPath();
             string helpImproveCommand = Common.PathCombine(getApplicationPath, "HelpImprove.exe");
+
+			if (!File.Exists(helpImproveCommand))
+			{
+				helpImproveCommand = Path.GetDirectoryName(Common.GetApplicationPath());
+				helpImproveCommand = Common.PathCombine(helpImproveCommand, "HelpImprove.exe");
+			}
+
             const string registryPath = "Software\\SIL\\Pathway";
 
             if (File.Exists(helpImproveCommand))
@@ -1466,7 +1484,13 @@ namespace SIL.PublishingSolution
             if (!File.Exists(copyrightFileName))
             {
                 var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+				if (!Directory.Exists(copyrightDir))
+				{
+					copyrightDir = Path.GetDirectoryName(Common.AssemblyPath);
+					copyrightDir = Common.PathCombine(copyrightDir, "Copyrights");
+				}
                 copyrightFileName = Common.PathCombine(copyrightDir, "SIL_Custom_Template.xhtml");
+				
             }
             return copyrightFileName;
         }
@@ -1498,6 +1522,11 @@ namespace SIL.PublishingSolution
                         {
                             // this is our item - set the CopyrightFilename
                             var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+							if (!Directory.Exists(copyrightDir))
+							{
+								copyrightDir = Path.GetDirectoryName(Common.AssemblyPath);
+								copyrightDir = Common.PathCombine(copyrightDir, "Copyrights");
+							}
                             CopyrightPagePath = Common.PathCombine(copyrightDir, subnode.Attributes["file"].Value);
                         }
                     }

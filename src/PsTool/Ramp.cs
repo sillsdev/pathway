@@ -1552,6 +1552,10 @@ namespace SIL.Tool
                         licenseXml = Common.PathCombine(licenseXml, "Copyrights");
                     }
                     licenseXml = Common.PathCombine(licenseXml, filename);
+					if (!File.Exists(licenseXml))
+					{
+						licenseXml = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+					}
                 }
                 else
                 {

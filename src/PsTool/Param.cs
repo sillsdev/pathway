@@ -1391,10 +1391,17 @@ namespace SIL.Tool
             string fileName = Common.PathCombine(Common.GetAllUserAppPath(), @"SIL\Pathway\UserInterfaceLanguage.xml");
             if (!File.Exists(fileName))
             {
-                string pathwayDirectory = PathwayPath.GetPathwayDir();
+				string pathwayDirectory = Common.AssemblyPath;
                 if (pathwayDirectory != null)
                 {
                     string installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
+
+					if (!Directory.Exists(installedLocalizationsFolder))
+					{
+						installedLocalizationsFolder = Path.GetDirectoryName(Common.AssemblyPath);
+						installedLocalizationsFolder = Common.PathCombine(installedLocalizationsFolder, "localizations");
+					}
+
                     string xmlSourcePath = Common.PathCombine(installedLocalizationsFolder, "UserInterfaceLanguage.xml");
 	                if (File.Exists(xmlSourcePath))
 	                {

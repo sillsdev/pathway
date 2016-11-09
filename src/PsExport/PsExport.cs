@@ -105,7 +105,7 @@ namespace SIL.PublishingSolution
 				inProcess.PerformStep();
 
 				string supportPath = GetSupportPath();
-				Backend.Load(Common.ProgInstall);
+				Backend.Load(Common.AssemblyPath);
                 LoadProgramSettings(supportPath);
                 LoadDataTypeSettings();
                 
@@ -154,7 +154,7 @@ namespace SIL.PublishingSolution
 
                 if (DataType == "Scripture")
                 {
-                    SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
+					SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
                 }
                 else if (DataType == "Dictionary")
                 {
@@ -245,9 +245,13 @@ namespace SIL.PublishingSolution
 
 		private void SimplifyExportFiles(string exportedDirectory)
 		{
+			string cssSimplerFile = Path.Combine(Common.GetApplicationPath(), "Export", "CssSimpler.exe");
+
+			if(!File.Exists(cssSimplerFile))
+				cssSimplerFile = Path.Combine(Common.GetApplicationPath(), "CssSimpler.exe");
+
 			string cssSimplerExe = Common.IsUnixOS()?
-				"/usr/bin/CssSimpler":
-				Path.Combine(Common.GetApplicationPath(), "Export","CssSimpler.exe");
+				"/usr/bin/CssSimpler": cssSimplerFile;
 			
 			var outDir = Path.GetDirectoryName(exportedDirectory);
 			if (outDir != null)
@@ -374,6 +378,10 @@ namespace SIL.PublishingSolution
 		    if (!File.Exists(xsltFullName))
 		    {
 			    xsltFullName = Common.PathCombine(Common.PathCombine(Common.GetPSApplicationPath(), "Preprocessing"), processName);
+				if (!File.Exists(xsltFullName))
+				{
+					xsltFullName = Common.PathCombine(Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Preprocessing"), processName);
+				}
 		    }
 		    if (!File.Exists(xsltFullName))
 		    {
@@ -409,7 +417,7 @@ namespace SIL.PublishingSolution
             {
                 Common.ParaTextFontName(fluffedCssFullName);
             }
-            else if (DataType == "Dictionary" && fileName == "main.xhtml")
+			else if (DataType == "Dictionary" && fileName == "main.xhtml" || fileName == "FlexRev.xhtml")
             {
                 Common.LanguageSettings(mainFullName, fluffedCssFullName, DataType == "Dictionary", fluffedCssReversal);
             }
@@ -547,7 +555,7 @@ namespace SIL.PublishingSolution
 
         protected static string GetSupportPath()
         {
-            return Common.GetPSApplicationPath();
+            return Common.AssemblyPath;
         }
 
         #endregion Export
@@ -591,7 +599,7 @@ namespace SIL.PublishingSolution
             }
             SetExtraProcessingValue(projInfo);
 
-            Backend.Launch(Destination, projInfo);
+			Backend.Launch(Destination, projInfo);
         }
 
         private void SetReverseExistValue(PublicationInformation projInfo)
@@ -648,7 +656,7 @@ namespace SIL.PublishingSolution
                 projInfo.IsOpenOutput = !Common.Testing;
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(mainXhtml);
                 SetExtraProcessingValue(projInfo);
-                Backend.Launch(Destination, projInfo);
+				Backend.Launch(Destination, projInfo);
             }
         }
         #endregion SeExport

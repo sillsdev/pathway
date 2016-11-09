@@ -86,6 +86,7 @@ namespace Test.XhtmlExport
 		/// </summary>
 		private static void PathawyB(string project, string layout, string inputType, string backend, string format)
 		{
+			Common.Testing = true;
 			const bool overwrite = true;
 			const string message = "";
 			var xhtmlName = project + "." + format;
@@ -118,9 +119,15 @@ namespace Test.XhtmlExport
 
 				ParatextPathwayLink converter = new ParatextPathwayLink("NKOu3", xslParams);
 				converter.ConvertUsxToPathwayXhtmlFile(usxBooksToExport[0].InnerXml, xhtmlOutput.Replace(".usx", ".xhtml"));
-
-
 			}
+
+			string pathwayBFile = Common.PathCombine(Common.AssemblyPath, "PathwayB.exe");
+			if (!File.Exists(pathwayBFile))
+			{
+				pathwayBFile = Path.GetDirectoryName(Common.AssemblyPath);
+				pathwayBFile = Common.PathCombine(pathwayBFile, "PathwayB.exe");
+			}
+
 			var p1 = new Process();
 			p1.StartInfo.UseShellExecute = false;
 			StringBuilder arg = new StringBuilder(string.Format("-f \"{0}\" ", xhtmlOutput));
@@ -132,7 +139,8 @@ namespace Test.XhtmlExport
 			arg.Append(string.Format("-d \"{0}\" ", workingFolder));
 			p1.StartInfo.Arguments = arg.ToString();
 			p1.StartInfo.WorkingDirectory = _tf.Output(null);
-			p1.StartInfo.FileName = Common.PathCombine(PathwayPath.GetPathwayDir(), "PathwayB.exe");
+			p1.StartInfo.FileName = pathwayBFile;
+			
 			p1.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 			p1.Start();
 			if (p1.Id <= 0)

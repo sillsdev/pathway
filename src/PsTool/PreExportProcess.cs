@@ -282,6 +282,11 @@ namespace SIL.Tool
             {
                 // no image file specified -- use the default image in the Graphic directory
                 string strImageFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
+
+				if (!Directory.Exists(strImageFolder))
+				{
+					strImageFolder = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Graphic");
+				}
                 strImageFile = Common.PathCombine(strImageFolder, "cover.png");
             }
             if (!File.Exists(strImageFile))
@@ -455,6 +460,10 @@ namespace SIL.Tool
         private void CopyCCResources(string outputFolder)
         {
             string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+			if (!Directory.Exists(strCopyrightFolder))
+			{
+				strCopyrightFolder = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+			}
             // copy over supporting files from the Copyright folder
             // rights logos - copyright page only
             if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("true"))
@@ -491,6 +500,10 @@ namespace SIL.Tool
                 return;
             }
             string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+			if (!Directory.Exists(strCopyrightFolder))
+			{
+				strCopyrightFolder = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+			}
             // open up the copyright / license file
             string strFilename = Param.GetMetadataValue(Param.CopyrightPageFilename);
             if (strCopyrightFolder == null || strFilename == null)
@@ -634,6 +647,10 @@ namespace SIL.Tool
             if (Param.GetMetadataValue(Param.CopyrightPage).ToLower().Equals("false") ||
                 Param.GetMetadataValue(Param.CopyrightPageFilename).Length < 1) { return string.Empty; }
             string strCopyrightFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+			if (!Directory.Exists(strCopyrightFolder))
+			{
+				strCopyrightFolder = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+			}
             // open up the copyright / license file
             string strFilename = Param.GetMetadataValue(Param.CopyrightPageFilename);
             if (strCopyrightFolder == null || strFilename == null)

@@ -5062,8 +5062,15 @@ namespace SIL.PublishingSolution
 		private void ShowCustomPreviewImage()
 		{
 			string preview;
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+
+			if (!Directory.Exists(pathwayDirectory))
+			{
+				pathwayDirectory = Path.GetDirectoryName(Common.AssemblyPath);
+				pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+			}
+
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, inputTypeBL);
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
 			preview = Common.PathCombine(pathwayDirectory, "PreviewMessage.jpg");
