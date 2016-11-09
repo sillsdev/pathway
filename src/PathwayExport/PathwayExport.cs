@@ -125,8 +125,8 @@ namespace SIL.PublishingSolution
                 else if (exportType == "pdf (using openoffice/libreoffice)")
                 {
                     projectInfo.FinalOutput = "pdf";
+					projectInfo.OutputExtension = "pdf";
                     process = new ExportLibreOffice();
-					Common._outputType = Common.OutputType.PDF;
                 }
                 else if (exportType == "pdf (using prince)")
                 {

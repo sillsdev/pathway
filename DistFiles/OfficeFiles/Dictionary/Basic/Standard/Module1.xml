@@ -83,6 +83,32 @@ MyError:
 
 End Sub
 
+sub CloseDocumentss
+	Dim Docs As Object,Components as Object
+	Components = StarDesktop.getComponents()
+	Docs = Components.createEnumeration()
+      Do While Docs.hasMoreElements()
+         Doc = Docs.nextElement()
+         Doc.dispose()
+      loop   
+Exit sub
+
+sub CloseDocument
+  Dim oEnum 
+  Dim oDoc
+  oEnum = StarDesktop.getComponents().createEnumeration() 
+Do While oEnum.hasMoreElements() 
+   oDoc = oEnum.nextElement() 
+   If HasUnoInterfaces(oDoc, "com.sun.star.util.XCloseable") Then 
+   oDoc.setModified(False) 
+   oDoc.close(True) 
+  Else 
+  oDoc.dispose() 
+   End If 
+Loop 
+StarDesktop.Terminate() 
+End sub
+
 
 &apos;This method aligns Cover page Image to Page Align(Full Page)
 Sub SetImageToCoverPage
@@ -186,7 +212,8 @@ End If
 	&apos;msgbox(&quot;dispose&quot;)
 	&apos;wait 5000 
 	&apos;CleanUp()
-	oDoc.dispose()
+	&apos;oDoc.dispose()
+	CloseDocument()
 	&apos;msgbox(&quot;disposeEnd&quot;)
 	&apos;wait 5000 
 Exit Sub

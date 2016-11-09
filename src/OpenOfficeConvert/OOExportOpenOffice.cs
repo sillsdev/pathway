@@ -495,6 +495,7 @@ namespace SIL.PublishingSolution
             publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
             publicationInfo.ProgressBar = statusProgressBar;
             publicationInfo.FileSequence = _odtFiles;
+			publicationInfo.IsOpenOutput = true;
 			ExportODT(publicationInfo, progressDialogProcess);
         }
 

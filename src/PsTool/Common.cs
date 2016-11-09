@@ -3778,7 +3778,7 @@ namespace SIL.Tool
 		public static string InsertCopyrightInPdf(string xhtmlFileName, string creatorTool, string inputType)
 		{
 			string pdfFileName = xhtmlFileName;
-			string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+			string executablePath = Path.GetDirectoryName(Common.AssemblyPath);
 			if (executablePath.IndexOf("Configuration") > 0 || pdfFileName.ToLower().Contains("local"))
 			{
 				if (File.Exists(pdfFileName))
@@ -3790,8 +3790,9 @@ namespace SIL.Tool
 			//Copyright information added in PDF files
 			try
 			{
-				string getPsApplicationPath = Common.GetPSApplicationPath();
+				string getPsApplicationPath = Common.AssemblyPath;
 				string licenseXml = Common.PathCombine(getPsApplicationPath, "Copyrights");
+
 				if (!Directory.Exists(licenseXml))
 				{
 					licenseXml = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
@@ -3828,6 +3829,11 @@ namespace SIL.Tool
 				UpdateLicenseAttributes(creatorTool, Param.Value["InputType"], destLicenseXml, organization, exportTitle, copyrightURL, utcDateTime);
 
 				string sourceJarFile = Common.PathCombine(getPsApplicationPath, "pdflicensemanager-2.3.jar");
+				if (!File.Exists(sourceJarFile))
+				{
+					sourceJarFile = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "pdflicensemanager-2.3.jar");
+				}
+
 				string destJarFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "pdflicensemanager-2.3.jar");
 
 				if (!File.Exists(destJarFile))
@@ -3835,7 +3841,12 @@ namespace SIL.Tool
 					File.Copy(sourceJarFile, destJarFile, true);
 				}
 
-				string sourceExeFile = Common.PathCombine(executablePath, "PdfLicense.exe");
+				string sourceExeFile = Common.PathCombine(getPsApplicationPath, "PdfLicense.exe");
+				if (!File.Exists(sourceExeFile))
+				{
+					sourceExeFile = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "PdfLicense.exe");
+				}
+
 				string destExeFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "PdfLicense.exe");
 
 				if (!File.Exists(destExeFile))

@@ -315,20 +315,6 @@ namespace Test.OpenOfficeConvert
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "letter2";
-			_validate.ClassProperty.Add("fo:font-family", "sans-serif");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "letter8";
-			_validate.ClassProperty.Add("fo:font-family", "serif");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-
         }
 
 
@@ -653,9 +639,9 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:font-weight-complex", "700");
             _validate.ClassProperty.Add("fo:font-size", "24pt");
             _validate.ClassProperty.Add("fo:font-size-complex", "24pt");
-			_validate.ClassProperty.Add("fo:font-family", "serif");
+			_validate.ClassProperty.Add("fo:font-family", "Times New Roman");
 
-			_validate.ClassProperty.Add("fo:font-name-complex", "serif");
+			_validate.ClassProperty.Add("fo:font-name-complex", "Times New Roman");
             _validate.ClassProperty.Add("fo:font-style", "italic");
             _validate.ClassProperty.Add("fo:font-variant", "small-caps");
 
