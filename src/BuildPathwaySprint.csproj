@@ -3,10 +3,10 @@
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
-  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="../packages/MSBuild.Extension.Pack.1.8.0/tools/net40/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="../packages/MSBuild.Extension.Pack.1.8.0/tools/net40/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="../packages/MSBuild.Extension.Pack.1.8.0/tools/net40/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="../packages/MSBuild.Extension.Pack.1.8.0/tools/net40/MSBuild.ExtensionPack.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
