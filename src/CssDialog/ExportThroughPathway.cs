@@ -1284,7 +1284,7 @@ namespace SIL.PublishingSolution
                     return true;
                 }
 
-                if (File.Exists(Common.PathCombine(pathwayPath, "ConfigurationTool.exe")))
+				if (File.Exists(Common.PathCombine(Common.AssemblyPath, "ConfigurationTool.exe")) || File.Exists(Common.PathCombine(Path.Combine(Common.AssemblyPath, "Export"), "ConfigurationTool.exe")))
                 {
                     return true;
                 }
