@@ -2370,19 +2370,21 @@ namespace SIL.Tool
 
 			string styleFileName = Common.PathCombine(ProgBase, file);
 
-			if (!File.Exists(styleFileName))
-				styleFileName = Path.Combine(Path.GetDirectoryName(Common.AssemblyPath), file);
-
-			if (Directory.Exists(styleFileName))
+			string fileExtension = Path.GetExtension(styleFileName);
+			if (string.IsNullOrEmpty(fileExtension))
 			{
-				return styleFileName;
+				if (!Directory.Exists(styleFileName))
+				{
+					styleFileName = Path.Combine(Path.GetDirectoryName(Common.AssemblyPath), file);
+				}
 			}
-
-			if (!File.Exists(styleFileName))
+			else 
 			{
-				styleFileName = Common.PathCombine(Path.GetDirectoryName(ProgBase), file);
+				if(!File.Exists(styleFileName))
+				{
+					styleFileName = Path.Combine(Path.GetDirectoryName(Common.AssemblyPath), file);
+				}
 			}
-
 			return styleFileName;
 		}
 

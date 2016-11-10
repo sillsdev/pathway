@@ -623,7 +623,8 @@ namespace SIL.Tool
                 Value[id] = val;
                 var node = xmlMap.SelectSingleNode(string.Format("stylePick/settings/property[@name=\"{0}\"]", id));
                 Debug.Assert(node != null && node.Attributes != null);
-                {
+                if(node != null)
+				{
                     var valueAttr = node.Attributes.GetNamedItem("value");
                     valueAttr.Value = val;
                 }

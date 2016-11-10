@@ -83,16 +83,6 @@ MyError:
 
 End Sub
 
-sub CloseDocumentss
-	Dim Docs As Object,Components as Object
-	Components = StarDesktop.getComponents()
-	Docs = Components.createEnumeration()
-      Do While Docs.hasMoreElements()
-         Doc = Docs.nextElement()
-         Doc.dispose()
-      loop   
-Exit sub
-
 sub CloseDocument
   Dim oEnum 
   Dim oDoc
