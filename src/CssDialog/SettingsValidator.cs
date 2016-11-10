@@ -369,13 +369,21 @@ namespace SIL.PublishingSolution
                 const string methodname = "MasterSheetPath";
                 const string xPath = "//stylePick/settings/property[@name=\"MasterSheetPath\"]";
                 XmlNode childNode = parentNode.SelectSingleNode(xPath);
-
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
                     appPath = Common.PathCombine(appPath, Common.SupportFolder);
+					if (!Directory.Exists(appPath))
+					{
+						appPath = Common.PathCombine(Path.GetDirectoryName(appPath), Common.SupportFolder);
+					}
                 }
                 string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
+				if (!Directory.Exists(path))
+				{
+					path = Common.PathCombine(Path.GetDirectoryName(appPath), childNode.Attributes["value"].Value);
+				}
+
                 if (!Directory.Exists(path))
                 {
                     errorTag = methodname + "|" + path;
@@ -398,8 +406,16 @@ namespace SIL.PublishingSolution
                 if (_fromPlugin)
                 {
                     appPath = Common.PathCombine(appPath, Common.SupportFolder);
+					if (!Directory.Exists(appPath))
+					{
+						appPath = Common.PathCombine(Path.GetDirectoryName(appPath), Common.SupportFolder);
+					}
                 }
                 string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
+				if (!Directory.Exists(path))
+				{
+					path = Common.PathCombine(Path.GetDirectoryName(appPath), childNode.Attributes["value"].Value);
+				}
                 if (!Directory.Exists(path))
                 {
                     errorTag = methodname + "|" + path;
@@ -422,8 +438,20 @@ namespace SIL.PublishingSolution
                 if (_fromPlugin)
                 {
                     appPath = Common.PathCombine(appPath, Common.SupportFolder);
+					if (!Directory.Exists(appPath))
+					{
+						appPath = Common.PathCombine(Path.GetDirectoryName(appPath), Common.SupportFolder);
+						if (!Directory.Exists(appPath))
+						{
+							appPath = Common.PathCombine(Path.GetDirectoryName(appPath), Common.SupportFolder);
+						}
+					}
                 }
                 string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
+				if (!Directory.Exists(path))
+				{
+					path = Common.PathCombine(Path.GetDirectoryName(appPath), childNode.Attributes["value"].Value);
+				}
                 if (!Directory.Exists(path))
                 {
                     errorTag = methodname + "|" + path;
@@ -449,9 +477,17 @@ namespace SIL.PublishingSolution
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
-                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
+					appPath = Common.PathCombine(appPath, Common.SupportFolder);
+					if (!Directory.Exists(appPath))
+					{
+						appPath = Common.PathCombine(Path.GetDirectoryName(appPath), Common.SupportFolder);
+					}
                 }
-                string path = Common.PathCombine(appPath, partialPath);
+				string path = Common.PathCombine(appPath, partialPath);
+				if (!Directory.Exists(path))
+				{
+					path = Common.PathCombine(Path.GetDirectoryName(appPath), partialPath);
+				}
                 if (!File.Exists(path))
                 {
                     errorTag = methodname + "|" + path;
@@ -473,9 +509,17 @@ namespace SIL.PublishingSolution
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
-                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
+					appPath = Common.PathCombine(appPath, Common.SupportFolder);
+					if (!Directory.Exists(appPath))
+					{
+						appPath = Common.PathCombine(Path.GetDirectoryName(appPath), Common.SupportFolder);
+					}
                 }
-                string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
+				string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
+				if (!Directory.Exists(path))
+				{
+					path = Common.PathCombine(Path.GetDirectoryName(appPath), childNode.Attributes["value"].Value);
+				}
                 if (!File.Exists(path))
                 {
                     errorTag = methodname + "|" + path;
@@ -524,9 +568,17 @@ namespace SIL.PublishingSolution
                 string appPath = Common.GetApplicationPath();
                 if (_fromPlugin)
                 {
-                    appPath = Common.PathCombine(appPath, Common.SupportFolder);
+					appPath = Common.PathCombine(appPath, Common.SupportFolder);
+					if (!Directory.Exists(appPath))
+					{
+						appPath = Common.PathCombine(Path.GetDirectoryName(appPath), Common.SupportFolder);
+					}
                 }
-                string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
+				string path = Common.PathCombine(appPath, childNode.Attributes["value"].Value);
+				if (!Directory.Exists(path))
+				{
+					path = Common.PathCombine(Path.GetDirectoryName(appPath), childNode.Attributes["value"].Value);
+				}
                 if (!File.Exists(path))
                 {
                     errorTag = methodname + "|" + path;
@@ -1081,11 +1133,21 @@ namespace SIL.PublishingSolution
             if (_fromPlugin)
             {
                 appPath = Common.PathCombine(appPath, Common.SupportFolder);
+				if (!Directory.Exists(appPath))
+				{
+					appPath = Common.PathCombine(Path.GetDirectoryName(appPath), Common.SupportFolder);
+				}
+
             }
             const string xPathMaster = "//stylePick/settings/property[@name=\"MasterSheetPath\"]";
             XmlNode masterNode = parentNode.SelectSingleNode(xPathMaster);
             string masterValue = masterNode.Attributes["value"].Value;
-            return Common.PathCombine(appPath, masterValue);
+	        string fileName = Common.PathCombine(appPath, masterValue);
+			if (!Directory.Exists(fileName))
+			{
+				fileName = Common.PathCombine(Path.GetDirectoryName(appPath), masterValue);
+			}
+			return fileName;
         }
 
         //Each tasks/task/@name should be unique
@@ -1179,8 +1241,16 @@ namespace SIL.PublishingSolution
                         if (_fromPlugin)
                         {
                             appPath = Common.PathCombine(appPath, Common.SupportFolder);
+							if (!Directory.Exists(appPath))
+							{
+								appPath = Common.PathCombine(Path.GetDirectoryName(appPath), Common.SupportFolder);
+							}
                         }
                         string iconFilePath = Common.PathCombine(appPath, oValue);
+						if (!Directory.Exists(iconFilePath))
+						{
+							iconFilePath = Common.PathCombine(Path.GetDirectoryName(appPath), oValue);
+						}
                         if (!File.Exists(iconFilePath))
                         {
                             errorTag = methodname + "|" + iconFilePath;

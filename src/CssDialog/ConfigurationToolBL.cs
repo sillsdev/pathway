@@ -1768,6 +1768,10 @@ namespace SIL.PublishingSolution
 			XmlDocument xDoc = Common.DeclareXMLDocument(false);
 			string executablePath = Common.GetApplicationPath();
 			executablePath = Common.PathCombine(executablePath, @"GoBible\Localizations\Languages.xml");
+			if (!File.Exists(executablePath))
+			{
+				executablePath = Common.PathCombine(Path.GetDirectoryName(Common.GetApplicationPath()), @"GoBible\Localizations\Languages.xml");
+			}
 			executablePath = CopiedToTempLanguageXMLFile(executablePath);
 			if (!File.Exists(executablePath)) return;
 			xDoc.Load(executablePath);
@@ -4216,7 +4220,8 @@ namespace SIL.PublishingSolution
 	                }
 	            }
 	        }
-	        cTool.DdlPageNumber.SelectedIndex = 0;
+			if(cTool.DdlPageNumber.Items.Count > 0)
+				cTool.DdlPageNumber.SelectedIndex = 0;
 	    }
 
 	    public void chkIncludeImage_CheckedChangedBL(object sender, EventArgs e)
