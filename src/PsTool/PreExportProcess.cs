@@ -1594,7 +1594,12 @@ namespace SIL.Tool
 			tw.WriteLine("display: inline;");
 			tw.WriteLine("}");
 
-			tw.Close();
+            tw.WriteLine(".mainheadword {");
+            tw.WriteLine("font-weight: bold;");
+            tw.WriteLine("string-set: guideword content();");
+            tw.WriteLine("}");
+
+            tw.Close();
 	    }
 
 
