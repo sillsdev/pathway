@@ -322,9 +322,20 @@ namespace SIL.PublishingSolution
         public string OutputFolder
         {
             get { return txtSaveInFolder.Text; }
-            set { txtSaveInFolder.Text = value; }
+			set { txtSaveInFolder.Text = ReplaceInvalidChars(value); }
         }
         #endregion Properties
+
+		private string ReplaceInvalidChars(string value)
+		{
+			char[] invalidPathChars = Path.GetInvalidPathChars();
+			invalidPathChars[invalidPathChars.Length - 1] = ' ';
+			foreach (var invalidPathChar in invalidPathChars)
+			{
+				value = value.Replace(invalidPathChar, '_');
+			}
+			return value;
+		}
 
         private void ExportThroughPathway_Load(object sender, EventArgs e)
         {

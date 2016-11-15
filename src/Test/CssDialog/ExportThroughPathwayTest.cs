@@ -90,5 +90,15 @@ namespace Test.CssDialog
                 lastItem = item;
             }
         }
+
+		/// <summary>
+		///A test for InvalidCharsTest
+		///</summary>
+		[Test]
+		public void InvalidCharsTest()
+		{
+			OutputFolder = @"C:\Turkish Stuff-Texts-07\Dictionary";
+			Assert.AreEqual(@"C:\Turkish_Stuff-Texts-07\Dictionary", OutputFolder, "InvalidCharsTest failed");
+		}
     }
 }
