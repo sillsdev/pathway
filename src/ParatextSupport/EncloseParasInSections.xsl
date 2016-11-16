@@ -4,7 +4,7 @@
     exclude-result-prefixes="xhtml"
     xmlns="http://www.w3.org/1999/xhtml">
 
-  <xsl:output method="xml" version="1.0" encoding="UTF-8" omit-xml-declaration="yes" indent="yes"
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" omit-xml-declaration="yes" indent="no"
       doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"/>
 
   <!-- Remove text (empty lines) at the root level. -->

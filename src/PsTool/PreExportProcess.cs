@@ -2530,7 +2530,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// TD-3482 
+        /// TD-3482 & TD-4763
         /// </summary>
         /// <param name="fileName"></param>
         public void MoveCallerToPrevText(string fileName)
@@ -2552,7 +2552,14 @@ namespace SIL.Tool
                     string nextNodeContent = markerNextNode.OuterXml;
                     if (nextNodeContent.Contains("Note_Target_Reference"))
                     {
-                        markerPrevNode.InnerXml = markerPrevNode.InnerXml + markerNextNode.OuterXml;
+                        try
+                        {
+                            markerPrevNode.InnerXml = markerPrevNode.InnerXml + markerNextNode.OuterXml;
+                        }
+                        catch (InvalidOperationException) //If the previous node is text or whitespace
+                        {
+                            return;
+                        }
                     }
                 }
                 if (markerNextNode != null && markerNextNode.ParentNode != null)
