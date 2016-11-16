@@ -373,7 +373,7 @@ namespace SIL.Tool
 			if (cssClassDetail1 == null)
 				return _matchedCssStyleName;
 			
-			string myParent = StackPeek(_allStyle);
+			string parentClass = StackPeek(_allStyle);
 			
 			if (!string.IsNullOrEmpty(_matchedCssStyleName))
 			{
@@ -383,7 +383,7 @@ namespace SIL.Tool
 				}
 			}
 
-			string className = multiClass + Common.SepParent + myParent;
+			string className = multiClass + Common.SepParent + parentClass;
 			className = Common.RightRemove(className, "_letData");
 			string idAllCssClassName = string.Empty;
 			foreach (KeyValuePair<string, string> property in IdAllClassWithandWithoutSeperator)
@@ -404,6 +404,18 @@ namespace SIL.Tool
 				}
 				else
 				{
+					foreach (ClassInfo cssClassInfo in cssClassDetail1)
+					{
+						parentClass = multiClass + Common.SepAncestor + StackPeek(_allParagraph);
+						parentClass = Common.RightRemove(parentClass, "_letData");
+						string cssClassName = cssClassInfo.StyleName;
+						if (cssClassName.Contains(Common.SepAncestor) && IdAllClass.ContainsKey(parentClass) &&
+							IdAllClass[parentClass].ContainsKey(propertyName))
+						{
+							returnValue = IdAllClass[cssClassName][propertyName];
+							return returnValue;
+						}
+					}
 					return string.Empty;
 				}
 			}
@@ -414,8 +426,8 @@ namespace SIL.Tool
 					className = cssClassInfo.StyleName;
 					if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey(propertyName))
 					{
-						myParent = multiClass + Common.SepParent + myParent;
-						if (myParent.IndexOf(className) == 0)
+						parentClass = multiClass + Common.SepParent + parentClass;
+						if (parentClass.IndexOf(className) == 0)
 						{
 							returnValue = IdAllClass[className][propertyName];
 							break;
@@ -423,10 +435,7 @@ namespace SIL.Tool
 					}
 				}
 			}
-
-
 			return returnValue;
-
 		}
 
         protected string GetPropertyValue(string className, string propertyName)
@@ -457,11 +466,15 @@ namespace SIL.Tool
                         _className = _className.Replace("_", "");
                         _className = _className.Replace("-", "");
                         FindSecondPicture();
-                        _className = Common.SortMutiClass(_className);
-                        if (_outputType == Common.OutputType.XELATEX)
-                        {
-                            _className = Common.ReplaceCSSClassName(_className);
-                        }
+	                    if (_outputType == Common.OutputType.XELATEX)
+	                    {
+		                    _className = Common.ReplaceCSSClassName(_className);
+							_className = Common.RightRemove(_className, " ");
+	                    }
+	                    else
+	                    {
+							_className = Common.SortMutiClass(_className);
+	                    }
                     }
                     else if (_reader.Name == "lang")
                     {
