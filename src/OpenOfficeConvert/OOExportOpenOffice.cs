@@ -59,6 +59,10 @@ namespace SIL.PublishingSolution
         private bool _isFromExe = false;
         private bool _isFirstODT = true;
 
+        public delegate void CleanUpMethod();
+
+        private string _xhtmlCleanUpFullPath;
+
         /// <summary>
         /// Convert XHTML to ODT
         /// </summary>
@@ -136,16 +140,17 @@ namespace SIL.PublishingSolution
 			#region Process Setting ODT
 			inProcess.SetStatus("Process Setting ODT file");
 			inProcess.PerformStep();
-			
+
+            _xhtmlCleanUpFullPath = publicationInfo.DefaultXhtmlFileWithPath;
 			if (dictSecName.Count > 1)
             {
                 GeneratedPdfFileName = dictSecName["Main"];
-                ExportODM(publicationInfo.ProgressBar, inProcess);
+                ExportODM(publicationInfo.ProgressBar,CleanUp, inProcess);
             }
             else
             {
                 publicationInfo.DictionaryOutputName = publicationInfo.ProjectName;
-                returnValue = ExportODT(publicationInfo, inProcess);
+                returnValue = ExportODT(publicationInfo, CleanUp, inProcess);
 			}
 
 			#endregion
@@ -155,12 +160,6 @@ namespace SIL.PublishingSolution
                 publicationInfo.OutputExtension = "pdf";
                 Common.InsertCopyrightInPdf(defaultXhtml, "LibreOffice", projInfo.ProjectInputType);
             }
-            else
-            {
-                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout.css", string.Empty);
-                CreateRAMP();
-                Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".css,.xhtml,.xml", String.Empty, String.Empty);
-			}
 
 			#region Close Reporting
 			inProcess.Close();
@@ -170,6 +169,14 @@ namespace SIL.PublishingSolution
 			#endregion Close Reporting
 
 			return returnValue;
+        }
+
+        private void CleanUp()
+        {
+            publicationInfo.DefaultXhtmlFileWithPath = _xhtmlCleanUpFullPath;
+            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout.css", string.Empty);
+            CreateRAMP();
+            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".css,.xhtml,.xml", String.Empty, String.Empty);
         }
 
         private Dictionary<string, Dictionary<string, string>> WriteGlossaryLink(PublicationInformation projInfo)
@@ -418,7 +425,7 @@ namespace SIL.PublishingSolution
             return dictSecName;
         }
 
-        private void ExportODM(ProgressBar statusProgressBar, InProcess progressDialogProcess)
+        private void ExportODM(ProgressBar statusProgressBar, CleanUpMethod cleanUp, InProcess progressDialogProcess)
         {
             Common.ShowMessage = false;
             _odtFiles.Clear();
@@ -456,7 +463,7 @@ namespace SIL.PublishingSolution
                                 publicationInfo.DefaultXhtmlFileWithPath = fileName;
                                 publicationInfo.ProgressBar = statusProgressBar;
                                 publicationInfo.IsOpenOutput = false;
-								generated = ExportODT(publicationInfo, progressDialogProcess);
+								generated = ExportODT(publicationInfo, null, progressDialogProcess);
                                 if (generated)
                                 {
                                     string returnFileName = Path.GetFileName(fileName);
@@ -496,7 +503,7 @@ namespace SIL.PublishingSolution
             publicationInfo.ProgressBar = statusProgressBar;
             publicationInfo.FileSequence = _odtFiles;
 			publicationInfo.IsOpenOutput = true;
-			ExportODT(publicationInfo, progressDialogProcess);
+			ExportODT(publicationInfo, cleanUp, progressDialogProcess);
         }
 
         private void XslProcess(KeyValuePair<string, string> subSection, string fileName, string xslFileName, ExportLibreOffice exportLibreOffice, ProgressBar statusProgressBar, InProcess progressDialogProcess)
@@ -527,7 +534,7 @@ namespace SIL.PublishingSolution
             {
                 publicationInfo.ProgressBar = statusProgressBar;
                 publicationInfo.IsOpenOutput = false;
-				generated = ExportODT(publicationInfo, progressDialogProcess);
+				generated = ExportODT(publicationInfo, null, progressDialogProcess);
 
                 if (generated)
                 {
@@ -560,7 +567,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Convert XHTML to ODT and ODM
         /// </summary>
-		public bool ExportODT(PublicationInformation projInfo, InProcess inProcess)
+		public bool ExportODT(PublicationInformation projInfo, CleanUpMethod cleanUp, InProcess inProcess)
 		{
 			#region 5. Process Creating Defaults ODT Styles
 			inProcess.SetStatus("Process Creating Defaults ODT Styles file");
@@ -775,6 +782,7 @@ namespace SIL.PublishingSolution
                     returnValue = true;
                     if (projInfo.IsOpenOutput && !Common.Testing)
                     {
+                        cleanUp?.Invoke();
                         Common.OpenOutput(fileNameNoPath);
                     }
                 }
