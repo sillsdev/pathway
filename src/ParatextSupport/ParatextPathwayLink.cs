@@ -42,7 +42,6 @@ namespace SIL.PublishingSolution
         private readonly XslCompiledTransform _mSeparateIntoBooks = new XslCompiledTransform();
         private readonly XslCompiledTransform _mUsxToXhtml = new XslCompiledTransform();
         private readonly XslCompiledTransform _mEncloseParasInSections = new XslCompiledTransform();
-        private readonly XslCompiledTransform _mSectionHeadMissing = new XslCompiledTransform();
 
         #endregion
 
@@ -359,14 +358,6 @@ namespace SIL.PublishingSolution
             XmlWriter htmlw3 = XmlWriter.Create(html3, _mUsxToXhtml.OutputSettings);
             _mUsxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
 
-
-            // Step 4. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
-            //       following elements to Pathway's format: book title, chapters, figures, footnotes.
-            StringBuilder html4 = new StringBuilder();
-            XmlWriter htmlw4 = XmlWriter.Create(html4, _mSectionHeadMissing.OutputSettings);
-            _mSectionHeadMissing.Transform(XmlReader.Create(new StringReader(html3.ToString())), args, htmlw4, null);
-
-            
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.DtdProcessing = DtdProcessing.Parse;
 
@@ -374,7 +365,7 @@ namespace SIL.PublishingSolution
             //       include the Scripture sections within columns.
             FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
             XmlWriter htmlw5 = XmlWriter.Create(xhtmlFile, _mEncloseParasInSections.OutputSettings);
-            XmlReader reader5 = XmlReader.Create(new StringReader(html4.ToString()), settings);
+            XmlReader reader5 = XmlReader.Create(new StringReader(html3.ToString()), settings);
             _mEncloseParasInSections.Transform(reader5, null, htmlw5, null);
             xhtmlFile.Close();
         }
@@ -403,9 +394,6 @@ namespace SIL.PublishingSolution
             _mEncloseParasInSections.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "ParatextSupport.EncloseParasInSections.xsl")));
-            _mSectionHeadMissing.Load(XmlReader.Create(
-                Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                "ParatextSupport.SectionHeadMismatch.xsl")));
         }
         
         private void ExportProcess(List<XmlDocument> usxBooksToExport, string publicationName, string format, string outputLocationPath, DialogResult result)
@@ -469,9 +457,12 @@ namespace SIL.PublishingSolution
             inProcess.PerformStep();
             inProcess.Close();
 
-            PsExport exporter = new PsExport();
-            exporter.DataType = "Scripture";
-            exporter.Export(fileName);
+            if (!Common.Testing)
+            {
+                PsExport exporter = new PsExport();
+                exporter.DataType = "Scripture";
+                exporter.Export(fileName);
+            }
         }
 
         /// <summary>
