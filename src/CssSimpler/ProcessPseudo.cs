@@ -214,7 +214,7 @@ namespace CssSimpler
         {
             var content = node.SelectSingleNode("following-sibling::PROPERTY[name='content']/value");
             Debug.Assert(content != null);
-            var val = content.InnerText;
+            var val = content.InnerText.Replace(@"\'", @"'");
             var properties = node.SelectNodes("parent::*/PROPERTY");
             Debug.Assert(properties != null);
             myClass = properties.Count <= 1 ? null : myClass.Replace(" ", "");
