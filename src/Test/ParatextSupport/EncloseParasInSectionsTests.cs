@@ -22,7 +22,6 @@ using System.Xml;
 using System.Xml.Xsl;
 using NUnit.Framework;
 using SIL.PublishingSolution;
-using SIL.Tool;
 
 namespace Test.ParatextSupport
 {

@@ -15,11 +15,8 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Xml;
-using System.Xml.Xsl;
-using NMock2;
+using System.Threading;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -49,9 +46,12 @@ namespace Test.ParatextSupport
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "Expected");
-            if (Directory.Exists(_outputPath))
-                Directory.Delete(_outputPath, true);
-            Directory.CreateDirectory(_outputPath);
+            if (!Directory.Exists(_outputPath))
+            {
+                Directory.CreateDirectory(_outputPath);
+                while (!Directory.Exists(_outputPath))
+                    Thread.Sleep(1000);
+            }
         }
         #endregion setup
 
