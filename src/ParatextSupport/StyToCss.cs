@@ -121,16 +121,12 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-
                     ssfFullPath = Common.GetParatextProjectPath();
-                    StyFullPath = Common.PathCombine(ssfFullPath, ssfFile);
-
+					StyFullPath = Common.PathCombine(ssfFullPath, "usfm.sty");
                 }
-
                 ssfFullPath = ssfFullPath + ssfFile;
             }
             
-
             bool isStylesheet = false;
 
             if (!File.Exists(ssfFullPath))
@@ -139,6 +135,7 @@ namespace SIL.PublishingSolution
                 return;
             }
 
+			string styFile = string.Empty;
             var reader = new XmlTextReader(ssfFullPath) { XmlResolver = null };
             while (reader.Read())
             {
@@ -148,12 +145,12 @@ namespace SIL.PublishingSolution
                 }
                 else if (reader.NodeType == XmlNodeType.Text && isStylesheet)
                 {
-                    ssfFile = reader.Value;
+					styFile = reader.Value;
                     break;
                 }
             }
             reader.Close();
-            StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
+			StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), styFile);
         }
 
         /// ------------------------------------------------------------------------
