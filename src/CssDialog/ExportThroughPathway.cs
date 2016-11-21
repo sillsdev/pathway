@@ -442,32 +442,23 @@ namespace SIL.PublishingSolution
 	            }
 	            if (AppDomain.CurrentDomain.FriendlyName.ToLower().Contains("fieldworks"))
 	            {
-		            var xdoc = new XmlDocument();
 		            try
 		            {
 						IDictionary<string,string> value=new Dictionary<string, string>();
 						var settingsFile = ssf;
-			            xdoc.Load(settingsFile);
-			            var curVernWssnode = xdoc.SelectSingleNode("//CurVernWss/Uni");
-			            if (curVernWssnode != null)
-			            {
-				            foreach (var lang in curVernWssnode.InnerText.Split(' '))
-				            {
-								var langname = GetLanguageValues(lang);
-					            if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-						            value.Add(lang, langname.Replace(',',' '));
-				            }
-			            }
-			            var curAnalysisWssnode = xdoc.SelectSingleNode("//CurAnalysisWss/Uni");
-			            if (curAnalysisWssnode != null)
-			            {
-							foreach (var lang in curAnalysisWssnode.InnerText.Split(' '))
-				            {
-								var langname = GetLanguageValues(lang);
-								if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-									value.Add(lang, langname.Replace(',', ' '));
-				            }
-			            }
+                        var flexScan = new FlexScan(settingsFile);
+				        foreach (var lang in flexScan.VernWs)
+				        {
+							var langname = GetLanguageValues(lang);
+					        if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+						        value.Add(lang, langname.Replace(',',' '));
+				        }
+						foreach (var lang in flexScan.AnalWs)
+				        {
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+				        }
 						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
 		            }
 		            catch (Exception)

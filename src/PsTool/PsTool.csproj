@@ -106,7 +106,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\..\output\Debug\Export</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SIL_TOOL</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -259,6 +259,7 @@
     <Compile Include="CommonXml.cs" />
     <Compile Include="CreatingHyphenationSettings.cs" />
     <Compile Include="FileStreamXmlResolver.cs" />
+    <Compile Include="FlexScan.cs" />
     <Compile Include="ImageMods.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="FontInternals.cs">
@@ -266,6 +267,8 @@
     <Compile Include="HashUtilities.cs" />
     <Compile Include="MergeCss.cs" />
     <Compile Include="MessageBoxExtender.cs" />
+    <Compile Include="NullXmlResolver.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Param.cs" />
     <Compile Include="PathPart.cs" />
     <Compile Include="PathwayPath.cs" />
@@ -331,6 +334,8 @@
     <Compile Include="SubProcess.cs" />
     <Compile Include="Substitution.cs" />
     <Compile Include="XHTMLProcess.cs" />
+    <Compile Include="XmlCopy.cs" />
+    <Compile Include="XmlParser.cs" />
     <Compile Include="ZipFolder.cs" />
     <Compile Include="ZipUtil.cs" />
   </ItemGroup>
