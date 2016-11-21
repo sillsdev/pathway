@@ -1282,23 +1282,7 @@ namespace SIL.PublishingSolution
         {
             if (_fromPlugIn)
             {
-                // Take into account custom directory installs - just look for the ConfigurationTool.exe
-                // in the same directory as this .dll.
-                string fullPathwayPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(PrintVia)).CodeBase);
-                // if the path returned starts with file://, trim that part out
-                string pathwayPath = (fullPathwayPath.StartsWith("file"))
-                                         ? fullPathwayPath.Substring(6)
-                                         : fullPathwayPath;
-
-                if (Common.UnixVersionCheck())
-                {
-                    return true;
-                }
-
-				if (File.Exists(Common.PathCombine(Common.AssemblyPath, "ConfigurationTool.exe")) || File.Exists(Common.PathCombine(Path.Combine(Common.AssemblyPath, "Export"), "ConfigurationTool.exe")))
-                {
-                    return true;
-                }
+	            return true;
             }
             return false;
         }
