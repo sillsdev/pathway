@@ -697,7 +697,10 @@ namespace SIL.Tool
                         rFile.FileDescription = Path.GetFileNameWithoutExtension(file) + " stylesheet";
                         rFile.FileRelationship = "source";
                     }
-                    AddFile(rFile);
+
+					if(!rFile.FileName.Contains("#"))
+						AddFile(rFile);
+
                 }
             }
             Status = "ready";
@@ -1634,7 +1637,8 @@ namespace SIL.Tool
                 zipFile.BeginUpdate();
                 foreach (string file in filesCollection)
                 {
-                    zipFile.Add(file, CompressionMethod.Stored);
+					if (!file.Contains("#"))
+						zipFile.Add(file, CompressionMethod.Stored);
                 }
 
                 foreach (var dirPath in dirCollection)
