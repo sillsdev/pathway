@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using SIL.Tool;
 //This will be called by macro externally. so, please do not remove this since it is not called by any other classes.
 namespace ApplyPDFLicenseInfo
@@ -68,6 +69,13 @@ namespace ApplyPDFLicenseInfo
             if (File.Exists(licencePdfFile))
             {
                 File.Copy(licencePdfFile, exportTitle, true);
+                var fileInfo = new FileInfo(licencePdfFile);
+                while (true)
+                {
+                    var newFileInfo = new FileInfo(exportTitle);
+                    if (newFileInfo.Length == fileInfo.Length) break;
+                    Thread.Sleep(1000);
+                }
 
                 if (commonTesting.ToLower().Contains("false"))
                 {
@@ -82,6 +90,14 @@ namespace ApplyPDFLicenseInfo
             {
                 if(pdfFileName != exportTitle)
                     File.Copy(pdfFileName, exportTitle, true);
+                var fileInfo = new FileInfo(licencePdfFile);
+                while (true)
+                {
+                    var newFileInfo = new FileInfo(exportTitle);
+                    if (newFileInfo.Length == fileInfo.Length) break;
+                    Thread.Sleep(1000);
+                }
+
 
                 if (commonTesting.ToLower().Contains("false"))
                 {
