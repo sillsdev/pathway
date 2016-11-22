@@ -51,10 +51,17 @@ namespace ApplyPDFLicenseInfo
                     var foundOpenDoc = false;
                     foreach (var process in Process.GetProcesses())
                     {
-                        var name = process.ProcessName;
-                        if (name.Contains("soffice"))
+                        try
                         {
-                            foundOpenDoc = true;
+                            var name = process.ProcessName;
+                            if (name.Contains("soffice"))
+                            {
+                                foundOpenDoc = true;
+                            }
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            // If the process has already exited
                         }
                     }
                     if (!foundOpenDoc) break;
