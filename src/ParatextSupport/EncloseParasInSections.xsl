@@ -63,7 +63,7 @@
       
       <!-- Include any introduction sections that begin with headings -->
       <xsl:for-each select="xhtml:h1[starts-with(@class, 'Intro_')]">
-        <xsl:if test="not(preceding-sibling::*[1][self::xhtml:h1][starts-with(@class, 'Intro_')])"> <!-- check last constraint -->
+        <xsl:if test="not(preceding-sibling::*[1][self::xhtml:h1][starts-with(@class, 'Intro_') or starts-with(@class,'i')])"> <!-- check last constraint -->
           <xsl:choose>
             <xsl:when test="@class = 'Intro_Section_Head' or @class = 'Intro_Title_Main' or @class = 'Intro_Title_Secondary' or
               @class = 'Intro_Title_Tertiary'">
@@ -118,7 +118,7 @@
   <xsl:template match="xhtml:p" mode="IntroCopy">
     <xsl:call-template name="p"/>
     <xsl:apply-templates 
-      select="following-sibling::*[1][(self::xhtml:p and starts-with(@class, 'Intro_')) or self::xhtml:table]" mode="IntroCopy"/>
+      select="following-sibling::*[1][(self::xhtml:p and (starts-with(@class, 'Intro_') or starts-with(@class,'i'))) or self::xhtml:table]" mode="IntroCopy"/>
   </xsl:template>
   
   <!-- Copy tables and paragraphs into a Scripture section. -->
@@ -181,11 +181,11 @@
     <xsl:apply-templates select="following-sibling::*[1]" mode="ScrSectionPrecedesHeading"/>
   </xsl:template>
   
-  <xsl:template match="*[starts-with(@class, 'Intro_')]" mode="ScrSectionPrecedesHeading">
+  <xsl:template match="*[starts-with(@class, 'Intro_') or starts-with(@class,'i')]" mode="ScrSectionPrecedesHeading">
     <xsl:apply-templates select="following-sibling::*[1]" mode="ScrSectionPrecedesHeadingFollowsIntro"/>
   </xsl:template>
 
-  <xsl:template match="xhtml:p[not(starts-with(@class, 'Intro_'))]" mode="ScrSectionPrecedesHeading">
+  <xsl:template match="xhtml:p[not(starts-with(@class, 'Intro_') or starts-with(@class,'i'))]" mode="ScrSectionPrecedesHeading">
     <xsl:call-template name="ScrSection"/>  
   </xsl:template>
   
