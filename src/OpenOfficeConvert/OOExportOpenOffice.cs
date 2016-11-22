@@ -782,7 +782,10 @@ namespace SIL.PublishingSolution
                     returnValue = true;
                     if (projInfo.IsOpenOutput && !Common.Testing)
                     {
-                        cleanUp?.Invoke();
+                        if (publicationInfo.FinalOutput.ToLower() != "pdf")
+                        {
+                            cleanUp?.Invoke();
+                        }
                         Common.OpenOutput(fileNameNoPath);
                     }
                 }

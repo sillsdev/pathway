@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using SIL.Tool;
+
 //This will be called by macro externally. so, please do not remove this since it is not called by any other classes.
+
 namespace ApplyPDFLicenseInfo
 {
     class Program
@@ -28,7 +30,7 @@ namespace ApplyPDFLicenseInfo
             string inputType = _readLicenseFilesBylines[4];
             string commonTesting = _readLicenseFilesBylines[5];
             string pdfFileName = string.Empty;
-            
+
             pdfFileName = ProcessLicensePdf(pdfFileName, executePath);
 
             if (exportTitle == string.Empty)
@@ -39,12 +41,26 @@ namespace ApplyPDFLicenseInfo
             string licencePdfFile = pdfFileName.Replace(".pdf", "1.pdf");
 
             ShowPDFFile(licencePdfFile, exportTitle, commonTesting, pdfFileName);
-           
+
             System.Globalization.TextInfo myTI = new System.Globalization.CultureInfo("en-US", false).TextInfo;
             inputType = myTI.ToTitleCase(inputType);
             if (creatorTool.ToLower() == "libreoffice")
             {
-                Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml", "layout.css", string.Empty);
+                while (true)
+                {
+                    var foundOpenDoc = false;
+                    foreach (var process in Process.GetProcesses())
+                    {
+                        var name = process.ProcessName;
+                        if (name.Contains("soffice"))
+                        {
+                            foundOpenDoc = true;
+                        }
+                    }
+                    if (!foundOpenDoc) break;
+                    Thread.Sleep(1000);
+                }
+                Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout.css", string.Empty);
                 LoadParameters(inputType);
                 CreateRAMP(xhtmlFile, inputType);
                 Common.CleanupExportFolder(xhtmlFile, ".xhtml,.xml,.css", "layout.css", string.Empty);
