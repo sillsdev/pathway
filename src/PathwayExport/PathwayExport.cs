@@ -521,7 +521,7 @@ namespace SIL.PublishingSolution
 	                (File.Exists(projectInfo.DefaultXhtmlFileWithPath) && fileNameWithoutExtension.ToLower() == "main"))
 		            projectInfo.IsLexiconSectionExist = true;
 
-                projectInfo.ProjectFileWithPath = projectInfo.DefaultXhtmlFileWithPath;
+                projectInfo.ProjectFileWithPath = null;
                 projectInfo.SwapHeadword = false;
                 projectInfo.FromPlugin = true;
 	            if (indexMain >= 0 && indexRev >= 0)
@@ -546,7 +546,7 @@ namespace SIL.PublishingSolution
                 {
                     projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, files[0]);
                 }
-                projectInfo.ProjectFileWithPath = projectInfo.DefaultXhtmlFileWithPath;
+                projectInfo.ProjectFileWithPath = null;
                 projectInfo.DictionaryPath = projectInfo.ProjectPath;
                 projectInfo.FromPlugin = true;
                 projectInfo.IsLexiconSectionExist = false;
