@@ -3847,14 +3847,21 @@ namespace SIL.Tool
 				}
 
 				string sourceExeFile = Common.PathCombine(getPsApplicationPath, "PdfLicense.exe");
-				if (!File.Exists(sourceExeFile))
+				if (sourceExeFile.StartsWith("/"))
+				{
+					sourceExeFile = "/usr/bin/PdfLicense";
+				}
+				else if (!File.Exists(sourceExeFile))
 				{
 					sourceExeFile = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "PdfLicense.exe");
 				}
 
 				string destExeFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "PdfLicense.exe");
-
-				if (!File.Exists(destExeFile))
+				if (destExeFile.StartsWith("/"))
+				{
+					destExeFile = "/usr/bin/PdfLicense";
+				}
+				else if (!File.Exists(destExeFile))
 				{
 					File.Copy(sourceExeFile, destExeFile, true);
 				}

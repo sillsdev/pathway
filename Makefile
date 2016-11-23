@@ -32,6 +32,8 @@ install:
 	cp src/ConfigurationTool.sh $(DESTDIR)$(prefix)/bin/ConfigurationTool
 	cp src/CssSimpler.sh $(DESTDIR)$(prefix)/bin/CssSimpler
 	cp src/PathwayExport.sh $(DESTDIR)$(prefix)/bin/PathwayExport
+	cp src/PdfLicense.sh $(DESTDIR)$(prefix)/bin/PdfLicense
+	cp src/ApplyPDFLicenseInfo.sh $(DESTDIR)$(prefix)/bin/ApplyPDFLicenseInfo
 	mkdir -p $(DESTDIR)$(prefix)/share/python-support
 	chmod 777 $(DESTDIR)$(prefix)/share/python-support
 	mkdir -p $(DESTDIR)$(prefix)/share/doc/pathway

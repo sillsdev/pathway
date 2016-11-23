@@ -181,21 +181,12 @@ End If
 	If Lcase(IsPreview) = &quot;false&quot; And Len(Trim(FilePath)) &gt; 4  Then
 		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
 		If(mid(FilePath,1,5) = &quot;/home&quot;) Then
-		  	MyArray = Split(FilePath,&quot;/&quot;)
-		  	FileName =  MyArray(UBound(MyArray))
-			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;PdfLicense.exe&quot;)
-			Shell(&quot;chmod a+x &quot; &amp; FilePathWithName, &quot;&quot;,1)
-			Shell(ConvertToURL(FilePathWithName), &quot;&quot;,1)
-			&apos;Shell(&quot;xdg-open &quot; + FilePathWithName)
-
+			Shell(ConvertToURL(&quot;/usr/bin/PdfLicense&quot;), &quot;&quot;,1)
 		Else
-		MyArray = Split(FilePath,&quot;\&quot;)
-		FileName =  MyArray(UBound(MyArray))
-		FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;PdfLicense.exe&quot;)
-		oSvc.execute(FilePathWithName, &quot;&quot;, 1)
-		&apos;oSvc.execute(ConvertToURL(FilePathWithName), &quot;&quot;, 1)
-			
-			&apos;oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
+			MyArray = Split(FilePath,&quot;\&quot;)
+			FileName =  MyArray(UBound(MyArray))
+			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;PdfLicense.exe&quot;)
+			oSvc.execute(FilePathWithName, &quot;&quot;, 1)
 		End If
 	End If
 

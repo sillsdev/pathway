@@ -25,6 +25,9 @@ namespace PdfLicense
             string getPsApplicationPath = GetPSApplicationPath();
 			getPsApplicationPath = Path.Combine(getPsApplicationPath, "Export");
             getPsApplicationPath = Path.Combine(getPsApplicationPath, "ApplyPDFLicenseInfo.exe");
+			if (getPsApplicationPath.StartsWith ("/")) {
+				getPsApplicationPath = @"/usr/bin/ApplyPDFLicenseInfo";
+			}
             if (File.Exists(getPsApplicationPath))
             {
                 if (creatorTool.ToLower() == "libreoffice")
