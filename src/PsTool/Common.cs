@@ -5174,5 +5174,37 @@ namespace SIL.Tool
 				input.CopyTo(output); // Using .NET 4
 			}
 		}
+
+		/// <summary>
+		/// Save InputType to StyleSettings.xml. Ex: Scripture or Dictionary
+		/// </summary>
+		/// <param name="inputType"></param>
+		public static void SaveInputType(string inputType)
+		{
+			string allUserSettingPath = Common.GetAllUserPath();
+			string allUserXmlPath = Common.PathCombine(allUserSettingPath, "StyleSettings.xml");
+			if (!Directory.Exists(allUserSettingPath))
+			{
+				Directory.CreateDirectory(allUserSettingPath);
+			}
+			if (!File.Exists(allUserXmlPath))
+			{
+				string settingPath = Path.GetDirectoryName(Param.SettingPath);
+				string xmlPath = Common.PathCombine(settingPath, "StyleSettings.xml");
+				File.Copy(xmlPath, allUserXmlPath, true);
+				File.Copy(xmlPath.Replace(".xml", ".xsd"), allUserXmlPath.Replace(".xml", ".xsd"), true);
+			}
+
+			XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
+			xmlDoc.Load(allUserXmlPath);
+			string xPath = "//settings/property[@name='InputType']";
+
+			var node = xmlDoc.SelectSingleNode(xPath);
+			if (node != null)
+			{
+				node.Attributes["value"].Value = inputType;
+			}
+			xmlDoc.Save(allUserXmlPath);
+		}
 	}
 }

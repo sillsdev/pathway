@@ -544,6 +544,8 @@ namespace SIL.PublishingSolution
         protected void LoadDataTypeSettings()
         {
             Param.Value[Param.InputType] = DataType;
+	        Param.SetLoadType = DataType;
+			Common.SaveInputType(DataType);
             Param.LoadSettings();
         }
 
@@ -582,6 +584,7 @@ namespace SIL.PublishingSolution
             projInfo.DefaultXhtmlFileWithPath = lexiconFull;
             projInfo.ProjectInputType = "Dictionary";
             projInfo.DictionaryPath = Path.GetDirectoryName(lexiconFull);
+			projInfo.ProjectPath = Path.GetDirectoryName(lexiconFull);
             projInfo.ProjectName = Path.GetFileNameWithoutExtension(lexiconFull);
             projInfo.SelectedTemplateStyle = _selectedCssFromTemplate;
 

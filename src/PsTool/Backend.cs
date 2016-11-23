@@ -123,6 +123,8 @@ namespace SIL.Tool
                     sb.Append("\"");
                 }
 
+		        Common.SaveInputType(publicationInformation.ProjectInputType);
+
                 string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString());
 
 				string pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "PathwayExport.exe");

@@ -83,6 +83,8 @@ namespace SIL.PublishingSolution
 			inProcess.PerformStep();
 			
 			publicationInfo = projInfo;
+			Param.SetLoadType = projInfo.ProjectInputType;
+			Param.LoadSettings();
             string defaultXhtml = projInfo.DefaultXhtmlFileWithPath;
             GeneratedPdfFileName = defaultXhtml;
             projInfo.OutputExtension = "odt";

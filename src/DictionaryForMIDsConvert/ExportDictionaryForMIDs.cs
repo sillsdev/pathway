@@ -63,13 +63,15 @@ namespace SIL.PublishingSolution
         /// <param name="exportType">scripture / dictionary</param>
         /// <param name="publicationInformation">structure with other necessary information about project.</param>
         /// <returns></returns>
-        protected void Launch(string exportType, PublicationInformation publicationInformation)
+        protected void Launch(PublicationInformation publicationInformation)
         {
             Export(publicationInformation);
         }
 
         public bool Export(PublicationInformation projInfo)
         {
+			Param.SetLoadType = projInfo.ProjectInputType;
+			Param.LoadSettings();
             bool success = false;
             projInfo.OutputExtension = "jar";
             if (projInfo == null || string.IsNullOrEmpty(projInfo.DefaultXhtmlFileWithPath) ||
@@ -79,7 +81,7 @@ namespace SIL.PublishingSolution
             }
             WorkDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             _isUnixOS = Common.UnixVersionCheck();
-            var inProcess = new InProcess(0, 8);
+            var inProcess = new InProcess(0, 7);
             var curdir = Environment.CurrentDirectory;
             var myCursor = Cursor.Current;
             try
@@ -88,10 +90,7 @@ namespace SIL.PublishingSolution
 
                 inProcess.Show();
                 inProcess.PerformStep();
-
-                LoadParameters();
-                inProcess.PerformStep();
-
+				
                 LoadCss(projInfo);
                 _DictionaryForMIDsInput = null;
                 inProcess.PerformStep();
@@ -168,13 +167,6 @@ namespace SIL.PublishingSolution
         {
             var cssTree = new CssTree();
             CssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-        }
-
-        protected void LoadParameters()
-        {
-            Param.LoadSettings();
-            Param.SetValue(Param.InputType, "Dictionary");
-            Param.LoadSettings();
         }
 
         protected void ReformatData(PublicationInformation projInfo)

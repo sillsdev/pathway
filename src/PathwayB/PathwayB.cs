@@ -70,9 +70,10 @@ namespace SIL.PublishingSolution
 				Common.Testing = !projectInfo.IsOpenOutput;
 
                 SettingProcessExportFile(projectInfo, files);
-
+				Common.SaveInputType(projectInfo.ProjectInputType);
                 Common.ProgBase = Common.GetPSApplicationPath();
                 // load settings from the settings file
+	            Param.SetLoadType = projectInfo.ProjectInputType;
                 Param.LoadSettings();
                 Param.Value[Param.InputType] = projectInfo.ProjectInputType;
                 Param.LoadSettings();

@@ -137,7 +137,9 @@ namespace Test.PsTool
         {
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
-            Param.Value[Param.InputType] = "Dictionary";
+	        Param.SetLoadType = "Dictionary";
+			Param.Value[Param.InputType] = "Dictionary";
+			
             SettingsInput(TestFolder);
             SetRampData();
             Assert.True(Contributor.Contains("GOD,compiler"), "should be GOD!");
@@ -178,6 +180,7 @@ namespace Test.PsTool
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
+			Param.SetLoadType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
 			Assert.True(Rights == "© 2016 SIL International®. ");
@@ -217,6 +220,7 @@ namespace Test.PsTool
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
+			Param.SetLoadType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
             Assert.AreEqual("Just for testing", RampDescription);

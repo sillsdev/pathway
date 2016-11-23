@@ -124,6 +124,22 @@ namespace SIL.Tool
             }
         }
 
+		public static string PathwaySettingFilePath
+		{
+			get
+			{
+				if(File.Exists(Path.Combine(Common.GetAllUserPath(), _loadType + DefaultSettingsFileName)))
+				{
+					return Path.Combine(Common.GetAllUserPath(), _loadType + DefaultSettingsFileName);
+				}
+				else
+				{
+					return Path.Combine(Path.Combine(Common.GetAllUserPath(), _loadType), _loadType + DefaultSettingsFileName);
+				}
+			}
+		}
+		
+
         public static string SettingOutputPath
         {
             get
@@ -176,29 +192,30 @@ namespace SIL.Tool
         /// </summary>
         public static void LoadSettings()
         {
-            _loadType = Value.ContainsKey(InputType) ? Value[InputType] : "Dictionary";
-            // mono check -- the Value[] slot for InputType might be initialized to an empty string.
-			if (_loadType.Length < 1) _loadType = "Dictionary";
-            if (LoadValues(SettingPath) == null) return;
-            if (!Directory.Exists(Value[OutputPath]))
-            {
-                ReplacePStoPathWay();
-                Directory.CreateDirectory(Value[OutputPath]);
-            }
-			
-            try
-            {
-                if (File.Exists(SettingOutputPath))
-                    if (LoadValues(SettingOutputPath) == null) return;
-            }
-            catch (Exception)
-            {
-                if (LoadValues(SettingPath) == null) return;
-            }
+	        if (LoadValues(PathwaySettingFilePath) == null)
+	        {
+				if (LoadValues(SettingPath) == null) return;
+	        }
             MediaType = GetAttrByName("//categories/category", "Media", "select").ToLower();
             LoadDictionary(StyleFile, "styles//style", "file");
             LoadImageList();
         }
+
+		public static string GetInputType(string settingsPath)
+		{
+			string projectInputType = string.Empty;
+			if (File.Exists(settingsPath))
+			{
+				var settingsReader = XmlReader.Create(settingsPath);
+				var settingsDoc = new XmlDocument();
+				settingsDoc.Load(settingsReader);
+				settingsReader.Close();
+				// ReSharper disable once PossibleNullReferenceException
+				projectInputType = settingsDoc.SelectSingleNode("//settings/property[@name='InputType']/@value").InnerText;
+				Param.SetLoadType = projectInputType;
+			}
+			return projectInputType;
+		}
 
         /// <summary>
         /// Function for renaming PublishingSolutions to Pathway.

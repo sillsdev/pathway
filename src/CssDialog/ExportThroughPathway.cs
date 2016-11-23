@@ -413,8 +413,7 @@ namespace SIL.PublishingSolution
         {
             // not setting defaults, just opening the dialog:
             // load the settings file and migrate it if necessary
-            Param.LoadSettings();
-            Param.SetValue(Param.InputType, InputType);
+	        Param.SetLoadType = InputType;
             Param.LoadSettings();
             isFromConfigurationTool = true;
         }

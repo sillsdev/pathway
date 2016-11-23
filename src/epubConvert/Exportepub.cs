@@ -153,6 +153,8 @@ namespace SIL.PublishingSolution
             addRevId = LoadAddRevIdXslt();
             noXmlSpace = LoadNoXmlSpaceXslt();
             fixEpub = LoadFixEpubXslt();
+			Param.SetLoadType = projInfo.ProjectInputType;
+			Param.LoadSettings();
             #endregion
             #region Create EpubFolder
             if (!Common.Testing)
@@ -161,7 +163,10 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                projInfo.ProjectPath = projInfo.DictionaryPath;
+	            if (!String.IsNullOrEmpty(projInfo.DictionaryPath))
+		            projInfo.ProjectPath = projInfo.DictionaryPath;
+				else if (!String.IsNullOrEmpty(projInfo.ProjectPath))
+		            projInfo.DictionaryPath = projInfo.ProjectPath;
             }
 
             #endregion

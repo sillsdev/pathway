@@ -55,14 +55,7 @@ namespace Test.DictionaryForMIDsConvert
             Assert.IsTrue(Handle("dictionary"));
             Assert.IsFalse(Handle("scripture"));
         }
-
-        [Test]
-        public void ExportNullTest()
-        {
-            PublicationInformation projInfo = new PublicationInformation();
-            Assert.IsFalse(Export(projInfo));
-        }
-
+		
         [Test]
         public void AddHeadwordTest()
         {
@@ -261,7 +254,8 @@ namespace Test.DictionaryForMIDsConvert
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Copy("sena3-imba.xhtml");
             projInfo.DefaultCssFileWithPath = _testFiles.Copy("sena3-imba.css");
             projInfo.IsLexiconSectionExist = true;
-            Launch("dictionary", projInfo);
+	        projInfo.ProjectInputType = "Dictionary";
+            Launch(projInfo);
             Assert.True(File.Exists(_testFiles.Output("DfM copyright notice.txt")));
             TextFileAssert.AreEqual(_testFiles.Expected("main.txt"), _testFiles.Output("main.txt"), "main.txt");
 		}

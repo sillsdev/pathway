@@ -98,7 +98,11 @@ namespace SIL.PublishingSolution
                         }
                     }
                 }
-                FindExportFormat();
+
+				// Find Export Format
+				string settingsPath = Path.Combine(Common.GetAllUserPath(), "StyleSettings.xml");
+				projectInfo.ProjectInputType = Param.GetInputType(settingsPath);
+
                 //projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
                 if (projectInfo.IsLexiconSectionExist == true)
                     projectInfo.ProjectName = "main";
@@ -169,7 +173,11 @@ namespace SIL.PublishingSolution
             }
         }
 
-		private static void LoadParameters(string inputType)		{			Param.LoadSettings();			Param.SetValue(Param.InputType, inputType);			Param.LoadSettings();		}
+		private static void LoadParameters(string inputType)
+		{
+			Param.LoadSettings();
+		}
+
 
         private static void ArgumentUsage(string[] args)
         {
@@ -445,41 +453,6 @@ namespace SIL.PublishingSolution
             return inFormat;
         }
 
-        private static void FindExportFormat()
-        {
-            ExportFormat expFormat = ExportFormat.Dictionary;
-            string entryAssemblyName = GetEntryAssemblyName();
-            if (!string.IsNullOrEmpty(entryAssemblyName))
-            {
-                if (entryAssemblyName.Contains("paratext"))
-                {
-                    expFormat = ExportFormat.Scripture;
-
-                }
-                else if (entryAssemblyName.Contains("fieldwork"))
-                {
-                    expFormat = ExportFormat.Dictionary;
-                }
-                else if (entryAssemblyName.Contains("configurationtool"))
-                {
-                    if (exportType.Contains("gobible") || exportType.Contains("go bible") ||
-                        exportType.Contains("sword") || exportType.Contains("theword/mysword"))
-                    {
-                        expFormat = ExportFormat.Scripture;
-                    }
-                }
-                else if (entryAssemblyName.Contains("pathwayexport"))
-                {
-                    if (exportType.Contains("gobible") || exportType.Contains("go bible") ||
-                        exportType.Contains("sword") || exportType.Contains("theword/mysword"))
-                    {
-                        expFormat = ExportFormat.Scripture;
-                    }
-                }
-            }
-            projectInfo.ProjectInputType = expFormat == ExportFormat.Dictionary ? "Dictionary" : "Scripture";
-            }
-
         private static string GetEntryAssemblyName()
         {
             string entryAssemblyName = string.Empty;
@@ -550,6 +523,9 @@ namespace SIL.PublishingSolution
                 projectInfo.DictionaryPath = projectInfo.ProjectPath;
                 projectInfo.FromPlugin = true;
                 projectInfo.IsLexiconSectionExist = false;
+				string dictionaryName = Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), Path.GetFileNameWithoutExtension(projectInfo.DefaultXhtmlFileWithPath));
+				projectInfo.DictionaryOutputName = dictionaryName;
+				projectInfo.ProjectName = Path.GetFileNameWithoutExtension(projectInfo.DefaultXhtmlFileWithPath);
 
             }
         }
