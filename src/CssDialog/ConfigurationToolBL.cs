@@ -1767,11 +1767,7 @@ namespace SIL.PublishingSolution
 		{
 			XmlDocument xDoc = Common.DeclareXMLDocument(false);
 			string executablePath = Common.GetApplicationPath();
-			executablePath = Common.PathCombine(executablePath, @"GoBible\Localizations\Languages.xml");
-			if (!File.Exists(executablePath))
-			{
-				executablePath = Common.PathCombine(Path.GetDirectoryName(Common.GetApplicationPath()), @"GoBible\Localizations\Languages.xml");
-			}
+			executablePath = PathwayPath.GetSupportPath(executablePath, @"GoBible\Localizations\Languages.xml", true);
 			executablePath = CopiedToTempLanguageXMLFile(executablePath);
 			if (!File.Exists(executablePath)) return;
 			xDoc.Load(executablePath);

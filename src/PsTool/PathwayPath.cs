@@ -145,5 +145,25 @@ namespace SIL.Tool
             }
             return isAvailable;
         }
+
+		public static string GetSupportPath(string theAppPath, string supportFileOrFolder, bool isFile)
+		{
+			string thePath = Common.PathCombine(theAppPath, supportFileOrFolder);
+			if (isFile)
+			{
+				if (!File.Exists(thePath))
+				{
+					thePath = Common.PathCombine(Path.GetDirectoryName(theAppPath), supportFileOrFolder);
+				}
+			}
+			else
+			{
+				if (!Directory.Exists(thePath))
+				{
+					thePath = Common.PathCombine(Path.GetDirectoryName(theAppPath), supportFileOrFolder);
+				}
+			}
+			return thePath;
+		}
     }
 }
