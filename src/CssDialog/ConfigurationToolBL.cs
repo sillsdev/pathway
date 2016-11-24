@@ -2857,6 +2857,7 @@ namespace SIL.PublishingSolution
 		{
 			Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationToolBL: LoadParam");
 			Param.SetValue(Param.InputType, inputTypeBL); // Dictionary or Scripture
+			Param.SetLoadType = inputTypeBL;
 			Param.LoadSettings();
 			MediaType = Param.MediaType;
 		}
