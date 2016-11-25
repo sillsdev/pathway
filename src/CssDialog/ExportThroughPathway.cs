@@ -322,11 +322,11 @@ namespace SIL.PublishingSolution
         public string OutputFolder
         {
             get { return txtSaveInFolder.Text; }
-			set { txtSaveInFolder.Text = ReplaceInvalidChars(value); }
+			set { txtSaveInFolder.Text = value; }
         }
         #endregion Properties
 
-		private string ReplaceInvalidChars(string value)
+		public string ReplaceInvalidChars(string value)
 		{
 			char[] invalidPathChars = Path.GetInvalidPathChars();
 			invalidPathChars[invalidPathChars.Length - 1] = ' ';
@@ -413,7 +413,8 @@ namespace SIL.PublishingSolution
         {
             // not setting defaults, just opening the dialog:
             // load the settings file and migrate it if necessary
-	        Param.SetLoadType = InputType;
+            Param.LoadSettings();
+            Param.SetValue(Param.InputType, InputType);
             Param.LoadSettings();
             isFromConfigurationTool = true;
         }
@@ -865,7 +866,7 @@ namespace SIL.PublishingSolution
                     if (OutputFolder.Substring(outputFolderLength - 2, 2) != "\\")
                         OutputFolder = OutputFolder + "\\";
                 }
-
+				txtSaveInFolder.Text = ReplaceInvalidChars(txtSaveInFolder.Text);
                 if (!Directory.Exists(OutputFolder))
                     Directory.CreateDirectory(OutputFolder);
             }

@@ -98,7 +98,7 @@ namespace Test.CssDialog
 		public void InvalidCharsTest()
 		{
 			OutputFolder = @"C:\Turkish Stuff-Texts-07\Dictionary";
-			Assert.AreEqual(@"C:\Turkish_Stuff-Texts-07\Dictionary", OutputFolder, "InvalidCharsTest failed");
+			Assert.AreEqual(@"C:\Turkish_Stuff-Texts-07\Dictionary", ReplaceInvalidChars(OutputFolder), "InvalidCharsTest failed");
 		}
     }
 }
