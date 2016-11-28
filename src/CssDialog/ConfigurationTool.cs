@@ -110,12 +110,14 @@ namespace SIL.PublishingSolution
 				entryAssemblyName = "configurationtool";
 			}
 			if (entryAssemblyName.Trim().ToLower().Contains("configurationtool"))
-			{
-				_cToolBL.inputTypeBL = Param.GetInputType(Param.PathwaySettingFilePath);
+			{				
 				//It will call when the Configtool from Application
 				RemoveSettingsFile();
 				if (!Common.Testing)
-					ValidateXMLVersion(Param.PathwaySettingFilePath);
+					ValidateXMLVersion(Param.SettingPath);
+
+				_cToolBL.inputTypeBL = Param.GetInputType(Param.PathwaySettingFilePath);
+
 				Param.LoadSettings(); // Load StyleSetting.xml
 				//_cToolBL.inputTypeBL = _cToolBL.LoadInputType();
 			}
