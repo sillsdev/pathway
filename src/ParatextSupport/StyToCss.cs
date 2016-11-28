@@ -108,23 +108,23 @@ namespace SIL.PublishingSolution
         /// ------------------------------------------------------------
         private void FindStyFile(string database, string ssfFullPath)
         {
+			string fullPath = string.Empty;
             string ssfFile = database + ".ssf";
             if (string.IsNullOrEmpty(ssfFullPath))
             {
                 if (Common.GetOsName().Contains("Windows"))
                 {
-                    ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Settings_Directory", "");
-                    if (string.IsNullOrEmpty(ssfFullPath))
+					fullPath = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Settings_Directory", "");
+					if (string.IsNullOrEmpty(fullPath))
                     { // Handle 32-bit Windows 7 and XP
-                        ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
+						fullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
                     }
                 }
                 else
                 {
-                    ssfFullPath = Common.GetParatextProjectPath();
-					StyFullPath = Common.PathCombine(ssfFullPath, "usfm.sty");
+					fullPath = Common.GetParatextProjectPath();
                 }
-                ssfFullPath = ssfFullPath + ssfFile;
+				ssfFullPath = Common.PathCombine(fullPath, ssfFile);
             }
             
             bool isStylesheet = false;
@@ -150,7 +150,7 @@ namespace SIL.PublishingSolution
                 }
             }
             reader.Close();
-			StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), styFile);
+			StyFullPath = Common.PathCombine(fullPath, styFile);
         }
 
         /// ------------------------------------------------------------------------
