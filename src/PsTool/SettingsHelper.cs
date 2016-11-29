@@ -180,7 +180,7 @@ namespace SIL.Tool
 		    return string.Empty;
 	    }
 
-	    private static string GetSettingFilePathForParatext(string database)
+	    public static string GetSettingFilePathForParatext(string database)
 	    {
 			// (Note that PathwayB _might_ have a project file we can poke at - no guarantee)
 		    object paraTextprojectPath;

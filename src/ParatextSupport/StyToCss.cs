@@ -108,35 +108,16 @@ namespace SIL.PublishingSolution
         /// ------------------------------------------------------------
         private void FindStyFile(string database, string ssfFullPath)
         {
-			string fullPath = string.Empty;
-            string ssfFile = database + ".ssf";
-            if (string.IsNullOrEmpty(ssfFullPath))
-            {
-                if (Common.GetOsName().Contains("Windows"))
-                {
-					fullPath = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Settings_Directory", "");
-					if (string.IsNullOrEmpty(fullPath))
-                    { // Handle 32-bit Windows 7 and XP
-						fullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
-                    }
-                }
-                else
-                {
-					fullPath = Common.GetParatextProjectPath();
-                }
-				ssfFullPath = Common.PathCombine(fullPath, ssfFile);
-            }
-            
+	        string ssfFile = SettingsHelper.GetSettingFilePathForParatext(database);
             bool isStylesheet = false;
-
-            if (!File.Exists(ssfFullPath))
+			if (!File.Exists(ssfFile))
             {
                 Debug.WriteLine(ssfFile + " does not exist.");
                 return;
             }
 
 			string styFile = string.Empty;
-            var reader = new XmlTextReader(ssfFullPath) { XmlResolver = null };
+			var reader = new XmlTextReader(ssfFile) { XmlResolver = null };
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element && reader.Name == "StyleSheet") // Is class name null
@@ -150,7 +131,7 @@ namespace SIL.PublishingSolution
                 }
             }
             reader.Close();
-			StyFullPath = Common.PathCombine(fullPath, styFile);
+			StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFile), styFile);
         }
 
         /// ------------------------------------------------------------------------
