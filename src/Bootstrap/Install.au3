@@ -99,12 +99,7 @@ EndFunc
 Func GetInstaller($name)
 	Global $InstallStable, $Version
 	Local $urlPath
-	if StringInStr($name, "XeLaTeX") Then
-		;$urlPath = 'http://pathway.sil.org/wp-content/sprint/' & $name
-		$urlPath = 'http://build.palaso.org/repository/download/bt190/.lastPinned/' & $name & '?guest=1'
-	Else
-		$urlPath = 'http://downloads.sil.org/Pathway/' & $Version & '/' & $name
-	EndIf
+	$urlPath = 'http://downloads.sil.org/Pathway/' & $Version & '/' & $name
 	if not FileExists($name) Then
 		;MsgBox(4096,"Status","Downloading " & $urlPath & " " & $name)
 		RunWait("wget.exe --output-document=" & $name & " " & $urlPath)
@@ -152,7 +147,7 @@ EndFunc
 Func DotNetInstalled($size)
 	Global $INS_Num, $INS_Size
 	Local $DotNet4
-	
+
 	;See http://msdn.microsoft.com/en-us/library/xhz1cfs8(v=VS.90).aspx
 	$DotNet4 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Policy\v4.0", "30319")
 	if not @error Then
@@ -167,7 +162,7 @@ EndFunc
 Func InstallDotNetIfNecessary()
 	Global $INS_DotNet
 	Local $name
-	
+
 	if Not $INS_DotNet Then
 		Return
 	Endif
@@ -211,7 +206,7 @@ EndFunc
 Func JavaInstalled($size)
 	Global $INS_Num, $INS_Size
 	Local $ver, $path
-	
+
 	;See http://stackoverflow.com/questions/2951804/how-to-check-java-installation-from-batch-script
 	$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment", "CurrentVersion")
 	if not @error Then
@@ -229,7 +224,7 @@ EndFunc
 Func InstallJavaIfNecessary()
 	Global $INS_Java
 	Local $latest, $pkg
-	
+
 	if Not $INS_Java Then
 		Return
 	EndIf
@@ -256,7 +251,7 @@ EndFunc
 
 Func Busy($pid)
 	Local $progress, $inc, $val
-	
+
 	Do
 		Sleep( 500 )
 	Until ProcessExists( $pid )
@@ -278,7 +273,7 @@ EndFunc
 
 Func OfficeInstalled($size)
 	Global $INS_Num, $INS_Size
-	
+
 	If IsAssociation(".odt") Then
 		Return True
 	EndIf
@@ -346,7 +341,7 @@ EndFunc
 Func PrinceInstalled($size)
 	Global $INS_Num, $INS_Size
 	Local $path
-	
+
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
@@ -392,7 +387,7 @@ EndFunc
 
 Func PdfInstalled($size)
 	Global $INS_Num, $INS_Size
-	
+
 	If IsAssociation(".pdf") Then
 		Return True
 	EndIf
@@ -447,7 +442,7 @@ EndFunc
 
 Func EpubInstalled($size)
 	Global $INS_Num, $INS_Size
-	
+
 	If IsAssociation(".epub") Then
 		Return True
 	EndIf
@@ -459,7 +454,7 @@ EndFunc
 Func InstallEpubReaderIfNecessary()
 	Global $INS_Epub
 	Local $viewer, $latest, $pkg
-	
+
 	if Not $INS_Epub Then
 		Return
 	Endif
@@ -519,7 +514,7 @@ EndFunc
 Func XeLaTexInstalled($size)
 	Global $INS_Num, $INS_Size
 	Local $path, $ver, $latest
-	
+
 	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexDir")
 	if @error Then
 		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexDir")
@@ -548,7 +543,7 @@ EndFunc
 
 Func InstallXeLaTeXIfNecessary()
 	Global $InstallStable, $INS_XeLaTex, $XeLaTexSuffix
-	
+
 	if $InstallStable or Not $INS_XeLaTex Then
 		Return
 	Endif
@@ -593,7 +588,7 @@ EndFunc
 
 ;~ Func InstallYouVersionIfNecessary()
 ;~ 	Global $InstallStable, $INS_YouVersion
-;~ 	
+;~
 ;~ 	Return
 ;~ 	if $InstallStable or Not $INS_YouVersion Then
 ;~ 		Return

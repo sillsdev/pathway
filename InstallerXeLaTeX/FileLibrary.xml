@@ -5032,4 +5032,6 @@
   <File Path="pkg\TeXLive\TLTREE.pm" ComponentGuid="7F7C932F-0E30-4E65-AB2F-800A8E2A71CD" />
   <File Path="pkg\TeXLive\TLUtils.pm" ComponentGuid="215926F2-8A49-425F-8A9E-343B70D60F8E" />
   <File Path="pkg\TeXLive\TLWinGoo.pm" ComponentGuid="A21F1D4A-BF2C-49A9-98AE-787B6C79F9C9" />
+  <File Path="n\win32\dvipdfmx.dll" ComponentGuid="1ED12369-8D3C-4CDB-8D5C-9781749C6667" />
+  <File Path="n\win32\xetex.dll" ComponentGuid="3003A7DA-7579-4429-AA48-E3159FE48B94" />
 </FileLibrary>
