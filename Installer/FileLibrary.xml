@@ -1919,4 +1919,6 @@
   <File Path="SIL.WritingSystems.dll" ComponentGuid="0559B9AB-D52C-4E72-AFD2-E9E93A42F1CF" />
   <File Path="SIL.WritingSystems.pdb" ComponentGuid="717D0E14-BFD3-47E4-A921-E494D4836E60" />
   <File Path="Xhtml-Epub.xslt" ComponentGuid="CC4D5EFF-5D94-41DF-AC1E-4462A1D8F09B" />
+  <File Path="Preprocessing\Scripture\Adjust Last Quote line for rq.xsl" ComponentGuid="8D27FECB-2676-4582-B271-415F4DEB4202" />
+  <File Path="Preprocessing\Scripture\Thin Space Before Footnote.xsl" ComponentGuid="FC2F3C67-AD2C-476B-B088-116CAC875713" />
 </FileLibrary>
