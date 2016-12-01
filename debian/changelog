@@ -91,7 +91,7 @@ pathway (1.15.4)  experimental; urgency=high
   * XeLaTex:TD-4729 Guidewords in headers are missing in Xelatex
   * XeLaTex:TD-4682 RTL letters randomly appears
 
- -- Greg Trihus <greg_trihus@sil.org>  Fri, 24 May 2016 14:02:20 -0600
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 1 Dec 2016 14:02:20 -0600
 
 pathway (1.15.3)  experimental; urgency=high
 

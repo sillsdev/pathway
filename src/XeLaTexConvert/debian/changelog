@@ -1,4 +1,10 @@
-pathway-xelatex (1.15.3.5133-1) unstable; urgency=high
+pathway-xelatex (1.15.4)  experimental; urgency=high
+
+  * 1.15.4 sprint - update build
+
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 1 Dec 2016 14:02:20 -0600
+
+pathway-xelatex (1.15.3)  experimental; urgency=high
 
   * 1.15.3.5133 sprint
     - based on TexLive 2015
