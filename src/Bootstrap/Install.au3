@@ -274,7 +274,10 @@ EndFunc
 Func OfficeInstalled($size)
 	Global $INS_Num, $INS_Size
 
-	RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\LibreOffice","")
+	RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\LibreOffice", "")
+	if @error Then
+		RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\LibreOffice","")
+	EndIf
 	If not @error Then
 		Return True
 	EndIf
