@@ -155,7 +155,7 @@ namespace TestBed
         {
             var plugin = new PsExport {DataType = "Scripture"};
             string outputpath = "c:/1pe/1pe";
-            plugin.Export(outputpath);
+			plugin.Export(outputpath);
 
         }
 
@@ -167,7 +167,7 @@ namespace TestBed
 
             string target = printVia.BackEnd; //"OpenOffice";
             var tpe = new PsExport {Destination = target, DataType = printVia.InputType};
-            tpe.Export(txtInputPath.Text);
+			tpe.Export(txtInputPath.Text);
         }
 
         private void InDesign_Click(object sender, EventArgs e)
@@ -465,7 +465,7 @@ namespace TestBed
 
             string target = dlg.Format; //"OpenOffice";
             var tpe = new PsExport {Destination = target, DataType = dlg.InputType};
-            tpe.Export(txtInputPath.Text);
+			tpe.Export(txtInputPath.Text);
 
         }
 
@@ -505,10 +505,8 @@ namespace TestBed
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string cc = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
             string[] filePaths = Directory.GetFiles(@"C:\ProgramData\SIL\WritingSystemStore\", "*.ldml");
             StringBuilder newProperty = new StringBuilder();
-            Dictionary<string, string> fontList1 = new Dictionary<string, string>();
             foreach (string filePath in filePaths)
             {
                 string fileName = Path.GetFileNameWithoutExtension(filePath);
@@ -625,9 +623,6 @@ namespace TestBed
                 cssFileName = cssFileName.Replace(".css", "main.css");
                 projInfo.DefaultCssFileWithPath = cssFileName;
             }
-
-            Exportepub epub = new Exportepub();
-
             string ProjType = "Dictionary";
 
             if (radScripture.Checked)
@@ -776,18 +771,11 @@ namespace TestBed
                 MessageBox.Show("Please enter the valid XML file");
                 return;
             }
-
-            var folderPath = Path.GetDirectoryName(txtInputPath.Text);
-
-            //Ramp ramp = new Ramp();
-            //SetRampData(ramp);
-            //ramp.Create(Common.PathCombine(folderPath, "MyTest"), folderPath);
-
             string x =
                 "eyJjcmVhdGVkX2F0IjoiVGh1LCAzMSBPY3QgMjAxMyAwODo0Nzo0OCBHTVQiLCJyYW1wLmlzX3JlYWR5IjoiWSIsImRjLnRpdGxlIjoiVGVzdCIsImJyb2FkX3R5cGUiOiJ2ZXJuYWN1bGFyIiwiZGMudHlwZS5tb2RlIjpbIlRleHQiXSwiZGMuZm9ybWF0Lm1lZGl1bSI6WyJQYXBlciJdLCJkYy5kZXNjcmlwdGlvbi5zdGFnZSI6InJvdWdoX2RyYWZ0IiwidmVyc2lvbi50eXBlIjoiZmlyc3QiLCJyYW1wLnZlcm5hY3VsYXJtYXRlcmlhbHN0eXBlIjoic2NyaXB0dXJlIiwiZGMudHlwZS5zY3JpcHR1cmVUeXBlIjoiQmlibGUgdGV4dCBjb21wbGV0ZSIsImRjLnRpdGxlLnNjcmlwdHVyZVNjb3BlIjpbIldOVDpOZXcgVGVzdGFtZW50Il0sImRjLnR5cGUuc2Nob2xhcmx5V29yayI6IkJvb2siLCJkYy5zdWJqZWN0LnN1YmplY3RMYW5ndWFnZSI6eyIwIjp7ImRpYWxlY3QiIDogIiIsICIgIjogImF2dDphdnQifX0sInN1YmplY3Quc3ViamVjdExhbmd1YWdlLmhhcyI6IlkiLCJkYy5sYW5ndWFnZS5pc28iOnsiMCI6eyJkaWFsZWN0IiA6ICIiLCAiICI6ICJhdnQ6YXZ0In19LCJkYy5jb250cmlidXRvciI6eyIwIjp7IiAiOiAiQmlsbCBEeWNrIiwgInJvbGUiOiAiY29tcGlsZXIifX0sImRjLmRhdGUubW9kaWZpZWQiOiIyMDEzLTEwLTMxIiwiZm9ybWF0LmV4dGVudC50ZXh0IjoiMCIsImZvcm1hdC5leHRlbnQuaW1hZ2VzIjoiMCIsImRjLnN1YmplY3Quc2lsRG9tYWluIjpbIkxJTkc6TGluZ3Vpc3RpY3MiXSwidHlwZS5kb21haW5TdWJ0eXBlLkxJTkciOlsibGV4aWNvbiAoTElORykiXSwiZGMuc3ViamVjdCI6eyIwIjp7IiAiOiAiQmlibGUiLCAibGFuZyI6ICJlbmcifX0sImRjLnJlbGF0aW9uLmNvbmZvcm1zdG8iOiJUVEYiLCJkYy5yaWdodHNIb2xkZXIiOnsiMCI6eyIgIjogIld5Y2xpZmZlIEJpYmxlIFRyYW5zbGF0b3JzIn19LCJkYy5yaWdodHMiOiLCqSAyMDEzIFNJTCBJbnRlcm5hdGlvbmFsLiBUaGlzIHdvcmsgaXMgbGljZW5zZWQgdW5kZXIgdGhlIENyZWF0aXZlIENvbW1vbnMgQXR0cmlidXRpb24tTm9uQ29tbWVyY2lhbC1TaGFyZUFsaWtlIDMuMCBVbnBvcnRlZCBMaWNlbnNlLlRvIHZpZXcgYSBjb3B5IG9mIHRoaXMgbGljZW5zZSwgdmlzaXQgaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbGljZW5zZXMvYnktbmMtc2EvMy4wLyIsInNpbC5zZW5zaXRpdml0eS5tZXRhZGF0YSI6IlB1YmxpYyIsInNpbC5zZW5zaXRpdml0eS5wcmVzZW50YXRpb24iOiJQdWJsaWMiLCJzaWwuc2Vuc2l0aXZpdHkuc291cmNlIjoiSW5zaXRlIHVzZXJzIiwiZmlsZXMiOnsiMCI6eyIgIjogIjE5ODUzNDYwMTNtZXJnZWRDNV9Db2xzX0FwcGxpY2F0aW9uU3R5bGVzLmNzcyIsICJkZXNjcmlwdGlvbiI6ICIxOTg1MzQ2MDEzbWVyZ2VkQzVfQ29sc19BcHBsaWNhdGlvblN0eWxlcyBzdHlsZXNoZWV0IiwgInJlbGF0aW9uc2hpcCI6ICJzb3VyY2UifSwiMSI6eyIgIjogIkM1X0NvbHNfQXBwbGljYXRpb25TdHlsZXMub2R0IiwgImRlc2NyaXB0aW9uIjogIkM1X0NvbHNfQXBwbGljYXRpb25TdHlsZXMgb2R0IGRvY3VtZW50IiwgInJlbGF0aW9uc2hpcCI6ICJwcmVzZW50YXRpb24iLCAiaXNfcHJpbWFyeSI6ICJZIiwgInNpbFB1YmxpYyI6ICJZIn0sIjIiOnsiICI6ICJDNV9Db2xzX0FwcGxpY2F0aW9uU3R5bGVzLnhodG1sIiwgImRlc2NyaXB0aW9uIjogIkM1X0NvbHNfQXBwbGljYXRpb25TdHlsZXMgWEhUTUwgZmlsZSIsICJyZWxhdGlvbnNoaXAiOiAic291cmNlIn19LCJkZXNjcmlwdGlvbi5oYXMiOiJZIiwiZGMuZGVzY3JpcHRpb24iOnsiMCI6eyIgIiA6ICJOZXcgVGVzdGFtZW50IiwgImxhbmciOiAiZW5nIn19LCJzdGF0dXMiOiJyZWFkeSJ9";
             string y = EncodeDecodeBase64(x, "decode");
 
-            MessageBox.Show("Done");
+            MessageBox.Show(y + "Done");
         }
 
         /// <summary>

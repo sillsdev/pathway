@@ -84,6 +84,9 @@ namespace SIL.PublishingSolution
         public bool IncludeFontVariants { get; set; }
         public string TocLevel { get; set; }
         public int MaxImageWidth { get; set; }
+		private XslCompiledTransform addRevId;
+	    private XslCompiledTransform noXmlSpace;
+	    private XslCompiledTransform fixEpub;
 
         public int BaseFontSize { get; set; }
         public int DefaultLineHeight { get; set; }
@@ -129,15 +132,14 @@ namespace SIL.PublishingSolution
         /// <returns>true if succeeds</returns>
         public bool Export(PublicationInformation projInfo)
         {
-	        Common.SetupLocalization();
+			Common.SetupLocalization();
             if (projInfo == null)
                 return false;
             const bool success = true;
-
             #region Set up progress reporting
-#if (TIME_IT)
-            DateTime dt1 = DateTime.Now;    // time this thing
-#endif
+			#if (TIME_IT)
+						DateTime dt1 = DateTime.Now;    // time this thing
+			#endif
             var myCursor = Common.UseWaitCursor();
             var curdir = Environment.CurrentDirectory;
 			var inProcess = Common.SetupProgressReporting(20, "Export " + ExportType);
@@ -148,9 +150,11 @@ namespace SIL.PublishingSolution
             var bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
             PageBreak = InputType.ToLower() == "dictionary" && GetPageBreakStatus(projInfo.SelectedTemplateStyle);
             #region LoadXslts
-            var addRevId = LoadAddRevIdXslt();
-            var noXmlSpace = LoadNoXmlSpaceXslt();
-            var fixEpub = LoadFixEpubXslt();
+            addRevId = LoadAddRevIdXslt();
+            noXmlSpace = LoadNoXmlSpaceXslt();
+            fixEpub = LoadFixEpubXslt();
+			Param.SetLoadType = projInfo.ProjectInputType;
+			Param.LoadSettings();
             #endregion
             #region Create EpubFolder
             if (!Common.Testing)
@@ -159,7 +163,10 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                projInfo.ProjectPath = projInfo.DictionaryPath;
+	            if (!String.IsNullOrEmpty(projInfo.DictionaryPath))
+		            projInfo.ProjectPath = projInfo.DictionaryPath;
+				else if (!String.IsNullOrEmpty(projInfo.ProjectPath))
+		            projInfo.DictionaryPath = projInfo.ProjectPath;
             }
 
             #endregion
@@ -249,7 +256,7 @@ namespace SIL.PublishingSolution
             var splitFiles = new List<string>();
             splitFiles.AddRange(frontMatter);
             SplittingFrontMatter(projInfo, preProcessor, defaultCss, splitFiles);
-            SplittingReversal(projInfo, addRevId, langArray, defaultCss, splitFiles);
+            SplittingReversal(projInfo, langArray, defaultCss, splitFiles);
             AddBooksMoveNotes(inProcess, htmlFiles, splitFiles);
             inProcess.PerformStep();
             #endregion Add Sections
@@ -324,7 +331,7 @@ namespace SIL.PublishingSolution
             _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
             epubToc.CreateNcx(projInfo, contentFolder, bookId);
             ModifyTOCFile(contentFolder);
-            ReplaceEmptyHref(contentFolder);
+			ReplaceEmptyHrefandXmlLangtoLang(contentFolder);
             if (File.Exists(tempCssFile))
             {
                 File.Delete(tempCssFile);
@@ -479,7 +486,7 @@ namespace SIL.PublishingSolution
 
             return success;
         }
-
+		
         private static string RenameEpubFileName(string oldEpubFileName, string epubVersion)
         {
             string newEpubFileName = oldEpubFileName.Replace(".epub", "_" + epubVersion + ".epub");
@@ -487,19 +494,13 @@ namespace SIL.PublishingSolution
             return newEpubFileName;
         }
 
-        protected void ReplaceEmptyHref(string contentFolder)
+        protected void ReplaceEmptyHrefandXmlLangtoLang(string contentFolder)
         {
             string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
             foreach (string file in files)
             {
-                var reader = new StreamReader(file);
-                var content = new StringBuilder();
-                content.Append(reader.ReadToEnd());
-                reader.Close();
-                content.Replace("a href=\"#\"", "a");
-                var writer = new StreamWriter(file);
-                writer.Write(content);
-                writer.Close();
+				Common.StreamReplaceInFile(file, " xml:lang=\"", " lang=\"");
+				Common.StreamReplaceInFile(file, "a href=\"#\"", "a");
             }
         }
         private void GlossaryLinkReferencing(PublicationInformation projInfo,Dictionary<string,Dictionary<string,string>> glossoryreferncelist)
@@ -508,8 +509,6 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDoc = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
-            //Common.DeclareXmlReaderSettings(false);
 
             if (!File.Exists(tocFiletoUpdate))
                 return;
@@ -581,7 +580,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
             //Common.DeclareXmlReaderSettings(false);
 
             if (!File.Exists(file))
@@ -621,11 +620,6 @@ namespace SIL.PublishingSolution
                             glossorywordsDictionaries.Add(booknodeid,glossorywordsDictionary);
                         }
                     }
-                    //var nodeInnerText = new StringBuilder();
-                    //nodeInnerText.Append(nodes[0].InnerXml);
-                    //nodeInnerText = nodeInnerText.Replace(titleMainInnerText + "</div>" + titleMainInnerText,
-                    //    titleMainInnerText + "</div>");
-                    //nodes[0].InnerXml = nodeInnerText.ToString();
                 }
             }
             return glossorywordsDictionaries;
@@ -837,6 +831,12 @@ namespace SIL.PublishingSolution
             sb.Append(Path.DirectorySeparatorChar);
             sb.Append("epub");
             string strFromOfficeFolder = Common.PathCombine(Common.GetPSApplicationPath(), "epub");
+			if (!Directory.Exists(strFromOfficeFolder))
+			{
+				strFromOfficeFolder = Path.GetDirectoryName(Common.AssemblyPath);
+				strFromOfficeFolder = Common.PathCombine(strFromOfficeFolder, "epub");
+			}
+
             projInfo.TempOutputFolder = sb.ToString();
             CopyFolder(strFromOfficeFolder, projInfo.TempOutputFolder);
             // set the folder where our epub content goes
@@ -853,8 +853,14 @@ namespace SIL.PublishingSolution
         private void AddBooksMoveNotes(InProcess inProcess, List<string> htmlFiles, IEnumerable<string> splitFiles)
         {
             string xsltFullName = GetXsltFile();
-            string getPsApplicationPath = Common.GetPSApplicationPath();
-            string xsltProcessExe = Common.PathCombine(getPsApplicationPath, "XslProcess.exe");
+			string getPsApplicationPath = Common.AssemblyPath;
+	        string xsltProcessExe = Common.PathCombine(getPsApplicationPath, "XslProcess.exe");
+			if (!File.Exists(xsltProcessExe))
+			{
+				getPsApplicationPath = Path.GetDirectoryName(Common.AssemblyPath);
+				xsltProcessExe = Common.PathCombine(getPsApplicationPath, "XslProcess.exe");
+			}
+
             inProcess.SetStatus("Apply Xslt Process in html file");
             if (File.Exists(xsltProcessExe))
             {
@@ -864,6 +870,8 @@ namespace SIL.PublishingSolution
                     var inputExtension = Path.GetExtension(file);
                     Debug.Assert(inputExtension != null);
                     var xhtmlOutputFile = file.Replace(inputExtension, outputExtension);
+					if (!File.Exists(file))
+						continue;
                     if (_isUnixOs)
                     {
                         if (file.Contains("File2Cpy"))
@@ -927,13 +935,17 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void SplittingReversal(PublicationInformation projInfo, XslCompiledTransform addRevId, string[] langArray, string defaultCss, List<string> splitFiles)
+        private void SplittingReversal(PublicationInformation projInfo, string[] langArray, string defaultCss, List<string> splitFiles)
         {
             // If we are working with a dictionary and have a reversal index, process it now)
             if (projInfo.IsReversalExist)
             {
                 var revFile = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                ReversalHacks(addRevId, langArray, defaultCss, revFile);
+
+				Common.ApplyXslt(revFile, noXmlSpace);
+				Common.ApplyXslt(revFile, fixEpub);
+
+				ReversalHacks(addRevId, langArray, defaultCss, revFile);
                 // now split out the html as needed
                 var fileNameWithPath = Common.SplitXhtmlFile(revFile, "letHead", "RevIndex", true);
                 splitFiles.AddRange(fileNameWithPath);
@@ -1562,7 +1574,7 @@ namespace SIL.PublishingSolution
                 XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
                 var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
                 namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
                 var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
@@ -2087,7 +2099,7 @@ namespace SIL.PublishingSolution
                 XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
                 var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
                 namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-                var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
                 var xmlReader = XmlReader.Create(file, xmlReaderSettings);
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
@@ -2143,7 +2155,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
             var xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings);
             xmlDocument.Load(xmlReader);
             xmlReader.Close();
@@ -2500,7 +2512,7 @@ namespace SIL.PublishingSolution
             var xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };//Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };//Common.DeclareXmlReaderSettings(false);
             foreach (string sourceFile in files)
             {
                 if (!File.Exists(sourceFile)) return;
@@ -2597,7 +2609,7 @@ namespace SIL.PublishingSolution
             var xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
             
             foreach (string sourceFile in files)
             {
@@ -2642,7 +2654,7 @@ namespace SIL.PublishingSolution
             XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-            var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false }; //Common.DeclareXmlReaderSettings(false);
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse }; //Common.DeclareXmlReaderSettings(false);
             foreach (string sourceFile in files)
             {
                 if (!File.Exists(sourceFile)) return;

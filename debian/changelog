@@ -1,3 +1,98 @@
+pathway (1.15.4)  experimental; urgency=high
+
+  * CSS:TD-4688 Akoose bullets are duplicated
+  * CSS:TD-4683 Remove Css Rules with errors using CssSimpler
+  * CSS:TD-4653 Move inline styles to CSS
+  * Common:TD-4156 Reversal entry doesnot appear in linux pdf prince
+  * Common:TD-4482 Prince PDF Page Size
+  * Common:TD-4700 minor entries outdented and some field overlapping
+  * Common:TD-4708 Fixed the reversal entry
+  * Common:TD-4708 Headword not bold and styles broken issues fix
+  * Common:TD-4712 Chapter number not reset for a new book
+  * Common:TD-4712 adjust so page break not inherited to every style
+  * Common:TD-4713 Remove method causing stylesheet failure.
+  * Common:TD-4713 Stylesheet not applied with alpha 3 and SE version
+  * Common:TD-4720 Handle input with no letter headers.
+  * Common:TD-4548 Handle cross ref introduction text
+  * Common:TD-4768 Adjust Scripture Intro structure
+  * Common:TD-4464 Running Header remains with "None" option
+  * Epub:TD-4554 Update Epub validator to 4.0.1
+  * Epub:TD-4555 Fix validation errors reported by epubcheck 4.0.1
+  * Epub:TD-4695 update parser for bullets and class
+  * Epub:TD-4696 only need to have path name change in error file
+  * Epub:TD-4699 Colors reversed
+  * Epub:TD-4710 Linux xenial Error Message box appeared for epub
+  * Epub:TD-4711 EPUB TOC puts all letter subordinate to Aa
+  * Epub:TD-4746 Failed to read book
+  * Epub:TD-4762 Scripture export TOC Display
+  * Epub:TD-4747 Unable to access epubcheck.jar file (URL incorrect ?)
+  * Epub:TD-4610 reversal TOC doesn't list entries under letters
+  * Build:TD-4614 doesn't use styles from the projects sty file.
+  * OO/LO:TD-4591 Handled Picture size and Position
+  * OO/LO:TD-4594 character styles for proper names are not applied
+  * OO/LO:TD-4606 Epub export contains validation errors
+  * OO/LO:TD-4662 Referenced headword regular in Flex and bold
+  * OO/LO:TD-4664 Page numbers 'Top Center' property appears on top left
+  * OO/LO:TD-4694 Exporting full Buang data appears to get Hung
+  * OO/LO:TD-4697 Missing picture caption
+  * OO/LO:TD-4701 Indent issues
+  * OO/LO:TD-4704 No line spacing styles in dictionary
+  * OO/LO:TD-4709 Adjust rules to insert comma between sense content
+  * OO/LO:TD-4717 Default Scripture Export Crashes
+  * OO/LO:TD-4718 Format error
+  * OO/LO:TD-4727 Fixed headerword issue in Main Dictionary
+  * OO/LO:TD-4728 Guidewords in headers are missing in Reversal
+  * OO/LO:TD-4730 Css command not recognized: overflow-wrap
+  * OO/LO:TD-4733 "ApplyPDFLicenseInfo stopped working" Error
+  * OO/LO:TD-4733 ApplyPDFLicenseInfo stopped working
+  * OO/LO:TD-4733 create Ramp package after odt closes
+  * OO/LO:TD-4733 SEH Exception Access Violation
+  * OO/LO:TD-4733 use XmlParser to scan for writing systems
+  * OO/LO:TD-4733 use scripts to launch PdfLicense for Linux
+  * OO/LO:TD-4745 Build Ramp package before launching output
+  * OO/LO:TD-4759 Guidewords in headers are missing in Pdf (Using Prince)
+  * OO/LO:TD-4767 remove wrong project file
+  * OO/LO:TD-4769 Chapter and verse missing before proper name markup
+  * OO/LO:TD-4726 Guidewords in headers are missing from Flex 8.3 output
+  * OO/LO:TD-4695 Mexico data Crash
+  * OO/LO:TD-4684 Application not found: SIL.Tool.Backend.Launch
+  * OO/LO:TD-4634 Bullet does not appear
+  * OO/LO:TD-4623 stylesheet modifications
+  * OO/LO:TD-4622 extra spaces
+  * OO/LO:TD-4621 missing indent for minor entry
+  * OO/LO:TD-4273 Index is not appear on TOC when exporting Urdu
+  * OO/LO:TD-4234 Introduction formatting issues
+  * Paratext:TD-4732 access installed tmx files from ui
+  * Paratext:TD-4764 don't add empty section heads
+  * Smart:TD-4498 Support Extra Material in Reference for theWord export
+  * Smart:TD-3212 Out-Of-Memory exception exporting WAO
+  * Stylesheet:TD-4642 Subentry indents
+  * UI:TD-4266 "None" word appears on every top of the page
+  * UI:TD-4454 Text Merges if Stylesheet is "Two Column"
+  * UI:TD-4567 PDF Prince Reversal Output added
+  * UI:TD-4609 Defaults button gives "no export formats"
+  * UI:TD-4668 Picture still present even when 'No' Pictures set
+  * UI:TD-4705 Unable to select scripture or dictionary CT
+  * UI:TD-4707 Linux xenial not items appear in dropdown
+  * UI:TD-4731 Add scroll bar for small screen configuration tool
+  * UI:TD-4748 UI Lang files missing
+  * UI:TD-4756 Launching the ConfigurationTool throws an error
+  * UI:TD-4760 Select Layout Screen not showing in Edit layout
+  * UI:TD-4761 ConfigurationTool shows an empty list of destinations
+  * UI:TD-4765 Replace \' with ' in input file.
+  * UI:TD-4655 Crash while clicking Properties tab with French UI
+  * XeLaTex:TD-4446 Reported Creator and modifier pdf output
+  * XeLaTex:TD-4446 Creator and moidfier of PDF should not be Chinese
+  * XeLaTex:TD-4698 Missing curly braces
+  * XeLaTex:TD-4706 Xelatex figure wrapping not understood
+  * XeLaTex:TD-4706 add wrapfig package
+  * XeLaTex:TD-4706 update xelatex windows build for 2016
+  * XeLaTex:TD-4723 Fix in Xelatex Paragraph breaking
+  * XeLaTex:TD-4729 Guidewords in headers are missing in Xelatex
+  * XeLaTex:TD-4682 RTL letters randomly appears
+
+ -- Greg Trihus <greg_trihus@sil.org>  Fri, 24 May 2016 14:02:20 -0600
+
 pathway (1.15.3)  experimental; urgency=high
 
   * CSS: TD-4643 handle CssSimpler when multiple classes on an element
@@ -51,7 +146,7 @@ pathway (1.15.3)  experimental; urgency=high
 
  -- Greg Trihus <greg_trihus@sil.org>  Fri, 24 May 2016 14:02:20 -0600
 
- pathway (1.14.3)  experimental; urgency=high
+pathway (1.14.3)  experimental; urgency=high
 
   * Epub:TD-4517 Retain spaces after etymology and usage
 

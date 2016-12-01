@@ -55,14 +55,7 @@ namespace Test.DictionaryForMIDsConvert
             Assert.IsTrue(Handle("dictionary"));
             Assert.IsFalse(Handle("scripture"));
         }
-
-        [Test]
-        public void ExportNullTest()
-        {
-            PublicationInformation projInfo = new PublicationInformation();
-            Assert.IsFalse(Export(projInfo));
-        }
-
+		
         [Test]
         public void AddHeadwordTest()
         {
@@ -219,6 +212,7 @@ namespace Test.DictionaryForMIDsConvert
             projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outDir, "main.xhtml");
             var curTesting = Common.Testing;
             Common.Testing = false;
+	        _isUnixOS = Common.UsingMonoVM;
             CreateDictionaryForMIDs(projInfo);
             Assert.True(Directory.Exists(Common.PathCombine(outDir, "DfM_lojen_SIL")));
             Common.Testing = curTesting;
@@ -260,11 +254,11 @@ namespace Test.DictionaryForMIDsConvert
             projInfo.DefaultXhtmlFileWithPath = _testFiles.Copy("sena3-imba.xhtml");
             projInfo.DefaultCssFileWithPath = _testFiles.Copy("sena3-imba.css");
             projInfo.IsLexiconSectionExist = true;
-            Launch("dictionary", projInfo);
+	        projInfo.ProjectInputType = "Dictionary";
+            Launch(projInfo);
             Assert.True(File.Exists(_testFiles.Output("DfM copyright notice.txt")));
             TextFileAssert.AreEqual(_testFiles.Expected("main.txt"), _testFiles.Output("main.txt"), "main.txt");
-            TextFileAssert.AreEqualEx(_testFiles.Expected("DictionaryForMIDs.properties"), _testFiles.Output("DictionaryForMIDs.properties"), new ArrayList{ 1 }, "DictionaryForMIDs.properties");
-        }
+		}
 
         [Test]
         [Category("ShortTest")]

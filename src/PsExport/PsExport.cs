@@ -105,7 +105,7 @@ namespace SIL.PublishingSolution
 				inProcess.PerformStep();
 
 				string supportPath = GetSupportPath();
-				Backend.Load(Common.ProgInstall);
+				Backend.Load(Common.AssemblyPath);
                 LoadProgramSettings(supportPath);
                 LoadDataTypeSettings();
                 
@@ -117,8 +117,6 @@ namespace SIL.PublishingSolution
                 Debug.Assert(mainFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "Path for input file missing");
                 if (string.IsNullOrEmpty(mainFullName) || !File.Exists(mainFullName))
                 {
-                    var msg = new[] { "Input File(main.xhtml) is not Found" };
-                    LocDB.Message("errFnFound", "Input File(main.xhtml) is not Found.", msg, LocDB.MessageTypes.Error, LocDB.MessageDefault.First);
                     return;
                 }
                 string cssFullName = GetCssFullName(outDir, mainFullName);
@@ -143,7 +141,7 @@ namespace SIL.PublishingSolution
                 }
                 DestinationSetup();
                 SetDefaultLanguageFont(fluffedCssFullName, mainFullName, fluffedRevCssFullName);
-				Common.StreamReplaceInFile(fluffedCssFullName, "\\2B27", "\\25C6");
+				//Common.StreamReplaceInFile(fluffedCssFullName, "\\2B27", "\\25C6");
 	            WritePublishingInformationFontStyleinCSS(fluffedCssFullName);
 				#endregion
 
@@ -156,7 +154,7 @@ namespace SIL.PublishingSolution
 
                 if (DataType == "Scripture")
                 {
-                    SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
+					SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
                 }
                 else if (DataType == "Dictionary")
                 {
@@ -247,10 +245,21 @@ namespace SIL.PublishingSolution
 
 		private void SimplifyExportFiles(string exportedDirectory)
 		{
-			string cssSimplerExe = Path.Combine(Common.GetApplicationPath(), "CssSimpler.exe");
+			string cssSimplerFile = Path.Combine(Common.GetApplicationPath(), "Export", "CssSimpler.exe");
+
+			if(!File.Exists(cssSimplerFile))
+				cssSimplerFile = Path.Combine(Common.GetApplicationPath(), "CssSimpler.exe");
+
+			string cssSimplerExe = Common.IsUnixOS()?
+				"/usr/bin/CssSimpler": cssSimplerFile;
+			
 			var outDir = Path.GetDirectoryName(exportedDirectory);
 			if (outDir != null)
 			{
+				foreach (string filename in Directory.GetFiles(outDir, "*.css"))
+				{
+					ReplaceUnicodeString(filename);
+				}
 				foreach (string filename in Directory.GetFiles(outDir, "*.xhtml"))
 				{
 					if (File.Exists(filename))
@@ -262,6 +271,21 @@ namespace SIL.PublishingSolution
 							Common.RunCommand(cssSimplerExe, String.Format("\"{0}\"",filename), 1);
 						}
 					}
+				}
+			}
+		}
+
+		private void ReplaceUnicodeString(string filename)
+		{
+			if (File.Exists(filename))
+			{
+				List<string> unicodeDiamondString = new List<string>();
+				unicodeDiamondString.Add("\\2B27");
+				unicodeDiamondString.Add("\\29EB");
+
+				foreach (var unicodeString in unicodeDiamondString)
+				{
+					Common.StreamReplaceInFile(filename, unicodeString, "\\25C6");
 				}
 			}
 		}
@@ -354,6 +378,10 @@ namespace SIL.PublishingSolution
 		    if (!File.Exists(xsltFullName))
 		    {
 			    xsltFullName = Common.PathCombine(Common.PathCombine(Common.GetPSApplicationPath(), "Preprocessing"), processName);
+				if (!File.Exists(xsltFullName))
+				{
+					xsltFullName = Common.PathCombine(Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Preprocessing"), processName);
+				}
 		    }
 		    if (!File.Exists(xsltFullName))
 		    {
@@ -389,7 +417,7 @@ namespace SIL.PublishingSolution
             {
                 Common.ParaTextFontName(fluffedCssFullName);
             }
-            else if (DataType == "Dictionary" && fileName == "main.xhtml")
+			else if (DataType == "Dictionary" && fileName == "main.xhtml" || fileName == "FlexRev.xhtml")
             {
                 Common.LanguageSettings(mainFullName, fluffedCssFullName, DataType == "Dictionary", fluffedCssReversal);
             }
@@ -417,9 +445,9 @@ namespace SIL.PublishingSolution
             {
                 Common.StreamReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
                 Common.StreamReplaceInFile(revFullName, "</ReversalIndexEntry_Self>", "");
-                Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
-                string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
-                Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
+				Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
+				string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
+				Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
                 AddHomographAndSenseNumClassNames.Execute(revFullName, revFullName);
             }
             return revFullName;
@@ -516,6 +544,8 @@ namespace SIL.PublishingSolution
         protected void LoadDataTypeSettings()
         {
             Param.Value[Param.InputType] = DataType;
+	        Param.SetLoadType = DataType;
+			Common.SaveInputType(DataType);
             Param.LoadSettings();
         }
 
@@ -527,7 +557,7 @@ namespace SIL.PublishingSolution
 
         protected static string GetSupportPath()
         {
-            return Common.GetPSApplicationPath();
+            return Common.AssemblyPath;
         }
 
         #endregion Export
@@ -554,6 +584,7 @@ namespace SIL.PublishingSolution
             projInfo.DefaultXhtmlFileWithPath = lexiconFull;
             projInfo.ProjectInputType = "Dictionary";
             projInfo.DictionaryPath = Path.GetDirectoryName(lexiconFull);
+			projInfo.ProjectPath = Path.GetDirectoryName(lexiconFull);
             projInfo.ProjectName = Path.GetFileNameWithoutExtension(lexiconFull);
             projInfo.SelectedTemplateStyle = _selectedCssFromTemplate;
 
@@ -571,7 +602,7 @@ namespace SIL.PublishingSolution
             }
             SetExtraProcessingValue(projInfo);
 
-            Backend.Launch(Destination, projInfo);
+			Backend.Launch(Destination, projInfo);
         }
 
         private void SetReverseExistValue(PublicationInformation projInfo)
@@ -628,7 +659,7 @@ namespace SIL.PublishingSolution
                 projInfo.IsOpenOutput = !Common.Testing;
                 projInfo.ProjectName = Path.GetFileNameWithoutExtension(mainXhtml);
                 SetExtraProcessingValue(projInfo);
-                Backend.Launch(Destination, projInfo);
+				Backend.Launch(Destination, projInfo);
             }
         }
         #endregion SeExport

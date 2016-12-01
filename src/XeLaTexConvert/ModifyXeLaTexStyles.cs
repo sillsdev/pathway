@@ -44,9 +44,7 @@ namespace SIL.PublishingSolution
 		private bool _xelatexDocumentOpenClosedRequired = false;
 		private bool _copyrightTexCreated = false;
 		private string _copyrightTexFilename = string.Empty;
-		private string _reversalIndexTexFilename = string.Empty;
-		private bool _reversalIndexExist = false;
-		private bool _isMirrored = false;
+		private string _reversalIndexTexFilename = string.Empty;		private bool _reversalIndexExist = false;		private bool _isMirrored = false;
 		private Dictionary<string, string> _langFontDictionary;
 		private Dictionary<string, Dictionary<string, string>> _tocList;
 		private List<string> _xeLaTexPropertyFontStyleList = new List<string>();
@@ -103,23 +101,23 @@ namespace SIL.PublishingSolution
 			get { return _copyrightTexCreated; }
 			set { _copyrightTexCreated = value; }
 		}
-
 		public bool ReversalIndexExist
 		{
+			get { return _reversalIndexExist; }
 			set { _reversalIndexExist = value; }
-		}
 
+		}
 		public string ReversalIndexTexFilename
 		{
+			get { return _reversalIndexTexFilename; }
 			set { _reversalIndexTexFilename = value; }
-		}
 
+		}
 		public string CopyrightTexFilename
 		{
 			get { return _copyrightTexFilename; }
 			set { _copyrightTexFilename = value; }
 		}
-
 		public bool XelatexDocumentOpenClosedRequired
 		{
 			get { return _xelatexDocumentOpenClosedRequired; }
@@ -613,7 +611,7 @@ namespace SIL.PublishingSolution
 				titleFontName = fontName;
 				titleFontSize = fontSize.ToString();
 			}
-			
+
 			if (Convert.ToBoolean(CoverImage) || Convert.ToBoolean(TitleInCoverPage))
 			{
 				xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
@@ -628,13 +626,13 @@ namespace SIL.PublishingSolution
 					xeLaTexInstallationPath = Common.PathCombine(xeLaTexInstallationPath, "win32");
 				}
 			}
-			
+
 			if (Convert.ToBoolean(CoverImage))
 			{
 				string destinctionPath = Common.PathCombine(xeLaTexInstallationPath, Path.GetFileName(CoverPageImagePath));
 				if (CoverPageImagePath.Trim() != "")
 				{
-					if (CoverPageImagePath != destinctionPath && Directory.Exists(xeLaTexInstallationPath))
+					if (File.Exists(CoverPageImagePath) && CoverPageImagePath != destinctionPath && Directory.Exists(xeLaTexInstallationPath))
 						File.Copy(CoverPageImagePath, destinctionPath, true);
 
 					tableOfContent += "\\color{black} \r\n";
@@ -692,6 +690,11 @@ namespace SIL.PublishingSolution
 				{
 					string executablePath = Common.GetApplicationPath();
 					copyRightFilePath = Common.PathCombine(executablePath, "Copyrights");
+					if (!Directory.Exists(copyRightFilePath))
+					{
+						copyRightFilePath = Path.GetDirectoryName(Common.AssemblyPath);
+						copyRightFilePath = Common.PathCombine(copyRightFilePath, "Copyrights");
+					}
 				}
 
 

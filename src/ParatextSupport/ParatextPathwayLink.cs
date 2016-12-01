@@ -38,23 +38,15 @@ namespace SIL.PublishingSolution
         private string _mOutputLocationPath;
         private string _mFormat;
         private string _mPublicationName;
-        private bool _isTesting;
         private readonly XslCompiledTransform _mCleanUsx = new XslCompiledTransform();
         private readonly XslCompiledTransform _mSeparateIntoBooks = new XslCompiledTransform();
         private readonly XslCompiledTransform _mUsxToXhtml = new XslCompiledTransform();
         private readonly XslCompiledTransform _mEncloseParasInSections = new XslCompiledTransform();
-        private readonly XslCompiledTransform _mSectionHeadMissing = new XslCompiledTransform();
 
         #endregion
 
         #region public variables
-
-        public bool IsTesting
-        {
-            get { return _isTesting; }
-            set { _isTesting = value; }
-        }
-
+		
         public string MOutputLocationPath
         {
             get { return _mOutputLocationPath; }
@@ -162,7 +154,7 @@ namespace SIL.PublishingSolution
         // ReSharper restore UnusedMember.Global
         {
             DialogResult result;
-            if (!IsTesting)
+            if (!Common.Testing)
             {
                 ScriptureContents dlg = new ScriptureContents();
                 dlg.DatabaseName = MDatabaseName;
@@ -366,22 +358,14 @@ namespace SIL.PublishingSolution
             XmlWriter htmlw3 = XmlWriter.Create(html3, _mUsxToXhtml.OutputSettings);
             _mUsxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
 
-
-            // Step 4. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
-            //       following elements to Pathway's format: book title, chapters, figures, footnotes.
-            StringBuilder html4 = new StringBuilder();
-            XmlWriter htmlw4 = XmlWriter.Create(html4, _mSectionHeadMissing.OutputSettings);
-            _mSectionHeadMissing.Transform(XmlReader.Create(new StringReader(html3.ToString())), args, htmlw4, null);
-
-            
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings.ProhibitDtd = false;
+            settings.DtdProcessing = DtdProcessing.Parse;
 
             // Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles) and 
             //       include the Scripture sections within columns.
             FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
             XmlWriter htmlw5 = XmlWriter.Create(xhtmlFile, _mEncloseParasInSections.OutputSettings);
-            XmlReader reader5 = XmlReader.Create(new StringReader(html4.ToString()), settings);
+            XmlReader reader5 = XmlReader.Create(new StringReader(html3.ToString()), settings);
             _mEncloseParasInSections.Transform(reader5, null, htmlw5, null);
             xhtmlFile.Close();
         }
@@ -410,9 +394,6 @@ namespace SIL.PublishingSolution
             _mEncloseParasInSections.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "ParatextSupport.EncloseParasInSections.xsl")));
-            _mSectionHeadMissing.Load(XmlReader.Create(
-                Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                "ParatextSupport.SectionHeadMismatch.xsl")));
         }
         
         private void ExportProcess(List<XmlDocument> usxBooksToExport, string publicationName, string format, string outputLocationPath, DialogResult result)
@@ -420,9 +401,7 @@ namespace SIL.PublishingSolution
 #if (TIME_IT)
                 DateTime dt1 = DateTime.Now;    // time this thing
 #endif
-            bool success;
-            var inProcess = new InProcess(0, 6);
-            var curdir = Environment.CurrentDirectory;
+	        var inProcess = new InProcess(0, 6);
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             inProcess.Text = "Scripture Export";
@@ -453,7 +432,6 @@ namespace SIL.PublishingSolution
 
             if (File.Exists(fileName))
             {
-                // TODO: Localize string
                 var msg = LocalizationManager.GetString("ParatextPathwayLink.ExportProcess.Message1", " already exists. Overwrite?", "");
                 result = MessageBox.Show(string.Format("{0}" + Environment.NewLine + msg, fileName), string.Empty, MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
@@ -475,14 +453,16 @@ namespace SIL.PublishingSolution
                 return;
             }
             ConvertUsxToPathwayXhtmlFile(scrBooksDoc.InnerXml, fileName);
-            success = true;
-            Cursor.Current = myCursor;
+	        Cursor.Current = myCursor;
             inProcess.PerformStep();
             inProcess.Close();
 
-            PsExport exporter = new PsExport();
-            exporter.DataType = "Scripture";
-            exporter.Export(fileName);
+            if (!Common.Testing)
+            {
+                PsExport exporter = new PsExport();
+                exporter.DataType = "Scripture";
+                exporter.Export(fileName);
+            }
         }
 
         /// <summary>

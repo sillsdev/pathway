@@ -1,0 +1,12 @@
+The getDependencies scripts were created by installing the BuildUpdate ruby script from: https://github.com/chrisvire/BuildUpdate and following the installation instructions and then using:
+
+../../BuildUpdate/buildupdate.rb -r .. -t bt75 -f getDependencies.win.sh
+and
+../../BuildUpdate/buildupdate.rb -r .. -t bt364 -f getDependencies.linux.sh
+
+To update these two files if the depencies are changed on Team City, simply use:
+../../BuildUpdate/buildupdate.rb -f getDependencies.win.sh
+and
+../../BuildUpdate/buildupdate.rb -f getDependencies.linux.sh
+
+If that doesn't work it is straightforward to recreate the files.

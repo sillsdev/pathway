@@ -1,5 +1,7 @@
-pathway-xelatex (1.13.3.4612-1) unstable; urgency=high
+pathway-xelatex (1.15.3.5133-1) unstable; urgency=high
 
+  * 1.15.3.5133 sprint
+    - based on TexLive 2015
   * 1.13.3.4612 sprint
     - based on TexLive 2015
   * 1.10.0.3915 daily
@@ -21,5 +23,5 @@ pathway-xelatex (1.13.3.4612-1) unstable; urgency=high
   * 1.5.0.2463 sprint
     - First release of XeLaTex for Pathway on Linux
 
- -- Greg Trihus <greg_trihus@sil.org>  Mon, 23 Jul 2012 16:21:26 -0600
+ -- Greg Trihus <greg_trihus@sil.org>  Mon, 25 Jul 2016 11:58:26 -0600
 

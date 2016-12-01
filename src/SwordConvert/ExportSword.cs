@@ -84,7 +84,6 @@ namespace SIL.PublishingSolution
 			else
 			{
 				throw new ArgumentException("Sword export option failed, Osis2Mod convertion file missing in the installer.");
-				return false;
 			}
 
 			string swordTempFolder = tempSwordCreatorPath;

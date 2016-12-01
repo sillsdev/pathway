@@ -39,7 +39,7 @@ namespace SIL.Tool
     {
         #region Private variable
         private TreeView _dictExplorer;
-        private bool _hideFile;
+        private bool _hideFile = false;
         private bool _isLexiconExist;
         private bool _isReversalExist;
         private bool _isExtraProcessing = true;

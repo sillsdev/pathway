@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+  <RULE term="3" pos="1">
+    <ANY>
+      <ATTRIB>
+        <name>dir</name>
+        <ATTRIBEQUAL />
+        <value>'ltr'</value>
+      </ATTRIB>
+    </ANY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-webkit-isolate</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-moz-isolate</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-ms-isolate</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>isolate</value>
+    </PROPERTY>
+  </RULE>
+  <RULE term="3" pos="2">
+    <ANY>
+      <ATTRIB>
+        <name>dir</name>
+        <ATTRIBEQUAL />
+        <value>'rtl'</value>
+      </ATTRIB>
+    </ANY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-webkit-isolate</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-moz-isolate</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-ms-isolate</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>isolate</value>
+    </PROPERTY>
+  </RULE>
+  <RULE term="3" pos="3" target="bdo">
+    <TAG>
+      <name>bdo</name>
+      <ATTRIB>
+        <name>dir</name>
+        <ATTRIBEQUAL />
+        <value>'ltr'</value>
+      </ATTRIB>
+    </TAG>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>bidi-override</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-webkit-isolate-override</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-moz-isolate-override</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-ms-isolate-override</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>isolate-override</value>
+    </PROPERTY>
+  </RULE>
+  <RULE term="3" pos="4" target="bdo">
+    <TAG>
+      <name>bdo</name>
+      <ATTRIB>
+        <name>dir</name>
+        <ATTRIBEQUAL />
+        <value>'rtl'</value>
+      </ATTRIB>
+    </TAG>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>bidi-override</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-webkit-isolate-override</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-moz-isolate-override</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>-ms-isolate-override</value>
+    </PROPERTY>
+    <PROPERTY>
+      <name>unicode-bidi</name>
+      <value>isolate-override</value>
+    </PROPERTY>
+  </RULE>
+</ROOT>

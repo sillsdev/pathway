@@ -33,7 +33,6 @@ namespace SIL.Tool
     {
         #region Private variable
 
-        private string _rampId;
         private string _createdOn;
         private string _modifiedDate;
         private string _ready;
@@ -45,15 +44,12 @@ namespace SIL.Tool
         private string _versionType;
         private string _typeScholarlyWork;
         private List<string> _subjectLanguage = new List<string>();
-        private string _coverageSpacialRegionHas;
-        private List<string> _coverageSpacialCountry = new List<string>();
+	    private List<string> _coverageSpacialCountry = new List<string>();
         private string _subjectLanguageHas;
         private List<string> _languageScript = new List<string>();
         private string _formatExtentText;
         private string _formatExtentImages;
-        private string _descSponsership;
-        private string _descTableofContentsHas;
-        private string _silDomain;
+	    private string _silDomain;
         private string _domainSubTypeLing;
         private List<string> _subject = new List<string>();
         private string _relRequiresHas;
@@ -701,7 +697,10 @@ namespace SIL.Tool
                         rFile.FileDescription = Path.GetFileNameWithoutExtension(file) + " stylesheet";
                         rFile.FileRelationship = "source";
                     }
-                    AddFile(rFile);
+
+					if(!rFile.FileName.Contains("#"))
+						AddFile(rFile);
+
                 }
             }
             Status = "ready";
@@ -1556,6 +1555,10 @@ namespace SIL.Tool
                         licenseXml = Common.PathCombine(licenseXml, "Copyrights");
                     }
                     licenseXml = Common.PathCombine(licenseXml, filename);
+					if (!File.Exists(licenseXml))
+					{
+						licenseXml = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+					}
                 }
                 else
                 {
@@ -1634,7 +1637,8 @@ namespace SIL.Tool
                 zipFile.BeginUpdate();
                 foreach (string file in filesCollection)
                 {
-                    zipFile.Add(file, CompressionMethod.Stored);
+					if (!file.Contains("#"))
+						zipFile.Add(file, CompressionMethod.Stored);
                 }
 
                 foreach (var dirPath in dirCollection)

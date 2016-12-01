@@ -433,6 +433,10 @@ namespace SIL.Tool
 			{
 				// sil + fileName with exact sourceFolder path
 				var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+				if (!Directory.Exists(copyrightDir))
+				{
+					copyrightDir = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+				}
 				string flexPict = PathCombine(copyrightDir, src);
 				if (File.Exists(flexPict))
 				{
@@ -762,6 +766,11 @@ namespace SIL.Tool
 
 				string xsltPath = PathCombine(path, xsltFile);
 
+				if (!File.Exists(xsltPath))
+				{
+					xsltPath = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), xsltFile);
+				}
+
 				//Create the XslCompiledTransform and load the stylesheet.
 				var xsltReader = XmlReader.Create(xsltPath);
 				XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xsltReader.NameTable);
@@ -781,7 +790,7 @@ namespace SIL.Tool
 					}
 
 				//Transform the file. and writing to temporary File
-				var setting = new XmlReaderSettings { ProhibitDtd = false, XmlResolver = null };
+				var setting = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = null };
 				XmlReader reader = XmlReader.Create(inputFile, setting);
 				var writerSettings = new XmlWriterSettings();
 				if (!IncludeUtf8BomIdentifier || !ext.ToLower().Contains("xhtml"))
@@ -1057,6 +1066,7 @@ namespace SIL.Tool
 			catch (XmlException ex)
 			{
 				var msg = new[] { ex.Message, xhtmlFileWithPath };
+				Console.WriteLine(msg.ToString());
 			}
 			books.AddRange(writers.Keys);
 			return books;

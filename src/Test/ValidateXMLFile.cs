@@ -91,7 +91,7 @@ namespace Test
             XPath = "//style:style[@style:name='" + ClassName + "']";
             XmlNode node = ValidateGetNodeNS();
 
-            Assert.IsNotNull(node, ClassName + " node missing");
+            //Assert.IsNotNull(node, ClassName + " node missing");
             if (node == null)
             {
                 match = false;
@@ -379,7 +379,6 @@ namespace Test
                                 match = false;
                             }
                         }
-
                     }
                     else
                     {
@@ -399,6 +398,7 @@ namespace Test
                         if (inner != value)
                         {
                             match = false;
+							Assert.Fail("Exception - TC Output :" + inner);
                         }
                     }
                 }
@@ -501,7 +501,7 @@ namespace Test
                             if (innerText != value)
                             {
                                 match = false;
-								Console.WriteLine("Exception - TC Output :" + innerText);
+								Assert.Fail("Exception - TC Output :" + innerText);
                             }
                         }
 
@@ -524,13 +524,13 @@ namespace Test
                         if (inner != value)
                         {
                             match = false;
-							Console.WriteLine("Exception - TC Output :" + inner);
+							Assert.Fail("Exception - TC Output :" + inner);
                         }
                     }
                 }
                 else
                 {
-					Console.WriteLine("Node Null Exception..");
+					Assert.Fail("Node Null Exception..");
                     match = false;
                 }
             }
@@ -567,7 +567,7 @@ namespace Test
                             if (innerText != value)
                             {
                                 match = false;
-								Console.WriteLine("Exception - TC Output :" + innerText);
+								Assert.Fail("Exception - TC Output :" + innerText);
                             }
                         }
 
@@ -589,7 +589,7 @@ namespace Test
                         }
                         if (inner != value)
                         {
-							Console.WriteLine("Exception - TC Output :" + inner);
+							Assert.Fail("Exception - TC Output :" + inner);
                             match = false;
                         }
                     }
@@ -833,6 +833,7 @@ namespace Test
                     if (value != ClassProperty[propertyKey])
                     {
                         match = false;
+	                    Assert.Fail("Expected Value : " + value);
                     }
                 }
             }
@@ -905,39 +906,5 @@ namespace Test
             ClassProperty.Clear();
             return match;
         }
-
-        //public bool ValidateNodeContent_OO(string outputStory, string content)
-        //{
-        //    FileNameWithPath = outputStory;
-        //    bool match = false;
-        //    XmlNode node = (FileNameWithPath, XPath);
-        //    if (node != null)
-        //    {
-        //        string value = string.Empty;
-        //        if (node.HasChildNodes)
-        //        {
-        //            value = node.ChildNodes[0].InnerText;
-        //        }
-        //        match = value == content;
-        //    }
-        //    ClassProperty.Clear();
-        //    return match;
-        //}
-
-        //public static ArrayList GetXmlNodeList(string xmlFileNameWithPath, string xPath)
-        //{
-        //    ArrayList dataList = new ArrayList();
-        //    XmlNode resultNode = GetXmlNode(xmlFileNameWithPath, xPath);
-        //    if (resultNode != null)
-        //    {
-        //        foreach (XmlNode node in resultNode.ChildNodes)
-        //        {
-        //            dataList.Add(node.InnerText);
-        //        }
-        //    }
-        //    return dataList;
-        //}
-
-
     }
 }

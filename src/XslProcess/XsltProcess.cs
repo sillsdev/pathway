@@ -73,7 +73,7 @@ namespace SIL.PublishingSolution
             var xslArg = new XsltArgumentList();
 
             //Transform the file. and writing to temporary File
-            var setting = new XmlReaderSettings { ProhibitDtd = false, XmlResolver = null };
+			var setting = new XmlReaderSettings { DtdProcessing = DtdProcessing.Parse, XmlResolver = null };
             var reader = XmlReader.Create(inputFile, setting);
             var writerSettings = new XmlWriterSettings();
             if (!IncludeUtf8BomIdentifier || !ext.ToLower().Contains("xhtml"))

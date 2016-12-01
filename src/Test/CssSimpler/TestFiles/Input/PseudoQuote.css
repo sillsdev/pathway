@@ -1,0 +1,3337 @@
+﻿
+.letHead{
+	-moz-column-count:1;
+	-webkit-column-count:1;
+	column-count:1;
+	clear:both;
+	text-align:center;
+	width:100%;
+}
+
+.letter{
+	text-indent:-12pt;
+	margin-left:21pt;
+	line-height:12pt;
+	padding-bottom:3pt;
+	padding-top:12pt;
+	font-size:14pt;
+	font-weight:bold;
+}
+body{
+		font-size:10pt;
+	}
+span[lang|="en"]{
+		font-family:'Doulos SIL',serif;
+	}
+span[lang|="pis"]{
+		font-family:'Times New Roman',serif;
+	}
+span[lang|="lgr"]{
+		font-family:'Charis SIL Compact',serif;
+	}
+span[lang|="lgr-fonipa-x-etic"]{
+		font-family:'Charis SIL Compact',serif;
+	}
+div.entry{
+		text-indent:-12pt;
+		margin-left:21pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+div.entry span[lang|="en"]{
+	}
+div.entry span[lang|="pis"]{
+	}
+div.entry span[lang|="lgr"]{
+	}
+div.entry span[lang|="lgr-fonipa-x-etic"]{
+	}
+div.mainentrycomplex{
+		text-indent:-12pt;
+		margin-left:21pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+div.mainentrycomplex span[lang|="en"]{
+	}
+div.mainentrycomplex span[lang|="pis"]{
+	}
+div.mainentrycomplex span[lang|="lgr"]{
+	}
+div.mainentrycomplex span[lang|="lgr-fonipa-x-etic"]{
+	}
+div.minorentryvariant{
+		text-indent:-12pt;
+		margin-left:21pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+div.minorentryvariant span[lang|="en"]{
+	}
+div.minorentryvariant span[lang|="pis"]{
+	}
+div.minorentryvariant span[lang|="lgr"]{
+	}
+div.minorentryvariant span[lang|="lgr-fonipa-x-etic"]{
+	}
+a{
+		text-decoration:inherit;
+		color:inherit;
+	}
+*[dir='ltr'], *[dir='rtl']{
+		unicode-bidi:isolate;
+		unicode-bidi:-ms-isolate;
+		unicode-bidi:-moz-isolate;
+	}
+.entry span[lang|="en"]{
+	}
+.entry span[lang|="pis"]{
+	}
+.entry span[lang|="lgr"]{
+	}
+.entry span[lang|="lgr-fonipa-x-etic"]{
+	}
+.entry{
+		clear:both;
+		white-space:pre-wrap;
+	}
+.entry{
+		text-indent:-12pt;
+		margin-left:21pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+.entry> .mainheadword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .mainheadword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .mainheadword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .mainheadword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .mainheadword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry .mainheadword> .mainheadwor+ .mainheadwor:before{
+		content:' ';
+	}
+.entry> .mainheadword> span:last-child:after{
+		content:'  ';
+	}
+.entry> .mainheadword> span{
+		font-weight:bold;
+	}
+.entry> .dialectlabelsrs:before{
+		content:'[';
+	}
+.entry> .dialectlabelsrs:after{
+		content:'] ';
+	}
+.entry> .dialectlabelsrs .dialectlabelsr .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry .pronunciations> .pronunciation+ .pronunciation:before{
+		content:', ';
+	}
+.entry> .pronunciations:after{
+		content:'  ';
+	}
+.entry> .pronunciations .pronunciation .form> .for+ .for:before{
+		content:' ';
+	}
+.entry> .pronunciations .pronunciation> .form> span:first-child:before{
+		content:'[';
+	}
+.entry> .pronunciations .pronunciation> .form> span:last-child:after{
+		content:']';
+	}
+.entry> .pronunciations .pronunciation> .location span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .pronunciations .pronunciation> .location span[lang|="pis"]{
+		font-style:italic;
+	}
+.entry> .pronunciations .pronunciation> .location span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .pronunciations .pronunciation> .location span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.entry> .pronunciations .pronunciation> .location:before{
+		content:'  ';
+	}
+.entry> .pronunciations .pronunciation> .location{
+		font-style:italic;
+	}
+.entry> .pronunciations .pronunciation> .location .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .pronunciations .pronunciation> .location> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.entry> .pronunciations .pronunciation> .location .alias> .alia+ .alia:before{
+		content:' ';
+	}
+.entry> .pronunciations .pronunciation> .location> .alias> span:last-child:after{
+		content:' ';
+	}
+.entry> .pronunciations .pronunciation> .mediafiles:after{
+		content:' ';
+	}
+.entry .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.entry> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.entry> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.entry> .variantformentrybackrefs> .variantformentrybackref+.variantentrytypes:before{
+		content:', ';
+	}
+.entry> .variantformentrybackrefs> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .variantformentrybackrefs> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:': ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .headword> span{
+		font-weight:bold;
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:before{
+		content:' [';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:after{
+		content:']';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels .variantentrydialectlabel .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.entry> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.entry> .minimallexreferences> span+ span:before{
+		content:'; ';
+	}
+.entry> .minimallexreferences:after{
+		content:'. ';
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.entry> .minimallexreferences .minimallexreference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.entry> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.entry> .minimallexreferences .minimallexreference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .entrytypes> .entrytype+ .entrytype:before{
+		content:',';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes:after{
+		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes .entrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.entry> .senses> span.sensecontent+ span:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="pis"]{
+		font-style:italic;
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
+		content:'  ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.entry> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="pis"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis:after{
+		content:'  ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype span[lang|="pis"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype:before{
+		content:'(';
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype:after{
+		content:') ';
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .sensetype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense .definitionorgloss> .definitionorglos+ .definitionorglos:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .dialectlabelsrs:before{
+		content:' [';
+	}
+.entry> .senses > .sensecontent > .sense> .dialectlabelsrs:after{
+		content:']';
+	}
+.entry> .senses > .sensecontent > .sense> .dialectlabelsrs .dialectlabelsr .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .scientificname span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .scientificname span[lang|="pis"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .scientificname span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .scientificname span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .scientificname:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent > .sense> .scientificname{
+		font-style:italic;
+		text-decoration:underline;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:first-child:before{
+		content:'\'';
+	}
+.entry> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:'\'';
+	}
+.entry> .senses > .sensecontent > .sense .encyclopedicinfo> .encyclopedicinf+ .encyclopedicinf:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .encyclopedicinfo:before{
+		content:' [';
+	}
+.entry> .senses > .sensecontent > .sense> .encyclopedicinfo:after{
+		content:']';
+	}
+.entry> .senses > .sensecontent > .sense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .restrictions> span:first-child:before{
+		content:'; [Restrictions: ';
+	}
+.entry> .senses > .sensecontent > .sense> .restrictions> span:last-child:after{
+		content:']';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences> span+ span:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .entrytypes> .entrytype+ .entrytype:before{
+		content:',';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes .entrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs:before{
+		content:'; (';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs:after{
+		content:')';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantformentrybackref+.variantentrytypes:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantentrytypes:after{
+		content:': ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:before{
+		content:' [';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:after{
+		content:']';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels .variantentrydialectlabel .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense .anthronote> .anthronot+ .anthronot:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .anthronote:before{
+		content:'; Anthropology note: ';
+	}
+.entry> .senses > .sensecontent > .sense .discoursenote> .discoursenot+ .discoursenot:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .discoursenote:before{
+		content:'; Discourse note: ';
+	}
+.entry> .senses > .sensecontent > .sense .phonologynote> .phonologynot+ .phonologynot:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .phonologynote:before{
+		content:'; Phonology note: ';
+	}
+.entry> .senses > .sensecontent > .sense .grammarnote> .grammarnot+ .grammarnot:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .grammarnote:before{
+		content:'; Grammar note: ';
+	}
+.entry> .senses > .sensecontent > .sense .semanticsnote> .semanticsnot+ .semanticsnot:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .semanticsnote:before{
+		content:'; Semantics note: ';
+	}
+.entry> .senses > .sensecontent > .sense .sociolinguisticsnote> .sociolinguisticsnot+ .sociolinguisticsnot:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .sociolinguisticsnote:before{
+		content:'; Sociolinguistics note: ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="en"]{
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="pis"]{
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="lgr"]{
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="lgr-fonipa-x-etic"]{
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:6pt;
+		padding-right:21pt;
+		display:block;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:6pt;
+		padding-right:21pt;
+		display:block;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent .discussion> .discussio+ .discussio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .discussion> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="en"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense .generalnote> .generalnot+ .generalnot:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .generalnote:before{
+		content:'; General note: ';
+	}
+.entry> .senses > .sensecontent > .sense .academicdomains> .academicdomain+ .academicdomain:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .academicdomains:before{
+		content:'ac. domains: ';
+	}
+.entry> .senses > .sensecontent > .sense> .academicdomains:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .academicdomains .academicdomain .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .academicdomains .academicdomain .name> .nam+ .nam:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .academicdomains .academicdomain> .name> span:first-child:before{
+		content:' (';
+	}
+.entry> .senses > .sensecontent > .sense> .academicdomains .academicdomain> .name> span:last-child:after{
+		content:')';
+	}
+.entry> .senses > .sensecontent > .sense .usages> .usage+ .usage:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .usages:before{
+		content:'; {';
+	}
+.entry> .senses > .sensecontent > .sense> .usages:after{
+		content:'}';
+	}
+.entry> .senses > .sensecontent > .sense> .usages .usage .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:', ';
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs> .complexformtypes:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .senses> span+ span:before{
+		content:' ';
+	}
+.entry> .senses > .sensecontent > .sense> .senses:before{
+		content:'; ';
+	}
+.entry> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.entry> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.entry .etymologies> .etymology+ .etymology:before{
+		content:' ';
+	}
+.entry> .etymologies:before{
+		content:'(';
+	}
+.entry> .etymologies:after{
+		content:') ';
+	}
+.entry> .etymologies .etymology .languages> .language+ .language:before{
+		content:', ';
+	}
+.entry> .etymologies .etymology> .languages:after{
+		content:' ';
+	}
+.entry> .etymologies .etymology> .languages .language .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .etymologies .etymology> .languagenotes> span:last-child:after{
+		content:' ';
+	}
+.entry> .etymologies .etymology .form> .for+ .for:before{
+		content:' ';
+	}
+.entry> .etymologies .etymology> .form> span:last-child:after{
+		content:' ';
+	}
+.entry> .etymologies .etymology .gloss> .glos+ .glos:before{
+		content:' ';
+	}
+.entry> .etymologies .etymology> .gloss> span:last-child:after{
+		content:' ';
+	}
+.entry .comment> .commen+ .commen:before{
+		content:' ';
+	}
+.entry> .comment> span:first-child:before{
+		content:'; [';
+	}
+.entry> .comment> span:last-child:after{
+		content:'] ';
+	}
+.entry .literalmeaning> .literalmeanin+ .literalmeanin:before{
+		content:' ';
+	}
+.entry> .literalmeaning> span:first-child:before{
+		content:'; lit. ';
+	}
+.entry .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:', ';
+	}
+.entry> .visiblecomplexformbackrefs:before{
+		content:'; ';
+	}
+.entry> .visiblecomplexformbackrefs> .complexformtypes:after{
+		content:' ';
+	}
+.entry> .visiblecomplexformbackrefs> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span{
+		font-weight:bold;
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.entry> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.entry .pictures .picture{
+		float:right;
+		text-align:center;
+		margin:0pt 0pt 4pt 4pt;
+		padding:2pt;
+		float:right;
+	}
+.entry .pictures .picture img{
+		max-height:1in;
+	}
+.entry> .pictures .picture span[lang|="en"]{
+	}
+.entry> .pictures .picture span[lang|="pis"]{
+	}
+.entry> .pictures .picture span[lang|="lgr"]{
+	}
+.entry> .pictures .picture span[lang|="lgr-fonipa-x-etic"]{
+	}
+.entry> .pictures> div+ div:before{
+		content:'  ';
+	}
+.entry> .pictures> div:last-child:after{
+		content:' ';
+	}
+.entry> .pictures .picture{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+	}
+.entry> .pictures .picture> .captionContent  img:after{
+		content:' ';
+	}
+.entry> .pictures .picture .caption> .captio+ .captio:before{
+		content:' ';
+	}
+.entry> .pictures .picture> .captionContent .headword[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .pictures .picture> .captionContent .headword span[lang|="en"]{
+		font-weight:bold;
+	}
+.entry> .pictures .picture> .captionContent .headword span[lang|="pis"]{
+		font-weight:bold;
+	}
+.entry> .pictures .picture> .captionContent .headword span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.entry> .pictures .picture> .captionContent .headword span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.entry> .pictures .picture .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.entry> .pictures .picture> .captionContent .headword:after{
+		content:'  ';
+	}
+.entry> .pictures .picture> .captionContent .headword{
+		font-weight:bold;
+	}
+.entry> .pictures .picture .owner_gloss> .owner_glos+ .owner_glos:before{
+		content:' ';
+	}
+.entry> .pictures .picture> .captionContent .owner_gloss:after{
+		content:' ';
+	}
+.mainentrycomplex span[lang|="en"]{
+	}
+.mainentrycomplex span[lang|="pis"]{
+	}
+.mainentrycomplex span[lang|="lgr"]{
+	}
+.mainentrycomplex span[lang|="lgr-fonipa-x-etic"]{
+	}
+.mainentrycomplex{
+		clear:both;
+		white-space:pre-wrap;
+	}
+.mainentrycomplex{
+		text-indent:-12pt;
+		margin-left:21pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+.mainentrycomplex> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrycomplex> .headword> span:last-child:after{
+		content:'  ';
+	}
+.mainentrycomplex> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .dialectlabelsrs:before{
+		content:'[';
+	}
+.mainentrycomplex> .dialectlabelsrs:after{
+		content:'] ';
+	}
+.mainentrycomplex> .dialectlabelsrs .dialectlabelsr .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex .pronunciations> .pronunciation+ .pronunciation:before{
+		content:', ';
+	}
+.mainentrycomplex> .pronunciations:after{
+		content:'  ';
+	}
+.mainentrycomplex> .pronunciations .pronunciation .form> .for+ .for:before{
+		content:' ';
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .form> span:first-child:before{
+		content:'[';
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .form> span:last-child:after{
+		content:']';
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location:before{
+		content:'  ';
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location{
+		font-style:italic;
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location .alias> .alia+ .alia:before{
+		content:' ';
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .location> .alias> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .pronunciations .pronunciation> .mediafiles:before{
+		content:' ';
+	}
+.mainentrycomplex .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.mainentrycomplex> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.mainentrycomplex> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.mainentrycomplex> .variantformentrybackrefs> .variantformentrybackref+.variantentrytypes:before{
+		content:', ';
+	}
+.mainentrycomplex> .variantformentrybackrefs> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .variantformentrybackrefs> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:': ';
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:before{
+		content:' [';
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:after{
+		content:']';
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels .variantentrydialectlabel .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrycomplex> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .minimallexreferences> span+ span:before{
+		content:'; ';
+	}
+.mainentrycomplex> .minimallexreferences:after{
+		content:'. ';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .complexformtypes> .complexformtype+ .complexformtype:before{
+		content:',';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .headword> .headwor+ .headwor:before{
+		content:',';
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .headword .headwor> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .headword .headwor> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .headword .headwor> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .headword .headwor> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .headword .headwor> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .minimallexreferences .minimallexreference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .headword .headwor> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .complexformentryrefs> span+ span:before{
+		content:', ';
+	}
+.mainentrycomplex> .complexformentryrefs:before{
+		content:'(';
+	}
+.mainentrycomplex> .complexformentryrefs:after{
+		content:') ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref .complexformtypes> .complexformtype+ .complexformtype:before{
+		content:', ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .complexformtypes .complexformtype> .reverseabbr> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:', ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry .glossorsummary> .glossorsummar+ .glossorsummar:before{
+		content:' ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .referencedentries .referencedentry> .glossorsummary> span:first-child:before{
+		content:' ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref .summary> .summar+ .summar:before{
+		content:' ';
+	}
+.mainentrycomplex> .complexformentryrefs .complexformentryref> .summary> span:first-child:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses> span.sensecontent+ span:before{
+		content:'; ';
+	}
+.mainentrycomplex> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
+		content:'  ';
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis:after{
+		content:'  ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .sensetype span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .sensetype span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .sensetype span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .sensetype span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .sensetype:before{
+		content:'(';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .sensetype:after{
+		content:') ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .sensetype{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .sensetype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .definitionorgloss> .definitionorglos+ .definitionorglos:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .dialectlabelsrs:before{
+		content:' [';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .dialectlabelsrs:after{
+		content:']';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .dialectlabelsrs .dialectlabelsr .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .scientificname span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .scientificname span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .scientificname span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .scientificname span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .scientificname:before{
+		content:'; ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .scientificname{
+		font-style:italic;
+		text-decoration:underline;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents:before{
+		content:'; ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:first-child:before{
+		content:'\'';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:'\'';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .encyclopedicinfo> .encyclopedicinf+ .encyclopedicinf:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .encyclopedicinfo:before{
+		content:' [';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .encyclopedicinfo:after{
+		content:']';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .restrictions> span:first-child:before{
+		content:'; [Restrictions: ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .restrictions> span:last-child:after{
+		content:']';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences> span+ span:before{
+		content:'; ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences:before{
+		content:'; ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .entrytypes> .entrytype+ .entrytype:before{
+		content:',';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes .entrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs:before{
+		content:'; (';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs:after{
+		content:')';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantformentrybackref+.variantentrytypes:before{
+		content:', ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantentrytypes:after{
+		content:': ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:before{
+		content:' [';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:after{
+		content:']';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels .variantentrydialectlabel .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .anthronote> .anthronot+ .anthronot:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .anthronote:before{
+		content:'; Anthropology note: ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .discoursenote> .discoursenot+ .discoursenot:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .discoursenote:before{
+		content:'; Discourse note: ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .phonologynote> .phonologynot+ .phonologynot:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .phonologynote:before{
+		content:'; Phonology note: ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .grammarnote> .grammarnot+ .grammarnot:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .grammarnote:before{
+		content:'; Grammar note: ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .semanticsnote> .semanticsnot+ .semanticsnot:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .semanticsnote:before{
+		content:'; Semantics note: ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .sociolinguisticsnote> .sociolinguisticsnot+ .sociolinguisticsnot:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .sociolinguisticsnote:before{
+		content:'; Sociolinguistics note: ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="en"]{
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="pis"]{
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="lgr"]{
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="lgr-fonipa-x-etic"]{
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:6pt;
+		padding-right:21pt;
+		display:block;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:6pt;
+		padding-right:21pt;
+		display:block;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent .discussion> .discussio+ .discussio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .discussion> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .generalnote> .generalnot+ .generalnot:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .generalnote:before{
+		content:'; General note: ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .academicdomains> .academicdomain+ .academicdomain:before{
+		content:', ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .academicdomains:before{
+		content:'ac. domains: ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .academicdomains:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .academicdomains .academicdomain .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .academicdomains .academicdomain .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .academicdomains .academicdomain> .name> span:first-child:before{
+		content:' (';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .academicdomains .academicdomain> .name> span:last-child:after{
+		content:')';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .usages> .usage+ .usage:before{
+		content:', ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .usages:before{
+		content:'; {';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .usages:after{
+		content:'}';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .usages .usage .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:', ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs:before{
+		content:'; ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .senses> span+ span:before{
+		content:' ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .senses:before{
+		content:'; ';
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.mainentrycomplex> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.mainentrycomplex .etymologies> .etymology+ .etymology:before{
+		content:' ';
+	}
+.mainentrycomplex> .etymologies:before{
+		content:'(';
+	}
+.mainentrycomplex> .etymologies:after{
+		content:') ';
+	}
+.mainentrycomplex> .etymologies .etymology .languages> .language+ .language:before{
+		content:', ';
+	}
+.mainentrycomplex> .etymologies .etymology> .languages:after{
+		content:' ';
+	}
+.mainentrycomplex> .etymologies .etymology> .languages .language .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .etymologies .etymology> .languagenotes> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .etymologies .etymology .form> .for+ .for:before{
+		content:' ';
+	}
+.mainentrycomplex> .etymologies .etymology> .form> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .etymologies .etymology .gloss> .glos+ .glos:before{
+		content:' ';
+	}
+.mainentrycomplex> .etymologies .etymology> .gloss> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex .comment> .commen+ .commen:before{
+		content:' ';
+	}
+.mainentrycomplex> .comment> span:first-child:before{
+		content:'; [';
+	}
+.mainentrycomplex> .comment> span:last-child:after{
+		content:'] ';
+	}
+.mainentrycomplex .literalmeaning> .literalmeanin+ .literalmeanin:before{
+		content:' ';
+	}
+.mainentrycomplex> .literalmeaning> span:first-child:before{
+		content:'; lit. ';
+	}
+.mainentrycomplex .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:', ';
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs:before{
+		content:'; ';
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex .pictures .picture{
+		float:right;
+		text-align:center;
+		margin:0pt 0pt 4pt 4pt;
+		padding:2pt;
+		float:right;
+	}
+.mainentrycomplex .pictures .picture img{
+		max-height:1in;
+	}
+.mainentrycomplex> .pictures .picture span[lang|="en"]{
+	}
+.mainentrycomplex> .pictures .picture span[lang|="pis"]{
+	}
+.mainentrycomplex> .pictures .picture span[lang|="lgr"]{
+	}
+.mainentrycomplex> .pictures .picture span[lang|="lgr-fonipa-x-etic"]{
+	}
+.mainentrycomplex> .pictures> div+ div:before{
+		content:'  ';
+	}
+.mainentrycomplex> .pictures> div:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .pictures .picture{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:0pt;
+	}
+.mainentrycomplex> .pictures .picture> .captionContent  img:after{
+		content:' ';
+	}
+.mainentrycomplex> .pictures .picture .caption> .captio+ .captio:before{
+		content:' ';
+	}
+.mainentrycomplex> .pictures .picture> .captionContent .headword[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .pictures .picture> .captionContent .headword span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .pictures .picture> .captionContent .headword span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .pictures .picture> .captionContent .headword span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .pictures .picture> .captionContent .headword span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .pictures .picture .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrycomplex> .pictures .picture> .captionContent .headword:after{
+		content:'  ';
+	}
+.mainentrycomplex> .pictures .picture> .captionContent .headword{
+		font-weight:bold;
+	}
+.mainentrycomplex> .pictures .picture .owner_gloss> .owner_glos+ .owner_glos:before{
+		content:' ';
+	}
+.mainentrycomplex> .pictures .picture> .captionContent .owner_gloss:after{
+		content:' ';
+	}
+.mainentrycomplex .visiblevariantentryrefs> .visiblevariantentryref+ .visiblevariantentryref:before{
+		content:', ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs:after{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs> .visiblevariantentryref+.variantentrytypes:before{
+		content:', ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs> .variantentrytypes:after{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:', ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .dialectlabelsrs:before{
+		content:' [';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .dialectlabelsrs:after{
+		content:']';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .dialectlabelsrs .dialectlabelsr .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .glossorsummary> .glossorsummar+ .glossorsummar:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .glossorsummary> span:first-child:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref .summary> .summar+ .summar:before{
+		content:' ';
+	}
+.mainentrycomplex> .visiblevariantentryrefs .visiblevariantentryref> .summary> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant span[lang|="en"]{
+	}
+.minorentryvariant span[lang|="pis"]{
+	}
+.minorentryvariant span[lang|="lgr"]{
+	}
+.minorentryvariant span[lang|="lgr-fonipa-x-etic"]{
+	}
+.minorentryvariant{
+		clear:both;
+		white-space:pre-wrap;
+	}
+.minorentryvariant{
+		text-indent:-12pt;
+		margin-left:21pt;
+		line-height:12pt;
+		padding-bottom:2pt;
+		padding-top:1pt;
+	}
+.minorentryvariant> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.minorentryvariant .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .headword> span:last-child:after{
+		content:'  ';
+	}
+.minorentryvariant> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant> .dialectlabelsrs:before{
+		content:'[';
+	}
+.minorentryvariant> .dialectlabelsrs:after{
+		content:'] ';
+	}
+.minorentryvariant> .dialectlabelsrs .dialectlabelsr .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant .pronunciations> .pronunciation+ .pronunciation:before{
+		content:', ';
+	}
+.minorentryvariant> .pronunciations:after{
+		content:' ';
+	}
+.minorentryvariant> .pronunciations .pronunciation .form> .for+ .for:before{
+		content:' ';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .form> span:first-child:before{
+		content:'[';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .form> span:last-child:after{
+		content:']';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location span[lang|="pis"]{
+		font-style:italic;
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location span[lang|="lgr"]{
+		font-style:italic;
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location:before{
+		content:'  ';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location{
+		font-style:italic;
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location .alias> .alia+ .alia:before{
+		content:' ';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .location> .alias> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .pronunciations .pronunciation> .mediafiles:before{
+		content:' ';
+	}
+.minorentryvariant .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.minorentryvariant> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.minorentryvariant> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.minorentryvariant> .variantformentrybackrefs> .variantformentrybackref+.variantentrytypes:before{
+		content:', ';
+	}
+.minorentryvariant> .variantformentrybackrefs> .variantentrytypes:after{
+		content:':';
+	}
+.minorentryvariant> .variantformentrybackrefs> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .variantformentrybackrefs> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:before{
+		content:' [';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:after{
+		content:']';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels .variantentrydialectlabel .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant .etymologies> .etymology+ .etymology:before{
+		content:' ';
+	}
+.minorentryvariant> .etymologies:before{
+		content:'(';
+	}
+.minorentryvariant> .etymologies:after{
+		content:') ';
+	}
+.minorentryvariant> .etymologies .etymology .languages> .language+ .language:before{
+		content:', ';
+	}
+.minorentryvariant> .etymologies .etymology> .languages:after{
+		content:' ';
+	}
+.minorentryvariant> .etymologies .etymology> .languages .language .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .etymologies .etymology> .languagenotes> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .etymologies .etymology .form> .for+ .for:before{
+		content:' ';
+	}
+.minorentryvariant> .etymologies .etymology> .form> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .etymologies .etymology .gloss> .glos+ .glos:before{
+		content:' ';
+	}
+.minorentryvariant> .etymologies .etymology> .gloss> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant .visiblevariantentryrefs> .visiblevariantentryref+ .visiblevariantentryref:before{
+		content:', ';
+	}
+.minorentryvariant> .visiblevariantentryrefs:before{
+		content:'(';
+	}
+.minorentryvariant> .visiblevariantentryrefs:after{
+		content:') ';
+	}
+.minorentryvariant> .visiblevariantentryrefs> .visiblevariantentryref+.variantentrytypes:before{
+		content:', ';
+	}
+.minorentryvariant> .visiblevariantentryrefs> .variantentrytypes:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs> .variantentrytypes .variantentrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs> .variantentrytypes .variantentrytype> .reverseabbr> span:last-child:after{
+		content:':';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:', ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .dialectlabelsrs:before{
+		content:' [';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .dialectlabelsrs:after{
+		content:']';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .dialectlabelsrs .dialectlabelsr .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry .glossorsummary> .glossorsummar+ .glossorsummar:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .referencedentries .referencedentry> .glossorsummary> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref .summary> .summar+ .summar:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblevariantentryrefs .visiblevariantentryref> .summary> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant .summarydefinition> .summarydefinitio+ .summarydefinitio:before{
+		content:' ';
+	}
+.minorentryvariant> .summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses> span.sensecontent+ span:before{
+		content:'; ';
+	}
+.minorentryvariant> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent .sensenumber:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="pis"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="lgr"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis:after{
+		content:'  ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sharedgrammaticalinfo> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="pis"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="lgr"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis:after{
+		content:'  ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .partofspeech> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype span[lang|="pis"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype span[lang|="lgr"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype:before{
+		content:'(';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype:after{
+		content:') ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .sensetype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .definitionorgloss> .definitionorglos+ .definitionorglos:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .dialectlabelsrs:before{
+		content:' [';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .dialectlabelsrs:after{
+		content:']';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .dialectlabelsrs .dialectlabelsr .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents:before{
+		content:'; ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span[lang|="lgr"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:first-child:before{
+		content:'\'';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:'\'';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .encyclopedicinfo> .encyclopedicinf+ .encyclopedicinf:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .encyclopedicinfo:before{
+		content:' [';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .encyclopedicinfo:after{
+		content:']';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .restrictions> span:first-child:before{
+		content:' Restrictions: ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .restrictions> span:last-child:after{
+		content:'] ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences> span+ span:before{
+		content:'; ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences:before{
+		content:'; ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences:after{
+		content:'. ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .entrytypes> .entrytype+ .entrytype:before{
+		content:',';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes .entrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs:before{
+		content:'(';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs:after{
+		content:') ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantformentrybackref+.variantentrytypes:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantentrytypes:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs> .variantentrytypes .variantentrytype> .abbreviation> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:before{
+		content:' [';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:after{
+		content:']';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels .variantentrydialectlabel .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="en"]{
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="pis"]{
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="lgr"]{
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent span[lang|="lgr-fonipa-x-etic"]{
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:6pt;
+		padding-right:21pt;
+		display:block;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:6pt;
+		padding-right:21pt;
+		display:block;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent .discussion> .discussio+ .discussio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .discussion> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span[lang|="lgr"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="en"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .scientificname:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .academicdomains> .academicdomain+ .academicdomain:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .academicdomains:before{
+		content:'ac. domains: ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .academicdomains:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .academicdomains .academicdomain .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .academicdomains .academicdomain .name> .nam+ .nam:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .academicdomains .academicdomain> .name> span:first-child:before{
+		content:' (';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .academicdomains .academicdomain> .name> span:last-child:after{
+		content:')';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .usages> .usage+ .usage:before{
+		content:', ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .usages:before{
+		content:' {';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .usages:after{
+		content:'}';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .usages .usage .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs:before{
+		content:'; ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs> .complexformtypes:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .senses> span+ span:before{
+		content:'  ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .senses:after{
+		content:' ';
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.minorentryvariant> .senses > .sensecontent > .sense> .senses > .sensecontent .sensenumber:after{
+		content:') ';
+	}
+.minorentryvariant .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:', ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs> .complexformtypes:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span{
+		font-weight:bold;
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref .definitionorglosses> .definitionorgloss+ .definitionorgloss:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .definitionorglosses:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .definitionorglosses:after{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.minorentryvariant> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense{
+		clear:both;
+		white-space:pre-wrap;
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis:after{
+		content:'  ';
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis .partofspeech> .partofspeec+ .partofspeec:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis .slots> .slot+ .slot:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis> .slots:before{
+		content:': ';
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis> .slots .slot .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .morphosyntaxanalysis> .slots .slot> .name> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype:before{
+		content:'(';
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype:after{
+		content:') ';
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .sensetype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense .definitionorgloss> .definitionorglos+ .definitionorglos:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .scientificname span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .scientificname span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .scientificname span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .scientificname span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .scientificname:before{
+		content:'; ';
+	}
+.mainentrysubsenses .mainentrysubsense> .scientificname{
+		font-style:italic;
+		text-decoration:underline;
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents:before{
+		content:'; ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:first-child:before{
+		content:'\'';
+	}
+.mainentrysubsenses .mainentrysubsense> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:'\'';
+	}
+.mainentrysubsenses .mainentrysubsense .encyclopedicinfo> .encyclopedicinf+ .encyclopedicinf:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .encyclopedicinfo:before{
+		content:' [';
+	}
+.mainentrysubsenses .mainentrysubsense> .encyclopedicinfo:after{
+		content:']';
+	}
+.mainentrysubsenses .mainentrysubsense .restrictions> .restriction+ .restriction:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .restrictions> span:first-child:before{
+		content:'; [Restrictions: ';
+	}
+.mainentrysubsenses .mainentrysubsense> .restrictions> span:last-child:after{
+		content:']';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences> span+ span:before{
+		content:'; ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences:before{
+		content:'; ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference .ownertype_abbreviation> .ownertype_abbreviatio+ .ownertype_abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span:last-child:after{
+		content:': ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .ownertype_abbreviation> span{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference .configtargets> .configtarget+ .configtarget:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .headword> span{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget .primaryentryrefs> .primaryentryref+ .primaryentryref:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:before{
+		content:' (';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs:after{
+		content:') ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .entrytypes> .entrytype+ .entrytype:before{
+		content:',';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .entrytypes .entrytype .reverseabbr> .reverseabb+ .reverseabb:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref .referencedentries> .referencedentry+ .referencedentry:before{
+		content:',';
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .lexsensereferences .lexsensereference> .configtargets .configtarget> .primaryentryrefs .primaryentryref> .referencedentries .referencedentry> .headword> span{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense .variantformentrybackrefs> .variantformentrybackref+ .variantformentrybackref:before{
+		content:'; ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs:before{
+		content:'; (';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs:after{
+		content:')';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs> .variantformentrybackref+.variantentrytypes:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs> .variantentrytypes:after{
+		content:': ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs> .variantentrytypes .variantentrytype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref .headword> .headwor+ .headwor:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .headword> span{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:before{
+		content:' [';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels:after{
+		content:']';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .variantentrydialectlabels .variantentrydialectlabel .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .variantformentrybackrefs .variantformentrybackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense .anthronote> .anthronot+ .anthronot:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .anthronote:before{
+		content:'; Anthropology note: ';
+	}
+.mainentrysubsenses .mainentrysubsense .discoursenote> .discoursenot+ .discoursenot:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .discoursenote:before{
+		content:'; Discourse note: ';
+	}
+.mainentrysubsenses .mainentrysubsense .phonologynote> .phonologynot+ .phonologynot:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .phonologynote:before{
+		content:'; Phonology note: ';
+	}
+.mainentrysubsenses .mainentrysubsense .grammarnote> .grammarnot+ .grammarnot:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .grammarnote:before{
+		content:'; Grammar note: ';
+	}
+.mainentrysubsenses .mainentrysubsense .semanticsnote> .semanticsnot+ .semanticsnot:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .semanticsnote:before{
+		content:'; Semantics note: ';
+	}
+.mainentrysubsenses .mainentrysubsense .sociolinguisticsnote> .sociolinguisticsnot+ .sociolinguisticsnot:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .sociolinguisticsnote:before{
+		content:'; Sociolinguistics note: ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent span[lang|="en"]{
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent span[lang|="pis"]{
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent span[lang|="lgr"]{
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent span[lang|="lgr-fonipa-x-etic"]{
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:6pt;
+		padding-right:21pt;
+		display:block;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent{
+		text-indent:0pt;
+		margin-left:0pt;
+		line-height:12pt;
+		padding-bottom:6pt;
+		padding-right:21pt;
+		display:block;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent .discussion> .discussio+ .discussio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .discussion> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents> span+ span:before{
+		content:'  ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="en"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="pis"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="lgr"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span span[lang|="lgr-fonipa-x-etic"]{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent .example> .exampl+ .exampl:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .example> span{
+		font-style:italic;
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent .translation> .translatio+ .translatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .extendednotecontents .extendednotecontent> .examplescontents .examplescontent> .translationcontents .translationcontent> .translation> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense .generalnote> .generalnot+ .generalnot:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .generalnote:before{
+		content:'; General note: ';
+	}
+.mainentrysubsenses .mainentrysubsense .academicdomains> .academicdomain+ .academicdomain:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains:before{
+		content:'ac. domains: ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains .academicdomain .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains .academicdomain .name> .nam+ .nam:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains .academicdomain> .name> span:first-child:before{
+		content:' (';
+	}
+.mainentrysubsenses .mainentrysubsense> .academicdomains .academicdomain> .name> span:last-child:after{
+		content:')';
+	}
+.mainentrysubsenses .mainentrysubsense .usages> .usage+ .usage:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .usages:before{
+		content:'; {';
+	}
+.mainentrysubsenses .mainentrysubsense> .usages:after{
+		content:'}';
+	}
+.mainentrysubsenses .mainentrysubsense> .usages .usage .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense .visiblecomplexformbackrefs> .visiblecomplexformbackref+ .visiblecomplexformbackref:before{
+		content:', ';
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs:before{
+		content:'; ';
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs> .complexformtypes:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs> .complexformtypes .complexformtype .abbreviation> .abbreviatio+ .abbreviatio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="en"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="pis"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span span[lang|="lgr-fonipa-x-etic"]{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref .headword> .headwor+ .headwor:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .headword> span{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref .owningentry_summarydefinition> .owningentry_summarydefinitio+ .owningentry_summarydefinitio:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:first-child:before{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .visiblecomplexformbackrefs .visiblecomplexformbackref> .owningentry_summarydefinition> span:last-child:after{
+		content:' ';
+	}
+.mainentrysubsenses .mainentrysubsense> .subsenses > .sensecontent .sensenumber{
+		font-weight:bold;
+	}
+.mainentrysubsenses .mainentrysubsense> .subsenses > .sensecontent .sensenumber:after{
+		content:') ';
+	}

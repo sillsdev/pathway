@@ -1512,21 +1512,6 @@ namespace SIL.Tool.Localization
             // Done
             xml.End();
             w.Close();
-
-            // Make a backup to the remote device if enabled. We have to create a file with the
-            // date in it so that the BackupSystem has something to copy; we then delete that
-            // file as there's no need to keep filling up the disk. (Bug0282)
-            string sRemotePath = Path.GetFileNameWithoutExtension(sPath) + " " + 
-                                 DateTime.Today.ToString("yyyy-MM-dd") + ".xml";
-            try
-            {
-                //File.Copy(sPath, sRemotePath, true);
-                //(new BackupSystem(sRemotePath)).MakeBackup();
-                //File.Delete(sRemotePath);
-            }
-            catch (Exception)
-            {
-            }
         }
         #endregion
         #region Method: void ReadLanguageData(string sPath)

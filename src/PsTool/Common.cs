@@ -33,12 +33,11 @@ using System.Xml;
 using System.Xml.Xsl;
 using L10NSharp;
 using Microsoft.Win32;
-using Palaso.WritingSystems;
-using Palaso.Xml;
 using SIL.Tool.Localization;
 using System.Reflection;
 using Test;
 using SIL.PublishingSolution;
+using SIL.WritingSystems;
 
 #endregion Using
 
@@ -76,7 +75,7 @@ namespace SIL.Tool
 		public static string Space = " ";
 		/* Non Breaking Space. It has differerence from normal space and the non breaking space */
 		public static string NonBreakingSpace = Common.ConvertUnicodeToString("\\00a0");
-
+		public static bool UseAfterBeforeProcess = false;
 		private static readonly ArrayList _units = new ArrayList();
 		public static ErrorProvider _errProvider = new ErrorProvider();
 		public static Font UIFont;
@@ -284,6 +283,8 @@ namespace SIL.Tool
 			List<string> lstFileName = new List<string>();
 			lstFileName.Add("Add Columns FW83");
 			lstFileName.Add("Letter Header Language");
+			lstFileName.Add("Filter Broken Links");
+			lstFileName.Add("Fix Duplicate ids");
 			return lstFileName;
 		}
 
@@ -328,7 +329,7 @@ namespace SIL.Tool
 						if (executablePath.Contains("ReSharper") || executablePath.Contains("NUnit"))
 						{
 							//This code will work when this method call from NUnit Test case
-						    executablePath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles/input");
+							executablePath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles/input");
 						}
 						else if (executablePath.ToLower().Contains("fieldworks") ||
 								 executablePath.ToLower().Contains("configurationtool") ||
@@ -352,6 +353,8 @@ namespace SIL.Tool
 						if (!File.Exists(PathCombine(cssPath, cssFile)) && SamplePath.Length > 0)
 						{
 							cssPath = PathCombine(executablePath, SamplePath);
+
+
 						}
 						arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), baseCssFileWithPath));
 					}
@@ -589,7 +592,7 @@ namespace SIL.Tool
 				XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
 				var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
 				namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, ProhibitDtd = false };
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
 				string styleName = string.Empty;
 				using (XmlReader xmlReader = XmlReader.Create(xhtmlFileName, xmlReaderSettings))
 				{
@@ -705,7 +708,7 @@ namespace SIL.Tool
 				List<string> langCodeList = new List<string>();
 				var vernacularLang = string.Empty;
 				var metaList = new List<KeyValuePair<string, string>>();
-				var xmlReaderSettings = new XmlReaderSettings {XmlResolver = null, ProhibitDtd = false};
+				var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
 				string attribute = string.Empty;
 				using (XmlReader xmlReader = XmlReader.Create(xhtmlFileNameWithPath, xmlReaderSettings))
 				{
@@ -1083,6 +1086,14 @@ namespace SIL.Tool
 			if (value.IndexOf("25CF") >= 0 || value.IndexOf("274D") >= 0)
 			{
 				value = value.Replace(value, Common.ConvertUnicodeToString("\\" + value)) + " ";
+			}
+			if (value.Contains("{"))
+			{
+				value = value.Replace("{", "\\{");
+			}
+			if (value.Contains("}"))
+			{
+				value = value.Replace("}", "\\}");
 			}
 			return value;
 		}
@@ -2288,7 +2299,6 @@ namespace SIL.Tool
 
 		public static string GetLDMLPath()
 		{
-			string path = string.Empty;
 			object regObj;
 			try
 			{
@@ -2326,9 +2336,9 @@ namespace SIL.Tool
 
 		public static string GetApplicationPath()
 		{
-			string pathwayDir = PathwayPath.GetPathwayDir();
+			string pathwayDir = AssemblyPath;
 			if (string.IsNullOrEmpty(pathwayDir))
-				return Path.GetDirectoryName(Application.ExecutablePath);
+				return PathwayPath.GetPathwayDir();
 			return pathwayDir;
 		}
 
@@ -2345,7 +2355,7 @@ namespace SIL.Tool
 				return file;
 			if (string.IsNullOrEmpty(ProgBase))
 			{
-				ProgBase = PathwayPath.GetPathwayDir();
+				ProgBase = Common.AssemblyPath;
 				if (string.IsNullOrEmpty(ProgBase))
 				{
 					if (!Testing)
@@ -2357,7 +2367,37 @@ namespace SIL.Tool
 
 				}
 			}
-			return Common.PathCombine(ProgBase, file);
+
+			string styleFileName = Common.PathCombine(ProgBase, file);
+
+			string fileExtension = Path.GetExtension(styleFileName);
+			if (string.IsNullOrEmpty(fileExtension))
+			{
+				if (!Directory.Exists(styleFileName))
+				{
+					styleFileName = Path.Combine(Path.GetDirectoryName(Common.AssemblyPath), file);
+				}
+			}
+			else 
+			{
+				if(!File.Exists(styleFileName))
+				{
+					styleFileName = Path.Combine(Path.GetDirectoryName(Common.AssemblyPath), file);
+				}
+			}
+			return styleFileName;
+		}
+
+		public static string InstallerPathFromRegistry(string file)
+		{
+			string progBase = Common.AssemblyPath;
+			string fileName = Common.PathCombine(progBase, file);
+			if (!File.Exists(fileName))
+			{
+				fileName = Path.GetDirectoryName(Common.AssemblyPath);
+				fileName = Common.PathCombine(fileName, file);
+			}
+			return fileName;
 		}
 
 		/// <summary>
@@ -2411,7 +2451,15 @@ namespace SIL.Tool
 
 		public static string GetProductName()
 		{
-			return Application.ProductName;
+			if (Common.Testing)
+			{
+				return "UnitTesting";
+			}
+			else
+			{
+				return Application.ProductName;
+			}
+
 		}
 
 		public static void OpenOutput(string outputPathWithFileName)
@@ -2453,7 +2501,8 @@ namespace SIL.Tool
 		public static string GetAllUserPath()
 		{
 			string allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-			allUserPath += "/SIL/Pathway";
+			allUserPath = Path.Combine(allUserPath, "SIL");
+			allUserPath = Path.Combine(allUserPath, "Pathway");
 			return DirectoryPathReplace(allUserPath);
 		}
 
@@ -2860,6 +2909,9 @@ namespace SIL.Tool
 			int count = arrayCssFile.Count;
 			for (int i = count - 1; i >= 0; i--)
 			{
+				removeMirrorPage = false;
+				removeEveryPage = false;
+				removePageNumber = false;
 				string cssFile = arrayCssFile[i].ToString();
 				//For Remove Mirrored Page
 				if (cssFile.IndexOf("Running_Head_Every_Page") >= 0)
@@ -3084,8 +3136,8 @@ namespace SIL.Tool
 			try
 			{
 				var pathwayFolder = FromRegistry("");
-				var directoryInfo = new DirectoryInfo(pathwayFolder);
-				var fileInfoList = directoryInfo.GetFiles("Pathway_Student_Manual_*.pdf");
+				var directoryInfo = new DirectoryInfo(Path.Combine(pathwayFolder, "Help"));
+				var fileInfoList = directoryInfo.GetFiles("Pathway_Student_Manual*.pdf");
 				using (Process process = new Process())
 				{
 					process.StartInfo.FileName = fileInfoList[0].FullName;
@@ -3347,33 +3399,29 @@ namespace SIL.Tool
 		public static string GetOsName()
 		{
 			OperatingSystem osInfo = Environment.OSVersion;
-
+			var versionString = osInfo.VersionString;
 			switch (osInfo.Platform)
 			{
 				case System.PlatformID.Win32NT:
 					switch (osInfo.Version.Major)
 					{
 						case 3:
-							return "Windows NT 3.51";
+							versionString = "Windows NT 3.51";
 							break;
 						case 4:
-							return "Windows NT 4.0";
+							versionString = "Windows NT 4.0";
 							break;
 						case 5:
-							if (osInfo.Version.Minor == 0)
-								return "Windows 2000";
-							else
-								return "Windows XP";
+							versionString = osInfo.Version.Minor == 0 ? "Windows 2000" : "Windows XP";
 							break;
 						case 6:
-							if (osInfo.Version.Minor == 1)
-								return "Windows7";
-							return "Windows8";
+							versionString = osInfo.Version.Minor == 1 ? "Windows7" : "Windows8";
+							break;
 					}
 					break;
 
 			}
-			return osInfo.VersionString.ToString();
+			return versionString;
 		}
 
 		/// <summary>
@@ -3472,8 +3520,6 @@ namespace SIL.Tool
 
 		public static string ConvertTifftoImage(string pathwithFileName, string convertFormatType)
 		{
-			string fileName = Path.GetFileName(pathwithFileName);
-			string fileNameWithOutExtension = Path.GetFileNameWithoutExtension(fileName);
 			string fileOutputPath = pathwithFileName.Replace(".tif", "." + convertFormatType); //Common.PathCombine(Path.GetDirectoryName(fileName), Path.GetFileNameWithoutExtension(fileNameWithOutExtension)) + "." + convertFormatType;
 			if (!File.Exists(fileOutputPath))
 			{
@@ -3621,8 +3667,11 @@ namespace SIL.Tool
 					XmlNode node =
 						xmlDocument.SelectSingleNode(
 							"/ldml/special[1]/*[namespace-uri()='urn://palaso.org/ldmlExtensions/v1' and local-name()='defaultFontFamily'][1]/@value");
-					newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
-					newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+					if (node != null)
+					{
+						newProperty.AppendLine("div[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+						newProperty.AppendLine("span[lang='" + fileName + "']{ font-family: \"" + node.Value + "\";}");
+					}
 				}
 
 				using (StreamWriter sw = File.CreateText(teDefaultFilePath))
@@ -3661,6 +3710,7 @@ namespace SIL.Tool
 				}
 				catch (Exception e)
 				{
+					Console.WriteLine(e.Message);
 					return null;
 				}
 			}
@@ -3733,7 +3783,7 @@ namespace SIL.Tool
 		public static string InsertCopyrightInPdf(string xhtmlFileName, string creatorTool, string inputType)
 		{
 			string pdfFileName = xhtmlFileName;
-			string executablePath = Path.GetDirectoryName(Application.ExecutablePath);
+			string executablePath = Path.GetDirectoryName(Common.AssemblyPath);
 			if (executablePath.IndexOf("Configuration") > 0 || pdfFileName.ToLower().Contains("local"))
 			{
 				if (File.Exists(pdfFileName))
@@ -3745,15 +3795,13 @@ namespace SIL.Tool
 			//Copyright information added in PDF files
 			try
 			{
-				string tempPdfFileName = string.Empty;
-				if (creatorTool != "LibreOffice")
-				{
-					tempPdfFileName = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), Path.GetFileName(xhtmlFileName));
-				}
-
-
-				string getPsApplicationPath = Common.GetPSApplicationPath();
+				string getPsApplicationPath = Common.AssemblyPath;
 				string licenseXml = Common.PathCombine(getPsApplicationPath, "Copyrights");
+
+				if (!Directory.Exists(licenseXml))
+				{
+					licenseXml = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+				}
 				licenseXml = Common.PathCombine(licenseXml, "SIL_License.xml");
 				string destLicenseXml = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "SIL_License.xml");
 				Param.LoadSettings();
@@ -3781,117 +3829,16 @@ namespace SIL.Tool
 				}
 
 				File.Copy(licenseXml, destLicenseXml);
-				XmlDocument xDoc = Common.DeclareXMLDocument(true);
-				xDoc.Load(destLicenseXml);
+				string utcDateTime = DateTimeOffset.UtcNow.ToString("o");
 
-				XmlNamespaceManager nsmgr = new XmlNamespaceManager(xDoc.NameTable);
-				nsmgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-				nsmgr.AddNamespace("xap", "http://ns.adobe.com/xap/1.0/");
-				nsmgr.AddNamespace("cc", "http://creativecommons.org/ns#");
-				nsmgr.AddNamespace("xapRights", "http://ns.adobe.com/xap/1.0/rights/");
-
-				string xPath = "//xap:CreateDate";
-				XmlElement root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
-				}
-
-				xPath = "//xap:CreatorTool";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = creatorTool;
-				}
-
-				xPath = "//xap:ModifyDate";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
-				}
-
-				xPath = "//xap:MetadataDate";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
-				}
-
-				nsmgr.AddNamespace("pdf", "http://ns.adobe.com/pdf/1.3/");
-
-				xPath = "//pdf:Producer";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = DateTime.Now.Date.ToString();
-				}
-
-				nsmgr.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
-
-				xPath = "//dc:description/rdf:Alt/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Param.GetMetadataValue(Param.Description, organization);
-				}
-
-				xPath = "//dc:creator/rdf:Seq/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Param.GetMetadataValue(Param.Creator, organization);
-				}
-
-				xPath = "//dc:title/rdf:Alt/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = exportTitle;
-				}
-
-				xPath = "//dc:subject/rdf:Bag/rdf:li[3]";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Param.Value["InputType"];
-				}
-
-				xPath = "//dc:rights/rdf:Alt/rdf:li";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = Common.ConvertUnicodeToString("\\00a9") + " " + organization + Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
-				}
-
-				xPath = "//cc:license";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = copyrightURL;
-				}
-
-				xPath = "//xapRights:WebStatement";
-				root = xDoc.DocumentElement;
-				if (root != null)
-				{
-					XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
-					returnNode.InnerText = copyrightURL;
-				}
-				xDoc.Save(destLicenseXml);
+				UpdateLicenseAttributes(creatorTool, Param.Value["InputType"], destLicenseXml, organization, exportTitle, copyrightURL, utcDateTime);
 
 				string sourceJarFile = Common.PathCombine(getPsApplicationPath, "pdflicensemanager-2.3.jar");
+				if (!File.Exists(sourceJarFile))
+				{
+					sourceJarFile = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "pdflicensemanager-2.3.jar");
+				}
+
 				string destJarFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "pdflicensemanager-2.3.jar");
 
 				if (!File.Exists(destJarFile))
@@ -3900,9 +3847,21 @@ namespace SIL.Tool
 				}
 
 				string sourceExeFile = Common.PathCombine(getPsApplicationPath, "PdfLicense.exe");
-				string destExeFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "PdfLicense.exe");
+				if (sourceExeFile.StartsWith("/"))
+				{
+					sourceExeFile = "/usr/bin/PdfLicense";
+				}
+				else if (!File.Exists(sourceExeFile))
+				{
+					sourceExeFile = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "PdfLicense.exe");
+				}
 
-				if (!File.Exists(destExeFile))
+				string destExeFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "PdfLicense.exe");
+				if (destExeFile.StartsWith("/"))
+				{
+					destExeFile = "/usr/bin/PdfLicense";
+				}
+				else if (!File.Exists(destExeFile))
 				{
 					File.Copy(sourceExeFile, destExeFile, true);
 				}
@@ -3919,6 +3878,121 @@ namespace SIL.Tool
 			// Ends the coding part for Copyright information added in PDF files
 
 			return pdfFileName;
+		}
+
+		public static void UpdateLicenseAttributes(string creatorTool, string inputType, string destLicenseXml, string organization,
+			string exportTitle, string copyrightURL, string utcDateTime)
+		{
+			XmlDocument xDoc = Common.DeclareXMLDocument(true);
+			xDoc.Load(destLicenseXml);
+
+			XmlNamespaceManager nsmgr = new XmlNamespaceManager(xDoc.NameTable);
+			nsmgr.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+			nsmgr.AddNamespace("xap", "http://ns.adobe.com/xap/1.0/");
+			nsmgr.AddNamespace("cc", "http://creativecommons.org/ns#");
+			nsmgr.AddNamespace("xapRights", "http://ns.adobe.com/xap/1.0/rights/");
+
+			string xPath = "//xap:CreateDate";
+			XmlElement root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = utcDateTime;
+			}
+
+			xPath = "//xap:CreatorTool";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = creatorTool;
+			}
+
+			xPath = "//xap:ModifyDate";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = utcDateTime;
+			}
+
+			xPath = "//xap:MetadataDate";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = utcDateTime;
+			}
+
+			nsmgr.AddNamespace("pdf", "http://ns.adobe.com/pdf/1.3/");
+
+			xPath = "//pdf:Producer";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = DateTime.Now.Date.ToString();
+			}
+
+			nsmgr.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
+
+			xPath = "//dc:description/rdf:Alt/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = Param.GetMetadataValue(Param.Description, organization);
+			}
+
+			xPath = "//dc:creator/rdf:Seq/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = Param.GetMetadataValue(Param.Creator, organization);
+			}
+
+			xPath = "//dc:title/rdf:Alt/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = exportTitle;
+			}
+
+			xPath = "//dc:subject/rdf:Bag/rdf:li[3]";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = inputType;
+			}
+
+			xPath = "//dc:rights/rdf:Alt/rdf:li";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = Common.ConvertUnicodeToString("\\00a9") + " " + organization +
+									   Common.ConvertUnicodeToString("\\00ae") + " " + DateTime.Now.Year;
+			}
+
+			xPath = "//cc:license";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = copyrightURL;
+			}
+
+			xPath = "//xapRights:WebStatement";
+			root = xDoc.DocumentElement;
+			if (root != null)
+			{
+				XmlNode returnNode = root.SelectSingleNode(xPath, nsmgr);
+				returnNode.InnerText = copyrightURL;
+			}
+			xDoc.Save(destLicenseXml);
 		}
 
 		private static string CopyrightUrlValue()
@@ -3947,8 +4021,6 @@ namespace SIL.Tool
 			{
 				return string.Empty;
 			}
-
-			return string.Empty;
 		}
 
 		private static string GetUrlFromCopyrightxhtmlFile(string xhtmlfileName)
@@ -4329,22 +4401,17 @@ namespace SIL.Tool
 
 		public static string GetParatextProjectPath()
 		{
-			var windowsIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
-			if (windowsIdentity != null)
+			string userName = Environment.UserName;
+			string registryPath = "/home/" + userName + "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
+			while (Directory.Exists(registryPath))
 			{
-				string userName = windowsIdentity.Name;
-				string registryPath = "/home/" + userName + "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
-				while (Directory.Exists(registryPath))
+				if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
 				{
-					if (File.Exists(Common.PathCombine(registryPath, "values.xml")))
-					{
-						XmlDocument doc = new XmlDocument();
-						doc.Load(Common.PathCombine(registryPath, "values.xml"));
-						return doc.InnerText;
-					}
+					XmlDocument doc = new XmlDocument();
+					doc.Load(Common.PathCombine(registryPath, "values.xml"));
+					return doc.InnerText;
 				}
 			}
-
 			return string.Empty;
 		}
 
@@ -4417,6 +4484,7 @@ namespace SIL.Tool
 			}
 			catch (System.Security.SecurityException ex)
 			{
+				Console.WriteLine(ex.Message);
 				isPermission = false;
 			}
 			return isPermission;
@@ -4446,13 +4514,11 @@ namespace SIL.Tool
 
 			string allUserPath = GetAllUserPath();
 			string fileLoc = Common.PathCombine(allUserPath, "License.txt");
-			FileStream fs = null;
+
 			if (!File.Exists(fileLoc))
 			{
-				using (fs = File.Create(fileLoc))
-				{
-
-				}
+				string text = "";
+				File.WriteAllText(fileLoc, text);
 			}
 			if (File.Exists(fileLoc))
 			{
@@ -4460,6 +4526,9 @@ namespace SIL.Tool
 				{
 					sw.WriteLine(tempDirectoryFolder);
 					sw.WriteLine(workingDirectoryXhtmlFileName);
+					if (string.IsNullOrEmpty(exportTitle))
+						exportTitle = GetFileNameWithoutExtension(workingDirectoryXhtmlFileName);
+
 					sw.WriteLine(exportTitle);
 					sw.WriteLine(creatorTool);
 					sw.WriteLine(inputType);
@@ -4467,7 +4536,6 @@ namespace SIL.Tool
 				}
 				isCreated = true;
 			}
-
 			return isCreated;
 		}
 
@@ -4543,6 +4611,10 @@ namespace SIL.Tool
 			string tempXmlFile = string.Empty;
 			string psSupportPath = GetPSApplicationPath();
 			string xmlFileNameWithPath = Common.PathCombine(psSupportPath, fileName);
+			if (!File.Exists(xmlFileNameWithPath))
+			{
+				xmlFileNameWithPath = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), fileName);
+			}
 			if (File.Exists(xmlFileNameWithPath))
 			{
 				string tempFolder = Common.PathCombine(Path.GetTempPath(), "SILTemp");
@@ -4580,14 +4652,6 @@ namespace SIL.Tool
 			{
 				string fontSize = string.Empty;
 				Dictionary<string, string> xhtmlMetaLanguage = new Dictionary<string, string>();
-				//var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
-				//if (fileNameWithoutExtension != null)
-				//{
-				//    string fileName = fileNameWithoutExtension.ToLower();
-				//    if (fileName != "main" && fileName != "main1")
-				//        return;
-				//}
-
 				var xDoc = Common.DeclareXMLDocument(true);
 				xDoc.Load(projInfo.DefaultXhtmlFileWithPath);
 				XmlNodeList nodeList = xDoc.GetElementsByTagName("meta");
@@ -4842,22 +4906,6 @@ namespace SIL.Tool
 			}
 		}
 
-		private static string InstalledLocalizations()
-		{
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
-			var installedLocalizationsFolder = string.Empty;
-			if (pathwayDirectory != null)
-			{
-				installedLocalizationsFolder = Path.Combine(pathwayDirectory, "localizations");
-			}
-			else
-			{
-				installedLocalizationsFolder = Path.Combine(Application.StartupPath, "localizations");
-			}
-
-			return installedLocalizationsFolder;
-		}
-
 		public static void SetupLocalization()
 		{
 			if (!Testing)
@@ -4872,7 +4920,7 @@ namespace SIL.Tool
 
 				//var installedStringFileFolder = FileLocator.GetDirectoryDistributedWithApplication("localization");
 				var targetTmxFilePath = Path.Combine(kCompany, kProduct);
-				string installedLocalizationsFolder = InstalledLocalizations();
+				var installedLocalizationsFolder = InstalledLocalizationsFolder;
 				var desiredUiLangId = GetLocalizationSettings();
 				if (desiredUiLangId == string.Empty)
 					desiredUiLangId = "en";
@@ -4896,9 +4944,63 @@ namespace SIL.Tool
 			}
 		}
 
+
+		public static string AssemblyPath
+		{
+			get
+			{
+				string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+				UriBuilder uri = new UriBuilder(codeBase);
+				string path = Uri.UnescapeDataString(uri.Path);
+				return Path.GetDirectoryName(path);
+			}
+		}
+
+
+		private static string InstalledLocalizationsFolder
+		{
+			get
+			{
+				string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+				UriBuilder uri = new UriBuilder(codeBase);
+				string path = Uri.UnescapeDataString(uri.Path);
+				string installedLocalizationsFolder = Path.Combine(Path.GetDirectoryName(path), "localizations");
+
+				if (Directory.Exists(installedLocalizationsFolder))
+				{
+					return installedLocalizationsFolder;
+				}
+				else
+				{
+					string changePath = Path.GetDirectoryName(path);
+					changePath = Path.GetDirectoryName(changePath);
+					installedLocalizationsFolder = Path.Combine(changePath, "localizations");
+
+					if (Directory.Exists(installedLocalizationsFolder))
+					{
+						return installedLocalizationsFolder;
+					}
+					else
+					{
+						var pathwayFolder = FromRegistry("");
+						installedLocalizationsFolder = Path.Combine(pathwayFolder, "localizations");
+
+						if (Directory.Exists(installedLocalizationsFolder))
+						{
+							return installedLocalizationsFolder;
+						}
+						else
+						{
+							return string.Empty;
+						}
+					}
+				}
+			}
+		}
+
 		public static void InitializeOtherProjects()
 		{
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory)) return;
 
 			foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
@@ -4935,7 +5037,7 @@ namespace SIL.Tool
 		public static string[] GetnamespacestoLocalize()
 		{
 			var namespacestoLocalize = new List<string>();
-			var pathwayDirectory = PathwayPath.GetPathwayDir();
+			var pathwayDirectory = Common.AssemblyPath;
 			if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory))
 				return new[] { "SIL.PublishingSolution" };
 			foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$"))
@@ -5018,6 +5120,10 @@ namespace SIL.Tool
 					if (files.Length > 0)
 					{
 						foreach (var lang in Param.HyphenLang.Split(','))
+						{
+							if (String.IsNullOrEmpty(lang))
+								break;
+
 							foreach (var file in files)
 							{
 								if (file.Split(new char[] { Convert.ToChar("_"), '.' })[1] ==
@@ -5027,6 +5133,7 @@ namespace SIL.Tool
 									Param.HyphenationSelectedLanguagelist.Add(lang);
 								}
 							}
+						}
 					}
 				}
 			}
@@ -5039,7 +5146,7 @@ namespace SIL.Tool
 		#endregion
 		public static string GetPalasoLanguageName(string lang)
 		{
-			var lpModel = new EthnologueLookup();
+			var lpModel = new LanguageLookup();
 			var matchLang = lpModel.SuggestLanguages(lang.ToLower()).FirstOrDefault();
 			string langname = null;
 			if (matchLang != null)
@@ -5065,5 +5172,46 @@ namespace SIL.Tool
 			return inProcess;
 		}
 
+		public static void CopyContent(string sourceFile, string destinationFile)
+		{
+			using (Stream input = File.OpenRead(destinationFile))
+			using (Stream output = new FileStream(sourceFile, FileMode.Append,
+				FileAccess.Write, FileShare.None))
+			{
+				input.CopyTo(output); // Using .NET 4
+			}
+		}
+
+		/// <summary>
+		/// Save InputType to StyleSettings.xml. Ex: Scripture or Dictionary
+		/// </summary>
+		/// <param name="inputType"></param>
+		public static void SaveInputType(string inputType)
+		{
+			string allUserSettingPath = Common.GetAllUserPath();
+			string allUserXmlPath = Common.PathCombine(allUserSettingPath, "StyleSettings.xml");
+			if (!Directory.Exists(allUserSettingPath))
+			{
+				Directory.CreateDirectory(allUserSettingPath);
+			}
+			if (!File.Exists(allUserXmlPath))
+			{
+				string settingPath = Path.GetDirectoryName(Param.SettingPath);
+				string xmlPath = Common.PathCombine(settingPath, "StyleSettings.xml");
+				File.Copy(xmlPath, allUserXmlPath, true);
+				File.Copy(xmlPath.Replace(".xml", ".xsd"), allUserXmlPath.Replace(".xml", ".xsd"), true);
+			}
+
+			XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
+			xmlDoc.Load(allUserXmlPath);
+			string xPath = "//settings/property[@name='InputType']";
+
+			var node = xmlDoc.SelectSingleNode(xPath);
+			if (node != null)
+			{
+				node.Attributes["value"].Value = inputType;
+			}
+			xmlDoc.Save(allUserXmlPath);
+		}
 	}
 }

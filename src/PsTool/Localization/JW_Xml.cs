@@ -631,11 +631,6 @@ namespace JWTools
 			// Destination for the field once broken down into lines
 			ArrayList rgLines = new ArrayList();
 
-			// For the first line, the length we're looking for must take into account the
-			// length of the marker. Afterwards, we'll switch it to using just the maxlength
-			// without the marker (as the marker only appears on the first line).
-			int cMaxLength = m_cMaxLineLength - m_cMarkerPad;
-
 			// We use the bBlankFound boolean to determine when to split a line. We only
 			// want to split after blanks, so that blank(s) always appear at the end of
 			// a line, not at the beginning.
@@ -664,7 +659,6 @@ namespace JWTools
 						rgLines.Add(sLine.TrimEnd());
 						sLine = "";
 						bBlankFound = false;
-						cMaxLength = m_cMaxLineLength;
 					}
 				}
 

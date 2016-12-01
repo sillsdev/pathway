@@ -37,9 +37,8 @@ namespace Test.CssDialog
         {
             FeatureSheet target = new FeatureSheet(); // TODO: Initialize to an appropriate value
             string expected = string.Empty; // TODO: Initialize to an appropriate value
-            string actual;
-            target.Sheet = expected;
-            actual = target.Sheet;
+	        target.Sheet = expected;
+            var actual = target.Sheet;
             Assert.AreEqual(expected, actual);
         }
 
@@ -51,9 +50,8 @@ namespace Test.CssDialog
         {
             FeatureSheet target = new FeatureSheet(); // TODO: Initialize to an appropriate value
             List<string> expected = null; // TODO: Initialize to an appropriate value
-            List<string> actual;
-            target.Features = expected;
-            actual = target.Features;
+	        target.Features = expected;
+            var actual = target.Features;
             Assert.AreEqual(expected, actual);
         }
 
@@ -64,12 +62,10 @@ namespace Test.CssDialog
         public void WriteTest()
         {
             FeatureSheet target = new FeatureSheet(); // TODO: Initialize to an appropriate value
-            long expected = 0; // TODO: Initialize to an appropriate value
-            long actual;
             CommonTestMethod.DisableDebugAsserts();
             try
             {
-                actual = target.Write();
+                target.Write();
                 Assert.Fail("Write succeeded with no sheet name!");
             }
             catch (Exception e)
@@ -116,13 +112,11 @@ namespace Test.CssDialog
         public void ReadToEndTest()
         {
             FeatureSheet target = new FeatureSheet(); // TODO: Initialize to an appropriate value
-            bool expected = false; // TODO: Initialize to an appropriate value
-            bool actual;
             // TODO: Sheet parameter must be set
             CommonTestMethod.DisableDebugAsserts();
             try
             {
-                actual = target.ReadToEnd();
+                target.ReadToEnd();
                 Assert.Fail("ReadToEnd returned when Sheet not set!");
             }
             catch (Exception e)
@@ -135,26 +129,5 @@ namespace Test.CssDialog
                 CommonTestMethod.EnableDebugAsserts();
             }
         }
-
-        /// <summary>
-        ///A test for FeatureSheet Constructor
-        ///</summary>
-        [Test]
-        public void FeatureSheetConstructorTest1()
-        {
-            FeatureSheet target = new FeatureSheet();
-            //TODO: Implement code to verify target
-        }
-
-        /// <summary>
-        ///A test for FeatureSheet Constructor
-        ///</summary>
-        [Test]
-        public void FeatureSheetConstructorTest()
-        {
-            string sheet = string.Empty; // TODO: Initialize to an appropriate value
-            FeatureSheet target = new FeatureSheet(sheet);
-            //TODO: Implement code to verify target
-        }
-    }
+	}
 }

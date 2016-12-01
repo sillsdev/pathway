@@ -34,8 +34,6 @@ namespace Test.CssDialog
         string _inputBasePath = string.Empty;
         /// <summary>holds path to expect folder for all tests</summary>
         string _expectBasePath = string.Empty;
-        /// <summary>path to all users output</summary>
-        string _publishingSolutionsData = string.Empty;
 
         [TestFixtureSetUp]
         protected void SetUp()
@@ -44,8 +42,6 @@ namespace Test.CssDialog
             string currentFolder = PathPart.Bin(Environment.CurrentDirectory, "/CssDialog/TestFiles");
             _inputBasePath = Common.PathCombine(currentFolder, "Input");
             _expectBasePath = Common.PathCombine(currentFolder, "Expected");
-            var allUsersDataDir = Common.GetAllUserAppPath();
-            _publishingSolutionsData = Common.PathCombine(allUsersDataDir, Common.PathCombine("SIL", "Pathway"));
         }
 
         [TestFixtureTearDown]
@@ -151,10 +147,14 @@ namespace Test.CssDialog
             var workDir = Common.PathCombine(Path.GetTempPath(), "Preprocess");
             if (Directory.Exists(workDir))
                 Directory.Delete(workDir, true);
-            string css = Common.PathCombine(_inputBasePath, "MergeFile7.css"); // TODO: Initialize to an appropriate value
+            string css = Common.PathCombine(_inputBasePath, "MergeFile7.css");
             string actual = target.Make(css, "Temp1.css");
-            string expected = Common.PathCombine(_expectBasePath, "MergeBottomImportFile.css"); // TODO: Initialize to an appropriate value
+	        var fileName = "MergeBottomImportFile.css";
+			if (Common.UsingMonoVM)
+				fileName = fileName.Replace(".css", "_Linux.css");
+			string expected = Common.PathCombine(_expectBasePath, fileName);
             TextFileAssert.AreEqual(expected, actual, "Make Funtion test failed");
+
         }
     }
 }

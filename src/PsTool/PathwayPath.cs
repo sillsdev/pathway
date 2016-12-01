@@ -98,7 +98,7 @@ namespace SIL.Tool
                 //if (!File.Exists(Common.PathCombine(pathwayDir, "PsExport.dll")) && !Common.Testing)
                 //    Debug.Fail("Unable to find Pathway directory in registry.");
                 // If the Support folder exists, it should be used.
-                Common.SupportFolder = Directory.Exists(Common.PathCombine(pathwayDir, "PathwaySupport")) ? "PathwaySupport" : "";
+                Common.SupportFolder = Directory.Exists(Common.PathCombine(Path.GetDirectoryName(pathwayDir), "PathwaySupport")) ? "PathwaySupport" : "";
             }
             catch { }
             return pathwayDir;
@@ -145,5 +145,25 @@ namespace SIL.Tool
             }
             return isAvailable;
         }
+
+		public static string GetSupportPath(string theAppPath, string supportFileOrFolder, bool isFile)
+		{
+			string thePath = Common.PathCombine(theAppPath, supportFileOrFolder);
+			if (isFile)
+			{
+				if (!File.Exists(thePath))
+				{
+					thePath = Common.PathCombine(Path.GetDirectoryName(theAppPath), supportFileOrFolder);
+				}
+			}
+			else
+			{
+				if (!Directory.Exists(thePath))
+				{
+					thePath = Common.PathCombine(Path.GetDirectoryName(theAppPath), supportFileOrFolder);
+				}
+			}
+			return thePath;
+		}
     }
 }

@@ -22,12 +22,10 @@ namespace SIL.PublishingSolution
     public class InMapProperty
     {
         private Dictionary<string, string> _IDProperty = new Dictionary<string, string>();
-        private Dictionary<string, string> _cssProperty = new Dictionary<string, string>();
         private bool _IsKeepLineWrittern = false;
         public Dictionary<string, string> IDProperty(Dictionary<string, string> cssProperty)
         {
             _IDProperty.Clear();
-            _cssProperty = cssProperty;
             foreach (KeyValuePair<string, string> property in cssProperty)
             {
                 bool writtenProperty = ProcessPagePropertyCases(cssProperty, property);

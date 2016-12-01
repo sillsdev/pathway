@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Xml;
 using System.Xml.Xsl;
 using NUnit.Framework;
@@ -88,17 +89,20 @@ namespace Test.ParatextSupport
             xslParams.Add("fontName", "Times");
             xslParams.Add("fontSize", "12");
 
-
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
+			Common.Testing = true;
+            Common.ProgInstall = PathPart.Bin(Path.GetDirectoryName(Environment.CurrentDirectory), @"/../../DistFiles");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
-            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ParatextSupport/TestFiles");
+            string testPath = PathPart.Bin(Path.GetDirectoryName(Environment.CurrentDirectory), "\\ParatextSupport\\TestFiles");
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "Expected");
-            if (Directory.Exists(_outputPath))
-                Directory.Delete(_outputPath, true);
-            Directory.CreateDirectory(_outputPath);
+            if (!Directory.Exists(_outputPath))
+            {
+                Directory.CreateDirectory(_outputPath);
+                while (!Directory.Exists(_outputPath))
+                    Thread.Sleep(1000);
+            }
 
             converter = new ParatextPathwayLink("testDb", xslParams);
             usxToXhtmlXslt = ParatextSupportExtensions.UsxToUsfmXslt(converter);
@@ -116,30 +120,22 @@ namespace Test.ParatextSupport
             usxBooksToExport.Add(xmlInnerText());
             string outputFolder = FileOutput("nkoNT");
             string expectedFolder = FileExpected("nkoNT");
-
-            converter.MFormat = "E-Book (Epub2 and Epub3)";
+			converter.MFormat = "E-Book (Epub2 and Epub3)";
             converter.MDatabaseName = "nkoNT";
             converter.MOutputLocationPath = outputFolder;
             converter.MPublicationName = "ScripturenkoNT";
-            converter.IsTesting = true;
+			Common.Testing = true;
 
             if (Directory.Exists(outputFolder))
                 Directory.Delete(outputFolder, true);
             Directory.CreateDirectory(outputFolder);
-            
             converter.ExportToPathway(usxBooksToExport);
-
+			
             usxBooksToExport.Clear();
             const string TestName = "ScripturenkoNT";
-            var cssFile = TestName + ".css";
             var xhtmlFile = TestName + ".xhtml";
-
-            string expectedCssFile = Common.PathCombine(expectedFolder, cssFile);
             string expectedXhtmlFile = Common.PathCombine(expectedFolder, xhtmlFile);
-
-            string outputCssFile = Common.PathCombine(outputFolder, cssFile);
-            string outputXhtmlFile = Common.PathCombine(outputFolder, xhtmlFile);
-
+			string outputXhtmlFile = Common.PathCombine(outputFolder, xhtmlFile);
             TextFileAssert.AreEqual(expectedXhtmlFile, outputXhtmlFile, FileData.Get(outputXhtmlFile));
         }
 
@@ -156,7 +152,7 @@ namespace Test.ParatextSupport
             converter.MDatabaseName = "nkoNT";
             converter.MOutputLocationPath = outputFolder;
             converter.MPublicationName = "ScripturenkoNT";
-            converter.IsTesting = true;
+			Common.Testing = true;
 
             if (Directory.Exists(outputFolder))
                 Directory.Delete(outputFolder, true);
@@ -166,13 +162,8 @@ namespace Test.ParatextSupport
 
             usxBooksToExport.Clear();
             const string TestName = "ScripturenkoNT";
-            var cssFile = TestName + ".css";
             var xhtmlFile = TestName + ".xhtml";
-
-            string expectedCssFile = Common.PathCombine(expectedFolder, cssFile);
             string expectedXhtmlFile = Common.PathCombine(expectedFolder, xhtmlFile);
-
-            string outputCssFile = Common.PathCombine(outputFolder, cssFile);
             string outputXhtmlFile = Common.PathCombine(outputFolder, xhtmlFile);
 
             TextFileAssert.AreEqual(expectedXhtmlFile, outputXhtmlFile, FileData.Get(outputXhtmlFile));

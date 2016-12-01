@@ -47,7 +47,7 @@ namespace SIL.Tool
         protected ClassAttrib _precedeClassAttrib = new ClassAttrib();
         protected ClassAttrib _xhtmlClassAttrib = new ClassAttrib();
         protected ClassAttrib _parentPrecedeClassAttrib = new ClassAttrib();
-
+		protected Dictionary<string, string> IdAllClassWithandWithoutSeperator = new Dictionary<string, string>();
         protected Dictionary<string, string> _childStyle;
         protected Dictionary<string, ClassInfo> _existingPsuedoBeforeStyle = new Dictionary<string, ClassInfo>();
         protected ClassInfo _psuedoBeforeStyle = new ClassInfo();
@@ -69,7 +69,6 @@ namespace SIL.Tool
         protected string _className;
         private string _isTagClass;
         private string _listType;
-
         #region Anchor
         protected string _anchorBookMarkName = string.Empty;
         protected string _anchorIdValue = string.Empty;
@@ -201,7 +200,9 @@ namespace SIL.Tool
 
             _childName = FindStyleName();
             GetHeadwordStyles(isHeadword);
-            _allStyleInfo.Push(classInfo);
+
+			if (!_allStyleInfo.Contains(classInfo))
+				_allStyleInfo.Push(classInfo);
 
             if (_divType.Contains(_tagType))
             {
@@ -295,7 +296,7 @@ namespace SIL.Tool
             {
                 string styleName;
                 string headwordStyle = string.Empty;//_childName
-                if (_childName.IndexOf("headword") == 0 || _childName.IndexOf("reversalform") == 0)
+                if (_childName.IndexOf("headword") == 0 ||_childName.IndexOf("mainheadword") == 0 || _childName.IndexOf("reversalform") == 0)
                 {
                     headwordStyle = _childName;
                 }
@@ -361,28 +362,81 @@ namespace SIL.Tool
 	        }
         }
 
-        private string GetDisplayBlock(string multiClass, string propertyName)
-        {
-            string returnValue = string.Empty;
-            ArrayList cssClassDetail1 = new ArrayList();
-            if (_classFamily.ContainsKey(multiClass))
-            {
-                cssClassDetail1 = _classFamily[multiClass];
-            }
-            if (cssClassDetail1 == null) return _matchedCssStyleName;
+		private string GetDisplayBlock(string multiClass, string propertyName)
+		{
+			string returnValue = string.Empty;
+			ArrayList cssClassDetail1 = new ArrayList();
+			if (_classFamily.ContainsKey(multiClass))
+			{
+				cssClassDetail1 = _classFamily[multiClass];
+			}
+			if (cssClassDetail1 == null)
+				return _matchedCssStyleName;
+			
+			string parentClass = StackPeek(_allStyle);
+			
+			if (!string.IsNullOrEmpty(_matchedCssStyleName))
+			{
+				if (IdAllClass.ContainsKey(_matchedCssStyleName) && IdAllClass[_matchedCssStyleName].ContainsKey(propertyName))
+				{
+					returnValue = IdAllClass[_matchedCssStyleName][propertyName];
+				}
+			}
 
-            foreach (ClassInfo cssClassInfo in cssClassDetail1)
-            {
-                string className = cssClassInfo.StyleName;
-                if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey(propertyName))
-                {
-                    returnValue = IdAllClass[className][propertyName];
-                    break;
-                }
-            }
-            return returnValue;
+			string className = multiClass + Common.SepParent + parentClass;
+			className = Common.RightRemove(className, "_letData");
+			string idAllCssClassName = string.Empty;
+			foreach (KeyValuePair<string, string> property in IdAllClassWithandWithoutSeperator)
+			{
+				string propertyValue = property.Value;
+				if (className == propertyValue)
+				{
+					idAllCssClassName = property.Key;
+					break;
+				}
+			}
 
-        }
+			if (IdAllClass.ContainsKey(idAllCssClassName))
+			{
+				if (IdAllClass[idAllCssClassName].ContainsKey(propertyName))
+				{
+					returnValue = IdAllClass[idAllCssClassName][propertyName];
+				}
+				else
+				{
+					foreach (ClassInfo cssClassInfo in cssClassDetail1)
+					{
+						parentClass = multiClass + Common.SepAncestor + StackPeek(_allParagraph);
+						parentClass = Common.RightRemove(parentClass, "_letData");
+						string cssClassName = cssClassInfo.StyleName;
+						if (cssClassName.Contains(Common.SepAncestor) && IdAllClass.ContainsKey(parentClass) &&
+							IdAllClass[parentClass].ContainsKey(propertyName))
+						{
+							returnValue = IdAllClass[cssClassName][propertyName];
+							return returnValue;
+						}
+					}
+					return string.Empty;
+				}
+			}
+			else
+			{
+				foreach (ClassInfo cssClassInfo in cssClassDetail1)
+				{
+					className = cssClassInfo.StyleName;
+					if (IdAllClass.ContainsKey(className) && IdAllClass[className].ContainsKey(propertyName))
+					{
+						parentClass = multiClass + Common.SepParent + parentClass;
+						if (parentClass.IndexOf(className) == 0)
+						{
+							returnValue = IdAllClass[className][propertyName];
+							break;
+						}
+					}
+				}
+			}
+			return returnValue;
+		}
 
         protected string GetPropertyValue(string className, string propertyName)
         {
@@ -412,11 +466,15 @@ namespace SIL.Tool
                         _className = _className.Replace("_", "");
                         _className = _className.Replace("-", "");
                         FindSecondPicture();
-                        _className = Common.SortMutiClass(_className);
-                        if (_outputType == Common.OutputType.XELATEX)
-                        {
-                            _className = Common.ReplaceCSSClassName(_className);
-                        }
+	                    if (_outputType == Common.OutputType.XELATEX)
+	                    {
+		                    _className = Common.ReplaceCSSClassName(_className);
+							_className = Common.RightRemove(_className, " ");
+	                    }
+	                    else
+	                    {
+							_className = Common.SortMutiClass(_className);
+	                    }
                     }
                     else if (_reader.Name == "lang")
                     {
@@ -864,7 +922,7 @@ namespace SIL.Tool
             ArrayList multiClassList = MultiClassCombination(_className);
 
             float ancestorFontSize = FindAncestorFontSize();
-            _parentStyleName = StackPeek(_allStyle);
+			_parentStyleName = StackPeek(_allStyle);
 
             string styleName = MatchCssStyle(ancestorFontSize, "null", multiClassList);
 			if (styleName == string.Empty) // missing style in CSS
@@ -879,7 +937,10 @@ namespace SIL.Tool
             }
 			else if (styleName == "span" && _outputType == Common.OutputType.ODT)
 			{
-				styleName = _className;
+				if (_lang.Length > 0)
+					styleName = _classNameWithLang;
+				else
+					styleName = _className;
 			}
 			else
 			{
@@ -891,51 +952,54 @@ namespace SIL.Tool
 			}
 	        string newStyleName = GetStyleNumber(styleName);
 
-            if (_newProperty.ContainsKey(newStyleName) == false)
+			if (_newProperty.ContainsKey(newStyleName) == false)
             {
                 _newProperty[newStyleName] = _tempStyle;
             }
 
-            IdAllClass[newStyleName] = _tempStyle;
-            string tagType = _tagType;
-            if (_divType.Contains(_tagType)) tagType = "div";
-            ParentClass[newStyleName] = _parentStyleName + "|" + tagType;
+			IdAllClass[newStyleName] = _tempStyle;
+			string tagType = _tagType;
+			if (_divType.Contains(_tagType)) tagType = "div";
+			ParentClass[newStyleName] = _parentStyleName + "|" + tagType;
 
-            _psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
-            string styleBefore = MatchCssStyle(ancestorFontSize, "before", multiClassList);
-            if (styleBefore != string.Empty)
-            {
-                string tag = "span"; //  always character styles
-                string newStyleBefore = GetStyleNumber(styleBefore);
-                _newProperty[newStyleBefore] = _tempStyle;
-                IdAllClass[newStyleBefore] = _tempStyle;
-                _psuedoBeforeStyle.StyleName = newStyleBefore;
-                ParentClass[newStyleBefore] = _parentStyleName + "|" + tag;
+			_psuedoBeforeStyle = _psuedoAfterStyle = _psuedoContainsStyle = null;
 
-            }
+	        if (Common.UseAfterBeforeProcess)
+	        {
+				string styleBefore = MatchCssStyle(ancestorFontSize, "before", multiClassList);
+				if (styleBefore != string.Empty)
+				{
+					string tag = "span"; //  always character styles
+					string newStyleBefore = GetStyleNumber(styleBefore);
+					_newProperty[newStyleBefore] = _tempStyle;
+					IdAllClass[newStyleBefore] = _tempStyle;
+					_psuedoBeforeStyle.StyleName = newStyleBefore;
+					ParentClass[newStyleBefore] = _parentStyleName + "|" + tag;
 
-            string styleAfter = MatchCssStyle(ancestorFontSize, "after", multiClassList);
-            if (styleAfter != string.Empty)
-            {
-                string tag = "span"; //  always character styles
-                string newStyleAfter = GetStyleNumber(styleAfter);
-                _newProperty[newStyleAfter] = _tempStyle;
-                IdAllClass[newStyleAfter] = _tempStyle;
-                _psuedoAfterStyle.StyleName = newStyleAfter;
-                ParentClass[newStyleAfter] = _parentStyleName + "|" + tag;
-            }
+				}
 
-            string styleContains = MatchCssStyle(ancestorFontSize, "contains", multiClassList);
-            if (styleContains != string.Empty)
-            {
-                string newStyleContains = GetStyleNumber(styleContains);
-                _newProperty[newStyleContains] = _tempStyle;
-                IdAllClass[newStyleContains] = _tempStyle;
-                _psuedoContainsStyle.StyleName = newStyleContains;
-                ParentClass[newStyleContains] = _parentStyleName + "|" + _tagType;
-            }
+				string styleAfter = MatchCssStyle(ancestorFontSize, "after", multiClassList);
+				if (styleAfter != string.Empty)
+				{
+					string tag = "span"; //  always character styles
+					string newStyleAfter = GetStyleNumber(styleAfter);
+					_newProperty[newStyleAfter] = _tempStyle;
+					IdAllClass[newStyleAfter] = _tempStyle;
+					_psuedoAfterStyle.StyleName = newStyleAfter;
+					ParentClass[newStyleAfter] = _parentStyleName + "|" + tag;
+				}
 
-            return newStyleName;
+				string styleContains = MatchCssStyle(ancestorFontSize, "contains", multiClassList);
+				if (styleContains != string.Empty)
+				{
+					string newStyleContains = GetStyleNumber(styleContains);
+					_newProperty[newStyleContains] = _tempStyle;
+					IdAllClass[newStyleContains] = _tempStyle;
+					_psuedoContainsStyle.StyleName = newStyleContains;
+					ParentClass[newStyleContains] = _parentStyleName + "|" + _tagType;
+				}
+	        }
+	        return newStyleName;
         }
 
         private string GetStyleNumber(string styleName)
@@ -944,7 +1008,7 @@ namespace SIL.Tool
             {
                 if (_parentStyleName.Trim().Length == 0) return styleName;
 
-                return styleName + Common.SepParent + _parentStyleName;
+                return styleName.Replace(" ","_") + Common.SepParent + StackPeek(_allStyle);
             }
 
             if (styleName == "headword") return styleName;
@@ -1008,7 +1072,7 @@ namespace SIL.Tool
 				{
 					cssClassDetail = _classFamily[multiClass];
 				}
-                AddTagProperty(cssClassDetail, multiClass);
+               // AddTagProperty(cssClassDetail, multiClass);
                 if (cssClassDetail == null) return _matchedCssStyleName;
 
                 foreach (ClassInfo cssClassInfo in cssClassDetail)
@@ -1075,11 +1139,32 @@ namespace SIL.Tool
                     if (resultCoreClass && resultTagClass && resultAncestor && resultParent && resultParentPrecede &&
                         resultPrecede)
                     {
+						if (cssClassInfo.StyleName == string.Empty)
+							return _matchedCssStyleName;
+
 	                    AssignProperty(cssClassInfo.StyleName, ancestorFontSize);
 
 						if (_matchedCssStyleName == string.Empty)
                         {
-                            _matchedCssStyleName = cssClassInfo.StyleName;
+							string classWithLang = string.Empty;
+							if (_lang.Length > 0)
+								classWithLang = _classNameWithLang;
+							else
+								classWithLang = _className;
+
+							_matchedCssStyleName = classWithLang;
+
+							if (cssClassInfo.StyleName != classWithLang)
+	                        {
+								string parentStyle = string.Empty;
+		                       
+								if (!String.IsNullOrEmpty(StackPeek(_allStyle)))
+									parentStyle = Common.SepParent + StackPeek(_allStyle);
+								
+								string newClassNameWithParentStyle = classWithLang + parentStyle.Replace("_letData_dicBody", "");
+								AssignProperty(newClassNameWithParentStyle, ancestorFontSize);    
+	                        }
+							
                             if (psuedo == "before")
                             {
                                 _psuedoBeforeStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
@@ -1092,30 +1177,21 @@ namespace SIL.Tool
                             {
                                 _psuedoContainsStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
                             }
-                        }
+                        }						
                     }
                 }
             }
             if (_outputType != Common.OutputType.ODT)
             {
                 AppendParentProperty();
-            }
-            if (_outputType != Common.OutputType.XETEX || _outputType != Common.OutputType.XELATEX)
-            {
-                _matchedCssStyleName.Replace(Common.sepPrecede, "");
-                _matchedCssStyleName.Replace(Common.SepParent, "");
-                _matchedCssStyleName.Replace(Common.SepPseudo, "");
-                _matchedCssStyleName.Replace(Common.SepTag, "");
-                _matchedCssStyleName.Replace(Common.SepAttrib, "");
-                _matchedCssStyleName.Replace(Common.Space, "");
-
-            }
+            }			
             return _matchedCssStyleName;
         }
 
 		/// <summary>
 		///Method to get the classname which are like ".semanticdomain + .semanticdomain;
-		/// Based on this, Code will avoid default space after the first "semanticdomain"		/// </summary>
+		/// Based on this, Code will avoid default space after the first "semanticdomain"
+		/// </summary>
 		/// <param name="cssClassInfo"></param>
 	    private void GetParentPrecedeClass(ClassInfo cssClassInfo)
 	    {
@@ -1250,75 +1326,193 @@ namespace SIL.Tool
 
         private void AssignProperty(string cssStyleName, float ancestorFontSize)
         {
+			foreach (KeyValuePair<string, string> property in IdAllClassWithandWithoutSeperator)
+			{
+				string propertyValue = property.Value;
+				if (cssStyleName == propertyValue)
+				{
+					cssStyleName = property.Key;
+					break;
+				}
+			}
             if (!IdAllClass.ContainsKey(cssStyleName))
             {
                 return;
             }
-            foreach (KeyValuePair<string, string> property in IdAllClass[cssStyleName])
-            {
-                if (_tempStyle.ContainsKey(property.Key)) continue;
-
-                if (_outputType == Common.OutputType.ODT && property.Key == "line-spacing")
-                {
-                    string without_pt = property.Value.Replace("pt", "");
-                    float value = float.Parse(without_pt.Replace("%", ""));
-                    float lineHeight = 0;
-                    if (property.Value.IndexOf("%") > 0)
-                    {
-                        lineHeight = (value - 100) * ancestorFontSize / 100;
-                        lineHeight = lineHeight / 2;
-                    }
-                    else if (property.Value.IndexOf("pt") > 0)
-                    {
-                        lineHeight = (value - ancestorFontSize) / 2;
-                    }
-                    if (lineHeight > 0)
-                    {
-                        _tempStyle[property.Key] = lineHeight + "pt";
-                    }
-                }
-                else if (property.Value.IndexOf("%") > 0 && property.Key != "text-position")
-                {
-                    float value = float.Parse(property.Value.Replace("%", ""));
-                    _tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString();
-                    const string point = "pt";
-                    if (_outputType == Common.OutputType.ODT)
-                    {
-                        if (property.Key == "column-gap") // For column-gap: 2em; change the value as (-ve)
-                        {
-                            string secClass = "Sect_" + _className.Trim();
-                            if (_dictColumnGapEm.ContainsKey(secClass) && _dictColumnGapEm[secClass].ContainsKey("columnGap"))
-                            {
-                                _dictColumnGapEm[secClass]["columnGap"] = _tempStyle[property.Key] + "pt";
-                                _tempStyle[property.Key] = (-ancestorFontSize * value / 100).ToString();
-
-                                if (true)
-                                {
-                                    int counter;
-                                    string colGapValue = _dictColumnGapEm[secClass]["columnGap"];
-                                    string columnGap = Common.GetNumericChar(colGapValue, out counter);
-                                    float columnGapInch = Common.ConvertToInch(columnGap);
-                                    float expColumnGap = Common.ConvertToInch(_dictColumnGapEm[secClass]["pageWidth"]) - columnGapInch - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"])
-                                                 - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"]) / 2.0F;
-                                    Common.ColumnWidth = float.Parse(Common.UnitConverter(expColumnGap + "in", "pt"));
-                                }
-                            }
-                        }
-                        else
-                        {
-                            float size = ancestorFontSize * value / 100;
-                            _tempStyle[property.Key] = size + point;
-                        }
-                    }
-                }
-                else
-                {
-                    if (property.Key != "prince-text-replace")
-                        _tempStyle[property.Key] = property.Value;
-                }
-            }
+			HandleIndent(cssStyleName);
+			AddTempStyleToCssStyle(cssStyleName, ancestorFontSize);
             WordCharSpace(ancestorFontSize);
         }
+
+		/// <summary>
+		/// For TD-4471 and TD-4536
+		/// Method to add the  entry's margin-left value to the SubEntry's margin-left to get the box effect.
+		/// </summary>
+		private void HandleIndent(string cssStyleName)
+		{
+			decimal subEntrySize = 0;
+			decimal entrySize = 0;
+			string currentStyleName = string.Empty;
+			string parentStyleNameStyle = string.Empty;
+
+			currentStyleName = cssStyleName;
+			parentStyleNameStyle = StackPeek(_allParagraph);
+
+			if (!_newProperty.ContainsKey(parentStyleNameStyle))
+				return;
+
+			Dictionary<string, string> previousStyleProperty = new Dictionary<string, string>();
+			previousStyleProperty = _newProperty[parentStyleNameStyle];
+
+			if (IdAllClass.ContainsKey(currentStyleName) && IdAllClass[currentStyleName].ContainsKey("margin-left"))
+			{
+				if (previousStyleProperty.ContainsKey("margin-left"))
+				{
+					if (IdAllClass[currentStyleName]["margin-left"].Contains("%") || previousStyleProperty["margin-left"].Contains("%"))
+						return;
+
+					subEntrySize = Math.Round(Convert.ToDecimal(IdAllClass[currentStyleName]["margin-left"].Replace("pt", "")));
+					entrySize = Math.Round(Convert.ToDecimal(previousStyleProperty["margin-left"].Replace("pt","")));
+					foreach (string styleName in IdAllClass.Keys)
+					{
+						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("margin-left"))
+						{
+							string stylePropertyValue = (subEntrySize + entrySize).ToString();
+							_tempStyle["margin-left"] = stylePropertyValue + "pt";
+						}
+
+						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("text-indent"))
+						{
+							if (IdAllClass[currentStyleName].ContainsKey("text-indent"))
+							{
+								if (IdAllClass[currentStyleName]["text-indent"].Contains("%"))
+									return;
+
+								subEntrySize = Math.Round(Convert.ToDecimal(IdAllClass[currentStyleName]["text-indent"].Replace("pt", "")));
+								string stylePropertyValue = (subEntrySize + entrySize).ToString();
+								_tempStyle["text-indent"] = stylePropertyValue + "pt";
+							}
+						}
+					}
+				}
+			}
+		}
+
+	    private void AddTempStyleToCssStyle(string cssStyleName, float ancestorFontSize)
+	    {
+			//inlinestyle first option
+		    if (_className.Contains("stxfin"))
+		    {
+			    if (_className.StartsWith("stxfin"))
+			    {
+				    if (!string.IsNullOrEmpty(_lang))
+				    {
+					    string tagTypeLang = string.Empty;
+					    tagTypeLang = _className + Common.SepAttrib + _lang;
+					    foreach (KeyValuePair<string, string> property in IdAllClass[tagTypeLang])
+					    {
+						    if (_tempStyle.ContainsKey(property.Key))
+							    continue;
+						    if (property.Key != "prince-text-replace")
+							    _tempStyle[property.Key] = property.Value;
+					    }
+				    }
+			    }
+		    }
+
+			//tag and lang second option
+			if (!string.IsNullOrEmpty(_lang))
+			{
+				string tagTypeLang = string.Empty;
+				tagTypeLang = _tagType + Common.SepAttrib + _lang;
+				string value = GetDisplayBlock(cssStyleName, "display");
+				if (value == "block")
+				{
+					tagTypeLang = "span" + Common.SepAttrib + _lang;
+				}
+				if (IdAllClass.ContainsKey(tagTypeLang))
+				{
+					foreach (KeyValuePair<string, string> property in IdAllClass[tagTypeLang])
+					{
+						if (_tempStyle.ContainsKey(property.Key))
+							continue;
+						if (property.Key != "prince-text-replace")
+							_tempStyle[property.Key] = property.Value;
+					}
+				}
+			}
+
+			if (IdAllClass.ContainsKey(cssStyleName))
+			{
+				foreach (KeyValuePair<string, string> property in IdAllClass[cssStyleName])
+				{
+					if (_tempStyle.ContainsKey(property.Key))
+						continue;
+
+					if (_outputType == Common.OutputType.ODT && property.Key == "line-spacing")
+					{
+						string without_pt = property.Value.Replace("pt", "");
+						float value = float.Parse(without_pt.Replace("%", ""));
+						float lineHeight = 0;
+						if (property.Value.IndexOf("%") > 0)
+						{
+							lineHeight = (value - 100) * ancestorFontSize / 100;
+							lineHeight = lineHeight / 2;
+						}
+						else if (property.Value.IndexOf("pt") > 0)
+						{
+							lineHeight = (value - ancestorFontSize) / 2;
+						}
+						if (lineHeight > 0)
+						{
+							_tempStyle[property.Key] = lineHeight + "pt";
+						}
+					}
+					else if (property.Value.IndexOf("%") > 0 && property.Key != "text-position")
+					{
+						float value = float.Parse(property.Value.Replace("%", ""));
+						_tempStyle[property.Key] = (ancestorFontSize * value / 100).ToString();
+						const string point = "pt";
+						if (_outputType == Common.OutputType.ODT)
+						{
+							if (property.Key == "column-gap") // For column-gap: 2em; change the value as (-ve)
+							{
+								string secClass = "Sect_" + _className.Trim();
+								if (_dictColumnGapEm.ContainsKey(secClass) && _dictColumnGapEm[secClass].ContainsKey("columnGap"))
+								{
+									_dictColumnGapEm[secClass]["columnGap"] = _tempStyle[property.Key] + "pt";
+									_tempStyle[property.Key] = (-ancestorFontSize * value / 100).ToString();
+
+									if (true)
+									{
+										int counter;
+										string colGapValue = _dictColumnGapEm[secClass]["columnGap"];
+										string columnGap = Common.GetNumericChar(colGapValue, out counter);
+										float columnGapInch = Common.ConvertToInch(columnGap);
+										float expColumnGap = Common.ConvertToInch(_dictColumnGapEm[secClass]["pageWidth"]) - columnGapInch - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"])
+													 - Common.ConvertToInch(_dictColumnGapEm[secClass]["marginLeft"]) / 2.0F;
+										Common.ColumnWidth = float.Parse(Common.UnitConverter(expColumnGap + "in", "pt"));
+									}
+								}
+							}
+							else
+							{
+								float size = ancestorFontSize * value / 100;
+								_tempStyle[property.Key] = size + point;
+							}
+						}
+					}
+					else
+					{
+						if (property.Key != "prince-text-replace")
+							_tempStyle[property.Key] = property.Value;
+					}
+				}
+			}
+
+			
+	    }
+
 
         private bool CompareCoreClass(ClassAttrib classAttrib, ClassAttrib xhtmlClassInfo, string cssTagFamily)
         {

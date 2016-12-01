@@ -1,5 +1,4 @@
-\documentclass{article} 
-\usepackage{changepage}
+\documentclass[a4paper]{article} 
 \usepackage{float}
 \usepackage{grffile}
 \usepackage{graphicx}
@@ -7,13 +6,30 @@
 \usepackage{fontspec}
 \usepackage{fancyhdr}
 \usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
+\usepackage{changepage}
+\usepackage{needspace}
 
-\begin{document} 
-\thispagestyle{empty} 
-\font\footnotescriptureText="Times New Roman" at 9pt
-\font\scriptureText="Times New Roman" at 12pt
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\scriptureText="Times New Roman/GR" at 12pt
+\font\footnotescriptureText="Times New Roman/GR" at 9pt
 
-\scriptureText{Ne'e ne, Lii Lolo Be'a, nèti uru tèka, nèti Ana Ama Lamatua.}  \footnote {‡} {1:1: Lii padhai ‘Ana Ama Lamatua’ abhu boe tu dara sasuri uuru
-                  sèra.}\scriptureText{Ngara na Yesus Kristus }
+\mbox{} 
+\newpage 
+\newpage 
+\setcounter{page}{1} 
+\pagenumbering{arabic} 
+\pagestyle{fancy} 
+
+\scriptureText{Ne'e ne, Lii Lolo Be'a, nèti uru tèka, nèti Ana Ama Lamatua.}\footnote {\footnotescriptureTextbody{1:1: Lii padhai ‘Ana Ama Lamatua’ abhu boe tu dara sasuri uuru
+                  sèra.}}\scriptureText{Ngara na Yesus Kristus }
 
 \end{document}

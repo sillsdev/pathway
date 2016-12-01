@@ -49,14 +49,14 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void GetPathwayDirTest()
         {
-            string actual = PathwayPath.GetPathwayDir();
+			string actual = Common.AssemblyPath;
             if (Common.IsUnixOS())
             {
                 Assert.IsTrue(actual.Substring(1) == @"usr/lib/pathway" || actual.Contains("ReSharper") || actual.Contains("NUnit"));
             }
             else
             {
-                Assert.IsTrue(actual.Replace(" (x86)", "").Substring(1) == @":\Program Files\SIL\Pathway\" || actual.Contains("ReSharper") || actual.Contains("NUnit"));
+                Assert.IsTrue(actual.Replace(" (x86)", "").Substring(1) == @":\Program Files\SIL\Pathway\" || actual.Contains("Export") || actual.Contains("NUnit"));
             }
         }
     }

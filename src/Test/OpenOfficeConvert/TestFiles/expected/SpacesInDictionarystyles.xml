@@ -15,7 +15,7 @@
       <style:paragraph-properties fo:padding-left="9pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:text-indent="-36pt" fo:margin-left="36pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:padding-top="1pt" fo:orphans="2" />
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_.ggo-Telu-IN_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headerFontStyleName" style:family="paragraph" style:parent-style-name="Standard">
@@ -357,7 +357,7 @@
       <style:paragraph-properties fo:text-align="start" style:justify-single-word="false" />
     </style:style>
     <style:style style:name="MT1" style:family="text">
-      <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Gautami" fo:font-size="12pt" />
+      <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="MT2" style:family="text">
       <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" />

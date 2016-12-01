@@ -1,0 +1,1079 @@
+\documentclass[a4paper,twoside]{article} 
+\usepackage{float}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=1.85cm,right=1.85cm,top=1.49cm,bottom=1.49cm,includeheadfoot]{geometry}
+\usepackage{eso-pic}
+\usepackage{changepage}
+\usepackage{needspace}
+\usepackage{setspace}
+\usepackage{multicol}
+\usepackage{bidi} 
+\pagestyle{plain}\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0.4pt} 
+
+\fancyhead[LO]{\rightmark}
+\fancyhead[RO]{\thepage}
+\fancyhead[LE]{\thepage}
+\fancyhead[RE]{\leftmark}
+\renewcommand{\thefootnote}{\alphalph{\value{footnote}}} 
+
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\diven="Charis SIL/GR" at 12pt
+\font\spanen="Charis SIL/GR" at 12pt
+\font\divpt="Times New Roman/GR" at 12pt
+\font\spanpt="Times New Roman/GR" at 12pt
+\font\divseh="Charis SIL/GR" at 12pt
+\font\spanseh="Charis SIL/GR" at 12pt
+\font\divsehfonipaxetic="Charis SIL/GR" at 12pt
+\font\spansehfonipaxetic="Charis SIL/GR" at 12pt
+\font\xitemen="Charis SIL/GR" at 10pt
+\font\xitemxitemcomplexformrefsbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemdefinitionbefore="Charis SIL/GR" at 12pt
+\font\xitemxitemdefinitionLcbefore="Charis SIL/GR" at 12pt
+\font\xitemxitementryrefcomponentbefore="Charis SIL/GR" at 10pt
+\font\xitemxitementryreftypebefore="Charis SIL/GR" at 10pt
+\font\xitemxitemexamplebefore="Charis SIL/GR/I" at 10pt
+\font\xitemxitemexamplesbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemheadwordbefore="Charis SIL/GR/B" at 10pt
+\font\xitemxitemLexEntrypublishStemComponentTargetHeadWordRefbefore="Charis SIL/GR/B" at 10pt
+\font\xitemxitemlexreftargetsbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemprimaryrefsbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemrelationsbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemsensecrossrefbefore="Charis SIL/GR/B" at 10pt
+\font\sensesensesensesbefore="Charis SIL/GR" at 10pt
+\font\sensesensesubsensesbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemtranslationbefore="Charis SIL/GR" at 12pt
+\font\xitemxitemtranslationLcbefore="Charis SIL/GR" at 12pt
+\font\xitemxitemvariantrefentrytypebefore="Charis SIL/GR" at 10pt
+\font\xitemxitemvariantrefformbefore="Charis SIL/GR/B" at 10pt
+\font\xitemxitemvariantrefsbefore="Charis SIL/GR" at 10pt
+\font\xitemtpi="Charis SIL/GR" at 12pt
+\font\letHeaddicBody="Charis SIL/GR/B" at 12pt
+\font\lettersehletHeaddicBody="Charis SIL/GR/B" at 18pt
+\font\letDatadicBody="Charis SIL/GR" at 12pt
+\font\entryletDatadicBody="Times New Roman/GR" at 10pt
+\font\headwordsehentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanenheadwordsehentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\sensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\sensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\grammaticalinfosensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\partofspeechptgrammaticalinfosensesensesentryletDatadicBody="Times New Roman/GR/I" at 10pt
+\font\spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody="Times New Roman/GR/I" at 10pt
+\font\spanenpartofspeechptgrammaticalinfosensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanengrammaticalinfosensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\definitionLcptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\xitemptdefinitionLcptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanendefinitionLcptsensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitemendefinitionLcptsensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenxitemendefinitionLcptsensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\examplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\examplesehexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spansehexamplesehexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanenexamplesehexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanenexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\variantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenvariantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\variantrefentrytypevariantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntryTypepublishStemVariantTypeReverseAbbrPubptvariantrefentrytypevariantrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptLexEntryTypepublishStemVariantTypeReverseAbbrPubptvariantrefentrytypevariantrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanenLexEntryTypepublishStemVariantTypeReverseAbbrPubptvariantrefentrytypevariantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenvariantrefentrytypevariantrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\variantrefformsehvariantrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\pictureRightentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\picturepictureRightentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\pictureCaptionpictureRightentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\pictureSensepictureCaptionpictureRightentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenpictureSensepictureCaptionpictureRightentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\pictureLabelsehpictureCaptionpictureRightentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spansehpictureLabelsehpictureCaptionpictureRightentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\boldxsensenumbersensesensesentryletDatadicBody="Times New Roman/GR/B" at 10pt
+\font\spanensensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\etymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\etymologyformptetymologyentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptetymologyformptetymologyentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanenetymologyformptetymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenetymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\etymologyformenetymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenetymologyformenetymologyentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanentranslationpttranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\grammaticalinfosensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\partofspeechptgrammaticalinfosensesentryletDatadicBody="Times New Roman/GR/I" at 10pt
+\font\spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody="Times New Roman/GR/I" at 10pt
+\font\spanenpartofspeechptgrammaticalinfosensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanengrammaticalinfosensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\xhomographnumberheadwordsehentryletDatadicBody="Charis SIL/GR/B" at 5.5pt
+\font\definitionLcensensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanendefinitionLcensensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\primaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\entryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntryTypepublishStemEntryTypeAbbreviationPubptentryreftypeprimaryrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptLexEntryTypepublishStemEntryTypeAbbreviationPubptentryreftypeprimaryrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanenLexEntryTypepublishStemEntryTypeAbbreviationPubptentryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenentryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\entryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\aentryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntrypublishStemComponentTargetHeadWordRefsehaentryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\subsensessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\sensesubsensessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\boldxsensenumbersensesubsensessensesensesentryletDatadicBody="Times New Roman/GR/B" at 10pt
+\font\definitionLcensensesubsensessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanendefinitionLcensensesubsensessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\examplesehxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spansehexamplesehxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\spanenexamplesehxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR/I" at 10pt
+\font\translationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\xitempttranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptxitempttranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanentranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitementranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenxitementranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitementryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntryTypepublishStemEntryTypeAbbreviationPubptxitementryreftypeprimaryrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptLexEntryTypepublishStemEntryTypeAbbreviationPubptxitementryreftypeprimaryrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanenLexEntryTypepublishStemEntryTypeAbbreviationPubptxitementryreftypeprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\relationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\lexreftargetsrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\alexreftargetsrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\sensecrossrefsehalexreftargetsrelationssensesensesentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\xsensexrefnumbersensecrossrefsehalexreftargetsrelationssensesensesentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanenrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\definitionptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptdefinitionptsensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanendefinitionptsensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanentranslationpttranslationsxitemexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationLcpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\xitempttranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptxitempttranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanentranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitementranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanenxitementranslationLcpttranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\complexformrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\complexformtypecomplexformrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntryTypepublishStemComplexFormTypeReverseAbbrPubptcomplexformtypecomplexformrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanptLexEntryTypepublishStemComplexFormTypeReverseAbbrPubptcomplexformtypecomplexformrefsentryletDatadicBody="Times New Roman/GR" at 10pt
+\font\spanencomplexformtypecomplexformrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\complexformformsehcomplexformrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanencomplexformformsehcomplexformrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanencomplexformrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitementryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\axitementryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\LexEntrypublishStemComponentTargetHeadWordRefsehaxitementryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\spanenentryrefcomponentprimaryrefsentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\translationLcentranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\spanentranslationLcentranslationsexamplessensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\xitemrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\lexreftargetsxitemrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\alexreftargetsxitemrelationssensesensesentryletDatadicBody="Charis SIL/GR" at 10pt
+\font\sensecrossrefsehalexreftargetsxitemrelationssensesensesentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\font\xsensexrefnumbersensecrossrefsehalexreftargetsxitemrelationssensesensesentryletDatadicBody="Charis SIL/GR/B" at 10pt
+\color{black} 
+\AddToShipoutPicture*{% 
+\put(0,0){\rule{\paperwidth}{\paperheight}}{\includegraphics[width=\paperwidth, height=\paperheight]{cover.png}}% 
+} 
+\thispagestyle{empty} 
+\font\CoverPageTitle="Liberation Serif/B":color=000000 at 22pt 
+\font\pFrontMatterdiv="Liberation Serif/B":color=000000 at 8pt 
+\vskip 60pt 
+\begin{center} 
+\CoverPageTitle{XelatexExport} 
+\end{center} 
+\newpage 
+\newpage 
+\thispagestyle{empty} 
+\mbox{} 
+\begin{titlepage}
+\begin{center}
+\textsc{\LARGE \CoverPageTitle{XelatexExport}}\\[1.5cm] 
+\vspace{110 mm} 
+\textsc{ \CoverPageTitle{XelatexPublisher}}\\[0.5cm] 
+\includegraphics[width=0.10 \textwidth]{./}\\[1cm]    
+\end{center} 
+\end{titlepage} 
+\pagenumbering{roman}  
+\setcounter{page}{3} 
+\input{File2Cpy.tex} 
+\pagestyle{plain} 
+\newpage 
+
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{A a} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle1}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{B b} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle2}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{C c} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle3}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{D d} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle4}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{F f} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle5}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{G g} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle6}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{K k} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle7}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{L l} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle8}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{M m} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle9}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{N n} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle10}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{P p} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle11}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{S s} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle12}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{T t} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle13}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{U u} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle14}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{W w} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle15}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\lettersehletHeaddicBody{X x} \Large }{{\protect \pageref{PageStock_PreserveCoverPageTitle16}}}{}}
+
+\newpage 
+
+\mbox{} 
+\newpage 
+\newpage 
+\setcounter{page}{1} 
+\pagenumbering{arabic} 
+\pagestyle{plain} 
+\tableofcontents 
+\newpage 
+
+\pagestyle{fancy} 
+\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{A a}}}}}
+ \label{PageStock_PreserveCoverPageTitle1} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody -an}{ \headwordsehentryletDatadicBody -an}\headwordsehentryletDatadicBody{-an} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V}\spanenpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{ > }\spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{Recíproca} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{Reciprocal} \spansehexamplesehexamplessensesensesentryletDatadicBody{For "iyan", nikijibiyána, nikidairiyána; akakutana} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ande}{ \headwordsehentryletDatadicBody ande}\headwordsehentryletDatadicBody{ande} \spanenvariantrefsentryletDatadicBody{(}\spanptLexEntryTypepublishStemVariantTypeReverseAbbrPubptvariantrefentrytypevariantrefsentryletDatadicBody{var. de pron.} \variantrefformsehvariantrefsentryletDatadicBody{inde}\spanenvariantrefsentryletDatadicBody{) }\spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Adv} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{sim} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{yes} 
+
+\hangindent= 12pt
+\hangafter=1\begin{center}
+\spansehpictureLabelsehpictureCaptionpictureRightentryletDatadicBody{ereffere}
+\end{center}
+
+
+\hangindent= 12pt
+\hangafter=1\markboth{ \headwordsehentryletDatadicBody ani}{ \headwordsehentryletDatadicBody ani}\headwordsehentryletDatadicBody{ani} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Inter} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{quem?} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{who?} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody anji}{ \headwordsehentryletDatadicBody anji}\headwordsehentryletDatadicBody{anji} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Inter} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{que?} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{what?} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{qual?} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{which?} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{B b}}}}}
+ \label{PageStock_PreserveCoverPageTitle2} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody balangaza}{ \headwordsehentryletDatadicBody balangaza}\headwordsehentryletDatadicBody{balangaza} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{consolar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{console} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody bandazi}{ \headwordsehentryletDatadicBody bandazi}\headwordsehentryletDatadicBody{bandazi} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{empregado de casa} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{servant} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody bande}{ \headwordsehentryletDatadicBody bande}\headwordsehentryletDatadicBody{bande} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{flor aquática vermelha} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{flower , type that floats in mass on water w/ red flower} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody banja}{ \headwordsehentryletDatadicBody banja}\headwordsehentryletDatadicBody{banja} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{casamento} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{marriage} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody banku}{ \headwordsehentryletDatadicBody banku}\headwordsehentryletDatadicBody{banku} \spanptetymologyformptetymologyentryletDatadicBody{banco} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{banco} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{stool} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody bhande}{ \headwordsehentryletDatadicBody bhande}\headwordsehentryletDatadicBody{bhande} \spanenetymologyformenetymologyentryletDatadicBody{band?} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{cinto} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{belt} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody bulangeti}{ \headwordsehentryletDatadicBody bulangeti}\headwordsehentryletDatadicBody{bulangeti} \spanenetymologyformenetymologyentryletDatadicBody{blanket} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{manta} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{cover} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody bverana}{ \headwordsehentryletDatadicBody bverana}\headwordsehentryletDatadicBody{bverana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{combinar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{make agreement} \spansehexamplesehexamplessensesensesentryletDatadicBody{Ine ndisabverana na Antonyo.} \spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody{Eu combina-se bem com António.} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{C c}}}}}
+ \label{PageStock_PreserveCoverPageTitle3} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody cabanga}{ \headwordsehentryletDatadicBody cabanga}\headwordsehentryletDatadicBody{cabanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{cerveja de milho} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{corn beer} \spansehexamplesehexamplessensesensesentryletDatadicBody{cabanga wadzipa wadidi} \spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody{cerveja forte boa} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody cibverano}{ \headwordsehentryletDatadicBody cibverano}\headwordsehentryletDatadicBody{cibverano} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{harmonia, aliança, entendemento} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{plan, contract, covenant} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody cikalango}{ \headwordsehentryletDatadicBody cikalango}\headwordsehentryletDatadicBody{cikalango} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{panela de barro} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{clay pot} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody cimbanjiri}{ \headwordsehentryletDatadicBody cimbanjiri}\headwordsehentryletDatadicBody{cimbanjiri} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{relva} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{grass} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody cimwana}{ \headwordsehentryletDatadicBody cimwana}\headwordsehentryletDatadicBody{cimwana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{não conseguir} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{not able} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody cinanazi}{ \headwordsehentryletDatadicBody cinanazi}\headwordsehentryletDatadicBody{cinanazi} \spanptetymologyformptetymologyentryletDatadicBody{ananás} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{ananás} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{pinapple} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ciphaniphani}{ \headwordsehentryletDatadicBody ciphaniphani}\headwordsehentryletDatadicBody{ciphaniphani} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{pirilampo} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{firefly} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ciphano}{ \headwordsehentryletDatadicBody ciphano}\headwordsehentryletDatadicBody{ciphano} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{instrumento} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{instrument} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody cixanu}{ \headwordsehentryletDatadicBody cixanu}\headwordsehentryletDatadicBody{cixanu} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{N} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{sexta-feira} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{Friday} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{quinto} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{fifth} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{D d}}}}}
+ \label{PageStock_PreserveCoverPageTitle4} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody djanja}{ \headwordsehentryletDatadicBody djanja}\headwordsehentryletDatadicBody{djanja}\xhomographnumberheadwordsehentryletDatadicBody{$_{1}$} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{mão} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{hand} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody djanja}{ \headwordsehentryletDatadicBody djanja}\headwordsehentryletDatadicBody{djanja}\xhomographnumberheadwordsehentryletDatadicBody{$_{2}$} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{medida de mão} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{hand full} \spansehexamplesehexamplessensesensesentryletDatadicBody{Ndipase mazandja mawiri ampunga.} \spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody{Da-me duas maos de arroz.} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody dzana}{ \headwordsehentryletDatadicBody dzana}\headwordsehentryletDatadicBody{dzana}\xhomographnumberheadwordsehentryletDatadicBody{$_{1}$} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Adv} \spanendefinitionLcensensesensesentryletDatadicBody{day before yesterday} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody dzana}{ \headwordsehentryletDatadicBody dzana}\headwordsehentryletDatadicBody{dzana}\xhomographnumberheadwordsehentryletDatadicBody{$_{2}$} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Num} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{cem} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{a hundred} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody dzango}{ \headwordsehentryletDatadicBody dzango}\headwordsehentryletDatadicBody{dzango} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{amulet used to protect against spirit-caused sickness} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{F f}}}}}
+ \label{PageStock_PreserveCoverPageTitle5} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody funana}{ \headwordsehentryletDatadicBody funana}\headwordsehentryletDatadicBody{funana} \spanenprimaryrefsentryletDatadicBody{(}\spanptLexEntryTypepublishStemEntryTypeAbbreviationPubptentryreftypeprimaryrefsentryletDatadicBody{recip. de} \LexEntrypublishStemComponentTargetHeadWordRefsehaentryrefcomponentprimaryrefsentryletDatadicBody{funa}\spanenprimaryrefsentryletDatadicBody{) }\spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{amar-se} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{love} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{G g}}}}}
+ \label{PageStock_PreserveCoverPageTitle6} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody gumana}{ \headwordsehentryletDatadicBody gumana}\headwordsehentryletDatadicBody{gumana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{encontrar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{find} \boldxsensenumbersensesubsensessensesensesentryletDatadicBody{1.1}\boldxsensenumbersensesubsensessensesensesentryletDatadicBody{) }\spanendefinitionLcensensesubsensessensesensesentryletDatadicBody{to consult a traditional doctor to find the cause of some calamity} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody gumanika}{ \headwordsehentryletDatadicBody gumanika}\headwordsehentryletDatadicBody{gumanika} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{V} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{existir} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{exist} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{encontrar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{encounter} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody gumanya}{ \headwordsehentryletDatadicBody gumanya}\headwordsehentryletDatadicBody{gumanya} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{juntar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{gather} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody gwanda}{ \headwordsehentryletDatadicBody gwanda}\headwordsehentryletDatadicBody{gwanda} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{cortar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{cut} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{K k}}}}}
+ \label{PageStock_PreserveCoverPageTitle7} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody kamwana}{ \headwordsehentryletDatadicBody kamwana}\headwordsehentryletDatadicBody{kamwana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{criancinha} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{small child} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody kamwanambwa}{ \headwordsehentryletDatadicBody kamwanambwa}\headwordsehentryletDatadicBody{kamwanambwa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{cãozinho} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{little dog} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody kang'ombe}{ \headwordsehentryletDatadicBody kang'ombe}\headwordsehentryletDatadicBody{kang'ombe} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{small cow or bull} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody kanwa}{ \headwordsehentryletDatadicBody kanwa}\headwordsehentryletDatadicBody{kanwa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{boca interior} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{mouth inside} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{mpaka nyama ifikire pa n'kanwa mwace (Sulo 023)} \spanptxitempttranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody{até a carne chega na boca d'ele} \spanenxitementranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody{until meat arrives in mouth his} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{khanwa mbee na kubira} \spanptxitempttranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody{lit."boca aberta por chorar" id."sempre chora"} \spanenxitementranslationLcpttranslationsxitemexamplessensesensesentryletDatadicBody{always crying} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody kanyumba}{ \headwordsehentryletDatadicBody kanyumba}\headwordsehentryletDatadicBody{kanyumba} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{casa ou quarto pequeno} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{small house or room} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody khanda}{ \headwordsehentryletDatadicBody khanda}\headwordsehentryletDatadicBody{khanda} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{skin (general)} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody khangala}{ \headwordsehentryletDatadicBody khangala}\headwordsehentryletDatadicBody{khangala} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{maca} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{stretcher} 
+
+\hangindent= 12pt
+\hangafter=1\begin{center}
+\spansehpictureLabelsehpictureCaptionpictureRightentryletDatadicBody{refe}
+\end{center}
+
+
+\hangindent= 12pt
+\hangafter=1\markboth{ \headwordsehentryletDatadicBody kubverana}{ \headwordsehentryletDatadicBody kubverana}\headwordsehentryletDatadicBody{kubverana} \spanenprimaryrefsentryletDatadicBody{(}\spanptLexEntryTypepublishStemEntryTypeAbbreviationPubptxitementryreftypeprimaryrefsentryletDatadicBody{aplic. de} \spanenentryreftypeprimaryrefsentryletDatadicBody{, }\spanptLexEntryTypepublishStemEntryTypeAbbreviationPubptxitementryreftypeprimaryrefsentryletDatadicBody{recip. de} \LexEntrypublishStemComponentTargetHeadWordRefsehaentryrefcomponentprimaryrefsentryletDatadicBody{bva}\spanenprimaryrefsentryletDatadicBody{) }\spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{N} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanendefinitionLcensensesensesentryletDatadicBody{be in peaceful coexistance together, be at peace with} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{ter comunhao, ter paz com alguem} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{be at peace with} \boldxsensenumbersensesensesentryletDatadicBody{3}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{combinar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{plan} \boldxsensenumbersensesensesentryletDatadicBody{4}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{reconcilhar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{reconcile} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody kusiana-siana}{ \headwordsehentryletDatadicBody kusiana-siana}\headwordsehentryletDatadicBody{kusiana-siana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{vários} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{various} \spansehexamplesehexamplessensesensesentryletDatadicBody{nthenda za kusiana-siana} \spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody{doenças várias} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody kwana}{ \headwordsehentryletDatadicBody kwana}\headwordsehentryletDatadicBody{kwana} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{V} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{estar satisfeito} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{be satisfied} \sensecrossrefsehalexreftargetsrelationssensesensesentryletDatadicBody{khuta}\xsensexrefnumbersensecrossrefsehalexreftargetsrelationssensesensesentryletDatadicBody{ 1}\spanenrelationssensesensesentryletDatadicBody{. }\boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{conseguir} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{succeed} \spansehexamplesehexamplessensesensesentryletDatadicBody{This is a test} \spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody{um teste} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody kwanisa}{ \headwordsehentryletDatadicBody kwanisa}\headwordsehentryletDatadicBody{kwanisa} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{V} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{conseguir} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{be able} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{vencer} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{win} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{L l}}}}}
+ \label{PageStock_PreserveCoverPageTitle8} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody lalanja}{ \headwordsehentryletDatadicBody lalanja}\headwordsehentryletDatadicBody{lalanja} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{laranjeira} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{orange tree} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody landana}{ \headwordsehentryletDatadicBody landana}\headwordsehentryletDatadicBody{landana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{é simulante} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{is like} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody lang'ana}{ \headwordsehentryletDatadicBody lang'ana}\headwordsehentryletDatadicBody{lang'ana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptdefinitionptsensesensesentryletDatadicBody{olhar, reparar} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody lang'anisa}{ \headwordsehentryletDatadicBody lang'anisa}\headwordsehentryletDatadicBody{lang'anisa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{observar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{observe} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody longana}{ \headwordsehentryletDatadicBody longana}\headwordsehentryletDatadicBody{longana} \spanenprimaryrefsentryletDatadicBody{(}\spanptLexEntryTypepublishStemEntryTypeAbbreviationPubptentryreftypeprimaryrefsentryletDatadicBody{recip. de} \LexEntrypublishStemComponentTargetHeadWordRefsehaentryrefcomponentprimaryrefsentryletDatadicBody{longa}\spanenprimaryrefsentryletDatadicBody{) }\spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{disputar-se} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{dispute} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{M m}}}}}
+ \label{PageStock_PreserveCoverPageTitle9} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody makumanai}{ \headwordsehentryletDatadicBody makumanai}\headwordsehentryletDatadicBody{makumanai} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Num} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{quarenta} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{forty} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody makumatanthatu}{ \headwordsehentryletDatadicBody makumatanthatu}\headwordsehentryletDatadicBody{makumatanthatu} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Num} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{sessenta} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{sixty} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody malandalupya}{ \headwordsehentryletDatadicBody malandalupya}\headwordsehentryletDatadicBody{malandalupya} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{summer, time to burn} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mana}{ \headwordsehentryletDatadicBody mana}\headwordsehentryletDatadicBody{mana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanendefinitionLcensensesensesentryletDatadicBody{refuse to share for love of food} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody manga}{ \headwordsehentryletDatadicBody manga}\headwordsehentryletDatadicBody{manga}\xhomographnumberheadwordsehentryletDatadicBody{$_{1}$} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{V} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{amarrar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{tie up} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{akhazimanga} \spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody{amarrava-a} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{tamanga nyumba} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{construir} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{construct} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody manga}{ \headwordsehentryletDatadicBody manga}\headwordsehentryletDatadicBody{manga}\xhomographnumberheadwordsehentryletDatadicBody{$_{2}$} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{mangeira} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{mango tree} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mangawa}{ \headwordsehentryletDatadicBody mangawa}\headwordsehentryletDatadicBody{mangawa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{dívida} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{debt} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mangwana}{ \headwordsehentryletDatadicBody mangwana}\headwordsehentryletDatadicBody{mangwana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Adv} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{amanhã} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{tomorrow} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody maningi}{ \headwordsehentryletDatadicBody maningi}\headwordsehentryletDatadicBody{maningi} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Adv} \spanendefinitionLcensensesensesentryletDatadicBody{much, many} \sensecrossrefsehalexreftargetsrelationssensesensesentryletDatadicBody{zinji}\spanenrelationssensesensesentryletDatadicBody{. }
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mankhadzi}{ \headwordsehentryletDatadicBody mankhadzi}\headwordsehentryletDatadicBody{mankhadzi} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{boy friend, lover, fiancé} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody manungo}{ \headwordsehentryletDatadicBody manungo}\headwordsehentryletDatadicBody{manungo} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{corpo} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{body} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody manyadzo}{ \headwordsehentryletDatadicBody manyadzo}\headwordsehentryletDatadicBody{manyadzo} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{vergonha} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{shame} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody manyedzo}{ \headwordsehentryletDatadicBody manyedzo}\headwordsehentryletDatadicBody{manyedzo} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{migalha} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{table scraps} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody manyengerero}{ \headwordsehentryletDatadicBody manyengerero}\headwordsehentryletDatadicBody{manyengerero} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{tetações} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{temptations} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody manyerezero}{ \headwordsehentryletDatadicBody manyerezero}\headwordsehentryletDatadicBody{manyerezero} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{pensamento} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{thoughts} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody manyezo}{ \headwordsehentryletDatadicBody manyezo}\headwordsehentryletDatadicBody{manyezo} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptdefinitionptsensesensesentryletDatadicBody{migalhas pequenos} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mbani}{ \headwordsehentryletDatadicBody mbani}\headwordsehentryletDatadicBody{mbani} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Inter} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{quem?} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{who?} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mbuyantumbzi}{ \headwordsehentryletDatadicBody mbuyantumbzi}\headwordsehentryletDatadicBody{mbuyantumbzi} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{consogros} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{in-laws} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody menyana}{ \headwordsehentryletDatadicBody menyana}\headwordsehentryletDatadicBody{menyana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{lutar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{fight} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mpando}{ \headwordsehentryletDatadicBody mpando}\headwordsehentryletDatadicBody{mpando} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{N} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{banco de um ou dois lugares sem costa} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{one or two place bench without a back} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanendefinitionLcensensesensesentryletDatadicBody{at times by extention "chair"} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mpani}{ \headwordsehentryletDatadicBody mpani}\headwordsehentryletDatadicBody{mpani} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{espeto com carne para assar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{stick with meat or fish on it for roasting, fish on a stick} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mphambano}{ \headwordsehentryletDatadicBody mphambano}\headwordsehentryletDatadicBody{mphambano} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{cruzamento} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{cross-road} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mphandu}{ \headwordsehentryletDatadicBody mphandu}\headwordsehentryletDatadicBody{mphandu} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{criminoso} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{criminal} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mphangwa}{ \headwordsehentryletDatadicBody mphangwa}\headwordsehentryletDatadicBody{mphangwa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{novas} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{news} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mulandu}{ \headwordsehentryletDatadicBody mulandu}\headwordsehentryletDatadicBody{mulandu} \spanptetymologyformptetymologyentryletDatadicBody{milando} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{questão} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{legal problem} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mwalana}{ \headwordsehentryletDatadicBody mwalana}\headwordsehentryletDatadicBody{mwalana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{divorciar-se} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{divorce} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mwana}{ \headwordsehentryletDatadicBody mwana}\headwordsehentryletDatadicBody{mwana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{criança} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{child} \spansehexamplesehexamplessensesensesentryletDatadicBody{Yana ana ana.} \spanptxitempttranslationLcpttranslationsexamplessensesensesentryletDatadicBody{Yana tem crianças.} \spanenxitementranslationLcpttranslationsexamplessensesensesentryletDatadicBody{Yana has children.} \spanptLexEntryTypepublishStemComplexFormTypeReverseAbbrPubptcomplexformtypecomplexformrefsentryletDatadicBody{comp.} \complexformformsehcomplexformrefsentryletDatadicBody{mwana-cinthu} \complexformrefsentryletDatadicBody{}
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mwana wa mamuna}{ \headwordsehentryletDatadicBody mwana wa mamuna}\headwordsehentryletDatadicBody{mwana wa mamuna} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{N} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{filho} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{son} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{filho de marido} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{husband's son} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mwana-cinthu}{ \headwordsehentryletDatadicBody mwana-cinthu}\headwordsehentryletDatadicBody{mwana-cinthu} \spanenprimaryrefsentryletDatadicBody{(}\spanptLexEntryTypepublishStemEntryTypeAbbreviationPubptentryreftypeprimaryrefsentryletDatadicBody{comp. de} \LexEntrypublishStemComponentTargetHeadWordRefsehaxitementryrefcomponentprimaryrefsentryletDatadicBody{mwana}\spanenentryrefcomponentprimaryrefsentryletDatadicBody{, }\LexEntrypublishStemComponentTargetHeadWordRefsehaxitementryrefcomponentprimaryrefsentryletDatadicBody{cinthu}\spanenprimaryrefsentryletDatadicBody{) }\spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{dono} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{owner} \spansehexamplesehexamplessensesensesentryletDatadicBody{mwana-cinthu nyumba} \spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody{dono de casa} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mwana-mobvi}{ \headwordsehentryletDatadicBody mwana-mobvi}\headwordsehentryletDatadicBody{mwana-mobvi} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{a person who always accompanies another, side kick} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mwanambwa}{ \headwordsehentryletDatadicBody mwanambwa}\headwordsehentryletDatadicBody{mwanambwa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{cão} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{dog} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mwanankati}{ \headwordsehentryletDatadicBody mwanankati}\headwordsehentryletDatadicBody{mwanankati} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{mensageiro} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{messenger} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody mwanyika}{ \headwordsehentryletDatadicBody mwanyika}\headwordsehentryletDatadicBody{mwanyika} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{cumprimentar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{greet} \sensecrossrefsehalexreftargetsrelationssensesensesentryletDatadicBody{moyoka}\spanenrelationssensesensesentryletDatadicBody{. }
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{N n}}}}}
+ \label{PageStock_PreserveCoverPageTitle10} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody n'kanwa}{ \headwordsehentryletDatadicBody n'kanwa}\headwordsehentryletDatadicBody{n'kanwa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{mouth, refers to the interior part of the mouth} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody n'tsanga}{ \headwordsehentryletDatadicBody n'tsanga}\headwordsehentryletDatadicBody{n'tsanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{no mato} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{in the bush} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nana}{ \headwordsehentryletDatadicBody nana}\headwordsehentryletDatadicBody{nana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{irmão mais velho} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{older brother} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nango}{ \headwordsehentryletDatadicBody nango}\headwordsehentryletDatadicBody{nango} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Adj} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{outra} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{other} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nchanje}{ \headwordsehentryletDatadicBody nchanje}\headwordsehentryletDatadicBody{nchanje} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{ciúme} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{jealousy} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ndani}{ \headwordsehentryletDatadicBody ndani}\headwordsehentryletDatadicBody{ndani} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{inimigo} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{enemy} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ng'anga}{ \headwordsehentryletDatadicBody ng'anga}\headwordsehentryletDatadicBody{ng'anga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{traditional doctor} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ngana}{ \headwordsehentryletDatadicBody ngana}\headwordsehentryletDatadicBody{ngana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptdefinitionptsensesensesentryletDatadicBody{um pessoa não specifica, alguém, fulano} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ngano}{ \headwordsehentryletDatadicBody ngano}\headwordsehentryletDatadicBody{ngano} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{N} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{limit do espaço} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{physical end} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{n'gano wa mapika} \spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody{termino de corrida} \spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody{fronteira de machamba} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{fronteira} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{border} \spansehexamplesehexamplessensesensesentryletDatadicBody{n'gano wa munda} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nkhanga}{ \headwordsehentryletDatadicBody nkhanga}\headwordsehentryletDatadicBody{nkhanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptdefinitionptsensesensesentryletDatadicBody{galinha de mato} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nkhangaiwa}{ \headwordsehentryletDatadicBody nkhangaiwa}\headwordsehentryletDatadicBody{nkhangaiwa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{pomba} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{pidgen} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nkucano}{ \headwordsehentryletDatadicBody nkucano}\headwordsehentryletDatadicBody{nkucano} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Adv} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{depois de amanha} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{day after tomorrow} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nsana}{ \headwordsehentryletDatadicBody nsana}\headwordsehentryletDatadicBody{nsana}\xhomographnumberheadwordsehentryletDatadicBody{$_{1}$} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{coluna vertebral} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{back bone} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nsana}{ \headwordsehentryletDatadicBody nsana}\headwordsehentryletDatadicBody{nsana}\xhomographnumberheadwordsehentryletDatadicBody{$_{2}$} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{tree dassie, about the size of a rat, has no tail, not to be confused w/ nsenzi (cane rat) which has a tail and is bigger, tree dassie Dendrohyrax arboreus} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nsanga}{ \headwordsehentryletDatadicBody nsanga}\headwordsehentryletDatadicBody{nsanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Adv} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{depressa} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{fast} \spansehexamplesehexamplessensesensesentryletDatadicBody{hasafamba tayu mwansanga ninga sulo.} \spanentranslationLcentranslationsexamplessensesensesentryletDatadicBody{NEG-he-PRESENT-walk-VF not fast-VFIN as...as rabbit} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nsanga-nsanga}{ \headwordsehentryletDatadicBody nsanga-nsanga}\headwordsehentryletDatadicBody{nsanga-nsanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Adv} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{muito depressa} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{very fast} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nsangani}{ \headwordsehentryletDatadicBody nsangani}\headwordsehentryletDatadicBody{nsangani} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{provérbio} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{proverb} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nsanganiko}{ \headwordsehentryletDatadicBody nsanganiko}\headwordsehentryletDatadicBody{nsanganiko} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{reunião de divinhar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{divining meeting, a meetings where leaders try to find out why someone got sick} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nsanje}{ \headwordsehentryletDatadicBody nsanje}\headwordsehentryletDatadicBody{nsanje} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{parábola} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{parable} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nsingano}{ \headwordsehentryletDatadicBody nsingano}\headwordsehentryletDatadicBody{nsingano} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{neddle for sewing, medical injections, repair fishing nets} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nsonkhano}{ \headwordsehentryletDatadicBody nsonkhano}\headwordsehentryletDatadicBody{nsonkhano} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{reunião} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{reunion} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ntanda}{ \headwordsehentryletDatadicBody ntanda}\headwordsehentryletDatadicBody{ntanda} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{crux} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{cross} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ntanga}{ \headwordsehentryletDatadicBody ntanga}\headwordsehentryletDatadicBody{ntanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{aboboreira} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{pumpkin vine} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ntsanza}{ \headwordsehentryletDatadicBody ntsanza}\headwordsehentryletDatadicBody{ntsanza} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{ninho} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{nest} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ntsikana}{ \headwordsehentryletDatadicBody ntsikana}\headwordsehentryletDatadicBody{ntsikana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{rapariga} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{girl} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyakatangale}{ \headwordsehentryletDatadicBody nyakatangale}\headwordsehentryletDatadicBody{nyakatangale} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{flouta} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{flute} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyakumana}{ \headwordsehentryletDatadicBody nyakumana}\headwordsehentryletDatadicBody{nyakumana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{guloso} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{selfish one} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyancidwe}{ \headwordsehentryletDatadicBody nyancidwe}\headwordsehentryletDatadicBody{nyancidwe} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{sapo} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{frog} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyandalo}{ \headwordsehentryletDatadicBody nyandalo}\headwordsehentryletDatadicBody{nyandalo} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{N} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{profeta tradicional} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{traditional prophet} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{médium} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{medium} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyanfutete}{ \headwordsehentryletDatadicBody nyanfutete}\headwordsehentryletDatadicBody{nyanfutete} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{paraletico} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{paralytic} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyanfuwe}{ \headwordsehentryletDatadicBody nyanfuwe}\headwordsehentryletDatadicBody{nyanfuwe} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{Common molerat, has large incisors, Cyptomys hottentotus} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyang'ang'a}{ \headwordsehentryletDatadicBody nyang'ang'a}\headwordsehentryletDatadicBody{nyang'ang'a} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{galagonidae, tipo de primata pequeno e noturno} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{bushbaby, noted for its night cry, any of Family Lorisidae} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyang'ombe}{ \headwordsehentryletDatadicBody nyang'ombe}\headwordsehentryletDatadicBody{nyang'ombe} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{criador do gado} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{cattle herdsman} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyanga}{ \headwordsehentryletDatadicBody nyanga}\headwordsehentryletDatadicBody{nyanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{chifre} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{horn} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyangalisa}{ \headwordsehentryletDatadicBody nyangalisa}\headwordsehentryletDatadicBody{nyangalisa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{fazer côcegas} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{tickle} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyansala}{ \headwordsehentryletDatadicBody nyansala}\headwordsehentryletDatadicBody{nyansala} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{maluco} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{insane person} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyantsembe}{ \headwordsehentryletDatadicBody nyantsembe}\headwordsehentryletDatadicBody{nyantsembe} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{sacerdote} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{priest} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyanyasa}{ \headwordsehentryletDatadicBody nyanyasa}\headwordsehentryletDatadicBody{nyanyasa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{é nogento} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{be disgusting} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{Njira ino isandinyanyasa.} \spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody{Rua este é nogento.} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{Pidalonga iwe pindinyanyasa.} \spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody{Coisa que tu disseste não gostei.} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyanza}{ \headwordsehentryletDatadicBody nyanza}\headwordsehentryletDatadicBody{nyanza} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{large river or lake} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody nyawance}{ \headwordsehentryletDatadicBody nyawance}\headwordsehentryletDatadicBody{nyawance} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{tipo cereal} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{cereal type} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{P p}}}}}
+ \label{PageStock_PreserveCoverPageTitle11} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody pana}{ \headwordsehentryletDatadicBody pana}\headwordsehentryletDatadicBody{pana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Prep} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{na presenca de} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{in the presence of} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody pandir}{ \headwordsehentryletDatadicBody pandir}\headwordsehentryletDatadicBody{pandir} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanendefinitionLcensensesensesentryletDatadicBody{come up out of the water} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody panduka}{ \headwordsehentryletDatadicBody panduka}\headwordsehentryletDatadicBody{panduka} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{rasgar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{tear} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody pandula}{ \headwordsehentryletDatadicBody pandula}\headwordsehentryletDatadicBody{pandula} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{V} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{rachar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{split} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{rasgar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{tear} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody pang'ono-pang'ono}{ \headwordsehentryletDatadicBody pang'ono-pang'ono}\headwordsehentryletDatadicBody{pang'ono-pang'ono} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Adv} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{devagar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{slowly} \spansehexamplesehexamplessensesensesentryletDatadicBody{Ddisafamba pang'ono-pang'ono.} \spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody{Ando devagar.} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody panga}{ \headwordsehentryletDatadicBody panga}\headwordsehentryletDatadicBody{panga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{dizer} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{say} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody pangana}{ \headwordsehentryletDatadicBody pangana}\headwordsehentryletDatadicBody{pangana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{despedir-se} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{say goodbye} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody panganizana}{ \headwordsehentryletDatadicBody panganizana}\headwordsehentryletDatadicBody{panganizana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{despedir-se} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{say goodbye} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody pangiza}{ \headwordsehentryletDatadicBody pangiza}\headwordsehentryletDatadicBody{pangiza} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{mostrar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{show} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody panja}{ \headwordsehentryletDatadicBody panja}\headwordsehentryletDatadicBody{panja} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{fora de} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{outside of} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody pantsi}{ \headwordsehentryletDatadicBody pantsi}\headwordsehentryletDatadicBody{pantsi} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{N} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanendefinitionLcensensesensesentryletDatadicBody{underneath, at the bottom} \spansehexamplesehexamplessensesensesentryletDatadicBody{Kalani pantsi.} \spanptxitempttranslationLcpttranslationsexamplessensesensesentryletDatadicBody{Sente-se aqui.} \spanenxitementranslationLcpttranslationsexamplessensesensesentryletDatadicBody{Sit down please.} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{no chão} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{on the ground} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody phanga}{ \headwordsehentryletDatadicBody phanga}\headwordsehentryletDatadicBody{phanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{bandido} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{bandit} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody phanya}{ \headwordsehentryletDatadicBody phanya}\headwordsehentryletDatadicBody{phanya} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{rato de campo} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{field rat} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody phanza}{ \headwordsehentryletDatadicBody phanza}\headwordsehentryletDatadicBody{phanza} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{diarreia} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{diarrhea} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody phataniza}{ \headwordsehentryletDatadicBody phataniza}\headwordsehentryletDatadicBody{phataniza} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{ligar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{connect} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody phiramanga}{ \headwordsehentryletDatadicBody phiramanga}\headwordsehentryletDatadicBody{phiramanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{milho} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{corn} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody phwandu}{ \headwordsehentryletDatadicBody phwandu}\headwordsehentryletDatadicBody{phwandu} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{festa} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{feast} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody piringana}{ \headwordsehentryletDatadicBody piringana}\headwordsehentryletDatadicBody{piringana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{ultrapassar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{is more than} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody pwanda}{ \headwordsehentryletDatadicBody pwanda}\headwordsehentryletDatadicBody{pwanda} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{pisar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{step} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{S s}}}}}
+ \label{PageStock_PreserveCoverPageTitle12} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody sandika}{ \headwordsehentryletDatadicBody sandika}\headwordsehentryletDatadicBody{sandika} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{corrigir} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{correct} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody sandikika}{ \headwordsehentryletDatadicBody sandikika}\headwordsehentryletDatadicBody{sandikika} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanendefinitionLcensensesensesentryletDatadicBody{be disappointed, things didn't turn out as planned, so one feels sorry for an action, repent} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody sanduka}{ \headwordsehentryletDatadicBody sanduka}\headwordsehentryletDatadicBody{sanduka} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{mudar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{change} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody sandukira}{ \headwordsehentryletDatadicBody sandukira}\headwordsehentryletDatadicBody{sandukira} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanendefinitionLcensensesensesentryletDatadicBody{one that was a friend and now is an enemy} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody sanduza}{ \headwordsehentryletDatadicBody sanduza}\headwordsehentryletDatadicBody{sanduza} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{V} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanendefinitionLcensensesensesentryletDatadicBody{change turn over something that is drying} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{transformar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{transform} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody sankhula}{ \headwordsehentryletDatadicBody sankhula}\headwordsehentryletDatadicBody{sankhula} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{escolher} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{choose} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody sanza}{ \headwordsehentryletDatadicBody sanza}\headwordsehentryletDatadicBody{sanza} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{second story of a building, often but not always used to store grain.} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{Dzuwa sanza} \spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody{por de sol} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{Mapiramanga ali pa sanza.} \spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody{Milho está em cima de casa elevada.} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody sanzo}{ \headwordsehentryletDatadicBody sanzo}\headwordsehentryletDatadicBody{sanzo} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{ramo} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{branch} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody sasanya}{ \headwordsehentryletDatadicBody sasanya}\headwordsehentryletDatadicBody{sasanya} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{V} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{arranjar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{prepare} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{endireitar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{straighten up} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{T t}}}}}
+ \label{PageStock_PreserveCoverPageTitle13} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody tani}{ \headwordsehentryletDatadicBody tani}\headwordsehentryletDatadicBody{tani} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Inter} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{como?} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{how?} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody tanthatu}{ \headwordsehentryletDatadicBody tanthatu}\headwordsehentryletDatadicBody{tanthatu} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Num} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{seis} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{six} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody teketesana}{ \headwordsehentryletDatadicBody teketesana}\headwordsehentryletDatadicBody{teketesana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{discutir} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{argue} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody thamanga}{ \headwordsehentryletDatadicBody thamanga}\headwordsehentryletDatadicBody{thamanga} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{correr} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{run} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody thando}{ \headwordsehentryletDatadicBody thando}\headwordsehentryletDatadicBody{thando} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{a place where noone lives, wilderness} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody thanga}{ \headwordsehentryletDatadicBody thanga}\headwordsehentryletDatadicBody{thanga}\xhomographnumberheadwordsehentryletDatadicBody{$_{1}$} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{corral} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{kraal} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody thanga}{ \headwordsehentryletDatadicBody thanga}\headwordsehentryletDatadicBody{thanga}\xhomographnumberheadwordsehentryletDatadicBody{$_{2}$} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{abobora} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{pumpkin} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody thangira}{ \headwordsehentryletDatadicBody thangira}\headwordsehentryletDatadicBody{thangira} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanendefinitionLcensensesensesentryletDatadicBody{to do before another person, preempt, "beat to the punch"} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody thangwi}{ \headwordsehentryletDatadicBody thangwi}\headwordsehentryletDatadicBody{thangwi}\xhomographnumberheadwordsehentryletDatadicBody{$_{1}$} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{porque} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{because} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody thangwi}{ \headwordsehentryletDatadicBody thangwi}\headwordsehentryletDatadicBody{thangwi}\xhomographnumberheadwordsehentryletDatadicBody{$_{2}$} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{N} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{por causa de} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{cause} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{culpa} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{guilt} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody thangwi anji?}{ \headwordsehentryletDatadicBody thangwi anji?}\headwordsehentryletDatadicBody{thangwi anji?} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Inter} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{error porque?} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{why?} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody thanya}{ \headwordsehentryletDatadicBody thanya}\headwordsehentryletDatadicBody{thanya} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{lepra} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{leprosy} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody tikana}{ \headwordsehentryletDatadicBody tikana}\headwordsehentryletDatadicBody{tikana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{insultar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{insult} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody tsalakana}{ \headwordsehentryletDatadicBody tsalakana}\headwordsehentryletDatadicBody{tsalakana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{pensar} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{think} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody tsanga}{ \headwordsehentryletDatadicBody tsanga}\headwordsehentryletDatadicBody{tsanga} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{N} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{savana sem muitos árvores, deserto, mato queimado, sem capím} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{savannah open grassland, desert, burned field, wilderness} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{capim} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{weeds} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody tsango}{ \headwordsehentryletDatadicBody tsango}\headwordsehentryletDatadicBody{tsango} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{vespa} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{wasp} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody tsanzaya}{ \headwordsehentryletDatadicBody tsanzaya}\headwordsehentryletDatadicBody{tsanzaya} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{V} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{feliz} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{happy} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{Mwana wa kusanzaya} \spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody{Crianca feliz} \spansehexamplesehxitemexamplessensesensesentryletDatadicBody{Mwana aenda kunyumba na kusanzaya.} \spanpttranslationpttranslationsxitemexamplessensesensesentryletDatadicBody{A crianca feliz foi a casa.} \sensecrossrefsehalexreftargetsxitemrelationssensesensesentryletDatadicBody{tsukwala}\spanenrelationssensesensesentryletDatadicBody{; }\sensecrossrefsehalexreftargetsxitemrelationssensesensesentryletDatadicBody{komerwa}\xsensexrefnumbersensecrossrefsehalexreftargetsxitemrelationssensesensesentryletDatadicBody{ 1}\spanenrelationssensesensesentryletDatadicBody{. }\boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{satisfação} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{satisfaction} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody tsanzayisa}{ \headwordsehentryletDatadicBody tsanzayisa}\headwordsehentryletDatadicBody{tsanzayisa} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{V} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{causar ser feliz} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{make happy} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{U u}}}}}
+ \label{PageStock_PreserveCoverPageTitle14} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody ulangi}{ \headwordsehentryletDatadicBody ulangi}\headwordsehentryletDatadicBody{ulangi} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{moral de conto} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{moral of story} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody umphandu}{ \headwordsehentryletDatadicBody umphandu}\headwordsehentryletDatadicBody{umphandu} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{criminalidade} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{criminality} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody uwana}{ \headwordsehentryletDatadicBody uwana}\headwordsehentryletDatadicBody{uwana} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{infância} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{childhood} 
+
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody uxanu}{ \headwordsehentryletDatadicBody uxanu}\headwordsehentryletDatadicBody{uxanu} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{N} \spanendefinitionLcensensesensesentryletDatadicBody{quintette; quality of fiveness} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{W w}}}}}
+ \label{PageStock_PreserveCoverPageTitle15} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody wanga}{ \headwordsehentryletDatadicBody wanga}\headwordsehentryletDatadicBody{wanga} \spanptpartofspeechptgrammaticalinfosensesentryletDatadicBody{V} \boldxsensenumbersensesensesentryletDatadicBody{1}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{ter saúde} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{be healthy} \spansehexamplesehexamplessensesensesentryletDatadicBody{Munawangisa kunyumba.} \spanpttranslationpttranslationsexamplessensesensesentryletDatadicBody{Seja que todos tem saúde em casa.} \boldxsensenumbersensesensesentryletDatadicBody{2}\boldxsensenumbersensesensesentryletDatadicBody{) }\spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{estar forte} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{be strong} 
+ \end{multicols}\begin{center}\begin{center}\widowpenalty=300
+\clubpenalty=300
+
+\section*{\needspace {8\baselineskip}{\topskip 18pt{\lettersehletHeaddicBody{\underline{X x}}}}}
+ \label{PageStock_PreserveCoverPageTitle16} \end{center}
+\end{center}\setlength{\columnsep}{12pt} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 12pt
+\hangafter=1
+\markboth{ \headwordsehentryletDatadicBody xanu}{ \headwordsehentryletDatadicBody xanu}\headwordsehentryletDatadicBody{xanu} \spanptpartofspeechptgrammaticalinfosensesensesentryletDatadicBody{Num} \spanptxitemptdefinitionLcptsensesensesentryletDatadicBody{cinco} \spanenxitemendefinitionLcptsensesensesentryletDatadicBody{five} 
+ \end{multicols}
+\end{document}

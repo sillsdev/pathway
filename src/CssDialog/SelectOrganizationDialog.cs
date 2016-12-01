@@ -26,7 +26,6 @@ namespace SIL.PublishingSolution
     {
         private static string _helpTopic = string.Empty;
         private XmlNodeList _organizations;
-        private bool _showAllOrgs = false;
         private string _inputType;
 
         public string Organization
@@ -78,12 +77,9 @@ namespace SIL.PublishingSolution
         /// <param name="e"></param>
         private void SelectOrganizationDialog_Load(object sender, EventArgs e)
         {
-            // Do we want to show all orgs?
-            _showAllOrgs = (File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")));
             // Load User Interface Collection Parameters
             Param.LoadSettings();
-            string inputType = Param.InputType;
-            _organizations = Param.GetItems("//stylePick/Organizations/Organization");
+	        _organizations = Param.GetItems("//stylePick/Organizations/Organization");
             foreach (var org in _organizations)
             {
                 var node = (XmlNode)org;

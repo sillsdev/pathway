@@ -58,14 +58,13 @@ namespace SIL.PublishingSolution
                 _isFromExe = Common.CheckExecutionPath();
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
-				HandleSubEntryIndent();
                 HandleMexioStyleSheet();
                 if (Param.HyphenEnable)
 	            {
 		            IsHyphenEnabled = true;
 	            }
                 //EnableHyphenation();
-                GetGuidewordLength(cssProperty);
+				GetGuidewordLength(_cssProperty);
                 GetHeaderRule();
                 InitializeObject(outputFile); // Creates new Objects
                 LoadAllProperty();  // Loads all properties
@@ -114,38 +113,6 @@ namespace SIL.PublishingSolution
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// For TD-4471 and TD-4536
-        /// Method to add the  entry's margin-left value to the SubEntry's margin-left to get the box effect.
-        /// </summary>
-        private void HandleSubEntryIndent()
-        {
-			if (_projInfo.ProjectInputType.ToLower() != "dictionary") return;
-			string styelName = "entry";
-			if (_cssProperty.ContainsKey("div." + styelName))
-	        {
-				styelName = "div.entry";
-	        }
-	        if (_cssProperty.ContainsKey("subentry") && _cssProperty["subentry"].ContainsKey("class-margin-left"))
-			{
-				if (_cssProperty.ContainsKey(styelName) && _cssProperty["entry"].ContainsKey("class-margin-left"))
-				{
-					int subEntrySize = Int16.Parse(_cssProperty["subentry"]["class-margin-left"]);
-					int entrySize = Int16.Parse(_cssProperty[styelName]["class-margin-left"]);
-					if (subEntrySize <= entrySize)
-					{
-						foreach (string styleName in _cssProperty.Keys)
-						{
-							if (styleName.IndexOf("subentry", StringComparison.Ordinal) == 0 && _cssProperty[styleName].ContainsKey("class-margin-left"))
-							{
-								_cssProperty[styleName]["class-margin-left"] = (subEntrySize + entrySize).ToString();
-							}
-						}
-					}
-				}
-			}
         }
 
         /// <summary>
@@ -527,54 +494,44 @@ namespace SIL.PublishingSolution
         /// <param name="listType">Type Name</param>
         private void CreateListType(string className, string listType)
         {
-            string listName = "Listdecimal";
-            string numFormat = "1";
+	        string numFormat = "1";
             string numSuffix = ".";
             if (listType == "none")
             {
-                listName = "Listnone";
-                numFormat = string.Empty;
+	            numFormat = string.Empty;
                 numSuffix = string.Empty;
             }
             else if (listType == "disc")
             {
-                listName = "Listdisc";
-                numFormat = "\u2022"; // solid bullet
+	            numFormat = "\u2022"; // solid bullet
             }
             else if (listType == "circle")
             {
-                listName = "Listcircle";
-                numFormat = "\u25e6"; // open bullet
+	            numFormat = "\u25e6"; // open bullet
             }
             else if (listType == "square")
             {
-                listName = "Listsquare";
-                numFormat = "\u25aa"; // square bullet
+	            numFormat = "\u25aa"; // square bullet
             }
             else if (listType == "decimal")
             {
-                listName = "Listdecimal";
-                numFormat = "1";
+	            numFormat = "1";
             }
             else if (listType == "lower-roman")
             {
-                listName = "Listlowerroman";
-                numFormat = "i";
+	            numFormat = "i";
             }
             else if (listType == "upper-roman")
             {
-                listName = "Listupperroman";
-                numFormat = "I";
+	            numFormat = "I";
             }
             else if (listType == "lower-alpha")
             {
-                listName = "Listloweralpha";
-                numFormat = "a";
+	            numFormat = "a";
             }
             else if (listType == "upper-alpha")
             {
-                listName = "Listupperalpha";
-                numFormat = "A";
+	            numFormat = "A";
             }
 
             switch (listType)
@@ -783,14 +740,11 @@ namespace SIL.PublishingSolution
                         {
                             try
                             {
-                                int convertToEm = int.Parse(columnGap.Replace("%", "")) / 100;
                                 pageProperties["columnGap"] = columnGap;
-
                             }
                             catch (Exception)
                             {
                                 pageProperties["columnGap"] = "1em";
-
                             }
                         }
                         _LOAllClass["Sect_" + className.Trim()] = pageProperties;
@@ -1034,7 +988,6 @@ namespace SIL.PublishingSolution
                                 {
                                     prefix = "";
                                 }
-                                string check = prefix + para.Key;
                                 if (!para.Key.StartsWith("-")) // user defined functions not allowed now
                                     _pageHeaderFooter[i + headerFooterIndex][prefix + para.Key] = para.Value.Replace(
                                         "'", "");
@@ -1615,7 +1568,6 @@ namespace SIL.PublishingSolution
                 {
                     string className = Common.LeftString(keyValue, "..");
                     string callclassName = Common.LeftString(keyValue, "..") + "..footnote-call";
-                    string markerclassName = Common.LeftString(keyValue, "..") + "..footnote-marker";
                     _writer.WriteStartElement("text:notes-configuration");
                     _writer.WriteAttributeString("text:note-class", className);
                     _writer.WriteAttributeString("text:citation-style-name", callclassName);

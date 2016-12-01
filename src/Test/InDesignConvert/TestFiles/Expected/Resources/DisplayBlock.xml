@@ -2,18 +2,28 @@
 <idPkg:Styles xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
   <RootCharacterStyleGroup Self="u6a">
     <CharacterStyle Self="CharacterStyle/$ID/[No character style]" Imported="false" Name="$ID/[No character style]" />
-    <CharacterStyle Self="CharacterStyle/t2_t1" Name="t2_t1" Imported="false" NextStyle="CharacterStyle/t2_t1" KeyboardShortcut="0 0" FillColor="Color/#0000ff" display="block">
+    <CharacterStyle Self="CharacterStyle/t1_1" Name="t1_1" Imported="false" NextStyle="CharacterStyle/t1_1" KeyboardShortcut="0 0" PointSize="14" Justification="LeftAlign" FillColor="Color/#ff0000">
       <Properties>
-        <BasedOn type="object">CharacterStyle/t1</BasedOn>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
-    <CharacterStyle Self="CharacterStyle/t3_t2_t1" Name="t3_t2_t1" Imported="false" NextStyle="CharacterStyle/t3_t2_t1" KeyboardShortcut="0 0" FillColor="Color/#008000" display="block">
+    <CharacterStyle Self="CharacterStyle/t2_1" Name="t2_1" Imported="false" NextStyle="CharacterStyle/t2_1" KeyboardShortcut="0 0" FillColor="Color/#0000ff" display="block" PointSize="14" Justification="LeftAlign">
       <Properties>
-        <BasedOn type="object">CharacterStyle/t2_t1</BasedOn>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </CharacterStyle>
+    <CharacterStyle Self="CharacterStyle/t3_1" Name="t3_1" Imported="false" NextStyle="CharacterStyle/t3_1" KeyboardShortcut="0 0" FillColor="Color/#008000" display="block" PointSize="14" Justification="LeftAlign">
+      <Properties>
+        <BasedOn type="object">CharacterStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
     <CharacterStyle Self="CharacterStyle/$ID/NormalCharacterStyle" Name="$ID/NormalCharacterStyle" Imported="false" NextStyle="CharacterStyle/$ID/NormalCharacterStyle" KeyboardShortcut="0 0">
@@ -21,6 +31,7 @@
         <BasedOn type="string">$ID/[No character style]</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
       </Properties>
     </CharacterStyle>
   </RootCharacterStyleGroup>
@@ -62,18 +73,28 @@
         <NumberingCharacterStyle type="object">CharacterStyle/$ID/[No character style]</NumberingCharacterStyle>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/t2_t1" Name="t2_t1" Imported="false" NextStyle="ParagraphStyle/t2_t1" KeyboardShortcut="0 0" FillColor="Color/#0000ff" display="block">
+    <ParagraphStyle Self="ParagraphStyle/t1_1" Name="t1_1" Imported="false" NextStyle="ParagraphStyle/t1_1" KeyboardShortcut="0 0" PointSize="14" Justification="LeftAlign" FillColor="Color/#ff0000">
       <Properties>
-        <BasedOn type="object">ParagraphStyle/t1</BasedOn>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/t3_t2_t1" Name="t3_t2_t1" Imported="false" NextStyle="ParagraphStyle/t3_t2_t1" KeyboardShortcut="0 0" FillColor="Color/#008000" display="block">
+    <ParagraphStyle Self="ParagraphStyle/t2_1" Name="t2_1" Imported="false" NextStyle="ParagraphStyle/t2_1" KeyboardShortcut="0 0" FillColor="Color/#0000ff" display="block" PointSize="14" Justification="LeftAlign">
       <Properties>
-        <BasedOn type="object">ParagraphStyle/t2_t1</BasedOn>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/t3_1" Name="t3_1" Imported="false" NextStyle="ParagraphStyle/t3_1" KeyboardShortcut="0 0" FillColor="Color/#008000" display="block" PointSize="14" Justification="LeftAlign">
+      <Properties>
+        <BasedOn type="object">ParagraphStyle/None</BasedOn>
+        <AppliedFont type="string">Times New Roman</AppliedFont>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
     <ParagraphStyle Self="ParagraphStyle/$ID/NormalParagraphStyle" Name="$ID/NormalParagraphStyle" Imported="false" NextStyle="ParagraphStyle/$ID/NormalParagraphStyle" KeyboardShortcut="0 0">
@@ -81,45 +102,76 @@
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <AppliedFont type="string">Times New Roman</AppliedFont>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
+        <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/t1" Name="t1" Imported="false" NextStyle="ParagraphStyle/t1" KeyboardShortcut="0 0" ParagraphBreakType="NextPage" PointSize="14" Justification="LeftAlign" FillColor="Color/#ff0000">
+    <ParagraphStyle Self="ParagraphStyle/t1" Name="t1" Imported="false" NextStyle="ParagraphStyle/t1" KeyboardShortcut="0 0" PointSize="14" Justification="LeftAlign" FillColor="Color/#ff0000">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/t2" Name="t2" Imported="false" NextStyle="ParagraphStyle/t2" KeyboardShortcut="0 0" ParagraphBreakType="NextPage" FillColor="Color/#0000ff" display="block">
+    <ParagraphStyle Self="ParagraphStyle/t2" Name="t2" Imported="false" NextStyle="ParagraphStyle/t2" KeyboardShortcut="0 0" FillColor="Color/#0000ff" display="block">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/t3" Name="t3" Imported="false" NextStyle="ParagraphStyle/t3" KeyboardShortcut="0 0" ParagraphBreakType="NextPage" FillColor="Color/#008000" display="block">
+    <ParagraphStyle Self="ParagraphStyle/t3" Name="t3" Imported="false" NextStyle="ParagraphStyle/t3" KeyboardShortcut="0 0" FillColor="Color/#008000" display="block">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/@page" Name="@page" Imported="false" NextStyle="ParagraphStyle/@page" KeyboardShortcut="0 0" ParagraphBreakType="NextPage" Height="792" Width="612" Margin-Left="56.7" Margin-Right="56.7" Margin-Top="56.7" Margin-Bottom="56.7" FacingPages="false">
+    <ParagraphStyle Self="ParagraphStyle/@page" Name="@page" Imported="false" NextStyle="ParagraphStyle/@page" KeyboardShortcut="0 0" Page-Height="792" Page-Width="612" Margin-Left="56.7" Margin-Right="56.7" Margin-Top="56.7" Margin-Bottom="56.7" FacingPages="false">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/@page:first" Name="@page:first" Imported="false" NextStyle="ParagraphStyle/@page:first" KeyboardShortcut="0 0" ParagraphBreakType="NextPage" Height="792" Width="612" Margin-Left="56.7" Margin-Right="56.7" Margin-Top="56.7" Margin-Bottom="56.7" FacingPages="false">
+    <ParagraphStyle Self="ParagraphStyle/@page:first" Name="@page:first" Imported="false" NextStyle="ParagraphStyle/@page:first" KeyboardShortcut="0 0" Page-Height="792" Page-Width="612" Margin-Left="56.7" Margin-Right="56.7" Margin-Top="56.7" Margin-Bottom="56.7" FacingPages="false">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/@page:left" Name="@page:left" Imported="false" NextStyle="ParagraphStyle/@page:left" KeyboardShortcut="0 0" ParagraphBreakType="NextPage" Height="792" Width="612" Margin-Left="56.7" Margin-Right="56.7" Margin-Top="56.7" Margin-Bottom="56.7" FacingPages="false">
+    <ParagraphStyle Self="ParagraphStyle/h1" Name="h1" Imported="false" NextStyle="ParagraphStyle/h1" KeyboardShortcut="0 0" FontStyle="Bold" SpaceBefore="12" PointSize="24">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/@page:right" Name="@page:right" Imported="false" NextStyle="ParagraphStyle/@page:right" KeyboardShortcut="0 0" ParagraphBreakType="NextPage" Height="792" Width="612" Margin-Left="56.7" Margin-Right="56.7" Margin-Top="56.7" Margin-Bottom="56.7" FacingPages="false">
+    <ParagraphStyle Self="ParagraphStyle/h2" Name="h2" Imported="false" NextStyle="ParagraphStyle/h2" KeyboardShortcut="0 0" FontStyle="Bold" SpaceBefore="8" PointSize="18">
+      <Properties>
+        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/h3" Name="h3" Imported="false" NextStyle="ParagraphStyle/h3" KeyboardShortcut="0 0" FontStyle="Bold" SpaceBefore="7" PointSize="14">
+      <Properties>
+        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/h4" Name="h4" Imported="false" NextStyle="ParagraphStyle/h4" KeyboardShortcut="0 0" FontStyle="Bold" SpaceBefore="6" PointSize="12">
+      <Properties>
+        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/h5" Name="h5" Imported="false" NextStyle="ParagraphStyle/h5" KeyboardShortcut="0 0" FontStyle="Bold" SpaceBefore="5.5" PointSize="10">
+      <Properties>
+        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/h6" Name="h6" Imported="false" NextStyle="ParagraphStyle/h6" KeyboardShortcut="0 0" FontStyle="Bold" SpaceBefore="5.5" PointSize="8">
+      <Properties>
+        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
+        <PreviewColor type="enumeration">Nothing</PreviewColor>
+      </Properties>
+    </ParagraphStyle>
+    <ParagraphStyle Self="ParagraphStyle/p" Name="p" Imported="false" NextStyle="ParagraphStyle/p" KeyboardShortcut="0 0" SpaceBefore="12" SpaceAfter="12">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>
@@ -184,7 +236,7 @@
           <BaselineFrameGridColor type="enumeration">LightBlue</BaselineFrameGridColor>
         </Properties>
       </BaselineFrameGridOption>
-      <AnchoredObjectSetting AnchoredPosition="InlinePosition" SpineRelative="false" LockPosition="false" PinPosition="true" AnchorPoint="BottomRightAnchor" HorizontalAlignment="LeftAlign" HorizontalReferencePoint="TextFrame" VerticalAlignment="BottomAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="0" />
+      <AnchoredObjectSetting AnchoredPosition="Anchored" SpineRelative="false" LockPosition="false" PinPosition="false" AnchorPoint="TopCenterAnchor" HorizontalAlignment="CenterAlign" HorizontalReferencePoint="ColumnEdge" VerticalAlignment="CenterAlign" VerticalReferencePoint="LineBaseline" AnchorXoffset="0" AnchorYoffset="0" AnchorSpaceAbove="4" />
       <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
         <Properties>
           <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />

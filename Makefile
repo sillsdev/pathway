@@ -7,24 +7,22 @@ endif
 ifndef bindst
 bindst=$(binsrc)/output/Release
 endif
-ifndef BUILD_NUMBER
-BUILD_NUMBER=1.13.4.4657
-endif
-ifndef Platform
-Platform=Any CPU
-endif
 
 build:
-	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Release\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
+	make -f Makefile46 build
+	make -f Makefile40 build
 
 debug:
-	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
+	make -f Makefile46 debug
+	make -f Makefile40 debug
 
 buildStep:
-	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/\;OutputPath=src/BuildStep/bin/Debug src/BuildStep/BuildStep.csproj
+	make -f Makefile46 buildStep
+	make -f Makefile40 buildStep
 
 tests:
-	nunit-console -exclude=SkipOnTeamCity\;LongTest -labels -nodots output/Debug/Test.dll
+	make -f Makefile46 tests
+	make -f Makefile40 tests
 
 install:
 	mkdir -p $(DESTDIR)$(prefix)/lib/pathway
@@ -32,6 +30,10 @@ install:
 	mkdir -p $(DESTDIR)$(prefix)/bin
 	cp src/PathwayB.sh $(DESTDIR)$(prefix)/bin/pathwayB
 	cp src/ConfigurationTool.sh $(DESTDIR)$(prefix)/bin/ConfigurationTool
+	cp src/CssSimpler.sh $(DESTDIR)$(prefix)/bin/CssSimpler
+	cp src/PathwayExport.sh $(DESTDIR)$(prefix)/bin/PathwayExport
+	cp src/PdfLicense.sh $(DESTDIR)$(prefix)/bin/PdfLicense
+	cp src/ApplyPDFLicenseInfo.sh $(DESTDIR)$(prefix)/bin/ApplyPDFLicenseInfo
 	mkdir -p $(DESTDIR)$(prefix)/share/python-support
 	chmod 777 $(DESTDIR)$(prefix)/share/python-support
 	mkdir -p $(DESTDIR)$(prefix)/share/doc/pathway
@@ -61,6 +63,10 @@ clean:
 uninstall:
 	-sudo apt-get -y remove pathway
 	sudo rm -rf $(DESTDIR)$(prefix)/lib/pathway
+	sudo rm $(DESTDIR)$(prefix)/bin/pathwayB
+	sudo rm $(DESTDIR)$(prefix)/bin/ConfigurationTool
+	sudo rm $(DESTDIR)$(prefix)/bin/CssSimpler
+	sudo rm $(DESTDIR)$(prefix)/bin/PathwayExport
 	sudo rm -rf $(DESTDIR)$(prefix)/share/doc/pathway
 	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/pathway*
 	sudo rm -rf $(DESTDIR)$(prefix)/share/man/man7/ConfigurationTool*

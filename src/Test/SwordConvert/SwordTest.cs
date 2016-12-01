@@ -48,8 +48,15 @@ namespace Test.SwordConvert
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "Expected");
 
-            string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+
+			if (!File.Exists(styleSettingFile))
+			{
+				styleSettingFile = Path.GetDirectoryName(Common.AssemblyPath);
+				styleSettingFile = Common.PathCombine(styleSettingFile, "StyleSettings.xml");
+			}
+			
             Common.Testing = true;
             ValidateXMLVersion(styleSettingFile);
             InputType = "Scripture";
@@ -126,7 +133,7 @@ namespace Test.SwordConvert
             var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName().Replace(".", "_"));
             Directory.CreateDirectory(inputTmpDir);
             string inputTmpDirFileName = string.Empty;
-            inputTmpDirFileName = Common.PathCombine(inputTmpDir, "usx");
+            inputTmpDirFileName = Common.PathCombine(inputTmpDir, "USX");
             Directory.CreateDirectory(inputTmpDirFileName);
             inputTmpDirFileName = Common.PathCombine(inputTmpDirFileName, Path.GetFileName(input));
             File.Copy(input, inputTmpDirFileName, true);
@@ -178,7 +185,7 @@ namespace Test.SwordConvert
         {
             const string file = "2JN";
 
-            string input = Common.PathCombine(_inputPath, file + ".usx");
+			string input = Common.PathCombine(_inputPath, file + ".USX");
             string output = Common.PathCombine(_outputPath, file + ".xml");
             string expected = Common.PathCombine(_expectedPath, file + ".xml");
 
@@ -244,7 +251,7 @@ namespace Test.SwordConvert
             var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName().Replace(".", "_"));
             Directory.CreateDirectory(inputTmpDir);
             string inputTmpDirFileName = string.Empty;
-            inputTmpDirFileName = Common.PathCombine(inputTmpDir, "usx");
+			inputTmpDirFileName = Common.PathCombine(inputTmpDir, "USX");
             Directory.CreateDirectory(inputTmpDirFileName);
             inputTmpDirFileName = Common.PathCombine(inputTmpDirFileName, Path.GetFileName(input));
             File.Copy(input, inputTmpDirFileName, true);
@@ -303,7 +310,7 @@ namespace Test.SwordConvert
             var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName().Replace(".", "_"));
             Directory.CreateDirectory(inputTmpDir);
             string inputTmpDirFileName = string.Empty;
-            inputTmpDirFileName = Common.PathCombine(inputTmpDir, "usx");
+			inputTmpDirFileName = Common.PathCombine(inputTmpDir, "USX");
             Directory.CreateDirectory(inputTmpDirFileName);
             inputTmpDirFileName = Common.PathCombine(inputTmpDirFileName, Path.GetFileName(input));
             File.Copy(input, inputTmpDirFileName, true);

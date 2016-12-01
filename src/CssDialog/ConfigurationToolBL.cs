@@ -75,7 +75,7 @@ namespace SIL.PublishingSolution
 		public string AttrDbName = "dbname";
 		public string AttrDbUid = "dbuserid";
 		public string AttrDbPwd = "dbpwd";
-		public string inputTypeBL = "Dictionary";
+		public string inputTypeBL = string.Empty;
 		public string ElementDesc = "description";
 		public string ElementAvailable = "available";
 		public string ElementComment = "comment";
@@ -152,57 +152,7 @@ namespace SIL.PublishingSolution
 		protected bool _disableWidowOrphan;
 
 		#endregion
-
-		#region Constructor
-		public ConfigurationToolBL()
-		{
-			standardSize["595x842"] = "A4";
-			standardSize["420x595"] = "A5";
-			standardSize["499x709"] = "B5";
-			standardSize["459x649"] = "C5";
-			standardSize["298x420"] = "A6";
-			standardSize["612x792"] = "Letter";
-			standardSize["396x612"] = "Half letter";
-			standardSize["378x594"] = "5.25in x 8.25in";
-			standardSize["418x626"] = "5.8in x 8.7in";
-			standardSize["432x648"] = "6in x 9in";
-			standardSize["468x648"] = "6.5in x 9in on letter";
-
-			_screenMode = ScreenMode.Load;
-
-			//Mirrored
-			pageDict.Add("@page:none-none", "None");
-			pageDict.Add("@page:left-top-right", "Top Inside Margin");
-			pageDict.Add("@page:left-top-left", "Top Outside Margin");
-			pageDict.Add("@page:left-top-center", "Top Center");
-			pageDict.Add("@page:left-bottom-right", "Bottom Inside Margin");
-			pageDict.Add("@page:left-bottom-left", "Bottom Outside Margin");
-			pageDict.Add("@page:left-bottom-center", "Bottom Center");
-			//Every Page
-			pageDict.Add("@page-top-left", "Top Left Margin");
-			pageDict.Add("@page-top-right", "Top Right Margin");
-			pageDict.Add("@page-top-center", "Top Center");
-			pageDict.Add("@page-bottom-right", "Bottom Right Margin");
-			pageDict.Add("@page-bottom-left", "Bottom Left Margin");
-			pageDict.Add("@page-bottom-center", "Bottom Center");
-			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
-			ColumnHeaderAddLocalization();
-		}
-		public ConfigurationToolBL(ConfigurationTool ctool):this()
-		{
-			 cTool = ctool;
-		}
-		private static void ColumnHeaderAddLocalization()
-		{
-			if (!Common.Testing)
-			{
-				Common.SetupLocalization();
-				InitializeGridColumnHeader();
-			}
-		}
-
-		#endregion
-
+		
 		#region Properties
 
 		public string MarginLeft
@@ -667,7 +617,134 @@ namespace SIL.PublishingSolution
 
 		#endregion
 
+		#region Constructor
+		public ConfigurationToolBL()
+		{
+			standardSize["595x842"] = "A4";
+			standardSize["420x595"] = "A5";
+			standardSize["499x709"] = "B5";
+			standardSize["459x649"] = "C5";
+			standardSize["298x420"] = "A6";
+			standardSize["612x792"] = "Letter";
+			standardSize["396x612"] = "Half letter";
+			standardSize["378x594"] = "5.25in x 8.25in";
+			standardSize["418x626"] = "5.8in x 8.7in";
+			standardSize["432x648"] = "6in x 9in";
+			standardSize["468x648"] = "6.5in x 9in on letter";
+
+			_screenMode = ScreenMode.Load;
+
+			//Mirrored
+			pageDict.Add("@page:none-none", "None");
+			pageDict.Add("@page:left-top-right", "Top Inside Margin");
+			pageDict.Add("@page:left-top-left", "Top Outside Margin");
+			pageDict.Add("@page:left-top-center", "Top Center");
+			pageDict.Add("@page:left-bottom-right", "Bottom Inside Margin");
+			pageDict.Add("@page:left-bottom-left", "Bottom Outside Margin");
+			pageDict.Add("@page:left-bottom-center", "Bottom Center");
+			//Every Page
+			pageDict.Add("@page-top-left", "Top Left Margin");
+			pageDict.Add("@page-top-right", "Top Right Margin");
+			pageDict.Add("@page-top-center", "Top Center");
+			pageDict.Add("@page-bottom-right", "Bottom Right Margin");
+			pageDict.Add("@page-bottom-left", "Bottom Left Margin");
+			pageDict.Add("@page-bottom-center", "Bottom Center");
+			_caption = LocalizationManager.GetString("ConfigurationToolBL.MessageBoxCaption.projectname", "Pathway Configuration Tool", "");
+			ColumnHeaderAddLocalization();
+		}
+
+		public ConfigurationToolBL(ConfigurationTool ctool)
+			: this()
+		{
+			cTool = ctool;
+		}
+		private static void ColumnHeaderAddLocalization()
+		{
+			if (!Common.Testing)
+			{
+				Common.SetupLocalization();
+				InitializeGridColumnHeader();
+			}
+		}
+
+		#endregion
+
 		#region Methods
+
+		public void ConfigurationTool_LoadBL()
+		{
+			IsUnixOs = Common.UnixVersionCheck();
+			_screenMode = ScreenMode.Load;
+			_lastSelectedLayout = StyleEXE;
+			Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
+
+			if (cTool.TabControl1.TabPages["tabdisplay"] != null)
+				tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
+			if (cTool.TabControl1.TabPages["tabPreview"] != null)
+				tabpreview = cTool.TabControl1.TabPages["tabPreview"];
+			if (cTool.TabControl1.TabPages.Count > 2)
+			{
+				if (cTool.TabControl1.TabPages["tabmobile"] != null)
+					tabmob = cTool.TabControl1.TabPages["tabmobile"];
+				if (cTool.TabControl1.TabPages["tabothers"] != null)
+					tabothers = cTool.TabControl1.TabPages["tabothers"];
+				if (cTool.TabControl1.TabPages["tabweb"] != null)
+					tabweb = cTool.TabControl1.TabPages["tabweb"];
+				if (cTool.TabControl1.TabPages["tabDict4Mids"] != null)
+					tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
+
+				string[] removeTabs = { "tabmobile", "tabothers", "tabweb", "tabPicture", "tabDict4Mids" };
+
+				foreach (var removeTab in removeTabs)
+				{
+					if (cTool.TabControl1.TabPages[removeTab] != null)
+					{
+						cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[removeTab]);
+					}
+				}
+			}
+
+			if (IsUnixOs)
+			{
+				cTool.WindowState = FormWindowState.Maximized;
+			}
+			else
+			{
+				cTool.MinimumSize = new Size(497, 183);
+				cTool.Width = Screen.PrimaryScreen.WorkingArea.Size.Width;
+				cTool.Width = cTool.Width < 1175 ? cTool.Width : 1175;
+			}
+			if (cTool.IsExportOptionFromFlexOrParatext)
+			{
+				cTool.BtnScripture.Visible = false;
+				cTool.BtnDictionary.Visible = false;
+			}
+			cTool.LoadSettings();
+			SetInputTypeButton();
+			ShowInputTypeButton();
+			CreateGridColumn();
+			LoadParam(); // Load DictionaryStyleSettings / ScriptureStyleSettings
+			ShowDataInGrid();
+
+			SetPreviousLayoutSelect(cTool.StylesGrid);
+			PopulateFeatureSheet(); //For TD-1194 // Load Default Values
+			SetMediaType();
+
+			// Window title (includes the version and edition (BTE / SE))
+			var sb = new StringBuilder();
+			sb.Append("Pathway Configuration Tool");
+			sb.Append(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")) ? " - BTE " : " - SE ");
+			sb.Append(AssemblyFileVersion);
+			cTool.Text = sb.ToString();
+			SetFocusToName();
+			SetMenuToolStrip();
+			//For the task TD-1481
+			cTool.BtnOthers.Enabled = true;
+
+			_screenMode = ScreenMode.View;
+			ShowInfoValue();
+			_screenMode = ScreenMode.Edit;
+		}
 
 		private static void InitializeGridColumnHeader()
 		{
@@ -731,15 +808,8 @@ namespace SIL.PublishingSolution
 				else
 				{
 					btnDictionary_ClickBL();
-				}
-				cTool.BtnScripture.Visible = false;
-				cTool.BtnDictionary.Visible = false;
-			}
-			else
-			{
-				cTool.BtnScripture.Visible = true;
-				cTool.BtnDictionary.Visible = true;
-			}
+				}				
+			}			
 		}
 
 		public string AssemblyFileVersion
@@ -967,41 +1037,70 @@ namespace SIL.PublishingSolution
 		private void SetAttributesForPaperProperties(StreamWriter writeCss)
 		{
 			var value = new Dictionary<string, string>();
-			string attribute = "Justified";
-			string key = ((ComboBoxItem)cTool.DdlJustified.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			string attribute = string.Empty;
+			string key = string.Empty;
+			if(cTool.DdlJustified.SelectedItem != null)
+			{
+				attribute = "Justified";
+				key = ((ComboBoxItem) cTool.DdlJustified.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "VerticalJustify";
-			key = ((ComboBoxItem)cTool.DdlVerticalJustify.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlVerticalJustify.SelectedItem != null)
+			{
+				attribute = "VerticalJustify";
+				key = ((ComboBoxItem) cTool.DdlVerticalJustify.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Page Size";
-			key = ((ComboBoxItem)cTool.DdlPagePageSize.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlPagePageSize.SelectedItem != null)
+			{
+				attribute = "Page Size";
+				key = ((ComboBoxItem) cTool.DdlPagePageSize.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Columns";
-			key = ((ComboBoxItem)cTool.DdlPageColumn.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlPageColumn.SelectedItem != null)
+			{
+				attribute = "Columns";
+				key = ((ComboBoxItem) cTool.DdlPageColumn.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Font Size";
-			key = ((ComboBoxItem)cTool.DdlFontSize.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlFontSize.SelectedItem != null)
+			{
+				attribute = "Font Size";
+				key = ((ComboBoxItem) cTool.DdlFontSize.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Leading";
-			key = ((ComboBoxItem)cTool.DdlLeading.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlLeading.SelectedItem != null)
+			{
+				attribute = "Leading";
+				key = ((ComboBoxItem) cTool.DdlLeading.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Pictures";
-			key = ((ComboBoxItem)cTool.DdlPicture.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlPicture.SelectedItem != null)
+			{
+				attribute = "Pictures";
+				key = ((ComboBoxItem) cTool.DdlPicture.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Running Head";
-			key = ((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlRunningHead.SelectedItem != null)
+			{
+				attribute = "Running Head";
+				key = ((ComboBoxItem) cTool.DdlRunningHead.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Header Size";
-			key = ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlHeaderFontSize.SelectedItem != null)
+			{
+				attribute = "Header Size";
+				key = ((ComboBoxItem) cTool.DdlHeaderFontSize.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
 			if (inputTypeBL.ToLower() == "scripture" && cTool.DdlReferenceFormat.SelectedItem != null)
 			{
@@ -1010,13 +1109,19 @@ namespace SIL.PublishingSolution
 				WriteAtImport(writeCss, attribute, key);
 			}
 
-			attribute = "Page Number";
-			key = ((ComboBoxItem)cTool.DdlPageNumber.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlPageNumber.SelectedItem != null)
+			{
+				attribute = "Page Number";
+				key = ((ComboBoxItem) cTool.DdlPageNumber.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
-			attribute = "Rules";
-			key = ((ComboBoxItem)cTool.DdlRules.SelectedItem).Value;
-			WriteAtImport(writeCss, attribute, key);
+			if (cTool.DdlRules.SelectedItem != null)
+			{
+				attribute = "Rules";
+				key = ((ComboBoxItem) cTool.DdlRules.SelectedItem).Value;
+				WriteAtImport(writeCss, attribute, key);
+			}
 
 			if (inputTypeBL.ToLower() == "dictionary" && cTool.DdlSense.Items.Count > 0)
 			{
@@ -1056,11 +1161,21 @@ namespace SIL.PublishingSolution
 			value["margin-right"] = cTool.TxtPageOutside.Text;
 			value["margin-bottom"] = cTool.TxtPageBottom.Text;
 			value["margin-left"] = cTool.TxtPageInside.Text;
-			value["-ps-fileproduce"] = "\"" + ((ComboBoxItem)cTool.DdlFileProduceDict.SelectedItem).Value + "\"";
+			var fileProduce = string.Empty;
+			if (cTool.DdlFileProduceDict.SelectedItem != null)
+			{
+				fileProduce = ((ComboBoxItem) cTool.DdlFileProduceDict.SelectedItem).Value;
+			}
+			value["-ps-fileproduce"] = "\"" + fileProduce + "\"";
 			value["-ps-fixed-line-height"] = "\"" + _fixedLineHeight + "\"";
 			value["-ps-split-file-by-letter"] = "\"" + _splitFileByLetter + "\"";
 			value["-ps-center-title-header"] = "\"" + _centerTitleHeader + "\"";
-			value["-ps-header-font-size"] = "\"" + ((ComboBoxItem)cTool.DdlHeaderFontSize.SelectedItem).Value + "\"";
+			var hFontSizeValue = string.Empty;
+			if (cTool.DdlHeaderFontSize.SelectedItem != null)
+			{
+				hFontSizeValue = ((ComboBoxItem) cTool.DdlHeaderFontSize.SelectedItem).Value;
+			}
+			value["-ps-header-font-size"] = "\"" + hFontSizeValue + "\"";
 			if (inputTypeBL.ToLower() == "scripture")
 			{
 				value["-ps-custom-footnote-caller"] = "\"" + cTool.TxtFnCallerSymbol.Text + "\"";
@@ -1652,7 +1767,7 @@ namespace SIL.PublishingSolution
 		{
 			XmlDocument xDoc = Common.DeclareXMLDocument(false);
 			string executablePath = Common.GetApplicationPath();
-			executablePath = Common.PathCombine(executablePath, @"GoBible\Localizations\Languages.xml");
+			executablePath = PathwayPath.GetSupportPath(executablePath, @"GoBible\Localizations\Languages.xml", true);
 			executablePath = CopiedToTempLanguageXMLFile(executablePath);
 			if (!File.Exists(executablePath)) return;
 			xDoc.Load(executablePath);
@@ -2321,7 +2436,6 @@ namespace SIL.PublishingSolution
 		/// <returns>True/False</returns>
 		protected bool ValidateStyleName(string stringValue)
 		{
-			string result1 = string.Empty;
 			var validateStringMessage = string.Empty;
 			bool valid = true;
 			if (!Common.ValidateStartsWithAlphabet(stringValue))
@@ -2508,37 +2622,6 @@ namespace SIL.PublishingSolution
 				inputType = node.Attributes["value"].Value;
 			}
 			return inputType;
-		}
-
-		/// <summary>
-		/// Save InputType to StyleSettings.xml. Ex: Scripture or Dictionary
-		/// </summary>
-		public void SaveInputType(string inputType)
-		{
-			string allUserSettingPath = Common.GetAllUserPath();
-			string allUserXmlPath = Common.PathCombine(allUserSettingPath, "StyleSettings.xml");
-			if (!Directory.Exists(allUserSettingPath))
-			{
-				Directory.CreateDirectory(allUserSettingPath);
-			}
-			if (!File.Exists(allUserXmlPath))
-			{
-				string settingPath = Path.GetDirectoryName(Param.SettingPath);
-				string xmlPath = Common.PathCombine(settingPath, "StyleSettings.xml");
-				File.Copy(xmlPath, allUserXmlPath, true);
-				File.Copy(xmlPath.Replace(".xml", ".xsd"), allUserXmlPath.Replace(".xml", ".xsd"), true);
-			}
-
-			XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
-			xmlDoc.Load(allUserXmlPath);
-			string xPath = "//settings/property[@name='InputType']";
-
-			var node = xmlDoc.SelectSingleNode(xPath);
-			if (node != null)
-			{
-				node.Attributes["value"].Value = inputType;
-			}
-			xmlDoc.Save(allUserXmlPath);
 		}
 
 		protected void ParseCSS(string cssPath, string loadType)
@@ -2774,6 +2857,7 @@ namespace SIL.PublishingSolution
 		{
 			Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationToolBL: LoadParam");
 			Param.SetValue(Param.InputType, inputTypeBL); // Dictionary or Scripture
+			Param.SetLoadType = inputTypeBL;
 			Param.LoadSettings();
 			MediaType = Param.MediaType;
 		}
@@ -3016,7 +3100,6 @@ namespace SIL.PublishingSolution
 		{
 			bool result = false;
 			if (PreviousValue.ToLower() == styleName.ToLower()) return result;
-			string selectedGridName = string.Empty;
 			styleName = styleName.Trim().ToLower();
 			for (int row = 0; row < grid.Rows.Count - 1; row++)
 			{
@@ -3087,78 +3170,81 @@ namespace SIL.PublishingSolution
 		/// </summary>
 		public void ShowStyleInGrid(DataGridView grid, ArrayList cssNames)
 		{
-			if (DataSetForGrid.Tables.Count > 0)
+			if (DataSetForGrid.Tables.Count > 0 && DataSetForGrid.Tables.Contains("Styles"))
+			{
 				DataSetForGrid.Tables["Styles"].Clear();
 
-			DataRow row;
-			XmlNodeList cats = Param.GetItems("//styles/" + MediaType + "/style");
-			foreach (XmlNode xml in cats)
-			{
-				XmlAttribute name = xml.Attributes[AttribName];
-				XmlAttribute file = xml.Attributes[AttribFile];
-				XmlAttribute type = xml.Attributes[AttribType];
-				XmlAttribute shown = xml.Attributes[AttribShown];
-				XmlAttribute approvedBy = xml.Attributes[AttribApproved];
-				XmlAttribute previewFile1 = xml.Attributes[AttribPreviewFile1];
-				XmlAttribute previewFile2 = xml.Attributes[AttribPreviewFile2];
-
-				XmlNode xml1 = xml.SelectSingleNode(ElementDesc);
-				string desc = string.Empty;
-				if (xml1 != null)
-					desc = xml1.InnerText;
-
-				xml1 = xml.SelectSingleNode(ElementComment);
-				string comment = string.Empty;
-				if (xml1 != null)
-					comment = xml1.InnerText;
-
-				row = DataSetForGrid.Tables["Styles"].NewRow();
-				row["Name"] = name != null ? name.Value : string.Empty; //name.Value;
-
-				if (row["Name"].ToString().IndexOf("Copy") >= 0 || row["Name"].ToString().IndexOf("Custom") >= 0)
+				DataRow row;
+				XmlNodeList cats = Param.GetItems("//styles/" + MediaType + "/style");
+				foreach (XmlNode xml in cats)
 				{
-					if (!cssNames.Contains(row["Name"]))
-						cssNames.Add(row["Name"]);
+					XmlAttribute name = xml.Attributes[AttribName];
+					XmlAttribute file = xml.Attributes[AttribFile];
+					XmlAttribute type = xml.Attributes[AttribType];
+					XmlAttribute shown = xml.Attributes[AttribShown];
+					XmlAttribute approvedBy = xml.Attributes[AttribApproved];
+					XmlAttribute previewFile1 = xml.Attributes[AttribPreviewFile1];
+					XmlAttribute previewFile2 = xml.Attributes[AttribPreviewFile2];
+
+					XmlNode xml1 = xml.SelectSingleNode(ElementDesc);
+					string desc = string.Empty;
+					if (xml1 != null)
+						desc = xml1.InnerText;
+
+					xml1 = xml.SelectSingleNode(ElementComment);
+					string comment = string.Empty;
+					if (xml1 != null)
+						comment = xml1.InnerText;
+
+
+					row = DataSetForGrid.Tables["Styles"].NewRow();
+					row["Name"] = name != null ? name.Value : string.Empty; //name.Value;
+
+					if (row["Name"].ToString().IndexOf("Copy") >= 0 || row["Name"].ToString().IndexOf("Custom") >= 0)
+					{
+						if (!cssNames.Contains(row["Name"]))
+							cssNames.Add(row["Name"]);
+					}
+					row["File"] = file.Value;
+					row["Description"] = desc;
+					row["Comment"] = comment;
+					row["Type"] = type != null ? type.Value : TypeStandard;
+					row["Shown"] = shown != null ? shown.Value : "Yes"; // shown.Value;
+					row["ApprovedBy"] = approvedBy != null ? approvedBy.Value : string.Empty; //approvedBy.Value;
+					row["previewFile1"] = previewFile1 != null && previewFile1.Value != null ? previewFile1.Value : string.Empty;
+					row["previewFile2"] = previewFile2 != null && previewFile2.Value != null ? previewFile2.Value : string.Empty;
+					DataSetForGrid.Tables["Styles"].Rows.Add(row);
 				}
-				row["File"] = file.Value;
-				row["Description"] = desc;
-				row["Comment"] = comment;
-				row["Type"] = type != null ? type.Value : TypeStandard;
-				row["Shown"] = shown != null ? shown.Value : "Yes"; // shown.Value;
-				row["ApprovedBy"] = approvedBy != null ? approvedBy.Value : string.Empty; //approvedBy.Value;
-				row["previewFile1"] = previewFile1 != null && previewFile1.Value != null ? previewFile1.Value : string.Empty;
-				row["previewFile2"] = previewFile2 != null && previewFile2.Value != null ? previewFile2.Value : string.Empty;
-				DataSetForGrid.Tables["Styles"].Rows.Add(row);
-			}
-			grid.DataSource = DataSetForGrid.Tables["Styles"];
-			grid.Refresh();
+				grid.DataSource = DataSetForGrid.Tables["Styles"];
+				grid.Refresh();
 
-			for (int i = 0; i < grid.Columns.Count; i++)
-			{
-				grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-			}
-
-			ColumnHeaderLocalization(grid);
-			if (grid.Columns.Count > 0)
-			{
-				grid.Columns[5].Visible = false; // Hiding the ApprovedBy column
-				grid.Columns[6].Visible = false; // Hiding the File Name       
-				grid.Columns[7].Visible = false; // Preview File 1
-				grid.Columns[8].Visible = false; // Preview File 2      
-
-			}
-
-			if (grid.SelectedRows.Count <= 0 && IsUnixOs)
-			{
-				Param.LoadSettings();
-				SetPreviousLayoutSelect(grid);
-				if (grid.SelectedRows.Count == 0 || grid.SelectedRows.Count == -1)
+				for (int i = 0; i < grid.Columns.Count; i++)
 				{
-					grid.ClearSelection();
-					grid.Rows[0].Selected = true;
-					SelectedRowIndex = 0;
-					//_screenMode = ScreenMode.View;
-					ShowInfoValue();
+					grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+				}
+
+				ColumnHeaderLocalization(grid);
+				if (grid.Columns.Count > 0)
+				{
+					grid.Columns[5].Visible = false; // Hiding the ApprovedBy column
+					grid.Columns[6].Visible = false; // Hiding the File Name
+					grid.Columns[7].Visible = false; // Preview File 1
+					grid.Columns[8].Visible = false; // Preview File 2
+
+				}
+
+				if (grid.SelectedRows.Count <= 0 && IsUnixOs)
+				{
+					Param.LoadSettings();
+					SetPreviousLayoutSelect(grid);
+					if (grid.SelectedRows.Count == 0 || grid.SelectedRows.Count == -1)
+					{
+						grid.ClearSelection();
+						grid.Rows[0].Selected = true;
+						SelectedRowIndex = 0;
+						//_screenMode = ScreenMode.View;
+						ShowInfoValue();
+					}
 				}
 			}
 		}
@@ -3167,16 +3253,19 @@ namespace SIL.PublishingSolution
 		{
 			if (!Common.Testing)
 			{
-				grid.Columns[0].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Name",
-					grid.Columns[0].HeaderText);
-				grid.Columns[1].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Description",
-					grid.Columns[1].HeaderText);
-				grid.Columns[2].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Comment",
-					grid.Columns[2].HeaderText);
-				grid.Columns[3].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Type",
-					grid.Columns[3].HeaderText);
-				grid.Columns[4].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Shown",
-					grid.Columns[4].HeaderText);
+				if (grid.Columns.Count > 0)
+				{
+					grid.Columns[0].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Name",
+						grid.Columns[0].HeaderText);
+					grid.Columns[1].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Description",
+						grid.Columns[1].HeaderText);
+					grid.Columns[2].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Comment",
+						grid.Columns[2].HeaderText);
+					grid.Columns[3].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Type",
+						grid.Columns[3].HeaderText);
+					grid.Columns[4].HeaderText = LocalizationManager.GetString("ConfigurationTool.Column.Shown",
+						grid.Columns[4].HeaderText);
+				}
 			}
 		}
 
@@ -3783,8 +3872,9 @@ namespace SIL.PublishingSolution
 		private bool PrincePreview(PublicationInformation projInfo)
 		{
 			bool success = false;
-			ExportPdf exportPdf = new ExportPdf();
-			success = exportPdf.Export(projInfo);
+            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
+			//ExportPdf exportPdf = new ExportPdf();
+			//success = exportPdf.Export(projInfo);
 			// copy to preview folder *******************
 			return success;
 		}
@@ -3792,9 +3882,10 @@ namespace SIL.PublishingSolution
 		private bool LOPreview(PublicationInformation projInfo)
 		{
 			bool success = false;
-			ExportLibreOffice openOffice = new ExportLibreOffice();
-			success = openOffice.Export(projInfo);
-			return success;
+            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
+            //ExportLibreOffice openOffice = new ExportLibreOffice();
+            //success = openOffice.Export(projInfo);
+            return success;
 		}
 
 		/// <summary>
@@ -4095,7 +4186,8 @@ namespace SIL.PublishingSolution
 	                }
 	            }
 	        }
-	        cTool.DdlPageNumber.SelectedIndex = 0;
+			if(cTool.DdlPageNumber.Items.Count > 0)
+				cTool.DdlPageNumber.SelectedIndex = 0;
 	    }
 
 	    public void chkIncludeImage_CheckedChangedBL(object sender, EventArgs e)
@@ -4344,7 +4436,7 @@ namespace SIL.PublishingSolution
 			{
 				setLastSelectedLayout();
 				setDefaultInputType();
-				SaveInputType(inputTypeBL);
+				Common.SaveInputType(inputTypeBL);
 				WriteCss();
 				StyleEXE = cTool.TxtName.Text;
 			}
@@ -4355,7 +4447,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageTop, null);
+				Common.AssignValuePageUnit(cTool.TxtPageTop, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageTop) != "")
 				{
@@ -4373,7 +4465,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageOutside, null);
+				Common.AssignValuePageUnit(cTool.TxtPageOutside, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageOutside) != "")
 				{
@@ -4416,7 +4508,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageInside, null);
+				Common.AssignValuePageUnit(cTool.TxtPageInside, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageInside) != "")
 				{
@@ -4434,7 +4526,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageGutterWidth, null);
+				Common.AssignValuePageUnit(cTool.TxtPageGutterWidth, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageGutterWidth) != "")
 				{
@@ -4546,7 +4638,7 @@ namespace SIL.PublishingSolution
 		{
 			try
 			{
-				bool result = Common.AssignValuePageUnit(cTool.TxtPageBottom, null);
+				Common.AssignValuePageUnit(cTool.TxtPageBottom, null);
 				_errProvider = Common._errProvider;
 				if (_errProvider.GetError(cTool.TxtPageBottom) != "")
 				{
@@ -4558,86 +4650,6 @@ namespace SIL.PublishingSolution
 				}
 			}
 			catch { }
-		}
-
-		public void ConfigurationTool_LoadBL()
-		{
-			IsUnixOs = Common.UnixVersionCheck();
-			_screenMode = ScreenMode.Load;
-			_lastSelectedLayout = StyleEXE;
-			Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
-			if (cTool.TabControl1.TabPages["tabdisplay"] != null)
-				tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
-			if (cTool.TabControl1.TabPages["tabPreview"] != null)
-				tabpreview = cTool.TabControl1.TabPages["tabPreview"];
-			if (cTool.TabControl1.TabPages.Count > 2)
-			{
-				if (cTool.TabControl1.TabPages["tabmobile"] != null)
-					tabmob = cTool.TabControl1.TabPages["tabmobile"];
-				if (cTool.TabControl1.TabPages["tabothers"] != null)
-					tabothers = cTool.TabControl1.TabPages["tabothers"];
-				if (cTool.TabControl1.TabPages["tabweb"] != null)
-					tabweb = cTool.TabControl1.TabPages["tabweb"];
-				if (cTool.TabControl1.TabPages["tabDict4Mids"] != null)
-					tabDict4Mids = cTool.TabControl1.TabPages["tabDict4Mids"];
-
-				string[] removeTabs = { "tabmobile", "tabothers", "tabweb", "tabPicture", "tabDict4Mids" };
-
-				foreach (var removeTab in removeTabs)
-				{
-					if (cTool.TabControl1.TabPages[removeTab] != null)
-					{
-						cTool.TabControl1.TabPages.Remove(cTool.TabControl1.TabPages[removeTab]);
-					}
-				}
-			}
-
-			if (IsUnixOs)
-			{
-				cTool.WindowState = FormWindowState.Maximized;
-			}
-			else
-			{
-				cTool.MinimumSize = new Size(497, 183);
-				cTool.Width = Screen.PrimaryScreen.WorkingArea.Size.Width;
-				cTool.Width = cTool.Width < 1175 ? cTool.Width : 1175;
-			}
-
-			cTool.LoadSettings();
-			SetInputTypeButton();
-			ShowInputTypeButton();
-			CreateGridColumn();
-			LoadParam(); // Load DictionaryStyleSettings / ScriptureStyleSettings
-			ShowDataInGrid();
-
-			SetPreviousLayoutSelect(cTool.StylesGrid);
-			PopulateFeatureSheet(); //For TD-1194 // Load Default Values
-			SetMediaType();
-			// sanity check - if the ScriptureStyleSettings file isn't there, make sure
-			// the dictionary styles are selected (and the buttons are hidden)
-			if (!File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")))
-			{
-				// select the dictionary styles
-				//btnDictionary_ClickBL();
-				// hide the Scripture / Dictionary buttons (they don't apply)
-				cTool.BtnScripture.Enabled = false;
-				cTool.BtnScripture.Visible = false;
-				cTool.BtnDictionary.Visible = false;
-			}
-			// Window title (includes the version and edition (BTE / SE))
-			var sb = new StringBuilder();
-			sb.Append("Pathway Configuration Tool");
-			sb.Append(File.Exists(Common.FromRegistry("ScriptureStyleSettings.xml")) ? " - BTE " : " - SE ");
-			sb.Append(AssemblyFileVersion);
-			cTool.Text = sb.ToString();
-			SetFocusToName();
-			SetMenuToolStrip();
-			//For the task TD-1481
-			cTool.BtnOthers.Enabled = true;
-
-			_screenMode = ScreenMode.View;
-			ShowInfoValue();
-			_screenMode = ScreenMode.Edit;
 		}
 
 		private void SetMenuToolStrip()
@@ -4774,7 +4786,7 @@ namespace SIL.PublishingSolution
 			string caption = "Delete Stylesheet";
 			var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message1", "Are you sure you want to delete the {0} stylesheet?", "");
 			confirmationStringMessage = string.Format(confirmationStringMessage, name);
-			if (!cTool._fromNunit)
+			if (!Common.Testing)
 			{
 				DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
 													  MessageBoxDefaultButton.Button2);
@@ -4925,7 +4937,7 @@ namespace SIL.PublishingSolution
 				confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabResetClick1.Message",
 					"Are you sure you want to remove all custom style sheets and restore \r\n settings to their initial values? (This cannot be undone.)", "");
 				const string caption = "Reset Settings";
-				if (!cTool._fromNunit)
+				if (!Common.Testing)
 				{
 					DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
 														  MessageBoxDefaultButton.Button2);
@@ -5021,8 +5033,15 @@ namespace SIL.PublishingSolution
 		private void ShowCustomPreviewImage()
 		{
 			string preview;
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+
+			if (!Directory.Exists(pathwayDirectory))
+			{
+				pathwayDirectory = Path.GetDirectoryName(Common.AssemblyPath);
+				pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+			}
+
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, inputTypeBL);
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
 			preview = Common.PathCombine(pathwayDirectory, "PreviewMessage.jpg");

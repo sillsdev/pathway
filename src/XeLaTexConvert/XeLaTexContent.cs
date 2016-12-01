@@ -335,6 +335,12 @@ namespace SIL.PublishingSolution
         {
             try
             {
+				foreach (string className in IdAllClass.Keys)
+				{
+					if (!IdAllClassWithandWithoutSeperator.ContainsKey(className))
+						IdAllClassWithandWithoutSeperator.Add(className, className.Replace("-", "_").Replace(".", ""));
+				}
+
                 _reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
                 bool headXML = true;
                 while (_reader.Read())
@@ -649,6 +655,9 @@ namespace SIL.PublishingSolution
 
                 _xetexFile.Write("}");
 
+                if(characterStyle.IndexOf("mainheadword") >= 0 || characterStyle.IndexOf("reversalindexentry") >= 0)
+                    WriteGuideword(characterStyle, content);
+
                 if (_incrementDropCap != 0)
                 {
                     _xetexFile.Write("}");
@@ -803,6 +812,31 @@ namespace SIL.PublishingSolution
                     }
                     _inlineCount = (inlineStyle.Count - paraStyleCount) + letterInlineCount;
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
+                    _xetexFile.Write("\\" + mergedParaStyle + "{");
+                }
+                AddUsedStyleName(characterStyle);
+            }
+            return footerClassName;
+        }
+
+        private void WriteGuideword(string characterStyle, string content)
+        {
+                //Note - Xetex paragraph new line
+                if (_xetexNewLine)
+                {
+                    _xetexFile.Write("\r\n");
+                    _xetexNewLine = false;
+                }
+
+                string paraStyle;
+
+                paraStyle = characterStyle.IndexOf("No character style") > 0 ? _previousParagraphName : characterStyle;
+                string mergedParaStyle = MergeInlineStyle(paraStyle);
+
+                string getStyleName = StackPeek(_allStyle);
+                if (_classInlineStyle.ContainsKey(mergedParaStyle))
+                {
+                    mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
                     if (_projInfo.ProjectInputType.ToLower() == "scripture")
                     {
                         string headerStyle = Common.ReplaceSeperators(_previousParagraphName);
@@ -862,7 +896,7 @@ namespace SIL.PublishingSolution
                             }
                         }
 
-                        if (mergedParaStyle.IndexOf("headword") == 0 && content != null)
+                        if (mergedParaStyle.IndexOf("mainheadword") >= 0 || mergedParaStyle.IndexOf("headword") == 0 && content != null)
                         {
                             _headerContent = content;
 
@@ -897,11 +931,7 @@ namespace SIL.PublishingSolution
                             _headerContent = content;
                         }
                     }
-					_xetexFile.Write("\\" + mergedParaStyle + "{");
                 }
-                AddUsedStyleName(characterStyle);
-            }
-            return footerClassName;
         }
 
         private string MergeInlineStyle(string paraStyle)
@@ -1178,18 +1208,18 @@ namespace SIL.PublishingSolution
 
                 _xetexFile.WriteLine("\r\n");
 
-                string p1 = @"\begin{wrapfigure}";
+                //string p1 = @"\begin{wrapfigure}";
                 string p2 = @"\begin{center}";
                 string p3 = @"\includegraphics[angle=0,width=" + width + "mm,height=" + height + "mm]{" + picFile + "} ";
-                _xetexFile.WriteLine(p1);
+                //_xetexFile.WriteLine(p1);
                 _xetexFile.WriteLine(p2);
                 _xetexFile.WriteLine(p3);
-                string p4 = @"\caption{}";
+                //string p4 = @"\caption{}";
                 string p5 = @"\end{center}";
-                string p6 = @"\end{wrapfigure}";
-                _xetexFile.WriteLine(p4);
+                //string p6 = @"\end{wrapfigure}";
+                //_xetexFile.WriteLine(p4);
                 _xetexFile.WriteLine(p5);
-                _xetexFile.WriteLine(p6);
+                //_xetexFile.WriteLine(p6);
                 _xetexFile.WriteLine("\r\n");
             }
         }
@@ -1669,7 +1699,7 @@ namespace SIL.PublishingSolution
         private void SetHeadwordTrue()
         {
             var attribute = _reader.GetAttribute("class");
-            if (attribute != null && (attribute != null && attribute.ToLower() == "headword"))
+            if (attribute != null && attribute != null && attribute.ToLower() == "headword")
             {
                 _isHeadword = true;
                 _headwordStyles = true;

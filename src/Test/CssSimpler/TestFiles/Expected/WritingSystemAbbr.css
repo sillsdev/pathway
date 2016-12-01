@@ -29,6 +29,24 @@ span[lang|= "pt"]{
 span[lang|= "seh"]{
    font-family: 'Charis SIL',serif;
 }
+div.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+}
+div.minorentrycomplex {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
+div.minorentryvariant {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
 a {
    text-decoration: inherit;
    color: inherit;
@@ -43,113 +61,113 @@ a {
    padding-bottom: 2pt;
    padding-top: 1pt;
 }
-.entry .mainheadword > span[lang|= "seh"]{
+.entry > .mainheadword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.entry .mainheadword > span {
+.entry > .mainheadword > span {
    font-weight: bold;
 }
-.entry .variantentrytype > .abbreviation > .writingsystemprefix {
+.entry > .variantformentrybackrefs .variantformentrybackref > .variantentrytypes .variantentrytype > .abbreviation > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.entry .variantentrytype > .name > .writingsystemprefix {
+.entry > .variantformentrybackrefs .variantformentrybackref > .variantentrytypes .variantentrytype > .name > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.entry .variantformentrybackref > .headword > span[lang|= "seh"]{
+.entry > .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.entry .variantformentrybackref > .headword > span {
+.entry > .variantformentrybackrefs .variantformentrybackref > .headword > span {
    font-weight: bold;
 }
-.entry .senses .sensecontent .sensenumber {
+.entry > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.entry .senses .morphosyntaxanalysis {
+.entry > .senses > .sharedgrammaticalinfo > .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry .senses .morphosyntaxanalysis {
+.entry > .senses > .sensecontent > .sense > .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry .senses .example > span[lang|= "seh"]{
+.entry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span[lang|= "seh"]{
    font-style: italic;
 }
-.entry .senses .example > span {
+.entry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span {
    font-style: italic;
 }
-.entry .senses .variantentrytype > .name > .writingsystemprefix {
+.entry > .senses > .sensecontent > .sense > .variantformentrybackrefs .variantformentrybackref > .variantentrytypes .variantentrytype > .name > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.entry .senses .variantformentrybackref > .headword > span[lang|= "seh"]{
+.entry > .senses > .sensecontent > .sense > .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.entry .senses .variantformentrybackref > .headword > span {
+.entry > .senses > .sensecontent > .sense > .variantformentrybackrefs .variantformentrybackref > .headword > span {
    font-weight: bold;
 }
-.entry .senses .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "seh"]{
+.entry > .senses > .sensecontent > .sense > .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.entry .senses .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
+.entry > .senses > .sensecontent > .sense > .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
    font-weight: bold;
 }
-.entry .senses .complexformsnotsubentries .nontrivialentryroot > .headword > span[lang|= "seh"]{
+.entry > .senses > .sensecontent > .sense > .complexformsnotsubentries .complexformsnotsubentry > .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.entry .senses .complexformsnotsubentries .nontrivialentryroot > .headword > span {
+.entry > .senses > .sensecontent > .sense > .complexformsnotsubentries .complexformsnotsubentry > .nontrivialentryroots .nontrivialentryroot > .headword > span {
    font-weight: bold;
 }
-.entry .senses .senses .sensecontent .sensenumber {
+.entry > .senses > .sensecontent > .sense > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.entry .complexformsnotsubentries .complexformtype > .abbreviation > .writingsystemprefix {
+.entry > .complexformsnotsubentries .complexformsnotsubentry > .complexformtypes .complexformtype > .abbreviation > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.entry .complexformsnotsubentries .complexformtype > .name > .writingsystemprefix {
+.entry > .complexformsnotsubentries .complexformsnotsubentry > .complexformtypes .complexformtype > .name > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.entry .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "seh"]{
+.entry > .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.entry .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
+.entry > .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
    font-weight: bold;
 }
-.entry .complexformsnotsubentries .morphosyntaxanalysis {
+.entry > .complexformsnotsubentries .complexformsnotsubentry > .morphosyntaxanalyses .morphosyntaxanalysis {
    font-style: italic;
 }
-.entry .complexformsnotsubentries .nontrivialentryroot > .headword > span[lang|= "seh"]{
+.entry > .complexformsnotsubentries .complexformsnotsubentry > .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.entry .complexformsnotsubentries .nontrivialentryroot > .headword > span {
+.entry > .complexformsnotsubentries .complexformsnotsubentry > .nontrivialentryroots .nontrivialentryroot > .headword > span {
    font-weight: bold;
 }
-.entry .picture {
+.entry .pictures .picture {
    float: right;
    text-align: center;
    margin: 0pt 0pt 4pt 4pt;
    padding: 2pt;
    float: right;
 }
-.entry .picture img {
+.entry .pictures .picture img {
    max-height: 1in;
 }
-.entry .picture {
+.entry > .pictures .picture {
    text-indent: 0pt;
    margin-left: 0pt;
    padding-bottom: 2pt;
    padding-top: 0pt;
 }
-.entry .subentries .subentry {
+.entry > .subentries .subentry {
    text-indent: 0pt;
    margin-left: 0pt;
    padding-bottom: 2pt;
    padding-top: 0pt;
    display: block;
 }
-.entry .subentries .subentry {
+.entry > .subentries .subentry {
    text-indent: 0pt;
    margin-left: 0pt;
    padding-bottom: 2pt;
@@ -172,36 +190,36 @@ a {
 .minorentrycomplex > .headword > span {
    font-weight: bold;
 }
-.minorentrycomplex .variantformentrybackref > .headword > span[lang|= "seh"]{
+.minorentrycomplex > .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.minorentrycomplex .variantformentrybackref > .headword > span {
+.minorentrycomplex > .variantformentrybackrefs .variantformentrybackref > .headword > span {
    font-weight: bold;
 }
-.minorentrycomplex .referencedentries .referencedentry > .headword > span[lang|= "seh"]{
+.minorentrycomplex > .visiblevariantentryrefs .visiblevariantentryref > .referencedentries .referencedentry > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.minorentrycomplex .referencedentries .referencedentry > .headword > span {
+.minorentrycomplex > .visiblevariantentryrefs .visiblevariantentryref > .referencedentries .referencedentry > .headword > span {
    font-weight: bold;
 }
-.minorentrycomplex .complexformentryrefs .reverseabbr > .writingsystemprefix {
+.minorentrycomplex > .complexformentryrefs .complexformentryref > .complexformtypes .complexformtype > .reverseabbr > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.minorentrycomplex .complexformentryrefs .reversename > .writingsystemprefix {
+.minorentrycomplex > .complexformentryrefs .complexformentryref > .complexformtypes .complexformtype > .reversename > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "seh"]{
+.minorentrycomplex > .complexformentryrefs .complexformentryref > .referencedentries .referencedentry > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span {
+.minorentrycomplex > .complexformentryrefs .complexformentryref > .referencedentries .referencedentry > .headword > span {
    font-weight: bold;
 }
-.minorentrycomplex .complexformentryrefs .nontrivialentryroot > .headword > span[lang|= "seh"]{
+.minorentrycomplex > .complexformentryrefs .complexformentryref > .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.minorentrycomplex .complexformentryrefs .nontrivialentryroot > .headword > span {
+.minorentrycomplex > .complexformentryrefs .complexformentryref > .nontrivialentryroots .nontrivialentryroot > .headword > span {
    font-weight: bold;
 }
 .minorentryvariant {
@@ -220,36 +238,36 @@ a {
 .minorentryvariant > .headword > span {
    font-weight: bold;
 }
-.minorentryvariant .variantformentrybackref > .headword > span[lang|= "seh"]{
+.minorentryvariant > .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.minorentryvariant .variantformentrybackref > .headword > span {
+.minorentryvariant > .variantformentrybackrefs .variantformentrybackref > .headword > span {
    font-weight: bold;
 }
-.minorentryvariant .reverseabbr > .writingsystemprefix {
+.minorentryvariant > .visiblevariantentryrefs .visiblevariantentryref > .variantentrytypes .variantentrytype > .reverseabbr > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.minorentryvariant .reversename > .writingsystemprefix {
+.minorentryvariant > .visiblevariantentryrefs .visiblevariantentryref > .variantentrytypes .variantentrytype > .reversename > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.minorentryvariant .referencedentries .referencedentry > .headword > span[lang|= "seh"]{
+.minorentryvariant > .visiblevariantentryrefs .visiblevariantentryref > .referencedentries .referencedentry > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.minorentryvariant .referencedentries .referencedentry > .headword > span {
+.minorentryvariant > .visiblevariantentryrefs .visiblevariantentryref > .referencedentries .referencedentry > .headword > span {
    font-weight: bold;
 }
-.minorentryvariant .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "seh"]{
+.minorentryvariant > .complexformentryrefs .complexformentryref > .referencedentries .referencedentry > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.minorentryvariant .complexformentryrefs .referencedentries .referencedentry > .headword > span {
+.minorentryvariant > .complexformentryrefs .complexformentryref > .referencedentries .referencedentry > .headword > span {
    font-weight: bold;
 }
-.minorentryvariant .complexformentryrefs .nontrivialentryroot > .headword > span[lang|= "seh"]{
+.minorentryvariant > .complexformentryrefs .complexformentryref > .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.minorentryvariant .complexformentryrefs .nontrivialentryroot > .headword > span {
+.minorentryvariant > .complexformentryrefs .complexformentryref > .nontrivialentryroots .nontrivialentryroot > .headword > span {
    font-weight: bold;
 }
 .mainentrysubentries .mainentrysubentry {
@@ -262,67 +280,67 @@ a {
 .mainentrysubentries .mainentrysubentry > .headword > span {
    font-weight: bold;
 }
-.mainentrysubentries .complexformtype > .abbreviation > .writingsystemprefix {
+.mainentrysubentries .mainentrysubentry > .complexformtypes .complexformtype > .abbreviation > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.mainentrysubentries .complexformtype > .name > .writingsystemprefix {
+.mainentrysubentries .mainentrysubentry > .complexformtypes .complexformtype > .name > span.writingsystemprefix {
    font-style: normal;
    font-size: 10pt;
 }
-.mainentrysubentries .variantformentrybackref > .headword > span[lang|= "seh"]{
+.mainentrysubentries .mainentrysubentry > .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.mainentrysubentries .variantformentrybackref > .headword > span {
+.mainentrysubentries .mainentrysubentry > .variantformentrybackrefs .variantformentrybackref > .headword > span {
    font-weight: bold;
 }
-.mainentrysubentries .senses .sensecontent .sensenumber {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.mainentrysubentries .senses .morphosyntaxanalysis {
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo > .morphosyntaxanalysis {
    font-style: italic;
 }
-.mainentrysubentries .senses .morphosyntaxanalysis {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .morphosyntaxanalysis {
    font-style: italic;
 }
-.mainentrysubentries .senses .example > span[lang|= "seh"]{
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span[lang|= "seh"]{
    font-style: italic;
 }
-.mainentrysubentries .senses .example > span {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .examplescontents .examplescontent > .example > span {
    font-style: italic;
 }
-.mainentrysubentries .senses .variantformentrybackref > .headword > span[lang|= "seh"]{
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.mainentrysubentries .senses .variantformentrybackref > .headword > span {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .variantformentrybackrefs .variantformentrybackref > .headword > span {
    font-weight: bold;
 }
-.mainentrysubentries .senses .senses .sensecontent .sensenumber {
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent > .sense > .senses > .sensecontent .sensenumber {
    font-weight: bold;
 }
-.mainentrysubentries .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "seh"]{
+.mainentrysubentries .mainentrysubentry > .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.mainentrysubentries .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
+.mainentrysubentries .mainentrysubentry > .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
    font-weight: bold;
 }
-.mainentrysubentries .complexformsnotsubentries .nontrivialentryroot > .headword > span[lang|= "seh"]{
+.mainentrysubentries .mainentrysubentry > .complexformsnotsubentries .complexformsnotsubentry > .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "seh"]{
    font-weight: bold;
 }
-.mainentrysubentries .complexformsnotsubentries .nontrivialentryroot > .headword > span {
+.mainentrysubentries .mainentrysubentry > .complexformsnotsubentries .complexformsnotsubentry > .nontrivialentryroots .nontrivialentryroot > .headword > span {
    font-weight: bold;
 }
-.mainentrysubentries .picture {
+.mainentrysubentries .mainentrysubentry .pictures .picture {
    float: right;
    text-align: center;
    margin: 0pt 0pt 4pt 4pt;
    padding: 2pt;
    float: right;
 }
-.mainentrysubentries .picture img {
+.mainentrysubentries .mainentrysubentry .pictures .picture img {
    max-height: 1in;
 }
-.mainentrysubentries .picture {
+.mainentrysubentries .mainentrysubentry > .pictures .picture {
    text-indent: 0pt;
    margin-left: 0pt;
    padding-bottom: 2pt;

@@ -31,8 +31,12 @@ namespace SIL.PublishingSolution
     public class OOUtility
     {
         #region Private Variables
-        private string _parentName;
-        #endregion
+	
+		#pragma warning disable 649
+		private string _parentName;
+		#pragma warning restore 649
+
+	    #endregion
 
         #region Public Properties
 

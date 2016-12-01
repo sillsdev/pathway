@@ -30,7 +30,6 @@ namespace Test.GoBibleConvert
         #region Private Variables
         private string _inputPath;
         private string _outputPath;
-        private string _expectedPath;
         private PublicationInformation _projInfo;
         #endregion
 
@@ -44,12 +43,18 @@ namespace Test.GoBibleConvert
             Common.Testing = true;
             _projInfo = new PublicationInformation();
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/GoBibleConvert/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "input");
+            _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
 
-            string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+
+			if (!File.Exists(styleSettingFile))
+			{
+				styleSettingFile = Path.GetDirectoryName(Common.AssemblyPath);
+				styleSettingFile = Common.PathCombine(styleSettingFile, "StyleSettings.xml");
+			}
+
             Common.Testing = true;
             ValidateXMLVersion(styleSettingFile);
             InputType = "Scripture";
@@ -99,7 +104,7 @@ namespace Test.GoBibleConvert
             ExportGoBible target = new ExportGoBible();
             string xx = Common.GetApplicationPath();
             string exportGoBiblePath = xx; 
-            target.CreateCollectionsTextFile(exportGoBiblePath);
+            target.CreateCollectionsTextFile(exportGoBiblePath,string.Empty);
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 

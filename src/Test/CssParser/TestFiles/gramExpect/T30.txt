@@ -1,1 +1,7 @@
-(PAGE (PROPERTY marks crop cross) (PROPERTY size 5 in 8 in portrait) (PROPERTY font 10 pt Gentium Georgia serif) (PROPERTY line-height 13) (REGION top-center (PROPERTY margin 13 pt 24 pt 0 18 pt) (PROPERTY content string ( bookx start ) " " string ( chapterx start ) ":" string ( versex start ) " — " string ( chapterx last ) ":" string ( versex last ))))
+(PAGE (PROPERTY marks crop cross) (PROPERTY size 5 in 8 in portrait) (PROPERTY font 10 pt Gentium Georgia serif) (PROPERTY line-height 13) (REGION top-center (PROPERTY margin 13 pt 24 pt 0 18 pt) (PROPERTY content string ( bookx start ) " " string ( chapterx start ) ":" string ( versex start ) " — " string ( chapterx last ) ":" string ( versex last ))) <mismatched token: [@154,425:425='2',<19>,16:15], resync=@footnotes {
+  border-top: thin solid black;
+  padding: 0.3em 0;
+  margin-top: 0.6em;
+  margin-left; 2>) <mismatched token: [@156,428:428=';',<42>,16:18], resync=pi;
+}
+}>

@@ -75,7 +75,7 @@ namespace SIL.Tool
             if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
                                                   "PathwayXeLaTeX", "XeLaTexVer", out regObj))
             {
-                return (string)regObj == "1.7";
+				return (string)regObj == "1.13.3";
             }
             return false;
         }

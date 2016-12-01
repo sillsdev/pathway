@@ -27,13 +27,6 @@ namespace SIL.Tool
     public class AfterBeforeProcess : AfterBeforeXHTMLProcess
     {
         #region Private Variable
-
-        string _outputExtension = string.Empty;
-        private string _sourcePicturePath;
-
-        private bool _imageParaForCaption = false;
-        private bool isFileEmpty = true;
-        
         private ArrayList _psuedoBefore = new ArrayList();
         private Dictionary<string, ClassInfo> _psuedoAfter = new Dictionary<string, ClassInfo>();
 
@@ -67,7 +60,6 @@ namespace SIL.Tool
 
         private void InitializeData(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> idAllClass, Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder)
         {
-            _outputExtension = projInfo.OutputExtension;
             _allStyle = new Stack<string>();
             _allParagraph = new Stack<string>();
             _allCharacter = new Stack<string>();
@@ -79,7 +71,6 @@ namespace SIL.Tool
             _displayBlock = new Dictionary<string, string>();
             _cssClassOrder = cssClassOrder;
            
-            _sourcePicturePath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             _projectPath = projInfo.TempOutputFolder;
 
             IdAllClass = idAllClass;
@@ -223,11 +214,6 @@ namespace SIL.Tool
 
                 ClosePara(false);
 
-                {
-
-                    if (_imageInserted)
-                        _imageParaForCaption = true;
-                }
                 _previousParagraphName = _paragraphName;
                 _paragraphName = null;
                 _isNewParagraph = false;
@@ -235,7 +221,6 @@ namespace SIL.Tool
                 _textWritten = false;
             }
             WriteText();
-            isFileEmpty = false;
         }
 
         private void WriteText()
@@ -267,8 +252,6 @@ namespace SIL.Tool
             {
                 _characterName = StackPeekCharStyle(_allCharacter);
             }
-            //content = whiteSpacePre(content);
-            bool contains = false;
             if (_psuedoContainsStyle != null)
             {
 				if (_psuedoContainsStyle.Contains != null && content.IndexOf(_psuedoContainsStyle.Contains) > -1)
@@ -330,7 +313,6 @@ namespace SIL.Tool
             _characterName = null;
             _closeChildName = StackPop(_allStyle);
             if (_closeChildName == string.Empty) return;
-            string closeChild = Common.LeftString(_closeChildName, "_");
 
             // Psuedo After
             PseudoAfter();

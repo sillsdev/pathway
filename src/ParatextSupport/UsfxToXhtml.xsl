@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<xsl:output method="xml" version="1.0" encoding="UTF-8" omit-xml-declaration="no" indent="yes"
+	<xsl:output method="xml" version="1.0" encoding="UTF-8" omit-xml-declaration="no" indent="no"
 	 doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"/>
 	<xsl:param name="ws" select="'es'"/>
 	<xsl:param name="userWs" select="'en'"/>

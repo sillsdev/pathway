@@ -48,7 +48,8 @@ namespace SIL.PublishingSolution
                                       IsOpenOutput = false,
                                       ProjectName = "main",
                                   };
-            var backendPath = Common.ProgInstall;
+
+	        
             var exportType = "OpenOffice/LibreOffice";
             bool bOutputSpecified = false;
             var files = new List<string>();
@@ -66,10 +67,13 @@ namespace SIL.PublishingSolution
                     i = ProcessExportType(args, i, projectInfo, files, ref inFormat, ref bShowDialog, ref exportType, ref bOutputSpecified);
                 }
 
-                SettingProcessExportFile(projectInfo, files);
+				Common.Testing = !projectInfo.IsOpenOutput;
 
+                SettingProcessExportFile(projectInfo, files);
+				Common.SaveInputType(projectInfo.ProjectInputType);
                 Common.ProgBase = Common.GetPSApplicationPath();
                 // load settings from the settings file
+	            Param.SetLoadType = projectInfo.ProjectInputType;
                 Param.LoadSettings();
                 Param.Value[Param.InputType] = projectInfo.ProjectInputType;
                 Param.LoadSettings();
@@ -98,7 +102,6 @@ namespace SIL.PublishingSolution
                 }
 
                 // run headless from the command line
-                Common.Testing = true;
                 ProcessInputFormat(inFormat, files, projectInfo);
 
                 if (projectInfo.DefaultXhtmlFileWithPath == null)
@@ -126,7 +129,7 @@ namespace SIL.PublishingSolution
 
                 var tpe = new PsExport { Destination = Param.PrintVia, DataType = projectInfo.ProjectInputType };
                 tpe.ProgressBar = null;
-                tpe.Export(projectInfo.DefaultXhtmlFileWithPath);
+				tpe.Export(projectInfo.DefaultXhtmlFileWithPath);
             }
             catch (ArgumentException ex)
             {
@@ -386,7 +389,15 @@ namespace SIL.PublishingSolution
             try
             {
                 // load the ParatextSupport DLL dynamically
-                Assembly asmPtSupport = Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+	            string paratextSupportDLL = Common.PathCombine(Common.AssemblyPath, "ParatextSupport.dll");
+
+				if (!File.Exists(paratextSupportDLL))
+				{
+					paratextSupportDLL = Path.GetDirectoryName(Common.AssemblyPath);
+					paratextSupportDLL = Common.PathCombine(paratextSupportDLL, "ParatextSupport.dll");
+				}
+
+				Assembly asmPtSupport = Assembly.LoadFrom(paratextSupportDLL);
                 Type tParatextPathwayLink = asmPtSupport.GetType("SIL.PublishingSolution.ParatextPathwayLink");
                 Object objParatextPathwayLink = null;
                 if (tParatextPathwayLink != null)
@@ -607,8 +618,16 @@ namespace SIL.PublishingSolution
                     try
                     {
                         // load the ParatextSupport DLL dynamically
-                        Assembly asmPTSupport =
-                            Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+						// load the ParatextSupport DLL dynamically
+						string paratextSupportDLL = Common.PathCombine(Common.AssemblyPath, "ParatextSupport.dll");
+
+						if (!File.Exists(paratextSupportDLL))
+						{
+							paratextSupportDLL = Path.GetDirectoryName(Common.AssemblyPath);
+							paratextSupportDLL = Common.PathCombine(paratextSupportDLL, "ParatextSupport.dll");
+						}
+
+                        Assembly asmPTSupport = Assembly.LoadFrom(paratextSupportDLL);
                         Type tSfmToUsx = asmPTSupport.GetType("SIL.PublishingSolution.SfmToUsx");
                         Object objSFMtoUsx = null;
                         if (tSfmToUsx != null)
@@ -643,9 +662,17 @@ namespace SIL.PublishingSolution
 
             try
             {
+				string paratextSupportDLL = Common.PathCombine(Common.AssemblyPath, "ParatextSupport.dll");
+
+				if (!File.Exists(paratextSupportDLL))
+				{
+					paratextSupportDLL = Path.GetDirectoryName(Common.AssemblyPath);
+					paratextSupportDLL = Common.PathCombine(paratextSupportDLL, "ParatextSupport.dll");
+				}
+
                 // load the ParatextSupport DLL dynamically
                 Assembly asmPTSupport =
-                    Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+					Assembly.LoadFrom(paratextSupportDLL);
 
                 // Convert the stylesheet to css
                 // new ScrStylesheet(styFile)
@@ -656,14 +683,11 @@ namespace SIL.PublishingSolution
                     // new styToCss
                     oScrStylesheet = Activator.CreateInstance(tStyToCSS);
                     // styToCss.StyFullPath = styFile
-                    PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath",
-                                                                       BindingFlags.Public | BindingFlags.Instance);
+                    PropertyInfo piStyFullPath = tStyToCSS.GetProperty("StyFullPath", BindingFlags.Public | BindingFlags.Instance);
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
-                    Object oResult = tStyToCSS.InvokeMember("ConvertStyToCss",
-                                                            BindingFlags.Default | BindingFlags.InvokeMethod, null,
-                                                            oScrStylesheet, args);
+                    tStyToCSS.InvokeMember("ConvertStyToCss", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
                 }
                 projInfo.DefaultCssFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
 
@@ -692,7 +716,7 @@ namespace SIL.PublishingSolution
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
                     argsConvert[1] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".xhtml");
-                    var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile",
+                    tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile",
                                                  BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL,
                                                  argsConvert);
                 }
@@ -739,8 +763,14 @@ namespace SIL.PublishingSolution
 
             try
             {
+				string paratextSupportDLL = Common.PathCombine(Common.AssemblyPath, "ParatextSupport.dll");
+
+				if (!File.Exists(paratextSupportDLL))
+				{
+					paratextSupportDLL = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "ParatextSupport.dll");
+				}
                 // load the ParatextSupport DLL dynamically
-                Assembly asm = Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+				Assembly asm = Assembly.LoadFrom(paratextSupportDLL);
 
                 // Convert the .sty stylesheet to css
                 // new ScrStylesheet(styFile)
@@ -755,7 +785,7 @@ namespace SIL.PublishingSolution
                     piStyFullPath.SetValue(oScrStylesheet, styFile, null);
                     Object[] args = new object[1];
                     args[0] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
-                    Object oResult = tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
+	                tStyToCSS.InvokeMember("ConvertStyToCSS", BindingFlags.Default | BindingFlags.InvokeMethod, null, oScrStylesheet, args);
                 }
                 projInfo.DefaultCssFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName + ".css");
 
@@ -808,7 +838,7 @@ namespace SIL.PublishingSolution
                     Object[] argsConvert = new object[2];
                     argsConvert[0] = scrBooksDoc.InnerXml;
                     argsConvert[1] = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ","_") + ".xhtml");
-                    var oRet = tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
+	                tPPL.InvokeMember("ConvertUsxToPathwayXhtmlFile", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsConvert);
                 }
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projInfo.ProjectPath, projInfo.ProjectName.Replace(" ", "_") + ".xhtml");
 

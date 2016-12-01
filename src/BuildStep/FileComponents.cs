@@ -46,6 +46,15 @@ namespace BuildStep
             set { _applicationFileName = value; }
         }
         #endregion ApplicationFileName
+
+        #region ReleaseFolder
+        private string _releaseFolder = "../output/Release";
+        public string ReleaseFolder
+        {
+            get { return _releaseFolder; }
+            set { _releaseFolder = value; }
+        }
+        #endregion ReleaseFolder
         #endregion Properties
 
         protected readonly XmlDocument XDoc = new XmlDocument();
@@ -55,7 +64,7 @@ namespace BuildStep
         {
             var path = _basePath;
             LoadGuids(Path.Combine(path, "FileLibrary.xml"));
-            var directoryInfo = new DirectoryInfo(Path.Combine(path, "../output/Release"));
+            var directoryInfo = new DirectoryInfo(Path.Combine(path, _releaseFolder));
             ResetFileComponents();
             ProcessFoldersAndFiles((XmlElement)XDoc.SelectSingleNode("//*[@Id='APPLICATIONFOLDER']"), directoryInfo);
             AddFeatures();
@@ -68,9 +77,10 @@ namespace BuildStep
 
         protected void ResetFileComponents()
         {
+            var name = Path.GetFileNameWithoutExtension(ApplicationFileName);
             XDoc.RemoveAll();
-            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("BuildStep.ApplicationTemplate.wxs");
-            Debug.Assert(stream != null, "ApplicationTemplate.wxs missing from BuildTasks project resources");
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("BuildStep." + name + "Template.wxs");
+            Debug.Assert(stream != null, String.Format("{0}Template.wxs missing from BuildTasks project resources", name));
             XDoc.Load(XmlReader.Create(stream));
         }
 

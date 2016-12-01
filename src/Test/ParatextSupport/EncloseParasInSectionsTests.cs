@@ -22,7 +22,6 @@ using System.Xml;
 using System.Xml.Xsl;
 using NUnit.Framework;
 using SIL.PublishingSolution;
-using SIL.Tool;
 
 namespace Test.ParatextSupport
 {
@@ -77,11 +76,6 @@ namespace Test.ParatextSupport
 			xslParams.Add("ws", "en");
             xslParams.Add("fontName", "Times");
             xslParams.Add("fontSize", "12");
-
-            if (Common.IsUnixOS())
-            {
-                _htmlHeader = "<head><title></title></head>";
-            }
 
             ParatextPathwayLink converter = new ParatextPathwayLink("testDb", xslParams);
             encloseParasInSections = ParatextSupportExtensions.EncloseParasInSectionsXslt(converter);

@@ -93,10 +93,10 @@ namespace SIL.Tool
                 {
                     string strMessage = "File has been exported successfully";
                     var msg = new[] { strMessage + ". "};
-
                     if(errCount > 0)
                     {
                         msg = new[] {strMessage + " with " + errCount + "error(s)."};
+						Console.WriteLine(msg.ToString());
                     }
                 }
             }
@@ -104,7 +104,7 @@ namespace SIL.Tool
             {
                 if (e.Message != null)
                 {
-                    var msg = new[] {e.Message};
+                    Console.WriteLine(new[] {e.Message});
                 }
             }
         }

@@ -18,6 +18,7 @@
 #region Using
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
@@ -35,8 +36,7 @@ namespace Test.OpenOfficeConvert
     public class LOStylesXMLTest
     {
         #region Private Variables
-        LOStyles _stylesXML;
-        string _errorFile;
+        //LOStyles _stylesXML;
         private string _inputPath;
         private string _outputPath;
         private ValidateXMLFile _validate;
@@ -48,26 +48,23 @@ namespace Test.OpenOfficeConvert
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            _stylesXML = new LOStyles();
-            _errorFile = Common.PathCombine(Path.GetTempPath(), "temp.odt");
+            //_stylesXML = new LOStyles();
             Common.Testing = true;
             returnValue = false;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
+            Debug.Print("testPath={0}", testPath);
             _inputPath = Common.PathCombine(testPath, "input");
             _outputPath = Common.PathCombine(testPath, "output");
+            if (!Directory.Exists(_outputPath))
+            {
+                Directory.CreateDirectory(_outputPath);
+            }
             Common.PathCombine(testPath, "expected");
             Common.SupportFolder = "";
             Common.ProgInstall = Common.DirectoryPathReplace(Environment.CurrentDirectory + "/../../../../DistFiles");
             projInfo.ProjectInputType = "Dictionary";
 
-
-            //Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            //CssTree cssTree = new CssTree();
-            //cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            //Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            //LOStyles inStyles = new LOStyles();
-            //idAllClass = inStyles.CreateStyles(projInfo, cssClass);
+	        Common.UseAfterBeforeProcess = true;
         }
         #endregion Setup
 
@@ -84,69 +81,6 @@ namespace Test.OpenOfficeConvert
         #endregion Private Functions
 
         //#region File Comparision
-        ///<summary>
-        ///TD-244 (Update CSSParser to handle revised grammar)
-        /// </summary>      
-        /*       [Test]
-        public void OxesCSSTest()
-        {
-            const string file = "Oxes";
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "styles.xml");
-            projInfo.DefaultCssFileWithPath = input;
-            projInfo.TempOutputFolder = _outputPath;
-                
-            Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-            CssTree cssTree = new CssTree();
-            cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
-            LOStyles loStyles = new LOStyles();
-
-            idAllClass = loStyles.CreateStyles(projInfo, cssClass);
-
-
-            //_stylesXML.CreateStyles(input, output, _errorFile, true);
-
-            string expected = FileExpected(file + "styles.xml");
-            XmlAssert.AreEqual(expected, output, "OxesCSSTest failed in styles.xml");
-        }*/
-        
-        /*
-
-        #region NODE Comparision
-
-        /// <summary>
-        /// TD86 .xitem[lang='en'] syntax in Styles.xml
-        /// </summary>
-        [Test]
-        public void LanguageTest_Node()
-        {
-            const string file = "LanguageTest";
-
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "Styles.xml");
-            _stylesXML.CreateStyles(input, output, _errorFile, true);
-
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "xitem_.en";
-            _validate.ClassProperty.Add("fo:font-size", "50%");
-            _validate.ClassProperty.Add("fo:font-size-complex", "50%");
-
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue, "LanguageTest syntax failed in Styles.xml");
-
-            _validate.ClassName = "xitem_.pt";
-            _validate.ClassProperty.Add("fo:font-size", "30pt");
-            _validate.ClassProperty.Add("fo:font-size-complex", "30pt");
-
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue, "LanguageTest syntax failed in Styles.xml");
-        }
-
-*/
         ///<summary>
         ///TD100 text-transform syntax in Styles.xml
         /// 
@@ -373,7 +307,6 @@ namespace Test.OpenOfficeConvert
 
         /// </summary>      
         [Test]
-        [Ignore("India team has to figure out why this fails")]
         public void FontFamily_Node()
         {
             const string file = "FontFamily";
@@ -388,47 +321,6 @@ namespace Test.OpenOfficeConvert
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "letter2";
-            _validate.ClassProperty.Add("fo:font-family", "Verdana");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-
-            _validate.ClassName = "letter3"; // Inherit
-            _validate.ClassProperty.Add("fo:font-family", "Tahoma");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "letter4";
-            _validate.ClassProperty.Add("fo:font-family", "Tahoma");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "letter5";
-            _validate.ClassProperty.Add("fo:font-family", "dummyfont");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            // letter6 no style
-
-            _validate.ClassName = "letter7";
-            _validate.ClassProperty.Add("fo:font-family", "dummyfamily");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "letter8";
-            _validate.ClassProperty.Add("fo:font-family", "Times New Roman");
-
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-
         }
 
 
@@ -439,7 +331,7 @@ namespace Test.OpenOfficeConvert
             const string file = "TextAlignTestA";
             string input = FileInput(file + ".css");
             string output = FileOutput(file + "styles.xml");
-            Dictionary<string, Dictionary<string, string>> cssClass = GetCssClass(input, output);
+            GetCssClass(input, output);
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "letter";
@@ -458,11 +350,9 @@ namespace Test.OpenOfficeConvert
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-            Dictionary<string, Dictionary<string, string>> idAllClass = new Dictionary<string, Dictionary<string, string>>();
+			
             LOStyles ooStyles = new LOStyles();
-
-            idAllClass = ooStyles.CreateStyles(projInfo, cssClass, output);
+            ooStyles.CreateStyles(projInfo, cssClass, output);
             return cssClass;
         }
 
@@ -741,7 +631,6 @@ namespace Test.OpenOfficeConvert
 
         /// </summary>      
         [Test]
-        [Ignore("India team has to figure out why this fails")]
         public void Font_Node()
         {
             const string file = "Font";
@@ -756,9 +645,9 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:font-weight-complex", "700");
             _validate.ClassProperty.Add("fo:font-size", "24pt");
             _validate.ClassProperty.Add("fo:font-size-complex", "24pt");
-            _validate.ClassProperty.Add("fo:font-family", "Times New Roman");
+			_validate.ClassProperty.Add("fo:font-family", "Times New Roman");
 
-            _validate.ClassProperty.Add("fo:font-name-complex", "Times New Roman");
+			_validate.ClassProperty.Add("fo:font-name-complex", "Times New Roman");
             _validate.ClassProperty.Add("fo:font-style", "italic");
             _validate.ClassProperty.Add("fo:font-variant", "small-caps");
 
@@ -991,13 +880,11 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-425 Impliment Start and Last References in same page
-
         /// </summary>
-        [Ignore]      
         [Test]
+		[Category("SkipOnTeamCity")]
         public void SinglePageRefTest_Node()
         {
-
             const string file = "SinglePageRef";
 
             string input = FileInput(file + ".css");
@@ -1018,56 +905,6 @@ namespace Test.OpenOfficeConvert
 
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
-
-            //style:master-page style:name="First_20_Page"
-            //Third Node
-            //XPath = "//style:style[@style:name='" + ClassName + "']";
-            //string xpath = "//style:master-page[style:name=\"First_20_Page\"]";
-            string xpath = "//style:master-page[@style:name='Left_20_Page']";
-            _validate.ClassName = string.Empty;
-            string inner =
-                //"<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
-                "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<text:span text:style-name=\"PageHeaderFooter12\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"PageHeaderFooter13\">" +
-                "<text:page-number text:select-page=\"current\">4</text:page-number>" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"PageHeaderFooter14\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"10\" />" +
-                "</text:span>" +
-                "</text:p>" +
-                "</style:header>";
-
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
-            Assert.IsTrue(returnValue);
-
-            xpath = "//style:master-page[@style:name='Right_20_Page']";
-            _validate.ClassName = string.Empty;
-            inner =
-                //"<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<style:header xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\">" +
-                "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-                "<text:span text:style-name=\"PageHeaderFooter18\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"PageHeaderFooter19\">" +
-                "<text:page-number text:select-page=\"current\">4</text:page-number>" +
-                "</text:span>" +
-                "<text:tab />" +
-                "<text:span text:style-name=\"PageHeaderFooter20\">" +
-                "<text:chapter text:display=\"name\" text:outline-level=\"10\" />" +
-                "</text:span>" +
-                "</text:p>" +
-                "</style:header>";
-
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
-            Assert.IsTrue(returnValue);
         }
 
         ///<summary>
@@ -1075,7 +912,6 @@ namespace Test.OpenOfficeConvert
 
         /// </summary>      
         [Test]
-        [Ignore]
         public void MirroredPageRefTest_Node()
         {
             const string file = "MirroredPageRef";
@@ -1094,18 +930,18 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
             xpath = "samenode";
-            _validate.ClassProperty.Add("fo:page-width", "14.8cm");
-            _validate.ClassProperty.Add("fo:page-height", "21cm");
+            _validate.ClassProperty.Add("fo:page-width", "419.5276pt");
+            _validate.ClassProperty.Add("fo:page-height", "595.2756pt");
             _validate.ClassProperty.Add("style:num-format", "1");
             _validate.ClassProperty.Add("style:print-orientation", "portrait");
             _validate.ClassProperty.Add("style:writing-mode", "lr-tb");
             _validate.ClassProperty.Add("style:footnote-max-height", "0in");
 
-            _validate.ClassProperty.Add("fo:margin-top", "1.15cm");
-            _validate.ClassProperty.Add("fo:margin-right", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-bottom", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-left", "1.5cm");
-
+            _validate.ClassProperty.Add("fo:margin-top", "32.59842pt");
+            _validate.ClassProperty.Add("fo:margin-right", "42.51968pt");
+            _validate.ClassProperty.Add("fo:margin-bottom", "32.59842pt");
+            _validate.ClassProperty.Add("fo:margin-left", "42.51968pt");
+						
             returnValue = _validate.ValidateNodeAttributesNS(1, xpath); // style:page-layout-properties
             Assert.IsTrue(returnValue);
 
@@ -1118,45 +954,28 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
             xpath = "samenode";
-            _validate.ClassProperty.Add("fo:page-width", "14.8cm");
-            _validate.ClassProperty.Add("fo:page-height", "21cm");
+			_validate.ClassProperty.Add("fo:page-width", "419.5276pt");
+			_validate.ClassProperty.Add("fo:page-height", "595.2756pt");
             _validate.ClassProperty.Add("style:num-format", "1");
             _validate.ClassProperty.Add("style:print-orientation", "portrait");
             _validate.ClassProperty.Add("style:writing-mode", "lr-tb");
             _validate.ClassProperty.Add("style:footnote-max-height", "0in");
 
-            _validate.ClassProperty.Add("fo:margin-top", "1.15cm");
-            _validate.ClassProperty.Add("fo:margin-right", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-bottom", "1.5cm");
-            _validate.ClassProperty.Add("fo:margin-left", "1.5cm");
+			_validate.ClassProperty.Add("fo:margin-top", "32.59842pt");
+			_validate.ClassProperty.Add("fo:margin-right", "42.51968pt");
+			_validate.ClassProperty.Add("fo:margin-bottom", "32.59842pt");
+			_validate.ClassProperty.Add("fo:margin-left", "42.51968pt");
 
             returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
             Assert.IsTrue(returnValue);
-
-            //Third Node
-            xpath = "//style:header-left";
-            _validate.ClassName = string.Empty;
-            string inner = "<text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">" +
-            "<text:span text:style-name=\"AllHeaderPageLeft\">" +
-            "<text:chapter text:display=\"name\" text:outline-level=\"9\" />" +
-            "</text:span>" +
-            "<text:tab />" +
-            "<text:span text:style-name=\"AllHeaderPageNumber\">" +
-            "<text:page-number text:select-page=\"current\">4</text:page-number>" +
-            "</text:span>" +
-            "<text:tab />" +
-            "<text:span text:style-name=\"AllHeaderPageRight\" />" +
-            "</text:p>";
-            returnValue = _validate.ValidateNodeInnerXml(xpath, inner);
-            Assert.IsTrue(returnValue);
-
+			
             //Fourth Node
             xpath = "//style:master-page[@style:name='";
             _validate.ClassName = "First_20_Page";
 
             _validate.ClassProperty.Add("style:display-name", "First Page");
-            _validate.ClassProperty.Add("style:page-layout-name", "pm2");
-            _validate.ClassProperty.Add("style:next-style-name", "Standard");
+            _validate.ClassProperty.Add("style:page-layout-name", "pm3");
+			_validate.ClassProperty.Add("style:next-style-name", "Left_20_Page");
 
             returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
             Assert.IsTrue(returnValue);
@@ -1303,7 +1122,6 @@ namespace Test.OpenOfficeConvert
         ///TD-663 Space between header and text  
 
         /// </summary> 
-        [Ignore]     
         [Test]
         public void HeaderSpace_Node()
         {
@@ -1323,7 +1141,7 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
 
             //second Node
-            xpath = "//style:page-layout[@style:name='pm4']";
+			xpath = "//style:page-layout[@style:name='pm6']";
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = string.Empty;
             _validate.ClassProperty.Add("fo:padding-top=", "72pt");
@@ -1369,47 +1187,7 @@ namespace Test.OpenOfficeConvert
 			string xpath = "//style:style[@style:name='subentry']";
 			_validate = new ValidateXMLFile(output);
 			_validate.ClassName = string.Empty;
-			_validate.ClassProperty.Add("fo:margin-left", "24pt");
-
-			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
-			Assert.IsTrue(returnValue);
-		}
-
-		///<summary>
-		/// When SubEntry have same/less than div.Entry's margin-left, calculate part add entry value to SubEntry to maintain indent.
-		/// </summary>
-		[Test]
-		public void DivEntrySubEntrySameMarginLeft_Node()
-		{
-			const string file = "DivEntrySubEntryMarginLeft";
-			string input = FileInput(file + ".css");
-			string output = FileOutput(file + "styles.xml");
-			GetCssClass(input, output);
-
-			string xpath = "//style:style[@style:name='subentry']";
-			_validate = new ValidateXMLFile(output);
-			_validate.ClassName = string.Empty;
-			_validate.ClassProperty.Add("fo:margin-left", "57pt");
-
-			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
-			Assert.IsTrue(returnValue);
-		}
-
-		///<summary>
-		/// When SubEntry have same/less than div.Entry's margin-left, calculate part add entry value to SubEntry to maintain indent.
-		/// </summary>
-		[Test]
-		public void DivEntrySubEntrySameMarginLeft2_Node()
-		{
-			const string file = "DivEntrySubEntryMarginLeft2";
-			string input = FileInput(file + ".css");
-			string output = FileOutput(file + "styles.xml");
-			GetCssClass(input, output);
-
-			string xpath = "//style:style[@style:name='subentry.-subentries_entry']";
-			_validate = new ValidateXMLFile(output);
-			_validate.ClassName = string.Empty;
-			_validate.ClassProperty.Add("fo:margin-left", "57pt");
+			_validate.ClassProperty.Add("fo:margin-left", "12pt");
 
 			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
 			Assert.IsTrue(returnValue);

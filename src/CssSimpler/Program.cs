@@ -13,6 +13,7 @@
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -36,17 +37,17 @@ namespace CssSimpler
         protected static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
         protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
         protected static List<string> UniqueClasses;
+        private static readonly XmlReaderSettings ReaderSettings = new XmlReaderSettings { XmlResolver = new NullResolver(), DtdProcessing = DtdProcessing.Ignore };
+        private static readonly XsltSettings XsltSettings = new XsltSettings{EnableDocumentFunction = false, EnableScript = false};
 
         static void Main(string[] args)
         {
-            // ReSharper disable AssignNullToNotNullAttribute
             XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"CssSimpler.XmlCss.xsl")));
+				"CssSimpler.XmlCss.xsl"), ReaderSettings), XsltSettings, new NullResolver());
             SimplifyXmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"CssSimpler.XmlCssSimplify.xsl")));
+				"CssSimpler.XmlCssSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
             SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                "CssSimpler.XhtmlSimplify.xsl")));
-            // ReSharper restore AssignNullToNotNullAttribute
+                "CssSimpler.XhtmlSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
             // see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
             var p = new OptionSet
             {
@@ -94,7 +95,7 @@ namespace CssSimpler
             var styleSheet = lc.StyleSheet;
             MakeBaskupIfNecessary(styleSheet, extra[0]);
             DebugWriteClassNames(lc.UniqueClasses);
-            Debug("Clean up Stylesheet: {0}", styleSheet);
+            VerboseMessage("Clean up Stylesheet: {0}", styleSheet);
             var parser = new CssTreeParser();
             var xml = new XmlDocument();
             UniqueClasses = lc.UniqueClasses;
@@ -102,12 +103,14 @@ namespace CssSimpler
             WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
-            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+            
+            new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
+            new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
+            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             try
             {
                 File.Delete(tmpXhtmlFullName);
@@ -125,11 +128,113 @@ namespace CssSimpler
             var r = parser.Root;
             xml.LoadXml("<ROOT/>");
             AddSubTree(xml.DocumentElement, r, parser);
+            ElaborateMultiSelectorRules(xml);
             if (OutputXml)
             {
-                Debug("Writing XML stylesheet");
+                VerboseMessage("Writing XML stylesheet");
                 WriteCssXml(styleSheet, xml);
             }
+        }
+
+        protected static void ElaborateMultiSelectorRules(XmlDocument xml)
+        {
+            var multiSelectors = xml.SelectNodes("//RULE/*[.=',']");
+            Debug.Assert(multiSelectors != null, "multiSelectors != null");
+            foreach (XmlElement multiSelector in multiSelectors)
+            {
+                var ruleNode = xml.CreateElement("RULE");
+                var node = multiSelector;
+                var targetClass = string.Empty;
+                var lastClass = string.Empty;
+                while (string.IsNullOrEmpty(targetClass) || string.IsNullOrEmpty(lastClass))
+                {
+                    node = node.PreviousSibling as XmlElement;
+                    if (node == null) break;
+                    if (targetClass == string.Empty)
+                    {
+                        if (node.Name == "CLASS" || node.Name == "TAG")
+                        {
+                            targetClass = node.FirstChild.InnerText;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(lastClass) || node.Name != "CLASS") continue;
+                    var poposedClass = node.FirstChild.InnerText;
+                    if (!NeedHigher.Contains(poposedClass))
+                    {
+                        lastClass = poposedClass;
+                    }
+                }
+                ruleNode.Attributes.Append(xml.CreateAttribute("term"));
+                ruleNode.Attributes.Append(xml.CreateAttribute("pos"));
+                if (!string.IsNullOrEmpty(lastClass))
+                {
+                    var lastClassAttr = xml.CreateAttribute("lastClass");
+                    lastClassAttr.InnerText = lastClass;
+                    ruleNode.Attributes.Append(lastClassAttr);
+                }
+                if (!string.IsNullOrEmpty(targetClass))
+                {
+                    var targetAttr = xml.CreateAttribute("target");
+                    targetAttr.InnerText = targetClass;
+                    ruleNode.Attributes.Append(targetAttr);
+                }
+                node = multiSelector;
+                while (true)
+                {
+                    node = node.NextSibling as XmlElement;
+                    if (node == null) break;
+                    if (node.Name != "PROPERTY") continue;
+                    ruleNode.AppendChild(node.CloneNode(true));
+                }
+                node = multiSelector.PreviousSibling as XmlElement;
+                while (true)
+                {
+                    if (node == null) break;
+                    var previousNode = node.PreviousSibling as XmlElement;
+                    ruleNode.InsertBefore(node, ruleNode.FirstChild);
+                    node = previousNode;
+                }
+                ruleNode.Attributes["term"].InnerText = TermNodes(ruleNode).Count.ToString();
+                var refRule = multiSelector.ParentNode as XmlElement;
+                Debug.Assert(refRule != null, "refRule != null");
+                refRule.Attributes["term"].InnerText = TermNodes(refRule).Count.ToString();
+                Debug.Assert(xml.DocumentElement != null, "xml.DocumentElement != null");
+                xml.DocumentElement.InsertBefore(ruleNode, refRule);
+                Debug.Assert(multiSelector.ParentNode != null, "multiSelector.ParentNode != null");
+                multiSelector.ParentNode.RemoveChild(multiSelector);
+            }
+            Debug.Assert(xml.DocumentElement != null, "xml.DocumentElement != null");
+            var rules = xml.DocumentElement.ChildNodes;
+            for (var index = 0; index < rules.Count; index += 1)
+            {
+                var rule = rules[index] as XmlElement;
+                Debug.Assert(rule != null, "rule != null");
+                try
+                {
+                    rule.Attributes["pos"].InnerText = (index + 1).ToString();
+                }
+                catch (NullReferenceException)
+                {
+	                if (rule.OwnerDocument != null)
+	                {
+		                var attr = rule.OwnerDocument.CreateAttribute("pos");
+		                attr.InnerText = (index + 1).ToString();
+		                if (rule.HasAttributes)
+		                {
+			                rule.Attributes.InsertBefore(attr, rule.Attributes[0]);
+		                }
+		                else
+		                {
+			                rule.Attributes.Append(attr);
+		                }
+	                }
+                }
+            }
+        }
+
+        private static XmlNodeList TermNodes(XmlElement ruleNode)
+        {
+            return ruleNode.SelectNodes(".//*[local-name() != 'name' and local-name() != 'value' and local-name() != 'unit' and local-name() != 'PROPERTY']");
         }
 
         protected static void ParseCssRemovingErrors(CssTreeParser parser, string styleSheet)
@@ -140,9 +245,11 @@ namespace CssSimpler
                 try
                 {
                     parser.Parse(styleSheet);
+                    if (parser.Errors.Count > 0)
+                        throw new Antlr.Runtime.RecognitionException(string.Format("{0} errors in CSS", parser.Errors.Count));
                     error = false;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     error = true;
                     RemoveError(parser.Errors, styleSheet);
@@ -178,6 +285,7 @@ namespace CssSimpler
                         while (!sr.EndOfStream)
                         {
                             var skipLine = sr.ReadLine();
+                            Debug.Assert(skipLine != null, "skipLine != null");
                             if (skipLine.Trim().EndsWith("}")) break;
                             rdline += 1;
                         }
@@ -226,18 +334,23 @@ namespace CssSimpler
 	        {
 				throw new ArgumentNullException("styleSheet");
 	        }
+            VerboseMessage("Writing Simple Stylesheet: {0}", styleSheet);
+            var xmlStream = new MemoryStream();
+            xml.Save(xmlStream);
+            xmlStream.Flush();
+            xmlStream.Position = 0;
+            var xmlReader = XmlReader.Create(xmlStream, ReaderSettings);
+            var memory = new MemoryStream();
+            SimplifyXmlCss.Transform(xmlReader, null, memory);
+            memory.Flush();
+            memory.Position = 0;
+            var cssReader = XmlReader.Create(memory, ReaderSettings);
             var cssFile = new FileStream(styleSheet, FileMode.Create);
             var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
-            Debug("Writing Simple Stylesheet: {0}", styleSheet);
-            var memory = new MemoryStream();
-            SimplifyXmlCss.Transform(xml, null, memory);
-            memory.Flush();
-            memory.Seek(0, 0);
-            var cssReader = XmlReader.Create(memory, null);
             XmlCss.Transform(cssReader, null, cssWriter);
             cssFile.Close();
             xml.RemoveAll();
-            memory.Seek(0, 0);
+            memory.Position = 0;
             xml.Load(memory);
         }
 
@@ -247,11 +360,13 @@ namespace CssSimpler
             {
                 throw new ArgumentNullException("styleSheet");
             }
-            Debug("Writing Stylesheet without pseudo rules: {0}", styleSheet);
+            VerboseMessage("Writing Stylesheet without pseudo rules: {0}", styleSheet);
             var ruleNodes = xml.SelectNodes("//RULE[PSEUDO]");
+            Debug.Assert(ruleNodes != null, "ruleNodes != null");
             foreach (XmlElement ruleNode in ruleNodes)
             {
                 var properties = ruleNode.SelectNodes("PROPERTY");
+                Debug.Assert(properties != null, "properties != null");
                 if (properties.Count <= 1)
                 {
                     ruleNode.RemoveAll();
@@ -266,6 +381,7 @@ namespace CssSimpler
                             ruleNode.RemoveChild(childNode);
                         }
                     }
+                    Debug.Assert(ruleNode.OwnerDocument != null, "ruleNode.OwnerDocument != null");
                     var classNode = ruleNode.OwnerDocument.CreateElement("CLASS");
                     var nameNode = ruleNode.OwnerDocument.CreateElement("name");
                     nameNode.InnerText = ruleNode.GetAttribute("lastClass") + "-ps";
@@ -313,25 +429,9 @@ namespace CssSimpler
                     firstClass = false;
                 }
                 classNames += "]";
-                Debug(classNames);
+                VerboseMessage(classNames);
             }
         }
-
-        //private static void GetContTargets(XmlDocument xml, Dictionary<string, List<XmlNode>> contClass)
-        //{
-        //    foreach (XmlNode contProp in xml.SelectNodes("//PROPERTY[name='content']"))
-        //    {
-        //        var target = contProp.ParentNode.Attributes["lastClass"];
-        //        if (contClass.ContainsKey(target.InnerText))
-        //        {
-        //            contClass[target.InnerText].Add(contProp);
-        //        }
-        //        else
-        //        {
-        //            contClass[target.InnerText] = new List<XmlNode> { contProp };
-        //        }
-        //    }
-        //}
 
         protected static void WriteCssXml(string styleSheet, XmlDocument xml)
         {
@@ -370,7 +470,7 @@ namespace CssSimpler
                 }
                 if (first >= 'A' && first <= 'Z' && second >= 'A' && second <= 'Z')
                 {
-                    System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
+                    Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
                     var node = n.OwnerDocument.CreateElement(name);
                     if (name == "RULE") // later postion equals greater precedence
                     {
@@ -383,7 +483,7 @@ namespace CssSimpler
                         term = _term;
                         var termAttr = n.OwnerDocument.CreateAttribute("term");
                         termAttr.Value = term.ToString();
-                        System.Diagnostics.Debug.Assert(n.Attributes != null, "Attributes != null");
+                        Debug.Assert(n.Attributes != null, "Attributes != null");
                         n.Attributes.Append(termAttr);
                     }
                     else
@@ -396,12 +496,12 @@ namespace CssSimpler
                     {
                         if (_noData)
                         {
-                            System.Diagnostics.Debug.Assert(node.ParentNode != null, "ParentNode != null");
+                            Debug.Assert(node.ParentNode != null, "ParentNode != null");
                             node.ParentNode.RemoveChild(node);
                             continue;
                         }
                         pos += 1;
-                        System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
+                        Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
                         var posAttr = n.OwnerDocument.CreateAttribute("pos");
                         posAttr.Value = pos.ToString();
                         node.Attributes.Append(posAttr);
@@ -421,7 +521,7 @@ namespace CssSimpler
                 }
                 else
                 {
-                    System.Diagnostics.Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
+                    Debug.Assert(n.OwnerDocument != null, "OwnerDocument != null");
                     var node = n.OwnerDocument.CreateElement(argState == 0? "name": (argState & 1) == 1? "value": "unit");
                     argState += 1;
                     node.InnerText = name;
@@ -439,7 +539,7 @@ namespace CssSimpler
                         }
                         else
                         {
-                            Debug("skipping: {0}", name);
+                            VerboseMessage("skipping: {0}", name);
                         }
                     }
                     if (n.Name == "TAG")
@@ -462,7 +562,7 @@ namespace CssSimpler
             p.WriteOptionDescriptions(Console.Out);
         }
 
-        static void Debug(string format, params object[] args)
+        static void VerboseMessage(string format, params object[] args)
         {
             if (_verbosity > 0)
             {

@@ -637,7 +637,7 @@ namespace epubConvert
 
                         opf.WriteAttributeString("idref", idRef);
                         opf.WriteAttributeString("linear", "yes");
-                        opf.WriteAttributeString("properties", "rendition:layout-scrolling");
+						opf.WriteAttributeString("properties", "rendition:layout-reflowable");
                         opf.WriteEndElement(); // itemref
                     //}
                 }

@@ -6,14 +6,14 @@
         <RasterVectorBalance type="double">50</RasterVectorBalance>
       </Properties>
     </FlattenerPreference>
-    <Page Self="page9" Name="9" AppliedTrapPreset="TrapPreset/$ID/kDefaultTrapStyleName" AppliedMaster="MasterAll" OverrideList="" TabOrder="" GridStartingPoint="TopOutside" UseMasterGrid="True">
+    <Page Self="page6" Name="6" AppliedTrapPreset="TrapPreset/$ID/kDefaultTrapStyleName" AppliedMaster="MasterLeft" OverrideList="" TabOrder="" GridStartingPoint="TopOutside" UseMasterGrid="True">
       <Properties>
         <Descriptor type="list">
           <ListItem type="string" />
           <ListItem type="enumeration">Arabic</ListItem>
           <ListItem type="boolean">true</ListItem>
           <ListItem type="boolean">false</ListItem>
-          <ListItem type="long">9</ListItem>
+          <ListItem type="long">6</ListItem>
           <ListItem type="string" />
         </Descriptor>
       </Properties>
@@ -24,14 +24,14 @@
         </Properties>
       </GridDataInformation>
     </Page>
-    <Page Self="page10" Name="10" AppliedTrapPreset="TrapPreset/$ID/kDefaultTrapStyleName" AppliedMaster="MasterLeft" OverrideList="" TabOrder="" GridStartingPoint="TopOutside" UseMasterGrid="True">
+    <Page Self="page7" Name="7" AppliedTrapPreset="TrapPreset/$ID/kDefaultTrapStyleName" AppliedMaster="MasterAll" OverrideList="" TabOrder="" GridStartingPoint="TopOutside" UseMasterGrid="True">
       <Properties>
         <Descriptor type="list">
           <ListItem type="string" />
           <ListItem type="enumeration">Arabic</ListItem>
           <ListItem type="boolean">true</ListItem>
           <ListItem type="boolean">false</ListItem>
-          <ListItem type="long">10</ListItem>
+          <ListItem type="long">7</ListItem>
           <ListItem type="string" />
         </Descriptor>
       </Properties>

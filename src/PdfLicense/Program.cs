@@ -16,14 +16,18 @@ namespace PdfLicense
         {
 
             string allUserPath = GetAllUserPath();
-            string licenseFileName = ReadPathinLicenseFile(allUserPath);
-            if (_readLicenseFilesBylines.Count < 0)
+            ReadPathinLicenseFile(allUserPath);
+            if (_readLicenseFilesBylines.Count <= 0)
             {
                 return;
             }
             string creatorTool = _readLicenseFilesBylines[3];
             string getPsApplicationPath = GetPSApplicationPath();
+			getPsApplicationPath = Path.Combine(getPsApplicationPath, "Export");
             getPsApplicationPath = Path.Combine(getPsApplicationPath, "ApplyPDFLicenseInfo.exe");
+			if (getPsApplicationPath.StartsWith ("/")) {
+				getPsApplicationPath = @"/usr/bin/ApplyPDFLicenseInfo";
+			}
             if (File.Exists(getPsApplicationPath))
             {
                 if (creatorTool.ToLower() == "libreoffice")
@@ -131,7 +135,6 @@ namespace PdfLicense
         {
             string fileLoc = PathCombine(allUserPath, "License.txt");
             string executePath = string.Empty;
-            int countRead = 0;
 
             if (File.Exists(fileLoc))
             {

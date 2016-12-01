@@ -1,0 +1,12 @@
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="APPLICATIONFOLDER" Name="pwtex"/>
+        </Directory>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="Application">
+            <ComponentRef Id="RegistryEntries"/>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

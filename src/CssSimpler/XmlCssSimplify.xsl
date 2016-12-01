@@ -31,7 +31,7 @@
     <xsl:template match="*[name='first-child']"/ -->
 
     <!-- Eliminates part of selector -->
-    <xsl:template match="RULE/*[position() > 1][following-sibling::*[name=parent::*/@lastClass]]">
+    <xsl:template match="RULE/*[position() > 1 and local-name() != 'TAG' and following-sibling::*[name=parent::*/@lastClass]]">
         <xsl:choose>
             <!-- remove pictures span -->
             <xsl:when test="name='pictures'"/>
@@ -49,8 +49,14 @@
                     <xsl:apply-templates select="node() | @*"/>
                 </xsl:copy>
             </xsl:when>
+            <!-- In order to retain sense hierarchy -->
+            <xsl:when test="local-name(.) = 'PARENTOF' and following-sibling::*[1]/name='senses' or local-name(following-sibling::*[1]) = 'PARENTOF' and following-sibling::*[2]/name='senses' or local-name(.) = 'PARENTOF' and preceding-sibling::*[1]/name='senses' or local-name(preceding-sibling::*[1]) = 'PARENTOF'">
+               <xsl:copy>
+                  <xsl:apply-templates select="node() | @*"/>
+               </xsl:copy>
+            </xsl:when>
             <!-- These two when clauses retain the selector for in between text -->
-            <xsl:when test="local-name(.) = 'PRECEDES' and following-sibling::*[1]/name=parent::*/@lastClass">
+            <xsl:when test="local-name(.) = 'PRECEDES' or local-name(following-sibling::*[1]) = 'PRECEDES' or local-name(preceding-sibling::*[1]) = 'PRECEDES'">
                 <xsl:copy>
                     <xsl:apply-templates select="node() | @*"/>
                 </xsl:copy>

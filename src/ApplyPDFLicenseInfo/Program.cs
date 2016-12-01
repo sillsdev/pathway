@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using SIL.Tool;
+
 //This will be called by macro externally. so, please do not remove this since it is not called by any other classes.
+
 namespace ApplyPDFLicenseInfo
 {
     class Program
@@ -27,7 +30,7 @@ namespace ApplyPDFLicenseInfo
             string inputType = _readLicenseFilesBylines[4];
             string commonTesting = _readLicenseFilesBylines[5];
             string pdfFileName = string.Empty;
-            
+
             pdfFileName = ProcessLicensePdf(pdfFileName, executePath);
 
             if (exportTitle == string.Empty)
@@ -38,11 +41,32 @@ namespace ApplyPDFLicenseInfo
             string licencePdfFile = pdfFileName.Replace(".pdf", "1.pdf");
 
             ShowPDFFile(licencePdfFile, exportTitle, commonTesting, pdfFileName);
-           
+
             System.Globalization.TextInfo myTI = new System.Globalization.CultureInfo("en-US", false).TextInfo;
             inputType = myTI.ToTitleCase(inputType);
             if (creatorTool.ToLower() == "libreoffice")
             {
+                while (true)
+                {
+                    var foundOpenDoc = false;
+                    foreach (var process in Process.GetProcesses())
+                    {
+                        try
+                        {
+                            var name = process.ProcessName;
+                            if (name.Contains("soffice"))
+                            {
+                                foundOpenDoc = true;
+                            }
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            // If the process has already exited
+                        }
+                    }
+                    if (!foundOpenDoc) break;
+                    Thread.Sleep(1000);
+                }
                 Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout.css", string.Empty);
                 LoadParameters(inputType);
                 CreateRAMP(xhtmlFile, inputType);
@@ -68,6 +92,13 @@ namespace ApplyPDFLicenseInfo
             if (File.Exists(licencePdfFile))
             {
                 File.Copy(licencePdfFile, exportTitle, true);
+                var fileInfo = new FileInfo(licencePdfFile);
+                while (true)
+                {
+                    var newFileInfo = new FileInfo(exportTitle);
+                    if (newFileInfo.Length == fileInfo.Length) break;
+                    Thread.Sleep(1000);
+                }
 
                 if (commonTesting.ToLower().Contains("false"))
                 {
@@ -82,6 +113,14 @@ namespace ApplyPDFLicenseInfo
             {
                 if(pdfFileName != exportTitle)
                     File.Copy(pdfFileName, exportTitle, true);
+                var fileInfo = new FileInfo(licencePdfFile);
+                while (true)
+                {
+                    var newFileInfo = new FileInfo(exportTitle);
+                    if (newFileInfo.Length == fileInfo.Length) break;
+                    Thread.Sleep(1000);
+                }
+
 
                 if (commonTesting.ToLower().Contains("false"))
                 {
@@ -169,8 +208,6 @@ namespace ApplyPDFLicenseInfo
         {
             string fileLoc = Path.Combine(allUserPath, "License.txt");
             string executePath = string.Empty;
-            int countRead = 0;
-
             if (File.Exists(fileLoc))
             {
                 using (StreamReader reader = new StreamReader(fileLoc))

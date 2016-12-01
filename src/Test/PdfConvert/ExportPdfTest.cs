@@ -108,6 +108,32 @@ namespace Test.PdfConvert
         }
 
         /// <summary>
+        ///A test for Dictionary Guideword
+        ///</summary>
+        [Test]
+        [Category("SkipOnTeamCity")]
+        [Category("LongTest")]
+        public void ExportDictionaryGuidewordTest()
+        {
+            string inputSourceDirectory = FileInput("");
+            string outputDirectory = FileOutput("");
+            if (Directory.Exists(outputDirectory))
+            {
+                Directory.Delete(outputDirectory, true);
+            }
+            FolderTree.Copy(inputSourceDirectory, outputDirectory);
+            _projInfo.ProjectPath = outputDirectory;
+            _projInfo.ProjectInputType = "Dictionary";
+            _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "ExportDictionaryGuideword.xhtml");
+            _projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "ExportDictionaryGuideword.css");
+
+            var target = new ExportPdf();
+            const bool expectedResult = true;
+            bool actual = target.Export(_projInfo);
+            Assert.AreEqual(expectedResult, actual);
+        }
+
+        /// <summary>
         ///A test for Export
         ///</summary>
         [Test]
@@ -152,7 +178,6 @@ namespace Test.PdfConvert
 
             FileCompare(file, ".css");
         }
-
         #endregion
 
         #region Private Functions

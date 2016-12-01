@@ -16,6 +16,7 @@
 
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -78,28 +79,20 @@ namespace Test.CssParserTest
             var sw = new StreamWriter(outFileName);
             sw.Write(strResult);
             sw.Close();
-
-            // Compare result to expected result
             var expFileName = Common.PathCombine(_expPath, testName + ".txt");
-            var sr = new StreamReader(expFileName);
-            var strExpect = sr.ReadToEnd();
-            sr.Close();
-            Assert.AreEqual(strResult, strExpect, msg);
+            TextFileAssert.AreEqual(expFileName, outFileName, msg);
 
             if (ctp.Errors.Count != 0)
             {
                 var strError = ctp.ErrorText();
                 var outErrorName = Common.PathCombine(_outPath, testName + "Err.txt");
                 var swe = new StreamWriter(outErrorName);
-                swe.Write(strError);
+                var strGenericError = Regex.Replace(strError, @"[\\/a-zA-Z0-9\:]+src", "src");
+                swe.Write(strGenericError.Replace(@"\", "/"));
                 swe.Close();
-
                 var expErrorName = Common.PathCombine(_expPath, testName + "Err.txt");
-                var sre = new StreamReader(expErrorName);
-                var strExpError = sre.ReadToEnd();
-                sre.Close();
                 var msgErr = msg + " in Error text";
-                Assert.AreEqual(strError, strExpError, msgErr);
+                TextFileAssert.AreEqual(expErrorName, outErrorName, msgErr);
             }
             else
             {
@@ -520,7 +513,7 @@ namespace Test.CssParserTest
         /// CSS throws error
         /// </summary>
         [Test]
-        [ExpectedException("Antlr.Runtime.Tree.RewriteEarlyExitException")]
+        //[ExpectedException("Antlr.Runtime.Tree.RewriteEarlyExitException")]
         public void CssNoErrorT30b()
         {
             OneTest("T30b", "CSS no error");

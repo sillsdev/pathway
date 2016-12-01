@@ -18,15 +18,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Xml;
-using System.Xml.XPath;
 using NUnit.Framework;
-using Palaso.Data;
 using SIL.PublishingSolution;
 using SIL.Tool;
-using Test;
 
 namespace Test.XeLatex
 {
@@ -71,14 +67,21 @@ namespace Test.XeLatex
 			Directory.CreateDirectory(_outputPath);
 			_projInfo.ProjectPath = testPath;
 			_classInlineStyle = new Dictionary<string, List<string>>();
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+
+			if (!File.Exists(styleSettingFile))
+			{
+				styleSettingFile = Path.GetDirectoryName(Common.AssemblyPath);
+				styleSettingFile = Common.PathCombine(styleSettingFile, "StyleSettings.xml");
+			}
 
 			ValidateXMLVersion(styleSettingFile);
 			Common.ProgInstall = pathwayDirectory;
 			Param.LoadSettings();
 			Param.SetValue(Param.InputType, "Scripture");
 			Param.LoadSettings();
+			Common.UseAfterBeforeProcess = true;
 		}
 
 		#endregion Setup
@@ -145,8 +148,15 @@ namespace Test.XeLatex
 			Param.UpdateMetadataValue(Param.Date, DateTime.Today.ToString("yyyy-MM-dd"));
 			Param.UpdateMetadataValue(Param.CoverPage, "True");
 
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			string coverImageFilePath = Common.PathCombine(pathwayDirectory, "Graphic");
+
+			if (!Directory.Exists(coverImageFilePath))
+			{
+				coverImageFilePath = Path.GetDirectoryName(Common.AssemblyPath);
+				coverImageFilePath = Common.PathCombine(coverImageFilePath, "Graphic");
+			}
+
 			coverImageFilePath = Common.PathCombine(coverImageFilePath, "cover.png");
 			Param.UpdateMetadataValue(Param.CoverPageFilename, coverImageFilePath);
 
@@ -217,7 +227,7 @@ namespace Test.XeLatex
 		public void TextIndentTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "TextIndent";
+			const string file = "Textindent";
 			ExportProcess(file);
 			FileCompare(file);
 		}
@@ -681,7 +691,7 @@ namespace Test.XeLatex
 		public void TextIndentPcTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "TextIndentPC";
+			const string file = "TextindentPC";
 			ExportProcess(file);
 			FileCompare(file);
 		}
@@ -905,7 +915,6 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Ignore]
 		[Category("SkipOnTeamCity")]
 		public void LineHeightPercentageTest()
 		{
@@ -916,7 +925,6 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Ignore]
 		[Category("SkipOnTeamCity")]
 		public void LineHeightPointTest()
 		{
@@ -965,24 +973,22 @@ namespace Test.XeLatex
 		public void FootNote1Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "FootNote";
+			const string file = "Footnote";
 			ExportProcess(file);
 			FileCompare(file);
 		}
-
-		[Ignore]
+		
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
 		public void FootNote2Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "FootNote2";
+			const string file = "Footnote2";
 			ExportProcess(file);
 			FileCompare(file);
 		}
 
-		[Ignore]
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -1162,14 +1168,23 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
+		[Test]
+		[Category("ShortTest")]
+		[Category("SkipOnTeamCity")]
+		public void MissingCurlyBracesTest()
+		{
+			_projInfo.ProjectInputType = "Dictionary";
+			const string file = "MissingCurlyBracesTest";
+			ExportProcess(file);
+			FileCompare(file);
+		}
 
-		[Ignore]
+		
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
 		public void VisibilityCensorPackageTest()
 		{
-
 			const string testFileName = "VisibilityPackage";
 			var inputname = testFileName + ".tex";
 			var xeLatexFullFile = FileOutput(inputname);
@@ -1177,9 +1192,10 @@ namespace Test.XeLatex
 			File.Copy(FileInput(inputname), xeLatexFullFile, overwrite);
 			var imgPath = new Dictionary<string, string>();
 			UpdateXeLaTexFontCacheIfNecessary();
+			Common.Testing = true;
 			CallXeLaTex(_projInfo, xeLatexFullFile, true, imgPath);
 			var outname = testFileName + ".log";
-			TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 1, 55, 56, 57, 58, 60 });
+			TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 2, 13, 14, 15, 16, 17 });
 		}
 
 		[Test]
@@ -1213,7 +1229,6 @@ namespace Test.XeLatex
 				Assert.AreEqual(@":\pwtex\", XeLaTexInstallation.GetXeLaTexDir().Substring(1));
 		}
 
-		[Ignore]
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -1370,7 +1385,7 @@ namespace Test.XeLatex
 			EnableConfigurationSettings(outputDirectory);
 
 			var target = new ExportXeLaTex();
-			bool actual = target.Export(_projInfo);
+			target.Export(_projInfo);
 
 			string outputResultFile = _projInfo.ProjectPath;
 			outputResultFile = Path.Combine(outputResultFile, "CoverPageTitle.tex");

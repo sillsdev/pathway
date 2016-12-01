@@ -36,7 +36,7 @@ namespace SIL.PublishingSolution
         protected static string WorkDir;
         protected static Dictionary<string, Dictionary<string, string>> CssClass;
         protected static DictionaryForMIDsStyle ContentStyles = new DictionaryForMIDsStyle();
-        private static bool _isUnixOS = false;
+		protected static bool _isUnixOS = false;
 
         #region Properties
         #region ExportType
@@ -63,13 +63,15 @@ namespace SIL.PublishingSolution
         /// <param name="exportType">scripture / dictionary</param>
         /// <param name="publicationInformation">structure with other necessary information about project.</param>
         /// <returns></returns>
-        protected void Launch(string exportType, PublicationInformation publicationInformation)
+        protected void Launch(PublicationInformation publicationInformation)
         {
             Export(publicationInformation);
         }
 
         public bool Export(PublicationInformation projInfo)
         {
+			Param.SetLoadType = projInfo.ProjectInputType;
+			Param.LoadSettings();
             bool success = false;
             projInfo.OutputExtension = "jar";
             if (projInfo == null || string.IsNullOrEmpty(projInfo.DefaultXhtmlFileWithPath) ||
@@ -79,7 +81,7 @@ namespace SIL.PublishingSolution
             }
             WorkDir = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
             _isUnixOS = Common.UnixVersionCheck();
-            var inProcess = new InProcess(0, 8);
+            var inProcess = new InProcess(0, 7);
             var curdir = Environment.CurrentDirectory;
             var myCursor = Cursor.Current;
             try
@@ -88,10 +90,7 @@ namespace SIL.PublishingSolution
 
                 inProcess.Show();
                 inProcess.PerformStep();
-
-                LoadParameters();
-                inProcess.PerformStep();
-
+				
                 LoadCss(projInfo);
                 _DictionaryForMIDsInput = null;
                 inProcess.PerformStep();
@@ -170,13 +169,6 @@ namespace SIL.PublishingSolution
             CssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
         }
 
-        protected void LoadParameters()
-        {
-            Param.LoadSettings();
-            Param.SetValue(Param.InputType, "Dictionary");
-            Param.LoadSettings();
-        }
-
         protected void ReformatData(PublicationInformation projInfo)
         {
             var outFile = new DictionaryForMIDsStreamWriter(projInfo);
@@ -238,20 +230,25 @@ namespace SIL.PublishingSolution
         {
             var output = new DictionaryForMIDsStreamWriter(projInfo);
             Debug.Assert(output.Directory != null);
-            var processFullPath = Common.PathCombine(output.Directory, "go.bat");
-            var DictionaryForMIDsPath = Common.FromRegistry("Dic4Mid");
+
+	        string assemblyPath = Common.AssemblyPath;
+			
+			var DictionaryForMIDsPath = Path.Combine(assemblyPath, "Dic4Mid");
+
+			if(!Directory.Exists(DictionaryForMIDsPath))
+			{
+				DictionaryForMIDsPath = Path.Combine(Path.GetDirectoryName(assemblyPath), "Dic4Mid"); 
+			}
+
             var creatorPath = Common.PathCombine(DictionaryForMIDsPath, "DfM-Creator");
             FolderTree.Copy(creatorPath, output.Directory);
-            const string redirectOutputFileName = LogName;
-            SubProcess.RedirectOutput = redirectOutputFileName;
-            if (_isUnixOS)
-            {
-                SubProcess.RunCommand(output.Directory, "wineconsole", processFullPath, true);
-            }
-            else
-            {
-                SubProcess.Run(output.Directory, processFullPath, ".", true);
-            }
+
+            const string prog = "java";
+            SubProcess.RedirectOutput = LogName;
+			var args1 = string.Format (@"-jar DfM-Creator.jar -DictionaryGeneration .{0}main.txt . .", Path.DirectorySeparatorChar);
+            SubProcess.RunCommand(output.Directory, prog, args1, true);
+			var args2 = string.Format (@"-jar DfM-Creator.jar -JarCreator .{0}dictionary{0} .{0}Empty_Jar-Jad{0} .", Path.DirectorySeparatorChar);
+            SubProcess.RunCommand(output.Directory, prog, args2, true);
         }
 
         protected void CreateSubmission(PublicationInformation projInfo)

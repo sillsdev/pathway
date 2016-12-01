@@ -36,9 +36,6 @@ namespace SIL.PublishingSolution
 
         public static void Execute(string inputFile, string output)
         {
-            if (!_insertHomographClass && !_insertSenseNumClass)
-                return;
-
             var xmlDoc = new XmlDocument();
             xmlDoc.XmlResolver = FileStreamXmlResolver.GetNullResolver();
             var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);

@@ -4,7 +4,7 @@
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/@page-top-right" Justification="RightAlign">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/@page-top-right">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content><?ACE 18?></Content>
       </CharacterStyleRange>
     </ParagraphStyleRange>

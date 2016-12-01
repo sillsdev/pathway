@@ -119,30 +119,6 @@ namespace Test.epubConvert
             Assert.IsTrue(silFont.Serif);
         }
         /// <summary>
-        /// Test the SIL Ezra font
-        /// </summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void EzraTest()
-        {
-            var silFont = new EmbeddedFont("Ezra SIL");
-            Assert.IsTrue(FontInternals.IsInstalled("Ezra SIL"));
-            Assert.IsTrue(silFont.CanRedistribute);
-            Assert.IsTrue(silFont.Serif);
-        }
-        /// <summary>
-        /// Test the SIL Galatia font
-        /// </summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void GalatiaTest()
-        {
-            var silFont = new EmbeddedFont("Galatia SIL");
-            Assert.IsTrue(FontInternals.IsInstalled("Galatia SIL"));
-            Assert.IsTrue(silFont.CanRedistribute);
-            Assert.IsTrue(silFont.Serif);
-        }
-        /// <summary>
         /// Test the SIL Gentium Basic font
         /// </summary>
         [Test]
@@ -183,23 +159,11 @@ namespace Test.epubConvert
         /// Test the SIL Scheharazade) font
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+		[Category("SkipOnTeamCity")]
         public void ScheharazadeTest()
         {
             var silFont = new EmbeddedFont("Scheherazade");
             Assert.IsTrue(FontInternals.IsInstalled("Scheherazade"));
-            Assert.IsTrue(silFont.CanRedistribute);
-            Assert.IsTrue(silFont.Serif);
-        }
-        /// <summary>
-        /// Test the SIL Sophia Nubian font
-        /// </summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-        public void SophiaNubianTest()
-        {
-            var silFont = new EmbeddedFont("Sophia Nubian");
-            Assert.IsTrue(FontInternals.IsInstalled("Sophia Nubian"));
             Assert.IsTrue(silFont.CanRedistribute);
             Assert.IsTrue(silFont.Serif);
         }

@@ -37,7 +37,6 @@ namespace Test.InDesignConvert
         private string _outputPath;
         private string _methodName;
         private string _outputStyles;
-        private string _outputStory;
         private string _outputSpread;
         private string _fileNameWithPath;
         private string _testFolderPath;
@@ -63,7 +62,6 @@ namespace Test.InDesignConvert
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/InDesignConvert/TestFiles");
             _outputPath = Common.PathCombine(_testFolderPath, "output");
             _outputStyles = Common.PathCombine(_outputPath, "Resources");
-            _outputStory = Common.PathCombine(_outputPath, "Stories");
             _outputSpread = Common.PathCombine(_outputPath, "Spreads");
             projInfo.TempOutputFolder = _outputPath;
             _cssProperty = new Dictionary<string, Dictionary<string, string>>();
@@ -173,7 +171,6 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Ignore]
         public void MarginPreferenceTest()
         {
             ClearFiles();
@@ -187,7 +184,7 @@ namespace Test.InDesignConvert
             XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
             XmlAttributeCollection attrb = node.Attributes;
             string result = attrb["Top"].Value;
-            Assert.AreEqual(result, "71", _methodName + " failed for Margin_Top");
+            Assert.AreEqual(result, "36", _methodName + " failed for Margin_Top");
 
             result = attrb["Right"].Value;
             Assert.AreEqual(result, "72", _methodName + " failed for Margin_Top");
@@ -230,7 +227,6 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Ignore]
         public void PathPointTypeTest2()
         {
             ClearFiles();
@@ -247,13 +243,13 @@ namespace Test.InDesignConvert
 
             string result = attrb["Anchor"].Value;
             // "-198 -324"
-            Assert.AreEqual(result, "-270 -360", _methodName + " failed for Anchor");
+            Assert.AreEqual(result, "-270 -325", _methodName + " failed for Anchor");
 
             result = attrb["LeftDirection"].Value;
-            Assert.AreEqual(result, "-270 -360", _methodName + " failed for LeftDirection");
+            Assert.AreEqual(result, "-270 -325", _methodName + " failed for LeftDirection");
 
             result = attrb["RightDirection"].Value;
-            Assert.AreEqual(result, "-270 -360", _methodName + " failed for RightDirection");
+            Assert.AreEqual(result, "-270 -325", _methodName + " failed for RightDirection");
         }
 
         [Test]
@@ -266,6 +262,7 @@ namespace Test.InDesignConvert
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);
             projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
+	        projInfo.ProjectInputType = "Dictionary";
             _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, _columnClass);
             _xPath = "//TextFrame[@Self=\"TF2\"]/TextFramePreference";

@@ -67,6 +67,7 @@ namespace Test.InDesignConvert
             Common.SupportFolder = "";
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles");
             Common.CopyFolderandSubFolder(_expectedPath, _outputPath, true);
+			Common.UseAfterBeforeProcess = true;
         }
 
         [SetUp]
@@ -92,7 +93,7 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "xsensenumber_1";
+			string styleName = "xsensenumber_1";
             _expected.Add(styleName, "x red ");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" +
                     styleName + "\"]";
@@ -100,9 +101,9 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "xsensenumber_sense_subsenses_1";
+			styleName = "xsensenumber_2";
             _expected.Add(styleName, "2.1) ");
-            XPath = "//ParagraphStyleRange/CharacterStyleRange[8][@AppliedCharacterStyle = \"CharacterStyle/" +
+            XPath = "//ParagraphStyleRange[2]/CharacterStyleRange[8][@AppliedCharacterStyle = \"CharacterStyle/" +
                     styleName + "\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, styleName + " test Failed");
@@ -110,19 +111,20 @@ namespace Test.InDesignConvert
         [Test]
         public void Counter1()
         {
+	        Common.UseAfterBeforeProcess = true;
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Counter1.css");
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Counter.xhtml");
             ExportProcess();
-            string classname = "sense..before_1";
+			string classname = "firstoftype sense_2";
             XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"]";
             string content = "1.2";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, classname + " test Failed");
-            classname = "sense..before_1";
+			classname = "lastoftype sense_2";
             XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"][2]";
 
-            content = "1.4";
+            content = "2.4";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, classname + " test Failed");
         }
@@ -134,14 +136,14 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Counter2.css");
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Counter.xhtml");
             ExportProcess();
-            string classname = "sense..before_1";
+			string classname = "firstoftype sense_2";
             XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"]";
             string content = "1.0.0";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, classname + " test Failed");
 
-            classname = "sense..before_1";
-            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"][3]";
+			classname = "firstoftype sense_2";
+            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"][2]";
 
             content = "2.0.4";
             result = ValidateNodeContent(_outputStory, content);
@@ -154,14 +156,14 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Counter3.css");
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Counter.xhtml");
             ExportProcess();
-            string classname = "sense..before_1";
+			string classname = "firstoftype sense_2";
             XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"]";
             string content = "1.1";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, classname + " test Failed");
 
-            classname = "sense..before_1";
-            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"][2]";
+			classname = "lastoftype sense_2";
+            XPath = "//ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + classname + "\"]";
 
             content = "1.2";
             result = ValidateNodeContent(_outputStory, content);
@@ -486,8 +488,7 @@ namespace Test.InDesignConvert
             bool result = StyleXmlNodeTest(true);
             Assert.IsTrue(result, _inputCSS + " test Failed");
         }
-
-        [Ignore]
+		
         [Test]
         public void DisplayBlock()
         {
@@ -496,27 +497,26 @@ namespace Test.InDesignConvert
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/DisplayBlock.xhtml");
             ExportProcess();
 
-            string expected = Common.DirectoryPathReplace(_testFolderPath + "/expected/Resources/DisplayBlock.xml");
+            string expected = Common.DirectoryPathReplace(_testFolderPath + "/Expected/Resources/DisplayBlock.xml");
             string output = Common.DirectoryPathReplace(_testFolderPath + "/output/Resources/Styles.xml");
             XmlAssert.AreEqual(expected, output, "DisplayBlock syntax failed in Styles.xml");
 
-            expected = Common.DirectoryPathReplace(_testFolderPath + "/expected/stories/DisplayBlock.xml");
-            output = Common.DirectoryPathReplace(_testFolderPath + "/output/stories/Story_1.xml");
-            XmlAssert.AreEqual(expected, output, "DisplayBlock syntax failed in stories.xml");
+            expected = Common.DirectoryPathReplace(_testFolderPath + "/Expected/Stories/DisplayBlock.xml");
+            output = Common.DirectoryPathReplace(_testFolderPath + "/output/Stories/Story_1.xml");
+            XmlAssert.AreEqual(expected, output, "DisplayBlock syntax failed in Stories.xml");
 
         }
 
         [Test]
-        [Ignore]
         public void PseudoBefore()
         {
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/PseudoBefore.css");
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/PseudoBefore.xhtml");
             ExportProcess();
-            string expected = Common.DirectoryPathReplace(_testFolderPath + "/expected/stories/PseudoBefore.xml");
-            string output = _testFolderPath + "/output/stories/Story_1.xml";
-            TextFileAssert.AreEqual(expected, output, "PseudoBefore syntax failed in stories.xml");
+            string expected = Common.DirectoryPathReplace(_testFolderPath + "/Expected/Stories/PseudoBefore.xml");
+            string output = _testFolderPath + "/output/Stories/Story_1.xml";
+            TextFileAssert.AreEqual(expected, output, "PseudoBefore syntax failed in Stories.xml");
         }
 
         [Test]
@@ -607,14 +607,14 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "letHead..after_1";
+			string styleName = "letHead_2";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
             string content = "###";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "letHead-letHead..after_1";
+			styleName = "letHead_3";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
             content = "***";
             result = ValidateNodeContent(_outputStory, content);
@@ -648,21 +648,21 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "NoteTargetReference_1";
+			string styleName = "NoteTargetReference_.zxx_1";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
             string content = "21:1 ";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "AlternateReading_1";
+			styleName = "AlternateReading_.zxx_1";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
             content = "runaround text ";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "NoteGeneralParagraph_1";
+			styleName = "NoteGeneralParagraph_1";
             XPath = "//CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
             content = "Keep in mind that text wrap options apply to the object being wrapped.";
             result = ValidateNodeContent(_outputStory, content);
@@ -778,33 +778,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
         }
-
-        [Ignore]
-        [Test]
-        public void ParentPrecede()
-        {
-            _stylesXML = new InStyles();
-            _storyXML = new InStory();
-            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/ParentPrecede.css");
-            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/ParentPrecede.xhtml");
-            ExportProcess();
-
-            _expected.Clear();
-            string styleName = "xitem_.en_1";
-            _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
-            XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
-            bool result = StoryXmlNodeTest(true);
-            Assert.IsTrue(result, styleName + " test Failed");
-
-            _expected.Clear();
-                        
-            styleName = "xlanguagetag_xitem-xitem_xitem_1";
-            _expected.Add("AppliedCharacterStyle", "CharacterStyle/" + styleName);
-            XPath = "//ParagraphStyleRange[2]/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
-            result = StoryXmlNodeTest(true);
-            Assert.IsTrue(result, styleName + " test Failed");
-        }
-
+		
         [Test]
         public void PseudoContains()
         {
@@ -837,7 +811,7 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "a.-b.-c_1";
+			string styleName = "a b c_1";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[1][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             bool result = StoryXmlNodeTest(true);
@@ -858,7 +832,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "a.-c_1";
+			styleName = "a c_1";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange[6][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(true);
@@ -866,37 +840,37 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        //[Ignore]
         public void Ancestor()
         {
+	        
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Ancestor.css");
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Ancestor.xhtml");
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "letter.-locator_1";
+			string styleName = "firstoftype letter_1";
             _expected.Add(styleName, "a");
             XPath = "//ParagraphStyleRange[2]/CharacterStyleRange[1][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             bool result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "letter.-locator_1";
+            styleName = "letter_1";
             _expected.Add(styleName, "b");
             XPath = "//ParagraphStyleRange[2]/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "letter.-locator_1";
+            styleName = "letter_1";
             _expected.Add(styleName, "d");
             XPath = "//ParagraphStyleRange[2]/CharacterStyleRange[5][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "letter.-current_1";
+			styleName = "current letter_1";
             _expected.Add(styleName, "w");
             XPath = "//ParagraphStyleRange[2]/CharacterStyleRange[24][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
@@ -907,7 +881,6 @@ namespace Test.InDesignConvert
         /// <summary>
         /// Tag Test - Ex: span{font-size:8pt;}, span[lang='en']{font-size:18pt;}
         /// </summary>
-        [Ignore]
         [Test]
         public void Tag()
         {
@@ -931,14 +904,14 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "main_4";
+			styleName = "header_1";
             _expected.Add(styleName, " span Header - Blue");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[3][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTestForTag(false);
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "main_5";
+			styleName = "header_.en_1";
             _expected.Add(styleName, " span Header with lang - Green");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[4][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTestForTag(false);
@@ -950,7 +923,6 @@ namespace Test.InDesignConvert
         /// Tag Test - Ex: span{font-size:8pt;}, span[lang='en']{font-size:18pt;}
         /// </summary>
         [Test]
-        [Ignore]
         public void SpacePreserve()
         {
             _storyXML = new InStory();
@@ -959,10 +931,10 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-            string styleName = "$ID/[No character style]"; 
+			string styleName = "headword"; 
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
-            string content = " ";
+			string content = "-End";
             bool result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, styleName + " test Failed");
         }
@@ -986,7 +958,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "Focused_1";
+			styleName = "Focused_.mcb_1";
             _expected.Add(styleName, "vako");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
@@ -1000,7 +972,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
             _expected.Clear();
-            styleName = "letData_3";
+			styleName = "EmphasizedText_1";
             _expected.Add(styleName, "chuparse la mano");
             XPath = "//ParagraphStyleRange/CharacterStyleRange[4][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]";
             result = StoryXmlNodeTest(false);
@@ -1048,7 +1020,7 @@ namespace Test.InDesignConvert
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/para.xhtml");
             ExportProcess();
 
-            string styleName = "p.a_1";
+            string styleName = "a_1";
             XPath = "//ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             string content = "para text para text para text para text para text para para text";
             bool result = ValidateNodeContent(_outputStory, content);
@@ -1071,7 +1043,6 @@ namespace Test.InDesignConvert
 
         // verify <p> tag above and below space
         [Test]
-        //[Ignore]
         public void List1()
         {
             _storyXML = new InStory();
@@ -1150,7 +1121,6 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        //[Ignore]
         public void List3()
         {
             _storyXML = new InStory();
@@ -1200,7 +1170,6 @@ namespace Test.InDesignConvert
         #endregion List
 
         [Test]
-        [Ignore]
         public void MultiLangHeader1()
         {
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/MultiLangHeader1.xhtml");
@@ -1265,7 +1234,7 @@ namespace Test.InDesignConvert
             XmlNode node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             string result = node.InnerXml;
 
-            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword_.ii\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
 
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
@@ -1274,39 +1243,31 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+	        expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headwordL3_.ii-fonipa\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
-
-            classname = "dTextVariablenFirst4";
-            output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
-            xPath = "//TextVariable[@Self = \"" + classname + "\"]";
-            node = Common.GetXmlNodeInDesignNamespace(output, xPath);
-            result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa_1\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
-            Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
-
+			
             classname = "dTextVariablenLast1";
             output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_1\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword_.ii\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
-            classname = "dTextVariablenLast3";
+			classname = "dTextVariablenLast2";
             output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-x-PIN_1\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headwordminor_.ii\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
-            classname = "dTextVariablenLast4";
+			classname = "dTextVariablenLast3";
             output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/xitem_.ii-fonipa_1\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headwordL3_.ii-fonipa\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
         }
 
@@ -1345,7 +1306,7 @@ namespace Test.InDesignConvert
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/PictureWidth.xhtml");
             ExportProcess();
 
-            string styleName = "pictureCaption_1";
+            string styleName = "pictureCaption";
             XPath = "//ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]/Rectangle/AnchoredObjectSetting";
 
             string _fileNameWithPath = Common.PathCombine(_outputStory, "Story_1.xml");
@@ -1363,7 +1324,6 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        //[Ignore]
         public void WidthAuto()
         {
             XmlNodeList nodesList;
@@ -1435,7 +1395,6 @@ namespace Test.InDesignConvert
             childNode.RemoveAll();
         }
 
-        [Ignore]
         [Test]
         public void ImageSourceAttrib()
         {
@@ -1474,19 +1433,19 @@ namespace Test.InDesignConvert
             node = nodesList[1];
             attrb = node.Attributes;
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "1 0 0 1 18 -21", "Case2 ItemTransform Property failed");
+            Assert.AreEqual(result, "1 0 0 1 18 -18", "Case2 ItemTransform Property failed");
 
             childNode = node.SelectSingleNode("Image");
             attrb = childNode.Attributes;
 
             result = attrb["ActualPpi"].Value;
-            Assert.AreEqual(result, "36 42", "Case2 ActualPpi Property failed");
+            Assert.AreEqual(result, "36 36", "Case2 ActualPpi Property failed");
 
             result = attrb["EffectivePpi"].Value;
-            Assert.AreEqual(result, "180 210", "Case2 EffectivePpi Property failed");
+            Assert.AreEqual(result, "72 72", "Case2 EffectivePpi Property failed");
 
             result = attrb["ItemTransform"].Value;
-            Assert.AreEqual(result, "0.2 0 0 0.2 -18 -21", "Case2 ItemTransform Property failed");
+			Assert.AreEqual(result, "0.5 0 0 0.5 -18 -18", "Case2 ItemTransform Property failed");
 
         }
 
@@ -1503,7 +1462,7 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             //Case 1:
-            XPath = "//ParagraphStyleRange[2]/Rectangle/TextFrame/ParagraphStyleRange/CharacterStyleRange/Content";
+            XPath = "//ParagraphStyleRange/Rectangle/TextFrame/ParagraphStyleRange/CharacterStyleRange/Content";
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, XPath);
             node = nodesList[0];
             content = node.InnerText;
@@ -1684,7 +1643,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, _inputCSS + " test Failed");
 
             _expected.Add("Content", " Reghia kori Diksonari.");
-            XPath = "//ParagraphStyleRange/CharacterStyleRange/Footnote/ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/NoteGeneralParagraph_1\"]";
+			XPath = "//ParagraphStyleRange/CharacterStyleRange/Footnote/ParagraphStyleRange/CharacterStyleRange[@AppliedCharacterStyle = \"CharacterStyle/NoteGeneralParagraph_1\"]";
             result = StoryXmlNodeTest(false);
             Assert.IsTrue(result, _inputCSS + " test Failed");
         }
@@ -1700,7 +1659,7 @@ namespace Test.InDesignConvert
             _storyXML = new InStory();
             _inputCSS= Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case1.css");
             ExportProcess();
-            string styleName = "h1_1";
+			string styleName = "h1_.en_1";
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             string content = "h1 lang";
             bool result = ValidateNodeContent(_outputStory, content);
@@ -1727,7 +1686,7 @@ namespace Test.InDesignConvert
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case4.css");
             ExportProcess();
-            styleName = "h1_.en_1";
+			styleName = "h1_.en_1";
             XPath = "//ParagraphStyleRange[2][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "h1 lang";
             result = ValidateNodeContent(_outputStory, content);
@@ -1737,7 +1696,7 @@ namespace Test.InDesignConvert
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case5.css");
             ExportProcess();
-            styleName = "h1.a_1";
+            styleName = "a_1";
             XPath = "//ParagraphStyleRange[3][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = " h1 class ";
             result = ValidateNodeContent(_outputStory, content);
@@ -1747,7 +1706,7 @@ namespace Test.InDesignConvert
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/tag_Case6.css");
             ExportProcess();
-            styleName = "h1.a_.en_1";
+			styleName = "a_.en_1";
             XPath = "//ParagraphStyleRange[4][@AppliedParagraphStyle = \"ParagraphStyle/" + styleName + "\"]//Content";
             content = "h1 class lang ";
             result = ValidateNodeContent(_outputStory, content);
@@ -1796,14 +1755,14 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Language.css");
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Language.xhtml");
             ExportProcess();
-            string classname = "partofspeech_1";
+			string classname = "partofspeech_.en_1";
             _expected.Clear();
             _expected.Add("AppliedLanguage", "$ID/English: USA");
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + classname + "\"]";
             bool result = StyleXmlNodeTest(true);
             Assert.IsTrue(result, _inputCSS + " test Failed");
 
-            classname = "partofPOR_1";
+			classname = "partofPOR_1";
             _expected.Clear();
             _expected.Add("AppliedLanguage", "$ID/Portuguese");
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + classname + "\"]";
@@ -1901,7 +1860,6 @@ namespace Test.InDesignConvert
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
-        [Ignore]
         public void Bughotugospels()
         {
             //Scripture
@@ -1922,9 +1880,7 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
             FileComparisionTest("B1peExpect", "2");
         }
-
-        [Ignore]
-        // Sankar
+		
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -2094,7 +2050,7 @@ namespace Test.InDesignConvert
             string xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             XmlNode node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             string result = node.InnerXml;
-            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+			string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword_.seh\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenLast1";
@@ -2102,7 +2058,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+			expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword_.seh\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
         }
 
@@ -2170,7 +2126,7 @@ namespace Test.InDesignConvert
             string xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             XmlNode node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             string result = node.InnerXml;
-            string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+			string expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword_.bzh\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
 
             classname = "dTextVariablenLast1";
@@ -2178,7 +2134,7 @@ namespace Test.InDesignConvert
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
             node = Common.GetXmlNodeInDesignNamespace(output, xPath);
             result = node.InnerXml;
-            expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
+			expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headword_.bzh\" SearchStrategy=\"LastOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
         }
 
@@ -2214,7 +2170,7 @@ namespace Test.InDesignConvert
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/TaggedText.xhtml");
             ExportProcess();
 
-            XPath = "//Story/ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/div.header_1\"]";
+			XPath = "//Story/ParagraphStyleRange[@AppliedParagraphStyle = \"ParagraphStyle/div_1\"]";
 
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);

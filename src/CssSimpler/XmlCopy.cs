@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace CssSimpler
@@ -92,6 +93,10 @@ namespace CssSimpler
                         }
                         break;
                     case XmlNodeType.Text:
+                        if (_rdr.Value == "a cabo")
+                        {
+                            Debug.Print("pause");
+                        }
                         _wtr.WriteString( _rdr.Value );
                         break;
                     case XmlNodeType.Whitespace:
@@ -192,20 +197,44 @@ namespace CssSimpler
         {
             //var ns = new XmlNamespaceManager(_rdr.NameTable);
             _wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
+            if (!string.IsNullOrEmpty(myClass))
+            {
             WriteAttr(myClass + "-ps");
+            }
             if (val.Contains(" "))
             {
                 _wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");
             }
-            if (val.StartsWith(@"\"))
+            if (val.Contains(@"\"))
             {
-                _wtr.WriteCharEntity((char) Convert.ToInt32(val.Substring(1), 16));
+                WriteValueEmbedEntities(val);
             }
             else
             {
                 _wtr.WriteValue(val);
             }
             _wtr.WriteEndElement();
+        }
+
+        private void WriteValueEmbedEntities(string val)
+        {
+            var matches = Regex.Matches(val, @"\\([0-9ABCDEF]+)", RegexOptions.IgnoreCase);
+            var position = 0;
+            foreach (Match match in matches)
+            {
+                var index = match.Groups[0].Index;
+                if (index > position)
+                {
+                    _wtr.WriteValue(val.Substring(position, index - position));
+                    position = index;
+                }
+                _wtr.WriteCharEntity((char) Convert.ToInt32(match.Groups[1].ToString(), 16));
+                position += match.Length;
+            }
+            if (position < val.Length)
+            {
+                _wtr.WriteValue(val.Substring(position));
+            }
         }
 
         protected void WriteAttr(string myClass)

@@ -128,33 +128,29 @@ namespace ApplyPDFLicenseInfo
         public static string GetOsName()
         {
             OperatingSystem osInfo = Environment.OSVersion;
-
+			var versionString = osInfo.VersionString;
             switch (osInfo.Platform)
             {
                 case System.PlatformID.Win32NT:
                     switch (osInfo.Version.Major)
                     {
                         case 3:
-                            return "Windows NT 3.51";
+                            versionString = "Windows NT 3.51";
                             break;
                         case 4:
-                            return "Windows NT 4.0";
+                            versionString = "Windows NT 4.0";
                             break;
                         case 5:
-                            if (osInfo.Version.Minor == 0)
-                                return "Windows 2000";
-                            else
-                                return "Windows XP";
+                            versionString = osInfo.Version.Minor == 0 ? "Windows 2000" : "Windows XP";
                             break;
                         case 6:
-                            if (osInfo.Version.Minor == 1)
-                                return "Windows7";
-                            return "Windows8";
+		                    versionString = osInfo.Version.Minor == 1 ? "Windows7" : "Windows8";
+		                    break;
                     }
                     break;
 
             }
-            return osInfo.VersionString.ToString();
+            return versionString;
         }
     }
 }

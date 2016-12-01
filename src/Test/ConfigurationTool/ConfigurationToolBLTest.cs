@@ -31,12 +31,10 @@ namespace Test.UIConfigurationToolBLTest
     [TestFixture]
     public class ConfigurationToolBLTest : ConfigurationToolBL
     {
-        private ConfigurationTool cTool;
+        private new ConfigurationTool cTool;
         private ConfigurationToolBL cToolBL;
         /// <summary>holds path to input folder for all tests</summary>
         private static string _inputBasePath = string.Empty;
-        /// <summary>holds path to expected results folder for all tests</summary>
-        private static string _expectBasePath = string.Empty;
         /// <summary>holds path to output folder for all tests</summary>
         private static string _outputBasePath = string.Empty;
         private string _supportSource = string.Empty;
@@ -48,11 +46,9 @@ namespace Test.UIConfigurationToolBLTest
         protected void Initialize()
         {
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ConfigurationTool/TestFiles");
-            _inputBasePath = Common.PathCombine(testPath, "Input");
-            _expectBasePath = Common.PathCombine(testPath, "Expected");
+            _inputBasePath = Common.PathCombine(testPath, "input");
             _outputBasePath = Common.PathCombine(testPath, "Output");
 
-            const bool recursive = true;
             if (Directory.Exists(_outputBasePath))
             {
                 DirectoryInfo di = new DirectoryInfo(_outputBasePath);
@@ -71,7 +67,7 @@ namespace Test.UIConfigurationToolBLTest
         protected void SetUp()
         {
             cTool = new ConfigurationTool();
-            cTool._fromNunit = true;
+			Common.Testing = true;
             cToolBL = new ConfigurationToolBL();
 
             //_pathwayPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/Pathway");
@@ -134,7 +130,7 @@ namespace Test.UIConfigurationToolBLTest
             FolderTree.Copy(fromFileName, toFileName);
         }
 
-        private static void LoadParam()
+        private new static void LoadParam()
         {
             // Verifying the input setting file and css file - in Input Folder
             const string settingFile = "DictionaryStyleSettings.xml";
@@ -169,6 +165,11 @@ namespace Test.UIConfigurationToolBLTest
             int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
             string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
             Assert.AreEqual("CustomSheet-1", actualStyleName, "GridRowValueTest Test Failes");
+
+			//We skipped because the dropdown value not loading in the Linux Testcases.
+			if (Common.UsingMonoVM)
+				return;
+
             string actual = cTool.StylesGrid[1, SelectedRowIndex].Value.ToString();
             Assert.AreEqual("5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13", actual.Trim(), "Grid description Test Failes");
             actual = cTool.StylesGrid[4, SelectedRowIndex].Value.ToString();
@@ -242,6 +243,11 @@ namespace Test.UIConfigurationToolBLTest
             Assert.AreEqual("", actual, "GridRowValueTest Test Failes");
             actual = cTool.TxtApproved.Text;
             Assert.AreEqual("", actual, "GridRowValueTest Test Failes");
+
+			//We skipped because the dropdown value not loading in the Linux Testcases.
+			if (Common.UsingMonoVM)
+				return;
+
             actual = cTool.DdlPagePageSize.Text;
             Assert.AreEqual("5.25in x 8.25in", actual, "GridRowValueTest Test Failes");
             actual = cTool.TxtPageInside.Text;
@@ -299,22 +305,7 @@ namespace Test.UIConfigurationToolBLTest
             Assert.AreEqual(afterNew - 1, afterDelete, "New Count Test Fails");
             cTool.Close();
         }
-
-        [Ignore]
-        [Test]
-        public void LoadTest()
-        {
-            SetUp();
-            CopyFile();
-            LoadParam();
-            cTool._cToolBL.ConfigurationTool_LoadBL();
-            cTool._cToolBL.ConfigurationTool_FormClosingBL();
-            GridRowCount_Load();
-            GridRowValue_Load();
-            FormButtonEnable_Load();
-        }
-
-
+       
         [Test]
         [Category("ShortTest")]
         public void SaveInputTypeTest()
@@ -322,7 +313,7 @@ namespace Test.UIConfigurationToolBLTest
             SetUp();
             CopyFile();
             Param.Value["OutputPath"] = _outputBasePath;
-            cToolBL.SaveInputType("Scripture");
+            Common.SaveInputType("Scripture");
             const string expected = "Scripture";
             var xdoc = new XmlDocument();
             xdoc.Load(Common.PathCombine(Common.GetAllUserPath(), "StyleSettings.xml"));

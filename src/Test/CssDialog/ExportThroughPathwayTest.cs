@@ -27,8 +27,15 @@ namespace Test.CssDialog
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+
+			if (!File.Exists(styleSettingFile))
+			{
+				styleSettingFile = Path.GetDirectoryName(Common.AssemblyPath);
+				styleSettingFile = Common.PathCombine(styleSettingFile, "StyleSettings.xml");
+			}
+
             Common.Testing = true;
             ValidateXMLVersion(styleSettingFile);
             InputType = "Dictionary";
@@ -83,5 +90,15 @@ namespace Test.CssDialog
                 lastItem = item;
             }
         }
+
+		/// <summary>
+		///A test for InvalidCharsTest
+		///</summary>
+		[Test]
+		public void InvalidCharsTest()
+		{
+			OutputFolder = @"C:\Turkish Stuff-Texts-07\Dictionary";
+			Assert.AreEqual(@"C:\Turkish_Stuff-Texts-07\Dictionary", ReplaceInvalidChars(OutputFolder), "InvalidCharsTest failed");
+		}
     }
 }
