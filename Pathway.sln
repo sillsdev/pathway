@@ -2061,7 +2061,6 @@ Global
 		{EB7EB8FE-6414-4C53-B5E6-54352EE25364}.PathwayXeLaTeX|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
 		{EB7EB8FE-6414-4C53-B5E6-54352EE25364}.PathwayXeLaTeX|Mixed Platforms.Build.0 = PathwayXeLaTeX|x86
 		{EB7EB8FE-6414-4C53-B5E6-54352EE25364}.PathwayXeLaTeX|x86.ActiveCfg = PathwayXeLaTeX|x86
-		{EB7EB8FE-6414-4C53-B5E6-54352EE25364}.PathwayXeLaTeX|x86.Build.0 = PathwayXeLaTeX|x86
 		{EB7EB8FE-6414-4C53-B5E6-54352EE25364}.PathwayYouVersion|Any CPU.ActiveCfg = PathwayXeLaTeX|Any CPU
 		{EB7EB8FE-6414-4C53-B5E6-54352EE25364}.PathwayYouVersion|Any CPU.Build.0 = PathwayXeLaTeX|Any CPU
 		{EB7EB8FE-6414-4C53-B5E6-54352EE25364}.PathwayYouVersion|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
@@ -2133,7 +2132,6 @@ Global
 		{749D4FCD-5100-46C8-AE73-50873CB5CEC0}.PathwayXeLaTeX|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
 		{749D4FCD-5100-46C8-AE73-50873CB5CEC0}.PathwayXeLaTeX|Mixed Platforms.Build.0 = PathwayXeLaTeX|x86
 		{749D4FCD-5100-46C8-AE73-50873CB5CEC0}.PathwayXeLaTeX|x86.ActiveCfg = PathwayXeLaTeX|x86
-		{749D4FCD-5100-46C8-AE73-50873CB5CEC0}.PathwayXeLaTeX|x86.Build.0 = PathwayXeLaTeX|x86
 		{749D4FCD-5100-46C8-AE73-50873CB5CEC0}.PathwayYouVersion|Any CPU.ActiveCfg = PathwayXeLaTeX|Any CPU
 		{749D4FCD-5100-46C8-AE73-50873CB5CEC0}.PathwayYouVersion|Any CPU.Build.0 = PathwayXeLaTeX|Any CPU
 		{749D4FCD-5100-46C8-AE73-50873CB5CEC0}.PathwayYouVersion|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
@@ -2205,7 +2203,6 @@ Global
 		{D6A2BF1C-774E-4118-830F-23D60DE0A9A9}.PathwayXeLaTeX|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
 		{D6A2BF1C-774E-4118-830F-23D60DE0A9A9}.PathwayXeLaTeX|Mixed Platforms.Build.0 = PathwayXeLaTeX|x86
 		{D6A2BF1C-774E-4118-830F-23D60DE0A9A9}.PathwayXeLaTeX|x86.ActiveCfg = PathwayXeLaTeX|x86
-		{D6A2BF1C-774E-4118-830F-23D60DE0A9A9}.PathwayXeLaTeX|x86.Build.0 = PathwayXeLaTeX|x86
 		{D6A2BF1C-774E-4118-830F-23D60DE0A9A9}.PathwayYouVersion|Any CPU.ActiveCfg = PathwayXeLaTeX|Any CPU
 		{D6A2BF1C-774E-4118-830F-23D60DE0A9A9}.PathwayYouVersion|Any CPU.Build.0 = PathwayXeLaTeX|Any CPU
 		{D6A2BF1C-774E-4118-830F-23D60DE0A9A9}.PathwayYouVersion|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
@@ -2277,7 +2274,6 @@ Global
 		{8FD33078-DF28-44DA-BE05-C9981EF9A214}.PathwayXeLaTeX|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86
 		{8FD33078-DF28-44DA-BE05-C9981EF9A214}.PathwayXeLaTeX|Mixed Platforms.Build.0 = PathwayXeLaTeX|x86
 		{8FD33078-DF28-44DA-BE05-C9981EF9A214}.PathwayXeLaTeX|x86.ActiveCfg = PathwayXeLaTeX|x86
-		{8FD33078-DF28-44DA-BE05-C9981EF9A214}.PathwayXeLaTeX|x86.Build.0 = PathwayXeLaTeX|x86
 		{8FD33078-DF28-44DA-BE05-C9981EF9A214}.PathwayYouVersion|Any CPU.ActiveCfg = PathwayXeLaTeX|Any CPU
 		{8FD33078-DF28-44DA-BE05-C9981EF9A214}.PathwayYouVersion|Any CPU.Build.0 = PathwayXeLaTeX|Any CPU
 		{8FD33078-DF28-44DA-BE05-C9981EF9A214}.PathwayYouVersion|Mixed Platforms.ActiveCfg = PathwayXeLaTeX|x86

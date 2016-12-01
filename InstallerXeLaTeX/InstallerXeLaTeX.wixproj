@@ -123,7 +123,7 @@
     </WixExtension>
   </ItemGroup>
   <Target Name="BeforeBuild">
-    <Exec Command="BuildStep.exe -v:1 -a:FileComponents --ApplicationFileName=XeLaTex.wxs --BasePath=$(SolutionDir)InstallerXeLaTeX --ReleaseFolder=../output/pwtex" WorkingDirectory="$(SolutionDir)" />
+    <Exec Command="BuildStep.exe -v:1 -a:FileComponents --ApplicationFileName=XeLaTex.wxs --BasePath=$(SolutionDir)InstallerXeLaTeX --ReleaseFolder=..\output\pwtex" WorkingDirectory="$(SolutionDir)" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
