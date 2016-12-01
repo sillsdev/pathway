@@ -23,7 +23,7 @@ Func Advanced($left, $top)
 	Global $advanced
 	Global $INS_Num, $INS_Size, $INS_DotNet, $INS_Java, $INS_Office, $INS_Epub, $INS_Pdf, $INS_Prince, $INS_XeLaTex, $INS_Dic4MID, $INS_PdfLicense, $INS_YouVersion, $DEL_Installer
 	Local $message, $size, $dotnet, $java, $office, $epub, $pdf, $prince, $xelatex, $dic4mid, $pdflicense, $youversion, $delIns, $pathway, $line, $close, $cancel, $msg
-	
+
 	$advanced = GUICreate("License", 660, 550, $left, $top)
 	$pathway = GUICtrlCreateIcon("icon.ico", -1, 40, 272, 146, 152, $SS_CENTERIMAGE)
 	$line = GUICtrlCreateGraphic(20, 444, 600, 2, $SS_BLACKFRAME)
@@ -42,10 +42,10 @@ Func Advanced($left, $top)
 	;$pdflicense = GUICtrlCreateCheckbox("PdfLicenseManager - 3.5MB", 264, 390, 340, 28)
 	;$youversion = GUICtrlCreateCheckbox("YouVersion (web pages) - 20.4MB", 264, 360, 340, 28)
 	$delIns = GUICtrlCreateCheckbox("Delete installers after using them", 264, 416, 340, 28)
-	
+
 	;$dotnetinfo = GUICtrlCreateButton("info", 594, 150, 32, 32, $BS_ICON, $WS_EX_TRANSPARENT)
 	;GUICtrlSetImage( $dotnetinfo, "info.ico", -1, 0)
-	
+
 
 	GUICtrlSetState($dotnet, $GUI_DISABLE)
 	Advanced_SetDefault($INS_DotNet, $dotnet)
@@ -92,7 +92,7 @@ Func Advanced($left, $top)
 			$INS_Epub = Advanced_State($epub, 43.2)
 			$INS_Pdf = Advanced_State($pdf, 13.8)
 			$INS_Prince = Advanced_State($prince, 4.0)
-			$INS_XeLaTex = Advanced_State($xelatex, 32.4)
+			$INS_XeLaTex = Advanced_State($xelatex, 111.0)
 			;$INS_Dic4MID = Advanced_State($dic4mid, 2.2)
 			;$INS_PdfLicense = Advanced_State($pdflicense, 3.5)
 			;$INS_YouVersion = Advanced_State($youversion, 20.4)
@@ -129,7 +129,7 @@ Func Advanced_SetDefault($value, $control)
 		GUICtrlSetState($control, $GUI_UNCHECKED)
 	EndIf
 	GUICtrlSetFont($control, 10, 400, 0, "Tahoma")
-EndFunc	
+EndFunc
 
 Func Advanced_State($control, $size)
 	Global $INS_Num, $INS_Size

@@ -58,14 +58,20 @@ EndFunc
 
 Func BteVersion()
 	Local $fwFolder
-	RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\ScrChecks\1.0\Settings_Directory","")
+	RegRead("HKLM\SOFTWARE\Wow6432Node\ScrChecks\1.0\Settings_Directory","")
 	if @error Then
-		RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory","")
+		RegRead("HKLM64\SOFTWARE\ScrChecks\1.0\Settings_Directory","")
 	EndIf
 	if @error Then
-		$fwFolder = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\FieldWorks\7.0", "RootCodeDir")
+		RegRead("HKLM\SOFTWARE\ScrChecks\1.0\Settings_Directory","")
+	EndIf
+	if @error Then
+		$fwFolder = RegRead("HKLM\SOFTWARE\Wow6432Node\SIL\FieldWorks\7.0", "RootCodeDir")
 		if @error Then
-			$fwFolder = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
+			$fwFolder = RegRead("HKLM64\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
+		EndIf
+		if @error Then
+			$fwFolder = RegRead("HKLM\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
 		EndIf
 		if @error Then
 			;MsgBox(4096,"Status","No BTE")
@@ -273,12 +279,16 @@ EndFunc
 
 Func OfficeInstalled($size)
 	Global $INS_Num, $INS_Size
+	Local $loKey
 
-	RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\LibreOffice", "")
-	if @error Then
-		RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\LibreOffice","")
+	$loKey = RegEnumKey("HKLM64\SOFTWARE\Wow6432Node\LibreOffice\LibreOffice", 1)
+	if $loKey = "" Then
+		$loKey = RegEnumKey("HKLM64\SOFTWARE\LibreOffice\LibreOffice",1)
 	EndIf
-	If not @error Then
+	if $loKey = "" Then
+		$loKey = RegEnumKey("HKLM\SOFTWARE\LibreOffice\LibreOffice",1)
+	EndIf
+	If $loKey <> "" Then
 		Return True
 	EndIf
 	$INS_Num = $INS_Num + 1
@@ -346,15 +356,21 @@ Func PrinceInstalled($size)
 	Global $INS_Num, $INS_Size
 	Local $path
 
-	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
+	$path = RegRead("HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
 	if @error Then
-		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
-		if @error Then
-			$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}", "InstallLocation")
-			if @error Then
-				$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}", "InstallLocation")
-			EndIf
-		EndIf
+		$path = RegRead("HKLM64\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
+	EndIf
+	if @error Then
+		$path = RegRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Prince_is1", "InstallLocation")
+	EndIf
+	if @error Then
+		$path = RegRead("HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}", "InstallLocation")
+	EndIf
+	if @error Then
+		$path = RegRead("HKLM64\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}", "InstallLocation")
+	EndIf
+	if @error Then
+		$path = RegRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{3AC28E9C-8F06-4E2C-ADDA-726E2230A03A}", "InstallLocation")
 	EndIf
 	if not @error Then
 		;MsgBox(4096,"Status","PrinceXml path " & $path)
@@ -519,16 +535,22 @@ Func XeLaTexInstalled($size)
 	Global $INS_Num, $INS_Size
 	Local $path, $ver, $latest
 
-	$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexDir")
+	$path = RegRead("HKLM\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexDir")
 	if @error Then
-		$path = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexDir")
+		$path = RegRead("HKLM64\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexDir")
+	EndIf
+	if @error Then
+		$path = RegRead("HKLM\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexDir")
 	EndIf
 	if not @error Then
 		;MsgBox(4096,"Status","XeLaTeX path " & $path)
 		if FileExists( $path & "bin\win32\xelatex.exe") Then
-			$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexVer")
+			$ver = RegRead("HKLM\SOFTWARE\Wow6432Node\SIL\PathwayXeLaTeX", "XeLaTexVer")
 			if @error Then
-				$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexVer")
+				$ver = RegRead("HKLM64\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexVer")
+			EndIf
+			if @error Then
+				$ver = RegRead("HKLM\SOFTWARE\SIL\PathwayXeLaTeX", "XeLaTexVer")
 			EndIf
 			$latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.6")
 			;MsgBox(4096,"Status","XeLaTeX ver " & $ver & ", latest " & $latest)
@@ -604,15 +626,27 @@ EndFunc
 
 Func IsAssociation($ext)
 	Local $ver, $cmd, $endPath, $serverApp
-	$ver = RegRead("HKEY_CURRENT_USER\SOFTWARE\Classes\" & $ext, "")
+	$ver = RegRead("HKCU64\SOFTWARE\Classes\" & $ext, "")
 	if @error Then
-		$ver = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\" & $ext, "")
+		$ver = RegRead("HKCU\SOFTWARE\Classes\" & $ext, "")
+	EndIf
+	if @error Then
+		$ver = RegRead("HKLM64\SOFTWARE\Classes\" & $ext, "")
+	EndIf
+	if @error Then
+		$ver = RegRead("HKLM\SOFTWARE\Classes\" & $ext, "")
 	EndIf
 	if not @error Then
 		;MsgBox(4096,"Status","Designator " & $ver)
-		$cmd = RegRead("HKEY_CURRENT_USER\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
+		$cmd = RegRead("HKCU64\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
 		if @error Then
-			$cmd = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
+			$cmd = RegRead("HKCU\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
+		Endif
+		if @error Then
+			$cmd = RegRead("HKLM64\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
+		Endif
+		if @error Then
+			$cmd = RegRead("HKLM\SOFTWARE\Classes\" & $ver & "\shell\open\command", "")
 		Endif
 		;MsgBox(4096,"Status","Command " & $cmd)
 		$endPath = StringInStr($cmd, """", 0, 2)
@@ -667,11 +701,17 @@ EndFunc
 Func LaunchSite($url)
 	Local $http, $cmd
 	;See http://stackoverflow.com/questions/5501349/open-website-in-the-users-default-browser-without-letting-them-launch-anything
-	$http = RegRead("HKEY_CURRENT_USER\Software\Classes\http\shell\open\command", "")
+	$http = RegRead("HKCU\Software\Classes\http\shell\open\command", "")
+	if @error Then
+		$http = RegRead("HKCU64\Software\Classes\http\shell\open\command", "")
+	Endif
 	if not @error Then
 		$cmd = StringReplace($http, "%1", $url)
 	Else
-		$http = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Classes\HTTP\shell\open\command", "")
+		$http = RegRead("HKLM\SOFTWARE\Classes\HTTP\shell\open\command", "")
+		if @error Then
+			$http = RegRead("HKLM64\SOFTWARE\Classes\HTTP\shell\open\command", "")
+		Endif
 		$cmd = $http & " " & $url
 	EndIf
 	RunWait($cmd)
@@ -679,23 +719,32 @@ EndFunc
 
 Func Check4Fw6()
 	Local $Fw6
-	$Fw6 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\FieldWorks", "RootCodeDir")
+	$Fw6 = RegRead("HKLM\SOFTWARE\Wow6432Node\SIL\FieldWorks", "RootCodeDir")
 	if @error Then
-		$Fw6 = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\FieldWorks", "RootCodeDir")
+		$Fw6 = RegRead("HKLM64\SOFTWARE\SIL\FieldWorks", "RootCodeDir")
+	EndIf
+	if @error Then
+		$Fw6 = RegRead("HKLM\SOFTWARE\SIL\FieldWorks", "RootCodeDir")
 	EndIf
 EndFunc
 
 Func Fw73orLater()
 	Local $fwDir, $ver
-	$fwDir = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\SIL\FieldWorks\7.0", "RootCodeDir")
+	$fwDir = RegRead("HKLM\SOFTWARE\Wow6432Node\SIL\FieldWorks\7.0", "RootCodeDir")
 	if @error Then
-		$fwDir = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
-		if @error Then
-			$fwDir = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\SIL\FieldWorks\8", "RootCodeDir")
-			if @error Then
-				Return False
-			EndIf
-		EndIf
+		$fwDir = RegRead("HKLM64\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
+	EndIf
+	if @error Then
+		$fwDir = RegRead("HKLM\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
+	EndIf
+	if @error Then
+		$fwDir = RegRead("HKLM64\SOFTWARE\SIL\FieldWorks\8", "RootCodeDir")
+	EndIf
+	if @error Then
+		$fwDir = RegRead("HKLM\SOFTWARE\SIL\FieldWorks\8", "RootCodeDir")
+	EndIf
+	if @error Then
+		Return False
 	EndIf
 	$ver = FileGetVersion( $fwDir & "Fieldworks.exe" )
 	;MsgBox( 1, "Info", $ver )
