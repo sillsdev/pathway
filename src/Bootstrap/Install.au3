@@ -274,7 +274,8 @@ EndFunc
 Func OfficeInstalled($size)
 	Global $INS_Num, $INS_Size
 
-	If IsAssociation(".odt") Then
+	RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\LibreOffice","")
+	If not @error Then
 		Return True
 	EndIf
 	$INS_Num = $INS_Num + 1
@@ -297,10 +298,10 @@ Func InstallLibreOfficeIfNecessary()
 	;EndIf
 	;$latest = IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3")
 	$latest = StringSplit(IniRead("PathwayBootstrap.Ini", "Versions", "LibreOffice", "3.4.3,6263"), ",")
-	$pkg = "LibO_" & $latest[1] & "_Win_x86_install_multi.msi"
+	;Current URL: http://donate.libreoffice.org/home/dl/win-x86/5.2.3/en-US/LibreOffice_5.2.3_Win_x86.msi
+	$pkg = "LibreOffice_" & $latest[1] & "_Win_x86.msi"
 	If $latest[0] = "1" Then
-		;MsgBox( 4096, "Getting URL", "http://download.documentfoundation.org/libreoffice/stable/" & $latest[1] & "/win/x86/" & $pkg)
-		GetFromUrl($pkg, "http://download.documentfoundation.org/libreoffice/stable/" & $latest[1] & "/win/x86/" & $pkg)
+		GetFromUrl($pkg, "http://donate.libreoffice.org/home/dl/win-x86/" & $latest[1] & "/en-US/" & $pkg)
 	Else
 		GetFromUrl($pkg, "http://www.oldapps.com/libreoffice.php?app=" & $latest[2])
 	EndIf
@@ -548,8 +549,7 @@ Func InstallXeLaTeXIfNecessary()
 		Return
 	Endif
 	Local $latest = IniRead("PathwayBootstrap.Ini", "Versions", "XeLaTex", "1.6")
-	Local $suffix = "Testing-" & $latest
-	Local $name = "SetupXeLaTeX" & $suffix & ".msi"
+	Local $name = "PathwayXeLaTexSetup-" & $latest & ".msi"
 	CleanUp($name)
 	GetInstaller($name)
 	LaunchInstaller($name)
