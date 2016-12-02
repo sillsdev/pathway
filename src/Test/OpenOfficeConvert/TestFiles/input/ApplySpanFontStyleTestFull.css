@@ -1,5 +1,3 @@
-.cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;font-family: 'Times New Roman', serif; } .title{margin-top: 112pt; text-align: center; font-family: 'Times New Roman', serif; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;font-family: 'Times New Roman', serif; } .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}.copyright{text-align: left; font-size:1pt;visibility:hidden;font-family: 'Times New Roman', serif;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;font-family: 'Times New Roman', serif;}.LText{font-size:12pt;font-style:italic;font-family: 'Times New Roman', serif;}.LText:before{content: "\2028"}.dummyTOC{font-size:1pt; page-break-after: always;} .TableOfContentLO{visibility:hidden;}.dummypage{page-break-after: always;} 
-
 .BookTitle {font-family: "Microsoft Sans Serif"; 
  font-size: 8pt; 
  }
@@ -572,48 +570,7 @@ a {
 .revsensenumber {
         font-weight: bold;
 }
-.scientificname { }
-.scientific-name { }
-.semanticdomainabbr { }
-.semanticdomainname { }
-.semantic-domain-abbr { }
-.semantic-domain-name { }
-.semanticdomains { }
-.semantic-domains { }
-.semantic-domains-sub { }
-.sense {
-        font-weight: normal;
-}
-.sensecomplexentryform {
-        font-weight: bold;
-}
-.sensecomplexentrytype { }
-.sensecomplexformrefs { }
-.sensecrossref {
-        font-weight: bold;
-}
-.sense-crossref {
-        font-weight: bold;
-}
-.sense-crossref-sub {
-        font-weight: bold;
-}
-.sensemainentryref {
-        font-weight: bold;
-}
-.slotname { }
-.slot-name { }
-.slots { }
-.subentry { }
-.subentry-type { }
-.translations { }
-.translations-minor { }
-.translations-sub { }
-.variantrefcondition { }
-.variantrefentrytype { }
-.variantrefform {
-        font-weight: bold;
-}
+
 .variantrefs { }
 .xhomographnumber {
         font-size: 55%;
@@ -698,105 +655,6 @@ text-align: justify;
        column-fill: balance;
 }
 
-
-
-
-
-
-        
-
-
-
-/* Language_Tag_No.css */
-.xlanguagetag {
-       display: none;
-}
-
-
-
-
-
-
-
-.letData, .revData {
-       line-height: inherit;
-       -ps-fixed-line-height: inherit;
-}
-.entry {
-       line-height: inherit;
-       -ps-fixed-line-height: inherit;
-}
-.revEntry {
-       line-height: inherit;
-       -ps-fixed-line-height: inherit;
-}
-.letHead {
-       line-height: inherit;
-       -ps-fixed-line-height: inherit;
-}
-.revHeader {
-       line-height: inherit;
-       -ps-fixed-line-height: inherit;
-}
-
-
-
-/* Cascading Style Sheet to set background color to Transparent */
-.entry, .subentry, .xitem[lang='tpi'], .crossref, .crossref-type, .example, .example-sub, .grammatical-info, .grammatical-info-sub, .headword, .headword-minor, .headword-sub, .LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub, .lexref-type, .lexref-type-sub, .pronunciation, .pronunciation-minor, .pronunciation-sub, .sense-crossref, .sense-crossref-sub, .subentries {
-    background-color: transparent;
-}
-
-
-
-.pictureRight {
-    display: block;
-}
-.pictureLeft {
-    display: block;
-}
-.pictureCenter {
-    display: block;
-}
-/* Running Head Mirrored.css */
-@page :left {
-    @top-left {
-           content: string( guideword, first);
-           direction: ltr;
-           font-weight: bold;
-           font-size: 12pt;
-           margin-top: 1cm;
-    }
-    @top-center    { content: ''; }
-    @top-right  { content: ''; }
-    @bottom-left   { content: ''; }
-    @bottom-center { content: ''; }
-    @bottom-right  { content: ''; }
-}
-@page :right {
-    @top-left   { content: ''; }
-    @top-center { content: ''; }
-    @top-right  {
-           content: string( guideword, last);
-           direction: ltr;
-           font-weight: bold;
-           font-size: 12pt;
-           margin-top: 1cm;
-    }
-    @bottom-left   { content: ''; }
-    @bottom-center { content: ''; }
-    @bottom-right  { content: ''; }
-}
-@page :first {
-    @top-left      { content: ''; }
-    @top-center    { content: ''; }
-    @top-right     { content: ''; }
-    @bottom-left   { content: ''; }
-    @bottom-center { content: ''; }
-    @bottom-right  { content: ''; }
-}
-
-
-
 .letData {
        column-rule: solid 1pt #808080;
 }
@@ -814,62 +672,4 @@ text-align: justify;
        margin: 18pt 9pt;
        /* padding-bottom: 36pt; */
        /* padding-top: 36pt; */
-}
-/* Page number  Top Inside.css */
-@page :left {
-    @top-right {
-          content: counter( page);
-           margin-top: 1cm;
-    }
-}
-
-@page :right {
-    @top-left {
-           content: counter( page);
-           margin-top: 1cm;
-    }
-}
-
-
-@page :first {
-    @bottom-left {
-           content: counter( page);
-    }
-}
-.revhomographnumber {
-        font-size: 55%;
-        font-weight: bold;
-        vertical-align: sub;
-}
-.revsensenumber {
-        font-weight: bold;
-}
-
-.minorentry {
-       text-align: left;
-       margin-left: 12pt;
-       text-indent: -12pt;
-}
-.BookReferenceDiv {
- display: none;
-}
-.Front_Matter {
-margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;
-}
-.hideDiv {
-page-break-before:always;
-display: none;
-}
-.BookReferenceDiv {
- display: none;
-}
-.BookReferenceDiv {
- display: none;
-}
-.Front_Matter {
-margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;
-}
-.hideDiv {
-page-break-before:always;
-display: none;
 }

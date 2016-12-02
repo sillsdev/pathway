@@ -102,6 +102,7 @@ namespace Test.OpenOfficeConvert
                 Directory.Delete(outputDirectory, true);
             }
             FolderTree.Copy(inputSourceDirectory, outputDirectory);
+	        Param.SetLoadType = "Scripture";
             Param.LoadSettings();
             _projInfo.ProjectPath = outputDirectory;
             _projInfo.ProjectInputType = "Scripture";

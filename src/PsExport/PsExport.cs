@@ -119,8 +119,10 @@ namespace SIL.PublishingSolution
                 {
                     return;
                 }
-                string cssFullName = GetCssFullName(outDir, mainFullName);
-                if (cssFullName == null) return;
+				string cssFullName;
+				if (GetCSSFileName(outFullName, outDir, mainFullName, out cssFullName)) 
+					return;
+
 				SetPageCenterTitle(cssFullName);
                 _selectedCssFromTemplate = Path.GetFileNameWithoutExtension(cssFullName);
                 string fluffedCssFullName;
@@ -208,6 +210,24 @@ namespace SIL.PublishingSolution
 				
             }
         }
+
+	    private bool GetCSSFileName(string outFullName, string outDir, string mainFullName, out string cssFullName)
+	    {
+		    cssFullName = GetCssFullName(outDir, mainFullName);
+		    if (cssFullName == null)
+			    return true;
+
+		    if (!File.Exists(cssFullName))
+		    {
+			    var cssName = Path.GetFileNameWithoutExtension(outFullName) + ".css";
+			    cssFullName = Common.PathCombine(outDir, cssName);
+			    if (!File.Exists(cssFullName))
+			    {
+				    return true;
+			    }
+		    }
+		    return false;
+	    }
 
 
 	    private void WritePublishingInformationFontStyleinCSS(string cssFileName)

@@ -119,6 +119,7 @@ namespace Test.XeLatex
 				Directory.Delete(outputDirectory, true);
 			}
 			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.SetLoadType = "Scripture";
 			Param.LoadSettings();
 			_projInfo.ProjectPath = outputDirectory;
 			_projInfo.ProjectInputType = "Scripture";
@@ -190,6 +191,7 @@ namespace Test.XeLatex
 				Directory.Delete(outputDirectory, true);
 			}
 			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.SetLoadType = "Dictionary";
 			Param.LoadSettings();
 			_projInfo.ProjectPath = outputDirectory;
 			_projInfo.ProjectInputType = "Dictionary";

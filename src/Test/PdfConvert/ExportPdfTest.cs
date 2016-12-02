@@ -95,6 +95,7 @@ namespace Test.PdfConvert
                 Directory.Delete(outputDirectory, true);
             }
             FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.SetLoadType = "Dictionary";
             Param.LoadSettings();
             _projInfo.ProjectPath = outputDirectory;
             _projInfo.ProjectInputType = "Dictionary";
@@ -122,6 +123,8 @@ namespace Test.PdfConvert
                 Directory.Delete(outputDirectory, true);
             }
             FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.SetLoadType = "Dictionary";
+			Param.LoadSettings();
             _projInfo.ProjectPath = outputDirectory;
             _projInfo.ProjectInputType = "Dictionary";
             _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "ExportDictionaryGuideword.xhtml");
@@ -147,8 +150,9 @@ namespace Test.PdfConvert
             {
                 Directory.Delete(outputDirectory, true);
             }
-            FolderTree.Copy(inputSourceDirectory, outputDirectory);
-            Param.LoadSettings();
+			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.SetLoadType = "Scripture";
+			Param.LoadSettings();
             _projInfo.ProjectPath = outputDirectory;
             _projInfo.ProjectInputType = "Scripture";
             _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "ScriptureDraft.xhtml");

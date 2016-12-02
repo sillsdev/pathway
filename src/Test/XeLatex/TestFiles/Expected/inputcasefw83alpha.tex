@@ -1,4 +1,4 @@
-\documentclass[gps1,twoside]{article} 
+\documentclass[a4paper]{article} 
 \usepackage{float}
 \usepackage{grffile}
 \usepackage{graphicx}
@@ -9,12 +9,11 @@
 \usepackage{calc}
 \usepackage{lettrine}
 \usepackage{alphalph}
-\usepackage[left=1.27cm,right=1.27cm,top=1.27cm,bottom=1.27cm,includeheadfoot]{geometry}
+\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
 \usepackage{changepage}
-\usepackage{setspace}
 \usepackage{needspace}
 \usepackage{multicol}
-\usepackage{bidi} 
+\usepackage{setspace}
 
 \parindent=0pt
 \parskip=\medskipamount
@@ -32,662 +31,43 @@
 \font\spanbzhfonipa="Charis SIL/GR" at 10pt
 \font\spanfr="Times New Roman/GR" at 10pt
 \font\spanes="Times New Roman/GR" at 10pt
-\font\spanbzhmainheadwordentry="Times New Roman/GR/B" at 12pt
-\font\spanspanmainheadwordentrybefore="Times New Roman/GR" at 9pt
-\font\spanmainheadwordentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanmainheadwordentry="Times New Roman/GR/B" at 12pt
-\font\pronunciationpronunciationpronunciationsentrybefore="Times New Roman/GR" at 9pt
-\font\pronunciationsentryafter="Times New Roman/GR" at 9pt
-\font\spanspanformpronunciationpronunciationsentrybefore="Times New Roman/GR" at 9pt
-\font\spanformpronunciationpronunciationsentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanformpronunciationpronunciationsentrylastchildafter="Times New Roman/GR" at 9pt
-\font\locationpronunciationpronunciationsentryafter="Times New Roman/GR" at 9pt
-\font\locationpronunciationpronunciationsentry="Times New Roman/GR/I" at 12pt
-\font\spanwritingsystemprefixspanabbreviationlocationpronunciationpronunciationsentry="Times New Roman/GR" at 10pt
-\font\spanwritingsystemprefixspanabbreviationlocationpronunciationpronunciationsentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationlocationpronunciationpronunciationsentrybefore="Times New Roman/GR" at 9pt
-\font\spanabbreviationlocationpronunciationpronunciationsentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspannamelocationpronunciationpronunciationsentrybefore="Times New Roman/GR" at 9pt
-\font\spannamelocationpronunciationpronunciationsentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanaliaslocationpronunciationpronunciationsentrybefore="Times New Roman/GR" at 9pt
-\font\spanaliaslocationpronunciationpronunciationsentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanvariantformentrybackrefsentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefsentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefsentryafter="Times New Roman/GR" at 9pt
-\font\variantentrytypevariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefsentrybefore="Times New Roman/GR" at 9pt
-\font\variantentrytypesvariantformentrybackrefvariantformentrybackrefsentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefsentrybefore="Times New Roman/GR" at 9pt
-\font\spanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefsentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanheadwordvariantformentrybackrefvariantformentrybackrefsentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefsentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefsentrylastchildafter="Times New Roman/GR" at 9pt
-\font\etymologyentrybefore="Times New Roman/GR" at 9pt
-\font\etymologyentryafter="Times New Roman/GR" at 9pt
-\font\spanspanformetymologyentrybefore="Times New Roman/GR" at 9pt
-\font\spanformetymologyentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanglossetymologyentrybefore="Times New Roman/GR" at 9pt
-\font\spanglossetymologyentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspancommentetymologyentrybefore="Times New Roman/GR" at 9pt
-\font\spancommentetymologyentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanminimallexreferencesentrybefore="Times New Roman/GR" at 9pt
-\font\minimallexreferencesentryafter="Times New Roman/GR" at 9pt
-\font\spanenownertypeabbreviationminimallexreferenceminimallexreferencesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanownertypeabbreviationminimallexreferenceminimallexreferencesentrybefore="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationminimallexreferenceminimallexreferencesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationminimallexreferenceminimallexreferencesentry="Times New Roman/GR/I" at 12pt
-\font\configtargetconfigtargetconfigtargetsminimallexreferenceminimallexreferencesentrybefore="Times New Roman/GR" at 9pt
-\font\configtargetsminimallexreferenceminimallexreferencesentryafter="Times New Roman/GR" at 9pt
-\font\spanbzhheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencesentry="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencesentrybefore="Times New Roman/GR" at 9pt
-\font\spanheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencesentry="Times New Roman/GR/B" at 12pt
-\font\spanspansensecontentspansensesentrybefore="Times New Roman/GR" at 9pt
-\font\sensesentryafter="Times New Roman/GR" at 9pt
-\font\sensenumbersensecontentsensesentry="Times New Roman/GR/B" at 12pt
-\font\sensenumbersensecontentsensesentryafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysissharedgrammaticalinfosensesentryafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysissharedgrammaticalinfosensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanslotsmorphosyntaxanalysissharedgrammaticalinfosensesentrybefore="Times New Roman/GR" at 9pt
-\font\slotsmorphosyntaxanalysissharedgrammaticalinfosensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspannameslotslotsmorphosyntaxanalysissharedgrammaticalinfosensesentrybefore="Times New Roman/GR" at 9pt
-\font\spannameslotslotsmorphosyntaxanalysissharedgrammaticalinfosensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysissensesensesentryafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysissensesensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanpartofspeechmorphosyntaxanalysissensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanpartofspeechmorphosyntaxanalysissensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanslotsmorphosyntaxanalysissensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\slotsmorphosyntaxanalysissensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspannameslotslotsmorphosyntaxanalysissensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spannameslotslotsmorphosyntaxanalysissensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\sensetypesensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\sensetypesensesensesentryafter="Times New Roman/GR" at 9pt
-\font\sensetypesensesensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanabbreviationsensetypesensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspandefinitionorglosssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spandefinitionorglosssensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\exampleexampleexamplessensesensesentrybefore="Times New Roman/GR" at 8pt
-\font\examplessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanbzhexampleexampleexamplessensesensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanexampleexampleexamplessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanexampleexampleexamplessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanexampleexampleexamplessensesensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspantranslationtranslationtranslationsexampleexamplessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spantranslationtranslationtranslationsexampleexamplessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanencyclopedicinfosensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanencyclopedicinfosensesensesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanencyclopedicinfosensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanrestrictionssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanrestrictionssensesensesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanrestrictionssensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanlexsensereferencessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\lexsensereferencessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanenownertypeabbreviationlexsensereferencelexsensereferencessensesensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanownertypeabbreviationlexsensereferencelexsensereferencessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationlexsensereferencelexsensereferencessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationlexsensereferencelexsensereferencessensesensesentry="Times New Roman/GR/I" at 12pt
-\font\configtargetconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanbzhheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensesentry="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensesentry="Times New Roman/GR/B" at 12pt
-\font\variantformentrybackrefvariantformentrybackrefvariantformentrybackrefssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssensesensesentryafter="Times New Roman/GR" at 9pt
-\font\variantentrytypevariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\variantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanheadwordvariantformentrybackrefvariantformentrybackrefssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\scientificnamesensesensesentryafter="Times New Roman/GR" at 9pt
-\font\semanticdomainsemanticdomainsemanticdomainssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\semanticdomainssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\semanticdomainssensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationsemanticdomainsemanticdomainssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanabbreviationsemanticdomainsemanticdomainssensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspannamesemanticdomainsemanticdomainssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainacademicdomainacademicdomainssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainssensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationacademicdomainacademicdomainssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspannameacademicdomainacademicdomainssensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spannameacademicdomainacademicdomainssensesensesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spannameacademicdomainacademicdomainssensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\usageusageusagessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\usagessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\usagessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationusageusagessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\complexformsnotsubentrycomplexformsnotsubentrycomplexformsnotsubentriessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\complexformsnotsubentriessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\complexformtypescomplexformsnotsubentrycomplexformsnotsubentriessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrcomplexformtypecomplexformtypescomplexformsnotsubentrycomplexformsnotsubentriessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanheadwordcomplexformsnotsubentrycomplexformsnotsubentriessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriessensesensesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootnontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessensesensesentry="Times New Roman/GR/B" at 12pt
-\font\spanspansensecontentspansensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\sensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\sensenumbersensecontentsensessensesensesentry="Times New Roman/GR/B" at 12pt
-\font\sensenumbersensecontentsensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\sensesensessensesensesentry="Times New Roman/GR" at 10pt
-\font\sensetypesensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\sensetypesensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\sensetypesensesensessensesensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanabbreviationsensetypesensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspandefinitionorglosssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spandefinitionorglosssensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\exampleexampleexamplessensesensessensesensesentrybefore="Times New Roman/GR" at 8pt
-\font\examplessensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanbzhexampleexampleexamplessensesensessensesensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanexampleexampleexamplessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanexampleexampleexamplessensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanexampleexampleexamplessensesensessensesensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspantranslationtranslationtranslationsexampleexamplessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spantranslationtranslationtranslationsexampleexamplessensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanencyclopedicinfosensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanencyclopedicinfosensesensessensesensesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanencyclopedicinfosensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanrestrictionssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanrestrictionssensesensessensesensesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanrestrictionssensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanlexsensereferencessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\lexsensereferencessensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanenownertypeabbreviationlexsensereferencelexsensereferencessensesensessensesensesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanownertypeabbreviationlexsensereferencelexsensereferencessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationlexsensereferencelexsensereferencessensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationlexsensereferencelexsensereferencessensesensessensesensesentry="Times New Roman/GR/I" at 12pt
-\font\configtargetconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanbzhheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessensesensesentry="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessensesensesentry="Times New Roman/GR/B" at 12pt
-\font\variantformentrybackrefvariantformentrybackrefvariantformentrybackrefssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\variantentrytypevariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\variantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanheadwordvariantformentrybackrefvariantformentrybackrefssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\scientificnamesensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\semanticdomainsemanticdomainsemanticdomainssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\semanticdomainssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\semanticdomainssensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationsemanticdomainsemanticdomainssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanabbreviationsemanticdomainsemanticdomainssensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspannamesemanticdomainsemanticdomainssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainacademicdomainacademicdomainssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainssensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationacademicdomainacademicdomainssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspannameacademicdomainacademicdomainssensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spannameacademicdomainacademicdomainssensesensessensesensesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spannameacademicdomainacademicdomainssensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\usageusageusagessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\usagessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\usagessensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationusageusagessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\complexformsnotsubentrycomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\complexformsnotsubentriessensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\complexformtypescomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrcomplexformtypecomplexformtypescomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanheadwordcomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootnontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentryafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessensesensessensesensesentry="Times New Roman/GR/B" at 12pt
-\font\complexformsnotsubentrycomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\complexformsnotsubentriesentryafter="Times New Roman/GR" at 9pt
-\font\complexformtypescomplexformsnotsubentrycomplexformsnotsubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrcomplexformtypecomplexformtypescomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanheadwordcomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanheadwordcomplexformsnotsubentrycomplexformsnotsubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysismorphosyntaxanalysismorphosyntaxanalysescomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysescomplexformsnotsubentrycomplexformsnotsubentriesentryafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysismorphosyntaxanalysescomplexformsnotsubentrycomplexformsnotsubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanpartofspeechmorphosyntaxanalysismorphosyntaxanalysescomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanpartofspeechmorphosyntaxanalysismorphosyntaxanalysescomplexformsnotsubentrycomplexformsnotsubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanslotsmorphosyntaxanalysismorphosyntaxanalysescomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\slotsmorphosyntaxanalysismorphosyntaxanalysescomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspannameslotslotsmorphosyntaxanalysismorphosyntaxanalysescomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spannameslotslotsmorphosyntaxanalysismorphosyntaxanalysescomplexformsnotsubentrycomplexformsnotsubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootnontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriesentryafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriesentry="Times New Roman/GR/B" at 12pt
-\font\spanspanpicturesentrybefore="Times New Roman/GR" at 9pt
-\font\picturesentryafter="Times New Roman/GR" at 9pt
-\font\picturepicturesentry="Times New Roman/GR" at 10pt
-\font\picturepicturesentryafter="Times New Roman/GR" at 9pt
-\font\spanspancaptionpicturepicturesentrybefore="Times New Roman/GR" at 9pt
-\font\paracontinuationsubentriesentry="Times New Roman/GR" at 10pt
-\font\subentrysubentriesentry="Times New Roman/GR" at 10pt
-\font\spanbzhheadwordsubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordsubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanheadwordsubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanheadwordsubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\complexformtypessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrcomplexformtypecomplexformtypessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\pronunciationpronunciationpronunciationssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\pronunciationssubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanformpronunciationpronunciationssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanformpronunciationpronunciationssubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanformpronunciationpronunciationssubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\locationpronunciationpronunciationssubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\locationpronunciationpronunciationssubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanwritingsystemprefixspanabbreviationlocationpronunciationpronunciationssubentrysubentriesentry="Times New Roman/GR" at 10pt
-\font\spanwritingsystemprefixspanabbreviationlocationpronunciationpronunciationssubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationlocationpronunciationpronunciationssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanabbreviationlocationpronunciationpronunciationssubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspannamelocationpronunciationpronunciationssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spannamelocationpronunciationpronunciationssubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanaliaslocationpronunciationpronunciationssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanaliaslocationpronunciationpronunciationssubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanvariantformentrybackrefssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\variantentrytypevariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\variantentrytypesvariantformentrybackrefvariantformentrybackrefssubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanheadwordvariantformentrybackrefvariantformentrybackrefssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\etymologysubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\etymologysubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanformetymologysubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanformetymologysubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanglossetymologysubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanglossetymologysubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspancommentetymologysubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spancommentetymologysubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanminimallexreferencessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\minimallexreferencessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanenownertypeabbreviationminimallexreferenceminimallexreferencessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanownertypeabbreviationminimallexreferenceminimallexreferencessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationminimallexreferenceminimallexreferencessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationminimallexreferenceminimallexreferencessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\configtargetconfigtargetconfigtargetsminimallexreferenceminimallexreferencessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\configtargetsminimallexreferenceminimallexreferencessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanbzhheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanheadwordconfigtargetconfigtargetsminimallexreferenceminimallexreferencessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\spanspansensecontentspansensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\sensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\sensenumbersensecontentsensessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\sensenumbersensecontentsensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysissharedgrammaticalinfosensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysissharedgrammaticalinfosensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanpartofspeechmorphosyntaxanalysissharedgrammaticalinfosensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanslotsmorphosyntaxanalysissharedgrammaticalinfosensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\slotsmorphosyntaxanalysissharedgrammaticalinfosensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspannameslotslotsmorphosyntaxanalysissharedgrammaticalinfosensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spannameslotslotsmorphosyntaxanalysissharedgrammaticalinfosensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysissensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysissensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanpartofspeechmorphosyntaxanalysissensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanpartofspeechmorphosyntaxanalysissensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanslotsmorphosyntaxanalysissensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\slotsmorphosyntaxanalysissensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspannameslotslotsmorphosyntaxanalysissensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spannameslotslotsmorphosyntaxanalysissensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\sensetypesensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\sensetypesensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\sensetypesensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanabbreviationsensetypesensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspandefinitionorglosssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spandefinitionorglosssensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\exampleexampleexamplessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 8pt
-\font\examplessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanbzhexampleexampleexamplessensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanexampleexampleexamplessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanexampleexampleexamplessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanexampleexampleexamplessensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspantranslationtranslationtranslationsexampleexamplessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spantranslationtranslationtranslationsexampleexamplessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanencyclopedicinfosensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanencyclopedicinfosensesensessubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanencyclopedicinfosensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanrestrictionssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanrestrictionssensesensessubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanrestrictionssensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanlexsensereferencessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\lexsensereferencessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanenownertypeabbreviationlexsensereferencelexsensereferencessensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanownertypeabbreviationlexsensereferencelexsensereferencessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationlexsensereferencelexsensereferencessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationlexsensereferencelexsensereferencessensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\configtargetconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanbzhheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\variantformentrybackrefvariantformentrybackrefvariantformentrybackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\variantentrytypevariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\variantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanheadwordvariantformentrybackrefvariantformentrybackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\scientificnamesensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\semanticdomainsemanticdomainsemanticdomainssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\semanticdomainssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\semanticdomainssensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationsemanticdomainsemanticdomainssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanabbreviationsemanticdomainsemanticdomainssensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspannamesemanticdomainsemanticdomainssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainacademicdomainacademicdomainssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainssensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationacademicdomainacademicdomainssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspannameacademicdomainacademicdomainssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spannameacademicdomainacademicdomainssensesensessubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spannameacademicdomainacademicdomainssensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\usageusageusagessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\usagessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\usagessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationusageusagessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\visiblecomplexformbackrefvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\visiblecomplexformbackrefssensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\complexformtypesvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrcomplexformtypecomplexformtypesvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanheadwordvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootnontrivialentryrootsvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootsvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootsvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootsvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\spanspansensecontentspansensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\sensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\sensenumbersensecontentsensessensesensessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\sensenumbersensecontentsensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\sensetypesensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\sensetypesensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\sensetypesensesensessensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanabbreviationsensetypesensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspandefinitionorglosssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spandefinitionorglosssensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\exampleexampleexamplessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 8pt
-\font\examplessensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanbzhexampleexampleexamplessensesensessensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanexampleexampleexamplessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanexampleexampleexamplessensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanexampleexampleexamplessensesensessensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspantranslationtranslationtranslationsexampleexamplessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spantranslationtranslationtranslationsexampleexamplessensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanencyclopedicinfosensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanencyclopedicinfosensesensessensesensessubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanencyclopedicinfosensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanrestrictionssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanrestrictionssensesensessensesensessubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanrestrictionssensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanlexsensereferencessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\lexsensereferencessensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanenownertypeabbreviationlexsensereferencelexsensereferencessensesensessensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\spanspanownertypeabbreviationlexsensereferencelexsensereferencessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationlexsensereferencelexsensereferencessensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanownertypeabbreviationlexsensereferencelexsensereferencessensesensessensesensessubentrysubentriesentry="Times New Roman/GR/I" at 12pt
-\font\configtargetconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanbzhheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessensesensessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanheadwordconfigtargetconfigtargetslexsensereferencelexsensereferencessensesensessensesensessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\variantformentrybackrefvariantformentrybackrefvariantformentrybackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\variantformentrybackrefssensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\variantentrytypevariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\variantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefssensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspanheadwordvariantformentrybackrefvariantformentrybackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefssensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\scientificnamesensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\semanticdomainsemanticdomainsemanticdomainssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\semanticdomainssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\semanticdomainssensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationsemanticdomainsemanticdomainssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanabbreviationsemanticdomainsemanticdomainssensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\spanspannamesemanticdomainsemanticdomainssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainacademicdomainacademicdomainssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\academicdomainssensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationacademicdomainacademicdomainssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspannameacademicdomainacademicdomainssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spannameacademicdomainacademicdomainssensesensessensesensessubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spannameacademicdomainacademicdomainssensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\usageusageusagessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\usagessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\usagessensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanabbreviationusageusagessensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\visiblecomplexformbackrefvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\visiblecomplexformbackrefssensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\complexformtypesvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrcomplexformtypecomplexformtypesvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanheadwordvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootnontrivialentryrootsvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootsvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootsvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootsvisiblecomplexformbackrefvisiblecomplexformbackrefssensesensessensesensessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\complexformsnotsubentrycomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\complexformsnotsubentriessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\complexformtypescomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspanreverseabbrcomplexformtypecomplexformtypescomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanheadwordcomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanspanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentryfirstchildbefore="Times New Roman/GR" at 9pt
-\font\spanowningentrysummarydefinitioncomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentrylastchildafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootnontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\nontrivialentryrootnontrivialentryrootscomplexformsnotsubentrycomplexformsnotsubentriessubentrysubentriesentry="Times New Roman/GR/B" at 12pt
-\font\picturepicturessubentrysubentriesentry="Times New Roman/GR" at 12pt
-\font\spanspanpicturessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\picturessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\picturepicturessubentrysubentriesentry="Times New Roman/GR" at 10pt
-\font\picturepicturessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanspancaptionpicturepicturessubentrysubentriesentrybefore="Times New Roman/GR" at 9pt
-\font\subentriessubentrysubentriesentryafter="Times New Roman/GR" at 9pt
-\font\spanbzhheadwordminorentrycomplex="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanheadwordminorentrycomplexlastchildafter="Times New Roman/GR" at 10pt
-\font\spanheadwordminorentrycomplex="Times New Roman/GR/B" at 12pt
-\font\pronunciationpronunciationpronunciationsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\pronunciationsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\spanspanformpronunciationpronunciationsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanformpronunciationpronunciationsminorentrycomplexfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanformpronunciationpronunciationsminorentrycomplexlastchildafter="Times New Roman/GR" at 10pt
-\font\spanspanvariantformentrybackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\variantformentrybackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\variantformentrybackrefsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\variantentrytypevariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\variantentrytypesvariantformentrybackrefvariantformentrybackrefsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\spanspanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefsminorentrycomplexlastchildafter="Times New Roman/GR" at 10pt
-\font\spanspanheadwordvariantformentrybackrefvariantformentrybackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanspanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefsminorentrycomplexlastchildafter="Times New Roman/GR" at 10pt
-\font\spanspanvisiblevariantentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\visiblevariantentryrefsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\variantentrytypevariantentrytypevariantentrytypesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\variantentrytypesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\spanspanabbreviationvariantentrytypevariantentrytypesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanabbreviationvariantentrytypevariantentrytypesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexlastchildafter="Times New Roman/GR" at 10pt
-\font\referencedentryreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanbzhheadwordreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplex="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplex="Times New Roman/GR/B" at 12pt
-\font\spanspandefinitionorglossreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spandefinitionorglossreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanspansummaryvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spansummaryvisiblevariantentryrefvisiblevariantentryrefsminorentrycomplexfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanspancomplexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\complexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\complexformentryrefsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\complexformtypecomplexformtypecomplexformtypescomplexformentryrefcomplexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 9pt
-\font\complexformtypescomplexformentryrefcomplexformentryrefsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\spanspanabbreviationcomplexformtypecomplexformtypescomplexformentryrefcomplexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanabbreviationcomplexformtypecomplexformtypescomplexformentryrefcomplexformentryrefsminorentrycomplexlastchildafter="Times New Roman/GR" at 10pt
-\font\referencedentryreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanbzhheadwordreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentrycomplex="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanheadwordreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentrycomplex="Times New Roman/GR/B" at 12pt
-\font\spanspandefinitionorglossreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spandefinitionorglossreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentrycomplexfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanspansummarycomplexformentryrefcomplexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spansummarycomplexformentryrefcomplexformentryrefsminorentrycomplexfirstchildbefore="Times New Roman/GR" at 10pt
-\font\nontrivialentryrootnontrivialentryrootnontrivialentryrootscomplexformentryrefcomplexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\nontrivialentryrootscomplexformentryrefcomplexformentryrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanspansummarydefinitionminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spansummarydefinitionminorentrycomplexfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spansummarydefinitionminorentrycomplexlastchildafter="Times New Roman/GR" at 10pt
-\font\spanspanvisiblecomplexformbackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\visiblecomplexformbackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\visiblecomplexformbackrefsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\complexformtypesvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\spanspanreverseabbrcomplexformtypecomplexformtypesvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanspanheadwordvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanspandefinitionorglossesvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\definitionorglossesvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentrycomplexafter="Times New Roman/GR" at 10pt
-\font\spanspanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentrycomplexbefore="Times New Roman/GR" at 10pt
-\font\spanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentrycomplexfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentrycomplexlastchildafter="Times New Roman/GR" at 10pt
-\font\spanbzhheadwordminorentryvariant="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanheadwordminorentryvariantlastchildafter="Times New Roman/GR" at 10pt
-\font\spanheadwordminorentryvariant="Times New Roman/GR/B" at 12pt
-\font\pronunciationpronunciationpronunciationsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\pronunciationsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\spanspanformpronunciationpronunciationsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanformpronunciationpronunciationsminorentryvariantfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanformpronunciationpronunciationsminorentryvariantlastchildafter="Times New Roman/GR" at 10pt
-\font\spanspanvariantformentrybackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\variantformentrybackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\variantformentrybackrefsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\variantentrytypevariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\variantentrytypesvariantformentrybackrefvariantformentrybackrefsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\spanspanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanreverseabbrvariantentrytypevariantentrytypesvariantformentrybackrefvariantformentrybackrefsminorentryvariantlastchildafter="Times New Roman/GR" at 10pt
-\font\spanspanheadwordvariantformentrybackrefvariantformentrybackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanspanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanowningentrysummarydefinitionvariantformentrybackrefvariantformentrybackrefsminorentryvariantlastchildafter="Times New Roman/GR" at 10pt
-\font\spanspanvisiblevariantentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\visiblevariantentryrefsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\variantentrytypevariantentrytypevariantentrytypesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\variantentrytypesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\spanspanabbreviationvariantentrytypevariantentrytypesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanabbreviationvariantentrytypevariantentrytypesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantlastchildafter="Times New Roman/GR" at 10pt
-\font\referencedentryreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanbzhheadwordreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariant="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanheadwordreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariant="Times New Roman/GR/B" at 12pt
-\font\spanspandefinitionorglossreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spandefinitionorglossreferencedentryreferencedentriesvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanspansummaryvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spansummaryvisiblevariantentryrefvisiblevariantentryrefsminorentryvariantfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanspancomplexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\complexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\complexformentryrefsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\complexformtypecomplexformtypecomplexformtypescomplexformentryrefcomplexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 9pt
-\font\complexformtypescomplexformentryrefcomplexformentryrefsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\spanspanabbreviationcomplexformtypecomplexformtypescomplexformentryrefcomplexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanabbreviationcomplexformtypecomplexformtypescomplexformentryrefcomplexformentryrefsminorentryvariantlastchildafter="Times New Roman/GR" at 10pt
-\font\referencedentryreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanbzhheadwordreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentryvariant="Times New Roman/GR/B" at 12pt
-\font\spanspanheadwordreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanheadwordreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentryvariant="Times New Roman/GR/B" at 12pt
-\font\spanspandefinitionorglossreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spandefinitionorglossreferencedentryreferencedentriescomplexformentryrefcomplexformentryrefsminorentryvariantfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanspansummarycomplexformentryrefcomplexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spansummarycomplexformentryrefcomplexformentryrefsminorentryvariantfirstchildbefore="Times New Roman/GR" at 10pt
-\font\nontrivialentryrootnontrivialentryrootnontrivialentryrootscomplexformentryrefcomplexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\nontrivialentryrootscomplexformentryrefcomplexformentryrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanspansummarydefinitionminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spansummarydefinitionminorentryvariantfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spansummarydefinitionminorentryvariantlastchildafter="Times New Roman/GR" at 10pt
-\font\spanspanvisiblecomplexformbackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\visiblecomplexformbackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\visiblecomplexformbackrefsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\complexformtypesvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\spanspanreverseabbrcomplexformtypecomplexformtypesvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanspanheadwordvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanspandefinitionorglossesvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\definitionorglossesvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentryvariantafter="Times New Roman/GR" at 10pt
-\font\spanspanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentryvariantbefore="Times New Roman/GR" at 10pt
-\font\spanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentryvariantfirstchildbefore="Times New Roman/GR" at 10pt
-\font\spanowningentrysummarydefinitionvisiblecomplexformbackrefvisiblecomplexformbackrefsminorentryvariantlastchildafter="Times New Roman/GR" at 10pt
-\font\xitemxitemcrossrefbefore="Times New Roman/GR/B" at 9pt
-\font\xitemxitemcrossreftargetsbefore="Times New Roman/GR" at 9pt
-\font\xitemxitemcrossreftypebefore="Times New Roman/GR/BI" at 9pt
-\font\xitemxitemexamplebefore="Times New Roman/GR" at 8pt
-\font\xitemxitemheadwordbefore="Times New Roman/GR/B" at 8pt
-\font\xitemxitemheadwordminorbefore="Times New Roman/GR/B" at 8pt
-\font\xitemxitemmainentryrefbefore="Times New Roman/GR/B" at 9pt
-\font\xitemxitemmainentryrefminorbefore="Times New Roman/GR/B" at 9pt
-\font\xitemxitempronunciationminorbefore="Times New Roman/GR" at 9pt
-\font\xitemxitemsensecrossrefbefore="Times New Roman/GR/B" at 9pt
-\font\xitemxitemsensemainentryrefbefore="Times New Roman/GR/B" at 9pt
-\font\xitemxitemtranslationbefore="Times New Roman/GR" at 9pt
-\font\xitemxitemheadwordsubbefore="Times New Roman/GR/B" at 8pt
-\font\xitemxitemLexEntrypublishRootMinorPrimaryTargetMLHeadWordPubbefore="Times New Roman/GR/B" at 8pt
-\font\xitemxitemLexEntrypublishStemMinorPrimaryTargetMLHeadWordPubbefore="Times New Roman/GR/B" at 8pt
-\font\xitemtpi="Times New Roman/GR" at 12pt
-\font\letHead="Times New Roman/GR/B" at 14pt
-\font\letterletHead="Times New Roman/GR/B" at 14pt
-\font\letData="Times New Roman/GR" at 9pt
-\font\entryletData="Times New Roman/GR" at 9pt
-\font\mainheadwordentryletData="Times New Roman/GR" at 9pt
-\font\spanbzhmainheadwordentryletData="Charis SIL/GR/B" at 10pt
-\font\sensesentryletData="Times New Roman/GR" at 9pt
-\font\sensecontentsensesentryletData="Times New Roman/GR" at 9pt
-\font\sensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
-\font\morphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR/I" at 9pt
-\font\partofspeechmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR/I" at 9pt
-\font\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR/I" at 10pt
-\font\slotsmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR/I" at 9pt
-\font\slotslotsmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR/I" at 9pt
-\font\nameslotslotsmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR/I" at 9pt
-\font\spanennameslotslotsmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR/I" at 10pt
-\font\definitionorglosssensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
+\font\letHead="Times New Roman/GR" at 12pt
+\font\letterletHead="Times New Roman/GR/B" at 10pt
+\font\letData="Times New Roman/GR" at 12pt
+\font\entryletData="Times New Roman/GR" at 10pt
+\font\mainheadwordentryletData="Times New Roman/GR" at 10pt
+\font\spanbzhmainheadwordentryletData="Charis SIL/GR" at 10pt
+\font\sensesentryletData="Times New Roman/GR" at 10pt
+\font\sensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\sensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\morphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\partofspeechmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\slotsmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\slotslotsmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\nameslotslotsmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\spanennameslotslotsmorphosyntaxanalysissensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\definitionorglosssensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
 \font\spanendefinitionorglosssensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
-\font\pronunciationsentryletData="Times New Roman/GR" at 9pt
-\font\pronunciationpronunciationsentryletData="Times New Roman/GR" at 9pt
-\font\formpronunciationpronunciationsentryletData="Times New Roman/GR" at 9pt
+\font\pronunciationsentryletData="Times New Roman/GR" at 10pt
+\font\pronunciationpronunciationsentryletData="Times New Roman/GR" at 10pt
+\font\formpronunciationpronunciationsentryletData="Times New Roman/GR" at 10pt
 \font\spanbzhfonipaformpronunciationpronunciationsentryletData="Charis SIL/GR" at 10pt
-\font\examplessensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
-\font\exampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 8pt
-\font\exampleexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 8pt
-\font\spanbzhexampleexampleexamplessensesensecontentsensesentryletData="Charis SIL/GR/I" at 10pt
-\font\translationsexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 8pt
-\font\translationtranslationsexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
-\font\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
-\font\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR/I" at 10pt
-\font\semanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
-\font\semanticdomainsemanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
-\font\abbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
+\font\examplessensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\exampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\exampleexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\spanbzhexampleexampleexamplessensesensecontentsensesentryletData="Charis SIL/GR" at 10pt
+\font\translationsexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\translationtranslationsexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\semanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\semanticdomainsemanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
+\font\abbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
 \font\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
-\font\namesemanticdomainsemanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
+\font\namesemanticdomainsemanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
 \font\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
-\font\picturesentryletData="Times New Roman/GR" at 9pt
+\font\picturesentryletData="Times New Roman/GR" at 10pt
 \font\picturepicturesentryletData="Times New Roman/GR" at 10pt
 \font\thumbnailpicturepicturesentryletData="Times New Roman/GR" at 10pt
 \font\sensenumberpicturepicturesentryletData="Times New Roman/GR" at 10pt
@@ -695,40 +75,6 @@
 \font\captionpicturepicturesentryletData="Times New Roman/GR" at 10pt
 \font\captioncaptionpicturepicturesentryletData="Times New Roman/GR" at 10pt
 \font\spanencaptioncaptionpicturepicturesentryletData="Times New Roman/GR" at 10pt
-\font\scientificnamesensesensecontentsensesentryletData="Times New Roman/GR" at 9pt
-\font\spanenscientificnamesensesensecontentsensesentryletData="Times New Roman/GR" at 10pt
-\font\subentriesentryletData="Times New Roman/GR" at 9pt
-\font\subentrysubentriesentryletData="Times New Roman/GR" at 10pt
-\font\headwordsubentrysubentriesentryletData="Times New Roman/GR/B" at 8pt
-\font\spanbzhheadwordsubentrysubentriesentryletData="Charis SIL/GR/B" at 10pt
-\font\aspanbzhheadwordsubentrysubentriesentryletData="Charis SIL/GR/B":color=inherit at 10pt
-\font\complexformtypessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\complexformtypecomplexformtypessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\reverseabbrcomplexformtypecomplexformtypessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\spanenreverseabbrcomplexformtypecomplexformtypessubentrysubentriesentryletData="Times New Roman/GR" at 10pt
-\font\pronunciationssubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\pronunciationpronunciationssubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\formpronunciationpronunciationssubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\spanbzhfonipaformpronunciationpronunciationssubentrysubentriesentryletData="Charis SIL/GR" at 10pt
-\font\sensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\sensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\sensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\definitionorglosssensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\spanendefinitionorglosssensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 10pt
-\font\examplessensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\exampleexamplessensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 8pt
-\font\exampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 8pt
-\font\spanbzhexampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData="Charis SIL/GR/I" at 10pt
-\font\translationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 8pt
-\font\translationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\translationtranslationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR/I" at 10pt
-\font\semanticdomainssensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\semanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\abbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 10pt
-\font\namesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 9pt
-\font\spanennamesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData="Times New Roman/GR" at 10pt
 
 \mbox{} 
 \newpage 
@@ -736,103 +82,33 @@
 \setcounter{page}{1} 
 \pagenumbering{arabic} 
 \pagestyle{fancy} 
-\begin{spacing}{0.916666666666667}\begin{center}\begin{spacing}{0.5}\begin{center}\widowpenalty=300
-\clubpenalty=300
-
-\section*{\needspace {8\baselineskip}{\topskip 18pt{\rightmargin 9pt{\letterletHead{\underline{W w}}}}}}\end{center}\end{spacing}
-\end{center}\end{spacing}\setlength{\columnsep}{12pt} 
-\setlength\columnseprule{0.4pt} 
-\begin{multicols}{2}\begin{spacing}{0.458333333333333}{\raggedright} \begin{spacing}{0.458333333333333}
-\hangindent= 12pt
+\begin{spacing}{0.5}\begin{center}
+\letterletHead{W w}\end{center}\end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 45pt
 \hangafter=1
-\spanbzhmainheadwordentryletData{=W=}\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{v}\slotsmorphosyntaxanalysissensesensecontentsensesentryletData{: }\spanennameslotslotsmorphosyntaxanalysissensesensecontentsensesentryletData{Person}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{Second person; labialisation of the initial consonant of Class 3 verbs beginning with gg, and Class 1 verbs beginning with k or g. Also of the Potential mode prefix for Class 2 verbs.}\sensesentryletData{ }\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
+\spanbzhmainheadwordentryletData{=W=}\markboth{ \spanbzhmainheadwordentryletData =W=}{ \spanbzhmainheadwordentryletData =W=}\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{v}\spanennameslotslotsmorphosyntaxanalysissensesensecontentsensesentryletData{Person}\spanendefinitionorglosssensesensecontentsensesentryletData{Second person; labialisation of the initial consonant of Class 3 verbs beginning with gg, and Class 1 verbs beginning with k or g. Also of the Potential mode prefix for Class 2 verbs.}\end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 45pt
 \hangafter=1
-\spanbzhmainheadwordentryletData{waain}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwaː.in}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{V1}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{to struggle, try hard, to struggle to climb out of something, as a hole.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Waain bë maḳ noh tena.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He tried hard looking for a way to get out.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Luḳ waaḳ lom waain rot rëḳ ma menedo loḳ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He fell into the cave and he struggled hard to get out but he couldn't and he had to remain there.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{4.8.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Hostility}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{4.8.1.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Oppose}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
+\spanbzhmainheadwordentryletData{waain}\markboth{ \spanbzhmainheadwordentryletData waain}{ \spanbzhmainheadwordentryletData waain}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwaː.in}\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{V1}\spanendefinitionorglosssensesensecontentsensesentryletData{to struggle, try hard, to struggle to climb out of something, as a hole.}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Waain bë maḳ noh tena.}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He tried hard looking for a way to get out.}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Luḳ waaḳ lom waain rot rëḳ ma menedo loḳ.}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He fell into the cave and he struggled hard to get out but he couldn't and he had to remain there.}\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{4.8.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Hostility}\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{4.8.1.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Oppose}\end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 45pt
 \hangafter=1
-\spanbzhmainheadwordentryletData{waaḳ}\spanbzhfonipaformpronunciationpronunciationsentryletData{waːq}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{cave, hole-a natural formation.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Waaḳ böpata ti neggëp vosnë.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{There's a huge cave in the bush.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Ya deggevek waaḳ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{They went into the cave.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.2.1.5}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Underground}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}
+\spanbzhmainheadwordentryletData{waaḳ}\markboth{ \spanbzhmainheadwordentryletData waaḳ}{ \spanbzhmainheadwordentryletData waaḳ}\spanbzhfonipaformpronunciationpronunciationsentryletData{waːq}\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\spanendefinitionorglosssensesensecontentsensesentryletData{cave, hole-a natural formation.}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Waaḳ böpata ti neggëp vosnë.}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{There's a huge cave in the bush.}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Ya deggevek waaḳ.}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{They went into the cave.}\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.2.1.5}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Underground}
 \spanensensenumberpicturepicturesentryletData{1}
 
 \spanencaptioncaptionpicturepicturesentryletData{waaḳ}
 
-\picturesentryletData{ }\end{spacing}\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
+\end{spacing}\begin{spacing}{0.5}
+\hangindent= 45pt
 \hangafter=1
-\spanbzhmainheadwordentryletData{wabeenġ}\spanbzhfonipaformpronunciationpronunciationsentryletData{wa.ˈᵐbɛːɴ}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{kind of yam.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Wabeenġ raḳ mekeyëh riing.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{The }\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{wabeeng}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{ grew up and broke the yam stake.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.5.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Grass, herb, vine}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
+\spanbzhmainheadwordentryletData{wöhbuum}
+\hangindent= 45pt
+\hangafter=1\markboth{ \spanbzhmainheadwordentryletData wöhbuum}{ \spanbzhmainheadwordentryletData wöhbuum}\spanbzhfonipaformpronunciationpronunciationsentryletData{wɔʁ.ᵐbuːm}\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\spanendefinitionorglosssensesensecontentsensesentryletData{large variety of eel.}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Ham besi wöhbuum duḳ jeyoġ.}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{Cook the eel by wrapping it in }\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{jeyoġ}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{ (bark and roasting it).}\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.6.1.5}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Fish}\end{spacing}
+\begin{spacing}{0.5}
+\hangindent= 45pt
 \hangafter=1
-\spanbzhmainheadwordentryletData{waing}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwa.iŋ}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{a kind of green vegetable from the coast, the vine is used for tying boats because it doesn't rot quickly in the sea.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Waing og yiḳ jojeng nivesa ti sën hil ġeyeh maġa.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{Waing}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{ is a good kind of green vegetable which we cook and eat.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{wanġ}\spanbzhfonipaformpronunciationpronunciationsentryletData{waɴ}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{a large variety of banana.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Ketöv wanġ meḳo ya begganġ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He cut the bunch of }\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{wanġ}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{ bananas and carried them to the house.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\spanenscientificnamesensesensecontentsensesentryletData{Musa sp.}\scientificnamesensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.5.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Grass, herb, vine}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{warak}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwaɾ.ak}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{adv}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{to crackle, as when crushing something dry or brittle; to dry up in the sun.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Nyëġ raḳ aru berus beyö warak warak.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{The sun shone on the tobacco leaves and they crackled (when crushed).}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{warwar}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwaɾ.waɾ}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{adv}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{to bolt, to eat quickly, to do something hastily/quickly, to hurry, to go in haste.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Vuu huk geneya warwar in detahi yi ggëp begganġ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He left the garden and went quickly because they had called him from the village.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Gga nos warwar.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He bolted his food quickly.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.4.6.4.4}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Immediately}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.4.8.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Sudden}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.4.8}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Speed}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{warwid}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwaɾ.a.wiⁿd}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{stalks of reed trailing in the water and moving back and forth with the current.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Warwid ggëp neggee luḳ bël.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{The reeds were bobbing around in the water.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Newa ggee nebë bël neḳo warwid.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{His heart was leaping about like a reed bobbing in the water.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Water}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.4.5.2.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{During}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.3.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Bodies of water}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.4.5.2.2}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{At the same time}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{weeḳ}\spanbzhfonipaformpronunciationpronunciationsentryletData{wɛːq}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{Interj}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{to spit out.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Weeḳ!}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{Spit it out! (Often said to small children)}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Nilëlin ġaġek bemuteḳ raḳ bë, "Weeḳ!"}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He didn't like what he heard and spat out, "}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{Weeḳ}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{!"}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.5.1.2.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Around}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{2.2}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Body functions}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.5.1.4.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Out, outside}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{weḳ}\spanbzhfonipaformpronunciationpronunciationsentryletData{wɛq}\pronunciationsentryletData{ }\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{wéleng}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwɛl̪.əŋ}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{kind of reed.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Weleng kip raḳ heek ahëbu.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{The reeds grew at the base of the fence.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Sap weleng mevaḳu heek raḳ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He cut the reeds and used them to make a fence.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\spanenscientificnamesensesensecontentsensesentryletData{Gramineae, Pennisetum macrostachyum Trin.}\scientificnamesensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.5.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Grass, herb, vine}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{wes}\spanbzhfonipaformpronunciationpronunciationsentryletData{wɛt͡ʃ}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{wall-of a house.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Wes kevoh gebegganġ neggëp nyë tale.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{The wall collapsed and the house was left standing open.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Ham kweping wes nah gökin.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{Cover the wall again.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Loḳ ġuvenġ raḳ wes.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He painted the wall.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{6.5.2.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Wall}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{6.5.1.5}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Fence, wall}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}
-\spanensensenumberpicturepicturesentryletData{1}
+\spanbzhmainheadwordentryletData{wöp-o}\markboth{ \spanbzhmainheadwordentryletData wöp-o}{ \spanbzhmainheadwordentryletData wöp-o}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwɔp.o}\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{Interj}\spanendefinitionorglosssensesensecontentsensesentryletData{alas, exclamation of concern, anxiety, or pity.}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Wöp-o! Sa kwaġ virek in vasöl.}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{Oh dear! I have forgotten the bow.}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Sa in-a! Wöp-o, sëḳ na menoh tena in dekepa aggata.}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{What will I do! Oh dear, where will I go, they have blocked off the road.}\end{spacing}
 
-\spanencaptioncaptionpicturepicturesentryletData{wes}
-
-\picturesentryletData{ }\end{spacing}\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{wëëj}\spanbzhfonipaformpronunciationpronunciationsentryletData{weːⁿd͡ʒ}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{Adj}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{many, plenty.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Ham ḳo mun wëëj loḳ sapu.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{You caught a great many rats in the snares.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Hil wëëj rot meḳesuu sir.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{There are a great many of us, more than of them.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.1.3.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Many, much}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{wëëk}\spanbzhfonipaformpronunciationpronunciationsentryletData{weːk}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{variety of bamboo which grows in the bush. It is used for stringing bows, making the saw for making fires, etc,.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Wëëk nam sena ġaḳo bël doḳ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{Give me the bamboo, I'll go and get water in it.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Heḳ wëëk bevahöö vasol raḳ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{He split the wëëk bamboo and strung his bow with it.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\spanenscientificnamesensesensecontentsensesentryletData{Bambusa sp.}\scientificnamesensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.5.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Grass, herb, vine}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{wëh}\spanbzhfonipaformpronunciationpronunciationsentryletData{weʁ}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{a block of land, the area of ground a person looks after.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Amaġ lo yö hir wëh sën yö debë taġee loḳ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{This is my fathers' piece of ground where they planted highland pandanus.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.5.4}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Area}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.3.6}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Made of, material}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.2.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Land}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.5.4.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Vicinity}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{Wij}\spanbzhfonipaformpronunciationpronunciationsentryletData{wiⁿd͡ʒ}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{the village of Wij, also known as Davonġ.}\sensesentryletData{ }\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{wirek}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwiɾ.ək}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{adv}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{before, long ago.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Wirek alam degelu sir raḳ ruġ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{In the old days people speared each other with spears.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Ham ya Mospi wirek.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{You went to Moresby before.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.2.2.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Short, not tall}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.4.5}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Relative time}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.2.2.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Short, not long}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{8.2.2}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Long}\semanticdomainsemanticdomainssensesensecontentsensesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{3.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Want}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}
-
-\spanbzhheadwordsubentrysubentriesentryletData{wirek hen}\headwordsubentrysubentriesentryletData{}\spanenreverseabbrcomplexformtypecomplexformtypessubentrysubentriesentryletData{comp.}\complexformtypessubentrysubentriesentryletData{ }\spanbzhfonipaformpronunciationpronunciationssubentrysubentriesentryletData{ˈwiɾ.ək ʁɛn}\pronunciationssubentrysubentriesentryletData{ }\spanendefinitionorglosssensesensecontentsensessubentrysubentriesentryletData{earlier, old, pertaining to or belonging to an earlier time.}\exampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\exampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData{Su wirek hen gaḳ yiḳ sëë nahën-ë.}\exampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData{It wasn't a long time ago, it just happened recently.}\translationtranslationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\exampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\examplessensesensecontentsensessubentrysubentriesentryletData{ }\semanticdomainssensesensecontentsensessubentrysubentriesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{8.4.6.5}\spanennamesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{Age}\semanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{8.4.6.5.4}\spanennamesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{Old, not new}\semanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{8.4.6.5.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{New}\semanticdomainssensesensecontentsensessubentrysubentriesentryletData{.) }\sensessubentrysubentriesentryletData{}
-
-\spanbzhheadwordsubentrysubentriesentryletData{wirek wirek}\headwordsubentrysubentriesentryletData{}\spanenreverseabbrcomplexformtypecomplexformtypessubentrysubentriesentryletData{Reduplication}\complexformtypessubentrysubentriesentryletData{ }\spanbzhfonipaformpronunciationpronunciationssubentrysubentriesentryletData{ˈwiɾ.ək ˈwiɾ.ək}\pronunciationssubentrysubentriesentryletData{ }\spanendefinitionorglosssensesensecontentsensessubentrysubentriesentryletData{from long ago, many times in the past, for a long time.}\exampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\exampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData{Hil aha nos wirek wirek beverup gwëbeng sënë.}\exampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData{We have eaten food from way back and right up to the present.}\translationtranslationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\exampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\exampleexamplessensesensecontentsensessubentrysubentriesentryletData{ }\exampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData{Ġeya ġenedo bebuum wirek wirek om ġenom begganġ.}\exampleexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData{You have been living with the whiteman for a very long time, so come back to the village.}\translationtranslationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\exampleexamplessensesensecontentsensessubentrysubentriesentryletData{}\examplessensesensecontentsensessubentrysubentriesentryletData{ }\semanticdomainssensesensecontentsensessubentrysubentriesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{8.2.2.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{Short, not tall}\semanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{8.2.2.1}\spanennamesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{Short, not long}\semanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{8.4.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{Indefinite time}\semanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{8.2.2}\spanennamesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{Long}\semanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{, }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{3.3}\spanennamesemanticdomainsemanticdomainssensesensecontentsensessubentrysubentriesentryletData{Want}\semanticdomainssensesensecontentsensessubentrysubentriesentryletData{.) }\sensessubentrysubentriesentryletData{}
-\end{spacing}\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{wöhbuum}\spanbzhfonipaformpronunciationpronunciationsentryletData{wɔʁ.ᵐbuːm}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{n}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{large variety of eel.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Ham besi wöhbuum duḳ jeyoġ.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{Cook the eel by wrapping it in }\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{jeyoġ}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{ (bark and roasting it).}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\semanticdomainssensesensecontentsensesentryletData{(sem. domains: }\spanenabbreviationsemanticdomainsemanticdomainssensesensecontentsensesentryletData{1.6.1.5}\spanennamesemanticdomainsemanticdomainssensesensecontentsensesentryletData{Fish}\semanticdomainssensesensecontentsensesentryletData{.) }\sensesentryletData{}\end{spacing}
-\begin{spacing}{0.458333333333333}
-\hangindent= 12pt
-\hangafter=1
-\spanbzhmainheadwordentryletData{wöp-o}\spanbzhfonipaformpronunciationpronunciationsentryletData{ˈwɔp.o}\pronunciationsentryletData{ }\spanenpartofspeechmorphosyntaxanalysissensesensecontentsensesentryletData{Interj}\morphosyntaxanalysissensesensecontentsensesentryletData{ }\spanendefinitionorglosssensesensecontentsensesentryletData{alas, exclamation of concern, anxiety, or pity.}\exampleexamplessensesensecontentsensesentryletData{}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Wöp-o! Sa kwaġ virek in vasöl.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{Oh dear! I have forgotten the bow.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{ }\exampleexampleexamplessensesensecontentsensesentryletData{}\spanbzhexampleexampleexamplessensesensecontentsensesentryletData{Sa in-a! Wöp-o, sëḳ na menoh tena in dekepa aggata.}\exampleexampleexamplessensesensecontentsensesentryletData{}\spanentranslationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{What will I do! Oh dear, where will I go, they have blocked off the road.}\translationtranslationtranslationsexampleexamplessensesensecontentsensesentryletData{}\translationtranslationsexampleexamplessensesensecontentsensesentryletData{}\exampleexamplessensesensecontentsensesentryletData{}\examplessensesensecontentsensesentryletData{ }\sensesentryletData{}\end{spacing}
- \end{spacing}\end{multicols}
 \end{document}

@@ -229,49 +229,7 @@ namespace Test.OpenOfficeConvert
 		}
 		
 		#endregion
-
-		private void CopyInputToOutput()
-		{
-			string[] files = new[] { "main.odt", "flexrev.odt", "main.odm", "flexrev.css", "main.xhtml", "flexrev.xhtml", "main.css", "flexrev.css" };
-			foreach (string file in files)
-			{
-				string outputfile = FileOutput(file);
-				File.Delete(outputfile);
-			}
-
-			files = new[] { "main.xhtml", "FlexRev.xhtml", "main.css", "FLExRev.css" };
-			foreach (string file in files)
-			{
-				CopyExistingFile(file);
-			}
-		}
-
-		private bool CheckFileExist()
-		{
-			bool returnValue = true;
-			string[] files = new[] { "main.odt", "FlexRev.odt", "main.odm" };
-			foreach (string file in files)
-			{
-				string outputfile = FileOutput(file);
-				if (!File.Exists(outputfile))
-				{
-					returnValue = false;
-					break;
-				}
-			}
-			return returnValue;
-		}
-
-		/// <summary>
-		/// Copies a file if it exists from the input test path to the output
-		/// </summary>
-		/// <param name="fileName">file to be copied if it exists</param>
-		private void CopyExistingFile(string fileName)
-		{
-			if (File.Exists(FileInput(fileName)))
-				File.Copy(FileInput(fileName), FileOutput(fileName), true);
-		}
-
+		
 		private string GetStyleOutput(string file)
 		{
 			LOContent contentXML = new LOContent();
@@ -309,33 +267,6 @@ namespace Test.OpenOfficeConvert
 			AfterBeforeProcess afterBeforeProcess = new AfterBeforeProcess();
 			afterBeforeProcess.RemoveAfterBefore(_projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
 
-			contentXML.CreateStory(_projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 325, pageSize);
-			_projInfo.TempOutputFolder = _projInfo.TempOutputFolder + _contentFile;
-			return styleOutput;
-		}
-
-		private string GetStyleOutput(PublicationInformation projInfo)
-		{
-			LOContent contentXML = new LOContent();
-			LOStyles stylesXML = new LOStyles();
-			projInfo.TempOutputFolder = _outputPath;
-			string file = Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath);
-
-			Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-			CssTree cssTree = new CssTree();
-			cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-			//StyleXML
-			string fileOutput = _index > 0 ? file + _index + _styleFile : file + _styleFile;
-			//string styleOutput = FileOutput(file + _styleFile);
-			string styleOutput = FileOutput(fileOutput);
-			Dictionary<string, Dictionary<string, string>> idAllClass = stylesXML.CreateStyles(_projInfo, cssClass, styleOutput);
-
-			// ContentXML
-			var pageSize = new Dictionary<string, string>();
-			pageSize["height"] = cssClass["@page"]["page-height"];
-			pageSize["width"] = cssClass["@page"]["page-width"];
-			_projInfo.TempOutputFolder = FileOutput(file);
 			contentXML.CreateStory(_projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 325, pageSize);
 			_projInfo.TempOutputFolder = _projInfo.TempOutputFolder + _contentFile;
 			return styleOutput;
