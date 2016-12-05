@@ -352,9 +352,7 @@ namespace SIL.Tool
 
 						if (!File.Exists(PathCombine(cssPath, cssFile)) && SamplePath.Length > 0)
 						{
-							cssPath = PathCombine(executablePath, SamplePath);
-
-
+							cssPath = PathwayPath.GetSupportPath(executablePath, SamplePath, false);
 						}
 						arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), baseCssFileWithPath));
 					}
