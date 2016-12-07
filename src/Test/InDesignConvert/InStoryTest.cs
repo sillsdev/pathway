@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="InStoryTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ using SIL.Tool;
 namespace Test.InDesignConvert
 {
     [TestFixture]
-    public class InStoryTest : ValidateXMLFile 
+    public class InStoryTest : ValidateXMLFile
     {
         #region Private Variables
         private string _inputCSS;
@@ -168,7 +168,7 @@ namespace Test.InDesignConvert
             content = "1.2";
             result = ValidateNodeContent(_outputStory, content);
             Assert.IsTrue(result, classname + " test Failed");
-        } 
+        }
 
         [Test]
         public void FontFamily4()
@@ -406,7 +406,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, _inputCSS + " test Failed");
         }
 
- 
+
         [Test]
         public void Font1()
         {
@@ -445,7 +445,7 @@ namespace Test.InDesignConvert
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + "a_1" + "\"]/Properties/AppliedFont";
             result = ValidateNodeValue();
             Assert.IsTrue(result, _inputCSS + " test Failed");
-        } 
+        }
 
         #endregion
 
@@ -488,7 +488,7 @@ namespace Test.InDesignConvert
             bool result = StyleXmlNodeTest(true);
             Assert.IsTrue(result, _inputCSS + " test Failed");
         }
-		
+
         [Test]
         public void DisplayBlock()
         {
@@ -531,7 +531,7 @@ namespace Test.InDesignConvert
             XPath = "//RootCharacterStyleGroup/CharacterStyle[@Name = \"main_2\"]";
             bool result = StyleXmlNodeTest(true);
             Assert.IsTrue(result, _inputCSS + " test Failed");
-            
+
             //1
             _expected.Clear();
             _expected.Add("FillColor", "Color/#ffa500");
@@ -778,7 +778,7 @@ namespace Test.InDesignConvert
             Assert.IsTrue(result, styleName + " test Failed");
 
         }
-		
+
         [Test]
         public void PseudoContains()
         {
@@ -842,7 +842,7 @@ namespace Test.InDesignConvert
         [Test]
         public void Ancestor()
         {
-	        
+
             _storyXML = new InStory();
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/Ancestor.css");
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Ancestor.xhtml");
@@ -931,7 +931,7 @@ namespace Test.InDesignConvert
             ExportProcess();
 
             _expected.Clear();
-			string styleName = "headword"; 
+			string styleName = "headword";
             _expected.Add("AppliedParagraphStyle", "ParagraphStyle/" + styleName);
             XPath = "//ParagraphStyleRange/CharacterStyleRange[2][@AppliedCharacterStyle = \"CharacterStyle/" + styleName + "\"]//Content";
 			string content = "-End";
@@ -1245,7 +1245,7 @@ namespace Test.InDesignConvert
             result = node.InnerXml;
 	        expected = "<MatchCharacterStylePreference TextBefore=\"\" TextAfter=\"\" AppliedCharacterStyle=\"CharacterStyle/headwordL3_.ii-fonipa\" SearchStrategy=\"FirstOnPage\" ChangeCase=\"None\" DeleteEndPunctuation=\"false\" />";
             Assert.AreEqual(expected, result, "MultiLangHeader1 test failed");
-			
+
             classname = "dTextVariablenLast1";
             output = Common.PathCombine(projInfo.TempOutputFolder, "designmap.xml");
             xPath = "//TextVariable[@Self = \"" + classname + "\"]";
@@ -1312,7 +1312,7 @@ namespace Test.InDesignConvert
             string _fileNameWithPath = Common.PathCombine(_outputStory, "Story_1.xml");
             XmlNodeList nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, XPath);
             XmlNode node = nodesList[0];
-            if (node == null) 
+            if (node == null)
                 Assert.IsTrue(false);
             XmlAttributeCollection attrb = node.Attributes;
 
@@ -1880,7 +1880,7 @@ namespace Test.InDesignConvert
             _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
             FileComparisionTest("B1peExpect", "2");
         }
-		
+
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -1954,13 +1954,13 @@ namespace Test.InDesignConvert
             string expected = Common.PathCombine(expectedFolder, "Stories\\Story_" + fileNo + ".xml");
             XmlAssert.AreEqual(output, expected, " Story_"+ fileNo + ".xml is not matching");
 
-            output = Common.PathCombine(projInfo.TempOutputFolder, "Resources\\styles.xml");
-            expected = Common.PathCombine(expectedFolder, "Resources\\styles.xml");
+            output = Common.PathCombine(projInfo.TempOutputFolder, "Resources\\Styles.xml");
+            expected = Common.PathCombine(expectedFolder, "Resources\\Styles.xml");
             XmlAssert.AreEqual(output, expected, " styles.xml is not matching");
             output = Common.PathCombine(projInfo.TempOutputFolder, "Resources\\Graphic.xml");
             expected = Common.PathCombine(expectedFolder, "Resources\\Graphic.xml");
             XmlAssert.AreEqual(output, expected, " Graphic.xml is not matching");
-            
+
             output = Common.PathCombine(projInfo.TempOutputFolder, "Resources\\Preferences.xml");
             expected = Common.PathCombine(expectedFolder, "Resources\\Preferences.xml");
             XmlAssert.AreEqual(output, expected, " Preferences.xml is not matching");
@@ -1968,11 +1968,11 @@ namespace Test.InDesignConvert
             output = Common.PathCombine(projInfo.TempOutputFolder, "Spreads\\Spread_1.xml");
             expected = Common.PathCombine(expectedFolder, "Spreads\\Spread_1.xml");
             XmlAssert.AreEqual(output, expected, " Spread_1.xml is not matching");
-            
+
             output = Common.PathCombine(projInfo.TempOutputFolder, "Spreads\\Spread_2.xml");
             expected = Common.PathCombine(expectedFolder, "Spreads\\Spread_2.xml");
             XmlAssert.AreEqual(output, expected, " Spread_2.xml is not matching");
-            
+
             output = Common.PathCombine(projInfo.TempOutputFolder, "Spreads\\Spread_3.xml");
             expected = Common.PathCombine(expectedFolder, "Spreads\\Spread_3.xml");
             XmlAssert.AreEqual(output, expected, " Spread_3.xml is not matching");
@@ -1980,7 +1980,7 @@ namespace Test.InDesignConvert
             output = Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads\\MasterSpread_All.xml");
             expected = Common.PathCombine(expectedFolder, "MasterSpreads\\MasterSpread_All.xml");
             XmlAssert.AreEqual(output, expected, " MasterSpread_All.xml is not matching");
-            
+
             output = Common.PathCombine(projInfo.TempOutputFolder, "MasterSpreads\\MasterSpread_First.xml");
             expected = Common.PathCombine(expectedFolder, "MasterSpreads\\MasterSpread_First.xml");
             XmlAssert.AreEqual(output, expected, " MasterSpread_First.xml is not matching");
@@ -2237,7 +2237,7 @@ namespace Test.InDesignConvert
 
         private void ExportProcess()
         {
-            _cssProperty.Clear(); 
+            _cssProperty.Clear();
             _idAllClass.Clear();
             _cssProperty = _cssTree.CreateCssProperty(_inputCSS, true);
             _idAllClass = _stylesXML.CreateIDStyles(_outputStyles, _cssProperty);

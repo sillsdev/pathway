@@ -1,14 +1,14 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="EmbeddedFontTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Erik Brommers</author>
 // <email>erik_brommers@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test methods of EmbeddedFont class
 // </remarks>
@@ -83,7 +83,7 @@ namespace Test.epubConvert
 			Assert.IsTrue(actual);
 		}
 
-		
+
 
 		[Test]
 		[Category("LongTest")]
@@ -121,7 +121,7 @@ namespace Test.epubConvert
 			var next = nodes[nodes.Count - 1].NextSibling.NextSibling;
 			Assert.AreEqual("Section_Head", next.Attributes.GetNamedItem("class").InnerText, "Section head should follow chapter links");
 		}
-		
+
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -691,7 +691,7 @@ namespace Test.epubConvert
 		{
 			CleanOutputDirectory();
 			string inputDataFolder = Common.PathCombine(_inputPath, "GlossaryTestcase");
-			string outputDataFolder = Common.PathCombine(_outputPath, "GlossaryTestcase");
+			string outputDataFolder = Common.PathCombine(_outputPath, "GlossaryTestCase");
 			Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
 
 			const string xhtmlName = "GlossaryTestCase.xhtml";
