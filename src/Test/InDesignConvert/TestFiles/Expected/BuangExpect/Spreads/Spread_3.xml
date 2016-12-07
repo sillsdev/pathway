@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<idPkg:Spread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
+  <Spread Self="Spread_3" PageTransitionType="None" PageTransitionDirection="NotApplicable" PageTransitionDuration="Medium" FlattenerOverride="Default" ShowMasterItems="true" PageCount="1" BindingLocation="0" AllowPageShuffle="true" ItemTransform="1 0 0 1 0 0">
+    <FlattenerPreference LineArtAndTextResolution="300" GradientAndMeshResolution="150" ClipComplexRegions="false" ConvertAllStrokesToOutlines="false" ConvertAllTextToOutlines="false">
+      <Properties>
+        <RasterVectorBalance type="double">50</RasterVectorBalance>
+      </Properties>
+    </FlattenerPreference>
+    <Page Self="page3" Name="3" AppliedTrapPreset="TrapPreset/$ID/kDefaultTrapStyleName" AppliedMaster="MasterAll" OverrideList="" TabOrder="" GridStartingPoint="TopOutside" UseMasterGrid="True">
+      <Properties>
+        <Descriptor type="list">
+          <ListItem type="string" />
+          <ListItem type="enumeration">Arabic</ListItem>
+          <ListItem type="boolean">true</ListItem>
+          <ListItem type="boolean">false</ListItem>
+          <ListItem type="long">3</ListItem>
+          <ListItem type="string" />
+        </Descriptor>
+      </Properties>
+      <MarginPreference Top="56.69291" Right="56.69291" Bottom="56.69291" Left="56.69291" ColumnsPositions="0 498.6142" ColumnDirection="Horizontal" />
+      <GridDataInformation FontStyle="Regular" PointSize="12" CharacterAki="0" LineAki="9" HorizontalScale="100" VerticalScale="100" LineAlignment="LeftOrTopLineJustify" GridAlignment="AlignEmCenter" CharacterAlignment="AlignEmCenter">
+        <Properties>
+          <AppliedFont type="string">Times New Roman</AppliedFont>
+        </Properties>
+      </GridDataInformation>
+    </Page>
+  </Spread>
+</idPkg:Spread>

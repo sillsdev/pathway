@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
+  <Story Self="9" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/t1_body">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]">
+        <Content>T1 class</Content>
+      </CharacterStyleRange><Br/></ParagraphStyleRange>
+  </Story>
+</idPkg:Story>

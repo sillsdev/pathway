@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
+  <Story Self="utlr" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/@page:right-top-left" Justification="LeftAlign">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/@page:right-top-left">
+        <Content><?ACE 18?></Content>
+      </CharacterStyleRange>
+    </ParagraphStyleRange>
+  </Story>
+</idPkg:Story>

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<idPkg:Spread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
+  <Spread Self="Spread_1" PageTransitionType="None" PageTransitionDirection="NotApplicable" PageTransitionDuration="Medium" FlattenerOverride="Default" ShowMasterItems="true" PageCount="1" BindingLocation="0" AllowPageShuffle="true" ItemTransform="1 0 0 1 0 0">
+    <FlattenerPreference LineArtAndTextResolution="300" GradientAndMeshResolution="150" ClipComplexRegions="false" ConvertAllStrokesToOutlines="false" ConvertAllTextToOutlines="false">
+      <Properties>
+        <RasterVectorBalance type="double">50</RasterVectorBalance>
+      </Properties>
+    </FlattenerPreference>
+    <Page Self="page1" Name="1" AppliedTrapPreset="TrapPreset/$ID/kDefaultTrapStyleName" AppliedMaster="MasterFirst" OverrideList="" TabOrder="" GridStartingPoint="TopOutside" UseMasterGrid="True">
+      <Properties>
+        <Descriptor type="list">
+          <ListItem type="string" />
+          <ListItem type="enumeration">Arabic</ListItem>
+          <ListItem type="boolean">true</ListItem>
+          <ListItem type="boolean">false</ListItem>
+          <ListItem type="long">1</ListItem>
+          <ListItem type="string" />
+        </Descriptor>
+      </Properties>
+      <MarginPreference Top="56.69291" Right="56.69291" Bottom="56.69291" Left="56.69291" ColumnsPositions="0 498.6142" ColumnDirection="Horizontal" />
+      <GridDataInformation FontStyle="Regular" PointSize="12" CharacterAki="0" LineAki="9" HorizontalScale="100" VerticalScale="100" LineAlignment="LeftOrTopLineJustify" GridAlignment="AlignEmCenter" CharacterAlignment="AlignEmCenter">
+        <Properties>
+          <AppliedFont type="string">Times New Roman</AppliedFont>
+        </Properties>
+      </GridDataInformation>
+    </Page>
+    <TextFrame Self="TF1" ParentStory="1" PreviousTextFrame="n" NextTextFrame="n" ContentType="TextType" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ua2" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[Normal Text Frame]" ItemTransform="1 0 0 1 0 0">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="-249.3071 -304.3071" LeftDirection="-249.3071 -304.3071" RightDirection="-249.3071 -304.3071" />
+              <PathPointType Anchor="-249.3071 304.3071" LeftDirection="-249.3071 304.3071" RightDirection="-249.3071 304.3071" />
+              <PathPointType Anchor="249.3071 304.3071" LeftDirection="249.3071 304.3071" RightDirection="249.3071 304.3071" />
+              <PathPointType Anchor="249.3071 -304.3071" LeftDirection="249.3071 -304.3071" RightDirection="249.3071 -304.3071" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+      </Properties>
+      <TextFramePreference TextColumnFixedWidth="495">
+        <Properties>
+          <InsetSpacing type="list">
+            <ListItem type="unit">0</ListItem>
+            <ListItem type="unit">0</ListItem>
+            <ListItem type="unit">0</ListItem>
+            <ListItem type="unit">0</ListItem>
+          </InsetSpacing>
+        </Properties>
+      </TextFramePreference>
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+        <Properties>
+          <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
+        </Properties>
+      </TextWrapPreference>
+    </TextFrame>
+    <TextFrame Self="TF2" ParentStory="2" PreviousTextFrame="n" NextTextFrame="n" ContentType="TextType" GradientFillStart="0 0" GradientFillLength="0" GradientFillAngle="0" GradientStrokeStart="0 0" GradientStrokeLength="0" GradientStrokeAngle="0" ItemLayer="ua2" Locked="false" LocalDisplaySetting="Default" GradientFillHiliteLength="0" GradientFillHiliteAngle="0" GradientStrokeHiliteLength="0" GradientStrokeHiliteAngle="0" AppliedObjectStyle="ObjectStyle/$ID/[Normal Text Frame]" ItemTransform="1 0 0 1 0 0">
+      <Properties>
+        <PathGeometry>
+          <GeometryPathType PathOpen="false">
+            <PathPointArray>
+              <PathPointType Anchor="-249.3071 -304.3071" LeftDirection="-249.3071 -304.3071" RightDirection="-249.3071 -304.3071" />
+              <PathPointType Anchor="-249.3071 304.3071" LeftDirection="-249.3071 304.3071" RightDirection="-249.3071 304.3071" />
+              <PathPointType Anchor="249.3071 304.3071" LeftDirection="249.3071 304.3071" RightDirection="249.3071 304.3071" />
+              <PathPointType Anchor="249.3071 -304.3071" LeftDirection="249.3071 -304.3071" RightDirection="249.3071 -304.3071" />
+            </PathPointArray>
+          </GeometryPathType>
+        </PathGeometry>
+      </Properties>
+      <TextFramePreference TextColumnCount="2" TextColumnGutter="12" TextColumnFixedWidth="495">
+        <Properties>
+          <InsetSpacing type="list">
+            <ListItem type="unit">0</ListItem>
+            <ListItem type="unit">0</ListItem>
+            <ListItem type="unit">0</ListItem>
+            <ListItem type="unit">0</ListItem>
+          </InsetSpacing>
+        </Properties>
+      </TextFramePreference>
+      <TextWrapPreference Inverse="false" ApplyToMasterPageOnly="false" TextWrapSide="BothSides" TextWrapMode="None">
+        <Properties>
+          <TextWrapOffset Top="0" Left="0" Bottom="0" Right="0" />
+        </Properties>
+      </TextWrapPreference>
+    </TextFrame>
+  </Spread>
+</idPkg:Spread>

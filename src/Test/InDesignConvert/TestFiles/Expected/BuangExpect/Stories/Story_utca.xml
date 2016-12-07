@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="6.0">
+  <Story Self="utca" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
+    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
+    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/@page-top-center" Justification="CenterAlign">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
+        <TextVariableInstance Self="u678" Name="FirstBookName" ResultText="&amp;lt;BF&amp;gt;" AssociatedTextVariable="dTextVariablenFirstBookName" />
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content> </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
+        <TextVariableInstance Self="u344" Name="FirstChapterNumber" ResultText="&amp;lt;CF&amp;gt;" AssociatedTextVariable="dTextVariablenFirstChapterNumber" />
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content>:</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
+        <TextVariableInstance Self="u786" Name="FirstVerseNumber" ResultText="&amp;lt;VF&amp;gt;" AssociatedTextVariable="dTextVariablenFirstVerseNumber" />
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content> - </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
+        <TextVariableInstance Self="u344" Name="LastChapterNumber" ResultText="&amp;lt;CL&amp;gt;" AssociatedTextVariable="dTextVariablenLastChapterNumber" />
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content>:</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
+        <TextVariableInstance Self="u786" Name="LastVerseNumber" ResultText="&amp;lt;VL&amp;gt;" AssociatedTextVariable="dTextVariablenLastVerseNumber" />
+      </CharacterStyleRange>
+    </ParagraphStyleRange>
+  </Story>
+</idPkg:Story>
