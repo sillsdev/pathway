@@ -372,7 +372,7 @@ namespace SIL.Tool
 			{
 				SetImageRectangleText(bmp, width, height, g, strTitle, badgeFont, size, strFormat, 20, 20f, outputFolder);
 			}
-            
+
         }
 
 		private static Rectangle SetImageRectangleText(Bitmap bmp, int width, int height, Graphics g, string strTitle,
@@ -410,7 +410,7 @@ namespace SIL.Tool
                 sb.Append(Common.ReplaceSymbolToText(Param.GetMetadataValue(Param.Publisher)));
 
             sb.AppendLine("</p>");
-            
+
             // logo stuff
             sb.Append("<p class='logo'>");
             if (Param.GetOrganization().StartsWith("SIL"))
@@ -1065,7 +1065,7 @@ namespace SIL.Tool
                     frontMatterCSSStyle = frontMatterCSSStyle + ".title{margin-top: 112pt; text-align: center; font-family: 'Times New Roman', serif; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;font-family: 'Times New Roman', serif; } .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}";
                 }
                 //END OF TITLE
-                //COPYRIGHT 
+                //COPYRIGHT
                 XmlNode copyRightContentNode = null;
                 if (File.Exists(copyRightFilePath))
                 {
@@ -1116,7 +1116,7 @@ namespace SIL.Tool
                         frontMatterCSSStyle = frontMatterCSSStyle + ".copyright{text-align: left; font-size:1pt;visibility:hidden;font-family: 'Times New Roman', serif;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;font-family: 'Times New Roman', serif;}.LText{font-size:12pt;font-style:italic;font-family: 'Times New Roman', serif;}.LText:before{content: \"\\2028\"}.dummyTOC{font-size:1pt; page-break-after: always;} ";
                     }
                 }
-                //END OF COPYRIGHT 
+                //END OF COPYRIGHT
                 //TABLE OF CONTENTS
                 XmlNode tocNode = null;
                 if (_includeTOCPage)
@@ -1260,7 +1260,7 @@ namespace SIL.Tool
         public string XelatexImagePreprocess()
         {
 
-            //Temp folder and file copy 
+            //Temp folder and file copy
             string sourcePicturePath = Path.GetDirectoryName(_baseXhtmlFileNameWithPath);
             string tempFile = _baseXhtmlFileNameWithPath;
             string metaname = Common.GetBaseValue(tempFile);
@@ -1361,7 +1361,7 @@ namespace SIL.Tool
             {
                 metaname = Common.GetMetaValue(tempFile);
             }
-            
+
             if (_projInfo.ProjectInputType != null && _projInfo.ProjectInputType.ToLower() == "scripture")
             {
                 string paraTextprojectPath;
@@ -2564,7 +2564,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="fileName"></param>
         public void MovePictureAsLastChild(string fileName)
@@ -2597,7 +2597,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="fileName"></param>
         public void SetNonBreakInVerseNumber(string fileName)
@@ -2629,7 +2629,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="fileName"></param>
         public void ReplaceDoubleSlashToLineBreak(string fileName)
@@ -2654,7 +2654,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="mergedCSS"> </param>
@@ -2725,7 +2725,7 @@ namespace SIL.Tool
         {
             if(Common.Testing == false)
                 if (_projInfo.ProjectInputType.ToLower() == "dictionary") return;
-            
+
             if(!Param.HyphenEnable) return;
 
             var hyphenWords = GetHyphenationWords();
@@ -2802,7 +2802,7 @@ namespace SIL.Tool
         #region XML PreProcessor
 
         /// <summary>
-        /// Changes the Class Name from Paragraph to Paragraph1 and Verse_numnber to Verse_numnber1 
+        /// Changes the Class Name from Paragraph to Paragraph1 and Verse_numnber to Verse_numnber1
         /// if the para has ChapterNumber.
         /// </summary>
         /// <param name="xmldoc">The xml Document</param>
@@ -3010,6 +3010,9 @@ namespace SIL.Tool
 
         public void RemoveDeclaration(string cssFileName, string match)
         {
+	        if (!File.Exists(cssFileName))
+		        return;
+
             var sr = new StreamReader(cssFileName);
             string fileContent = sr.ReadToEnd();
             sr.Close();
@@ -3334,7 +3337,7 @@ namespace SIL.Tool
                             columnList[columnList.Count - 1].InsertAfter(divReferenceNode, columnList[columnList.Count-1].LastChild);
                         }
                     }
-                    
+
                 }
             }
             xDoc.Save(_projInfo.DefaultXhtmlFileWithPath);

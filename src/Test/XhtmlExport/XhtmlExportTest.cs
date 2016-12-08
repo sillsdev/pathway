@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="XhtmlExportTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test methods of FlexDePlugin
 // </remarks>
@@ -78,13 +78,13 @@ namespace Test.XhtmlExport
 		/// </summary>
 		private static void PathawyB(string project, string layout, string inputType, string backend)
 		{
-			PathawyB(project, layout, inputType, backend, "xhtml");
+			PathwayB(project, layout, inputType, backend, "xhtml");
 		}
 
 		/// <summary>
 		/// Runs Pathway on the data and applies the back end
 		/// </summary>
-		private static void PathawyB(string project, string layout, string inputType, string backend, string format)
+		private static void PathwayB(string project, string layout, string inputType, string backend, string format)
 		{
 			Common.Testing = true;
 			const bool overwrite = true;
@@ -128,6 +128,11 @@ namespace Test.XhtmlExport
 				pathwayBFile = Common.PathCombine(pathwayBFile, "PathwayB.exe");
 			}
 
+			Param.SetLoadType = "Scripture";
+			Param.LoadSettings();
+
+			EnableConfigurationSettings(workingFolder, project);
+
 			var p1 = new Process();
 			p1.StartInfo.UseShellExecute = false;
 			StringBuilder arg = new StringBuilder(string.Format("-f \"{0}\" ", xhtmlOutput));
@@ -140,7 +145,7 @@ namespace Test.XhtmlExport
 			p1.StartInfo.Arguments = arg.ToString();
 			p1.StartInfo.WorkingDirectory = _tf.Output(null);
 			p1.StartInfo.FileName = pathwayBFile;
-			
+
 			p1.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 			p1.Start();
 			if (p1.Id <= 0)
@@ -168,6 +173,49 @@ namespace Test.XhtmlExport
 					throw new AssertionException("Unrecognized backend type");
 			}
 		}
+
+		private static void EnableConfigurationSettings(string outputDirectory, string projectName)
+		{
+			Param.SetValue(Param.PrintVia, projectName);
+			Param.SetValue(Param.LayoutSelected, "A4 Cols ApplicationStyles");
+			// Publication Information tab
+			Param.UpdateTitleMetadataValue(Param.Title, projectName, false);
+			Param.UpdateMetadataValue(Param.Description, projectName + "Description");
+			Param.UpdateMetadataValue(Param.Creator, projectName + "Creator");
+			Param.UpdateMetadataValue(Param.Publisher, projectName + "Publisher");
+			Param.UpdateMetadataValue(Param.CopyrightHolder, "SIL International");
+			// also persist the other DC elements
+			Param.UpdateMetadataValue(Param.Subject, "Bible");
+			Param.UpdateMetadataValue(Param.Date, DateTime.Today.ToString("yyyy-MM-dd"));
+			Param.UpdateMetadataValue(Param.CoverPage, "True");
+
+			string pathwayDirectory = Common.AssemblyPath;
+			string coverImageFilePath = Common.PathCombine(pathwayDirectory, "Graphic");
+
+			if (!Directory.Exists(coverImageFilePath))
+			{
+				coverImageFilePath = Path.GetDirectoryName(Common.AssemblyPath);
+				coverImageFilePath = Common.PathCombine(coverImageFilePath, "Graphic");
+			}
+
+			coverImageFilePath = Common.PathCombine(coverImageFilePath, "cover.png");
+			Param.UpdateMetadataValue(Param.CoverPageFilename, coverImageFilePath);
+
+			Param.UpdateMetadataValue(Param.CoverPageTitle, "True");
+			Param.UpdateMetadataValue(Param.TitlePage, "True");
+			Param.UpdateMetadataValue(Param.CopyrightPage, "True");
+
+			string copyrightsFilePath = Common.PathCombine(pathwayDirectory, "Copyrights");
+			copyrightsFilePath = Common.PathCombine(copyrightsFilePath, "SIL_CC-by-nc-sa.xhtml");
+			Param.UpdateMetadataValue(Param.CopyrightPageFilename, copyrightsFilePath);
+
+			Param.UpdateMetadataValue(Param.TableOfContents, "True");
+			Param.SetValue(Param.Media, "paper");
+			Param.SetValue(Param.PublicationLocation, outputDirectory);
+			Param.Write();
+
+		}
+
 
 		private static XmlDocument xmlInnerText(string usxfileName)
 		{
@@ -239,7 +287,7 @@ namespace Test.XhtmlExport
 		[Category("SkipOnTeamCity")]
 		public void NKOu3OpenOfficeTest()
 		{
-			PathawyB("NKOu3", "NKOu3", "Scripture", "OpenOffice/LibreOffice", "usx");
+			PathwayB("NKOu3", "NKOu3", "Scripture", "OpenOffice/LibreOffice", "usx");
 		}
 		#endregion Nkonya Sample Open Office
 
@@ -278,7 +326,7 @@ namespace Test.XhtmlExport
 		[Category("SkipOnTeamCity")]
 		public void NKOu3InDesignTest()
 		{
-			PathawyB("NKOu3", "NKOu3", "Scripture", "InDesign", "usx");
+			PathwayB("NKOu3", "NKOu3", "Scripture", "InDesign", "usx");
 		}
 		#endregion Nkonya Sample Open Office
 
@@ -304,7 +352,7 @@ namespace Test.XhtmlExport
 		[Category("SkipOnTeamCity")]
 		public void NKOu3XeLaTexTest()
 		{
-			PathawyB("NKOu3", "NKOu3", "Scripture", "XeLaTex", "usx");
+			PathwayB("NKOu3", "NKOu3", "Scripture", "XeLaTex", "usx");
 		}
 		#endregion Nkonya Sample XeLaTex
 	}

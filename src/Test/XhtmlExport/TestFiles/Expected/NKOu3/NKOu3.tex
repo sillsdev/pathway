@@ -1,4 +1,4 @@
-\documentclass[c5paper,twoside]{article} 
+\documentclass[a4paper,twoside]{article} 
 \usepackage{float}
 \usepackage{grffile}
 \usepackage{graphicx}
@@ -9,7 +9,7 @@
 \usepackage{calc}
 \usepackage{lettrine}
 \usepackage{alphalph}
-\usepackage[left=1.5cm,right=1.5cm,top=1.15cm,bottom=1.15cm,includeheadfoot]{geometry}
+\usepackage[left=1.85cm,right=1.85cm,top=1.49cm,bottom=1.49cm,includeheadfoot]{geometry}
 \usepackage{eso-pic}
 \usepackage{changepage}
 \usepackage{needspace}
@@ -188,29 +188,48 @@
 \font\VerseNumberzxxParagraphContinuationscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 6pt
 \font\spanzxxParagraphContinuationscrSectioncolumnsscrBookscrBody="Times New Roman/GR" at 11pt
 \font\AlternateReadingzxxNoteGeneralParagraphParagraphscrSectioncolumnsscrBookscrBody="Times New Roman/GR/I" at 12pt
+\color{black} 
+\AddToShipoutPicture*{% 
+\put(0,0){\rule{\paperwidth}{\paperheight}}{\includegraphics[width=\paperwidth, height=\paperheight]{cover.png}}% 
+} 
+\thispagestyle{empty} 
 \font\CoverPageTitle="Microsoft Sans Serif/B":color=000000 at 22pt 
 \font\pFrontMatterdiv="Microsoft Sans Serif/B":color=000000 at 8pt 
 \vskip 60pt 
 \begin{center} 
-\CoverPageTitle{} 
+\CoverPageTitle{NKOu3} 
 \end{center} 
 \newpage 
 \newpage 
 \thispagestyle{empty} 
 \mbox{} 
+\begin{titlepage}
+\begin{center}
+\textsc{\LARGE \CoverPageTitle{NKOu3}}\\[1.5cm] 
+\vspace{110 mm} 
+\textsc{ \CoverPageTitle{NKOu3Publisher}}\\[0.5cm] 
+\includegraphics[width=0.10 \textwidth]{./}\\[1cm]    
+\end{center} 
+\end{titlepage} 
 \pagenumbering{roman}  
 \setcounter{page}{3} 
+\input{} 
 \pagestyle{plain} 
 \newpage 
-\newpage 
-\thispagestyle{empty} 
-\mbox{} 
 
 \mbox{} 
 \newpage 
 \newpage 
 \setcounter{page}{1} 
 \pagenumbering{arabic} 
+
+\addtocontents{toc}{\protect \contentsline{section}{\scrBookNamezxxscrBookscrBody{Mateo}}{{\protect \pageref{PageStock_PreserveNKOu31}}}{}}
+
+\newpage 
+\pagestyle{plain} 
+\tableofcontents 
+\newpage 
+
 \pagestyle{fancy} 
 \begin{comment}
 
