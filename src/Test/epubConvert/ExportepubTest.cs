@@ -719,7 +719,7 @@ namespace Test.epubConvert
 			foreach (var fileName in filesList)
 			{
 				var info = new FileInfo(fileName);
-				if (info.Extension == ".xhtml")
+				if (info.Extension == ".xhtml" && info.Name.ToLower().Contains("part"))
 				{
 					FileCompare("GlossaryTestCase/OEBPS/" + info.Name, "GlossaryTestCaseExpected/OEBPS/" + info.Name);
 				}
@@ -761,7 +761,7 @@ namespace Test.epubConvert
 			foreach (var fileName in filesList)
 			{
 				var info = new FileInfo(fileName);
-				if (info.Extension == ".xhtml")
+				if (info.Extension == ".xhtml" && info.Name.ToLower().Contains("part"))
 				{
 					FileCompare("aaiScriptureExportTest/OEBPS/" + info.Name, "ebookExpected/OEBPS/" + info.Name);
 				}

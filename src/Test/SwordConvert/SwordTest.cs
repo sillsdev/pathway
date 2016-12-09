@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="SwordTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Sword Test Support
 // </remarks>
@@ -56,7 +56,7 @@ namespace Test.SwordConvert
 				styleSettingFile = Path.GetDirectoryName(Common.AssemblyPath);
 				styleSettingFile = Common.PathCombine(styleSettingFile, "StyleSettings.xml");
 			}
-			
+
             Common.Testing = true;
             ValidateXMLVersion(styleSettingFile);
             InputType = "Scripture";
@@ -125,7 +125,7 @@ namespace Test.SwordConvert
         public void RutBookTest()
         {
             const string file = "rut";
-            
+
             string input = Common.PathCombine(_inputPath, file + ".usx");
             string output = Common.PathCombine(_outputPath, file + ".xml");
             string expected = Common.PathCombine(_expectedPath, file + ".xml");
@@ -178,21 +178,21 @@ namespace Test.SwordConvert
 
         ///<summary>
         ///Compare files
-        /// </summary>  
+        /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void JN2BookTest()
         {
             const string file = "2JN";
 
-			string input = Common.PathCombine(_inputPath, file + ".USX");
+			string input = Common.PathCombine(_inputPath, file + ".usx");
             string output = Common.PathCombine(_outputPath, file + ".xml");
             string expected = Common.PathCombine(_expectedPath, file + ".xml");
 
             var inputTmpDir = Common.PathCombine(Path.GetTempPath(), Path.GetRandomFileName().Replace(".", "_"));
             Directory.CreateDirectory(inputTmpDir);
             string inputTmpDirFileName = string.Empty;
-            inputTmpDirFileName = Common.PathCombine(inputTmpDir, "usx");
+			inputTmpDirFileName = Common.PathCombine(inputTmpDir, "USX");
             Directory.CreateDirectory(inputTmpDirFileName);
             inputTmpDirFileName = Common.PathCombine(inputTmpDirFileName, Path.GetFileName(input));
             File.Copy(input, inputTmpDirFileName, true);
@@ -237,7 +237,7 @@ namespace Test.SwordConvert
 
         ///<summary>
         ///Compare files
-        /// </summary>  
+        /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void EzraBookTest()
@@ -296,7 +296,7 @@ namespace Test.SwordConvert
 
         ///<summary>
         ///Compare files
-        /// </summary>  
+        /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void JudgesBookTest()
@@ -353,6 +353,6 @@ namespace Test.SwordConvert
             FileAssert.AreEqual(expected, output, file + " test fails");
         }
 
-        
+
     }
 }

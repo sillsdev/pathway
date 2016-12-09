@@ -827,8 +827,9 @@ namespace SIL.PublishingSolution
                     args[3] = "zxx";
                     args[4] = "PathwayB";
                     Object oPPL = Activator.CreateInstance(tPPL, args);
-                    Object[] argsCombine = new object[1];
+                    Object[] argsCombine = new object[2];
                     argsCombine[0] = docs;
+					argsCombine[1] = Param.PrintVia;
                     XmlDocument scrBooksDoc = (XmlDocument)tPPL.InvokeMember
                         ("CombineUsxDocs", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsCombine);
                     if (string.IsNullOrEmpty(scrBooksDoc.InnerText))

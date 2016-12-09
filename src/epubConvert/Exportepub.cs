@@ -8,7 +8,7 @@
 // <author>Erik Brommers</author>
 // <email>erik_brommers@sil.org</email>
 // Last reviewed:
-// 
+//
 // <remarks>
 // epub export
 //
@@ -28,7 +28,7 @@
 // --------------------------------------------------------------------------------------
 
 // uncomment this to write out performance timings
-//#define TIME_IT 
+//#define TIME_IT
 
 using System;
 using System.Collections;
@@ -147,7 +147,7 @@ namespace SIL.PublishingSolution
 
             #region Setup
             inProcess.SetStatus("Setup");
-            var bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
+            var bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run.
             PageBreak = InputType.ToLower() == "dictionary" && GetPageBreakStatus(projInfo.SelectedTemplateStyle);
             #region LoadXslts
             addRevId = LoadAddRevIdXslt();
@@ -445,7 +445,7 @@ namespace SIL.PublishingSolution
 
             inProcess.PerformStep();
             #endregion Validate
-            
+
             #region Clean up
             inProcess.SetStatus("Clean up");
             Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1.x", string.Empty);
@@ -486,7 +486,7 @@ namespace SIL.PublishingSolution
 
             return success;
         }
-		
+
         private static string RenameEpubFileName(string oldEpubFileName, string epubVersion)
         {
             string newEpubFileName = oldEpubFileName.Replace(".epub", "_" + epubVersion + ".epub");
@@ -541,7 +541,7 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
-                    
+
                 }
             }
             xmlDoc.Save(tocFiletoUpdate);
@@ -992,7 +992,7 @@ namespace SIL.PublishingSolution
             // EDB 10/22/2010
             // HACK: we need the preprocessed image file names (preprocessor.imageprocess()), but
             // it's missing the xml namespace that makes it a valid xhtml file. We'll add it here.
-            // (The unprocessed html works fine, but doesn't have the updated links to the image files in it, 
+            // (The unprocessed html works fine, but doesn't have the updated links to the image files in it,
             // so we can't use it.)
             // TODO: remove this line when TE provides valid XHTML output.
 
@@ -1143,7 +1143,7 @@ namespace SIL.PublishingSolution
 	                {
 		                File.Move(file, dest);
 	                }
-	               
+
 	                // split the file into smaller pieces if needed
                     var files = new List<string>();
 
@@ -1421,7 +1421,7 @@ namespace SIL.PublishingSolution
 
             // Modify the local XSLT for the following conditions:
             // - Scriptures with a inline footnotes (References == "After Each Section"):
-            //   adds the 
+            //   adds the
 
             if (InputType.ToLower().Equals("scripture") && References.Contains("Section"))
             {
@@ -1995,7 +1995,7 @@ namespace SIL.PublishingSolution
         #region File Processing Methods
         /// <summary>
         /// Returns true if the specified search text string is found in the given file.
-        /// Modified to use the Knuth-Morris-Pratt search algorithm 
+        /// Modified to use the Knuth-Morris-Pratt search algorithm
         /// (http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm)
         /// </summary>
         /// <param name="filePath"></param>
@@ -2034,7 +2034,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Helper method to change the relative hyperlinks in the references file to absolute ones. 
+        /// Helper method to change the relative hyperlinks in the references file to absolute ones.
         /// This is done after the scripture files are split out into individual books of 100K or less in size.
         /// </summary>
         /// <param name="contentFolder"></param>
@@ -2086,7 +2086,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Helper method to change the relative hyperlinks in the references file to absolute ones. 
+        /// Helper method to change the relative hyperlinks in the references file to absolute ones.
         /// This is done after the scripture files are split out into individual books of 100K or less in size.
         /// </summary>
         /// <param name="contentFolder"></param>
@@ -2105,7 +2105,7 @@ namespace SIL.PublishingSolution
                 xmlReader.Close();
                 XmlNodeList footnoteNodes = null;
                 footnoteNodes = xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a");
-                    
+
                 if (footnoteNodes == null || footnoteNodes.Count == 0)
                 {
                     footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
@@ -2121,7 +2121,7 @@ namespace SIL.PublishingSolution
                 }
 
                 footnoteNodes = xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a");
-                
+
                 if (footnoteNodes == null || footnoteNodes.Count == 0)
                 {
                     footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
@@ -2281,7 +2281,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Splits the specified xhtml file out into multiple files, either based on letter (dictionary) or book (scripture). 
+        /// Splits the specified xhtml file out into multiple files, either based on letter (dictionary) or book (scripture).
         /// This method was adapted from ExportOpenOffice.cs.
         /// </summary>
         /// <param name="temporaryCvFullName"></param>
@@ -2414,7 +2414,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Copies the selected source folder and its subdirectories to the destination folder path. 
+        /// Copies the selected source folder and its subdirectories to the destination folder path.
         /// This is a recursive method.
         /// </summary>
         /// <param name="sourceFolder"></param>
@@ -2610,7 +2610,7 @@ namespace SIL.PublishingSolution
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
 			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
-            
+
             foreach (string sourceFile in files)
             {
                 string fileName = Path.GetFileNameWithoutExtension(sourceFile);

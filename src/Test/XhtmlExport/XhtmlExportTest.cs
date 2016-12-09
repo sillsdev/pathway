@@ -128,7 +128,7 @@ namespace Test.XhtmlExport
 				pathwayBFile = Common.PathCombine(pathwayBFile, "PathwayB.exe");
 			}
 
-			Param.SetLoadType = "Scripture";
+			Param.SetLoadType = inputType;
 			Param.LoadSettings();
 
 			EnableConfigurationSettings(workingFolder, project);
