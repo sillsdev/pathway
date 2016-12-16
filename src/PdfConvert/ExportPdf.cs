@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ExportPdf.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Export to pdf output
 // </remarks>
@@ -129,11 +129,14 @@ namespace SIL.PublishingSolution
                         preProcessor.SwapHeadWordAndReversalForm();
                     preProcessor.MovePictureAsLastChild(preProcessor.ProcessedXhtml);
                     preProcessor.SetNonBreakInVerseNumber(preProcessor.ProcessedXhtml);
-                    preProcessor.ReplaceDoubleSlashToLineBreak(preProcessor.ProcessedXhtml);
+					if (preProcessor.ReplaceProcessForPrinceOutput(preProcessor.ProcessedXhtml))
+	                {
+						AudioVisualImageProcess(preProcessor);
+	                }
+
                     preProcessor.MoveCallerToPrevText(preProcessor.ProcessedXhtml);
                     string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
-                    //string tempFolderName = Path.GetFileName(tempFolder);
-                    var mc = new MergeCss { OutputLocation = tempFolder };
+					var mc = new MergeCss { OutputLocation = tempFolder };
 
 	                if (projInfo.IsReversalExist && File.Exists(projInfo.DefaultRevCssFileWithPath))
 	                {
@@ -186,7 +189,7 @@ namespace SIL.PublishingSolution
 						Common.SetDefaultCSS(reversalFile, defaultCSS);
 					}
 
-                    if (!ExportPrince(projInfo, xhtmlFileName, isUnixOS, regPrinceKey, defaultCSS)) 
+                    if (!ExportPrince(projInfo, xhtmlFileName, isUnixOS, regPrinceKey, defaultCSS))
                         return false;
 
                     Environment.CurrentDirectory = curdir;
@@ -201,7 +204,7 @@ namespace SIL.PublishingSolution
                     {
                         string pdfFileName = xhtmlFileName + ".pdf";
                         pdfFileName = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), pdfFileName);
-                        
+
                         if (!Common.Testing && File.Exists(pdfFileName))
                         {
                             // ReSharper disable RedundantAssignment
@@ -214,11 +217,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    success = false;
-                    if (Common.Testing)
-                    {
-                        success = true;
-                    }
+                    success = false || Common.Testing;
                 }
             //}
             //catch (Exception)
@@ -227,6 +226,31 @@ namespace SIL.PublishingSolution
             //}
             return success;
         }
+
+	    private void AudioVisualImageProcess(PreExportProcess preProcessor)
+	    {
+		    string strImageFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
+		    if (!Directory.Exists(strImageFolder))
+		    {
+			    strImageFolder = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Graphic");
+		    }
+		    string speakerSourceFile = Common.PathCombine(strImageFolder, "speaker.png");
+		    string speakerDestination = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
+			string speakerDestinationFile = Path.Combine(speakerDestination, "speaker.png");
+		    File.Copy(speakerSourceFile, speakerDestinationFile, true);
+
+		    string speakerDestinationAudioVisual = Path.Combine(speakerDestination, "AudioVisual");
+		    if (Directory.Exists(speakerDestinationAudioVisual))
+		    {
+				string[] files = Directory.GetFiles(speakerDestinationAudioVisual);
+                foreach (string file in files)
+                {
+                    string name = Path.GetFileName(file);
+					string dest = Common.PathCombine(speakerDestination, name);
+                    File.Copy(file, dest, true);
+                }
+			}
+	    }
 
 	    private static bool ExportPrince(PublicationInformation projInfo, string xhtmlFileName, bool isUnixOS,
                                    RegistryKey regPrinceKey, string defaultCSS)
@@ -277,9 +301,9 @@ namespace SIL.PublishingSolution
 				}
 				else
 				{
-					inputArguments = "-s " + defaultCSS + " " + _processedXhtml + " -o " + xhtmlFileName + ".pdf";	
+					inputArguments = "-s " + defaultCSS + " " + _processedXhtml + " -o " + xhtmlFileName + ".pdf";
 				}
-                
+
                 using (Process p1 = new Process())
                 {
                     p1.StartInfo.FileName = "prince";
