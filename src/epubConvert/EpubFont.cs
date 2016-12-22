@@ -1,15 +1,15 @@
 ﻿#region // Copyright (C) 2014, SIL International. All Rights Reserved.
 // --------------------------------------------------------------------------------------------
 // <copyright file="EpubFont.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ namespace epubConvert
         #region void ReferenceFonts(string cssFile, IPublicationInformation projInfo)
         /// <summary>
         /// Inserts links in the CSS file to the fonts used by the writing systems:
-        /// - If the fonts are embedded, adds a @font-face declaration referencing the .ttf file 
+        /// - If the fonts are embedded, adds a @font-face declaration referencing the .ttf file
         ///   that's found in the archive
         /// - Sets the font-family for the body:lang selector to the referenced font
         /// </summary>
@@ -601,10 +601,14 @@ namespace epubConvert
             sb.AppendLine(" font-style : normal;");
             sb.AppendLine(" font-variant : normal;");
             sb.AppendLine(" font-size : all;");
-            sb.Append(" src : url('");
-            sb.Append(Path.GetFileName(embeddedFont.BoldFilename));
-            sb.AppendLine("');");
-            sb.AppendLine("}");
+
+			if (!String.IsNullOrEmpty(Path.GetFileName(embeddedFont.BoldFilename)))
+	        {
+		        sb.Append(" src : url('");
+		        sb.Append(Path.GetFileName(embeddedFont.BoldFilename));
+		        sb.AppendLine("');");
+	        }
+			sb.AppendLine("}");
         }
 
         private static void WriteItalicVariantDeclarationBlock(StringBuilder sb, EmbeddedFont embeddedFont)
@@ -617,10 +621,13 @@ namespace epubConvert
             sb.AppendLine(" font-style : italic;");
             sb.AppendLine(" font-variant : normal;");
             sb.AppendLine(" font-size : all;");
-            sb.Append(" src : url('");
-            sb.Append(Path.GetFileName(embeddedFont.ItalicFilename));
-            sb.AppendLine("');");
-            sb.AppendLine("}");
+	        if (!String.IsNullOrEmpty(Path.GetFileName(embeddedFont.ItalicFilename)))
+	        {
+				sb.Append(" src : url('");
+				sb.Append(Path.GetFileName(embeddedFont.ItalicFilename));
+				sb.AppendLine("');");
+	        }
+			sb.AppendLine("}");
         }
 
         private static void WriteFontDeclarationBlock(StringBuilder sb, EmbeddedFont embeddedFont)
@@ -633,10 +640,13 @@ namespace epubConvert
             sb.AppendLine(" font-style : normal;");
             sb.AppendLine(" font-variant : normal;");
             sb.AppendLine(" font-size : all;");
-            sb.Append(" src : url('");
-            sb.Append(Path.GetFileName(embeddedFont.Filename));
-            sb.AppendLine("');");
-            sb.AppendLine("}");
+			if (!String.IsNullOrEmpty(Path.GetFileName(embeddedFont.Filename)))
+	        {
+		        sb.Append(" src : url('");
+		        sb.Append(Path.GetFileName(embeddedFont.Filename));
+		        sb.AppendLine("');");
+	        }
+			sb.AppendLine("}");
         }
 
         private static void WriteMissingFontMessage(StringBuilder sb, EmbeddedFont embeddedFont)
@@ -806,7 +816,7 @@ namespace epubConvert
                         (isMissing == false && _parent.NonSilFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(_parent.DefaultFont)) || // automatic for non-SIL fonts
                         (isMissing == true && _parent.MissingFont == FontHandling.SubstituteDefaultFont && !nonSilFont.Key.Name.Equals(_parent.DefaultFont))) // automatic for missing fonts
                     {
-                        // the user has chosen a different (SIL) font - 
+                        // the user has chosen a different (SIL) font -
                         // create a new EmbeddedFont and add it to the list
                         _embeddedFonts.Remove(nonSilFont.Key.Name);
                         var newFont = new EmbeddedFont(dlg.SelectedFont);
@@ -849,7 +859,7 @@ namespace epubConvert
                 {
                     if (!dlg.UseFontAnyway() && !nonSilFont.Key.Name.Equals(dlg.SelectedFont))
                     {
-                        // the user has chosen a different (SIL) font - 
+                        // the user has chosen a different (SIL) font -
                         // create a new EmbeddedFont and add it to the list
                         _embeddedFonts.Remove(nonSilFont.Key.Name);
                         var newFont = new EmbeddedFont(dlg.SelectedFont);
