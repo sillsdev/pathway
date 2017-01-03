@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="PsExportTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test methods of FlexDePlugin
 // </remarks>
@@ -278,7 +278,7 @@ namespace Test.PsExport
 			Common.ProgBase = Common.GetPSApplicationPath();
             Param.LoadSettings();
         }
-        
+
         /// <summary>
         /// Copies a file if it exists from the input test path to the output
         /// </summary>
@@ -404,7 +404,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\u00A0This is a sample text,"),
                 new ODet(ODet.Chk, "Punctuation after Glossary entry (TD-3719)", "mat21-23.odt", ODet.Content, "//text:p[26]", " 24 This is sample, text to get the correct content.  25 If you can see the text test, Coding is correct"),
                 new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1\u20112\u00A0"),
-                
+
             };
 
             ExportTest("T4", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
@@ -910,7 +910,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:name='Graphics2']//@xlink:href", "Pictures/1.jpg"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_TitleMain_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_Paragraph_scrSection_')]//@fo:language", "zxx"),
-                
+
             };
 
             ExportTest("T14", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
@@ -950,7 +950,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "letter header font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@fo:font-weight", "700"),
                 new ODet(ODet.Chk, "letter header complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@style:font-weight-complex", "700"),
                 new ODet(ODet.Chk, "letter header font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@fo:font-size", "18pt"),
-                new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@style:font-size-complex", "18pt"),                
+                new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@style:font-size-complex", "18pt"),
                 new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
                 new ODet(ODet.Chk, "entry indent", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-indent", "-12pt"),
                 new ODet(ODet.Chk, "headword font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_.auc_entry_letData_dicBody']//@fo:font-family", "Doulos SIL"),
@@ -976,7 +976,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "definition country", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_xitem_.es_definitionL2_.es_sense_senses_entry_letData_dicBody')]//@fo:country", "ES"),
                 new ODet(ODet.Chk, "rights page header", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'LHeading')]", "ABOUT THIS DOCUMENT"),
                 new ODet(ODet.Chk, "rights url", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'span_LText')][2]", "http://www.ethnologue.com/language/auc"),
-                new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//text:span[starts-with(@text:style-name, 'LText')])[2]", "\u00a9 2016 John Doe\u00ae."),
+                new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//text:span[starts-with(@text:style-name, 'LText')])[2]", "\u00a9 2017 John Doe\u00ae."),
                 new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'div_FrontMatter')]", "This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Unported License."),
                 new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//*[starts-with(@text:style-name, 'div_FrontMatter')])[2]", "To view a copy of this license, visit "),
                 new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//*[starts-with(@text:style-name, 'div_FrontMatter')])[3]", "http://creativecommons.org/licenses/by-nc-sa/4.0/"),
@@ -1039,7 +1039,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "header right tab", "mat21-23.odt", ODet.Styles, "//*[@style:name='Header']//*[@style:type='right']/@style:position", "334pt"),
                 new ODet(ODet.Chk, "right header frame", "mat21-23.odt", ODet.Styles, "//*[@style:display-name='Right Page']//style:footer//@svg:y", "32pt"),
                 new ODet(ODet.Chk, "right header guide word", "mat21-23.odt", ODet.Styles, "//*[@style:display-name='Right Page']//@text:name", "Right_Guideword_R"),
-                
+
             };
 
             ExportTest("T16", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
@@ -1059,7 +1059,7 @@ namespace Test.PsExport
             {
                new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\uFEFF" +Common.ConvertUnicodeToString("\\201c") + "This is a sample text,"),
                 new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1‑2﻿"),
-                
+
             };
 
             ExportTest("T17", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
@@ -1141,7 +1141,7 @@ namespace Test.PsExport
 			Assert.AreEqual(2, files.Length);
 			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "FlexRev Preprocess produced different results");
 		}
-		
+
 		[Test]
 		public void XsltPreProcessAddColumnFW83MainTest()
 		{
