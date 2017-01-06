@@ -3,15 +3,19 @@
   <Story Self="1" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/letHead a b">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]">
-        <Content>♦let Head
-             </Content>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/a b letHead_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/a b letHead_2">
+        <Content>♦</Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content>let Head </Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/letData a b">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/[No character style]">
-        <Content>: let Data
-             </Content>
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/a b letData_1">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/a b letData_2">
+        <Content>: </Content>
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content>let Data </Content>
       </CharacterStyleRange><Br/></ParagraphStyleRange>
   </Story>
 </idPkg:Story>

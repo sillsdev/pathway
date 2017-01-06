@@ -27,7 +27,7 @@ namespace Test.theWordConvert
         {
             const string key = "version.date";
             const string inValue = "2014.7.14";
-            _dbParams[key] = inValue;
+            DbParams[key] = inValue;
             var actual = ParseDateIfNecessary(key, inValue);
             Assert.AreEqual("date('2014-07-14')", actual);
         }
@@ -37,7 +37,7 @@ namespace Test.theWordConvert
         {
             const string key = "version.date";
             const string inValue = "2014-07-14";
-            _dbParams[key] = inValue;
+            DbParams[key] = inValue;
             var actual = ParseDateIfNecessary(key, inValue);
             Assert.AreEqual("date('2014-07-14')", actual);
         }
@@ -47,7 +47,7 @@ namespace Test.theWordConvert
         {
             const string key = "publish.date";
             const string inValue = "2009";
-            _dbParams[key] = inValue;
+            DbParams[key] = inValue;
             var actual = ParseDateIfNecessary(key, inValue);
             Assert.AreEqual("date('2009-01-01')", actual);
         }

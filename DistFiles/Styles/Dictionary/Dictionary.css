@@ -298,3 +298,7 @@ text-align: justify;
     text-align: center;
 }
 
+.mainheadword {
+	font-weight: bold;
+	string-set: guideword content();
+}

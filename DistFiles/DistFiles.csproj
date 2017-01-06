@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
-  <UsingTask TaskName="MSBuild.ExtensionPack.UI.Dialog" AssemblyFile="MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.UI.Dialog" AssemblyFile="..\packages\MSBuild.Extension.Pack.1.8.0\tools\net40\MSBuild.ExtensionPack.dll" />
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
   <PropertyGroup>
@@ -36,6 +36,8 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -202,6 +204,8 @@
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <Edition>BTE</Edition>
+    <ProductName>PathwayXeLaTeX</ProductName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -215,6 +219,8 @@
     <DebugType>none</DebugType>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <Edition>BTE</Edition>
+    <ProductName>PathwayXeLaTeX</ProductName>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -264,10 +270,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\Installer\License.rtf" />
+    <None Include="packages.config" />
     <None Include="Readme\ReadMePw.rtf" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="Build">
     <CallTarget Targets="BeforeBuild" Condition=" '$(ConfTag)' != 'XeLaTeX' " />
@@ -292,8 +299,6 @@
   </Target>
   <Target Name="BeforeBuild">
     <!-- validator is referenced even if not called -->
-    <Delete Files="@(AllDebugOutput)" Condition="'$(Configuration)' == 'Debug'" />
-    <Delete Files="@(AllReleaseOutput)" Condition="'$(Configuration)' != 'Debug'" />
     <Copy SourceFiles="@(DicStyles)" DestinationFiles="@(DicStyles->'$(OutputPath)Styles\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(ScrStyles)" DestinationFiles="@(ScrStyles->'$(OutputPath)Styles\Scripture\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
     <Copy SourceFiles="@(DictionaryForMIDs)" DestinationFiles="@(DictionaryForMIDs->'$(OutputPath)Dic4Mid\%(RecursiveDir)%(Filename)%(Extension)')" />
@@ -336,8 +341,6 @@
   </Target>
   <Target Name="AfterBuild" />
   <ItemGroup>
-    <AllDebugOutput Include="..\output\Debug\**\*.*" Exclude="..\output\Debug\*.vshost.exe" />
-    <AllReleaseOutput Include="..\output\Release\**\*.*" Exclude="..\output\Release\*.vshost.exe" />
     <EpubCheck Include="epubcheck-4.0.1\**\*.*" />
     <PdfLicenseManager Include="pdflicensemanager-2.3.jar" />
     <Paratexmf Include="..\src\XeLaTexConvert\Paratexmf\**\*.*" />
@@ -464,8 +467,18 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Graphic\speaker.png" />
+  </ItemGroup>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets'))" />
+  </Target>
 </Project>

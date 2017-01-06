@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="OOStyles.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (c) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (c) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// Creates the OOStyle file 
+// Creates the OOStyle file
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -157,7 +157,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Enabling hyphenation
         /// </summary>
-        
+
 
         private string GetLanguageForReversalNumber()
         {
@@ -199,7 +199,7 @@ namespace SIL.PublishingSolution
         #region CreateCssStyle
         /// <summary>
         //  <style:style style:name="a" style:family="paragraph" style:parent-style-name="none"> *
-        //  <style:paragraph-properties fo:text-align="left" /> 
+        //  <style:paragraph-properties fo:text-align="left" />
         //  <style:text-properties fo:font-size="24pt" style:font-size-complex="24pt" fo:color="#ff0000" />
         //  </style:style>
         /// </summary>
@@ -214,7 +214,7 @@ namespace SIL.PublishingSolution
                 bool isFootnoteStyle = false;
                 if (cssClass.Key.StartsWith("@page") || cssClass.Key.EndsWith("..after") || cssClass.Key.EndsWith("..before"))
                 {
-                    if (cssClass.Key.EndsWith("..before")) //TD-3051 
+                    if (cssClass.Key.EndsWith("..before")) //TD-3051
                     {
                         if (cssClass.Value.ContainsKey("counter-increment"))
                         {
@@ -603,13 +603,13 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Create value XML file for storing section and column info
-        /// 
-        /// <list> 
+        ///
+        /// <list>
         /// </list>
         /// </summary>
         /// <returns>class Name</returns>
-        /// -------------------------------------------------------------------------------------------        
-        /// 
+        /// -------------------------------------------------------------------------------------------
+        ///
         private void CreateColumnXMLFile(string className)
         {
             string path = Common.PathCombine(Path.GetTempPath(), "_" + className.Trim() + ".xml");
@@ -786,7 +786,7 @@ namespace SIL.PublishingSolution
 
         #region Page Layouts and Master Page - Header/Footer
 
-        private void CreatePageStyle()   // PageHeaderFooter() in odt conversion 
+        private void CreatePageStyle()   // PageHeaderFooter() in odt conversion
         {
             CreatePageFirstPage();
             if (_guidewordLength == 0 && _projInfo.ProjectInputType.ToLower() == "dictionary") return;
@@ -1012,8 +1012,8 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Generate last block of Styles.xml
-        /// 
-        /// <list> 
+        ///
+        /// <list>
         /// </list>
         /// </summary>
         /// <returns> </returns>
@@ -1078,7 +1078,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:family", "paragraph");
             _writer.WriteAttributeString("style:class", "text");
             _writer.WriteEndElement();
-			
+
 	        string aTagColor = string.Empty;
 	        aTagColor = GetAnchorTagColor(aTagColor);
 
@@ -1229,14 +1229,19 @@ namespace SIL.PublishingSolution
             _writer.WriteStartElement("style:paragraph-properties");//style:paragraph-properties
             _writer.WriteAttributeString("fo:margin-top", "0.0005in");
             _writer.WriteAttributeString("fo:margin-bottom", "0.0835in");
-            _writer.WriteAttributeString("fo:keep-with-next", "always");
 
+			if (CheckIsPageBottomCenterSet())
+			{
+				_writer.WriteAttributeString("fo:text-align", "end");
+				_writer.WriteAttributeString("style:justify-single-word", "false");
+				_writer.WriteAttributeString("style:writing-mode", "page");
+
+			}
+
+	        _writer.WriteAttributeString("fo:keep-with-next", "always");
             _writer.WriteAttributeString("text:number-lines", "false");
             _writer.WriteAttributeString("text:line-number", "0");
-
             _writer.WriteStartElement("style:tab-stops");//style:tab-stops
-
-
             if (_isCenterTabStopNeeded)
             {
                 _writer.WriteStartElement("style:tab-stop");//style:tab-stop
@@ -1745,7 +1750,7 @@ namespace SIL.PublishingSolution
             }
             catch
             {
-                
+
             }
         }
 
@@ -2283,7 +2288,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:name", "Standard");
             _writer.WriteAttributeString("style:page-layout-name", "pm1");
             _writer.WriteEndElement();
-            //STANDARD CODE PART ENDS 
+            //STANDARD CODE PART ENDS
 
             #endregion
 
@@ -2335,7 +2340,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteEndElement(); // Close of Master Page
                     //TITLE CODE PART ENDS
                 }
-                
+
 
                 //DUMMYPAGE CODE PART
                 _writer.WriteStartElement("style:master-page");
@@ -2435,7 +2440,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:next-style-name", "XHTML");
                 CreateHeaderFooterVariables(6);
                 _writer.WriteEndElement(); // Close of Master Page
-                ////XHTML CODE PART ENDS 
+                ////XHTML CODE PART ENDS
 
                 #endregion
             }
@@ -2497,26 +2502,67 @@ namespace SIL.PublishingSolution
             {
                 if (source == "Variable")
                 {
-                    _writer.WriteAttributeString("fo:text-align", "center");
+					if (CheckIsPageBottomCenterSet())
+					{
+						_writer.WriteAttributeString("fo:text-align", "start");
+					}
+					else
+					{
+						_writer.WriteAttributeString("fo:text-align", "center");
+					}
                 }
                 else
                 {
-                    _writer.WriteAttributeString("style:horizontal-pos", "center");
+	                if (CheckIsPageBottomCenterSet())
+	                {
+						_writer.WriteAttributeString("style:horizontal-pos", "left");
+	                }
+	                else
+	                {
+						_writer.WriteAttributeString("style:horizontal-pos", "center");
+	                }
                 }
             }
             else
             {
                 if (source == "Variable")
                 {
-                    _writer.WriteAttributeString("fo:text-align", "start");
+	                if (CheckIsPageBottomCenterSet())
+	                {
+						_writer.WriteAttributeString("fo:text-align", "center");
+	                }
+	                else
+	                {
+						_writer.WriteAttributeString("fo:text-align", "start");
+	                }
                 }
                 else
                 {
-                    _writer.WriteAttributeString("style:horizontal-pos", "left");
+	                if (CheckIsPageBottomCenterSet())
+	                {
+						_writer.WriteAttributeString("style:horizontal-pos", "center");
+	                }
+	                else
+	                {
+						_writer.WriteAttributeString("style:horizontal-pos", "left");	                }
                 }
             }
         }
 
+		private bool CheckIsPageBottomCenterSet()
+		{
+			string pageDir = "@page-bottom-center";
+			if (_cssProperty.ContainsKey(pageDir) && _cssProperty[pageDir].ContainsKey("content"))
+			{
+				string valuePage = _cssProperty[pageDir]["content"].ToString();
+				if (valuePage.Contains("counter(page)"))
+				{
+					return true;
+
+				}
+			}
+			return false;
+		}
 
         private void CreateHeaderFrame()
         {
@@ -2545,7 +2591,15 @@ namespace SIL.PublishingSolution
 			string headerFontSize = Common.GetHeaderFontSize(_cssProperty, _projInfo.ProjectInputType);
 			_writer.WriteAttributeString("fo:font-size", headerFontSize);
             _writer.WriteEndElement();
-            _writer.WriteEndElement();
+	        if (CheckIsPageBottomCenterSet())
+	        {
+		        _writer.WriteStartElement("style:paragraph-properties");
+		        _writer.WriteAttributeString("fo:text-align", "start");
+		        _writer.WriteAttributeString("style:justify-single-word", "false");
+		        _writer.WriteAttributeString("fo:background-color", "#ffffff");
+		        _writer.WriteEndElement();
+	        }
+	        _writer.WriteEndElement();
 
             if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
@@ -2558,7 +2612,16 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:font-name-complex", _projInfo.ReversalFontName);
 				_writer.WriteAttributeString("fo:font-size", headerFontSize);
                 _writer.WriteEndElement();
-                _writer.WriteEndElement();
+
+	            if (CheckIsPageBottomCenterSet())
+	            {
+		            _writer.WriteStartElement("style:paragraph-properties");
+		            _writer.WriteAttributeString("fo:text-align", "start");
+		            _writer.WriteAttributeString("style:justify-single-word", "false");
+		            _writer.WriteAttributeString("fo:background-color", "#ffffff");
+		            _writer.WriteEndElement();
+	            }
+	            _writer.WriteEndElement();
             }
 
             _writer.WriteStartElement("style:style");
@@ -2570,7 +2633,16 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("style:font-name-complex", "Charis SIL");
 			_writer.WriteAttributeString("fo:font-size", headerFontSize);
             _writer.WriteEndElement();
-            _writer.WriteEndElement();
+
+	        if (CheckIsPageBottomCenterSet())
+	        {
+		        _writer.WriteStartElement("style:paragraph-properties");
+		        _writer.WriteAttributeString("fo:text-align", "end");
+		        _writer.WriteAttributeString("style:justify-single-word", "false");
+		        _writer.WriteAttributeString("fo:background-color", "#ffffff");
+		        _writer.WriteEndElement();
+	        }
+	        _writer.WriteEndElement();
 
             _writer.WriteStartElement("style:style");
             _writer.WriteAttributeString("style:name", "Mfr1");

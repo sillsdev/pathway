@@ -1,0 +1,36 @@
+.entry 
+{
+  font-family: "<default serif>", serif;	/* inherited */
+  font-weight: normal;	/* inherited */
+  color: rgb(12,24,0);	/* inherited */
+  background-color: rgb(255,255,255);	/* inherited */
+
+}
+
+.letData 
+{
+    column-fill: auto;
+    column-rule: solid 1pt #aa0000;
+}
+
+.letter 
+{
+   display: inline;
+   font-weight: normal;
+   font-size: 30pt;
+   font-family: "Times New Roman", serif;	/* default Serif font */
+}
+	
+	
+.headword 
+{
+    string-set: guideword content();
+}
+
+.letHead 
+{
+    display: block;
+    column-count: 1;
+    margin-right: .75in;
+    padding-bottom: 9pt;
+}

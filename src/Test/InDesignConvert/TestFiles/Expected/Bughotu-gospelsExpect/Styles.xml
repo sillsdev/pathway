@@ -57,55 +57,7 @@
         <Leading type="enumeration">Auto</Leading>
       </Properties>
     </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/baseline" Name="baseline" Imported="false" NextStyle="ParagraphStyle/baseline" KeyboardShortcut="0 0" FontStyle="Bold" FillColor="Color/#0000ff" Position="Normal">
-      <Properties>
-        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/sub" Name="sub" Imported="false" NextStyle="ParagraphStyle/sub" KeyboardShortcut="0 0" Position="Subscript" FillColor="Color/#0000ff" PointSize="100%">
-      <Properties>
-        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/super" Name="super" Imported="false" NextStyle="ParagraphStyle/super" KeyboardShortcut="0 0" Position="Superscript" FillColor="Color/#0000ff" PointSize="100%">
-      <Properties>
-        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/test" Name="test" Imported="false" NextStyle="ParagraphStyle/test" KeyboardShortcut="0 0" FillColor="Color/#008000">
-      <Properties>
-        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/top" Name="top" Imported="false" NextStyle="ParagraphStyle/top" KeyboardShortcut="0 0" BaselineShift="50%" FillColor="Color/#0000ff">
-      <Properties>
-        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/bottom" Name="bottom" Imported="false" NextStyle="ParagraphStyle/bottom" KeyboardShortcut="0 0" BaselineShift="-50%" FillColor="Color/#0000ff">
-      <Properties>
-        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/percent" Name="percent" Imported="false" NextStyle="ParagraphStyle/percent" KeyboardShortcut="0 0" BaselineShift="75%" FillColor="Color/#0000ff">
-      <Properties>
-        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/percent1" Name="percent1" Imported="false" NextStyle="ParagraphStyle/percent1" KeyboardShortcut="0 0" BaselineShift="25%" FillColor="Color/#0000ff">
-      <Properties>
-        <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
-        <PreviewColor type="enumeration">Nothing</PreviewColor>
-      </Properties>
-    </ParagraphStyle>
-    <ParagraphStyle Self="ParagraphStyle/point" Name="point" Imported="false" NextStyle="ParagraphStyle/point" KeyboardShortcut="0 0" BaselineShift="7" FillColor="Color/#0000ff">
+    <ParagraphStyle Self="ParagraphStyle/VerseNumber" Name="VerseNumber" Imported="false" NextStyle="ParagraphStyle/VerseNumber" KeyboardShortcut="0 0" PointSize="15" Position="Superscript" FirstLineIndent="0" LeftIndent="0">
       <Properties>
         <BasedOn type="string">$ID/[No paragraph style]</BasedOn>
         <PreviewColor type="enumeration">Nothing</PreviewColor>

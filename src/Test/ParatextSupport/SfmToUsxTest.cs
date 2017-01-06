@@ -15,17 +15,11 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
 using System.IO;
-using System.Xml;
-using System.Xml.XPath;
+using System.Threading;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
-using Test;
 
 namespace Test.ParatextSupport
 {
@@ -49,6 +43,12 @@ namespace Test.ParatextSupport
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
             _expectedPath = Common.PathCombine(testPath, "Expected");
+            if (!Directory.Exists(_outputPath))
+            {
+                Directory.CreateDirectory(_outputPath);
+                while (!Directory.Exists(_outputPath))
+                    Thread.Sleep(1000);
+            }
         }
         #endregion
 

@@ -48,6 +48,8 @@ namespace SIL.PublishingSolution
                                       IsOpenOutput = false,
                                       ProjectName = "main",
                                   };
+
+	        
             var exportType = "OpenOffice/LibreOffice";
             bool bOutputSpecified = false;
             var files = new List<string>();
@@ -65,10 +67,13 @@ namespace SIL.PublishingSolution
                     i = ProcessExportType(args, i, projectInfo, files, ref inFormat, ref bShowDialog, ref exportType, ref bOutputSpecified);
                 }
 
-                SettingProcessExportFile(projectInfo, files);
+				Common.Testing = !projectInfo.IsOpenOutput;
 
+                SettingProcessExportFile(projectInfo, files);
+				Common.SaveInputType(projectInfo.ProjectInputType);
                 Common.ProgBase = Common.GetPSApplicationPath();
                 // load settings from the settings file
+	            Param.SetLoadType = projectInfo.ProjectInputType;
                 Param.LoadSettings();
                 Param.Value[Param.InputType] = projectInfo.ProjectInputType;
                 Param.LoadSettings();
@@ -97,7 +102,6 @@ namespace SIL.PublishingSolution
                 }
 
                 // run headless from the command line
-                Common.Testing = true;
                 ProcessInputFormat(inFormat, files, projectInfo);
 
                 if (projectInfo.DefaultXhtmlFileWithPath == null)
@@ -125,7 +129,7 @@ namespace SIL.PublishingSolution
 
                 var tpe = new PsExport { Destination = Param.PrintVia, DataType = projectInfo.ProjectInputType };
                 tpe.ProgressBar = null;
-                tpe.Export(projectInfo.DefaultXhtmlFileWithPath);
+				tpe.Export(projectInfo.DefaultXhtmlFileWithPath);
             }
             catch (ArgumentException ex)
             {
@@ -385,7 +389,15 @@ namespace SIL.PublishingSolution
             try
             {
                 // load the ParatextSupport DLL dynamically
-                Assembly asmPtSupport = Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+	            string paratextSupportDLL = Common.PathCombine(Common.AssemblyPath, "ParatextSupport.dll");
+
+				if (!File.Exists(paratextSupportDLL))
+				{
+					paratextSupportDLL = Path.GetDirectoryName(Common.AssemblyPath);
+					paratextSupportDLL = Common.PathCombine(paratextSupportDLL, "ParatextSupport.dll");
+				}
+
+				Assembly asmPtSupport = Assembly.LoadFrom(paratextSupportDLL);
                 Type tParatextPathwayLink = asmPtSupport.GetType("SIL.PublishingSolution.ParatextPathwayLink");
                 Object objParatextPathwayLink = null;
                 if (tParatextPathwayLink != null)
@@ -606,8 +618,16 @@ namespace SIL.PublishingSolution
                     try
                     {
                         // load the ParatextSupport DLL dynamically
-                        Assembly asmPTSupport =
-                            Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+						// load the ParatextSupport DLL dynamically
+						string paratextSupportDLL = Common.PathCombine(Common.AssemblyPath, "ParatextSupport.dll");
+
+						if (!File.Exists(paratextSupportDLL))
+						{
+							paratextSupportDLL = Path.GetDirectoryName(Common.AssemblyPath);
+							paratextSupportDLL = Common.PathCombine(paratextSupportDLL, "ParatextSupport.dll");
+						}
+
+                        Assembly asmPTSupport = Assembly.LoadFrom(paratextSupportDLL);
                         Type tSfmToUsx = asmPTSupport.GetType("SIL.PublishingSolution.SfmToUsx");
                         Object objSFMtoUsx = null;
                         if (tSfmToUsx != null)
@@ -642,9 +662,17 @@ namespace SIL.PublishingSolution
 
             try
             {
+				string paratextSupportDLL = Common.PathCombine(Common.AssemblyPath, "ParatextSupport.dll");
+
+				if (!File.Exists(paratextSupportDLL))
+				{
+					paratextSupportDLL = Path.GetDirectoryName(Common.AssemblyPath);
+					paratextSupportDLL = Common.PathCombine(paratextSupportDLL, "ParatextSupport.dll");
+				}
+
                 // load the ParatextSupport DLL dynamically
                 Assembly asmPTSupport =
-                    Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+					Assembly.LoadFrom(paratextSupportDLL);
 
                 // Convert the stylesheet to css
                 // new ScrStylesheet(styFile)
@@ -735,8 +763,14 @@ namespace SIL.PublishingSolution
 
             try
             {
+				string paratextSupportDLL = Common.PathCombine(Common.AssemblyPath, "ParatextSupport.dll");
+
+				if (!File.Exists(paratextSupportDLL))
+				{
+					paratextSupportDLL = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "ParatextSupport.dll");
+				}
                 // load the ParatextSupport DLL dynamically
-                Assembly asm = Assembly.LoadFrom(Common.PathCombine(PathwayPath.GetPathwayDir(), "ParatextSupport.dll"));
+				Assembly asm = Assembly.LoadFrom(paratextSupportDLL);
 
                 // Convert the .sty stylesheet to css
                 // new ScrStylesheet(styFile)
@@ -793,8 +827,9 @@ namespace SIL.PublishingSolution
                     args[3] = "zxx";
                     args[4] = "PathwayB";
                     Object oPPL = Activator.CreateInstance(tPPL, args);
-                    Object[] argsCombine = new object[1];
+                    Object[] argsCombine = new object[2];
                     argsCombine[0] = docs;
+					argsCombine[1] = Param.PrintVia;
                     XmlDocument scrBooksDoc = (XmlDocument)tPPL.InvokeMember
                         ("CombineUsxDocs", BindingFlags.Default | BindingFlags.InvokeMethod, null, oPPL, argsCombine);
                     if (string.IsNullOrEmpty(scrBooksDoc.InnerText))

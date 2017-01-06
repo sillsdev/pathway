@@ -4,23 +4,20 @@
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/@page:right-top-right" Justification="RightAlign">
-      <CharacterStyleRange AppliedCharacterStyle="@page:right-top-right" PageNumberType="TextVariable">
-        <TextVariableInstance Self="ul1" Name="LG_1" ResultText="&amp;lt;Last&amp;gt;" AssociatedTextVariable="dTextVariablenLast1" />
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
+        <TextVariableInstance Self="u678" Name="LastBookName" ResultText="&amp;lt;BL&amp;gt;" AssociatedTextVariable="dTextVariablenLastBookName" />
+      </CharacterStyleRange>
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content> </Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
-        <TextVariableInstance Self="u678" Name="HGL" ResultText="&amp;lt;HomoGraph&amp;gt;" AssociatedTextVariable="dTextVariablenHomoGraphL" />
+        <TextVariableInstance Self="u344" Name="LastChapterNumber" ResultText="&amp;lt;CL&amp;gt;" AssociatedTextVariable="dTextVariablenLastChapterNumber" />
       </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="@page:right-top-right" PageNumberType="TextVariable">
-        <TextVariableInstance Self="ul1" Name="LG_3" ResultText="&amp;lt;Last&amp;gt;" AssociatedTextVariable="dTextVariablenLast3" />
-      </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
-        <TextVariableInstance Self="u678" Name="HGL" ResultText="&amp;lt;HomoGraph&amp;gt;" AssociatedTextVariable="dTextVariablenHomoGraphL" />
-      </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="@page:right-top-right" PageNumberType="TextVariable">
-        <TextVariableInstance Self="ul1" Name="LG_4" ResultText="&amp;lt;Last&amp;gt;" AssociatedTextVariable="dTextVariablenLast4" />
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content>:</Content>
       </CharacterStyleRange>
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
-        <TextVariableInstance Self="u678" Name="HGL" ResultText="&amp;lt;HomoGraph&amp;gt;" AssociatedTextVariable="dTextVariablenHomoGraphL" />
+        <TextVariableInstance Self="u786" Name="LastVerseNumber" ResultText="&amp;lt;VL&amp;gt;" AssociatedTextVariable="dTextVariablenLastVerseNumber" />
       </CharacterStyleRange>
     </ParagraphStyleRange>
   </Story>

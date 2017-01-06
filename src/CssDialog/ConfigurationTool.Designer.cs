@@ -3542,6 +3542,7 @@ namespace SIL.PublishingSolution
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigurationTool_FormClosing);
 			this.Load += new System.EventHandler(this.ConfigurationTool_Load);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ConfigurationTool_KeyUp);
+			this.Resize += new System.EventHandler(this.ConfigurationTool_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.stylesGrid)).EndInit();
 			this.toolStripMain.ResumeLayout(false);
 			this.toolStripMain.PerformLayout();

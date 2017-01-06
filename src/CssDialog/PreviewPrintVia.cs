@@ -331,8 +331,13 @@ namespace SIL.PublishingSolution
 
 		private void ShowImageForPreviewLayout(string imageFileName, string message)
 		{
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+			if (!Directory.Exists(pathwayDirectory))
+			{
+				pathwayDirectory = Path.GetDirectoryName(Common.AssemblyPath);
+				pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+			}
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, Param.Value["InputType"]);
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
 			string preview = Common.PathCombine(pathwayDirectory, imageFileName);
@@ -429,8 +434,9 @@ namespace SIL.PublishingSolution
 		private bool PrincePreview(PublicationInformation projInfo)
 		{
 			bool success = false;
-			ExportPdf exportPdf = new ExportPdf();
-			success = exportPdf.Export(projInfo);
+            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
+            //ExportPdf exportPdf = new ExportPdf();
+			//success = exportPdf.Export(projInfo);
 			// copy to preview folder *******************
 			return success;
 		}
@@ -438,8 +444,9 @@ namespace SIL.PublishingSolution
 		private bool LOPreview(PublicationInformation projInfo)
 		{
 			bool success = false;
-			ExportLibreOffice openOffice = new ExportLibreOffice();
-			success = openOffice.Export(projInfo);
+            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
+            //ExportLibreOffice openOffice = new ExportLibreOffice();
+			//success = openOffice.Export(projInfo);
 			return success;
 		}
 

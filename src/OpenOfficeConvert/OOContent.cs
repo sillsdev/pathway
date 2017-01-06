@@ -841,8 +841,6 @@ namespace SIL.PublishingSolution
 				return;
 			}
 
-
-
 			if (_childName.ToLower().Contains("tableofcontents"))
 			{
 				CallTOC();
@@ -1291,6 +1289,12 @@ namespace SIL.PublishingSolution
 				}
 
 				var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+
+				if (!Directory.Exists(copyrightDir))
+				{
+					copyrightDir = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+				}
+
 				string logoFromPath = Common.PathCombine(copyrightDir, logoName);
 
 				string normalTargetFile = _projInfo.TempOutputFolder;
@@ -3074,10 +3078,16 @@ namespace SIL.PublishingSolution
 			string basePath = _projInfo.TempOutputFolder.Substring(0, _projInfo.TempOutputFolder.LastIndexOf(Path.DirectorySeparatorChar));
 			string clsName = _allStyle.Peek();
 			String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + Path.GetFileName(_imageSource));
+
+			
 			string rectHeight = GetPropertyValue(clsName, "height", _pageSize["height"]);
 			string rectWidth = GetPropertyValue(clsName, "width", _pageSize["width"]);
 
-			if (File.Exists(fromPath)) { File.Copy(fromPath, toPath, true); }
+			Directory.CreateDirectory(Path.Combine(basePath, "Pictures"));
+			if (File.Exists(fromPath)) 
+			{ 
+				File.Copy(fromPath, toPath, true); 
+			}
 
 			string strFrameCount = "Graphics" + _frameCount;
 

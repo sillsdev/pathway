@@ -580,53 +580,7 @@ namespace Test.UIConfigurationToolTest
             }
             Assert.IsTrue(result, "Grid Column order is not proper");
         }
-
-        [Ignore]
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void GetUserInformationTest()
-        {
-            //UserInformation userInfo = new UserInformation();
-            //userInfo.GetUserInformation(false);
-
-            //Assert.IsNotNullOrEmpty(userInfo.OSName);
-            //Assert.IsNotNullOrEmpty(userInfo.UserSystemGuid);
-            //Assert.IsNotNullOrEmpty(userInfo.OSServicePack);
-            //Assert.IsNotNullOrEmpty(userInfo.Language);
-            ////Assert.IsNotNullOrEmpty(userInfo.FontLists);
-            //Assert.IsNotNullOrEmpty(userInfo.SystemCountry);
-            //Assert.IsNotNullOrEmpty(userInfo.JavaVersion);
-            //Assert.IsNotNullOrEmpty(userInfo.XelatexVersion);
-            //Assert.IsNotNullOrEmpty(userInfo.PathwayVersion);
-            //Assert.IsNotNullOrEmpty(userInfo.LibraofficeVersion);
-            //Assert.IsNotNullOrEmpty(userInfo.Paratext);
-            //Assert.IsNotNullOrEmpty(userInfo.TEVersion);
-            //Assert.IsNotNullOrEmpty(userInfo.Prince);
-            //Assert.IsNotNullOrEmpty(userInfo.IndesignVersion);
-            //Assert.IsNotNullOrEmpty(userInfo.BrowserList);
-            //Assert.IsNotNullOrEmpty(userInfo.FrameworkVersion);
-            //Assert.IsNotNullOrEmpty(userInfo.GeoLocation);
-        }
-
-        [Ignore]
-        [Test]
-        public void MergeStyleSetting()
-        {
-            Common.Testing = true;
-            SettingsVersionControl settingsVersion = new SettingsVersionControl();
-            settingsVersion.UpdateSettingsFile(string.Empty);
-
-            string expectedFileWithPath = Common.PathCombine(_expectBasePath, "DictionaryStyleSettings.xml");
-            string outputFileWithPath = Common.PathCombine(_outputBasePath, "DictionaryStyleSettings.xml");
-            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "Dictionary Setting file fails");
-
-            expectedFileWithPath = Common.PathCombine(_expectBasePath, "ScriptureStyleSettings.xml");
-            outputFileWithPath = Common.PathCombine(_outputBasePath, "ScriptureStyleSettings.xml");
-            TextFileAssert.AreEqual(expectedFileWithPath, outputFileWithPath, "Scripture Setting file fails");
-        }
-
-
+     
         #endregion
 
         #region Methods

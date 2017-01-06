@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="PsExportTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test methods of FlexDePlugin
 // </remarks>
@@ -49,7 +49,7 @@ namespace Test.PsExport
         protected void SetUp()
         {
             Common.Testing = true;
-            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/PsExport/TestFiles");
+            string testPath = PathPart.Bin(Path.GetDirectoryName(Environment.CurrentDirectory), "/PsExport/TestFiles");
             _inputBasePath = Common.PathCombine(testPath, "Input");
             _expectBasePath = Common.PathCombine(testPath, "Expected");
             _outputBasePath = Common.PathCombine(testPath, "Output");
@@ -173,6 +173,8 @@ namespace Test.PsExport
         /// <param name="msg">message to identify test if error occurs</param>
         protected void SeExportTest(string testName, string mainXhtml, string jobFileName, string target, string msg)
         {
+	        Common.Testing = true;
+
             CommonOutputSetup(testName);
             File.Copy(FileInput(mainXhtml), FileOutput(mainXhtml), true);
             string cssPath = Path.GetFileNameWithoutExtension(mainXhtml);
@@ -181,7 +183,7 @@ namespace Test.PsExport
             FolderTree.Copy(FileInput("Pictures"), FileOutput("Pictures"));
 
             var tpe = new SIL.PublishingSolution.PsExport { DataType = "Scripture", Destination = target };
-            tpe.SeExport(mainXhtml, jobFileName, _outputTestPath);
+			tpe.SeExport(mainXhtml, jobFileName, _outputTestPath);
             switch (target)
             {
                 case "OpenOffice/LibreOffice":
@@ -226,12 +228,12 @@ namespace Test.PsExport
             CopyExistingFile("FlexRev.xhtml");
             CopyExistingFile("FlexRev.css");
 
-            var tpe = new SIL.PublishingSolution.PsExport { Destination = target, DataType = dataType};
+            var tpe = new SIL.PublishingSolution.PsExport { DataType = dataType};
             if (testName.ToLower() == "t5" || testName.ToLower() == "t8")
             {
                 tpe._fromNUnit = true;
             }
-            tpe.Export(FileOutput(mainXhtml));
+			tpe.Export(FileOutput(mainXhtml));
             switch (target)
             {
                 case "OpenOffice":
@@ -276,7 +278,7 @@ namespace Test.PsExport
 			Common.ProgBase = Common.GetPSApplicationPath();
             Param.LoadSettings();
         }
-        
+
         /// <summary>
         /// Copies a file if it exists from the input test path to the output
         /// </summary>
@@ -320,6 +322,7 @@ namespace Test.PsExport
         /// Simple test where no changes are made to the settings.
         /// </summary>
         [Test]
+        [Category("SkipOnTeamCity")]
         public void AcquireUserSettingsT1()
         {
             AcquireUserSettingsTest("T1", "1pe.xhtml", "Layout_02.css", "T1: Style sheet default preparation");
@@ -332,7 +335,6 @@ namespace Test.PsExport
         /// Test ODT export
         /// </summary>
         [Test]
-        [Ignore]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void SeExportT2()
@@ -346,7 +348,7 @@ namespace Test.PsExport
         /// Test PDF export
         /// </summary>
         [Test]
-        [Ignore]
+		[Category("SkipOnTeamCity")]
         public void SeExportT3()
         {
             SeExportTest("T3", "1pe.xhtml", "Layout_02.css", "Pdf (using Prince)", "T3: PDF Export Test");
@@ -372,7 +374,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "page left margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "1.5cm"),
                 new ODet(ODet.Chk, "page right margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "1.5cm"),
                 new ODet(ODet.Chk, "page bottom margin", "mat21-23.odt", ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "1.15cm"),
-                new ODet(ODet.Chk, "title section", "mat21-23.odt", ODet.Content, "//office:body/office:text/*[4]/@text:name", "Sect_scrBook"),
+                //new ODet(ODet.Chk, "title section", "mat21-23.odt", ODet.Content, "//office:body/office:text/*[4]/@text:name", "Sect_scrBook"),
                 new ODet(ODet.Chk, "book title", "mat21-23.odt", ODet.Content, "(//text:span[substring-before(@text:style-name, '_') = 'scrBookName'])[1]", "Mateo"),
                 new ODet(ODet.Chk, "book code", "mat21-23.odt", ODet.Content, "//text:span[substring-before(@text:style-name, '_') = 'scrBookCode']", "MAT"),
                 new ODet(ODet.Chk, "main title", "mat21-23.odt", ODet.Content, "//text:p[substring-before(@text:style-name, '_') = 'TitleMain']/text:span", "Mateo"),
@@ -402,7 +404,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\u00A0This is a sample text,"),
                 new ODet(ODet.Chk, "Punctuation after Glossary entry (TD-3719)", "mat21-23.odt", ODet.Content, "//text:p[26]", " 24 This is sample, text to get the correct content.  25 If you can see the text test, Coding is correct"),
                 new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1\u20112\u00A0"),
-                
+
             };
 
             ExportTest("T4", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
@@ -717,7 +719,6 @@ namespace Test.PsExport
         /// Test Flex Export test - Page A5 Test
         /// </summary>
         [Test]
-        [Ignore]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void PsExportT8()
@@ -909,7 +910,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "embedded picture", "mat21-23.odt", ODet.Content, "//draw:frame[@draw:name='Graphics2']//@xlink:href", "Pictures/1.jpg"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_TitleMain_')]//@fo:language", "zxx"),
                 new ODet(ODet.Chk, "Title language", "mat21-23.odt", ODet.Styles, "//style:style[starts-with(@style:name,'span_.nko_Paragraph_scrSection_')]//@fo:language", "zxx"),
-                
+
             };
 
             ExportTest("T14", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
@@ -925,8 +926,7 @@ namespace Test.PsExport
         /// For country see: http://www.iso.org/iso/iso-3166-1_decoding_table.html
         /// </remarks>
         [Test]
-		[Ignore]
-        [Category("LongTest")]
+		[Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void T15DictionaryRights()
         {
@@ -938,52 +938,45 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "page left margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-left", "2cm"),
                 new ODet(ODet.Chk, "page right margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-right", "2cm"),
                 new ODet(ODet.Chk, "page bottom margin", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:page-layout-properties/@fo:margin-bottom", "2cm"),
-                //see T5 above new ODet(ODet.Chk, "1st Page empty header", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:header-style", ""),
-                //see above new ODet(ODet.Chk, "1st Page empty footer", ODet.Main, ODet.Styles, "//style:page-layout[@style:name='{pageLayout}']/style:footer-style", ""),
                 new ODet(ODet.Def, "left master", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{masterPage}']/@style:next-style-name", "leftMaster"),
-                //new ODet(ODet.Chk, "left header variable", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{leftMaster}']//text:variable-get/@text:name", "Left_Guideword_L"),
-                //new ODet(ODet.Def, "left header style", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{leftMaster}']//text:span/@text:style-name", "headerTextStyle"),
                 new ODet(ODet.Def, "right master", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{leftMaster}']/@style:next-style-name", "rightMaster"),
-                //new ODet(ODet.Chk, "right footer variable", ODet.Main, ODet.Styles, "//style:master-page[@style:name='{rightMaster}']//style:footer//draw:frame//text:variable-get/@text:name", "Right_Guideword_R"),
                 new ODet(ODet.Chk, "single column letter header", ODet.Main, ODet.Content, "//style:style[@style:name='Sect_letHead']//@fo:column-count", "1"),
                 new ODet(ODet.Chk, "double column data", ODet.Main, ODet.Content, "//style:style[@style:name='Sect_letData']//@fo:column-count", "2"),
-                new ODet(ODet.Chk, "letter header center", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:text-align", "center"),
-                new ODet(ODet.Chk, "letter header top margin", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:margin-top", "18pt"),
-                new ODet(ODet.Chk, "letter header bottom margin", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:margin-bottom", "18pt"),
-                new ODet(ODet.Chk, "letter header font", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-family", "Doulos SIL"),
-                new ODet(ODet.Chk, "letter header complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-name-complex", "Doulos SIL"),
-                new ODet(ODet.Chk, "letter header font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-weight", "700"),
-                new ODet(ODet.Chk, "letter header complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-weight-complex", "700"),
-                new ODet(ODet.Chk, "letter header font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@fo:font-size", "18pt"),
-                new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_letHead_dicBody']//@style:font-size-complex", "18pt"),
-                //new ODet(ODet.Chk, "entry background", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:background-color", "transparent"),
-                //new ODet(ODet.Chk, "entry alignment", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-align", "left"),
+                new ODet(ODet.Chk, "letter header center", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@fo:text-align", "center"),
+                new ODet(ODet.Chk, "letter header top margin", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@fo:margin-top", "18pt"),
+                new ODet(ODet.Chk, "letter header bottom margin", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@fo:margin-bottom", "18pt"),
+                new ODet(ODet.Chk, "letter header font", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@fo:font-family", "Doulos SIL"),
+                new ODet(ODet.Chk, "letter header complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@style:font-name-complex", "Doulos SIL"),
+                new ODet(ODet.Chk, "letter header font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@fo:font-weight", "700"),
+                new ODet(ODet.Chk, "letter header complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@style:font-weight-complex", "700"),
+                new ODet(ODet.Chk, "letter header font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@fo:font-size", "18pt"),
+                new ODet(ODet.Chk, "letter header complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='letter_.auc_letHead_dicBody']//@style:font-size-complex", "18pt"),
                 new ODet(ODet.Chk, "entry left margin", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:margin-left", "12pt"),
                 new ODet(ODet.Chk, "entry indent", ODet.Main, ODet.Styles, "//style:style[@style:name='entry_letData_dicBody']//@fo:text-indent", "-12pt"),
-                new ODet(ODet.Chk, "headword font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-family", "Doulos SIL"),
-                new ODet(ODet.Chk, "headword complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-name-complex", "Doulos SIL"),
-                new ODet(ODet.Chk, "headword font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-weight", "700"),
-                new ODet(ODet.Chk, "headword complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-weight-complex", "700"),
-                new ODet(ODet.Chk, "headword font size", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@fo:font-size", "10pt"),
-                new ODet(ODet.Chk, "headword complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_entry_letData_dicBody']//@style:font-size-complex", "10pt"),
+                new ODet(ODet.Chk, "headword font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_.auc_entry_letData_dicBody']//@fo:font-family", "Doulos SIL"),
+                new ODet(ODet.Chk, "headword complex font", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_.auc_entry_letData_dicBody']//@style:font-name-complex", "Doulos SIL"),
+                new ODet(ODet.Chk, "headword font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_.auc_entry_letData_dicBody']//@fo:font-weight", "700"),
+                new ODet(ODet.Chk, "headword complex font weight", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_.auc_entry_letData_dicBody']//@style:font-weight-complex", "700"),
+                new ODet(ODet.Chk, "headword font size", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_.auc_entry_letData_dicBody']//@fo:font-size", "10pt"),
+                new ODet(ODet.Chk, "headword complex font size", ODet.Main, ODet.Styles, "//style:style[@style:name='headword_.auc_entry_letData_dicBody']//@style:font-size-complex", "10pt"),
                 new ODet(ODet.Chk, "headword left variable", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[2]//@text:name", "Left_Guideword_L"),
                 new ODet(ODet.Chk, "headword right variable", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[4]//@text:name", "Right_Guideword_R"),
                 new ODet(ODet.Chk, "headword left variable value", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[2]//@office:string-value", "congane"),
                 new ODet(ODet.Chk, "headword right variable value", ODet.Main, ODet.Content, "//text:p[@text:style-name='entry_letData_dicBody']/text:span[4]//@office:string-value", "congane"),
-                new ODet(ODet.Chk, "part of speech", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'span_.es_span_.es_grammaticalinfo')]", "sus"),
-                new ODet(ODet.Chk, "part of speech font", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_span_.es_grammaticalinfo')]//@fo:font-family", "Times New Roman"),
-                new ODet(ODet.Chk, "part of speech complex font", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_span_.es_grammaticalinfo')]//@style:font-name-complex", "Times New Roman"),
+                new ODet(ODet.Chk, "part of speech", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'span_.es_partofspeech_.es_grammaticalinfo_sense_senses_entry_letData_dicBody')]", "sus"),
+                new ODet(ODet.Chk, "part of speech font", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_partofspeech_.es_grammaticalinfo_sense_senses_entry_letData_dicBody')]//@fo:font-family", "Times New Roman"),
+                new ODet(ODet.Chk, "part of speech complex font", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_partofspeech_.es_grammaticalinfo_sense_senses_entry_letData_dicBody')]//@style:font-name-complex", "Times New Roman"),
                 new ODet(ODet.Chk, "part of speech font style", ODet.Main, ODet.Styles, "//*[starts-with(@style:name,'grammaticalinfo')]//@fo:font-style", "italic"),
                 new ODet(ODet.Chk, "part of speech font size", ODet.Main, ODet.Styles, "//*[starts-with(@style:name,'grammaticalinfo')]//@fo:font-size", "10pt"),
                 new ODet(ODet.Chk, "part of speech complex font size", ODet.Main, ODet.Styles, "//*[starts-with(@style:name,'grammaticalinfo')]//@style:font-size-complex", "10pt"),
-                new ODet(ODet.Chk, "part of speech language", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_span_.es_grammaticalinfo')]//@fo:language", "es"),
-                new ODet(ODet.Chk, "part of speech country", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_span_.es_grammaticalinfo')]//@fo:country", "ES"),
-                new ODet(ODet.Chk, "definition", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'span_.es_span_.es_span_.es_sense')]", "zarigueya"),
-                new ODet(ODet.Chk, "definition language", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_span_.es_span_.es_sense')]//@fo:language", "es"),
-                new ODet(ODet.Chk, "definition country", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_span_.es_span_.es_sense')]//@fo:country", "ES"),
+                new ODet(ODet.Chk, "part of speech language", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_partofspeech_.es_grammaticalinfo_sense_senses_entry_letData_dicBody')]//@fo:language", "es"),
+                new ODet(ODet.Chk, "part of speech country", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_partofspeech_.es_grammaticalinfo_sense_senses_entry_letData_dicBody')]//@fo:country", "ES"),
+                new ODet(ODet.Chk, "definition", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'span_.es_xitem_.es_definitionL2_.es_sense_senses_entry_letData_dicBody')]", "zarigueya"),
+                new ODet(ODet.Chk, "definition language", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_xitem_.es_definitionL2_.es_sense_senses_entry_letData_dicBody')]//@fo:language", "es"),
+                new ODet(ODet.Chk, "definition country", ODet.Main, ODet.Styles, "//*[starts-with(@style:name, 'span_.es_xitem_.es_definitionL2_.es_sense_senses_entry_letData_dicBody')]//@fo:country", "ES"),
                 new ODet(ODet.Chk, "rights page header", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'LHeading')]", "ABOUT THIS DOCUMENT"),
                 new ODet(ODet.Chk, "rights url", ODet.Main, ODet.Content, "//text:span[starts-with(@text:style-name, 'span_LText')][2]", "http://www.ethnologue.com/language/auc"),
-                new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//text:span[starts-with(@text:style-name, 'LText')])[2]", "\u00a9 2016 John Doe\u00ae."),
+                new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//text:span[starts-with(@text:style-name, 'LText')])[2]", "\u00a9 2017 John Doe\u00ae."),
                 new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "//*[starts-with(@text:style-name, 'div_FrontMatter')]", "This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Unported License."),
                 new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//*[starts-with(@text:style-name, 'div_FrontMatter')])[2]", "To view a copy of this license, visit "),
                 new ODet(ODet.Chk, "rights copyright", ODet.Main, ODet.Content, "(//*[starts-with(@text:style-name, 'div_FrontMatter')])[3]", "http://creativecommons.org/licenses/by-nc-sa/4.0/"),
@@ -1046,7 +1039,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "header right tab", "mat21-23.odt", ODet.Styles, "//*[@style:name='Header']//*[@style:type='right']/@style:position", "334pt"),
                 new ODet(ODet.Chk, "right header frame", "mat21-23.odt", ODet.Styles, "//*[@style:display-name='Right Page']//style:footer//@svg:y", "32pt"),
                 new ODet(ODet.Chk, "right header guide word", "mat21-23.odt", ODet.Styles, "//*[@style:display-name='Right Page']//@text:name", "Right_Guideword_R"),
-                
+
             };
 
             ExportTest("T16", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
@@ -1066,7 +1059,7 @@ namespace Test.PsExport
             {
                new ODet(ODet.Chk, "Glossary entry (TD-3665)", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Line1_')]", "5\uFEFF" +Common.ConvertUnicodeToString("\\201c") + "This is a sample text,"),
                 new ODet(ODet.Chk, "Space after verse", "mat21-23.odt", ODet.Content, "//*[starts-with(@text:style-name, 'Verse')]", "1‑2﻿"),
-                
+
             };
 
             ExportTest("T17", "mat21-23.xhtml", "Scripture", "OpenOffice", "", tests);
@@ -1148,7 +1141,7 @@ namespace Test.PsExport
 			Assert.AreEqual(2, files.Length);
 			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "FlexRev Preprocess produced different results");
 		}
-		
+
 		[Test]
 		public void XsltPreProcessAddColumnFW83MainTest()
 		{

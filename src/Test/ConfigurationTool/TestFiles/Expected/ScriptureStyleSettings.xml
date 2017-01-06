@@ -1,185 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="42">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="42">
   <settings>
-    <property name="InputPath" value="%(AppData)s/SIL/Pathway" />
-    <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture" />
-    <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Scripture" />
-    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s" />
-    <property name="MasterSheetPath" value="Styles/Scripture" />
-    <property name="IconPath" value="Icons" />
-    <property name="SamplePath" value="Samples/Scripture" />
-    <property name="BaseStyles" value="Scripture.css" />
-    <property name="DefaultIcon" value="Graphic/book.png" />
-    <property name="CurrentInput" value="Samples/Scripture/Bughotu-1pe.xhtml" />
-    <property name="InputType" value="Scripture" />
-    <property name="LastTask" value="Quick print" />
-    <property name="PreviewType" value="Prince" />
-    <property name="CssEditor" value="C:/Windows/Notepad.exe" />
-    <property name="SelectedIcon" value="Graphic/arrow.png" />
-    <property name="MissingIcon" value="Graphic/missing.png" />
-    <property name="Help" value="PsDoc.chm" />
-    <property name="PrintVia" value="OpenOffice/LibreOffice" />
-	<property name="Preprocessing" value="" />
-	<property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
-    <property name="ExtraProcessing" value="True" />
-    <property name="Media" value="mobile" />
+    <property name="InputPath" value="%(AppData)s/SIL/Pathway"/>
+    <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Scripture"/>
+    <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Scripture"/>
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s"/>
+    <property name="MasterSheetPath" value="Styles/Scripture"/>
+    <property name="IconPath" value="Icons"/>
+    <property name="SamplePath" value="Samples/Scripture"/>
+    <property name="BaseStyles" value="Scripture.css"/>
+    <property name="DefaultIcon" value="Graphic/book.png"/>
+    <property name="CurrentInput" value="Samples/Scripture/Bughotu-1pe.xhtml"/>
+    <property name="InputType" value="Scripture"/>
+    <property name="LastTask" value="Quick print"/>
+    <property name="PreviewType" value="Prince"/>
+    <property name="CssEditor" value="C:/Windows/Notepad.exe"/>
+    <property name="SelectedIcon" value="Graphic/arrow.png"/>
+    <property name="MissingIcon" value="Graphic/missing.png"/>
+    <property name="Help" value="PsDoc.chm"/>
+    <property name="PrintVia" value="OpenOffice/LibreOffice"/>
+    <property name="Preprocessing" value=""/>
+    <property name="LayoutSelected" value="C5 Cols ApplicationStyles"/>
+    <property name="ExtraProcessing" value="True"/>
+    <property name="Media" value="mobile"/>
+    <property name="Organization" value=""/>
   </settings>
   <defaultSettings>
-    <property name="PrintVia" value="OpenOffice/LibreOffice" />
-    <property name="LayoutSelected" value="C5 Cols ApplicationStyles" />
-    <property name="ExtraProcessing" value="True" />
-    <property name="Preprocessing" value="" />		
-    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s" />
-    <property name="Media" value="paper" />
+    <property name="PrintVia" value="OpenOffice/LibreOffice"/>
+    <property name="LayoutSelected" value="C5 Cols ApplicationStyles"/>
+    <property name="ExtraProcessing" value="True"/>
+    <property name="Preprocessing" value=""/>
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Scripture/$(StyleSheet)s_$(DateTime)s"/>
+    <property name="Media" value="paper"/>
   </defaultSettings>
-  <features>   
+  <features>
     <feature name="Justified">
-      <option name="Yes" file="Justified_Yes.css" />
-      <option name="No" file="Justified_No.css" />
+      <option name="Yes" file="Justified_Yes.css"/>
+      <option name="No" file="Justified_No.css"/>
     </feature>
     <feature name="VerticalJustify">
-      <option name="Top" file="VerticalJustify_Top.css" />
-      <option name="Center" file="VerticalJustify_Center.css" />
-      <option name="Bottom" file="VerticalJustify_Bottom.css" />
+      <option name="Top" file="VerticalJustify_Top.css"/>
+      <option name="Center" file="VerticalJustify_Center.css"/>
+      <option name="Bottom" file="VerticalJustify_Bottom.css"/>
     </feature>
     <feature name="Page Size">
-      <option name="A4" file="Page_size_A4.css" />
-      <option name="A5" file="Page_size_A5.css" />
-	  <option name="B5" file="Page_size_B5.css" />
-      <option name="C5" file="Page_size_C5.css" />
-      <option name="A6" file="Page_size_A6.css" />
-      <option name="Letter" file="Page_size_Letter.css" />
-      <option name="Half letter" file="Page_size_Half_Letter.css" />
-      <option name="6in x 9in" file="Page_size_6inx9in.css" />
-      <option name="5.25in x 8.25in" file="Page_size_GPS1.css" />
-      <option name="5.8in x 8.7in" file="Page_size_GPS2.css" />
+      <option name="A4" file="Page_size_A4.css"/>
+      <option name="A5" file="Page_size_A5.css"/>
+      <option name="B5" file="Page_size_B5.css"/>
+      <option name="C5" file="Page_size_C5.css"/>
+      <option name="A6" file="Page_size_A6.css"/>
+      <option name="Letter" file="Page_size_Letter.css"/>
+      <option name="Half letter" file="Page_size_Half_Letter.css"/>
+      <option name="6in x 9in" file="Page_size_6inx9in.css"/>
+      <option name="6.5in x 9in on letter" file="Page_size_6.5x9onLetter.css"/>
+      <option name="5.25in x 8.25in" file="Page_size_GPS1.css"/>
+      <option name="5.8in x 8.7in" file="Page_size_GPS2.css"/>
     </feature>
     <feature name="Columns">
-      <option name="1" file="Columns_1.css" icon="column1.png" />
-      <option name="2" file="Columns_2.css" icon="column2b.png" />
+      <option name="1" file="Columns_1.css" icon="column1.png"/>
+      <option name="2" file="Columns_2.css" icon="column2b.png"/>
     </feature>
     <feature name="Font">
-      <option name="Charis SIL" file="base_font_charis.css" />
-      <option name="Doulos SIL" file="base_font_doulos.css" />
-      <option name="Sophia SIL" file="base_font_sophia.css" />
-      <option name="Charis SIL Compact" file="base_font_charis_compact.css" />
-      <option name="No Change" file="base_font_nc.css" />
+      <option name="Charis SIL" file="base_font_charis.css"/>
+      <option name="Doulos SIL" file="base_font_doulos.css"/>
+      <option name="Sophia SIL" file="base_font_sophia.css"/>
+      <option name="Charis SIL Compact" file="base_font_charis_compact.css"/>
+      <option name="No Change" file="base_font_nc.css"/>
     </feature>
     <feature name="Font Size">
-      <option name="9" file="font_size_9_11.css" />
-      <option name="10" file="font_size_10_12.css" />
-      <option name="11" file="font_size_11_13.css" />
-      <option name="12" file="font_size_12_14.css" />
-      <option name="13" file="font_size_13_15.css" />
-      <option name="14" file="font_size_14_16.css" />
-      <option name="15" file="font_size_15_17.css" />
-      <option name="No Change" file="font_size_nc.css" />
+      <option name="9" file="font_size_9_11.css"/>
+      <option name="10" file="font_size_10_12.css"/>
+      <option name="11" file="font_size_11_13.css"/>
+      <option name="12" file="font_size_12_14.css"/>
+      <option name="13" file="font_size_13_15.css"/>
+      <option name="14" file="font_size_14_16.css"/>
+      <option name="15" file="font_size_15_17.css"/>
+      <option name="18" file="font_size_18_20.css"/>
+      <option name="24" file="font_size_24_26.css"/>
+      <option name="28" file="font_size_28_30.css"/>
+      <option name="No Change" file="font_size_nc.css"/>
     </feature>
-	<feature name="Header Size">
-	  <option name="14"  file="Font_HeaderSize_14.css" />
-	  <option name="12"  file="Font_HeaderSize_12.css" />
-	  <option name="11"  file="Font_HeaderSize_11.css" />
-	  <option name="10"  file="Font_HeaderSize_10.css" />
-	  <option name="9" file="Font_HeaderSize_9.css" />
-	  <option name="8" file="Font_HeaderSize_8.css" />
-	  <option name="Same as body" file="Font_HeaderSize_nc.css" />
-	  <option name="Same as headword" file="Font_HeaderSize_nc.css" />
+    <feature name="Header Size">
+      <option name="28" file="Font_HeaderSize_28.css"/>
+      <option name="24" file="Font_HeaderSize_24.css"/>
+      <option name="18" file="Font_HeaderSize_18.css"/>
+      <option name="14" file="Font_HeaderSize_14.css"/>
+      <option name="12" file="Font_HeaderSize_12.css"/>
+      <option name="11" file="Font_HeaderSize_11.css"/>
+      <option name="10" file="Font_HeaderSize_10.css"/>
+      <option name="9" file="Font_HeaderSize_9.css"/>
+      <option name="8" file="Font_HeaderSize_8.css"/>
+      <option name="Same as body" file="Font_HeaderSize_nc.css"/>
+      <option name="Same as section (\s)" file="Font_HeaderSize_nc.css"/>
     </feature>
-	<feature name="Headword Size">
-      <option name="14" file="Headword_Size_14.css" />
-      <option name="12" file="Headword_Size_12.css" />
-      <option name="11" file="Headword_Size_11.css" />
-      <option name="10" file="Headword_Size_10.css" />
-      <option name="9" file="Headword_Size_9.css" />
-      <option name="8" file="Headword_Size_8.css" />
-      <option name="No Change" file="Headword_Size_nc.css" />
+    <feature name="Headword Size">
+      <option name="14" file="Headword_Size_14.css"/>
+      <option name="12" file="Headword_Size_12.css"/>
+      <option name="11" file="Headword_Size_11.css"/>
+      <option name="10" file="Headword_Size_10.css"/>
+      <option name="9" file="Headword_Size_9.css"/>
+      <option name="8" file="Headword_Size_8.css"/>
+      <option name="No Change" file="Headword_Size_nc.css"/>
     </feature>
     <feature name="Font Size / Leading">
-      <option name="9 / 11" file="font_size_9_11.css" />
-      <option name="10 / 12" file="font_size_10_12.css" />
-      <option name="11 / 13" file="font_size_11_13.css" />
-      <option name="No Change" file="font_size_nc.css" />
+      <option name="9 / 11" file="font_size_9_11.css"/>
+      <option name="10 / 12" file="font_size_10_12.css"/>
+      <option name="11 / 13" file="font_size_11_13.css"/>
+      <option name="No Change" file="font_size_nc.css"/>
     </feature>
     <feature name="Leading">
-      <option name="11" file="Leading_11.css" />
-      <option name="12" file="Leading_12.css" />
-      <option name="13" file="Leading_13.css" />
-      <option name="24" file="Leading_24.css" />
-      <option name="26" file="Leading_26.css" />
-      <option name="No Change" file="Leading_nc.css" />
-    </feature>   
-    <feature name="Pictures">
-      <option name="Yes" file="Pictures_Yes.css" />
-      <option name="No" file="Pictures_No.css" />
+      <option name="11" file="Leading_11.css"/>
+      <option name="12" file="Leading_12.css"/>
+      <option name="13" file="Leading_13.css"/>
+      <option name="24" file="Leading_24.css"/>
+      <option name="26" file="Leading_26.css"/>
+      <option name="No Change" file="Leading_nc.css"/>
     </feature>
-	<feature name="Running Head">
-      <option name="Every Page" file="Running_Head_Every_Page.css" />
-      <option name="Mirrored" file="Running_Head_Mirrored.css" />
+    <feature name="Pictures">
+      <option name="Yes" file="Pictures_Yes.css"/>
+      <option name="No" file="Pictures_No.css"/>
+    </feature>
+    <feature name="Running Head">
+      <option name="Every Page" file="Running_Head_Every_Page.css"/>
+      <option name="Mirrored" file="Running_Head_Mirrored.css"/>
+      <option name="None" file="Running_Head_None.css"/>
     </feature>
     <feature name="Reference Format">
-      <option name="Genesis 1:1" file="Running_Head_Mirrored_Verse.css" type="Mirrored" />      
-      <option name="Genesis 1" file="Running_Head_Mirrored_Chapter.css" type="Mirrored" />
-      <option name="Genesis 1-2" file="Running_Head_Paged_Chapter.css" type="Mirrored" />
-      <option name="Gen 1:1" file="Running_Head_Mirrored_Verse_Abbr.css" type="Mirrored" />      
-      <option name="Gen 1" file="Running_Head_Mirrored_Chapter_Abbr.css" type="Mirrored" />
-      <option name="Gen 1-2" file="Running_Head_Paged_Chapter_Abbr.css" type="Mirrored" />
-	  <option name="Genesis 1:1-2:1" file="Running_Head_Paged_Verse.css" type="Every Page" />
-	  <option name="Gen 1:1-2:1" file="Running_Head_Paged_Verse_Abbr.css" type="Every Page" />
-    </feature>	
-	 <feature name="Page Number">
-      <option name="Top Inside Margin" file="PageNumber_TopInside.css" type="Mirrored" />
-      <option name="Top Outside Margin" file="PageNumber_TopOutside.css" type="Mirrored" />
-      <option name="Top Center" file="PageNumber_TopCenter_Mirrored.css" type="Mirrored" />
-      <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" type="Mirrored" />
-      <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" type="Mirrored" />
-      <option name="Bottom Center" file="PageNumber_BottomCenter_Mirrored.css" type="Mirrored" />
-      <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page" />
-      <option name="Bottom Center" file="PageNumber_BottomCenter.css" type="Every Page" />
-      <option name="None" file="PageNumber_None.css" type="Both" />
-    </feature>	
+      <option name="Genesis 1" file="Running_Head_Mirrored_Chapter.css" type="Mirrored"/>
+      <option name="Genesis 1-2" file="Running_Head_Mirrored_MultiChapter.css" type="Mirrored"/>
+      <option name="Gen 1" file="Running_Head_Mirrored_Chapter_Abbr.css" type="Mirrored"/>
+      <option name="Gen 1-2" file="Running_Head_Mirrored_MultiChapter_Abbr.css" type="Mirrored"/>
+      <option name="Genesis 1" file="Running_Head_Paged_Chapter.css" type="Every Page"/>
+      <option name="Gen 1" file="Running_Head_Paged_Chapter_Abbr.css" type="Every Page"/>
+      <option name="None" file="Running_Head_Ref_None.css" type="None"/>
+    </feature>
+    <feature name="Page Number">
+      <option name="Top Inside Margin" file="PageNumber_TopInside.css" type="Mirrored"/>
+      <option name="Top Outside Margin" file="PageNumber_TopOutside.css" type="Mirrored"/>
+      <option name="Top Center" file="PageNumber_TopCenter_Mirrored.css" type="Mirrored"/>
+      <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" type="Mirrored"/>
+      <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" type="Mirrored"/>
+      <option name="Bottom Center" file="PageNumber_BottomCenter_Mirrored.css" type="Mirrored"/>
+      <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page"/>
+      <option name="Bottom Center" file="PageNumber_BottomCenter.css" type="Every Page"/>
+      <option name="None" file="PageNumber_None.css" type="Both"/>
+    </feature>
     <feature name="Rules">
-      <option name="Yes" file="Rules_Yes.css" />
-      <option name="No" file="Rules_No.css" />
+      <option name="Yes" file="Rules_Yes.css"/>
+      <option name="No" file="Rules_No.css"/>
     </feature>
     <feature name="FileProduced">
-      <option name="One" file="Empty.css" />
-      <option name="One Per Book" file="Empty.css" />
+      <option name="One" file="Empty.css"/>
+      <option name="One Per Book" file="Empty.css"/>
     </feature>
     <feature name="RedLetter">
-      <option name="Yes" file="Empty.css" />
-      <option name="No" file="Empty.css" />
+      <option name="Yes" file="Empty.css"/>
+      <option name="No" file="Empty.css"/>
     </feature>
     <feature name="EmbedFonts">
-        <option name="Yes" file="Empty.css" />
-        <option name="No" file="Empty.css" />
+      <option name="Yes" file="Empty.css"/>
+      <option name="No" file="Empty.css"/>
     </feature>
     <feature name="TOCLevel">
-      <option name="1 - Book Only" file="Empty.css" />
-      <option name="2 - Book and Section" file="Empty.css" />
+      <option name="1 - Book Only" file="Empty.css"/>
+      <option name="2 - Book and Section" file="Empty.css"/>
     </feature>
     <feature name="MissingFont">
-      <option name="Use Fallback Font" file="Empty.css" />
-      <option name="Prompt User" file="Empty.css" />
-      <option name="Cancel Export" file="Empty.css" />
+      <option name="Use Fallback Font" file="Empty.css"/>
+      <option name="Prompt User" file="Empty.css"/>
+      <option name="Cancel Export" file="Empty.css"/>
     </feature>
     <feature name="NonSILFont">
-      <option name="Embed Font Anyway" file="Empty.css" />
-      <option name="Use Fallback Font" file="Empty.css" />
-      <option name="Prompt User" file="Empty.css" />
-      <option name="Cancel Export" file="Empty.css" />
+      <option name="Embed Font Anyway" file="Empty.css"/>
+      <option name="Use Fallback Font" file="Empty.css"/>
+      <option name="Prompt User" file="Empty.css"/>
+      <option name="Cancel Export" file="Empty.css"/>
     </feature>
     <feature name="DefaultAlignment">
-      <option name="Left" file="Empty.css" />
-      <option name="Right" file="Empty.css" />
-      <option name="Justify" file="Empty.css" />
+      <option name="Left" file="Empty.css"/>
+      <option name="Right" file="Empty.css"/>
+      <option name="Justify" file="Empty.css"/>
     </feature>
     <feature name="ChapterNumbers">
-      <option name="Drop Cap" file="Empty.css" />
-      <option name="Left Margin" file="Empty.css" />
+      <option name="Drop Cap" file="Empty.css"/>
+      <option name="Left Margin" file="Empty.css"/>
     </feature>
     <feature name="References">
-      <option name="After Each Section" file="Empty.css" />
-      <option name="At End of Document" file="Empty.css" />
+      <option name="After Each Section" file="Empty.css"/>
+      <option name="At End of Document" file="Empty.css"/>
     </feature>
     <feature name="Lic_Other">
       <option name="Draft" file="Draft.xhtml"/>
@@ -203,191 +212,238 @@
       <option name="Draft" file="UBS_Draft.xhtml"/>
     </feature>
     <feature name="Subject">
-        <option name="Religion and Spirituality" file="Empty.css" />
-        <option name="Reference" file="Empty.css" />
+      <option name="Religion and Spirituality" file="Empty.css"/>
+      <option name="Reference" file="Empty.css"/>
     </feature>
   </features>
   <categories>
     <category name="Publisher" select="WBT">
-      <item name="WBT" />
-      <item name="UBS" />
+      <item name="WBT"/>
+      <item name="UBS"/>
     </category>
     <category name="Media" select="mobile">
-      <item name="Paper" />
-      <item name="Mobile" />
-      <item name="Web" />
-      <item name="Others" />
+      <item name="Paper"/>
+      <item name="Mobile"/>
+      <item name="Web"/>
+      <item name="Others"/>
     </category>
     <category name="Location" select="Cameroon">
-      <item name="Cameroon" />
-      <item name="Africa" />
-      <item name="Indonesia" />
-      <item name="Philippines" />
+      <item name="Cameroon"/>
+      <item name="Africa"/>
+      <item name="Indonesia"/>
+      <item name="Philippines"/>
     </category>
   </categories>
   <roles select="Output User">
-    <role name="Output User" icon="user.png" />
-    <role name="Coordinator" icon="coordinator.png" />
-    <role name="System Designer" icon="designer.png" />
+    <role name="Output User" icon="user.png"/>
+    <role name="Coordinator" icon="coordinator.png"/>
+    <role name="System Designer" icon="designer.png"/>
   </roles>
   <styles>
     <paper>
-      <style name="A4 Cols ApplicationStyles" file="Layout_15.css" approvedBy="GPS" previewfile1="GPS - A4 - 2 Col p1.jpg" previewfile2="GPS - A4 - 2 Col p2.jpg" shown="Yes">
+      <style name="A4 Cols ApplicationStyles" file="Layout_15.css" approvedBy="GPS"
+        previewfile1="GPS - A4 - 2 Col p1.jpg" previewfile2="GPS - A4 - 2 Col p2.jpg" shown="Yes">
         <description> Two column A4 output format. </description>
       </style>
-      <style name="C5 Cols ApplicationStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="GPS - C5 - 2 Col p1.jpg" previewfile2="GPS - C5 - 2 Col p2.jpg" shown="Yes">
+      <style name="C5 Cols ApplicationStyles" file="Layout_12.css" approvedBy="GPS"
+        previewfile1="GPS - C5 - 2 Col p1.jpg" previewfile2="GPS - C5 - 2 Col p2.jpg" shown="Yes">
         <description> Two column C5 output format. </description>
       </style>
-      <style name="Letter Cols ApplicationStyles" file="Layout_14.css" approvedBy="GPS" previewfile1="GPS - Letter - 2 Col p1.jpg" previewfile2="GPS - Letter - 2 Col p2.jpg" shown="Yes">
+      <style name="Letter Cols ApplicationStyles" file="Layout_14.css" approvedBy="GPS"
+        previewfile1="GPS - Letter - 2 Col p1.jpg" previewfile2="GPS - Letter - 2 Col p2.jpg"
+        shown="Yes">
         <description> Two column Letter output format. </description>
       </style>
-      <style name="5.25x8.25in 11pt Justified" file="GPS11J11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="5.25x8.25in 11pt Justified" file="GPS11J11.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 1 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>5.25x8.25in - 1 Col - Justified - Charis 11 on 13</description>
       </style>
-      <style name="5.25x8.25in 11pt Left" file="GPS11L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="5.25x8.25in 11pt Left" file="GPS11L11.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>5.25x8.25in - 1 Col - Left - Charis 11 on 13</description>
       </style>
-      <style name="5.25x8.25in Cols 10pt Justified" file="GPS12J10.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p2.jpg" shown="Yes">
+      <style name="5.25x8.25in Cols 10pt Justified" file="GPS12J10.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 10 on 12 p2.jpg" shown="Yes">
         <description>5.25x8.25in - 2 Col - Justified - Charis 10 on 12</description>
       </style>
-      <style name="5.25x8.25in Cols 11pt Justified" file="GPS12J11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="5.25x8.25in Cols 11pt Justified" file="GPS12J11.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>5.25x8.25in - 2 Col - Justified - Charis 11 on 13</description>
       </style>
-      <style name="5.25x8.25in Cols 9pt Justified" file="GPS12J9.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p2.jpg" shown="Yes">
+      <style name="5.25x8.25in Cols 9pt Justified" file="GPS12J9.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 2 Col - Justified - Charis 9 on 11 p2.jpg" shown="Yes">
         <description>5.25x8.25in - 2 Col - Justified - Charis 9 on 11</description>
       </style>
-      <style name="5.25x8.25in Cols 10pt Left" file="GPS12L10.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p2.jpg" shown="Yes">
+      <style name="5.25x8.25in Cols 10pt Left" file="GPS12L10.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 10 on 12 p2.jpg" shown="Yes">
         <description>5.25x8.25in - 2 Col - Left - Charis 10 on 12</description>
       </style>
-      <style name="5.25x8.25in Cols 11pt Left" file="GPS12L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="5.25x8.25in Cols 11pt Left" file="GPS12L11.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>5.25x8.25in - 2 Col - Left - Charis 11 on 13</description>
       </style>
-      <style name="5.25x8.25in Cols 9pt Left" file="GPS12L9.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p2.jpg" shown="Yes">
+      <style name="5.25x8.25in Cols 9pt Left" file="GPS12L9.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 2 Col - Left - Charis 9 on 11 p2.jpg" shown="Yes">
         <description>5.25x8.25in - 2 Col - Left - Charis 9 on 11</description>
       </style>
-      <style name="5.8x8.7in 11pt Justified" file="GPS21J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="5.8x8.7in 11pt Justified" file="GPS21J11.css" approvedBy="GPS"
+        previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>5.8x8.7in - 1 Col - Justified - Charis 11 on 13</description>
       </style>
-      <style name="5.8x8.7in 11pt Left" file="GPS21L11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="5.8x8.7in 11pt Left" file="GPS21L11.css" approvedBy="GPS"
+        previewfile1="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.8x8.7in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>5.8x8.7in - 1 Col - Left - Charis 11 on 13</description>
       </style>
-      <style name="5.8x8.7in Cols 10pt Justified" file="GPS22J10.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p2.jpg" shown="Yes">
+      <style name="5.8x8.7in Cols 10pt Justified" file="GPS22J10.css" approvedBy="GPS"
+        previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p1.jpg"
+        previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 10 on 12 p2.jpg" shown="Yes">
         <description>5.8x8.7in - 2 Col - Justified - Charis 10 on 12</description>
       </style>
-      <style name="5.8x8.7in Cols 11pt Justified" file="GPS22J11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="5.8x8.7in Cols 11pt Justified" file="GPS22J11.css" approvedBy="GPS"
+        previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>5.8x8.7in - 2 Col - Justified - Charis 11 on 13</description>
       </style>
-      <style name="5.8x8.7in Cols 9pt Justified" file="GPS22J9.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p2.jpg" shown="Yes">
+      <style name="5.8x8.7in Cols 9pt Justified" file="GPS22J9.css" approvedBy="GPS"
+        previewfile1="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p1.jpg"
+        previewfile2="GPS - 5.8x8.7in - 2 Col - Justified - Charis 9 on 11 p2.jpg" shown="Yes">
         <description>5.8x8.7in - 2 Col - Justified - Charis 9 on 11</description>
       </style>
-      <style name="5.8x8.7in Cols 10pt Left" file="GPS22L10.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p2.jpg" shown="Yes">
+      <style name="5.8x8.7in Cols 10pt Left" file="GPS22L10.css" approvedBy="GPS"
+        previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p1.jpg"
+        previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 10 on 12 p2.jpg" shown="Yes">
         <description>5.8x8.7in - 2 Col - Left - Charis 10 on 12</description>
       </style>
-      <style name="5.8x8.7in Cols 11pt Left" file="GPS22L11.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="5.8x8.7in Cols 11pt Left" file="GPS22L11.css" approvedBy="GPS"
+        previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>5.8x8.7in - 2 Col - Left - Charis 11 on 13</description>
       </style>
-      <style name="5.8x8.7in Cols 9pt Left" file="GPS22L9.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg" previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg" shown="Yes">
+      <style name="5.8x8.7in Cols 9pt Left" file="GPS22L9.css" approvedBy="GPS"
+        previewfile1="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p1.jpg"
+        previewfile2="GPS - 5.8x8.7in - 2 Col - Left - Charis 9 on 11 p2.jpg" shown="Yes">
         <description>5.8x8.7in - 2 Col - Left - Charis 9 on 11</description>
       </style>
-      <style name="A4 Cols 11pt" file="Layout_02.css" approvedBy="GPS" previewfile1="GPS - A4 - 2 Col - Charis 11 on 13 p1.jpg" previewfile2="GPS - A4 - 2 Col - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="A4 Cols 11pt" file="Layout_02.css" approvedBy="GPS"
+        previewfile1="GPS - A4 - 2 Col - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - A4 - 2 Col - Charis 11 on 13 p2.jpg" shown="Yes">
         <description> Two column draft 11pt A4 with drop capital. </description>
       </style>
-      <style name="A4 11pt draft" file="Layout_01.css" approvedBy="GPS" previewfile1="GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg" previewfile2="GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="A4 11pt draft" file="Layout_01.css" approvedBy="GPS"
+        previewfile1="GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg" shown="Yes">
         <description> Single column draft 11pt A4 with drop capital </description>
-      </style>
-      <!-- style name="Trial2" file="Layout_03.css">
-            <description> Single column draft 11pt A4 with chapter header. </description>
-        </style>
-        <style name="Web" file="Layout_04.css">
-            <description> Double column draft 11pt A4 with chapter header </description>
-        </style>
-        <style name="Cell" file="Layout_05.css">
-            <description> Single column draft 13pt A4 with drop cap chapter </description>
-        </style>
-        <style name="TestD1" file="Layout_06.css">
-            <description> Single column draft 13pt A4 with chapter header </description>
-        </style>
-        <style name="TestD2" file="Layout_07.css">
-            <description> Single column draft 13pt A4 with chapter header </description>
-        </style>
-        <style name="TestD3" file="Layout_08.css">
-            <description> Double column draft 13pt A4 with chapter header </description>
-        </style>
-        <style name="TestF1" file="Layout_09.css">
-            <description> Single column final 11pt A5 with drop capital </description>
-        </style>
-        <style name="Final" file="Layout_10.css">
-            <description> Two column final 11pt A5 with drop capital. </description>
-        </style>
-        <style name="Quick" file="Layout_11.css">
-            <description> Two column A5 with TE font and size choices. </description>
-        </style>
-        <style name="QuickLet" file="Layout_13.css">
-            <description> Two column Letter with TE font and size choices. </description>
-        </style -->
+      </style>   
     </paper>
     <mobile>
-      <style name="Go Bible" file="GoBible.css" approvedBy="GPS" previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="Go Bible" file="GoBible.css" approvedBy="GPS"
+        previewfile1="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.8x8.7in - 1 Col - Justified - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>Text only, no section heads or cross references</description>
-        <styleProperty name="FileProduced" value="One" />
-        <styleProperty name="RedLetter" value="No" />
-        <styleProperty name="Information" value="DRAFT Bible text." />
-        <styleProperty name="Copyright" value="© 2013 Wycliffe Bible Translators, Inc." />
-        <styleProperty name="Icon" value="Icon.png" />
-		<styleProperty name="Language" value="English" />
+        <styleProperty name="FileProduced" value="One"/>
+        <styleProperty name="RedLetter" value="No"/>
+        <styleProperty name="Information" value="DRAFT Bible text."/>
+        <styleProperty name="Copyright" value="© 2014 Wycliffe Bible Translators, Inc."/>
+        <styleProperty name="Icon" value="Icon.png"/>
+        <styleProperty name="Language" value="English"/>
       </style>
     </mobile>
     <web>
-      <style name="Web 11pt" file="GPS11L11.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="Web 11pt" file="GPS11L11.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>Web - 1 Col - Left - Charis 11 on 13</description>
       </style>
     </web>
     <others>
-      <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg" previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
+      <style name="EBook (epub)" file="epub.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
         <description>1 column flowed text, for use in e-books</description>
         <styleProperty name="CoverImage" value="cover.png"/>
         <styleProperty name="TOCLevel" value="1 - Book Only"/>
-        <styleProperty name="AddColophonPage" value="Yes" />
-        <styleProperty name="BaseFontSize" value="13" />
-        <styleProperty name="DefaultLineHeight" value="125" />
-        <styleProperty name="DefaultAlignment" value="Left" />
-        <styleProperty name="ChapterNumbers" value="Drop Cap" />
-        <styleProperty name="References" value="After Each Section" />
-        <styleProperty name="MaxImageWidth" value="600" />
+        <styleProperty name="AddColophonPage" value="Yes"/>
+        <styleProperty name="BaseFontSize" value="13"/>
+        <styleProperty name="DefaultLineHeight" value="125"/>
+        <styleProperty name="DefaultAlignment" value="Left"/>
+        <styleProperty name="ChapterNumbers" value="Drop Cap"/>
+        <styleProperty name="References" value="After Each Section"/>
+        <styleProperty name="MaxImageWidth" value="600"/>
         <styleProperty name="EmbedFonts" value="Yes"/>
-        <styleProperty name="IncludeFontVariants" value="Yes" />
-        <styleProperty name="DefaultFont" value="Charis SIL" />
+        <styleProperty name="IncludeFontVariants" value="Yes"/>
+        <styleProperty name="DefaultFont" value="Charis SIL"/>
         <styleProperty name="MissingFont" value="Prompt User"/>
-        <styleProperty name="NonSILFont" value="Prompt User" />
+        <styleProperty name="NonSILFont" value="Prompt User"/>
         <styleProperty name="Title" value=" "/>
-        <styleProperty name="Creator" value=" " />
-        <styleProperty name="Publisher" value=" " />
-        <styleProperty name="Type" value=" " />
-        <styleProperty name="Source" value=" " />
-        <styleProperty name="Format" value=" " />
-        <styleProperty name="Contributor" value=" " />
-        <styleProperty name="Relation" value=" " />
-        <styleProperty name="Coverage" value=" " />
-		<styleProperty name="IncludeImage" value="Yes" />
-        <styleProperty name="Information" value="DRAFT Bible text." />
-        <styleProperty name="Copyright" value="© 2013 Wycliffe Bible Translators, Inc." />
+        <styleProperty name="Creator" value=" "/>
+        <styleProperty name="Publisher" value=" "/>
+        <styleProperty name="Type" value=" "/>
+        <styleProperty name="Source" value=" "/>
+        <styleProperty name="Format" value=" "/>
+        <styleProperty name="Contributor" value=" "/>
+        <styleProperty name="Relation" value=" "/>
+        <styleProperty name="Coverage" value=" "/>
+        <styleProperty name="IncludeImage" value="Yes"/>
+        <styleProperty name="Information" value="DRAFT Bible text."/>
+        <styleProperty name="Copyright" value="© 2014 Wycliffe Bible Translators, Inc."/>
+      </style>
+      <style name="EBook (epub) Right Align" file="epubRightAlign.css" approvedBy="GPS"
+        previewfile1="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p1.jpg"
+        previewfile2="GPS - 5.25x8.25in - 1 Col - Left - Charis 11 on 13 p2.jpg" shown="Yes">
+        <description>1 column flowed text, right align for use in e-books</description>
+        <styleProperty name="CoverImage" value="cover.png"/>
+        <styleProperty name="TOCLevel" value="1 - Book Only"/>
+        <styleProperty name="AddColophonPage" value="Yes"/>
+        <styleProperty name="BaseFontSize" value="13"/>
+        <styleProperty name="DefaultLineHeight" value="125"/>
+        <styleProperty name="DefaultAlignment" value="Right"/>
+        <styleProperty name="ChapterNumbers" value="Drop Cap"/>
+        <styleProperty name="References" value="After Each Section"/>
+        <styleProperty name="MaxImageWidth" value="600"/>
+        <styleProperty name="EmbedFonts" value="Yes"/>
+        <styleProperty name="IncludeFontVariants" value="Yes"/>
+        <styleProperty name="DefaultFont" value="Charis SIL"/>
+        <styleProperty name="MissingFont" value="Prompt User"/>
+        <styleProperty name="NonSILFont" value="Prompt User"/>
+        <styleProperty name="Title" value=" "/>
+        <styleProperty name="Creator" value=" "/>
+        <styleProperty name="Publisher" value=" "/>
+        <styleProperty name="Type" value=" "/>
+        <styleProperty name="Source" value=" "/>
+        <styleProperty name="Format" value=" "/>
+        <styleProperty name="Contributor" value=" "/>
+        <styleProperty name="Relation" value=" "/>
+        <styleProperty name="Coverage" value=" "/>
+        <styleProperty name="IncludeImage" value="Yes"/>
+        <styleProperty name="Information" value="DRAFT Bible text."/>
+        <styleProperty name="Copyright" value="© 2014 Wycliffe Bible Translators, Inc."/>
       </style>
     </others>
   </styles>
   <tasks>
-    <task name="Quick print" style="C5 Cols ApplicationStyles" icon="Graphic/quick.png" />
-    <task name="Village check" style="A4 11pt draft" icon="Graphic/draft.png" />
-    <task name="Trial print" style="5.25x8.25in Cols 10pt Left" icon="Graphic/trialPrint.png" />
-    <task name="Final print" style="5.25x8.25in 11pt Left" icon="Graphic/final.png" />
-    <task name="Web publish" style="Web 11pt" icon="Graphic/web.png" />
-    <task name="Cell publish" style="Go Bible" icon="Graphic/cell.png" />
+    <task name="Quick print" style="C5 Cols ApplicationStyles" icon="Graphic/quick.png"/>
+    <task name="Village check" style="A4 11pt draft" icon="Graphic/draft.png"/>
+    <task name="Trial print" style="5.25x8.25in Cols 10pt Left" icon="Graphic/trialPrint.png"/>
+    <task name="Final print" style="5.25x8.25in 11pt Left" icon="Graphic/final.png"/>
+    <task name="Web publish" style="Web 11pt" icon="Graphic/web.png"/>
+    <task name="Cell publish" style="Go Bible" icon="Graphic/cell.png"/>
   </tasks>
   <column-width>
-    <column name="0" width="85" />
-    <column name="1" width="318" />
-    <column name="2" width="91" />
-    <column name="3" width="52" />
-    <column name="4" width="46" />
+    <column name="0" width="85"/>
+    <column name="1" width="318"/>
+    <column name="2" width="91"/>
+    <column name="3" width="60"/>
+    <column name="4" width="110"/>
   </column-width>
   <Organizations>
     <Organization>SIL International</Organization>
@@ -397,65 +453,73 @@
   </Organizations>
   <Metadata>
     <meta name="Title" outputTypes="all">
-      <defaultValue></defaultValue>
-      <currentValue></currentValue>
-      <PreviousProjectName></PreviousProjectName>
+      <defaultValue/>
+      <currentValue/>
+      <PreviousProjectName/>
     </meta>
     <meta name="Creator" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Publisher" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">Wycliffe_x0020_Bible_x0020_Translators</organizationDefault>
-      <organizationDefault organizationName="Wycliffe_x0020_Bible_x0020_Translators" Locked="false">Wycliffe_x0020_Bible_x0020_Translators</organizationDefault>
-      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">United_x0020_Bible_x0020_Societies</organizationDefault>
-      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">Pioneer_x0020_Bible_x0020_Translators</organizationDefault>
-      <defaultValue></defaultValue>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false"
+        >Wycliffe_x0020_Bible_x0020_Translators</organizationDefault>
+      <organizationDefault organizationName="Wycliffe_x0020_Bible_x0020_Translators" Locked="false"
+        >Wycliffe_x0020_Bible_x0020_Translators</organizationDefault>
+      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false"
+        >United_x0020_Bible_x0020_Societies</organizationDefault>
+      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false"
+        >Pioneer_x0020_Bible_x0020_Translators</organizationDefault>
+      <defaultValue/>
     </meta>
     <meta name="Description" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2013_x0020_SIL_x0020_International.</organizationDefault>
-      <organizationDefault organizationName="Wycliffe_x0020_Bible_0x0020_Translators" Locked="false">_x00A9__x0020_2013_x0020_Wycliffe_x0020_Inc.</organizationDefault>
-      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false">_x00A9__x0020_2013_x0020_United_x0020_Bible_x0020_Societies._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
-      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false">_x00A9__x0020_2013_x0020_Pioneer_x0020_Bible_x0020_Translators._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
-      <defaultValue>_x00A9__x0020_2013_x0020_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false"
+        >_x00A9__x0020_2014_x0020_SIL_x0020_International.</organizationDefault>
+      <organizationDefault organizationName="Wycliffe_x0020_Bible_0x0020_Translators" Locked="false"
+        >_x00A9__x0020_2014_x0020_Wycliffe_x0020_Inc.</organizationDefault>
+      <organizationDefault organizationName="United_x0020_Bible_x0020_Societies" Locked="false"
+        >_x00A9__x0020_2014_x0020_United_x0020_Bible_x0020_Societies._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <organizationDefault organizationName="Pioneer_x0020_Bible_x0020_Translators" Locked="false"
+        >_x00A9__x0020_2014_x0020_Pioneer_x0020_Bible_x0020_Translators._x0020_All_x0020_Rights_x0020_Reserved.</organizationDefault>
+      <defaultValue>_x00A9__x0020_2014_x0020_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Source" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Format" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Contributor" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Relation" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Coverage" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Subject" outputTypes="all">
       <defaultValue>Bible</defaultValue>
     </meta>
     <meta name="Date" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Language" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Identifier" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Cover Page" outputTypes="epub">
       <defaultValue>true</defaultValue>
     </meta>
     <meta name="Cover Page Filename" outputTypes="epub">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Cover Page Title" outputTypes="epub">
       <defaultValue>true</defaultValue>
@@ -467,7 +531,7 @@
       <defaultValue>false</defaultValue>
     </meta>
     <meta name="Copyright Page Filename" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue>Copyrights_x005C_SIL_CC-by-nc-sa.xhtml</defaultValue>
     </meta>
     <meta name="Table of Contents" outputTypes="all">
       <defaultValue>false</defaultValue>

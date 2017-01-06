@@ -677,6 +677,7 @@ namespace SIL.PublishingSolution
 			_screenMode = ScreenMode.Load;
 			_lastSelectedLayout = StyleEXE;
 			Trace.WriteLineIf(_traceOn.Level == TraceLevel.Verbose, "ConfigurationTool_Load");
+
 			if (cTool.TabControl1.TabPages["tabdisplay"] != null)
 				tabDisplay = cTool.TabControl1.TabPages["tabdisplay"];
 			if (cTool.TabControl1.TabPages["tabPreview"] != null)
@@ -1766,7 +1767,7 @@ namespace SIL.PublishingSolution
 		{
 			XmlDocument xDoc = Common.DeclareXMLDocument(false);
 			string executablePath = Common.GetApplicationPath();
-			executablePath = Common.PathCombine(executablePath, @"GoBible\Localizations\Languages.xml");
+			executablePath = PathwayPath.GetSupportPath(executablePath, @"GoBible\Localizations\Languages.xml", true);
 			executablePath = CopiedToTempLanguageXMLFile(executablePath);
 			if (!File.Exists(executablePath)) return;
 			xDoc.Load(executablePath);
@@ -2623,37 +2624,6 @@ namespace SIL.PublishingSolution
 			return inputType;
 		}
 
-		/// <summary>
-		/// Save InputType to StyleSettings.xml. Ex: Scripture or Dictionary
-		/// </summary>
-		public void SaveInputType(string inputType)
-		{
-			string allUserSettingPath = Common.GetAllUserPath();
-			string allUserXmlPath = Common.PathCombine(allUserSettingPath, "StyleSettings.xml");
-			if (!Directory.Exists(allUserSettingPath))
-			{
-				Directory.CreateDirectory(allUserSettingPath);
-			}
-			if (!File.Exists(allUserXmlPath))
-			{
-				string settingPath = Path.GetDirectoryName(Param.SettingPath);
-				string xmlPath = Common.PathCombine(settingPath, "StyleSettings.xml");
-				File.Copy(xmlPath, allUserXmlPath, true);
-				File.Copy(xmlPath.Replace(".xml", ".xsd"), allUserXmlPath.Replace(".xml", ".xsd"), true);
-			}
-
-			XmlDocument xmlDoc = Common.DeclareXMLDocument(false);
-			xmlDoc.Load(allUserXmlPath);
-			string xPath = "//settings/property[@name='InputType']";
-
-			var node = xmlDoc.SelectSingleNode(xPath);
-			if (node != null)
-			{
-				node.Attributes["value"].Value = inputType;
-			}
-			xmlDoc.Save(allUserXmlPath);
-		}
-
 		protected void ParseCSS(string cssPath, string loadType)
 		{
 			_cssPath = cssPath;
@@ -2887,6 +2857,7 @@ namespace SIL.PublishingSolution
 		{
 			Trace.WriteLineIf(_traceOnBL.Level == TraceLevel.Verbose, "ConfigurationToolBL: LoadParam");
 			Param.SetValue(Param.InputType, inputTypeBL); // Dictionary or Scripture
+			Param.SetLoadType = inputTypeBL;
 			Param.LoadSettings();
 			MediaType = Param.MediaType;
 		}
@@ -3901,8 +3872,9 @@ namespace SIL.PublishingSolution
 		private bool PrincePreview(PublicationInformation projInfo)
 		{
 			bool success = false;
-			ExportPdf exportPdf = new ExportPdf();
-			success = exportPdf.Export(projInfo);
+            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
+			//ExportPdf exportPdf = new ExportPdf();
+			//success = exportPdf.Export(projInfo);
 			// copy to preview folder *******************
 			return success;
 		}
@@ -3910,9 +3882,10 @@ namespace SIL.PublishingSolution
 		private bool LOPreview(PublicationInformation projInfo)
 		{
 			bool success = false;
-			ExportLibreOffice openOffice = new ExportLibreOffice();
-			success = openOffice.Export(projInfo);
-			return success;
+            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
+            //ExportLibreOffice openOffice = new ExportLibreOffice();
+            //success = openOffice.Export(projInfo);
+            return success;
 		}
 
 		/// <summary>
@@ -4213,7 +4186,8 @@ namespace SIL.PublishingSolution
 	                }
 	            }
 	        }
-	        cTool.DdlPageNumber.SelectedIndex = 0;
+			if(cTool.DdlPageNumber.Items.Count > 0)
+				cTool.DdlPageNumber.SelectedIndex = 0;
 	    }
 
 	    public void chkIncludeImage_CheckedChangedBL(object sender, EventArgs e)
@@ -4462,7 +4436,7 @@ namespace SIL.PublishingSolution
 			{
 				setLastSelectedLayout();
 				setDefaultInputType();
-				SaveInputType(inputTypeBL);
+				Common.SaveInputType(inputTypeBL);
 				WriteCss();
 				StyleEXE = cTool.TxtName.Text;
 			}
@@ -4812,7 +4786,7 @@ namespace SIL.PublishingSolution
 			string caption = "Delete Stylesheet";
 			var confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabDeleteClick.Message1", "Are you sure you want to delete the {0} stylesheet?", "");
 			confirmationStringMessage = string.Format(confirmationStringMessage, name);
-			if (!cTool._fromNunit)
+			if (!Common.Testing)
 			{
 				DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning,
 													  MessageBoxDefaultButton.Button2);
@@ -4963,7 +4937,7 @@ namespace SIL.PublishingSolution
 				confirmationStringMessage = LocalizationManager.GetString("ConfigurationToolBL.TabResetClick1.Message",
 					"Are you sure you want to remove all custom style sheets and restore \r\n settings to their initial values? (This cannot be undone.)", "");
 				const string caption = "Reset Settings";
-				if (!cTool._fromNunit)
+				if (!Common.Testing)
 				{
 					DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
 														  MessageBoxDefaultButton.Button2);
@@ -5059,8 +5033,15 @@ namespace SIL.PublishingSolution
 		private void ShowCustomPreviewImage()
 		{
 			string preview;
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+
+			if (!Directory.Exists(pathwayDirectory))
+			{
+				pathwayDirectory = Path.GetDirectoryName(Common.AssemblyPath);
+				pathwayDirectory = Common.PathCombine(pathwayDirectory, "Styles");
+			}
+
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, inputTypeBL);
 			pathwayDirectory = Common.PathCombine(pathwayDirectory, "Preview");
 			preview = Common.PathCombine(pathwayDirectory, "PreviewMessage.jpg");

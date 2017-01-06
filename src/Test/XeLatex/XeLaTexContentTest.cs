@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="XeLaTexContentTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // WordPress Test Support
 // </remarks>
@@ -67,8 +67,14 @@ namespace Test.XeLatex
 			Directory.CreateDirectory(_outputPath);
 			_projInfo.ProjectPath = testPath;
 			_classInlineStyle = new Dictionary<string, List<string>>();
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+
+			if (!File.Exists(styleSettingFile))
+			{
+				styleSettingFile = Path.GetDirectoryName(Common.AssemblyPath);
+				styleSettingFile = Common.PathCombine(styleSettingFile, "StyleSettings.xml");
+			}
 
 			ValidateXMLVersion(styleSettingFile);
 			Common.ProgInstall = pathwayDirectory;
@@ -113,6 +119,7 @@ namespace Test.XeLatex
 				Directory.Delete(outputDirectory, true);
 			}
 			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.SetLoadType = "Scripture";
 			Param.LoadSettings();
 			_projInfo.ProjectPath = outputDirectory;
 			_projInfo.ProjectInputType = "Scripture";
@@ -142,8 +149,15 @@ namespace Test.XeLatex
 			Param.UpdateMetadataValue(Param.Date, DateTime.Today.ToString("yyyy-MM-dd"));
 			Param.UpdateMetadataValue(Param.CoverPage, "True");
 
-			string pathwayDirectory = PathwayPath.GetPathwayDir();
+			string pathwayDirectory = Common.AssemblyPath;
 			string coverImageFilePath = Common.PathCombine(pathwayDirectory, "Graphic");
+
+			if (!Directory.Exists(coverImageFilePath))
+			{
+				coverImageFilePath = Path.GetDirectoryName(Common.AssemblyPath);
+				coverImageFilePath = Common.PathCombine(coverImageFilePath, "Graphic");
+			}
+
 			coverImageFilePath = Common.PathCombine(coverImageFilePath, "cover.png");
 			Param.UpdateMetadataValue(Param.CoverPageFilename, coverImageFilePath);
 
@@ -177,6 +191,7 @@ namespace Test.XeLatex
 				Directory.Delete(outputDirectory, true);
 			}
 			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.SetLoadType = "Dictionary";
 			Param.LoadSettings();
 			_projInfo.ProjectPath = outputDirectory;
 			_projInfo.ProjectInputType = "Dictionary";
@@ -902,7 +917,6 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Ignore]
 		[Category("SkipOnTeamCity")]
 		public void LineHeightPercentageTest()
 		{
@@ -913,7 +927,6 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Ignore]
 		[Category("SkipOnTeamCity")]
 		public void LineHeightPointTest()
 		{
@@ -967,7 +980,6 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
-		[Ignore]
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -979,7 +991,6 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
-		[Ignore]
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -1170,13 +1181,12 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
-		[Ignore]
+
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
 		public void VisibilityCensorPackageTest()
 		{
-
 			const string testFileName = "VisibilityPackage";
 			var inputname = testFileName + ".tex";
 			var xeLatexFullFile = FileOutput(inputname);
@@ -1184,9 +1194,10 @@ namespace Test.XeLatex
 			File.Copy(FileInput(inputname), xeLatexFullFile, overwrite);
 			var imgPath = new Dictionary<string, string>();
 			UpdateXeLaTexFontCacheIfNecessary();
+			Common.Testing = true;
 			CallXeLaTex(_projInfo, xeLatexFullFile, true, imgPath);
 			var outname = testFileName + ".log";
-			TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 1, 55, 56, 57, 58, 60 });
+			TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 2, 13, 14, 15, 16, 17 });
 		}
 
 		[Test]
@@ -1220,7 +1231,6 @@ namespace Test.XeLatex
 				Assert.AreEqual(@":\pwtex\", XeLaTexInstallation.GetXeLaTexDir().Substring(1));
 		}
 
-		[Ignore]
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -1247,7 +1257,7 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
-		
+
 
 		[Test]
 		[Category("ShortTest")]

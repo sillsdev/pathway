@@ -4,11 +4,8 @@
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/@page-top-right" Justification="RightAlign">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/@page-top-right" PageNumberType="TextVariable">
-        <TextVariableInstance Self="ul1" Name="LastGuideword" ResultText="&amp;lt;Last&amp;gt;" AssociatedTextVariable="dTextVariablenLast" />
-      </CharacterStyleRange>
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/xhomographnumber_headword_entry_letData_dicBody" PageNumberType="TextVariable">
-        <TextVariableInstance Self="u678" Name="HomoGraphNumberL" ResultText="&amp;lt;HomoGraph&amp;gt;" AssociatedTextVariable="dTextVariablenHomoGraphL" />
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
+        <Content><?ACE 18?></Content>
       </CharacterStyleRange>
     </ParagraphStyleRange>
   </Story>

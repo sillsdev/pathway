@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ContentXMLTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -31,12 +31,14 @@ namespace Test.OpenOfficeConvert
 {
     [TestFixture]
     [Category("BatchTest")]
-	public class LOContentXMLTest
+    [Category("SkipOnTeamCity")]
+    public class LOContentXMLTest
     {
         #region Private Variables
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
+	    private string _expectedlinuxPath;
         ProgressBar _progressBar;
         private PublicationInformation _projInfo;
 
@@ -66,11 +68,9 @@ namespace Test.OpenOfficeConvert
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "expected");
-            //if (Directory.Exists(_outputPath))
-            //{
-            //    Directory.Delete(_outputPath, true);
-            //}
+			_expectedlinuxPath = Common.PathCombine(testPath, "expectedlinux");
+			_expectedPath = Common.PathCombine(testPath, "expected");
+
             Common.DeleteDirectory(_outputPath);
             Directory.CreateDirectory(_outputPath);
             FolderTree.Copy(FileInput("Pictures"), FileOutput("Pictures"));
@@ -85,6 +85,7 @@ namespace Test.OpenOfficeConvert
 	        Common.UseAfterBeforeProcess = true;
             _styleFile = "styles.xml";
             _contentFile = "content.xml";
+
             _isLinux = Common.IsUnixOS();
 
 			if (!_isLinux)
@@ -117,29 +118,23 @@ namespace Test.OpenOfficeConvert
             {
                 switch (counter)
                 {
-                    case 3:
-                        exp = "locator_dictionary";
-                        inner = "parent text div div parent text";
-                        fail = CheckStyleandInnerText(item, exp, inner);
-                        break;
-
                     case 4:
-                        exp = "locator_locator_dictionary";
-                        inner = "parent text";
+						exp = "locator_dictionary";
+						inner = "parent text div div parent text";
                         fail = CheckStyleandInnerText(item, exp, inner);
                         break;
 
                     case 5:
-                        exp = "locator_dictionary";
-                        inner = "parent text";
+						exp = "locator_locator_dictionary";
+						inner = "parent text";
                         fail = CheckStyleandInnerText(item, exp, inner);
                         break;
 
-                    case 6:
-                        exp = "topara_locator_dictionary";
-                        inner = "text";
-                        fail = CheckStyleandInnerText(item, exp, inner);
-                        break;
+					case 6:
+						exp = "locator_dictionary";
+						inner = "parent text";
+						fail = CheckStyleandInnerText(item, exp, inner);
+						break;
 
                     case 7:
                         exp = "topara_locator_dictionary";
@@ -148,6 +143,12 @@ namespace Test.OpenOfficeConvert
                         break;
 
                     case 8:
+                        exp = "topara_locator_dictionary";
+                        inner = "text";
+                        fail = CheckStyleandInnerText(item, exp, inner);
+                        break;
+
+                    case 9:
                         exp = "locator_dictionary";
                         inner = "parent text";
                         fail = CheckStyleandInnerText(item, exp, inner);
@@ -314,7 +315,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///em and % test
-        /// </summary>      
+        /// </summary>
         [Test]
         public void EMTest1_Node()
         {
@@ -383,7 +384,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-90 .locator .letter
-        /// </summary>      
+        /// </summary>
         [Test]
         public void AncestorChildTest1_Node()
         {
@@ -452,7 +453,7 @@ namespace Test.OpenOfficeConvert
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "AncestorTestForNewFlexVersion";
-			
+
 			string styleOutput = GetStyleOutput(file);
 
 			//Content Test - First
@@ -463,6 +464,9 @@ namespace Test.OpenOfficeConvert
 			Assert.IsTrue(returnValue1);
 			_validate.ClassName = "span_.en_definitionorgloss_sense_sensecontent_senses_entry_body";
 			content = "Second person; labialisation of the initial consonant of Class 3 verbs beginning with gg";
+			if (Common.UsingMonoVM)
+				content = "Second person; labialisation of the initial consonant of\n Class 3 verbs beginning with gg";
+
 			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
 
@@ -486,8 +490,8 @@ namespace Test.OpenOfficeConvert
 
 		///<summary>
 		/// TD-4528 - V should be italic and not bold
-		/// TD-4529 - Person should be italic 
-		/// </summary>   
+		/// TD-4529 - Person should be italic
+		/// </summary>
 		[Test]
 		[Category("SkipOnTeamCity")]
 		public void ItalicOnFlex83Test_Node()
@@ -532,8 +536,8 @@ namespace Test.OpenOfficeConvert
 		}
 
 		///<summary>
-		/// TD-4527 Missing slot punctuation 
-		/// </summary>   
+		/// TD-4527 Missing slot punctuation
+		/// </summary>
 		[Test]
 		[Category("SkipOnTeamCity")]
 		public void PseudoBeforeOnFlex83Test_Node()
@@ -551,174 +555,6 @@ namespace Test.OpenOfficeConvert
 			Assert.IsTrue(returnValue1);
 		}
 
-        ///<summary>
-        /// TD-1525 Period after double quotes
-        /// </summary>      
-        [Ignore] //Pesudo styles removed in css
-        [Test]
-        public void PseudoQuotes_Node()
-        {
-            const string file = "PseudoQuotes";
-            _projInfo.ProjectInputType = "Dictionary";
-            string styleOutput = GetStyleOutput(file);
-
-            _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "xsensenumber..before_sense_senses_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "18pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "18pt");
-            _validate.ClassProperty.Add("fo:color", "#008000");
-            bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "pronunciations..after_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "40pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "40pt");
-            _validate.ClassProperty.Add("fo:color", "#ff0000");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-
-            _validate.ClassName = "translation..before_translations_xitem_examples_sense_senses_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "15pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "15pt");
-            _validate.ClassProperty.Add("fo:color", "#008000");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "translation..after_translations_xitem_examples_sense_senses_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "15pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "15pt");
-            _validate.ClassProperty.Add("fo:color", "#ff0000");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "headword..after_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "50pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "50pt");
-            _validate.ClassProperty.Add("fo:color", "#ff0000");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "headword..before_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "50pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "50pt");
-            _validate.ClassProperty.Add("fo:color", "#0000ff");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "letHead..before_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "20pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "20pt");
-            _validate.ClassProperty.Add("fo:color", "#0000ff");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-
-            _validate.ClassName = "definition..before_sense_senses_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "35pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "35pt");
-            _validate.ClassProperty.Add("fo:color", "#ffa500");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "definition..after_sense_senses_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "35pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "35pt");
-            _validate.ClassProperty.Add("fo:color", "#ffa500");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            _validate.ClassName = "sense..before_senses_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "18pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "18pt");
-            _validate.ClassProperty.Add("fo:color", "#000000");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-
-            _validate.ClassName = "sense..after_senses_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-weight", "700");
-            _validate.ClassProperty.Add("style:font-weight-complex", "700");
-            _validate.ClassProperty.Add("fo:font-size", "18pt");
-            _validate.ClassProperty.Add("style:font-size-complex", "18pt");
-            _validate.ClassProperty.Add("fo:color", "#800080");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-
-            //Content Test - 
-            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "headword..before_entry_letData_dicBody";
-            string content = "\"";
-            bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-
-            _validate.ClassName = "headword..after_entry_letData_dicBody";
-            content = "'";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-
-            _validate.ClassName = "pronunciations..after_entry_letData_dicBody";
-            content = Common.ConvertUnicodeToString("\\25ba");
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-
-            _validate.ClassName = "sense..before_senses_entry_letData_dicBody";
-            content = "' ' ' '" + Common.ConvertUnicodeToString("\\25ba") + " ' '' ' multi singles with uni";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-
-            _validate.ClassName = "xsensenumber..before_sense_senses_entry_letData_dicBody";
-            content = Common.ConvertUnicodeToString("\\25ba");
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-
-
-            _validate.ClassName = "definition..before_sense_senses_entry_letData_dicBody";
-            content = "&lt;'-'&gt;";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-
-            _validate.ClassName = "definition..after_sense_senses_entry_letData_dicBody";
-            content = "&lt;\"-\"&gt;";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-
-            _validate.ClassName = "translation..before_translations_xitem_examples_sense_senses_entry_letData_dicBody";
-            content = "''" + Common.ConvertUnicodeToString("\\2565") + "'' two single with uni";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-
-            _validate.ClassName = "translation..after_translations_xitem_examples_sense_senses_entry_letData_dicBody";
-            content = "\"\"" + Common.ConvertUnicodeToString("\\2115") + "\"\" two double with uni";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-
-            _validate.ClassName = "sense..after_senses_entry_letData_dicBody";
-            content = "\" \" \" \"" + Common.ConvertUnicodeToString("\\25ba") + "\" \" \" multi double with uni";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
-        }
-
         [Test]
         public void PseudoQuotes1_Node()
         {
@@ -727,7 +563,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Dictionary";
             GetStyleOutput(file);
 
-            //Content Test 
+            //Content Test
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			string content = "∖U8658 A a \". " + Common.ConvertUnicodeToString("\\2666") + "\" B b \".  \" C c '  ** ' ** D d # v \" v =\"\" ∖ ' E e \"^ F f $@ G g ! ";
             XmlNode officeNode = _validate.GetOfficeNode();
@@ -737,8 +573,8 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// TD-429 -  Handling Anchor Tag 
-        /// </summary>      
+        /// TD-429 -  Handling Anchor Tag
+        /// </summary>
         [Test]
         public void AnchorTag_Node()
         {
@@ -803,7 +639,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-91 .letter[class~='current']
-        /// </summary>      
+        /// </summary>
         [Test]
         public void ClassNameValueTest_Node()
         {
@@ -845,7 +681,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-1607. main.odm format - percentage test
-        /// </summary>      
+        /// </summary>
         [Test]
         public void ColumnGapPercent()
         {
@@ -924,8 +760,8 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// TD-83. Open Office column-gap: 1.5em;  
-        /// </summary>      
+        /// TD-83. Open Office column-gap: 1.5em;
+        /// </summary>
         [Test]
         public void ColumnGap_Node()
         {
@@ -1001,7 +837,7 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// </summary>  
+        /// </summary>
         [Test]
         public void ColumnGapLong()
         {
@@ -1076,74 +912,11 @@ namespace Test.OpenOfficeConvert
 
         }
 
-        [Test]
-        [Ignore]
-        public void CallTOCTest()
-        {
-
-            //For Scripture
-            SetUp();
-            //CopyFile();
-            LoadParam("Scripture", "true");
-            _projInfo.ProjectInputType = "Scripture";
-            const string fileCallTOCScriptureTrue = "CallTOCScripture";
-
-            GetStyleOutput(fileCallTOCScriptureTrue);
-            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = string.Empty;
-            string xpath = "//text:table-of-content[@text:style-name='Sect3']/text:table-of-content-source";
-            _validate.ClassProperty.Add("text:outline-level", "10");
-            bool returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
-            Assert.IsTrue(returnValue);
-
-            LoadParam("Scripture", "false");
-            _projInfo.ProjectInputType = "Scripture";
-            const string fileCallTOCScriptureFalse = "CallTOCScripture";
-
-            GetStyleOutput(fileCallTOCScriptureFalse);
-
-            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = string.Empty;
-
-            xpath = "//text:table-of-content[@text:style-name='Sect3']/text:table-of-content-source";
-            _validate.ClassProperty.Add("text:outline-level", "10");
-            returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
-            Assert.IsFalse(returnValue);
-
-            //For Dictionary
-            LoadParam("Dictionary", "true");
-            _projInfo.ProjectInputType = "Dictionary";
-            const string fileCallTOCDictionaryTrue = "CallTOCDictionary";
-           GetStyleOutput(fileCallTOCDictionaryTrue);
-
-            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = string.Empty;
-
-            xpath = "//text:table-of-content[@text:style-name='Sect3']/text:table-of-content-source";
-            _validate.ClassProperty.Add("text:outline-level", "10");
-            returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
-            Assert.IsTrue(returnValue);
-
-            LoadParam("Dictionary", "false");
-            _projInfo.ProjectInputType = "Dictionary";
-            const string fileCallTOCDictionaryFalse = "CallTOCDictionary";
-            GetStyleOutput(fileCallTOCDictionaryFalse);
-
-            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = string.Empty;
-
-            xpath = "//text:table-of-content[@text:style-name='Sect3']/text:table-of-content-source";
-            _validate.ClassProperty.Add("text:outline-level", "10");
-            returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
-            Assert.IsFalse(returnValue);
-        }
-
-
         ///<summary>
         /// TD-170 Open Office: triangle should appear before all senses
         /// TD-171 Open Office: sense # is wrong font size
-        /// TD-172 open office: visibility  
-        /// </summary>      
+        /// TD-172 open office: visibility
+        /// </summary>
         [Test]
         public void Visibility_Node()
         {
@@ -1159,7 +932,7 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Counter1_Node()
         {
@@ -1179,7 +952,7 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue1, "Counter1 - Content Failure");
 
 			_validate.ClassName = "lastoftype_sense_article_sectionletter_dictionary";
-			
+
 
             content = "2.42";
             returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "span");
@@ -1191,7 +964,7 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// </summary>      
+        /// </summary>
         [Test]
         public void GlossaryReferenceNode()
         {
@@ -1211,7 +984,7 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// </summary>      
+        /// </summary>
         [Test]
         public void GlossaryReferenceTitleNode()
         {
@@ -1231,7 +1004,7 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Counter2_Node()
         {
@@ -1261,7 +1034,7 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Counter3_Node()
         {
@@ -1275,7 +1048,7 @@ namespace Test.OpenOfficeConvert
             string content = "1.11";
             bool returnValue1 = _validate.ValidateOfficeTextNodeList(1, content, "span");
             Assert.IsTrue(returnValue1, "Counter3 - Content Failure");
-			
+
             content = "2.11";
             returnValue1 = _validate.ValidateOfficeTextNodeList(2, content, "span");
             Assert.IsTrue(returnValue1, "Counter3 - Content Failure");
@@ -1292,7 +1065,7 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// </summary>      
+        /// </summary>
         [Test]
         public void FootNote_Node()
         {
@@ -1334,7 +1107,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-1909
-        /// </summary>      
+        /// </summary>
         [Test]
         public void FootnoteSpanContent_Node()
         {
@@ -1353,7 +1126,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-2758
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Body()
         {
@@ -1381,7 +1154,7 @@ namespace Test.OpenOfficeConvert
             string xpath = "//text:note[@text:id='ftn1']";
             _validate.ClassName = string.Empty;
             _validate.GetOuterXml = true;
-			            
+
 			string content = "<text:note text:id=\"ftn1\" text:note-class=\"footnote\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:note-citation text:label=\"a\">a</text:note-citation><text:note-body><text:p text:style-name=\"NoteGeneralParagraph\"><text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">1:1 = </text:span><text:span text:style-name=\"AlternateReading_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">Les juges:</text:span><text:span text:style-name=\"span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">poque de leur histoire, les par des juges. des personnes par Dieu. Dieu les chargeait plus de une ou plusieurs tribus en guerre et de diriger le peuple. Ils rendaient aussi la justice. </text:span><text:span text:style-name=\"AlternateReading_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">Moab:</text:span><text:span text:style-name=\"span_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody\">pays fertile situest de la mer Morte.</text:span></text:p></text:note-body></text:note>";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNoteFormat - Content Failure");
@@ -1389,7 +1162,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD81 line-height: always syntax in Styles.xml
-        /// </summary>      
+        /// </summary>
         [Test]
         public void LineHeight_Node()
         {
@@ -1486,7 +1259,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-181 White-space:pre;
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Whitespace_Node()
         {
@@ -1525,7 +1298,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-1776 TeluguGondwana_
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TeluguGondwana_Node()
         {
@@ -1544,7 +1317,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD130 (Remove AutoWidth and set Column Width for columns)
         /// .letData { column-fill: balance; }
-        /// </summary>      
+        /// </summary>
         [Test]
         public void RemoveAutoWidth_Node()
         {
@@ -1564,7 +1337,6 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD130 (Remove AutoWidth and set Column Width for columns)
         /// </summary>
-        [Ignore]
         [Test]
         public void InlineBlock_Node()
         {
@@ -1577,7 +1349,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///Test pink and blue in output
-        /// </summary>      
+        /// </summary>
         [Test]
         public void LanguageColor_Node()
         {
@@ -1615,7 +1387,7 @@ namespace Test.OpenOfficeConvert
         }
 
         /// <summary>
-        /// </summary>      
+        /// </summary>
         [Test]
         public void PseudoAfter_Node()
         {
@@ -1624,7 +1396,7 @@ namespace Test.OpenOfficeConvert
 
             GetStyleOutput(file);
 
-            //Content Test 
+            //Content Test
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "pronunciation_.bzh-fonipa_pronunciations_entry_letData_dicBody";
             string content = "text]";
@@ -1646,7 +1418,7 @@ namespace Test.OpenOfficeConvert
             const string file = "LanguageInline";
             GetStyleOutput(file);
 
-            //Content Test 
+            //Content Test
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
 			_validate.ClassName = "partofspeech_.tam_entry_letData_dicBody";
             string content = "Select a destination";
@@ -1662,7 +1434,7 @@ namespace Test.OpenOfficeConvert
 
 
         /// <summary>
-        /// </summary>      
+        /// </summary>
         [Test]
         public void PseudoAfter1_Node()
         {
@@ -1671,7 +1443,7 @@ namespace Test.OpenOfficeConvert
 
             GetStyleOutput(file);
 
-            //Content Test 
+            //Content Test
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = "letHead_div_dicBody";
             string content = "A a<text:span text:style-name=\"entry_letHead_div_dicBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\">entry</text:span>###";
@@ -1686,7 +1458,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-59  font-size: larger; and font-size: smaller;
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Larger_Node()
         {
@@ -1717,8 +1489,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-222   Image width:50%
-        /// </summary>  
-        [Ignore]
+        /// </summary>
         [Test]
         public void Picture_Width_Node()
         {
@@ -1731,7 +1502,7 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = "entry1_letData_dicBody";
             _validate.ClassNameTrim = true;
             _validate.GetOuterXml = true;
-            string content = "<text:p text:style-name=\"entry1_letData_dicBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Graphics1\" draw:name=\"Graphics1\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"45pt\" svg:height=\"33.75pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"0in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"Graphics1\" draw:name=\"Graphics1\" text:anchor-type=\"paragraph\" svg:width=\"45pt\" svg:height=\"33.75pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuatet=\"onLoad\" xlink:href=\"Pictures/leftindexmacro1.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>leftindexmacro1.jpg</svg:title></draw:frame><text:p text:style-name=\"pictureCaption_pictureRight_entry1_letData_dicBody\"><text:span text:style-name=\"CmPicturepublishStemCaptionSenseNumber_pictureCaption_pictureRight_entry1_letData_dicBody\">1</text:span><text:span text:style-name=\"CmPicturepublishStemCaptionCaptionPub_.pt_pictureCaption_pictureRight_entry1_letData_dicBody\">cala</text:span></text:p></draw:text-box></draw:frame><text:span text:style-name=\"headword_entry1_letData_dicBody\">cala</text:span><text:span text:style-name=\"headword..after_entry1_letData_dicBody\"><text:s text:c=\"1\" /></text:span><text:span text:style-name=\"partofspeech_.pt_grammaticalinfo_sense_senses_entry1_letData_dicBody\">N</text:span><text:span text:style-name=\"xlanguagetag_xitem_.pt_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">Por </text:span><text:span text:style-name=\"xitem_.pt_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">dedo</text:span><text:span text:style-name=\"xlanguagetag_xitem_.en_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">Eng </text:span><text:span text:style-name=\"xitem_.en_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">finger</text:span></text:p>";
+			string content = "<text:p text:style-name=\"entry1_letData_dicBody\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"fr3\" draw:name=\"Frame3\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"25%\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr3\" draw:name=\"Graphics3\" text:anchor-type=\"paragraph\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/leftindexmacro1.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>leftindexmacro1.jpg</svg:title></draw:frame><text:p text:style-name=\"pictureCaption_pictureRight_entry1_letData_dicBody\"><text:p text:style-name=\"CmPicturepublishStemCaptionSenseNumber_pictureCaption_pictureRight_entry1_letData_dicBody\">1</text:p><text:p text:style-name=\"CmPicturepublishStemCaptionCaptionPub_.pt_pictureCaption_pictureRight_entry1_letData_dicBody\">cala</text:p></text:p></draw:text-box></draw:frame><text:span text:style-name=\"headword_.seh_entry1_letData_dicBody\">cala</text:span><text:span text:style-name=\"headword_.seh\"><text:variable-set text:name=\"Left_Guideword_L\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"headword_.seh\"><text:variable-set text:name=\"RLeft_Guideword_L\" text:display=\"none\" text:formula=\"ooow: cala\" office:value-type=\"string\" office:string-value=\"cala\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"headword_.seh\"><text:variable-set text:name=\"Right_Guideword_R\" text:display=\"none\" text:formula=\"ooow: \" office:value-type=\"string\" office:string-value=\"\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"headword_.seh\"><text:variable-set text:name=\"RRight_Guideword_R\" text:display=\"none\" text:formula=\"ooow: cala\" office:value-type=\"string\" office:string-value=\"cala\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span /> <text:span text:style-name=\"partofspeech_.pt_grammaticalinfo_sense_senses_entry1_letData_dicBody\">N</text:span><text:span text:style-name=\"xlanguagetag_.en_xitem_.pt_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">Por </text:span><text:span text:style-name=\"xitem_.pt_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">dedo</text:span><text:span text:style-name=\"xlanguagetag_.en_xitem_.en_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">Eng </text:span><text:span text:style-name=\"xitem_.en_definitionL2_.pt_sense_senses_entry1_letData_dicBody\">finger</text:span></text:p>";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1, "PictureWidth - Content 1 Failure");
         }
@@ -1739,8 +1510,8 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// TD-1855 Picture / PictureBox error
         /// </summary>
-        [Ignore]
         [Test]
+		[Category("SkipOnTeamCity")]
         public void Picture_Mrk_Node()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -1752,14 +1523,17 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = "section_scriptureText_body";
             _validate.ClassNameTrim = true;
             _validate.GetOuterXml = true;
-            string content = "<text:p text:style-name=\"section_scriptureText_body\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"292.5pt\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"0in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"292.5pt\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/lb00296c.png\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>lb00296c.png</svg:title></draw:frame><text:p text:style-name=\"div.caption_img_section_scriptureText_body\">Yohanis, Tuka Sarani Dh (Mark.1.4-6)</text:p></draw:text-box></draw:frame></text:p>";
+			string content = "<text:p text:style-name=\"section_scriptureText_body\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"292.5pt\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"292.5pt\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/lb00296c.png\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>lb00296c.png</svg:title></draw:frame><text:p text:style-name=\"caption_img_section_scriptureText_body\"><text:p text:style-name=\"caption_img_section_scriptureText_body\">Yohanis, Tuka Sarani Dh (Mark.1.4-6)</text:p></text:p></draw:text-box></draw:frame><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu. </text:p><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu.</text:p><text:p text:style-name=\"p_section_scriptureText_body\"><text:span text:style-name=\"verseNumber_p_section_scriptureText_body\">  7 </text:span>Tuka Sarani hia Lamatua Yesus!.  <text:span text:style-name=\"verseNumber_p_section_scriptureText_body\"> 8 </text:span>intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here </text:p></text:p>";
+
+	        if (Common.UsingMonoVM)
+		        content = "<text:p text:style-name=\"section_scriptureText_body\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"292.5pt\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"292.5pt\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/figure/lb00296c.png\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>figure/lb00296c.png</svg:title></draw:frame><text:p text:style-name=\"caption_img_section_scriptureText_body\"><text:p text:style-name=\"caption_img_section_scriptureText_body\">Yohanis, Tuka Sarani Dh (Mark.1.4-6)</text:p></text:p></draw:text-box></draw:frame><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu. </text:p><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu.</text:p><text:p text:style-name=\"p_section_scriptureText_body\"><text:span text:style-name=\"verseNumber_p_section_scriptureText_body\">  7 </text:span>Tuka Sarani hia Lamatua Yesus!.  <text:span text:style-name=\"verseNumber_p_section_scriptureText_body\"> 8 </text:span>intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here </text:p></text:p>";
             bool returnValue1 = _validate.ValidateOfficeTextNodeForPicture(content, "para");
             Assert.IsTrue(returnValue1, "Picture_Mrk - Content 1 Failure");
         }
 
         ///<summary>
         /// TD-1855 Picture / PictureBox error
-        /// </summary>      
+        /// </summary>
         [Test]
         public void ImageNoCaption_Node()
         {
@@ -1777,8 +1551,8 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
         }
         ///<summary>
-        /// TD-227 Set language for data. 
-        /// </summary>      
+        /// TD-227 Set language for data.
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -1815,6 +1589,8 @@ namespace Test.OpenOfficeConvert
             returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1);
 
+	        if (Common.UsingMonoVM)
+		        return;
 
             //Note - The Styles will be created while processing xhtml(content.xml)
             //Style Test - Second
@@ -1853,10 +1629,9 @@ namespace Test.OpenOfficeConvert
 
 
         ///<summary>
-        /// TD-204   unable to put tok / pisin. 
-        /// </summary>      
+        /// TD-204   unable to put tok / pisin.
+        /// </summary>
         [Test]
-        [Ignore]
         public void ClassContent_Node()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -1865,16 +1640,16 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             //Content Test - First
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "xlanguagetag_.en_xitem_.tpi_definition_.en_sense_senses_entry_letData";
+			_validate.ClassName = "xlanguagetag_.en_xitem_.en_definition_.en_sense_senses_entry_letData_dicBody";
             _validate.ClassNameTrim = true;
-            string content = "/";
+			string content = "Eng";
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
             Assert.IsTrue(returnValue1, "ClassContent - Content 1 Failure");
 
             //Note - The Styles will be created while processing xhtml(content.xml)
             //Style Test - Second
             _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "xlanguagetag_.en_xitem_.tpi_definition_.en_sense_senses_entry_letData";
+			_validate.ClassName = "xlanguagetag_.en_xitem_.tpi_definition_.en_sense_senses_entry_letData_dicBody";
             _validate.ClassProperty.Add("fo:font-size", "38pt");
             _validate.ClassProperty.Add("style:font-size-complex", "38pt");
             _validate.ClassProperty.Add("fo:color", "#ff0000");
@@ -1885,7 +1660,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-304   Open Office div.header
-        /// </summary>      
+        /// </summary>
         [Test]
         public void div_header_Node()
         {
@@ -1913,8 +1688,8 @@ namespace Test.OpenOfficeConvert
 
 
         ///<summary>
-        /// TD-347  Implement content: normal;  
-        /// </summary>      
+        /// TD-347  Implement content: normal;
+        /// </summary>
         [Test]
         public void ContentNormalTest_Node()
         {
@@ -1937,7 +1712,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-343 Implement lists
-        /// </summary>      
+        /// </summary>
         [Test]
         public void ListOlUl_Node()
         {
@@ -2038,7 +1813,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// TD-362 Image Attribute
         /* <example img[src='Thomsons-gazelle1.jpg'] { float:left;}> */
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Picture_ImageAttrib_Node()
         {
@@ -2059,7 +1834,7 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
             _validate.GetOuterXml = true;
-            _validate.XPath = "//draw:frame[@draw:style-name='fr2']";            
+            _validate.XPath = "//draw:frame[@draw:style-name='fr2']";
 			string content = "<draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"288pt\" svg:height=\"144pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"288pt\" svg:height=\"144pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/1.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>1.jpg</svg:title></draw:frame><text:p text:style-name=\"img_image_firstoftype_sense_article_sectionletter_dictionary\"> Flea </text:p></draw:text-box></draw:frame>";
             bool returnValue = _validate.ValidateOfficeTextNode(0, content, "para");
             Assert.IsTrue(returnValue);
@@ -2106,7 +1881,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-416 chapter number should align with top of text not with bottom
-        /// </summary>      
+        /// </summary>
         [Test]
         public void DropCap_Node()
         {
@@ -2139,7 +1914,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-453 - Index doesn't have three columns in this data
-        /// </summary>      
+        /// </summary>
         [Test]
         public void ColumnCountTest_Node()
         {
@@ -2196,7 +1971,7 @@ namespace Test.OpenOfficeConvert
         }
 
         ///<summary>
-        /// </summary>      
+        /// </summary>
         [Test]
         public void SpanStyleTest_Node()
         {
@@ -2224,7 +1999,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-458 - Index sense divider spacing
-        /// </summary>      
+        /// </summary>
         [Test]
         public void SpaceBeforeTest_Node()
         {
@@ -2244,7 +2019,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-479 -  create property to substitute quote characters
-        /// </summary>      
+        /// </summary>
         [Test]
         public void ReplacePrinceQuoteTest_Node()
         {
@@ -2269,7 +2044,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-518 -  divider line missing after introduction
-        /// </summary>      
+        /// </summary>
         [Test]
         public void EmptyDivTag_Node()
         {
@@ -2300,8 +2075,8 @@ namespace Test.OpenOfficeConvert
 
         }
         ///<summary>
-        /// TD-654 
-        /// </summary>      
+        /// TD-654
+        /// </summary>
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -2339,7 +2114,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-349 -  width: auto
-        /// </summary>      
+        /// </summary>
         [Test]
         public void AutoWidth_Node()
         {
@@ -2418,7 +2193,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-1239 -  Two column output from TE can conflict with two column stylesheets, not wrap correctly at section breaks.
-        /// </summary>      
+        /// </summary>
         [Test]
         public void RemoveScrSectionClass_Node()
         {
@@ -2445,9 +2220,8 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-1239 -  Two column output from TE can conflict with two column stylesheets, not wrap correctly at section breaks.
-        /// </summary>      
+        /// </summary>
         [Test]
-        [Ignore]
         [Category("SkipOnTeamCity")]
         public void TableProperty()
         {
@@ -2455,26 +2229,19 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Scripture";
             const string file = "TableProperty";
 
-            GetStyleOutput(file);
+			string styleOutput = GetStyleOutput(file);
 
-            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = string.Empty;
-
-            string xpath = "//style:style[@style:name='Sect_columns2']/style:section-properties";
-            _validate.ClassProperty.Add("text:dont-balance-text-columns", "false");
-            bool returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
-            Assert.IsTrue(returnValue);
-
-            xpath = "//style:style[@style:name='Sect_columns1']/style:section-properties";
-            _validate.ClassProperty.Add("text:dont-balance-text-columns", "true");
-            returnValue = _validate.ValidateNodeAttributesNS(0, xpath);
-            Assert.IsTrue(returnValue);
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+			TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 
         }
 
         ///<summary>
         /// TD-89	Open Office .slots:before
-        /// </summary>      
+        /// </summary>
         [Test]
         public void SignificantSpace()
         {
@@ -2503,7 +2270,7 @@ namespace Test.OpenOfficeConvert
         }
         ///<summary>
         /// TD96 text-indent
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Textindent_Node()
         {
@@ -2528,7 +2295,7 @@ namespace Test.OpenOfficeConvert
         }
         ///<summary>
         /// BackgroundColor
-        /// </summary>      
+        /// </summary>
         [Test]
         public void BackgroundColor_Node()
         {
@@ -2571,7 +2338,7 @@ namespace Test.OpenOfficeConvert
         }
         ///<summary>
         /// DisplayNone
-        /// </summary>      
+        /// </summary>
         [Test]
         public void DisplayNone_Node()
         {
@@ -2606,7 +2373,7 @@ namespace Test.OpenOfficeConvert
         }
         ///<summary>
         /// Display Inline
-        /// </summary>      
+        /// </summary>
         [Test]
         public void DisplayInline_Node()
         {
@@ -3064,12 +2831,12 @@ namespace Test.OpenOfficeConvert
             if (_isLinux)
             {
                 content =
-					"<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Charis SIL\" style:font-name-asian=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"left\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm6\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm13\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties></style:page-layout>";
+					"<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#0000ff\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#ffff00\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#0000ff\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#ffff00\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#0000ff\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#ffff00\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"center\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" fo:background-color=\"#ffffff\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" fo:background-color=\"#ffffff\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Charis SIL\" style:font-name-asian=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /><style:paragraph-properties fo:text-align=\"end\" style:justify-single-word=\"false\" fo:background-color=\"#ffffff\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" svg:height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" svg:height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm6\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" svg:height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm13\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties></style:page-layout>";
             }
             else
             {
                 content =
-					"<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#0000ff\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#ffff00\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#0000ff\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#ffff00\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#0000ff\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#ffff00\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Charis SIL\" style:font-name-asian=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"left\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" svg:height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" svg:height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm6\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" svg:height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm13\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties></style:page-layout>";
+					"<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#0000ff\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#ffff00\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#0000ff\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#ffff00\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#0000ff\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:color=\"#ffff00\" fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"center\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" fo:background-color=\"#ffffff\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" fo:background-color=\"#ffffff\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Charis SIL\" style:font-name-asian=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /><style:paragraph-properties fo:text-align=\"end\" style:justify-single-word=\"false\" fo:background-color=\"#ffffff\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" svg:height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" svg:height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm6\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" svg:height=\"14.21pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm13\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties></style:page-layout>";
             }
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "PageTest failed");
@@ -3217,7 +2984,6 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// PageTest9
         /// </summary>
-        [Ignore]
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -3229,14 +2995,21 @@ namespace Test.OpenOfficeConvert
 
             string xpath = "//office:automatic-styles";
             _validate = new ValidateXMLFile(styleOutput);
-            string content = "<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" style:writing-mode=\"lr-tb\" fo:font-family=\"Verdana\" style:font-name-complex=\"Verdana\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"100%\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" fo:margin-top=\"100%\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" style:writing-mode=\"lr-tb\" fo:font-family=\"Verdana\" style:font-name-complex=\"Verdana\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"100%\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"string(guidewordfirst)\" style:writing-mode=\"lr-tb\" fo:font-family=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"string(guidewordlast)\" style:writing-mode=\"lr-tb\" fo:font-family=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"string(guidewordfirst)\" style:writing-mode=\"lr-tb\" fo:font-family=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"string(guidewordlast)\" style:writing-mode=\"lr-tb\" fo:font-family=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"end\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name-complex=\"Gautami1\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name-complex=\"GenericFont\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"right\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#0000ff\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm4\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#008000\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm5\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ffa500\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout>";
-            bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+            string content = "<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" style:writing-mode=\"lr-tb\" fo:font-family=\"Verdana\" style:font-name-complex=\"Verdana\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"100%\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" fo:margin-top=\"100%\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" style:writing-mode=\"lr-tb\" fo:font-family=\"Verdana\" style:font-name-complex=\"Verdana\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"100%\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"string(guidewordfirst)\" style:writing-mode=\"lr-tb\" fo:font-family=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"string(guidewordlast)\" style:writing-mode=\"lr-tb\" fo:font-family=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"string(guidewordfirst)\" style:writing-mode=\"lr-tb\" fo:font-family=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"|counter(page)|\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"string(guidewordlast)\" style:writing-mode=\"lr-tb\" fo:font-family=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-weight=\"700\" fo:font-size=\"12pt\" fo:margin-top=\"28.34646pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"\" /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"end\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Charis SIL\" style:font-name-asian=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"right\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#0000ff\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm6\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm4\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#008000\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"15.84pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm5\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ffa500\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm13\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#0000ff\" fo:page-width=\"595.2756pt\" fo:page-height=\"841.8898pt\" fo:margin-top=\"57pt\" fo:margin-right=\"113.3858pt\" fo:margin-bottom=\"57pt\" fo:margin-left=\"113.3858pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties></style:page-layout>";
+	        if (Common.UsingMonoVM)
+		        content = "<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Charis SIL\" style:font-name-asian=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"left\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm6\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm13\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:page-height=\"792pt\" fo:page-width=\"612pt\" fo:margin-left=\"56.7pt\" fo:margin-right=\"56.7pt\" fo:margin-top=\"56.7pt\" fo:margin-bottom=\"56.7pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties></style:page-layout>";
+
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
 
             Assert.IsTrue(returnValue1, "PageTest failed");
 
             xpath = "//office:master-styles";
             _validate = new ValidateXMLFile(styleOutput);
-            content = "<style:master-page style:name=\"Standard\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"First_20_Page\" style:display-name=\"First Page\" style:next-style-name=\"Left_20_Page\" style:page-layout-name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:tab /><text:page-number text:select-page=\"current\">4</text:page-number><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header></style:master-page><style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:tab /><text:page-number text:select-page=\"current\">4</text:page-number><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:tab /><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"56.3pt\" fo:min-width=\"135pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"14.14pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame></text:p></style:footer></style:master-page>";
+            content = "<style:master-page style:name=\"Standard\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Cover_20_Page\" style:display-name=\"Cover Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Title_20_Page\" style:display-name=\"Title Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"TableofContents_20_Page\" style:display-name=\"TableofContents Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:page-number style:num-format=\"i\" text:select-page=\"current\">xv</text:page-number></text:p></style:footer></style:master-page><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"First_20_Page\" style:display-name=\"First Page\" style:next-style-name=\"Left_20_Page\" style:page-layout-name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"56.25pt\" fo:min-width=\"100pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame></text:p></style:footer></style:master-page><style:master-page style:name=\"Right_20_Page\" style:display-name=\"Right Page\" style:page-layout-name=\"pm5\" style:next-style-name=\"Left_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span><text:tab /><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></style:header><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"Mfr1\" draw:name=\"Frame1\" text:anchor-type=\"paragraph\" svg:y=\"56.25pt\" fo:min-width=\"100pt\" draw:z-index=\"1\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"19.00pt\"><text:p text:style-name=\"MP1\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Right_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RRight_Guideword_R\" office:value-type=\"string\" xmlns:office=\"urn:oasis:names:tc:opendocument:xmlns:office:1.0\" /></text:span></text:p></draw:text-box></draw:frame></text:p></style:footer></style:master-page>";
+
+	        if (Common.UsingMonoVM)
+		        content = "<style:master-page style:name=\"Standard\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Cover_20_Page\" style:display-name=\"Cover Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm1\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"Title_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Title_20_Page\" style:display-name=\"Title Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"TableofContents_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"TableofContents_20_Page\" style:display-name=\"TableofContents Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:footer><text:p text:style-name=\"Footer\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:tab /><text:page-number style:num-format=\"i\" text:select-page=\"current\">xv</text:page-number></text:p></style:footer></style:master-page><style:master-page style:name=\"Dummy_20_Page\" style:display-name=\"Dummy Page\" style:next-style-name=\"First_20_Page\" style:page-layout-name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"First_20_Page\" style:display-name=\"First Page\" style:next-style-name=\"XHTML\" style:page-layout-name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" /><style:master-page style:name=\"XHTML\" style:page-layout-name=\"pm2\" style:next-style-name=\"XHTML\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\" />";
+
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "PageTest-master failed");
 
@@ -3244,7 +3017,6 @@ namespace Test.OpenOfficeConvert
 		///<summary>
 		/// PageTestForTitle
 		/// </summary>
-		[Ignore]
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -3258,7 +3030,11 @@ namespace Test.OpenOfficeConvert
 			string xpath = "//office:automatic-styles";
 			_validate = new ValidateXMLFile(styleOutput);
 			string content = string.Empty;
-			content = "<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"IBAN -- ENGLISH\" style:writing-mode=\"lr-tb\" fo:font-family=\"Verdana\" style:font-name-complex=\"Verdana\" fo:font-weight=\"400\" fo:font-size=\"11pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" /></style:style><style:style style:name=\"MT2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" /></style:style><style:style style:name=\"MT3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Charis SIL\" style:font-name-asian=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"left\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#0000ff\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm6\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm4\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#008000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"10.8pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm5\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm13\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#0000ff\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties></style:page-layout>";
+			content = "<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"IBAN -- ENGLISH\" style:writing-mode=\"lr-tb\" fo:font-family=\"Charis SIL AmArea\" style:font-name-complex=\"Charis SIL AmArea\" fo:font-weight=\"400\" fo:font-size=\"11pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Charis SIL\" style:font-name-asian=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"left\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#0000ff\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm6\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm4\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#008000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"15.84pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm5\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm13\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#0000ff\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties></style:page-layout>";
+
+			if (Common.UsingMonoVM)
+				content = "<style:style style:name=\"PageHeaderFooter0\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter4\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter5\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter12\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties fo:font-weight=\"700\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter13\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties content=\"IBAN -- ENGLISH\" style:writing-mode=\"lr-tb\" fo:font-family=\"Verdana\" style:font-name-complex=\"Verdana\" fo:font-weight=\"400\" fo:font-size=\"11pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"PageHeaderFooter14\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter15\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter16\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter17\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter18\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter19\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter20\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter21\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter22\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"PageHeaderFooter23\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties /></style:style><style:style style:name=\"MP1\" style:family=\"paragraph\" style:parent-style-name=\"Frame_20_contents\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:paragraph-properties fo:text-align=\"start\" style:justify-single-word=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT1\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT2\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Times New Roman\" style:font-name-asian=\"Times New Roman\" style:font-name-complex=\"Times New Roman\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"MT3\" style:family=\"text\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:text-properties style:font-name=\"Charis SIL\" style:font-name-asian=\"Charis SIL\" style:font-name-complex=\"Charis SIL\" fo:font-size=\"12pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:style><style:style style:name=\"Mfr1\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"left\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:style style:name=\"Mfr3\" style:family=\"graphic\" style:parent-style-name=\"Frame\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:graphic-properties style:vertical-pos=\"from-top\" style:vertical-rel=\"page\" style:horizontal-pos=\"center\" style:horizontal-rel=\"paragraph\" fo:background-color=\"transparent\" style:background-transparency=\"100%\" fo:padding=\"0in\" fo:border=\"none\" style:shadow=\"none\" style:flow-with-text=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:columns fo:column-count=\"1\" fo:column-gap=\"0in\" /></style:graphic-properties></style:style><style:page-layout style:name=\"pm1\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style /></style:page-layout><style:page-layout style:name=\"pm2\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm3\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#0000ff\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm6\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style /><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm4\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#008000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"15.84pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm5\" style:page-usage=\"mirrored\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties><style:header-style><style:header-footer-properties fo:margin-bottom=\"14.21pt\" fo:min-height=\"28.42pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:header-style><style:footer-style><style:header-footer-properties fo:margin-bottom=\"0.0pt\" fo:min-height=\"0.0pt\" fo:margin-left=\"0pt\" fo:margin-right=\"0pt\" style:dynamic-spacing=\"false\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:footer-style></style:page-layout><style:page-layout style:name=\"pm12\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm13\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#ff0000\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\" /></style:page-layout><style:page-layout style:name=\"pm7\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:page-layout-properties fo:background-color=\"#0000ff\" fo:page-width=\"419.5276pt\" fo:page-height=\"595.2756pt\" fo:margin-top=\"85.03937pt\" fo:margin-right=\"85.03937pt\" fo:margin-bottom=\"85.03937pt\" fo:margin-left=\"85.03937pt\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><style:background-image /><style:footnote-sep style:distance-before-sep=\"0.0398in\" style:distance-after-sep=\"0.0398in\" style:color=\"#000000\" style:adjustment=\"centre\" style:rel-width=\"100%\" /></style:page-layout-properties></style:page-layout>";
+
 			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
 			Assert.IsTrue(returnValue1, "PageTest failed");
 
@@ -3270,7 +3046,7 @@ namespace Test.OpenOfficeConvert
 		}
         ///<summary>
         /// DictionaryT9Test
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -3285,16 +3061,15 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = string.Empty;
             string xpath = "//draw:frame";
             //_validate.GetInnerText = true;
-            _validate.GetOuterXml = true;            
+            _validate.GetOuterXml = true;
 			string content = "<draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/nowaitress.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>nowaitress.jpg</svg:title></draw:frame><text:p text:style-name=\"caption_image_firstoftype_sense_article_sectionletter_dictionary\">a waitress</text:p></draw:text-box></draw:frame>";
             bool returnValue = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue);
         }
         ///<summary>
         /// TD96 text-indent
-        /// </summary>      
+        /// </summary>
         [Test]
-        [Ignore]
         public void MasterDocument()
         {
             ExportLibreOffice exportOpenOffice = new ExportLibreOffice();
@@ -3558,9 +3333,17 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(styleOutput);
 
             _validate.ClassName = "headword_.te_entry_letData_dicBody";
-            _validate.ClassProperty.Add("fo:font-family", "Arial Unicode MS");
-            _validate.ClassProperty.Add("style:font-name-complex", "Arial Unicode MS");
-            _validate.ClassProperty.Add("fo:font-size", "10pt");
+	        if (Common.UsingMonoVM)
+	        {
+		        _validate.ClassProperty.Add("fo:font-family", "Times New Roman");
+		        _validate.ClassProperty.Add("style:font-name-complex", "Times New Roman");
+	        }
+	        else
+	        {
+		        _validate.ClassProperty.Add("fo:font-family", "Arial Unicode MS");
+		        _validate.ClassProperty.Add("style:font-name-complex", "Arial Unicode MS");
+	        }
+	        _validate.ClassProperty.Add("fo:font-size", "10pt");
 
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue);
@@ -3593,7 +3376,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// prince-text-replace
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextReplaceTest_Node()
         {
@@ -3611,7 +3394,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-2908
-        /// </summary>      
+        /// </summary>
         [Test]
         public void KeepLineSeperator()
         {
@@ -3636,7 +3419,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3539 - Avoid conversion process for image from "TIF" to "JPG"
-        /// </summary>      
+        /// </summary>
         [Test]
         public void KeepImageExtension()
         {
@@ -3674,7 +3457,7 @@ namespace Test.OpenOfficeConvert
         #region Indesign TestCases
         ///<summary>
         /// Indesign PseudoBefore
-        /// </summary>      
+        /// </summary>
         [Test]
         public void PseudoBefore_Node()
         {
@@ -3697,7 +3480,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// Indesign Parent1
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Parent1_Node()
         {
@@ -3724,7 +3507,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// Indesign Precede1
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Precede1_Node()
         {
@@ -3761,7 +3544,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-2617
-        /// </summary>      
+        /// </summary>
         [Test]
         public void SpaceTest()
         {
@@ -3780,7 +3563,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// Indesign PseudoContains
-        /// </summary>      
+        /// </summary>
         [Test]
         public void PseudoContains_Node()
         {
@@ -3808,7 +3591,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// Indesign MultiClass
-        /// </summary>      
+        /// </summary>
         [Test]
         public void MultiClass_Node()
         {
@@ -3876,7 +3659,7 @@ namespace Test.OpenOfficeConvert
 
 		///<summary>
 		/// LO MultiClass
-		/// </summary>      
+		/// </summary>
 		[Test]
 		public void SubEntryMultiClass_Node()
 		{
@@ -3909,7 +3692,7 @@ namespace Test.OpenOfficeConvert
 
 		///<summary>
 		/// Indesign MultiClass
-		/// </summary>      
+		/// </summary>
 		[Test]
 		public void PunctuationPseudoChild_Node()
 		{
@@ -3930,11 +3713,11 @@ namespace Test.OpenOfficeConvert
 			returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
 			Assert.IsTrue(returnValue1);
 		}
-		
+
 
         ///<summary>
-        /// Counter 
-        /// </summary>      
+        /// Counter
+        /// </summary>
         [Test]
         public void CounterPart_Node()
         {
@@ -3954,9 +3737,8 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///Full Scripture Test
-        /// </summary>      
+        /// </summary>
         [Test]
-        [Ignore]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void BughotugospelsExport()
@@ -3972,7 +3754,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///Telugu Font FootnoteMarkerTestcase Scripture Test
-        ///</summary>      
+        ///</summary>
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -3983,14 +3765,14 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, "TeluguFootnoteMarkerTeststyles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, "TeluguFootnoteMarkerTestcontent.xml");
-            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } }); 
+            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
         ///<summary>
         ///TokPisinExport Full Scripture Test
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -3999,22 +3781,22 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Scripture";
             const string file = "TokPisin";
             string styleOutput = GetStyleOutput(file);
-            string style = "";
-            if (Common.UnixVersionCheck())
-            {
-                style = "_Unix";
-            }
-            string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
-            string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
-		
+
         ///<summary>
         ///Kabwa Full Scripture Test
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -4029,10 +3811,10 @@ namespace Test.OpenOfficeConvert
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
-		
+
 		///<summary>
 		///Dictionary Insert HardSpace Test
-		///</summary>      
+		///</summary>
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
@@ -4043,6 +3825,11 @@ namespace Test.OpenOfficeConvert
 			string styleOutput = GetStyleOutput(file);
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4050,7 +3837,7 @@ namespace Test.OpenOfficeConvert
 
 		///<summary>
 		///Dictionary Insert HardSpace Test
-		///</summary>      
+		///</summary>
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
@@ -4061,6 +3848,11 @@ namespace Test.OpenOfficeConvert
 			string styleOutput = GetStyleOutput(file);
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4068,7 +3860,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///B1pe Full Scripture Test
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -4083,11 +3875,11 @@ namespace Test.OpenOfficeConvert
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
-		
-        
+
+
 		///<summary>
 		///MexicoStyle Dictionary main export Test TD-4708
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -4098,14 +3890,19 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
-		
-		
+
+
 		///<summary>
 		///MexicoStyle Dictionary reversal export Test TD-4708
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -4116,13 +3913,18 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
 		///<summary>
 		///MexicoStyle Dictionary Slash symbol
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
 		public void SlashSymbolExport()
@@ -4132,14 +3934,19 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
-		
+
 
         ///<summary>
         ///Table structure Test
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4159,9 +3966,9 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///Table structure Test
-        /// </summary>      
+        /// </summary>
         [Test]
-        [Ignore]
+		[Category("SkipOnTeamCity")]
         public void Table2Test()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -4171,6 +3978,7 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
@@ -4178,7 +3986,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// Space Issue fixed, before any modification pls contact sankar
-        /// </summary>     
+        /// </summary>
         [Test]
         public void CrossRefSpaceTest()
         {
@@ -4222,7 +4030,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///B1pe Full Scripture Test
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4241,7 +4049,7 @@ namespace Test.OpenOfficeConvert
         }
         ///<summary>
         ///B1pe Full Scripture Test
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -4259,7 +4067,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///FullBuangTest
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
@@ -4268,13 +4076,13 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "BuangExport";
             string styleOutput = GetStyleOutput(file);
-            string style = string.Empty;
-            if (_isLinux)
-            {
-                style = "_Unix";
-            }
-            string styleExpected = Common.PathCombine(_expectedPath, file + "styles" + style + ".xml");
-            string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4282,7 +4090,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3560
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4300,7 +4108,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3554
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4311,6 +4119,11 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4318,7 +4131,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3563
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4329,6 +4142,11 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4336,7 +4154,7 @@ namespace Test.OpenOfficeConvert
 
 		///<summary>
         /// TD-3607
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4347,6 +4165,11 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4354,7 +4177,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3275
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4365,6 +4188,11 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4373,7 +4201,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3680
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4391,7 +4219,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3603
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4402,6 +4230,11 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4409,7 +4242,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3681
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4428,7 +4261,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3608
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4439,6 +4272,11 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4447,7 +4285,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3563
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4466,7 +4304,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         /// TD-3498
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4495,7 +4333,7 @@ namespace Test.OpenOfficeConvert
         /// TD-4210
         /// The word "itamo­kori" has hidden hyphenation by unicode hyphen character(\u00AD).
         /// Can copy and paste it in notepad.
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
@@ -4515,7 +4353,7 @@ namespace Test.OpenOfficeConvert
 
         }
 
-		
+
 		///<summary>
 		/// Buang Ws Test
 		/// </summary>
@@ -4526,12 +4364,11 @@ namespace Test.OpenOfficeConvert
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "NewGuidewordStyle2";
 			string styleOutput = GetStyleOutput(file);
-			string style = "";
-			if (Common.UnixVersionCheck())
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
 			{
-				style = "_Unix";
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
 			}
-			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
@@ -4550,6 +4387,12 @@ namespace Test.OpenOfficeConvert
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
 			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
@@ -4564,19 +4407,16 @@ namespace Test.OpenOfficeConvert
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "AnchorSpaceFlex83";
 			string styleOutput = GetStyleOutput(file);
-			string style = "";
-			if (Common.UnixVersionCheck())
-			{
-				style = "_Unix";
-			}
-			string contentExpected = Common.PathCombine(_expectedPath, file + "content" + style + ".xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
 		///<summary>
 		/// TD-4673
-		/// </summary>      
+		/// </summary>
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -4587,6 +4427,11 @@ namespace Test.OpenOfficeConvert
 			string styleOutput = GetStyleOutput(file);
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
@@ -4604,6 +4449,10 @@ namespace Test.OpenOfficeConvert
 			const string file = "SpaceAfterClosingBrace";
 			string styleOutput = GetStyleOutput(file);
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
@@ -4620,22 +4469,29 @@ namespace Test.OpenOfficeConvert
 			const string file = "ParentPrecedeSpace";
 			string styleOutput = GetStyleOutput(file);
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
-		
+
 		///<summary>
 		///Avoid space after the picture in new FLEX8.3 Test TD-4675
 		///</summary>
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
-		public void PictureSpaceAfterTest()
+		public void AfterPictureSpaceTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "PictureSpaceAfter";
 			string styleOutput = GetStyleOutput(file);
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if(Common.UsingMonoVM)
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}

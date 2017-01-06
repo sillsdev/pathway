@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="InStylesTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test Cases for InDesign StylesTest
 // </remarks>
@@ -24,7 +24,7 @@ using SIL.Tool;
 namespace Test.InDesignConvert
 {
     [TestFixture]
-    public class InStylesTest : ValidateXMLFile 
+    public class InStylesTest : ValidateXMLFile
     {
         #region Private Variables
         private string _input;
@@ -135,7 +135,11 @@ namespace Test.InDesignConvert
         public void FontFamily3()
         {
             _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontFamily3.css");
-            _expected.Add("AppliedFont", "Arial Unicode MS");
+			if(Common.UsingMonoVM)
+				_expected.Add("AppliedFont", "sans-serif");
+			else
+				_expected.Add("AppliedFont", "Arial Unicode MS");
+
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]/Properties/AppliedFont";
             NodeTest(false);
         }
@@ -310,7 +314,7 @@ namespace Test.InDesignConvert
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
         }
-        #endregion 
+        #endregion
 
         #region MarginTop
         [Test]
@@ -322,7 +326,7 @@ namespace Test.InDesignConvert
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
         }
-        #endregion 
+        #endregion
 
         #region MarginBottom
         [Test]
@@ -334,7 +338,7 @@ namespace Test.InDesignConvert
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
         }
-        #endregion 
+        #endregion
 
         #region Padding
 
@@ -380,7 +384,7 @@ namespace Test.InDesignConvert
             _expected.Add("LeftIndent", "14");
             Assert.IsTrue(ValidateNodeAttribute(), " failed for Padding_Left");
         }
-        #endregion 
+        #endregion
 
         #region TextIndent
         [Test]
@@ -392,7 +396,7 @@ namespace Test.InDesignConvert
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
         }
-        #endregion 
+        #endregion
 
         #region TextDecoration
         [Test]
@@ -404,8 +408,8 @@ namespace Test.InDesignConvert
             XPath = "//RootParagraphStyleGroup/ParagraphStyle[@Name = \"" + _className + "\"]";
             NodeTest(true);
         }
-        #endregion 
-        
+        #endregion
+
         #region Color
         [Test]
         public void Color()
@@ -554,7 +558,7 @@ namespace Test.InDesignConvert
             _expected.Add("EndJoin", "BevelEndJoin");
             XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[3][@Name = \"" + classname + "\"]";
             NodeTest(true);
-        } 
+        }
         #endregion
 
         #region Hyphenation
@@ -582,7 +586,7 @@ namespace Test.InDesignConvert
             _expected.Add("HyphenateLadderLimit", "1");
             XPath = "//RootParagraphStyleGroup[1]/ParagraphStyle[8][@Name = \"" + classname + "\"]";
             NodeTest(true);
-        } 
+        }
         #endregion
 
         #region Position
@@ -604,7 +608,7 @@ namespace Test.InDesignConvert
             _expected.Add("RightIndent", "50");
             Assert.IsTrue(ValidateNodeAttribute(), " failed for postionRight");
 
-        } 
+        }
         #endregion
 
         #region IncreaseFontSizeForSuper

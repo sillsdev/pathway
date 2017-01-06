@@ -113,6 +113,7 @@ namespace epubValidator
                             progFullName = progFullName.Substring(0, progFullName.Length - 4);
                         }
                         var strAppDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+	                    strAppDir = Path.GetDirectoryName(strAppDir);
                         // jar file to execute (epubcheck)
                         sb.Append("-jar");
                         sb.Append(" \"");

@@ -1,0 +1,469 @@
+\documentclass[a4paper]{article} 
+\usepackage{float}
+\usepackage{grffile}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{lettrine}
+\usepackage{alphalph}
+\usepackage[left=2cm,right=2cm,top=1.99cm,bottom=1.99cm,includeheadfoot]{geometry}
+\usepackage{eso-pic}
+\usepackage{changepage}
+\usepackage{needspace}
+\usepackage{multicol}
+\usepackage{bidi} 
+\pagestyle{plain}\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0.4pt} 
+
+\lhead{\rightmark}
+\chead{\thepage}
+\rhead{\leftmark}
+\renewcommand{\thefootnote}{\alphalph{\value{footnote}}} 
+
+
+\parindent=0pt
+\parskip=\medskipamount
+\begin{document}
+\pagestyle{plain}
+\sloppy
+\setlength{\parfillskip}{0pt plus 1fil}
+\font\divbn="Charis SIL/GR" at 12pt
+\font\spanbn="Charis SIL/GR" at 12pt
+\font\divde="Charis SIL/GR" at 12pt
+\font\spande="Charis SIL/GR" at 12pt
+\font\diven="Times New Roman/GR" at 12pt
+\font\spanen="Times New Roman/GR" at 12pt
+\font\dives="Charis SIL/GR" at 12pt
+\font\spanes="Charis SIL/GR" at 12pt
+\font\divfa="Charis SIL/GR" at 12pt
+\font\spanfa="Charis SIL/GR" at 12pt
+\font\divfr="Charis SIL/GR" at 12pt
+\font\spanfr="Charis SIL/GR" at 12pt
+\font\divggoINxaheri="Charis SIL/GR" at 12pt
+\font\spanggoINxaheri="Charis SIL/GR" at 12pt
+\font\divggoTeluIN="Charis SIL/GR" at 12pt
+\font\spanggoTeluIN="Charis SIL/GR" at 12pt
+\font\divggofonipaxemic="Charis SIL/GR" at 12pt
+\font\spanggofonipaxemic="Charis SIL/GR" at 12pt
+\font\divgrc="Charis SIL/GR" at 12pt
+\font\spangrc="Charis SIL/GR" at 12pt
+\font\divhbo="Charis SIL/GR" at 12pt
+\font\spanhbo="Charis SIL/GR" at 12pt
+\font\divhi="Annapurna SIL/GR" at 12pt
+\font\spanhi="Annapurna SIL/GR" at 12pt
+\font\divid="Charis SIL/GR" at 12pt
+\font\spanid="Charis SIL/GR" at 12pt
+\font\divkm="Charis SIL/GR" at 12pt
+\font\spankm="Charis SIL/GR" at 12pt
+\font\divko="Charis SIL/GR" at 12pt
+\font\spanko="Charis SIL/GR" at 12pt
+\font\divlv="Charis SIL/GR" at 12pt
+\font\spanlv="Charis SIL/GR" at 12pt
+\font\divms="Charis SIL/GR" at 12pt
+\font\spanms="Charis SIL/GR" at 12pt
+\font\divne="Charis SIL/GR" at 12pt
+\font\spanne="Charis SIL/GR" at 12pt
+\font\divpt="Charis SIL/GR" at 12pt
+\font\spanpt="Charis SIL/GR" at 12pt
+\font\divru="Charis SIL/GR" at 12pt
+\font\spanru="Charis SIL/GR" at 12pt
+\font\divseh="Charis SIL/GR" at 12pt
+\font\spanseh="Charis SIL/GR" at 12pt
+\font\divte="Charis SIL/GR" at 12pt
+\font\spante="Charis SIL/GR" at 12pt
+\font\divth="Charis SIL/GR" at 12pt
+\font\spanth="Charis SIL/GR" at 12pt
+\font\divtr="Charis SIL/GR" at 12pt
+\font\spantr="Charis SIL/GR" at 12pt
+\font\divvi="Charis SIL/GR" at 12pt
+\font\spanvi="Charis SIL/GR" at 12pt
+\font\divzhCN="Charis SIL/GR" at 12pt
+\font\spanzhCN="Charis SIL/GR" at 12pt
+\font\xitemte="Charis SIL/GR" at 10pt
+\font\xitemhi="Annapurna SIL/GR" at 10pt
+\font\xitemxitemcomplexformformbefore="Charis SIL/GR/B" at 10pt
+\font\xitemxitemcomplexformrefsbefore="Times New Roman/GR" at 12pt
+\font\xitemxitemdefinitionbefore="Times New Roman/GR" at 12pt
+\font\xitemxitementryrefcomponentbefore="Times New Roman/GR" at 12pt
+\font\xitemxitementryreftypebefore="Times New Roman/GR" at 12pt
+\font\xitemxitemexamplebefore="Charis SIL/GR/I" at 10pt
+\font\xitemxitemexamplesbefore="Times New Roman/GR" at 12pt
+\font\xitemxitemheadwordbefore="Charis SIL/GR/B" at 10pt
+\font\xitemxitemLexEntrypublishStemComponentTargetHeadWordRefbefore="Charis SIL/GR/B" at 10pt
+\font\xitemxitemLexEntryTypepublishStemComplexFormTypeReverseAbbrPubbefore="Times New Roman/GR" at 12pt
+\font\xitemxitemLexEntryTypepublishStemEntryTypeAbbreviationPubbefore="Times New Roman/GR" at 12pt
+\font\xitemxitemLexSensepublishStemGlossPubLdbefore="Charis SIL/GR" at 10pt
+\font\xitemxitemLexSensepublishStemGlossPubLebefore="Charis SIL/GR" at 10pt
+\font\xitemxitempartofspeechbefore="Times New Roman/GR" at 12pt
+\font\xitemxitempictureLabelbefore="Times New Roman/GR" at 12pt
+\font\xitemxitemprimaryrefsbefore="Times New Roman/GR" at 12pt
+\font\xitemxitempronunciationbefore="Charis SIL/GR" at 10pt
+\font\xitemxitempronunciationsbefore="Times New Roman/GR" at 12pt
+\font\sensesensesensesbefore="Times New Roman/GR" at 12pt
+\font\xitemxitemtranslationbefore="Times New Roman/GR" at 12pt
+\font\xitemxitemtranslationLdbefore="Charis SIL/GR" at 10pt
+\font\letHead="Times New Roman/GR" at 12pt
+\font\letterggoTeluINletHead="Charis SIL/GR/B" at 24pt
+\font\letData="Times New Roman/GR" at 12pt
+\font\entryletData="Times New Roman/GR" at 10pt
+\font\headwordggoTeluINentryletData="Charis SIL/GR/B" at 10pt
+\font\spanenheadwordggoTeluINentryletData="Times New Roman/GR/B" at 10pt
+\font\pronunciationsentryletData="Times New Roman/GR" at 10pt
+\font\pronunciationggofonipaxemicpronunciationsentryletData="Charis SIL/GR" at 10pt
+\font\spanenpronunciationggofonipaxemicpronunciationsentryletData="Times New Roman/GR" at 10pt
+\font\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData="Charis SIL/GR" at 10pt
+\font\spanenpronunciationsentryletData="Times New Roman/GR" at 10pt
+\font\sensesentryletData="Times New Roman/GR" at 10pt
+\font\sensesensesentryletData="Times New Roman/GR" at 10pt
+\font\grammaticalinfosensesensesentryletData="Times New Roman/GR/I" at 10pt
+\font\partofspeechengrammaticalinfosensesensesentryletData="Times New Roman/GR/I" at 10pt
+\font\spanenpartofspeechengrammaticalinfosensesensesentryletData="Times New Roman/GR/I" at 10pt
+\font\spanengrammaticalinfosensesensesentryletData="Times New Roman/GR/I" at 10pt
+\font\definitionensensesensesentryletData="Times New Roman/GR" at 10pt
+\font\spanendefinitionensensesensesentryletData="Times New Roman/GR" at 10pt
+\font\LexSensepublishStemGlossPubLdtesensesensesentryletData="Charis SIL/GR" at 10pt
+\font\spanteLexSensepublishStemGlossPubLdtesensesensesentryletData="Charis SIL/GR" at 10pt
+\font\spanenLexSensepublishStemGlossPubLdtesensesensesentryletData="Times New Roman/GR" at 10pt
+\font\spanensensesentryletData="Times New Roman/GR" at 10pt
+\font\grammaticalinfoentryletData="Times New Roman/GR/I" at 10pt
+\font\partofspeechengrammaticalinfoentryletData="Times New Roman/GR/I" at 10pt
+\font\spanenpartofspeechengrammaticalinfoentryletData="Times New Roman/GR/I" at 10pt
+\font\xsensenumbersensesensesentryletData="Times New Roman/GR" at 10pt
+\font\xitemteLexSensepublishStemGlossPubLdtesensesensesentryletData="Charis SIL/GR" at 10pt
+\font\spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData="Charis SIL/GR" at 10pt
+\font\xitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData="Annapurna SIL/GR" at 10pt
+\font\spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData="Annapurna SIL/GR" at 10pt
+\font\examplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\xitemexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\exampleggoTeluINxitemexamplessensesensesentryletData="Charis SIL/GR/I" at 10pt
+\font\spanggoTeluINexampleggoTeluINxitemexamplessensesensesentryletData="Charis SIL/GR/I" at 10pt
+\font\spanenexampleggoTeluINxitemexamplessensesensesentryletData="Times New Roman/GR/I" at 10pt
+\font\translationsxitemexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\translationLdtetranslationsxitemexamplessensesensesentryletData="Charis SIL/GR" at 10pt
+\font\spantetranslationLdtetranslationsxitemexamplessensesensesentryletData="Charis SIL/GR" at 10pt
+\font\spanentranslationLdtetranslationsxitemexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\spanenexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\primaryrefsentryletData="Times New Roman/GR" at 10pt
+\font\spanenprimaryrefsentryletData="Times New Roman/GR" at 10pt
+\font\entryreftypeprimaryrefsentryletData="Times New Roman/GR" at 10pt
+\font\LexEntryTypepublishStemEntryTypeAbbreviationPubenentryreftypeprimaryrefsentryletData="Times New Roman/GR" at 10pt
+\font\spanenLexEntryTypepublishStemEntryTypeAbbreviationPubenentryreftypeprimaryrefsentryletData="Times New Roman/GR" at 10pt
+\font\spanenentryreftypeprimaryrefsentryletData="Times New Roman/GR" at 10pt
+\font\entryrefcomponentprimaryrefsentryletData="Times New Roman/GR" at 10pt
+\font\aentryrefcomponentprimaryrefsentryletData="Times New Roman/GR" at 10pt
+\font\LexEntrypublishStemComponentTargetHeadWordRefggoTeluINaentryrefcomponentprimaryrefsentryletData="Charis SIL/GR/B" at 10pt
+\font\exampleggoTeluINexamplessensesensesentryletData="Charis SIL/GR/I" at 10pt
+\font\spanggoTeluINexampleggoTeluINexamplessensesensesentryletData="Charis SIL/GR/I" at 10pt
+\font\spanenexampleggoTeluINexamplessensesensesentryletData="Times New Roman/GR/I" at 10pt
+\font\translationsexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\translationLdtetranslationsexamplessensesensesentryletData="Charis SIL/GR" at 10pt
+\font\spantetranslationLdtetranslationsexamplessensesensesentryletData="Charis SIL/GR" at 10pt
+\font\spanentranslationLdtetranslationsexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\complexformrefsentryletData="Times New Roman/GR" at 10pt
+\font\complexformtypecomplexformrefsentryletData="Times New Roman/GR" at 10pt
+\font\LexEntryTypepublishStemComplexFormTypeReverseAbbrPubencomplexformtypecomplexformrefsentryletData="Times New Roman/GR" at 10pt
+\font\spanenLexEntryTypepublishStemComplexFormTypeReverseAbbrPubencomplexformtypecomplexformrefsentryletData="Times New Roman/GR" at 10pt
+\font\spanencomplexformtypecomplexformrefsentryletData="Times New Roman/GR" at 10pt
+\font\complexformformggoTeluINcomplexformrefsentryletData="Charis SIL/GR/B" at 10pt
+\font\spanencomplexformformggoTeluINcomplexformrefsentryletData="Times New Roman/GR/B" at 10pt
+\font\spanencomplexformrefsentryletData="Times New Roman/GR" at 10pt
+\font\pictureRightentryletData="Times New Roman/GR" at 10pt
+\font\picturepictureRightentryletData="Times New Roman/GR" at 10pt
+\font\pictureCaptionpictureRightentryletData="Times New Roman/GR" at 10pt
+\font\CmPicturepublishStemPileThumbnailPubpictureCaptionpictureRightentryletData="Times New Roman/GR" at 10pt
+\font\spanenCmPicturepublishStemPileThumbnailPubpictureCaptionpictureRightentryletData="Times New Roman/GR" at 10pt
+\font\pictureLabelenpictureCaptionpictureRightentryletData="Times New Roman/GR" at 10pt
+\font\spanenpictureLabelenpictureCaptionpictureRightentryletData="Times New Roman/GR" at 10pt
+\font\LexSensepublishStemGlossPubLehisensesensesentryletData="Annapurna SIL/GR" at 10pt
+\font\spanhiLexSensepublishStemGlossPubLehisensesensesentryletData="Annapurna SIL/GR" at 10pt
+\font\spanenLexSensepublishStemGlossPubLehisensesensesentryletData="Times New Roman/GR" at 10pt
+\font\translationentranslationsexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\xitementranslationentranslationsexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\spanenxitementranslationentranslationsexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\spanentranslationentranslationsexamplessensesensesentryletData="Times New Roman/GR" at 10pt
+\font\xitemtetranslationentranslationsexamplessensesensesentryletData="Charis SIL/GR" at 10pt
+\font\spantexitemtetranslationentranslationsexamplessensesensesentryletData="Charis SIL/GR" at 10pt
+\font\spanenentryletData="Times New Roman/GR" at 10pt
+\color{black} 
+\AddToShipoutPicture*{% 
+\put(0,0){\rule{\paperwidth}{\paperheight}}{\includegraphics[width=\paperwidth, height=\paperheight]{cover.png}}% 
+} 
+\thispagestyle{empty} 
+\font\CoverPageTitle="Liberation Serif/B":color=000000 at 22pt 
+\font\pFrontMatterdiv="Liberation Serif/B":color=000000 at 8pt 
+\vskip 60pt 
+\begin{center} 
+\CoverPageTitle{Gondwana Sample} 
+\end{center} 
+\newpage 
+\newpage 
+\thispagestyle{empty} 
+\mbox{} 
+\begin{titlepage}
+\begin{center}
+\textsc{\LARGE \CoverPageTitle{Gondwana Sample}}\\[1.5cm] 
+\vspace{110 mm} 
+\textsc{ \CoverPageTitle{Gondwana SamplePublisher}}\\[0.5cm] 
+\includegraphics[width=0.10 \textwidth]{./}\\[1cm]    
+\end{center} 
+\end{titlepage} 
+\pagenumbering{roman}  
+\setcounter{page}{3} 
+\input{} 
+\pagestyle{plain} 
+\newpage 
+
+
+\addtocontents{toc}{\protect \contentsline{section}{\letterggoTeluINletHeadbody{అ} \Large }{{\protect \pageref{PageStock_PreserveGondwana Sample1}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\letterggoTeluINletHeadbody{న} \Large }{{\protect \pageref{PageStock_PreserveGondwana Sample2}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\letterggoTeluINletHeadbody{ు} \Large }{{\protect \pageref{PageStock_PreserveGondwana Sample3}}}{}}
+
+\addtocontents{toc}{\protect \contentsline{section}{\letterggoTeluINletHeadbody{ొ} \Large }{{\protect \pageref{PageStock_PreserveGondwana Sample4}}}{}}
+
+\newpage 
+
+\mbox{} 
+\newpage 
+\newpage 
+\setcounter{page}{1} 
+\pagenumbering{arabic} 
+\pagestyle{plain} 
+\tableofcontents 
+\newpage 
+
+\pagestyle{fancy} 
+\begin{center}
+\topskip 18pt{\section*{\needspace {8\baselineskip}{\letterggoTeluINletHead{అ}}}}
+ \label{PageStock_PreserveGondwana Sample1} \end{center}
+\setlength{\columnsep}{1.5em} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అకుర్పొక్ (మహ్న)} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{akurpok (mahna)}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{month 6 of the Gond year (August-September).} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{భాద్రపదం} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అక్కల్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{akkal}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfoentryletData{n} \xsensenumbersensesensesentryletData{1}\spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{బుద్ధి} \xsensenumbersensesensesentryletData{2}\spanendefinitionensensesensesentryletData{wisdom.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{తెలివి} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{बुद्धि} \spanggoTeluINexampleggoTeluINxitemexamplessensesensesentryletData{అక్కల్ మన్వల్ మాయ్నల్ చొకొట్ మందంతొర్.} \spantetranslationLdtetranslationsxitemexamplessensesensesentryletData{బుద్ధి గల వ్యక్తి మంచిగా ఉంటాడు.} \spanggoTeluINexampleggoTeluINxitemexamplessensesensesentryletData{బయ్యె బాబలిర్ కాండిన్ అక్కల్ బుద్ది కరుసన.} \spantetranslationLdtetranslationsxitemexamplessensesensesentryletData{తండ్రి తల్లి కొడుకులను తెలివి తేటలు నేర్పాలి.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అక్కొ మామల} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{akko māmal}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenprimaryrefsentryletData{(}\spanenLexEntryTypepublishStemEntryTypeAbbreviationPubenentryreftypeprimaryrefsentryletData{der. of} \LexEntrypublishStemComponentTargetHeadWordRefggoTeluINaentryrefcomponentprimaryrefsentryletData{అక్కొ మామల్}\spanenprimaryrefsentryletData{) }\spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{తాత మామయ్య} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{నన్ అక్కొ మామలిర్ సోరిక్ దాంతొన్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{నేనూ తాతయ్య మామయ్య ఇంటికి సంబంధానికి వెలుతాను.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అక్కొ మామల్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{akko}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{maternal grandfather.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{తాత} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{तात; नानादादा; बूढा आदमी} \spanggoTeluINexampleggoTeluINxitemexamplessensesensesentryletData{మావొర్ అక్కొ డగుర్.} \spantetranslationLdtetranslationsxitemexamplessensesensesentryletData{మా తాతయ్య పెద్దవాడు.} \spanggoTeluINexampleggoTeluINxitemexamplessensesensesentryletData{అక్కొ చుట్ట ఉంజెర్ మంతొర్.} \spantetranslationLdtetranslationsxitemexamplessensesensesentryletData{తాతయ్య చుట్ట తాగుతున్నాడు.} \spanenLexEntryTypepublishStemComplexFormTypeReverseAbbrPubencomplexformtypecomplexformrefsentryletData{der.} \complexformformggoTeluINcomplexformrefsentryletData{అక్కొ మామల} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అక్డెమాత} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{akḍemāta}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{ముడ్చుకున్నది} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{నావంగ్ కాల్క్ అక్డెమాతంగ్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{నా కాళ్లు ముడ్చుకున్నాయి.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అక్ర} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{akra}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{num} \spanendefinitionensensesensesentryletData{eleven.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{(11) పదకొండు} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{ग्यारह} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{నాకున్ అక్ర హెర్రెంగ్ మంతంగ్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{నాకు పదకొండు మేకలు ఉన్నాయి.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అక్సర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aksar}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{characters} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{అక్షరాలు} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{మస్తరల్ అక్సర్కున్ వెహ్తొర్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{గురువు అక్షరాలు చెప్పాడు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అక్సర్క్‌నె} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aksarkne}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{అచ్చరాలతో} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{గోండి బాసతున్ అక్సర్క్‌నె లిహి కీంతెర్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{గోండిని అచ్చరాలలో రాసుకుంటారు.} 
+
+\hangindent= 36pt
+\hangafter=1\begin{center}
+\spanenpictureLabelenpictureCaptionpictureRightentryletData{rice with tumeric}
+\end{center}
+
+\headwordggoTeluINentryletData{అక్సెదంగ్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aksedaṅg}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfoentryletData{n} \xsensenumbersensesensesentryletData{1}\spanendefinitionensensesensesentryletData{rice with vermilion} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{పసుపు బియ్యం} \xsensenumbersensesensesentryletData{2}\spanendefinitionensensesensesentryletData{rice mixed with vermilion thrown at a wedding, or on cattle (e.g. during 'laxmi pooja') in order to bless.} \spanhiLexSensepublishStemGlossPubLehisensesensesentryletData{अक्षतब.; हल्दी और कुंकुम से मिश्रित चावल} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{గొవుర్ దన్ గోటమ్నె నొవ్రి నొవ్రనగ సమ్దిర్ అక్సెదాంగ్ వాటంతెర్.} \spanenxitementranslationentranslationsexamplessensesensesentryletData{At the wedding place, everyone throws rice on the bride andgroom.} \spantexitemtetranslationentranslationsexamplessensesensesentryletData{$\sharp$పెండ్లి పందిరిలో పడుసు, వరులకు పసుపు బియ్యం వేస్తారు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అక్సెదన దివొస్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aksedana divos}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanendefinitionensensesensesentryletData{wedding day} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{పెళ్లి రోజు} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అక్సెర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{akser}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{character} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{అక్షరం} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{अक्षर; वर्ण} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{అక్సెర్ ఉంది గునం.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{అక్షరం ఉంది గుణం.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అగ్గటల్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aggaṭal}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfoentryletData{adv} \xsensenumbersensesensesentryletData{1}\spanendefinitionensensesensesentryletData{from there (nm.)} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{నుంచి} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{वहा से} \xsensenumbersensesensesentryletData{2}\spanendefinitionensensesensesentryletData{someone (nm.) or something from there.} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{అక్కడనుండి} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{అగ్గటల్ నన్న నీకున్ సూడ్తొన్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{అక్కడి నుండి నేను నిన్ను చూసాను.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అగ్గటొర} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aggaṭor}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenprimaryrefsentryletData{(}\spanenLexEntryTypepublishStemEntryTypeAbbreviationPubenentryreftypeprimaryrefsentryletData{der. of} \LexEntrypublishStemComponentTargetHeadWordRefggoTeluINaentryrefcomponentprimaryrefsentryletData{అగ్గటొర్}\spanenprimaryrefsentryletData{) }\spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{man from there.} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{అక్కడివారు} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{వేర్ మాయ్నల్ అగ్గటొర్.} \spanenxitementranslationentranslationsexamplessensesensesentryletData{This man is from there.} \spantexitemtetranslationentranslationsexamplessensesensesentryletData{ఈ వ్యక్తి అక్కడి వారు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అగ్గటొర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{agga}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \xsensenumbersensesensesentryletData{1}\spanenpartofspeechengrammaticalinfosensesensesentryletData{adv} \spanendefinitionensensesensesentryletData{there.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{అక్కడ} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{वहा} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{వేర్ వెర్తల్ అగ్గటొర్ ఆందుర్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{ఈ చుట్టము అక్కడి వాడు.} \xsensenumbersensesensesentryletData{2}\spanendefinitionensensesensesentryletData{there} \spanenLexEntryTypepublishStemComplexFormTypeReverseAbbrPubencomplexformtypecomplexformrefsentryletData{der.} \complexformformggoTeluINcomplexformrefsentryletData{అగ్గటొర} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అఙె} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṅe}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{elder brother's wife.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{వదిన} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{भाबि} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{మావొర్ దాదన బాయ్కొ నాకున్ అఙె ఆంత.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{మా అన్నయ్య పెండ్లం నాకు వదిన అవుతుంది.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అచనక్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{acanak}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{adv} \spanendefinitionensensesensesentryletData{suddenly} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{ఆకస్మికంగా} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{మావ సాడతె అచనక్ పి.ఓ. సాబ్ వాసి మత్తొర్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{మా బడికి పి.ఓ ఆకస్మికంగా వచ్చినాడు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అచొట్క్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{acoṭk}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{usual} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{మామూలు} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{साधारण} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అచ్చొరె} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{accore}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \xsensenumbersensesensesentryletData{1}\spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{ఇంతే} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{కాండిరంగ్ పరిక్సంగ్ అచ్చొరె.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{పిల్లల పరీక్షలు ఇంతే.} \xsensenumbersensesensesentryletData{2}\spanendefinitionensensesensesentryletData{that's all} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అచ్చొర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{accor}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{adv} \spanendefinitionensensesensesentryletData{that much, that many (nm.).} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{అంత} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{నిమ్మె అచ్చొర్ డగుర్ బహన్ ఆతి.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{నీవు అంత పెద్దగా ఏలా అయినావు.} \spanenLexEntryTypepublishStemComplexFormTypeReverseAbbrPubencomplexformtypecomplexformrefsentryletData{der.} \complexformformggoTeluINcomplexformrefsentryletData{అచ్చోడ్ రొప్పొ} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అచ్చోడ్ రొప్పొ} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{accōḍ roppo}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenprimaryrefsentryletData{(}\spanenLexEntryTypepublishStemEntryTypeAbbreviationPubenentryreftypeprimaryrefsentryletData{der. of} \LexEntrypublishStemComponentTargetHeadWordRefggoTeluINaentryrefcomponentprimaryrefsentryletData{అచ్చొర్}\spanenprimaryrefsentryletData{) }\spanenpartofspeechengrammaticalinfosensesensesentryletData{adv} \spanendefinitionensensesensesentryletData{meanwhile.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{అంతలో} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{इसी दौरान} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{బుయరితగ అచ్చొడ్ రొప్పొ నేంగ్మా.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{గుహలో చాల లోపలికి వెళ్లకు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అచ్వీర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{acvīr}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{pro} \spanendefinitionensensesensesentryletData{that many (m.).} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{అంతమంది} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{అచ్విర్ తె మావ రోన్ తిన్లెన్ వాయన.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{అంతమంది మా ఇంటికి తినడానికి రావాలి.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అజుక్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{ajuk}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{conj} \spanendefinitionensensesensesentryletData{even now.} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{ఇంకా} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{దుకాన్ దారల్ అజుక్ ఉండె బతంగ్ పహజ్లె ఇంతొర్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{దుకాణ దారు ఇంకా ఏమి కావాలి అని అడుగుతున్నాడు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అటుమ్ కుటుమ్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭum kuṭum}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{చుట్టలు చుట్టం} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{మర్మిన్క్ అటుమ్ కుటుమున్ సమ్దిర్క్ కేయంతెర్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{పెండ్లిలో చుట్టలు చుట్టాలు అందరిని పిలుస్తారు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అటొ} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭo}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{auto} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{ఆటో} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{అటొతున్ మూంద్ గారెంగ్ మందంతంగ్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{ఆటో కు మూడు చక్రాలు ఉంటాయి.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్కీ కీత} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭki kī-}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfoentryletData{n} \xsensenumbersensesensesentryletData{1}\spanendefinitionensensesensesentryletData{fixation} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{అంటించడం} \xsensenumbersensesensesentryletData{2}\spanendefinitionensensesensesentryletData{to hang.} \spanhiLexSensepublishStemGlossPubLehisensesensesentryletData{टाँगना} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{నావ ఆంగ్డెతున్ మోలతగ అట్కి కీతొన్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{నా అంగిని మొలలో అంటి పెట్టుకున్నాను.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్కుల్క్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭkulk}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{flattened rice} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{అటుకులు} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{चिउडा} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{పెరెక్ ఙల్ అట్కుల్క్ తయర్ కీంతెర్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{బియ్యము నుండి అటుకులు తయారు చేస్తారు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్కె మాత} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭke māta}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{ఊపిరి ఆగింది} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{నావ నేస్క్‌వల్ అట్కె మాత.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{నా ఊపిరి ఆగిపోయింది.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్ట} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭṭa}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanendefinitionensensesensesentryletData{cook} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{వంట చెయ్యి} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్టవన్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭṭavan}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{num} \spanendefinitionensensesensesentryletData{fifty-eight.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{(58) యాభై ఎనిమిది} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{अट्‌ठावन} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{మా కాండిన్ అట్టవన్ జోకఙ్ లిహికియుస్తోన్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{మా పిల్ల వానికి 50 ఎనిమిది సార్లు రాయించాను.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్టవీస్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭṭavīs}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{num} \spanendefinitionensensesensesentryletData{twenty-eight.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{(28) ఇరవై ఎనిమిది} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{अट्‌ठाईस} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{నన్ అట్టావీస్ న పొంటిన్ మా సాడకండిర్ కున్ యేత్‌తొన్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{మా బడి పిల్లలకు ఇరవై ఎనిమిది రూపాయిల పెన్నులు కొన్నాను.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్టెచాలిస్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭṭecālis}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{num} \spanendefinitionensensesensesentryletData{forty-eight.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{(48) నలభై ఎనిమిది} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{अड़तालीस} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{అద్ ఆంగ్డె అట్టె చాలిస్న ఆంద్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{ఆ చొక్క నలభై ఎనిమిది రూపాయలు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్టెసాట్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭṭesāṭ}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{num} \spanendefinitionensensesensesentryletData{sixty-eight.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{(68) అరవై ఎనిమిది} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{अड़सठ} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{అట్టె సాట్న రెండు పుస్తక్ యేత్‌తొన్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{అరవై ఎనిమిది రూపాయల పుస్తకాలు కొన్నాను.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్టెహత్తర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭṭehattar}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{num} \spanendefinitionensensesensesentryletData{seventy-eight.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{(78) డెబ్భై ఏనిమిది} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{अठहत्तर} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్‌పియ్వల్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭpiyval}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{పట్టు పట్టడం} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్యనొవ్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭyanov}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{num} \spanendefinitionensensesensesentryletData{ninety-eight.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{(98) తొంభై ఎనిమిది} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{अट्‌ठानवे} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{మా కాలెజ్ నగ అట్యనొవ్ కాండిర్కున్ స్కాలర్ సిప్ కొత్తంగ్ వాతంగ్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{మా కాలేజి లొ తొంభై ఎనిమిది మంది పిల్లలకు స్కాలర్ సిప్ డబ్బులు వచ్చినాయి.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్యాన్సీ} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭyānsī}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{num} \spanendefinitionensensesensesentryletData{eighty-eight.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{(88) ఎనభై ఎనిమిది} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{अट्‌ठासी} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{$\sharp$మానాటె అట్టాన్సి హజర్ త కామ్ మంజుర్ ఆత.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{$\sharp$మా ఊరిలో (85) ఎనభై ఎనిమిది వేల పని మంజూరు ఐనది.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్ర} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭra}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{num} \spanendefinitionensensesensesentryletData{eighteen.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{(18) పద్దెనిమిది} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{अठारह} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{వోర్- నాకున్ అట్ర హజర్ కొత్తంగ్ సియన.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{అతను నాకు పద్దెనిమిది వేలు ఇవ్వాలి.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అట్లాంటిక్ సమ్దుర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭlāṇṭik samdur}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{అట్లాంటిక్ మహా సముద్రం} 
+
+\hangindent= 36pt
+\hangafter=1\begin{center}
+\spanenpictureLabelenpictureCaptionpictureRightentryletData{Kitchen Cooking}
+\end{center}
+
+\headwordggoTeluINentryletData{అట్వల్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aṭval}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{వంట చేయుట} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{తిందన్ సాటి రోజి గాటోంగ్ కుస్రింగ్ అట్వల్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{తినడానికి రోజు అన్నము కూరలు వంట చేయడం.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అడంతొర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aḍantor}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{n} \spanendefinitionensensesensesentryletData{crying} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{ఏడ్వడం} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{కాండిర్ పుట్త బరొబర్ అడంతెర్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{పిల్లలు పుట్టినప్పుడు ఏడుస్తారు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అడ్డంఅసి} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aḍḍaṁasi}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అడ్డబుడ్డ} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aḍḍabuḍḍa}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{adj} \spanendefinitionensensesensesentryletData{blockage} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{అడ్డదిడ్డమైన} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{बाधा देने वाला} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{కామ్ కీయ్నెకె ఆడ బుడ్డ అయ్వ.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{పని చేసేటప్పుడు అడ్డదిడ్డముగా రావద్దు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అడ్డమ్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aḍḍam}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{adv} \spanendefinitionensensesensesentryletData{across.} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{అడ్డముగా} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{आडा} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{పోడ్దున్ అడ్డమ్ టెప్ప ఆత.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{సూర్యునికి అడ్డముగా మేఘం వచ్చింది.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అడ్డమ్ ఆ} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aḍḍam ā-}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfoentryletData{v} \xsensenumbersensesensesentryletData{1}\spanendefinitionensensesensesentryletData{object} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{అడ్డుకో} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{रोक; बीच में पड} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{బాబల్ బయ్యెన్ పానెకె కాండి అడ్డమ్ ఆతొర్.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{నాన అమ్మను కొట్టే టప్పుడు కొడుకు అడ్డుకున్నాడు.} \xsensenumbersensesensesentryletData{2}\spanendefinitionensensesensesentryletData{obstruct} \spantexitemteLexSensepublishStemGlossPubLdtesensesensesentryletData{అడ్డగించు} \spanhixitemhiLexSensepublishStemGlossPubLdtesensesensesentryletData{रोक; मना कर} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{నిమ్మె దర్బర్‌తె అడ్డమ్ అస్సి వడ్క్‌మా.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{నువ్వు కూర్చోవడం కన్నా అడ్డంగా మాట్లాడకు.} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{అడ్డంవడి} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{aḍḍanvaḍi}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanendefinitionensensesensesentryletData{air coming across} \spanteLexSensepublishStemGlossPubLdtesensesensesentryletData{అడ్డంగా వచ్చే గాలి} \spanggoTeluINexampleggoTeluINexamplessensesensesentryletData{నిన్నెతల్ అడ్డంవడి వాసెర్ మంత.} \spantetranslationLdtetranslationsexamplessensesensesentryletData{నిన్నటి నుండి అడ్డంగా గాలి వస్తుంది.} 
+ \end{multicols}\begin{center}
+\topskip 18pt{\section*{\needspace {8\baselineskip}{\letterggoTeluINletHead{న}}}}
+ \label{PageStock_PreserveGondwana Sample2} \end{center}
+\setlength{\columnsep}{1.5em} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{-న్గ} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{nga}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{-న్గటల్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{ngaṭal}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} 
+ \end{multicols}\begin{center}
+\topskip 18pt{\section*{\needspace {8\baselineskip}{\letterggoTeluINletHead{ు}}}}
+ \label{PageStock_PreserveGondwana Sample3} \end{center}
+\setlength{\columnsep}{1.5em} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{-ున్‌} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{un‌}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{ns} \spanendefinitionensensesensesentryletData{ACC} 
+
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{-ుర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{ur}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{vs} \spanendefinitionensensesensesentryletData{3.M.PL.DIST} 
+ \end{multicols}\begin{center}
+\topskip 18pt{\section*{\needspace {8\baselineskip}{\letterggoTeluINletHead{ొ}}}}
+ \label{PageStock_PreserveGondwana Sample4} \end{center}
+\setlength{\columnsep}{1.5em} 
+\setlength\columnseprule{0.4pt} 
+\begin{multicols}{2}{\raggedright} 
+\hangindent= 36pt
+\hangafter=1
+\headwordggoTeluINentryletData{-ొర్} \spanenpronunciationggofonipaxemicpronunciationsentryletData{[}\spanggofonipaxemicpronunciationggofonipaxemicpronunciationsentryletData{or}\spanenpronunciationggofonipaxemicpronunciationsentryletData{]} \spanenpartofspeechengrammaticalinfosensesensesentryletData{vs} \spanendefinitionensensesensesentryletData{3.M.SG} 
+ \end{multicols}
+\end{document}

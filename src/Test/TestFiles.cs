@@ -29,8 +29,15 @@ namespace Test
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/" + testFilesBase + "/TestFiles");
             _inputPath = Common.PathCombine(testPath, "Input");
             _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "Expected");
-            if (Directory.Exists(_outputPath))
+	        if (testFilesBase == "XhtmlExport" && Common.UsingMonoVM)
+	        {
+		        _expectedPath = Common.PathCombine(testPath, "ExpectedLinux");
+	        }
+	        else
+	        {
+		        _expectedPath = Common.PathCombine(testPath, "Expected");
+	        }
+	        if (Directory.Exists(_outputPath))
             {
                 Directory.Delete(_outputPath, true);
                 Thread.Sleep(1000);

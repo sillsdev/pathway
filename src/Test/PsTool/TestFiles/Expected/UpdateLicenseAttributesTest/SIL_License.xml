@@ -2,13 +2,13 @@
  <x:xmpmeta xmlns:x="adobe:ns:meta/">
   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <rdf:Description rdf:about="" xmlns:xap="http://ns.adobe.com/xap/1.0/">
-    <xap:CreateDate>2016-09-28T06:17:01.8009677+00:00</xap:CreateDate>
+    <xap:CreateDate>2017-01-03T13:58:38.0879614+00:00</xap:CreateDate>
     <xap:CreatorTool>XeLaTex</xap:CreatorTool>
-    <xap:ModifyDate>2016-09-28T06:17:01.8009677+00:00</xap:ModifyDate>
-    <xap:MetadataDate>2016-09-28T06:17:01.8009677+00:00</xap:MetadataDate>
+    <xap:ModifyDate>2017-01-03T13:58:38.0879614+00:00</xap:ModifyDate>
+    <xap:MetadataDate>2017-01-03T13:58:38.0879614+00:00</xap:MetadataDate>
    </rdf:Description>
    <rdf:Description rdf:about="" xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
-    <pdf:Producer>9/28/2016 12:00:00 AM</pdf:Producer>
+    <pdf:Producer>1/3/2017 12:00:00 AM</pdf:Producer>
     <pdf:Keywords>Foreign Literatures and Linguistics; Language Documentation; Dictionary; Reference</pdf:Keywords>
    </rdf:Description>
    <rdf:Description rdf:about="" xmlns:xapRights="http://ns.adobe.com/xap/1.0/rights/">
@@ -42,7 +42,7 @@
 	 </dc:subject>
     <dc:rights>
      <rdf:Alt>
-      <rdf:li xml:lang="x-default">© SIL International® 2016</rdf:li>
+      <rdf:li xml:lang="x-default">© SIL International® 2017</rdf:li>
      </rdf:Alt>
     </dc:rights>
    </rdf:Description>

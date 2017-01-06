@@ -1,193 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="42">
+<stylePick xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="StyleSettings.xsd" version="42">
   <settings>
-    <property name="InputPath" value="" />
-    <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
-    <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Dictionary" />
-    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s" />
-    <property name="MasterSheetPath" value="Styles/Dictionary" />
-    <property name="IconPath" value="Icons" />
-    <property name="SamplePath" value="Samples/Dictionary" />
-    <property name="BaseStyles" value="Dictionary.css" />
-    <property name="DefaultIcon" value="Graphic/book.png" />
-    <property name="CurrentInput" value="" />
-    <property name="InputType" value="Dictionary" />
-    <property name="LastTask" value="Quick print" />
-    <property name="PreviewType" value="Prince" />
-    <property name="CssEditor" value="C:/Windows/Notepad.exe" />
-    <property name="SelectedIcon" value="Graphic/arrow.png" />
-    <property name="MissingIcon" value="Graphic/missing.png" />
-    <property name="Help" value="PsDoc.chm" />
-    <property name="PrintVia" value="OpenOffice/LibreOffice" />
-    <property name="ConfigureDictionary" value="True" />
-    <property name="ReversalIndexes" value="True" />
-	<property name="Preprocessing" value="" />
-    <property name="GrammerSketch" value="False" />
-	<property name="LayoutSelected" value="FieldWorksStyles" />
-    <property name="ExtraProcessing" value="True" />
-    <property name="Media" value="paper" />
-	<property name="Organization" value="" />
+    <property name="InputPath" value=""/>
+    <property name="OutputPath" value="%(AppData)s/SIL/Pathway/Dictionary"/>
+    <property name="UserSheetPath" value="%(AppData)s/SIL/Pathway/Dictionary"/>
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s"/>
+    <property name="MasterSheetPath" value="Styles/Dictionary"/>
+    <property name="IconPath" value="Icons"/>
+    <property name="SamplePath" value="Samples/Dictionary"/>
+    <property name="BaseStyles" value="Dictionary.css"/>
+    <property name="DefaultIcon" value="Graphic/book.png"/>
+    <property name="CurrentInput" value=""/>
+    <property name="InputType" value="Dictionary"/>
+    <property name="LastTask" value="Quick print"/>
+    <property name="PreviewType" value="Prince"/>
+    <property name="CssEditor" value="C:/Windows/Notepad.exe"/>
+    <property name="SelectedIcon" value="Graphic/arrow.png"/>
+    <property name="MissingIcon" value="Graphic/missing.png"/>
+    <property name="Help" value="PsDoc.chm"/>
+    <property name="PrintVia" value="OpenOffice/LibreOffice"/>
+    <property name="ConfigureDictionary" value="True"/>
+    <property name="ReversalIndexes" value="True"/>
+    <property name="Preprocessing" value=""/>
+    <property name="GrammerSketch" value="False"/>
+    <property name="LayoutSelected" value="FieldWorksStyles"/>
+    <property name="ExtraProcessing" value="True"/>
+    <property name="Media" value="paper"/>
+    <property name="Organization" value=""/>
   </settings>
   <defaultSettings>
-    <property name="PrintVia" value="OpenOffice/LibreOffice" />
-    <property name="ConfigureDictionary" value="True" />
-    <property name="ReversalIndexes" value="True" />
-    <property name="GrammerSketch" value="False" />
-    <property name="LayoutSelected" value="FieldWorksStyles" />
-    <property name="ExtraProcessing" value="True" />
-        <property name="Preprocessing" value="" />		
-    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s" />
-    <property name="Media" value="paper" />
+    <property name="PrintVia" value="OpenOffice/LibreOffice"/>
+    <property name="ConfigureDictionary" value="True"/>
+    <property name="ReversalIndexes" value="True"/>
+    <property name="GrammerSketch" value="False"/>
+    <property name="LayoutSelected" value="FieldWorksStyles"/>
+    <property name="ExtraProcessing" value="True"/>
+    <property name="Preprocessing" value=""/>
+    <property name="PublicationLocation" value="$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s"/>
+    <property name="Media" value="paper"/>
   </defaultSettings>
   <features>
     <feature name="Justified">
-      <option name="Yes" file="Justified_Yes.css" />
-      <option name="No" file="Justified_No.css" />
+      <option name="Yes" file="Justified_Yes.css"/>
+      <option name="No" file="Justified_No.css"/>
     </feature>
     <feature name="VerticalJustify">
-      <option name="Top" file="VerticalJustify_Top.css" />
-      <option name="Center" file="VerticalJustify_Center.css" />
-      <option name="Bottom" file="VerticalJustify_Bottom.css" />
+      <option name="Top" file="VerticalJustify_Top.css"/>
+      <option name="Center" file="VerticalJustify_Center.css"/>
+      <option name="Bottom" file="VerticalJustify_Bottom.css"/>
     </feature>
     <feature name="Page Size">
-      <option name="A4" file="Page_size_A4.css" />
-      <option name="A5" file="Page_size_A5.css" />
-	  <option name="B5" file="Page_size_B5.css" />
-      <option name="C5" file="Page_size_C5.css" />
-      <option name="A6" file="Page_size_A6.css" />	  
-      <option name="Letter" file="Page_size_Letter.css" />
-      <option name="Half letter" file="Page_size_Half_Letter.css" />
-      <option name="6in x 9in" file="Page_size_6inx9in.css" />
-      <option name="6.5in x 9in on letter" file="Page_size_6.5x9onLetter.css" />
-      <option name="5.25in x 8.25in" file="Page_size_GPS1.css" />
-      <option name="5.8in x 8.7in" file="Page_size_GPS2.css" />
+      <option name="A4" file="Page_size_A4.css"/>
+      <option name="A5" file="Page_size_A5.css"/>
+      <option name="B5" file="Page_size_B5.css"/>
+      <option name="C5" file="Page_size_C5.css"/>
+      <option name="A6" file="Page_size_A6.css"/>
+      <option name="Letter" file="Page_size_Letter.css"/>
+      <option name="Half letter" file="Page_size_Half_Letter.css"/>
+      <option name="6in x 9in" file="Page_size_6inx9in.css"/>
+      <option name="6.5in x 9in on letter" file="Page_size_6.5x9onLetter.css"/>
+      <option name="5.25in x 8.25in" file="Page_size_GPS1.css"/>
+      <option name="5.8in x 8.7in" file="Page_size_GPS2.css"/>
     </feature>
     <feature name="Columns">
-      <option name="1" file="Columns_1.css" icon="column1.png" />
-      <option name="2" file="Columns_2.css" icon="column2b.png" />
+      <option name="1" file="Columns_1.css" icon="column1.png"/>
+      <option name="2" file="Columns_2.css" icon="column2b.png"/>
     </feature>
     <feature name="Sense">
-      <option name="Bullet" file="Sense_Bullet.css" />
-      <option name="No change" file="Sense_nc.css" />
+      <option name="Bullet" file="Sense_Bullet.css"/>
+      <option name="No change" file="Sense_nc.css"/>
     </feature>
     <feature name="Example">
-      <option name="Callout" file="Example_Callout.css" />
-      <option name="No change" file="Example_nc.css" />
+      <option name="Callout" file="Example_Callout.css"/>
+      <option name="No change" file="Example_nc.css"/>
     </feature>
     <feature name="Writing System">
-      <option name="Seperator" file="Writing_System_Separator.css" />
-      <option name="No change" file="Writing_System_nc.css" />
+      <option name="Seperator" file="Writing_System_Separator.css"/>
+      <option name="No change" file="Writing_System_nc.css"/>
     </feature>
     <feature name="Language Tag">
-      <option name="No" file="Language_Tag_No.css" />
-      <option name="Yes" file="Language_Tag_Yes.css" />
+      <option name="No" file="Language_Tag_No.css"/>
+      <option name="Yes" file="Language_Tag_Yes.css"/>
     </feature>
     <feature name="Font">
-      <option name="Charis SIL" file="Font_Charis.css" />
-      <option name="Doulos SIL" file="Font_Doulos.css" />
-      <option name="Sophia SIL" file="Font_Sophia.css" />
-      <option name="Charis SIL Compact" file="font_charis_compact.css" />
-      <option name="No Change" file="Font_nc.css" />
+      <option name="Charis SIL" file="Font_Charis.css"/>
+      <option name="Doulos SIL" file="Font_Doulos.css"/>
+      <option name="Sophia SIL" file="Font_Sophia.css"/>
+      <option name="Charis SIL Compact" file="font_charis_compact.css"/>
+      <option name="No Change" file="Font_nc.css"/>
     </feature>
     <feature name="Font Size">
-      <option name="15" file="Font_Size_15.css" />
-      <option name="14" file="Font_Size_14.css" />
-      <option name="13" file="Font_Size_13.css" />
-      <option name="12" file="Font_Size_12.css" />
-      <option name="11" file="Font_Size_11.css" />
-      <option name="10" file="Font_Size_10.css" />
-      <option name="9" file="Font_Size_9.css" />
-      <option name="No Change" file="Font_Size_nc.css" />
+      <option name="28" file="Font_Size_28.css"/>
+      <option name="24" file="Font_Size_24.css"/>
+      <option name="18" file="Font_Size_18.css"/>
+      <option name="15" file="Font_Size_15.css"/>
+      <option name="14" file="Font_Size_14.css"/>
+      <option name="13" file="Font_Size_13.css"/>
+      <option name="12" file="Font_Size_12.css"/>
+      <option name="11" file="Font_Size_11.css"/>
+      <option name="10" file="Font_Size_10.css"/>
+      <option name="9" file="Font_Size_9.css"/>
+      <option name="No Change" file="Font_Size_nc.css"/>
     </feature>
     <feature name="Header Size">
-	  <option name="14"  file="Font_HeaderSize_14.css" />
-	  <option name="12"  file="Font_HeaderSize_12.css" />
-	  <option name="11"  file="Font_HeaderSize_11.css" />
-	  <option name="10"  file="Font_HeaderSize_10.css" />
-	  <option name="9" file="Font_HeaderSize_9.css" />
-	  <option name="8" file="Font_HeaderSize_8.css" />
-	  <option name="Same as body" file="Font_HeaderSize_nc.css" />
-	  <option name="Same as headword" file="Font_HeaderSize_nc.css" />
+      <option name="28" file="Font_HeaderSize_28.css"/>
+      <option name="24" file="Font_HeaderSize_24.css"/>
+      <option name="18" file="Font_HeaderSize_18.css"/>
+      <option name="14" file="Font_HeaderSize_14.css"/>
+      <option name="12" file="Font_HeaderSize_12.css"/>
+      <option name="11" file="Font_HeaderSize_11.css"/>
+      <option name="10" file="Font_HeaderSize_10.css"/>
+      <option name="9" file="Font_HeaderSize_9.css"/>
+      <option name="8" file="Font_HeaderSize_8.css"/>
+      <option name="Same as body" file="Font_HeaderSize_nc.css"/>
+      <option name="Same as headword" file="Font_HeaderSize_nc.css"/>
     </feature>
     <feature name="Headword Size">
-      <option name="14" file="Headword_Size_14.css" />
-      <option name="12" file="Headword_Size_12.css" />
-      <option name="11" file="Headword_Size_11.css" />
-      <option name="10" file="Headword_Size_10.css" />
-      <option name="9" file="Headword_Size_9.css" />
-      <option name="8" file="Headword_Size_8.css" />
-      <option name="No Change" file="Headword_Size_nc.css" />
+      <option name="14" file="Headword_Size_14.css"/>
+      <option name="12" file="Headword_Size_12.css"/>
+      <option name="11" file="Headword_Size_11.css"/>
+      <option name="10" file="Headword_Size_10.css"/>
+      <option name="9" file="Headword_Size_9.css"/>
+      <option name="8" file="Headword_Size_8.css"/>
+      <option name="No Change" file="Headword_Size_nc.css"/>
     </feature>
     <feature name="Leading">
-      <option name="11" file="Leading_11.css" />
-      <option name="12" file="Leading_12.css" />
-      <option name="13" file="Leading_13.css" />
-      <option name="14" file="Leading_14.css" />
-      <option name="16" file="Leading_16.css" />
-      <option name="24" file="Leading_24.css" />
-      <option name="No Change" file="Leading_nc.css" />
+      <option name="11" file="Leading_11.css"/>
+      <option name="12" file="Leading_12.css"/>
+      <option name="13" file="Leading_13.css"/>
+      <option name="14" file="Leading_14.css"/>
+      <option name="16" file="Leading_16.css"/>
+      <option name="24" file="Leading_24.css"/>
+      <option name="No Change" file="Leading_nc.css"/>
     </feature>
     <feature name="Background">
-      <option name="Transparent" file="Background_Transparent.css" />
-      <option name="No Change" file="Background_nc.css" />
+      <option name="Transparent" file="Background_Transparent.css"/>
+      <option name="No Change" file="Background_nc.css"/>
     </feature>
     <feature name="Embedded Spans">
-      <option name="Writing System Formatted" file="Embedded_Spans.css" />
-      <option name="Writing System Compact Formatted" file="Compact_Embedded_Spans.css" />
-      <option name="No Change" file="Embedded_Spans_nc.css" />
+      <option name="Writing System Formatted" file="Embedded_Spans.css"/>
+      <option name="Writing System Compact Formatted" file="Compact_Embedded_Spans.css"/>
+      <option name="No Change" file="Embedded_Spans_nc.css"/>
     </feature>
     <feature name="Pictures">
-      <option name="Yes" file="Pictures_Yes.css" />
-      <option name="No" file="Pictures_No.css" />
+      <option name="Yes" file="Pictures_Yes.css"/>      
+      <option name="No" file="Pictures_No.css"/>
     </feature>
     <feature name="Running Head">
-      <option name="Every Page" file="Running_Head_Every_Page.css" />
-      <option name="Mirrored" file="Running_Head_Mirrored.css" />
-      <option name="None" file="Running_Head_None.css" />
+      <option name="Every Page" file="Running_Head_Every_Page.css"/>
+      <option name="Mirrored" file="Running_Head_Mirrored.css"/>
+      <option name="None" file="Running_Head_None.css"/>
     </feature>
     <feature name="Page Number">
-      <option name="Top Inside Margin" file="PageNumber_TopInside.css" type="Mirrored" />
-      <option name="Top Outside Margin" file="PageNumber_TopOutside.css" type="Mirrored" />
-      <option name="Top Center" file="PageNumber_TopCenter_Mirrored.css" type="Mirrored" />
-      <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" type="Mirrored" />
-      <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" type="Mirrored" />
-      <option name="Bottom Center" file="PageNumber_BottomCenter_Mirrored.css" type="Mirrored" />
-	    <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page" />
-      <option name="Bottom Center" file="PageNumber_BottomCenter.css" type="Every Page" />
-      <option name="None" file="PageNumber_None.css" type="Both" />
+      <option name="Top Inside Margin" file="PageNumber_TopInside.css" type="Mirrored"/>
+      <option name="Top Outside Margin" file="PageNumber_TopOutside.css" type="Mirrored"/>
+      <option name="Top Center" file="PageNumber_TopCenter_Mirrored.css" type="Mirrored"/>
+      <option name="Bottom Inside Margin" file="PageNumber_BottomInside.css" type="Mirrored"/>
+      <option name="Bottom Outside Margin" file="PageNumber_BottomOutside.css" type="Mirrored"/>
+      <option name="Bottom Center" file="PageNumber_BottomCenter_Mirrored.css" type="Mirrored"/>
+      <option name="Top Center" file="PageNumber_TopCenter.css" type="Every Page"/>
+      <option name="Bottom Center" file="PageNumber_BottomCenter.css" type="Every Page"/>
+      <option name="None" file="PageNumber_None.css" type="Both"/>
     </feature>
     <feature name="Rules">
-      <option name="Yes" file="Rules_Yes.css" />
-      <option name="No" file="Rules_No.css" />
+      <option name="Yes" file="Rules_Yes.css"/>
+      <option name="No" file="Rules_No.css"/>
     </feature>
     <feature name="FileProduced">
-      <option name="One" file="Empty.css" />
-      <option name="One Per Letter" file="Empty.css" />
+      <option name="One" file="Empty.css"/>
+      <option name="One Per Letter" file="Empty.css"/>
     </feature>
     <feature name="EmbedFonts">
-      <option name="Yes" file="Empty.css" />
-      <option name="No" file="Empty.css" />
+      <option name="Yes" file="Empty.css"/>
+      <option name="No" file="Empty.css"/>
     </feature>
     <feature name="TOCLevel">
-      <option name="1 - Letter Only" file="Empty.css" />
-      <option name="2 - Letter and Entry" file="Empty.css" />
-      <option name="3 - Letter, Entry and Sense" file="Empty.css" />
+      <option name="1 - Letter Only" file="Empty.css"/>
+      <option name="2 - Letter and Entry" file="Empty.css"/>
+      <option name="3 - Letter, Entry and Sense" file="Empty.css"/>
     </feature>
     <feature name="MissingFont">
-      <option name="Use Fallback Font" file="Empty.css" />
-      <option name="Prompt User" file="Empty.css" />
-      <option name="Cancel Export" file="Empty.css" />
+      <option name="Use Fallback Font" file="Empty.css"/>
+      <option name="Prompt User" file="Empty.css"/>
+      <option name="Cancel Export" file="Empty.css"/>
     </feature>
     <feature name="NonSILFont">
-      <option name="Embed Font Anyway" file="Empty.css" />
-      <option name="Use Fallback Font" file="Empty.css" />
-      <option name="Prompt User" file="Empty.css" />
-      <option name="Cancel Export" file="Empty.css" />
+      <option name="Embed Font Anyway" file="Empty.css"/>
+      <option name="Use Fallback Font" file="Empty.css"/>
+      <option name="Prompt User" file="Empty.css"/>
+      <option name="Cancel Export" file="Empty.css"/>
     </feature>
     <feature name="DefaultAlignment">
-      <option name="Left" file="Empty.css" />
-      <option name="Right" file="Empty.css" />
-      <option name="Justify" file="Empty.css" />
+      <option name="Left" file="Empty.css"/>
+      <option name="Right" file="Empty.css"/>
+      <option name="Justify" file="Empty.css"/>
     </feature>
     <feature name="Lic_Other">
       <option name="Draft" file="Draft.xhtml"/>
@@ -202,57 +209,73 @@
       <option name="Intended for Sale" file="SIL_Selling.xhtml"/>
     </feature>
     <feature name="Subject">
-      <option name="Reference" file="Empty.css" />
+      <option name="Reference" file="Empty.css"/>
     </feature>
   </features>
   <categories>
     <category name="Media" select="paper">
-      <item name="Paper" />
-      <item name="Mobile" />
-      <item name="Web" />
-      <item name="Others" />
+      <item name="Paper"/>
+      <item name="Mobile"/>
+      <item name="Web"/>
+      <item name="Others"/>
     </category>
     <category name="Location" select="Cameroon">
-      <item name="Cameroon" />
-      <item name="Africa" />
-      <item name="Indonesia" />
-      <item name="Philippines" />
+      <item name="Cameroon"/>
+      <item name="Africa"/>
+      <item name="Indonesia"/>
+      <item name="Philippines"/>
     </category>
   </categories>
   <roles select="Output User">
-    <role name="Output User" icon="user.png" />
-    <role name="Coordinator" icon="coordinator.png" />
-    <role name="System Designer" icon="designer.png" />
+    <role name="Output User" icon="user.png"/>
+    <role name="Coordinator" icon="coordinator.png"/>
+    <role name="System Designer" icon="designer.png"/>
   </roles>
   <styles>
     <paper>
-      <style name="FieldWorksA4Styles" file="Layout_15.css" approvedBy="GPS" previewfile1="FieldWorksA4Styles P1.jpg" previewfile2="FieldWorksA4Styles P2.jpg" shown="Yes">
+      <style name="FieldWorksA4Styles" file="Layout_15.css" approvedBy="GPS"
+        previewfile1="FieldWorksA4Styles P1.jpg" previewfile2="FieldWorksA4Styles P2.jpg"
+        shown="Yes">
         <description>A4 ruled double column with Flex formatting</description>
       </style>
-      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS" previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg" shown="Yes">
+      <style name="FieldWorksStyles" file="Layout_12.css" approvedBy="GPS"
+        previewfile1="Fieldworks_Layout_12 P1.jpg" previewfile2="Fieldworks_Layout_12 P2.jpg"
+        shown="Yes">
         <description>C5 ruled double column with Flex formatting</description>
       </style>
-      <style name="FieldWorksLetterStyles" file="Layout_14.css" approvedBy="GPS" previewfile1="FieldWorksLetterStyles P1.jpg" previewfile2="FieldWorksLetterStyles P2.jpg" shown="Yes">
+      <style name="FieldWorksLetterStyles" file="Layout_14.css" approvedBy="GPS"
+        previewfile1="FieldWorksLetterStyles P1.jpg" previewfile2="FieldWorksLetterStyles P2.jpg"
+        shown="Yes">
         <description>Letter ruled double column with Flex formatting</description>
       </style>
-      <style name="Mexico65x9" file="Layout_16.css" approvedBy="GPS" previewfile1="FieldWorksLetterStyles P1.jpg" previewfile2="FieldWorksLetterStyles P2.jpg" shown="Yes">
+      <style name="Mexico65x9" file="Layout_16.css" approvedBy="GPS"
+        previewfile1="FieldWorksLetterStyles P1.jpg" previewfile2="FieldWorksLetterStyles P2.jpg"
+        shown="Yes">
         <description>6.5x9 on letter double column with Flex formatting</description>
       </style>
-      <style name="OneColumn" file="LayoutOneCol.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
+      <style name="OneColumn" file="LayoutOneCol.css" approvedBy="GPS"
+        previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg"
+        shown="Yes">
         <description>5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13</description>
       </style>
-      <style name="TwoColumn" file="LayoutTwoCol.css" approvedBy="GPS" previewfile1="TwoColumn_LayoutTwoCol p1.jpg" previewfile2="TwoColumn_LayoutTwoCol p2.jpg" shown="Yes">
+      <style name="TwoColumn" file="LayoutTwoCol.css" approvedBy="GPS"
+        previewfile1="TwoColumn_LayoutTwoCol p1.jpg" previewfile2="TwoColumn_LayoutTwoCol p2.jpg"
+        shown="Yes">
         <description>5.25x8.25in - 2 Col - Left aligned - Charis 9 on 11</description>
       </style>
-      <style name="LikeBuangPNG" file="Layout_04.css" approvedBy="GPS" previewfile1="Pacific_Layout_04 p1.jpg" previewfile2="Pacific_Layout_04 p2.jpg" shown="Yes">
+      <style name="LikeBuangPNG" file="Layout_04.css" approvedBy="GPS"
+        previewfile1="Pacific_Layout_04 p1.jpg" previewfile2="Pacific_Layout_04 p2.jpg" shown="Yes">
         <description>Double column 9/13pt C5 with one column, sense paragraphs, example callouts,
           writing system separator, embedded spans marked according to writing system, mirrored
           headers and rule lines.</description>
       </style>
-      <style name="FieldWorksRightToLeft" file="Layout_13.css" approvedBy="GPS" previewfile1="FieldworksArabicBased_Layout_13 p1.jpg" previewfile2="FieldworksArabicBased_Layout_13 p2.jpg" shown="Yes">
+      <style name="FieldWorksRightToLeft" file="Layout_13.css" approvedBy="GPS"
+        previewfile1="FieldworksArabicBased_Layout_13 p1.jpg"
+        previewfile2="FieldworksArabicBased_Layout_13 p2.jpg" shown="Yes">
         <description>C5 ruled double column with Flex formatting for Arabic based font</description>
       </style>
-      <style name="Draft" file="Layout_01.css" approvedBy="GPS" previewfile1="Draft_Layout_01 p1.jpg" previewfile2="Draft_Layout_01 p2.jpg" shown="Yes">
+      <style name="Draft" file="Layout_01.css" approvedBy="GPS"
+        previewfile1="Draft_Layout_01 p1.jpg" previewfile2="Draft_Layout_01 p2.jpg" shown="Yes">
         <description>Single column draft 12/24pt A4</description>
       </style>
       <!-- style name="GPS11J11" file="GPS11J11.css" approvedBy="GPS">
@@ -332,162 +355,203 @@
     </style -->
     </paper>
     <mobile>
-      <style name="DictionaryForMIDs" file="DictionaryForMIDs.css" approvedBy="GPS" previewfile1="" previewfile2="" shown="Yes">
+      <style name="DictionaryForMIDs" file="DictionaryForMIDs.css" approvedBy="GPS" previewfile1=""
+        previewfile2="" shown="Yes">
         <description>No custom properties for DictionaryForMIDs</description>
       </style>
     </mobile>
     <web>
-      <style name="OneWeb" file="OneWeb.css"  shown="Yes" type="Custom">
+      <style name="OneWeb" file="OneWeb.css" shown="Yes" type="Custom">
         <description>FTP Property Settings</description>
-		<styleProperty name="ftpaddress" value="" />
-        <styleProperty name="ftpuserid" value="" />
-        <styleProperty name="ftppwd" value="" />
-        <styleProperty name="dbservername" value="" />
-        <styleProperty name="dbname" value="" />
-        <styleProperty name="dbuserid" value="" />
-        <styleProperty name="dbpwd" value="" />
-		<styleProperty name="weburl" value="" />
-        <styleProperty name="webadminusrnme" value="" />
-        <styleProperty name="webadminpwd" value="" />
-        <styleProperty name="webadminsiteNme" value="" />
-        <styleProperty name="webemailid" value="" />
-        <styleProperty name="webftpfldrnme" value="" />
+        <styleProperty name="ftpaddress" value=""/>
+        <styleProperty name="ftpuserid" value=""/>
+        <styleProperty name="ftppwd" value=""/>
+        <styleProperty name="dbservername" value=""/>
+        <styleProperty name="dbname" value=""/>
+        <styleProperty name="dbuserid" value=""/>
+        <styleProperty name="dbpwd" value=""/>
+        <styleProperty name="weburl" value=""/>
+        <styleProperty name="webadminusrnme" value=""/>
+        <styleProperty name="webadminpwd" value=""/>
+        <styleProperty name="webadminsiteNme" value=""/>
+        <styleProperty name="webemailid" value=""/>
+        <styleProperty name="webftpfldrnme" value=""/>
       </style>
     </web>
     <others>
-      <style name="EBook (epub)" file="epub.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
-        <description>1 column flowed text, left aligned, default font for each writing system</description>
+      <style name="EBook (epub)" file="epub.css" approvedBy="GPS"
+        previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg"
+        shown="Yes">
+        <description>1 column flowed text, left aligned, default font for each writing
+          system</description>
         <styleProperty name="CoverImage" value="cover.png"/>
         <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>
-        <styleProperty name="AddColophonPage" value="Yes" />
-        <styleProperty name="BaseFontSize" value="13" />
-        <styleProperty name="DefaultLineHeight" value="125" />
-        <styleProperty name="DefaultAlignment" value="Left" />
-        <styleProperty name="ChapterNumbers" value="Drop Cap" />
-        <styleProperty name="MaxImageWidth" value="600" />
+        <styleProperty name="AddColophonPage" value="Yes"/>
+        <styleProperty name="BaseFontSize" value="13"/>
+        <styleProperty name="DefaultLineHeight" value="125"/>
+        <styleProperty name="DefaultAlignment" value="Left"/>
+        <styleProperty name="ChapterNumbers" value="Drop Cap"/>
+        <styleProperty name="MaxImageWidth" value="600"/>
         <styleProperty name="EmbedFonts" value="Yes"/>
-        <styleProperty name="IncludeFontVariants" value="Yes" />
-        <styleProperty name="DefaultFont" value="Charis SIL" />
+        <styleProperty name="IncludeFontVariants" value="Yes"/>
+        <styleProperty name="DefaultFont" value="Charis SIL"/>
         <styleProperty name="MissingFont" value="Prompt User"/>
-        <styleProperty name="NonSILFont" value="Prompt User" />
+        <styleProperty name="NonSILFont" value="Prompt User"/>
         <styleProperty name="Title" value=" "/>
-        <styleProperty name="Creator" value=" " />
-        <styleProperty name="Publisher" value=" " />
-        <styleProperty name="Type" value=" " />
-        <styleProperty name="Source" value=" " />
-        <styleProperty name="Format" value=" " />
-        <styleProperty name="Contributor" value=" " />
-        <styleProperty name="Relation" value=" " />
-        <styleProperty name="Coverage" value=" " />
-		<styleProperty name="IncludeImage" value="Yes" />		
-        <styleProperty name="Information" value="DRAFT Dictionary." />
-        <styleProperty name="Copyright" value="© 2014 SIL International®." />
-		<styleProperty name="PageBreak" value="No" />
+        <styleProperty name="Creator" value=" "/>
+        <styleProperty name="Publisher" value=" "/>
+        <styleProperty name="Type" value=" "/>
+        <styleProperty name="Source" value=" "/>
+        <styleProperty name="Format" value=" "/>
+        <styleProperty name="Contributor" value=" "/>
+        <styleProperty name="Relation" value=" "/>
+        <styleProperty name="Coverage" value=" "/>
+        <styleProperty name="IncludeImage" value="Yes"/>
+        <styleProperty name="Information" value="DRAFT Dictionary."/>
+        <styleProperty name="Copyright" value="© 2014 SIL International®."/>
+        <styleProperty name="PageBreak" value="No"/>
       </style>
-	  <style name="EBook (epub) Right Align" file="epubRightAlign.css" approvedBy="GPS" previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg" shown="Yes">
-        <description>1 column flowed text, Right aligned, default font for each writing system</description>
+      <style name="EBook (epub) Right Align" file="epubRightAlign.css" approvedBy="GPS"
+        previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg"
+        shown="Yes">
+        <description>1 column flowed text, Right aligned, default font for each writing
+          system</description>
         <styleProperty name="CoverImage" value="cover.png"/>
         <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>
-        <styleProperty name="AddColophonPage" value="Yes" />
-        <styleProperty name="BaseFontSize" value="13" />
-        <styleProperty name="DefaultLineHeight" value="125" />
-        <styleProperty name="DefaultAlignment" value="Right" />
-        <styleProperty name="ChapterNumbers" value="Drop Cap" />
-        <styleProperty name="MaxImageWidth" value="600" />
+        <styleProperty name="AddColophonPage" value="Yes"/>
+        <styleProperty name="BaseFontSize" value="13"/>
+        <styleProperty name="DefaultLineHeight" value="125"/>
+        <styleProperty name="DefaultAlignment" value="Right"/>
+        <styleProperty name="ChapterNumbers" value="Drop Cap"/>
+        <styleProperty name="MaxImageWidth" value="600"/>
         <styleProperty name="EmbedFonts" value="Yes"/>
-        <styleProperty name="IncludeFontVariants" value="Yes" />
-        <styleProperty name="DefaultFont" value="Charis SIL" />
+        <styleProperty name="IncludeFontVariants" value="Yes"/>
+        <styleProperty name="DefaultFont" value="Charis SIL"/>
         <styleProperty name="MissingFont" value="Prompt User"/>
-        <styleProperty name="NonSILFont" value="Prompt User" />
+        <styleProperty name="NonSILFont" value="Prompt User"/>
         <styleProperty name="Title" value=" "/>
-        <styleProperty name="Creator" value=" " />
-        <styleProperty name="Publisher" value=" " />
-        <styleProperty name="Type" value=" " />
-        <styleProperty name="Source" value=" " />
-        <styleProperty name="Format" value=" " />
-        <styleProperty name="Contributor" value=" " />
-        <styleProperty name="Relation" value=" " />
-        <styleProperty name="Coverage" value=" " />
-		<styleProperty name="IncludeImage" value="Yes" />		
-        <styleProperty name="Information" value="DRAFT Dictionary." />
-        <styleProperty name="Copyright" value="© 2014 SIL International®." />
-		<styleProperty name="PageBreak" value="No" />
+        <styleProperty name="Creator" value=" "/>
+        <styleProperty name="Publisher" value=" "/>
+        <styleProperty name="Type" value=" "/>
+        <styleProperty name="Source" value=" "/>
+        <styleProperty name="Format" value=" "/>
+        <styleProperty name="Contributor" value=" "/>
+        <styleProperty name="Relation" value=" "/>
+        <styleProperty name="Coverage" value=" "/>
+        <styleProperty name="IncludeImage" value="Yes"/>
+        <styleProperty name="Information" value="DRAFT Dictionary."/>
+        <styleProperty name="Copyright" value="© 2014 SIL International®."/>
+        <styleProperty name="PageBreak" value="No"/>
+      </style>
+      <style name="EBook Mexico style (epub)" file="epubMexico.css" approvedBy="GPS"
+        previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg"
+        shown="Yes">
+        <description>1 column flowed text, left aligned, default font for each writing
+          system</description>
+        <styleProperty name="CoverImage" value="cover.png"/>
+        <styleProperty name="TOCLevel" value="2 - Letter and Entry"/>
+        <styleProperty name="AddColophonPage" value="Yes"/>
+        <styleProperty name="BaseFontSize" value="13"/>
+        <styleProperty name="DefaultLineHeight" value="125"/>
+        <styleProperty name="DefaultAlignment" value="Left"/>
+        <styleProperty name="ChapterNumbers" value="Drop Cap"/>
+        <styleProperty name="MaxImageWidth" value="600"/>
+        <styleProperty name="EmbedFonts" value="Yes"/>
+        <styleProperty name="IncludeFontVariants" value="Yes"/>
+        <styleProperty name="DefaultFont" value="Charis SIL"/>
+        <styleProperty name="MissingFont" value="Prompt User"/>
+        <styleProperty name="NonSILFont" value="Prompt User"/>
+        <styleProperty name="Title" value=" "/>
+        <styleProperty name="Creator" value=" "/>
+        <styleProperty name="Publisher" value=" "/>
+        <styleProperty name="Type" value=" "/>
+        <styleProperty name="Source" value=" "/>
+        <styleProperty name="Format" value=" "/>
+        <styleProperty name="Contributor" value=" "/>
+        <styleProperty name="Relation" value=" "/>
+        <styleProperty name="Coverage" value=" "/>
+        <styleProperty name="IncludeImage" value="Yes"/>
+        <styleProperty name="Information" value="DRAFT Dictionary."/>
+        <styleProperty name="Copyright" value="© 2014 SIL International®."/>
+        <styleProperty name="PageBreak" value="No"/>
       </style>
     </others>
   </styles>
   <tasks>
-    <task name="Quick print" style="FieldWorksStyles" icon="Graphic/quick.png" />
-    <task name="Village check" style="Draft" icon="Graphic/draft.png" />
-    <task name="Trial print" style="LikeBuangPNG" icon="Graphic/trialPrint.png" />
-    <task name="Final print" style="TwoColumn" icon="Graphic/final.png" />
-    <task name="Web publish" style="OneColumn" icon="Graphic/web.png" />
-    <task name="Cell publish" style="DictionaryForMIDs" icon="Graphic/cell.png" />
+    <task name="Quick print" style="FieldWorksStyles" icon="Graphic/quick.png"/>
+    <task name="Village check" style="Draft" icon="Graphic/draft.png"/>
+    <task name="Trial print" style="LikeBuangPNG" icon="Graphic/trialPrint.png"/>
+    <task name="Final print" style="TwoColumn" icon="Graphic/final.png"/>
+    <task name="Web publish" style="OneColumn" icon="Graphic/web.png"/>
+    <task name="Cell publish" style="DictionaryForMIDs" icon="Graphic/cell.png"/>
   </tasks>
   <column-width>
-    <column name="0" width="85" />
-    <column name="1" width="318" />
-    <column name="2" width="91" />
-    <column name="3" width="60" />
-    <column name="4" width="110" />
+    <column name="0" width="85"/>
+    <column name="1" width="318"/>
+    <column name="2" width="91"/>
+    <column name="3" width="60"/>
+    <column name="4" width="110"/>
   </column-width>
   <Organizations>
     <Organization>SIL International</Organization>
   </Organizations>
   <Metadata>
     <meta name="Title" outputTypes="all">
-      <defaultValue></defaultValue>
-      <currentValue></currentValue>
-      <PreviousProjectName></PreviousProjectName>
+      <defaultValue/>
+      <currentValue/>
+      <PreviousProjectName/>
     </meta>
     <meta name="Creator" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Publisher" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">SIL_x0020_International</organizationDefault>
-      <defaultValue></defaultValue>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false"
+        >SIL_x0020_International</organizationDefault>
+      <defaultValue/>
     </meta>
     <meta name="Description" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Copyright Holder" outputTypes="all">
-      <organizationDefault organizationName="SIL_x0020_International" Locked="false">_x00A9__x0020_2014_x0020_SIL_x0020_International_x00AE_.</organizationDefault>
+      <organizationDefault organizationName="SIL_x0020_International" Locked="false"
+        >_x00A9__x0020_2014_x0020_SIL_x0020_International_x00AE_.</organizationDefault>
       <defaultValue>_x00A9__x0020_2014_x0020_SIL_x0020_International_x00AE_._x0020_All_x0020_Rights_x0020_Reserved.</defaultValue>
     </meta>
     <meta name="Type" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Source" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Format" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Contributor" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Relation" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Coverage" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Subject" outputTypes="all">
       <defaultValue>Foreign_x0020_Literatures_x0020_and_x0020_Linguistics_x003B__x0020_Language_x0020_Documentation_x003B__x0020_Dictionary_x003B__x0020_Reference</defaultValue>
     </meta>
     <meta name="Date" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Language" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Identifier" outputTypes="all">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Cover Page" outputTypes="epub">
       <defaultValue>true</defaultValue>
     </meta>
     <meta name="Cover Page Filename" outputTypes="epub">
-      <defaultValue></defaultValue>
+      <defaultValue/>
     </meta>
     <meta name="Cover Page Title" outputTypes="epub">
       <defaultValue>true</defaultValue>
@@ -499,7 +563,7 @@
       <defaultValue>false</defaultValue>
     </meta>
     <meta name="Copyright Page Filename" outputTypes="all">
-      <defaultValue>Copyrights_x005C_SIL_CC-by-nc-sa.xhtml</defaultValue>	  
+      <defaultValue>Copyrights_x005C_SIL_CC-by-nc-sa.xhtml</defaultValue>
     </meta>
     <meta name="Table of Contents" outputTypes="all">
       <defaultValue>false</defaultValue>

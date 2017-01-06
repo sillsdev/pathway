@@ -42,7 +42,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\output\Debug</OutputPath>
+    <OutputPath>..\..\output\Debug\Export</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -54,7 +54,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -69,7 +69,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -84,7 +84,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -98,7 +98,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -113,7 +113,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\output\Debug</OutputPath>
+    <OutputPath>..\..\output\Debug\Export</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -128,7 +128,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -143,7 +143,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -158,7 +158,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -172,7 +172,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -186,7 +186,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
@@ -197,7 +197,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
     <DebugType>none</DebugType>
@@ -208,7 +208,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -226,7 +226,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <OutputPath>..\..\output\Release</OutputPath>
+    <OutputPath>..\..\output\Release\Export</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -295,9 +295,11 @@
     <Compile Include="InDesignConvert\InStylesTest2.cs" />
     <Compile Include="OpenOfficeConvert\LOContentExportTest.cs" />
     <Compile Include="OpenOfficeConvert\LOContentTest.cs" />
+    <Compile Include="OpenOfficeConvert\LOContentXMLTest.cs" />
     <Compile Include="OpenOfficeConvert\LOTest.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OpenOfficeConvert\OOStylesXMLTest.cs" />
     <Compile Include="ParatextSupport\EncloseParasInSectionsTests.cs" />
     <Compile Include="ParatextSupport\ParatextSupportExtensions.cs" />
     <Compile Include="ParatextSupport\SfmToUsxTest.cs" />
@@ -337,8 +339,6 @@
     <Compile Include="CssParser\CssParserTest.cs" />
     <Compile Include="CssParser\GramTest.cs" />
     <Compile Include="CssParser\MakePropertyTest.cs" />
-    <Compile Include="OpenOfficeConvert\LOContentXMLTest.cs" />
-    <Compile Include="OpenOfficeConvert\OOStylesXMLTest.cs" />
     <Compile Include="PsExport\PsExportTest.cs" />
     <Compile Include="PsTool\CommonCssTest.cs" />
     <Compile Include="PsTool\CommonTest.cs" />
@@ -598,7 +598,723 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="OpenOfficeConvert\TestFiles\input\AncestorChildTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\AncestorTestForNewFlexVersion.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\AnchorSpaceFlex83.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\AnchorTag.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ApplySpanFontStyleTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ApplySpanFontStyleTestFull.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\AutoWidth.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\B1pe.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\BackgroundColor.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\BackgroundWhiteRemoval.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\body.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\BookNameChanged.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Border.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\BuangExport.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\BuangX.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Bughotu-gospels.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\CallTOCDictionary.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\CallTOCScripture.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\CharisSILFont.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ClassContent.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ClassNameValueTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ColumnCount.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ColumnGap.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ColumnGapLong.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ColumnGapPercent.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ContentNormalTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Counter1.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Counter2.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Counter3.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\CounterPart.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\CrossRef.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\CrossRefSpace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\DictionaryMainStyle.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\DisplayInline.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\DisplayNone.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\DivEntrySubEntryMarginLeft.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\DivEntrySubEntryMarginLeft2.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\div_header.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Doulos SILFont.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\DropCap.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\EmptyDivTag.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\EMTest1.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\EMTest2.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\EMTest3.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\EntryStyle.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\EntrySubEntryMarginLeft.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ExportLO\Dictionarymain.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ExportLO\ScriptureInput.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FlexRev.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Font.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FontFamily.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FontWeightBolder.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Footnote.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FootNoteFormat.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FootnoteSeperator.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FootnoteSpanContent.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FootnoteVerse2.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FootnoteVerseNumber.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FrontMatterDirection.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FrontMatterOptions.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\FullBuangTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\GentiumFont.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\GlossaryReference.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\GlossaryReferenceTitle.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\GuidewordLength.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\HardSpaceAfterVerseNumber.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\HeaderSpace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Headword_Main.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Headword_Reversal.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\HomographSpace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\HyphenationRuleLO.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ImageAttrib.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ImageEmptyCaption.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ImageFloatTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ImageNoCaption.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\InlineBlock.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\InsertHardSpace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\InsertWhiteSpace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ItalicOnFlex83.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Kabwa.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\KeepImageExtension.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\KeepLineSeperator.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\KeepWithNextTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Language.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\LanguageColor.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\LanguageInline.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Larger.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\LineHeight.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ListOlUl.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\main.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\MainTitleDisplay.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\MexicoStyle.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\mrk.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\multiClass.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NestedDivCase1.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NestedDivCase2.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NestedDivCase3.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NestedDivCase4.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NewFlexBuangColor.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NewGuidewordStyle.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NewGuidewordStyle2.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NewMultiClassSubEntry.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NewPunctuationPsuedoChild.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\NoImage.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\OutlineLevel.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Padding.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestA.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestB.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestC.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PageTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PageTest9.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\para.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ParallerReferenceKeepWith.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Parent1.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ParentPrecedeSpace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PerformanceTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PictureColumnWidth.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PictureMaxHeight.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PictureSpaceAfter.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PictureWidth.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Precede1.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PrecedesPseudoLangTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PrecedesPseudoTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PrecedesPseudoTestA.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PrecedesPseudoTestB.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PseudoAfter.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PseudoAfter1.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PseudoBefore.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PseudoBeforeOnOnFlex83.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PseudoContains.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PseudoQuotes.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\PseudoQuotes1.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Pseudostyle.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ReferenceMark.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\RemoveAutoWidth.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\RemoveScrSectionClass.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\ReplacePrinceQuote.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\RevarsalEmptyPage.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\RevarsalHeader.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\RightToLeftHeader.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\RunningHeaderNone.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\selfspacetest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SetColumnGapTest1.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SetColumnGapTest2.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SignificantSpace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SlashSymbol.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SpaceAfterClosingBrace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\spacebefore.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Spacebeginningentries.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SpaceIssueOnSense.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SpacesInDictionary.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SpaceTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\spanstyle.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\StyleChangesinMexico.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\StyleChangesinMexicoReversal.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SubscriptForNewFlex.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\SuperVerticalAlign.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\t9.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Table.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Table2.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\TableProperty.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\TabUnicode.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\TD82a.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\TeluguFootnoteMarkerTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\TeluguGondwana.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\TeTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\Textindent.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\TextReplace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\TokPisin.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\UserIndicFont.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\VerseNumber.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\VisibilityTest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\whitespace.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\WhiteSpaceNextLine.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\output\ExportLO\ScriptureInput.odt" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AncestorChildTestContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AncestorChildTestStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AncestorTestForNewFlexVersioncontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AncestorTestForNewFlexVersionstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AnchorSpaceFlex83content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AnchorSpaceFlex83styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AnchorTagcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AnchorTagStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AutoWidthcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\AutoWidthStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\B1pecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\B1pestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\BookNameChangedcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\BookNameChangedstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Borderstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\BuangExportcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\BuangExportcontent_Unix.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\BuangExportStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\BuangExportstyles_Unix.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\BuangXcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\BuangXStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Bughotu-gospelscontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Bughotu-gospelsstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\CharisSILFontstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ClassContentcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ClassContentStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ClassNameValueTestContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ClassNameValueTestStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ColorTestPositiveStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ColorTestPositiveStylesNeg.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ColumnCountcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ColumnCountStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ColumnGapContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ColumnGapStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ContentCounterstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ContentNormalTestcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ContentNormalTestStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\CreateDropCapStyleTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\CreateGraphicsStyleTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\CreateStyleHyphenateTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\CreateStyleTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\CreateStyleWithNewValueTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\CrossRefcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\CrossRefSpacecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\CrossRefSpacestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\DictionaryMainStylecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\DictionaryMainStylestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Directionstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\DivEntrySubEntryMarginLeft2content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\DivEntrySubEntryMarginLeft2styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\DivEntrySubEntryMarginLeftcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\DivEntrySubEntryMarginLeftstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\div_headercontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\div_headerStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\DoulosSILFontstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\DropCapcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\DropCapStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EmptyDivTagcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EmptyDivTagStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EMTest1Content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EMTest1Styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EMTest2Content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EMTest2Styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EMTest3Content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EMTest3Styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EntryStylecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\EntryStylestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\FontFamilyStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Fontstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\FontWeightBolderstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Footnotecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\FootNoteFormatcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\FootNoteFormatStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\FootnoteStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\FrontMatterDirectioncontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\FrontMatterDirectionstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\GentiumFontstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\GetFontweightTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\GuidewordLengthcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\GuidewordLengthstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\HeaderSpacestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Headword_Maincontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Headword_Mainstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Headword_Reversalcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Headword_Reversalstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\HyphenationKeywordsstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ImageAttribcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ImageAttribStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ImageEmptyCaptioncontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ImageEmptyCaptionstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\InlineBlockContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\InlineBlockStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\InsertHardSpacecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\InsertHardSpacestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\InsertWhiteSpacecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\InsertWhiteSpacestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Kabwacontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Kabwastyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\KeepWithNextStyleTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\KeepWithNextTestcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\KeepWithNextTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\LanguageColorContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\LanguageColorStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Languagecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\LanguageStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\LanguageTestStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\LanguageTestStylesNeg.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Largercontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\LargerStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\LineHeightContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\LineHeightStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ListOlUlcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ListOlUlStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\MainTitleDisplaycontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\MainTitleDisplaystyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Master.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\MexicoStylecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\MexicoStylestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\MirroredPageRefstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NestedDivCase1Content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NestedDivCase1Styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NestedDivCase2Content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NestedDivCase2Styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NestedDivCase3Content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NestedDivCase3Styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NestedDivCase4Content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NestedDivCase4Styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NewFlexBuangColorcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NewFlexBuangColorstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NewGuidewordStyle2content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NewGuidewordStyle2styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NewGuidewordStylecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\NewGuidewordStylestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\OutlineLevelcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\OutlineLevelstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Oxesstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PaddingBottomTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PaddingTopTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Padding_Allstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageBreakAfterTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageBreakBeforeTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageHeaderFooterTestAcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageHeaderFooterTestAstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageHeaderFooterTestBcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageHeaderFooterTestBstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageHeaderFooterTestCcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageHeaderFooterTestCstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest1content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest1styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest2content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest2styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest3content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest3styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest4content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest4styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest5content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest5styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest6content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest6styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest7content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest7styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest8content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest8styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest9content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PageTest9styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ParentPrecedeSpacecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ParentPrecedeSpacestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PictureColumnWidthcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PictureColumnWidthstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PictureSpaceAftercontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PictureSpaceAfterstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Pictures\Ax1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Pictures\Flea1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Pictures\LeftIndexMacro1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Pictures\Thomsons-gazelle1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PictureWidthcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PictureWidthStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Positionstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PrecedesPseudoLangTestContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PrecedesPseudoLangTestStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PrecedesPseudoTestAcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PrecedesPseudoTestAStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PrecedesPseudoTestBcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PrecedesPseudoTestBStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PseudoAfterContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\PseudoAfterStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Pseudostylecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Pseudostylestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RemoveAutoWidthContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RemoveAutoWidthStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RemoveScrSectionClasscontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RemoveScrSectionClassStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ReplacePrinceQuotecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\ReplacePrinceQuoteStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RevarsalEmptyPagecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RevarsalEmptyPagestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RevarsalHeadercontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RevarsalHeaderstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RightToLeftHeadercontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RightToLeftHeaderstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RunningHeaderNonecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\RunningHeaderNonestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\selfspacetestcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\selfspaceteststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SetColumnGapTest1.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SignificantSpacecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SignificantSpacestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SinglePageRefstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SlashSymbolcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SlashSymbolstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SpaceAfterClosingBracecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\spacebeforecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\spacebeforeStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Spacebeginningentriescontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SpacesInDictionarycontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SpacesInDictionarystyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\spanstylecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\spanstyleStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\StyleChangesinMexicocontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\StyleChangesinMexicoReversalcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\StyleChangesinMexicoReversalstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\StyleChangesinMexicostyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\StyleExistTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\stylesTD100.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SubscriptForNewFlexcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\SubscriptForNewFlexstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Table2content.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Table2styles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Tablecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TablePropertycontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TablePropertystyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\Tablestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TabUnicodecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TabUnicodestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TeluguFootnoteMarkerTestcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TeluguFootnoteMarkerTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TeTestcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TeTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextAlignTestAstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextAlignTestBstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontSizeTestAstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontSizeTestBstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontSizeTestCStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontSizeTestDStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontStyleTestAStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontStyleTestBStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontVariantTestAStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontWeightTestAstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontWeightTestBstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontWeightTestCstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontWeightTestDStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextFontWeightTestEStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TextIndentTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TokPisincontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\TokPisinstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\UnicodeTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\UnitConversionstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\VerseNumbercontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\VerseNumberStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\VerticalAlignTeststyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\VisibilityTestcontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\VisibilityTestStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\WhitespaceContent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\WhiteSpaceNextLinecontent.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\WhiteSpaceNextLinestyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\WhitespaceStyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\expected\WidowsandOrphansstyles.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\AllPageFooter.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\AncestorChildTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\AncestorTestForNewFlexVersion.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\AnchorSpaceFlex83.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\AnchorTag.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ApplySpanFontStyleTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ApplySpanFontStyleTestFull.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\AutoWidth.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\B1pe.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\BackgroundColor.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\BackgroundWhiteRemoval.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\body.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\BookNameChanged.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Border.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\BuangExport.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\BuangX.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Bughotu-gospels.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\CallTOCDictionary.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\CallTOCScripture.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\CharisSILFont.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\CharisSILFontTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ClassContent.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ClassNameValueTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ColorTestPositive.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ColumnCount.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ColumnGap.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ColumnGapLong.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ColumnGapPercent.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ContentCounter.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ContentNormalTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Counter1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Counter2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Counter3.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\CounterPart.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\CreateStyleWithNewValueTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\CrossRef.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\CrossRefSpace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryHeaderSameAsBody.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryMainStyle.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest3.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest4.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest5.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest6.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest7.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest8.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DictionaryPageTest9.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Direction.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DisplayInline.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DisplayNone.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DivEntrySubEntryMarginLeft.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DivEntrySubEntryMarginLeft2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\div_header.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DoulosSILFont.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DropCap.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\DropCapsTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\EmptyDivTag.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\EMTest1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\EMTest2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\EMTest3.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\EntryStyle.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\EntrySubEntryMarginLeft.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ExportLO\Dictionarymain.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ExportLO\Pictures\800200-det.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ExportLO\Pictures\contre-sanglon.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ExportLO\Pictures\selle amazone.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ExportLO\Pictures\selle dbstacle.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ExportLO\Pictures\selle de course.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ExportLO\Pictures\selle de dressage.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ExportLO\Pictures\tapis de selle.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ExportLO\ScriptureInput.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\fixed-line-height.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Flea1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FLExRev.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Font.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FontFamily.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FontWeightBolder.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Footnote.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FootNoteFormat.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FootNoteSeperator.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FootnoteSpanContent.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FootnoteVerse2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FootnoteVerseNumber.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FrontMatterDirection.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FrontMatterOptions1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FrontMatterOptions2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FrontMatterOptions3.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FrontMatterOptions4.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\FullBuangTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\GentiumFont.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\GetFontweightTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\GlossaryReference.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\GlossaryReferenceTitle.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Graphics.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\GuidewordLength.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\HardSpaceAfterVerseNumber.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\HeaderSpace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Headword_Main.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Headword_Reversal.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\HomographSpace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\HyphenationKeywords.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\HyphenationRuleLO.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\hyphentest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ImageAttrib.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ImageEmptyCaption.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ImageFloatTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ImageNoCaption.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\InlineBlock.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\InsertHardSpace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\InsertWhiteSpace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ItalicOnFlex83.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Kabwa.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\KeepImageExtension.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\KeepLineSeperator.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\KeepWithNextStyleTest.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\KeepWithNextTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Language.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\LanguageColor.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\LanguageInline.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\LanguageTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Larger.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\LineHeight.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ListOlUl.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\main.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\MainTitleDisplay.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Master.xml" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\MexicoStyle.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\MirroredPageRef.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\mrk.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\multiClass.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NestedDivCase1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NestedDivCase2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NestedDivCase3.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NestedDivCase4.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NewFlexBuangColor.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NewGuidewordStyle.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NewGuidewordStyle2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NewMultiClassSubEntry.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NewPunctuationPsuedoChild.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\NoImage.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\OutlineLevel.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Oxes.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Padding.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PaddingAll.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PaddingBottomTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PaddingTopTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PageBreakAfterTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PageBreakBeforeTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooter.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestA.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestB.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestC.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PagePseudoFirstTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PageTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pageTest1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PageTest10.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest3.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest4.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest5.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest6.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest7.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest8.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest9.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\para.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ParallerReferenceKeepWith.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Parent1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ParentPrecedeSpace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PerformanceTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PictureColumnWidth.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PictureMaxHeight.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PictureSpaceAfter.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\2.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\Ax1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\Flea1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\Kele-.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\leftindexmacro1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\lion.tif" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pictures\Thomsons-gazelle1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PictureWidth.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Position.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Precede1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PrecedesPseudoLangTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PrecedesPseudoTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PrecedesPseudoTestA.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PrecedesPseudoTestB.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PseudoAfter.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PseudoAfter1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PseudoBefore.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PseudoBeforeOnOnFlex83.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PseudoContains.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PseudoQuotes.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\PseudoQuotes1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Pseudostyle.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ReferenceMark.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\RemoveAutoWidth.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\RemoveScrSectionClass.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ReplacePrinceQuote.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\RevarsalEmptyPage.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\RevarsalHeader.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\RightToLeftHeader.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\RunningHeaderNone.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\ScriptureHeaderSameAsBody.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\selfspacetest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\SignificantSpace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\SinglePageRef.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\SlashSymbol.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\SpaceAfterClosingBrace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\spacebefore.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Spacebeginningentries.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\SpaceIssueOnSense.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\SpacesInDictionary.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\SpaceTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\spanstyle.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\StyleChangesinMexico.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\StyleChangesinMexicoReversal.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\SubscriptForNewFlex.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\SuperVerticalAlign.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\t9.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Table.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Table2.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TableProperty.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TabUnicode.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TD100.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TD78a.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TD82a.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TD86.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TD96.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TeluguFootnoteMarkerTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TeluguGondwana.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TeTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextAlignTestA.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextAlignTestB.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextDecorationLineThroughTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontSizeTestA.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontSizeTestB.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontSizeTestC.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontSizeTestD.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontStyleTestA.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontStyleTestB.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontVariantTestA.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontWeightTestA.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontWeightTestB.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontWeightTestC.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontWeightTestD.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextFontWeightTestE.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Textindent.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextReplace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TextStyleTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\Thomsons-gazelle1.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\TokPisin.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\UnicodeTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\UnitConversion.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\UserIndicFont.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\VerseNumber.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\VerticalAlignTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\VisibilityTest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\whitespace.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\WhiteSpaceNextLine.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\WidowsandOrphans.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\output\ExportLO\Pictures\800200-det.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\output\ExportLO\Pictures\contre-sanglon.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\output\ExportLO\Pictures\selle amazone.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\output\ExportLO\Pictures\selle dbstacle.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\output\ExportLO\Pictures\selle de course.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\output\ExportLO\Pictures\selle de dressage.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\output\ExportLO\Pictures\tapis de selle.jpg" />
+    <Content Include="OpenOfficeConvert\TestFiles\testView.py" />
+    <Content Include="OpenOfficeConvert\TestFiles\tvf.py" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

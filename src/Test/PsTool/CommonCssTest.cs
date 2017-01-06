@@ -67,13 +67,13 @@ namespace Test.PsTool
         ///</summary>
 
         [Test]
-        [Ignore]
         public void MakeSingleCSSTest3()
         {
-            string fileName = "MergedLayout_02.css";
+            string fileName = "MergedLayout_03.css";
             string input = GetFileNameWithPath("NoFile.css");
-            string expected = Common.MakeSingleCSS(input, fileName);
-            Assert.AreEqual(expected, input);
+			string output = Common.MakeSingleCSS(input, fileName);
+			string expected = GetFileNameWithExpectedPath(fileName);
+			TextFileAssert.AreEqual(expected, output);
         }
 
         /// <summary>
@@ -89,23 +89,7 @@ namespace Test.PsTool
             returnValue = Path.GetFileName(returnValue);
 			Assert.IsTrue(returnValue.Contains(expected), "MakeSingleCssTest4 Failed");
         }
-
-        /// <summary>
-        ///A test for MakeSingleCSS
-        ///</summary>
-        [Test]
-        [Ignore]
-        public void MakeSingleCSSTest5()
-        {
-            string fileName = "";
-            string input = "";
-            string expected = "";
-
-            string returnValue = Common.MakeSingleCSS(input, fileName);
-            returnValue = Path.GetFileName(returnValue);
-            Assert.AreEqual(expected, returnValue);
-        }
-
+       
         /// <summary>
         ///A test for GetCSSFileNames
         ///</summary>

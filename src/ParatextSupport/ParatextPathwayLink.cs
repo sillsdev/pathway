@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ParatextPathwayLink.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -38,22 +38,14 @@ namespace SIL.PublishingSolution
         private string _mOutputLocationPath;
         private string _mFormat;
         private string _mPublicationName;
-        private bool _isTesting;
         private readonly XslCompiledTransform _mCleanUsx = new XslCompiledTransform();
         private readonly XslCompiledTransform _mSeparateIntoBooks = new XslCompiledTransform();
         private readonly XslCompiledTransform _mUsxToXhtml = new XslCompiledTransform();
         private readonly XslCompiledTransform _mEncloseParasInSections = new XslCompiledTransform();
-        private readonly XslCompiledTransform _mSectionHeadMissing = new XslCompiledTransform();
 
         #endregion
 
         #region public variables
-
-        public bool IsTesting
-        {
-            get { return _isTesting; }
-            set { _isTesting = value; }
-        }
 
         public string MOutputLocationPath
         {
@@ -80,7 +72,7 @@ namespace SIL.PublishingSolution
         }
 
         #endregion
-        
+
         #region public Methods
 
         /// ------------------------------------------------------------------------------------
@@ -94,9 +86,9 @@ namespace SIL.PublishingSolution
         /// <param name="userWs">The user writing system locale.</param>
         /// <param name="userName">Name of the user.</param>
         /// ------------------------------------------------------------------------------------
-        // ReSharper disable UnusedMember.Global                
+        // ReSharper disable UnusedMember.Global
         public ParatextPathwayLink(string projName, string databaseName, string ws, string userWs, string userName)
-        // ReSharper restore UnusedMember.Global        
+        // ReSharper restore UnusedMember.Global
         {
             if (ws == "en")
                 ws = "zxx";
@@ -129,7 +121,7 @@ namespace SIL.PublishingSolution
             MDatabaseName = databaseName;
             _mXslParams = xslParams;
             _mProjectName = xslParams["projName"].ToString();
-            // If the writing system is undefined or set (by default) to English, add a writing system code 
+            // If the writing system is undefined or set (by default) to English, add a writing system code
             // that should not have a dictionary to prevent all words from being marked as misspelled.
             object strWs;
             if (_mXslParams.TryGetValue("ws", out strWs))
@@ -154,7 +146,7 @@ namespace SIL.PublishingSolution
         /// Exports to the specified Scripture books to pathway.
         /// (Called from Paratext by Reflection.)
         /// </summary>
-        /// <param name="usxBooksToExport">The XML document representation of the Scripture 
+        /// <param name="usxBooksToExport">The XML document representation of the Scripture
         /// books in USFM file.</param>
         /// ------------------------------------------------------------------------------------
         // ReSharper disable UnusedMember.Global
@@ -162,7 +154,7 @@ namespace SIL.PublishingSolution
         // ReSharper restore UnusedMember.Global
         {
             DialogResult result;
-            if (!IsTesting)
+            if (!Common.Testing)
             {
                 ScriptureContents dlg = new ScriptureContents();
                 dlg.DatabaseName = MDatabaseName;
@@ -298,7 +290,7 @@ namespace SIL.PublishingSolution
                 XmlWriter htmlw2 = XmlWriter.Create(cleanUsx, _mCleanUsx.OutputSettings);
                 _mCleanUsx.Transform(XmlReader.Create(new StringReader(separatedBooks.ToString())), null, htmlw2, null);
 
-                // Step 3. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
+                // Step 3. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the
                 //       following elements to Pathway's format: book title, chapters, figures, footnotes.
                 StringBuilder html = new StringBuilder();
                 XmlWriter htmlw3 = XmlWriter.Create(html, _mUsxToXhtml.OutputSettings);
@@ -360,36 +352,28 @@ namespace SIL.PublishingSolution
             XmlWriter htmlw2 = XmlWriter.Create(cleanUsx, _mCleanUsx.OutputSettings);
             _mCleanUsx.Transform(XmlReader.Create(new StringReader(separatedBooks.ToString())), null, htmlw2, null);
 
-            // Step 3. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
+            // Step 3. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the
             //       following elements to Pathway's format: book title, chapters, figures, footnotes.
             StringBuilder html3 = new StringBuilder();
             XmlWriter htmlw3 = XmlWriter.Create(html3, _mUsxToXhtml.OutputSettings);
             _mUsxToXhtml.Transform(XmlReader.Create(new StringReader(cleanUsx.ToString())), args, htmlw3, null);
 
-
-            // Step 4. Convert the SFMs to styles recognized by Pathway. Also, change the structure of the 
-            //       following elements to Pathway's format: book title, chapters, figures, footnotes.
-            StringBuilder html4 = new StringBuilder();
-            XmlWriter htmlw4 = XmlWriter.Create(html4, _mSectionHeadMissing.OutputSettings);
-            _mSectionHeadMissing.Transform(XmlReader.Create(new StringReader(html3.ToString())), args, htmlw4, null);
-
-            
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.DtdProcessing = DtdProcessing.Parse;
 
-            // Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles) and 
+            // Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles) and
             //       include the Scripture sections within columns.
             FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
             XmlWriter htmlw5 = XmlWriter.Create(xhtmlFile, _mEncloseParasInSections.OutputSettings);
-            XmlReader reader5 = XmlReader.Create(new StringReader(html4.ToString()), settings);
+            XmlReader reader5 = XmlReader.Create(new StringReader(html3.ToString()), settings);
             _mEncloseParasInSections.Transform(reader5, null, htmlw5, null);
             xhtmlFile.Close();
         }
-        
+
         #endregion
 
         #region private methods
-        
+
         /// ------------------------------------------------------------------------------------
         /// <summary>
         /// Loads the style sheets that are used to transform from Paratext USX to XHTML.
@@ -410,18 +394,14 @@ namespace SIL.PublishingSolution
             _mEncloseParasInSections.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "ParatextSupport.EncloseParasInSections.xsl")));
-            _mSectionHeadMissing.Load(XmlReader.Create(
-                Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                "ParatextSupport.SectionHeadMismatch.xsl")));
         }
-        
+
         private void ExportProcess(List<XmlDocument> usxBooksToExport, string publicationName, string format, string outputLocationPath, DialogResult result)
         {
 #if (TIME_IT)
                 DateTime dt1 = DateTime.Now;    // time this thing
 #endif
 	        var inProcess = new InProcess(0, 6);
-            var curdir = Environment.CurrentDirectory;
             var myCursor = Cursor.Current;
             Cursor.Current = Cursors.WaitCursor;
             inProcess.Text = "Scripture Export";
@@ -452,7 +432,6 @@ namespace SIL.PublishingSolution
 
             if (File.Exists(fileName))
             {
-                // TODO: Localize string
                 var msg = LocalizationManager.GetString("ParatextPathwayLink.ExportProcess.Message1", " already exists. Overwrite?", "");
                 result = MessageBox.Show(string.Format("{0}" + Environment.NewLine + msg, fileName), string.Empty, MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
@@ -478,9 +457,12 @@ namespace SIL.PublishingSolution
             inProcess.PerformStep();
             inProcess.Close();
 
-            PsExport exporter = new PsExport();
-            exporter.DataType = "Scripture";
-            exporter.Export(fileName);
+            if (!Common.Testing)
+            {
+                PsExport exporter = new PsExport();
+                exporter.DataType = "Scripture";
+                exporter.Export(fileName);
+            }
         }
 
         /// <summary>
@@ -502,7 +484,7 @@ namespace SIL.PublishingSolution
                 fw.Close();
             }
         }
-        
+
         private static void GetBookName(XmlNodeList list, ref string bookName)
         {
             if (list != null)
@@ -530,7 +512,7 @@ namespace SIL.PublishingSolution
                 }
             }
         }
-        
+
         #endregion
     }
 }

@@ -127,16 +127,6 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_.bgt_ParagraphContinuation_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:float="top" fo:margin-top="0pt" fo:margin-right="3.75pt" fo:margin-bottom="3.75pt" fo:margin-left="0pt" fo:text-indent="0pt" fo:text-align="center" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-align="center" />
-      <style:text-properties text:display="block" fo:text-transform="capitalize" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bgt_pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="pictureCaption_pictureCenter_Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
-    </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
       <style:text-properties text:display="true" />
@@ -416,11 +406,8 @@
       </style:paragraph-properties>
       <style:text-properties style:font-name="Times New Roman" fo:language="zxx" fo:country="none" style:font-name-complex="Times New Roman" />
     </style:style>
-    <style:style style:family="graphic" style:name="Graphics2">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
-    <style:style style:name="Graphics" style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
+    <style:style style:name="Graphics" style:family="graphic">
+      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" />
     </style:style>
     <style:style style:name="GraphicsI1" style:family="graphic" style:parent-style-name="Graphics1">
       <style:graphic-properties style:vertical-pos="bottom" style:vertical-rel="page-content" style:horizontal-pos="center" style:horizontal-rel="page" />
@@ -428,11 +415,8 @@
     <style:style style:name="GraphicsI2" style:family="graphic" style:parent-style-name="Graphics1">
       <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" />
     </style:style>
-    <style:style style:family="graphic" style:name="fr2" style:parent-style-name="Graphics2">
-      <style:graphic-properties text:anchor-type="paragraph" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
-    <style:style style:name="Frame" style:family="graphic" style:parent-style-name="Graphics" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:graphic-properties text:anchor-type="paragraph" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" style:flow-with-text="false" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
+    <style:style style:name="Frame" style:family="graphic" style:parent-style-name="Graphics">
+      <style:graphic-properties text:anchor-type="paragraph" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" style:flow-with-text="false" />
     </style:style>
     <text:outline-style>
       <text:outline-level-style text:level="1" style:num-format="">

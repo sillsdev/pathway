@@ -3,10 +3,10 @@
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
-  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
-  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="../DistFiles/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Compression.Zip" AssemblyFile="../packages/MSBuild.Extension.Pack.1.8.0/tools/net40/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Web.WebClient" AssemblyFile="../packages/MSBuild.Extension.Pack.1.8.0/tools/net40/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.Framework.TextString" AssemblyFile="../packages/MSBuild.Extension.Pack.1.8.0/tools/net40/MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.Folder" AssemblyFile="../packages/MSBuild.Extension.Pack.1.8.0/tools/net40/MSBuild.ExtensionPack.dll" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -212,7 +212,7 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <Reference Include="BuildTasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -221,7 +221,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition=" '$(MSBuildToolsPath)' != '' "/>
   <Import Project="C:\Windows\Microsoft.NET\Framework64\v2.0.50727\Microsoft.CSharp.targets" Condition=" '$(MSBuildToolsPath)' == '' "/>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets. -->
   <Target Name="MyTest">
     <Message Text="Path: $(MSBuildToolsPath)" Importance="high" />
@@ -472,7 +472,7 @@
     </MSBuild.ExtensionPack.Framework.TextString>
     <Message Text="ArchiveName: $(ArchiveName)" Importance="high" />
     <MSBuild.ExtensionPack.Web.WebClient TaskAction="DownloadFile" Url="http://mirror.ctan.org/systems/texlive/tlnet/install-tl.zip" FileName="$(ArchiveName)"/>
-    <Exec Command="tar -xzf install-tl-unx.tar.gz" WorkingDirectory="%(InstallerWorkDir.Identity)"/>
+    <Exec Command="unzip install-tl-unx.tar.gz" WorkingDirectory="%(InstallerWorkDir.Identity)"/>
   </Target>
 
   <Target Name="TlInstall">
@@ -517,7 +517,7 @@
     <modules Include="lm fontspec euenc tipa xkeyval xunicode"/>
     <modules Include="fancyhdr float graphics hanging mdframed oberdiek"/>
     <modules Include="setspace tools xcolor eso-pic geometry lettrine"/>
-    <modules Include="bidi iftex xetex xetex-def needspace"/>
+    <modules Include="bidi iftex xetex needspace"/>
   </ItemGroup>
   <Target Name="TlWinPkgInstall">
     <MSBuild.ExtensionPack.FileSystem.Folder TaskAction="Get" Path="XeLaTexConvert\XeLaTexExe\bin" Match="win32">

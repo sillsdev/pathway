@@ -4,7 +4,7 @@
     exclude-result-prefixes="xhtml"
     xmlns="http://www.w3.org/1999/xhtml">
 
-  <xsl:output method="xml" version="1.0" encoding="UTF-8" omit-xml-declaration="yes" indent="yes"
+  <xsl:output method="xml" version="1.0" encoding="UTF-8" omit-xml-declaration="yes" indent="no"
       doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"/>
 
   <!-- Remove text (empty lines) at the root level. -->
@@ -63,7 +63,7 @@
       
       <!-- Include any introduction sections that begin with headings -->
       <xsl:for-each select="xhtml:h1[starts-with(@class, 'Intro_')]">
-        <xsl:if test="not(preceding-sibling::*[1][self::xhtml:h1][starts-with(@class, 'Intro_')])"> <!-- check last constraint -->
+        <xsl:if test="not(preceding-sibling::*[1][self::xhtml:h1][starts-with(@class, 'Intro_') or starts-with(@class,'i')])"> <!-- check last constraint -->
           <xsl:choose>
             <xsl:when test="@class = 'Intro_Section_Head' or @class = 'Intro_Title_Main' or @class = 'Intro_Title_Secondary' or
               @class = 'Intro_Title_Tertiary'">
@@ -118,7 +118,7 @@
   <xsl:template match="xhtml:p" mode="IntroCopy">
     <xsl:call-template name="p"/>
     <xsl:apply-templates 
-      select="following-sibling::*[1][(self::xhtml:p and starts-with(@class, 'Intro_')) or self::xhtml:table]" mode="IntroCopy"/>
+      select="following-sibling::*[1][(self::xhtml:p and (starts-with(@class, 'Intro_') or starts-with(@class,'i'))) or self::xhtml:table]" mode="IntroCopy"/>
   </xsl:template>
   
   <!-- Copy tables and paragraphs into a Scripture section. -->
@@ -147,7 +147,7 @@
     <xsl:apply-templates select="following-sibling::*[1]" mode="IntroSectionPrecedesHeading"/>
   </xsl:template>
   
-  <xsl:template match="xhtml:p[starts-with(@class, 'Intro_')]" mode="IntroSectionPrecedesHeading">
+  <xsl:template match="xhtml:p[starts-with(@class, 'Intro_') or starts-with(@class,'i')]" mode="IntroSectionPrecedesHeading">
     <xsl:call-template name="IntroSection"/>
   </xsl:template>
   
@@ -181,11 +181,11 @@
     <xsl:apply-templates select="following-sibling::*[1]" mode="ScrSectionPrecedesHeading"/>
   </xsl:template>
   
-  <xsl:template match="*[starts-with(@class, 'Intro_')]" mode="ScrSectionPrecedesHeading">
+  <xsl:template match="*[starts-with(@class, 'Intro_') or starts-with(@class,'i')]" mode="ScrSectionPrecedesHeading">
     <xsl:apply-templates select="following-sibling::*[1]" mode="ScrSectionPrecedesHeadingFollowsIntro"/>
   </xsl:template>
 
-  <xsl:template match="xhtml:p[not(starts-with(@class, 'Intro_'))]" mode="ScrSectionPrecedesHeading">
+  <xsl:template match="xhtml:p[not(starts-with(@class, 'Intro_') or starts-with(@class,'i'))]" mode="ScrSectionPrecedesHeading">
     <xsl:call-template name="ScrSection"/>  
   </xsl:template>
   
@@ -222,11 +222,11 @@
   <!-- *** Handle case where the first Scripture element at the root level immediately follows the introduction. *** -->
   <xsl:template match="*" mode="ScrSectionPrecedesHeadingFollowsIntro"/>
 
-  <xsl:template match="*[starts-with(@class, 'Intro_')]|xhtml:table" mode="ScrSectionPrecedesHeadingFollowsIntro">
+  <xsl:template match="*[starts-with(@class, 'Intro_') or starts-with(@class, 'i')]|xhtml:table" mode="ScrSectionPrecedesHeadingFollowsIntro">
     <xsl:apply-templates select="following-sibling::*[1]" mode="ScrSectionPrecedesHeadingFollowsIntro"/>
   </xsl:template>
 
-  <xsl:template match="xhtml:p[not(starts-with(@class, 'Intro_'))]" mode="ScrSectionPrecedesHeadingFollowsIntro">
+  <xsl:template match="xhtml:p[not(starts-with(@class, 'Intro_') or starts-with(@class, 'i'))]" mode="ScrSectionPrecedesHeadingFollowsIntro">
     <xsl:call-template name="ScrSection"/>
   </xsl:template>
 </xsl:stylesheet>

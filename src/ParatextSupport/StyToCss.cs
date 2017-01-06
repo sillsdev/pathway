@@ -108,38 +108,16 @@ namespace SIL.PublishingSolution
         /// ------------------------------------------------------------
         private void FindStyFile(string database, string ssfFullPath)
         {
-            string ssfFile = database + ".ssf";
-            if (string.IsNullOrEmpty(ssfFullPath))
-            {
-                if (Common.GetOsName().Contains("Windows"))
-                {
-                    ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\Wow6432Node\\ScrChecks\\1.0\\Settings_Directory", "");
-                    if (string.IsNullOrEmpty(ssfFullPath))
-                    { // Handle 32-bit Windows 7 and XP
-                        ssfFullPath = Common.GetValueFromRegistry("SOFTWARE\\ScrChecks\\1.0\\Settings_Directory", "");
-                    }
-                }
-                else
-                {
-
-                    ssfFullPath = Common.GetParatextProjectPath();
-                    StyFullPath = Common.PathCombine(ssfFullPath, ssfFile);
-
-                }
-
-                ssfFullPath = ssfFullPath + ssfFile;
-            }
-            
-
+	        string ssfFile = SettingsHelper.GetSettingFilePathForParatext(database);
             bool isStylesheet = false;
-
-            if (!File.Exists(ssfFullPath))
+			if (!File.Exists(ssfFile))
             {
                 Debug.WriteLine(ssfFile + " does not exist.");
                 return;
             }
 
-            var reader = new XmlTextReader(ssfFullPath) { XmlResolver = null };
+			string styFile = string.Empty;
+			var reader = new XmlTextReader(ssfFile) { XmlResolver = null };
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element && reader.Name == "StyleSheet") // Is class name null
@@ -148,12 +126,12 @@ namespace SIL.PublishingSolution
                 }
                 else if (reader.NodeType == XmlNodeType.Text && isStylesheet)
                 {
-                    ssfFile = reader.Value;
+					styFile = reader.Value;
                     break;
                 }
             }
             reader.Close();
-            StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFullPath), ssfFile);
+			StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFile), styFile);
         }
 
         /// ------------------------------------------------------------------------
@@ -468,6 +446,7 @@ namespace SIL.PublishingSolution
             _mapClassName["m"] = "Paragraph_Continuation";
             _mapClassName["fqa"] = "fqa";
             _mapClassName["sc"] = "Inscription";
+			_mapClassName["pn"] = "pn";
         }
     }
 }

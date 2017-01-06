@@ -697,7 +697,10 @@ namespace SIL.Tool
                         rFile.FileDescription = Path.GetFileNameWithoutExtension(file) + " stylesheet";
                         rFile.FileRelationship = "source";
                     }
-                    AddFile(rFile);
+
+					if(!rFile.FileName.Contains("#"))
+						AddFile(rFile);
+
                 }
             }
             Status = "ready";
@@ -1552,6 +1555,10 @@ namespace SIL.Tool
                         licenseXml = Common.PathCombine(licenseXml, "Copyrights");
                     }
                     licenseXml = Common.PathCombine(licenseXml, filename);
+					if (!File.Exists(licenseXml))
+					{
+						licenseXml = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Copyrights");
+					}
                 }
                 else
                 {
@@ -1630,7 +1637,8 @@ namespace SIL.Tool
                 zipFile.BeginUpdate();
                 foreach (string file in filesCollection)
                 {
-                    zipFile.Add(file, CompressionMethod.Stored);
+					if (!file.Contains("#"))
+						zipFile.Add(file, CompressionMethod.Stored);
                 }
 
                 foreach (var dirPath in dirCollection)

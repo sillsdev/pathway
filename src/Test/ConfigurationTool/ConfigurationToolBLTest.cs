@@ -67,7 +67,7 @@ namespace Test.UIConfigurationToolBLTest
         protected void SetUp()
         {
             cTool = new ConfigurationTool();
-            cTool._fromNunit = true;
+			Common.Testing = true;
             cToolBL = new ConfigurationToolBL();
 
             //_pathwayPath = Common.PathCombine(Common.GetAllUserAppPath(), "SIL/Pathway");
@@ -305,22 +305,7 @@ namespace Test.UIConfigurationToolBLTest
             Assert.AreEqual(afterNew - 1, afterDelete, "New Count Test Fails");
             cTool.Close();
         }
-
-        [Ignore]
-        [Test]
-        public void LoadTest()
-        {
-            SetUp();
-            CopyFile();
-            LoadParam();
-            cTool._cToolBL.ConfigurationTool_LoadBL();
-            cTool._cToolBL.ConfigurationTool_FormClosingBL();
-            GridRowCount_Load();
-            GridRowValue_Load();
-            FormButtonEnable_Load();
-        }
-
-
+       
         [Test]
         [Category("ShortTest")]
         public void SaveInputTypeTest()
@@ -328,7 +313,7 @@ namespace Test.UIConfigurationToolBLTest
             SetUp();
             CopyFile();
             Param.Value["OutputPath"] = _outputBasePath;
-            cToolBL.SaveInputType("Scripture");
+            Common.SaveInputType("Scripture");
             const string expected = "Scripture";
             var xdoc = new XmlDocument();
             xdoc.Load(Common.PathCombine(Common.GetAllUserPath(), "StyleSettings.xml"));

@@ -35,10 +35,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using L10NSharp;
 using SilTools;
+using SIL.CommandLineProcessing;
 using SIL.Tool;
 
 namespace SIL.PublishingSolution
@@ -320,9 +322,20 @@ namespace SIL.PublishingSolution
         public string OutputFolder
         {
             get { return txtSaveInFolder.Text; }
-            set { txtSaveInFolder.Text = value; }
+			set { txtSaveInFolder.Text = value; }
         }
         #endregion Properties
+
+		public string ReplaceInvalidChars(string value)
+		{
+			char[] invalidPathChars = Path.GetInvalidPathChars();
+			invalidPathChars[invalidPathChars.Length - 1] = ' ';
+			foreach (var invalidPathChar in invalidPathChars)
+			{
+				value = value.Replace(invalidPathChar, '_');
+			}
+			return value;
+		}
 
         private void ExportThroughPathway_Load(object sender, EventArgs e)
         {
@@ -400,8 +413,7 @@ namespace SIL.PublishingSolution
         {
             // not setting defaults, just opening the dialog:
             // load the settings file and migrate it if necessary
-            Param.LoadSettings();
-            Param.SetValue(Param.InputType, InputType);
+			Param.SetLoadType = InputType;
             Param.LoadSettings();
             isFromConfigurationTool = true;
         }
@@ -429,32 +441,23 @@ namespace SIL.PublishingSolution
 	            }
 	            if (AppDomain.CurrentDomain.FriendlyName.ToLower().Contains("fieldworks"))
 	            {
-		            var xdoc = new XmlDocument();
 		            try
 		            {
 						IDictionary<string,string> value=new Dictionary<string, string>();
 						var settingsFile = ssf;
-			            xdoc.Load(settingsFile);
-			            var curVernWssnode = xdoc.SelectSingleNode("//CurVernWss/Uni");
-			            if (curVernWssnode != null)
-			            {
-				            foreach (var lang in curVernWssnode.InnerText.Split(' '))
-				            {
-								var langname = GetLanguageValues(lang);
-					            if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-						            value.Add(lang, langname.Replace(',',' '));
-				            }
-			            }
-			            var curAnalysisWssnode = xdoc.SelectSingleNode("//CurAnalysisWss/Uni");
-			            if (curAnalysisWssnode != null)
-			            {
-							foreach (var lang in curAnalysisWssnode.InnerText.Split(' '))
-				            {
-								var langname = GetLanguageValues(lang);
-								if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-									value.Add(lang, langname.Replace(',', ' '));
-				            }
-			            }
+                        var flexScan = new FlexScan(settingsFile);
+				        foreach (var lang in flexScan.VernWs)
+				        {
+							var langname = GetLanguageValues(lang);
+					        if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+						        value.Add(lang, langname.Replace(',',' '));
+				        }
+						foreach (var lang in flexScan.AnalWs)
+				        {
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+				        }
 						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
 		            }
 		            catch (Exception)
@@ -511,6 +514,12 @@ namespace SIL.PublishingSolution
             }
 
             string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\");// + xsltFile[0]
+
+			if (!Directory.Exists(xsltFullName))
+			{
+				xsltFullName = Path.GetDirectoryName(Common.GetApplicationPath());
+				xsltFullName = Common.PathCombine(xsltFullName, "Preprocessing\\");
+			}
             xsltFullName = Common.PathCombine(xsltFullName, InputType + "\\"); //TD-2871 - separate dictionary and Scripture xslt
             if (Directory.Exists(xsltFullName))
             {
@@ -758,8 +767,8 @@ namespace SIL.PublishingSolution
         protected void LoadAvailFormats()
         {
             OperatingSystem OS = Environment.OSVersion;
-            string BackendsPath = Common.ProgInstall;
-            Backend.Load(BackendsPath);
+	        string backendsPath = Common.ProgInstall;
+            Backend.Load(backendsPath);
 			Console.WriteLine( @"InputType from : {0}", InputType);
             ArrayList exportType = Backend.GetExportType(InputType);
             exportType.Sort();
@@ -856,7 +865,7 @@ namespace SIL.PublishingSolution
                     if (OutputFolder.Substring(outputFolderLength - 2, 2) != "\\")
                         OutputFolder = OutputFolder + "\\";
                 }
-
+				txtSaveInFolder.Text = ReplaceInvalidChars(txtSaveInFolder.Text);
                 if (!Directory.Exists(OutputFolder))
                     Directory.CreateDirectory(OutputFolder);
             }
@@ -875,6 +884,11 @@ namespace SIL.PublishingSolution
             if (!File.Exists(CoverPageImagePath))
             {
                 CoverPageImagePath = Common.PathCombine(Common.GetApplicationPath(), "Graphic\\cover.png");
+				if (!File.Exists(CoverPageImagePath))
+				{
+					CoverPageImagePath = Path.GetDirectoryName(Common.GetApplicationPath());
+					CoverPageImagePath = Common.PathCombine(CoverPageImagePath, "Graphic\\cover.png");
+				}
             }
 
             // attempt to save the properties - if it doesn't work, leave the dialog open
@@ -909,6 +923,18 @@ namespace SIL.PublishingSolution
                 Param.SetValue(Param.Preprocessing, preprocessing);
             }
             Param.Write();
+
+
+            //StringBuilder sb =new StringBuilder();
+            //sb.Append("file1.xhtml");
+            //sb.Append(", ");
+            //sb.Append("file2.xhtml");
+
+            //string argument = string.Format("--target '{0}' --directory '{1}' --files '{2}'", ddlLayout.SelectedItem.ToString() , OutputFolder, sb.ToString());
+
+            //CommandLineRunner.Run(Common.PathCombine(Common.GetApplicationPath(), "PathwayExport.exe"), argument,
+            //    OutputFolder, 50000, null);
+
             this.Close();
         }
 
@@ -930,6 +956,13 @@ namespace SIL.PublishingSolution
         {
             string getApplicationPath = Common.GetApplicationPath();
             string helpImproveCommand = Common.PathCombine(getApplicationPath, "HelpImprove.exe");
+
+			if (!File.Exists(helpImproveCommand))
+			{
+				helpImproveCommand = Path.GetDirectoryName(Common.GetApplicationPath());
+				helpImproveCommand = Common.PathCombine(helpImproveCommand, "HelpImprove.exe");
+			}
+
             const string registryPath = "Software\\SIL\\Pathway";
 
             if (File.Exists(helpImproveCommand))
@@ -1239,23 +1272,7 @@ namespace SIL.PublishingSolution
         {
             if (_fromPlugIn)
             {
-                // Take into account custom directory installs - just look for the ConfigurationTool.exe
-                // in the same directory as this .dll.
-                string fullPathwayPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(PrintVia)).CodeBase);
-                // if the path returned starts with file://, trim that part out
-                string pathwayPath = (fullPathwayPath.StartsWith("file"))
-                                         ? fullPathwayPath.Substring(6)
-                                         : fullPathwayPath;
-
-                if (Common.UnixVersionCheck())
-                {
-                    return true;
-                }
-
-                if (File.Exists(Common.PathCombine(pathwayPath, "ConfigurationTool.exe")))
-                {
-                    return true;
-                }
+	            return true;
             }
             return false;
         }
@@ -1452,7 +1469,13 @@ namespace SIL.PublishingSolution
             if (!File.Exists(copyrightFileName))
             {
                 var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+				if (!Directory.Exists(copyrightDir))
+				{
+					copyrightDir = Path.GetDirectoryName(Common.AssemblyPath);
+					copyrightDir = Common.PathCombine(copyrightDir, "Copyrights");
+				}
                 copyrightFileName = Common.PathCombine(copyrightDir, "SIL_Custom_Template.xhtml");
+				
             }
             return copyrightFileName;
         }
@@ -1484,6 +1507,11 @@ namespace SIL.PublishingSolution
                         {
                             // this is our item - set the CopyrightFilename
                             var copyrightDir = Common.PathCombine(Common.GetPSApplicationPath(), "Copyrights");
+							if (!Directory.Exists(copyrightDir))
+							{
+								copyrightDir = Path.GetDirectoryName(Common.AssemblyPath);
+								copyrightDir = Common.PathCombine(copyrightDir, "Copyrights");
+							}
                             CopyrightPagePath = Common.PathCombine(copyrightDir, subnode.Attributes["file"].Value);
                         }
                     }

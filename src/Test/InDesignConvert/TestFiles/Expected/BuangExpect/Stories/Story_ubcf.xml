@@ -4,7 +4,7 @@
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/@page:first-bottom-center" Justification="CenterAlign">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/@page:first-bottom-center">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/headword">
         <Content><?ACE 18?></Content>
       </CharacterStyleRange>
     </ParagraphStyleRange>

@@ -690,6 +690,11 @@ namespace SIL.PublishingSolution
 				{
 					string executablePath = Common.GetApplicationPath();
 					copyRightFilePath = Common.PathCombine(executablePath, "Copyrights");
+					if (!Directory.Exists(copyRightFilePath))
+					{
+						copyRightFilePath = Path.GetDirectoryName(Common.AssemblyPath);
+						copyRightFilePath = Common.PathCombine(copyRightFilePath, "Copyrights");
+					}
 				}
 
 

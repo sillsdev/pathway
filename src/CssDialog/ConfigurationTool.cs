@@ -42,8 +42,7 @@ namespace SIL.PublishingSolution
 		#endregion
 
 		#region Public Variable
-
-		public bool _fromNunit = false;
+		
 		public string InputType = string.Empty;
 		public string MediaType = string.Empty;
 		public string Style = string.Empty;
@@ -111,13 +110,16 @@ namespace SIL.PublishingSolution
 				entryAssemblyName = "configurationtool";
 			}
 			if (entryAssemblyName.Trim().ToLower().Contains("configurationtool"))
-			{
+			{				
 				//It will call when the Configtool from Application
 				RemoveSettingsFile();
-				if (!_fromNunit)
+				if (!Common.Testing)
 					ValidateXMLVersion(Param.SettingPath);
+
+				_cToolBL.inputTypeBL = Param.GetInputType(Param.PathwaySettingFilePath);
+
 				Param.LoadSettings(); // Load StyleSetting.xml
-				_cToolBL.inputTypeBL = _cToolBL.LoadInputType();
+				//_cToolBL.inputTypeBL = _cToolBL.LoadInputType();
 			}
 			else
 			{
@@ -1543,5 +1545,16 @@ namespace SIL.PublishingSolution
 			_cToolBL.txtMaxImageWidth_ValidatedBL(sender);
 		}
 
-	}
+        private void ConfigurationTool_Resize(object sender, EventArgs e)
+        {
+            if (((ConfigurationTool)sender).Width >= 1280 || ((ConfigurationTool)sender).Height >= 853)
+            {
+                panel3.AutoScroll = false;
+            }
+            else
+            {
+                panel3.AutoScroll = true;
+            }
+        }
+    }
 }

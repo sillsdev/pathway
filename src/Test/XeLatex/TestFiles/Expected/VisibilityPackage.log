@@ -1,39 +1,27 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (Web2C 2011) (format=xelatex 2011.7.28)  21 OCT 2011 13:20
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015/W32TeX) (preloaded format=xelatex 2015.10.12)  27 OCT 2016 17:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**VisibilityPackage.tex
+**./VisibilityPackage.tex
 (./VisibilityPackage.tex
-LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
-rman-x-2009-06-19, ngerman-x-2009-06-19, afrikaans, ancientgreek, ibycus, arabi
-c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
-h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
-h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
- icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
-iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
- lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
-ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
-ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
-.
+LaTeX2e <2015/10/01> patch level 1
 (c:/pwtex/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (c:/pwtex/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
-\c@part=\count80
-\c@section=\count81
-\c@subsection=\count82
-\c@subsubsection=\count83
-\c@paragraph=\count84
-\c@subparagraph=\count85
-\c@figure=\count86
-\c@table=\count87
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (c:/pwtex/texmf/tex/censor/censor.sty)
-No file VisibilityPackage.aux.
+) (c:/pwtex/texmf-dist/tex/censor/censor.sty) (./VisibilityPackage.aux)
 \openout1 = `VisibilityPackage.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
@@ -52,12 +40,12 @@ LaTeX Font Info:    ... okay on input line 3.
 
 ] (./VisibilityPackage.aux) ) 
 Here is how much of TeX's memory you used:
- 209 strings out of 494150
- 2268 string characters out of 3155861
- 48202 words of memory out of 3000000
- 3550 multiletter control sequences out of 15000+200000
- 3640 words of font info for 14 fonts, out of 3000000 for 9000
- 1018 hyphenation exceptions out of 8191
- 23i,4n,17p,167b,107s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 212 strings out of 495723
+ 2333 string characters out of 6187069
+ 45292 words of memory out of 5000000
+ 3438 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 23i,4n,17p,146b,107s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on VisibilityPackage.pdf (1 page).

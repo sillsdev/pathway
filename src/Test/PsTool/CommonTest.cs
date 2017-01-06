@@ -886,7 +886,6 @@ namespace Test.PsTool
         }
 
         #region LanguageTests
-		[Ignore]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         // If unit fails, please confirm the below file exist,

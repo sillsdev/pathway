@@ -3,6 +3,10 @@
   <Story Self="utrf" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/" AppliedNamedGrid="n">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" FrameType="TextFrameType" StoryOrientation="Horizontal" StoryDirection="LeftToRightDirection" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/@page:first-top-right" Justification="RightAlign" />
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/@page:first-top-right" Justification="RightAlign">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/@page:first-top-right">
+        <Content><?ACE 18?></Content>
+      </CharacterStyleRange>
+    </ParagraphStyleRange>
   </Story>
 </idPkg:Story>

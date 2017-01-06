@@ -171,7 +171,6 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Ignore]
         public void MarginPreferenceTest()
         {
             ClearFiles();
@@ -185,7 +184,7 @@ namespace Test.InDesignConvert
             XmlNode node = Common.GetXmlNodeInDesignNamespace(_fileNameWithPath, _xPath);
             XmlAttributeCollection attrb = node.Attributes;
             string result = attrb["Top"].Value;
-            Assert.AreEqual(result, "71", _methodName + " failed for Margin_Top");
+            Assert.AreEqual(result, "36", _methodName + " failed for Margin_Top");
 
             result = attrb["Right"].Value;
             Assert.AreEqual(result, "72", _methodName + " failed for Margin_Top");
@@ -228,7 +227,6 @@ namespace Test.InDesignConvert
         }
 
         [Test]
-        [Ignore]
         public void PathPointTypeTest2()
         {
             ClearFiles();
@@ -245,13 +243,13 @@ namespace Test.InDesignConvert
 
             string result = attrb["Anchor"].Value;
             // "-198 -324"
-            Assert.AreEqual(result, "-270 -360", _methodName + " failed for Anchor");
+            Assert.AreEqual(result, "-270 -325", _methodName + " failed for Anchor");
 
             result = attrb["LeftDirection"].Value;
-            Assert.AreEqual(result, "-270 -360", _methodName + " failed for LeftDirection");
+            Assert.AreEqual(result, "-270 -325", _methodName + " failed for LeftDirection");
 
             result = attrb["RightDirection"].Value;
-            Assert.AreEqual(result, "-270 -360", _methodName + " failed for RightDirection");
+            Assert.AreEqual(result, "-270 -325", _methodName + " failed for RightDirection");
         }
 
         [Test]

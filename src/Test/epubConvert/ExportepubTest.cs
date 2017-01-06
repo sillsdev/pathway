@@ -1,14 +1,14 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="EmbeddedFontTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Erik Brommers</author>
 // <email>erik_brommers@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test methods of EmbeddedFont class
 // </remarks>
@@ -83,7 +83,7 @@ namespace Test.epubConvert
 			Assert.IsTrue(actual);
 		}
 
-		
+
 
 		[Test]
 		[Category("LongTest")]
@@ -121,7 +121,7 @@ namespace Test.epubConvert
 			var next = nodes[nodes.Count - 1].NextSibling.NextSibling;
 			Assert.AreEqual("Section_Head", next.Attributes.GetNamedItem("class").InnerText, "Section head should follow chapter links");
 		}
-		
+
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -307,7 +307,12 @@ namespace Test.epubConvert
 		#region Private Functions
 		private string FileProg(string fileName)
 		{
-			return Common.PathCombine(Common.GetPSApplicationPath(), fileName);
+			string file = Common.PathCombine(Common.GetPSApplicationPath(), fileName);
+			if (!File.Exists(file))
+			{
+				file = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), fileName);
+			}
+			return file;
 		}
 
 		private string FileInput(string fileName)
@@ -347,7 +352,8 @@ namespace Test.epubConvert
 			Assert.IsTrue(actual);
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
 			ExtractzipFilesBasedOnOS(result, FileOutput("EpubIndentFileComparison"));
-			result = result.Replace("Output", "Expected");
+			string expPath = Common.UsingMonoVM ? "ExpectedLinux" : "Expected";
+			result = result.Replace("Output", expPath);
 			ExtractzipFilesBasedOnOS(result, FileOutput("EpubIndentFileComparisonExpect"));
 			FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_01.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_01.xhtml");
 
@@ -446,6 +452,37 @@ namespace Test.epubConvert
 			ExtractzipFilesBasedOnOS(result, FileOutput("entryguidexpect"));
 			FileCompare("entryguidcomparison/OEBPS/PartFile00001_.xhtml", "entryguidexpect/OEBPS/PartFile00001_.xhtml");
 
+		}
+
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void ReferenceFontsTest()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+			Common.Testing = true;
+			const string XhtmlName = "ReferenceFonts.xhtml";
+			const string CssName = "ReferenceFonts.css";
+			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+			projInfo.IsReversalExist = false;
+			projInfo.ProjectName = "CSS Font Test";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			File.Copy(FileInput(CssName), FileOutput(CssName), true);
+			var parent = new Exportepub();
+			parent.EmbedFonts = true;
+			var target = new EpubFont(parent);
+			var langArray = target.InitializeLangArray(projInfo);
+			target.BuildFontsList();
+			if (target.EmbedAllFonts(langArray, FileOutput("")))
+			{
+				target.ReferenceFonts(FileOutput(CssName), projInfo);
+				TextFileAssert.AreEqualEx(FileOutput(CssName), FileExpected(CssName), new ArrayList { 4, 8, 12});
+			}
 		}
 
 		[Test]
@@ -685,7 +722,7 @@ namespace Test.epubConvert
 		{
 			CleanOutputDirectory();
 			string inputDataFolder = Common.PathCombine(_inputPath, "GlossaryTestcase");
-			string outputDataFolder = Common.PathCombine(_outputPath, "GlossaryTestcase");
+			string outputDataFolder = Common.PathCombine(_outputPath, "GlossaryTestCase");
 			Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
 
 			const string xhtmlName = "GlossaryTestCase.xhtml";
@@ -713,7 +750,7 @@ namespace Test.epubConvert
 			foreach (var fileName in filesList)
 			{
 				var info = new FileInfo(fileName);
-				if (info.Extension == ".xhtml")
+				if (info.Extension == ".xhtml" && info.Name.ToLower().Contains("part"))
 				{
 					FileCompare("GlossaryTestCase/OEBPS/" + info.Name, "GlossaryTestCaseExpected/OEBPS/" + info.Name);
 				}
@@ -755,7 +792,7 @@ namespace Test.epubConvert
 			foreach (var fileName in filesList)
 			{
 				var info = new FileInfo(fileName);
-				if (info.Extension == ".xhtml")
+				if (info.Extension == ".xhtml" && info.Name.ToLower().Contains("part"))
 				{
 					FileCompare("aaiScriptureExportTest/OEBPS/" + info.Name, "ebookExpected/OEBPS/" + info.Name);
 				}

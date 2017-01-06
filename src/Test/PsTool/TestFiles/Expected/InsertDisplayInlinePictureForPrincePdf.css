@@ -19,3 +19,7 @@ display: inline;
 .picturePage {
 display: inline;
 }
+.mainheadword {
+font-weight: bold;
+string-set: guideword content();
+}

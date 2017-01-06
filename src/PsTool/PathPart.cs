@@ -13,6 +13,9 @@
 // ODT Test Support
 // </remarks>
 // --------------------------------------------------------------------------------------------
+
+using System;
+using System.Diagnostics;
 using System.IO;
 using SIL.Tool;
 
@@ -22,7 +25,8 @@ namespace Test
     {
         public static string Bin(string currentDir, string addedPath)
         {
-            int binFolderPart = currentDir.IndexOf(Path.DirectorySeparatorChar + "output" + Path.DirectorySeparatorChar);
+            Debug.Print("CurrentDir={0}", currentDir);
+            var binFolderPart = currentDir.IndexOf(Path.DirectorySeparatorChar + "output" + Path.DirectorySeparatorChar, StringComparison.Ordinal);
             return Common.DirectoryPathReplace(currentDir.Substring(0, binFolderPart) + "/src/Test" + addedPath);
         }
     }

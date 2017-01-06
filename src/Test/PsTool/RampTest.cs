@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="RampTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test Ramp files
 // </remarks>
@@ -137,7 +137,9 @@ namespace Test.PsTool
         {
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
-            Param.Value[Param.InputType] = "Dictionary";
+	        Param.SetLoadType = "Dictionary";
+			Param.Value[Param.InputType] = "Dictionary";
+
             SettingsInput(TestFolder);
             SetRampData();
             Assert.True(Contributor.Contains("GOD,compiler"), "should be GOD!");
@@ -171,7 +173,6 @@ namespace Test.PsTool
         }
 
         [Test]
-        [Ignore]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void RampRightsTest()
@@ -179,9 +180,10 @@ namespace Test.PsTool
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
+			Param.SetLoadType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
-            Assert.True(Rights == "( c ) 2013 SIL International®. DRAFT DOCUMENTPlease note that this document is not in its final form. This document was printed during the normal course of a review process by the creator or editor, and will likely be superceded in both content and format by a...", "CopyRight Information is wrong!");
+			Assert.True(Rights == "© "+ DateTime.Now.Date.Year + " SIL International®. ");
         }
 
         [Test]
@@ -218,6 +220,7 @@ namespace Test.PsTool
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
             _projInputType = "Dictionary";
+			Param.SetLoadType = "Dictionary";
             SettingsInput(TestFolder);
             SetRampData();
             Assert.AreEqual("Just for testing", RampDescription);

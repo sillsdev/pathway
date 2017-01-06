@@ -1,0 +1,48 @@
+ifndef prefix
+prefix=/usr
+endif
+ifndef binsrc
+binsrc=${PWD}
+endif
+ifndef bindst
+bindst=$(binsrc)/output/Release
+endif
+ifndef BUILD_NUMBER
+BUILD_NUMBER=1.13.4.4657
+endif
+ifndef Platform
+Platform=Any CPU
+endif
+ifndef MONO_PREFIX
+MONO_PREFIX=/opt/mono4-sil
+endif
+ifndef GDK_SHARP
+GDK_SHARP=$(MONO_PREFIX)/lib/mono/gtk-sharp-3.0
+endif
+ifndef LD_LIBRARY_PATH
+LD_LIBRARY_PATH=$(MONO_PREFIX)/lib
+endif
+ifndef PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$(MONO_PREFIX)/lib/pkgconfig
+endif
+ifndef MONO_GAC_PREFIX
+MONO_GAC_PREFIX=$(MONO_PREFIX)
+endif
+ifndef MONO_MWF_SCALING
+MONO_MWF_SCALING=disable
+endif
+PATH := $(MONO_PREFIX)/bin:$(PATH)
+
+build:
+	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Release\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
+
+debug:
+	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
+
+buildStep:
+	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/\;OutputPath=src/BuildStep/bin/Debug src/BuildStep/BuildStep.csproj
+
+tests:
+	nunit-console -exclude=SkipOnTeamCity\;LongTest -labels -nodots output/Debug/Test.dll
+
+

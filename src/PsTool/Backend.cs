@@ -21,6 +21,9 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text;
+using SIL.CommandLineProcessing;
+using SIL.Progress;
 
 namespace SIL.Tool
 
@@ -36,7 +39,10 @@ namespace SIL.Tool
             {
                 return;
             }
-
+			if (Directory.Exists(path) && !path.Contains("Export"))
+			{
+				path = Common.PathCombine(path, "Export");
+			}
             _backend.Clear();
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
@@ -81,15 +87,56 @@ namespace SIL.Tool
             var localType = type.Replace(@"\", "/").ToLower();
 	        try
 	        {
-		        foreach (IExportProcess process in _backend)
-		        {
-			        if (process.ExportType.ToLower() == "openoffice/libreoffice")
-				        localType = OpenOfficeClassifier(publicationInformation, localType); // Cross checking for OpenOffice
+                //foreach (IExportProcess process in _backend)
+                //{
+                //    if (process.ExportType.ToLower() == "openoffice/libreoffice")
+                //        localType = OpenOfficeClassifier(publicationInformation, localType); // Cross checking for OpenOffice
 
-			        if (process.ExportType.ToLower() == localType.ToLower())
-				        return process.Export(publicationInformation);
-		        }
-	        }
+                //    if (process.ExportType.ToLower() == localType.ToLower())
+                //        return process.Export(publicationInformation);
+                //}
+
+                //Code to call PathwayExport Commandline Utility -commented for now
+		        string mainXhtmlFile = Path.GetFileNameWithoutExtension(publicationInformation.DefaultXhtmlFileWithPath);
+
+		        if (mainXhtmlFile.ToLower() == "flexrev")
+			        publicationInformation.IsReversalExist = false;
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append("\"");
+                sb.Append(publicationInformation.DefaultXhtmlFileWithPath);
+                sb.Append(",\" ");
+                sb.Append("\"");
+                sb.Append(publicationInformation.DefaultCssFileWithPath);
+                if (publicationInformation.IsReversalExist)
+                {
+                    sb.Append(",\" ");
+                    sb.Append("\"");
+                    sb.Append(Path.Combine(Path.GetDirectoryName(publicationInformation.DefaultXhtmlFileWithPath), "FlexRev.xhtml"));
+                    sb.Append(",\" ");
+                    sb.Append("\"");
+                    sb.Append(publicationInformation.DefaultRevCssFileWithPath);
+                    sb.Append("\"");
+                }
+                else
+                {
+                    sb.Append("\"");
+                }
+
+		        Common.SaveInputType(publicationInformation.ProjectInputType);
+
+                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString());
+
+				string pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "PathwayExport.exe");
+
+				if (!File.Exists(pathwayExportFile))
+					pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "Export", "PathwayExport.exe");
+
+				var cmd = Common.IsUnixOS()?
+					"/usr/bin/PathwayExport": pathwayExportFile;
+				
+                CommandLineRunner.Run(cmd, argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
+            }
 	        catch(Exception ex)
 	        {
 		        throw new Exception(ex.Message);
@@ -99,7 +146,7 @@ namespace SIL.Tool
                 publicationInformation.DefaultXhtmlFileWithPath = xhtmlFile;
                 ShowVerbose(publicationInformation);
             } 
-            return false;
+            return true;
         }
 
         private static void ShowVerbose(PublicationInformation publicationInformation)
