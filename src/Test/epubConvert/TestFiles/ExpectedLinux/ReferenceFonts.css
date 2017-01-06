@@ -1,0 +1,1417 @@
+/* font info - added by Psi.Features\UnitTesting (epubConvert, Version=1.13.4.4657, Culture=neutral, PublicKeyToken=null) */
+@font-face {
+ font-family : "Scheherazade";
+ font-weight : normal;
+ font-style : normal;
+ font-variant : normal;
+ font-size : all;
+}
+@font-face {
+ font-family : "Charis SIL";
+ font-weight : normal;
+ font-style : normal;
+ font-variant : normal;
+ font-size : all;
+ src : url('CharisSILR.ttf');
+}
+/* default language font info */
+body {
+font-family: Scheherazade, Times, serif;
+direction: rtl;
+}
+*:lang(ur) {
+font-family: Scheherazade, Times, serif;
+direction: rtl;
+}
+*:lang(en) {
+font-family: 'Charis SIL', Times, serif;
+direction: ltr;
+}
+/* end auto-generated font info */
+
+.BookTitle {font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookCreator{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookPublisher{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookDescription{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookCopyrightHolder{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+div[lang='en']{ font-family: "Charis SIL";}
+span[lang='en']{ font-family: "Charis SIL";}
+div[lang='ur']{ font-family: "Scheherazade";}
+span[lang='ur']{ font-family: "Scheherazade";}
+
+.letHead {
+   
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+}
+.letter {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 12pt;
+   font-weight: bold;
+}
+body {
+font-size: 13pt;
+line-height: 125%;
+
+   font-size: 12pt;
+}
+span[lang|= "en"]{
+   font-family: 'Charis SIL',serif;
+   font-size: 12pt;
+}
+span[lang|= "ur"]{
+   font-family: 'Scheherazade',serif;
+   font-size: 12pt;
+}
+span[lang|= "ur-x-ind"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 12pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+*[dir= 'ltr']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: -moz-isolate;
+}
+*[dir= 'rtl']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: -moz-isolate;
+}
+.entry span[lang|= "en"]{
+   font-size: 12pt;
+}
+.entry span[lang|= "ur"]{
+   font-size: 12pt;
+}
+.entry span[lang|= "ur-x-ind"]{
+   font-size: 12pt;
+}
+.entry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.entry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   font-size: 12pt;
+}
+.entry .mainheadword > span[lang|= "ur"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span span[lang|= "en"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span span[lang|= "ur"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span span[lang|= "ur-x-ind"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "ur"]{
+   font-style: italic;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis span[lang|= "ur-x-ind"]{
+   font-style: italic;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "ur"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis span[lang|= "ur-x-ind"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span[lang|= "ur"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span span[lang|= "ur"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span span[lang|= "ur-x-ind"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .example > span {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .lexsensereference > .ownertype_abbreviation > span span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .lexsensereference > .ownertype_abbreviation > span span[lang|= "ur"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .lexsensereference > .ownertype_abbreviation > span span[lang|= "ur-x-ind"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .lexsensereference > .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "ur"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .lexsensereference > .configtargets .configtarget > .headword > span span[lang|= "en"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .lexsensereference > .configtargets .configtarget > .headword > span span[lang|= "ur"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .lexsensereference > .configtargets .configtarget > .headword > span span[lang|= "ur-x-ind"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry .picture {
+   
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   
+}
+.entry .picture img {
+   max-height: 1in;
+}
+.entry .picture span[lang|= "en"]{
+   font-size: 12pt;
+}
+.entry .picture span[lang|= "ur"]{
+   font-size: 12pt;
+}
+.entry .picture span[lang|= "ur-x-ind"]{
+   font-size: 12pt;
+}
+.entry .picture {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: -24pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 12pt;
+}
+.entry .captionContent .headword[lang|= "ur"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword span[lang|= "en"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword span[lang|= "ur"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword span[lang|= "ur-x-ind"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword {
+   font-weight: bold;
+}
+.minorentryvariant span[lang|= "en"]{
+   font-size: 12pt;
+}
+.minorentryvariant span[lang|= "ur"]{
+   font-size: 12pt;
+}
+.minorentryvariant span[lang|= "ur-x-ind"]{
+   font-size: 12pt;
+}
+.minorentryvariant {
+   clear: both;
+   white-space: pre-wrap;
+}
+.minorentryvariant {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   font-size: 12pt;
+}
+.minorentryvariant > .headword > span[lang|= "ur"]{
+   font-weight: bold;
+}
+.minorentryvariant > .headword > span span[lang|= "en"]{
+   font-weight: bold;
+}
+.minorentryvariant > .headword > span span[lang|= "ur"]{
+   font-weight: bold;
+}
+.minorentryvariant > .headword > span span[lang|= "ur-x-ind"]{
+   font-weight: bold;
+}
+.minorentryvariant > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .referencedentries .referencedentry > .headword > span[lang|= "ur"]{
+   font-weight: bold;
+}
+.minorentryvariant .referencedentries .referencedentry > .headword > span span[lang|= "en"]{
+   font-weight: bold;
+}
+.minorentryvariant .referencedentries .referencedentry > .headword > span span[lang|= "ur"]{
+   font-weight: bold;
+}
+.minorentryvariant .referencedentries .referencedentry > .headword > span span[lang|= "ur-x-ind"]{
+   font-weight: bold;
+}
+.minorentryvariant .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.stxfinmainheadword[lang= 'ur']{
+   font-weight: bold;
+   font-size: 58%;
+   position: relative;
+   top: 0.3em;
+}
+.stxfinheadword[lang= 'ur']{
+   font-weight: bold;
+   font-size: 58%;
+   position: relative;
+   top: 0.3em;
+}
+/** imported styles from from epub_Dictionary.css **/
+
+body {
+font-size: 13pt;
+line-height: 125%;
+
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: --> from BaseFontSize
+   line-height: --> from DefaultLineHeight
+*/
+font-weight: normal;
+font-style: normal;
+}
+
+.complexentryform,
+.complexform-form,
+.crossref,
+.crossref-headword,
+.example-minor,
+.example-sub,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub,
+.LexSense-publishStemComponentTarget-OwnerOutlinePub,
+.mainentryref-minor,
+.mainentryref,
+.mainentryrefminor,
+.sense-crossref,
+.sensecomplexentryform,
+.sensecrossref,
+.sense-crossref-sub,
+.sensemainentryref
+.reversal-form,
+.revsensenumber,
+.variantrefform {
+    font-weight : bold;
+}
+.crossreftype,
+.crossref-type {
+        font-style: italic;
+        font-weight: bold;
+}
+.entry {
+    margin-left : 3%;
+    margin-right: 3%;
+    padding-bottom: 1%;
+    text-indent: -3%;
+}
+.example,
+.grammatical-info-minor,
+.grammatical-info-sub,
+.grammaticalinfo,
+.grammatical-info,
+.lexref-type,
+.translation,
+.translation-minor,
+.translation-sub {
+    font-style : italic;
+}
+.headwordminor, .headword-minor {
+    font-weight: bold;
+    font-style: normal;
+    margin-right: 10px;
+}
+.partofspeech {
+font-weight: normal;
+font-style: italic;
+}
+
+.LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, 
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub,
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub,
+.xsensenumber {
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.LexEntryType-publishStemSenseVariantType-ReverseAbbrPub {
+padding-right: 5px;
+}
+.letData {
+    text-align : left;
+} 
+.letHead {
+    border-bottom: .5pt solid #a00;
+    clear: both;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+}
+.letter {
+    font-weight : normal;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    padding-bottom : 2%;
+    padding-top : 2%;
+}
+.LexEntrypublishStemParaHomographNumber {
+    vertical-align: super;
+}
+.LexEntry-publishStemParaHomographNumber {
+    vertical-align: super;
+}
+.lexreftype,
+.lexref-type,
+.lexref-type-sub {
+        font-style: italic;
+        font-weight: bold;
+}
+.revData {
+    text-align: left;
+}
+.revEntry {
+    margin-left: 1pc;
+    text-indent: -1pc;
+}
+.revHeader {
+    font-weight: bold;
+    text-align: center;
+}
+.revhomographnumber {
+    vertical-align: sub;
+}
+.pronunciations,
+.senses {
+    margin-left: 0;
+    padding-left: 0;
+}
+.definition,
+.etymology-form,
+.etymology-gloss,
+.etymology-comment,
+.senses,
+.grammatical-info,
+.grammatical-info-sub,
+.entryref-type,
+.variant-type-minor,
+.LexEntryType-publishStemComplexFormType-ReverseAbbrPub {
+    padding-right: 0.5em;
+}
+.xitem + .xitem,
+.variantref-form-sub,
+.LexSense-publishStemComponentTarget-GlossPub,
+.LexEntry-publishStemComponentTarget-SummaryDefinitionPub {
+    /*padding-left: 0.5em;*/
+}
+.variantref-form-sub,
+.definition_L2,
+.pronunciations,
+.sense-complexform-form,
+.pronunciation,
+.pronunciation-minor,
+.etymology-form,
+.sense-variantref-form,
+.semantic-domains, 
+.examples, 
+.translations, 
+.primaryrefs,
+.entryref-component, 
+.primaryrefs-minor, 
+.variant-primary-minor, 
+.relations, 
+.lexref-targets, 
+.complex-subentry-minor,
+.variantrefs, 
+.variantref-form-minor,
+.variantref-form {
+    margin-left: 0;
+    text-indent: 0;
+}
+.sense {
+    font-weight: normal;
+}
+.subentry { }
+.xhomographnumber {
+    font-weight: normal;
+    font-style: normal;
+    vertical-align : -33%;
+    text-indent : 0;
+    margin-left : 0;
+    padding-right: 2px;
+    line-height: 80%;
+}
+.xlanguagetag {
+        display: none;
+}
+.Front_Matter {
+margin-left : 4%;
+margin-right: 4%;
+text-align: left;
+}
+.entry .senses > .sense + .sense::before {
+content: "";
+}
+
+.letter
+{
+	margin-top:10pt;
+	margin-bottom:10pt;
+	line-height:150%;
+}
+.minorentryvariant {
+    margin-left : 3%;
+    margin-right: 3%;
+    padding-bottom: 1%;
+    text-indent: -3%;
+}
+.minorentrycomplex {
+    margin-left : 3%;
+    margin-right: 3%;
+    padding-bottom: 1%;
+    text-indent: -3%;
+}
+/** imported styles from epub_Pictures.css **/
+
+.picture {
+    height: 1.0in;
+}
+.pictureRight {
+    display: block;
+    float : right;
+    text-align : center;
+    margin: 0px 0px 5px 5px;
+    text-indent: 0px;
+}
+.pictureLeft {
+    display: block;
+    float : left;
+    position : relative;
+    left : -2pc;
+    text-align : center;
+    width: 99px;
+    margin: 0px 5px 5px 0px;
+    text-indent: 0px;
+}
+.pictureCenter {
+    display: block;
+    clear : both;
+    text-align : center;
+    margin-top : 1%;
+    width: 4.75in;
+    margin: 0px 5px 5px 0px;
+}
+.pictureRight > .picture {
+    width: 95px;
+    height: 84px;
+}
+div.pictureLeft > img.picture {
+    width: 95px;
+    height: 84px;
+}
+.pictureCaption {
+    font-size : 80%;
+    font-weight : normal;
+    font-style : italic;
+    display : block;
+    text-align : center;
+    margin-bottom : .5%;
+}
+span.reference :before {
+	content: "(";
+}
+span.reference :after {
+	content: ")";
+}
+.entry> .pictures .picture{
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}
+.entry .pictures .picture{		
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}
+.entry> .picture{
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}
+.entry .picture{		
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}
+/** imported styles from from FrontMatter.css **/
+
+
+em {
+    font-weight: normal;
+    font-style: normal;
+}
+a {
+    white-space: nowrap;
+}
+table {
+    margin-bottom: 1em;
+}
+td {
+    vertical-align: middle;
+    padding: 8px;
+}
+h1 {
+    font-size: 125%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+#TitlePage h1 {
+    font-size: 250%;
+    margin-top: 2em;
+    text-align: center;
+    line-height: 125%;
+}
+h2 {
+    font-size: 110%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+.ccimg {
+    width: 32px;
+    height: 32px;
+}
+p {
+    margin-top: .5em;
+    margin-bottom: 1em;
+}
+#Logo {
+    padding-top: 0.5em;
+}
+.Publisher {
+    padding-top: 6em;
+    font-size: 80%;
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.logo {
+    text-align: center;
+    padding-top: .5em;
+    margin-top: 0;
+}
+.Contents ul a::after {
+  
+}
+.Contents ul {
+    list-style-type: none;
+}
+
+#TitlePage{
+   text-align: center;
+}
+.dicBody{
+   margin-left : 10px;
+   margin-right: 10px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+/** imported styles from from epub_FontSize.css **/
+
+/*
+*  For the .epub format, each style is based on a percentage of the
+*  body element (which is set programmatically in the epubExport. Setting
+*  these values explicitly allows us to override the merged settings.
+*/
+
+.letter              
+{
+     font-size : 150%;
+}
+.letData, .revData   { font-size: 100%; }
+.CmPossibility-publishDomainTypeForReversal-AbbreviationPub,
+.CmPossibility-publishDomainTypeForReversal-NamePub,
+.CmPossibility-publishSenseTypeForReversal-AbbreviationPub,
+.CmPossibility-publishUsageTypeForReversal-AbbreviationPub,
+.CmSemanticDomain-publishSemDomForReversal-AbbreviationPub,
+.CmSemanticDomain-publishSemDomForReversal-NamePub,
+.complexform,
+.complexform-entry-type,
+.complexform-form,
+.complexform-summarydef,
+.complexform-type,
+.crossref-headword,
+.crossref-type-abbr,
+.domain-type-abbr,
+.domain-type-name,
+.encyclopedic-info,
+.entryref-component,
+.entryref-summary,
+.entryref-summary-minor,
+.entryref-type,
+.etymology,
+.etymology-comment,
+.etymology-form,
+.etymology-gloss,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub,
+.LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub,
+.LexEntryType-publishAbbreviationForReversal-AbbreviationPub,
+.LexEntryType-publishStemComplexFormType-ReverseAbbrPub,
+.LexEntryType-publishStemEntryType-AbbreviationPub,
+.LexEntryType-publishStemVariantType-ReverseAbbrPub,
+.lexref,
+.lexref-type-abbr,
+.pictureLabel,
+.pronunciation-form,
+.reversal-form,
+.semantic-domain-abbr,
+.semantic-domain-name,
+.sense-crossref-headword,
+.sense-type,
+.sense-type-abbr,
+.slot,
+.summarydef-minor,
+.usage-type-abbr,
+.variant-headword,
+.variant-summary,
+.variantref,
+.variantref-entry-type,
+.variantref-form,
+.complexentryform    { font-size: 100%; }
+.crossref            { font-size: 100%; }
+.crossref > .xitem + .xitem :before { font-size: 100%; }
+.crossref-targets    { font-size: 100%; }
+.crossref-targets > .xitem + .xitem :before { font-size: 100%; }
+.crossref-type       { font-size: 100%; }
+.crossref-type > .xitem + .xitem :before { font-size: 100%; }
+.crossrefs		   { font-size: 100%; }
+.crossreftype        { font-size: 100%; }
+.crossreftype :after { font-size: 100%; }
+.definition-minor	   { font-size: 100%; }
+.definition-sub	   { font-size: 100%; }
+.definition          { font-size: 100%; }
+.entry-type-abbr-sub { font-size: 100%; }
+.entry               { font-size: 100%; }
+.entryref-primary-minor { font-size: 100%; }
+.entryref-type-minor { font-size: 100%; }
+.example-minor	   { font-size: 95%; }
+.example-sub	   { font-size: 95%; }
+.example             { font-size: 95%; }
+.example :after      { font-size: 95%; }
+.example :before     { font-size: 95%; }
+.example > .xitem + .xitem :before { font-size: 95%; }
+.grammatical-info	   { font-size: 100%; }
+.grammatical-info-minor { font-size: 100%; }
+.grammatical-info-sub { font-size: 100%; }
+.grammaticalinfo     { font-size: 100%; }
+.grammaticalinfo :after { font-size: 100%; }
+.headword-minor	   { font-size: 100%; }
+.headword-sub	   { font-size: 100%; }
+.headword            { font-size: 100%; }
+.headword :after     { font-size: 100%; }
+.headword > .xitem + .xitem :before { font-size: 100%; }
+.headwordminor       { font-size: 100%; }
+.headwordminor :after { font-size: 100%; }
+.headwordminor > .xitem + .xitem :before { font-size: 100%; }
+.letHead             { font-size: 125%; }
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub { font-size: 100%; }
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub { font-size: 100%; }
+.LexEntrypublishStemParaHomographNumber :after { font-size: 100%; }
+.LexEntrypublishStemParaHomographNumber {font-size: 100%; }
+.LexEntryRef-publishRootSubEntryType-RootSubEntryType { font-size: 100%; }
+.LexEntryType-publishRootMinorEntryType-AbbreviationPub { font-size: 100%; }
+.LexEntryType-publishStemMinorEntryType-AbbreviationPub { font-size: 100%; }
+.lexref-targets 	   { font-size: 95%; }
+.lexref-targets-sub  { font-size: 95%; }
+.lexref-type	   { font-size: 100%; }
+.lexref-type-sub	   { font-size: 100%; }
+.lexreftype          { font-size: 100%; }
+.lexreftype :after   { font-size: 100%; }
+.mainentryref        { font-size: 100%; }
+.mainentryref > .xitem + .xitem :before { font-size: 100%; }
+.mainentryrefminor   { font-size: 100%; }
+.mainentryrefminor > .xitem + .xitem :before { font-size: 100%; }
+.partofspeech        { font-size: 100%; }
+.partofspeech-minor  { font-size: 100%; }
+.partofspeech-sub    { font-size: 100%; }
+.pictureCaption      { font-size: 100%; }
+.primaryrefs-minor   { font-size: 100%; }
+.pronunciation-minor { font-size: 100%; }
+.pronunciation-sub   { font-size: 100%; }
+.pronunciation       { font-size: 100%; }
+.pronunciationminor  { font-size: 100%; }
+.pronunciationminor > .xitem + .xitem :before { font-size: 100%; }
+.revEntry            { font-size: 100%; }
+.revHeader           { font-size: 100%; }
+.scientific-name     { font-size: 100%; }
+.semantic-domain-abbr-sub { font-size: 100%; }
+.semantic-domain-name-sub { font-size: 100%; }
+.semantic-domains-sub { font-size: 100%; }
+.sense-crossref      { font-size: 100%; }
+.sense-crossref-sub  { font-size: 100%; }
+.sense               { font-size: 100%; }
+.sensecomplexentryform { font-size: 100%; }
+.sensecrossref       { font-size: 95%; }
+.sensecrossref > .xitem + .xitem :before { font-size: 95%; }
+.sensemainentryref   { font-size: 100%; }
+.sensemainentryref > .xitem + .xitem :before { font-size: 100%; }
+.slot-name           { font-size: 100%; }
+.subentry            { font-size: 100%; }
+.subentry-type       { font-size: 100%; }
+.translation-minor   { font-size: 100%; }
+.translation-sub     { font-size: 100%; }
+.translation         { font-size: 100%; }
+.translation :after  { font-size: 100%; }
+.translation > .xitem + .xitem :before { font-size: 100%; }
+.variantrefform      { font-size: 100%; }
+.xsensenumber     { font-size: 95%; }
+.xhomographnumber {
+    font-size : 67%;
+}
+.sensepara     { font-size: 100% !important;}
+.translation_L3 { font-size: 100% !important;}
+.translation-sub_L3 { font-size: 100% !important;}
+.pronunciation-minor { font-size: 100% !important;}
+.definition_L3 { font-size: 100% !important;}
+.definition-sub_L3{ font-size: 100% !important;}
+.LexSense-publishStem-GlossPub_L3{ font-size: 100% !important;}
+.LexSense-publishStem-GlossPub_L4{ font-size: 100% !important;}
+.xitem{ font-size: 100% !important;}
+.LexEntry-publishStemComponentTarget-HeadWordRef{font-size:100% !important;}
+body {
+font-size: 13pt;
+line-height: 125%;
+
+   font-size: 12pt;
+}
+span[lang|= "en"]{
+   font-family: 'Charis SIL',serif;
+   font-size: 12pt;
+}
+span[lang|= "ur"]{
+   font-family: 'Scheherazade',serif;
+   font-size: 12pt;
+}
+span[lang|= "ur-x-ind"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 12pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+*[dir= 'ltr']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: -moz-isolate;
+}
+*[dir= 'rtl']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: -moz-isolate;
+}
+/** imported styles from from epub_Dictionary.css **/
+
+body {
+font-size: 13pt;
+line-height: 125%;
+
+/* NOTE: elements filled in by the epub export based on
+the user's preferences from the Configuration Tool:
+   font-size: --> from BaseFontSize
+   line-height: --> from DefaultLineHeight
+*/
+font-weight: normal;
+font-style: normal;
+}
+
+.complexentryform,
+.complexform-form,
+.crossref,
+.crossref-headword,
+.example-minor,
+.example-sub,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub,
+.LexSense-publishStemComponentTarget-OwnerOutlinePub,
+.mainentryref-minor,
+.mainentryref,
+.mainentryrefminor,
+.sense-crossref,
+.sensecomplexentryform,
+.sensecrossref,
+.sense-crossref-sub,
+.sensemainentryref
+.reversal-form,
+.revsensenumber,
+.variantrefform {
+    font-weight : bold;
+}
+.crossreftype,
+.crossref-type {
+        font-style: italic;
+        font-weight: bold;
+}
+.entry {
+    margin-left : 3%;
+    margin-right: 3%;
+    padding-bottom: 1%;
+    text-indent: -3%;
+}
+.example,
+.grammatical-info-minor,
+.grammatical-info-sub,
+.grammaticalinfo,
+.grammatical-info,
+.lexref-type,
+.translation,
+.translation-minor,
+.translation-sub {
+    font-style : italic;
+}
+.headwordminor, .headword-minor {
+    font-weight: bold;
+    font-style: normal;
+    margin-right: 10px;
+}
+.partofspeech {
+font-weight: normal;
+font-style: italic;
+}
+
+.LexSense-publishStemMinorPrimaryTarget-OwnerOutlinePub, 
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub,
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub,
+.xsensenumber {
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.LexEntryType-publishStemSenseVariantType-ReverseAbbrPub {
+padding-right: 5px;
+}
+.letData {
+    text-align : left;
+} 
+.letHead {
+    border-bottom: .5pt solid #a00;
+    clear: both;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+}
+.letter {
+    font-weight : normal;
+    font-style : normal;
+    text-align : center;
+    text-indent : 0;
+    margin-left : 0;
+    padding-bottom : 2%;
+    padding-top : 2%;
+}
+.LexEntrypublishStemParaHomographNumber {
+    vertical-align: super;
+}
+.LexEntry-publishStemParaHomographNumber {
+    vertical-align: super;
+}
+.lexreftype,
+.lexref-type,
+.lexref-type-sub {
+        font-style: italic;
+        font-weight: bold;
+}
+.revData {
+    text-align: left;
+}
+.revEntry {
+    margin-left: 1pc;
+    text-indent: -1pc;
+}
+.revHeader {
+    font-weight: bold;
+    text-align: center;
+}
+.revhomographnumber {
+    vertical-align: sub;
+}
+.pronunciations,
+.senses {
+    margin-left: 0;
+    padding-left: 0;
+}
+.definition,
+.etymology-form,
+.etymology-gloss,
+.etymology-comment,
+.senses,
+.grammatical-info,
+.grammatical-info-sub,
+.entryref-type,
+.variant-type-minor,
+.LexEntryType-publishStemComplexFormType-ReverseAbbrPub {
+    padding-right: 0.5em;
+}
+.xitem + .xitem,
+.variantref-form-sub,
+.LexSense-publishStemComponentTarget-GlossPub,
+.LexEntry-publishStemComponentTarget-SummaryDefinitionPub {
+    /*padding-left: 0.5em;*/
+}
+.variantref-form-sub,
+.definition_L2,
+.pronunciations,
+.sense-complexform-form,
+.pronunciation,
+.pronunciation-minor,
+.etymology-form,
+.sense-variantref-form,
+.semantic-domains, 
+.examples, 
+.translations, 
+.primaryrefs,
+.entryref-component, 
+.primaryrefs-minor, 
+.variant-primary-minor, 
+.relations, 
+.lexref-targets, 
+.complex-subentry-minor,
+.variantrefs, 
+.variantref-form-minor,
+.variantref-form {
+    margin-left: 0;
+    text-indent: 0;
+}
+.sense {
+    font-weight: normal;
+}
+.subentry { }
+.xhomographnumber {
+    font-weight: normal;
+    font-style: normal;
+    vertical-align : -33%;
+    text-indent : 0;
+    margin-left : 0;
+    padding-right: 2px;
+    line-height: 80%;
+}
+.xlanguagetag {
+        display: none;
+}
+.Front_Matter {
+margin-left : 4%;
+margin-right: 4%;
+text-align: left;
+}
+.entry .senses > .sense + .sense::before {
+content: "";
+}
+
+.letter
+{
+	margin-top:10pt;
+	margin-bottom:10pt;
+	line-height:150%;
+}
+.minorentryvariant {
+    margin-left : 3%;
+    margin-right: 3%;
+    padding-bottom: 1%;
+    text-indent: -3%;
+}
+.minorentrycomplex {
+    margin-left : 3%;
+    margin-right: 3%;
+    padding-bottom: 1%;
+    text-indent: -3%;
+}
+/** imported styles from epub_Pictures.css **/
+
+.picture {
+    height: 1.0in;
+}
+.pictureRight {
+    display: block;
+    float : right;
+    text-align : center;
+    margin: 0px 0px 5px 5px;
+    text-indent: 0px;
+}
+.pictureLeft {
+    display: block;
+    float : left;
+    position : relative;
+    left : -2pc;
+    text-align : center;
+    width: 99px;
+    margin: 0px 5px 5px 0px;
+    text-indent: 0px;
+}
+.pictureCenter {
+    display: block;
+    clear : both;
+    text-align : center;
+    margin-top : 1%;
+    width: 4.75in;
+    margin: 0px 5px 5px 0px;
+}
+.pictureRight > .picture {
+    width: 95px;
+    height: 84px;
+}
+div.pictureLeft > img.picture {
+    width: 95px;
+    height: 84px;
+}
+.pictureCaption {
+    font-size : 80%;
+    font-weight : normal;
+    font-style : italic;
+    display : block;
+    text-align : center;
+    margin-bottom : .5%;
+}
+span.reference :before {
+	content: "(";
+}
+span.reference :after {
+	content: ")";
+}
+.entry> .pictures .picture{
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}
+.entry .pictures .picture{		
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}
+.entry> .picture{
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}
+.entry .picture{		
+margin-bottom: 20pt;
+padding-bottom: 20pt;
+}
+/** imported styles from from FrontMatter.css **/
+
+
+em {
+    font-weight: normal;
+    font-style: normal;
+}
+a {
+    white-space: nowrap;
+}
+table {
+    margin-bottom: 1em;
+}
+td {
+    vertical-align: middle;
+    padding: 8px;
+}
+h1 {
+    font-size: 125%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+#TitlePage h1 {
+    font-size: 250%;
+    margin-top: 2em;
+    text-align: center;
+    line-height: 125%;
+}
+h2 {
+    font-size: 110%;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+.ccimg {
+    width: 32px;
+    height: 32px;
+}
+p {
+    margin-top: .5em;
+    margin-bottom: 1em;
+}
+#Logo {
+    padding-top: 0.5em;
+}
+.Publisher {
+    padding-top: 6em;
+    font-size: 80%;
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.logo {
+    text-align: center;
+    padding-top: .5em;
+    margin-top: 0;
+}
+.Contents ul a::after {
+  
+}
+.Contents ul {
+    list-style-type: none;
+}
+
+#TitlePage{
+   text-align: center;
+}
+.dicBody{
+   margin-left : 10px;
+   margin-right: 10px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+/** imported styles from from epub_FontSize.css **/
+
+/*
+*  For the .epub format, each style is based on a percentage of the
+*  body element (which is set programmatically in the epubExport. Setting
+*  these values explicitly allows us to override the merged settings.
+*/
+
+.letter              
+{
+     font-size : 150%;
+}
+.letData, .revData   { font-size: 100%; }
+.CmPossibility-publishDomainTypeForReversal-AbbreviationPub,
+.CmPossibility-publishDomainTypeForReversal-NamePub,
+.CmPossibility-publishSenseTypeForReversal-AbbreviationPub,
+.CmPossibility-publishUsageTypeForReversal-AbbreviationPub,
+.CmSemanticDomain-publishSemDomForReversal-AbbreviationPub,
+.CmSemanticDomain-publishSemDomForReversal-NamePub,
+.complexform,
+.complexform-entry-type,
+.complexform-form,
+.complexform-summarydef,
+.complexform-type,
+.crossref-headword,
+.crossref-type-abbr,
+.domain-type-abbr,
+.domain-type-name,
+.encyclopedic-info,
+.entryref-component,
+.entryref-summary,
+.entryref-summary-minor,
+.entryref-type,
+.etymology,
+.etymology-comment,
+.etymology-form,
+.etymology-gloss,
+.LexEntry-publishStemComponentTarget-MLHeadWordPub,
+.LexEntry-publishStemMinorPrimaryTarget-SummaryDefinitionPub,
+.LexEntryType-publishAbbreviationForReversal-AbbreviationPub,
+.LexEntryType-publishStemComplexFormType-ReverseAbbrPub,
+.LexEntryType-publishStemEntryType-AbbreviationPub,
+.LexEntryType-publishStemVariantType-ReverseAbbrPub,
+.lexref,
+.lexref-type-abbr,
+.pictureLabel,
+.pronunciation-form,
+.reversal-form,
+.semantic-domain-abbr,
+.semantic-domain-name,
+.sense-crossref-headword,
+.sense-type,
+.sense-type-abbr,
+.slot,
+.summarydef-minor,
+.usage-type-abbr,
+.variant-headword,
+.variant-summary,
+.variantref,
+.variantref-entry-type,
+.variantref-form,
+.complexentryform    { font-size: 100%; }
+.crossref            { font-size: 100%; }
+.crossref > .xitem + .xitem :before { font-size: 100%; }
+.crossref-targets    { font-size: 100%; }
+.crossref-targets > .xitem + .xitem :before { font-size: 100%; }
+.crossref-type       { font-size: 100%; }
+.crossref-type > .xitem + .xitem :before { font-size: 100%; }
+.crossrefs		   { font-size: 100%; }
+.crossreftype        { font-size: 100%; }
+.crossreftype :after { font-size: 100%; }
+.definition-minor	   { font-size: 100%; }
+.definition-sub	   { font-size: 100%; }
+.definition          { font-size: 100%; }
+.entry-type-abbr-sub { font-size: 100%; }
+.entry               { font-size: 100%; }
+.entryref-primary-minor { font-size: 100%; }
+.entryref-type-minor { font-size: 100%; }
+.example-minor	   { font-size: 95%; }
+.example-sub	   { font-size: 95%; }
+.example             { font-size: 95%; }
+.example :after      { font-size: 95%; }
+.example :before     { font-size: 95%; }
+.example > .xitem + .xitem :before { font-size: 95%; }
+.grammatical-info	   { font-size: 100%; }
+.grammatical-info-minor { font-size: 100%; }
+.grammatical-info-sub { font-size: 100%; }
+.grammaticalinfo     { font-size: 100%; }
+.grammaticalinfo :after { font-size: 100%; }
+.headword-minor	   { font-size: 100%; }
+.headword-sub	   { font-size: 100%; }
+.headword            { font-size: 100%; }
+.headword :after     { font-size: 100%; }
+.headword > .xitem + .xitem :before { font-size: 100%; }
+.headwordminor       { font-size: 100%; }
+.headwordminor :after { font-size: 100%; }
+.headwordminor > .xitem + .xitem :before { font-size: 100%; }
+.letHead             { font-size: 125%; }
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub { font-size: 100%; }
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub { font-size: 100%; }
+.LexEntrypublishStemParaHomographNumber :after { font-size: 100%; }
+.LexEntrypublishStemParaHomographNumber {font-size: 100%; }
+.LexEntryRef-publishRootSubEntryType-RootSubEntryType { font-size: 100%; }
+.LexEntryType-publishRootMinorEntryType-AbbreviationPub { font-size: 100%; }
+.LexEntryType-publishStemMinorEntryType-AbbreviationPub { font-size: 100%; }
+.lexref-targets 	   { font-size: 95%; }
+.lexref-targets-sub  { font-size: 95%; }
+.lexref-type	   { font-size: 100%; }
+.lexref-type-sub	   { font-size: 100%; }
+.lexreftype          { font-size: 100%; }
+.lexreftype :after   { font-size: 100%; }
+.mainentryref        { font-size: 100%; }
+.mainentryref > .xitem + .xitem :before { font-size: 100%; }
+.mainentryrefminor   { font-size: 100%; }
+.mainentryrefminor > .xitem + .xitem :before { font-size: 100%; }
+.partofspeech        { font-size: 100%; }
+.partofspeech-minor  { font-size: 100%; }
+.partofspeech-sub    { font-size: 100%; }
+.pictureCaption      { font-size: 100%; }
+.primaryrefs-minor   { font-size: 100%; }
+.pronunciation-minor { font-size: 100%; }
+.pronunciation-sub   { font-size: 100%; }
+.pronunciation       { font-size: 100%; }
+.pronunciationminor  { font-size: 100%; }
+.pronunciationminor > .xitem + .xitem :before { font-size: 100%; }
+.revEntry            { font-size: 100%; }
+.revHeader           { font-size: 100%; }
+.scientific-name     { font-size: 100%; }
+.semantic-domain-abbr-sub { font-size: 100%; }
+.semantic-domain-name-sub { font-size: 100%; }
+.semantic-domains-sub { font-size: 100%; }
+.sense-crossref      { font-size: 100%; }
+.sense-crossref-sub  { font-size: 100%; }
+.sense               { font-size: 100%; }
+.sensecomplexentryform { font-size: 100%; }
+.sensecrossref       { font-size: 95%; }
+.sensecrossref > .xitem + .xitem :before { font-size: 95%; }
+.sensemainentryref   { font-size: 100%; }
+.sensemainentryref > .xitem + .xitem :before { font-size: 100%; }
+.slot-name           { font-size: 100%; }
+.subentry            { font-size: 100%; }
+.subentry-type       { font-size: 100%; }
+.translation-minor   { font-size: 100%; }
+.translation-sub     { font-size: 100%; }
+.translation         { font-size: 100%; }
+.translation :after  { font-size: 100%; }
+.translation > .xitem + .xitem :before { font-size: 100%; }
+.variantrefform      { font-size: 100%; }
+.xsensenumber     { font-size: 95%; }
+.xhomographnumber {
+    font-size : 67%;
+}
+.sensepara     { font-size: 100% !important;}
+.translation_L3 { font-size: 100% !important;}
+.translation-sub_L3 { font-size: 100% !important;}
+.pronunciation-minor { font-size: 100% !important;}
+.definition_L3 { font-size: 100% !important;}
+.definition-sub_L3{ font-size: 100% !important;}
+.LexSense-publishStem-GlossPub_L3{ font-size: 100% !important;}
+.LexSense-publishStem-GlossPub_L4{ font-size: 100% !important;}
+.xitem{ font-size: 100% !important;}
+.LexEntry-publishStemComponentTarget-HeadWordRef{font-size:100% !important;}
+.Chapter_Number {
+font-size: 199%;
+}
+.Title_Secondary {
+text-align: center;
+}
+.Line1 {
+text-indent: 30pt;
+}
+.Line2 {
+text-indent: 60pt;
+}
+.Cover {
+vertical-align: middle;
+text-align: center;
+}
+
+.Cover img{
+height: 100%;
+width: 100%;
+}

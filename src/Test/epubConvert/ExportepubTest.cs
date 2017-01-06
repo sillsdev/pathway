@@ -455,6 +455,36 @@ namespace Test.epubConvert
 		}
 
 		[Test]
+		public void ReferenceFontsTest()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+			Common.Testing = true;
+			const string XhtmlName = "ReferenceFonts.xhtml";
+			const string CssName = "ReferenceFonts.css";
+			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
+			projInfo.IsReversalExist = false;
+			projInfo.ProjectName = "CSS Font Test";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			File.Copy(FileInput(CssName), FileOutput(CssName), true);
+			var parent = new Exportepub();
+			parent.EmbedFonts = true;
+			var target = new EpubFont(parent);
+			var langArray = target.InitializeLangArray(projInfo);
+			target.BuildFontsList();
+			if (target.EmbedAllFonts(langArray, FileOutput("")))
+			{
+				target.ReferenceFonts(FileOutput(CssName), projInfo);
+				TextFileAssert.AreEqualEx(FileOutput(CssName), FileExpected(CssName), new ArrayList { 4, 8, 12});
+			}
+		}
+
+		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void Epub3ExportTest()

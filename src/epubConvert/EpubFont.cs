@@ -740,8 +740,11 @@ namespace epubConvert
                     return false; // User Cancels operation
                 }
             }
-            CopyFonts(contentFolder);
-            // clean up
+	        if (!Common.Testing)
+	        {
+		        CopyFonts(contentFolder);
+	        }
+	        // clean up
             if (nonSilFonts.Count > 0)
             {
                 nonSilFonts.Clear();
@@ -919,8 +922,7 @@ namespace epubConvert
                             dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.BoldFilename));
                             if (!File.Exists(dest))
                             {
-                                File.Copy(embeddedFont.BoldFilename,
-                                          dest, true);
+                                File.Copy(embeddedFont.BoldFilename, dest, true);
                             }
                         }
                     }
