@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="PathwayExport.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -168,7 +168,7 @@ namespace SIL.PublishingSolution
 					process = new ExportTheWord();
                 }
 
-	            
+
                 process.Export(projectInfo);
             }
         }
@@ -228,6 +228,11 @@ namespace SIL.PublishingSolution
                         argFilledCss = true;
                         files.Add(args[i++]);
                         break;
+					case "--database":
+					case "-b":
+						Param.DatabaseName = args[i++];
+						Param.DatabaseName = Param.DatabaseName.Replace("'", "").Trim();
+						break;
 					case "--nunit":
 		                if (args[i++].ToLower() == "true")
 		                {
@@ -259,7 +264,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                // If target export type is not mentioned, 
+                // If target export type is not mentioned,
                 if (!argFilledExportType)
                 {
                     //  get the default export type from the settings file and store it in the exportType
@@ -327,7 +332,7 @@ namespace SIL.PublishingSolution
 
         private static int CaptureFileList(string[] args, int i, List<string> files)
         {
-            // store the files in our internal list for now 
+            // store the files in our internal list for now
             // (single filenames and * will end up as a single element in the list)
             string fname = string.Empty;
             while (args[i].EndsWith(","))
@@ -473,7 +478,7 @@ namespace SIL.PublishingSolution
             if (projectInfo.ProjectInputType == "Dictionary")
             {
                 // dictionary
-                // main - if there's a file name of "main" in the list, we'll use it as the default xhtml; 
+                // main - if there's a file name of "main" in the list, we'll use it as the default xhtml;
                 // if not, we'll use the first item in the list
                 int indexMain = files.FindIndex(
                     something => (something.ToLower().EndsWith("main.xhtml"))
@@ -482,7 +487,7 @@ namespace SIL.PublishingSolution
                                                            ? Common.PathCombine(projectInfo.ProjectPath,
                                                                                 files[indexMain])
                                                            : Common.PathCombine(projectInfo.ProjectPath, files[0]);
-                // reversal index - needs to be named "flexrev.xhtml" 
+                // reversal index - needs to be named "flexrev.xhtml"
                 // (for compatibility with transforms in Pathway)
                 int indexRev = files.FindIndex(
                     something => (something.ToLower().EndsWith("flexrev.xhtml"))
