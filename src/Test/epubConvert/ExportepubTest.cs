@@ -455,6 +455,7 @@ namespace Test.epubConvert
 		}
 
 		[Test]
+		[Category("SkipOnTeamCity")]
 		public void ReferenceFontsTest()
 		{
 			// clean out old files
