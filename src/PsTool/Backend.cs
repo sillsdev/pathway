@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="Backend.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Library for Pathway
 // </remarks>
@@ -125,7 +125,7 @@ namespace SIL.Tool
 
 		        Common.SaveInputType(publicationInformation.ProjectInputType);
 
-                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString());
+                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3} --database {4}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString(), Param.DatabaseName);
 
 				string pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "PathwayExport.exe");
 
@@ -134,7 +134,7 @@ namespace SIL.Tool
 
 				var cmd = Common.IsUnixOS()?
 					"/usr/bin/PathwayExport": pathwayExportFile;
-				
+
                 CommandLineRunner.Run(cmd, argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
             }
 	        catch(Exception ex)
@@ -145,7 +145,7 @@ namespace SIL.Tool
             {
                 publicationInformation.DefaultXhtmlFileWithPath = xhtmlFile;
                 ShowVerbose(publicationInformation);
-            } 
+            }
             return true;
         }
 
@@ -263,9 +263,9 @@ namespace SIL.Tool
             {
                 try
                 {
-                    //Try to find without specifying the directory, 
+                    //Try to find without specifying the directory,
                     //so that we find things that are in the Path environment variable
-                    //This is useful in extension situations where the extension's bin directory 
+                    //This is useful in extension situations where the extension's bin directory
                     //is not the same as the FieldWorks binary directory (e.g. WeSay)
                     assembly = Assembly.LoadFrom(assemblyPath);
                 }

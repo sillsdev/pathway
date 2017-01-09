@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="SettingsHelper.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -38,6 +38,7 @@ namespace SIL.Tool
             Paratext,
             FieldWorks,
             PathwayB,
+			PathwayExport,
             Other
         }
 
@@ -59,20 +60,24 @@ namespace SIL.Tool
             {
                 _hostProgram = HostProgram.Paratext;
             }
+			else if (executablePath.ToLower().Contains("export"))
+			{
+				_hostProgram = HostProgram.PathwayExport;
+			}
 			else if (executablePath.ToLower().Contains("pathwayb"))
             {
                 _hostProgram = HostProgram.PathwayB;
             }
             else
             {
-                // This could be the configuration tool, nunit test, etc. - 
+                // This could be the configuration tool, nunit test, etc. -
                 // whatever it is, it doesn't have a settings file we need to look at.
                 _hostProgram = HostProgram.Other;
             }
         }
 
         /// <summary>
-        /// Override - returns 
+        /// Override - returns
         /// </summary>
         /// <returns>the path and filename to the currently selected language descrptions settings</returns>
         public string GetLanguageFilename()
@@ -105,7 +110,7 @@ namespace SIL.Tool
                 return string.Empty;
             }
             // Paratext (or PathwayB)
-            if (_hostProgram == HostProgram.Paratext || _hostProgram == HostProgram.PathwayB)
+            if (_hostProgram == HostProgram.Paratext || _hostProgram == HostProgram.PathwayB || _hostProgram == HostProgram.PathwayExport)
             {
                 return GetSettingFilePathForParatext(database);
             }
@@ -187,7 +192,7 @@ namespace SIL.Tool
 		    string ssfFile = database + ".ssf";
 		    if (Common.UnixVersionCheck())
 		    {
-			 
+
 				string userName = Environment.UserName;
 				string registryPath = "/home/" + userName +
 				                        "/.config/paratext/registry/LocalMachine/software/scrchecks/1.0/settings_directory/";
@@ -203,7 +208,7 @@ namespace SIL.Tool
 					}
 					//string ParatextProjectPath = Environment.GetEnvironmentVariable("ParatextProjPath");
 				}
-			 
+
 		    }
 		    else
 		    {
@@ -217,7 +222,7 @@ namespace SIL.Tool
 					    return string.Empty;
 			    }
 		    }
-		    // not found on logical drives. 
+		    // not found on logical drives.
 		    Debug.WriteLine(ssfFile + " does not exist.");
 		    return string.Empty;
 	    }
