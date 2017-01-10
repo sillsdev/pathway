@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="Common.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (c) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (c) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
+// Last reviewed:
 //
 // <remarks>
 // Library for Pathway
@@ -118,8 +118,8 @@ namespace SIL.Tool
 		}
 
 		/// <summary>
-		/// Returns whether this program is running under the mono VM environment. 
-		/// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE. 
+		/// Returns whether this program is running under the mono VM environment.
+		/// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE.
 		/// </summary>
 		public static bool UsingMonoVM
 		{
@@ -561,7 +561,7 @@ namespace SIL.Tool
 		#region PublishingSolutionsEnvironmentReset()
 
 		/// <summary>
-		/// Remove all files saved in All Users\AppData, 
+		/// Remove all files saved in All Users\AppData,
 		/// (Executing this method when these files are expected to be present may cause a crash).
 		/// Intended for use during testing.
 		/// </summary>
@@ -1036,7 +1036,7 @@ namespace SIL.Tool
 		/// <returns>Replaced text</returns>
 		public static string ReplaceSymbolToXelatexText(string value)
 		{
-			//Task TD-2666 (Unicode value is 2260 = ?) 
+			//Task TD-2666 (Unicode value is 2260 = ?)
 			if (value.IndexOf("2260") >= 0)
 			{
 				value = value.Replace("2260", "$\\neq$");
@@ -1150,7 +1150,7 @@ namespace SIL.Tool
 
 		/// <summary>
 		/// Validate a given string value is numeric or not
-		/// Valid Numbers: 2, 2.34, +34, -45.653 
+		/// Valid Numbers: 2, 2.34, +34, -45.653
 		/// </summary>
 		/// <param name="number">string</param>
 		/// <returns>True/False</returns>
@@ -1180,7 +1180,7 @@ namespace SIL.Tool
 
 		/// <summary>
 		/// Validate a given string value is numeric or not
-		/// Valid Numbers: 34 
+		/// Valid Numbers: 34
 		/// </summary>
 		/// <param name="number">string</param>
 		/// <returns>True/False</returns>
@@ -1209,7 +1209,7 @@ namespace SIL.Tool
 		#region ValidateAlphabets(string stringValue)
 
 		/// <summary>
-		/// Validate a given string is alphabets or not 
+		/// Validate a given string is alphabets or not
 		/// </summary>
 		/// <param name="stringValue">string</param>
 		/// <returns>True/False</returns>
@@ -1236,7 +1236,7 @@ namespace SIL.Tool
 		#region ValidateStartsWithAlphabet(string stringValue)
 
 		/// <summary>
-		/// Validate a given string is Starts with alphabets or not 
+		/// Validate a given string is Starts with alphabets or not
 		/// </summary>
 		/// <param name="stringValue">string</param>
 		/// <returns>True/False</returns>
@@ -1453,7 +1453,7 @@ namespace SIL.Tool
 
 		/// -------------------------------------------------------------------------------------------
 		/// <summary>
-		/// Unicode Conversion 
+		/// Unicode Conversion
 		/// </summary>
 		/// <param name="parameter">input String</param>
 		/// <returns>Unicode Character</returns>
@@ -2018,7 +2018,7 @@ namespace SIL.Tool
 
 		/// -------------------------------------------------------------------------------------------
 		/// <summary>
-		/// unicode to String Conversion 
+		/// unicode to String Conversion
 		/// </summary>
 		/// <param name="parameter">String</param>
 		/// <returns>unicode Character</returns>
@@ -2216,7 +2216,7 @@ namespace SIL.Tool
 		public static string SupportFolder = string.Empty;
 
 		/// <summary>
-		/// Return the Local setting Path+ "SIL\Dictionary" 
+		/// Return the Local setting Path+ "SIL\Dictionary"
 		/// </summary>
 		/// <returns>Dictionary Setting Path</returns>
 		public static string GetPSApplicationPath()
@@ -2263,7 +2263,7 @@ namespace SIL.Tool
 		#region GetXmlNodeListInDesignNamespace
 
 		/// <summary>
-		/// Returns XMLNodeList 
+		/// Returns XMLNodeList
 		/// </summary>
 		/// <param name="xmlFileNameWithPath">File Name</param>
 		/// <param name="xPath">Xpath for the XML Node</param>
@@ -2376,7 +2376,7 @@ namespace SIL.Tool
 					styleFileName = Path.Combine(Path.GetDirectoryName(Common.AssemblyPath), file);
 				}
 			}
-			else 
+			else
 			{
 				if(!File.Exists(styleFileName))
 				{
@@ -2417,7 +2417,7 @@ namespace SIL.Tool
 		#region GetFiledWorksPath()
 
 		/// <summary>
-		/// Return the Field Works Path 
+		/// Return the Field Works Path
 		/// </summary>
 		/// <returns>Field Works Path</returns>
 		public static string GetFiledWorksPath()
@@ -2432,7 +2432,7 @@ namespace SIL.Tool
 		#region GetFiledWorksPath Version()
 
 		/// <summary>
-		/// Return the Field Works Path 
+		/// Return the Field Works Path
 		/// </summary>
 		/// <returns>Field Works Path</returns>
 		public static string GetFiledWorksPathVersion()
@@ -5175,6 +5175,16 @@ namespace SIL.Tool
 			{
 				input.CopyTo(output); // Using .NET 4
 			}
+		}
+
+		public static bool IsFileReadOnly(string FileName)
+		{
+			// Create a new FileInfo object.
+			FileInfo fInfo = new FileInfo(FileName);
+
+			// Return the IsReadOnly property value.
+			return fInfo.IsReadOnly;
+
 		}
 
 		/// <summary>
