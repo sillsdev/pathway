@@ -898,7 +898,7 @@ namespace epubConvert
 					continue;
 				}
 				string dest = Common.PathCombine(contentFolder, Path.GetFileName(embeddedFont.Filename));
-				if (embeddedFont.Filename != string.Empty && File.Exists(embeddedFont.Filename) && !Common.IsFileReadOnly(embeddedFont.BoldFilename))
+				if (embeddedFont.Filename != string.Empty && File.Exists(embeddedFont.Filename) && !Common.IsFileReadOnly(embeddedFont.Filename))
 				{
 					File.Copy(embeddedFont.Filename, dest, true);
 
