@@ -1,8 +1,8 @@
 [Desktop Entry]
-Encodeing=UTF-8
+Encoding=UTF-8
 Version=1.0
 Type=Application
-Icon=pathwayConfigurationTool22
+Icon=pathwayConfigurationTool64
 Name=Pathway ConfigurationTool
 Comment=Sets default values and styles for Pathway export
 Exec=/usr/bin/ConfigurationTool
