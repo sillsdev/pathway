@@ -1,3 +1,9 @@
+pathway-xelatex (1.15.5)  experimental; urgency=high
+
+  * 1.15.5 adjust format configuration to not configure LuaTeX
+
+ -- Greg Trihus <greg_trihus@sil.org>  Fri, 13 Jan 2017 09:35:20 -0600
+
 pathway-xelatex (1.15.4)  experimental; urgency=high
 
   * 1.15.4 sprint - update build
