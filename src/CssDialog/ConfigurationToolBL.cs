@@ -1123,7 +1123,7 @@ namespace SIL.PublishingSolution
 				WriteAtImport(writeCss, attribute, key);
 			}
 
-			if (inputTypeBL.ToLower() == "dictionary" && cTool.DdlSense.Items.Count > 0)
+			if (inputTypeBL.ToLower() == "dictionary" && cTool.DdlSense.Items.Count > 0 && cTool.DdlSense.SelectedItem != null)
 			{
 				attribute = "Sense";
 				key = ((ComboBoxItem)cTool.DdlSense.SelectedItem).Value;
@@ -1186,6 +1186,8 @@ namespace SIL.PublishingSolution
 			value["-ps-disable-widow-orphan"] = "\"" + _disableWidowOrphan + "\"";
 			WriteCssClass(writeCss, "page", value);
 
+			if (cTool.DdlRunningHead.SelectedItem != null)
+			{
 			if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
 			{
 				value.Clear();
@@ -1198,9 +1200,12 @@ namespace SIL.PublishingSolution
 				value["margin-left"] = cTool.TxtPageInside.Text;
 				WriteCssClass(writeCss, "page :right", value);
 			}
+			}
 
 			if (_centerTitleHeader)
 			{
+				if (cTool.DdlRunningHead.SelectedItem != null)
+				{
 				if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
 				{
 					SetPageTopCenter(value);
@@ -1215,6 +1220,7 @@ namespace SIL.PublishingSolution
 					WriteCssClass(writeCss, "page -top-center", value);
 				}
 			}
+		}
 		}
 
 		private void SetAttributesForOtherProperties(StreamWriter writeCss)
