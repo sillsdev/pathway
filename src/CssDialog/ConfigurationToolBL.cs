@@ -4947,7 +4947,13 @@ namespace SIL.PublishingSolution
 				{
 					DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
 														  MessageBoxDefaultButton.Button2);
-					if (result == DialogResult.No) return;
+					if (result == DialogResult.No)
+						return;
+					else
+					{
+						if (cTool.StylesGrid.Rows.Count > 0)
+							cTool.StylesGrid.Rows[0].Selected = true;
+					}
 				}
 
 				string allUsersPath = Common.GetAllUserPath();
