@@ -132,10 +132,10 @@ namespace CssSimpler
             var xml = new XmlDocument();
             UniqueClasses = lc.UniqueClasses;
             LoadCssXml(parser, styleSheet, xml);
-            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            WriteXmlAsCss(styleSheet, xml); //removes unused rules
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
-            
+
             new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
             xml.RemoveAll();
             UniqueClasses = null;
@@ -656,7 +656,7 @@ namespace CssSimpler
                 }
 
             }
-                
+
         }
 
         static void ShowHelp(OptionSet p)
