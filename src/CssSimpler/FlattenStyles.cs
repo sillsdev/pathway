@@ -30,7 +30,7 @@ namespace CssSimpler
         private readonly List<int> _displayBlockRuleNum = new List<int>();
         private const int StackSize = 30;
         private readonly ArrayList _classes = new ArrayList(StackSize);
-        private readonly ArrayList _langs = new ArrayList(StackSize); 
+        private readonly ArrayList _langs = new ArrayList(StackSize);
         private readonly ArrayList _levelRules = new ArrayList(StackSize);
         private readonly ArrayList _savedSibling = new ArrayList(StackSize);
         //private string _lastClass = String.Empty;
@@ -73,11 +73,11 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             SkipNode = r.Name == "span";
-            //if (nextClass != null && nextClass.StartsWith("examplescontent"))
-            //{
-            //    Debug.Print("break;");
-            //}
-            CollectRules(r, GetRuleKey(r.Name, nextClass));
+			//if (nextClass != null && nextClass.StartsWith("letter"))
+			//{
+			//	Debug.Print("break;");
+			//}
+			CollectRules(r, GetRuleKey(r.Name, nextClass));
             CollectRules(r, GetRuleKey(r.Name, KeyClass(r.Depth)));
             CollectRules(r, nextClass);
             CollectRules(r, GetRuleKey(r.Name, ""));
@@ -142,6 +142,7 @@ namespace CssSimpler
                 foreach (var node in targets[t])
                 {
                     if (!Applies(node, r)) continue;
+	                AddInTermOrder(found, node);
                     found.Add(node);
                     dirty = true;
                 }
@@ -152,7 +153,33 @@ namespace CssSimpler
             }
         }
 
-        private bool Applies(XmlNode node, XmlReader r)
+	    private static void AddInTermOrder(IList<XmlElement> found, XmlElement node)
+	    {
+		    var rule = GetRule(node);
+		    var terms = GetTerms(rule);
+		    var added = false;
+		    for (var i = found.Count; i-- > 0; )
+		    {
+			    if (GetTerms(GetRule(found[i])) < terms) continue;
+			    if (i + 1 == found.Count)
+			    {
+				    found.Add(node);
+			    }
+			    else
+			    {
+				    found.Insert(i + 1, node);
+			    }
+			    added = true;
+			    break;
+		    }
+		    if (!added)
+		    {
+			    found.Insert(0, node);
+		    }
+
+	    }
+
+	    private bool Applies(XmlNode node, XmlReader r)
         {
             var index = r.Depth;
             while (node != null && node.Name == "PROPERTY")
@@ -534,12 +561,11 @@ namespace CssSimpler
                     var added = false;
                     foreach (var term in targets[target])
                     {
-                        var targetRule = term.ParentNode as XmlElement;
-                        Debug.Assert(targetRule != null, "targetRule != null");
-                        var ruleTerms = int.Parse(targetRule.GetAttribute("term"));
+                        var targetRule = GetRule(term);
+	                    var ruleTerms = GetTerms(targetRule);
                         // ReSharper disable once TryCastAlwaysSucceeds
-                        var curRule = styleRule.ParentNode as XmlElement;
-                        var curTerms = int.Parse(curRule.GetAttribute("term"));
+                        var curRule = GetRule(styleRule);
+                        var curTerms = GetTerms(curRule);
                         if (curTerms >= ruleTerms)
                         {
                             targets[target].Insert(index, styleRule);
@@ -556,7 +582,20 @@ namespace CssSimpler
             }
         }
 
-        private static string GetRuleKey(string target, string lastClass)
+	    private static int GetTerms(XmlElement targetRule)
+	    {
+		    var ruleTerms = int.Parse(targetRule.GetAttribute("term"));
+		    return ruleTerms;
+	    }
+
+	    private static XmlElement GetRule(XmlElement term)
+	    {
+		    var targetRule = term.ParentNode as XmlElement;
+		    Debug.Assert(targetRule != null, "targetRule != null");
+		    return targetRule;
+	    }
+
+	    private static string GetRuleKey(string target, string lastClass)
         {
             if (target == "span" || target == "xitem")
             {
