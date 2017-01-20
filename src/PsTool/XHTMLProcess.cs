@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="XHTMLProcess.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -372,9 +372,9 @@ namespace SIL.Tool
 			}
 			if (cssClassDetail1 == null)
 				return _matchedCssStyleName;
-			
+
 			string parentClass = StackPeek(_allStyle);
-			
+
 			if (!string.IsNullOrEmpty(_matchedCssStyleName))
 			{
 				if (IdAllClass.ContainsKey(_matchedCssStyleName) && IdAllClass[_matchedCssStyleName].ContainsKey(propertyName))
@@ -1157,14 +1157,14 @@ namespace SIL.Tool
 							if (cssClassInfo.StyleName != classWithLang)
 	                        {
 								string parentStyle = string.Empty;
-		                       
+
 								if (!String.IsNullOrEmpty(StackPeek(_allStyle)))
 									parentStyle = Common.SepParent + StackPeek(_allStyle);
-								
+
 								string newClassNameWithParentStyle = classWithLang + parentStyle.Replace("_letData_dicBody", "");
-								AssignProperty(newClassNameWithParentStyle, ancestorFontSize);    
+								AssignProperty(newClassNameWithParentStyle, ancestorFontSize);
 	                        }
-							
+
                             if (psuedo == "before")
                             {
                                 _psuedoBeforeStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
@@ -1177,14 +1177,14 @@ namespace SIL.Tool
                             {
                                 _psuedoContainsStyle = SetClassInfo(cssClassInfo.CoreClass.ClassName, cssClassInfo);
                             }
-                        }						
+                        }
                     }
                 }
             }
             if (_outputType != Common.OutputType.ODT)
             {
                 AppendParentProperty();
-            }			
+            }
             return _matchedCssStyleName;
         }
 
@@ -1409,14 +1409,17 @@ namespace SIL.Tool
 				    {
 					    string tagTypeLang = string.Empty;
 					    tagTypeLang = _className + Common.SepAttrib + _lang;
-					    foreach (KeyValuePair<string, string> property in IdAllClass[tagTypeLang])
+					    if (IdAllClass.ContainsKey(tagTypeLang))
 					    {
-						    if (_tempStyle.ContainsKey(property.Key))
-							    continue;
-						    if (property.Key != "prince-text-replace")
-							    _tempStyle[property.Key] = property.Value;
-					    }
-				    }
+							foreach (KeyValuePair<string, string> property in IdAllClass[tagTypeLang])
+							{
+								if (_tempStyle.ContainsKey(property.Key))
+									continue;
+								if (property.Key != "prince-text-replace")
+									_tempStyle[property.Key] = property.Value;
+							}
+						}
+					}
 			    }
 		    }
 
@@ -1510,7 +1513,7 @@ namespace SIL.Tool
 				}
 			}
 
-			
+
 	    }
 
 
