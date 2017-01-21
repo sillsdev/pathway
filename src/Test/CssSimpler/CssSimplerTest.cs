@@ -398,7 +398,7 @@ namespace Test.CssSimplerTest
             }
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(xhtmlFullName, 3, "//*[local-name()='a']/preceding-sibling::*", "Wrong number of bullets in output");
-            NodeTest(xhtmlFullName, 14, "//*[@xml:space]", "Wrong number of list punctuation");
+            NodeTest(xhtmlFullName, 20, "//*[@xml:space]", "Wrong number of list punctuation");
         }
 
         /// <summary>
@@ -576,7 +576,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 3023, "//*[@xml:space]", "Nodes with pseudo content changed for Fw 8.2.8");
+            NodeTest(outFullName, 4444, "//*[@xml:space]", "Nodes with pseudo content changed for Fw 8.2.8");
         }
 
         /// <summary>
@@ -682,7 +682,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 81, "//*[@xml:space]", "subentry punctuation");
+            NodeTest(outFullName, 83, "//*[@xml:space]", "subentry punctuation");
         }
 
         /// <summary>
@@ -796,7 +796,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 129, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 135, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -1045,7 +1045,7 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 7, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 9, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -1130,7 +1130,10 @@ namespace Test.CssSimplerTest
             NodeTest(outFullName, 2, "//*[@class='examplescontent-ps']", "examplebullet");
         }
 
-	    [Test]
+		/// <summary>
+		/// .letter rule has a green color but span for en lang has blue color and more terms
+		/// </summary>
+		[Test]
 	    public void LetterColorTest()
 	    {
 		    const string testName = "LetterColor";
@@ -1151,7 +1154,75 @@ namespace Test.CssSimplerTest
 		    var xmlCssFullName = _testFiles.Output(testName + ".xml");
 		    SavedXmlCssFileName = xmlCssFullName;
 			OutputFlattenedStylesheet(xhtmlFullName, cssFullName, fs);
-			NodeTest(xmlCssFullName, 1, "//name[text()='color']/following-sibling::*/text()", "#000080");
+			NodeTest(xmlCssFullName, 1, "//name[text()='color']/following-sibling::*[text()='#000080']", "Letter Color Blue");
+		}
+
+		/// <summary>
+		/// By default spans are created for significant space since it is needed for Pathway to Libre Office
+		/// </summary>
+		[Test]
+		public void SpaceSpansTest()
+		{
+			const string testName = "SpaceSpans";
+			_testFiles.Copy(testName + ".css");
+			_testFiles.Copy(testName + ".xhtml");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			var xhtmlOutFullName = _testFiles.Output(testName + "Out.xhtml");
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			var lc = new LoadClasses(xhtmlFullName);
+			var styleSheet = lc.StyleSheet;
+			UniqueClasses = lc.UniqueClasses;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			// ReSharper disable once UnusedVariable
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false);
+			fs.Structure = 0;
+			fs.DivBlocks = false;
+			MetaData(fs);
+			fs.Parse();
+			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
+			NodeTest(xhtmlOutFullName, 16, "//*[@class='sp']", "Space Spans");
+		}
+
+		/// <summary>
+		/// By default spans are created for significant space since it is needed for Pathway to Libre Office
+		/// </summary>
+		[Test]
+		public void SpaceSpansOffTest()
+		{
+			const string testName = "SpaceSpansOff";
+			_testFiles.Copy(testName + ".css");
+			_testFiles.Copy(testName + ".xhtml");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			var xhtmlOutFullName = _testFiles.Output(testName + "Out.xhtml");
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			var lc = new LoadClasses(xhtmlFullName);
+			var styleSheet = lc.StyleSheet;
+			UniqueClasses = lc.UniqueClasses;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			// ReSharper disable once UnusedVariable
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false);
+			fs.SpaceClass = string.Empty; // When class name set to empty string, no spans will be created.
+			fs.Structure = 0;
+			fs.DivBlocks = false;
+			MetaData(fs);
+			fs.Parse();
+			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
+			NodeTest(xhtmlOutFullName, 0, "//*[@class='sp']", "Space Spans");
+			fs.SpaceClass = "sp";
 		}
 
 		[Test]

@@ -37,7 +37,7 @@ namespace CssSimpler
         protected bool SkipNode;
         protected string Suffix = "-ps";
         protected string ReplaceLocalName;
-		protected string SpaceClass = "sp";
+		public string SpaceClass = "sp";
 		public string TitleDefault;
         public string AuthorDefault;
         public bool DebugPrint;
@@ -142,7 +142,7 @@ namespace CssSimpler
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
                         //Debug.Print("space");
-		                if (!string.IsNullOrEmpty(SpaceClass))
+		                if (!string.IsNullOrEmpty(SpaceClass) && _rdr.Depth > 1)
 		                {
 							_wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
 							WriteClassAttr(SpaceClass + Suffix);
