@@ -1130,7 +1130,31 @@ namespace Test.CssSimplerTest
             NodeTest(outFullName, 2, "//*[@class='examplescontent-ps']", "examplebullet");
         }
 
-        [Test]
+	    [Test]
+	    public void LetterColorTest()
+	    {
+		    const string testName = "LetterColor";
+			_testFiles.Copy(testName + ".css");
+			_testFiles.Copy(testName + ".xhtml");
+		    var cssFullName = _testFiles.Output(testName + ".css");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+		    var xhtmlOutFullName = _testFiles.Output(testName + "Out.xhtml");
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			UniqueClasses = null;
+			LoadCssXml(parser, cssFullName, xml);
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false);
+			fs.Structure = 0;
+			fs.DivBlocks = false;
+			MetaData(fs);
+			fs.Parse();
+		    var xmlCssFullName = _testFiles.Output(testName + ".xml");
+		    SavedXmlCssFileName = xmlCssFullName;
+			OutputFlattenedStylesheet(xhtmlFullName, cssFullName, fs);
+			NodeTest(xmlCssFullName, 1, "//name[text()='color']/following-sibling::*/text()", "#000080");
+		}
+
+		[Test]
         public void WriteValue1Test()
         {
             const string testName = "Value1" + ".xml";

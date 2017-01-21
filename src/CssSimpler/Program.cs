@@ -35,7 +35,7 @@ namespace CssSimpler
         private static bool _flatten;
         private static int _headerStyles;
         private static bool _embedStyles;
-        private static bool _combineMainRev;
+        //private static bool _combineMainRev;
         private static bool _incMeta;
         private static bool _noXmlHeader;
         private static bool _divBlocks;
@@ -165,7 +165,7 @@ namespace CssSimpler
             }
         }
 
-        private static void OutputFlattenedStylesheet(string outFullName, string styleSheet, FlattenStyles fs)
+        protected static void OutputFlattenedStylesheet(string outFullName, string styleSheet, FlattenStyles fs)
         {
             if (_embedStyles)
             {
@@ -193,7 +193,7 @@ namespace CssSimpler
         }
 
         private static readonly XmlDocument SettingsXml = new XmlDocument();
-        private static void MetaData(FlattenStyles fs)
+        protected static void MetaData(FlattenStyles fs)
         {
             if (!_incMeta) return;
             var settingFullName = Path.Combine(Environment.GetEnvironmentVariable("LOCALAPPDATA"), "SIL", "Pathway",
@@ -493,14 +493,19 @@ namespace CssSimpler
             cssFile.Close();
         }
 
-        private static void MapXmlCssToStream(XmlDocument xml, Stream cssFile)
+	    protected static string SavedXmlCssFileName;
+		private static void MapXmlCssToStream(XmlDocument xml, Stream cssFile)
         {
             var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
             XmlCss.Transform(xml, null, cssWriter);
             cssWriter.Flush();
+	        if (string.IsNullOrEmpty(SavedXmlCssFileName)) return;	// For testing we save XML representation of CSS
+	        VerboseMessage("Writing XML stylesheet to " + SavedXmlCssFileName);
+	        WriteCssXml(SavedXmlCssFileName, xml);
+	        SavedXmlCssFileName = string.Empty;
         }
 
-        private static void MakeBackupIfNecessary(string styleSheet, string xhtmlFullName)
+		private static void MakeBackupIfNecessary(string styleSheet, string xhtmlFullName)
         {
             if (_makeBackup)
             {
