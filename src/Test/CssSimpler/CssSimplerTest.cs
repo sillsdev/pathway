@@ -716,8 +716,10 @@ namespace Test.CssSimplerTest
 
         /// <summary>
         /// Remove extra parenthesis in Semantic domaain before abbreviation
+        /// This test fails on Windows Team City b/c a newline is missing from the end of the file but succeeds locally and on Linux
         /// </summary>
         [Test]
+		[Category("SkipOnTeamCity")] //Team City doesn't add a new line to the end of the generated XML file and throws a comparison error
         public void PseudoExtraSemDomParenTest()
         {
             const string testName = "PseudoExtraSemDomParen";
