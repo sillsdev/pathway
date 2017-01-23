@@ -32,12 +32,13 @@ namespace SIL.Tool
         private readonly XmlReader _rdr;
         private readonly XmlWriter _wtr;
         private bool _finish;
-        private readonly bool _noXmlHeader;
+        private bool _noXmlHeader;
         protected bool SkipAttr;
         protected bool SkipNode;
         protected string Suffix = "-ps";
         protected string ReplaceLocalName;
-        public string TitleDefault;
+		public string SpaceClass = "sp";
+		public string TitleDefault;
         public string AuthorDefault;
         public bool DebugPrint;
         private bool _doAttributes;
@@ -141,8 +142,19 @@ namespace SIL.Tool
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
                         //Debug.Print("space");
-                        _wtr.WriteWhitespace(_rdr.Value);
-                        break;
+		                if (!string.IsNullOrEmpty(SpaceClass) && _rdr.Depth > 1)
+		                {
+							_wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
+							WriteClassAttr(SpaceClass + Suffix);
+							_wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");
+							_wtr.WriteWhitespace(_rdr.Value);
+							_wtr.WriteEndElement();
+						}
+						else
+		                {
+							_wtr.WriteWhitespace(_rdr.Value);
+						}
+						break;
                     case XmlNodeType.CDATA:
                         _wtr.WriteCData( _rdr.Value );
                         break;

@@ -22,7 +22,7 @@ using System.Xml;
 using System.Xml.Xsl;
 using SIL.PublishingSolution;
 using Antlr.Runtime.Tree;
-using Mono.Options;
+using SIL.Tool;
 
 namespace CssSimpler
 {

@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using SIL.Tool;
 
 namespace CssSimpler
 {
@@ -137,7 +138,7 @@ namespace CssSimpler
             var requireParent = false;
             // We should be at the tag / class for the rule being applied so look before it.
             while (node != null)
-            { 
+            {
                 node = node.PreviousSibling;
                 if (node == null) break;
                 switch (node.Name)

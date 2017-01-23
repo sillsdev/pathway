@@ -246,13 +246,9 @@
     <Compile Include="FlattenStyles.cs" />
     <Compile Include="LoadClasses.cs" />
     <Compile Include="MoveInlineStyles.cs" />
-    <Compile Include="Options.cs" />
     <Compile Include="ProcessPseudo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XmlCopy.cs" />
-    <Compile Include="XmlParser.cs" />
-    <Compile Include="NullXmlResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="XmlCss.xsl" />
@@ -283,6 +279,10 @@
     <ProjectReference Include="..\CssParser\CssParser.csproj">
       <Project>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</Project>
       <Name>CssParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PsTool\PsTool.csproj">
+      <Project>{448f846f-ce23-462c-bf7e-827875a36f82}</Project>
+      <Name>PsTool</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
