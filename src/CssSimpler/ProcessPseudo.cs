@@ -33,7 +33,7 @@ namespace CssSimpler
         private readonly SortedSet<string> _needHigher;
 
         public ProcessPseudo(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher)
-            : base(input, output)
+            : base(input, output, false)
         {
             _needHigher = needHigher;
             CollectTargets(xmlCss);
@@ -144,7 +144,7 @@ namespace CssSimpler
                 {
                     case "PARENTOF":
                         requireParent = true;
-                        continue;
+                        break;
                     case "CLASS":
                         string name = node.FirstChild.InnerText;
                         while (!requireParent && index > 0 && !MatchClass(index, name))

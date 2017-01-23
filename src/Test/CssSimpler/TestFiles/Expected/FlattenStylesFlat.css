@@ -1,0 +1,581 @@
+﻿span {
+   font-size: 10pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.abbreviation {
+   /* Rule List: 4,3,-1,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.abbreviation2 {
+   /* Rule List: 5,3,-1,8,13,12 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.abbreviation3 {
+   /* Rule List: 4,3,-1,106,105,190,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.abbreviation4 {
+   /* Rule List: 5,3,-1,106,105,190,8,13,12 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.abbreviation5 {
+   /* Rule List: 6,3,-1,8,13,12 */
+   font-family: 'Charis SIL',serif;
+   color: #F00;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.captionContent {
+   /* Rule List: -1,102,98,3,8,13,12 */
+   text-indent: 0pt;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   font-size: 10pt;
+   white-space: pre-wrap;
+}
+.complexformentryrefs {
+   /* Rule List: 3,-1,9,108,107 */
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.definitionorgloss {
+   /* Rule List: 4,3,-1,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.definitionorgloss2 {
+   /* Rule List: 4,3,-1,106,105,190,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.definitionorgloss3 {
+   /* Rule List: 5,3,-1,8,13,12 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.entry {
+   /* Rule List: 8,13,12,-1 */
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   clear: both;
+   white-space: pre-wrap;
+}
+.example {
+   /* Rule List: 45,47,7,3,-1,8,13,12 */
+   font-style: italic;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.glossorsummary {
+   /* Rule List: 5,3,-1,10,149,148 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword {
+   /* Rule List: 11,-1,150,152,7,3,10,149,148 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword10 {
+   /* Rule List: 11,-1,86,88,7,3,8,13,12 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword11 {
+   /* Rule List: 11,-1,96,97,7,3,8,13,12 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword12 {
+   /* Rule List: 11,-1,61,62,7,3,8,13,12 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword2 {
+   /* Rule List: 11,-1,7,3,174,175,10,149,148 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   font-weight: bold;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword3 {
+   /* Rule List: 11,-1,4,3,174,175,7,10,149,148 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   font-weight: bold;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword4 {
+   /* Rule List: 11,-1,30,31,7,3,8,13,12 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword5 {
+   /* Rule List: 11,-1,174,175,7,3,10,149,148 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword6 {
+   /* Rule List: 11,-1,191,193,7,3,106,105,190,8,13,12 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.headword7 {
+   /* Rule List: 11,-1,109,111,7,3,9,108,107 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword8 {
+   /* Rule List: 11,-1,141,142,7,3,9,108,107 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.headword9 {
+   /* Rule List: 11,-1,146,147,7,3,9,108,107 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.letHead {
+   /* Rule List: 1,-1 */
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+}
+.letter {
+   /* Rule List: 2,7,3,-1,1 */
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 14pt;
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   text-align: center;
+}
+.mainheadword {
+   /* Rule List: 11,-1,14,16,7,3,8,13,12 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.minorentrycomplex {
+   /* Rule List: 9,108,107,-1 */
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   clear: both;
+   white-space: pre-wrap;
+}
+.minorentryvariant {
+   /* Rule List: 10,149,148,-1 */
+   text-indent: -36pt;
+   margin-left: 45pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   clear: both;
+   white-space: pre-wrap;
+}
+.name {
+   /* Rule List: 4,3,-1,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.name2 {
+   /* Rule List: 5,3,-1,8,13,12 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.name3 {
+   /* Rule List: 4,3,-1,106,105,190,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.name4 {
+   /* Rule List: 5,3,-1,106,105,190,8,13,12 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.name5 {
+   /* Rule List: 6,3,-1,8,13,12 */
+   font-family: 'Charis SIL',serif;
+   color: #F00;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.nontrivialentryroots {
+   /* Rule List: 3,-1,9,108,107 */
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.nontrivialentryroots2 {
+   /* Rule List: 3,-1,8,13,12 */
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.partofspeech {
+   /* Rule List: 4,3,-1,40,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   font-style: italic;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.partofspeech2 {
+   /* Rule List: 4,3,-1,219,106,105,190,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   font-style: italic;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.partofspeech3 {
+   /* Rule List: 4,3,-1,91,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   font-style: italic;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.partofspeech4 {
+   /* Rule List: 4,3,-1,37,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   font-style: italic;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.picture {
+   /* Rule List: 102,98,-1,3,8,13,12 */
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   font-size: 10pt;
+   white-space: pre-wrap;
+}
+.referencedentry {
+   /* Rule List: 3,-1,9,108,107 */
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reverseabbr {
+   /* Rule List: 4,3,-1,10,149,148 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reverseabbr2 {
+   /* Rule List: 5,3,-1,10,149,148 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reverseabbr3 {
+   /* Rule List: 6,3,-1,10,149,148 */
+   font-family: 'Charis SIL',serif;
+   color: #F00;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reverseabbr4 {
+   /* Rule List: 4,3,-1,9,108,107 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reverseabbr5 {
+   /* Rule List: 5,3,-1,9,108,107 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reverseabbr6 {
+   /* Rule List: 6,3,-1,9,108,107 */
+   font-family: 'Charis SIL',serif;
+   color: #F00;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reversename {
+   /* Rule List: 4,3,-1,10,149,148 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reversename2 {
+   /* Rule List: 5,3,-1,10,149,148 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reversename3 {
+   /* Rule List: 6,3,-1,10,149,148 */
+   font-family: 'Charis SIL',serif;
+   color: #F00;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reversename4 {
+   /* Rule List: 4,3,-1,9,108,107 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reversename5 {
+   /* Rule List: 5,3,-1,9,108,107 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.reversename6 {
+   /* Rule List: 6,3,-1,9,108,107 */
+   font-family: 'Charis SIL',serif;
+   color: #F00;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.sensenumber {
+   /* Rule List: 5,3,-1,102,98,8,13,12 */
+   font-family: 'Doulos SIL',serif;
+   font-size: 10pt;
+   text-indent: 0pt;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   white-space: pre-wrap;
+}
+.sensenumber2 {
+   /* Rule List: 34,3,-1,8,13,12 */
+   font-weight: bold;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.sensenumber3 {
+   /* Rule List: 3,-1,34,8,13,12 */
+   font-size: 10pt;
+   font-weight: bold;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.subentry {
+   /* Rule List: 106,105,190,3,-1,8,13,12 */
+   text-indent: 0pt;
+   margin-left: 0pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+   clear: both;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.thumbnail {
+   /* Rule List: 99,-1,102,98,3,8,13,12 */
+   max-height: 1in;
+   text-indent: 0pt;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   font-size: 10pt;
+   white-space: pre-wrap;
+}
+.translation {
+   /* Rule List: 4,3,-1,8,13,12 */
+   font-family: 'Arial',serif;
+   color: #800080;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.variantformentrybackrefs {
+   /* Rule List: 3,-1,8,13,12 */
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix {
+   /* Rule List: 165,3,-1,10,149,148 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix10 {
+   /* Rule List: 82,3,-1,8,13,12 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix11 {
+   /* Rule List: 57,3,-1,8,13,12 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix2 {
+   /* Rule List: 169,3,-1,10,149,148 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix3 {
+   /* Rule List: 22,3,-1,8,13,12 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix4 {
+   /* Rule List: 26,3,-1,8,13,12 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix5 {
+   /* Rule List: 195,3,-1,106,105,190,8,13,12 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix6 {
+   /* Rule List: 199,3,-1,106,105,190,8,13,12 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: 0pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix7 {
+   /* Rule List: 132,3,-1,9,108,107 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix8 {
+   /* Rule List: 136,3,-1,9,108,107 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}
+.writingsystemprefix9 {
+   /* Rule List: 78,3,-1,8,13,12 */
+   font-style: normal;
+   font-size: 10pt;
+   text-indent: -36pt;
+   white-space: pre-wrap;
+}

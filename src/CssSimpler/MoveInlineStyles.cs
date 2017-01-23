@@ -23,7 +23,7 @@ namespace CssSimpler
     {
 
         public MoveInlineStyles(string input, string output, string cssName)
-            : base(input, output)
+            : base(input, output, false)
         {
             DeclareBefore(XmlNodeType.Element, ResetClassName);
             DeclareBefore(XmlNodeType.Attribute, LookForStyle);
@@ -38,7 +38,7 @@ namespace CssSimpler
             }
             foreach (var key in SavedStyles.Keys)
             {
-                sw.WriteLine("." + key + " { " + SavedStyles[key] + " }");
+                sw.WriteLine("span > span." + key + " { " + SavedStyles[key] + " }");
             }
             sw.Close();
             sr.Close();
@@ -96,7 +96,7 @@ namespace CssSimpler
                 }
                 if (_currentClass == string.Empty)
                 {
-                    WriteAttr(newClass);
+                    WriteClassAttr(newClass);
                 }
                 SkipAttr = true;
             }

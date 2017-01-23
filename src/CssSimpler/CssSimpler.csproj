@@ -242,6 +242,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmbedStyles.cs" />
+    <Compile Include="FlattenStyles.cs" />
     <Compile Include="LoadClasses.cs" />
     <Compile Include="MoveInlineStyles.cs" />
     <Compile Include="Options.cs" />
@@ -254,11 +256,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="XmlCss.xsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="XmlCssSimplify.xsl">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
