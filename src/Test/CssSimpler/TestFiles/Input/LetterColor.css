@@ -1,0 +1,36 @@
+﻿
+.letHead{
+	-moz-column-count:1;
+	-webkit-column-count:1;
+	column-count:1;
+	clear:both;
+	text-align:center;
+	width:100%;
+}
+
+.letter{
+	border-left-width:0pt;
+	border-right-width:0pt;
+	border-top-width:0pt;
+	border-bottom-width:0pt;
+	text-indent:-8.504pt;
+	margin-left:8.504pt;
+	padding-bottom:3pt;
+	padding-top:12pt;
+	font-size:14pt;
+	font-weight:bold;
+	color:#008000;
+	content:'\2022';
+}
+body{
+		font-size:10pt;
+	}
+span[lang|="es"]{
+		font-family:'Times New Roman',serif;
+		font-size:10pt;
+		color:#008000;
+	}
+span[lang|="en"]{
+		font-family:'Times New Roman',serif;
+		color:#000080;
+	}

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"[
+<!ATTLIST html lang CDATA #REQUIRED >
+<!ATTLIST span lang CDATA #IMPLIED >
+<!ATTLIST span entryguid CDATA #IMPLIED >
+<!ATTLIST img alt CDATA #IMPLIED >
+<<<<<<< HEAD
+]><html lang="utf-8" xmlns="http://www.w3.org/1999/xhtml"><head><link href="PseudoExtraSemDomParen.css" rel="stylesheet" /><title></title></head><body><span class="sp" xml:space="preserve">
+</span><div class="entry" id="g2a160ae0-17fc-4cef-b9e8-70ba58d29f6f"><span class="subentry mainentrysubentry"><span class="semanticdomains" lang="utf-8" xml:space="preserve">(sem. domains: </span><span class="abbreviation" lang="en">6.7.7</span><span class="abbreviation2" lang="en" xml:space="preserve"> - </span><span class="name" lang="en">Container</span><span class="semanticdomains" lang="utf-8" xml:space="preserve">.) </span><span class="sp" xml:space="preserve"> </span></span></div><div class="minorentrycomplex" id="g7c5ee751-4076-494f-9d66-fce02e2e5fa0"><span class="complexformentryrefs" lang="utf-8" xml:space="preserve"> (</span><span class="reverseabbr" lang="en">comp. of</span><span class="sp" xml:space="preserve"> </span><span class="sp" xml:space="preserve"> </span><span class="sp" xml:space="preserve"> </span><a href="#g2a160ae0-17fc-4cef-b9e8-70ba58d29f6f"><span class="headword" lang="bzh">ḳelé</span></a><span class="complexformentryrefs" lang="utf-8">)</span></div><span class="sp" xml:space="preserve">
+</span></body></html>
+=======
+]><html lang="utf-8" xmlns="http://www.w3.org/1999/xhtml"><head><link href="PseudoExtraSemDomParen.css" rel="stylesheet" /><title></title></head><body>
+<div class="entry" id="g2a160ae0-17fc-4cef-b9e8-70ba58d29f6f"><span class="subentry mainentrysubentry"><span class="semanticdomains" lang="utf-8" xml:space="preserve">(sem. domains: </span><span class="abbreviation" lang="en">6.7.7</span><span class="abbreviation2" lang="en" xml:space="preserve"> - </span><span class="name" lang="en">Container</span><span class="semanticdomains" lang="utf-8" xml:space="preserve">.) </span> </span></div><div class="minorentrycomplex" id="g7c5ee751-4076-494f-9d66-fce02e2e5fa0"><span class="complexformentryrefs" lang="utf-8" xml:space="preserve"> (</span><span class="reverseabbr" lang="en">comp. of</span>   <a href="#g2a160ae0-17fc-4cef-b9e8-70ba58d29f6f"><span class="headword" lang="bzh">ḳelé</span></a><span class="complexformentryrefs" lang="utf-8">)</span></div>
+</body></html>
+>>>>>>> f1b9fd0fe66ffbb7b39a96eb7658d82c769984d8
