@@ -45,7 +45,7 @@
                     </xsl:call-template>
                 </xsl:copy>
             </xsl:when>
-            
+
             <!-- There is a main section but no reversal -->
             <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
                 <xsl:call-template name="SubCopy">
@@ -53,7 +53,7 @@
                     <xsl:with-param name="type">Part</xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
-            
+
             <!-- Test for beginning of reversal section -->
             <xsl:when test="count(ncx:content[starts-with(@src,'Rev')]) = 1 and starts-with(preceding-sibling::*[1]//@src,'Part')">
                 <xsl:copy>
@@ -75,7 +75,7 @@
                     </xsl:call-template>
                 </xsl:copy>
             </xsl:when>
-            
+
             <!-- Reversal section but no main section -->
             <xsl:when test="count(ncx:content[starts-with(@src,'Rev')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Rev'))  and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
                 <xsl:call-template name="SubCopy">
@@ -94,11 +94,11 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template name="SubCopy">
         <xsl:param name="item"/>
         <xsl:param name="type"/>
-        
+
         <xsl:if test="starts-with($item/ncx:content/@src, $type)">
             <xsl:copy-of select="$item"/>
             <xsl:call-template name="SubCopy">
@@ -107,5 +107,5 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
-    
+
 </xsl:stylesheet>
