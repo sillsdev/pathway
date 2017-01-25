@@ -25,7 +25,7 @@
     <xsl:template match="ncx:navPoint">
         <xsl:choose>
             <!-- Test for beginning of main section -->
-            <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part')) and count(following::*[starts-with(@src,'Rev')]) > 0">
+            <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part')) and starts-with(following-sibling::*//@src,'Rev')">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
                     <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
@@ -77,7 +77,7 @@
             </xsl:when>
             
             <!-- Reversal section but no main section -->
-            <xsl:when test="count(ncx:content[starts-with(@src,'Rev')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Rev'))  and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
+            <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
                 <xsl:call-template name="SubCopy">
                     <xsl:with-param name="item" select="."/>
                     <xsl:with-param name="type">Rev</xsl:with-param>
