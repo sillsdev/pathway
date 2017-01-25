@@ -25,7 +25,7 @@
     <xsl:template match="ncx:navPoint">
         <xsl:choose>
             <!-- Test for beginning of main section -->
-            <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part')) and count(following::*[starts-with(@src,'Rev')]) > 0">
+            <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part')) and starts-with(following-sibling::*//@src,'Rev')">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
                     <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
@@ -45,7 +45,7 @@
                     </xsl:call-template>
                 </xsl:copy>
             </xsl:when>
-
+            
             <!-- There is a main section but no reversal -->
             <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
                 <xsl:call-template name="SubCopy">
@@ -53,7 +53,7 @@
                     <xsl:with-param name="type">Part</xsl:with-param>
                 </xsl:call-template>
             </xsl:when>
-
+            
             <!-- Test for beginning of reversal section -->
             <xsl:when test="count(ncx:content[starts-with(@src,'Rev')]) = 1 and starts-with(preceding-sibling::*[1]//@src,'Part')">
                 <xsl:copy>
@@ -75,9 +75,9 @@
                     </xsl:call-template>
                 </xsl:copy>
             </xsl:when>
-
+            
             <!-- Reversal section but no main section -->
-            <xsl:when test="count(ncx:content[starts-with(@src,'Rev')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Rev'))  and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
+            <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
                 <xsl:call-template name="SubCopy">
                     <xsl:with-param name="item" select="."/>
                     <xsl:with-param name="type">Rev</xsl:with-param>
@@ -94,11 +94,11 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+    
     <xsl:template name="SubCopy">
         <xsl:param name="item"/>
         <xsl:param name="type"/>
-
+        
         <xsl:if test="starts-with($item/ncx:content/@src, $type)">
             <xsl:copy-of select="$item"/>
             <xsl:call-template name="SubCopy">
@@ -107,5 +107,5 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
-
+    
 </xsl:stylesheet>
