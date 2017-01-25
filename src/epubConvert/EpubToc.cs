@@ -1,15 +1,15 @@
 ﻿#region // Copyright (C) 2014, SIL International. All Rights Reserved.
 // --------------------------------------------------------------------------------------------
 // <copyright file="EpubManifest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -72,6 +72,10 @@ namespace epubConvert
                 string name = Path.GetFileName(file);
                 Debug.Assert(name != null);
                 string bookName = GetBookName(file);
+
+				if(string.IsNullOrEmpty(bookName))
+					continue;
+
                 if (name.IndexOf("File", StringComparison.Ordinal) == 0 && name.IndexOf("TOC", StringComparison.Ordinal) == -1)
                 {
                     WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
@@ -769,7 +773,7 @@ namespace epubConvert
                 return (sb.ToString());
             }
             // fall back on just the file name
-            return Path.GetFileName(xhtmlFileName);
+			return string.Empty;
         }
 
     }
