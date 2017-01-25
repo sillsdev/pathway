@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="CommonXml.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
+// Last reviewed:
 //
 // <remarks>
 // Library for Pathway
@@ -167,7 +167,7 @@ namespace SIL.Tool
 						}
 					}
 				}
-				// Check only in the header and retrun 
+				// Check only in the header and retrun
 				if (reader.NodeType == XmlNodeType.EndElement)
 				{
 					if (string.Compare(reader.Name, "head", true) >= 0)
@@ -208,7 +208,7 @@ namespace SIL.Tool
 						}
 					}
 				}
-				// Check only in the header and retrun 
+				// Check only in the header and retrun
 				if (reader.NodeType == XmlNodeType.EndElement)
 				{
 					if (reader.Name == "head")
@@ -376,14 +376,14 @@ namespace SIL.Tool
 				string rootPath = Path.GetPathRoot(metaName);
 				if (rootPath.Length > 0)
 				{
-					//Server Path ex: \\servername\foldername and from the Drive ex: c:\\ 
+					//Server Path ex: \\servername\foldername and from the Drive ex: c:\\
 					fileName = PathCombine(metaName, src);
 					if (File.Exists(fileName))
 					{
 						fromPath = fileName;
 					}
 				}
-				else  // from the Folder 
+				else  // from the Folder
 				{
 					string srcFileName = src;
 					if (src.IndexOf("file://") >= 0)  // File contains
@@ -557,7 +557,7 @@ namespace SIL.Tool
 					}
 					else
 					{
-						// search in Exact folder 
+						// search in Exact folder
 						fileName = src.Substring(designatorLength, src.Length - designatorLength);
 						if (File.Exists(fileName))
 						{
@@ -683,7 +683,7 @@ namespace SIL.Tool
 
 		#region GetXmlNodes
 		/// <summary>
-		/// Returns XmlNodeList 
+		/// Returns XmlNodeList
 		/// </summary>
 		/// <param name="xmlFileNameWithPath">File Name</param>
 		/// <param name="xPath">Xpath for the XML Node</param>
@@ -977,25 +977,45 @@ namespace SIL.Tool
 
 
 		/// <summary>
-		/// This method splits the input xhtml into different files 
+		/// This method splits the input xhtml into different files
 		/// and stores in the temp path using the class name to split the file
-		/// 
+		///
 		/// </summary>
 		/// <param name="xhtmlFileWithPath">The input Xhtml File </param>
 		/// <param name="bookSplitterClass">The class name to split the class</param>
 		/// <param name = "adjacentClass"></param>
 		/// <returns>The entire path of the splitted files are retured as List</returns>
+		//public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass, bool adjacentClass)
+		//{
+		//	return SplitXhtmlFile(xhtmlFileWithPath, bookSplitterClass, "PartFile", adjacentClass);
+		//}
+		private static readonly List<string> SplitFileList = new List<string>();
 		public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass, bool adjacentClass)
 		{
-			return SplitXhtmlFile(xhtmlFileWithPath, bookSplitterClass, "PartFile", adjacentClass);
+			var split = new SplitXml(xhtmlFileWithPath, bookSplitterClass)
+			{
+				Folder = ".",
+				Prefix = "PartFile"
+			};
+			var folder = Path.GetDirectoryName(xhtmlFileWithPath);
+			split.CreateOutputFolderAt(folder);
+			while (!split.EndOfFile())
+			{
+				split.Parse();
+			}
+			SplitFileList.Clear();
+			foreach (var file in split.FileList)
+			{
+				SplitFileList.Add(PathCombine(folder, file));
+			}
+			return SplitFileList;
 		}
 
-
 		/// <summary>
-		/// This method splits the input xhtml into different files 
+		/// This method splits the input xhtml into different files
 		/// and stores in the temp path using the class name to split the file. This override allows you
 		/// to specify the resulting filename prefix (e.g., "PartFile" in "PartFile1.xhtml").
-		/// 
+		///
 		/// </summary>
 		/// <param name="xhtmlFileWithPath">The input Xhtml File </param>
 		/// <param name="bookSplitterClass">The class name to split the class</param>
