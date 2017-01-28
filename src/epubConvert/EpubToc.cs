@@ -73,9 +73,6 @@ namespace epubConvert
                 Debug.Assert(name != null);
                 string bookName = GetBookName(file);
 
-				if(string.IsNullOrEmpty(bookName))
-					continue;
-
                 if (name.IndexOf("File", StringComparison.Ordinal) == 0 && name.IndexOf("TOC", StringComparison.Ordinal) == -1)
                 {
                     WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
@@ -94,7 +91,8 @@ namespace epubConvert
                     {
                         WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
                         index++;
-                    }
+						ncx.WriteEndElement(); // navPoint
+					}
                     if (InputType.ToLower() == "dictionary")
                     {
                         DictionaryNcx(ncx, ref isMainOpen, ref isMainSubOpen, ref isRevOpen, ref isRevSubOpen, ref index, skipChapterInfo, file, name, bookName);
@@ -195,14 +193,17 @@ namespace epubConvert
                 if (fileNameWithoutExtension != null && (fileNameWithoutExtension.EndsWith("_") ||
                                                                        fileNameWithoutExtension.EndsWith("_01")))
                 {
-                    if (isMainSubOpen)
-                    {
-                        ncx.WriteEndElement(); // navPoint
-                    }
-                    WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
-                    index++;
-                    isMainSubOpen = true;
-                }
+	                if (!string.IsNullOrEmpty(bookName))
+	                {
+						if (isMainSubOpen)
+						{
+							ncx.WriteEndElement(); // navPoint
+						}
+						WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
+						index++;
+						isMainSubOpen = true;
+					}
+				}
                 if (!skipChapterInfo)
                 {
                     WriteChapterLinks(file, ref index, ncx);
@@ -220,18 +221,21 @@ namespace epubConvert
                 if (fileNameWithoutExtension != null && (fileNameWithoutExtension.EndsWith("_") ||
                                                                        fileNameWithoutExtension.EndsWith("_01")))
                 {
-                    if (isRevSubOpen)
-                    {
-                        ncx.WriteEndElement(); // navPoint
-                    }
-                    if (!isRevOpen)
-                    {
-                        isRevOpen = true;
-                    }
-                    WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
-                    index++;
-                    isRevSubOpen = true;
-                }
+	                if (!string.IsNullOrEmpty(bookName))
+	                {
+						if (isRevSubOpen)
+						{
+							ncx.WriteEndElement(); // navPoint
+						}
+						if (!isRevOpen)
+						{
+							isRevOpen = true;
+						}
+						WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
+						index++;
+						isRevSubOpen = true;
+					}
+				}
                 if (!skipChapterInfo)
                 {
                     WriteChapterLinks(file, ref index, ncx);
