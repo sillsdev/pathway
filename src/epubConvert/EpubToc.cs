@@ -73,9 +73,6 @@ namespace epubConvert
                 Debug.Assert(name != null);
                 string bookName = GetBookName(file);
 
-				if(string.IsNullOrEmpty(bookName))
-					continue;
-
                 if (name.IndexOf("File", StringComparison.Ordinal) == 0 && name.IndexOf("TOC", StringComparison.Ordinal) == -1)
                 {
                     WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
