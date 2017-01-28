@@ -108,7 +108,7 @@ namespace SIL.Tool
         {
             var myClass = r.GetAttribute("class");
             if (string.IsNullOrEmpty(myClass) || r.Name != "div") return;
-            if (!myClass.StartsWith("entry") && !myClass.StartsWith("minorentry") && !myClass.StartsWith("scrSection")) return;
+            if (!myClass.StartsWith("entry") && !myClass.StartsWith("minorentry") && !myClass.StartsWith("reversalindexentry") && !myClass.StartsWith("scrSection")) return;
             _entryLevel = r.Depth;
             if (Writing) return;
             var nextFileFullName = CurrentFileName();
@@ -138,10 +138,18 @@ namespace SIL.Tool
 
         private string _letterLang;
         private string _letter;
+	    private string _bookName;
         private void AtLetter(XmlReader r)
         {
-            if (r.GetAttribute("class") != "letter" && r.GetAttribute("class") != "scrBookCode") return;
-            var newFileFullName = NewFileName(r);
+			var cssClass = r.GetAttribute("class");
+	        if (cssClass == "scrBookName")
+	        {
+		        _bookName = r.Value;
+	        }
+            if (cssClass != "letter" && cssClass != "scrBookCode") return;
+			_letterLang = r.GetAttribute("lang");
+			_letter = GetString();
+			var newFileFullName = NewFileName(r);
             var newFileName = Path.GetFileName(newFileFullName);
             FileList.Add(newFileName);
             LetterLabels.Add(_letter);
@@ -149,23 +157,19 @@ namespace SIL.Tool
             NextWriter(newFileFullName);
             SetTitle();
             WriteXmlHeader();
-            WriteLetterHeader(_letterLang, _letter, r);
-        }
+	        if (r.GetAttribute("class") != "scrBookCode")
+	        {
+		        WriteLetterHeader(_letterLang, _letter, r);
+	        }
+	        else
+	        {
+				WriteBookHeader(_letterLang, _bookName, r.Value, r);
+	        }
+		}
 
         private string NewFileName(XmlReader r)
         {
-            _letterLang = r.GetAttribute("lang");
-            _letter = GetString();
-            var firstLetter = _letter.Substring(0, 1).ToLower(CultureInfo.InvariantCulture).ToCharArray()[0];
-            if (firstLetter >= 'a' && firstLetter <= 'z' && _letter.Substring(1, 1) == " ")
-            {
-                FileLetter = r.GetAttribute("class") == "scrBookCode"? _letter: firstLetter.ToString().ToUpper();
-                _letterNum = 0;
-            }
-            else
-            {
-                _letterNum += 1;
-            }
+            _letterNum += 1;
             return CurrentFileName();
         }
 
