@@ -433,7 +433,7 @@ namespace SIL.Tool
         }
         #endregion Callbacks
 
-        #region Letter header
+        #region Letter and Book headers
         protected void WriteLetterHeader(string letterLang, string letter, XmlReader r)
         {
             _wtr.WriteStartElement("", "div", r.NamespaceURI);
@@ -445,10 +445,24 @@ namespace SIL.Tool
             _wtr.WriteEndElement();
             _wtr.WriteEndElement();
         }
-        #endregion Letter header
 
-        #region Embedded styles
-        protected void WriteEmbddedStyle(string val)
+		protected void WriteBookHeader(string bookLang, string bookName, string bookCode, XmlReader r)
+		{
+			_wtr.WriteStartElement("", "span", r.NamespaceURI);
+			_wtr.WriteAttributeString("class", "scrBookName");
+			_wtr.WriteAttributeString("lang", bookLang);
+			_wtr.WriteValue(bookName);
+			_wtr.WriteEndElement();
+			_wtr.WriteStartElement("", "span", r.NamespaceURI);
+			_wtr.WriteAttributeString("class", "scrBookCode");
+			_wtr.WriteAttributeString("lang", bookLang);
+			_wtr.WriteValue(bookCode);
+			_wtr.WriteEndElement();
+		}
+		#endregion Letter header
+
+		#region Embedded styles
+		protected void WriteEmbddedStyle(string val)
         {
             _wtr.WriteStartElement("style", "http://www.w3.org/1999/xhtml");
             _wtr.WriteAttributeString("type", "text/css");
