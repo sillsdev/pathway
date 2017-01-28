@@ -985,30 +985,9 @@ namespace SIL.Tool
 		/// <param name="bookSplitterClass">The class name to split the class</param>
 		/// <param name = "adjacentClass"></param>
 		/// <returns>The entire path of the splitted files are retured as List</returns>
-		//public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass, bool adjacentClass)
-		//{
-		//	return SplitXhtmlFile(xhtmlFileWithPath, bookSplitterClass, "PartFile", adjacentClass);
-		//}
-		private static readonly List<string> SplitFileList = new List<string>();
 		public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass, bool adjacentClass)
 		{
-			var split = new SplitXml(xhtmlFileWithPath, bookSplitterClass)
-			{
-				Folder = ".",
-				Prefix = "PartFile"
-			};
-			var folder = Path.GetDirectoryName(xhtmlFileWithPath);
-			split.CreateOutputFolderAt(folder);
-			while (!split.EndOfFile())
-			{
-				split.Parse();
-			}
-			SplitFileList.Clear();
-			foreach (var file in split.FileList)
-			{
-				SplitFileList.Add(PathCombine(folder, file));
-			}
-			return SplitFileList;
+			return SplitXhtmlFile(xhtmlFileWithPath, bookSplitterClass, "PartFile", adjacentClass);
 		}
 
 		private static readonly List<string> SplitFileList = new List<string>();
