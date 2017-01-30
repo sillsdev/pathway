@@ -272,7 +272,7 @@ namespace SIL.PublishingSolution
 
 			string cssSimplerExe = Common.IsUnixOS()?
 				"/usr/bin/CssSimpler": cssSimplerFile;
-			
+
 			var outDir = Path.GetDirectoryName(exportedDirectory);
 			if (outDir != null)
 			{
@@ -280,6 +280,7 @@ namespace SIL.PublishingSolution
 				{
 					ReplaceUnicodeString(filename);
 				}
+				int indexCnt = 0;
 				foreach (string filename in Directory.GetFiles(outDir, "*.xhtml"))
 				{
 					if (File.Exists(filename))
@@ -288,7 +289,17 @@ namespace SIL.PublishingSolution
 						UserOptionSelectionBasedXsltPreProcess(filename);
 						if (DataType.ToLower() == "dictionary")
 						{
-							Common.RunCommand(cssSimplerExe, String.Format("-f \"{0}\"",filename), 1);
+							string prefix;
+							if (filename.ToLower().Contains("rev"))
+							{
+								indexCnt += 1;
+								prefix = "-p=r" + indexCnt + " ";
+							}
+							else
+							{
+								prefix = "";
+							}
+							Common.RunCommand(cssSimplerExe, String.Format("{0}-f \"{1}\"",prefix, filename), 1);
 						}
 					}
 				}

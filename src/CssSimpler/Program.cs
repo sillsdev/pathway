@@ -39,6 +39,7 @@ namespace CssSimpler
         private static bool _incMeta;
         private static bool _noXmlHeader;
         private static bool _divBlocks;
+	    private static string _decorateStyles;
 
         protected static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
         protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
@@ -48,12 +49,14 @@ namespace CssSimpler
 
         static void Main(string[] args)
         {
+	        // ReSharper disable AssignNullToNotNullAttribute
             XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"CssSimpler.XmlCss.xsl")));
             SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "CssSimpler.XhtmlSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
-            // see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
-            var p = new OptionSet
+			// ReSharper enable AssignNullToNotNullAttribute
+			// see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
+			var p = new OptionSet
             {
                 {
                     "x|xml", "produce XML output of CSS",
@@ -99,7 +102,11 @@ namespace CssSimpler
                     "d|div", "replace span with div for display block",
                     v => _divBlocks = !_divBlocks
                 },
-            };
+				{
+					"p|prefix=", "prefix style names with value",
+					v => { _decorateStyles = v; }
+				},
+			};
 
             List<string> extra;
             try
@@ -107,15 +114,15 @@ namespace CssSimpler
                 extra = p.Parse(args);
                 if (extra.Count == 0)
                 {
-                    Console.WriteLine("Enter full file name to process");
+                    Console.WriteLine(@"Enter full file name to process");
                     extra.Add(Console.ReadLine());
                 }
             }
             catch (OptionException e)
             {
-                Console.Write("SimpleCss: ");
+                Console.Write(@"SimpleCss: ");
                 Console.WriteLine(e.Message);
-                Console.WriteLine("Try `CssSimple --help' for more information.");
+                Console.WriteLine(@"Try `CssSimple --help' for more information.");
                 return;
             }
             if (_showHelp || extra.Count != 1)
@@ -145,7 +152,7 @@ namespace CssSimpler
             var tmp3Out = Path.GetTempFileName();
             if (_flatten)
             {
-                var fs = new FlattenStyles(extra[0], tmp3Out, xml, NeedHigher, _noXmlHeader);
+                var fs = new FlattenStyles(extra[0], tmp3Out, xml, NeedHigher, _noXmlHeader, _decorateStyles);
                 fs.Structure = _headerStyles;
                 fs.DivBlocks = _divBlocks;
                 MetaData(fs);
@@ -430,10 +437,10 @@ namespace CssSimpler
         protected static string WriteSimpleXhtml(string xhtmlFullName)
         {
             if (string.IsNullOrEmpty(xhtmlFullName) || !File.Exists(xhtmlFullName))
-                throw new ArgumentException("Missing Xhtml file: {0}", xhtmlFullName);
+                throw new ArgumentException(@"Missing Xhtml file: {0}", xhtmlFullName);
             var folder = Path.GetDirectoryName(xhtmlFullName);
             if (string.IsNullOrEmpty(folder))
-                throw new ArgumentException("Xhtml name missing folder {0}", xhtmlFullName);
+                throw new ArgumentException(@"Xhtml name missing folder {0}", xhtmlFullName);
             var outfile = Path.Combine(folder, Path.GetFileNameWithoutExtension(xhtmlFullName) + "Out.xhtml");
             var ifs = new FileStream(xhtmlFullName, FileMode.Open, FileAccess.Read);
             var reader = XmlReader.Create(ifs, new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore});
@@ -665,10 +672,10 @@ namespace CssSimpler
 
         static void ShowHelp(OptionSet p)
         {
-            Console.WriteLine("Usage: CssSimple [OPTIONS]+ FullInputFilePath.xhtml");
-            Console.WriteLine("Simplify the input css.");
+            Console.WriteLine(@"Usage: CssSimple [OPTIONS]+ FullInputFilePath.xhtml");
+            Console.WriteLine(@"Simplify the input css.");
             Console.WriteLine();
-            Console.WriteLine("Options:");
+            Console.WriteLine(@"Options:");
             p.WriteOptionDescriptions(Console.Out);
         }
 
@@ -676,7 +683,7 @@ namespace CssSimpler
         {
             if (_verbosity > 0)
             {
-                Console.Write("# ");
+                Console.Write(@"# ");
                 Console.WriteLine(format, args);
             }
         }
