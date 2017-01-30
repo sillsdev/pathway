@@ -492,7 +492,6 @@ namespace SIL.PublishingSolution
                 int indexRev = files.FindIndex(
                     something => (something.ToLower().EndsWith("flexrev.xhtml"))
                     );
-				projectInfo.IsReversalExist = (indexMain >= 0 && indexRev >= 0);
 
 	            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(projectInfo.DefaultXhtmlFileWithPath);
 	            if (fileNameWithoutExtension != null &&
