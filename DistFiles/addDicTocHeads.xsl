@@ -77,7 +77,7 @@
             </xsl:when>
             
             <!-- Reversal section but no main section -->
-            <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
+            <xsl:when test="count(ncx:content[starts-with(@src,'Rev')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
                 <xsl:call-template name="SubCopy">
                     <xsl:with-param name="item" select="."/>
                     <xsl:with-param name="type">Rev</xsl:with-param>
