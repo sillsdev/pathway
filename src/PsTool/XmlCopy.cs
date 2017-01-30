@@ -35,6 +35,8 @@ namespace SIL.Tool
         private bool _noXmlHeader;
         protected bool SkipAttr;
         protected bool SkipNode;
+	    protected string StyleDecorate;
+		protected readonly List<string> DecorateExceptions = new List<string> {"letHead", "letter", "reversalindexentry"};
         protected string Suffix = "-ps";
         protected string ReplaceLocalName;
 		public string SpaceClass = "sp";
@@ -102,8 +104,15 @@ namespace SIL.Tool
                                     }
                                     else
                                     {
-                                        _wtr.WriteAttributeString(_rdr.Name, _rdr.Value);
-                                    }
+	                                    if (_rdr.Name == "class" && !DecorateExceptions.Contains(_rdr.Value))
+	                                    {
+											_wtr.WriteAttributeString(_rdr.Name, _rdr.Value + StyleDecorate);
+										}
+	                                    else
+	                                    {
+											_wtr.WriteAttributeString(_rdr.Name, _rdr.Value);
+										}
+									}
                                 }
                                 AfterProcessMethods();
                             }
@@ -145,7 +154,7 @@ namespace SIL.Tool
 		                if (!string.IsNullOrEmpty(SpaceClass) && _rdr.Depth > 1)
 		                {
 							_wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
-							WriteClassAttr(SpaceClass + Suffix);
+							WriteClassAttr(SpaceClass);
 							_wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");
 							_wtr.WriteWhitespace(_rdr.Value);
 							_wtr.WriteEndElement();
@@ -299,7 +308,8 @@ namespace SIL.Tool
             _wtr.WriteStartElement(localName, "http://www.w3.org/1999/xhtml");
             if (!string.IsNullOrEmpty(myClass))
             {
-                WriteClassAttr(myClass + Suffix);
+	            var decoration = DecorateExceptions.Contains(myClass) ? "" : StyleDecorate;
+				WriteClassAttr(myClass + Suffix + decoration);
             }
             if (!string.IsNullOrEmpty(myLang))
             {

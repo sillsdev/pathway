@@ -243,7 +243,7 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher, false);
+            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(outFullName, 2, "//*[starts-with(@class,'example')]", "wrong number of example nodes");
@@ -272,7 +272,7 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher, false);
+            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(outFullName, 0, "//*[local-name()='span'][@class='pictures']", "pictures node present when it shouldn't be");
@@ -742,7 +742,7 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, tmp2OutFullName, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmp2OutFullName, outFullName, xml, NeedHigher, false);
+            var fs = new FlattenStyles(tmp2OutFullName, outFullName, xml, NeedHigher, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
@@ -825,7 +825,7 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, tmp2Out, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmp2Out, outFullName, xml, NeedHigher, false);
+            var fs = new FlattenStyles(tmp2Out, outFullName, xml, NeedHigher, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
@@ -889,7 +889,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
             var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
-            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher, false);
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(flatFullName, 1, "//*[starts-with(@class,'picture')]", "picture node missing");
@@ -955,7 +955,7 @@ namespace Test.CssSimplerTest
             var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
             RemoveCssPseudo(cssFullName, xml);
             var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
-            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher, false);
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(flatFullName, 4, "//*[starts-with(@class,'stxfinheadword')]", "headword with styles");
@@ -1149,7 +1149,7 @@ namespace Test.CssSimplerTest
 			var xml = new XmlDocument();
 			UniqueClasses = null;
 			LoadCssXml(parser, cssFullName, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false);
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1184,7 +1184,7 @@ namespace Test.CssSimplerTest
 			// ReSharper disable once UnusedVariable
 			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false);
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1217,7 +1217,7 @@ namespace Test.CssSimplerTest
 			// ReSharper disable once UnusedVariable
 			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false);
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
 			fs.SpaceClass = string.Empty; // When class name set to empty string, no spans will be created.
 			fs.Structure = 0;
 			fs.DivBlocks = false;
