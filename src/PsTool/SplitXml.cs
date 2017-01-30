@@ -14,7 +14,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Xml;
 
@@ -108,7 +107,7 @@ namespace SIL.Tool
         {
             var myClass = r.GetAttribute("class");
             if (string.IsNullOrEmpty(myClass) || r.Name != "div") return;
-            if (!myClass.StartsWith("entry") && !myClass.StartsWith("minorentry") && !myClass.StartsWith("reversalindexentry") && !myClass.StartsWith("scrSection")) return;
+            if (!myClass.StartsWith("entry") && !myClass.StartsWith("minorentry") && !myClass.Contains("reversalindexentry") && !myClass.StartsWith("scrSection")) return;
             _entryLevel = r.Depth;
             if (Writing) return;
             var nextFileFullName = CurrentFileName();
@@ -149,7 +148,7 @@ namespace SIL.Tool
             if (cssClass != "letter" && cssClass != "scrBookCode") return;
 			_letterLang = r.GetAttribute("lang");
 			_letter = GetString();
-			var newFileFullName = NewFileName(r);
+			var newFileFullName = NewFileName();
             var newFileName = Path.GetFileName(newFileFullName);
             FileList.Add(newFileName);
             LetterLabels.Add(_letter);
@@ -167,7 +166,7 @@ namespace SIL.Tool
 	        }
 		}
 
-        private string NewFileName(XmlReader r)
+        private string NewFileName()
         {
             _letterNum += 1;
             return CurrentFileName();
