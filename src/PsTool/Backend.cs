@@ -30,20 +30,20 @@ namespace SIL.Tool
 {
     public static class Backend
     {
-        private static List<IExportProcess> _backend = new List<IExportProcess>();
+        public static List<IExportProcess> backend = new List<IExportProcess>();
         private static ArrayList _exportType = new ArrayList();
         private static VerboseClass verboseClass;
-        public static void Load(string path)
+		public static List<IExportProcess> LoadExportAssembly(string path)
         {
             if (!Directory.Exists(path))
             {
-                return;
+                return null;
             }
 			if (Directory.Exists(path) && !path.Contains("Export"))
 			{
 				path = Common.PathCombine(path, "Export");
 			}
-            _backend.Clear();
+            backend.Clear();
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
             foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
             {
@@ -59,14 +59,47 @@ namespace SIL.Tool
                 className = "SIL.PublishingSolution.Export" + className;
                 IExportProcess exportProcess = CreateObject(fileInfo.FullName, className) as IExportProcess;
 
-                _backend.Add(exportProcess);
+                backend.Add(exportProcess);
             }
+
+	        return backend;
         }
+
+		public static void Load(string path)
+		{
+			if (!Directory.Exists(path))
+			{
+				return;
+			}
+			if (Directory.Exists(path) && !path.Contains("Export"))
+			{
+				path = Common.PathCombine(path, "Export");
+			}
+			backend.Clear();
+			DirectoryInfo directoryInfo = new DirectoryInfo(path);
+			foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
+			{
+				var className = string.Empty;
+				if (fileInfo.Name == "OpenOfficeConvert.dll")
+					className = "LibreOffice";
+				else if (fileInfo.Name.Contains("Convert"))
+					className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Convert", "");
+				else if (fileInfo.Name.Contains("Writer"))
+					className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Writer", "");
+				else
+					continue;
+				className = "SIL.PublishingSolution.Export" + className;
+				IExportProcess exportProcess = CreateObject(fileInfo.FullName, className) as IExportProcess;
+
+				backend.Add(exportProcess);
+			}
+		}
+
 
         public static ArrayList GetExportType(string inputDataType)
         {
             _exportType.Clear();
-            foreach (IExportProcess process in _backend)
+            foreach (IExportProcess process in backend)
             {
                 if (process.Handle(inputDataType))
                 {
