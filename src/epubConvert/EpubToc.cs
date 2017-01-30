@@ -729,45 +729,20 @@ namespace epubConvert
             XmlNodeList nodes;
             if (InputType.ToLower().Equals("dictionary"))
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
-	            if (nodes == null || nodes.Count == 0)
-	            {
-		            nodes = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
-	            }
-	            if (nodes == null || nodes.Count == 0)
-	            {
-		            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='letter']", namespaceManager);
-	            }
-	            if (nodes == null || nodes.Count == 0)
-	            {
-		            nodes = xmlDocument.SelectNodes("//span[@class='letter']", namespaceManager);
-	            }
+                nodes = xmlDocument.SelectNodes("//*[@class='letter']", namespaceManager);
             }
             else
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                if (nodes == null || nodes.Count == 0)
-                {
-                    nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
-                }
+                nodes = xmlDocument.SelectNodes("//*[@class='scrBookName']", namespaceManager);
                 if (nodes == null || nodes.Count == 0)
                 {
                     // nothing there - check on the Title_Main span
-                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
-                    // nothing there - check on the scrBookName span
-                    if (nodes == null || nodes.Count == 0)
-                    {
-                        nodes = xmlDocument.SelectNodes("//div[@class='Title_Main']", namespaceManager);
-                    }
+                    nodes = xmlDocument.SelectNodes("//*[@class='Title_Main']", namespaceManager);
                 }
                 if (nodes == null || nodes.Count == 0)
                 {
                     // we're really scraping the bottom - check on the scrBookCode span
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
-                    if (nodes == null || nodes.Count == 0)
-                    {
-                        nodes = xmlDocument.SelectNodes("//span[@class='scrBookCode']", namespaceManager);
-                    }
+                    nodes = xmlDocument.SelectNodes("//*[@class='scrBookCode']", namespaceManager);
                 }
             }
             if (nodes != null && nodes.Count > 0)
