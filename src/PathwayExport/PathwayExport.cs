@@ -57,127 +57,127 @@ namespace SIL.PublishingSolution
                 Environment.Exit(0);
             }
             else if (args.Length == 1 && args[0].ToLower() == "--help")
-            {
-                Usage();
-                Console.Read();
-                Environment.Exit(0);
-            }
-            else
-            {
-                projectInfo = new PublicationInformation();
-                ArgumentUsage(args);
+	        {
+		        Usage();
+		        Console.Read();
+		        Environment.Exit(0);
+	        }
+	        else
+	        {
+		        projectInfo = new PublicationInformation();
+		        ArgumentUsage(args);
 
-                projectInfo.ProjectPath = exportDirectory;
-                foreach (string f in files)
-                {
-                    if (f.ToLower().Contains(".css"))
-                    {
-                        if (f.ToLower().Contains("flexrev"))
-                        {
-                            projectInfo.DefaultRevCssFileWithPath = f;
-                        }
-                        else
-                        {
-                            projectInfo.DefaultCssFileWithPath = f;
-                        }
-                    }
-                    if (f.ToLower().EndsWith(".xhtml"))
-                    {
-                        if (f.ToLower().Contains("flexrev"))
-                        {
-                            //projectInfo.DefaultXhtmlFileWithPath = f;
-                            projectInfo.IsReversalExist = true;
-                            //projectInfo.ProjectName = f;
-                        }
-                        //else if (f.ToLower().Contains("main"))
-                        else
-                        {
-                            projectInfo.DefaultXhtmlFileWithPath = f;
-                            if (f.ToLower().Contains("main"))
-                                projectInfo.IsLexiconSectionExist = true;
-                        }
-                    }
-                }
+		        projectInfo.ProjectPath = exportDirectory;
+		        foreach (string f in files)
+		        {
+			        if (f.ToLower().Contains(".css"))
+			        {
+				        if (f.ToLower().Contains("flexrev"))
+				        {
+					        projectInfo.DefaultRevCssFileWithPath = f;
+				        }
+				        else
+				        {
+					        projectInfo.DefaultCssFileWithPath = f;
+				        }
+			        }
+			        if (f.ToLower().EndsWith(".xhtml"))
+			        {
+				        if (f.ToLower().Contains("flexrev"))
+				        {
+					        projectInfo.IsReversalExist = true;
+				        }
+				        else
+				        {
+					        projectInfo.DefaultXhtmlFileWithPath = f;
+					        if (f.ToLower().Contains("main"))
+						        projectInfo.IsLexiconSectionExist = true;
+				        }
+			        }
+		        }
 
-				// Find Export Format
-				string settingsPath = Path.Combine(Common.GetAllUserPath(), "StyleSettings.xml");
-				projectInfo.ProjectInputType = Param.GetInputType(settingsPath);
+		        // Find Export Format
+		        string settingsPath = Path.Combine(Common.GetAllUserPath(), "StyleSettings.xml");
+		        projectInfo.ProjectInputType = Param.GetInputType(settingsPath);
 
-                //projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
-                if (projectInfo.IsLexiconSectionExist == true)
-                    projectInfo.ProjectName = "main";
-                else if (projectInfo.IsReversalExist == true)
-                    projectInfo.ProjectName = "flexrev";
+		        if (projectInfo.IsLexiconSectionExist == true)
+			        projectInfo.ProjectName = "main";
+		        else if (projectInfo.IsReversalExist == true)
+			        projectInfo.ProjectName = "flexrev";
 
-	            projectInfo.IsOpenOutput = !Common.Testing;
+		        projectInfo.IsOpenOutput = !Common.Testing;
 
-                SetFileName();
-                projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
-				LoadParameters(projectInfo.ProjectInputType);
-                IExportProcess process = new ExportLibreOffice();
-                if (exportType == "openoffice/libreoffice")
-                {
-	                Common._outputType = Common.OutputType.ODT;
-                    projectInfo.FinalOutput = "odt";
-                    process = new ExportLibreOffice();
-                }
-                else if (exportType == "e-book (.epub)" || exportType == "e-book (epub2 and epub3)")
-                {
-                    process = new Exportepub();
-					Common._outputType = Common.OutputType.EPUB;
-                }
-                else if (exportType == "pdf (using openoffice/libreoffice)")
-                {
-                    projectInfo.FinalOutput = "pdf";
-					projectInfo.OutputExtension = "pdf";
-                    process = new ExportLibreOffice();
-                }
-                else if (exportType == "pdf (using prince)")
-                {
-                    process = new ExportPdf();
-					Common._outputType = Common.OutputType.PDF;
-                }
-                else if (exportType == "xelatex")
-                {
-                    process = new ExportXeLaTex();
-					Common._outputType = Common.OutputType.XELATEX;
-                }
-                else if (exportType == "dictionaryformids")
-                {
-                    process = new ExportDictionaryForMIDs();
-					Common._outputType = Common.OutputType.MOBILE;
-                }
-                else if (exportType == "indesign")
-                {
-                    process = new ExportInDesign();
-					Common._outputType = Common.OutputType.IDML;
-                }
-                else if (exportType == "gobible" || exportType == "go bible")
-                {
-                    projectInfo.ProjectName = "Go_Bible";
-                    projectInfo.SelectedTemplateStyle = "GoBible";
-                    process = new ExportGoBible();
-					Common._outputType = Common.OutputType.MOBILE;
-                }
-                else if (exportType == "sword")
-                {
-                    process = new ExportSword();
-                }
-                else if (exportType == "theword/mysword")
-                {
-					process = new ExportTheWord();
-                }
+		        SetFileName();
+		        projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
+		        LoadParameters(projectInfo.ProjectInputType);
 
+				List<IExportProcess> backend = new List<IExportProcess>();
+		        backend = Backend.LoadExportAssembly(Common.AssemblyPath);
+		        if (exportType == "openoffice/libreoffice")
+		        {
+			        Common._outputType = Common.OutputType.ODT;
+			        projectInfo.FinalOutput = "odt";
+			        // process = new ExportLibreOffice();
+		        }
+		        else if (exportType == "e-book (.epub)" || exportType == "e-book (epub2 and epub3)")
+		        {
+			        // process = new Exportepub();
+			        Common._outputType = Common.OutputType.EPUB;
+		        }
+		        else if (exportType == "pdf (using openoffice/libreoffice)")
+		        {
+			        projectInfo.FinalOutput = "pdf";
+			        projectInfo.OutputExtension = "pdf";
+			        // process = new ExportLibreOffice();
+		        }
+		        else if (exportType == "pdf (using prince)")
+		        {
+			        // process = new ExportPdf();
+			        Common._outputType = Common.OutputType.PDF;
+		        }
+		        else if (exportType == "xelatex")
+		        {
+			        // process = new ExportXeLaTex();
+			        Common._outputType = Common.OutputType.XELATEX;
+		        }
+		        else if (exportType == "dictionaryformids")
+		        {
+			        // process = new ExportDictionaryForMIDs();
+			        Common._outputType = Common.OutputType.MOBILE;
+		        }
+		        else if (exportType == "indesign")
+		        {
+			        //  process = new ExportInDesign();
+			        Common._outputType = Common.OutputType.IDML;
+		        }
+		        else if (exportType == "gobible" || exportType == "go bible")
+		        {
+			        projectInfo.ProjectName = "Go_Bible";
+			        projectInfo.SelectedTemplateStyle = "GoBible";
+			        //  process = new ExportGoBible();
+			        Common._outputType = Common.OutputType.MOBILE;
+		        }
+		        else if (exportType == "sword")
+		        {
+			        //  process = new ExportSword();
+		        }
+		        else if (exportType == "theword/mysword")
+		        {
+			        // process = new ExportTheWord();
+		        }
 
-                process.Export(projectInfo);
-            }
+		        foreach (IExportProcess lProcess in backend)
+		        {
+			        if (exportType == lProcess.ExportType.ToLower())
+				        lProcess.Export(projectInfo);
+		        }
+	        }
         }
 
 		private static void LoadParameters(string inputType)
 		{
 			Param.LoadSettings();
 		}
-
 
         private static void ArgumentUsage(string[] args)
         {
