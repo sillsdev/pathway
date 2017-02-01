@@ -209,17 +209,9 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CssDialog, Version=1.13.4.4657, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\output\Debug\CssDialog.dll</HintPath>
-    </Reference>
     <Reference Include="L10NSharp, Version=2.0.17.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="PsTool, Version=1.13.4.4657, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\output\Debug\PsTool.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
@@ -250,6 +242,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CssDialog\CssDialog4.csproj">
+      <Project>{749d4fcd-5100-46c8-ae73-50873cb5cec0}</Project>
+      <Name>CssDialog4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PsTool\PsTool4.csproj">
+      <Project>{422c5127-260d-4f16-b476-33aa38dbf919}</Project>
+      <Name>PsTool4</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
