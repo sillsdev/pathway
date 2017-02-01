@@ -719,6 +719,12 @@ namespace SIL.PublishingSolution
 				cTool.BtnScripture.Visible = false;
 				cTool.BtnDictionary.Visible = false;
 			}
+			string[] files = Directory.GetFiles(Common.AssemblyPath, "Paratext*.dll", SearchOption.AllDirectories);
+			if (files.Length <= 0)
+			{
+				cTool.BtnScripture.Visible = false;
+				inputTypeBL = "Dictionary";
+			}
 			cTool.LoadSettings();
 			SetInputTypeButton();
 			ShowInputTypeButton();
