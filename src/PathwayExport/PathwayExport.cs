@@ -115,62 +115,78 @@ namespace SIL.PublishingSolution
 		        backend = Backend.LoadExportAssembly(Common.AssemblyPath);
 		        foreach (IExportProcess lProcess in backend)
 		        {
-			        switch (exportType)
+
+			        if (exportType == "openoffice/libreoffice")
 			        {
-				        case "openoffice/libreoffice":
-					        Common._outputType = Common.OutputType.ODT;
-					        projectInfo.FinalOutput = "odt";
-					        lProcess.Export(projectInfo);
-					        break;
+				        Common._outputType = Common.OutputType.ODT;
+				        projectInfo.FinalOutput = "odt";
+						lProcess.Export(projectInfo);
+				        break;
 				        // process = new ExportLibreOffice();
-				        case "e-book (.epub)":
-				        case "e-book (epub2 and epub3)":
-					        // process = new Exportepub();
-					        Common._outputType = Common.OutputType.EPUB;
-					        lProcess.Export(projectInfo);
-					        break;
-				        case "pdf (using openoffice/libreoffice)":
-					        projectInfo.FinalOutput = "pdf";
-					        projectInfo.OutputExtension = "pdf";
-					        lProcess.Export(projectInfo);
-					        break;
+			        }
+			        if (exportType == "e-book (.epub)" || exportType == "e-book (epub2 and epub3)")
+			        {
+				        // process = new Exportepub();
+				        Common._outputType = Common.OutputType.EPUB;
+						lProcess.Export(projectInfo);
+						break;
+			        }
+			        if (exportType == "pdf (using openoffice/libreoffice)")
+			        {
+				        projectInfo.FinalOutput = "pdf";
+				        projectInfo.OutputExtension = "pdf";
+						lProcess.Export(projectInfo);
+						break;
 				        // process = new ExportLibreOffice();
-				        case "pdf (using prince)":
-					        // process = new ExportPdf();
-					        Common._outputType = Common.OutputType.PDF;
-					        lProcess.Export(projectInfo);
-					        break;
-				        case "xelatex":
-					        // process = new ExportXeLaTex();
-					        Common._outputType = Common.OutputType.XELATEX;
-					        lProcess.Export(projectInfo);
-					        break;
-				        case "dictionaryformids":
-					        // process = new ExportDictionaryForMIDs();
-					        Common._outputType = Common.OutputType.MOBILE;
-					        lProcess.Export(projectInfo);
-					        break;
-				        case "indesign":
-					        //  process = new ExportInDesign();
-					        Common._outputType = Common.OutputType.IDML;
-					        lProcess.Export(projectInfo);
-					        break;
-				        case "gobible":
-				        case "go bible":
-					        projectInfo.ProjectName = "Go_Bible";
-					        projectInfo.SelectedTemplateStyle = "GoBible";
-					        //  process = new ExportGoBible();
-					        Common._outputType = Common.OutputType.MOBILE;
-					        lProcess.Export(projectInfo);
-					        break;
-				        case "sword":
-					        //  process = new ExportSword();
-					        lProcess.Export(projectInfo);
-					        break;
-				        case "theword/mysword":
-					        // process = new ExportTheWord();
-					        lProcess.Export(projectInfo);
-					        break;
+			        }
+			        if (exportType == "pdf (using prince)")
+			        {
+				        // process = new ExportPdf();
+				        Common._outputType = Common.OutputType.PDF;
+						lProcess.Export(projectInfo);
+						break;
+			        }
+			        if (exportType == "xelatex")
+			        {
+				        // process = new ExportXeLaTex();
+				        Common._outputType = Common.OutputType.XELATEX;
+						lProcess.Export(projectInfo);
+						break;
+			        }
+			        if (exportType == "dictionaryformids")
+			        {
+				        // process = new ExportDictionaryForMIDs();
+				        Common._outputType = Common.OutputType.MOBILE;
+						lProcess.Export(projectInfo);
+						break;
+			        }
+			        if (exportType == "indesign")
+			        {
+				        //  process = new ExportInDesign();
+				        Common._outputType = Common.OutputType.IDML;
+						lProcess.Export(projectInfo);
+						break;
+			        }
+			        if (exportType == "gobible" || exportType == "go bible")
+			        {
+				        projectInfo.ProjectName = "Go_Bible";
+				        projectInfo.SelectedTemplateStyle = "GoBible";
+				        //  process = new ExportGoBible();
+				        Common._outputType = Common.OutputType.MOBILE;
+						lProcess.Export(projectInfo);
+						break;
+			        }
+			        if (exportType == "sword")
+			        {
+				        //  process = new ExportSword();
+						lProcess.Export(projectInfo);
+						break;
+			        }
+			        if (exportType == "theword/mysword")
+			        {
+				        // process = new ExportTheWord();
+						lProcess.Export(projectInfo);
+						break;
 			        }
 		        }
 	        }
