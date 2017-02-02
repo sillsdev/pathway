@@ -8,20 +8,22 @@
 // </copyright>
 #endregion
 //
-// File: XmlCopy.cs (from SimpleCss5.cs)
+// File: XmlOneToMany.cs
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace SIL.Tool
 {
-    public abstract class XmlCopy
+    public abstract class XmlOneToMany
     {
+        #region Variables
         protected delegate void ParserMethod(XmlReader r);
         protected delegate void EndTagMethod(int dept, string name);
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _beforeNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
@@ -30,55 +32,148 @@ namespace SIL.Tool
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _afterNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly StreamReader _sr;
         private readonly XmlReader _rdr;
-        private readonly XmlWriter _wtr;
+        private FileStream _writerfile;
+        private XmlWriter _wtr;
+        public bool Writing;
         private bool _finish;
-        private bool _noXmlHeader;
         protected bool SkipAttr;
         protected bool SkipNode;
-	    protected string StyleDecorate;
-		protected readonly List<string> DecorateExceptions = new List<string> {"letHead", "letter", "letData", "reversalindexentry"};
         protected string Suffix = "-ps";
         protected string ReplaceLocalName;
-		public string SpaceClass = "sp";
-		public string TitleDefault;
+        protected string ReplaceAttrValue;
+        public bool NoXmlHeader;
+        public string TitleDefault;
         public string AuthorDefault;
         public bool DebugPrint;
         private bool _doAttributes;
+        private readonly StringBuilder _header = new StringBuilder();
+        #endregion Variables
 
-        protected XmlCopy(string xmlInFullName, string xmlOutFullName, bool noXmlHeader)
+        #region Construct and capture file header
+        public string Header
         {
-            var settings = new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver()};
-            _sr = new StreamReader(xmlInFullName);
-            _rdr = XmlReader.Create(_sr, settings);
-            _noXmlHeader = noXmlHeader;
-            var wrtSettings = new XmlWriterSettings {OmitXmlDeclaration = noXmlHeader};
-            _wtr = XmlWriter.Create(xmlOutFullName, wrtSettings);
+            get { return _header.ToString(); }
+            set
+            {
+                _header.Clear();
+                _header.Append(value);
+            }
         }
 
+        protected XmlOneToMany(string xmlInFullName)
+        {
+            _sr = new StreamReader(xmlInFullName);
+            _rdr = XmlReader.Create(_sr, MyReaderSettings());
+            _wtr = XmlWriter.Create(_header);
+            Writing = true;
+			Parse(true, _rdr);
+			_wtr.WriteEndElement();
+			_wtr.WriteEndElement();
+			_wtr.Close();
+			Writing = false;
+		}
+
+		private StringReader _hsr;
+        private XmlReader _headerRdr;
+
+        public void WriteXmlHeader()
+        {
+            _hsr = new StringReader(_header.ToString());
+            _headerRdr = XmlReader.Create(_hsr, MyReaderSettings());
+            Writing = true;
+            Parse(true, _headerRdr);
+            _headerRdr.Close();
+            _hsr.Close();
+        }
+
+        private static XmlReaderSettings MyReaderSettings()
+        {
+            return new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore, XmlResolver = new NullResolver() };
+        }
+        #endregion Construct and capture header
+
+        protected string GetString()
+        {
+            return _rdr.ReadElementString();
+        }
+
+        #region NextWriter
+        protected void NextWriter(string xmlOutFullName)
+        {
+            NextWriter(xmlOutFullName, NoXmlHeader);
+        }
+
+        protected void NextWriter(string xmlOutFullName, bool noXmlHeader)
+        {
+            NoXmlHeader = noXmlHeader;
+            var wrtSettings = new XmlWriterSettings { OmitXmlDeclaration = noXmlHeader };
+            _writerfile = File.Create(xmlOutFullName);
+            _wtr = XmlWriter.Create(_writerfile, wrtSettings);
+            Writing = true;
+        }
+        #endregion NextWriter
+
+        #region Flow Control
+        public bool EndOfFile()
+        {
+            return _rdr.EOF;
+        }
+
+        protected void Finished()
+        {
+            _finish = true;
+        }
+
+        protected long CurrentSize()
+        {
+            return _writerfile.Length;
+        }
+
+        public void Close()
+        {
+			_rdr.Close();
+            _sr.Close();
+        }
+        #endregion Flow Control
+
+        #region Parsing...
         public void Parse()
         {
-            while (_rdr.Read())
+            Parse(false, _rdr);
+        }
+
+        public void Parse(bool inHeader, XmlReader r)
+        {
+            _finish = SkipNode = SkipAttr = false;
+            while (r.Read())
             {
                 SkipAttr = SkipNode;
-                BeforeProcessMethods();
+                BeforeProcessMethods(r);
                 if (_finish)
                     break;
-                switch ( _rdr.NodeType )
+                switch ( r.NodeType )
                 {
                     case XmlNodeType.Element:
                         if (!SkipNode)
                         {
                             if (DebugPrint)
                             {
-                                Debug.Print("start " + _rdr.LocalName);
+                                var errClass = r.GetAttribute("class");
+                                Debug.Print("start " + (Writing ? "writing " : "reading ") + r.LocalName + "." + (!string.IsNullOrEmpty(errClass)?errClass:""));
                             }
                             if (string.IsNullOrEmpty(ReplaceLocalName))
                             {
-                                _wtr.WriteStartElement(_rdr.Prefix, _rdr.LocalName, _rdr.NamespaceURI);
+                                if (Writing)
+                                {
+                                    _wtr.WriteStartElement(r.Prefix, r.LocalName, r.NamespaceURI);
+                                }
                             }
                             else
                             {
-                                _wtr.WriteStartElement(_rdr.Prefix, ReplaceLocalName, _rdr.NamespaceURI);
+                                if (Writing)
+                                {
+                                    _wtr.WriteStartElement(r.Prefix, ReplaceLocalName, r.NamespaceURI);
+                                }
                                 ReplaceLocalName = null;
                             }
                         }
@@ -86,35 +181,45 @@ namespace SIL.Tool
                         {
                             SkipAttr = true;
                         }
-                        var empty = _rdr.IsEmptyElement;
-                        var depth = _rdr.Depth;
-                        var name = _rdr.Name;
+                        var empty = r.IsEmptyElement;
+                        var depth = r.Depth;
+                        var name = r.Name;
                         if (_doAttributes)
                         {
-                            for (int attrIndex = _rdr.AttributeCount; attrIndex > 0; attrIndex--)
+                            for (int attrIndex = r.AttributeCount; attrIndex > 0; attrIndex--)
                             {
-                                _rdr.MoveToNextAttribute();
+                                r.MoveToNextAttribute();
                                 SkipAttr = SkipNode;
-                                BeforeProcessMethods();
+                                BeforeProcessMethods(r);
                                 if (!SkipAttr)
                                 {
-                                    if (_rdr.Name.Length > 4 && _rdr.Name.Substring(0, 4) == "xml:")
+                                    if (r.Name.Length > 4 && r.Name.Substring(0, 4) == "xml:")
                                     {
-                                        _wtr.WriteAttributeString("xml", _rdr.Name.Substring(4), "http://www.w3.org/XML/1998/namespace", _rdr.Value);
+                                        if (Writing)
+                                        {
+                                            _wtr.WriteAttributeString("xml", r.Name.Substring(4), "http://www.w3.org/XML/1998/namespace", r.Value);
+                                        }
                                     }
                                     else
                                     {
-	                                    if (_rdr.Name == "class" && !DecorateExceptions.Contains(_rdr.Value))
-	                                    {
-											_wtr.WriteAttributeString(_rdr.Name, _rdr.Value + StyleDecorate);
-										}
-	                                    else
-	                                    {
-											_wtr.WriteAttributeString(_rdr.Name, _rdr.Value);
-										}
-									}
+                                        if (string.IsNullOrEmpty(ReplaceAttrValue))
+                                        {
+                                            if (Writing)
+                                            {
+                                                _wtr.WriteAttributeString(r.Name, r.Value);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (Writing)
+                                            {
+                                                _wtr.WriteAttributeString(r.Name, ReplaceAttrValue);
+                                            }
+                                            ReplaceAttrValue = null;
+                                        }
+                                    }
                                 }
-                                AfterProcessMethods();
+                                AfterProcessMethods(r);
                             }
                             SkipAttr = false;
                         }
@@ -122,22 +227,29 @@ namespace SIL.Tool
                         {
                             if (!SkipAttr)
                             {
-                                _wtr.WriteAttributes(_rdr, true);
+                                if (Writing)
+                                {
+                                    _wtr.WriteAttributes(r, true);
+                                }
                             }
                         }
+                        if (inHeader && name == "body") return;
                         FirstChildProcessMethods(XmlNodeType.Element);
                         if (empty)
                         {
                             BeforeEndProcessMethods(XmlNodeType.EndElement, depth, name);
                             if (name == "title" && !string.IsNullOrEmpty(TitleDefault))
                             {
-                                AddTitle();
+                                InsertTitle();
                             }
                             else
                             {
                                 if (!SkipNode)
                                 {
-                                    _wtr.WriteEndElement();
+                                    if (Writing)
+                                    {
+                                        _wtr.WriteEndElement();
+                                    }
                                 }
                             }
                         }
@@ -145,85 +257,120 @@ namespace SIL.Tool
                     case XmlNodeType.Text:
                         if (!SkipNode)
                         {
-                            _wtr.WriteString(_rdr.Value);
+                            if (Writing)
+                            {
+                                _wtr.WriteString(r.Value);
+                            }
                         }
                         break;
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
                         //Debug.Print("space");
-		                if (!string.IsNullOrEmpty(SpaceClass) && _rdr.Depth > 1)
-		                {
-							_wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
-							WriteClassAttr(SpaceClass);
-							_wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");
-							_wtr.WriteWhitespace(_rdr.Value);
-							_wtr.WriteEndElement();
-						}
-						else
-		                {
-							_wtr.WriteWhitespace(_rdr.Value);
-						}
-						break;
+                        if (Writing)
+                        {
+                            _wtr.WriteWhitespace(r.Value);
+                        }
+                        break;
                     case XmlNodeType.CDATA:
-                        _wtr.WriteCData( _rdr.Value );
+                        if (Writing)
+                        {
+                            _wtr.WriteCData(r.Value);
+                        }
                         break;
                     case XmlNodeType.EntityReference:
-                        _wtr.WriteEntityRef(_rdr.Name);
+                        if (Writing)
+                        {
+                            _wtr.WriteEntityRef(r.Name);
+                        }
                         break;
                     case XmlNodeType.XmlDeclaration:
-                        if (!_noXmlHeader)
+                        if (!NoXmlHeader)
                         {
-                            _wtr.WriteProcessingInstruction(_rdr.Name, _rdr.Value);
-                            _wtr.WriteDocType("html", "-//W3C//DTD XHTML 1.1//EN", "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd", @"
+                            if (Writing)
+                            {
+                                _wtr.WriteProcessingInstruction(r.Name, r.Value);
+                                _wtr.WriteDocType("html", "-//W3C//DTD XHTML 1.1//EN", "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd", @"
 <!ATTLIST html lang CDATA #REQUIRED >
 <!ATTLIST span lang CDATA #IMPLIED >
 <!ATTLIST span entryguid CDATA #IMPLIED >
 <!ATTLIST img alt CDATA #IMPLIED >
 ");
+                            }
                         }
                         break;
                     case XmlNodeType.ProcessingInstruction:
-                        _wtr.WriteProcessingInstruction( _rdr.Name, _rdr.Value );
+                        if (Writing)
+                        {
+                            _wtr.WriteProcessingInstruction(r.Name, r.Value);
+                        }
                         break;
                     case XmlNodeType.DocumentType: // This code will never execute with DtdProcessing.Ignore (see instantiation)
                         break;
                     case XmlNodeType.Comment:
-                        _wtr.WriteComment( _rdr.Value );
+                        if (Writing)
+                        {
+                            _wtr.WriteComment(r.Value);
+                        }
                         break;
                     case XmlNodeType.EndElement:
-                        //Debug.Print("End " + _rdr.Name);
-                        BeforeEndProcessMethods(_rdr.NodeType, _rdr.Depth, _rdr.Name);
+                        //Debug.Print("End " + r.Name);
+                        BeforeEndProcessMethods(r.NodeType, r.Depth, r.Name);
                         if (!SkipNode)
                         {
-                            _wtr.WriteFullEndElement();
+                            if (Writing)
+                            {
+                                try
+                                {
+                                    _wtr.WriteFullEndElement();
+                                }
+                                catch (InvalidOperationException)
+                                {
+                                    // We have already written enough end elements
+                                }
+                            }
                         }
                         break;
                 }
-                AfterProcessMethods();
+                AfterProcessMethods(r);
                 if (_finish)
                     break;
             }
-            for (var depth = _rdr.Depth; depth > 0; depth--)
+            for (var depth = r.Depth; depth > 0; depth--)
             {
-                BeforeEndProcessMethods(XmlNodeType.EndElement, _rdr.Depth, _rdr.Name);
-                _wtr.WriteFullEndElement();
+                BeforeEndProcessMethods(XmlNodeType.EndElement, r.Depth, r.Name);
+                if (Writing)
+                {
+                    try
+                    {
+                        _wtr.WriteFullEndElement();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        // We have already written enough end elements
+                    }
+                }
             }
-            _wtr.Close();
-            _rdr.Close();
-            _sr.Close();
+            if (Writing)
+            {
+                _wtr.Close();
+                _writerfile.Close();
+            }
+            Writing = false;
         }
+        #endregion Parsing...
 
-        private void AddTitle()
+        #region Insert while parsing...
+        private void InsertTitle()
         {
             _wtr.WriteString(TitleDefault);
             _wtr.WriteEndElement();
             if (!string.IsNullOrEmpty(AuthorDefault))
             {
-                AddAuthor();
+                InsertAuthor();
             }
         }
 
-        private void AddAuthor()
+        private void InsertAuthor()
         {
             _wtr.WriteStartElement(_rdr.Prefix, "meta", _rdr.NamespaceURI);
             _wtr.WriteAttributeString("name", "author");
@@ -234,14 +381,16 @@ namespace SIL.Tool
             _wtr.WriteAttributeString("content", AuthorDefault);
             _wtr.WriteEndElement();
         }
+        #endregion Insert while parsing...
 
-        private void BeforeProcessMethods()
+        #region Callbacks
+        private void BeforeProcessMethods(XmlReader r)
         {
-            if (!_beforeNodeTypeMap.ContainsKey(_rdr.NodeType)) return;
-            foreach (ParserMethod func in _beforeNodeTypeMap[_rdr.NodeType])
+            if (!_beforeNodeTypeMap.ContainsKey(r.NodeType)) return;
+            foreach (ParserMethod func in _beforeNodeTypeMap[r.NodeType])
             {
                 Debug.Assert(func != null, "func != null");
-                func(_rdr);
+                func(r);
                 if (_finish)
                     break;
             }
@@ -271,26 +420,58 @@ namespace SIL.Tool
             }
         }
 
-        private void AfterProcessMethods()
+        private void AfterProcessMethods(XmlReader r)
         {
-            if (!_afterNodeTypeMap.ContainsKey(_rdr.NodeType)) return;
-            foreach (ParserMethod func in _afterNodeTypeMap[_rdr.NodeType])
+            if (!_afterNodeTypeMap.ContainsKey(r.NodeType)) return;
+            foreach (ParserMethod func in _afterNodeTypeMap[r.NodeType])
             {
                 Debug.Assert(func != null, "func != null");
-                func(_rdr);
+                func(r);
                 if (_finish)
                     break;
             }
         }
+        #endregion Callbacks
 
-        protected void WriteEmbddedStyle(string val)
+        #region Letter and Book headers
+        protected void WriteLetterHeader(string letterLang, string letter, XmlReader r)
+        {
+            _wtr.WriteStartElement("", "div", r.NamespaceURI);
+            _wtr.WriteAttributeString("class", "letHead");
+            _wtr.WriteStartElement("", "span", r.NamespaceURI);
+            _wtr.WriteAttributeString("class", "letter");
+            _wtr.WriteAttributeString("lang", letterLang);
+            _wtr.WriteValue(letter);
+            _wtr.WriteEndElement();
+            _wtr.WriteEndElement();
+        }
+
+		protected void WriteBookHeader(string bookLang, string bookName, string bookCode, XmlReader r)
+		{
+			_wtr.WriteStartElement("", "span", r.NamespaceURI);
+			_wtr.WriteAttributeString("class", "scrBookName");
+			_wtr.WriteAttributeString("lang", bookLang);
+			_wtr.WriteValue(bookName);
+			_wtr.WriteEndElement();
+			_wtr.WriteStartElement("", "span", r.NamespaceURI);
+			_wtr.WriteAttributeString("class", "scrBookCode");
+			_wtr.WriteAttributeString("lang", bookLang);
+			_wtr.WriteValue(bookCode);
+			_wtr.WriteEndElement();
+		}
+		#endregion Letter header
+
+		#region Embedded styles
+		protected void WriteEmbddedStyle(string val)
         {
             _wtr.WriteStartElement("style", "http://www.w3.org/1999/xhtml");
             _wtr.WriteAttributeString("type", "text/css");
             _wtr.WriteRaw(val);
             _wtr.WriteEndElement();
         }
+        #endregion Embedded styles
 
+        #region Writing Content
         protected void WriteContent(string val, string myClass)
         {
             WriteContent(val, myClass, "");
@@ -308,8 +489,7 @@ namespace SIL.Tool
             _wtr.WriteStartElement(localName, "http://www.w3.org/1999/xhtml");
             if (!string.IsNullOrEmpty(myClass))
             {
-	            var decoration = DecorateExceptions.Contains(myClass) ? "" : StyleDecorate;
-				WriteClassAttr(myClass + Suffix + decoration);
+                WriteClassAttr(myClass + Suffix);
             }
             if (!string.IsNullOrEmpty(myLang))
             {
@@ -364,12 +544,9 @@ namespace SIL.Tool
         {
             _wtr.WriteAttributeString("lang", myLang);
         }
+        #endregion Writing Content
 
-        protected void Finished()
-        {
-            _finish = true;
-        }
-
+        #region Callback setup
         protected void DeclareBefore(XmlNodeType nodeType, ParserMethod parserMethod)
         {
             if (_beforeNodeTypeMap.ContainsKey(nodeType))
@@ -433,5 +610,6 @@ namespace SIL.Tool
                 _doAttributes = true;
             }
         }
+        #endregion Callback setup
     }
 }

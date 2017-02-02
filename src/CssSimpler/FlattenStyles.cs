@@ -39,10 +39,11 @@ namespace CssSimpler
         private readonly SortedSet<string> _needHigher;
         private string _headerTag;
 
-        public FlattenStyles(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher, bool noXmlHeader)
+        public FlattenStyles(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher, bool noXmlHeader, string decorateStyles)
             : base(input, output, noXmlHeader)
         {
             _needHigher = needHigher;
+			StyleDecorate = decorateStyles;
             MakeRuleIndex(xmlCss);
             IdentifyDisplayBlockRules(xmlCss);
             _xmlCss = xmlCss;
@@ -390,7 +391,7 @@ namespace CssSimpler
                 var ruleNode = _flatCss.CreateElement("RULE");
                 var classNode = _flatCss.CreateElement("CLASS");
                 var classNameNode = _flatCss.CreateElement("name");
-                classNameNode.InnerText = style;
+                classNameNode.InnerText = DecorateExceptions.Contains(style) ? style: style + StyleDecorate;
                 classNode.AppendChild(classNameNode);
                 ruleNode.AppendChild(classNode);
                 Debug.Assert(_flatCss.DocumentElement != null, "_flatCss.DocumentElement != null");
