@@ -47,150 +47,149 @@ namespace SIL.PublishingSolution
         private static bool filledCss;
         private static PublicationInformation projectInfo;
 
-        private static void Main(string[] args)
-        {
-            if (args.Length == 0)
-            {
-                Console.Write("PathwayExport: ");
-                Console.WriteLine("Try 'PathwayExport --help' for more information.");
-                Console.Read();
-                Environment.Exit(0);
-            }
-            else if (args.Length == 1 && args[0].ToLower() == "--help")
-	        {
-		        Usage();
-		        Console.Read();
-		        Environment.Exit(0);
-	        }
-	        else
-	        {
-		        projectInfo = new PublicationInformation();
-		        ArgumentUsage(args);
+		private static void Main(string[] args)
+		{
+			if (args.Length == 0)
+			{
+				Console.Write("PathwayExport: ");
+				Console.WriteLine("Try 'PathwayExport --help' for more information.");
+				Console.Read();
+				Environment.Exit(0);
+			}
+			else if (args.Length == 1 && args[0].ToLower() == "--help")
+			{
+				Usage();
+				Console.Read();
+				Environment.Exit(0);
+			}
+			else
+			{
+				projectInfo = new PublicationInformation();
+				ArgumentUsage(args);
 
-		        projectInfo.ProjectPath = exportDirectory;
-		        foreach (string f in files)
-		        {
-			        if (f.ToLower().Contains(".css"))
-			        {
-				        if (f.ToLower().Contains("flexrev"))
-				        {
-					        projectInfo.DefaultRevCssFileWithPath = f;
-				        }
-				        else
-				        {
-					        projectInfo.DefaultCssFileWithPath = f;
-				        }
-			        }
-			        if (f.ToLower().EndsWith(".xhtml"))
-			        {
-				        if (f.ToLower().Contains("flexrev"))
-				        {
-					        projectInfo.IsReversalExist = true;
-				        }
-				        else
-				        {
-					        projectInfo.DefaultXhtmlFileWithPath = f;
-					        if (f.ToLower().Contains("main"))
-						        projectInfo.IsLexiconSectionExist = true;
-				        }
-			        }
-		        }
+				projectInfo.ProjectPath = exportDirectory;
+				foreach (string f in files)
+				{
+					if (f.ToLower().Contains(".css"))
+					{
+						if (f.ToLower().Contains("flexrev"))
+						{
+							projectInfo.DefaultRevCssFileWithPath = f;
+						}
+						else
+						{
+							projectInfo.DefaultCssFileWithPath = f;
+						}
+					}
+					if (f.ToLower().EndsWith(".xhtml"))
+					{
+						if (f.ToLower().Contains("flexrev"))
+						{
+							projectInfo.IsReversalExist = true;
+						}
+						else
+						{
+							projectInfo.DefaultXhtmlFileWithPath = f;
+							if (f.ToLower().Contains("main"))
+								projectInfo.IsLexiconSectionExist = true;
+						}
+					}
+				}
 
-		        // Find Export Format
-		        string settingsPath = Path.Combine(Common.GetAllUserPath(), "StyleSettings.xml");
-		        projectInfo.ProjectInputType = Param.GetInputType(settingsPath);
+				// Find Export Format
+				string settingsPath = Path.Combine(Common.GetAllUserPath(), "StyleSettings.xml");
+				projectInfo.ProjectInputType = Param.GetInputType(settingsPath);
 
-		        if (projectInfo.IsLexiconSectionExist == true)
-			        projectInfo.ProjectName = "main";
-		        else if (projectInfo.IsReversalExist == true)
-			        projectInfo.ProjectName = "flexrev";
+				if (projectInfo.IsLexiconSectionExist == true)
+					projectInfo.ProjectName = "main";
+				else if (projectInfo.IsReversalExist == true)
+					projectInfo.ProjectName = "flexrev";
 
-		        projectInfo.IsOpenOutput = !Common.Testing;
+				projectInfo.IsOpenOutput = !Common.Testing;
 
-		        SetFileName();
-		        projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
-		        LoadParameters(projectInfo.ProjectInputType);
+				SetFileName();
+				projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
+				LoadParameters(projectInfo.ProjectInputType);
 
 				List<IExportProcess> backend = new List<IExportProcess>();
-		        backend = Backend.LoadExportAssembly(Common.AssemblyPath);
-		        foreach (IExportProcess lProcess in backend)
-		        {
-
-			        if (exportType == "openoffice/libreoffice")
-			        {
-				        Common._outputType = Common.OutputType.ODT;
-				        projectInfo.FinalOutput = "odt";
+				backend = Backend.LoadExportAssembly(Common.AssemblyPath);
+				foreach (IExportProcess lProcess in backend)
+				{
+					if (exportType == "openoffice/libreoffice" && lProcess.ExportType.ToLower() == "openoffice/libreoffice")
+					{
+						Common._outputType = Common.OutputType.ODT;
+						projectInfo.FinalOutput = "odt";
 						lProcess.Export(projectInfo);
-				        break;
-				        // process = new ExportLibreOffice();
-			        }
-			        if (exportType == "e-book (.epub)" || exportType == "e-book (epub2 and epub3)")
-			        {
-				        // process = new Exportepub();
-				        Common._outputType = Common.OutputType.EPUB;
+						Environment.Exit(0);
+						// process = new ExportLibreOffice();
+					}
+					if (lProcess.ExportType.ToLower() == "e-book (epub2 and epub3)" && (exportType == "e-book (.epub)" || exportType == "e-book (epub2 and epub3)"))
+					{
+						// process = new Exportepub();
+						Common._outputType = Common.OutputType.EPUB;
 						lProcess.Export(projectInfo);
-						break;
-			        }
-			        if (exportType == "pdf (using openoffice/libreoffice)")
-			        {
-				        projectInfo.FinalOutput = "pdf";
-				        projectInfo.OutputExtension = "pdf";
+						Environment.Exit(0);
+					}
+					if (exportType == "pdf (using openoffice/libreoffice)" && lProcess.ExportType.ToLower() == "openoffice/libreoffice")
+					{
+						projectInfo.FinalOutput = "pdf";
+						projectInfo.OutputExtension = "pdf";
 						lProcess.Export(projectInfo);
-						break;
-				        // process = new ExportLibreOffice();
-			        }
-			        if (exportType == "pdf (using prince)")
-			        {
-				        // process = new ExportPdf();
-				        Common._outputType = Common.OutputType.PDF;
+						Environment.Exit(0);
+						// process = new ExportLibreOffice();
+					}
+					if (exportType == "pdf (using prince)" && lProcess.ExportType.ToLower() == "pdf (using prince)")
+					{
+						// process = new ExportPdf();
+						Common._outputType = Common.OutputType.PDF;
 						lProcess.Export(projectInfo);
-						break;
-			        }
-			        if (exportType == "xelatex")
-			        {
-				        // process = new ExportXeLaTex();
-				        Common._outputType = Common.OutputType.XELATEX;
+						Environment.Exit(0);
+					}
+					if (exportType == "xelatex" && lProcess.ExportType.ToLower() == "xelatex")
+					{
+						// process = new ExportXeLaTex();
+						Common._outputType = Common.OutputType.XELATEX;
 						lProcess.Export(projectInfo);
-						break;
-			        }
-			        if (exportType == "dictionaryformids")
-			        {
-				        // process = new ExportDictionaryForMIDs();
-				        Common._outputType = Common.OutputType.MOBILE;
+						Environment.Exit(0);
+					}
+					if (exportType == "dictionaryformids" && lProcess.ExportType.ToLower() == "dictionaryformids")
+					{
+						// process = new ExportDictionaryForMIDs();
+						Common._outputType = Common.OutputType.MOBILE;
 						lProcess.Export(projectInfo);
-						break;
-			        }
-			        if (exportType == "indesign")
-			        {
-				        //  process = new ExportInDesign();
-				        Common._outputType = Common.OutputType.IDML;
+						Environment.Exit(0);
+					}
+					if (exportType == "indesign" && lProcess.ExportType.ToLower() == "indesign")
+					{
+						//  process = new ExportInDesign();
+						Common._outputType = Common.OutputType.IDML;
 						lProcess.Export(projectInfo);
-						break;
-			        }
-			        if (exportType == "gobible" || exportType == "go bible")
-			        {
-				        projectInfo.ProjectName = "Go_Bible";
-				        projectInfo.SelectedTemplateStyle = "GoBible";
-				        //  process = new ExportGoBible();
-				        Common._outputType = Common.OutputType.MOBILE;
+						Environment.Exit(0);
+					}
+					if (lProcess.ExportType.ToLower() == "go bible" && (exportType == "gobible" || exportType == "go bible"))
+					{
+						projectInfo.ProjectName = "Go_Bible";
+						projectInfo.SelectedTemplateStyle = "GoBible";
+						//  process = new ExportGoBible();
+						Common._outputType = Common.OutputType.MOBILE;
 						lProcess.Export(projectInfo);
-						break;
-			        }
-			        if (exportType == "sword")
-			        {
-				        //  process = new ExportSword();
+						Environment.Exit(0);
+					}
+					if (exportType == "sword" && lProcess.ExportType.ToLower() == "sword")
+					{
+						//  process = new ExportSword();
 						lProcess.Export(projectInfo);
-						break;
-			        }
-			        if (exportType == "theword/mysword")
-			        {
-				        // process = new ExportTheWord();
+						Environment.Exit(0);
+					}
+					if (exportType == "theword/mysword" && lProcess.ExportType.ToLower() == "theword/mysword")
+					{
+						// process = new ExportTheWord();
 						lProcess.Export(projectInfo);
-						break;
-			        }
-		        }
-	        }
-        }
+						Environment.Exit(0);
+					}
+				}
+			}
+		}
 
 		private static void LoadParameters(string inputType)
 		{
