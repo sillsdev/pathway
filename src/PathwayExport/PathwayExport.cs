@@ -113,63 +113,65 @@ namespace SIL.PublishingSolution
 
 				List<IExportProcess> backend = new List<IExportProcess>();
 		        backend = Backend.LoadExportAssembly(Common.AssemblyPath);
-		        if (exportType == "openoffice/libreoffice")
-		        {
-			        Common._outputType = Common.OutputType.ODT;
-			        projectInfo.FinalOutput = "odt";
-			        // process = new ExportLibreOffice();
-		        }
-		        else if (exportType == "e-book (.epub)" || exportType == "e-book (epub2 and epub3)")
-		        {
-			        // process = new Exportepub();
-			        Common._outputType = Common.OutputType.EPUB;
-		        }
-		        else if (exportType == "pdf (using openoffice/libreoffice)")
-		        {
-			        projectInfo.FinalOutput = "pdf";
-			        projectInfo.OutputExtension = "pdf";
-			        // process = new ExportLibreOffice();
-		        }
-		        else if (exportType == "pdf (using prince)")
-		        {
-			        // process = new ExportPdf();
-			        Common._outputType = Common.OutputType.PDF;
-		        }
-		        else if (exportType == "xelatex")
-		        {
-			        // process = new ExportXeLaTex();
-			        Common._outputType = Common.OutputType.XELATEX;
-		        }
-		        else if (exportType == "dictionaryformids")
-		        {
-			        // process = new ExportDictionaryForMIDs();
-			        Common._outputType = Common.OutputType.MOBILE;
-		        }
-		        else if (exportType == "indesign")
-		        {
-			        //  process = new ExportInDesign();
-			        Common._outputType = Common.OutputType.IDML;
-		        }
-		        else if (exportType == "gobible" || exportType == "go bible")
-		        {
-			        projectInfo.ProjectName = "Go_Bible";
-			        projectInfo.SelectedTemplateStyle = "GoBible";
-			        //  process = new ExportGoBible();
-			        Common._outputType = Common.OutputType.MOBILE;
-		        }
-		        else if (exportType == "sword")
-		        {
-			        //  process = new ExportSword();
-		        }
-		        else if (exportType == "theword/mysword")
-		        {
-			        // process = new ExportTheWord();
-		        }
-
 		        foreach (IExportProcess lProcess in backend)
 		        {
-			        if (exportType == lProcess.ExportType.ToLower())
-				        lProcess.Export(projectInfo);
+			        switch (exportType)
+			        {
+				        case "openoffice/libreoffice":
+					        Common._outputType = Common.OutputType.ODT;
+					        projectInfo.FinalOutput = "odt";
+					        lProcess.Export(projectInfo);
+					        break;
+				        // process = new ExportLibreOffice();
+				        case "e-book (.epub)":
+				        case "e-book (epub2 and epub3)":
+					        // process = new Exportepub();
+					        Common._outputType = Common.OutputType.EPUB;
+					        lProcess.Export(projectInfo);
+					        break;
+				        case "pdf (using openoffice/libreoffice)":
+					        projectInfo.FinalOutput = "pdf";
+					        projectInfo.OutputExtension = "pdf";
+					        lProcess.Export(projectInfo);
+					        break;
+				        // process = new ExportLibreOffice();
+				        case "pdf (using prince)":
+					        // process = new ExportPdf();
+					        Common._outputType = Common.OutputType.PDF;
+					        lProcess.Export(projectInfo);
+					        break;
+				        case "xelatex":
+					        // process = new ExportXeLaTex();
+					        Common._outputType = Common.OutputType.XELATEX;
+					        lProcess.Export(projectInfo);
+					        break;
+				        case "dictionaryformids":
+					        // process = new ExportDictionaryForMIDs();
+					        Common._outputType = Common.OutputType.MOBILE;
+					        lProcess.Export(projectInfo);
+					        break;
+				        case "indesign":
+					        //  process = new ExportInDesign();
+					        Common._outputType = Common.OutputType.IDML;
+					        lProcess.Export(projectInfo);
+					        break;
+				        case "gobible":
+				        case "go bible":
+					        projectInfo.ProjectName = "Go_Bible";
+					        projectInfo.SelectedTemplateStyle = "GoBible";
+					        //  process = new ExportGoBible();
+					        Common._outputType = Common.OutputType.MOBILE;
+					        lProcess.Export(projectInfo);
+					        break;
+				        case "sword":
+					        //  process = new ExportSword();
+					        lProcess.Export(projectInfo);
+					        break;
+				        case "theword/mysword":
+					        // process = new ExportTheWord();
+					        lProcess.Export(projectInfo);
+					        break;
+			        }
 		        }
 	        }
         }
