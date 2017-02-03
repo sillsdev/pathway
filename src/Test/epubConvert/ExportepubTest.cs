@@ -557,9 +557,16 @@ namespace Test.epubConvert
 			var bookId = new Guid("5C3DF448-BADC-4F83-AF5C-B880027FF079");
 			target.CreateNcx(projInfo, outputDirectory, bookId);
 			string tocOutputNCXFile = Path.Combine(outputDirectory, "toc.ncx");
-			string tocExpectedNCXFile = Path.Combine(_expectedPath, "toc.ncx");
-
-			FileCompare(tocOutputNCXFile, tocExpectedNCXFile);
+			var tdoc = new XmlDocument();
+			var reader = XmlReader.Create(tocOutputNCXFile, new XmlReaderSettings { XmlResolver = null });
+			tdoc.Load(reader);
+			reader.Close();
+			var srcNodes = tdoc.SelectNodes(@"//*[starts-with(@src,'Part')]/@src");
+			Assert.AreEqual(21, srcNodes.Count);
+			Assert.AreEqual("PartFile00001_.xhtml#gca26b453-4696-4aa1-9e28-1f5121e9b066", srcNodes[2].InnerText);
+			var textNodes = tdoc.SelectNodes("//*[starts-with(@src,'Part')]/preceding-sibling::*[1]/*");
+			Assert.AreEqual("waain ", textNodes[2].InnerText);
+			tdoc.DocumentElement.RemoveAll();
 		}
 
 		/// <summary>
@@ -710,9 +717,16 @@ namespace Test.epubConvert
 			var bookId = new Guid("5C3DF448-BADC-4F83-AF5C-B880027FF079");
 			target.CreateNcx(projInfo, outputDirectory, bookId);
 			string tocOutputNCXFile = Path.Combine(outputDirectory, "toc.ncx");
-			string tocExpectedNCXFile = Path.Combine(_expectedPath, "tocwithreversal.ncx");
-
-			FileCompare(tocOutputNCXFile, tocExpectedNCXFile);
+			var tdoc = new XmlDocument();
+			var reader = XmlReader.Create(tocOutputNCXFile, new XmlReaderSettings {XmlResolver = null});
+			tdoc.Load(reader);
+			reader.Close();
+			var revSrcNodes = tdoc.SelectNodes(@"//*[starts-with(@src,'Rev')]/@src");
+			Assert.AreEqual(12, revSrcNodes.Count);
+			Assert.AreEqual("RevIndex00001_.xhtml#g1396f97c-3ab2-44c5-971d-a568218c7b13", revSrcNodes[2].InnerText);
+			var revTextNodes = tdoc.SelectNodes("//*[starts-with(@src,'Rev')]/preceding-sibling::*[1]/*");
+			Assert.AreEqual("\x905\x915\x94d\x937\x924\x92c.\xa0", revTextNodes[2].InnerText);
+			tdoc.DocumentElement.RemoveAll();
 		}
 
 		[Test]
