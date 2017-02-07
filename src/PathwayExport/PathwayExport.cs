@@ -249,6 +249,7 @@ namespace SIL.PublishingSolution
 					case "-b":
 						Param.DatabaseName = args[i++];
 						Param.DatabaseName = Param.DatabaseName.Replace("'", "").Trim();
+						Common.databaseName = Param.DatabaseName.Replace("'", "").Trim();
 						break;
 					case "--nunit":
 		                if (args[i++].ToLower() == "true")
