@@ -1453,7 +1453,7 @@ namespace SIL.PublishingSolution
                 {
                     sbRef.AppendLine("<xsl:value-of select=\"xhtml:span[@class='Note_Target_Reference']\"/>");
                     sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text>");
-                    sbRef.AppendLine("<xsl:for-each select=\"xhtml:span[not(@class ='Note_Target_Reference')]\"><xsl:value-of select=\".\"/></xsl:for-each>");
+					sbRef.AppendLine("<xsl:for-each select=\"xhtml:span[not(@class ='Note_Target_Reference')]\"><xsl:value-of select=\".\"/></xsl:for-each>");
                     sbRef.AppendLine("</xsl:element></xsl:for-each>");
                 }
                 else
@@ -1480,7 +1480,9 @@ namespace SIL.PublishingSolution
                 sbRef.AppendLine("<xsl:element name=\"a\">");
                 sbRef.AppendLine("<xsl:attribute name=\"href\"><xsl:text>#</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
                 sbRef.AppendLine("<xsl:text>[</xsl:text><xsl:value-of select=\"@title\"/><xsl:text>]</xsl:text>");
-                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element></xsl:for-each>");
+                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text>");
+				sbRef.AppendLine("<xsl:for-each select=\"xhtml:span\"><xsl:copy><xsl:for-each select=\"@*\"><xsl:copy/></xsl:for-each><xsl:apply-templates/></xsl:copy></xsl:for-each>");
+				sbRef.AppendLine("</xsl:element></xsl:for-each>");
                 sbRef.AppendLine("<!-- cross-references - use the verse number for the list bullet -->");
                 sbRef.AppendLine("<xsl:for-each select=\"descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']\">");
                 sbRef.AppendLine("<xsl:element name=\"li\">");
@@ -1491,7 +1493,7 @@ namespace SIL.PublishingSolution
                 {
                     sbRef.AppendLine("<xsl:value-of select=\"xhtml:span[@class='Note_Target_Reference']\"/>");
                     sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text>");
-                    sbRef.AppendLine("<xsl:for-each select=\"xhtml:span[not(@class ='Note_Target_Reference')]\"><xsl:value-of select=\".\"/></xsl:for-each>");
+					sbRef.AppendLine("<xsl:for-each select=\"xhtml:span\"><xsl:copy><xsl:for-each select=\"@*\"><xsl:copy/></xsl:for-each><xsl:apply-templates/></xsl:copy></xsl:for-each>");
                     sbRef.AppendLine("</xsl:element>");
                 }
                 else
