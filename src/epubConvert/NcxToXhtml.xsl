@@ -33,7 +33,7 @@
         </xsl:otherwise>
       </xsl:choose>
       <ul>
-        <xsl:apply-templates select="ncx:navPoint/ncx:navPoint"/>
+        <xsl:apply-templates select="ncx:navPoint/ncx:navPoint|ncx:navPoint"/>
       </ul>
     </div>
   </xsl:template>

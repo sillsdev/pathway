@@ -133,27 +133,29 @@ namespace epubConvert
                                                                    (fileNameWithoutExtension.EndsWith("_") ||
                                                                     fileNameWithoutExtension.EndsWith("_01"))))
             {
-                if (isScriptureSubOpen)
+                if (!string.IsNullOrEmpty(bookName))
                 {
-                    ncx.WriteEndElement(); // navPoint
+                    if (isScriptureSubOpen)
+                    {
+                        ncx.WriteEndElement(); // navPoint
+                    }
+                    ncx.WriteStartElement("navPoint");
+                    ncx.WriteAttributeString("id", "dtb:uid");
+                    ncx.WriteAttributeString("playOrder", index.ToString(CultureInfo.InvariantCulture));
+                    ncx.WriteStartElement("navLabel");
+                    ncx.WriteElementString("text", bookName);
+                    ncx.WriteEndElement(); // navlabel
+                    ncx.WriteStartElement("content");
+                    ncx.WriteAttributeString("src", name);
+                    ncx.WriteEndElement(); // meta
+                    index++;
+                    // chapters within the books (nested as a subhead)
+                    if (!skipChapterInfo)
+                    {
+                        WriteChapterLinks(file, ref index, ncx);
+                    }
+                    isScriptureSubOpen = true;
                 }
-                bookName = GetBookName(file);
-                ncx.WriteStartElement("navPoint");
-                ncx.WriteAttributeString("id", "dtb:uid");
-                ncx.WriteAttributeString("playOrder", index.ToString(CultureInfo.InvariantCulture));
-                ncx.WriteStartElement("navLabel");
-                ncx.WriteElementString("text", bookName);
-                ncx.WriteEndElement(); // navlabel
-                ncx.WriteStartElement("content");
-                ncx.WriteAttributeString("src", name);
-                ncx.WriteEndElement(); // meta
-                index++;
-                // chapters within the books (nested as a subhead)
-                if (!skipChapterInfo)
-                {
-                    WriteChapterLinks(file, ref index, ncx);
-                }
-                isScriptureSubOpen = true;
             }
             else if (name.IndexOf("zzReference", StringComparison.Ordinal) == 0)
             {
