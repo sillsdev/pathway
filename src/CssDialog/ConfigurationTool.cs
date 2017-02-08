@@ -1556,5 +1556,10 @@ namespace SIL.PublishingSolution
                 panel3.AutoScroll = true;
             }
         }
+
+		private void txtBaseFontSize_Leave(object sender, EventArgs e)
+		{
+			_cToolBL.txtBaseFontSize_LeaveBL(sender);
+		}
     }
 }

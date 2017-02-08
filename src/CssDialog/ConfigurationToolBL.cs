@@ -4978,6 +4978,16 @@ namespace SIL.PublishingSolution
 			Utils.MsgBox(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
+		public void txtBaseFontSize_LeaveBL(object sender)
+		{
+			try
+			{
+				if (ValidateEPubFontSize(Convert.ToDouble(((TextBox)sender).Text)) == false)
+					MessageBox.Show("Please enter values from 6.0 to 28.0", string.Empty, MessageBoxButtons.OK);
+			}
+			catch { }
+		}
+
 		public void ShowPreview(int page)
 		{
 			var myCursor = Cursor.Current;
@@ -5511,6 +5521,28 @@ namespace SIL.PublishingSolution
 					cTool.TxtWebEmailId.Focus();
 					result = false;
 				}
+			}
+			return result;
+		}
+
+		/// <summary>
+		/// Validate whether the given value is not < 6.0 and not > 28.0
+		/// Valid Numbers: 7, 8.5 etc
+		/// </summary>
+		/// <param name="fSize">Double</param>
+		/// <returns>True/False</returns>
+
+		private bool ValidateEPubFontSize(Double fSize)
+		{
+			bool result = false;
+
+			if (fSize >= 6.0 && fSize <= 28.0)
+			{
+				result = true;
+			}
+			else
+			{
+				result = false;
 			}
 			return result;
 		}
