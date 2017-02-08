@@ -3329,6 +3329,7 @@ namespace SIL.Tool
 				Common.CleanDirectory(di);
 			}
 			Directory.CreateDirectory(destFolder);
+			FolderTree.Copy(FromRegistry(Path.Combine("Html5", "Dictionary")), destFolder);
 			string[] files = Directory.GetFiles(sourceFolder);
 			try
 			{
