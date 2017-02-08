@@ -4,8 +4,6 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{749D4FCD-5100-46C8-AE73-50873CB5CEC0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -35,7 +33,6 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -49,7 +46,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -63,7 +59,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -77,7 +72,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -90,7 +84,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -103,7 +96,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\..\output\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -118,7 +110,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -132,7 +123,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -146,7 +136,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -159,7 +148,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -172,7 +160,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
@@ -182,7 +169,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
@@ -192,7 +178,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
@@ -208,9 +193,9 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
@@ -224,6 +209,7 @@
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DesktopAnalytics">
@@ -235,10 +221,6 @@
     <Reference Include="Prince">
       <HintPath>..\..\packages\PrinceXML.10.7\lib\net20\Prince.dll</HintPath>
     </Reference>
-    <Reference Include="SIL.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -246,6 +228,15 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="SIL.Core">
+      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CssParser">
+      <HintPath>..\..\output\Release\CssParser.dll</HintPath>
+    </Reference>
+    <Reference Include="PsTool">
+      <HintPath>..\..\output\Release\PsTool.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutPw.cs">
@@ -456,16 +447,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\2014_sil_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CssParser\CssParser4.csproj">
-      <Project>{eb7eb8fe-6414-4c53-b5e6-54352ee25364}</Project>
-      <Name>CssParser4</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PsTool\PsTool4.csproj">
-      <Project>{422c5127-260d-4f16-b476-33aa38dbf919}</Project>
-      <Name>PsTool4</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
