@@ -2571,11 +2571,13 @@ namespace SIL.PublishingSolution
                                 while (next != null && (next.Attributes != null && next.Attributes.GetNamedItem("class").InnerText.ToLower().Contains("title")))
                                     next = next.NextSibling;
                             }
+                            var book = string.Empty;
                             foreach (string variable in chapterIdList)
                             {
                                 string[] valueList = variable.Split('_');
-                                if (valueList[0] != valueList1[0])
+                                if (valueList[0] != valueList1[0] && valueList[2] != book)
                                     continue;
+                                book = valueList[2];
 
                                 Debug.Assert(xmlDocument.DocumentElement != null);
                                 XmlNode nodeContent = xmlDocument.CreateElement("a", xmlDocument.DocumentElement.NamespaceURI);
