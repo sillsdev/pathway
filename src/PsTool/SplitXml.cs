@@ -49,6 +49,7 @@ namespace SIL.Tool
             DeclareBefore(XmlNodeType.Element, AtLetterHead);
             DeclareBefore(XmlNodeType.Element, StyleSheetLink);
             DeclareFirstChild(XmlNodeType.Element, AtLetter);
+            DeclareBefore(XmlNodeType.Element, AtBook);
             DeclareBefore(XmlNodeType.Element, SetEntryLevel);
             DeclareAfter(XmlNodeType.EndElement, CheckSizeAtEntry);
             DeclareBefore(XmlNodeType.Attribute, ReplaceStyleSheetHref);
@@ -107,9 +108,9 @@ namespace SIL.Tool
         {
             var myClass = r.GetAttribute("class");
             if (string.IsNullOrEmpty(myClass) || r.Name != "div") return;
-            if (!myClass.StartsWith("entry") && !myClass.StartsWith("minorentry") && !myClass.Contains("reversalindexentry") && !myClass.StartsWith("scrSection")) return;
+            if (!myClass.StartsWith("entry") && !myClass.StartsWith("minorentry") && !myClass.Contains("reversalindexentry") && !myClass.StartsWith("scrBook") && !myClass.StartsWith("scrSection")) return;
             _entryLevel = r.Depth;
-            if (Writing) return;
+            if (Writing || _letterNum == 0) return;
             var nextFileFullName = CurrentFileName();
             var nextFileName = Path.GetFileName(nextFileFullName);
             FileList.Add(nextFileName);
@@ -137,15 +138,10 @@ namespace SIL.Tool
 
         private string _letterLang;
         private string _letter;
-	    private string _bookName;
         private void AtLetter(XmlReader r)
         {
 			var cssClass = r.GetAttribute("class");
-	        if (cssClass == "scrBookName")
-	        {
-		        _bookName = r.Value;
-	        }
-            if (cssClass != "letter" && cssClass != "scrBookCode") return;
+            if (cssClass != "letter") return;
 			_letterLang = r.GetAttribute("lang");
 			_letter = GetString();
 			var newFileFullName = NewFileName();
@@ -156,15 +152,23 @@ namespace SIL.Tool
             NextWriter(newFileFullName);
             SetTitle();
             WriteXmlHeader();
-	        if (r.GetAttribute("class") != "scrBookCode")
-	        {
 		        WriteLetterHeader(_letterLang, _letter, r);
-	        }
-	        else
-	        {
-				WriteBookHeader(_letterLang, _bookName, r.Value, r);
-	        }
 		}
+
+        private void AtBook(XmlReader r)
+        {
+            var cssClass = r.GetAttribute("class");
+            if (cssClass != "scrBookName") return;
+            _letter = GetString();
+            var newFileFullName = NewFileName();
+            var newFileName = Path.GetFileName(newFileFullName);
+            FileList.Add(newFileName);
+            LetterLabels.Add(_letter);
+            LetterLinks.Add(newFileName);
+            NextWriter(newFileFullName);
+            SetTitle();
+            WriteXmlHeader();
+        }
 
         private string NewFileName()
         {

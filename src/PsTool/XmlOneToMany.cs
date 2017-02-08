@@ -445,20 +445,6 @@ namespace SIL.Tool
             _wtr.WriteEndElement();
             _wtr.WriteEndElement();
         }
-
-		protected void WriteBookHeader(string bookLang, string bookName, string bookCode, XmlReader r)
-		{
-			_wtr.WriteStartElement("", "span", r.NamespaceURI);
-			_wtr.WriteAttributeString("class", "scrBookName");
-			_wtr.WriteAttributeString("lang", bookLang);
-			_wtr.WriteValue(bookName);
-			_wtr.WriteEndElement();
-			_wtr.WriteStartElement("", "span", r.NamespaceURI);
-			_wtr.WriteAttributeString("class", "scrBookCode");
-			_wtr.WriteAttributeString("lang", bookLang);
-			_wtr.WriteValue(bookCode);
-			_wtr.WriteEndElement();
-		}
 		#endregion Letter header
 
 		#region Embedded styles
