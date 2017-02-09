@@ -1257,6 +1257,7 @@ namespace Test.CssSimplerTest
 			fs.Parse();
 			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
 			TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+			NodeTest(xhtmlOutFullName, 1, "//*[@rel='stylesheet']", "One Stylesheet");
 		}
 
 		[Test]
@@ -1288,6 +1289,7 @@ namespace Test.CssSimplerTest
 			fs.Parse();
 			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
 			TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
+			NodeTest(xhtmlOutFullName, 1, "//*[@rel='stylesheet']", "One Stylesheet");
 		}
 
 		[Test]

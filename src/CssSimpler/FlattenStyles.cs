@@ -38,6 +38,7 @@ namespace CssSimpler
         private string _precedingClass = String.Empty;
         private readonly SortedSet<string> _needHigher;
         private string _headerTag;
+	    private bool _stylesheetPresent;
 
         public FlattenStyles(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher, bool noXmlHeader, string decorateStyles)
             : base(input, output, noXmlHeader)
@@ -48,9 +49,11 @@ namespace CssSimpler
             IdentifyDisplayBlockRules(xmlCss);
             _xmlCss = xmlCss;
             Suffix = string.Empty;
+	        _stylesheetPresent = false;
             DeclareBefore(XmlNodeType.Attribute, SaveClassLang);
             DeclareBefore(XmlNodeType.Element, SaveSibling);
             DeclareBefore(XmlNodeType.Element, InsertBefore);
+			DeclareBefore(XmlNodeType.Element, RemoveExtraStylesheets);
             DeclareBefore(XmlNodeType.EndElement, SetForEnd);
             DeclareBefore(XmlNodeType.Text, TextNode);
             DeclareBefore(XmlNodeType.EntityReference, OtherNode);
@@ -61,7 +64,21 @@ namespace CssSimpler
             DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveClass);
         }
 
-        private void IdentifyDisplayBlockRules(XmlDocument xmlCss)
+	    private void RemoveExtraStylesheets(XmlReader r)
+	    {
+		    if (r.Name != "link") return;
+		    if (r.GetAttribute("rel") != "stylesheet") return;
+		    if (_stylesheetPresent)
+		    {
+			    SkipNode = true;
+		    }
+		    else
+		    {
+			    _stylesheetPresent = true;
+		    }
+	    }
+
+	    private void IdentifyDisplayBlockRules(XmlDocument xmlCss)
         {
             var dispBlockNodes = xmlCss.SelectNodes("//*[name='display' and value='block']/parent::*/@pos");
             Debug.Assert(dispBlockNodes != null, "dispBlockNodes != null");
@@ -115,8 +132,11 @@ namespace CssSimpler
 
         private void DivEnds(int depth, string name)
         {
-            SkipNode = name == "span";
-            SkipNode = IsNotBlockRule(depth);
+	        if (name != "link")
+	        {
+				SkipNode = name == "span";
+			}
+			SkipNode = IsNotBlockRule(depth);
             if (_levelRules.Count > depth)
             {
                 _levelRules[depth] = null;
