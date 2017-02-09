@@ -20,8 +20,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.Net.Mime;
 using System.Reflection;
 using System.Text;
+using System.Windows.Forms;
 using SIL.CommandLineProcessing;
 using SIL.Progress;
 
@@ -158,7 +160,7 @@ namespace SIL.Tool
 
 		        Common.SaveInputType(publicationInformation.ProjectInputType);
 
-                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3} --database {4}", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString(), Param.DatabaseName);
+                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3} --database \"{4}\"", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString(), Param.DatabaseName);
 
 				string pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "PathwayExport.exe");
 
@@ -168,8 +170,32 @@ namespace SIL.Tool
 				var cmd = Common.IsUnixOS()?
 					"/usr/bin/PathwayExport": pathwayExportFile;
 
-                CommandLineRunner.Run(cmd, argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
-            }
+		        var envVar = Environment.GetEnvironmentVariables();
+		        if (envVar.Contains("PathwayExportBatch"))
+		        {
+			        var batchFullName = Path.Combine(publicationInformation.DictionaryPath, "PathwayExport.bat");
+			        using (var sw = new StreamWriter(batchFullName))
+			        {
+				        sw.WriteLine(cmd + " " + argument);
+				        sw.Close();
+			        }
+			        MessageBox.Show(@"Batch command written to " + batchFullName + @" since PathwayExportBatch variable present");
+			        if (Common.IsUnixOS())
+			        {
+				        SubProcess.Run("", "nautilus", Common.HandleSpaceinLinuxPath(publicationInformation.DictionaryPath), false);
+			        }
+			        else
+			        {
+				        SubProcess.Run(publicationInformation.DictionaryPath, "explorer.exe", publicationInformation.DictionaryPath,
+					        false);
+			        }
+		        }
+		        else
+		        {
+					CommandLineRunner.Run(cmd, argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
+				}
+
+			}
 	        catch(Exception ex)
 	        {
 		        throw new Exception(ex.Message);
