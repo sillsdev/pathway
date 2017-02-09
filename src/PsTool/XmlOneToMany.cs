@@ -30,6 +30,7 @@ namespace SIL.Tool
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _firstChildNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly Dictionary<XmlNodeType, List<EndTagMethod>> _beforeEndNodeTypeMap = new Dictionary<XmlNodeType, List<EndTagMethod>>();
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _afterNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
+		private readonly Dictionary<string, string> ns = new Dictionary<string, string> ();
         private readonly StreamReader _sr;
         private readonly XmlReader _rdr;
         private FileStream _writerfile;
@@ -62,6 +63,8 @@ namespace SIL.Tool
 
         protected XmlOneToMany(string xmlInFullName)
         {
+			ns["xml"] = "http://www.w3.org/XML/1998/namespace";
+			ns["xmlns"] = "";
             _sr = new StreamReader(xmlInFullName);
             _rdr = XmlReader.Create(_sr, MyReaderSettings());
             _wtr = XmlWriter.Create(_header);
@@ -193,11 +196,16 @@ namespace SIL.Tool
                                 BeforeProcessMethods(r);
                                 if (!SkipAttr)
                                 {
-                                    if (r.Name.Length > 4 && r.Name.Substring(0, 4) == "xml:")
+									if (r.Name.Contains(":"))
                                     {
                                         if (Writing)
                                         {
-                                            _wtr.WriteAttributeString("xml", r.Name.Substring(4), "http://www.w3.org/XML/1998/namespace", r.Value);
+											var parts = r.Name.Split(':');
+											if (parts[0] == "xmlns")
+											{
+												ns[parts[1]] = r.Value;
+											}
+											_wtr.WriteAttributeString(parts[0], parts[1], ns[parts[0]], r.Value);
                                         }
                                     }
                                     else
