@@ -87,8 +87,9 @@ namespace SIL.PublishingSolution
 		private XslCompiledTransform addRevId;
 	    private XslCompiledTransform noXmlSpace;
 	    private XslCompiledTransform fixEpub;
+		private XslCompiledTransform toc2html5;
 
-        public int BaseFontSize { get; set; }
+		public int BaseFontSize { get; set; }
         public int DefaultLineHeight { get; set; }
         /// <summary>
         /// Fallback font (if the embedded font is missing or non-SIL)
@@ -153,6 +154,7 @@ namespace SIL.PublishingSolution
             addRevId = LoadAddRevIdXslt();
             noXmlSpace = LoadNoXmlSpaceXslt();
             fixEpub = LoadFixEpubXslt();
+	        toc2html5 = LoadToc2Html5Xslt();
 			Param.SetLoadType = projInfo.ProjectInputType;
 			Param.LoadSettings();
             #endregion
@@ -374,7 +376,12 @@ namespace SIL.PublishingSolution
                 inProcess.SetStatus("Copy html files");
                 string htmlFolderPath = Common.PathCombine(Path.GetDirectoryName(epub3Path), "HTML5");
                 string oebpsFolderPath = Common.PathCombine(epub3Path, "OEBPS");
-                Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf, toc.html");
+				var bootstrapToc = Common.PathCombine(epub3Path, "bootstrapToc.html");
+				File.Copy(Path.Combine(oebpsFolderPath, "toc.ncx"), bootstrapToc);
+				Common.ApplyXslt(bootstrapToc, toc2html5);
+
+				Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf,toc.xhtml,toc.ncx");
+				File.Delete(bootstrapToc);
             }
 
             inProcess.SetStatus("Packaging for Epub3");
@@ -1099,7 +1106,16 @@ namespace SIL.PublishingSolution
             return fixEpub;
         }
 
-        private static XslCompiledTransform LoadNoXmlSpaceXslt()
+		private static XslCompiledTransform LoadToc2Html5Xslt()
+		{
+			var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.toc2html5.xsl");
+			Debug.Assert(stream != null);
+			var toc2Html5 = new XslCompiledTransform();
+			toc2Html5.Load(XmlReader.Create(stream));
+			return toc2Html5;
+		}
+
+		private static XslCompiledTransform LoadNoXmlSpaceXslt()
         {
             var noXmlSpaceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.noXmlSpace.xsl");
             Debug.Assert(noXmlSpaceStream != null);
