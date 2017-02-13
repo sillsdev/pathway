@@ -170,8 +170,7 @@ namespace SIL.Tool
 				var cmd = Common.IsUnixOS()?
 					"/usr/bin/PathwayExport": pathwayExportFile;
 
-		        var envVar = Environment.GetEnvironmentVariables();
-		        if (envVar.Contains("PathwayExportBatch"))
+				if (HasPathwayExportBatchRegistryValueForCurrentUserRegistry())
 		        {
 			        var batchFullName = Path.Combine(publicationInformation.DictionaryPath, "PathwayExport.bat");
 			        using (var sw = new StreamWriter(batchFullName))
@@ -207,6 +206,24 @@ namespace SIL.Tool
             }
             return true;
         }
+
+		private static bool HasPathwayExportBatchRegistryValueForCurrentUserRegistry()
+		{
+			bool isAvailable = false;
+			try
+			{
+				object regObj;
+				if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyCurrentUser,
+					"Pathway", "PathwayExportBatch", out regObj))
+				{
+					isAvailable = true;
+				}
+			}
+			catch
+			{
+			}
+			return isAvailable;
+		}
 
         private static void ShowVerbose(PublicationInformation publicationInformation)
         {

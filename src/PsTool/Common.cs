@@ -3329,7 +3329,7 @@ namespace SIL.Tool
 				Common.CleanDirectory(di);
 			}
 			Directory.CreateDirectory(destFolder);
-			FolderTree.Copy(FromRegistry(Path.Combine("Html5", "Dictionary")), destFolder);
+			FolderTree.Copy(FromRegistry(Path.Combine("Html5", "Dictionary")), destFolder, false);
 			var template = FileData.Get(Path.Combine(destFolder, "pages", "template.html"));
 			var tocDoc = DeclareXMLDocument(false);
 			var sr = new StreamReader(Path.Combine(sourceFolder, "..", "bootstrapToc.html"));
