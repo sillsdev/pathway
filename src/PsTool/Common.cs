@@ -3329,31 +3329,65 @@ namespace SIL.Tool
 				Common.CleanDirectory(di);
 			}
 			Directory.CreateDirectory(destFolder);
-			string[] files = Directory.GetFiles(sourceFolder);
+			FolderTree.Copy(FromRegistry(Path.Combine("Html5", "Dictionary")), destFolder);
+			var template = FileData.Get(Path.Combine(destFolder, "pages", "template.html"));
+			var tocDoc = DeclareXMLDocument(false);
+			var sr = new StreamReader(Path.Combine(sourceFolder, "..", "bootstrapToc.html"));
+			tocDoc.Load(sr);
+			sr.Close();
+			var opfDoc = DeclareXMLDocument(false);
+			sr = new StreamReader(Path.Combine(sourceFolder, "content.opf"));
+			opfDoc.Load(sr);
+			sr.Close();
+			var fileOrderQ = opfDoc.SelectNodes("//*[local-name()='item']/@href[contains(.,'.html')]");
+			var fileOrder = (from XmlAttribute attr in fileOrderQ select attr.Value).ToList();
+			var contDoc = DeclareXMLDocument(false);
+
+
+			var pagetitle = Param.GetMetadataValue("Title");
+			var head = Param.GetMetadataValue("Title");
+			var author = Param.GetMetadataValue("Creator");
+			var description = Param.GetMetadataValue("Description");
+			var version = DateTime.Today.ToShortDateString();
+			var categorylink = "#";
+			var aboutlink = "File2Cpy00000_.html";
+			var pageCss = "book.css";
+			var sidebar = tocDoc.SelectSingleNode("//*[local-name()='body']").InnerXml;
+			var files = Directory.GetFiles(sourceFolder);
+			var iFiles = ignoreFiles.Split(',');
 			try
 			{
-				bool isfileIgnore = false;
-				string[] iFiles = ignoreFiles.Split(',');
-
-
-
-
-				foreach (string file in files)
+				var first = true;
+				foreach (var file in files)
 				{
-					if (file == null) continue;
-					foreach (var ifile in iFiles)
+					var name = Path.GetFileName(file);
+					if (iFiles.Contains(name)) continue;
+					Debug.Assert(name != null, "name != null");
+					var dest = Path.Combine(destFolder, "pages", name);
+					if (Path.GetExtension(name) == ".html")
 					{
-						if (ifile.Trim() == Path.GetFileName(file))
+						sr = new StreamReader(file);
+						contDoc.Load(sr);
+						sr.Close();
+						var index = fileOrder.IndexOf(name);
+						var backlink = index > 0? fileOrder[index - 1]: "#";
+						var forelink = index + 1 < fileOrder.Count ? fileOrder[index + 1]: "#";
+						var content = contDoc.SelectSingleNode("//*[local-name()='body']").InnerXml;
+						var result = string.Format(template, pagetitle, head, version, backlink, forelink, categorylink, aboutlink,
+							sidebar, content, pageCss, author, description);
+						var sw = new StreamWriter(dest);
+						sw.Write(result);
+						sw.Close();
+						if (first)
 						{
-							isfileIgnore = true;
-							break;
+							File.Copy(dest, Path.Combine(destFolder, "pages", "index.html"), true);
+							first = false;
 						}
-						isfileIgnore = false;
 					}
-					if (isfileIgnore) continue;
-					string name = Path.GetFileName(file);
-					string dest = Common.PathCombine(destFolder, name);
-					File.Copy(file, dest);
+					else
+					{
+						File.Copy(file, dest);
+					}
 				}
 			}
 			catch

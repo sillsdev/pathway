@@ -1,0 +1,619 @@
+﻿.letHead {
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+}
+.letter {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.906pt;
+   margin-left: 20.906pt;
+   line-height: 12pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 14pt;
+   font-weight: bold;
+}
+body {
+   font-size: 10pt;
+}
+span[lang|= "fr"]{
+   font-family: 'Times New Roman',serif;
+}
+span[lang|= "es"]{
+   font-family: 'Times New Roman',serif;
+}
+span[lang|= "en"]{
+   font-family: 'Times New Roman',serif;
+}
+span[lang|= "tpi"]{
+   font-family: 'Andika Basic',serif;
+}
+span[lang|= "bzh-fonipa"]{
+   font-family: 'Doulos SIL',serif;
+}
+span[lang|= "bzh"]{
+   font-family: 'Charis SIL',serif;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+[dir= 'ltr']{
+   unicode-bidi: -webkit-isolate;
+   unicode-bidi: -moz-isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: isolate;
+}
+[dir= 'rtl']{
+   unicode-bidi: -webkit-isolate;
+   unicode-bidi: -moz-isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: isolate;
+}
+bdo[dir= 'ltr']{
+   unicode-bidi: bidi-override;
+   unicode-bidi: -webkit-isolate-override;
+   unicode-bidi: -moz-isolate-override;
+   unicode-bidi: -ms-isolate-override;
+   unicode-bidi: isolate-override;
+}
+bdo[dir= 'rtl']{
+   unicode-bidi: bidi-override;
+   unicode-bidi: -webkit-isolate-override;
+   unicode-bidi: -moz-isolate-override;
+   unicode-bidi: -ms-isolate-override;
+   unicode-bidi: isolate-override;
+}
+.entry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.entry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.906pt;
+   margin-left: 20.906pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+}
+.entry .mainheadword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span {
+   font-weight: bold;
+}
+.entry .minimallexreferences .minimallexreference > .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.entry .minimallexreferences .minimallexreference > .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.entry .minimallexreferences .minimallexreference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #936;
+}
+.entry .minimallexreferences .minimallexreference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+   color: #936;
+}
+.entry .minimallexreferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.entry .minimallexreferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .sensetype {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .examplescontents .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .examplescontents .example > span {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #F60;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+   color: #F60;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 42.094pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 42.094pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .discussion > span[lang|= "en"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .discussion > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .example > span {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry .complexformsnotsubentries .morphosyntaxanalyses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot {
+   font-weight: bold;
+}
+.entry .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.entry .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.entry .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.entry .picture img {
+   max-height: 1in;
+}
+.entry .picture {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 24.094pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
+.entry .captionContent .caption > span[lang|= "en"]{
+   font-weight: bold;
+   color: #0F0;
+}
+.entry .captionContent .caption > span {
+   font-weight: bold;
+   color: #0F0;
+}
+.entry .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 35.787pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.entry .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 35.787pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.minorentrycomplex {
+   clear: both;
+   white-space: pre-wrap;
+}
+.minorentrycomplex {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.906pt;
+   margin-left: 20.906pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
+.minorentrycomplex > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .visiblevariantentryrefs .referencedentries .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentrycomplex .visiblevariantentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #F00;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+   color: #F00;
+}
+.minorentrycomplex .complexformentryrefs .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .visiblecomplexformbackrefs .visiblecomplexformbackref {
+   display: block;
+}
+.minorentrycomplex .visiblecomplexformbackrefs .visiblecomplexformbackref {
+   display: block;
+}
+.minorentrycomplex .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentrycomplex .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant {
+   clear: both;
+   white-space: pre-wrap;
+}
+.minorentryvariant {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.906pt;
+   margin-left: 20.906pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
+.minorentryvariant > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentryvariant > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .visiblevariantentryrefs .referencedentries .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #00F;
+}
+.minorentryvariant .visiblevariantentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+   color: #00F;
+}
+.minorentryvariant .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentryvariant .complexformentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .complexformentryrefs .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentryvariant .complexformentryrefs .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .visiblecomplexformbackrefs .visiblecomplexformbackref {
+   display: block;
+}
+.minorentryvariant .visiblecomplexformbackrefs .visiblecomplexformbackref {
+   display: block;
+}
+.minorentryvariant .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.minorentryvariant .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubsenses .mainentrysubsense {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubsenses .sensetype {
+   font-style: italic;
+}
+.mainentrysubsenses .examplescontents .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.mainentrysubsenses .examplescontents .example > span {
+   font-style: italic;
+}
+.mainentrysubsenses .lexsensereferences .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubsenses .lexsensereferences .lexsensereference > .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.mainentrysubsenses .lexsensereferences .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubsenses .lexsensereferences .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubsenses .lexsensereferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubsenses .lexsensereferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubsenses .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 42.094pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.mainentrysubsenses .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 42.094pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.mainentrysubsenses .extendednotecontents .discussion > span[lang|= "en"]{
+   font-weight: bold;
+}
+.mainentrysubsenses .extendednotecontents .discussion > span {
+   font-weight: bold;
+}
+.mainentrysubsenses .extendednotecontents .examplescontents .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.mainentrysubsenses .extendednotecontents .examplescontents .example > span {
+   font-style: italic;
+}
+.mainentrysubsenses .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot {
+   font-weight: bold;
+}
+.mainentrysubsenses .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubsenses .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubsenses .subsenses .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .minimallexreferences .minimallexreference > .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubentries .minimallexreferences .minimallexreference > .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.mainentrysubentries .minimallexreferences .minimallexreference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #3CC;
+}
+.mainentrysubentries .minimallexreferences .minimallexreference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+   color: #3CC;
+}
+.mainentrysubentries .minimallexreferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .minimallexreferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .sensetype {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .example > span {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+   color: #008000;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+   color: #008000;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .lexsensereferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .lexsensereferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 6.306999pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 6.306999pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .discussion > span[lang|= "en"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .discussion > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .example > span[lang|= "bzh"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .example > span {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .visiblecomplexformbackrefs .nontrivialentryroots .nontrivialentryroot {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .visiblecomplexformbackrefs .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .visiblecomplexformbackrefs .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
+.mainentrysubentries .subentries .subentry {
+   display: block;
+}
+.mainentrysubentries .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot {
+   font-weight: bold;
+}
+.mainentrysubentries .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.mainentrysubentries .picture img {
+   max-height: 1in;
+}
+.mainentrysubentries .picture {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: -11.693pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+}
+.mainentrysubentries .captionContent .headword[lang|= "bzh"]{
+   font-weight: bold;
+}
+.mainentrysubentries .captionContent .headword {
+   font-weight: bold;
+}
+.headword-st[lang= 'bzh']{
+   font-weight: bold;
+   font-size: 58%;
+   position: relative;
+   top: 0.3em;
+}
+.mainheadword-st[lang= 'bzh']{
+   font-weight: bold;
+   font-size: 58%;
+   position: relative;
+   top: 0.3em;
+}

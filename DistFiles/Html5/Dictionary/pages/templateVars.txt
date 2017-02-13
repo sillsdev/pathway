@@ -1,0 +1,9 @@
+pagetitle
+head
+version
+backlink
+forelink
+categorylink
+aboutlink
+sidebar
+content

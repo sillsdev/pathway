@@ -1,0 +1,755 @@
+﻿.letHead {
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+}
+.letter {
+   line-height: 12pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 11pt;
+   font-weight: bold;
+}
+body {
+   font-size: 11pt;
+}
+span[lang|= "en"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 11pt;
+}
+span[lang|= "fr"]{
+   font-family: 'Times New Roman',serif;
+   font-size: 11pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.entry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.entry {
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   font-size: 11pt;
+}
+.entry .mainheadword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry .mainheadword > span {
+   font-weight: bold;
+}
+.entry .pronunciations .location {
+   font-style: italic;
+}
+.entry .grouping_referencessection .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry .grouping_referencessection .variantformentrybackrefs .variantformentrybackref > .headword > span {
+   font-weight: bold;
+}
+.entry .grouping_referencessection .minimallexreferences .minimallexreference > .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.entry .grouping_referencessection .minimallexreferences .minimallexreference > .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.entry .grouping_referencessection .minimallexreferences .minimallexreference > .configtargets .configtarget > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry .grouping_referencessection .minimallexreferences .minimallexreference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+}
+.entry .grouping_referencessection .minimallexreferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry .grouping_referencessection .minimallexreferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.entry .grouping_referencessection .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry .grouping_referencessection .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
+   font-weight: bold;
+}
+.entry .grouping_referencessection .complexformsnotsubentries .morphosyntaxanalyses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry .grouping_referencessection .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry .grouping_referencessection .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense {
+   font-size: 11pt;
+}
+.entry > .senses > .sensecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 18pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   display: block;
+}
+.entry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .morphosyntaxanalysis {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .sensetype {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .examplescontents .examplescontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   line-height: 12pt;
+   padding-bottom: 6pt;
+   font-size: 11pt;
+   margin-left: 0pt;
+   display: block;
+}
+.examplescontent-ps {
+   font-size: 10pt;
+   color: Black;
+}
+.entry > .senses > .sensecontent .sense .examplescontents .examplescontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -9pt;
+   margin-left: -18pt;
+   line-height: 12pt;
+   padding-bottom: 6pt;
+   font-size: 11pt;
+   display: block;
+}
+.examplescontent-ps {
+   font-size: 10pt;
+   color: Black;
+}
+.entry > .senses > .sensecontent .sense .examplescontents .example > span[lang|= "fr"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .examplescontents .example > span {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .ownertype_abbreviation > span[lang|= "en"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .ownertype_abbreviation > span {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .configtargets .configtarget > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .lexsensereference > .configtargets .configtarget > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .lexsensereferences .configtargets .primaryentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .variantformentrybackrefs .variantformentrybackref > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   margin-left: 18pt;
+   display: block;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   margin-left: 18pt;
+   display: block;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   display: block;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   display: block;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .discussion > span[lang|= "en"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .discussion > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .examplescontent {
+   font-size: 11pt;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .example > span[lang|= "fr"]{
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .example > span {
+   font-style: italic;
+}
+.entry > .senses > .sensecontent .sense .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.entry > .senses > .sensecontent .sense > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.entry .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #800080;
+   display: block;
+}
+.entry .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #800080;
+   display: block;
+}
+.entry .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.entry .picture img {
+   max-height: 1in;
+}
+.entry .picture {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+}
+.entry .captionContent .headword[lang|= "fr"]{
+   font-weight: bold;
+}
+.entry .captionContent .headword {
+   font-weight: bold;
+}
+.entry .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #800080;
+   display: block;
+}
+.entry .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #800080;
+   display: block;
+}
+.minorentrycomplex {
+   clear: both;
+   white-space: pre-wrap;
+}
+.minorentrycomplex {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #F00;
+}
+.minorentrycomplex > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .visiblevariantentryrefs .referencedentries .referencedentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .visiblevariantentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .complexformentryrefs .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .grouping_referencessection .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .grouping_referencessection .variantformentrybackrefs .variantformentrybackref > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .grouping_referencessection .complexformentryrefs .complexformtypes .reverseabbr > span[lang|= "en"]{
+   font-weight: bold;
+}
+.minorentrycomplex .grouping_referencessection .complexformentryrefs .complexformtypes .reverseabbr > span {
+   font-weight: bold;
+}
+.minorentrycomplex .grouping_referencessection .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .grouping_referencessection .complexformentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .grouping_referencessection .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .grouping_referencessection .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .grouping_referencessection .visiblecomplexformbackrefs .morphosyntaxanalyses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.minorentrycomplex .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #800080;
+   display: block;
+}
+.minorentrycomplex .subentries .subentry {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #800080;
+   display: block;
+}
+.minorentrycomplex .subentries .subentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .subentries .subentry > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .subentries .variantformentrybackrefs_inflectional-variants .variantentrytypes .variantentrytype > .abbreviation > span[lang|= "en"]{
+   font-weight: bold;
+}
+.minorentrycomplex .subentries .variantformentrybackrefs_inflectional-variants .variantentrytypes .variantentrytype > .abbreviation > span {
+   font-weight: bold;
+}
+.minorentrycomplex .subentries .variantformentrybackrefs_inflectional-variants .variantformentrybackref_inflectional-variants > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .subentries .variantformentrybackrefs_inflectional-variants .variantformentrybackref_inflectional-variants > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .subentries .complexformsnotsubentries .complexformsnotsubentry {
+   display: block;
+}
+.minorentrycomplex .subentries .complexformsnotsubentries .complexformsnotsubentry {
+   display: block;
+}
+.minorentrycomplex .subentries .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .subentries .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
+   font-weight: bold;
+}
+.minorentrycomplex .subentries .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.minorentrycomplex .subentries .picture img {
+   max-height: 1in;
+}
+.minorentrycomplex .subentries .picture {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+}
+.minorentrycomplex .subentries .captionContent .headword[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentrycomplex .subentries .captionContent .headword {
+   font-weight: bold;
+}
+.minorentryvariant {
+   clear: both;
+   white-space: pre-wrap;
+}
+.minorentryvariant {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -36pt;
+   margin-left: 45pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   color: #F00;
+}
+.minorentryvariant > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentryvariant > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .variantformentrybackrefs .variantformentrybackref > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentryvariant .variantformentrybackrefs .variantformentrybackref > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .visiblevariantentryrefs .referencedentries .referencedentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentryvariant .visiblevariantentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .complexformentryrefs .referencedentries .referencedentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentryvariant .complexformentryrefs .referencedentries .referencedentry > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .complexformentryrefs .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentryvariant .complexformentryrefs .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.minorentryvariant .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span {
+   font-weight: bold;
+}
+.minorentryvariant .visiblecomplexformbackrefs .morphosyntaxanalyses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubsenses .mainentrysubsense {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubsenses .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubsenses .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   margin-left: 18pt;
+   display: block;
+}
+.mainentrysubsenses .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   margin-left: 18pt;
+   display: block;
+}
+.mainentrysubsenses .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   display: block;
+}
+.mainentrysubsenses .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   display: block;
+}
+.mainentrysubsenses .extendednotecontents .discussion > span[lang|= "en"]{
+   font-weight: bold;
+}
+.mainentrysubsenses .extendednotecontents .discussion > span {
+   font-weight: bold;
+}
+.mainentrysubsenses .extendednotecontents .examplescontents .examplescontent {
+   font-size: 11pt;
+}
+.mainentrysubsenses .extendednotecontents .examplescontents .example > span[lang|= "fr"]{
+   font-style: italic;
+}
+.mainentrysubsenses .extendednotecontents .examplescontents .example > span {
+   font-style: italic;
+}
+.mainentrysubsenses .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.mainentrysubsenses .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubsenses .subentries .subentry {
+   font-size: 11pt;
+   color: #800080;
+}
+.mainentrysubsenses .subentries .subentry {
+   font-size: 11pt;
+   color: #800080;
+}
+.mainentrysubsenses .mainentrysubsense > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry {
+   clear: both;
+   white-space: pre-wrap;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sharedgrammaticalinfo .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .morphosyntaxanalysis {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .sensetype {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .examplescontent {
+   font-size: 11pt;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .example > span[lang|= "fr"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .examplescontents .example > span {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 18pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   display: block;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .extendednotecontent {
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -18pt;
+   margin-left: 18pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+   display: block;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .discussion > span[lang|= "en"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .discussion > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .examplescontent {
+   font-size: 11pt;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .example > span[lang|= "fr"]{
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .extendednotecontents .examplescontents .example > span {
+   font-style: italic;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .visiblecomplexformbackrefs .visiblecomplexformbackref > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .visiblecomplexformbackrefs .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense .visiblecomplexformbackrefs .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .mainentrysubentry > .senses > .sensecontent .sense > .senses > .sensecontent .sensenumber {
+   font-weight: bold;
+}
+.mainentrysubentries .complexformsnotsubentries .complexformsnotsubentry > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.mainentrysubentries .complexformsnotsubentries .complexformsnotsubentry > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span[lang|= "fr"]{
+   font-weight: bold;
+}
+.mainentrysubentries .complexformsnotsubentries .nontrivialentryroots .nontrivialentryroot > .headword > span {
+   font-weight: bold;
+}
+.mainentrysubentries .picture {
+   float: right;
+   text-align: center;
+   margin: 0pt 0pt 4pt 4pt;
+   padding: 2pt;
+   float: right;
+}
+.mainentrysubentries .picture img {
+   max-height: 1in;
+}
+.mainentrysubentries .picture {
+   text-indent: 0pt;
+   margin-left: 0pt;
+   line-height: 12pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 11pt;
+}

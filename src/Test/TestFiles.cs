@@ -52,7 +52,20 @@ namespace Test
             return Common.PathCombine(_inputPath, fileName);
         }
 
-        public string Copy(string fileName)
+		public string SubInput(string test, string fileName)
+		{
+			var subPath = Common.PathCombine(_inputPath, test);
+			if (!Directory.Exists(subPath))
+			{
+				Directory.CreateDirectory(subPath);
+				Thread.Sleep(1000);
+			}
+			if (string.IsNullOrEmpty(fileName))
+				return subPath;
+			return Common.PathCombine(subPath, fileName);
+		}
+
+		public string Copy(string fileName)
         {
             string output = Output(fileName);
             File.Copy(Input(fileName), output, true);
