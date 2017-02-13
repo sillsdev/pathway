@@ -7,7 +7,7 @@
 // <author>Erik Brommers</author>
 // <email>erik_brommers@sil.org</email>
 // Last reviewed:
-// 
+//
 // <remarks>
 // Export Through Pathway dialog (replacement for the PrintVia dialog).
 // This dialog is designed to be a simple-to-complex dialog for exporting to the
@@ -16,7 +16,7 @@
 // When the user displays this dialog, it checks the <>StyleSettings.xml file
 // for the user's Organization. If not found (which will be the case for first launch
 // after installation and when the user holds the shift key down to clean out the
-// settings), the dialog will display the SelectOrganizationDialog to select one. 
+// settings), the dialog will display the SelectOrganizationDialog to select one.
 // Each organization can have its own default values for publisher, copyright, etc.;
 // specifying an organization allows an organization to pre-fill some of the dialog
 // fields for the user. These fields can be overridden by the user.
@@ -630,7 +630,7 @@ namespace SIL.PublishingSolution
                 {
                     chkTOC.Checked = true;
                     chkTOC.Enabled = false;
-                }	            
+                }
             }
 
             // Processing Options tab
@@ -1053,7 +1053,7 @@ namespace SIL.PublishingSolution
                             int index = ddlCopyrightStatement.Items.Add(value);
                             if (copyrightFileName == subnode.Attributes["file"].Value)
                             {
-                                // this is the selected copyright statement - 
+                                // this is the selected copyright statement -
                                 // select it in the dropdown and check the standard radio button
                                 ddlCopyrightStatement.SelectedIndex = index;
                                 rdoStandardCopyright.Checked = true;
@@ -1412,16 +1412,15 @@ namespace SIL.PublishingSolution
         private void btnBrowseSaveInFolder_Click(object sender, EventArgs e)
         {
             var dlg = new FolderBrowserDialog();
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string documentsPath = FolderTree.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
             dlg.SelectedPath = Common.PathCombine(documentsPath, Common.SaveInFolderBase);
             DirectoryInfo directoryInfo = new DirectoryInfo(dlg.SelectedPath);
             if (!directoryInfo.Exists)
                 directoryInfo.Create();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-
                 string folderName = ddlStyle.Text + "_" + _sDateTime;
-                _newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
+				_newSaveInFolderPath = Common.PathCombine(FolderTree.ShortFileName(dlg.SelectedPath), folderName);
                 Param.SetValue(Param.PublicationLocation, _newSaveInFolderPath);
                 txtSaveInFolder.Text = _newSaveInFolderPath;
             }
@@ -1460,7 +1459,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Get the Custom copyright file when exist in the location 
+        /// Get the Custom copyright file when exist in the location
         /// </summary>
         /// <returns></returns>
         private string GetCopyRightFileName()
@@ -1475,7 +1474,7 @@ namespace SIL.PublishingSolution
 					copyrightDir = Common.PathCombine(copyrightDir, "Copyrights");
 				}
                 copyrightFileName = Common.PathCombine(copyrightDir, "SIL_Custom_Template.xhtml");
-				
+
             }
             return copyrightFileName;
         }
@@ -1620,7 +1619,7 @@ namespace SIL.PublishingSolution
 
 			List<Control> allTextboxes = GetAllControls(this);
 
-		    
+
 		    foreach (var textBoxCtrl in allTextboxes)
 		    {
 				Font txtBoxFont = new Font(fontName, fontSize);

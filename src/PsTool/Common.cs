@@ -3079,7 +3079,7 @@ namespace SIL.Tool
 		public static string GetSaveInFolder(string template, string database, string layout)
 		{
 			Dictionary<string, string> map = new Dictionary<string, string>();
-			map["Documents"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			map["Documents"] = FolderTree.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 			map["Base"] = SaveInFolderBase;
 			map["CurrentProject"] = database;
 			map["StyleSheet"] = layout;
