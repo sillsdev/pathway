@@ -70,11 +70,14 @@ namespace Test.PsTool
 		[Category("SkipOnTeamCity")]
 		public void LongShortDirectoryNameTest()
 		{
+			if (Common.UsingMonoVM)
+				return;
+
 			string directory = "C:\\Program Files (x86)\\Common Files";
-			string shortdirectory = FolderTree.ShortFileName(directory);
+			string shortdirectory = ManageDirectory.ShortFileName(directory);
 			StringAssert.Contains(shortdirectory, "C:\\PROGRA~2\\COMMON~1", "Directory Not matched");
 
-			string longdirectory = FolderTree.LongFileName(shortdirectory);
+			string longdirectory = ManageDirectory.LongFileName(shortdirectory);
 			StringAssert.Contains(longdirectory, "C:\\Program Files (x86)\\Common Files", "Directory Not matched");
 		}
     }

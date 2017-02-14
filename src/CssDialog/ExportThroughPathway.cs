@@ -1412,7 +1412,16 @@ namespace SIL.PublishingSolution
         private void btnBrowseSaveInFolder_Click(object sender, EventArgs e)
         {
             var dlg = new FolderBrowserDialog();
-            string documentsPath = FolderTree.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+	        string documentsPath = string.Empty;
+
+	        if (Common.UsingMonoVM)
+	        {
+		        documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+	        }
+	        else
+	        {
+				documentsPath = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+	        }
             dlg.SelectedPath = Common.PathCombine(documentsPath, Common.SaveInFolderBase);
             DirectoryInfo directoryInfo = new DirectoryInfo(dlg.SelectedPath);
             if (!directoryInfo.Exists)
@@ -1420,7 +1429,15 @@ namespace SIL.PublishingSolution
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string folderName = ddlStyle.Text + "_" + _sDateTime;
-				_newSaveInFolderPath = Common.PathCombine(FolderTree.ShortFileName(dlg.SelectedPath), folderName);
+				if (Common.UsingMonoVM)
+				{
+					_newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
+				}
+				else
+				{
+					_newSaveInFolderPath = Common.PathCombine(ManageDirectory.ShortFileName(dlg.SelectedPath), folderName);
+				}
+
                 Param.SetValue(Param.PublicationLocation, _newSaveInFolderPath);
                 txtSaveInFolder.Text = _newSaveInFolderPath;
             }

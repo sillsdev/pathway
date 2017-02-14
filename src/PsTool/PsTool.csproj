@@ -265,6 +265,7 @@
     <Compile Include="FontInternals.cs">
     </Compile>
     <Compile Include="HashUtilities.cs" />
+    <Compile Include="ManageDirectory.cs" />
     <Compile Include="MergeCss.cs" />
     <Compile Include="MessageBoxExtender.cs" />
     <Compile Include="NullXmlResolver.cs" />
