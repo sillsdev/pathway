@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="StyToCssTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -111,6 +111,24 @@ namespace Test.ParatextSupport
 
 			StyToCss styToCssObj = new StyToCss();
 			styToCssObj.ConvertStyToCss("aai", cssFileOutput, ssfFileInputPath);
+
+			TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
+		}
+
+
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void uisTrans_Marker_rq_StytoCSSTest()
+		{
+			const string TestName = "uisTrans";
+			var cssFile = TestName + ".css";
+			string cssFileOutput = FileOutput(cssFile);
+			string ssfFileInputPath = FileInput(TestName);
+			ssfFileInputPath = Common.PathCombine(ssfFileInputPath, "gather");
+			ssfFileInputPath = Common.PathCombine(ssfFileInputPath, TestName + ".ssf");
+
+			StyToCss styToCssObj = new StyToCss();
+			styToCssObj.ConvertStyToCss("uisTrans", cssFileOutput, ssfFileInputPath);
 
 			TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
 		}

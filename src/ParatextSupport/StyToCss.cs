@@ -108,7 +108,16 @@ namespace SIL.PublishingSolution
         /// ------------------------------------------------------------
         private void FindStyFile(string database, string ssfFullPath)
         {
-	        string ssfFile = SettingsHelper.GetSettingFilePathForParatext(database);
+			string ssfFile = string.Empty;
+			if(string.IsNullOrEmpty(ssfFullPath))
+			{
+				ssfFile = SettingsHelper.GetSettingFilePathForParatext(database);
+			}
+			else
+			{
+				ssfFile = ssfFullPath;
+			}
+
             bool isStylesheet = false;
 			if (!File.Exists(ssfFile))
             {
