@@ -360,6 +360,7 @@ namespace Test.epubConvert
 		}
 
 		[Test]
+		[Category("SkipOnTeamCity")]
 		public void FootNoteMarker_RQ_Test()
 		{
 			const string FolderName = "FootnoteMarker_RQ";
