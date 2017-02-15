@@ -92,13 +92,16 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             SkipNode = r.Name == "span";
-			//if (nextClass != null && nextClass.StartsWith("letter"))
+			//if (nextClass != null && nextClass.StartsWith("abbreviation"))
 			//{
 			//	Debug.Print("break;");
 			//}
 			CollectRules(r, GetRuleKey(r.Name, nextClass));
-            CollectRules(r, GetRuleKey(r.Name, KeyClass(r.Depth)));
-            CollectRules(r, nextClass);
+	        for (var i = r.Depth; i >= 0; i--)
+	        {
+				CollectRules(r, GetRuleKey(r.Name, KeyClass(i)));
+			}
+			CollectRules(r, nextClass);
             CollectRules(r, GetRuleKey(r.Name, ""));
             SkipNode = IsNotBlockRule(r.Depth);
             if (!SkipNode)
@@ -391,7 +394,7 @@ namespace CssSimpler
         private readonly SortedDictionary<string, string> _reverseMap = new SortedDictionary<string, string>();
         private readonly XmlDocument _flatCss = new XmlDocument();
         private readonly XmlDocument _xmlCss;
-        private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column-count", "float", "clear", "width", "margin-left", "padding-bottom", "padding-top", "display"};
+        private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column-count", "float", "clear", "width", "margin-left", "padding-bottom", "padding-top", "padding-right", "padding-left", "pading", "display"};
         public XmlDocument MakeFlatCss()
         {
             _flatCss.RemoveAll();
