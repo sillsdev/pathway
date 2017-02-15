@@ -1,0 +1,163 @@
+﻿body {
+   font-size: 10pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+.abbreviation {
+   /* Rule List: 5,-1,12,388,387,3 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.abbreviation2 {
+   /* Rule List: 5,-1,6,21,20,3 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.abbreviation3 {
+   /* Rule List: 4,-1,6,21,20,3 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.definitionorgloss {
+   /* Rule List: 4,-1,6,21,20,3 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.dialectlabelsrs {
+   /* Rule List: -1,12,388,387,3 */
+   text-indent: -12pt;
+   font-size: 10pt;
+   white-space: pre-wrap;
+}
+.dialectlabelsrs2 {
+   /* Rule List: -1,6,21,20,3 */
+   text-indent: -12pt;
+   font-size: 10pt;
+   white-space: pre-wrap;
+}
+.dicBody {
+   /* Rule List: 3,-1 */
+   font-size: 10pt;
+}
+.entry {
+   /* Rule List: 6,21,20,-1,3 */
+   text-indent: -12pt;
+   margin-left: 21pt;
+   padding-bottom: 2pt;
+   padding-top: 1pt;
+   font-size: 10pt;
+   clear: both;
+   white-space: pre-wrap;
+}
+.glossorsummary {
+   /* Rule List: 4,-1,12,388,387,3 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.headword {
+   /* Rule List: 15,-1,391,389,394,14,386,5,12,388,387,3 */
+   font-weight: bold;
+   font-size: 10pt;
+   font-family: 'Charis SIL',serif;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.headword2 {
+   /* Rule List: 15,-1,439,437,441,5,12,388,387,3 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.headword3 {
+   /* Rule List: 15,-1,52,50,55,5,6,21,20,3 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.letData {
+   /* Rule List: -1,3 */
+   font-size: 10pt;
+}
+.letHead {
+   /* Rule List: 1,-1,3 */
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   text-align: center;
+   width: 100%;
+   font-size: 10pt;
+}
+.letter {
+   /* Rule List: 5,2,-1,1,3 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   margin-left: 21pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-weight: bold;
+   text-align: center;
+}
+.mainheadword {
+   /* Rule List: 15,-1,24,22,27,5,6,21,20,3 */
+   font-weight: bold;
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.minorentryvariant {
+   /* Rule List: 12,388,387,-1,3 */
+   text-indent: -12pt;
+   margin-left: 21pt;
+   padding-bottom: 2pt;
+   padding-top: 0pt;
+   font-size: 10pt;
+   clear: both;
+   white-space: pre-wrap;
+}
+.partofspeech {
+   /* Rule List: 4,-1,103,6,21,20,3 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   font-style: italic;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.reverseabbr {
+   /* Rule List: 4,-1,12,388,387,3 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.summary {
+   /* Rule List: 4,-1,12,388,387,3 */
+   font-family: 'Charis SIL',serif;
+   font-size: 10pt;
+   text-indent: -12pt;
+   white-space: pre-wrap;
+}
+.variantformentrybackrefs {
+   /* Rule List: -1,6,21,20,3 */
+   text-indent: -12pt;
+   font-size: 10pt;
+   white-space: pre-wrap;
+}

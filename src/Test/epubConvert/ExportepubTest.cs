@@ -360,6 +360,65 @@ namespace Test.epubConvert
 		}
 
 		[Test]
+		public void FootNoteMarker_RQ_Test()
+		{
+			const string FolderName = "FootnoteMarker_RQ";
+
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+			FolderTree.Copy(FileInput(FolderName), FileOutput(FolderName));
+			PublicationInformation projInfo = GetProjInfo(FileOutput(FolderName), true);
+			projInfo.ProjectName = "RQMarkerTest";
+			projInfo.ProjectInputType = "Dictionary";
+			projInfo.IsLexiconSectionExist = true;
+			//File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"));
+			var target = new Exportepub();
+			var actual = target.Export(projInfo);
+			Assert.IsTrue(actual);
+			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+			ExtractzipFilesBasedOnOS(result, FileOutput(FolderName));
+
+			string outputFileName = FileOutput(FolderName);
+			outputFileName = Path.Combine(outputFileName, "OEBPS");
+
+
+			XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
+			XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
+			var filePath = Common.PathCombine(outputFileName, "PartFile00001_.xhtml");
+			XmlReader xmlReader = XmlReader.Create(FileOutput(filePath), xmlReaderSettings);
+			xmlDocument.Load(xmlReader);
+			xmlReader.Close();
+			XmlNodeList nodes = xmlDocument.SelectNodes(".//xhtml:div", namespaceManager);
+			Assert.AreEqual(3, nodes.Count, "Should be 3 divs");
+
+			Assert.AreEqual(nodes[0].InnerText, "E e", "Not matched text content");
+			Assert.AreEqual(nodes[1].InnerText, "Entry fr. var. of VariantTest [Tam] Sum1 Green ", "Not matched text content");
+			Assert.AreEqual(nodes[2].InnerText, "Entry fr. var. of VariantTest [Tam] Sum1 Green ", "Not matched text content");
+
+			xmlDocument = Common.DeclareXMLDocument(true);
+			namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
+			filePath = Common.PathCombine(outputFileName, "RevIndex00001_.xhtml");
+			XmlReader xmlReader2 = XmlReader.Create(FileOutput(filePath), xmlReaderSettings);
+			xmlDocument.Load(xmlReader2);
+			xmlReader.Close();
+			nodes = xmlDocument.SelectNodes(".//xhtml:div", namespaceManager);
+			Assert.AreEqual(3, nodes.Count, "Should be 3 divs");
+
+			Assert.AreEqual(nodes[0].InnerText, "T t", "Not matched text content");
+			Assert.AreEqual(nodes[1].InnerText, "Tested adj Entry (fr. var. of VariantTest [TamTamil] Sum1 Green) ", "Not matched text content");
+			Assert.AreEqual(nodes[2].InnerText, "Tested adj Entry (fr. var. of VariantTest [TamTamil] Sum1 Green) ", "Not matched text content");
+
+		}
+
+		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void ExportDictionaryInsertBeforeAfterTest()
@@ -965,6 +1024,25 @@ namespace Test.epubConvert
 			return projInfo;
 		}
 
+		/// <summary>
+		/// Create a simple PublicationInformation instance
+		/// </summary>
+		private PublicationInformation GetProjInfo(string exportDirecotry, bool reversalExist)
+		{
+			PublicationInformation projInfo = new PublicationInformation();
+
+			projInfo.DefaultXhtmlFileWithPath = Path.Combine(exportDirecotry, "main.xhtml");
+			projInfo.DefaultCssFileWithPath = Path.Combine(exportDirecotry, "main.css");
+			projInfo.DictionaryPath = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
+			projInfo.IsOpenOutput = false;
+			projInfo.IsReversalExist = reversalExist;
+			if (reversalExist)
+			{
+				projInfo.DefaultRevCssFileWithPath = Path.Combine(exportDirecotry, "FlexRev.css");
+			}
+
+			return projInfo;
+		}
 
 		private void ExtractzipFilesBasedOnOS(string result, string outputFilePath)
 		{
