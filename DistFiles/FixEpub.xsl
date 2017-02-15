@@ -49,5 +49,15 @@
         </xsl:attribute>
     </xsl:template>
     
-     <xsl:template match="/xhtml:html/xhtml:body/xhtml:span"></xsl:template>
+    <xsl:template match="@onclick">
+        <xsl:attribute name="onclick">
+            <xsl:text>document.getElementById('</xsl:text>
+            <xsl:variable name="arg" select="substring(.,26,string-length(.)-34)"/>
+            <xsl:variable name="apos">&apos;</xsl:variable>
+            <xsl:value-of select="translate(translate($arg,$apos,''),' ','_')"/>
+            <xsl:text>').play()</xsl:text>
+        </xsl:attribute>
+    </xsl:template>
+    
+    <xsl:template match="/xhtml:html/xhtml:body/xhtml:span"></xsl:template>
 </xsl:stylesheet>

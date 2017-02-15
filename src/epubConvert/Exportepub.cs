@@ -360,7 +360,7 @@ namespace SIL.PublishingSolution
 
             #endregion Copy Epub2 package for Epub3
 
-            #region Packaging for Epub2 and Epub3
+            #region Packaging for Epub2
             inProcess.SetStatus("Packaging for Epub2");
             if (_isUnixOs)
             {
@@ -369,8 +369,10 @@ namespace SIL.PublishingSolution
             string fileName = CreateFileNameFromTitle(projInfo);
             Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
             var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+			#endregion Packaging Epub2
 
-            if (!Common.Testing)
+			#region Create HTML5 from Epub3
+			if (!Common.Testing)
             {
 
                 inProcess.SetStatus("Copy html files");
@@ -381,10 +383,18 @@ namespace SIL.PublishingSolution
 				Common.ApplyXslt(bootstrapToc, toc2html5);
 
 				Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf,toc.xhtml,toc.ncx");
+				var avFolder = Path.Combine(projInfo.ProjectPath, "AudioVisual");
+				if (Directory.Exists(avFolder))
+				{
+					FolderTree.Copy(avFolder, Path.Combine(htmlFolderPath, "pages", "AudioVisual"));
+				}
+
 				File.Delete(bootstrapToc);
             }
+			#endregion Create HTML5 from Epub3
 
-            inProcess.SetStatus("Packaging for Epub3");
+			#region Packaging for Epub3
+			inProcess.SetStatus("Packaging for Epub3");
 
             string fileNameV3 = CreateFileNameFromTitle(projInfo);
             string outputPathWithFileNameV3 = null;
@@ -1050,11 +1060,6 @@ namespace SIL.PublishingSolution
 
         private static MergeCss _mc; // When mc is disposed it also deletes the merged file
 
-        //public Exportepub(string epub3Path)
-        //{
-        //    //this.epub3Path = epub3Path;
-        //}
-
         private static string MergeAndFilterCss(PreExportProcess preProcessor, string tempFolder, string cssFullPath)
         {
             var tempFolderName = Path.GetFileName(tempFolder);
@@ -1382,22 +1387,22 @@ namespace SIL.PublishingSolution
             if (projInfo.DefaultXhtmlFileWithPath == null || projInfo.DefaultCssFileWithPath == null) return;
             if (projInfo.DefaultXhtmlFileWithPath.Trim().Length == 0 || projInfo.DefaultCssFileWithPath.Trim().Length == 0) return;
 
-            var cssTree = new CssTree();
-            Dictionary<string, Dictionary<string, string>> cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+			var cssTree = new CssTree();
+			Dictionary<string, Dictionary<string, string>> cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
-            var afterBeforeProcess = new AfterBeforeProcessEpub();
-            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-            PseudoClass = afterBeforeProcess._psuedoClassName;
+			var afterBeforeProcess = new AfterBeforeProcessEpub();
+			afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+			PseudoClass = afterBeforeProcess._psuedoClassName;
 
-            if (projInfo.IsReversalExist && projInfo.ProjectInputType.ToLower() == "dictionary")
+			if (projInfo.IsReversalExist && projInfo.ProjectInputType.ToLower() == "dictionary")
             {
-                cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
-                string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
+				cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
+				string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                RemovePseudoBefore(cssTree);
-                var afterBeforeProcessReversal = new AfterBeforeProcessEpub();
-                afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-                Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
+				RemovePseudoBefore(cssTree);
+				var afterBeforeProcessReversal = new AfterBeforeProcessEpub();
+				afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+				Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
                 projInfo.DefaultXhtmlFileWithPath = originalDefaultXhtmlFileName;
             }
         }

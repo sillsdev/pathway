@@ -53,7 +53,7 @@
 	</xsl:template>
 	
 	<!-- Special processing for a couple divs -->
-	<xsl:template match="xhtml:div">
+	<xsl:template match="xhtml:div|xhtml:audio|xhtml:source">
 		<xsl:copy>
 			<xsl:for-each select="@*">
 				<xsl:copy/>
