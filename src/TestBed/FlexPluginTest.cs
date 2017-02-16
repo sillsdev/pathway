@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="FlexPluginTest.cs" from='2009' to='2009' company='SIL International'>
-//      Copyright ( c ) 2009, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2009, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // FlexPlugin Test
 // </remarks>
@@ -82,7 +82,7 @@ namespace TestBed
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="src"></param>
         public void PutAccessibleName(string src)
@@ -352,7 +352,7 @@ namespace TestBed
                 }
             }
 
-            //Find missing files in xml 
+            //Find missing files in xml
             foreach (string file in FileNames)
             {
                 if (!fileNamesXml.Contains(file))
@@ -779,7 +779,7 @@ namespace TestBed
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="inputText">string to encode / decode</param>
         /// <param name="operation">encode/decode</param>
@@ -898,5 +898,18 @@ namespace TestBed
                 }
             }
         }
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			if (!File.Exists(txtInputPath.Text))
+			{
+				MessageBox.Show("Please enter the valid XHTML path");
+				return;
+			}
+
+			string xhtmlFileName = txtInputPath.Text;
+			string inputHtmlFileName = xhtmlFileName;
+			var fileNameWithPath = Common.SplitXhtmlFile(inputHtmlFileName, "scrBook", "PartFile", false);
+		}
     }
 }
