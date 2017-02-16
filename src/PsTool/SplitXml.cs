@@ -108,10 +108,10 @@ namespace SIL.Tool
         {
             var myClass = r.GetAttribute("class");
             if (string.IsNullOrEmpty(myClass) || r.Name != "div") return;
-            if (!myClass.StartsWith("entry") && !myClass.StartsWith("minorentry") && !myClass.Contains("reversalindexentry") && !myClass.StartsWith("scrBook") && !myClass.StartsWith("scrSection")) return;
+            if (!myClass.StartsWith("entry") && !myClass.StartsWith("minorentry") && !myClass.Contains("reversalindexentry") && !myClass.StartsWith("scrSection")) return;
             _entryLevel = r.Depth;
             if (Writing || _letterNum == 0) return;
-            var nextFileFullName = CurrentFileName();
+            var nextFileFullName = NewFileName();
             var nextFileName = Path.GetFileName(nextFileFullName);
             FileList.Add(nextFileName);
             NextWriter(nextFileFullName);
@@ -124,7 +124,6 @@ namespace SIL.Tool
             if (!Writing || CurrentSize() < TargetSize) return;
             SkipNode = true;
             Finished();
-            _letterNum += 1;
         }
         #endregion Break FIles at entry based on size
 
@@ -152,7 +151,7 @@ namespace SIL.Tool
             NextWriter(newFileFullName);
             SetTitle();
             WriteXmlHeader();
-		        WriteLetterHeader(_letterLang, _letter, r);
+		    WriteLetterHeader(_letterLang, _letter, r);
 		}
 
         private void AtBook(XmlReader r)
