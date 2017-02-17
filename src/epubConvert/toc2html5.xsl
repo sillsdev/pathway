@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" 
+<xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/">
   <xsl:output method="html" encoding="UTF-8" indent="yes"/>
 
-  <!-- Recursive copy template -->   
+  <!-- Recursive copy template -->
   <xsl:template match="node() | @*">
       <xsl:apply-templates select="node() | @*"/>
   </xsl:template>
-  
+
   <!-- update root -->
   <xsl:template match="/">
     <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
@@ -31,13 +31,14 @@
 
   <xsl:template match="ncx:navPoint">
     <xsl:param name="level" select="2"/>
-    
+
     <xsl:element name="li" namespace="http://www.w3.org/1999/xhtml">
       <xsl:attribute name="id">
         <xsl:value-of select="@id"/>
       </xsl:attribute>
       <xsl:element name="a" namespace="http://www.w3.org/1999/xhtml">
-        <xsl:attribute name="href">
+		<xsl:attribute name="class">s</xsl:attribute>
+	    <xsl:attribute name="href">
           <xsl:value-of select="ncx:content/@src"/>
         </xsl:attribute>
         <xsl:value-of select="ncx:navLabel/ncx:text"/>
@@ -67,5 +68,5 @@
       </xsl:if>
     </xsl:element>
   </xsl:template>
-  
+
 </xsl:stylesheet>
