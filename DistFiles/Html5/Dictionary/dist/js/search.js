@@ -1,6 +1,9 @@
 	function search(){
 		var key = $('.form-control').val();
 		var results = $('#searchResults')[0];
+		while (results.firstChild){
+			results.removeChild(results.firstChild);
+		}
 		if (key.length > 2){
 			$('.s').each(function(i, obj){
 				var cur = $(this).text();
@@ -10,6 +13,10 @@
 					results.appendChild(li);
 				}
 			});
-			$('#resultsBtn')[0].click()
+			if (results.childNodes.length == 1){
+				$('#searchResults a')[0].click();
+			} else {
+				$('#resultsBtn')[0].click();
+			}
 		}
 	}
