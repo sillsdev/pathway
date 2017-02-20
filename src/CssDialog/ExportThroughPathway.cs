@@ -904,11 +904,6 @@ namespace SIL.PublishingSolution
             if (Text.Contains("Default"))
                 SaveDefaultProperty(this);
 
-            if (!Common.IsUnixOS())
-            {
-                OutputFolder = Path.GetDirectoryName(OutputFolder);
-            }
-
             DictionaryName = OutputFolder;
             Common.TimeStarted = DateTime.Now;
             _settingsHelper.ClearValues();
