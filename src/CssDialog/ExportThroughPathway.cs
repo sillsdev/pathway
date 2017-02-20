@@ -866,6 +866,9 @@ namespace SIL.PublishingSolution
                         OutputFolder = OutputFolder + "\\";
                 }
 				txtSaveInFolder.Text = ReplaceInvalidChars(txtSaveInFolder.Text);
+	            string saveInFolderFirstPart = Path.GetDirectoryName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
+				string saveInFolderSecondPart = Path.GetFileName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
+	            txtSaveInFolder.Text = Path.Combine(saveInFolderFirstPart, GetStyleInLowerCaseWithoutSpecialCharacters(saveInFolderSecondPart));
                 if (!Directory.Exists(OutputFolder))
                     Directory.CreateDirectory(OutputFolder);
             }
@@ -1320,12 +1323,21 @@ namespace SIL.PublishingSolution
         private void ddlStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
             _publicationName = ddlStyle.Text.Replace(" ", "_");
-            txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyle.Text.Replace(" ", "_"));
+			string ddlStyleInLowerCaseWithoutSpecialCharacters = GetStyleInLowerCaseWithoutSpecialCharacters(ddlStyle.Text);
+			txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyleInLowerCaseWithoutSpecialCharacters);
             if (_newSaveInFolderPath.Length > 0)
             {
-                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text.Replace(" ", "_") + "_" + _sDateTime;
+				txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + GetStyleInLowerCaseWithoutSpecialCharacters(ddlStyle.Text) + "_" + _sDateTime;
             }
         }
+
+		private string GetStyleInLowerCaseWithoutSpecialCharacters(string theStyle)
+	    {
+			StringBuilder styleWithoutSpecialCharacters = new StringBuilder(theStyle.Replace(" ", "_"));
+			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace("(", "");
+			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace(")", "");
+			return styleWithoutSpecialCharacters.ToString().ToLower();
+	    }
 
         private void chkCoverImage_CheckedChanged(object sender, EventArgs e)
         {
@@ -1428,7 +1440,8 @@ namespace SIL.PublishingSolution
                 directoryInfo.Create();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                string folderName = ddlStyle.Text + "_" + _sDateTime;
+				string styleInLowerCaseWithoutSpecialCharacters = GetStyleInLowerCaseWithoutSpecialCharacters(ddlStyle.Text);
+				string folderName = styleInLowerCaseWithoutSpecialCharacters + "_" + _sDateTime;
 				if (Common.UsingMonoVM)
 				{
 					_newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
