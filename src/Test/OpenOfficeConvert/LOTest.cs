@@ -180,6 +180,35 @@ namespace Test.OpenOfficeConvert
             Assert.AreEqual(expectedResult, actual);
         }
 
+		/// <summary>
+		///Paragraph Test
+		///</summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void ParagraphTest()
+		{
+			string inputSourceDirectory = FileInput("ParagraphTest");
+			string outputDirectory = FileOutput("ParagraphTest");
+			if (Directory.Exists(outputDirectory))
+			{
+				Directory.Delete(outputDirectory, true);
+			}
+			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.LoadSettings();
+			_projInfo.ProjectPath = outputDirectory;
+			_projInfo.ProjectInputType = "Dictionary";
+			_projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "main.xhtml");
+			_projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "main.css");
+			_projInfo.OutputExtension = "odt";
+			EnableConfigurationSettings(outputDirectory);
+
+			var target = new ExportLibreOffice();
+			const bool expectedResult = true;
+			bool actual = target.Export(_projInfo);
+			Assert.AreEqual(expectedResult, actual);
+		}
+
         private string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);

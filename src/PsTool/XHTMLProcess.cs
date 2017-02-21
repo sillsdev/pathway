@@ -375,13 +375,13 @@ namespace SIL.Tool
 
 			string parentClass = StackPeek(_allStyle);
 
-			if (!string.IsNullOrEmpty(_matchedCssStyleName))
-			{
-				if (IdAllClass.ContainsKey(_matchedCssStyleName) && IdAllClass[_matchedCssStyleName].ContainsKey(propertyName))
-				{
-					returnValue = IdAllClass[_matchedCssStyleName][propertyName];
-				}
-			}
+			//if (!string.IsNullOrEmpty(_matchedCssStyleName))
+			//{
+			//	if (IdAllClass.ContainsKey(_matchedCssStyleName) && IdAllClass[_matchedCssStyleName].ContainsKey(propertyName))
+			//	{
+			//		returnValue = IdAllClass[_matchedCssStyleName][propertyName];
+			//	}
+			//}
 
 			string className = multiClass + Common.SepParent + parentClass;
 			className = Common.RightRemove(className, "_letData");
@@ -484,9 +484,11 @@ namespace SIL.Tool
                     }
                     else if (!(_reader.Name == "id" || _reader.Name == "xml:space"))
                     {
-                        _xhtmlAttribute.Add(_reader.Name + _reader.Value);
-                        if (_reader.Name == "href")
-                            _anchorBookMarkName = _reader.Value;
+						if (_reader.Name == "href")
+						{
+							_anchorBookMarkName = _reader.Value;
+							_xhtmlAttribute.Add(_reader.Name + _reader.Value);
+						}
                     }
                     else if (_reader.Name == "id")
                     {
@@ -535,10 +537,10 @@ namespace SIL.Tool
             }
 
             _xhtmlAttribute.Sort();
-            foreach (string attribute in _xhtmlAttribute)
-            {
-                classNameWithLang = classNameWithLang + Common.SepAttrib + attribute;
-            }
+			foreach (string attribute in _xhtmlAttribute)
+			{
+				classNameWithLang = classNameWithLang + Common.SepAttrib + attribute;
+			}
 
             return classNameWithLang;
         }
