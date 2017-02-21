@@ -28,6 +28,7 @@ namespace CssSimpler
         {
             DeclareBefore(XmlNodeType.Element, ResetClassName);
             DeclareBefore(XmlNodeType.Attribute, LookForStyle);
+	        SpaceClass = null;
             Parse();
             var sr = new StreamReader(cssName);
             var outName = cssName + "~Out";

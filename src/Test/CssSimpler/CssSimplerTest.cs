@@ -399,7 +399,7 @@ namespace Test.CssSimplerTest
             }
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(xhtmlFullName, 3, "//*[local-name()='a']/preceding-sibling::*", "Wrong number of bullets in output");
-            NodeTest(xhtmlFullName, 20, "//*[@xml:space]", "Wrong number of list punctuation");
+            NodeTest(xhtmlFullName, 14, "//*[@xml:space]", "Wrong number of list punctuation");
         }
 
         /// <summary>
@@ -577,7 +577,7 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 4444, "//*[@xml:space]", "Nodes with pseudo content changed for Fw 8.2.8");
+            NodeTest(outFullName, 3023, "//*[@xml:space]", "Nodes with pseudo content changed for Fw 8.2.8");
         }
 
         /// <summary>
@@ -683,7 +683,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 83, "//*[@xml:space]", "subentry punctuation");
+            NodeTest(outFullName, 81, "//*[@xml:space]", "subentry punctuation");
         }
 
         /// <summary>
@@ -799,7 +799,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 135, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 129, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -1048,7 +1048,7 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 9, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 7, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -1263,7 +1263,7 @@ namespace Test.CssSimplerTest
 			MetaData(fs);
 			fs.Parse();
 			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
-			NodeTest(xhtmlOutFullName, 16, "//*[@class='sp']", "Space Spans");
+			NodeTest(xhtmlOutFullName, 14, "//*[@class='sp']", "Space Spans");
 		}
 
 		/// <summary>

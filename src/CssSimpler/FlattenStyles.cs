@@ -62,6 +62,7 @@ namespace CssSimpler
             DeclareBefore(XmlNodeType.CDATA, OtherNode);
             DeclareBeforeEnd(XmlNodeType.EndElement, DivEnds);
             DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveClass);
+	        SpaceClass = "sp";
         }
 
 	    private void RemoveExtraStylesheets(XmlReader r)

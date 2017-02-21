@@ -57,6 +57,8 @@ namespace SIL.Tool
 
         public void Parse()
         {
+	        int _inDiv = 0;
+
             while (_rdr.Read())
             {
                 SkipAttr = SkipNode;
@@ -125,6 +127,7 @@ namespace SIL.Tool
                                 _wtr.WriteAttributes(_rdr, true);
                             }
                         }
+
                         FirstChildProcessMethods(XmlNodeType.Element);
                         if (empty)
                         {
@@ -140,8 +143,11 @@ namespace SIL.Tool
                                     _wtr.WriteEndElement();
                                 }
                             }
-                        }
-                        break;
+                        } else if (name == "div")
+						{
+							_inDiv += 1;
+						}
+						break;
                     case XmlNodeType.Text:
                         if (!SkipNode)
                         {
@@ -151,7 +157,7 @@ namespace SIL.Tool
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
                         //Debug.Print("space");
-		                if (!string.IsNullOrEmpty(SpaceClass) && _rdr.Depth > 1)
+		                if (_inDiv > 0 && !string.IsNullOrEmpty(SpaceClass))
 		                {
 							_wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
 							WriteClassAttr(SpaceClass);
@@ -196,6 +202,10 @@ namespace SIL.Tool
                         if (!SkipNode)
                         {
                             _wtr.WriteFullEndElement();
+	                        if (_rdr.Name == "div")
+	                        {
+		                        _inDiv -= 1;
+	                        }
                         }
                         break;
                 }

@@ -472,6 +472,7 @@ namespace CssSimpler
                 else
                 {
                     var newClass = ruleNode.GetAttribute("lastClass") + "-ps";
+	                if (newClass == "-ps") continue; /* previous versions of Fieldworks didn't have pseudo elements formed the same way */
                     ruleNode.Attributes["lastClass"].InnerText = newClass;
                     ruleNode.Attributes["target"].InnerText = newClass;
                     for (var count = ruleNode.ChildNodes.Count - 1; count >= 0; count -= 1)
