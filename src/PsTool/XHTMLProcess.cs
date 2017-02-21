@@ -362,27 +362,18 @@ namespace SIL.Tool
 	        }
         }
 
-		private string GetDisplayBlock(string multiClass, string propertyName)
-		{
-			string returnValue = string.Empty;
-			ArrayList cssClassDetail1 = new ArrayList();
-			if (_classFamily.ContainsKey(multiClass))
-			{
-				cssClassDetail1 = _classFamily[multiClass];
-			}
-			if (cssClassDetail1 == null)
-				return _matchedCssStyleName;
+	    private string GetDisplayBlock(string multiClass, string propertyName)
+	    {
+		    string returnValue = string.Empty;
+		    ArrayList cssClassDetail1 = new ArrayList();
+		    if (_classFamily.ContainsKey(multiClass))
+		    {
+			    cssClassDetail1 = _classFamily[multiClass];
+		    }
+		    if (cssClassDetail1 == null)
+			    return _matchedCssStyleName;
 
-			string parentClass = StackPeek(_allStyle);
-
-			//if (!string.IsNullOrEmpty(_matchedCssStyleName))
-			//{
-			//	if (IdAllClass.ContainsKey(_matchedCssStyleName) && IdAllClass[_matchedCssStyleName].ContainsKey(propertyName))
-			//	{
-			//		returnValue = IdAllClass[_matchedCssStyleName][propertyName];
-			//	}
-			//}
-
+		    string parentClass = StackPeek(_allStyle);
 			string className = multiClass + Common.SepParent + parentClass;
 			className = Common.RightRemove(className, "_letData");
 			string idAllCssClassName = string.Empty;
@@ -484,10 +475,10 @@ namespace SIL.Tool
                     }
                     else if (!(_reader.Name == "id" || _reader.Name == "xml:space"))
                     {
+						_xhtmlAttribute.Add(_reader.Name + _reader.Value);
 						if (_reader.Name == "href")
 						{
 							_anchorBookMarkName = _reader.Value;
-							_xhtmlAttribute.Add(_reader.Name + _reader.Value);
 						}
                     }
                     else if (_reader.Name == "id")
