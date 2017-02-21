@@ -8,10 +8,10 @@
 // <author>Erik Brommers</author>
 // <email>erik_brommers@sil.org</email>
 // Last reviewed:
-// 
+//
 // <remarks>
 // epub Validator. This program calls the open source epubcheck utility to validate
-// the given epub file. epubcheck is hosted on Google Code at: 
+// the given epub file. epubcheck is hosted on Google Code at:
 // http://code.google.com/p/epubcheck/
 // </remarks>
 // --------------------------------------------------------------------------------------
@@ -27,8 +27,8 @@ namespace epubValidator
     public static class Program
     {
         /// <summary>
-        /// Returns whether this program is running under the mono VM environment. 
-        /// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE. 
+        /// Returns whether this program is running under the mono VM environment.
+        /// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE.
         /// </summary>
         public static bool UsingMonoVM
         {
@@ -53,7 +53,7 @@ namespace epubValidator
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns>Path and filename for Java.exe (or null if not found</returns>
         public static string GetJavaExe()
@@ -129,8 +129,15 @@ namespace epubValidator
 						sb.Append("epubcheck.jar");
 						sb.Append("\" ");
 	                    sb.Append(" -e "); // Include only error and fatal severity messages in output
-                        // filename to run it against (the .epub file)
-                        sb.Append("\"");
+						sb.Append(" -c \""); // Custom rule file to change priority of RSC-005 (lang tag value)
+						sb.Append(strAppDir.Substring(6)); // Remove the leading file:/ from the CodeBase result
+						sb.Append(Path.DirectorySeparatorChar);
+						sb.Append("epubcheck-4.0.1");
+						sb.Append(Path.DirectorySeparatorChar);
+						sb.Append("mylist.txt");
+						sb.Append("\" ");
+						// filename to run it against (the .epub file)
+						sb.Append("\"");
                         sb.Append(Filename);
                         sb.Append("\"");
                         var procArgs = sb.ToString();
