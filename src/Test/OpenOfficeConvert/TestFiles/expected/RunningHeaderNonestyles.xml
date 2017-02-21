@@ -119,8 +119,8 @@
       <style:paragraph-properties fo:text-align="center" />
       <style:text-properties text:display="block" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_pictureCaption_picturePage_Paragraph_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="pictureCaption_picturePage_Paragraph_scrSection_columns_scrBook_scrBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.zxx_pictureCaption_picturePage_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="pictureCaption_picturePage_Paragraph_scrSection_columns_scrBook_scrBody">
+      <style:text-properties fo:font-family="Cambria" style:font-name-complex="Cambria" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ReferencedText_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:language="zxx" fo:country="none" />

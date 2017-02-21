@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="CommonTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test methods of FlexDePlugin
 // </remarks>
@@ -341,8 +341,8 @@ namespace Test.PsTool
         [Test]
         public void ConvertToInchTest()
         {
-            string attribute = string.Empty; 
-            float expected = 0F; 
+            string attribute = string.Empty;
+            float expected = 0F;
             float actual;
             actual = Common.ConvertToInch(attribute);
             Assert.AreEqual(expected, actual);
@@ -410,7 +410,7 @@ namespace Test.PsTool
         [Test]
         public void GetPSApplicationPathTest()
         {
-            string expected = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles"); 
+            string expected = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles");
             string actual = Common.GetPSApplicationPath();
             Assert.AreEqual(expected, actual);
         }
@@ -487,7 +487,7 @@ namespace Test.PsTool
             parameter = null;// Single quote is wrong
             actual = Common.ConvertUnicodeToString(parameter);
             Assert.AreEqual(expected, actual);
-        }        
+        }
 
         ///// <summary>
         /////A test for ConvertStringToUnicode // TODO: Pending
@@ -495,8 +495,8 @@ namespace Test.PsTool
         //[Test]
         //public void ConvertStringToUnicodeTest()
         //{
-        //    string inputString = "{"; // 
-        //    string expected = "\007D"; // 
+        //    string inputString = "{"; //
+        //    string expected = "\007D"; //
         //    string actual = Common.ConvertStringToUnicode(inputString);
         //    Assert.AreEqual(expected, actual);
         //}
@@ -516,9 +516,9 @@ namespace Test.PsTool
         [Test]
         public void GetNumericCharTest1()
         {
-            string inputValue = "12pt"; 
-            int counter = 0; 
-            int counterExpected = 2; 
+            string inputValue = "12pt";
+            int counter = 0;
+            int counterExpected = 2;
             string expected = "12";
             string actual = Common.GetNumericChar(inputValue, out counter);
             Assert.AreEqual(counterExpected, counter);
@@ -582,7 +582,7 @@ namespace Test.PsTool
         [Test]
         public void LanguageCodeAndNameTest()
         {
-            Dictionary<string, string> expected = Common.LanguageCodeAndName(); // TODO: same input and expected 
+            Dictionary<string, string> expected = Common.LanguageCodeAndName(); // TODO: same input and expected
             Dictionary<string, string> actual = Common.LanguageCodeAndName();
             Assert.AreEqual(expected, actual);
         }
@@ -1049,7 +1049,7 @@ namespace Test.PsTool
         [Test]
         public void GetNewFolderNameTest1()
         {
-            //string filePath = Common.PathCombine(GetTestPath(),"Input") ; 
+            //string filePath = Common.PathCombine(GetTestPath(),"Input") ;
             string filePath = GetTestPath();
             string folderName = "Input";
             string expected = "Input";
@@ -1062,7 +1062,7 @@ namespace Test.PsTool
         [Test]
         public void GetNewFolderNameTest2()
         {
-            //string filePath = Common.PathCombine(GetTestPath(),"Input") ; 
+            //string filePath = Common.PathCombine(GetTestPath(),"Input") ;
             string filePath = GetTestPath();
             string folderName = "InputFiles";
             string expected = "InputFiles1";
@@ -1265,7 +1265,7 @@ namespace Test.PsTool
             string database = "{Current_Project}";
             string layout = "Quick";
             string dateTime = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
-            string expected = Common.PathCombine(documents, @"Publications\{Current_Project}\Dictionary\Quick_" + dateTime);
+            string expected = Common.PathCombine(ManageDirectory.ShortFileName(documents), @"Publications\{Current_Project}\Dictionary\Quick_" + dateTime);
             string actual = Common.GetSaveInFolder(template, database, layout);
             Assert.AreEqual(expected, actual);
         }
