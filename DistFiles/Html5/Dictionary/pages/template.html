@@ -19,6 +19,7 @@
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet"/>
+	<link href="../dist/css/simple-sidebar.css" rel="stylesheet"/>
 
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -35,19 +36,13 @@
 
 </head>
 
-<body>
+<body style="padding-top: 70px;">
 
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
                 <a class="navbar-brand" href="index.html">{1} {2}</a>
             </div>
             <!-- /.navbar-header -->
@@ -83,59 +78,59 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search..."/>
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" onclick="search()">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-						{7}
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-  <button id="resultsBtn" type="button" class="btn btn-info btn-lg hide" data-toggle="modal" data-target="#myModal">Search Results</button>
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav" id="side-menu">
+				<li class="sidebar-search">
+					<div class="input-group custom-search-form">
+						<input type="text" class="form-control" placeholder="Search..."/>
+						<span class="input-group-btn">
+						<button class="btn btn-default" type="button" onclick="search()">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+					</div>
+					<!-- /input-group -->
+				</li>
+				{7}
+			</ul>
+		</div>
+		<!-- /.navbar-static-side -->
 
-				  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+        <div id="page-content-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<button id="resultsBtn" type="button" class="btn btn-info btn-lg hide" data-toggle="modal" data-target="#myModal">Search Results</button>
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Search Results</h4>
-        </div>
-        <div class="modal-body">
-          <ul id="searchResults"></ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
+									  <!-- Modal -->
+						<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal-dialog">
 
-    </div>
-  </div>
-                    {8}
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
+							  <!-- Modal content-->
+							  <div class="modal-content">
+								<div class="modal-header">
+								  <button type="button" class="close" data-dismiss="modal">&times;</button>
+								  <h4 class="modal-title">Search Results</h4>
+								</div>
+								<div class="modal-body">
+								  <ul id="searchResults"></ul>
+								</div>
+								<div class="modal-footer">
+								  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							  </div>
+
+							</div>
+						</div>
+						{8}
+					</div>
+					<!-- /.col-lg-12 -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
 
@@ -153,7 +148,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
 	<script src="../dist/js/search.js"></script>
 
 </body>
