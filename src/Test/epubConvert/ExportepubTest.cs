@@ -355,7 +355,7 @@ namespace Test.epubConvert
 			string expPath = Common.UsingMonoVM ? "ExpectedLinux" : "Expected";
 			result = result.Replace("Output", expPath);
 			ExtractzipFilesBasedOnOS(result, FileOutput("EpubIndentFileComparisonExpect"));
-			FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_01.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_01.xhtml");
+			FileCompare("EpubIndentFileComparison/OEBPS/PartFile00001_.xhtml", "EpubIndentFileComparisonExpect/OEBPS/PartFile00001_.xhtml");
 
 		}
 
@@ -938,7 +938,11 @@ namespace Test.epubConvert
 			_tf = new TestFiles("epubConvert");
 			var pwf = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
 			string pathwaySettingFolder = Common.PathCombine(pwf, "Pathway");
-			Common.CopyFolderandSubFolder(pathwaySettingFolder, pathwaySettingFolder + "test", true);
+
+			if (Directory.Exists(pathwaySettingFolder))
+			{
+				Common.CopyFolderandSubFolder(pathwaySettingFolder, pathwaySettingFolder + "test", true);
+			}
 
 			ExtractzipFilesBasedOnOS(_tf.Input("Pathway.zip"), pwf);
 
@@ -957,6 +961,7 @@ namespace Test.epubConvert
 			projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDataFolder, xhtmlName);
 			projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
 			projInfo.ProjectName = "ABSDictionaryTestCase";
+			projInfo.IsLexiconSectionExist = true;
 			Common.Testing = true;
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);

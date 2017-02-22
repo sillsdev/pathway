@@ -2088,15 +2088,17 @@ namespace SIL.PublishingSolution
                     {
                         content.Replace(("a href=\"#" + href + "\""),
                                         ("a href=\"" + Path.GetFileName(files[index]) + "#" + href + "\""));
+						index = 0;
                         break;
                     }
                     // update the index and try again
                     index++;
                     if (index == files.Length)
                     {
-                        if (looped) break; // already searched through the list -- this item isn't found, get out
-                        index = 0;
-                        looped = true;
+						index = 0;
+						looped = true;
+                        if (looped)
+							break; // already searched through the list -- this item isn't found, get out
                     }
                 }
                 inProcess.PerformStep();
