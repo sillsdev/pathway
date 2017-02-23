@@ -17,3 +17,18 @@
     counter-reset: complexformpara;
     text-indent: 2pc;
 }
+.minorentry {
+       text-align: justify;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
+.minorentryvariant {
+       text-align: justify;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
+.minorentrycomplex {
+       text-align: justify;
+       margin-left: 12pt;
+       text-indent: -12pt;
+}
