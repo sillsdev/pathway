@@ -58,6 +58,7 @@ namespace SIL.Tool
 			PDF,
 			MOBILE,
 			EPUB,
+			HTML5,
 			XETEX,
 			XELATEX
 		};
@@ -2602,7 +2603,7 @@ namespace SIL.Tool
 						File.Delete(file);
 					}
 
-					string fi = Path.GetFileNameWithoutExtension(file).ToLower();
+					string fi = Path.GetFileName(file).ToLower();
 					foreach (string filelike in lstNamelike)
 					{
 						if (fi.Contains(filelike.Trim().ToLower()))
@@ -2611,7 +2612,7 @@ namespace SIL.Tool
 						}
 					}
 
-					if (type == ".css" && !fi.ToLower().Contains("merged"))
+					if (type == ".css" && !fi.Contains("merged"))
 					{
 						File.Delete(file);
 					}

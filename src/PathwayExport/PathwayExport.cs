@@ -19,7 +19,6 @@ using System.IO;
 using SIL.Tool;
 using System.Collections.Generic;
 using System.Reflection;
-using SIL.PublishingSolution;
 
 namespace SIL.PublishingSolution
 {
@@ -127,6 +126,13 @@ namespace SIL.PublishingSolution
 					{
 						// process = new Exportepub();
 						Common._outputType = Common.OutputType.EPUB;
+						lProcess.Export(projectInfo);
+						Environment.Exit(0);
+					}
+					if (lProcess.ExportType.ToLower() == "browser (html5)" && exportType == "browser (html5)")
+					{
+						// process = new Exportepub();
+						Common._outputType = Common.OutputType.HTML5;
 						lProcess.Export(projectInfo);
 						Environment.Exit(0);
 					}
@@ -332,7 +338,8 @@ namespace SIL.PublishingSolution
             {
                 case "e-book (.epub)":
                 case "e-book (epub2 and epub3)":
-                case "gobible":
+				case "browser (html5)":
+				case "gobible":
                 case "go bible":
                 case "dictionaryformids":
                 case "pdf (using openoffice/libreoffice)":
