@@ -53,167 +53,201 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    /// <summary>
-    /// Possible values for the MissingFont and NonSilFont properties.
-    /// </summary>
-    public enum FontHandling
-    {
-        EmbedFont,
-        SubstituteDefaultFont,
-        PromptUser,
-        CancelExport
-    }
+	/// <summary>
+	/// Possible values for the MissingFont and NonSilFont properties.
+	/// </summary>
+	public enum FontHandling
+	{
+		EmbedFont,
+		SubstituteDefaultFont,
+		PromptUser,
+		CancelExport
+	}
 
-    public class Exportepub : IExportProcess
-    {
-        private EpubFont _epubFont;
-        private EpubManifest _epubManifest;
-        Epub3Transformation _exportEpub3;
-        private bool _isIncludeImage = true;
+	public class Exportepub : IExportProcess
+	{
+		private EpubFont _epubFont;
+		private EpubManifest _epubManifest;
+		Epub3Transformation _exportEpub3;
+		private bool _isIncludeImage = true;
 
-        private bool _isNoteTargetReferenceExists;
-        private bool _isUnixOs;
+		private bool _isNoteTargetReferenceExists;
+		private bool _isUnixOs;
 
-        //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
-        public string InputType = "dictionary";
+		//        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
+		public string InputType = "dictionary";
 
-        public const string ReferencesFilename = "zzReferences.xhtml";
+		public const string ReferencesFilename = "zzReferences.xhtml";
 
-        // property implementations
-        public bool EmbedFonts { get; set; }
-        public bool IncludeFontVariants { get; set; }
-        public string TocLevel { get; set; }
-        public int MaxImageWidth { get; set; }
+		// property implementations
+		public bool EmbedFonts { get; set; }
+		public bool IncludeFontVariants { get; set; }
+		public string TocLevel { get; set; }
+		public int MaxImageWidth { get; set; }
 		private XslCompiledTransform addRevId;
-	    private XslCompiledTransform noXmlSpace;
-	    private XslCompiledTransform fixEpub;
+		private XslCompiledTransform noXmlSpace;
+		private XslCompiledTransform fixEpub;
 
 		public int BaseFontSize { get; set; }
-        public int DefaultLineHeight { get; set; }
-        /// <summary>
-        /// Fallback font (if the embedded font is missing or non-SIL)
-        /// </summary>
-        public string DefaultFont { get; set; }
-        public string DefaultAlignment { get; set; }
-        public string ChapterNumbers { get; set; }
-        public string References { get; set; }
-        public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
-        public FontHandling NonSilFont { get; set; }
-        private ArrayList PseudoClass = new ArrayList();
-        public bool PageBreak;
-        private readonly Dictionary<string, string> _tocIdMapping = new Dictionary<string, string>();
-        readonly List<string> _tocIDs = new List<string>();
+		public int DefaultLineHeight { get; set; }
 
-        // interface methods
-        public string ExportType
-        {
-            get
-            {
-                return "E-Book (Epub2 and Epub3)";//E-Book (.epub)
-            }
-        }
+		/// <summary>
+		/// Fallback font (if the embedded font is missing or non-SIL)
+		/// </summary>
+		public string DefaultFont { get; set; }
 
-        /// <summary>
-        /// Returns what input data types this export process handles. The epub exporter
-        /// currently handles scripture and dictionary data types.
-        /// </summary>
-        /// <param name="inputDataType">input data type to test</param>
-        /// <returns>true if this export process handles the specified data type</returns>
-        public bool Handle(string inputDataType)
-        {
-            var returnValue = inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture";
-            return returnValue;
-        }
+		public string DefaultAlignment { get; set; }
+		public string ChapterNumbers { get; set; }
+		public string References { get; set; }
+		public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
+		public FontHandling NonSilFont { get; set; }
+		private ArrayList PseudoClass = new ArrayList();
+		public bool PageBreak;
+		private readonly Dictionary<string, string> _tocIdMapping = new Dictionary<string, string>();
+		readonly List<string> _tocIDs = new List<string>();
 
-        /// <summary>
-        /// Entry point for epub converter
-        /// </summary>
-        /// <param name="projInfo">values passed including xhtml and css names</param>
-        /// <returns>true if succeeds</returns>
-        public bool Export(PublicationInformation projInfo)
-        {
+		// interface methods
+		public string ExportType
+		{
+			get
+			{
+				return "E-Book (Epub2 and Epub3)"; //E-Book (.epub)
+			}
+		}
+
+		/// <summary>
+		/// Returns what input data types this export process handles. The epub exporter
+		/// currently handles scripture and dictionary data types.
+		/// </summary>
+		/// <param name="inputDataType">input data type to test</param>
+		/// <returns>true if this export process handles the specified data type</returns>
+		public bool Handle(string inputDataType)
+		{
+			var returnValue = inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture";
+			return returnValue;
+		}
+
+		/// <summary>
+		/// Entry point for epub converter
+		/// </summary>
+		/// <param name="projInfo">values passed including xhtml and css names</param>
+		/// <returns>true if succeeds</returns>
+		public bool Export(PublicationInformation projInfo)
+		{
 			Common.SetupLocalization();
-            if (projInfo == null)
-                return false;
-            const bool success = true;
-            #region Set up progress reporting
-			#if (TIME_IT)
+			if (projInfo == null)
+				return false;
+			const bool success = true;
+
+			#region Set up progress reporting
+
+#if (TIME_IT)
 						DateTime dt1 = DateTime.Now;    // time this thing
 			#endif
-            var myCursor = Common.UseWaitCursor();
-            var curdir = Environment.CurrentDirectory;
+			var myCursor = Common.UseWaitCursor();
+			var curdir = Environment.CurrentDirectory;
 			var inProcess = Common.SetupProgressReporting(20, "Export " + ExportType);
-            #endregion Set up progress reporting
 
-	        PreExportProcess preProcessor;
-	        EpubToc epubToc;
-	        var bookId = SetupConversion(projInfo, inProcess, out preProcessor, out epubToc);
+			#endregion Set up progress reporting
 
-	        string[] langArray;
-	        var outputFolder = PreprocessXhtml(projInfo, inProcess, preProcessor, out langArray);
+			PreExportProcess preProcessor;
+			EpubToc epubToc;
+			var bookId = SetupConversion(projInfo, inProcess, out preProcessor, out epubToc);
 
-	        string mergedCss;
-	        string defaultCss;
-	        string tempCssFile;
-	        var tempFolder = ProcessingCss(projInfo, inProcess, preProcessor, out mergedCss, out defaultCss, out tempCssFile);
+			string[] langArray;
+			var outputFolder = PreprocessXhtml(projInfo, inProcess, preProcessor, out langArray);
 
-            FixIssuesWithFlexXhtml(projInfo, preProcessor, langArray, inProcess);
+			string mergedCss;
+			string defaultCss;
+			string tempCssFile;
+			var tempFolder = ProcessingCss(projInfo, inProcess, preProcessor, out mergedCss, out defaultCss, out tempCssFile);
 
-            AddNavitation(inProcess, preProcessor);
+			FixIssuesWithFlexXhtml(projInfo, preProcessor, langArray, inProcess);
 
-	        var frontMatter = AddFrontMatter(inProcess, preProcessor, tempFolder);
+			AddNavitation(inProcess, preProcessor);
 
-	        List<string> splitFiles;
-	        var htmlFiles = SplitIntoSections(projInfo, inProcess, frontMatter, preProcessor, defaultCss, langArray, out splitFiles);
+			var frontMatter = AddFrontMatter(inProcess, preProcessor, tempFolder);
 
-            var contentFolder = CreateContentStructure(projInfo, inProcess, tempFolder);
+			List<string> splitFiles;
+			var htmlFiles = SplitIntoSections(projInfo, inProcess, frontMatter, preProcessor, defaultCss, langArray,
+				out splitFiles);
 
-	        AddEndNotesIfNecessary(inProcess, contentFolder, preProcessor, splitFiles);
+			var contentFolder = CreateContentStructure(projInfo, inProcess, tempFolder);
 
-            if (!FontEmbedding(projInfo, inProcess, langArray, mergedCss, contentFolder, curdir, myCursor)) return false;
+			AddEndNotesIfNecessary(inProcess, contentFolder, preProcessor, splitFiles);
 
-            CopyContentToEpubFolder(inProcess, mergedCss, defaultCss, htmlFiles, contentFolder);
+			if (!FontEmbedding(projInfo, inProcess, langArray, mergedCss, contentFolder, curdir, myCursor)) return false;
 
-            InsertChapterLinks(inProcess, contentFolder);
+			CopyContentToEpubFolder(inProcess, mergedCss, defaultCss, htmlFiles, contentFolder);
+
+			InsertChapterLinks(inProcess, contentFolder);
 
 			UpdateHyperlinks(inProcess, contentFolder);
 
-            ProcessImages(inProcess, tempFolder, contentFolder);
+			ProcessImages(inProcess, tempFolder, contentFolder);
 
-            CreateEpubManifest(projInfo, inProcess, contentFolder, bookId, epubToc, tempCssFile);
+			CreateEpubManifest(projInfo, inProcess, contentFolder, bookId, epubToc, tempCssFile);
 
-            var epub3Path = MakeCopyOfEpub2(projInfo);
+			var epub3Path = MakeCopyOfEpub2(projInfo);
 
-	        string outputPathWithFileName;
-	        var fileName = PackageEpub2(projInfo, inProcess, contentFolder, outputFolder, out outputPathWithFileName);
+			string outputPathWithFileName;
+			var fileName = PackageEpub2(projInfo, inProcess, contentFolder, outputFolder, out outputPathWithFileName);
 
 			var outputPathWithFileNameV3 = PackageEpub3(projInfo, inProcess, epub3Path);
 
-            outputPathWithFileName = ValidateEpubs(inProcess, outputPathWithFileName, outputFolder, fileName, ref outputPathWithFileNameV3);
+			outputPathWithFileName = ValidateEpubs(inProcess, outputPathWithFileName, outputFolder, fileName,
+				ref outputPathWithFileNameV3);
 
-            CleanUp(inProcess, outputPathWithFileName, outputPathWithFileNameV3);
+			CleanUp(inProcess, outputPathWithFileName, outputPathWithFileNameV3);
 
-            CreateArchiveSubmission(projInfo, inProcess, epub3Path);
+			CreateArchiveSubmission(projInfo, inProcess, epub3Path);
 
-            FinalCleanUp(inProcess, outputPathWithFileName, outputPathWithFileNameV3);
+			FinalCleanUp(inProcess, outputPathWithFileName, outputPathWithFileNameV3);
 
-	        #region Close Reporting
-            inProcess.Close();
+			#region Close Reporting
 
-            Environment.CurrentDirectory = curdir;
-            Cursor.Current = myCursor;
-            #endregion Close Reporting
+			inProcess.Close();
 
-            return success;
-        }
+			Environment.CurrentDirectory = curdir;
+			Cursor.Current = myCursor;
 
-	    protected static void FinalCleanUp(InProcess inProcess, string outputPathWithFileName, string outputPathWithFileNameV3)
-	    {
-		    inProcess.SetStatus("Final Clean up");
-		    Common.CleanupExportFolder(outputPathWithFileName, ".xhtml,.xml,.css", string.Empty, "Test");
-		    if (!Common.Testing)
-		    {
-			    Common.CleanupExportFolder(outputPathWithFileNameV3, ".xhtml,.xml,.css", string.Empty, "Test,pictures,AudioVisual");
+			#endregion Close Reporting
+
+			return success;
+		}
+
+		protected static void FinalCleanUp(InProcess inProcess, string outputPathWithFileName, string outputPathWithFileNameV3)
+		{
+			inProcess.SetStatus("Final Clean up");
+			Common.CleanupExportFolder(outputPathWithFileName, ".xhtml,.xml,.css", string.Empty, "Test,pictures,AudioVisual");
+			if (!Common.Testing)
+			{
+				Common.CleanupExportFolder(outputPathWithFileNameV3, ".xhtml,.xml,.css", string.Empty, "Test,pictures,AudioVisual");
+				var folder =Path.GetDirectoryName(Path.GetDirectoryName(outputPathWithFileNameV3));
+				var pictures = Path.Combine(folder, "pictures");
+				if (Directory.Exists(pictures))
+				{
+					try
+					{
+						Directory.Delete(pictures, true);
+					}
+					catch
+					{
+						// don't worry if we can't clean up pictures folder
+					}
+			    }
+			    var audioVisual = Path.Combine(folder, "AudioVisual");
+			    if (Directory.Exists(audioVisual))
+			    {
+					try
+					{
+						Directory.Delete(audioVisual, true);
+					}
+					catch
+					{
+						// don't worry if we can't clean up folder
+					}
+			    }
 		    }
 		    inProcess.PerformStep();
 	    }

@@ -19,7 +19,6 @@ using System.IO;
 using SIL.Tool;
 using System.Collections.Generic;
 using System.Reflection;
-using SIL.PublishingSolution;
 
 namespace SIL.PublishingSolution
 {
