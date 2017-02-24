@@ -149,7 +149,7 @@ namespace SIL.PublishingSolution
 			File.Copy(Path.Combine(oebpsFolderPath, "toc.ncx"), bootstrapToc);
 			Common.ApplyXslt(bootstrapToc, _toc2Html5);
 
-			Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf,toc.xhtml,toc.ncx");
+			Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf,toc.xhtml,toc.ncx,File3TOC00000_.html,File2TOC00000_.html,File1TOC00000_.html,File0TOC00000_.html");
 			var avFolder = Path.Combine(projInfo.ProjectPath, "AudioVisual");
 			if (Directory.Exists(avFolder))
 			{

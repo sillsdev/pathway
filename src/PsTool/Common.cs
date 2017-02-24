@@ -3358,7 +3358,7 @@ namespace SIL.Tool
 			var categorylink = "#";
 			var aboutlink = "File2Cpy00000_.html";
 			var pageCss = "book.css";
-			var sidebar = tocDoc.SelectSingleNode("//*[local-name()='body']").InnerXml;
+			var sidebar = tocDoc.SelectSingleNode("//*[local-name()='body']").InnerXml.Replace(@" xmlns=""http://www.w3.org/1999/xhtml""","");
 			var files = Directory.GetFiles(sourceFolder);
 			var iFiles = ignoreFiles.Split(',');
 			try
