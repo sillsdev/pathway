@@ -8,6 +8,11 @@
     overflow-x: hidden;
  }
 
+ /* gt- so the dialog fits on the screen on the phone */
+ body .modal {
+	 width: 60%;
+ }
+
 /* Toggle Styles */
 
 #wrapper {
@@ -63,6 +68,7 @@
     list-style: none;
 }
 
+/* gt- This adds space around the search box so rounded corners are visible */
 .sidebar-search{
 	padding: 5px 20px 0px 5px;
 }
