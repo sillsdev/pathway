@@ -130,6 +130,13 @@ namespace SIL.PublishingSolution
 						lProcess.Export(projectInfo);
 						Environment.Exit(0);
 					}
+					if (lProcess.ExportType.ToLower() == "browser (html5)" && exportType == "browser (html5)")
+					{
+						// process = new Exportepub();
+						Common._outputType = Common.OutputType.HTML5;
+						lProcess.Export(projectInfo);
+						Environment.Exit(0);
+					}
 					if (exportType == "pdf (using openoffice/libreoffice)" && lProcess.ExportType.ToLower() == "openoffice/libreoffice")
 					{
 						projectInfo.FinalOutput = "pdf";
@@ -332,7 +339,8 @@ namespace SIL.PublishingSolution
             {
                 case "e-book (.epub)":
                 case "e-book (epub2 and epub3)":
-                case "gobible":
+				case "browser (html5)":
+				case "gobible":
                 case "go bible":
                 case "dictionaryformids":
                 case "pdf (using openoffice/libreoffice)":
