@@ -25,7 +25,6 @@ using CssSimpler;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
-using FileData = BuildStep.FileData;
 
 namespace Test.CssSimplerTest
 {
@@ -1130,7 +1129,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 2, "//*[@class='examplescontent-ps']", "examplebullet");
+            NodeTest(outFullName, 2, "//*[@class='examplescontent-pb']", "examplebullet");
         }
 
 		/// <summary>
@@ -1331,6 +1330,42 @@ namespace Test.CssSimplerTest
 			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
 			TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
 			NodeTest(xhtmlOutFullName, 1, "//*[@rel='stylesheet']", "One Stylesheet");
+		}
+
+		[Test]
+		public void Override2Test()
+		{
+			const string testName = "Override2";
+			_testFiles.Copy(testName + ".css");
+			_testFiles.Copy(testName + "Overrides.css");
+			_testFiles.Copy(testName + ".xhtml");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			var xhtmlOutFullName = _testFiles.Output(testName + "Out.xhtml");
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			var lc = new LoadClasses(xhtmlFullName);
+			var styleSheet = lc.StyleSheet;
+			UniqueClasses = lc.UniqueClasses;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			// ReSharper disable once UnusedVariable
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			fs.Structure = 0;
+			fs.DivBlocks = false;
+			MetaData(fs);
+			fs.Parse();
+			var xmlCssFullName = _testFiles.Output(testName + ".xml");
+			SavedXmlCssFileName = xmlCssFullName;
+			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
+			NodeTest(xmlCssFullName, 1, "//CLASS[name='definitionorgloss-pb']", "definitionorgloss before rule");
+			NodeTest(xmlCssFullName, 1, "//CLASS[name='definitionorgloss-pa']", "definitionorgloss after rule");
+			NodeTest(xmlCssFullName, 1, "//CLASS[name='definitionorgloss-pb']/parent::*//PROPERTY[name='background-color' and value='#F00']", "definitionorgloss before rule has background color");
+			NodeTest(xmlCssFullName, 0, "//CLASS[name='definitionorgloss-pa']/parent::*//PROPERTY[name='background-color' and value='#F00']", "definitionorgloss after rule has no background color");
 		}
 
 		[Test]

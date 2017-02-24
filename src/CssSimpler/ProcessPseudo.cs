@@ -51,6 +51,7 @@ namespace CssSimpler
         private void InsertBefore(XmlReader r)
         {
             var nextClass = r.GetAttribute("class");
+	        Suffix = "-pb";
 			if (ApplyBestRule(r.Depth, nextClass, _beforeTargets, nextClass)) return;
             if (ApplyBestRule(r.Depth, GetTargetKey(r.Name, nextClass), _beforeTargets, nextClass)) return;
             var keyClass = KeyClass(r.Depth);
@@ -80,6 +81,7 @@ namespace CssSimpler
                 lookUp -= 1;
                 endClass = _classes[lookUp] as string;
             }
+	        Suffix = "-pa";
             var target1 = GetTargetKey(_classes[index] as string, endClass);
             var target2 = GetTargetKey(name, endClass);
             if (ApplyBestRule(depth, target1, _afterTargets, endClass)) return;
@@ -111,9 +113,12 @@ namespace CssSimpler
                         }
                         if (targets == _beforeTargets)
                         {
-                            _savedFirstNode = node;
-                            _firstClass = myClass;
-                        }
+	                        if (_savedFirstNode == null)
+	                        {
+								_savedFirstNode = node;
+								_firstClass = myClass;
+							}
+						}
                         else
                         {
                             var inserted = InsertContent(node, myClass);
