@@ -28,7 +28,7 @@ namespace Test.epubConvert
     /// <summary>
     ///</summary>
     [TestFixture]
-    public class ExportHtml5Test
+    public class ExportHtml5Test : Exportepub
     {
         #region Private Variables
 
@@ -235,7 +235,21 @@ namespace Test.epubConvert
             Assert.AreEqual("s6.html", html5Split.IdLinks["gf921a938"]);
         }
 
-        #endregion Tests
+		[Test]
+		public void PronunciationJsTest()
+		{
+			const string testName = "PronunciationJs";
+			_testFiles.Copy(testName + ".xhtml");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			fixEpub = LoadFixEpubXslt();
+			Common.ApplyXslt(xhtmlFullName, fixEpub);
+			var resultDoc = Common.DeclareXMLDocument(true);
+			resultDoc.Load(xhtmlFullName);
+			// ReSharper disable once PossibleNullReferenceException
+			Assert.AreEqual("document.getElementById('g77836adc').play()", resultDoc.SelectSingleNode("//*[@class='CmFile']/@onclick").Value);
+		}
 
-    }
+		#endregion Tests
+
+	}
 }

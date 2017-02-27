@@ -86,7 +86,7 @@ namespace SIL.PublishingSolution
 		public int MaxImageWidth { get; set; }
 		private XslCompiledTransform addRevId;
 		private XslCompiledTransform noXmlSpace;
-		private XslCompiledTransform fixEpub;
+		protected XslCompiledTransform fixEpub;
 
 		public int BaseFontSize { get; set; }
 		public int DefaultLineHeight { get; set; }
@@ -1226,7 +1226,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static XslCompiledTransform LoadFixEpubXslt()
+        protected static XslCompiledTransform LoadFixEpubXslt()
         {
             var fixEpub = new XslCompiledTransform();
             fixEpub.Load(XmlReader.Create(Common.UsersXsl("FixEpub.xsl")));
