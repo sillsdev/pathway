@@ -3346,10 +3346,8 @@ namespace SIL.Tool
 			opfDoc.Load(sr);
 			sr.Close();
 			var fileOrderQ = opfDoc.SelectNodes("//*[local-name()='item']/@href[contains(.,'.html')]");
-			var fileOrder = (from XmlAttribute attr in fileOrderQ select attr.Value).ToList();
+			var fileOrder = (from XmlAttribute attr in fileOrderQ let val = attr.Value where !val.Contains("TOC") select attr.Value).ToList();
 			var contDoc = DeclareXMLDocument(false);
-
-
 			var pagetitle = Param.GetMetadataValue("Title");
 			var head = Param.GetMetadataValue("Title");
 			var author = Param.GetMetadataValue("Creator");
