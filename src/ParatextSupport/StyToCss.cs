@@ -27,6 +27,7 @@ namespace SIL.PublishingSolution
     {
         public string StyFullPath { get; set; }
         private string _cssFullPath;
+		private string _projectDirectory;
         private Dictionary<string, Dictionary<string, string>> _styleInfo = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _cssProp;
         private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
@@ -43,18 +44,56 @@ namespace SIL.PublishingSolution
         public void ConvertStyToCss(string database, string cssFullPath, string ssfFullPath)
         {
             _cssFullPath = cssFullPath;
-            FindStyFile(database, ssfFullPath);
-            MapClassName();
+			_projectDirectory = ssfFullPath;
+            bool fileExists = FindStyFile(database, ssfFullPath);
+
+	        if (!fileExists)
+	        {
+		        return;
+	        }
+
+	        MapClassName();
             ParseFile();
             SetFontAndDirection();
             WriteCSS();
 
             // Create custom.css from custom.sty
             SetCustomPath(database);
+			if (!File.Exists(StyFullPath))
+			{
+				return;
+			}
             ParseFile();
             SetFontAndDirection();
             WriteCSS();
+			MergeCustomCss(cssFullPath, _cssFullPath);
         }
+
+	    private void MergeCustomCss(string mainCssFileName, string customCssFileName)
+	    {
+		    if (File.Exists(customCssFileName))
+		    {
+			    FileStream fs1 = null;
+			    FileStream fs2 = null;
+			    try
+			    {
+				    fs1 = File.Open(mainCssFileName, FileMode.Append);
+				    fs2 = File.Open(customCssFileName, FileMode.Open);
+				    byte[] fs2Content = new byte[fs2.Length];
+				    fs2.Read(fs2Content, 0, (int) fs2.Length);
+				    fs1.Write(fs2Content, 0, (int) fs2.Length);
+			    }
+			    catch (Exception ex)
+			    {
+				    Console.WriteLine(ex.Message + " : " + ex.StackTrace);
+			    }
+			    finally
+			    {
+				    fs1.Close();
+				    fs2.Close();
+			    }
+		    }
+	    }
 
         /// <summary>
         /// Override to convert the sty file to CSS, assuming the
@@ -75,11 +114,9 @@ namespace SIL.PublishingSolution
 
         private void SetCustomPath(string database)
         {
-            _styFolder = Path.GetDirectoryName(StyFullPath);
+			_styFolder = Path.GetDirectoryName(_projectDirectory);
             _cssFolder = Path.GetDirectoryName(_cssFullPath);
-
             _styFolder = Common.PathCombine(_styFolder, database);
-
             StyFullPath = Common.PathCombine(_styFolder, "custom.sty");
             _cssFullPath = Common.PathCombine(_cssFolder, "custom.css");
         }
@@ -106,23 +143,27 @@ namespace SIL.PublishingSolution
         /// <param name="database">The settings for the Paratext database.
         /// </param>
         /// ------------------------------------------------------------
-        private void FindStyFile(string database, string ssfFullPath)
+        private bool FindStyFile(string database, string ssfFullPath)
         {
 			string ssfFile = string.Empty;
 			if(string.IsNullOrEmpty(ssfFullPath))
 			{
 				ssfFile = SettingsHelper.GetSettingFilePathForParatext(database);
+				_projectDirectory = ssfFile;
 			}
 			else
 			{
 				ssfFile = ssfFullPath;
+				//string ssfFileInputPath = FileInput(TestName);
+				ssfFile = Common.PathCombine(ssfFile, "gather");
+				ssfFile = Common.PathCombine(ssfFile, database + ".ssf");
 			}
 
             bool isStylesheet = false;
 			if (!File.Exists(ssfFile))
             {
                 Debug.WriteLine(ssfFile + " does not exist.");
-                return;
+                return false;
             }
 
 			string styFile = string.Empty;
@@ -141,6 +182,7 @@ namespace SIL.PublishingSolution
             }
             reader.Close();
 			StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFile), styFile);
+	        return true;
         }
 
         /// ------------------------------------------------------------------------
@@ -152,11 +194,11 @@ namespace SIL.PublishingSolution
         private void ParseFile()
         {
             _styleInfo.Clear();
-            if (!File.Exists(StyFullPath))
-            {
-                Debug.WriteLine(StyFullPath + " does not exist.");
-                return;
-            }
+			if (!File.Exists(StyFullPath))
+			{
+				Debug.WriteLine(StyFullPath + " does not exist.");
+				return;
+			}
             StreamReader file = new StreamReader(StyFullPath);
             string line;
             while ((line = file.ReadLine()) != null)
@@ -449,7 +491,7 @@ namespace SIL.PublishingSolution
             _mapClassName["r"] = "Parallel_Passage_Reference";
             _mapClassName["c"] = "Chapter_Number";
             _mapClassName["rem"] = "rem";
-            _mapClassName["fig"] = "fig";
+			_mapClassName["fig"] = "pictureCaption";
             _mapClassName["q1"] = "Line1";
             _mapClassName["q2"] = "Line2";
             _mapClassName["m"] = "Paragraph_Continuation";

@@ -14,3 +14,14 @@ font-style: italic;
 direction: ltr;
 }
 
+.pictureCaption
+{
+font-style: italic;
+font-size: 11pt;
+}
+
+.scrBody
+{
+direction: ltr;
+}
+

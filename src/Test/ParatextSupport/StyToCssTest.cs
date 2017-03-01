@@ -65,7 +65,11 @@ namespace Test.ParatextSupport
             Common.TextDirectionLanguageFile = FileInput("Dhivehi.lds");
             WriteLanguageFontDirection(sw);
             sw.Close();
-            TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
+
+	        string expectedFile = FileExpected(cssFile);
+	        string outputFile = FileOutput(cssFile);
+
+			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
         }
 
 
@@ -76,14 +80,14 @@ namespace Test.ParatextSupport
             const string TestName = "nkoNT";
             var cssFile = TestName + ".css";
             string cssFileOutput = FileOutput(cssFile);
-            string ssfFileInputPath = FileInput(TestName);
-            ssfFileInputPath = Common.PathCombine(ssfFileInputPath, "gather");
-            ssfFileInputPath = Common.PathCombine(ssfFileInputPath, TestName + ".ssf");
 
             StyToCss styToCssObj = new StyToCss();
-            styToCssObj.ConvertStyToCss("nkoNT", cssFileOutput, ssfFileInputPath);
+			styToCssObj.ConvertStyToCss("nkoNT", cssFileOutput, FileInput(TestName));
 
-            TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
+			string expectedFile = FileExpected(cssFile);
+			string outputFile = FileOutput(cssFile);
+
+			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
         }
 
         [Test]
@@ -95,7 +99,10 @@ namespace Test.ParatextSupport
             StyToCss styToCssObj = new StyToCss();
             styToCssObj.ConvertStyToCss(cssFileOutput);
 
-            TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
+			string expectedFile = FileExpected(cssFile);
+			string outputFile = FileOutput(cssFile);
+
+			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
         }
 
 		[Test]
@@ -105,16 +112,32 @@ namespace Test.ParatextSupport
 			const string TestName = "aai";
 			var cssFile = TestName + ".css";
 			string cssFileOutput = FileOutput(cssFile);
-			string ssfFileInputPath = FileInput(TestName);
-			ssfFileInputPath = Common.PathCombine(ssfFileInputPath, "gather");
-			ssfFileInputPath = Common.PathCombine(ssfFileInputPath, TestName + ".ssf");
 
 			StyToCss styToCssObj = new StyToCss();
-			styToCssObj.ConvertStyToCss("aai", cssFileOutput, ssfFileInputPath);
+			styToCssObj.ConvertStyToCss("aai", cssFileOutput, FileInput(TestName));
 
-			TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
+			string expectedFile = FileExpected(cssFile);
+			string outputFile = FileOutput(cssFile);
+
+			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
 		}
 
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void MergeMainandCustomCssStylesTest()
+		{
+			const string TestName = "uitrans";
+			var cssFile = TestName + ".css";
+			string cssFileOutput = FileOutput(cssFile);
+
+			StyToCss styToCssObj = new StyToCss();
+			styToCssObj.ConvertStyToCss("uitrans", cssFileOutput, FileInput(TestName));
+
+			string expectedFile = FileExpected(cssFile);
+			string outputFile = FileOutput(cssFile);
+
+			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
+		}
 
 		[Test]
 		[Category("SkipOnTeamCity")]
@@ -123,14 +146,14 @@ namespace Test.ParatextSupport
 			const string TestName = "uisTrans";
 			var cssFile = TestName + ".css";
 			string cssFileOutput = FileOutput(cssFile);
-			string ssfFileInputPath = FileInput(TestName);
-			ssfFileInputPath = Common.PathCombine(ssfFileInputPath, "gather");
-			ssfFileInputPath = Common.PathCombine(ssfFileInputPath, TestName + ".ssf");
 
 			StyToCss styToCssObj = new StyToCss();
-			styToCssObj.ConvertStyToCss("uisTrans", cssFileOutput, ssfFileInputPath);
+			styToCssObj.ConvertStyToCss("uisTrans", cssFileOutput, FileInput(TestName));
 
-			TextFileAssert.AreEqual(FileExpected(cssFile), FileOutput(cssFile), FileData.Get(FileOutput(cssFile)));
+			string expectedFile = FileExpected(cssFile);
+			string outputFile = FileOutput(cssFile);
+
+			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
 		}
 
         #region Private Functions
