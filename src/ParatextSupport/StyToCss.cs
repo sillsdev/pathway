@@ -167,7 +167,8 @@ namespace SIL.PublishingSolution
             }
 
 			string styFile = string.Empty;
-			var reader = new XmlTextReader(ssfFile) { XmlResolver = new NullResolver() };
+			//ssf files don't have DTD or namespaces so we shouldn't need the null resolver.
+	        var reader = new XmlTextReader(ssfFile); //{ XmlResolver = new NullResolver() };
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element && reader.Name == "StyleSheet") // Is class name null
