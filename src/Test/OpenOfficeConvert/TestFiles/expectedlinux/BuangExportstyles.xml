@@ -26,22 +26,22 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xlanguagetag_.en_xitem_.en_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_definition_.en_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.tpi_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xlanguagetag_.en_xitem_.tpi_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.tpi_definition_.en_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData_dicBody" />
@@ -49,45 +49,45 @@
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xlanguagetag_.en_example_.bzh_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="example_.bzh_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xlanguagetag_.en_translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="slots_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="slotname_.en_slots_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="slots_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xlanguagetag_.en_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="semanticdomains_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_semanticdomains_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="semanticdomains_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="semanticdomainabbr_.en_xitem_semanticdomains_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_semanticdomains_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="semanticdomainname_.en_xitem_semanticdomains_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_semanticdomains_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xsensenumber_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="example_.bzh_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xlanguagetag_.en_example_.bzh_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="example_.bzh_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translation_.en_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xlanguagetag_.en_translation_.en_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translation_.en_translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-size="8pt" style:font-size-complex="8pt" fo:color="#2F60FF" fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
@@ -300,10 +300,10 @@
     </style:default-style>
     <style:style style:name="Standard" style:family="paragraph" style:class="text" />
     <style:style style:name="Internet_20_link" style:display-name="Internet link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties fo:color="" style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="Visited_20_Internet_20_Link" style:display-name="Visited Internet Link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties fo:color="" style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="block_5f_p" style:display-name="block_p" style:family="paragraph">
       <style:paragraph-properties fo:margin-left="0.1665in" fo:margin-right="0in" fo:line-height="0.2in" fo:text-align="start" style:justify-single-word="false" fo:orphans="2" fo:text-indent="-0.1665in" style:auto-text-indent="false" style:page-number="auto" fo:background-color="transparent" fo:padding-left="0in" fo:padding-right="0in" fo:padding-top="0.0138in" fo:padding-bottom="0.028in" fo:border="none" fo:keep-with-next="always" />

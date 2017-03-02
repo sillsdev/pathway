@@ -1082,28 +1082,34 @@ namespace SIL.PublishingSolution
 	        string aTagColor = string.Empty;
 	        aTagColor = GetAnchorTagColor(aTagColor);
 
-	        //// "HyperLink"
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "Internet_20_link");
-            _writer.WriteAttributeString("style:display-name", "Internet link");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-			_writer.WriteAttributeString("fo:color", aTagColor);
-            _writer.WriteAttributeString("style:text-line-through-style", "none");
-            _writer.WriteAttributeString("style:text-underline-style", "none");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
+			//// "HyperLink"
+			_writer.WriteStartElement("style:style");
+			_writer.WriteAttributeString("style:name", "Internet_20_link");
+			_writer.WriteAttributeString("style:display-name", "Internet link");
+			_writer.WriteAttributeString("style:family", "text");
+			_writer.WriteStartElement("style:text-properties");
+			if (aTagColor != "inherit")
+			{
+				_writer.WriteAttributeString("fo:color", aTagColor);
+			}
+			_writer.WriteAttributeString("style:text-line-through-style", "none");
+			_writer.WriteAttributeString("style:text-underline-style", "none");
+			_writer.WriteEndElement();
+			_writer.WriteEndElement();
 
-            _writer.WriteStartElement("style:style");
-            _writer.WriteAttributeString("style:name", "Visited_20_Internet_20_Link");
-            _writer.WriteAttributeString("style:display-name", "Visited Internet Link");
-            _writer.WriteAttributeString("style:family", "text");
-            _writer.WriteStartElement("style:text-properties");
-			_writer.WriteAttributeString("fo:color", aTagColor);
-            _writer.WriteAttributeString("style:text-line-through-style", "none");
-            _writer.WriteAttributeString("style:text-underline-style", "none");
-            _writer.WriteEndElement();
-            _writer.WriteEndElement();
+			_writer.WriteStartElement("style:style");
+			_writer.WriteAttributeString("style:name", "Visited_20_Internet_20_Link");
+			_writer.WriteAttributeString("style:display-name", "Visited Internet Link");
+			_writer.WriteAttributeString("style:family", "text");
+			_writer.WriteStartElement("style:text-properties");
+			if (aTagColor != "inherit")
+			{
+				_writer.WriteAttributeString("fo:color", aTagColor);
+			}
+			_writer.WriteAttributeString("style:text-line-through-style", "none");
+			_writer.WriteAttributeString("style:text-underline-style", "none");
+			_writer.WriteEndElement();
+			_writer.WriteEndElement();
 
             //Insert Fixed Height Hidden Paragraph for TD-2912
             _writer.WriteStartElement("style:style");
@@ -1626,7 +1632,6 @@ namespace SIL.PublishingSolution
 
 		    if (aTagColor == string.Empty || aTagColor.ToLower() == "inherit")
 		    {
-			    aTagColor = "#0000ff";
 			    _projInfo.IsAnchorInherited = true;
 		    }
 		    return aTagColor;

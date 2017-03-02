@@ -36,7 +36,7 @@
       <style:text-properties fo:font-style="normal" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_.es_letHead_dicBody" style:family="text" style:parent-style-name="letHead_dicBody" style:default-outline-level="2" style:list-style-name="" style:master-page-name="">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letData_dicBody" style:family="paragraph" style:parent-style-name="dicBody">
       <style:paragraph-properties fo:text-align="left" />
@@ -44,12 +44,12 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="reversalindexentry_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="reversalform_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="reversalindexentry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_reversalform_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="reversalform_reversalindexentry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="reversalindexentry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="abbreviation_partofspeech_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_reversalindexentry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_abbreviation_partofspeech_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="abbreviation_partofspeech_reversalindexentry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="reversalindexentry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecontent_referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="referringsenses_reversalindexentry_letData_dicBody" />
@@ -62,21 +62,21 @@
       <style:text-properties fo:font-style="italic" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:color="#008000" fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_headword_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="headword_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_span_.mxb_headword_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="span_.mxb_headword_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headwordstxfin_.mxb_span_.mxb_headword_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="span_.mxb_headword_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" style:text-position="-12% 58%" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" style:text-position="-12% 58%" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="lexemeform_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.mxb_lexemeform_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="lexemeform_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:color="#000080" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="restrictions_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.es_restrictions_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="restrictions_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_span_.es_restrictions_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody" style:family="text" style:parent-style-name="span_.es_restrictions_referringsense_sensecontent_referringsenses_reversalindexentry_letData_dicBody">
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="400" style:font-weight-complex="400" fo:font-style="italic" fo:color="#808000" />
@@ -105,7 +105,7 @@
       <style:text-properties fo:font-family="Charis SIL AmArea" />
     </style:style>
     <style:style style:name="span_.mxb" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="10pt" fo:font-weight="700" fo:font-style="normal" fo:color="#000080" />
+      <style:text-properties fo:font-family="Charis SIL AmArea" fo:font-size="10pt" fo:font-weight="700" fo:font-style="normal" fo:color="#000080" />
     </style:style>
     <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties style:line-height-at-least="26pt" fo:margin-left="9pt" fo:margin-right="9pt" fo:text-align="center" fo:border-bottom="solid .5pt #808080 " fo:margin-top="18pt" fo:margin-bottom="18pt" />
@@ -453,10 +453,10 @@
     </style:default-style>
     <style:style style:name="Standard" style:family="paragraph" style:class="text" />
     <style:style style:name="Internet_20_link" style:display-name="Internet link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="Visited_20_Internet_20_Link" style:display-name="Visited Internet Link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="block_5f_p" style:display-name="block_p" style:family="paragraph">
       <style:paragraph-properties fo:margin-left="0.1665in" fo:margin-right="0in" fo:line-height="0.2in" fo:text-align="start" style:justify-single-word="false" fo:orphans="2" fo:text-indent="-0.1665in" style:auto-text-indent="false" style:page-number="auto" fo:background-color="transparent" fo:padding-left="0in" fo:padding-right="0in" fo:padding-top="0.0138in" fo:padding-bottom="0.028in" fo:border="none" fo:keep-with-next="always" />
