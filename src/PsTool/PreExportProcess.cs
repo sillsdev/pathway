@@ -2655,44 +2655,39 @@ namespace SIL.Tool
 			if (nodeList == null) return false;
 			for (int i = 0; i < nodeList.Count; i++)
 			{
-				string fallbackStr = "&#x1f50a;";
+				var fallbackStr = "&#x1f50a;";
 				Encoding enc = Encoding.GetEncoding(Encoding.ASCII.CodePage, new EncoderReplacementFallback(fallbackStr), new DecoderReplacementFallback(fallbackStr));
 				string cleanStr = enc.GetString(enc.GetBytes(nodeList[i].InnerText));
-				if (cleanStr.Contains("&#x1f50a;"))
+				if (!cleanStr.Contains("&#x1f50a;")) continue;
+				nodeList[i].InnerXml = "<img src=\"speaker.png\" alt=\"Play\" height=\"16\" width=\"21\"/>";
+				checkAudioVisualAvailable = true;
+				var attributeCollection = nodeList[i].Attributes;
+				if (attributeCollection == null) continue;
+				try
 				{
-					nodeList[i].InnerXml = "<img src=\"speaker.png\" alt=\"Play\" height=\"16\" width=\"21\"/>";
-					checkAudioVisualAvailable = true;
-					var attributeCollection = nodeList[i].Attributes;
-					if (attributeCollection != null)
+					var xmlAttributeCollection = attributeCollection["class"].InnerText;
+					if (!xmlAttributeCollection.Contains("audio")) continue;
+					var hrefText = attributeCollection["href"].InnerText;
+					hrefText = hrefText.Replace("#", "") + ".wav";
+					attributeCollection["href"].InnerText = hrefText;
+					var parentNode = nodeList[i].ParentNode.ChildNodes;
+					foreach (XmlNode subnode in parentNode)
 					{
-						var xmlAttributeCollection = attributeCollection["class"].InnerText;
-						if (xmlAttributeCollection.Contains("audio"))
+						if (subnode == null || subnode.Name.ToLower() != "audio") continue;
+						if (subnode.FirstChild.Name.ToLower() != "source") continue;
+						var sourceAttributeCollection = subnode.FirstChild.Attributes;
+						if (sourceAttributeCollection == null) continue;
+						var sourceXmlAttributeCollection = sourceAttributeCollection["src"].InnerText;
+						if (sourceXmlAttributeCollection.ToLower().Contains("audiovisual"))
 						{
-							string hrefText = attributeCollection["href"].InnerText;
-							hrefText = hrefText.Replace("#", "") + ".wav";
-							attributeCollection["href"].InnerText = hrefText;
-							var parentNode = nodeList[i].ParentNode.ChildNodes;
-							foreach (XmlNode subnode in parentNode)
-							{
-								if (subnode != null && subnode.Name.ToLower() == "audio")
-								{
-									if (subnode.FirstChild.Name.ToLower() == "source")
-									{
-										var sourceAttributeCollection = subnode.FirstChild.Attributes;
-										if (sourceAttributeCollection != null)
-										{
-											var sourceXmlAttributeCollection = sourceAttributeCollection["src"].InnerText;
-											if (sourceXmlAttributeCollection.ToLower().Contains("audiovisual"))
-											{
-												//<source src="file://636130973644990987summer.mp3"/>
-												sourceAttributeCollection["src"].InnerText = sourceXmlAttributeCollection.Replace("AudioVisual\\", "file://");
-											}
-										}
-									}
-								}
-							}
+							//<source src="file://636130973644990987summer.mp3"/>
+							sourceAttributeCollection["src"].InnerText = sourceXmlAttributeCollection.Replace("AudioVisual\\", "file://");
 						}
 					}
+				}
+				catch
+				{
+					// if the class attribute generates a null exception, do nothing.
 				}
 			}
 
