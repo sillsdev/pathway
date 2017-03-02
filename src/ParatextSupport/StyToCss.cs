@@ -167,7 +167,7 @@ namespace SIL.PublishingSolution
             }
 
 			string styFile = string.Empty;
-			var reader = new XmlTextReader(ssfFile) { XmlResolver = null };
+			var reader = new XmlTextReader(ssfFile) { XmlResolver = new NullResolver() };
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element && reader.Name == "StyleSheet") // Is class name null
