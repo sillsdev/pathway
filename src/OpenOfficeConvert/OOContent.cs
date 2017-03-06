@@ -1483,11 +1483,7 @@ namespace SIL.PublishingSolution
 				else if (status == "name")
 				{
 					string anchorName = _anchorBookMarkName.Replace("name", "");
-
-					_writer.WriteStartElement("text:bookmark-start");
-					_writer.WriteAttributeString("text:name", anchorName.ToLower());
-					_writer.WriteEndElement();
-					_writer.WriteStartElement("text:bookmark-end");
+					_writer.WriteStartElement("text:bookmark");
 					_writer.WriteAttributeString("text:name", anchorName.ToLower());
 					_writer.WriteEndElement();
 				}
@@ -1567,12 +1563,6 @@ namespace SIL.PublishingSolution
 			}
 			else if (_anchorIdValue.Length > 0 && _sourceList.Contains(_anchorIdValue.Replace("#", "").ToLower()) && _targetList.Contains(_anchorIdValue.Replace("#", "").ToLower())) //search in source for writing target
 			{
-				_writer.WriteStartElement("text:bookmark-start");
-				_writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
-				_writer.WriteEndElement();
-				_writer.WriteStartElement("text:bookmark-end");
-				_writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
-				_writer.WriteEndElement();
 				_anchorIdValue = string.Empty;
 			}
 
@@ -1621,13 +1611,9 @@ namespace SIL.PublishingSolution
 			_writer.WriteEndElement();
 			_writer.WriteEndElement();
 			_writer.WriteEndElement();
-
-			if (footerClassName.IndexOf("NoteCross") != 0)
-			{
-				_writer.WriteStartElement("text:s"); // Insert space after the footnote call
-				_writer.WriteAttributeString("text:c", "1");
-				_writer.WriteEndElement();
-			}
+			_writer.WriteStartElement("text:bookmark");
+			_writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
+			_writer.WriteEndElement();			
 		}
 
 		public static string SpanTagCorrection(string content)

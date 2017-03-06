@@ -613,7 +613,7 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.ClassName = string.Empty;
             xpath = "//text:span[@text:style-name='headword1_.bzh_a_entry_letData_dicBody']";
-            content = "<text:bookmark-start text:name=\"nema3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-end text:name=\"nema3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />nema3 text";
+			content = "<text:bookmark text:name=\"nema3\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />nema3 text";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "reference-ref failed");
         }
@@ -3201,7 +3201,7 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue1, "Reference with text test failed");
 
 			xpath = "//text:span[@text:style-name='AlternateReading_.nko_Test3_Paragraph_scrSection_columns_scrBook_scrBody']";
-            content = "<text:bookmark-start text:name=\"fbcf3087e-dcad-43bc-ba61-1ca2f4ffbb36\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" /><text:bookmark-end text:name=\"fbcf3087e-dcad-43bc-ba61-1ca2f4ffbb36\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" />Child";
+            content = "Child";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Reference without text test failed");
 
