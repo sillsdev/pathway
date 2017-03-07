@@ -5219,10 +5219,12 @@ namespace SIL.Tool
 		{
 			// Create a new FileInfo object.
 			FileInfo fInfo = new FileInfo(FileName);
-
+			if (UsingMonoVM)
+			{
+				return false;
+			}
 			// Return the IsReadOnly property value.
 			return fInfo.IsReadOnly;
-
 		}
 
 		/// <summary>

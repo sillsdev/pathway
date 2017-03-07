@@ -640,6 +640,7 @@ namespace SIL.PublishingSolution
             {
 				Common.StreamReplaceInFile(file, " xml:lang=\"", " lang=\"");
 				Common.StreamReplaceInFile(file, "a href=\"#\"", "a");
+				Common.StreamReplaceInFile(file, " lang=\"\"", "");
             }
         }
         private void GlossaryLinkReferencing(PublicationInformation projInfo,Dictionary<string,Dictionary<string,string>> glossoryreferncelist)
