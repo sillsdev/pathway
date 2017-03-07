@@ -36,7 +36,7 @@ namespace SIL.Tool
         protected bool SkipAttr;
         protected bool SkipNode;
 	    protected string StyleDecorate;
-		protected readonly List<string> DecorateExceptions = new List<string> {"letHead", "letter", "letData", "reversalindexentry"};
+		protected readonly List<string> DecorateExceptions = new List<string> {"letHead", "letter", "letData", "reversalindexentry", "dicBody"};
         protected string Suffix = "-ps";
         protected string ReplaceLocalName;
 		public string SpaceClass = "sp";
