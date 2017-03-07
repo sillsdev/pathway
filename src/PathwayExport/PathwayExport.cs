@@ -52,7 +52,6 @@ namespace SIL.PublishingSolution
 			{
 				Console.Write("PathwayExport: ");
 				Console.WriteLine("Try 'PathwayExport --help' for more information.");
-				Console.Read();
 				Environment.Exit(0);
 			}
 			else if (args.Length == 1 && args[0].ToLower() == "--help")

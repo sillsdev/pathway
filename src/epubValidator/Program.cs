@@ -130,6 +130,10 @@ namespace epubValidator
 						sb.Append("\" ");
 	                    sb.Append(" -e "); // Include only error and fatal severity messages in output
 						sb.Append(" -c \""); // Custom rule file to change priority of RSC-005 (lang tag value)
+						if (UsingMonoVM)
+						{
+							sb.Append(Path.DirectorySeparatorChar);
+						}
 						sb.Append(strAppDir.Substring(6)); // Remove the leading file:/ from the CodeBase result
 						sb.Append(Path.DirectorySeparatorChar);
 						sb.Append("epubcheck-4.0.1");
