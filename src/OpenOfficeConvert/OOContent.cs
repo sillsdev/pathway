@@ -3626,10 +3626,6 @@ namespace SIL.PublishingSolution
 		{
 			if (_projInfo.ProjectInputType.ToLower() == "dictionary")
 			{
-				if (content == "అకుర్పొక్ (మహ్న)" || content == "अक्षतब.")
-				{
-					Debug.Print("pause");
-				}
 				if (_previousParagraphName == null) _previousParagraphName = string.Empty;
 
 				//if (_childName.IndexOf("reversalform") >= 0 && _previousChildName.IndexOf("headword") >= 0)
