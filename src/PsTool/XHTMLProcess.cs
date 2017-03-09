@@ -1382,7 +1382,7 @@ namespace SIL.Tool
 									return;
 
 								subEntrySize = Math.Round(Convert.ToDecimal(IdAllClass[currentStyleName]["text-indent"].Replace("pt", "")));
-								string stylePropertyValue = (subEntrySize + entrySize).ToString();
+								string stylePropertyValue = (subEntrySize).ToString();
 								_tempStyle["text-indent"] = stylePropertyValue + "pt";
 							}
 						}

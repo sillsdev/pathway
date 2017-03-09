@@ -1,16 +1,16 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="PsExport.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ namespace SIL.PublishingSolution
     {
         public bool _fromNUnit = false;
         private string _selectedCssFromTemplate = string.Empty;
-        
+
         #region Properties
         /// <summary>Gets or sets Output format (ODT, PDF, INX, TeX, HTM, PDB, etc.)</summary>
         public string Destination
@@ -47,7 +47,7 @@ namespace SIL.PublishingSolution
             set
             {
                 Param.SetValue(Param.PrintVia, value);
-            } 
+            }
         }
 
         /// <summary>Gets or sets data type (Scripture, Dictionary)</summary>
@@ -108,7 +108,7 @@ namespace SIL.PublishingSolution
 				Backend.Load(Common.AssemblyPath);
                 LoadProgramSettings(supportPath);
                 LoadDataTypeSettings();
-                
+
                 DefaultProjectFileSetup(outDir);
                 SubProcess.BeforeProcess(outFullName);
 
@@ -120,13 +120,13 @@ namespace SIL.PublishingSolution
                     return;
                 }
 				string cssFullName;
-				if (GetCSSFileName(outFullName, outDir, mainFullName, out cssFullName)) 
+				if (GetCSSFileName(outFullName, outDir, mainFullName, out cssFullName))
 					return;
 
 				SetPageCenterTitle(cssFullName);
                 _selectedCssFromTemplate = Path.GetFileNameWithoutExtension(cssFullName);
                 string fluffedCssFullName;
-                
+
                 if (Path.GetFileNameWithoutExtension(outFullName) == "FlexRev")
                 {
                     fluffedCssFullName = GetFluffedCssFullName(GetRevFullName(outFullName), outDir, cssFullName);
@@ -207,7 +207,7 @@ namespace SIL.PublishingSolution
             }
             finally
             {
-				
+
             }
         }
 
@@ -335,8 +335,8 @@ namespace SIL.PublishingSolution
 
             string fileDir = Path.GetDirectoryName(cssFullName);
             string fileName = Path.GetFileName(cssFullName);
-			
-	        if (fileName != null && fileName.IndexOf("Layout", System.StringComparison.Ordinal) == 0) 
+
+	        if (fileName != null && fileName.IndexOf("Layout", System.StringComparison.Ordinal) == 0)
 				return; //For PathwayB Test fail
 
             fileName = "Preserve" + fileName;
@@ -374,7 +374,7 @@ namespace SIL.PublishingSolution
         /// <param name="outFullName">input xhtml file</param>
         protected void UserOptionSelectionBasedXsltPreProcess(string outFullName)
         {
-			if (!Param.Value.ContainsKey(Param.Preprocessing)) 
+			if (!Param.Value.ContainsKey(Param.Preprocessing))
 				return;
             var preprocessing = Param.Value[Param.Preprocessing];
             if (preprocessing == string.Empty) return;
@@ -435,7 +435,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="fluffedCssFullName"></param>
         /// <param name="mainFullName"></param>
@@ -476,9 +476,7 @@ namespace SIL.PublishingSolution
             {
                 Common.StreamReplaceInFile(revFullName, "<ReversalIndexEntry_Self>", "");
                 Common.StreamReplaceInFile(revFullName, "</ReversalIndexEntry_Self>", "");
-				Common.StreamReplaceInFile(revFullName, "class=\"headword\"", "class=\"headref\"");
 				string revCssFullName = revFullName.Substring(0, revFullName.Length - 6) + ".css";
-				Common.StreamReplaceInFile(revCssFullName, ".headword", ".headref");
                 AddHomographAndSenseNumClassNames.Execute(revFullName, revFullName);
             }
             return revFullName;
@@ -561,7 +559,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="outDir"></param>
         protected void DefaultProjectFileSetup(string outDir)
