@@ -102,7 +102,7 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pictures_entry_body" style:family="text" style:parent-style-name="entry_body" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="picture_pictures_entry_body" style:family="paragraph" style:parent-style-name="pictures_entry_body">
-      <style:paragraph-properties fo:margin-left="90pt" fo:text-indent="9pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:float="right" fo:text-align="center" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:padding-right="2pt" fo:padding-left="2pt" />
+      <style:paragraph-properties fo:margin-left="90pt" fo:text-indent="-36pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:float="right" fo:text-align="center" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:padding-right="2pt" fo:padding-left="2pt" />
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="captionContent_picture_pictures_entry_body" style:family="paragraph" style:parent-style-name="picture_pictures_entry_body" />

@@ -18,9 +18,6 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_.ggo-Telu-IN_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headerFontStyleName" style:family="paragraph" style:parent-style-name="Standard">
-      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" />
-    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciations_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />

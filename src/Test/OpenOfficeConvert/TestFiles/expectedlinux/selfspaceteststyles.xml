@@ -126,7 +126,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:color="#800080" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="fr" fo:country="FR" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="picture_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody">
-      <style:paragraph-properties fo:margin-left="24pt" fo:text-indent="0pt" fo:float="right" fo:text-align="left" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:padding-top="1pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:background-color="transparent" />
+      <style:paragraph-properties fo:margin-left="24pt" fo:text-indent="-12pt" fo:float="right" fo:text-align="left" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:padding-top="1pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="captionContent_picture_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="picture_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensenumber_captionContent_picture_entry_letData_dicBody" style:family="text" style:parent-style-name="captionContent_picture_entry_letData_dicBody" />
@@ -137,7 +137,7 @@
       <style:text-properties fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:paragraph-properties fo:margin-left="24pt" fo:text-indent="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
+      <style:paragraph-properties fo:margin-left="24pt" fo:text-indent="0pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
       <style:text-properties text:display="block" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">

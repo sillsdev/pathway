@@ -31,7 +31,7 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecontent_senses_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="senses_entry_letData_dicBody">
-      <style:paragraph-properties fo:margin-left="30pt" fo:text-indent="-6pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
+      <style:paragraph-properties fo:margin-left="30pt" fo:text-indent="-18pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
       <style:text-properties text:display="block" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensenumber_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecontent_senses_entry_letData_dicBody">
@@ -56,7 +56,7 @@
       <style:text-properties fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:paragraph-properties fo:margin-left="12pt" fo:text-indent="12pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
+      <style:paragraph-properties fo:margin-left="12pt" fo:text-indent="0pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" fo:color="#800080" text:display="block" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
@@ -137,7 +137,7 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:paragraph-properties fo:margin-left="12pt" fo:text-indent="21pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:margin-left="12pt" fo:text-indent="-9pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" text:display="block" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplescontentps_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody">

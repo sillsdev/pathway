@@ -31,7 +31,7 @@
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="extendednotecontent_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody">
-      <style:paragraph-properties fo:margin-left="12pt" fo:text-indent="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:padding-right="21pt" />
+      <style:paragraph-properties fo:margin-left="12pt" fo:text-indent="0pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:padding-right="21pt" />
       <style:text-properties fo:font-size="10pt" style:font-size-complex="10pt" text:display="block" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="abbreviation_.en_extendednotecontent_entry_letData_dicBody" style:family="text" style:parent-style-name="extendednotecontent_entry_letData_dicBody">
