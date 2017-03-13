@@ -28,7 +28,7 @@
     margin-left: 0pt;
     padding-right: 2pt;
     float: left;
-    string-set: chapter content() ":";
+    string-set: chapter content();
 }
 
 .crossHYPHENReference::footnote-call {
@@ -313,7 +313,7 @@ span {
     vertical-align: super;
     text-indent: 0pt;
     margin-left: 0pt;
-    string-set: verse content();
+    string-set: verse string(chapter) ':' content();
 }
 .Verse_Number_In_Note {
     vertical-align: super;
@@ -321,7 +321,13 @@ span {
     margin-left: 0pt;
 }
 .Verse_Number1 {
-    display: none;
+    font-size:1pt;
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse string(chapter) ':1';
+	display: inline;
+	visibility: hidden;
 }
 .Front_Matter {
 margin-left : 48pt;
