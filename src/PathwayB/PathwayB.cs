@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="PathwayB.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ namespace SIL.PublishingSolution
                                       ProjectName = "main",
                                   };
 
-	        
+
             var exportType = "OpenOffice/LibreOffice";
             bool bOutputSpecified = false;
             var files = new List<string>();
@@ -256,7 +256,7 @@ namespace SIL.PublishingSolution
                     break;
                 case "--files":
                 case "-f":
-                    i = CaptureFileList(args, i, files);
+					i = CaptureFileList(args, i, files, projectInfo);
                     break;
                 case "--inputformat":
                 case "-if":
@@ -314,8 +314,8 @@ namespace SIL.PublishingSolution
                     Usage();
                     Environment.Exit(0);
                     break;
-                default:
-                    i = CaptureFileList(args, --i, files);
+				default:
+					i = CaptureFileList(args, --i, files, projectInfo);
                     if (files.Count > 0)
                     {
                         var lcName = files[0].ToLower();
@@ -351,7 +351,7 @@ namespace SIL.PublishingSolution
             if (projectInfo.ProjectInputType == "Dictionary")
             {
                 // dictionary
-                // main - if there's a file name of "main" in the list, we'll use it as the default xhtml; 
+                // main - if there's a file name of "main" in the list, we'll use it as the default xhtml;
                 // if not, we'll use the first item in the list
                 int index = files.FindIndex(
                     something => (something.ToLower().Equals("main.xhtml"))
@@ -360,7 +360,7 @@ namespace SIL.PublishingSolution
                                                            ? Common.PathCombine(projectInfo.ProjectPath,
                                                                                 files[index])
                                                            : Common.PathCombine(projectInfo.ProjectPath, files[0]);
-                // reversal index - needs to be named "flexrev.xhtml" 
+                // reversal index - needs to be named "flexrev.xhtml"
                 // (for compatibility with transforms in Pathway)
                 index = files.FindIndex(
                     something => (something.ToLower().Equals("flexrev.xhtml"))
@@ -432,15 +432,29 @@ namespace SIL.PublishingSolution
             return inFormat;
         }
 
-        private static int CaptureFileList(string[] args, int i, List<string> files)
+		private static int CaptureFileList(string[] args, int i, List<string> files, PublicationInformation projectInfo)
         {
-            // store the files in our internal list for now 
+
+	        if (args[i] == "*")
+	        {
+		        // wildcard - need to expand the file count to include all .sfm files in this directory
+		        var sfmFiles = Directory.GetFiles(projectInfo.ProjectPath, "*.sfm");
+		        files.Clear(); // should only be 1 item, but just in case...
+				foreach (var sfmFile in sfmFiles)
+		        {
+					files.Add(Path.GetFileName(sfmFile)); // relative file names (no path)
+		        }
+		        i++;
+		        return i;
+	        }
+	        // store the files in our internal list for now
             // (single filenames and * will end up as a single element in the list)
             while (args[i].EndsWith(","))
             {
                 files.Add(args[i].Substring(0, args[i].Length - 1));
                 i++;
             }
+
             files.Add(args[i++]);
             return i;
         }
@@ -613,7 +627,7 @@ namespace SIL.PublishingSolution
                 foreach (string filename in Directory.GetFiles(Path.GetDirectoryName(filepattern), Path.GetFileName(filepattern)))
                 {
                     StringWriter stringWriter = new StringWriter();
-                    XmlTextWriter xmlTextWriter = new XmlTextWriter(stringWriter); 
+                    XmlTextWriter xmlTextWriter = new XmlTextWriter(stringWriter);
                     XmlDocument doc = new XmlDocument();
                     try
                     {
@@ -647,7 +661,7 @@ namespace SIL.PublishingSolution
                     xmlTextWriter.Flush();
                     xmlTextWriter.Close();
                     stringWriter.Close();
-                    
+
                     // If we got anything, add it to the list.
                     if (doc.HasChildNodes)
                     {
@@ -658,7 +672,7 @@ namespace SIL.PublishingSolution
             if (docs.Count == 0)
             {
                 throw new Exception("Unable to convert USFM documents to Pathway's internal XHTML format.");
-            }           
+            }
 
             try
             {
