@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="SfmToUsxTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Conversion Process
 // </remarks>
@@ -54,7 +54,7 @@ namespace Test.ParatextSupport
 
         ///<summary>
         ///Compare files
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void Book()
@@ -71,9 +71,28 @@ namespace Test.ParatextSupport
             FileAssert.AreEqual(expected, output, file + " test fails");
         }
 
+		///<summary>
+		///Compare files
+		/// </summary>
+		[Test]
+		[Category("SkipOnTeamCity")]
+		public void GENKFYBook()
+		{
+			SfmToUsx _sfmToUsx = new SfmToUsx();
+			const string file = "GENKFY";
+
+			string input = Common.PathCombine(_inputPath, file + ".sfm");
+			string output = Common.PathCombine(_outputPath, file + ".usx");
+			string expected = Common.PathCombine(_expectedPath, file + ".usx");
+
+			_sfmToUsx.ConvertSFMtoUsx(input, output);
+
+			FileAssert.AreEqual(expected, output, file + " test fails");
+		}
+
         ///<summary>
         ///Compare files
-        /// </summary>      
+        /// </summary>
         [Test]
         [Category("SkipOnTeamCity")]
         public void NKOu3Book()

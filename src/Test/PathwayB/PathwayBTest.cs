@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="PathwayBTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Erik Brommers, reworked from XhtmlExportTest.cs by Greg Trihus</author>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // PathwayB.exe command line tests
 // </remarks>
@@ -35,7 +35,7 @@ namespace Test
             USFM,
             USX
         }
-        
+
         /// <summary>
         /// setup Input, Expected, and Output paths relative to location of program
         /// </summary>
@@ -53,7 +53,7 @@ namespace Test
             Directory.CreateDirectory(_outputPath);
         }
         #endregion Setup
-        
+
         /// <summary>
         /// Runs PathwayB on the data and applies the back end
         /// </summary>
@@ -315,7 +315,7 @@ namespace Test
 
             RunPathwayB(InputFormat.XHTML, "\"main.xhtml\", \"FlexRev.xhtml\"", "Sena 3-01", "main", "Dictionary", "E-Book (Epub2 and Epub3)", "MainAndRevTest");
         }
-      
+
         /// <summary>
         /// EDB 11/1/2011 -
         /// Note: The validation on this test is currently failing due to a bug in TE (FWR 2550 - mismatched cases in hyperlink IDs). There is
@@ -334,13 +334,13 @@ namespace Test
             {
                 if (File.Exists(file))
                     File.Delete(file);
-            } 
+            }
             // make a copy of the xhtml and CSS files
             File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "Sena 3-01.xhtml"), Common.PathCombine(_outputPath, "Scripture Draft.xhtml"), true);
             File.Copy(Common.PathCombine(Common.PathCombine(_inputPath, "Sena 3-01"), "Sena 3-01.css"), Common.PathCombine(_outputPath, "Scripture Draft.css"), true);
             // run the test
           // TODO  RunPathwayB(InputFormat.XHTML, "\"Scripture Draft.xhtml\"", "Sena 3-01", "Scripture Draft", "Scripture", "E-Book (Epub2 and Epub3)", "xhtmlTest");
-            
+
         }
 
         /// <summary>
@@ -439,5 +439,43 @@ namespace Test
             }
             // TODO: implement test
         }
+
+		/// <summary>
+		/// Tests USFM conversion from the command line. Currently the PathwayB module uses reflection to call into ParatextShared.dll. For this
+		/// to pass, you need to have ParatextShared.dll and NetLoc.dll in your Pathway installation directory.
+		/// </summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void KFYScriptureEpubExportTest()
+		{
+			// clean out old files
+			foreach (var file in Directory.GetFiles(_outputPath))
+			{
+				if (File.Exists(file))
+					File.Delete(file);
+			}
+			if (Directory.Exists(Common.PathCombine(_outputPath, "gather")))
+			{
+				// delete the gather subdirectory files as well
+				foreach (var file in Directory.GetFiles(Common.PathCombine(_outputPath, "gather")))
+				{
+					File.Delete(file);
+				}
+			}
+			// Copy the files
+			var projPath = Common.PathCombine(_inputPath, "KFY");
+			//if (Directory.Exists(Common.PathCombine(projPath, "gather")))
+			DirectoryCopy(projPath, _outputPath, true);
+			// Copy Settings
+			var targetSettings = Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pathway");
+			if (Directory.Exists(targetSettings))
+			{
+				Directory.Delete(targetSettings, true);
+			}
+			DirectoryCopy(Common.PathCombine(_inputPath, "Pathway"), targetSettings, true);
+			// run the test
+			RunPathwayB(InputFormat.USFM, "*", "KFY", "KFY", "Scripture", "E-Book (Epub2 and Epub3)", "PathwayBExport");
+		}
     }
 }
