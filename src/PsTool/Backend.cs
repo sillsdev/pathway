@@ -175,7 +175,7 @@ namespace SIL.Tool
 			        var batchFullName = Path.Combine(publicationInformation.DictionaryPath, "PathwayExport.bat");
 			        using (var sw = new StreamWriter(batchFullName))
 			        {
-				        sw.WriteLine(cmd + " " + argument);
+				        sw.WriteLine("\"" + cmd + "\" " + argument);
 				        sw.Close();
 			        }
 			        MessageBox.Show(@"Batch command written to " + batchFullName + @" since PathwayExportBatch variable present");
