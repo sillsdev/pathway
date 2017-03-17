@@ -396,7 +396,7 @@ namespace SIL.PublishingSolution
                 chkHyphen.Checked = false;
                 clbHyphenlang.Items.Clear();
                 //Loads Hyphenation related settings
-		        LoadHyphenationSettings();
+		        LoadHyphenationSettingsToForm();
 	            LoadProperty();
                 EnableUIElements();
 
@@ -409,7 +409,16 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        private void LoadDefaultSettings()
+	    private void LoadHyphenationSettingsToForm()
+	    {
+		    Common.LoadHyphenationSettings();
+			foreach (string lang in Param.HyphenLang.Split(','))
+			{
+				clbHyphenlang.Items.Add(lang, (Param.HyphenationSelectedLanguagelist.Contains(lang) ? true : false));
+			}
+		}
+
+		private void LoadDefaultSettings()
         {
             // not setting defaults, just opening the dialog:
             // load the settings file and migrate it if necessary
@@ -417,78 +426,6 @@ namespace SIL.PublishingSolution
             Param.LoadSettings();
             isFromConfigurationTool = true;
         }
-
-        private void LoadHyphenationSettings()
-        {
-            var ssf = _settingsHelper.GetSettingsFilename(_settingsHelper.Database);
-            if (ssf != null && ssf.Trim().Length > 0)
-            {
-	            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe")
-	            {
-		            var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
-		            Param.DatabaseName = _settingsHelper.Database;
-		            Param.IsHyphen = false;
-		            Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database, true);
-		            foreach (string filename in Directory.GetFiles(paratextpath, "*.txt"))
-		            {
-			            if (filename.Contains("hyphen"))
-			            {
-				            Param.IsHyphen = true;
-				            Param.HyphenFilepath = filename;
-				            Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
-			            }
-		            }
-	            }
-	            if (AppDomain.CurrentDomain.FriendlyName.ToLower().Contains("fieldworks"))
-	            {
-		            try
-		            {
-						IDictionary<string,string> value=new Dictionary<string, string>();
-						var settingsFile = ssf;
-                        var flexScan = new FlexScan(settingsFile);
-				        foreach (var lang in flexScan.VernWs)
-				        {
-							var langname = GetLanguageValues(lang);
-					        if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-						        value.Add(lang, langname.Replace(',',' '));
-				        }
-						foreach (var lang in flexScan.AnalWs)
-				        {
-							var langname = GetLanguageValues(lang);
-							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-								value.Add(lang, langname.Replace(',', ' '));
-				        }
-						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
-		            }
-		            catch (Exception)
-		            {
-		            }
-	            }
-
-            }
-			Common.EnableHyphenation();
-            CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database, InputType);
-            foreach (string lang in Param.HyphenLang.Split(','))
-            {
-                    clbHyphenlang.Items.Add(lang, (Param.HyphenationSelectedLanguagelist.Contains(lang) ? true : false));
-            }
-        }
-
-	    public static string GetLanguageValues(string lang)
-	    {
-		    if (lang.Contains("-"))
-		    {
-			    lang = lang.Substring(0, lang.IndexOf("-", System.StringComparison.Ordinal));
-		    }
-		    var allLangs = from ci in CultureInfo.GetCultures(CultureTypes.NeutralCultures)
-			    where ci.TwoLetterISOLanguageName != "iv"
-			    orderby ci.DisplayName
-			    select ci;
-		    var langname = lang.Length == 2
-			    ? allLangs.FirstOrDefault(s => s.TwoLetterISOLanguageName == lang)
-			    : allLangs.FirstOrDefault(s => s.ThreeLetterISOLanguageName == lang);
-		    return langname != null ? langname.EnglishName : Common.GetPalasoLanguageName(lang);
-	    }
 
 	    private void AssignFolderDateTime()
         {

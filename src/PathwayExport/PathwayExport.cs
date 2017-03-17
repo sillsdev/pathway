@@ -108,6 +108,7 @@ namespace SIL.PublishingSolution
 				SetFileName();
 				projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
 				LoadParameters(projectInfo.ProjectInputType);
+				Common.LoadHyphenationSettings();
 
 				List<IExportProcess> backend = new List<IExportProcess>();
 				backend = Backend.LoadExportAssembly(Common.AssemblyPath);

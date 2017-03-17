@@ -12,6 +12,7 @@
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -35,7 +36,10 @@ namespace SIL.Tool
         private bool _noXmlHeader;
         protected bool SkipAttr;
         protected bool SkipNode;
-	    protected string StyleDecorate;
+		private const int StackSize = 30;
+		protected readonly ArrayList Classes = new ArrayList(StackSize);
+		protected readonly ArrayList Langs = new ArrayList(StackSize);
+		protected string StyleDecorate;
 		protected readonly List<string> DecorateExceptions = new List<string> {"letHead", "letter", "letData", "reversalindexentry", "dicBody"};
         protected string Suffix = "-ps";
         protected string ReplaceLocalName;
@@ -245,7 +249,53 @@ namespace SIL.Tool
             _wtr.WriteEndElement();
         }
 
-        private void BeforeProcessMethods()
+		protected static void AddInHierarchy(XmlReader r, IList arrayList)
+		{
+			AddInHierarchy(arrayList, r.Depth, r.Value);
+		}
+
+		protected static void AddInHierarchy(IList arrayList, int index, object value)
+		{
+			if (index >= arrayList.Count)
+			{
+				while (arrayList.Count < index)
+				{
+					// ReSharper disable once AssignNullToNotNullAttribute
+					arrayList.Add(null);
+				}
+				arrayList.Add(value);
+			}
+			else
+			{
+				arrayList[index] = value;
+			}
+		}
+
+		protected string GetClass(XmlReader r)
+		{
+			var myClass = r.GetAttribute("class");
+			var depth = r.Depth;
+			while (string.IsNullOrEmpty(myClass) && depth > 0)
+			{
+				myClass = Classes.Count > depth ? (string)Classes[depth] : null;
+				depth -= 1;
+			}
+			return myClass;
+		}
+
+		protected string GetLang(XmlReader r)
+		{
+			var myLang = r.GetAttribute("lang");
+			var depth = r.Depth;
+			while (string.IsNullOrEmpty(myLang) && depth > 0)
+			{
+				myLang = Langs.Count > depth ? (string)Langs[depth] : null;
+				depth -= 1;
+			}
+			return myLang;
+		}
+
+		private void BeforeProcessMethods()
         {
             if (!_beforeNodeTypeMap.ContainsKey(_rdr.NodeType)) return;
             foreach (ParserMethod func in _beforeNodeTypeMap[_rdr.NodeType])
@@ -292,6 +342,11 @@ namespace SIL.Tool
                     break;
             }
         }
+
+	    protected void WriteTextValue(string val)
+	    {
+			_wtr.WriteValue(val);
+	    }
 
         protected void WriteEmbddedStyle(string val)
         {

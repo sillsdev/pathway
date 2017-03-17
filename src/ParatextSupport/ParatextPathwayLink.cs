@@ -119,6 +119,7 @@ namespace SIL.PublishingSolution
         public ParatextPathwayLink(string databaseName, Dictionary<string, object> xslParams)
         {
             MDatabaseName = databaseName;
+	        Param.DatabaseName = databaseName;
             _mXslParams = xslParams;
             _mProjectName = xslParams["projName"].ToString();
             // If the writing system is undefined or set (by default) to English, add a writing system code

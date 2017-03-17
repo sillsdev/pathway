@@ -30,8 +30,6 @@ namespace CssSimpler
         private readonly Dictionary<string, List<XmlElement>> _ruleIndex = new Dictionary<string, List<XmlElement>>();
         private readonly List<int> _displayBlockRuleNum = new List<int>();
         private const int StackSize = 30;
-        private readonly ArrayList _classes = new ArrayList(StackSize);
-        private readonly ArrayList _langs = new ArrayList(StackSize);
         private readonly ArrayList _levelRules = new ArrayList(StackSize);
         private readonly ArrayList _savedSibling = new ArrayList(StackSize);
         //private string _lastClass = String.Empty;
@@ -63,6 +61,8 @@ namespace CssSimpler
             DeclareBeforeEnd(XmlNodeType.EndElement, DivEnds);
             DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveClass);
 	        SpaceClass = "sp";
+			Classes.RemoveRange(0, Classes.Count);
+			Langs.RemoveRange(0, Langs.Count);
         }
 
 	    private void RemoveExtraStylesheets(XmlReader r)
@@ -150,9 +150,9 @@ namespace CssSimpler
         private void UnsaveClass(int depth, string name)
         {
             var index = depth + 1;
-            if (index >= _classes.Count) return;
-            _precedingClass = _classes[index] as string;
-            _classes[index] = null;
+            if (index >= Classes.Count) return;
+            _precedingClass = Classes[index] as string;
+            Classes[index] = null;
         }
 
         private void CollectRules(XmlReader r, string target)
@@ -302,8 +302,8 @@ namespace CssSimpler
 
         private bool MatchClass(int index, string name)
         {
-            if (index >= _classes.Count) return false;
-            var classNames = _classes[index] as string;
+            if (index >= Classes.Count) return false;
+            var classNames = Classes[index] as string;
             if (classNames == null) return false;
             if (!classNames.Split(' ').Contains(name)) return false;
             return true;
@@ -478,7 +478,7 @@ namespace CssSimpler
         {
             if (r.Name == "class")
             {
-                AddInHierarchy(r, _classes);
+                AddInHierarchy(r, Classes);
                 switch (r.Value)
                 {
                     case "entry":
@@ -497,54 +497,8 @@ namespace CssSimpler
             }
             else if (r.Name == "lang")
             {
-                AddInHierarchy(r, _langs);
+                AddInHierarchy(r, Langs);
             }
-        }
-
-        private static void AddInHierarchy(XmlReader r, IList arrayList)
-        {
-            AddInHierarchy(arrayList, r.Depth, r.Value);
-        }
-
-        private static void AddInHierarchy(IList arrayList, int index, object value)
-        {
-            if (index >= arrayList.Count)
-            {
-                while (arrayList.Count < index)
-                {
-                    // ReSharper disable once AssignNullToNotNullAttribute
-                    arrayList.Add(null);
-                }
-                arrayList.Add(value);
-            }
-            else
-            {
-                arrayList[index] = value;
-            }
-        }
-
-        private string GetClass(XmlReader r)
-        {
-            var myClass = r.GetAttribute("class");
-            var depth = r.Depth;
-            while (string.IsNullOrEmpty(myClass) && depth > 0)
-            {
-                myClass = _classes.Count > depth? (string)_classes[depth]: null;
-                depth -= 1;
-            }
-            return myClass;
-        }
-
-        private string GetLang(XmlReader r)
-        {
-            var myLang = r.GetAttribute("lang");
-            var depth = r.Depth;
-            while (string.IsNullOrEmpty(myLang) && depth > 0)
-            {
-                myLang = _langs.Count > depth ? (string)_langs[depth] : null;
-                depth -= 1;
-            }
-            return myLang;
         }
 
         private int _nextFirst = -1;
@@ -654,10 +608,10 @@ namespace CssSimpler
 
         private string KeyClass(int depth)
         {
-            if (_classes.Count <= depth) return null;
+            if (Classes.Count <= depth) return null;
             while (depth > 0)
             {
-                var proposedClass = _classes[depth] as string;
+                var proposedClass = Classes[depth] as string;
                 if (proposedClass != null && !_needHigher.Contains(proposedClass))
                     return proposedClass;
                 depth -= 1;

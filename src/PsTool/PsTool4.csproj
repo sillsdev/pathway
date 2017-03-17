@@ -250,6 +250,7 @@
     <Compile Include="FileStreamXmlResolver.cs" />
     <Compile Include="FlexScan.cs" />
     <Compile Include="ImageMods.cs" />
+    <Compile Include="InsertHyphens.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="FontInternals.cs">
     </Compile>

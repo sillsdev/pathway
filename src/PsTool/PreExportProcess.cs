@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -2774,33 +2775,12 @@ namespace SIL.Tool
 
 			if (!File.Exists(xhtmlFile)) return;
 
-			// load the xhtml file we're working with
-			XmlDocument xmlDocument = Common.DeclareXMLDocument(true);
-			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
-			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
-			XmlReader xmlReader = XmlReader.Create(xhtmlFile, xmlReaderSettings);
-			xmlDocument.Load(xmlReader);
-			xmlReader.Close();
-
-			const string xPath = "//xhtml:div[@class='Paragraph']";
-			XmlNodeList paragraphNodeList = xmlDocument.SelectNodes(xPath, namespaceManager);
-			if (paragraphNodeList != null && paragraphNodeList.Count > 0)
-			{
-				for (int i = 0; i < paragraphNodeList.Count; i++)
-				{
-					foreach (string hyphenWord in hyphenWords.Keys)
-					{
-						if (paragraphNodeList[i].InnerText.Contains(" " + hyphenWord + " ") ||
-							paragraphNodeList[i].InnerText.Contains(" " + hyphenWord + ",") ||
-							paragraphNodeList[i].InnerText.Contains(hyphenWord + ","))
-						{
-							paragraphNodeList[i].InnerText = paragraphNodeList[i].InnerText.Replace(hyphenWord, hyphenWords[hyphenWord]);
-						}
-					}
-				}
-			}
-			xmlDocument.Save(xhtmlFile);
+			var tempFile = Path.Combine(Path.GetTempPath(), Path.GetTempFileName() + ".xhtml");
+			File.Copy(xhtmlFile, tempFile);
+			var ih = new InsertHyphens(xhtmlFile, tempFile, Param.HyphenLang, hyphenWords);
+			ih.Parse();
+			File.Copy(tempFile, xhtmlFile, true);
+			File.Delete(tempFile);
 		}
 
 		/// <summary>

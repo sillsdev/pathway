@@ -3639,6 +3639,42 @@ namespace SIL.Tool
 		}
 
 		/// <summary>
+		/// Method to get the font-name from the meta tag in the ".xhtml" input file based on key "scheme="Default Font"
+		/// and append the fontname in beginning of the input css file.
+		/// so, these fonts will be the default for the whole content.
+		/// </summary>
+		/// <param name="inputXhtmlFileName">Passing the input xhtml file</param>
+		/// <param name="inputCssFileName">Passing input css file</param>
+		/// <param name="isFLEX">FLEX / Paratext</param>
+		/// <param name="inputRevCssFileName">Merged rev css to include the font list which used for mergedmain css file</param>
+		public static void LanguageSettings(string inputXhtmlFileName, string inputCssFileName, bool isFLEX, string inputRevCssFileName)
+		{
+			StringBuilder newProperty = new StringBuilder();
+			XmlDocument xdoc = DeclareXMLDocument(false);
+			xdoc.Load(inputXhtmlFileName);
+			XmlNodeList fontList = xdoc.GetElementsByTagName("meta");
+			foreach (XmlNode fontName in fontList)
+			{
+				if (isFLEX && (fontName.OuterXml.IndexOf("scheme=\"Default Font\"") > 0 || fontName.OuterXml.IndexOf("scheme=\"language to font\"") > 0))
+				{
+					string fntName = fontName.Attributes["name"].Value;
+					string fntContent = fontName.Attributes["content"].Value;
+					newProperty.AppendLine("div[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
+					newProperty.AppendLine("span[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
+				}
+				else if (!isFLEX && fontName.OuterXml.IndexOf("name=\"fontName\"") > 0)
+				{
+					string fntContent = fontName.Attributes["content"].Value;
+					newProperty.AppendLine("div{ font-family: \"" + fntContent + "\";}");
+					newProperty.AppendLine("span{ font-family: \"" + fntContent + "\";}");
+				}
+			}
+			FileInsertText(inputCssFileName, newProperty.ToString());
+			if (File.Exists(inputRevCssFileName))
+			{ FileInsertText(inputRevCssFileName, newProperty.ToString()); }
+		}
+
+		/// <summary>
 		/// Method to get the font-name from the ldml file which located in WritingSystemStore folder and create a css file
 		/// and append the fontname in beginning of the input css file.
 		/// so, these fonts will be the default for the whole content.
@@ -4119,7 +4155,7 @@ namespace SIL.Tool
 		public static string ParaTextDcLanguage(string dataBaseName, bool hyphenlang)
 		{
 			string dcLanguage = string.Empty;
-			if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext00
+			if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" || Param.Value[Param.InputType] == "Scripture") // is scripture
 			{
 				// read Language Code from ssf
 				SettingsHelper settingsHelper = new SettingsHelper(dataBaseName);
@@ -5101,6 +5137,77 @@ namespace SIL.Tool
 		#endregion
 
 		#region Hyphenation Settings
+
+		public static void LoadHyphenationSettings()
+		{
+			var _settingsHelper = new SettingsHelper(Param.DatabaseName);
+			_settingsHelper.LoadValues();
+			var ssf = _settingsHelper.GetSettingsFilename(_settingsHelper.Database);
+			if (ssf != null && ssf.Trim().Length > 0)
+			{
+				var app = AppDomain.CurrentDomain.FriendlyName.ToLower();
+				if (app == "paratext.exe" || Param.Value[Param.InputType] == "Scripture")
+				{
+					var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
+					Param.DatabaseName = _settingsHelper.Database;
+					Param.IsHyphen = false;
+					Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database, true);
+					foreach (string filename in Directory.GetFiles(paratextpath, "*.txt"))
+					{
+						if (filename.Contains("hyphen"))
+						{
+							Param.IsHyphen = true;
+							Param.HyphenFilepath = filename;
+							Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
+						}
+					}
+				}
+				if (app.Contains("fieldworks") || Param.Value[Param.InputType] == "Dictionary")
+				{
+					try
+					{
+						IDictionary<string, string> value = new Dictionary<string, string>();
+						var settingsFile = ssf;
+						var flexScan = new FlexScan(settingsFile);
+						foreach (var lang in flexScan.VernWs)
+						{
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+						}
+						foreach (var lang in flexScan.AnalWs)
+						{
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+						}
+						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
+					}
+					catch (Exception)
+					{
+					}
+				}
+
+			}
+			Common.EnableHyphenation();
+			CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database, Param.Value[Param.InputType]);
+		}
+
+		public static string GetLanguageValues(string lang)
+		{
+			if (lang.Contains("-"))
+			{
+				lang = lang.Substring(0, lang.IndexOf("-", System.StringComparison.Ordinal));
+			}
+			var allLangs = from ci in CultureInfo.GetCultures(CultureTypes.NeutralCultures)
+						   where ci.TwoLetterISOLanguageName != "iv"
+						   orderby ci.DisplayName
+						   select ci;
+			var langname = lang.Length == 2
+				? allLangs.FirstOrDefault(s => s.TwoLetterISOLanguageName == lang)
+				: allLangs.FirstOrDefault(s => s.ThreeLetterISOLanguageName == lang);
+			return langname != null ? langname.EnglishName : Common.GetPalasoLanguageName(lang);
+		}
 
 		public static void EnableHyphenation()
 		{
