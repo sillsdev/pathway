@@ -1140,5 +1140,85 @@ namespace Test.PsExport
 			XmlAssert.AreEqual(Common.PathCombine(_expectTestPath, data), infile, "FW83v Reversal Preprocess produced different results");
 		}
 
+		/// <summary>
+		///A test for Languagesettings(from META tag) file added in css. TD-2736
+		///</summary>
+		[Test]
+		public void LanguageSettingsFromMetaTag()
+		{
+			const string xhtmlFileName = "LanguageSettings.xhtml";
+			const string cssFileName = "LanguageSettings.css";
+			string sourceXhtmlFile = GetFileNameWithPath(xhtmlFileName);
+			string sourceCssFile = GetFileNameWithPath(cssFileName);
+			string output = GetFileNameWithOutputPath(cssFileName);
+			string expected = GetFileNameWithExpectedPath(cssFileName);
+			CopyToOutput(sourceCssFile, output);
+			LanguageSettings(sourceXhtmlFile, output, true, string.Empty, string.Empty);
+			TextFileAssert.AreEqual(expected, output);
+		}
+
+		/// <summary>
+		///A test for Languagesettings(from META tag) file added in css. TD-2736
+		///</summary>
+		[Test]
+		public void BaseFontSize()
+		{
+			const string xhtmlFileName = "BaseFontSize.xhtml";
+			const string cssFileName = "BaseFontSize.css";
+			const string revXhtmlFileName = "FlexRev.xhtml";
+			const string revCssFileName = "FlexRev.css";
+
+
+			string sourceMainXhtmlFile = GetFileNameWithPath(xhtmlFileName);
+			string sourceMainCssFile = GetFileNameWithPath(cssFileName);
+
+			string sourceFlexXhtmlFile = GetFileNameWithPath(revXhtmlFileName);
+			string sourceFlexCssFile = GetFileNameWithPath(revCssFileName);
+
+			string outputMainCss = GetFileNameWithOutputPath(cssFileName);
+			string expectedMainCss = GetFileNameWithExpectedPath(cssFileName);
+
+			string outputFlexCss = GetFileNameWithOutputPath(revCssFileName);
+			string expectedFlexCss = GetFileNameWithExpectedPath(revCssFileName);
+
+
+			CopyToOutput(sourceMainCssFile, outputMainCss);
+			CopyToOutput(sourceFlexCssFile, outputFlexCss);
+
+			SetBaseFontSize(sourceMainXhtmlFile, outputMainCss, true, sourceFlexXhtmlFile, outputFlexCss);
+
+			TextFileAssert.AreEqual(expectedMainCss, outputMainCss);
+
+			TextFileAssert.AreEqual(expectedFlexCss, outputFlexCss);
+		}
+
+
+
+		private static string GetPath(string place, string filename)
+		{
+			return Common.PathCombine(GetTestPath(), Common.PathCombine(place, filename));
+		}
+		private static string GetTestPath()
+		{
+			return PathPart.Bin(Environment.CurrentDirectory, "/PsExport/TestFiles/");
+		}
+
+		private static string GetFileNameWithPath(string fileName)
+		{
+			return Common.DirectoryPathReplace(GetPath("Input", fileName));
+		}
+		private static string GetFileNameWithOutputPath(string fileName)
+		{
+			return Common.DirectoryPathReplace(GetPath("Output", fileName));
+		}
+		private static string GetFileNameWithExpectedPath(string fileName)
+		{
+			return Common.DirectoryPathReplace(GetPath("Expected", fileName));
+		}
+		private static void CopyToOutput(string input, string output)
+		{
+			if (File.Exists(input))
+				File.Copy(input, output, true);
+		}
     }
 }

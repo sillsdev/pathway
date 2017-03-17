@@ -38,6 +38,7 @@ using System.Reflection;
 using Test;
 using SIL.PublishingSolution;
 using SIL.WritingSystems;
+using SIL.Xml;
 
 #endregion Using
 
@@ -2661,8 +2662,8 @@ namespace SIL.Tool
 			sr.Close();
 			var fsWrite = new FileStream(sourceFile, FileMode.Create, FileAccess.ReadWrite);
 			var writer = new StreamWriter(fsWrite);
-			writer.WriteLine(textToInsert);
 			writer.Write(builder.ToString());
+			writer.WriteLine(textToInsert);
 			writer.Close();
 			fsWrite.Close();
 		}
@@ -3635,42 +3636,6 @@ namespace SIL.Tool
 				isRecentVersion = true;
 			}
 			return isRecentVersion;
-		}
-
-		/// <summary>
-		/// Method to get the font-name from the meta tag in the ".xhtml" input file based on key "scheme="Default Font"
-		/// and append the fontname in beginning of the input css file.
-		/// so, these fonts will be the default for the whole content.
-		/// </summary>
-		/// <param name="inputXhtmlFileName">Passing the input xhtml file</param>
-		/// <param name="inputCssFileName">Passing input css file</param>
-		/// <param name="isFLEX">FLEX / Paratext</param>
-		/// <param name="inputRevCssFileName">Merged rev css to include the font list which used for mergedmain css file</param>
-		public static void LanguageSettings(string inputXhtmlFileName, string inputCssFileName, bool isFLEX, string inputRevCssFileName)
-		{
-			StringBuilder newProperty = new StringBuilder();
-			XmlDocument xdoc = DeclareXMLDocument(false);
-			xdoc.Load(inputXhtmlFileName);
-			XmlNodeList fontList = xdoc.GetElementsByTagName("meta");
-			foreach (XmlNode fontName in fontList)
-			{
-				if (isFLEX && (fontName.OuterXml.IndexOf("scheme=\"Default Font\"") > 0 || fontName.OuterXml.IndexOf("scheme=\"language to font\"") > 0))
-				{
-					string fntName = fontName.Attributes["name"].Value;
-					string fntContent = fontName.Attributes["content"].Value;
-					newProperty.AppendLine("div[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
-					newProperty.AppendLine("span[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
-				}
-				else if (!isFLEX && fontName.OuterXml.IndexOf("name=\"fontName\"") > 0)
-				{
-					string fntContent = fontName.Attributes["content"].Value;
-					newProperty.AppendLine("div{ font-family: \"" + fntContent + "\";}");
-					newProperty.AppendLine("span{ font-family: \"" + fntContent + "\";}");
-				}
-			}
-			FileInsertText(inputCssFileName, newProperty.ToString());
-			if (File.Exists(inputRevCssFileName))
-			{ FileInsertText(inputRevCssFileName, newProperty.ToString()); }
 		}
 
 		/// <summary>

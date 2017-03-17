@@ -1087,23 +1087,6 @@ namespace Test.PsTool
             TextFileAssert.AreEqual(expected, output);
         }
 
-        /// <summary>
-        ///A test for Languagesettings(from META tag) file added in css. TD-2736
-        ///</summary>
-        [Test]
-        public void LanguageSettingsFromMetaTag()
-        {
-            const string xhtmlFileName = "LanguageSettings.xhtml";
-            const string cssFileName = "LanguageSettings.css";
-            string sourceXhtmlFile = GetFileNameWithPath(xhtmlFileName);
-            string sourceCssFile = GetFileNameWithPath(cssFileName);
-            string output = GetFileNameWithOutputPath(cssFileName);
-            string expected = GetFileNameWithExpectedPath(cssFileName);
-            CopyToOutput(sourceCssFile, output);
-            Common.LanguageSettings(sourceXhtmlFile, output, true, string.Empty);
-            TextFileAssert.AreEqual(expected, output);
-        }
-
 		/// <summary>
 		///A test for GetLanguageCode
 		/// Checks whether the Language Code returned is as expected

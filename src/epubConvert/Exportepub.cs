@@ -1159,7 +1159,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                string expCssLine = "@import \"" + Path.GetFileName(projInfo.DefaultCssFileWithPath) + "\";";
+                string expCssLine = "\r\n" + "@import \"" + Path.GetFileName(projInfo.DefaultCssFileWithPath) + "\";";
                 Common.FileInsertText(cssFullPath, expCssLine);
             }
             return cssFullPath;

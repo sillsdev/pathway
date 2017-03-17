@@ -3061,14 +3061,21 @@ namespace SIL.Tool
 			int searchPos = fileContent.Length;
 			while (true)
 			{
-				int findTop = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
-				if (findTop == -1)
+				if (fileContent.Contains(match))
+				{
+					int findTop = fileContent.LastIndexOf(match, searchPos, StringComparison.OrdinalIgnoreCase);
+					if (findTop == -1)
+					{
+						break;
+					}
+					int closingbracePos = fileContent.IndexOf("}", findTop) + 1;
+					fileContent = fileContent.Substring(0, findTop) + fileContent.Substring(closingbracePos);
+					searchPos = findTop - 1;
+				}
+				else
 				{
 					break;
 				}
-				int closingbracePos = fileContent.IndexOf("}", findTop) + 1;
-				fileContent = fileContent.Substring(0, findTop) + fileContent.Substring(closingbracePos);
-				searchPos = findTop - 1;
 			}
 			var sw = new StreamWriter(cssFileName);
 			sw.Write(fileContent);
