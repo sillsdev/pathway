@@ -579,19 +579,25 @@ namespace SIL.PublishingSolution
 
 			UniqueClasses = lc.UniqueClasses;
 			UniqueIds = lc.UniqueIDs;
+
+
+			List<string> lstDontInclude = new List<string>();
+			lstDontInclude.Add("letter");
+			lstDontInclude.Add("scrBody");
+			lstDontInclude.Add("scrBook");
+			lstDontInclude.Add("scrBookName");
+			lstDontInclude.Add("scrBookCode");
+			lstDontInclude.Add("Title_Main");
+			lstDontInclude.Add("Title_Secondary");
+
+
 			foreach (var clsValue in UniqueClasses)
 			{
-				if (clsValue.ToLower() != "letter")
+				if (!lstDontInclude.Contains(clsValue))
 				{
 					newProperty.AppendLine("." + clsValue + "{ font-size: " + baseFontSize + "pt;} \r\n");
 				}
 			}
-
-			foreach (var clsValue in UniqueIds)
-			{
-				newProperty.AppendLine("#" + clsValue + "{ font-size: " + baseFontSize + "pt;} \r\n");
-			}
-
 			return newProperty;
 		}
 
