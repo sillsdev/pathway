@@ -52,12 +52,11 @@ namespace SIL.PublishingSolution
 			{
 				Console.Write("PathwayExport: ");
 				Console.WriteLine("Try 'PathwayExport --help' for more information.");
-				Environment.Exit(0);
+				Environment.Exit(-1);
 			}
 			else if (args.Length == 1 && args[0].ToLower() == "--help")
 			{
 				Usage();
-				Console.Read();
 				Environment.Exit(0);
 			}
 			else
@@ -221,10 +220,9 @@ namespace SIL.PublishingSolution
                         argFilledExportType = true;
                         if (!CheckExportType())
                         {
-                            Console.Write(@"PathwayExport : Unknown Export Type");
+                            Console.Write(@"PathwayExport : Unknown Export Target");
                             Console.WriteLine(@"Try 'PathwayExport --help' for more information.");
-                            Console.Read();
-                            Environment.Exit(0);
+                            Environment.Exit(-2);
                         }
                         break;
                     case "--directory":
@@ -236,8 +234,7 @@ namespace SIL.PublishingSolution
                         {
                             Console.Write(@"PathwayExport : Export directory not exists");
                             Console.WriteLine(@"Try 'PathwayExport --help' for more information.");
-                            Console.Read();
-                            Environment.Exit(0);
+                            Environment.Exit(-3);
                         }
                         projectInfo.ProjectPath = exportDirectory;
                         break;
@@ -283,8 +280,7 @@ namespace SIL.PublishingSolution
             {
                 Console.Write("PathwayExport: Files Missing. Cannot Proceed.");
                 Console.WriteLine("Try 'PathwayExport --help' for more information.");
-                Console.Read();
-                Environment.Exit(0);
+                Environment.Exit(-4);
             }
             else
             {
@@ -326,8 +322,7 @@ namespace SIL.PublishingSolution
             {
                 Console.Write("PathwayExport: CSS Files not mentioned");
                 Console.WriteLine("Try 'PathwayExport --help' for more information.");
-                Console.Read();
-                Environment.Exit(0);
+                Environment.Exit(-5);
             }
         }
 
@@ -406,59 +401,6 @@ namespace SIL.PublishingSolution
             Console.Write(val);
             val = "   --css | -c                stylesheet file name (required for xhtml only).\r\n";
             Console.Write(val);
-            //val = "   --showdialog | -s         Show the Export Through Pathway dialog, and take\r\n";
-            //Console.Write(val);
-            //val = "                             the values for target format, style, etc. from\r\n";
-            //Console.Write(val);
-            //val = "                             the user's input on the dialog.\r\n";
-            //Console.Write(val);
-            //val = "   --launch | -l             launch resulting output in target back end.\r\n";
-            //Console.Write(val);
-            //val = "   --name | -n               [main] Project name.\r\n\r\n\r\n";
-            //Console.Write(val);
-            //val = "Examples:\r\n\r\n";
-            //Console.Write(val);
-            //val = "   PathwayB.exe -d \"D:\\MyProject\" -if usfm -f * -t \"E-Book (.epub)\" \r\n";
-            //Console.Write(val);
-            //val = "                             -i \"Scripture\" -n \"SEN\" \r\n";
-            //Console.Write(val);
-            //val = "      Creates an .epub file from the USFM project found in D:\\MyProject.\r\n\r\n";
-            //Console.Write(val);
-            //val = "   PathwayB.exe -d \"D:\\MyDict\" -if xhtml -c \"D:\\MyDict\\main.css\" \r\n";
-            //Console.Write(val);
-            //val = "                             -f \"main.xhtml\", \"FlexRev.xhtml\" \r\n";
-            //Console.Write(val);
-            //val = "                             -t \"E-Book (.epub)\" -i \"Dictionary\" \r\n";
-            //Console.Write(val);
-            //val = "                             -n \"Sena 3-01\" \r\n";
-            //Console.Write(val);
-            //val = "      Creates an .epub file from the xhtml dictionary found in D:\\MyDict.\r\n";
-            //Console.Write(val);
-            //val = "      Both main and reversal index files are included in the output.\r\n\r\n";
-            //Console.Write(val);
-            //val = "   PathwayB.exe -d \"D:\\Project2\" -if usfm -f * -i \"Scripture\" -n \"SEN\"-s\r\n";
-            //Console.Write(val);
-            //val = "      Displays the Export Through Pathway dialog, then generates output from\r\n";
-            //Console.Write(val);
-            //val = "      the USFM project found in D:\\Project2 to the user-specified output \r\n";
-            //Console.Write(val);
-            //val = "      format and style.\r\n\r\n";
-            //Console.Write(val);
-            //val = "Notes:\r\n\r\n";
-            //Console.Write(val);
-            //val = "-  Not all output types may be available, depending on your installation\r\n";
-            //Console.Write(val);
-            //val = "   Package. To verify the available output types, open the Configuration\r\n";
-            //Console.Write(val);
-            //val = "   Tool, click the Defaults button and click on the Destination drop-down.\r\n";
-            //Console.Write(val);
-            //val = "   The available outputs match the selections in this list.\r\n\r\n";
-            //Console.Write(val);
-            //val = "-  For dictionary output, the reversal index file needs to be named\r\n";
-            //Console.Write(val);
-            //val = "   \"FlexRev.xhtml\". this is to maintain consistency with the file naming\r\n";
-            //Console.Write(val);
-            //val = "   convention used in Pathway.\r\n\r\n";
             Console.Write(val);
         }
 
