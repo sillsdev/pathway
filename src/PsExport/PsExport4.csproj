@@ -216,9 +216,6 @@
     <Reference Include="PsTool">
       <HintPath>..\..\output\Release\PsTool.dll</HintPath>
     </Reference>
-    <Reference Include="CssDialog">
-      <HintPath>..\..\output\Release\CssDialog.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddHomographAndSenseNumClassNames.cs" />
@@ -247,6 +244,10 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CssDialog\CssDialog4.csproj">
+      <Project>{749d4fcd-5100-46c8-ae73-50873cb5cec0}</Project>
+      <Name>CssDialog4</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CssParser\CssParser4.csproj">
       <Project>{eb7eb8fe-6414-4c53-b5e6-54352ee25364}</Project>
       <Name>CssParser4</Name>
