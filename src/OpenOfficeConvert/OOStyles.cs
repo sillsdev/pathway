@@ -2664,7 +2664,8 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("fo:border", "none");
             _writer.WriteAttributeString("style:shadow", "none");
             _writer.WriteAttributeString("style:flow-with-text", "false");
-            _writer.WriteStartElement("style:background-image");
+			_writer.WriteAttributeString("draw:textarea-vertical-align", "middle");
+			_writer.WriteStartElement("style:background-image");
             _writer.WriteEndElement();
 
             _writer.WriteStartElement("style:columns");

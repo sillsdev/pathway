@@ -3679,7 +3679,7 @@ namespace SIL.PublishingSolution
 			bool fillHeadword = false;
 
 			//Check possible classname in ClassNameWithLang string.
-			bool isClassNameWithLangMatches = (_classNameWithLang.IndexOf("headwordminor", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("mainheadword", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("reversalform", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("span", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("a", StringComparison.Ordinal) == 0);
+			bool isClassNameWithLangMatches = (_classNameWithLang.IndexOf("headwordminor", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("headword", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("mainheadword", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("reversalform", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("span", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("a", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _childName string.
 			bool isClassNameMatches = (_classNameWithLang.IndexOf("reversalform", StringComparison.Ordinal) == 0 ||
@@ -3689,7 +3689,7 @@ namespace SIL.PublishingSolution
                       _childName.Replace("span_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousParagraphName string.
-			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0 || _previousParagraphName.IndexOf("reversalindexentry", StringComparison.Ordinal) == 0);
+			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentryr1_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entryr1_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0 || _previousParagraphName.IndexOf("reversalindexentry", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousChildName string.
 			bool isPrevChildNameMatches = (_previousChildName.IndexOf("headword", StringComparison.Ordinal) == -1 && _previousChildName.IndexOf("reversalform", StringComparison.Ordinal) == -1);
