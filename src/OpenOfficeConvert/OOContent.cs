@@ -3662,11 +3662,11 @@ namespace SIL.PublishingSolution
 			{
 				if (_refFormat.IndexOf("1-2") > 0)
 				{
-					if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0)
+					if (_classNameWithLang.IndexOf("chapternumber", StringComparison.InvariantCultureIgnoreCase) == 0)
 					{
 						_strPreviousChapterNumber = content;
 					}
-					if (_classNameWithLang.ToLower().IndexOf("versenumber") == 0)
+					if (_classNameWithLang.IndexOf("versenumber", StringComparison.InvariantCultureIgnoreCase) == 0)
 					// && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)
 					{
 						fillHeadword = true;
@@ -3675,8 +3675,9 @@ namespace SIL.PublishingSolution
 				}
 				else
 				{
-					if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 &&
-						(_previousParagraphName.ToLower().IndexOf("paragraph") == 0))
+					if (_classNameWithLang.IndexOf("chapternumber", StringComparison.InvariantCultureIgnoreCase) == 0 &&
+						(_previousParagraphName.IndexOf("paragraph", StringComparison.InvariantCultureIgnoreCase) == 0 ||
+						_previousParagraphName.IndexOf("line1", StringComparison.InvariantCultureIgnoreCase) == 0))
 					{
 						fillHeadword = true;
 					}
