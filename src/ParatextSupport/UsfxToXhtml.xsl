@@ -553,14 +553,14 @@
 
 		<div class="{$pictureLoc}" xmlns="http://www.w3.org/1999/xhtml">
 			<img id="Figure-{$bookCode}-{$figureNumber}" class="picture" src="{$figurePath}{@file}" alt="{$altFigurePath}{@file}"/>
-			<div class="pictureCaption">
-				<span class="pictureCaption" lang="{$ws}">
+			<div lang="{$ws}" class="pictureCaption">
+				<span lang="{$ws}">
 					<xsl:value-of select="."/>
 				</span>
-				<span class="pictureCaption" lang="{$ws}">
+				<span lang="{$ws}" class="reference">
 					<xsl:text> (</xsl:text>
 					<xsl:value-of select="@ref"/>
-					<xsl:text>) </xsl:text>
+					<xsl:text>) </xsl:text>	
 				</span>
 			</div>
 		</div>
