@@ -68,7 +68,6 @@ namespace SIL.PublishingSolution
         /// </summary>
         public bool Export(PublicationInformation projInfo)
         {
-	        MessageBox.Show("openoffice enter");
 			#region Set up progress reporting
 #if (TIME_IT)
             DateTime dt1 = DateTime.Now;    // time this thing
