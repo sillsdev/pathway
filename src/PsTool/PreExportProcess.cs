@@ -3234,10 +3234,6 @@ namespace SIL.Tool
 				tw.WriteLine("color: #ffffff;");
 				tw.WriteLine("}");
 
-				tw.WriteLine(".pictureColumn {");
-				tw.WriteLine("width: 99%;");
-				tw.WriteLine("}");
-
 				tw.WriteLine(".frtColumns {");
 				tw.WriteLine("column-count: 1;");
 				tw.WriteLine("column-gap: 12pt;");
