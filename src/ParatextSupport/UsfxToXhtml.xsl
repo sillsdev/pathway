@@ -557,7 +557,7 @@
 				<span class="pictureCaption" lang="{$ws}">
 					<xsl:value-of select="."/>
 				</span>
-				<span class="pictureCaption" lang="{$ws}" class="reference">
+				<span class="pictureCaption" lang="{$ws}">
 					<xsl:text> (</xsl:text>
 					<xsl:value-of select="@ref"/>
 					<xsl:text>) </xsl:text>
