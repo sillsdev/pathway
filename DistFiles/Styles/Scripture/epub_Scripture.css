@@ -9,11 +9,11 @@ the user's preferences from the Configuration Tool:
 font-weight: normal;
 font-style: normal;
 }
-.Alternate_Reading {
-    font-style: italic;
+.footnote_query {    
     display: inline;
     list-style-position: inside;
 }
+.intropara {    text-indent: 20pt; }
 .border {
     border-top : 0.5pt solid #808080;
     text-align : center;
@@ -233,8 +233,6 @@ the user's preferences from the Configuration Tool:
     content: "&nbsp;";
 }
 .Title_Main {
-    font-weight : bold;
-    font-style : normal;
     text-align : center;
     text-indent : 0;
     margin-left : 0;
@@ -244,8 +242,6 @@ the user's preferences from the Configuration Tool:
 }
 .Title_Secondary {
     display: block;
-    font-weight : normal;
-    font-style : normal;
     text-align : center;
     text-indent : 0;
     margin-left : 0;
@@ -253,8 +249,6 @@ the user's preferences from the Configuration Tool:
     padding-top : 1%;
 }
 .Title_Tertiary {
-    font-weight : normal;
-    font-style : normal;
     text-align : center;
     text-indent : 0;
     margin-left : 0;

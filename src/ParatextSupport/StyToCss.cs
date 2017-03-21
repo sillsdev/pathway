@@ -481,11 +481,12 @@ namespace SIL.PublishingSolution
             _mapClassName["toc1"] = "scrBookCode";
             _mapClassName["toc2"] = "scrBookName";
             _mapClassName["mt1"] = "Title_Main";
-            _mapClassName["mt2"] = "Title_Secondary";
+			_mapClassName["mt2"] = "Title_Secondary";
+			_mapClassName["mt3"] = "Title_Tertiary";
             _mapClassName["w"] = "See_In_Glossary";
             _mapClassName["v"] = "Verse_Number";
             _mapClassName["fr"] = "Note_Target_Reference";
-            _mapClassName["fq"] = "Alternate_Reading";
+            _mapClassName["fq"] = "footnote_query";
             _mapClassName["f"] = "Note_General_Paragraph";
             _mapClassName["p"] = "Paragraph";
             _mapClassName["s"] = "Section_Head";
@@ -496,10 +497,12 @@ namespace SIL.PublishingSolution
             _mapClassName["q1"] = "Line1";
             _mapClassName["q2"] = "Line2";
             _mapClassName["m"] = "Paragraph_Continuation";
-            _mapClassName["fqa"] = "fqa";
+			_mapClassName["fqa"] = "footnote_querya";
             _mapClassName["sc"] = "Inscription";
 			_mapClassName["pn"] = "pn";
 			_mapClassName["rq"] = "rq";
+			_mapClassName["ip"] = "intropara";
+			_mapClassName["ft"] = "ft";
         }
     }
 }

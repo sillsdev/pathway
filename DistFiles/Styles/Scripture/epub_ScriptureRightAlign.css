@@ -9,11 +9,11 @@ the user's preferences from the Configuration Tool:
 font-weight: normal;
 font-style: normal;
 }
-.Alternate_Reading {
-    font-style: italic;
+.footnote_query {
     display: inline;
     list-style-position: inside;
 }
+.intropara {    text-indent: 20pt; }
 .border {
     border-top : 0.5pt solid #808080;
     text-align : center;

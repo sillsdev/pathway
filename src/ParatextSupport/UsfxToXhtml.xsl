@@ -190,7 +190,7 @@
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'ip'">
-				<p class="Intro_Paragraph" xmlns="http://www.w3.org/1999/xhtml">
+				<p class="intropara" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>
@@ -554,11 +554,13 @@
 		<div class="{$pictureLoc}" xmlns="http://www.w3.org/1999/xhtml">
 			<img id="Figure-{$bookCode}-{$figureNumber}" class="picture" src="{$figurePath}{@file}" alt="{$altFigurePath}{@file}"/>
 			<div class="pictureCaption">
-				<span lang="{$ws}">
+				<span class="pictureCaption" lang="{$ws}">
 					<xsl:value-of select="."/>
 				</span>
-				<span lang="{$ws}" class="reference">
-					<xsl:value-of select="@ref"/>					
+				<span class="pictureCaption" lang="{$ws}" class="reference">
+					<xsl:text> (</xsl:text>
+					<xsl:value-of select="@ref"/>
+					<xsl:text>) </xsl:text>
 				</span>
 			</div>
 		</div>
@@ -713,8 +715,13 @@
 			-->
 
 			<!-- Footnote character styles -->
-			<xsl:when test="@style = 'ft' or @style = 'xt'">
-				<span lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+			<xsl:when test="@style = 'ft'">
+				<span class="ft" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</span>
+			</xsl:when>
+			<xsl:when test="@style = 'xt'">
+				<span class="xt" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</span>
 			</xsl:when>
@@ -734,12 +741,12 @@
 				</span>
 			</xsl:when>
       <xsl:when test="@style = 'fq' or @style = 'xq'">
-        <span class="Quoted_Text" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+      	<span class="footnote_query" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
           <xsl:apply-templates/>
         </span>
       </xsl:when>
       <xsl:when test="@style = 'fqa'">
-				<span class="Alternate_Reading" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
+				<span class="footnote_querya" lang="{$ws}" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</span>
 			</xsl:when>

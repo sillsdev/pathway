@@ -3094,8 +3094,25 @@ namespace SIL.PublishingSolution
 			{
 				_writer.WriteAttributeString("text:anchor-type", "page");
 			}
-			_writer.WriteAttributeString("svg:width", rectWidth + "pt");
-			_writer.WriteAttributeString("svg:height", rectHeight + "pt");
+
+			if (rectHeight.Contains("pt"))
+			{
+				_writer.WriteAttributeString("svg:height", rectHeight);
+			}
+			else
+			{
+				_writer.WriteAttributeString("svg:height", rectHeight + "pt");
+			}
+
+			if (rectWidth.Contains("pt"))
+			{
+				_writer.WriteAttributeString("svg:width", rectWidth);
+			}
+			else
+			{
+				_writer.WriteAttributeString("svg:width", rectWidth + "pt");
+			}
+
 			_writer.WriteStartElement("draw:image");
 			_writer.WriteAttributeString("xlink:type", "simple");
 			_writer.WriteAttributeString("xlink:show", "embed");
@@ -3109,7 +3126,6 @@ namespace SIL.PublishingSolution
 			_isNewParagraph = false;
 			_isParagraphClosed = true;
 		}
-
 
 		private void DisplayProperty()
 		{

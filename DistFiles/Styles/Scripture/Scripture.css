@@ -1,3 +1,5 @@
+/* Scripture.css */
+
 @page {
     -ps-positionchapternumbers-string: "Drop Capital";
     -ps-IncludeVersenumber-string: "True";
@@ -5,8 +7,7 @@
     ps-NonConsecutiveReferenceSeparator-string:",";
 }
 
-.Alternate_Reading {
-    font-style: italic;
+.footnote_query {    
     display: inline;
     /* http://dev.w3.org/csswg/css-gcpm/#creating-footnotes */
     float: footnote;
@@ -72,20 +73,15 @@
     margin-left: 0pt;
 }
 .Intro_Title_Main {
-	font-size: 14pt;
 	padding-top: 8pt;
 	padding-bottom: 4pt;
 }
 .Intro_Title_Secondary {
-	font-size: 13pt;
-	font-style: italic;
 	text-align: center;
 	padding-top: 6pt;
 	padding-bottom: 3pt;
 }
 .Intro_Section_Head {
-    font-weight: bold;	/* cascaded environment */
-    font-style: normal;	/* cascaded environment */
     text-align: center;
     text-indent: 0pt;
     margin-left: 0pt;
@@ -153,12 +149,7 @@
     vertical-align: top;
     line-height: none;
 }
-/*.Note_General_Paragraph::footnote-marker {
-    font-weight: bold;
-    content: string(chapter) string(verse) ' = ';
-    /* content: string(footnoteMarker); font-size: 6pt; vertical-align: super; color: purple;
-    text-align: left;
-} */
+
 .Note_Target_Reference::footnote-marker {
     font-weight: bold;
 }
@@ -169,8 +160,6 @@
     vertical-align: super;
     vertical-align: top;
     line-height: none;
-}
-.scrFootnoteMarker {
 }
 .Paragraph {
     text-indent: 12pt;
@@ -184,7 +173,7 @@
 }
 .Paragraph1 {
     margin-left: 0pt;
-	orphans: 2;
+    orphans: 2;
     widows:2;
 }
 
@@ -201,8 +190,6 @@
     display: none;
 }
 
-.scrBody {
-}
 .scrBook {
     column-count: 1;
     clear: both;
@@ -222,8 +209,6 @@
     text-align: left;
 }
 .Section_Head {
-    font-weight: bold;	/* cascaded environment */
-    font-style: normal;	/* cascaded environment */
     text-align: center;
     text-indent: 0pt;
     margin-left: 0pt;
@@ -235,8 +220,6 @@
 
 .Section_Range_Paragraph
 {
-   font-weight: bold;	/* cascaded environment */
-   font-style: normal;	/* cascaded environment */
    text-align: center;
    text-indent: 0pt;
    margin-left: 0pt;
@@ -248,16 +231,12 @@
 
 
 .Section_Head_Major {
-    font-weight: bold;	/* cascaded environment */
-    font-style: normal;	/* cascaded environment */
     text-align: center;
     text-indent: 0pt;
     margin-left: 0pt;
     margin-top: 8pt;
 }
 .Section_Head_Minor {
-    font-weight: normal;	/* cascaded environment */
-    font-style: italic;	/* cascaded environment */
     text-align: center;
     text-indent: 0pt;
     margin-left: 0pt;
@@ -295,9 +274,6 @@ span {
     margin-left: 0pt;
 }
 .Title_Main {
-    font-size: 18pt;
-    font-weight: bold;	/* cascaded environment */
-    font-style: normal;	/* cascaded environment */
     text-align: center;
     text-indent: 0pt;
     margin-left: 0pt;
@@ -367,3 +343,8 @@ page-break-before: always;
 .scrBook {
 string-set: chapter '1';
 }
+
+.intropara {
+    text-indent: 20pt; 
+}
+/* End Scripture.css */
