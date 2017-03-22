@@ -3247,6 +3247,11 @@ namespace SIL.Tool
 				tw.WriteLine(".h3 {");
 				tw.WriteLine("display: none;");
 				tw.WriteLine("}");
+
+				tw.WriteLine(".intropara{");
+				tw.WriteLine("text-indent: 20pt;");
+				tw.WriteLine("}");
+
 			}
 			tw.Close();
 		}

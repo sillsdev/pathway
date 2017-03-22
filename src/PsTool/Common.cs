@@ -1366,7 +1366,8 @@ namespace SIL.Tool
 		{
 			string attributeValue = string.Empty;
 
-			if (string.IsNullOrEmpty(outputUnit)) return inputValue;
+			if (string.IsNullOrEmpty(outputUnit) || inputValue == "inherit")
+				return inputValue;
 
 			try
 			{

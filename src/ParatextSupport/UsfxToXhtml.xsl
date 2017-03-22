@@ -553,7 +553,7 @@
 
 		<div class="{$pictureLoc}" xmlns="http://www.w3.org/1999/xhtml">
 			<img id="Figure-{$bookCode}-{$figureNumber}" class="picture" src="{$figurePath}{@file}" alt="{$altFigurePath}{@file}"/>
-			<div lang="{$ws}" class="pictureCaption">
+			<p lang="{$ws}" class="pictureCaption">
 				<span lang="{$ws}">
 					<xsl:value-of select="."/>
 				</span>
@@ -562,7 +562,7 @@
 					<xsl:value-of select="@ref"/>
 					<xsl:text>) </xsl:text>	
 				</span>
-			</div>
+			</p>
 		</div>
 	</xsl:template>
 	
@@ -838,6 +838,13 @@
 					<!-- Support old format for USX -->
 					<xsl:value-of select="ancestor::book/@id"/>
 				</xsl:when>
+				<xsl:when test="preceding::book[1]/@code">
+					<xsl:value-of select="preceding::book[1]/@code"/>
+				</xsl:when>
+				<xsl:when test="preceding::book[1]/@id">
+					<!-- Support old format for USX -->
+					<xsl:value-of select="preceding::book[1]/@id"/>
+				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 		<xsl:variable name="footnoteNumber">
@@ -847,6 +854,12 @@
 				</xsl:when>
 				<xsl:when test="ancestor::book/@id">
 					<xsl:value-of select="count(preceding::note[ancestor::book[@id=$bookCode]])+1"/>
+				</xsl:when>
+				<xsl:when test="preceding::book[1]/@code">
+					<xsl:value-of select="count(preceding::note[preceding::book[@code=$bookCode]])+1"/>
+				</xsl:when>
+				<xsl:when test="preceding::book[1]/@id">
+					<xsl:value-of select="count(preceding::note[preceding::book[@id=$bookCode]])+1"/>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>

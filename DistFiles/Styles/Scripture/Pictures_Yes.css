@@ -54,8 +54,8 @@ div.pictureLeft > img.picture {
     width: 95px;
     height: 84px;
 }
-.pictureCaption {
-    display: block;
+.pictureCaption {    
+    display : inline;
     text-align: center;
 }
 
