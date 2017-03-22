@@ -35,6 +35,7 @@ using L10NSharp;
 using Microsoft.Win32;
 using SIL.Tool.Localization;
 using System.Reflection;
+using System.Threading;
 using Test;
 using SIL.PublishingSolution;
 using SIL.WritingSystems;
@@ -2647,6 +2648,7 @@ namespace SIL.Tool
 		/// </summary>
 		/// <param name="sourceFile">Input source File</param>
 		/// <param name="textToInsert">Text to Insert at the Top</param>
+		/// <remarks>See: http://stackoverflow.com/questions/4683142/c-sharp-waiting-for-a-copy-operation-to-complete</remarks>
 		public static void FileInsertText(string sourceFile, string textToInsert)
 		{
 			string cssFileName = Path.GetFileName(sourceFile);
@@ -2661,12 +2663,24 @@ namespace SIL.Tool
 			var builder = new StringBuilder(sr.ReadToEnd());
 			fs.Close();
 			sr.Close();
-			var fsWrite = new FileStream(sourceFile, FileMode.Create, FileAccess.ReadWrite);
-			var writer = new StreamWriter(fsWrite);
+			var fileInfo = new FileInfo(sourceFile);
+			var startSize = fileInfo.Length;
+			using (var fsWrite = new FileStream(sourceFile, FileMode.Create, FileAccess.ReadWrite))
+			{
+				using (var writer = new StreamWriter(fsWrite))
+				{
 			writer.Write(builder.ToString());
 			writer.WriteLine(textToInsert);
 			writer.Close();
+				}
 			fsWrite.Close();
+			}
+			fileInfo.Refresh();
+			while (fileInfo.Length == startSize)
+			{
+				Thread.Sleep(100);
+				fileInfo.Refresh();
+			}
 		}
 
 		/// <summary>
