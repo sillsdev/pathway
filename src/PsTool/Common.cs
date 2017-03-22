@@ -2669,11 +2669,11 @@ namespace SIL.Tool
 			{
 				using (var writer = new StreamWriter(fsWrite))
 				{
-			writer.Write(builder.ToString());
-			writer.WriteLine(textToInsert);
-			writer.Close();
+					writer.Write(builder.ToString());
+					writer.WriteLine(textToInsert);
+					writer.Close();
 				}
-			fsWrite.Close();
+				fsWrite.Close();
 			}
 			fileInfo.Refresh();
 			while (fileInfo.Length == startSize)

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E9E86AC5-EC9E-40C4-A386-64A77C48034B}</ProjectGuid>
+    <ProjectGuid>{8FD33078-DF28-44DA-BE05-C9981EF9A214}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ParatextSupport</RootNamespace>
