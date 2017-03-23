@@ -6,7 +6,7 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letHead_dicBody" style:family="paragraph" style:parent-style-name="dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_letHead_dicBody" style:family="paragraph" style:parent-style-name="letHead_dicBody">
       <style:paragraph-properties fo:text-align="center" fo:margin-top="18pt" fo:margin-bottom="18pt" style:writing-mode="lr-tb" />
-      <style:text-properties fo:font-family="Charis SIL AmArea" style:font-name-complex="Charis SIL AmArea" fo:font-weight="700" style:font-weight-complex="700" fo:font-size="24pt" style:font-size-complex="24pt" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:font-size="24pt" style:font-size-complex="24pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letData_dicBody" style:family="paragraph" style:parent-style-name="dicBody">
       <style:paragraph-properties fo:text-align="left" />
@@ -22,19 +22,19 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_xitem_.en_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_definition_.en_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.iba_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
@@ -52,10 +52,10 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="subentries_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="subentry_subentries_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="subentries_entry_letData_dicBody">
@@ -67,29 +67,29 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="subentrytype_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="subentry_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entrytypeabbrsub_.en_subentrytype_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="subentrytype_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_entrytypeabbrsub_.en_subentrytype_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="entrytypeabbrsub_.en_subentrytype_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="subentry_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="grammaticalinfosub_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sensessub_subentry_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeechsub_.en_grammaticalinfosub_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfosub_sensessub_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_partofspeechsub_.en_grammaticalinfosub_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeechsub_.en_grammaticalinfosub_sensessub_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sensessub_subentry_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xsensenumbersub_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensessub_subentry_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definitionsub_.en_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensessub_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_definitionsub_.en_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="definitionsub_.en_sense_sensessub_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_xitem_.en_definitionsub_.en_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_definitionsub_.en_sense_sensessub_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.iba_definitionsub_.en_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="definitionsub_.en_sense_sensessub_subentry_subentries_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
@@ -107,10 +107,10 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationssub_xitem_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationsub_.en_translationssub_xitem_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="translationssub_xitem_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translationsub_.en_translationssub_xitem_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="translationsub_.en_translationssub_xitem_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="EmphasizedText_.iba_translationsub_.en_translationssub_xitem_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="translationsub_.en_translationssub_xitem_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
@@ -123,10 +123,10 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationssub_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationsub_.en_translationssub_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="translationssub_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translationsub_.en_translationssub_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="translationsub_.en_translationssub_examplessub_sense_sensessub_subentry_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
@@ -142,7 +142,7 @@
     <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="letter" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="center" fo:margin-top="18pt" fo:margin-bottom="18pt" style:writing-mode="lr-tb" />
-      <style:text-properties fo:font-family="Charis SIL AmArea" fo:font-weight="700" fo:font-size="24pt" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-weight="700" fo:font-size="24pt" />
     </style:style>
     <style:style style:name="letData" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="left" />
@@ -435,7 +435,7 @@
       <style:text-properties style:font-name="Charis SIL" style:font-name-asian="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
-      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="left" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="left" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false" draw:textarea-vertical-align="middle">
         <style:background-image />
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>
