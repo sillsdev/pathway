@@ -2651,6 +2651,8 @@ namespace SIL.Tool
 		/// <remarks>See: http://stackoverflow.com/questions/4683142/c-sharp-waiting-for-a-copy-operation-to-complete</remarks>
 		public static void FileInsertText(string sourceFile, string textToInsert)
 		{
+			if (string.IsNullOrEmpty(textToInsert)) return;
+
 			string cssFileName = Path.GetFileName(sourceFile);
 
 			if (textToInsert.IndexOf(cssFileName) > 0)
