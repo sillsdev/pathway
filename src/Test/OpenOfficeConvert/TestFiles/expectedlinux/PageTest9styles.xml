@@ -29,13 +29,8 @@
     <style:style style:name="dicBody" style:family="paragraph" style:parent-style-name="" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letHead_dicBody" style:family="paragraph" style:parent-style-name="dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_letHead_dicBody" style:family="paragraph" style:parent-style-name="letHead_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letData_dicBody" style:family="paragraph" style:parent-style-name="dicBody">
-      <style:paragraph-properties fo:text-align="left" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entry_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
-      <style:paragraph-properties fo:border-top="solid 0pt " fo:border-bottom="solid 0pt " fo:border-left="solid 0pt " fo:border-right="solid 0pt " fo:text-indent="-17.008pt" fo:margin-left="17.008pt" fo:padding-left="0pt" fo:padding-bottom="2pt" fo:padding-top="1pt" fo:orphans="2" />
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="11pt" style:font-size-complex="11pt" />
-    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letData_dicBody" style:family="paragraph" style:parent-style-name="dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entry_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headwordminor_.bss-fonipa_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
@@ -46,19 +41,19 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_.en_grammaticalinfo_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_.en_headword_.bss-fonipa_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_.bss-fonipa_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="example_.bss-fonipa_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData_dicBody">
@@ -69,19 +64,19 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translation_.en_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translation_.en_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translation_.en_translations_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensevariantrefs_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexSense_VariantFormEntryBackRefs_sensevariantrefs_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensevariantrefs_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensevariantrefentrytype_LexSense_VariantFormEntryBackRefs_sensevariantrefs_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="LexSense_VariantFormEntryBackRefs_sensevariantrefs_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntryTypepublishRootSenseVariantTypeReverseAbbrPub_.en_sensevariantrefentrytype_LexSense_VariantFormEntryBackRefs_sensevariantrefs_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensevariantrefentrytype_LexSense_VariantFormEntryBackRefs_sensevariantrefs_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_LexEntryTypepublishRootSenseVariantTypeReverseAbbrPub_.en_sensevariantrefentrytype_LexSense_VariantFormEntryBackRefs_sensevariantrefs_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="LexEntryTypepublishRootSenseVariantTypeReverseAbbrPub_.en_sensevariantrefentrytype_LexSense_VariantFormEntryBackRefs_sensevariantrefs_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensevariantrefform_.bss-fonipa_LexSense_VariantFormEntryBackRefs_sensevariantrefs_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="LexSense_VariantFormEntryBackRefs_sensevariantrefs_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
@@ -90,10 +85,10 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantrefentrytype_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefs_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntryTypepublishRootVariantTypeReverseAbbrPub_.en_variantrefentrytype_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefentrytype_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_LexEntryTypepublishRootVariantTypeReverseAbbrPub_.en_variantrefentrytype_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="LexEntryTypepublishRootVariantTypeReverseAbbrPub_.en_variantrefentrytype_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantrefform_.bss-fonipa_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefs_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
@@ -102,10 +97,10 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entryreftypeminor_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="primaryrefsminor_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntryTypepublishRootMinorEntryTypeAbbreviationPub_.en_entryreftypeminor_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="entryreftypeminor_primaryrefsminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_LexEntryTypepublishRootMinorEntryTypeAbbreviationPub_.en_entryreftypeminor_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="LexEntryTypepublishRootMinorEntryTypeAbbreviationPub_.en_entryreftypeminor_primaryrefsminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entryrefprimaryminor_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="primaryrefsminor_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntrypublishRootMinorPrimaryTargetMLHeadWordPub_.bss-fonipa_entryrefprimaryminor_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="entryrefprimaryminor_primaryrefsminor_entry_letData_dicBody">
@@ -117,40 +112,40 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xsensenumber_sense_sensesminor_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensesminor_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="grammaticalinfominor_sense_sensesminor_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensesminor_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeechminor_.en_grammaticalinfominor_sense_sensesminor_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfominor_sense_sensesminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_partofspeechminor_.en_grammaticalinfominor_sense_sensesminor_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeechminor_.en_grammaticalinfominor_sense_sensesminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definitionminor_.en_sense_sensesminor_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensesminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_definitionminor_.en_sense_sensesminor_entry_letData_dicBody" style:family="text" style:parent-style-name="definitionminor_.en_sense_sensesminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefs_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantrefentrytype_xitem_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_variantrefs_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntryTypepublishRootVariantTypeReverseAbbrPub_.en_variantrefentrytype_xitem_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefentrytype_xitem_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_LexEntryTypepublishRootVariantTypeReverseAbbrPub_.en_variantrefentrytype_xitem_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="LexEntryTypepublishRootVariantTypeReverseAbbrPub_.en_variantrefentrytype_xitem_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantrefform_.bss-fonipa_xitem_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_variantrefs_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantsummary_.en_xitem_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_variantsummary_.en_xitem_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantsummary_.en_xitem_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntrypublishRootParaVqual_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantsummary_.en_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_variantsummary_.en_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="variantsummary_.en_variantrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntrypublishRootParaPlural_.bss-fonipa_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
@@ -169,17 +164,17 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="grammaticalinfosub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeechsub1.0_.en_grammaticalinfosub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfosub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_partofspeechsub1.0_.en_grammaticalinfosub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeechsub1.0_.en_grammaticalinfosub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="MoMorphSynAnalysispublishRootSubFeaturesPub1.0_grammaticalinfosub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfosub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definitionsub_.en_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_definitionsub_.en_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="definitionsub_.en_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplessub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplesub_.bss-fonipa_examplessub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="examplessub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody">
@@ -190,10 +185,10 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationssub_examplessub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="examplessub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationsub_.en_translationssub_examplessub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="translationssub_examplessub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translationsub_.en_translationssub_examplessub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="translationsub_.en_translationssub_examplessub_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xsensenumber_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bss-fonipa_definition_.en_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="definition_.en_sense_senses_entry_letData_dicBody">
@@ -210,19 +205,19 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_examples_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translation_.en_translations_xitem_examples_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntrypublishRootMinorParaVqual_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="primaryrefsminor_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entryreftypeminor_xitem_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_primaryrefsminor_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntryTypepublishRootMinorEntryTypeAbbreviationPub_.en_entryreftypeminor_xitem_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="entryreftypeminor_xitem_primaryrefsminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_LexEntryTypepublishRootMinorEntryTypeAbbreviationPub_.en_entryreftypeminor_xitem_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="LexEntryTypepublishRootMinorEntryTypeAbbreviationPub_.en_entryreftypeminor_xitem_primaryrefsminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entryrefprimaryminor_xitem_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_primaryrefsminor_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntrypublishRootMinorPrimaryTargetMLHeadWordPub_.bss-fonipa_entryrefprimaryminor_xitem_primaryrefsminor_entry_letData_dicBody" style:family="text" style:parent-style-name="entryrefprimaryminor_xitem_primaryrefsminor_entry_letData_dicBody">
@@ -237,20 +232,20 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationsminor_examplesminor_sense_sensesminor_entry_letData_dicBody" style:family="text" style:parent-style-name="examplesminor_sense_sensesminor_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationminor_.en_translationsminor_examplesminor_sense_sensesminor_entry_letData_dicBody" style:family="text" style:parent-style-name="translationsminor_examplesminor_sense_sensesminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translationminor_.en_translationsminor_examplesminor_sense_sensesminor_entry_letData_dicBody" style:family="text" style:parent-style-name="translationminor_.en_translationsminor_examplesminor_sense_sensesminor_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bss-fonipa_translation_.en_translations_examples_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translation_.en_translations_examples_sense_senses_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="lexreftype_.en_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="relations_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_lexreftype_.en_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="lexreftype_.en_relations_sense_senses_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="lexreftargets_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="relations_sense_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecrossref_.bss-fonipa_lexreftargets_relations_sense_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="lexreftargets_relations_sense_senses_entry_letData_dicBody">
@@ -258,15 +253,15 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="LexEntrypublishRootSubentryExtension_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xhomographnumber_.en_headwordsub_.bss-fonipa_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="headwordsub_.bss-fonipa_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xsensenumber_sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensessub_subentry__AllComplexFormEntryBackRefs_subentries_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="crossrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="crossreftype_.en_crossrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="crossrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_crossreftype_.en_crossrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="crossreftype_.en_crossrefs_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="crossreftargets_crossrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="crossrefs_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="crossref_.bss-fonipa_crossreftargets_crossrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="crossreftargets_crossrefs_entry_letData_dicBody">
@@ -291,14 +286,6 @@
       <style:text-properties text:display="true" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="Standard" style:class="extra" />
-    <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="letData" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="left" />
-    </style:style>
-    <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:border-top="solid 0pt " fo:border-bottom="solid 0pt " fo:border-left="solid 0pt " fo:border-right="solid 0pt " fo:text-indent="-17.008pt" fo:margin-left="17.008pt" fo:padding-left="0pt" fo:padding-bottom="2pt" fo:padding-top="1pt" />
-      <style:text-properties fo:font-family="Times New Roman" fo:font-size="11pt" />
-    </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
       <style:text-properties fo:font-weight="700" fo:font-size="24pt" />
@@ -389,7 +376,7 @@
     </style:default-style>
     <style:default-style style:family="paragraph">
       <style:paragraph-properties fo:hyphenation-ladder-count="no-limit" style:text-autospace="ideograph-alpha" style:punctuation-wrap="hanging" style:line-break="strict" style:tab-stop-distance="0.4925in" style:writing-mode="page" />
-      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="11pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Times New Roman" style:font-size-asian="11pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Times New Roman" style:font-size-complex="11pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="false" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
+      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="12pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Times New Roman" style:font-size-asian="12pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Times New Roman" style:font-size-complex="12pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="true" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
     </style:default-style>
     <style:default-style style:family="table">
       <style:table-properties table:border-model="collapsing" />
@@ -411,17 +398,17 @@
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:padding-bottom="0.0499in" fo:keep-with-next="always" fo:border-bottom="1pt solid #000000" text:number-lines="false" text:line-number="0">
         <style:tab-stops>
-          <style:tab-stop style:position="2.559055in" style:type="center" />
-          <style:tab-stop style:position="5.118111in" style:type="right" />
+          <style:tab-stop style:position="3.4625in" style:type="center" />
+          <style:tab-stop style:position="6.925in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
-      <style:text-properties style:font-name="Times New Roman" fo:font-weight="bold" fo:font-size="12pt" />
+      <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" text:number-lines="false" text:line-number="0">
         <style:tab-stops>
-          <style:tab-stop style:position="2.559055in" style:type="center" />
-          <style:tab-stop style:position="5.118111in" style:type="right" />
+          <style:tab-stop style:position="3.4625in" style:type="center" />
+          <style:tab-stop style:position="6.925in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
     </style:style>
@@ -441,7 +428,7 @@
     </style:style>
     <style:style style:name="Frame_20_contents" style:display-name="Frame contents" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:class="extra">
       <style:paragraph-properties fo:text-align="center" style:justify-single-word="false" />
-      <style:text-properties style:font-name="Times New Roman" fo:font-weight="bold" fo:font-size="12pt" />
+      <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="Contents_20_Heading" style:display-name="Contents Heading" style:family="paragraph" style:parent-style-name="Heading" style:class="index">
       <style:paragraph-properties fo:margin="100%" fo:margin-left="0in" fo:text-indent="0in" fo:margin-right="0in" style:auto-text-indent="false" text:number-lines="false" text:line-number="0" />
@@ -456,10 +443,10 @@
       <style:text-properties style:font-name="Times New Roman" fo:language="zxx" fo:country="none" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style style:family="graphic" style:name="Graphics2">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
+      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
     </style:style>
     <style:style style:name="Graphics" style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
+      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
     </style:style>
     <style:style style:name="GraphicsI1" style:family="graphic" style:parent-style-name="Graphics1">
       <style:graphic-properties style:vertical-pos="bottom" style:vertical-rel="page-content" style:horizontal-pos="center" style:horizontal-rel="page" />
@@ -510,61 +497,61 @@
   </office:styles>
   <office:automatic-styles>
     <style:style style:name="PageHeaderFooter0" style:family="text">
-      <style:text-properties content="" style:writing-mode="lr-tb" fo:font-family="Verdana" style:font-name-complex="Verdana" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="100%" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter1" style:family="text">
-      <style:text-properties content="" fo:margin-top="100%" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter2" style:family="text">
-      <style:text-properties content="" style:writing-mode="lr-tb" fo:font-family="Verdana" style:font-name-complex="Verdana" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="100%" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter3" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter4" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter5" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter12" style:family="text">
-      <style:text-properties content="string(guidewordfirst)" style:writing-mode="lr-tb" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter13" style:family="text">
-      <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter14" style:family="text">
-      <style:text-properties content="string(guidewordlast)" style:writing-mode="lr-tb" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter15" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter16" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter17" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter18" style:family="text">
-      <style:text-properties content="string(guidewordfirst)" style:writing-mode="lr-tb" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter19" style:family="text">
-      <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter20" style:family="text">
-      <style:text-properties content="string(guidewordlast)" style:writing-mode="lr-tb" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter21" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter22" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter23" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="MP1" style:family="paragraph" style:parent-style-name="Frame_20_contents">
-      <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
+      <style:paragraph-properties fo:text-align="start" style:justify-single-word="false" />
     </style:style>
     <style:style style:name="MT1" style:family="text">
       <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" />
@@ -576,7 +563,7 @@
       <style:text-properties style:font-name="Charis SIL" style:font-name-asian="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
-      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="right" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="left" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false" draw:textarea-vertical-align="middle">
         <style:background-image />
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>
@@ -587,15 +574,15 @@
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>
     </style:style>
-    <style:page-layout style:name="pm1" style:page-usage="mirrored">
-      <style:page-layout-properties fo:background-color="#ff0000" fo:page-width="595.2756pt" fo:page-height="841.8898pt" fo:margin-top="57pt" fo:margin-right="113.3858pt" fo:margin-bottom="57pt" fo:margin-left="113.3858pt">
+    <style:page-layout style:name="pm1">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
       <style:header-style />
       <style:footer-style />
     </style:page-layout>
-    <style:page-layout style:name="pm2" style:page-usage="mirrored">
-      <style:page-layout-properties fo:background-color="#ff0000" fo:page-width="595.2756pt" fo:page-height="841.8898pt" fo:margin-top="57pt" fo:margin-right="113.3858pt" fo:margin-bottom="57pt" fo:margin-left="113.3858pt">
+    <style:page-layout style:name="pm2">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
       </style:page-layout-properties>
       <style:header-style>
@@ -606,7 +593,7 @@
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm3">
-      <style:page-layout-properties fo:background-color="#0000ff" fo:page-width="595.2756pt" fo:page-height="841.8898pt" fo:margin-top="57pt" fo:margin-right="113.3858pt" fo:margin-bottom="57pt" fo:margin-left="113.3858pt">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
         <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
@@ -618,7 +605,7 @@
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm6">
-      <style:page-layout-properties fo:background-color="#ff0000" fo:page-width="595.2756pt" fo:page-height="841.8898pt" fo:margin-top="57pt" fo:margin-right="113.3858pt" fo:margin-bottom="57pt" fo:margin-left="113.3858pt">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
         <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
@@ -627,38 +614,14 @@
         <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
-    <style:page-layout style:name="pm4" style:page-usage="mirrored">
-      <style:page-layout-properties fo:background-color="#008000" fo:page-width="595.2756pt" fo:page-height="841.8898pt" fo:margin-top="57pt" fo:margin-right="113.3858pt" fo:margin-bottom="57pt" fo:margin-left="113.3858pt">
-        <style:background-image />
-        <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
-      </style:page-layout-properties>
-      <style:header-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:header-style>
-      <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="15.84pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:footer-style>
-    </style:page-layout>
-    <style:page-layout style:name="pm5" style:page-usage="mirrored">
-      <style:page-layout-properties fo:background-color="#ffa500" fo:page-width="595.2756pt" fo:page-height="841.8898pt" fo:margin-top="57pt" fo:margin-right="113.3858pt" fo:margin-bottom="57pt" fo:margin-left="113.3858pt">
-        <style:background-image />
-        <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
-      </style:page-layout-properties>
-      <style:header-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:header-style>
-      <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:footer-style>
-    </style:page-layout>
     <style:page-layout style:name="pm12">
-      <style:page-layout-properties fo:background-color="#ff0000" fo:page-width="595.2756pt" fo:page-height="841.8898pt" fo:margin-top="57pt" fo:margin-right="113.3858pt" fo:margin-bottom="57pt" fo:margin-left="113.3858pt" />
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt" />
     </style:page-layout>
     <style:page-layout style:name="pm13">
-      <style:page-layout-properties fo:background-color="#ff0000" fo:page-width="595.2756pt" fo:page-height="841.8898pt" fo:margin-top="57pt" fo:margin-right="113.3858pt" fo:margin-bottom="57pt" fo:margin-left="113.3858pt" />
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt" />
     </style:page-layout>
     <style:page-layout style:name="pm7">
-      <style:page-layout-properties fo:background-color="#0000ff" fo:page-width="595.2756pt" fo:page-height="841.8898pt" fo:margin-top="57pt" fo:margin-right="113.3858pt" fo:margin-bottom="57pt" fo:margin-left="113.3858pt">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
         <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
@@ -679,77 +642,7 @@
       </style:footer>
     </style:master-page>
     <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3" />
-    <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page">
-      <style:header>
-        <text:p text:style-name="Header">
-          <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
-          </text:span>
-          <text:span text:style-name="MT2">
-            <text:variable-get text:name="RLeft_Guideword_L" office:value-type="string" />
-          </text:span>
-          <text:tab />
-          <text:span text:style-name="MT3">
-            <text:page-number text:select-page="current">4</text:page-number>
-          </text:span>
-        </text:p>
-      </style:header>
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="56.25pt" fo:min-width="100pt" draw:z-index="1">
-            <draw:text-box fo:min-height="19.00pt">
-              <text:p text:style-name="MP1">
-                <text:span text:style-name="MT1">
-                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
-                </text:span>
-                <text:span text:style-name="MT2">
-                  <text:variable-get text:name="RRight_Guideword_R" office:value-type="string" />
-                </text:span>
-              </text:p>
-            </draw:text-box>
-          </draw:frame>
-        </text:p>
-      </style:footer>
-    </style:master-page>
-    <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page">
-      <style:header>
-        <text:p text:style-name="Header">
-          <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
-          </text:span>
-          <text:span text:style-name="MT2">
-            <text:variable-get text:name="RLeft_Guideword_L" office:value-type="string" />
-          </text:span>
-          <text:tab />
-          <text:span text:style-name="MT3">
-            <text:page-number text:select-page="current">4</text:page-number>
-          </text:span>
-          <text:tab />
-          <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
-          </text:span>
-          <text:span text:style-name="MT2">
-            <text:variable-get text:name="RLeft_Guideword_L" office:value-type="string" />
-          </text:span>
-        </text:p>
-      </style:header>
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="56.25pt" fo:min-width="100pt" draw:z-index="1">
-            <draw:text-box fo:min-height="19.00pt">
-              <text:p text:style-name="MP1">
-                <text:span text:style-name="MT1">
-                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
-                </text:span>
-                <text:span text:style-name="MT2">
-                  <text:variable-get text:name="RRight_Guideword_R" office:value-type="string" />
-                </text:span>
-              </text:p>
-            </draw:text-box>
-          </draw:frame>
-        </text:p>
-      </style:footer>
-    </style:master-page>
+    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="XHTML" style:page-layout-name="pm3" />
+    <style:master-page style:name="XHTML" style:page-layout-name="pm2" style:next-style-name="XHTML" />
   </office:master-styles>
 </office:document-styles>

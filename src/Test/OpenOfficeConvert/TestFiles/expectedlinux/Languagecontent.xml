@@ -10,4 +10,22 @@
       <style:columns fo:column-count="2" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"><style:column-sep style:width="1pt" style:color="#aa0000" /><style:column style:rel-width="-145.8661*" fo:start-indent="0in" fo:end-indent="75in" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" /><style:column style:rel-width="-145.8661*" fo:start-indent="75in" fo:end-indent="0in" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" /></style:columns>
     </style:section-properties>
   </style:style>
-</office:automatic-styles><office:body><office:text><text:variable-decls><text:variable-decl office:value-type="string" text:name="Left_Guideword_L" /><text:variable-decl office:value-type="string" text:name="RLeft_Guideword_L" /><text:variable-decl office:value-type="string" text:name="Right_Guideword_R" /><text:variable-decl office:value-type="string" text:name="RRight_Guideword_R" /></text:variable-decls><text:sequence-decls><text:sequence-decl text:display-outline-level="0" text:name="Illustration" /><text:sequence-decl text:display-outline-level="0" text:name="Table" /><text:sequence-decl text:display-outline-level="0" text:name="Text" /><text:sequence-decl text:display-outline-level="0" text:name="Drawing" /></text:sequence-decls><text:p text:style-name="P4" /><text:p text:style-name="main_body"><text:span text:style-name="xitem_main_body">No Lang sample text file</text:span><text:span text:style-name="xitem_.en_main_body">sample text file</text:span><text:span text:style-name="xitem_.fr_main_body">exemple de fichier texte</text:span><text:span text:style-name="xitem_.es_main_body">Este es muestra texto</text:span><text:span text:style-name="xitem_.en-US_main_body">sample text file</text:span><text:span text:style-name="xitem_.fr-FR_main_body">exemple de fichier texte</text:span><text:span text:style-name="xitem_.es-ES_main_body">Este es muestra texto</text:span></text:p><text:p text:style-name="xitem_.es-ES_main_body">Este es muestra texto<text:span text:style-name="span_xitem_.es-ES_main_body">Este es muestra texto</text:span></text:p></office:text></office:body></office:document-content>
+</office:automatic-styles><office:body><office:text><text:variable-decls><text:variable-decl office:value-type="string" text:name="Left_Guideword_L" /><text:variable-decl office:value-type="string" text:name="RLeft_Guideword_L" /><text:variable-decl office:value-type="string" text:name="Right_Guideword_R" /><text:variable-decl office:value-type="string" text:name="RRight_Guideword_R" /></text:variable-decls><text:sequence-decls><text:sequence-decl text:display-outline-level="0" text:name="Illustration" /><text:sequence-decl text:display-outline-level="0" text:name="Table" /><text:sequence-decl text:display-outline-level="0" text:name="Text" /><text:sequence-decl text:display-outline-level="0" text:name="Drawing" /></text:sequence-decls><text:p text:style-name="P4" /><text:s text:c="1"> </text:s><text:p text:style-name="main_body"><text:span text:style-name="xitem_main_body">
+No Lang sample text file
+</text:span><text:s text:c="1"> </text:s><text:span text:style-name="xitem_.en_main_body">
+sample text file
+</text:span><text:s text:c="1"> </text:s><text:span text:style-name="xitem_.fr_main_body">
+exemple de fichier texte
+</text:span><text:s text:c="1"> </text:s><text:span text:style-name="xitem_.es_main_body">
+Este es muestra texto
+</text:span><text:s text:c="1"> </text:s><text:span text:style-name="xitem_.en-US_main_body">
+sample text file
+</text:span><text:s text:c="1"> </text:s><text:span text:style-name="xitem_.fr-FR_main_body">
+exemple de fichier texte
+</text:span><text:s text:c="1"> </text:s><text:span text:style-name="xitem_.es-ES_main_body">
+Este es muestra texto
+</text:span><text:s text:c="1"> </text:s></text:p><text:p text:style-name="xitem_.es-ES_main_body">
+Este es muestra texto
+<text:span text:style-name="span_xitem_.es-ES_main_body">
+Este es muestra texto
+</text:span><text:s text:c="1"> </text:s></text:p></office:text></office:body></office:document-content>

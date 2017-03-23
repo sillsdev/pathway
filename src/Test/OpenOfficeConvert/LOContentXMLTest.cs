@@ -2669,7 +2669,7 @@ namespace Test.OpenOfficeConvert
         public void PageTest1()
         {
             _projInfo.ProjectInputType = "Dictionary";
-            const string file = "PageTest";
+			const string file = "pagetest";
             _index = 1;
             string styleOutput = GetStyleOutput(file);
             _index = 0; // reset
@@ -2708,7 +2708,7 @@ namespace Test.OpenOfficeConvert
         public void PageTest2()
         {
 			_projInfo.ProjectInputType = "Dictionary";
-            const string file = "PageTest";
+            const string file = "pagetest";
             _index = 2;
             string styleOutput = GetStyleOutput(file);
             _index = 0; // reset
@@ -2744,7 +2744,7 @@ namespace Test.OpenOfficeConvert
         public void PageTest3()
         {
             _projInfo.ProjectInputType = "Dictionary";
-            const string file = "PageTest";
+            const string file = "pagetest";
             _index = 3;
             string styleOutput = GetStyleOutput(file);
             _index = 0; // reset
@@ -2781,7 +2781,7 @@ namespace Test.OpenOfficeConvert
         public void PageTest4()
         {
             _projInfo.ProjectInputType = "Dictionary";
-            const string file = "PageTest";
+            const string file = "pagetest";
             _index = 4;
             string styleOutput = GetStyleOutput(file);
             _index = 0; // reset
@@ -2822,7 +2822,7 @@ namespace Test.OpenOfficeConvert
         public void PageTest5()
         {
             _projInfo.ProjectInputType = "Dictionary";
-            const string file = "PageTest";
+            const string file = "pagetest";
             _index = 5;
             string styleOutput = GetStyleOutput(file);
             _index = 0; // reset
@@ -2863,7 +2863,7 @@ namespace Test.OpenOfficeConvert
         public void PageTest6()
         {
             _projInfo.ProjectInputType = "Dictionary";
-            const string file = "PageTest";
+            const string file = "pagetest";
             _index = 6;
             string styleOutput = GetStyleOutput(file);
             _index = 0; // reset
@@ -2904,7 +2904,7 @@ namespace Test.OpenOfficeConvert
         public void PageTest7()
         {
             _projInfo.ProjectInputType = "Dictionary";
-            const string file = "PageTest";
+            const string file = "pagetest";
             _index = 7;
             string styleOutput = GetStyleOutput(file);
             _index = 0; // reset
@@ -2946,7 +2946,7 @@ namespace Test.OpenOfficeConvert
         public void PageTest8()
         {
             _projInfo.ProjectInputType = "Dictionary";
-            const string file = "PageTest";
+            const string file = "pagetest";
             _index = 8;
             string styleOutput = GetStyleOutput(file);
             _index = 0; // reset
@@ -3025,7 +3025,7 @@ namespace Test.OpenOfficeConvert
 		public void PageTestTitle()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "PageTest";
+			const string file = "pagetest";
 			_index = 10;
 			string styleOutput = GetStyleOutput(file);
 			_index = 0; // reset

@@ -6,7 +6,7 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letHead_dicBody" style:family="paragraph" style:parent-style-name="dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_letHead_dicBody" style:family="paragraph" style:parent-style-name="letHead_dicBody">
       <style:paragraph-properties fo:text-align="center" fo:margin-top="18pt" fo:margin-bottom="18pt" style:writing-mode="lr-tb" />
-      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:font-weight="700" style:font-weight-complex="700" fo:font-size="24pt" style:font-size-complex="24pt" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:font-size="24pt" style:font-size-complex="24pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letData_dicBody" style:family="paragraph" style:parent-style-name="dicBody">
       <style:paragraph-properties fo:text-align="left" />
@@ -16,14 +16,17 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_.ggo-Telu-IN_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
-      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headerFontStyleName" style:family="paragraph" style:parent-style-name="Standard">
+      <style:text-properties fo:font-family="Gautami" style:font-name-complex="Gautami" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciations_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.ggo-fonipa-x-emic_pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciation_.ggo-fonipa-x-emic_pronunciations_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
@@ -31,19 +34,19 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensepara_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="grammaticalinfo_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="sensepara_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="partofspeech_.en_grammaticalinfo_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="grammaticalinfo_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_partofspeech_.en_grammaticalinfo_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="partofspeech_.en_grammaticalinfo_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definitionL3_.en_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="sensepara_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.en_definitionL3_.en_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="definitionL3_.en_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_xitem_.en_definitionL3_.en_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_.en_definitionL3_.en_sensepara_entry_letData_dicBody">
-      <style:text-properties fo:language="en" fo:country="US" />
+      <style:text-properties fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="xitem_.te_definitionL3_.en_sensepara_entry_letData_dicBody" style:family="text" style:parent-style-name="definitionL3_.en_sensepara_entry_letData_dicBody">
       <style:text-properties fo:language="zxx" fo:country="none" />
@@ -79,7 +82,7 @@
     <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="letter" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="center" fo:margin-top="18pt" fo:margin-bottom="18pt" style:writing-mode="lr-tb" />
-      <style:text-properties fo:font-family="Gautami" fo:font-weight="700" fo:font-size="24pt" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-weight="700" fo:font-size="24pt" />
     </style:style>
     <style:style style:name="letData" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="left" />
@@ -90,7 +93,7 @@
     </style:style>
     <style:style style:name="headword" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Gautami" fo:font-weight="700" />
+      <style:text-properties fo:font-family="Times New Roman" fo:font-weight="700" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
@@ -182,7 +185,7 @@
     </style:default-style>
     <style:default-style style:family="paragraph">
       <style:paragraph-properties fo:hyphenation-ladder-count="no-limit" style:text-autospace="ideograph-alpha" style:punctuation-wrap="hanging" style:line-break="strict" style:tab-stop-distance="0.4925in" style:writing-mode="page" />
-      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="12pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Times New Roman" style:font-size-asian="12pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Times New Roman" style:font-size-complex="12pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="false" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
+      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="12pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Times New Roman" style:font-size-asian="12pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Times New Roman" style:font-size-complex="12pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="true" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
     </style:default-style>
     <style:default-style style:family="table">
       <style:table-properties table:border-model="collapsing" />
@@ -363,7 +366,7 @@
       <style:text-properties style:font-name="Charis SIL" style:font-name-asian="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
-      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="left" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="left" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false" draw:textarea-vertical-align="middle">
         <style:background-image />
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>
