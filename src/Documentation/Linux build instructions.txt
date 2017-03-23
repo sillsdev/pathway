@@ -105,9 +105,9 @@ BUILDING PATHWAY XELATEX
 msbuild /t:Clean src\BuildPathwaySprint.csproj
 msbuild /p:BUILD_NUMBER=1.15.3.5138 /p:Configuration=PathwayXeLaTeX /p:Platform=x86 /p:Edition=BTE Pathway.sln
 or
-cd ~/git/pathway/pathway/XeLaTexConvert
+cd ~/git/pathway/src/XeLaTexConvert
 make clean clean-build
-debuild -ePlatform=x86 -eDEB_BUILD_OPTIONS=nostrip -eOutputPath=. -i -us -uc -b
+debuild -ePlatform=x86 -eDEB_BUILD_OPTIONS=nostrip -eOutputPath=. -eBUILD_NUMBER=1.15.5.5415 -ebinsrc=. -i -us -uc -b
 Use Platform=Any\ CPU for 64-bit
 
 INSTALLING PATHWAY XELATEX

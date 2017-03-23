@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="UsxToUsfmTests.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -46,7 +46,7 @@ namespace Test.ParatextSupport
         private const string usxParaVerse = "<para style=\"p\"><verse number=\"1\" style=\"v\" />Para 1</para>";
         private const string usxPara = "<para style=\"p\">Para</para><para style=\"p\">Para</para>";
         private const string introSectionHead = "<h1 class=\"Intro_Section_Head\"><span lang=\"zxx\">Intro Section</span></h1>";
-        private const string introSectionContent = "<p class=\"Intro_Paragraph\"><span lang=\"zxx\">Intro Para</span></p>";
+		private const string introSectionContent = "<p class=\"intropara\"><span lang=\"zxx\">Intro Para</span></p>";
         private const string chapterVersePara = "<p class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span>" +
             "<span class=\"Verse_Number\" lang=\"zxx\">1</span><span lang=\"zxx\">Para 1</span></p>";
         private const string scrSectionHead = "<h1 class=\"Section_Head\"><span lang=\"zxx\">Section</span></h1>";
@@ -58,7 +58,7 @@ namespace Test.ParatextSupport
             "<link rel=\"schema.DC\" href=\"http://purl.org/dc/elements/1.1/\" />" +
             "<meta name=\"description\" content=\"TestProj exported by Tester on 2013-08-27T00:00:00\" />" +
             "<meta name=\"filename\" content=\"TestProj.xhtml\" />" +
-            "<meta name=\"stylesheet\" content=\"usfm\" />" + 
+            "<meta name=\"stylesheet\" content=\"usfm\" />" +
             "<meta name=\"fontName\" content=\"Times\" />" +
             "<meta name=\"fontSize\" content=\"12\" />" +
             "<meta name=\"dc.language\" content=\"\" scheme=\"DCTERMS.RFC5646\" /></head>";
@@ -74,7 +74,7 @@ namespace Test.ParatextSupport
         private ParatextPathwayLink converter;
         private XslCompiledTransform usxToXhtmlXslt;
         Dictionary<string, object> xslParams;
-        
+
         #region Fixture setup
         [TestFixtureSetUp]
         public void FixtureSetup()
@@ -90,6 +90,7 @@ namespace Test.ParatextSupport
             xslParams.Add("fontSize", "12");
 
 			Common.Testing = true;
+			Param.LoadSettings();
             Common.ProgInstall = PathPart.Bin(Path.GetDirectoryName(Environment.CurrentDirectory), @"/../../DistFiles");
             Common.SupportFolder = "";
             Common.ProgBase = Common.ProgInstall;
@@ -111,7 +112,7 @@ namespace Test.ParatextSupport
 
 
         #region Tests
-        
+
         [Test]
 		[Category("SkipOnTeamCity")]
         public void ExportToPathwayTest()
@@ -130,7 +131,7 @@ namespace Test.ParatextSupport
                 Directory.Delete(outputFolder, true);
             Directory.CreateDirectory(outputFolder);
             converter.ExportToPathway(usxBooksToExport);
-			
+
             usxBooksToExport.Clear();
             const string TestName = "ScripturenkoNT";
             var xhtmlFile = TestName + ".xhtml";

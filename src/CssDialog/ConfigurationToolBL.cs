@@ -719,6 +719,12 @@ namespace SIL.PublishingSolution
 				cTool.BtnScripture.Visible = false;
 				cTool.BtnDictionary.Visible = false;
 			}
+			string[] files = Directory.GetFiles(Common.AssemblyPath, "Paratext*.dll", SearchOption.AllDirectories);
+			if (files.Length <= 0)
+			{
+				cTool.BtnScripture.Visible = false;
+				inputTypeBL = "Dictionary";
+			}
 			cTool.LoadSettings();
 			SetInputTypeButton();
 			ShowInputTypeButton();
@@ -1123,7 +1129,7 @@ namespace SIL.PublishingSolution
 				WriteAtImport(writeCss, attribute, key);
 			}
 
-			if (inputTypeBL.ToLower() == "dictionary" && cTool.DdlSense.Items.Count > 0)
+			if (inputTypeBL.ToLower() == "dictionary" && cTool.DdlSense.Items.Count > 0 && cTool.DdlSense.SelectedItem != null)
 			{
 				attribute = "Sense";
 				key = ((ComboBoxItem)cTool.DdlSense.SelectedItem).Value;
@@ -1186,6 +1192,8 @@ namespace SIL.PublishingSolution
 			value["-ps-disable-widow-orphan"] = "\"" + _disableWidowOrphan + "\"";
 			WriteCssClass(writeCss, "page", value);
 
+			if (cTool.DdlRunningHead.SelectedItem != null)
+			{
 			if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
 			{
 				value.Clear();
@@ -1198,9 +1206,12 @@ namespace SIL.PublishingSolution
 				value["margin-left"] = cTool.TxtPageInside.Text;
 				WriteCssClass(writeCss, "page :right", value);
 			}
+			}
 
 			if (_centerTitleHeader)
 			{
+				if (cTool.DdlRunningHead.SelectedItem != null)
+				{
 				if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
 				{
 					SetPageTopCenter(value);
@@ -1215,6 +1226,7 @@ namespace SIL.PublishingSolution
 					WriteCssClass(writeCss, "page -top-center", value);
 				}
 			}
+		}
 		}
 
 		private void SetAttributesForOtherProperties(StreamWriter writeCss)
@@ -4941,7 +4953,13 @@ namespace SIL.PublishingSolution
 				{
 					DialogResult result = Utils.MsgBox(confirmationStringMessage, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
 														  MessageBoxDefaultButton.Button2);
-					if (result == DialogResult.No) return;
+					if (result == DialogResult.No)
+						return;
+					else
+					{
+						if (cTool.StylesGrid.Rows.Count > 0)
+							cTool.StylesGrid.Rows[0].Selected = true;
+					}
 				}
 
 				string allUsersPath = Common.GetAllUserPath();
@@ -4958,6 +4976,16 @@ namespace SIL.PublishingSolution
 			}
 			catch { }
 			Utils.MsgBox(confirmationStringMessage, _caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		public void txtBaseFontSize_LeaveBL(object sender)
+		{
+			try
+			{
+				if (ValidateEPubFontSize(Convert.ToDouble(((TextBox)sender).Text)) == false)
+					MessageBox.Show("Please enter values from 6.0 to 28.0", string.Empty, MessageBoxButtons.OK);
+			}
+			catch { }
 		}
 
 		public void ShowPreview(int page)
@@ -5493,6 +5521,28 @@ namespace SIL.PublishingSolution
 					cTool.TxtWebEmailId.Focus();
 					result = false;
 				}
+			}
+			return result;
+		}
+
+		/// <summary>
+		/// Validate whether the given value is not < 6.0 and not > 28.0
+		/// Valid Numbers: 7, 8.5 etc
+		/// </summary>
+		/// <param name="fSize">Double</param>
+		/// <returns>True/False</returns>
+
+		private bool ValidateEPubFontSize(Double fSize)
+		{
+			bool result = false;
+
+			if (fSize >= 6.0 && fSize <= 28.0)
+			{
+				result = true;
+			}
+			else
+			{
+				result = false;
 			}
 			return result;
 		}

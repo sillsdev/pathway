@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="CommonXml.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
+// Last reviewed:
 //
 // <remarks>
 // Library for Pathway
@@ -167,7 +167,7 @@ namespace SIL.Tool
 						}
 					}
 				}
-				// Check only in the header and retrun 
+				// Check only in the header and retrun
 				if (reader.NodeType == XmlNodeType.EndElement)
 				{
 					if (string.Compare(reader.Name, "head", true) >= 0)
@@ -208,7 +208,7 @@ namespace SIL.Tool
 						}
 					}
 				}
-				// Check only in the header and retrun 
+				// Check only in the header and retrun
 				if (reader.NodeType == XmlNodeType.EndElement)
 				{
 					if (reader.Name == "head")
@@ -376,14 +376,14 @@ namespace SIL.Tool
 				string rootPath = Path.GetPathRoot(metaName);
 				if (rootPath.Length > 0)
 				{
-					//Server Path ex: \\servername\foldername and from the Drive ex: c:\\ 
+					//Server Path ex: \\servername\foldername and from the Drive ex: c:\\
 					fileName = PathCombine(metaName, src);
 					if (File.Exists(fileName))
 					{
 						fromPath = fileName;
 					}
 				}
-				else  // from the Folder 
+				else  // from the Folder
 				{
 					string srcFileName = src;
 					if (src.IndexOf("file://") >= 0)  // File contains
@@ -557,7 +557,7 @@ namespace SIL.Tool
 					}
 					else
 					{
-						// search in Exact folder 
+						// search in Exact folder
 						fileName = src.Substring(designatorLength, src.Length - designatorLength);
 						if (File.Exists(fileName))
 						{
@@ -683,7 +683,7 @@ namespace SIL.Tool
 
 		#region GetXmlNodes
 		/// <summary>
-		/// Returns XmlNodeList 
+		/// Returns XmlNodeList
 		/// </summary>
 		/// <param name="xmlFileNameWithPath">File Name</param>
 		/// <param name="xPath">Xpath for the XML Node</param>
@@ -977,9 +977,9 @@ namespace SIL.Tool
 
 
 		/// <summary>
-		/// This method splits the input xhtml into different files 
+		/// This method splits the input xhtml into different files
 		/// and stores in the temp path using the class name to split the file
-		/// 
+		///
 		/// </summary>
 		/// <param name="xhtmlFileWithPath">The input Xhtml File </param>
 		/// <param name="bookSplitterClass">The class name to split the class</param>
@@ -990,12 +990,13 @@ namespace SIL.Tool
 			return SplitXhtmlFile(xhtmlFileWithPath, bookSplitterClass, "PartFile", adjacentClass);
 		}
 
+		private static readonly List<string> SplitFileList = new List<string>();
 
 		/// <summary>
-		/// This method splits the input xhtml into different files 
+		/// This method splits the input xhtml into different files
 		/// and stores in the temp path using the class name to split the file. This override allows you
 		/// to specify the resulting filename prefix (e.g., "PartFile" in "PartFile1.xhtml").
-		/// 
+		///
 		/// </summary>
 		/// <param name="xhtmlFileWithPath">The input Xhtml File </param>
 		/// <param name="bookSplitterClass">The class name to split the class</param>
@@ -1004,234 +1005,23 @@ namespace SIL.Tool
 		/// <returns>The entire path of the splitted files are retured as List</returns>
 		public static List<string> SplitXhtmlFile(string xhtmlFileWithPath, string bookSplitterClass, string filenamePrefix, bool adjacentClass)
 		{
-			List<string> books = new List<string>();
-			XmlTextReader _reader;
-			bookSplitterClass = bookSplitterClass.ToLower();
-
-
-			var reader = new StreamReader(xhtmlFileWithPath);
-			string content = reader.ReadToEnd().ToLower();
-			reader.Close();
-
-			var match = Regex.Matches(content, "\"" + bookSplitterClass + "\"");
-			int counter = match.Count;
-
-			if (counter <= 0)
-				return books;
-
-			try
+			var split = new SplitXml(xhtmlFileWithPath, bookSplitterClass)
 			{
-				_reader = Common.DeclareXmlTextReader(xhtmlFileWithPath, true);
-			}
-			catch (Exception ex)
+				Folder = ".",
+				Prefix = filenamePrefix
+			};
+			var folder = Path.GetDirectoryName(xhtmlFileWithPath);
+			split.CreateOutputFolderAt(folder);
+			while (!split.EndOfFile())
 			{
-				MessageBox.Show(ex.Message);
-				return books;
+				split.Parse();
 			}
-
-			Dictionary<string, XmlWriter> writers = new Dictionary<string, XmlWriter>();
-
-			string allUserPath = Path.GetTempPath();
-			for (int i = 0; i < counter; i++)
+			SplitFileList.Clear();
+			foreach (var file in split.FileList)
 			{
-				string fileName = Common.PathCombine(allUserPath, filenamePrefix + (i + 1) + ".xhtml");
-				DeleteFile(fileName);
-				XmlTextWriter writer = null;
-				try
-				{
-					writer = new XmlTextWriter(fileName, null) { Formatting = Formatting.Indented };
-				}
-				catch (Exception ex)
-				{
-
-					Console.Write(ex.Message);
-				}
-				writers[fileName] = writer;
+				SplitFileList.Add(PathCombine(folder, file));
 			}
-
-			try
-			{
-
-				SplitXhtmlFileAdjacent(_reader, writers, bookSplitterClass, adjacentClass);
-				_reader.Close();
-
-				XmlWriter writerClose;
-				foreach (KeyValuePair<string, XmlWriter> pair in writers)
-				{
-					writerClose = pair.Value;
-					writerClose.Flush();
-					writerClose.Close();
-				}
-			}
-			catch (XmlException ex)
-			{
-				var msg = new[] { ex.Message, xhtmlFileWithPath };
-				Console.WriteLine(msg.ToString());
-			}
-			books.AddRange(writers.Keys);
-			return books;
-		}
-
-		/// <summary>
-		/// From the one xmlreader multiple xmlwriter are ued to split the class
-		/// using dictionary
-		/// </summary>
-		/// <param name="reader"></param>
-		/// <param name="writers"></param>
-		/// <param name="bookSplitterClass"></param>
-		/// <param name="adjacentClass"></param>
-		static void SplitXhtmlFileAdjacent(XmlReader reader, Dictionary<string, XmlWriter> writers, string bookSplitterClass, bool adjacentClass)
-		{
-			int srcCount = 0;
-			bool isLetData = false;
-			XmlWriter writer;
-
-			if (reader == null)
-			{
-				throw new ArgumentNullException("reader");
-			}
-
-			while (reader.Read())
-			{
-			srcWritten:
-				switch (reader.NodeType)
-				{
-					case XmlNodeType.Element:
-						string prefix = reader.Prefix;
-						string localName = reader.LocalName;
-						string nameSpace = reader.NamespaceURI;
-						string className = string.Empty;
-						className = reader.GetAttribute("class") ?? "";
-						if (className == "letData" && !isLetData)
-						{
-							isLetData = true;
-						}
-						if (className.ToLower() == bookSplitterClass)
-						{
-							isLetData = false;
-							srcCount++;
-							string f1 = reader.ReadOuterXml();  // current node - Ex: LetHead
-
-							string f2 = string.Empty;
-							if (adjacentClass)
-							{
-								f2 = reader.ReadOuterXml();  // Adjacent node - Ex: LetData
-								f1 += f2;
-							}
-
-							int writerCount1 = 1;
-							foreach (KeyValuePair<string, XmlWriter> pair in writers)
-							{
-								if (srcCount == writerCount1)
-								{
-									writer = pair.Value;
-									writer.WriteRaw(f1);
-								}
-								writerCount1++;
-							}
-							goto srcWritten;  // Note - The reader already points to next node.
-							// Note - so need of reading again. start process the node.
-						}
-						int writerCount2 = 1;
-						foreach (KeyValuePair<string, XmlWriter> pair in writers)
-						{
-							if (!isLetData || writerCount2 == srcCount)
-							{
-								writer = pair.Value;
-								writer.WriteStartElement(prefix, localName, nameSpace);
-								writer.WriteAttributes(reader, true);
-								if (reader.IsEmptyElement)
-								{
-									writer.WriteEndElement();
-								}
-							}
-							writerCount2++;
-						}
-						break;
-					case XmlNodeType.Text:
-						int writerCount3 = 1;
-						foreach (KeyValuePair<string, XmlWriter> pair in writers)
-						{
-							if (!isLetData || writerCount3 == srcCount)
-							{
-								writer = pair.Value;
-								writer.WriteString(reader.Value);
-							}
-							writerCount3++;
-						}
-						break;
-					case XmlNodeType.Whitespace:
-					case XmlNodeType.SignificantWhitespace:
-						int writerCount4 = 1;
-						foreach (KeyValuePair<string, XmlWriter> pair in writers)
-						{
-							if (!isLetData || writerCount4 == srcCount)
-							{
-								writer = pair.Value;
-								writer.WriteWhitespace(reader.Value);
-							}
-							writerCount4++;
-						}
-						break;
-					case XmlNodeType.CDATA:
-						foreach (KeyValuePair<string, XmlWriter> pair in writers)
-						{
-							writer = pair.Value;
-							writer.WriteCData(reader.Value);
-						}
-						break;
-					case XmlNodeType.EntityReference:
-						foreach (KeyValuePair<string, XmlWriter> pair in writers)
-						{
-							writer = pair.Value;
-							writer.WriteEntityRef(reader.Name);
-						}
-						break;
-					case XmlNodeType.XmlDeclaration:
-					case XmlNodeType.ProcessingInstruction:
-						foreach (KeyValuePair<string, XmlWriter> pair in writers)
-						{
-							writer = pair.Value;
-							writer.WriteProcessingInstruction(reader.Name, reader.Value);
-						}
-						break;
-					case XmlNodeType.DocumentType:
-						foreach (KeyValuePair<string, XmlWriter> pair in writers)
-						{
-							writer = pair.Value;
-							writer.WriteDocType(reader.Name, reader.GetAttribute("PUBLIC"),
-												reader.GetAttribute("SYSTEM"), reader.Value);
-						}
-						break;
-					case XmlNodeType.Comment:
-						foreach (KeyValuePair<string, XmlWriter> pair in writers)
-						{
-							writer = pair.Value;
-							writer.WriteComment(reader.Value);
-						}
-						break;
-					case XmlNodeType.EndElement:
-						int writerCount5 = 1;
-						foreach (KeyValuePair<string, XmlWriter> pair in writers)
-						{
-							if (!isLetData || writerCount5 == srcCount)
-							{
-								try
-								{
-									writer = pair.Value;
-									writer.WriteFullEndElement();
-								}
-								catch
-								{
-									return;
-								}
-							}
-							writerCount5++;
-						}
-
-						break;
-				}
-			}
+			return SplitFileList;
 		}
 	}
 }

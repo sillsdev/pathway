@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="InSpreadTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -309,7 +309,7 @@ namespace Test.InDesignConvert
             projInfo.DefaultXhtmlFileWithPath = _inputXHTML;
             Dictionary<string, ArrayList> stylename = _storyXML.CreateStory(projInfo, _idAllClass, _cssTree.SpecificityClass, _cssTree.CssClassOrder);
             _spreadXML.CreateIDSpread(_outputSpread, _idAllClass, stylename["ColumnClass"]);
-            _xPath = "//TextFrame[@Self=\"TF2\"]/TextFramePreference";
+            _xPath = "//TextFrame[@Self=\"TF3\"]/TextFramePreference";
             _fileNameWithPath = Common.PathCombine(_outputSpread, "Spread_1.xml");
             nodesList = Common.GetXmlNodeListInDesignNamespace(_fileNameWithPath, _xPath);
             XmlNode node = nodesList[0];

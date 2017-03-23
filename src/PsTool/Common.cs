@@ -1,13 +1,13 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="Common.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (c) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (c) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
+// Last reviewed:
 //
 // <remarks>
 // Library for Pathway
@@ -35,9 +35,11 @@ using L10NSharp;
 using Microsoft.Win32;
 using SIL.Tool.Localization;
 using System.Reflection;
+using System.Threading;
 using Test;
 using SIL.PublishingSolution;
 using SIL.WritingSystems;
+using SIL.Xml;
 
 #endregion Using
 
@@ -58,6 +60,7 @@ namespace SIL.Tool
 			PDF,
 			MOBILE,
 			EPUB,
+			HTML5,
 			XETEX,
 			XELATEX
 		};
@@ -118,8 +121,8 @@ namespace SIL.Tool
 		}
 
 		/// <summary>
-		/// Returns whether this program is running under the mono VM environment. 
-		/// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE. 
+		/// Returns whether this program is running under the mono VM environment.
+		/// ONLY USE THIS IF YOU ABSOLUTELY NEED CONDITIONAL CODE.
 		/// </summary>
 		public static bool UsingMonoVM
 		{
@@ -283,7 +286,7 @@ namespace SIL.Tool
 			List<string> lstFileName = new List<string>();
 			lstFileName.Add("Add Columns FW83");
 			lstFileName.Add("Letter Header Language");
-			lstFileName.Add("Filter Broken Links");
+			//lstFileName.Add("Filter Broken Links"); -- Also removes links from reversal back to main
 			lstFileName.Add("Fix Duplicate ids");
 			return lstFileName;
 		}
@@ -352,9 +355,7 @@ namespace SIL.Tool
 
 						if (!File.Exists(PathCombine(cssPath, cssFile)) && SamplePath.Length > 0)
 						{
-							cssPath = PathCombine(executablePath, SamplePath);
-
-
+							cssPath = PathwayPath.GetSupportPath(executablePath, SamplePath, false);
 						}
 						arrayCSSFile.AddRange(GetCSSFileNames(PathCombine(cssPath, cssFile), baseCssFileWithPath));
 					}
@@ -563,7 +564,7 @@ namespace SIL.Tool
 		#region PublishingSolutionsEnvironmentReset()
 
 		/// <summary>
-		/// Remove all files saved in All Users\AppData, 
+		/// Remove all files saved in All Users\AppData,
 		/// (Executing this method when these files are expected to be present may cause a crash).
 		/// Intended for use during testing.
 		/// </summary>
@@ -1038,7 +1039,7 @@ namespace SIL.Tool
 		/// <returns>Replaced text</returns>
 		public static string ReplaceSymbolToXelatexText(string value)
 		{
-			//Task TD-2666 (Unicode value is 2260 = ?) 
+			//Task TD-2666 (Unicode value is 2260 = ?)
 			if (value.IndexOf("2260") >= 0)
 			{
 				value = value.Replace("2260", "$\\neq$");
@@ -1152,7 +1153,7 @@ namespace SIL.Tool
 
 		/// <summary>
 		/// Validate a given string value is numeric or not
-		/// Valid Numbers: 2, 2.34, +34, -45.653 
+		/// Valid Numbers: 2, 2.34, +34, -45.653
 		/// </summary>
 		/// <param name="number">string</param>
 		/// <returns>True/False</returns>
@@ -1182,7 +1183,7 @@ namespace SIL.Tool
 
 		/// <summary>
 		/// Validate a given string value is numeric or not
-		/// Valid Numbers: 34 
+		/// Valid Numbers: 34
 		/// </summary>
 		/// <param name="number">string</param>
 		/// <returns>True/False</returns>
@@ -1211,7 +1212,7 @@ namespace SIL.Tool
 		#region ValidateAlphabets(string stringValue)
 
 		/// <summary>
-		/// Validate a given string is alphabets or not 
+		/// Validate a given string is alphabets or not
 		/// </summary>
 		/// <param name="stringValue">string</param>
 		/// <returns>True/False</returns>
@@ -1238,7 +1239,7 @@ namespace SIL.Tool
 		#region ValidateStartsWithAlphabet(string stringValue)
 
 		/// <summary>
-		/// Validate a given string is Starts with alphabets or not 
+		/// Validate a given string is Starts with alphabets or not
 		/// </summary>
 		/// <param name="stringValue">string</param>
 		/// <returns>True/False</returns>
@@ -1366,7 +1367,8 @@ namespace SIL.Tool
 		{
 			string attributeValue = string.Empty;
 
-			if (string.IsNullOrEmpty(outputUnit)) return inputValue;
+			if (string.IsNullOrEmpty(outputUnit) || inputValue == "inherit")
+				return inputValue;
 
 			try
 			{
@@ -1455,7 +1457,7 @@ namespace SIL.Tool
 
 		/// -------------------------------------------------------------------------------------------
 		/// <summary>
-		/// Unicode Conversion 
+		/// Unicode Conversion
 		/// </summary>
 		/// <param name="parameter">input String</param>
 		/// <returns>Unicode Character</returns>
@@ -2020,7 +2022,7 @@ namespace SIL.Tool
 
 		/// -------------------------------------------------------------------------------------------
 		/// <summary>
-		/// unicode to String Conversion 
+		/// unicode to String Conversion
 		/// </summary>
 		/// <param name="parameter">String</param>
 		/// <returns>unicode Character</returns>
@@ -2218,7 +2220,7 @@ namespace SIL.Tool
 		public static string SupportFolder = string.Empty;
 
 		/// <summary>
-		/// Return the Local setting Path+ "SIL\Dictionary" 
+		/// Return the Local setting Path+ "SIL\Dictionary"
 		/// </summary>
 		/// <returns>Dictionary Setting Path</returns>
 		public static string GetPSApplicationPath()
@@ -2265,7 +2267,7 @@ namespace SIL.Tool
 		#region GetXmlNodeListInDesignNamespace
 
 		/// <summary>
-		/// Returns XMLNodeList 
+		/// Returns XMLNodeList
 		/// </summary>
 		/// <param name="xmlFileNameWithPath">File Name</param>
 		/// <param name="xPath">Xpath for the XML Node</param>
@@ -2378,7 +2380,7 @@ namespace SIL.Tool
 					styleFileName = Path.Combine(Path.GetDirectoryName(Common.AssemblyPath), file);
 				}
 			}
-			else 
+			else
 			{
 				if(!File.Exists(styleFileName))
 				{
@@ -2419,7 +2421,7 @@ namespace SIL.Tool
 		#region GetFiledWorksPath()
 
 		/// <summary>
-		/// Return the Field Works Path 
+		/// Return the Field Works Path
 		/// </summary>
 		/// <returns>Field Works Path</returns>
 		public static string GetFiledWorksPath()
@@ -2434,7 +2436,7 @@ namespace SIL.Tool
 		#region GetFiledWorksPath Version()
 
 		/// <summary>
-		/// Return the Field Works Path 
+		/// Return the Field Works Path
 		/// </summary>
 		/// <returns>Field Works Path</returns>
 		public static string GetFiledWorksPathVersion()
@@ -2604,7 +2606,7 @@ namespace SIL.Tool
 						File.Delete(file);
 					}
 
-					string fi = Path.GetFileNameWithoutExtension(file).ToLower();
+					string fi = Path.GetFileName(file).ToLower();
 					foreach (string filelike in lstNamelike)
 					{
 						if (fi.Contains(filelike.Trim().ToLower()))
@@ -2613,7 +2615,7 @@ namespace SIL.Tool
 						}
 					}
 
-					if (type == ".css" && !fi.ToLower().Contains("merged"))
+					if (type == ".css" && !fi.Contains("merged"))
 					{
 						File.Delete(file);
 					}
@@ -2646,6 +2648,7 @@ namespace SIL.Tool
 		/// </summary>
 		/// <param name="sourceFile">Input source File</param>
 		/// <param name="textToInsert">Text to Insert at the Top</param>
+		/// <remarks>See: http://stackoverflow.com/questions/4683142/c-sharp-waiting-for-a-copy-operation-to-complete</remarks>
 		public static void FileInsertText(string sourceFile, string textToInsert)
 		{
 			string cssFileName = Path.GetFileName(sourceFile);
@@ -2660,12 +2663,24 @@ namespace SIL.Tool
 			var builder = new StringBuilder(sr.ReadToEnd());
 			fs.Close();
 			sr.Close();
-			var fsWrite = new FileStream(sourceFile, FileMode.Create, FileAccess.ReadWrite);
-			var writer = new StreamWriter(fsWrite);
-			writer.WriteLine(textToInsert);
-			writer.Write(builder.ToString());
-			writer.Close();
-			fsWrite.Close();
+			var fileInfo = new FileInfo(sourceFile);
+			var startSize = fileInfo.Length;
+			using (var fsWrite = new FileStream(sourceFile, FileMode.Create, FileAccess.ReadWrite))
+			{
+				using (var writer = new StreamWriter(fsWrite))
+				{
+					writer.Write(builder.ToString());
+					writer.WriteLine(textToInsert);
+					writer.Close();
+				}
+				fsWrite.Close();
+			}
+			fileInfo.Refresh();
+			while (fileInfo.Length == startSize)
+			{
+				Thread.Sleep(100);
+				fileInfo.Refresh();
+			}
 		}
 
 		/// <summary>
@@ -2909,9 +2924,6 @@ namespace SIL.Tool
 			int count = arrayCssFile.Count;
 			for (int i = count - 1; i >= 0; i--)
 			{
-				removeMirrorPage = false;
-				removeEveryPage = false;
-				removePageNumber = false;
 				string cssFile = arrayCssFile[i].ToString();
 				//For Remove Mirrored Page
 				if (cssFile.IndexOf("Running_Head_Every_Page") >= 0)
@@ -3084,7 +3096,12 @@ namespace SIL.Tool
 		public static string GetSaveInFolder(string template, string database, string layout)
 		{
 			Dictionary<string, string> map = new Dictionary<string, string>();
-			map["Documents"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+			if(UsingMonoVM)
+				map["Documents"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			else
+				map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+
 			map["Base"] = SaveInFolderBase;
 			map["CurrentProject"] = database;
 			map["StyleSheet"] = layout;
@@ -3334,31 +3351,63 @@ namespace SIL.Tool
 				Common.CleanDirectory(di);
 			}
 			Directory.CreateDirectory(destFolder);
-			string[] files = Directory.GetFiles(sourceFolder);
+			FolderTree.Copy(FromRegistry(Path.Combine("Html5", "Dictionary")), destFolder, false);
+			var template = FileData.Get(Path.Combine(destFolder, "pages", "template.html"));
+			var tocDoc = DeclareXMLDocument(false);
+			var sr = new StreamReader(Path.Combine(sourceFolder, "..", "bootstrapToc.html"));
+			tocDoc.Load(sr);
+			sr.Close();
+			var opfDoc = DeclareXMLDocument(false);
+			sr = new StreamReader(Path.Combine(sourceFolder, "content.opf"));
+			opfDoc.Load(sr);
+			sr.Close();
+			var fileOrderQ = opfDoc.SelectNodes("//*[local-name()='item']/@href[contains(.,'.html')]");
+			var fileOrder = (from XmlAttribute attr in fileOrderQ let val = attr.Value where !val.Contains("TOC") select attr.Value).ToList();
+			var contDoc = DeclareXMLDocument(false);
+			var pagetitle = Param.GetMetadataValue("Title");
+			var head = Param.GetMetadataValue("Title");
+			var author = Param.GetMetadataValue("Creator");
+			var description = Param.GetMetadataValue("Description");
+			var version = DateTime.Today.ToShortDateString();
+			var categorylink = "#";
+			var aboutlink = "File2Cpy00000_.html";
+			var pageCss = "book.css";
+			var sidebar = tocDoc.SelectSingleNode("//*[local-name()='body']").InnerXml.Replace(@" xmlns=""http://www.w3.org/1999/xhtml""","");
+			var files = Directory.GetFiles(sourceFolder);
+			var iFiles = ignoreFiles.Split(',');
 			try
 			{
-				bool isfileIgnore = false;
-				string[] iFiles = ignoreFiles.Split(',');
-
-
-
-
-				foreach (string file in files)
+				var first = true;
+				foreach (var file in files)
 				{
-					if (file == null) continue;
-					foreach (var ifile in iFiles)
+					var name = Path.GetFileName(file);
+					if (iFiles.Contains(name)) continue;
+					Debug.Assert(name != null, "name != null");
+					var dest = Path.Combine(destFolder, "pages", name);
+					if (Path.GetExtension(name) == ".html")
 					{
-						if (ifile.Trim() == Path.GetFileName(file))
+						sr = new StreamReader(file);
+						contDoc.Load(sr);
+						sr.Close();
+						var index = fileOrder.IndexOf(name);
+						var backlink = index > 0? fileOrder[index - 1]: "#";
+						var forelink = index + 1 < fileOrder.Count ? fileOrder[index + 1]: "#";
+						var content = contDoc.SelectSingleNode("//*[local-name()='body']").InnerXml;
+						var result = string.Format(template, pagetitle, head, version, backlink, forelink, categorylink, aboutlink,
+							sidebar, content, pageCss, author, description);
+						var sw = new StreamWriter(dest);
+						sw.Write(result);
+						sw.Close();
+						if (first)
 						{
-							isfileIgnore = true;
-							break;
+							File.Copy(dest, Path.Combine(destFolder, "pages", "index.html"), true);
+							first = false;
 						}
-						isfileIgnore = false;
 					}
-					if (isfileIgnore) continue;
-					string name = Path.GetFileName(file);
-					string dest = Common.PathCombine(destFolder, name);
-					File.Copy(file, dest);
+					else
+					{
+						File.Copy(file, dest);
+					}
 				}
 			}
 			catch
@@ -4121,7 +4170,7 @@ namespace SIL.Tool
 		public static string ParaTextDcLanguage(string dataBaseName, bool hyphenlang)
 		{
 			string dcLanguage = string.Empty;
-			if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext00
+			if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" || Param.Value[Param.InputType] == "Scripture") // is scripture
 			{
 				// read Language Code from ssf
 				SettingsHelper settingsHelper = new SettingsHelper(dataBaseName);
@@ -5104,6 +5153,77 @@ namespace SIL.Tool
 
 		#region Hyphenation Settings
 
+		public static void LoadHyphenationSettings()
+		{
+			var _settingsHelper = new SettingsHelper(Param.DatabaseName);
+			_settingsHelper.LoadValues();
+			var ssf = _settingsHelper.GetSettingsFilename(_settingsHelper.Database);
+			if (ssf != null && ssf.Trim().Length > 0)
+			{
+				var app = AppDomain.CurrentDomain.FriendlyName.ToLower();
+				if (app == "paratext.exe" || Param.Value[Param.InputType] == "Scripture")
+				{
+					var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
+					Param.DatabaseName = _settingsHelper.Database;
+					Param.IsHyphen = false;
+					Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database, true);
+					foreach (string filename in Directory.GetFiles(paratextpath, "*.txt"))
+					{
+						if (filename.Contains("hyphen"))
+						{
+							Param.IsHyphen = true;
+							Param.HyphenFilepath = filename;
+							Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
+						}
+					}
+				}
+				if (app.Contains("fieldworks") || Param.Value[Param.InputType] == "Dictionary")
+				{
+					try
+					{
+						IDictionary<string, string> value = new Dictionary<string, string>();
+						var settingsFile = ssf;
+						var flexScan = new FlexScan(settingsFile);
+						foreach (var lang in flexScan.VernWs)
+						{
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+						}
+						foreach (var lang in flexScan.AnalWs)
+						{
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+						}
+						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
+					}
+					catch (Exception)
+					{
+					}
+				}
+
+			}
+			Common.EnableHyphenation();
+			CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database, Param.Value[Param.InputType]);
+		}
+
+		public static string GetLanguageValues(string lang)
+		{
+			if (lang.Contains("-"))
+			{
+				lang = lang.Substring(0, lang.IndexOf("-", System.StringComparison.Ordinal));
+			}
+			var allLangs = from ci in CultureInfo.GetCultures(CultureTypes.NeutralCultures)
+						   where ci.TwoLetterISOLanguageName != "iv"
+						   orderby ci.DisplayName
+						   select ci;
+			var langname = lang.Length == 2
+				? allLangs.FirstOrDefault(s => s.TwoLetterISOLanguageName == lang)
+				: allLangs.FirstOrDefault(s => s.ThreeLetterISOLanguageName == lang);
+			return langname != null ? langname.EnglishName : Common.GetPalasoLanguageName(lang);
+		}
+
 		public static void EnableHyphenation()
 		{
 			try
@@ -5180,6 +5300,18 @@ namespace SIL.Tool
 			{
 				input.CopyTo(output); // Using .NET 4
 			}
+		}
+
+		public static bool IsFileReadOnly(string FileName)
+		{
+			// Create a new FileInfo object.
+			FileInfo fInfo = new FileInfo(FileName);
+			if (UsingMonoVM)
+			{
+				return false;
+			}
+			// Return the IsReadOnly property value.
+			return fInfo.IsReadOnly;
 		}
 
 		/// <summary>

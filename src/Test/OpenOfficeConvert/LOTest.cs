@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ContentXMLTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.OutputExtension = "odt";
 			string pathwayDirectory = Path.GetDirectoryName(Common.AssemblyPath);
             string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
-           
+
             ValidateXMLVersion(styleSettingFile);
             Common.ProgInstall = pathwayDirectory;
             Param.LoadSettings();
@@ -102,6 +102,7 @@ namespace Test.OpenOfficeConvert
                 Directory.Delete(outputDirectory, true);
             }
             FolderTree.Copy(inputSourceDirectory, outputDirectory);
+	        Param.SetLoadType = "Scripture";
             Param.LoadSettings();
             _projInfo.ProjectPath = outputDirectory;
             _projInfo.ProjectInputType = "Scripture";
@@ -145,10 +146,9 @@ namespace Test.OpenOfficeConvert
             Param.UpdateMetadataValue(Param.CopyrightPageFilename, copyrightsFilePath);
 
             Param.UpdateMetadataValue(Param.TableOfContents, "True");
-            Param.SetValue(Param.Media, "paper");
             Param.SetValue(Param.PublicationLocation, outputDirectory);
             Param.Write();
-            
+
         }
 
         /// <summary>
@@ -179,7 +179,65 @@ namespace Test.OpenOfficeConvert
             bool actual = target.Export(_projInfo);
             Assert.AreEqual(expectedResult, actual);
         }
-        
+
+		/// <summary>
+		///Paragraph Test
+		///</summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void ParagraphTest()
+		{
+			string inputSourceDirectory = FileInput("ParagraphTest");
+			string outputDirectory = FileOutput("ParagraphTest");
+			if (Directory.Exists(outputDirectory))
+			{
+				Directory.Delete(outputDirectory, true);
+			}
+			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.LoadSettings();
+			_projInfo.ProjectPath = outputDirectory;
+			_projInfo.ProjectInputType = "Dictionary";
+			_projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "main.xhtml");
+			_projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "main.css");
+			_projInfo.OutputExtension = "odt";
+			EnableConfigurationSettings(outputDirectory);
+
+			var target = new ExportLibreOffice();
+			const bool expectedResult = true;
+			bool actual = target.Export(_projInfo);
+			Assert.AreEqual(expectedResult, actual);
+		}
+
+		/// <summary>
+		///Paragraph Test
+		///</summary>
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void UnderlineColorTest()
+		{
+			string inputSourceDirectory = FileInput("UnderlineColorTest");
+			string outputDirectory = FileOutput("UnderlineColorTest");
+			if (Directory.Exists(outputDirectory))
+			{
+				Directory.Delete(outputDirectory, true);
+			}
+			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.LoadSettings();
+			_projInfo.ProjectPath = outputDirectory;
+			_projInfo.ProjectInputType = "Dictionary";
+			_projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "main.xhtml");
+			_projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "main.css");
+			_projInfo.OutputExtension = "odt";
+			EnableConfigurationSettings(outputDirectory);
+
+			var target = new ExportLibreOffice();
+			const bool expectedResult = true;
+			bool actual = target.Export(_projInfo);
+			Assert.AreEqual(expectedResult, actual);
+		}
+
         private string FileInput(string fileName)
         {
             return Common.PathCombine(_inputPath, fileName);

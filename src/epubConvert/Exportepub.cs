@@ -8,7 +8,7 @@
 // <author>Erik Brommers</author>
 // <email>erik_brommers@sil.org</email>
 // Last reviewed:
-// 
+//
 // <remarks>
 // epub export
 //
@@ -28,7 +28,7 @@
 // --------------------------------------------------------------------------------------
 
 // uncomment this to write out performance timings
-//#define TIME_IT 
+//#define TIME_IT
 
 using System;
 using System.Collections;
@@ -53,441 +53,580 @@ using SIL.Tool;
 
 namespace SIL.PublishingSolution
 {
-    /// <summary>
-    /// Possible values for the MissingFont and NonSilFont properties.
-    /// </summary>
-    public enum FontHandling
-    {
-        EmbedFont,
-        SubstituteDefaultFont,
-        PromptUser,
-        CancelExport
-    }
+	/// <summary>
+	/// Possible values for the MissingFont and NonSilFont properties.
+	/// </summary>
+	public enum FontHandling
+	{
+		EmbedFont,
+		SubstituteDefaultFont,
+		PromptUser,
+		CancelExport
+	}
 
-    public class Exportepub : IExportProcess
-    {
-        private EpubFont _epubFont;
-        private EpubManifest _epubManifest;
-        Epub3Transformation _exportEpub3;
-        private bool _isIncludeImage = true;
+	public class Exportepub : IExportProcess
+	{
+		private EpubFont _epubFont;
+		private EpubManifest _epubManifest;
+		Epub3Transformation _exportEpub3;
+		private bool _isIncludeImage = true;
 
-        private bool _isNoteTargetReferenceExists;
-        private bool _isUnixOs;
+		private bool _isNoteTargetReferenceExists;
+		private bool _isUnixOs;
 
-        //        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
-        public string InputType = "dictionary";
+		//        protected static PostscriptLanguage _postscriptLanguage = new PostscriptLanguage();
+		public string InputType = "dictionary";
 
-        public const string ReferencesFilename = "zzReferences.xhtml";
+		public const string ReferencesFilename = "zzReferences.xhtml";
 
-        // property implementations
-        public bool EmbedFonts { get; set; }
-        public bool IncludeFontVariants { get; set; }
-        public string TocLevel { get; set; }
-        public int MaxImageWidth { get; set; }
+		// property implementations
+		public bool EmbedFonts { get; set; }
+		public bool IncludeFontVariants { get; set; }
+		public string TocLevel { get; set; }
+		public int MaxImageWidth { get; set; }
 		private XslCompiledTransform addRevId;
-	    private XslCompiledTransform noXmlSpace;
-	    private XslCompiledTransform fixEpub;
+		private XslCompiledTransform noXmlSpace;
+		protected XslCompiledTransform fixEpub;
 
-        public int BaseFontSize { get; set; }
-        public int DefaultLineHeight { get; set; }
-        /// <summary>
-        /// Fallback font (if the embedded font is missing or non-SIL)
-        /// </summary>
-        public string DefaultFont { get; set; }
-        public string DefaultAlignment { get; set; }
-        public string ChapterNumbers { get; set; }
-        public string References { get; set; }
-        public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
-        public FontHandling NonSilFont { get; set; }
-        private ArrayList PseudoClass = new ArrayList();
-        public bool PageBreak;
-        private readonly Dictionary<string, string> _tocIdMapping = new Dictionary<string, string>();
-        readonly List<string> _tocIDs = new List<string>();
+		public int BaseFontSize { get; set; }
+		public int DefaultLineHeight { get; set; }
 
-        // interface methods
-        public string ExportType
-        {
-            get
-            {
-                return "E-Book (Epub2 and Epub3)";//E-Book (.epub)
-            }
-        }
+		/// <summary>
+		/// Fallback font (if the embedded font is missing or non-SIL)
+		/// </summary>
+		public string DefaultFont { get; set; }
 
-        /// <summary>
-        /// Returns what input data types this export process handles. The epub exporter
-        /// currently handles scripture and dictionary data types.
-        /// </summary>
-        /// <param name="inputDataType">input data type to test</param>
-        /// <returns>true if this export process handles the specified data type</returns>
-        public bool Handle(string inputDataType)
-        {
-            var returnValue = inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture";
-            return returnValue;
-        }
+		public string DefaultAlignment { get; set; }
+		public string ChapterNumbers { get; set; }
+		public string References { get; set; }
+		public FontHandling MissingFont { get; set; } // note that this doesn't use all the enum values
+		public FontHandling NonSilFont { get; set; }
+		private ArrayList PseudoClass = new ArrayList();
+		public bool PageBreak;
+		private readonly Dictionary<string, string> _tocIdMapping = new Dictionary<string, string>();
+		readonly List<string> _tocIDs = new List<string>();
 
-        /// <summary>
-        /// Entry point for epub converter
-        /// </summary>
-        /// <param name="projInfo">values passed including xhtml and css names</param>
-        /// <returns>true if succeeds</returns>
-        public bool Export(PublicationInformation projInfo)
-        {
+		// interface methods
+		public string ExportType
+		{
+			get
+			{
+				return "E-Book (Epub2 and Epub3)"; //E-Book (.epub)
+			}
+		}
+
+		/// <summary>
+		/// Returns what input data types this export process handles. The epub exporter
+		/// currently handles scripture and dictionary data types.
+		/// </summary>
+		/// <param name="inputDataType">input data type to test</param>
+		/// <returns>true if this export process handles the specified data type</returns>
+		public bool Handle(string inputDataType)
+		{
+			var returnValue = inputDataType.ToLower() == "dictionary" || inputDataType.ToLower() == "scripture";
+			return returnValue;
+		}
+
+		/// <summary>
+		/// Entry point for epub converter
+		/// </summary>
+		/// <param name="projInfo">values passed including xhtml and css names</param>
+		/// <returns>true if succeeds</returns>
+		public bool Export(PublicationInformation projInfo)
+		{
 			Common.SetupLocalization();
-            if (projInfo == null)
-                return false;
-            const bool success = true;
-            #region Set up progress reporting
-			#if (TIME_IT)
+			if (projInfo == null)
+				return false;
+			const bool success = true;
+
+			#region Set up progress reporting
+
+#if (TIME_IT)
 						DateTime dt1 = DateTime.Now;    // time this thing
 			#endif
-            var myCursor = Common.UseWaitCursor();
-            var curdir = Environment.CurrentDirectory;
+			var myCursor = Common.UseWaitCursor();
+			var curdir = Environment.CurrentDirectory;
 			var inProcess = Common.SetupProgressReporting(20, "Export " + ExportType);
-            #endregion Set up progress reporting
 
-            #region Setup
-            inProcess.SetStatus("Setup");
-            var bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
-            PageBreak = InputType.ToLower() == "dictionary" && GetPageBreakStatus(projInfo.SelectedTemplateStyle);
-            #region LoadXslts
-            addRevId = LoadAddRevIdXslt();
-            noXmlSpace = LoadNoXmlSpaceXslt();
-            fixEpub = LoadFixEpubXslt();
-			Param.SetLoadType = projInfo.ProjectInputType;
-			Param.LoadSettings();
-            #endregion
-            #region Create EpubFolder
-            if (!Common.Testing)
-            {
-                CreateEpubFolder(projInfo);
-            }
-            else
-            {
-	            if (!String.IsNullOrEmpty(projInfo.DictionaryPath))
-		            projInfo.ProjectPath = projInfo.DictionaryPath;
-				else if (!String.IsNullOrEmpty(projInfo.ProjectPath))
-		            projInfo.DictionaryPath = projInfo.ProjectPath;
-            }
+			#endregion Set up progress reporting
 
-            #endregion
+			PreExportProcess preProcessor;
+			EpubToc epubToc;
+			var bookId = SetupConversion(projInfo, inProcess, out preProcessor, out epubToc);
 
-            var preProcessor = new PreExportProcess(projInfo);
-            preProcessor.RemoveBrokenImage();
+			string[] langArray;
+			var outputFolder = PreprocessXhtml(projInfo, inProcess, preProcessor, out langArray);
 
-            _isUnixOs = Common.UnixVersionCheck();
-            if (_isUnixOs)
-            {
-                Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath, "epub");
-            }
+			string mergedCss;
+			string defaultCss;
+			string tempCssFile;
+			var tempFolder = ProcessingCss(projInfo, inProcess, preProcessor, out mergedCss, out defaultCss, out tempCssFile);
 
-            _isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
+			FixIssuesWithFlexXhtml(projInfo, preProcessor, langArray, inProcess);
 
-            _isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
+			AddNavitation(inProcess, preProcessor);
 
-            _epubFont = new EpubFont(this);
-            _epubManifest = new EpubManifest(this, _epubFont);
-            _epubManifest.LoadPropertiesFromSettings();
-            LoadOtherFeatures();
-            var epubToc = new EpubToc(projInfo.ProjectInputType, TocLevel);
-            inProcess.PerformStep();
+			var frontMatter = AddFrontMatter(inProcess, preProcessor, tempFolder);
 
-            #endregion Setup
+			List<string> splitFiles;
+			var htmlFiles = SplitIntoSections(projInfo, inProcess, frontMatter, preProcessor, defaultCss, langArray,
+				out splitFiles);
 
-            #region Xhtml preprocessing
-            inProcess.SetStatus("Preprocessing content");
+			var contentFolder = CreateContentStructure(projInfo, inProcess, tempFolder);
 
-            var glossorywords = WriteGlossaryLink(projInfo);
-            GlossaryLinkReferencing(projInfo,glossorywords);
+			AddEndNotesIfNecessary(inProcess, contentFolder, preProcessor, splitFiles);
 
-            InsertBeforeAfterInXhtml(projInfo);
-            var outputFolder = SetOutputFolderAndCurrentDirectory(projInfo);
-            Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
-            XhtmlPreprocessing(projInfo, preProcessor);
-            var langArray = _epubFont.InitializeLangArray(projInfo);
-            inProcess.PerformStep();
-            #endregion Xhtml preprocessing
+			if (!FontEmbedding(projInfo, inProcess, langArray, mergedCss, contentFolder, curdir, myCursor)) return false;
 
-            #region Css preprocessing
-            inProcess.SetStatus("Preprocessing stylesheet");
-            var cssFullPath = CssFullPath(projInfo);
-            Common.WriteDefaultLanguages(projInfo, cssFullPath);
-            var tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
-            var mergedCss = MergeAndFilterCss(preProcessor, tempFolder, cssFullPath);
-            /* Modify the content in css file for before after css style process */
-            preProcessor.InsertPseudoContentProperty(mergedCss, PseudoClass);
-            CustomizeCss(mergedCss);
-            var niceNameCss = NiceNameCss(projInfo, tempFolder, ref mergedCss);
-            var defaultCss = Path.GetFileName(niceNameCss);
-            string tempCssFile = mergedCss.Replace(".css", "tmp.css");
-            File.Copy(mergedCss, tempCssFile, true);
+			CopyContentToEpubFolder(inProcess, mergedCss, defaultCss, htmlFiles, contentFolder);
 
-            Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCss);
-            Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCss);
-            if (!File.Exists(mergedCss))
-            {
-                File.Copy(tempCssFile, mergedCss, true);
-            }
+			InsertChapterLinks(inProcess, contentFolder);
 
-            inProcess.PerformStep();
-            #endregion Css preprocessing
+			UpdateHyperlinks(inProcess, contentFolder);
 
-            #region Hacks
-            XhtmlNamespaceHack(projInfo, preProcessor, langArray);
-            Common.ApplyXslt(preProcessor.ProcessedXhtml, noXmlSpace);
-            Common.ApplyXslt(preProcessor.ProcessedXhtml, fixEpub);
-            inProcess.PerformStep();
-            #endregion Hacks
+			ProcessImages(inProcess, tempFolder, contentFolder);
 
-            #region Adding Navigation and Front Matter
-            inProcess.SetStatus("Adding Navigation");
-            preProcessor.PrepareBookNameAndChapterCount();
-            inProcess.PerformStep();
+			CreateEpubManifest(projInfo, inProcess, contentFolder, bookId, epubToc, tempCssFile);
 
-            // insert the front matter items as separate files in the output folder
-            inProcess.SetStatus("Adding Front Matter");
-            preProcessor.SkipChapterInformation = TocLevel;
-            var frontMatter = preProcessor.InsertFrontMatter(tempFolder, false);
-            inProcess.PerformStep();
-            #endregion Adding Navigation and Front Matter
+			var epub3Path = MakeCopyOfEpub2(projInfo);
 
-            #region Add Sections
-            inProcess.SetStatus("Add Sections");
-            var htmlFiles = new List<string>();
-            var splitFiles = new List<string>();
-            splitFiles.AddRange(frontMatter);
-            SplittingFrontMatter(projInfo, preProcessor, defaultCss, splitFiles);
-            SplittingReversal(projInfo, langArray, defaultCss, splitFiles);
-            AddBooksMoveNotes(inProcess, htmlFiles, splitFiles);
-            inProcess.PerformStep();
-            #endregion Add Sections
+			string outputPathWithFileName;
+			var fileName = PackageEpub2(projInfo, inProcess, contentFolder, outputFolder, out outputPathWithFileName);
 
-            #region Create structure and add end notes
-            inProcess.SetStatus("Creating structure");
-            string contentFolder = CreateContentStructure(projInfo, tempFolder);
-            inProcess.PerformStep();
+			var outputPathWithFileNameV3 = PackageEpub3(projInfo, inProcess, epub3Path);
 
-            // extract references file if specified
-            if (References.Contains("End") && InputType.ToLower().Equals("scripture"))
-            {
-                inProcess.SetStatus("Creating endnote references file");
-                CreateReferencesFile(contentFolder, preProcessor.ProcessedXhtml);
-                splitFiles.Add(Common.PathCombine(contentFolder, ReferencesFilename));
-            }
-            #endregion Create structure and add end notes
+			outputPathWithFileName = ValidateEpubs(inProcess, outputPathWithFileName, outputFolder, fileName,
+				ref outputPathWithFileNameV3);
 
-            #region Font embedding
-            inProcess.SetStatus("Processing fonts");
-            if (!FontProcessing(projInfo, langArray, mergedCss, contentFolder))
-            {
-                // user cancelled the epub conversion - clean up and exit
-                Environment.CurrentDirectory = curdir;
-                Cursor.Current = myCursor;
-                inProcess.Close();
-                return false;
-            }
-            inProcess.PerformStep();
-            #endregion Font Embedding
+			CleanUp(inProcess, outputPathWithFileName, outputPathWithFileNameV3);
 
-            #region Copy to Epub
-            inProcess.SetStatus("Copy contents and styles to Epub");
-            CopyStylesAndContentToEpub(mergedCss, defaultCss, htmlFiles, contentFolder);
-            inProcess.PerformStep();
-            #endregion Copy to Epub
+			CreateArchiveSubmission(projInfo, inProcess, epub3Path);
 
-            #region Insert Chapter Links
-            inProcess.SetStatus("Insert Chapter Links");
-            InsertChapterLinkBelowBookName(contentFolder);
-            InsertReferenceLinkInTocFile(contentFolder);
-            inProcess.PerformStep();
-            #endregion Insert Chapter Links
+			FinalCleanUp(inProcess, outputPathWithFileName, outputPathWithFileNameV3);
 
-            #region Process hyperlinks
+			#region Close Reporting
+
+			inProcess.Close();
+
+			Environment.CurrentDirectory = curdir;
+			Cursor.Current = myCursor;
+
+			#endregion Close Reporting
+
+			return success;
+		}
+
+		protected static void FinalCleanUp(InProcess inProcess, string outputPathWithFileName, string outputPathWithFileNameV3)
+		{
+			inProcess.SetStatus("Final Clean up");
+			Common.CleanupExportFolder(outputPathWithFileName, ".xhtml,.xml,.css", string.Empty, "Test,pictures,AudioVisual");
+			if (!Common.Testing)
+			{
+				Common.CleanupExportFolder(outputPathWithFileNameV3, ".xhtml,.xml,.css", string.Empty, "Test,pictures,AudioVisual");
+				var folder =Path.GetDirectoryName(Path.GetDirectoryName(outputPathWithFileNameV3));
+				var pictures = Path.Combine(folder, "pictures");
+				if (Directory.Exists(pictures))
+				{
+					try
+					{
+						Directory.Delete(pictures, true);
+					}
+					catch
+					{
+						// don't worry if we can't clean up pictures folder
+					}
+			    }
+			    var audioVisual = Path.Combine(folder, "AudioVisual");
+			    if (Directory.Exists(audioVisual))
+			    {
+					try
+					{
+						Directory.Delete(audioVisual, true);
+					}
+					catch
+					{
+						// don't worry if we can't clean up folder
+					}
+			    }
+		    }
+		    inProcess.PerformStep();
+	    }
+
+	    protected void CreateArchiveSubmission(PublicationInformation projInfo, InProcess inProcess, string epub3Path)
+	    {
+		    inProcess.SetStatus("Archive");
+		    CreateRAMP(projInfo);
+		    if (!Common.Testing)
+		    {
+			    projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
+			    CreateRAMP(projInfo);
+		    }
+		    inProcess.PerformStep();
+	    }
+
+	    protected static void CleanUp(InProcess inProcess, string outputPathWithFileName, string outputPathWithFileNameV3)
+	    {
+		    inProcess.SetStatus("Clean up");
+		    Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1.x", string.Empty);
+		    if (!Common.Testing)
+		    {
+			    Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de,.zip", "_1.x", "META-INF,OEBPS");
+		    }
+		    inProcess.PerformStep();
+	    }
+
+	    protected string ValidateEpubs(InProcess inProcess, string outputPathWithFileName, string outputFolder, string fileName,
+		    ref string outputPathWithFileNameV3)
+	    {
+		    inProcess.SetStatus("Validate");
+
+		    #region Option Dialog box
+
+		    bool isOutputDilalogNeeded = true;
+		    if (!Common.Testing)
+		    {
+			    string caption = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Caption", "Export Complete", "");
+			    if (Utils.MsgBox(
+				        LocalizationManager.GetString("Exportepub.ValidateMsgBox",
+					        Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files?"), caption,
+				        MessageBoxButtons.YesNo,
+				        MessageBoxIcon.Information) == DialogResult.Yes)
+			    {
+				    ValidateResult(outputPathWithFileName); // Epub2 ExportType
+				    ValidateResult(outputPathWithFileNameV3); //Epub3 ExportType
+			    }
+
+			    #region Option Dialog box
+
+			    if (!Common.Testing && isOutputDilalogNeeded)
+			    {
+				    outputPathWithFileName = RenameEpubFileName(outputPathWithFileName, "epub2");
+				    outputPathWithFileNameV3 = RenameEpubFileName(outputPathWithFileNameV3, "epub3");
+
+				    var exportTypeDlg = new EpubExportTypeDlg();
+				    exportTypeDlg.ShowDialog();
+				    if (exportTypeDlg.ExportType == "epub2")
+				    {
+					    outputFolder = Path.GetDirectoryName(outputPathWithFileName);
+					    DisplayOutput(outputFolder, fileName, ref outputPathWithFileName);
+				    }
+				    else if (exportTypeDlg.ExportType == "epub3")
+				    {
+					    outputFolder = Path.GetDirectoryName(outputPathWithFileNameV3);
+					    DisplayOutput(outputFolder, fileName, ref outputPathWithFileNameV3);
+				    }
+				    else if (exportTypeDlg.ExportType == "folder")
+				    {
+					    if (_isUnixOs)
+					    {
+						    SubProcess.Run("", "nautilus", Common.HandleSpaceinLinuxPath(Path.GetDirectoryName(outputFolder)), false);
+					    }
+					    else
+					    {
+						    SubProcess.Run(Path.GetDirectoryName(outputFolder), "explorer.exe", Path.GetDirectoryName(outputFolder), false);
+					    }
+				    }
+			    }
+
+			    #endregion Option Dialog box
+		    }
+
+		    #endregion Option Dialog box
+
+		    inProcess.PerformStep();
+		    return outputPathWithFileName;
+	    }
+
+	    protected string PackageEpub3(PublicationInformation projInfo, InProcess inProcess, string epub3Path)
+	    {
+		    inProcess.SetStatus("Packaging for Epub3");
+
+		    string fileNameV3 = CreateFileNameFromTitle(projInfo);
+		    string outputPathWithFileNameV3 = null;
+		    if (epub3Path != null)
+		    {
+			    Compress(epub3Path, Common.PathCombine(epub3Path, fileNameV3));
+			    outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
+		    }
+#if (TIME_IT)
+            TimeSpan tsTotal = DateTime.Now - dt1;
+            Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
+#endif
+		    inProcess.PerformStep();
+		    return outputPathWithFileNameV3;
+	    }
+
+	    protected string PackageEpub2(PublicationInformation projInfo, InProcess inProcess, string contentFolder,
+		    string outputFolder, out string outputPathWithFileName)
+	    {
+		    inProcess.SetStatus("Packaging for Epub2");
+		    if (_isUnixOs)
+		    {
+			    AddDtdInXhtml(contentFolder);
+		    }
+		    string fileName = CreateFileNameFromTitle(projInfo);
+		    Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
+		    outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+		    return fileName;
+	    }
+
+	    protected string MakeCopyOfEpub2(PublicationInformation projInfo)
+	    {
+		    string epub3Path = projInfo.ProjectPath;
+		    epub3Path = Common.PathCombine(epub3Path, "Epub3");
+		    Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
+		    if (File.Exists(projInfo.DefaultXhtmlFileWithPath))
+			    File.Copy(projInfo.DefaultXhtmlFileWithPath,
+				    Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath)), true);
+
+		    if (File.Exists(projInfo.DefaultCssFileWithPath))
+			    File.Copy(projInfo.DefaultCssFileWithPath,
+				    Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultCssFileWithPath)), true);
+
+		    if (File.Exists(projInfo.DefaultRevCssFileWithPath))
+			    File.Copy(projInfo.DefaultRevCssFileWithPath,
+				    Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultRevCssFileWithPath)), true);
+
+		    _exportEpub3 = new Epub3Transformation(this, _epubFont);
+		    _exportEpub3.Epub3Directory = epub3Path;
+		    _exportEpub3.Export(projInfo);
+		    return epub3Path;
+	    }
+
+	    protected void CreateEpubManifest(PublicationInformation projInfo, InProcess inProcess, string contentFolder, Guid bookId,
+		    EpubToc epubToc, string tempCssFile)
+	    {
+		    inProcess.SetStatus("Generating .epub TOC and manifest");
+		    _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
+		    epubToc.CreateNcx(projInfo, contentFolder, bookId);
+		    ModifyTOCFile(contentFolder);
+		    ReplaceEmptyHrefandXmlLangtoLang(contentFolder);
+		    if (File.Exists(tempCssFile))
+		    {
+			    File.Delete(tempCssFile);
+		    }
+		    inProcess.PerformStep();
+	    }
+
+	    protected void ProcessImages(InProcess inProcess, string tempFolder, string contentFolder)
+	    {
+		    inProcess.SetStatus("Processing images");
+		    ProcessImages(tempFolder, contentFolder);
+		    inProcess.PerformStep();
+	    }
+
+	    protected void UpdateHyperlinks(InProcess inProcess, string contentFolder)
+	    {
 #if (TIME_IT)
             DateTime dtRefStart = DateTime.Now;
 #endif
-            inProcess.SetStatus("Processing hyperlinks");
-            if (InputType.ToLower() == "scripture" && References.Contains("End"))
-            {
-                UpdateReferenceHyperlinks(contentFolder, inProcess);
-                UpdateReferenceSourcelinks(contentFolder, inProcess);
-            }
-            FixRelativeHyperlinks(contentFolder);
+		    inProcess.SetStatus("Processing hyperlinks");
+		    if (InputType.ToLower() == "scripture" && References.Contains("End"))
+		    {
+			    UpdateReferenceHyperlinks(contentFolder, inProcess);
+			    UpdateReferenceSourcelinks(contentFolder, inProcess);
+		    }
+		    FixRelativeHyperlinks(contentFolder);
 
 #if (TIME_IT)
             TimeSpan tsRefTotal = DateTime.Now - dtRefStart;
             Debug.WriteLine("Exportepub: time spent fixing reference hyperlinks: " + tsRefTotal);
 #endif
-            inProcess.PerformStep();
-            #endregion Process hyperlinks
+		    inProcess.PerformStep();
+	    }
 
-            #region Process images
-            inProcess.SetStatus("Processing images");
-            ProcessImages(tempFolder, contentFolder);
-            inProcess.PerformStep();
-            #endregion Process images
+	    protected void InsertChapterLinks(InProcess inProcess, string contentFolder)
+	    {
+		    inProcess.SetStatus("Insert Chapter Links");
+		    InsertChapterLinkBelowBookName(contentFolder);
+		    InsertReferenceLinkInTocFile(contentFolder);
+		    inProcess.PerformStep();
+	    }
 
-            #region Manifest and Table of Contents
-            inProcess.SetStatus("Generating .epub TOC and manifest");
-            _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
-            epubToc.CreateNcx(projInfo, contentFolder, bookId);
-            ModifyTOCFile(contentFolder);
-			ReplaceEmptyHrefandXmlLangtoLang(contentFolder);
-            if (File.Exists(tempCssFile))
-            {
-                File.Delete(tempCssFile);
-            }
-            inProcess.PerformStep();
-            #endregion Manifest and Table of Contents
+	    protected void CopyContentToEpubFolder(InProcess inProcess, string mergedCss, string defaultCss, List<string> htmlFiles,
+		    string contentFolder)
+	    {
+		    inProcess.SetStatus("Copy contents and styles to Epub");
+		    CopyStylesAndContentToEpub(mergedCss, defaultCss, htmlFiles, contentFolder);
+		    inProcess.PerformStep();
+	    }
 
-            #region Copy Epub2 package for Epub3
-            string epub3Path = projInfo.ProjectPath;
-            epub3Path = Common.PathCombine(epub3Path, "Epub3");
-            Common.CopyFolderandSubFolder(projInfo.TempOutputFolder, epub3Path, true);
-            if (File.Exists(projInfo.DefaultXhtmlFileWithPath))
-                File.Copy(projInfo.DefaultXhtmlFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath)), true);
+	    protected bool FontEmbedding(PublicationInformation projInfo, InProcess inProcess, string[] langArray, string mergedCss,
+		    string contentFolder, string curdir, Cursor myCursor)
+	    {
+		    inProcess.SetStatus("Processing fonts");
+		    if (!FontProcessing(projInfo, langArray, mergedCss, contentFolder))
+		    {
+			    // user cancelled the epub conversion - clean up and exit
+			    Environment.CurrentDirectory = curdir;
+			    Cursor.Current = myCursor;
+			    inProcess.Close();
+			    return false;
+		    }
+		    inProcess.PerformStep();
+		    return true;
+	    }
 
-            if (File.Exists(projInfo.DefaultCssFileWithPath))
-                File.Copy(projInfo.DefaultCssFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultCssFileWithPath)), true);
+	    protected void AddEndNotesIfNecessary(InProcess inProcess, string contentFolder, PreExportProcess preProcessor,
+		    List<string> splitFiles)
+	    {
+// extract references file if specified
+		    if (References.Contains("End") && InputType.ToLower().Equals("scripture"))
+		    {
+			    inProcess.SetStatus("Creating endnote references file");
+			    CreateReferencesFile(contentFolder, preProcessor.ProcessedXhtml);
+			    splitFiles.Add(Common.PathCombine(contentFolder, ReferencesFilename));
+		    }
+	    }
 
-            if (File.Exists(projInfo.DefaultRevCssFileWithPath))
-                File.Copy(projInfo.DefaultRevCssFileWithPath, Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultRevCssFileWithPath)), true);
+	    protected string CreateContentStructure(PublicationInformation projInfo, InProcess inProcess, string tempFolder)
+	    {
+		    inProcess.SetStatus("Creating structure");
+		    string contentFolder = CreateContentStructure(projInfo, tempFolder);
+		    inProcess.PerformStep();
+		    return contentFolder;
+	    }
 
-            _exportEpub3 = new Epub3Transformation(this, _epubFont);
-            _exportEpub3.Epub3Directory = epub3Path;
-            _exportEpub3.Export(projInfo);
+	    protected List<string> SplitIntoSections(PublicationInformation projInfo, InProcess inProcess, List<string> frontMatter,
+		    PreExportProcess preProcessor, string defaultCss, string[] langArray, out List<string> splitFiles)
+	    {
+		    inProcess.SetStatus("Add Sections");
+		    var htmlFiles = new List<string>();
+		    splitFiles = new List<string>();
+		    splitFiles.AddRange(frontMatter);
+		    SplittingFrontMatter(projInfo, preProcessor, defaultCss, splitFiles);
+		    SplittingReversal(projInfo, langArray, defaultCss, splitFiles);
+		    AddBooksMoveNotes(inProcess, htmlFiles, splitFiles);
+		    inProcess.PerformStep();
+		    return htmlFiles;
+	    }
 
-            #endregion Copy Epub2 package for Epub3
+	    protected List<string> AddFrontMatter(InProcess inProcess, PreExportProcess preProcessor, string tempFolder)
+	    {
+// insert the front matter items as separate files in the output folder
+		    inProcess.SetStatus("Adding Front Matter");
+		    preProcessor.SkipChapterInformation = TocLevel;
+		    var frontMatter = preProcessor.InsertFrontMatter(tempFolder, false);
+		    inProcess.PerformStep();
+		    return frontMatter;
+	    }
 
-            #region Packaging for Epub2 and Epub3
-            inProcess.SetStatus("Packaging for Epub2");
-            if (_isUnixOs)
-            {
-                AddDtdInXhtml(contentFolder);
-            }
-            string fileName = CreateFileNameFromTitle(projInfo);
-            Compress(projInfo.TempOutputFolder, Common.PathCombine(outputFolder, fileName));
-            var outputPathWithFileName = Common.PathCombine(outputFolder, fileName) + ".epub";
+	    protected static void AddNavitation(InProcess inProcess, PreExportProcess preProcessor)
+	    {
+		    inProcess.SetStatus("Adding Navigation");
+		    preProcessor.PrepareBookNameAndChapterCount();
+		    inProcess.PerformStep();
+	    }
 
-            if (!Common.Testing)
-            {
+	    protected void FixIssuesWithFlexXhtml(PublicationInformation projInfo, PreExportProcess preProcessor, string[] langArray,
+		    InProcess inProcess)
+	    {
+		    XhtmlNamespaceHack(projInfo, preProcessor, langArray);
+		    Common.ApplyXslt(preProcessor.ProcessedXhtml, noXmlSpace);
+		    Common.ApplyXslt(preProcessor.ProcessedXhtml, fixEpub);
+		    inProcess.PerformStep();
+	    }
 
-                inProcess.SetStatus("Copy html files");
-                string htmlFolderPath = Common.PathCombine(Path.GetDirectoryName(epub3Path), "HTML5");
-                string oebpsFolderPath = Common.PathCombine(epub3Path, "OEBPS");
-                Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf, toc.html");
-            }
+	    protected string ProcessingCss(PublicationInformation projInfo, InProcess inProcess, PreExportProcess preProcessor,
+		    out string mergedCss, out string defaultCss, out string tempCssFile)
+	    {
+		    inProcess.SetStatus("Preprocessing stylesheet");
+		    var cssFullPath = CssFullPath(projInfo);
+		    Common.WriteDefaultLanguages(projInfo, cssFullPath);
+		    var tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
+		    mergedCss = MergeAndFilterCss(preProcessor, tempFolder, cssFullPath);
+		    /* Modify the content in css file for before after css style process */
+		    preProcessor.InsertPseudoContentProperty(mergedCss, PseudoClass);
+		    CustomizeCss(mergedCss);
+		    var niceNameCss = NiceNameCss(projInfo, tempFolder, ref mergedCss);
+		    defaultCss = Path.GetFileName(niceNameCss);
+		    tempCssFile = mergedCss.Replace(".css", "tmp.css");
+		    File.Copy(mergedCss, tempCssFile, true);
 
-            inProcess.SetStatus("Packaging for Epub3");
+		    Common.SetDefaultCSS(projInfo.DefaultXhtmlFileWithPath, defaultCss);
+		    Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCss);
+		    if (!File.Exists(mergedCss))
+		    {
+			    File.Copy(tempCssFile, mergedCss, true);
+		    }
 
-            string fileNameV3 = CreateFileNameFromTitle(projInfo);
-            string outputPathWithFileNameV3 = null;
-            if (epub3Path != null)
-            {
-                Compress(epub3Path, Common.PathCombine(epub3Path, fileNameV3));
-                outputPathWithFileNameV3 = Common.PathCombine(epub3Path, fileNameV3) + ".epub";
-            }
-#if (TIME_IT)
-            TimeSpan tsTotal = DateTime.Now - dt1;
-            Debug.WriteLine("Exportepub: time spent in .epub conversion: " + tsTotal);
-#endif
-            inProcess.PerformStep();
-            #endregion Packaging
+		    inProcess.PerformStep();
+		    return tempFolder;
+	    }
 
-            #region Validate
-            inProcess.SetStatus("Validate");
+	    protected string PreprocessXhtml(PublicationInformation projInfo, InProcess inProcess, PreExportProcess preProcessor,
+		    out string[] langArray)
+	    {
+		    inProcess.SetStatus("Preprocessing content");
 
-            #region Option Dialog box
-            bool isOutputDilalogNeeded = true;
-            if (!Common.Testing)
-            {
-				string caption = LocalizationManager.GetString("EpubExportTypeDlg.ValidateAndDisplay.Caption", "Export Complete", "");
-				if (Utils.MsgBox(LocalizationManager.GetString("Exportepub.ValidateMsgBox", Resources.ExportCallingEpubValidator + "\r\n Do you want to Validate ePub files?"), caption, MessageBoxButtons.YesNo,
-                                    MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    ValidateResult(outputPathWithFileName);     // Epub2 ExportType
-                    ValidateResult(outputPathWithFileNameV3);   //Epub3 ExportType
-                }
+		    var glossorywords = WriteGlossaryLink(projInfo);
+		    GlossaryLinkReferencing(projInfo, glossorywords);
 
-                #region Option Dialog box
+		    InsertBeforeAfterInXhtml(projInfo);
+		    var outputFolder = SetOutputFolderAndCurrentDirectory(projInfo);
+		    Common.SetProgressBarValue(projInfo.ProgressBar, projInfo.DefaultXhtmlFileWithPath);
+		    XhtmlPreprocessing(projInfo, preProcessor);
+		    langArray = _epubFont.InitializeLangArray(projInfo);
+		    inProcess.PerformStep();
+		    return outputFolder;
+	    }
 
-                if (!Common.Testing && isOutputDilalogNeeded)
-                {
-                    outputPathWithFileName = RenameEpubFileName(outputPathWithFileName, "epub2");
-                    outputPathWithFileNameV3 = RenameEpubFileName(outputPathWithFileNameV3, "epub3");
+	    protected Guid SetupConversion(PublicationInformation projInfo, InProcess inProcess, out PreExportProcess preProcessor,
+		    out EpubToc epubToc)
+	    {
+		    inProcess.SetStatus("Setup");
+		    var bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run.
+		    PageBreak = InputType.ToLower() == "dictionary" && GetPageBreakStatus(projInfo.SelectedTemplateStyle);
 
-                    var exportTypeDlg = new EpubExportTypeDlg();
-                    exportTypeDlg.ShowDialog();
-                    if (exportTypeDlg.ExportType == "epub2")
-                    {
-                        outputFolder = Path.GetDirectoryName(outputPathWithFileName);
-                        DisplayOutput(outputFolder, fileName, ref outputPathWithFileName);
-                    }
-                    else if (exportTypeDlg.ExportType == "epub3")
-                    {
-                        outputFolder = Path.GetDirectoryName(outputPathWithFileNameV3);
-                        DisplayOutput(outputFolder, fileName, ref outputPathWithFileNameV3);
-                    }
-                    else if (exportTypeDlg.ExportType == "folder")
-                    {
-                        if (_isUnixOs)
-                        {
-                            SubProcess.Run("", "nautilus",  Common.HandleSpaceinLinuxPath(Path.GetDirectoryName(outputFolder)), false);
-                        }
-                        else
-                        {
-                            SubProcess.Run(Path.GetDirectoryName(outputFolder), "explorer.exe", Path.GetDirectoryName(outputFolder), false);
-                        }
-                    }
-                }
-                #endregion Option Dialog box
-            }
-            #endregion Option Dialog box
+		    #region LoadXslts
 
-            inProcess.PerformStep();
-            #endregion Validate
-            
-            #region Clean up
-            inProcess.SetStatus("Clean up");
-            Common.CleanupExportFolder(outputPathWithFileName, ".tmp,.de", "_1.x", string.Empty);
-            if (!Common.Testing)
-            {
-                Common.CleanupExportFolder(outputPathWithFileNameV3, ".tmp,.de,.zip", "_1.x", "META-INF,OEBPS");
-            }
-            inProcess.PerformStep();
-            #endregion Clean up
+		    addRevId = LoadAddRevIdXslt();
+		    noXmlSpace = LoadNoXmlSpaceXslt();
+		    fixEpub = LoadFixEpubXslt();
+		    Param.SetLoadType = projInfo.ProjectInputType;
+		    Param.LoadSettings();
 
-            #region Archive
-            inProcess.SetStatus("Archive");
-            CreateRAMP(projInfo);
-            if (!Common.Testing)
-            {
-                projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultXhtmlFileWithPath));
-                CreateRAMP(projInfo);
-            }
-            inProcess.PerformStep();
-            #endregion Archive
+		    #endregion
 
-            #region Clean up
-            inProcess.SetStatus("Final Clean up");
-            Common.CleanupExportFolder(outputPathWithFileName, ".xhtml,.xml,.css", string.Empty, "Test");
-            if (!Common.Testing)
-            {
-                Common.CleanupExportFolder(outputPathWithFileNameV3, ".xhtml,.xml,.css", string.Empty, "Test");
-            }
-            inProcess.PerformStep();
-            #endregion Clean up
+		    #region Create EpubFolder
 
-            #region Close Reporting
-            inProcess.Close();
+		    if (!Common.Testing)
+		    {
+			    CreateEpubFolder(projInfo);
+		    }
+		    else
+		    {
+			    if (!String.IsNullOrEmpty(projInfo.DictionaryPath))
+				    projInfo.ProjectPath = projInfo.DictionaryPath;
+			    else if (!String.IsNullOrEmpty(projInfo.ProjectPath))
+				    projInfo.DictionaryPath = projInfo.ProjectPath;
+		    }
 
-            Environment.CurrentDirectory = curdir;
-            Cursor.Current = myCursor;
-            #endregion Close Reporting
+		    #endregion
 
-            return success;
-        }
-		
-        private static string RenameEpubFileName(string oldEpubFileName, string epubVersion)
+		    preProcessor = new PreExportProcess(projInfo);
+		    preProcessor.RemoveBrokenImage();
+
+		    _isUnixOs = Common.UnixVersionCheck();
+		    if (_isUnixOs)
+		    {
+			    Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath, "epub");
+		    }
+
+		    _isIncludeImage = GetIncludeImageStatus(projInfo.SelectedTemplateStyle);
+
+		    _isNoteTargetReferenceExists = Common.NodeExists(projInfo.DefaultXhtmlFileWithPath, "");
+
+		    _epubFont = new EpubFont(this);
+		    _epubManifest = new EpubManifest(this, _epubFont);
+		    _epubManifest.LoadPropertiesFromSettings();
+		    LoadOtherFeatures();
+		    epubToc = new EpubToc(projInfo.ProjectInputType, TocLevel);
+		    inProcess.PerformStep();
+		    return bookId;
+	    }
+
+	    private static string RenameEpubFileName(string oldEpubFileName, string epubVersion)
         {
             string newEpubFileName = oldEpubFileName.Replace(".epub", "_" + epubVersion + ".epub");
             File.Move(oldEpubFileName, newEpubFileName);
@@ -501,6 +640,7 @@ namespace SIL.PublishingSolution
             {
 				Common.StreamReplaceInFile(file, " xml:lang=\"", " lang=\"");
 				Common.StreamReplaceInFile(file, "a href=\"#\"", "a");
+				Common.StreamReplaceInFile(file, " lang=\"\"", "");
             }
         }
         private void GlossaryLinkReferencing(PublicationInformation projInfo,Dictionary<string,Dictionary<string,string>> glossoryreferncelist)
@@ -541,7 +681,7 @@ namespace SIL.PublishingSolution
                             }
                         }
                     }
-                    
+
                 }
             }
             xmlDoc.Save(tocFiletoUpdate);
@@ -779,7 +919,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private string CreateFileNameFromTitle(PublicationInformation projInfo)
+	    protected string CreateFileNameFromTitle(PublicationInformation projInfo)
         {
             string fileName = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
             if (!Common.Testing)
@@ -992,7 +1132,7 @@ namespace SIL.PublishingSolution
             // EDB 10/22/2010
             // HACK: we need the preprocessed image file names (preprocessor.imageprocess()), but
             // it's missing the xml namespace that makes it a valid xhtml file. We'll add it here.
-            // (The unprocessed html works fine, but doesn't have the updated links to the image files in it, 
+            // (The unprocessed html works fine, but doesn't have the updated links to the image files in it,
             // so we can't use it.)
             // TODO: remove this line when TE provides valid XHTML output.
 
@@ -1019,7 +1159,7 @@ namespace SIL.PublishingSolution
             }
             else
             {
-                string expCssLine = "@import \"" + Path.GetFileName(projInfo.DefaultCssFileWithPath) + "\";";
+                string expCssLine = "\r\n" + "@import \"" + Path.GetFileName(projInfo.DefaultCssFileWithPath) + "\";";
                 Common.FileInsertText(cssFullPath, expCssLine);
             }
             return cssFullPath;
@@ -1042,11 +1182,6 @@ namespace SIL.PublishingSolution
         }
 
         private static MergeCss _mc; // When mc is disposed it also deletes the merged file
-
-        //public Exportepub(string epub3Path)
-        //{
-        //    //this.epub3Path = epub3Path;
-        //}
 
         private static string MergeAndFilterCss(PreExportProcess preProcessor, string tempFolder, string cssFullPath)
         {
@@ -1092,14 +1227,14 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private static XslCompiledTransform LoadFixEpubXslt()
+        protected static XslCompiledTransform LoadFixEpubXslt()
         {
             var fixEpub = new XslCompiledTransform();
             fixEpub.Load(XmlReader.Create(Common.UsersXsl("FixEpub.xsl")));
             return fixEpub;
         }
 
-        private static XslCompiledTransform LoadNoXmlSpaceXslt()
+		private static XslCompiledTransform LoadNoXmlSpaceXslt()
         {
             var noXmlSpaceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("epubConvert.noXmlSpace.xsl");
             Debug.Assert(noXmlSpaceStream != null);
@@ -1143,7 +1278,7 @@ namespace SIL.PublishingSolution
 	                {
 		                File.Move(file, dest);
 	                }
-	               
+
 	                // split the file into smaller pieces if needed
                     var files = new List<string>();
 
@@ -1366,22 +1501,22 @@ namespace SIL.PublishingSolution
             if (projInfo.DefaultXhtmlFileWithPath == null || projInfo.DefaultCssFileWithPath == null) return;
             if (projInfo.DefaultXhtmlFileWithPath.Trim().Length == 0 || projInfo.DefaultCssFileWithPath.Trim().Length == 0) return;
 
-            var cssTree = new CssTree();
-            Dictionary<string, Dictionary<string, string>> cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
+			var cssTree = new CssTree();
+			Dictionary<string, Dictionary<string, string>> cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
 
-            var afterBeforeProcess = new AfterBeforeProcessEpub();
-            afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-            PseudoClass = afterBeforeProcess._psuedoClassName;
+			var afterBeforeProcess = new AfterBeforeProcessEpub();
+			afterBeforeProcess.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+			PseudoClass = afterBeforeProcess._psuedoClassName;
 
-            if (projInfo.IsReversalExist && projInfo.ProjectInputType.ToLower() == "dictionary")
+			if (projInfo.IsReversalExist && projInfo.ProjectInputType.ToLower() == "dictionary")
             {
-                cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
-                string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
+				cssClass = cssTree.CreateCssProperty(projInfo.DefaultRevCssFileWithPath, true);
+				string originalDefaultXhtmlFileName = projInfo.DefaultXhtmlFileWithPath;
                 projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath), "FlexRev.xhtml");
-                RemovePseudoBefore(cssTree);
-                var afterBeforeProcessReversal = new AfterBeforeProcessEpub();
-                afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
-                Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
+				RemovePseudoBefore(cssTree);
+				var afterBeforeProcessReversal = new AfterBeforeProcessEpub();
+				afterBeforeProcessReversal.RemoveAfterBefore(projInfo, cssClass, cssTree.SpecificityClass, cssTree.CssClassOrder);
+				Common.StreamReplaceInFile(projInfo.DefaultXhtmlFileWithPath, "&nbsp;", Common.NonBreakingSpace);
                 projInfo.DefaultXhtmlFileWithPath = originalDefaultXhtmlFileName;
             }
         }
@@ -1421,7 +1556,7 @@ namespace SIL.PublishingSolution
 
             // Modify the local XSLT for the following conditions:
             // - Scriptures with a inline footnotes (References == "After Each Section"):
-            //   adds the 
+            //   adds the
 
             if (InputType.ToLower().Equals("scripture") && References.Contains("Section"))
             {
@@ -1453,7 +1588,7 @@ namespace SIL.PublishingSolution
                 {
                     sbRef.AppendLine("<xsl:value-of select=\"xhtml:span[@class='Note_Target_Reference']\"/>");
                     sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text>");
-                    sbRef.AppendLine("<xsl:for-each select=\"xhtml:span[not(@class ='Note_Target_Reference')]\"><xsl:value-of select=\".\"/></xsl:for-each>");
+					sbRef.AppendLine("<xsl:for-each select=\"xhtml:span[not(@class ='Note_Target_Reference')]\"><xsl:value-of select=\".\"/></xsl:for-each>");
                     sbRef.AppendLine("</xsl:element></xsl:for-each>");
                 }
                 else
@@ -1480,7 +1615,9 @@ namespace SIL.PublishingSolution
                 sbRef.AppendLine("<xsl:element name=\"a\">");
                 sbRef.AppendLine("<xsl:attribute name=\"href\"><xsl:text>#</xsl:text><xsl:value-of select=\"@id\"/></xsl:attribute>");
                 sbRef.AppendLine("<xsl:text>[</xsl:text><xsl:value-of select=\"@title\"/><xsl:text>]</xsl:text>");
-                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text><xsl:value-of select=\".\"/></xsl:element></xsl:for-each>");
+                sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text>");
+				sbRef.AppendLine("<xsl:for-each select=\"xhtml:span\"><xsl:copy><xsl:for-each select=\"@*\"><xsl:copy/></xsl:for-each><xsl:apply-templates/></xsl:copy></xsl:for-each>");
+				sbRef.AppendLine("</xsl:element></xsl:for-each>");
                 sbRef.AppendLine("<!-- cross-references - use the verse number for the list bullet -->");
                 sbRef.AppendLine("<xsl:for-each select=\"descendant::xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']\">");
                 sbRef.AppendLine("<xsl:element name=\"li\">");
@@ -1491,7 +1628,7 @@ namespace SIL.PublishingSolution
                 {
                     sbRef.AppendLine("<xsl:value-of select=\"xhtml:span[@class='Note_Target_Reference']\"/>");
                     sbRef.AppendLine("</xsl:element><xsl:text> </xsl:text>");
-                    sbRef.AppendLine("<xsl:for-each select=\"xhtml:span[not(@class ='Note_Target_Reference')]\"><xsl:value-of select=\".\"/></xsl:for-each>");
+					sbRef.AppendLine("<xsl:for-each select=\"xhtml:span\"><xsl:copy><xsl:for-each select=\"@*\"><xsl:copy/></xsl:for-each><xsl:apply-templates/></xsl:copy></xsl:for-each>");
                     sbRef.AppendLine("</xsl:element>");
                 }
                 else
@@ -1995,7 +2132,7 @@ namespace SIL.PublishingSolution
         #region File Processing Methods
         /// <summary>
         /// Returns true if the specified search text string is found in the given file.
-        /// Modified to use the Knuth-Morris-Pratt search algorithm 
+        /// Modified to use the Knuth-Morris-Pratt search algorithm
         /// (http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm)
         /// </summary>
         /// <param name="filePath"></param>
@@ -2034,7 +2171,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Helper method to change the relative hyperlinks in the references file to absolute ones. 
+        /// Helper method to change the relative hyperlinks in the references file to absolute ones.
         /// This is done after the scripture files are split out into individual books of 100K or less in size.
         /// </summary>
         /// <param name="contentFolder"></param>
@@ -2065,15 +2202,17 @@ namespace SIL.PublishingSolution
                     {
                         content.Replace(("a href=\"#" + href + "\""),
                                         ("a href=\"" + Path.GetFileName(files[index]) + "#" + href + "\""));
+						index = 0;
                         break;
                     }
                     // update the index and try again
                     index++;
                     if (index == files.Length)
                     {
-                        if (looped) break; // already searched through the list -- this item isn't found, get out
-                        index = 0;
-                        looped = true;
+						index = 0;
+						looped = true;
+                        if (looped)
+							break; // already searched through the list -- this item isn't found, get out
                     }
                 }
                 inProcess.PerformStep();
@@ -2086,7 +2225,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Helper method to change the relative hyperlinks in the references file to absolute ones. 
+        /// Helper method to change the relative hyperlinks in the references file to absolute ones.
         /// This is done after the scripture files are split out into individual books of 100K or less in size.
         /// </summary>
         /// <param name="contentFolder"></param>
@@ -2105,7 +2244,7 @@ namespace SIL.PublishingSolution
                 xmlReader.Close();
                 XmlNodeList footnoteNodes = null;
                 footnoteNodes = xmlDocument.SelectNodes("//span[@class='Note_General_Paragraph']/a");
-                    
+
                 if (footnoteNodes == null || footnoteNodes.Count == 0)
                 {
                     footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_General_Paragraph']/xhtml:a", namespaceManager);
@@ -2121,7 +2260,7 @@ namespace SIL.PublishingSolution
                 }
 
                 footnoteNodes = xmlDocument.SelectNodes("//span[@class='Note_CrossHYPHENReference_Paragraph']/a");
-                
+
                 if (footnoteNodes == null || footnoteNodes.Count == 0)
                 {
                     footnoteNodes = xmlDocument.SelectNodes("//xhtml:span[@class='Note_CrossHYPHENReference_Paragraph']/xhtml:a", namespaceManager);
@@ -2281,7 +2420,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Splits the specified xhtml file out into multiple files, either based on letter (dictionary) or book (scripture). 
+        /// Splits the specified xhtml file out into multiple files, either based on letter (dictionary) or book (scripture).
         /// This method was adapted from ExportOpenOffice.cs.
         /// </summary>
         /// <param name="temporaryCvFullName"></param>
@@ -2414,7 +2553,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Copies the selected source folder and its subdirectories to the destination folder path. 
+        /// Copies the selected source folder and its subdirectories to the destination folder path.
         /// This is a recursive method.
         /// </summary>
         /// <param name="sourceFolder"></param>
@@ -2569,11 +2708,13 @@ namespace SIL.PublishingSolution
                                 while (next != null && (next.Attributes != null && next.Attributes.GetNamedItem("class").InnerText.ToLower().Contains("title")))
                                     next = next.NextSibling;
                             }
+                            var book = string.Empty;
                             foreach (string variable in chapterIdList)
                             {
                                 string[] valueList = variable.Split('_');
-                                if (valueList[0] != valueList1[0])
+                                if (valueList[0] != valueList1[0] && valueList[2] != book)
                                     continue;
+                                book = valueList[2];
 
                                 Debug.Assert(xmlDocument.DocumentElement != null);
                                 XmlNode nodeContent = xmlDocument.CreateElement("a", xmlDocument.DocumentElement.NamespaceURI);
@@ -2610,7 +2751,7 @@ namespace SIL.PublishingSolution
             var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
             namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
 			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
-            
+
             foreach (string sourceFile in files)
             {
                 string fileName = Path.GetFileNameWithoutExtension(sourceFile);

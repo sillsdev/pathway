@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="CssTree.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2009, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2009, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // return css to dictionary
 // </remarks>
@@ -44,7 +44,7 @@ namespace SIL.PublishingSolution
          #region Constructor
         public CssTree()
         {
-            OutputType = Common.OutputType.IDML; 
+            OutputType = Common.OutputType.IDML;
         }
         #endregion
 
@@ -56,12 +56,12 @@ namespace SIL.PublishingSolution
             TreeNode node = cssTree.BuildTree(cssSourceFile);
             _cssClass.Clear();
             ProcessCSSTree(node);
-            if (OutputType != Common.OutputType.EPUB)
+            if (OutputType != Common.OutputType.EPUB && OutputType != Common.OutputType.HTML5)
             {
                 SetLeftRightFirstPage(setDefaultPageValue);
             }
             cssBorderColor = _mapProperty.CssBorderColor;
-            if (OutputType != Common.OutputType.EPUB)
+            if (OutputType != Common.OutputType.EPUB && OutputType != Common.OutputType.HTML5)
             {
                 SetDefaultTagProperty();
             }
@@ -135,7 +135,7 @@ namespace SIL.PublishingSolution
                     _classInfo = new ClassInfo();
                     _classInfo.Tag.SetClassAttrib(pair.Key, _classInfo.Tag.Attribute);
                     _classInfo.CoreClass.SetClassAttrib(string.Empty, _classInfo.Tag.Attribute);
-                    _classInfo.TagName = _classInfo.Tag.ClassName; 
+                    _classInfo.TagName = _classInfo.Tag.ClassName;
                     _classInfo.SpecificityWeightage = 1;
                     _classInfo.StyleName = pair.Key;
                     SetSpecificityClass(pair.Key, _classInfo);
@@ -154,7 +154,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        
+
         private void SetLeftRightFirstPage(bool setDefaultPageValue)
         {
             _setDefaultPageValue = setDefaultPageValue;
@@ -263,8 +263,8 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Generate Styles.xml body from Antlr tree
-        /// 
-        /// <list> 
+        ///
+        /// <list>
         /// </list>
         /// </summary>
         /// <param name="node">Antlr XMLNode</param>
@@ -314,7 +314,7 @@ namespace SIL.PublishingSolution
                                 {
                                     Property(property, regionName);
                                 }
-                            } 
+                            }
                             break;
                         case "PROPERTY":
                             Property(node, pseudoName);
@@ -347,7 +347,7 @@ namespace SIL.PublishingSolution
                         case "TAG":
                             _classInfo.Tag = ClassNode(node);
                             _classInfo.CoreClass.SetClassAttrib(string.Empty, _classInfo.Tag.Attribute);
-                            _classInfo.TagName = Common.LeftString(_classInfo.Tag.ClassName,Common.SepAttrib); 
+                            _classInfo.TagName = Common.LeftString(_classInfo.Tag.ClassName,Common.SepAttrib);
                             tagName = GetFirstChild(node) + Common.SepTag;
                             tagStyleName = _classInfo.Tag.ClassName;
                             tagStyleName = GetImageAttrib(tagStyleName);
@@ -504,7 +504,7 @@ namespace SIL.PublishingSolution
             StyleAttribute _attributeInfo;
             _attributeInfo = Properties(node);
             _attributeInfo.ClassName = clsName;
-            
+
             if (_attributeInfo.Name.ToLower() == "content")
             {
                 _attributeInfo.StringValue = ReplaceCountertoPipeLine(_attributeInfo.StringValue);
@@ -594,7 +594,7 @@ namespace SIL.PublishingSolution
                     }
                     else if (classAttrib.Name == "src")
                     {
-                        attribute = "src"; 
+                        attribute = "src";
                         className = classAttrib.AttributeValue;
                     }
 
@@ -636,14 +636,14 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Map _attributeInfo to MapPropertys.cs
-        /// 
-        /// <list> 
+        ///
+        /// <list>
         /// </list>
         /// </summary>
         /// <param name="styleAttributeInfo">StyleAttribute styleAttributeInfo</param>
         /// <returns>StyleAttribute _attributeInfo</returns>
-        /// -------------------------------------------------------------------------------------------        
-        /// 
+        /// -------------------------------------------------------------------------------------------
+        ///
         private void AddProperty(StyleAttribute styleAttributeInfo)
         {
             try
@@ -680,14 +680,14 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Generate property nodes
-        /// 
-        /// <list> 
+        ///
+        /// <list>
         /// </list>
         /// </summary>
         /// <param name="tree">Css tree</param>
         /// <returns></returns>
-        /// -------------------------------------------------------------------------------------------        
-        /// 
+        /// -------------------------------------------------------------------------------------------
+        ///
         private StyleAttribute Properties(TreeNode tree)
         {
             ArrayList unit = new ArrayList();
@@ -784,14 +784,14 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Get GetAttributes Values from the node
-        /// 
-        /// <list> 
+        ///
+        /// <list>
         /// </list>
         /// </summary>
         /// <param name="tree">Antlr Tree</param>
         /// <returns>ATTRIB</returns>
-        /// -------------------------------------------------------------------------------------------        
-        /// 
+        /// -------------------------------------------------------------------------------------------
+        ///
         private ClassAttribute GetAttribValue(TreeNode tree)
         {
             try
@@ -848,7 +848,7 @@ namespace SIL.PublishingSolution
 						{
 							// found a possible match -- try to get each possible font style's file name that's installed
 							// on the local machine
-							string[] styles = 
+							string[] styles =
 							{
 								"Regular",
 								"Bold",
@@ -875,7 +875,7 @@ namespace SIL.PublishingSolution
 	            try
 	            {
 	                fontsKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\MICROSOFT\WINDOWS NT\CURRENTVERSION\Fonts\");
-	
+
 	                string[] fontNames = fontsKey.GetValueNames();                foreach (string font in fontName)
 	                {
 	                    for (int i = 0; i < fontNames.Length; i++)

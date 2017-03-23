@@ -141,15 +141,7 @@ using System.Text.RegularExpressions;
 #if TEST
 using NDesk.Options;
 #endif
-#if SIL_TOOL
 namespace SIL.Tool
-#else
-#if NDESK_OPTIONS
-namespace NDesk.Options
-#else
-namespace Mono.Options
-#endif
-#endif
 {
     static class StringCoda
     {

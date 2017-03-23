@@ -1,15 +1,15 @@
 ﻿#region // Copyright (C) 2014, SIL International. All Rights Reserved.
 // --------------------------------------------------------------------------------------------
 // <copyright file="EpubManifest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -72,6 +72,7 @@ namespace epubConvert
                 string name = Path.GetFileName(file);
                 Debug.Assert(name != null);
                 string bookName = GetBookName(file);
+
                 if (name.IndexOf("File", StringComparison.Ordinal) == 0 && name.IndexOf("TOC", StringComparison.Ordinal) == -1)
                 {
                     WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
@@ -90,7 +91,8 @@ namespace epubConvert
                     {
                         WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
                         index++;
-                    }
+						ncx.WriteEndElement(); // navPoint
+					}
                     if (InputType.ToLower() == "dictionary")
                     {
                         DictionaryNcx(ncx, ref isMainOpen, ref isMainSubOpen, ref isRevOpen, ref isRevSubOpen, ref index, skipChapterInfo, file, name, bookName);
@@ -131,27 +133,29 @@ namespace epubConvert
                                                                    (fileNameWithoutExtension.EndsWith("_") ||
                                                                     fileNameWithoutExtension.EndsWith("_01"))))
             {
-                if (isScriptureSubOpen)
+                if (!string.IsNullOrEmpty(bookName))
                 {
-                    ncx.WriteEndElement(); // navPoint
+                    if (isScriptureSubOpen)
+                    {
+                        ncx.WriteEndElement(); // navPoint
+                    }
+                    ncx.WriteStartElement("navPoint");
+                    ncx.WriteAttributeString("id", "dtb:uid");
+                    ncx.WriteAttributeString("playOrder", index.ToString(CultureInfo.InvariantCulture));
+                    ncx.WriteStartElement("navLabel");
+                    ncx.WriteElementString("text", bookName);
+                    ncx.WriteEndElement(); // navlabel
+                    ncx.WriteStartElement("content");
+                    ncx.WriteAttributeString("src", name);
+                    ncx.WriteEndElement(); // meta
+                    index++;
+                    // chapters within the books (nested as a subhead)
+                    if (!skipChapterInfo)
+                    {
+                        WriteChapterLinks(file, ref index, ncx);
+                    }
+                    isScriptureSubOpen = true;
                 }
-                bookName = GetBookName(file);
-                ncx.WriteStartElement("navPoint");
-                ncx.WriteAttributeString("id", "dtb:uid");
-                ncx.WriteAttributeString("playOrder", index.ToString(CultureInfo.InvariantCulture));
-                ncx.WriteStartElement("navLabel");
-                ncx.WriteElementString("text", bookName);
-                ncx.WriteEndElement(); // navlabel
-                ncx.WriteStartElement("content");
-                ncx.WriteAttributeString("src", name);
-                ncx.WriteEndElement(); // meta
-                index++;
-                // chapters within the books (nested as a subhead)
-                if (!skipChapterInfo)
-                {
-                    WriteChapterLinks(file, ref index, ncx);
-                }
-                isScriptureSubOpen = true;
             }
             else if (name.IndexOf("zzReference", StringComparison.Ordinal) == 0)
             {
@@ -191,14 +195,17 @@ namespace epubConvert
                 if (fileNameWithoutExtension != null && (fileNameWithoutExtension.EndsWith("_") ||
                                                                        fileNameWithoutExtension.EndsWith("_01")))
                 {
-                    if (isMainSubOpen)
-                    {
-                        ncx.WriteEndElement(); // navPoint
-                    }
-                    WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
-                    index++;
-                    isMainSubOpen = true;
-                }
+	                if (!string.IsNullOrEmpty(bookName))
+	                {
+						if (isMainSubOpen)
+						{
+							ncx.WriteEndElement(); // navPoint
+						}
+						WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
+						index++;
+						isMainSubOpen = true;
+					}
+				}
                 if (!skipChapterInfo)
                 {
                     WriteChapterLinks(file, ref index, ncx);
@@ -216,18 +223,21 @@ namespace epubConvert
                 if (fileNameWithoutExtension != null && (fileNameWithoutExtension.EndsWith("_") ||
                                                                        fileNameWithoutExtension.EndsWith("_01")))
                 {
-                    if (isRevSubOpen)
-                    {
-                        ncx.WriteEndElement(); // navPoint
-                    }
-                    if (!isRevOpen)
-                    {
-                        isRevOpen = true;
-                    }
-                    WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
-                    index++;
-                    isRevSubOpen = true;
-                }
+	                if (!string.IsNullOrEmpty(bookName))
+	                {
+						if (isRevSubOpen)
+						{
+							ncx.WriteEndElement(); // navPoint
+						}
+						if (!isRevOpen)
+						{
+							isRevOpen = true;
+						}
+						WriteNavPoint(ncx, index.ToString(CultureInfo.InvariantCulture), bookName, name);
+						index++;
+						isRevSubOpen = true;
+					}
+				}
                 if (!skipChapterInfo)
                 {
                     WriteChapterLinks(file, ref index, ncx);
@@ -721,45 +731,20 @@ namespace epubConvert
             XmlNodeList nodes;
             if (InputType.ToLower().Equals("dictionary"))
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:div[@class='letter']", namespaceManager);
-	            if (nodes == null || nodes.Count == 0)
-	            {
-		            nodes = xmlDocument.SelectNodes("//div[@class='letter']", namespaceManager);
-	            }
-	            if (nodes == null || nodes.Count == 0)
-	            {
-		            nodes = xmlDocument.SelectNodes("//xhtml:span[@class='letter']", namespaceManager);
-	            }
-	            if (nodes == null || nodes.Count == 0)
-	            {
-		            nodes = xmlDocument.SelectNodes("//span[@class='letter']", namespaceManager);
-	            }
+                nodes = xmlDocument.SelectNodes("//*[@class='letter']", namespaceManager);
             }
             else
             {
-                nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookName']", namespaceManager);
-                if (nodes == null || nodes.Count == 0)
-                {
-                    nodes = xmlDocument.SelectNodes("//span[@class='scrBookName']", namespaceManager);
-                }
+                nodes = xmlDocument.SelectNodes("//*[@class='scrBookName']", namespaceManager);
                 if (nodes == null || nodes.Count == 0)
                 {
                     // nothing there - check on the Title_Main span
-                    nodes = xmlDocument.SelectNodes("//xhtml:div[@class='Title_Main']", namespaceManager);
-                    // nothing there - check on the scrBookName span
-                    if (nodes == null || nodes.Count == 0)
-                    {
-                        nodes = xmlDocument.SelectNodes("//div[@class='Title_Main']", namespaceManager);
-                    }
+                    nodes = xmlDocument.SelectNodes("//*[@class='Title_Main']", namespaceManager);
                 }
                 if (nodes == null || nodes.Count == 0)
                 {
                     // we're really scraping the bottom - check on the scrBookCode span
-                    nodes = xmlDocument.SelectNodes("//xhtml:span[@class='scrBookCode']", namespaceManager);
-                    if (nodes == null || nodes.Count == 0)
-                    {
-                        nodes = xmlDocument.SelectNodes("//span[@class='scrBookCode']", namespaceManager);
-                    }
+                    nodes = xmlDocument.SelectNodes("//*[@class='scrBookCode']", namespaceManager);
                 }
             }
             if (nodes != null && nodes.Count > 0)
@@ -769,7 +754,7 @@ namespace epubConvert
                 return (sb.ToString());
             }
             // fall back on just the file name
-            return Path.GetFileName(xhtmlFileName);
+			return string.Empty;
         }
 
     }

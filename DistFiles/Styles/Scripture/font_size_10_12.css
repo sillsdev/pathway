@@ -1,167 +1,20 @@
-.scrBody
-{
-  font-size: 10pt;
+span { 
+	font-size: 10pt; 
+	line-height: 10pt;
+	-ps-fixed-line-height: 10pt;
 }
-
-.columns {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
+div { 
+	font-size: 10pt; 
+	line-height: 10pt;
+	-ps-fixed-line-height: 10pt;
 }
-
-.Chapter_Head {
-    font-size:14pt;
-    line-height:24pt;
+a { 
+	font-size: 10pt; 
+	line-height: 10pt;
+	-ps-fixed-line-height: 10pt;
 }
-
-.Chapter_Number {
-    font-size: 250%;
-}
-
-.Inscription {
-    font-size: 10pt;
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Inscription_Paragraph {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Intro_List_Item1 {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Intro_Paragraph {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Intro_Title_Main {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Intro_Section_Head {
-    font-size: 10pt;
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.REVERSE_SOLIDUSCitation_Line1, .Citation_Line1, .Line1 {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.REVERSE_SOLIDUSCitation_Line2, .Citation_Line2, .Line2 {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Note_CrossHYPHENReference_Paragraph {
-    font-size: 8pt;	/* cascaded environment */
-    line-height: 10pt;
-    -ps-fixed-line-height: 10pt;
-}
-
-.Note_CrossHYPHENReference_Paragraph::footnote-call {
-    font-size: 6pt;
-    vertical-align: super;
-    line-height: none;
-}
-
-.Note_CrossHYPHENReference_Paragraph::footnote-marker {
-    font-size: 8pt;
-}
-
-.Note_General_Paragraph {
-    font-size: 8pt;	/* cascaded environment */
-    line-height: 10pt;
-    -ps-fixed-line-height: 10pt;
-}
-
-.Note_General_Paragraph::footnote-call {
-    font-size: 6pt;
-    vertical-align: super;
-    line-height: none;
-}
-
-.Note_General_Paragraph::footnote-marker {
-    font-size: 8pt;
-}
-
-.Paragraph {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Paragraph_Continuation {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Paragraph1 {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Parallel_Passage_Reference {
-    font-size:10pt;
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Section_Head {
-    font-size: 10pt;
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.iot{
-    font-size: 10pt;
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Section_Head_Major {
-    font-size: 10pt;
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Section_Head_Minor {
-    font-size: 10pt;
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Stanza_Break {
-    font-size: 10pt;	/* cascaded environment */
-    line-height: 12pt;
-    -ps-fixed-line-height: 12pt;
-}
-
-.Title_Main {
-    font-size: 20pt;	/* cascaded environment */
-    line-height: 24pt;
-    -ps-fixed-line-height: 24pt;
-}
-
-.Verse_Number {
-    font-size: 6pt;
-}
-
-.Verse_Number_In_Note {
-    font-size: 6pt;
+.basefontsize{
+	font-size: 10pt; 
+	line-height: 10pt;
+	-ps-fixed-line-height: 10pt;
 }

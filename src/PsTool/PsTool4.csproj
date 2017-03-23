@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{422C5127-260D-4F16-B476-33AA38DBF919}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -50,12 +48,10 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
     <OutputPath>..\..\output\Release</OutputPath>
-    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <Edition>BTE</Edition>
     <ConfTag>Pw7</ConfTag>
     <Status>Testing</Status>
@@ -101,7 +97,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\..\output\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SIL_TOOL</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -193,6 +189,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
     <OutputPath>..\..\output\Release</OutputPath>
@@ -207,22 +204,11 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Analytics.NET, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Analytics.2.0.2\lib\Analytics.NET.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="L10NSharp">
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="SIL.Core">
       <HintPath>..\..\lib\SIL.Core.dll</HintPath>
@@ -236,6 +222,15 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="Analytics.NET, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\Analytics.2.0.2\lib\Analytics.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfterBeforeProcess.cs" />
@@ -255,10 +250,13 @@
     <Compile Include="FileStreamXmlResolver.cs" />
     <Compile Include="FlexScan.cs" />
     <Compile Include="ImageMods.cs" />
+    <Compile Include="InsertHyphens.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="FontInternals.cs">
     </Compile>
     <Compile Include="HashUtilities.cs" />
+    <Compile Include="LoadXmlDocument.cs" />
+    <Compile Include="ManageDirectory.cs" />
     <Compile Include="MergeCss.cs" />
     <Compile Include="MessageBoxExtender.cs" />
     <Compile Include="NullXmlResolver.cs" />
@@ -292,6 +290,7 @@
     <Compile Include="RegistryHelperLite.cs" />
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="ShowHelp.cs" />
+    <Compile Include="SplitXml.cs" />
     <Compile Include="StyleCategories.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,6 +328,7 @@
     <Compile Include="Substitution.cs" />
     <Compile Include="XHTMLProcess.cs" />
     <Compile Include="XmlCopy.cs" />
+    <Compile Include="XmlOneToMany.cs" />
     <Compile Include="XmlParser.cs" />
     <Compile Include="ZipFolder.cs" />
     <Compile Include="ZipUtil.cs" />

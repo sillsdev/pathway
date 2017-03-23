@@ -8,22 +8,24 @@
       <style:text-properties fo:font-style="normal" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_.seh_letHead_dicBody" style:family="text" style:parent-style-name="letHead_dicBody" style:default-outline-level="2" style:list-style-name="" style:master-page-name="">
-      <style:text-properties fo:font-size="18pt" style:font-size-complex="18pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="18pt" style:font-size-complex="18pt" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letData_dicBody" style:family="paragraph" style:parent-style-name="dicBody">
       <style:paragraph-properties fo:text-align="left" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entry_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="24pt" fo:text-indent="-12pt" fo:background-color="transparent" fo:orphans="2" />
+      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" fo:orphans="2" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.seh_mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.seh_mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="mainheadword_entry_letData_dicBody">
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:font-size="10pt" style:font-size-complex="10pt" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="picture_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody">
-      <style:paragraph-properties fo:float="right" fo:text-align="left" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="12pt" fo:padding-top="1pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-indent="-12pt" fo:background-color="transparent" />
+      <style:paragraph-properties fo:margin-left="24pt" fo:text-indent="-12pt" fo:float="right" fo:text-align="left" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:padding-top="1pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="captionContent_picture_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="picture_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_sensenumber_captionContent_picture_entry_letData_dicBody" style:family="text" style:parent-style-name="captionContent_picture_entry_letData_dicBody">
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensenumber_captionContent_picture_entry_letData_dicBody" style:family="text" style:parent-style-name="captionContent_picture_entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_sensenumber_captionContent_picture_entry_letData_dicBody" style:family="text" style:parent-style-name="sensenumber_captionContent_picture_entry_letData_dicBody">
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="en" fo:country="US" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
@@ -89,7 +91,7 @@
     </style:style>
     <style:style style:name="a" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="24pt" fo:text-indent="-12pt" fo:background-color="transparent" />
+      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
     </style:style>
     <style:style style:name="span_.seh_mainheadword.-entry" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
@@ -195,7 +197,7 @@
       <style:paragraph-properties fo:float="right" fo:text-align="left" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="12pt" fo:padding-top="1pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-indent="-12pt" fo:background-color="transparent" />
     </style:style>
     <style:style style:name="subentry.-subentries.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="24pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
       <style:text-properties text:display="block" fo:background-color="transparent" />
     </style:style>
     <style:style style:name="minorentrycomplex" style:family="paragraph" style:parent-style-name="none">
@@ -457,7 +459,7 @@
       <style:paragraph-properties fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
     </style:style>
     <style:style style:name="subentry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="left" fo:margin-left="24pt" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-align="left" fo:margin-left="12pt" fo:background-color="transparent" />
       <style:text-properties text:display="block" fo:background-color="transparent" />
     </style:style>
     <style:style style:name="complexform" style:family="paragraph" style:parent-style-name="none">
@@ -597,10 +599,10 @@
     </style:default-style>
     <style:style style:name="Standard" style:family="paragraph" style:class="text" />
     <style:style style:name="Internet_20_link" style:display-name="Internet link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="Visited_20_Internet_20_Link" style:display-name="Visited Internet Link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="block_5f_p" style:display-name="block_p" style:family="paragraph">
       <style:paragraph-properties fo:margin-left="0.1665in" fo:margin-right="0in" fo:line-height="0.2in" fo:text-align="start" style:justify-single-word="false" fo:orphans="2" fo:text-indent="-0.1665in" style:auto-text-indent="false" style:page-number="auto" fo:background-color="transparent" fo:padding-left="0in" fo:padding-right="0in" fo:padding-top="0.0138in" fo:padding-bottom="0.028in" fo:border="none" fo:keep-with-next="always" />
@@ -774,7 +776,7 @@
       <style:text-properties style:font-name="Charis SIL" style:font-name-asian="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
-      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="right" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="right" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false" draw:textarea-vertical-align="middle">
         <style:background-image />
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>

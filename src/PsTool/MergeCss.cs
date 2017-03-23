@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="MergeCss.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Combines all css into a single file by implementing @import
 // </remarks>
@@ -146,12 +146,12 @@ namespace SIL.Tool
                     if (!File.Exists(validName)) return arrayCssFile;
                 }
             }
-            
+
             sr = new StreamReader(validName);
             while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();
-                Match m = Regex.Match(line, "@import \"(.*)\";", RegexOptions.IgnoreCase);
+                Match m = Regex.Match(line, "@import \"([^\"]*)\";", RegexOptions.IgnoreCase);
                 if (m.Success)
                 {
                     GetCssNameList(Common.PathCombine(_cssPath, m.Groups[1].Value), arrayCssFile);

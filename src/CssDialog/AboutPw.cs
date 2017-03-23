@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="AboutPw.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2009, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2009, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// Displays the properties of the calling Assembly (Pathway). 
+// Displays the properties of the calling Assembly (Pathway).
 // Note: the copyright info is coming from the AssemblyInfo.cs in /Pathway/CssDialog/Properties.
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Gets AssemblyDescription 
+        /// Gets AssemblyDescription
         /// </summary>
         public string AssemblyDescription
         {
@@ -230,7 +230,7 @@ namespace SIL.PublishingSolution
 
         private void lnkProj_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://pathway.sil.org/");
+            System.Diagnostics.Process.Start("http://software.sil.org/pathway/");
         }
 
         private void lnkGPL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -2122,12 +2122,13 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.txtBaseFontSize, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.txtBaseFontSize, "ConfigurationTool.txtBaseFontSize");
 			this.txtBaseFontSize.Location = new System.Drawing.Point(63, 3);
-			this.txtBaseFontSize.MaxLength = 2;
+			this.txtBaseFontSize.MaxLength = 4;
 			this.txtBaseFontSize.Name = "txtBaseFontSize";
 			this.txtBaseFontSize.Size = new System.Drawing.Size(45, 20);
 			this.txtBaseFontSize.TabIndex = 2;
 			this.txtBaseFontSize.Enter += new System.EventHandler(this.SetGotFocusValue);
 			this.txtBaseFontSize.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBaseFontSize_KeyUp);
+			this.txtBaseFontSize.Leave += new System.EventHandler(this.txtBaseFontSize_Leave);
 			this.txtBaseFontSize.Validated += new System.EventHandler(this.txtBaseFontSize_Validated);			
 			// 
 			// lblPt

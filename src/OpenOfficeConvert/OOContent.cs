@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="OOContent.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Creates the Contentxml in ODT Export
 // </remarks>
@@ -21,6 +21,7 @@ using System.Globalization;
 using System.Text;
 using System.Xml;
 using System.Collections;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -52,7 +53,7 @@ namespace SIL.PublishingSolution
 		int _autoFootNoteCount;
 		private string _sourcePicturePath;
 
-		//Table 
+		//Table
 		List<string> _table = new List<string>();
 		private int _tableCount = 0;
 		private int _tableColumnCount = 0;
@@ -359,7 +360,7 @@ namespace SIL.PublishingSolution
 					ContentCounterReset[className] = IdAllClass[className][searchKey];
 				}
 
-				// Footnote process 
+				// Footnote process
 				searchKey = "display";
 				if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
 				{
@@ -485,15 +486,15 @@ namespace SIL.PublishingSolution
 
 		private void ProcessXHTML(ProgressBar pb, string Sourcefile, string targetPath)
 		{
-			if (_outputExtension == "odm") 
+			if (_outputExtension == "odm")
 				return;
-			
+
 			foreach(string className in IdAllClass.Keys)
 			{
 				if (!IdAllClassWithandWithoutSeperator.ContainsKey(className))
 					IdAllClassWithandWithoutSeperator.Add(className, className.Replace("-","_").Replace(".",""));
 			}
-			
+
 			_styleFilePath = targetPath + "styles.xml";
 			try
 			{
@@ -608,7 +609,7 @@ namespace SIL.PublishingSolution
 				}
 				if (_reader.Name == "div" && _nextVerse &&
 					(_classNameWithLang.ToLower().IndexOf("paragraph") == 0 ||
-					 _classNameWithLang.ToLower().IndexOf("line") == 0)) //_classNameWithLang.ToLower() == "paragraph" 
+					 _classNameWithLang.ToLower().IndexOf("line") == 0)) //_classNameWithLang.ToLower() == "paragraph"
 				{
 					if (!string.IsNullOrEmpty(_previousGuideword))
 					{
@@ -792,7 +793,7 @@ namespace SIL.PublishingSolution
 			if (content == null) return "";
 			content = content.Replace("\r\n", "");
 			content = content.Replace("\t", "");
-			
+
 			Char[] charac = content.ToCharArray();
 			StringBuilder builder = new StringBuilder();
 			foreach (char var in charac)
@@ -819,7 +820,7 @@ namespace SIL.PublishingSolution
 				if (!String.IsNullOrEmpty(content) && !_previousSignificant && charac[0] == ' ')
 				{
 					content = charac[0] + content;
-				}				
+				}
 			}
 
 			if (_classNameWithLang.IndexOf("scrFootnoteMarker") == 0)
@@ -830,7 +831,7 @@ namespace SIL.PublishingSolution
 			{
 				_significant = true;
 				_footnoteSpace = true;
-			}			
+			}
 			return content;
 		}
 
@@ -885,7 +886,7 @@ namespace SIL.PublishingSolution
 					else
 					{
 						_writer.WriteStartElement("text:p");
-						_writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass                        
+						_writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
 					}
 				}
 				AddUsedStyleName(_paragraphName);
@@ -951,7 +952,7 @@ namespace SIL.PublishingSolution
 			}
 			catch (Exception)
 			{
-				// shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+				// shouldn't happen (ExportThroughPathway dialog forces the user to select an organization),
 				// but just in case, specify a default org.
 				organization = "SIL International";
 			}
@@ -972,8 +973,8 @@ namespace SIL.PublishingSolution
 
 		private void WriteText()
 		{
-			string content = _reader.Value;			
-			content = ReplaceString(content);			
+			string content = _reader.Value;
+			content = ReplaceString(content);
 			if (CollectFootNoteChapterVerse(content, Common.OutputType.ODT.ToString())) return;
 			if (_isPictureDisplayNone)
 			{
@@ -990,7 +991,7 @@ namespace SIL.PublishingSolution
 				_characterNameAlways = _characterName;
 			}
 
-			// Ignore display : "none"; 
+			// Ignore display : "none";
 			if (IdAllClass.ContainsKey(_characterName) && IdAllClass[_characterName].ContainsKey("display"))
 			{
 				if (IdAllClass[_characterName]["display"] == "none")
@@ -1483,11 +1484,7 @@ namespace SIL.PublishingSolution
 				else if (status == "name")
 				{
 					string anchorName = _anchorBookMarkName.Replace("name", "");
-
-					_writer.WriteStartElement("text:bookmark-start");
-					_writer.WriteAttributeString("text:name", anchorName.ToLower());
-					_writer.WriteEndElement();
-					_writer.WriteStartElement("text:bookmark-end");
+					_writer.WriteStartElement("text:bookmark");
 					_writer.WriteAttributeString("text:name", anchorName.ToLower());
 					_writer.WriteEndElement();
 				}
@@ -1567,12 +1564,6 @@ namespace SIL.PublishingSolution
 			}
 			else if (_anchorIdValue.Length > 0 && _sourceList.Contains(_anchorIdValue.Replace("#", "").ToLower()) && _targetList.Contains(_anchorIdValue.Replace("#", "").ToLower())) //search in source for writing target
 			{
-				_writer.WriteStartElement("text:bookmark-start");
-				_writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
-				_writer.WriteEndElement();
-				_writer.WriteStartElement("text:bookmark-end");
-				_writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
-				_writer.WriteEndElement();
 				_anchorIdValue = string.Empty;
 			}
 
@@ -1621,13 +1612,9 @@ namespace SIL.PublishingSolution
 			_writer.WriteEndElement();
 			_writer.WriteEndElement();
 			_writer.WriteEndElement();
-
-			if (footerClassName.IndexOf("NoteCross") != 0)
-			{
-				_writer.WriteStartElement("text:s"); // Insert space after the footnote call
-				_writer.WriteAttributeString("text:c", "1");
-				_writer.WriteEndElement();
-			}
+			_writer.WriteStartElement("text:bookmark");
+			_writer.WriteAttributeString("text:name", _anchorIdValue.ToLower());
+			_writer.WriteEndElement();
 		}
 
 		public static string SpanTagCorrection(string content)
@@ -1713,7 +1700,7 @@ namespace SIL.PublishingSolution
 				tempClassName = _reader.Name;
 			}
 
-			if (_reader.Name == "div" && _projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") < 0)// 
+			if (_reader.Name == "div" && _projInfo.DefaultXhtmlFileWithPath.ToLower().IndexOf("flexrev") < 0)//
 			{
 				const string paraSpan = "text:p";
 
@@ -1757,7 +1744,7 @@ namespace SIL.PublishingSolution
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="targetPath"></param>
 		private void StartElement(string targetPath)
@@ -2762,11 +2749,11 @@ namespace SIL.PublishingSolution
 					rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
 				}
 			}
-			else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72 
+			else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72
 			{
 				rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
 			}
-			else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
+			else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0,
 			{
 				double value = .9;
 				if (_allStyle.Peek().IndexOf("logo") == 0 || _allStyle.Peek().IndexOf("LText_FrontMatter") == 0)
@@ -2785,7 +2772,7 @@ namespace SIL.PublishingSolution
 			}
 			else
 			{
-				//Default value is 72 
+				//Default value is 72
 				rectHeight = "72"; // fixed the width as 1 in = 72pt;
 				rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
 			}
@@ -3032,11 +3019,11 @@ namespace SIL.PublishingSolution
 					rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
 				}
 			}
-			else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72 
+			else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72
 			{
 				rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
 			}
-			else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
+			else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0,
 			{
 				double value = .9;
 				if (_allStyle.Peek().IndexOf("logo") == 0 || _allStyle.Peek().IndexOf("LText_FrontMatter") == 0)
@@ -3055,7 +3042,7 @@ namespace SIL.PublishingSolution
 			}
 			else
 			{
-				//Default value is 72 
+				//Default value is 72
 				rectHeight = "72"; // fixed the width as 1 in = 72pt;
 				rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
 			}
@@ -3079,14 +3066,14 @@ namespace SIL.PublishingSolution
 			string clsName = _allStyle.Peek();
 			String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + Path.GetFileName(_imageSource));
 
-			
+
 			string rectHeight = GetPropertyValue(clsName, "height", _pageSize["height"]);
 			string rectWidth = GetPropertyValue(clsName, "width", _pageSize["width"]);
 
 			Directory.CreateDirectory(Path.Combine(basePath, "Pictures"));
-			if (File.Exists(fromPath)) 
-			{ 
-				File.Copy(fromPath, toPath, true); 
+			if (File.Exists(fromPath))
+			{
+				File.Copy(fromPath, toPath, true);
 			}
 
 			string strFrameCount = "Graphics" + _frameCount;
@@ -3107,8 +3094,25 @@ namespace SIL.PublishingSolution
 			{
 				_writer.WriteAttributeString("text:anchor-type", "page");
 			}
-			_writer.WriteAttributeString("svg:width", rectWidth + "pt");
-			_writer.WriteAttributeString("svg:height", rectHeight + "pt");
+
+			if (rectHeight.Contains("pt"))
+			{
+				_writer.WriteAttributeString("svg:height", rectHeight);
+			}
+			else
+			{
+				_writer.WriteAttributeString("svg:height", rectHeight + "pt");
+			}
+
+			if (rectWidth.Contains("pt"))
+			{
+				_writer.WriteAttributeString("svg:width", rectWidth);
+			}
+			else
+			{
+				_writer.WriteAttributeString("svg:width", rectWidth + "pt");
+			}
+
 			_writer.WriteStartElement("draw:image");
 			_writer.WriteAttributeString("xlink:type", "simple");
 			_writer.WriteAttributeString("xlink:show", "embed");
@@ -3122,7 +3126,6 @@ namespace SIL.PublishingSolution
 			_isNewParagraph = false;
 			_isParagraphClosed = true;
 		}
-
 
 		private void DisplayProperty()
 		{
@@ -3258,8 +3261,8 @@ namespace SIL.PublishingSolution
 		/// -------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Generate Second block of Content.xml, this block will called after inserting the column
-		/// 
-		/// <list> 
+		///
+		/// <list>
 		/// </list>
 		/// </summary>
 		/// <param> </param>
@@ -3368,7 +3371,7 @@ namespace SIL.PublishingSolution
 			}
 			catch (Exception)
 			{
-				// shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+				// shouldn't happen (ExportThroughPathway dialog forces the user to select an organization),
 				// but just in case, specify a default org.
 				organization = "SIL International";
 			}
@@ -3467,8 +3470,8 @@ namespace SIL.PublishingSolution
 		/// -------------------------------------------------------------------------------------------
 		/// <summary>
 		/// Generate last block of Content.xml
-		/// 
-		/// <list> 
+		///
+		/// <list>
 		/// </list>
 		/// </summary>
 		/// <returns> </returns>
@@ -3641,10 +3644,10 @@ namespace SIL.PublishingSolution
 			{
 				if (_previousParagraphName == null) _previousParagraphName = string.Empty;
 
-				if (_childName.IndexOf("reversalform") >= 0 && _previousChildName.IndexOf("headword") >= 0)
-				{
-					_previousChildName = "This_is_some_blabla_text";
-				}
+				//if (_childName.IndexOf("reversalform") >= 0 && _previousChildName.IndexOf("headword") >= 0)
+				//{
+				//	_previousChildName = "This_is_some_blabla_text";
+				//}
 
 				if (IsHeadwordMatches())
 				{
@@ -3659,11 +3662,11 @@ namespace SIL.PublishingSolution
 			{
 				if (_refFormat.IndexOf("1-2") > 0)
 				{
-					if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0)
+					if (_classNameWithLang.IndexOf("chapternumber", StringComparison.InvariantCultureIgnoreCase) == 0)
 					{
 						_strPreviousChapterNumber = content;
 					}
-					if (_classNameWithLang.ToLower().IndexOf("versenumber") == 0)
+					if (_classNameWithLang.IndexOf("versenumber", StringComparison.InvariantCultureIgnoreCase) == 0)
 					// && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)
 					{
 						fillHeadword = true;
@@ -3672,8 +3675,9 @@ namespace SIL.PublishingSolution
 				}
 				else
 				{
-					if (_classNameWithLang.ToLower().IndexOf("chapternumber") == 0 &&
-						(_previousParagraphName.ToLower().IndexOf("paragraph") == 0))
+					if (_classNameWithLang.IndexOf("chapternumber", StringComparison.InvariantCultureIgnoreCase) == 0 &&
+						(_previousParagraphName.IndexOf("paragraph", StringComparison.InvariantCultureIgnoreCase) == 0 ||
+						_previousParagraphName.IndexOf("line1", StringComparison.InvariantCultureIgnoreCase) == 0))
 					{
 						fillHeadword = true;
 					}
@@ -3692,7 +3696,7 @@ namespace SIL.PublishingSolution
 			bool fillHeadword = false;
 
 			//Check possible classname in ClassNameWithLang string.
-			bool isClassNameWithLangMatches = (_classNameWithLang.IndexOf("headwordminor", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("headword", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("span", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("a", StringComparison.Ordinal) == 0);
+			bool isClassNameWithLangMatches = (_classNameWithLang.IndexOf("headwordminor", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("headword", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("mainheadword", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("reversalform", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("span", StringComparison.Ordinal) == 0 || _classNameWithLang.IndexOf("a", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _childName string.
 			bool isClassNameMatches = (_classNameWithLang.IndexOf("reversalform", StringComparison.Ordinal) == 0 ||
@@ -3702,7 +3706,7 @@ namespace SIL.PublishingSolution
                       _childName.Replace("span_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousParagraphName string.
-			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0 || _previousParagraphName.IndexOf("reversalindexentry", StringComparison.Ordinal) == 0);
+			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentryr1_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entryr1_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0 || _previousParagraphName.IndexOf("reversalindexentry", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousChildName string.
 			bool isPrevChildNameMatches = (_previousChildName.IndexOf("headword", StringComparison.Ordinal) == -1 && _previousChildName.IndexOf("reversalform", StringComparison.Ordinal) == -1);
@@ -4008,8 +4012,8 @@ namespace SIL.PublishingSolution
 		}
 
 		/// <summary>
-		/// Two guidewords are introduced on left/right position. 
-		/// We set to empty(_secondText) for main 
+		/// Two guidewords are introduced on left/right position.
+		/// We set to empty(_secondText) for main
 		/// and set toempty(_firstText) for Reversal
 		/// </summary>
 		/// <param name="content"></param>

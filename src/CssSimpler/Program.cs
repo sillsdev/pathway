@@ -22,7 +22,7 @@ using System.Xml;
 using System.Xml.Xsl;
 using SIL.PublishingSolution;
 using Antlr.Runtime.Tree;
-using Mono.Options;
+using SIL.Tool;
 
 namespace CssSimpler
 {
@@ -32,9 +32,16 @@ namespace CssSimpler
         protected static bool OutputXml;
         private static int _verbosity;
         private static bool _makeBackup;
+        private static bool _flatten;
+        private static int _headerStyles;
+        private static bool _embedStyles;
+        //private static bool _combineMainRev;
+        private static bool _incMeta;
+        private static bool _noXmlHeader;
+        private static bool _divBlocks;
+	    private static string _decorateStyles;
 
         protected static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
-        protected static readonly XslCompiledTransform SimplifyXmlCss = new XslCompiledTransform();
         protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
         protected static List<string> UniqueClasses;
         private static readonly XmlReaderSettings ReaderSettings = new XmlReaderSettings { XmlResolver = new NullResolver(), DtdProcessing = DtdProcessing.Ignore };
@@ -42,32 +49,64 @@ namespace CssSimpler
 
         static void Main(string[] args)
         {
+	        // ReSharper disable AssignNullToNotNullAttribute
             XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"CssSimpler.XmlCss.xsl"), ReaderSettings), XsltSettings, new NullResolver());
-            SimplifyXmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-				"CssSimpler.XmlCssSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
+				"CssSimpler.XmlCss.xsl")));
             SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "CssSimpler.XhtmlSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
-            // see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
-            var p = new OptionSet
+			// ReSharper enable AssignNullToNotNullAttribute
+			// see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
+			var p = new OptionSet
             {
                 {
                     "x|xml", "produce XML output of CSS",
-                    v => OutputXml = v != null
+                    v => OutputXml = !OutputXml
                 },
                 {
                     "b|backup", "make a backup of the original CSS file",
-                    v => _makeBackup = v != null
+                    v => _makeBackup = !_makeBackup
                 },
                 {
-                    "v", "increase debug message verbosity",
+                    "v|verbose", "increase debug message verbosity",
                     v => { if (v != null) ++_verbosity; }
                 },
                 {
                     "h|help", "show this message and exit",
-                    v => _showHelp = v != null
+                    v => _showHelp = !_showHelp
                 },
-            };
+                {
+                    "f|flat", "flattens the hierarchy simplifies the css required for -secmrd",
+                    v => _flatten = !_flatten
+                },
+                {
+                    "s|structure", "Use header tags for structure (1-3)",
+                    v => _headerStyles += 1
+                },
+                {
+                    "e|embed", "embed styles in output",
+                    v => _embedStyles = !_embedStyles
+                },
+                //{
+                //    "c|combine", "combine main and reversal(s) in a single output",
+                //    v => _combineMainRev = !_combineMainRev
+                //},
+                {
+                    "m|meta", "include title and author meta data",
+                    v => _incMeta = !_incMeta
+                },
+                {
+                    "r|remove", "remove Xml header and DOCTYPE",
+                    v => _noXmlHeader = !_noXmlHeader
+                },
+                {
+                    "d|div", "replace span with div for display block",
+                    v => _divBlocks = !_divBlocks
+                },
+				{
+					"p|prefix=", "prefix style names with value",
+					v => { _decorateStyles = v; }
+				},
+			};
 
             List<string> extra;
             try
@@ -75,15 +114,15 @@ namespace CssSimpler
                 extra = p.Parse(args);
                 if (extra.Count == 0)
                 {
-                    Console.WriteLine("Enter full file name to process");
+                    Console.WriteLine(@"Enter full file name to process");
                     extra.Add(Console.ReadLine());
                 }
             }
             catch (OptionException e)
             {
-                Console.Write("SimpleCss: ");
+                Console.Write(@"SimpleCss: ");
                 Console.WriteLine(e.Message);
-                Console.WriteLine("Try `CssSimple --help' for more information.");
+                Console.WriteLine(@"Try `CssSimple --help' for more information.");
                 return;
             }
             if (_showHelp || extra.Count != 1)
@@ -93,33 +132,111 @@ namespace CssSimpler
             }
             var lc = new LoadClasses(extra[0]);
             var styleSheet = lc.StyleSheet;
-            MakeBaskupIfNecessary(styleSheet, extra[0]);
+            MakeBackupIfNecessary(styleSheet, extra[0]);
             DebugWriteClassNames(lc.UniqueClasses);
             VerboseMessage("Clean up Stylesheet: {0}", styleSheet);
             var parser = new CssTreeParser();
             var xml = new XmlDocument();
             UniqueClasses = lc.UniqueClasses;
             LoadCssXml(parser, styleSheet, xml);
-            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
-            
-            new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+	        // ReSharper disable once UnusedVariable
+            var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
+            // ReSharper disable once UnusedVariable
+            var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
             RemoveCssPseudo(styleSheet, xml);
-            WriteSimpleCss(styleSheet, xml); //reloads xml with simplified version
+            var tmp3Out = Path.GetTempFileName();
+            if (_flatten)
+            {
+                var fs = new FlattenStyles(extra[0], tmp3Out, xml, NeedHigher, _noXmlHeader, _decorateStyles);
+                fs.Structure = _headerStyles;
+                fs.DivBlocks = _divBlocks;
+                MetaData(fs);
+                fs.Parse();
+                File.Copy(tmp3Out, extra[0], true);
+                OutputFlattenedStylesheet(extra[0], styleSheet, fs);
+            }
             try
             {
                 File.Delete(tmpXhtmlFullName);
                 File.Delete(tmp2Out);
+                File.Delete(tmp3Out);
             }
             catch
             {
                 // ignored
             }
+        }
+
+        protected static void OutputFlattenedStylesheet(string outFullName, string styleSheet, FlattenStyles fs)
+        {
+            if (_embedStyles)
+            {
+                var ms = new MemoryStream();
+                MapXmlCssToStream(fs.MakeFlatCss(), ms);
+                ms.Seek(0, 0);
+                var tmp4Out = Path.GetTempFileName();
+                var es = new EmbedStyles(outFullName, tmp4Out, ms, _noXmlHeader);
+                es.Parse();
+                File.Copy(tmp4Out, outFullName, true);
+                try
+                {
+                    File.Delete(styleSheet);
+                    File.Delete(tmp4Out);
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+            else
+            {
+                WriteXmlAsCss(styleSheet, fs.MakeFlatCss());
+            }
+        }
+
+        private static readonly XmlDocument SettingsXml = new XmlDocument();
+        protected static void MetaData(FlattenStyles fs)
+        {
+            if (!_incMeta) return;
+            var settingFullName = Path.Combine(Environment.GetEnvironmentVariable("LOCALAPPDATA"), "SIL", "Pathway",
+                "Dictionary", "DictionaryStyleSettings.xml");
+            if (!File.Exists(settingFullName)) return;
+            SettingsXml.Load(settingFullName);
+            fs.TitleDefault = SetValue("Title");
+            fs.AuthorDefault = SetValue("Creator");
+        }
+
+
+        private static string SetValue(string cls)
+        {
+            var valNode = SettingsXml.SelectSingleNode(string.Format("//Metadata/*[@name='{0}']/currentValue/text()", cls));
+            if (valNode == null || string.IsNullOrEmpty(valNode.InnerText))
+            {
+                valNode = SettingsXml.SelectSingleNode(string.Format("//Metadata/*[@name='{0}']/defaultValue/text()", cls));
+            }
+            if (valNode != null && !string.IsNullOrEmpty(valNode.InnerText))
+            {
+                var val = valNode.InnerText;
+                var pos = 0;
+                var sb = new StringBuilder();
+                foreach (Match match in Regex.Matches(val, @"_x([0-9A-F]{4})_"))
+                {
+                    sb.Append(val.Substring(pos, match.Index - pos));
+                    sb.Append(Convert.ToChar(Convert.ToUInt32(match.Groups[1].Value, 16)));
+                    pos = match.Index + match.Length;
+                }
+                if (pos < val.Length)
+                {
+                    sb.Append(val.Substring(pos));
+                }
+                return sb.ToString();
+            }
+            return null;
         }
 
         protected static void LoadCssXml(CssTreeParser parser, string styleSheet, XmlDocument xml)
@@ -138,6 +255,13 @@ namespace CssSimpler
 
         protected static void ElaborateMultiSelectorRules(XmlDocument xml)
         {
+            var emptyRules = xml.SelectNodes("//RULE[count(@term)=0]");
+            Debug.Assert(emptyRules != null, "emptyRules != null");
+            foreach (XmlElement emptyRule in emptyRules)
+            {
+                Debug.Assert(xml.DocumentElement != null, "xml.DocumentElement != null");
+                xml.DocumentElement.RemoveChild(emptyRule);
+            }
             var multiSelectors = xml.SelectNodes("//RULE/*[.=',']");
             Debug.Assert(multiSelectors != null, "multiSelectors != null");
             foreach (XmlElement multiSelector in multiSelectors)
@@ -313,10 +437,10 @@ namespace CssSimpler
         protected static string WriteSimpleXhtml(string xhtmlFullName)
         {
             if (string.IsNullOrEmpty(xhtmlFullName) || !File.Exists(xhtmlFullName))
-                throw new ArgumentException("Missing Xhtml file: {0}", xhtmlFullName);
+                throw new ArgumentException(@"Missing Xhtml file: {0}", xhtmlFullName);
             var folder = Path.GetDirectoryName(xhtmlFullName);
             if (string.IsNullOrEmpty(folder))
-                throw new ArgumentException("Xhtml name missing folder {0}", xhtmlFullName);
+                throw new ArgumentException(@"Xhtml name missing folder {0}", xhtmlFullName);
             var outfile = Path.Combine(folder, Path.GetFileNameWithoutExtension(xhtmlFullName) + "Out.xhtml");
             var ifs = new FileStream(xhtmlFullName, FileMode.Open, FileAccess.Read);
             var reader = XmlReader.Create(ifs, new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore});
@@ -326,32 +450,6 @@ namespace CssSimpler
             reader.Close();
             ifs.Close();
             return outfile;
-        }
-
-        protected static void WriteSimpleCss(string styleSheet, XmlDocument xml)
-        {
-			if (string.IsNullOrEmpty(styleSheet) || !File.Exists(styleSheet))
-	        {
-				throw new ArgumentNullException("styleSheet");
-	        }
-            VerboseMessage("Writing Simple Stylesheet: {0}", styleSheet);
-            var xmlStream = new MemoryStream();
-            xml.Save(xmlStream);
-            xmlStream.Flush();
-            xmlStream.Position = 0;
-            var xmlReader = XmlReader.Create(xmlStream, ReaderSettings);
-            var memory = new MemoryStream();
-            SimplifyXmlCss.Transform(xmlReader, null, memory);
-            memory.Flush();
-            memory.Position = 0;
-            var cssReader = XmlReader.Create(memory, ReaderSettings);
-            var cssFile = new FileStream(styleSheet, FileMode.Create);
-            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
-            XmlCss.Transform(cssReader, null, cssWriter);
-            cssFile.Close();
-            xml.RemoveAll();
-            memory.Position = 0;
-            xml.Load(memory);
         }
 
         protected static void RemoveCssPseudo(string styleSheet, XmlDocument xml)
@@ -373,6 +471,11 @@ namespace CssSimpler
                 }
                 else
                 {
+	                var suffix = (ruleNode.SelectSingleNode("PSEUDO[name='before']") != null) ? "-pb" : "-pa";
+                    var newClass = ruleNode.GetAttribute("lastClass") + suffix;
+	                if (newClass == suffix) continue; /* previous versions of Fieldworks didn't have pseudo elements formed the same way */
+                    ruleNode.Attributes["lastClass"].InnerText = newClass;
+                    ruleNode.Attributes["target"].InnerText = newClass;
                     for (var count = ruleNode.ChildNodes.Count - 1; count >= 0; count -= 1)
                     {
                         var childNode = ruleNode.ChildNodes[count];
@@ -384,18 +487,34 @@ namespace CssSimpler
                     Debug.Assert(ruleNode.OwnerDocument != null, "ruleNode.OwnerDocument != null");
                     var classNode = ruleNode.OwnerDocument.CreateElement("CLASS");
                     var nameNode = ruleNode.OwnerDocument.CreateElement("name");
-                    nameNode.InnerText = ruleNode.GetAttribute("lastClass") + "-ps";
+                    nameNode.InnerText = newClass;
                     classNode.AppendChild(nameNode);
                     ruleNode.InsertBefore(classNode, ruleNode.FirstChild);
                 }
             }
+            WriteXmlAsCss(styleSheet, xml);
+        }
+
+        protected static void WriteXmlAsCss(string styleSheet, XmlDocument xml)
+        {
             var cssFile = new FileStream(styleSheet, FileMode.Create);
-            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
-            XmlCss.Transform(xml, null, cssWriter);
+            MapXmlCssToStream(xml, cssFile);
             cssFile.Close();
         }
 
-        private static void MakeBaskupIfNecessary(string styleSheet, string xhtmlFullName)
+	    protected static string SavedXmlCssFileName;
+		private static void MapXmlCssToStream(XmlDocument xml, Stream cssFile)
+        {
+            var cssWriter = XmlWriter.Create(cssFile, XmlCss.OutputSettings);
+            XmlCss.Transform(xml, null, cssWriter);
+            cssWriter.Flush();
+	        if (string.IsNullOrEmpty(SavedXmlCssFileName)) return;	// For testing we save XML representation of CSS
+	        VerboseMessage("Writing XML stylesheet to " + SavedXmlCssFileName);
+	        WriteCssXml(SavedXmlCssFileName, xml);
+	        SavedXmlCssFileName = string.Empty;
+        }
+
+		private static void MakeBackupIfNecessary(string styleSheet, string xhtmlFullName)
         {
             if (_makeBackup)
             {
@@ -550,15 +669,15 @@ namespace CssSimpler
                 }
 
             }
-                
+
         }
 
         static void ShowHelp(OptionSet p)
         {
-            Console.WriteLine("Usage: CssSimple [OPTIONS]+ FullInputFilePath.xhtml");
-            Console.WriteLine("Simplify the input css.");
+            Console.WriteLine(@"Usage: CssSimple [OPTIONS]+ FullInputFilePath.xhtml");
+            Console.WriteLine(@"Simplify the input css.");
             Console.WriteLine();
-            Console.WriteLine("Options:");
+            Console.WriteLine(@"Options:");
             p.WriteOptionDescriptions(Console.Out);
         }
 
@@ -566,7 +685,7 @@ namespace CssSimpler
         {
             if (_verbosity > 0)
             {
-                Console.Write("# ");
+                Console.Write(@"# ");
                 Console.WriteLine(format, args);
             }
         }

@@ -13,20 +13,19 @@
     xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/">
     <xsl:param name="mainName">Main</xsl:param>
     <xsl:param name="revName">Reversal Index</xsl:param>
-    
+
     <!-- Recursive copy template -->
     <xsl:template match="ncx:ncx | ncx:head | ncx:meta | ncx:docTitle | ncx:text | ncx:navMap | ncx:navLabel | ncx:content | @*">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- Add Main header -->
     <xsl:template match="ncx:navPoint">
-        <xsl:param name="subCopy" select="No"/>
         <xsl:choose>
             <!-- Test for beginning of main section -->
-            <xsl:when test="ncx:content[@src='PartFile00001_.xhtml']">
+            <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part')) and count(following::*[starts-with(@src,'Rev')]) > 0">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
                     <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
@@ -35,67 +34,28 @@
                         </xsl:element>
                     </xsl:element>
                     <xsl:element name="content" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:attribute name="src">PartFile00001_.xhtml#body</xsl:attribute>
+                        <xsl:attribute name="src">
+                            <xsl:value-of select="ncx:content/@src"/>
+                            <xsl:text>#body</xsl:text>
+                        </xsl:attribute>
                     </xsl:element>
-                    <xsl:for-each select=". | following-sibling::node()">
-                        <xsl:if test="contains(ncx:content/@src,'Part')">
-                            <xsl:copy>
-                                <xsl:apply-templates select="node() | @*">
-                                    <xsl:with-param name="subCopy">Yes</xsl:with-param>
-                                </xsl:apply-templates>
-                            </xsl:copy>
-                        </xsl:if>
-                    </xsl:for-each>
-                </xsl:copy>
-            </xsl:when>
-            
-			<xsl:when test="ncx:content[@src='PartFile00001_01.xhtml']">
-                <xsl:copy>
-                    <xsl:apply-templates select="@*"/>
-                    <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:element name="text" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                            <xsl:value-of select="$mainName"/>
-                        </xsl:element>
-                    </xsl:element>
-                    <xsl:element name="content" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:attribute name="src">PartFile00001_01.xhtml#body</xsl:attribute>
-                    </xsl:element>
-                    <xsl:for-each select=". | following-sibling::node()">
-                        <xsl:if test="contains(ncx:content/@src,'Part')">
-                            <xsl:copy>
-                                <xsl:apply-templates select="node() | @*">
-                                    <xsl:with-param name="subCopy">Yes</xsl:with-param>
-                                </xsl:apply-templates>
-                            </xsl:copy>
-                        </xsl:if>
-                    </xsl:for-each>
-                </xsl:copy>
-            </xsl:when>
-            <!-- Test for beginning of reversal section -->
-            <xsl:when test="ncx:content[@src='RevIndex00001_.xhtml']">
-                <xsl:copy>
-                    <xsl:apply-templates select="@*"/>
-                    <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:element name="text" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                            <xsl:value-of select="$revName"/>
-                        </xsl:element>
-                    </xsl:element>
-                    <xsl:element name="content" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:attribute name="src">RevIndex00001_.xhtml#body</xsl:attribute>
-                    </xsl:element>
-                    <xsl:for-each select=". | following-sibling::node()">
-                        <xsl:if test="contains(ncx:content/@src,'Rev')">
-                            <xsl:copy>
-                                <xsl:apply-templates select="node() | @*">
-                                    <xsl:with-param name="subCopy">Yes</xsl:with-param>
-                                </xsl:apply-templates>
-                            </xsl:copy>
-                        </xsl:if>
-                    </xsl:for-each>
+                    <xsl:call-template name="SubCopy">
+                        <xsl:with-param name="item" select="."/>
+                        <xsl:with-param name="type">Part</xsl:with-param>
+                    </xsl:call-template>
                 </xsl:copy>
             </xsl:when>
 
-			<xsl:when test="ncx:content[@src='RevIndex00001_01.xhtml']">
+            <!-- There is a main section but no reversal -->
+            <xsl:when test="count(ncx:content[starts-with(@src,'Part')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
+                <xsl:call-template name="SubCopy">
+                    <xsl:with-param name="item" select="."/>
+                    <xsl:with-param name="type">Part</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+
+            <!-- Test for beginning of reversal section -->
+            <xsl:when test="count(ncx:content[starts-with(@src,'Rev')]) = 1 and starts-with(preceding-sibling::*[1]//@src,'Part')">
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
                     <xsl:element name="navLabel" namespace="http://www.daisy.org/z3986/2005/ncx/">
@@ -104,32 +64,48 @@
                         </xsl:element>
                     </xsl:element>
                     <xsl:element name="content" namespace="http://www.daisy.org/z3986/2005/ncx/">
-                        <xsl:attribute name="src">RevIndex00001_01.xhtml#body</xsl:attribute>
+                        <xsl:attribute name="src">
+                            <xsl:value-of select="ncx:content/@src"/>
+                            <xsl:text>#body</xsl:text>
+                        </xsl:attribute>
                     </xsl:element>
-                    <xsl:for-each select=". | following-sibling::node()">
-                        <xsl:if test="contains(ncx:content/@src,'Rev')">
-                            <xsl:copy>
-                                <xsl:apply-templates select="node() | @*">
-                                    <xsl:with-param name="subCopy">Yes</xsl:with-param>
-                                </xsl:apply-templates>
-                            </xsl:copy>
-                        </xsl:if>
-                    </xsl:for-each>
+                    <xsl:call-template name="SubCopy">
+                        <xsl:with-param name="item" select="."/>
+                        <xsl:with-param name="type">Rev</xsl:with-param>
+                    </xsl:call-template>
                 </xsl:copy>
             </xsl:when>
+
+            <!-- Reversal section but no main section -->
+            <xsl:when test="count(ncx:content[starts-with(@src,'Rev')]) = 1 and not(starts-with(preceding-sibling::*[1]//@src,'Rev'))  and not(starts-with(preceding-sibling::*[1]//@src,'Part'))">
+                <xsl:call-template name="SubCopy">
+                    <xsl:with-param name="item" select="."/>
+                    <xsl:with-param name="type">Rev</xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+
             <!-- Two cases: we are copying the nodes under main or rev or we are copying front matter -->
             <xsl:otherwise>
-                <xsl:if test="$subCopy = 'Yes' or starts-with(ncx:content/@src, 'File')">
+                <xsl:if test="starts-with(ncx:content/@src, 'File')">
                     <xsl:copy>
-                        <xsl:apply-templates select="node() | @*">
-                            <xsl:with-param name="subCopy">
-                                <xsl:value-of select="$subCopy"/>
-                            </xsl:with-param>
-                        </xsl:apply-templates>
+                        <xsl:apply-templates select="node() | @*"/>
                     </xsl:copy>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
+    <xsl:template name="SubCopy">
+        <xsl:param name="item"/>
+        <xsl:param name="type"/>
+
+        <xsl:if test="starts-with($item/ncx:content/@src, $type)">
+            <xsl:copy-of select="$item"/>
+            <xsl:call-template name="SubCopy">
+                <xsl:with-param name="item" select="$item/following-sibling::*[1]"/>
+                <xsl:with-param name="type" select="$type"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
 </xsl:stylesheet>

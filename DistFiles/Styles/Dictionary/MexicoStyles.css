@@ -1,25 +1,5 @@
-/* Mexico styles */
+﻿/* Mexico styles */
 a {color: rgb(0,0,255);}
-
-.entry {
-    text-indent: -12pt;
-    margin-left: 12pt;
-}
-
-.subentry {
-    text-indent: -12pt;
-    margin-left: 36pt;
-}
-
-.minorentryvariant {
-    text-indent: -12pt;
-    margin-left: 12pt;
-}
-
-.mainentrycomplex {
-    text-indent: -12pt;
-    margin-left: 12pt;
-}
 
 .visiblecomplexformbackrefs{
 	text-indent: -12pt;

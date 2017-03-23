@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="InInsertMacro.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// File contains functions to insert in macro file. 
+// File contains functions to insert in macro file.
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -73,7 +73,7 @@ namespace SIL.PublishingSolution
 			{
 				scriptsFolder = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "InDesignFiles/Dictionary/Scripts");
 			}
-            CopyFolderWithFiles(scriptsFolder, Common.PathCombine(projInfo.TempOutputFolder, "scripts"));
+            CopyFolderWithFiles(scriptsFolder, Common.PathCombine(projInfo.TempOutputFolder, "Scripts"));
 
             strMacroPath = Common.PathCombine(projInfo.TempOutputFolder, "Scripts/Startup Scripts/PlaceFrames.jsx");
             ReadFile(false, textContent);

@@ -1,3 +1,64 @@
+pathway (1.15.7.5891)  experimental; urgency=high
+
+  * Common:TD-4758 Enable hyphenation for Scripture.
+  * Common:TD-4780 Spaces in username leads to problems
+  * Epub/HTML5:TD-1812 Epub validation errors
+  * Epub/HTML5:TD-4557 Fix Scripture epub creation with PathwayB
+  * Epub/HTML5:TD-4689 Epub too much space between entries
+  * Epub/HTML5:TD-4744 Epub validator error in linux
+  * Epub/HTML5:TD-4784 Improve file splitting, Update TOC
+  * Epub/HTML5:Make a separate cross-platform option for HTML5
+  * General:TD-4681 Handle audio writing system export
+  * General:TD-4721 Formatting via pathway is not following flex
+  * General:TD-4744 Validation errors appear while exporting
+  * General:TD-4770 Fix when xhtml has insignificant line breaks
+  * General:TD-4775 Pass Paratext database name to PathwayExport
+  * General:TD-4785 Add logic to handle css overrides.
+  * General:TD-4792 Forming Export Directory name
+  * Help:TD-4796 Help/More Help still opens web to old Pathway site
+  * Help:TD-4802 Update preprocessing descriptions
+  * Linux:TD-4725 fix crash from missing name of bold font
+  * Linux:TD-4738 Creating 'Copy of' and 'Custom' Stylesheets ...
+  * Linux:TD-4744 adjust validator to have extra slash for linux
+  * Linux:TD-4454 Text Merges in the Prince Pdf Output If I set Stylesheet as Two Column
+  * Linux:TD-4766 mono-basic4-sil dependency error
+  * LO/OO:TD-4269 Running Header appears twice in the page view
+  * LO/OO:TD-4301 Space after footnote marker before period
+  * LO/OO:TD-4396 Pathway justify not working on minor entries
+  * LO/OO:TD-4708 headword not bold
+  * LO/OO:TD-4739 MinorEntryVariant Color override and extra padding removed
+  * LO/OO:TD-4740 Extended Note data content is not appear
+  * LO/OO:TD-4741 Base font size
+  * LO/OO:TD-4755 Primary entry references missing in output
+  * LO/OO:TD-4773 Header Font size dropdown is empty
+  * LO/OO:TD-4790 Handle rule in overides .css file
+  * LO/OO:TD-4801 Fonts for mt2 fq and fqa paratext display
+  * LO/OO:TD-4803 crash when margin-left is bad
+  * LO/OO:TD-4804 create guidewords in line1 as well as paragraph
+  * LO/OO:TD-4686 baseline alignment of right guidword
+  * LO/OO:TD-4383 The option to split files fails to produce a LibreOffice file
+  * LO/OO:TD-4519 Ask about running macro 2nd time
+  * LO/OO:TD-4719 Characters and colors changed
+  * Paratext:TD-4512 Marker rq missing
+  * Paratext:TD-4513 Use Styles from Custom sty file
+  * Paratext:TD-4614 PT export with Pathway on Linux doesn't use styles from the projects sty file.
+  * Paratext:TD-4754 Pathway SE Build removed Scripture button
+  * Paratext:TD-4763 Footnotes in rq prevent output
+  * Paratext:TD-4797 remove modifications to resolver for readding ssf file.
+  * Paratext:TD-4805 Paratext complains that Pathway is incompatible
+  * Stylesheet:TD-4757 Right aligned Scripture quote reference
+  * Stylesheet:Apply justification to variant and complex minor entries
+  * UI:TD-4045 Text merging happens when I set the Font size ‘0’ ...
+  * UI:TD-4737 Running Header, Reference Format did not save
+  * UI:TD-4751 Using ConfigurationTool, SaveAs copies the wrong sheet
+  * UI:TD-4774 update link on about box for new web site
+  * UI:TD-4779 custom sheet is getting recreated after reset
+  * UI:TD-4241 Inform user of what is happening when the process takes a long time
+  * XeLaTeX:TD-4368 One empty page is created between main and reversal
+  * XeLaTeX:TD-4702 Fields begin at new line instead of continuing in the paragraph
+
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 23 Mar 2017 10:58:20 -0600
+
 pathway (1.15.4)  experimental; urgency=high
 
   * CSS:TD-4688 Akoose bullets are duplicated
@@ -91,7 +152,7 @@ pathway (1.15.4)  experimental; urgency=high
   * XeLaTex:TD-4729 Guidewords in headers are missing in Xelatex
   * XeLaTex:TD-4682 RTL letters randomly appears
 
- -- Greg Trihus <greg_trihus@sil.org>  Fri, 24 May 2016 14:02:20 -0600
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 1 Dec 2016 14:02:20 -0600
 
 pathway (1.15.3)  experimental; urgency=high
 

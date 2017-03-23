@@ -37,16 +37,17 @@
 
     <xsl:template match="RULE">
         <xsl:if test="count(child::PROPERTY) > 0">
-            <xsl:apply-templates select="*[local-name() != 'PROPERTY']" mode="inRule"/>
+            <xsl:apply-templates select="*[local-name() != 'PROPERTY' and local-name() != 'COMMENT']" mode="inRule"/>
             <xsl:text>{</xsl:text>
-            <xsl:apply-templates select="PROPERTY" mode="inRule"/>
+            <xsl:apply-templates select="COMMENT|PROPERTY" mode="inRule"/>
             <xsl:text>&#13;&#10;}&#13;&#10;</xsl:text>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="ANY" mode="inRule">
-        <xsl:text>*</xsl:text>
-        <xsl:apply-templates select="*" mode="inRule"/>
+    <xsl:template match="COMMENT" mode="inRule">
+        <xsl:text>&#13;&#10;   /* </xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text> */</xsl:text>
     </xsl:template>
 
     <xsl:template match="TAG/name" mode="inRule">

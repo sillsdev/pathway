@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="OOMapProperty.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Mapping with Libre Office property
 // </remarks>
@@ -69,7 +69,7 @@ namespace SIL.PublishingSolution
 
         private void MappingOtherProperty(KeyValuePair<string, string> property)
         {
-           
+
             switch (_propertyKey)
             {
                 case "hyphens":
@@ -163,8 +163,11 @@ namespace SIL.PublishingSolution
                     isPropertyWritten = true;
                     break;
                 case "color":
+					Color(property.Value);
+					isPropertyWritten = true;
+					break;
 				case "text-decoration-color":
-                    Color(property.Value);
+					TextDecorationColor(property.Value);
                     isPropertyWritten = true;
                     break;
                 case "background-color":
@@ -726,13 +729,15 @@ namespace SIL.PublishingSolution
         public void Color(string propertyValue)
         {
 			propertyValue = ColorConversion(propertyValue);
+			_idProperty[_propertyKey] = propertyValue;
+        }
+
+		public void TextDecorationColor(string propertyValue)
+        {
+			propertyValue = ColorConversion(propertyValue);
 			if (_propertyKey == "text-decoration-color")
 			{
-				_idProperty["color"] = propertyValue;
-			}
-			else
-			{
-				_idProperty[_propertyKey] = propertyValue;
+				_idProperty["text-underline-color"] = propertyValue;
 			}
         }
 
@@ -791,8 +796,8 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// 
-        /// 
+        ///
+        ///
         /// </summary>
         /// <param name="propertyValue"></param>
         public void TextDecoration(string propertyValue)
@@ -953,7 +958,7 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Converts rgb(47,96,255) to "#ff0000" format
-        /// 
+        ///
         /// <list>
         /// </list>
         /// </summary>
@@ -1015,7 +1020,7 @@ namespace SIL.PublishingSolution
 
         /// <summary>
         /// Converts cmyk to "#ff0000" format
-        /// 
+        ///
         /// <list>
         /// </list>
         /// </summary>

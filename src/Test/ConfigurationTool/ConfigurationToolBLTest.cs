@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ConfigurationToolBLTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -205,7 +205,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlRules.Text;
             Assert.AreEqual("Yes", actual, "Grid rules Test Failes");
             actual = cTool.DdlFontSize.Text;
-            Assert.AreEqual("11", actual, "Grid font size Test Failes");
+			Assert.AreEqual("No Change", actual, "Grid font size Test Failes");
             actual = cTool.DdlFileProduceDict.Text;
             Assert.AreEqual("One", actual, "Grid file produce Test Failes");
             actual = cTool.DdlSense.Text;
@@ -275,7 +275,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlRules.Text;
             Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlFontSize.Text;
-            Assert.AreEqual("11", actual, "GridRowValueTest Test Failes");
+			Assert.AreEqual("No Change", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlFileProduceDict.Text;
             Assert.AreEqual("One", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlSense.Text;
@@ -305,7 +305,7 @@ namespace Test.UIConfigurationToolBLTest
             Assert.AreEqual(afterNew - 1, afterDelete, "New Count Test Fails");
             cTool.Close();
         }
-       
+
         [Test]
         [Category("ShortTest")]
         public void SaveInputTypeTest()

@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using SIL.Tool;
 
 namespace CssSimpler
 {
@@ -33,7 +34,7 @@ namespace CssSimpler
         private readonly SortedSet<string> _needHigher;
 
         public ProcessPseudo(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher)
-            : base(input, output)
+            : base(input, output, false)
         {
             _needHigher = needHigher;
             CollectTargets(xmlCss);
@@ -43,13 +44,15 @@ namespace CssSimpler
             DeclareFirstChild(XmlNodeType.Element, InsertFirstChild);
             DeclareBeforeEnd(XmlNodeType.EndElement, InsertAfter);
             DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveClass);
+	        SpaceClass = null;
             Parse();
         }
 
         private void InsertBefore(XmlReader r)
         {
             var nextClass = r.GetAttribute("class");
-            if (ApplyBestRule(r.Depth, nextClass, _beforeTargets, nextClass)) return;
+	        Suffix = "-pb";
+			if (ApplyBestRule(r.Depth, nextClass, _beforeTargets, nextClass)) return;
             if (ApplyBestRule(r.Depth, GetTargetKey(r.Name, nextClass), _beforeTargets, nextClass)) return;
             var keyClass = KeyClass(r.Depth);
             if (_classes.Count > r.Depth && ApplyBestRule(r.Depth, GetTargetKey(r.Name, keyClass), _beforeTargets, keyClass)) return;
@@ -61,18 +64,16 @@ namespace CssSimpler
         private string _firstClass = string.Empty;
         private void InsertFirstChild(XmlReader r)
         {
-            if (_savedFirstNode != null)
-            {
-                InsertContent(_savedFirstNode, _firstClass);
-                _savedFirstNode = null;
-                _firstClass = string.Empty;
-            }
+	        if (_savedFirstNode == null) return;
+	        InsertContent(_savedFirstNode, _firstClass);
+	        _savedFirstNode = null;
+	        _firstClass = string.Empty;
         }
 
         private void InsertAfter(int depth, string name)
         {
             var index = depth + 1;
-            if (index >= _classes.Count) return;
+			if (index >= _classes.Count) return;
             var endClass = _classes[index] as string;
             var lookUp = index;
             while ((endClass == null || _needHigher.Contains(endClass)) && lookUp > 0)
@@ -80,6 +81,7 @@ namespace CssSimpler
                 lookUp -= 1;
                 endClass = _classes[lookUp] as string;
             }
+	        Suffix = "-pa";
             var target1 = GetTargetKey(_classes[index] as string, endClass);
             var target2 = GetTargetKey(name, endClass);
             if (ApplyBestRule(depth, target1, _afterTargets, endClass)) return;
@@ -109,17 +111,19 @@ namespace CssSimpler
                         {
                             myClass = myClass.Split(' ')[0];
                         }
-                        //if (LookupNotFirstChild(node) != null)
                         if (targets == _beforeTargets)
                         {
-                            _savedFirstNode = node;
-                            _firstClass = myClass;
-                        }
+	                        if (_savedFirstNode == null)
+	                        {
+								_savedFirstNode = node;
+								_firstClass = myClass;
+							}
+						}
                         else
                         {
-                            InsertContent(node, myClass);
+                            var inserted = InsertContent(node, myClass);
+	                        if (inserted) return true;
                         }
-                        return true;
                     }
                 }
             }
@@ -137,14 +141,14 @@ namespace CssSimpler
             var requireParent = false;
             // We should be at the tag / class for the rule being applied so look before it.
             while (node != null)
-            { 
+            {
                 node = node.PreviousSibling;
                 if (node == null) break;
                 switch (node.Name)
                 {
                     case "PARENTOF":
                         requireParent = true;
-                        continue;
+                        break;
                     case "CLASS":
                         string name = node.FirstChild.InnerText;
                         while (!requireParent && index > 0 && !MatchClass(index, name))
@@ -189,8 +193,7 @@ namespace CssSimpler
             if (index >= _classes.Count) return false;
             var classNames = _classes[index] as string;
             if (classNames == null) return false;
-            if (!classNames.Split(' ').Contains(name)) return false;
-            return true;
+            return classNames.Split(' ').Contains(name);
         }
 
         private bool RequiredFirst(XmlNode node)
@@ -210,39 +213,38 @@ namespace CssSimpler
             return node.SelectSingleNode("parent::*//PSEUDO[name='first-child' and parent::PSEUDO]");
         }
 
-        private void InsertContent(XmlNode node, string myClass)
+        private bool InsertContent(XmlNode node, string myClass)
         {
             var content = node.SelectSingleNode("following-sibling::PROPERTY[name='content']/value");
-            Debug.Assert(content != null);
+	        if (content == null) return false;	/* previously some flex or Pathway rules might set font for before after content w/o the content */
             var val = content.InnerText.Replace(@"\'", @"'");
             var properties = node.SelectNodes("parent::*/PROPERTY");
             Debug.Assert(properties != null);
             myClass = properties.Count <= 1 ? null : myClass.Replace(" ", "");
             WriteContent(val.Substring(1, val.Length - 2), myClass);  // Remove quotes
+	        return true;
         }
 
         private void SaveClass(XmlReader r)
         {
-            if (r.Name == "class")
-            {
-                if (!_needHigher.Contains(r.Value))
-                {
-                    _lastClass = r.Value;
-                }
-                if (r.Depth >= _classes.Count)
-                {
-                    while (_classes.Count < r.Depth)
-                    {
-                        // ReSharper disable once AssignNullToNotNullAttribute
-                        _classes.Add(null);
-                    }
-                    _classes.Add(r.Value);
-                }
-                else
-                {
-                    _classes[r.Depth] = r.Value;
-                }
-            }
+	        if (r.Name != "class") return;
+	        if (!_needHigher.Contains(r.Value))
+	        {
+		        _lastClass = r.Value;
+	        }
+	        if (r.Depth >= _classes.Count)
+	        {
+		        while (_classes.Count < r.Depth)
+		        {
+			        // ReSharper disable once AssignNullToNotNullAttribute
+			        _classes.Add(null);
+		        }
+		        _classes.Add(r.Value);
+	        }
+	        else
+	        {
+		        _classes[r.Depth] = r.Value;
+	        }
         }
 
         private int _nextFirst = -1;
@@ -313,33 +315,31 @@ namespace CssSimpler
 
         private static string GetTargetKey(string target, string lastClass)
         {
-            if (target == "span" || target == "xitem")
-            {
-                if (lastClass == null) return null;
-                if (!lastClass.Contains(" "))
-                {
-                    target = string.Format("{0}:{1}", target, lastClass);
-                }
-                else
-                {
-                    var sb = new StringBuilder();
-                    var first = true;
-                    foreach (var s in lastClass.Split(' '))
-                    {
-                        if (!first)
-                        {
-                            sb.Append(" ");
-                        }
-                        else
-                        {
-                            first = false;
-                        }
-                        sb.Append(string.Format("{0}:{1}", target, s));
-                    }
-                    target = sb.ToString();
-                }
-            }
-            return target;
+	        if (target != "span" && target != "xitem") return target;
+	        if (lastClass == null) return null;
+	        if (!lastClass.Contains(" "))
+	        {
+		        target = string.Format("{0}:{1}", target, lastClass);
+	        }
+	        else
+	        {
+		        var sb = new StringBuilder();
+		        var first = true;
+		        foreach (var s in lastClass.Split(' '))
+		        {
+			        if (!first)
+			        {
+				        sb.Append(" ");
+			        }
+			        else
+			        {
+				        first = false;
+			        }
+			        sb.Append(string.Format("{0}:{1}", target, s));
+		        }
+		        target = sb.ToString();
+	        }
+	        return target;
         }
 
         private string KeyClass(int depth)

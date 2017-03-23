@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="XeLaTexContentTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // WordPress Test Support
 // </remarks>
@@ -119,6 +119,7 @@ namespace Test.XeLatex
 				Directory.Delete(outputDirectory, true);
 			}
 			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.SetLoadType = "Scripture";
 			Param.LoadSettings();
 			_projInfo.ProjectPath = outputDirectory;
 			_projInfo.ProjectInputType = "Scripture";
@@ -190,6 +191,7 @@ namespace Test.XeLatex
 				Directory.Delete(outputDirectory, true);
 			}
 			FolderTree.Copy(inputSourceDirectory, outputDirectory);
+			Param.SetLoadType = "Dictionary";
 			Param.LoadSettings();
 			_projInfo.ProjectPath = outputDirectory;
 			_projInfo.ProjectInputType = "Dictionary";
@@ -977,7 +979,7 @@ namespace Test.XeLatex
 			ExportProcess(file);
 			FileCompare(file);
 		}
-		
+
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -1179,7 +1181,7 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
-		
+
 		[Test]
 		[Category("ShortTest")]
 		[Category("SkipOnTeamCity")]
@@ -1255,7 +1257,7 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
-		
+
 
 		[Test]
 		[Category("ShortTest")]

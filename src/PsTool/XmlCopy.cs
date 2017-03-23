@@ -12,6 +12,7 @@
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -32,12 +33,18 @@ namespace SIL.Tool
         private readonly XmlReader _rdr;
         private readonly XmlWriter _wtr;
         private bool _finish;
-        private readonly bool _noXmlHeader;
+        private bool _noXmlHeader;
         protected bool SkipAttr;
         protected bool SkipNode;
+		private const int StackSize = 30;
+		protected readonly ArrayList Classes = new ArrayList(StackSize);
+		protected readonly ArrayList Langs = new ArrayList(StackSize);
+		protected string StyleDecorate;
+		protected readonly List<string> DecorateExceptions = new List<string> {"letHead", "letter", "letData", "reversalindexentry", "dicBody"};
         protected string Suffix = "-ps";
         protected string ReplaceLocalName;
-        public string TitleDefault;
+		public string SpaceClass = "sp";
+		public string TitleDefault;
         public string AuthorDefault;
         public bool DebugPrint;
         private bool _doAttributes;
@@ -54,6 +61,8 @@ namespace SIL.Tool
 
         public void Parse()
         {
+	        int _inDiv = 0;
+
             while (_rdr.Read())
             {
                 SkipAttr = SkipNode;
@@ -101,8 +110,15 @@ namespace SIL.Tool
                                     }
                                     else
                                     {
-                                        _wtr.WriteAttributeString(_rdr.Name, _rdr.Value);
-                                    }
+	                                    if (_rdr.Name == "class" && !DecorateExceptions.Contains(_rdr.Value))
+	                                    {
+											_wtr.WriteAttributeString(_rdr.Name, _rdr.Value + StyleDecorate);
+										}
+	                                    else
+	                                    {
+											_wtr.WriteAttributeString(_rdr.Name, _rdr.Value);
+										}
+									}
                                 }
                                 AfterProcessMethods();
                             }
@@ -115,6 +131,7 @@ namespace SIL.Tool
                                 _wtr.WriteAttributes(_rdr, true);
                             }
                         }
+
                         FirstChildProcessMethods(XmlNodeType.Element);
                         if (empty)
                         {
@@ -130,8 +147,11 @@ namespace SIL.Tool
                                     _wtr.WriteEndElement();
                                 }
                             }
-                        }
-                        break;
+                        } else if (name == "div")
+						{
+							_inDiv += 1;
+						}
+						break;
                     case XmlNodeType.Text:
                         if (!SkipNode)
                         {
@@ -141,8 +161,19 @@ namespace SIL.Tool
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
                         //Debug.Print("space");
-                        _wtr.WriteWhitespace(_rdr.Value);
-                        break;
+		                if (_inDiv > 0 && !string.IsNullOrEmpty(SpaceClass))
+		                {
+							_wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
+							WriteClassAttr(SpaceClass);
+							_wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");
+							_wtr.WriteWhitespace(_rdr.Value);
+							_wtr.WriteEndElement();
+						}
+						else
+		                {
+							_wtr.WriteWhitespace(_rdr.Value);
+						}
+						break;
                     case XmlNodeType.CDATA:
                         _wtr.WriteCData( _rdr.Value );
                         break;
@@ -175,6 +206,10 @@ namespace SIL.Tool
                         if (!SkipNode)
                         {
                             _wtr.WriteFullEndElement();
+	                        if (_rdr.Name == "div")
+	                        {
+		                        _inDiv -= 1;
+	                        }
                         }
                         break;
                 }
@@ -214,7 +249,53 @@ namespace SIL.Tool
             _wtr.WriteEndElement();
         }
 
-        private void BeforeProcessMethods()
+		protected static void AddInHierarchy(XmlReader r, IList arrayList)
+		{
+			AddInHierarchy(arrayList, r.Depth, r.Value);
+		}
+
+		protected static void AddInHierarchy(IList arrayList, int index, object value)
+		{
+			if (index >= arrayList.Count)
+			{
+				while (arrayList.Count < index)
+				{
+					// ReSharper disable once AssignNullToNotNullAttribute
+					arrayList.Add(null);
+				}
+				arrayList.Add(value);
+			}
+			else
+			{
+				arrayList[index] = value;
+			}
+		}
+
+		protected string GetClass(XmlReader r)
+		{
+			var myClass = r.GetAttribute("class");
+			var depth = r.Depth;
+			while (string.IsNullOrEmpty(myClass) && depth > 0)
+			{
+				myClass = Classes.Count > depth ? (string)Classes[depth] : null;
+				depth -= 1;
+			}
+			return myClass;
+		}
+
+		protected string GetLang(XmlReader r)
+		{
+			var myLang = r.GetAttribute("lang");
+			var depth = r.Depth;
+			while (string.IsNullOrEmpty(myLang) && depth > 0)
+			{
+				myLang = Langs.Count > depth ? (string)Langs[depth] : null;
+				depth -= 1;
+			}
+			return myLang;
+		}
+
+		private void BeforeProcessMethods()
         {
             if (!_beforeNodeTypeMap.ContainsKey(_rdr.NodeType)) return;
             foreach (ParserMethod func in _beforeNodeTypeMap[_rdr.NodeType])
@@ -262,6 +343,11 @@ namespace SIL.Tool
             }
         }
 
+	    protected void WriteTextValue(string val)
+	    {
+			_wtr.WriteValue(val);
+	    }
+
         protected void WriteEmbddedStyle(string val)
         {
             _wtr.WriteStartElement("style", "http://www.w3.org/1999/xhtml");
@@ -287,7 +373,8 @@ namespace SIL.Tool
             _wtr.WriteStartElement(localName, "http://www.w3.org/1999/xhtml");
             if (!string.IsNullOrEmpty(myClass))
             {
-                WriteClassAttr(myClass + Suffix);
+	            var decoration = DecorateExceptions.Contains(myClass) ? "" : StyleDecorate;
+				WriteClassAttr(myClass + Suffix + decoration);
             }
             if (!string.IsNullOrEmpty(myLang))
             {

@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ContentXMLTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -32,10 +32,11 @@ namespace Test.OpenOfficeConvert
 	public class LOContentExportTest
 	{
 		#region Private Variables
-		
+
 		private string _inputPath;
 		private string _outputPath;
 		private string _expectedPath;
+		private string _expectedlinuxPath;
 		ProgressBar _progressBar;
 		protected TimeSpan _totalTime;
 		private PublicationInformation _projInfo;
@@ -60,7 +61,7 @@ namespace Test.OpenOfficeConvert
 			_inputPath = Common.PathCombine(testPath, "input");
 			_outputPath = Common.PathCombine(testPath, "output");
 			_expectedPath = Common.PathCombine(testPath, "expected");
-			
+			_expectedlinuxPath = Common.PathCombine(testPath, "expectedlinux");
 			Common.DeleteDirectory(_outputPath);
 			Directory.CreateDirectory(_outputPath);
 			FolderTree.Copy(FileInput("Pictures"), FileOutput("Pictures"));
@@ -183,7 +184,7 @@ namespace Test.OpenOfficeConvert
 
 		///<summary>
 		///Dictionary Tab Test
-		///</summary>      
+		///</summary>
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
@@ -199,14 +200,19 @@ namespace Test.OpenOfficeConvert
 
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
 			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
 			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
-		
+
 		///<summary>
 		///B1pe Full Scripture Test
-		/// </summary>      
+		/// </summary>
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
@@ -223,54 +229,46 @@ namespace Test.OpenOfficeConvert
 
 			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
 			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 			Common.UseAfterBeforeProcess = true;
 		}
-		
-		#endregion
 
-		private void CopyInputToOutput()
-		{
-			string[] files = new[] { "main.odt", "flexrev.odt", "main.odm", "flexrev.css", "main.xhtml", "flexrev.xhtml", "main.css", "flexrev.css" };
-			foreach (string file in files)
-			{
-				string outputfile = FileOutput(file);
-				File.Delete(outputfile);
-			}
-
-			files = new[] { "main.xhtml", "FlexRev.xhtml", "main.css", "FLExRev.css" };
-			foreach (string file in files)
-			{
-				CopyExistingFile(file);
-			}
-		}
-
-		private bool CheckFileExist()
-		{
-			bool returnValue = true;
-			string[] files = new[] { "main.odt", "FlexRev.odt", "main.odm" };
-			foreach (string file in files)
-			{
-				string outputfile = FileOutput(file);
-				if (!File.Exists(outputfile))
-				{
-					returnValue = false;
-					break;
-				}
-			}
-			return returnValue;
-		}
-
-		/// <summary>
-		/// Copies a file if it exists from the input test path to the output
+		///<summary>
+		///B1pe Full Scripture Test
 		/// </summary>
-		/// <param name="fileName">file to be copied if it exists</param>
-		private void CopyExistingFile(string fileName)
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void EveryPageBottomCenterExport()
 		{
-			if (File.Exists(FileInput(fileName)))
-				File.Copy(FileInput(fileName), FileOutput(fileName), true);
+			Common.UseAfterBeforeProcess = false;
+			_projInfo.ProjectInputType = "Scripture";
+			const string file = "everypagebottomcenter";
+			DateTime startTime = DateTime.Now;
+
+			string styleOutput = GetStyleOutput(file);
+
+			_totalTime = DateTime.Now - startTime;
+
+			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+			if (Common.UsingMonoVM)
+			{
+				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+			}
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+			Common.UseAfterBeforeProcess = true;
 		}
+
+		#endregion
 
 		private string GetStyleOutput(string file)
 		{
@@ -314,33 +312,6 @@ namespace Test.OpenOfficeConvert
 			return styleOutput;
 		}
 
-		private string GetStyleOutput(PublicationInformation projInfo)
-		{
-			LOContent contentXML = new LOContent();
-			LOStyles stylesXML = new LOStyles();
-			projInfo.TempOutputFolder = _outputPath;
-			string file = Path.GetFileNameWithoutExtension(_projInfo.DefaultXhtmlFileWithPath);
-
-			Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
-			CssTree cssTree = new CssTree();
-			cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-
-			//StyleXML
-			string fileOutput = _index > 0 ? file + _index + _styleFile : file + _styleFile;
-			//string styleOutput = FileOutput(file + _styleFile);
-			string styleOutput = FileOutput(fileOutput);
-			Dictionary<string, Dictionary<string, string>> idAllClass = stylesXML.CreateStyles(_projInfo, cssClass, styleOutput);
-
-			// ContentXML
-			var pageSize = new Dictionary<string, string>();
-			pageSize["height"] = cssClass["@page"]["page-height"];
-			pageSize["width"] = cssClass["@page"]["page-width"];
-			_projInfo.TempOutputFolder = FileOutput(file);
-			contentXML.CreateStory(_projInfo, idAllClass, cssTree.SpecificityClass, cssTree.CssClassOrder, 325, pageSize);
-			_projInfo.TempOutputFolder = _projInfo.TempOutputFolder + _contentFile;
-			return styleOutput;
-		}
-
 		private static void LoadParam(string inputType, string tocTrueFalse)
 		{
 			// Verifying the input setting file and css file - in Input Folder
@@ -360,6 +331,6 @@ namespace Test.OpenOfficeConvert
 			Param.Value["UserSheetPath"] = _outputBasePath;
 		}
 
-		
+
 	}
 }

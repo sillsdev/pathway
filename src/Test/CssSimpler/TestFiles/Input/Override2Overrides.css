@@ -1,0 +1,15 @@
+/* This file can be used to add custom css rules that will be applied to the xhtml export */
+.entry> .senses > .sensecontent > .sense> .definitionorgloss> span:first-child:before{
+		content:'Def: (';
+		font-weight:bold;
+		font-family:'Times New Roman',serif;
+		font-size:14pt;
+		color:#0F0;
+		background-color:#F00;
+		text-decoration-color:#FF0;
+	}
+
+.entry> .senses > .sensecontent > .sense> .definitionorgloss> span:last-child:after{
+		content:') ';
+		color:#0F0;
+	}

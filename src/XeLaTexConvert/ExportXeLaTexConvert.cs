@@ -1,14 +1,14 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="ExportXeLaTexConvert.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 //
 // </remarks>
@@ -125,7 +125,13 @@ namespace SIL.PublishingSolution
                 imgPath = newProperty["ImagePath"];
             }
             UpdateXeLaTexFontCacheIfNecessary();
-            CallXeLaTex(projInfo, xeLatexFullFile, true, imgPath);
+
+	        if (Common.Testing)
+	        {
+		        return true;
+	        }
+
+	        CallXeLaTex(projInfo, xeLatexFullFile, true, imgPath);
 	        if (!Common.Testing)
 	        {
 		        ProcessRampFile(projInfo, xeLatexFullFile, organization);
@@ -258,7 +264,7 @@ namespace SIL.PublishingSolution
             }
             catch (Exception)
             {
-                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization),
                 // but just in case, specify a default org.
                 organization = "SIL International";
             }

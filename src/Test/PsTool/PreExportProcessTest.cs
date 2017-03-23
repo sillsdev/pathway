@@ -92,6 +92,24 @@ namespace Test.PsTool
             Directory.Delete(preExportProcess.GetCreatedTempFolderPath, true);
         }
 
+		/// <summary>
+		///A test for Prince Export AudioVisual
+		///</summary>
+		[Test]
+		public void PrinceExportAudioVisualInputcaseTest()
+		{
+			string filename = "PrinceExportAudioVisualInputcase.xhtml";
+			string input = GetFileNameWithPath(filename);
+			string expected = GetFileNameWithExpectedPath(filename);
+			PublicationInformation projInfo = new PublicationInformation();
+			string output = GetFileNameWithOutputPath(filename);
+			CopyToOutput(input, output);
+			projInfo.ProjectInputType = "Dictionary";
+			preExportProcess = new PreExportProcess();
+			preExportProcess.ReplaceProcessForPrinceOutput(output);
+			XmlAssert.AreEqual(expected, output, "PrinceExport AudioVisual Inputcase failed");
+		}
+
         /// <summary>
         ///A test for GoBibleRearrangeVerseNumbers
         ///</summary>

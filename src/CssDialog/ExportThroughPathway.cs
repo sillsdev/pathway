@@ -7,7 +7,7 @@
 // <author>Erik Brommers</author>
 // <email>erik_brommers@sil.org</email>
 // Last reviewed:
-// 
+//
 // <remarks>
 // Export Through Pathway dialog (replacement for the PrintVia dialog).
 // This dialog is designed to be a simple-to-complex dialog for exporting to the
@@ -16,7 +16,7 @@
 // When the user displays this dialog, it checks the <>StyleSettings.xml file
 // for the user's Organization. If not found (which will be the case for first launch
 // after installation and when the user holds the shift key down to clean out the
-// settings), the dialog will display the SelectOrganizationDialog to select one. 
+// settings), the dialog will display the SelectOrganizationDialog to select one.
 // Each organization can have its own default values for publisher, copyright, etc.;
 // specifying an organization allows an organization to pre-fill some of the dialog
 // fields for the user. These fields can be overridden by the user.
@@ -396,7 +396,7 @@ namespace SIL.PublishingSolution
                 chkHyphen.Checked = false;
                 clbHyphenlang.Items.Clear();
                 //Loads Hyphenation related settings
-		        LoadHyphenationSettings();
+		        LoadHyphenationSettingsToForm();
 	            LoadProperty();
                 EnableUIElements();
 
@@ -409,7 +409,16 @@ namespace SIL.PublishingSolution
             catch { }
         }
 
-        private void LoadDefaultSettings()
+	    private void LoadHyphenationSettingsToForm()
+	    {
+		    Common.LoadHyphenationSettings();
+			foreach (string lang in Param.HyphenLang.Split(','))
+			{
+				clbHyphenlang.Items.Add(lang, (Param.HyphenationSelectedLanguagelist.Contains(lang) ? true : false));
+			}
+		}
+
+		private void LoadDefaultSettings()
         {
             // not setting defaults, just opening the dialog:
             // load the settings file and migrate it if necessary
@@ -417,78 +426,6 @@ namespace SIL.PublishingSolution
             Param.LoadSettings();
             isFromConfigurationTool = true;
         }
-
-        private void LoadHyphenationSettings()
-        {
-            var ssf = _settingsHelper.GetSettingsFilename(_settingsHelper.Database);
-            if (ssf != null && ssf.Trim().Length > 0)
-            {
-	            if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe")
-	            {
-		            var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
-		            Param.DatabaseName = _settingsHelper.Database;
-		            Param.IsHyphen = false;
-		            Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database, true);
-		            foreach (string filename in Directory.GetFiles(paratextpath, "*.txt"))
-		            {
-			            if (filename.Contains("hyphen"))
-			            {
-				            Param.IsHyphen = true;
-				            Param.HyphenFilepath = filename;
-				            Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
-			            }
-		            }
-	            }
-	            if (AppDomain.CurrentDomain.FriendlyName.ToLower().Contains("fieldworks"))
-	            {
-		            try
-		            {
-						IDictionary<string,string> value=new Dictionary<string, string>();
-						var settingsFile = ssf;
-                        var flexScan = new FlexScan(settingsFile);
-				        foreach (var lang in flexScan.VernWs)
-				        {
-							var langname = GetLanguageValues(lang);
-					        if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-						        value.Add(lang, langname.Replace(',',' '));
-				        }
-						foreach (var lang in flexScan.AnalWs)
-				        {
-							var langname = GetLanguageValues(lang);
-							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-								value.Add(lang, langname.Replace(',', ' '));
-				        }
-						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
-		            }
-		            catch (Exception)
-		            {
-		            }
-	            }
-
-            }
-			Common.EnableHyphenation();
-            CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database, InputType);
-            foreach (string lang in Param.HyphenLang.Split(','))
-            {
-                    clbHyphenlang.Items.Add(lang, (Param.HyphenationSelectedLanguagelist.Contains(lang) ? true : false));
-            }
-        }
-
-	    public static string GetLanguageValues(string lang)
-	    {
-		    if (lang.Contains("-"))
-		    {
-			    lang = lang.Substring(0, lang.IndexOf("-", System.StringComparison.Ordinal));
-		    }
-		    var allLangs = from ci in CultureInfo.GetCultures(CultureTypes.NeutralCultures)
-			    where ci.TwoLetterISOLanguageName != "iv"
-			    orderby ci.DisplayName
-			    select ci;
-		    var langname = lang.Length == 2
-			    ? allLangs.FirstOrDefault(s => s.TwoLetterISOLanguageName == lang)
-			    : allLangs.FirstOrDefault(s => s.ThreeLetterISOLanguageName == lang);
-		    return langname != null ? langname.EnglishName : Common.GetPalasoLanguageName(lang);
-	    }
 
 	    private void AssignFolderDateTime()
         {
@@ -592,7 +529,7 @@ namespace SIL.PublishingSolution
         {
             // Front Matter tab
             // edb - temporary / remove as exports are implemented
-            if (!ddlLayout.Text.Contains("Epub") && !ddlLayout.Text.Contains("OpenOffice/LibreOffice") && !ddlLayout.Text.Contains("InDesign") && !ddlLayout.Text.Contains("XeLaTex"))
+            if (!ddlLayout.Text.Contains("Epub") && !ddlLayout.Text.Contains("HTML") && !ddlLayout.Text.Contains("OpenOffice/LibreOffice") && !ddlLayout.Text.Contains("InDesign") && !ddlLayout.Text.Contains("XeLaTex"))
             {
                 tabPage2.Enabled = false;
                 chkCoverImage.Enabled = false;
@@ -612,7 +549,7 @@ namespace SIL.PublishingSolution
             {
                 tabPage2.Enabled = true;
                 chkTitlePage.Enabled = true;
-                chkCoverImage.Enabled = (ddlLayout.Text.Contains("Epub") || ddlLayout.Text.Contains("OpenOffice/LibreOffice") || ddlLayout.Text.Contains("InDesign") || ddlLayout.Text.Contains("XeLaTex"));
+                chkCoverImage.Enabled = (ddlLayout.Text.Contains("Epub") || ddlLayout.Text.Contains("HTML") || ddlLayout.Text.Contains("OpenOffice/LibreOffice") || ddlLayout.Text.Contains("InDesign") || ddlLayout.Text.Contains("XeLaTex"));
                 chkCoverImageTitle.Enabled = (chkCoverImage.Enabled && chkCoverImage.Checked);
                 btnCoverImage.Enabled = chkCoverImageTitle.Enabled;
                 imgCoverImage.Enabled = chkCoverImageTitle.Enabled;
@@ -626,11 +563,11 @@ namespace SIL.PublishingSolution
                 lnkChooseCopyright.Enabled = true;
 
                 chkTOC.Enabled = true;
-                if (ddlLayout.Text.Contains("Epub"))
+                if (ddlLayout.Text.Contains("Epub") || ddlLayout.Text.Contains("HTML"))
                 {
                     chkTOC.Checked = true;
                     chkTOC.Enabled = false;
-                }	            
+                }
             }
 
             // Processing Options tab
@@ -866,6 +803,9 @@ namespace SIL.PublishingSolution
                         OutputFolder = OutputFolder + "\\";
                 }
 				txtSaveInFolder.Text = ReplaceInvalidChars(txtSaveInFolder.Text);
+	            string saveInFolderFirstPart = Path.GetDirectoryName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
+				string saveInFolderSecondPart = Path.GetFileName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
+	            txtSaveInFolder.Text = Path.Combine(saveInFolderFirstPart, GetStyleInLowerCaseWithoutSpecialCharacters(saveInFolderSecondPart));
                 if (!Directory.Exists(OutputFolder))
                     Directory.CreateDirectory(OutputFolder);
             }
@@ -900,11 +840,6 @@ namespace SIL.PublishingSolution
             DialogResult = DialogResult.Yes;
             if (Text.Contains("Default"))
                 SaveDefaultProperty(this);
-
-            if (!Common.IsUnixOS())
-            {
-                OutputFolder = Path.GetDirectoryName(OutputFolder);
-            }
 
             DictionaryName = OutputFolder;
             Common.TimeStarted = DateTime.Now;
@@ -1053,7 +988,7 @@ namespace SIL.PublishingSolution
                             int index = ddlCopyrightStatement.Items.Add(value);
                             if (copyrightFileName == subnode.Attributes["file"].Value)
                             {
-                                // this is the selected copyright statement - 
+                                // this is the selected copyright statement -
                                 // select it in the dropdown and check the standard radio button
                                 ddlCopyrightStatement.SelectedIndex = index;
                                 rdoStandardCopyright.Checked = true;
@@ -1190,7 +1125,8 @@ namespace SIL.PublishingSolution
             switch (exportType)
             {
                 case "E-Book (Epub2 and Epub3)":
-                    value = "application/epub+zip";
+				case "Browser (HTML5)":
+					value = "application/epub+zip";
                     break;
                 case "Go Bible":
                     // generic archive
@@ -1294,7 +1230,7 @@ namespace SIL.PublishingSolution
             {
                 media = "mobile";
             }
-            else if (backend == "e-book (epub2 and epub3)")//e-book (.epub)
+            else if (backend == "e-book (epub2 and epub3)" || backend == "browser (html5)")//e-book (.epub)
             {
                 media = "others";
             }
@@ -1320,12 +1256,21 @@ namespace SIL.PublishingSolution
         private void ddlStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
             _publicationName = ddlStyle.Text.Replace(" ", "_");
-            txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyle.Text.Replace(" ", "_"));
+			string ddlStyleInLowerCaseWithoutSpecialCharacters = GetStyleInLowerCaseWithoutSpecialCharacters(ddlStyle.Text);
+			txtSaveInFolder.Text = Common.GetSaveInFolder(Param.DefaultValue[Param.PublicationLocation], DatabaseName, ddlStyleInLowerCaseWithoutSpecialCharacters);
             if (_newSaveInFolderPath.Length > 0)
             {
-                txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + ddlStyle.Text.Replace(" ", "_") + "_" + _sDateTime;
+				txtSaveInFolder.Text = Path.GetDirectoryName(_newSaveInFolderPath) + GetStyleInLowerCaseWithoutSpecialCharacters(ddlStyle.Text) + "_" + _sDateTime;
             }
         }
+
+		private string GetStyleInLowerCaseWithoutSpecialCharacters(string theStyle)
+	    {
+			StringBuilder styleWithoutSpecialCharacters = new StringBuilder(theStyle.Replace(" ", "_"));
+			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace("(", "");
+			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace(")", "");
+			return styleWithoutSpecialCharacters.ToString().ToLower();
+	    }
 
         private void chkCoverImage_CheckedChanged(object sender, EventArgs e)
         {
@@ -1412,16 +1357,33 @@ namespace SIL.PublishingSolution
         private void btnBrowseSaveInFolder_Click(object sender, EventArgs e)
         {
             var dlg = new FolderBrowserDialog();
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+	        string documentsPath = string.Empty;
+
+	        if (Common.UsingMonoVM)
+	        {
+		        documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+	        }
+	        else
+	        {
+				documentsPath = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+	        }
             dlg.SelectedPath = Common.PathCombine(documentsPath, Common.SaveInFolderBase);
             DirectoryInfo directoryInfo = new DirectoryInfo(dlg.SelectedPath);
             if (!directoryInfo.Exists)
                 directoryInfo.Create();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+				string styleInLowerCaseWithoutSpecialCharacters = GetStyleInLowerCaseWithoutSpecialCharacters(ddlStyle.Text);
+				string folderName = styleInLowerCaseWithoutSpecialCharacters + "_" + _sDateTime;
+				if (Common.UsingMonoVM)
+				{
+					_newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
+				}
+				else
+				{
+					_newSaveInFolderPath = Common.PathCombine(ManageDirectory.ShortFileName(dlg.SelectedPath), folderName);
+				}
 
-                string folderName = ddlStyle.Text + "_" + _sDateTime;
-                _newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
                 Param.SetValue(Param.PublicationLocation, _newSaveInFolderPath);
                 txtSaveInFolder.Text = _newSaveInFolderPath;
             }
@@ -1460,7 +1422,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// Get the Custom copyright file when exist in the location 
+        /// Get the Custom copyright file when exist in the location
         /// </summary>
         /// <returns></returns>
         private string GetCopyRightFileName()
@@ -1475,7 +1437,7 @@ namespace SIL.PublishingSolution
 					copyrightDir = Common.PathCombine(copyrightDir, "Copyrights");
 				}
                 copyrightFileName = Common.PathCombine(copyrightDir, "SIL_Custom_Template.xhtml");
-				
+
             }
             return copyrightFileName;
         }
@@ -1620,7 +1582,7 @@ namespace SIL.PublishingSolution
 
 			List<Control> allTextboxes = GetAllControls(this);
 
-		    
+
 		    foreach (var textBoxCtrl in allTextboxes)
 		    {
 				Font txtBoxFont = new Font(fontName, fontSize);

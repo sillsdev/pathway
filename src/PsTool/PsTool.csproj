@@ -261,10 +261,13 @@
     <Compile Include="FileStreamXmlResolver.cs" />
     <Compile Include="FlexScan.cs" />
     <Compile Include="ImageMods.cs" />
+    <Compile Include="InsertHyphens.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="FontInternals.cs">
     </Compile>
     <Compile Include="HashUtilities.cs" />
+    <Compile Include="LoadXmlDocument.cs" />
+    <Compile Include="ManageDirectory.cs" />
     <Compile Include="MergeCss.cs" />
     <Compile Include="MessageBoxExtender.cs" />
     <Compile Include="NullXmlResolver.cs" />
@@ -298,6 +301,7 @@
     <Compile Include="RegistryHelperLite.cs" />
     <Compile Include="SettingsHelper.cs" />
     <Compile Include="ShowHelp.cs" />
+    <Compile Include="SplitXml.cs" />
     <Compile Include="StyleCategories.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -335,6 +339,7 @@
     <Compile Include="Substitution.cs" />
     <Compile Include="XHTMLProcess.cs" />
     <Compile Include="XmlCopy.cs" />
+    <Compile Include="XmlOneToMany.cs" />
     <Compile Include="XmlParser.cs" />
     <Compile Include="ZipFolder.cs" />
     <Compile Include="ZipUtil.cs" />

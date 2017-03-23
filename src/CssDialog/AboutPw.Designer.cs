@@ -65,9 +65,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblProductName, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblProductName, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblProductName, "AboutPw.lblProductName");
-			this.lblProductName.Location = new System.Drawing.Point(166, 23);
+			this.lblProductName.Location = new System.Drawing.Point(221, 28);
+			this.lblProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblProductName.Name = "lblProductName";
-			this.lblProductName.Size = new System.Drawing.Size(0, 22);
+			this.lblProductName.Size = new System.Drawing.Size(0, 29);
 			this.lblProductName.TabIndex = 1;
 			// 
 			// lblVersion
@@ -78,9 +79,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblVersion, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblVersion, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblVersion, "AboutPw.lblVersion");
-			this.lblVersion.Location = new System.Drawing.Point(167, 89);
+			this.lblVersion.Location = new System.Drawing.Point(223, 110);
+			this.lblVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblVersion.Name = "lblVersion";
-			this.lblVersion.Size = new System.Drawing.Size(0, 14);
+			this.lblVersion.Size = new System.Drawing.Size(0, 16);
 			this.lblVersion.TabIndex = 2;
 			// 
 			// lblProjUrl
@@ -91,11 +93,12 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblProjUrl, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblProjUrl, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblProjUrl, "AboutPw.lblProjUrl");
-			this.lblProjUrl.Location = new System.Drawing.Point(168, 208);
+			this.lblProjUrl.Location = new System.Drawing.Point(224, 256);
+			this.lblProjUrl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblProjUrl.Name = "lblProjUrl";
-			this.lblProjUrl.Size = new System.Drawing.Size(355, 27);
+			this.lblProjUrl.Size = new System.Drawing.Size(273, 33);
 			this.lblProjUrl.TabIndex = 5;
-			this.lblProjUrl.Text = "Other project related information is available at:";
+			this.lblProjUrl.Text = "Other project information is available at:";
 			// 
 			// chkHelpToImprove
 			// 
@@ -106,9 +109,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.chkHelpToImprove, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.chkHelpToImprove, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.chkHelpToImprove, "AboutPw.chkHelpToImprove");
-			this.chkHelpToImprove.Location = new System.Drawing.Point(171, 246);
+			this.chkHelpToImprove.Location = new System.Drawing.Point(228, 303);
+			this.chkHelpToImprove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.chkHelpToImprove.Name = "chkHelpToImprove";
-			this.chkHelpToImprove.Size = new System.Drawing.Size(88, 18);
+			this.chkHelpToImprove.Size = new System.Drawing.Size(112, 20);
 			this.chkHelpToImprove.TabIndex = 6;
 			this.chkHelpToImprove.Text = "Help Improve";
 			this.chkHelpToImprove.UseVisualStyleBackColor = true;
@@ -120,9 +124,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.btnOk, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.btnOk, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.btnOk, "AboutPw.btnOk");
-			this.btnOk.Location = new System.Drawing.Point(430, 246);
+			this.btnOk.Location = new System.Drawing.Point(573, 303);
+			this.btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(75, 23);
+			this.btnOk.Size = new System.Drawing.Size(100, 28);
 			this.btnOk.TabIndex = 7;
 			this.btnOk.Text = "Ok";
 			this.btnOk.UseVisualStyleBackColor = true;
@@ -136,9 +141,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblGPL, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblGPL, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblGPL, "AboutPw.lblGPL");
-			this.lblGPL.Location = new System.Drawing.Point(166, 140);
+			this.lblGPL.Location = new System.Drawing.Point(221, 172);
+			this.lblGPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblGPL.Name = "lblGPL";
-			this.lblGPL.Size = new System.Drawing.Size(72, 24);
+			this.lblGPL.Size = new System.Drawing.Size(96, 30);
 			this.lblGPL.TabIndex = 9;
 			this.lblGPL.Text = "Code license:";
 			this.lblGPL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -151,9 +157,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.label1, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.label1, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.label1, "AboutPw.label1");
-			this.label1.Location = new System.Drawing.Point(166, 55);
+			this.label1.Location = new System.Drawing.Point(221, 68);
+			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(195, 24);
+			this.label1.Size = new System.Drawing.Size(263, 32);
 			this.label1.TabIndex = 18;
 			this.label1.Text = "Configuration Tool";
 			// 
@@ -165,9 +172,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lnkGPL, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lnkGPL, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lnkGPL, "AboutPw.AboutPw.lnkGPL");
-			this.lnkGPL.Location = new System.Drawing.Point(247, 145);
+			this.lnkGPL.Location = new System.Drawing.Point(329, 178);
+			this.lnkGPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkGPL.Name = "lnkGPL";
-			this.lnkGPL.Size = new System.Drawing.Size(67, 14);
+			this.lnkGPL.Size = new System.Drawing.Size(87, 16);
 			this.lnkGPL.TabIndex = 10;
 			this.lnkGPL.TabStop = true;
 			this.lnkGPL.Text = "GNU GPL v3";
@@ -181,10 +189,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.label5, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.label5, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.label5, "AboutPw.AboutPw.label5");
-			this.label5.Location = new System.Drawing.Point(329, 112);
+			this.label5.Location = new System.Drawing.Point(439, 138);
 			this.label5.Margin = new System.Windows.Forms.Padding(0);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(25, 11);
+			this.label5.Size = new System.Drawing.Size(33, 14);
 			this.label5.TabIndex = 16;
 			this.label5.Text = "®";
 			// 
@@ -195,9 +203,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.pictureBox1, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.pictureBox1, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.pictureBox1, "AboutPw.AboutPw.pictureBox1");
-			this.pictureBox1.Location = new System.Drawing.Point(22, 24);
+			this.pictureBox1.Location = new System.Drawing.Point(29, 30);
+			this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(123, 128);
+			this.pictureBox1.Size = new System.Drawing.Size(164, 158);
 			this.pictureBox1.TabIndex = 17;
 			this.pictureBox1.TabStop = false;
 			// 
@@ -208,9 +217,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblCompany, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblCompany, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblCompany, "AboutPw.lblCompany");
-			this.lblCompany.Location = new System.Drawing.Point(166, 164);
+			this.lblCompany.Location = new System.Drawing.Point(221, 202);
+			this.lblCompany.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblCompany.Name = "lblCompany";
-			this.lblCompany.Size = new System.Drawing.Size(365, 28);
+			this.lblCompany.Size = new System.Drawing.Size(487, 34);
 			this.lblCompany.TabIndex = 20;
 			this.lblCompany.Text = "SIL International in collaboration with EC Group Datasoft Private Limited";
 			this.lblCompany.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -223,9 +233,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblSilPathway, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblSilPathway, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblSilPathway, "AboutPw.lblSilPathway");
-			this.lblSilPathway.Location = new System.Drawing.Point(167, 23);
+			this.lblSilPathway.Location = new System.Drawing.Point(223, 28);
+			this.lblSilPathway.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblSilPathway.Name = "lblSilPathway";
-			this.lblSilPathway.Size = new System.Drawing.Size(94, 24);
+			this.lblSilPathway.Size = new System.Drawing.Size(125, 32);
 			this.lblSilPathway.TabIndex = 21;
 			this.lblSilPathway.Text = "Pathway";
 			// 
@@ -237,9 +248,10 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblVersionwithDate, null);
 			this.l10NSharpExtender1.SetLocalizationPriority(this.lblVersionwithDate, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblVersionwithDate, "AboutPw.lblVersionwithDate");
-			this.lblVersionwithDate.Location = new System.Drawing.Point(168, 89);
+			this.lblVersionwithDate.Location = new System.Drawing.Point(224, 110);
+			this.lblVersionwithDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lblVersionwithDate.Name = "lblVersionwithDate";
-			this.lblVersionwithDate.Size = new System.Drawing.Size(74, 14);
+			this.lblVersionwithDate.Size = new System.Drawing.Size(95, 16);
 			this.lblVersionwithDate.TabIndex = 22;
 			this.lblVersionwithDate.Text = "Version: 1.4.0";
 			// 
@@ -250,12 +262,13 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lnkProj, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lnkProj, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lnkProj, "AboutPw.AboutPw.lnkProj");
-			this.lnkProj.Location = new System.Drawing.Point(415, 208);
+			this.lnkProj.Location = new System.Drawing.Point(500, 256);
+			this.lnkProj.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.lnkProj.Name = "lnkProj";
-			this.lnkProj.Size = new System.Drawing.Size(108, 13);
+			this.lnkProj.Size = new System.Drawing.Size(195, 17);
 			this.lnkProj.TabIndex = 8;
 			this.lnkProj.TabStop = true;
-			this.lnkProj.Text = "http://pathway.sil.org";
+			this.lnkProj.Text = "http://software.sil.org/pathway";
 			this.lnkProj.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkProj_LinkClicked);
 			// 
 			// label2
@@ -266,19 +279,20 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.label2, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.label2, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.label2, "AboutPw.AboutPw.label2");
-			this.label2.Location = new System.Drawing.Point(167, 116);
+			this.label2.Location = new System.Drawing.Point(223, 143);
+			this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(168, 14);
+			this.label2.Size = new System.Drawing.Size(222, 16);
 			this.label2.TabIndex = 15;
 			this.label2.Text = "(C) 2008 - 2016 SIL International  ";
 			// 
 			// AboutPw
 			// 
 			this.AccessibleName = "AboutPw";
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.ClientSize = new System.Drawing.Size(535, 290);
+			this.ClientSize = new System.Drawing.Size(713, 357);
 			this.Controls.Add(this.lnkProj);
 			this.Controls.Add(this.lblProjUrl);
 			this.Controls.Add(this.lblCompany);
@@ -299,10 +313,11 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this, null);
 			this.l10NSharpExtender1.SetLocalizingId(this, "AboutPw.WindowTitle");
+			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "AboutPw";
-			this.Padding = new System.Windows.Forms.Padding(9);
+			this.Padding = new System.Windows.Forms.Padding(12, 11, 12, 11);
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

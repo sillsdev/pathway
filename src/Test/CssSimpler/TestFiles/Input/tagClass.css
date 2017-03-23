@@ -1,6 +1,0 @@
-.entry> .senses> span.sensecontent+ span:before{
-		content:'  ';
-	}
-.entry> .senses:after{
-		content:' ';
-	}

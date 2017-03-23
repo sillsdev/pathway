@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
@@ -46,72 +47,7 @@ namespace Test.epubConvert
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
-		public void ExportDictionaryCssFileComparisonTest()
-		{
-			// clean out old files
-			CleanOutputDirectory();
-			if (!Directory.Exists(FileOutput("ExportDictionary")))
-				Directory.CreateDirectory(FileOutput("ExportDictionary"));
-
-			const string XhtmlName = "main.xhtml";
-			const string CssName = "main.css";
-			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
-			File.Copy(FileInput("FlexRev.xhtml"), FileOutput("FlexRev.xhtml"), true);
-			File.Copy(FileInput("FlexRev.css"), FileOutput("FlexRev.css"), true);
-			File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"), true);
-			projInfo.IsReversalExist = true;
-			projInfo.IsLexiconSectionExist = true;
-			projInfo.ProjectInputType = "Dictionary";
-			projInfo.DefaultRevCssFileWithPath = Common.PathCombine(_inputPath, "FlexRev.css");
-			string expCssLine = "@import \"" + Path.GetFileName(projInfo.DefaultRevCssFileWithPath) + "\";";
-			Common.FileInsertText(FileOutput("epub.css"), expCssLine);
-			Param.LoadSettings();
-			projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
-								   DateTime.Now.Date.ToShortTimeString();
-			var target = new Exportepub();
-			var actual = target.Export(projInfo);
-
-			Assert.IsTrue(actual);
-			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			ExtractzipFilesBasedOnOS(result, "main");
-			string expFileName = "ExportDictionaryCSSFileComparisonExpected";
-			if (Common.UsingMonoVM)
-			{
-				expFileName = "ExportDictionaryCSSFileComparisonExpected_Linux";
-			}
-			File.Copy(FileExpected(expFileName + ".epub"), FileOutput(expFileName + ".epub"), true);
-			result = FileOutput(expFileName + ".epub");
-			ExtractzipFilesBasedOnOS(result, expFileName);
-
-			if (Common.UsingMonoVM)
-			{
-				TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput(expFileName + "/OEBPS/book.css"), new ArrayList {
-					69,
-					86,
-					88,
-					619,
-					628,
-					941
-				});
-			}
-			else
-			{
-				TextFileAssert.CheckLineAreEqualEx(FileOutput("main/OEBPS/book.css"), FileOutput(expFileName + "/OEBPS/book.css"), new ArrayList {
-					93,
-					110,
-					112,
-					643,
-					652,
-					965
-				});
-			}
-
-		}
-
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public async void ExportDictionaryPassTest()
+		public void ADictionaryEpubExportPassTest()
 		{
 			// clean out old files
 			CleanOutputDirectory();
@@ -141,7 +77,7 @@ namespace Test.epubConvert
 			Assert.AreEqual(node.InnerText.Trim(), "child of Fatima"); // Fail if content is gone (TD-2814)
 		}
 
-		
+
 		public static void IsValid(string filename, string msg)
 		{
 			Assert.IsTrue(File.Exists(filename), string.Format("{0}: {1} does not exist", msg, filename));
@@ -175,7 +111,7 @@ namespace Test.epubConvert
 		{
 			return Common.PathCombine(_expectedPath, fileName);
 		}
-		
+
 		private void CleanOutputDirectory()
 		{
 			Common.DeleteDirectory(_outputPath);

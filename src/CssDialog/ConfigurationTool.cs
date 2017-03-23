@@ -1,17 +1,17 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ConfiguraionTool.cs" from='2010' to='2014' company='SIL International'>
-//      Copyright (C) 2010, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2010, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// Last reviewed: 
-// 
+// Last reviewed:
+// Last reviewed:
+//
 // <remarks>
-// Creates the Configuration Tool for Dictionary and Scripture 
+// Creates the Configuration Tool for Dictionary and Scripture
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ namespace SIL.PublishingSolution
 		#endregion
 
 		#region Public Variable
-		
+
 		public string InputType = string.Empty;
 		public string MediaType = string.Empty;
 		public string Style = string.Empty;
@@ -110,7 +110,7 @@ namespace SIL.PublishingSolution
 				entryAssemblyName = "configurationtool";
 			}
 			if (entryAssemblyName.Trim().ToLower().Contains("configurationtool"))
-			{				
+			{
 				//It will call when the Configtool from Application
 				RemoveSettingsFile();
 				if (!Common.Testing)
@@ -142,7 +142,7 @@ namespace SIL.PublishingSolution
 				}
 				Param.SetLoadType = _cToolBL.inputTypeBL;
 				tsDefault.Enabled = false;
-				
+
 			}
 		}
 
@@ -879,7 +879,7 @@ namespace SIL.PublishingSolution
 			SetUpErrorHandling();
             Param.LoadUiLanguageFontInfo();
             UpdateFontOnL10NSharp(LocalizationManager.UILanguageId);
-			
+
 			_cToolBL = new ConfigurationToolBL();
 			LoadSettings();
 			if (!IsExportOptionFromFlexOrParatext)
@@ -1086,7 +1086,7 @@ namespace SIL.PublishingSolution
         {
             string fontName = "Microsoft Sans Serif";
             string fontSize = "8";
-            
+
             Param.GetFontValues(langId, ref fontName, ref fontSize);
 
 	        //For all labels and textboxes
@@ -1144,7 +1144,7 @@ namespace SIL.PublishingSolution
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="container"></param>
         /// <returns></returns>
@@ -1432,7 +1432,7 @@ namespace SIL.PublishingSolution
 
 		private void moreHelpToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			using (Process.Start("http://pathway.sil.org/demo/accessing-online-help-and-student-guide/"))
+			using (Process.Start("http://software.sil.org/pathway/support/"))
 			{
 			}
 		}
@@ -1556,5 +1556,10 @@ namespace SIL.PublishingSolution
                 panel3.AutoScroll = true;
             }
         }
+
+		private void txtBaseFontSize_Leave(object sender, EventArgs e)
+		{
+			_cToolBL.txtBaseFontSize_LeaveBL(sender);
+		}
     }
 }

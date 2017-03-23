@@ -4,7 +4,7 @@
   <office:styles>
     <style:style style:name="dicBody" style:family="paragraph" style:parent-style-name="" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letHead_dicBody" style:family="paragraph" style:parent-style-name="dicBody">
-      <style:paragraph-properties fo:margin-left="9pt" fo:margin-right="9pt" fo:text-align="center" fo:border-bottom="solid .5pt #808080 " fo:margin-top="18pt" fo:margin-bottom="18pt" />
+      <style:paragraph-properties fo:border-bottom="solid .5pt #aa0000 " style:line-height-at-least="26pt" fo:margin-top="18pt" fo:margin-right="54pt" fo:margin-bottom="18pt" fo:margin-left="54pt" fo:text-align="center" />
       <style:text-properties fo:font-style="normal" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letter_.bzh_letHead_dicBody" style:family="text" style:parent-style-name="letHead_dicBody" style:default-outline-level="2" style:list-style-name="" style:master-page-name="">
@@ -13,19 +13,13 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="letData_dicBody" style:family="paragraph" style:parent-style-name="dicBody">
       <style:paragraph-properties fo:text-align="left" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minorentryvariant_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="minorentryvariant_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
-    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minorentryvariant_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="minorentryvariant_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="headword_minorentryvariant_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciations_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="minorentryvariant_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_pronunciations_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="pronunciations_minorentryvariant_letData_dicBody">
-      <style:text-properties fo:background-color="transparent" />
-    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_pronunciations_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="pronunciations_minorentryvariant_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="form_pronunciation_pronunciations_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="pronunciation_pronunciations_minorentryvariant_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh-fonipa_form_pronunciation_pronunciations_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="form_pronunciation_pronunciations_minorentryvariant_letData_dicBody">
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
@@ -34,23 +28,19 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="visiblevariantentryrefs_minorentryvariant_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="referencedentry_referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_referencedentry_referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="referencedentry_referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
-    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_referencedentry_referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="referencedentry_referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_referencedentry_referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="headword_referencedentry_referencedentries_visiblevariantentryref_visiblevariantentryrefs_minorentryvariant_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:color="#0000FF" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#0000FF" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="entry_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" fo:orphans="2" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:orphans="2" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="mainheadword_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciations_entry_letData_dicBody">
-      <style:text-properties fo:background-color="transparent" />
-    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciations_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="form_pronunciation_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciation_pronunciations_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh-fonipa_form_pronunciation_pronunciations_entry_letData_dicBody" style:family="text" style:parent-style-name="form_pronunciation_pronunciations_entry_letData_dicBody">
       <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
@@ -59,21 +49,17 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="minimallexreferences_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ownertypeabbreviation_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="minimallexreference_minimallexreferences_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_ownertypeabbreviation_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="ownertypeabbreviation_minimallexreference_minimallexreferences_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:background-color="transparent" fo:language="en" fo:country="US" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="minimallexreference_minimallexreferences_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
-    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#993366" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#993366" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="senses_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="400" style:font-weight-complex="400" />
-    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecontent_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mlpartofspeech_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_mlpartofspeech_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="mlpartofspeech_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_dicBody">
@@ -85,11 +71,9 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examplescontents_sense_sensecontent_senses_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:background-color="transparent" />
-    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-style="italic" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-style="italic" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationcontents_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translationcontent_translationcontents_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="translationcontents_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" />
@@ -124,37 +108,15 @@
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensenumber_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
+      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span_.bzh_mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_mainheadword_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_.stylefont-weight:bold;font-size:58%;position:relative;top:0.3em;_span_.bzh_mainheadword_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_mainheadword_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ownertypeabbreviation_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_ownertypeabbreviation_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="ownertypeabbreviation_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:background-color="transparent" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#FF6600" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#FF6600" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_.stylefont-weight:bold;font-size:58%;position:relative;top:0.3em;_span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#FF6600" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="picture_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody">
-      <style:paragraph-properties fo:margin-left="24pt" fo:text-indent="0pt" fo:float="right" fo:text-align="left" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:padding-top="1pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" style:line-height-at-least="12pt" fo:background-color="transparent" />
-    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="picture_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="captionContent_picture_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="picture_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensenumber_captionContent_picture_entry_letData_dicBody" style:family="text" style:parent-style-name="captionContent_picture_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_sensenumber_captionContent_picture_entry_letData_dicBody" style:family="text" style:parent-style-name="sensenumber_captionContent_picture_entry_letData_dicBody">
@@ -162,173 +124,7 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="caption_captionContent_picture_entry_letData_dicBody" style:family="text" style:parent-style-name="captionContent_picture_entry_letData_dicBody" />
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_caption_captionContent_picture_entry_letData_dicBody" style:family="text" style:parent-style-name="caption_captionContent_picture_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#00FF00" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody">
-      <style:text-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:paragraph-properties fo:margin-left="24pt" fo:text-indent="12pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
-      <style:text-properties text:display="block" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformtypes_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformtype_complexformtypes_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformtypes_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="reverseabbr_complexformtype_complexformtypes_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformtype_complexformtypes_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_reverseabbr_complexformtype_complexformtypes_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="reverseabbr_complexformtype_complexformtypes_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciations_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_pronunciations_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciations_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="form_pronunciation_pronunciations_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="pronunciation_pronunciations_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh-fonipa_form_pronunciation_pronunciations_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="form_pronunciation_pronunciations_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="400" style:font-weight-complex="400" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="definitionorgloss_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_definitionorgloss_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="definitionorgloss_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="example_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_example_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="example_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-style="italic" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translations_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="translation_translations_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="translations_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_translation_translations_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="translation_translations_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="semanticdomain_semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="abbreviation_semanticdomain_semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="semanticdomain_semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_abbreviation_semanticdomain_semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="abbreviation_semanticdomain_semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="name_semanticdomain_semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="semanticdomain_semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_name_semanticdomain_semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="name_semanticdomain_semanticdomains_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sensenumber_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="sharedgrammaticalinfo_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sharedgrammaticalinfo_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mlpartofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_mlpartofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="mlpartofspeech_morphosyntaxanalysis_sharedgrammaticalinfo_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span_.en_translation_translations_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_translation_translations_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.en_translation_translations_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_translation_translations_complete_examples_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ownertypeabbreviation_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_ownertypeabbreviation_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="ownertypeabbreviation_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:background-color="transparent" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#008000" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#008000" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_.stylefont-weight:bold;font-size:58%;position:relative;top:0.3em;_span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#008000" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minorentrycomplex_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="headword_minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciations_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="minorentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pronunciation_pronunciations_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="pronunciations_minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="form_pronunciation_pronunciations_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="pronunciation_pronunciations_minorentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh-fonipa_form_pronunciation_pronunciations_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="form_pronunciation_pronunciations_minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:font-family="Doulos SIL" style:font-name-complex="Doulos SIL" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="minorentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="complexformentryrefs_minorentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformtypes_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformtype_complexformtypes_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="complexformtypes_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="abbreviation_complexformtype_complexformtypes_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="complexformtype_complexformtypes_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_abbreviation_complexformtype_complexformtypes_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="abbreviation_complexformtype_complexformtypes_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="referencedentry_referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="referencedentry_referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#FF0000" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.en_definitionorgloss_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_definitionorgloss_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span_.en_definitionorgloss_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.en_definitionorgloss_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_headword_configtarget_configtargets_lexsensereference_lexsensereferences_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:color="#FF6600" fo:background-color="transparent" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ownertypeabbreviation_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_ownertypeabbreviation_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="ownertypeabbreviation_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:background-color="transparent" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="configtargets_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="configtarget_configtargets_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="configtargets_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_configtarget_configtargets_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="configtarget_configtargets_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_headword_configtarget_configtargets_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody" style:family="text" style:parent-style-name="headword_configtarget_configtargets_minimallexreference_minimallexreferences_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#33CCCC" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.en_span_.bzh_example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:background-color="transparent" fo:language="en" fo:country="US" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span_.bzh_example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_example_examplescontent_examplescontents_sense_sensecontent_senses_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-style="italic" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span_.bzh_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#FF0000" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_.stylefont-weight:bold;font-size:58%;position:relative;top:0.3em;_span_.bzh_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_headword_referencedentry_referencedentries_complexformentryref_complexformentryrefs_minorentrycomplex_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#FF0000" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_span_.bzh_headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#993366" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.bzh_.stylefont-weight:bold;font-size:58%;position:relative;top:0.3em;_span_.bzh_headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody" style:family="text" style:parent-style-name="span_.bzh_headword_configtarget_configtargets_minimallexreference_minimallexreferences_entry_letData_dicBody">
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#993366" fo:background-color="transparent" fo:language="zxx" fo:country="none" />
+      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-weight="700" style:font-weight-complex="700" fo:color="#00FF00" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
@@ -381,7 +177,7 @@
       <style:text-properties fo:font-family="Doulos SIL" />
     </style:style>
     <style:style style:name="letHead" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:margin-left="9pt" fo:margin-right="9pt" fo:text-align="center" fo:border-bottom="solid .5pt #808080 " fo:margin-top="18pt" fo:margin-bottom="18pt" />
+      <style:paragraph-properties fo:border-bottom="solid .5pt #aa0000 " style:line-height-at-least="26pt" fo:margin-top="18pt" fo:margin-right="54pt" fo:margin-bottom="18pt" fo:margin-left="54pt" fo:text-align="center" />
       <style:text-properties fo:font-style="normal" fo:font-weight="700" />
     </style:style>
     <style:style style:name="letter" style:family="paragraph" style:parent-style-name="none">
@@ -396,129 +192,83 @@
     </style:style>
     <style:style style:name="a" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
     </style:style>
     <style:style style:name="span_.bzh_mainheadword.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="span_mainheadword.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="span_.en_ownertypeabbreviation.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-style="italic" />
     </style:style>
     <style:style style:name="span_ownertypeabbreviation.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-style="italic" />
     </style:style>
     <style:style style:name="span_.bzh_headword_configtarget.-configtargets_minimallexreference.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:color="#993366" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-weight="700" fo:color="#993366" />
     </style:style>
     <style:style style:name="span_headword_configtarget.-configtargets_minimallexreference.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:color="#993366" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-weight="700" fo:color="#993366" />
     </style:style>
     <style:style style:name="sensenumber.-sensecontent.-senses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="morphosyntaxanalysis.-senses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-style="italic" />
     </style:style>
     <style:style style:name="span_.bzh_example.-senses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-style="italic" />
     </style:style>
     <style:style style:name="span_example.-senses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-style="italic" />
     </style:style>
     <style:style style:name="span_.en_ownertypeabbreviation.-senses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-style="italic" />
     </style:style>
     <style:style style:name="span_ownertypeabbreviation.-senses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-style="italic" />
     </style:style>
     <style:style style:name="span_.bzh_headword_configtarget.-configtargets_lexsensereference.-senses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:color="#FF6600" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-weight="700" fo:color="#FF6600" />
     </style:style>
     <style:style style:name="span_headword_configtarget.-configtargets_lexsensereference.-senses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:color="#FF6600" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="sensenumber.-sensecontent.-senses.-senses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="picture.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:float="right" fo:text-align="left" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="12pt" fo:padding-top="1pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-indent="-12pt" style:line-height-at-least="12pt" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-weight="700" fo:color="#FF6600" />
     </style:style>
     <style:style style:name="span_.en_caption.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:color="#00FF00" fo:background-color="transparent" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-weight="700" fo:color="#00FF00" />
     </style:style>
     <style:style style:name="span_caption.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:color="#00FF00" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="subentry.-subentries.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:background-color="transparent" />
-      <style:text-properties text:display="block" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="minorentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
-    </style:style>
-    <style:style style:name="span_.bzh_headword_minorentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="span_headword_minorentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
+      <style:paragraph-properties fo:text-indent="-36pt" fo:margin-left="45pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:text-properties fo:font-weight="700" fo:color="#00FF00" />
     </style:style>
     <style:style style:name="span_.bzh_headword_referencedentry.-minorentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
       <style:text-properties fo:font-weight="700" fo:color="#FF0000" />
     </style:style>
     <style:style style:name="span_headword_referencedentry.-minorentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
       <style:text-properties fo:font-weight="700" fo:color="#FF0000" />
     </style:style>
-    <style:style style:name="minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
-    </style:style>
-    <style:style style:name="span_.bzh_headword_minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="span_headword_minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
     <style:style style:name="span_.bzh_headword_referencedentry.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
-      <style:text-properties fo:color="#0000FF" fo:font-weight="700" />
+      <style:text-properties fo:font-weight="700" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_referencedentry.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
-      <style:text-properties fo:color="#0000FF" fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="mainentrysubentry.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="span_.bzh_headword_mainentrysubentry.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="span_headword_mainentrysubentry.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="span_.en_ownertypeabbreviation.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="span_ownertypeabbreviation.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
+      <style:text-properties fo:font-weight="700" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.bzh_headword_configtarget.-configtargets_minimallexreference.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-weight="700" fo:color="#33CCCC" />
@@ -526,219 +276,14 @@
     <style:style style:name="span_headword_configtarget.-configtargets_minimallexreference.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-weight="700" fo:color="#33CCCC" />
     </style:style>
-    <style:style style:name="sensenumber.-sensecontent.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="morphosyntaxanalysis.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="span_.bzh_example.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="span_example.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="span_.en_ownertypeabbreviation.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="span_ownertypeabbreviation.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
     <style:style style:name="span_.bzh_headword_configtarget.-configtargets_lexsensereference.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-weight="700" fo:color="#008000" />
     </style:style>
     <style:style style:name="span_headword_configtarget.-configtargets_lexsensereference.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-weight="700" fo:color="#008000" />
     </style:style>
-    <style:style style:name="sensenumber.-sensecontent.-senses.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="span_.bzh_example.-senses.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="span_example.-senses.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="span_.en_ownertypeabbreviation.-senses.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="span_ownertypeabbreviation.-senses.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="span_.bzh_headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="span_headword_configtarget.-configtargets_lexsensereference.-senses.-senses.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="subentry.-subentries.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties text:display="block" />
-    </style:style>
-    <style:style style:name="picture.-mainentrysubentries" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:float="right" fo:text-align="center" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="0pt" fo:padding-top="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-indent="0pt" style:line-height-at-least="12pt" />
-    </style:style>
-    <style:style style:name="complexentryform" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="crossref" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="crossreftype" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="grammaticalinfo" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="grammaticalinfominor" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-style="italic" />
-    </style:style>
-    <style:style style:name="grammaticalinfosub" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="headwordminor" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="headwordsub" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="headword" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="LexEntrypublishRootMinorPrimaryTargetMLHeadWordPub" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="LexEntrypublishStemMinorPrimaryTargetMLHeadWordPub" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
     <style:style style:name="letData" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="left" />
-    </style:style>
-    <style:style style:name="LexEntrypublishStemParaHomographNumber" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-size="12pt" style:text-position="super 55%" />
-    </style:style>
-    <style:style style:name="lexreftype" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="lexreftypesub" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-style="italic" fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="mainentryrefminor" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="mainentryref" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="picture" style:family="paragraph" style:parent-style-name="none" />
-    <style:style style:name="pictureRight" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:float="right" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-align="center" fo:text-indent="0pt" />
-      <style:text-properties text:display="block" />
-    </style:style>
-    <style:style style:name="revData" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="left" />
-    </style:style>
-    <style:style style:name="revEntry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
-      <style:text-properties fo:font-size="10pt" />
-    </style:style>
-    <style:style style:name="revHeader" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:border-bottom="solid .5pt #808080 " fo:margin-top="18pt" fo:margin-right="9pt" fo:margin-bottom="18pt" fo:margin-left="9pt" />
-      <style:text-properties fo:font-size="18pt" fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="revhomographnumber" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-size="100%" fo:font-weight="700" style:text-position="sub 55%" />
-    </style:style>
-    <style:style style:name="revsensenumber" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" fo:font-family="Times New Roman" />
-    </style:style>
-    <style:style style:name="sense" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="400" />
-    </style:style>
-    <style:style style:name="sensecomplexentryform" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="sensecrossref" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="sensecrossrefsub" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-      <style:text-properties fo:font-weight="700" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="sensemainentryref" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="variantrefform" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="xhomographnumber" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-size="100%" fo:font-weight="700" style:text-position="sub 55%" />
-    </style:style>
-    <style:style style:name="xlanguagetag" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties text:display="none" />
-    </style:style>
-    <style:style style:name="xsensenumber" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-weight="700" />
-    </style:style>
-    <style:style style:name="FrontMatter" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:margin-left="12pt" fo:margin-right="12pt" style:writing-mode="lr-tb" fo:text-align="left" />
-    </style:style>
-    <style:style style:name="pictureCenter" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-indent="0pt" />
-      <style:text-properties text:display="block" />
-    </style:style>
-    <style:style style:name="CoverPageTitle" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-family="Charis SIL" fo:font-size="24pt" />
-    </style:style>
-    <style:style style:name="minorentry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="left" fo:margin-left="12pt" fo:text-indent="-12pt" />
-    </style:style>
-    <style:style style:name="subentry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="left" fo:margin-left="12pt" fo:background-color="transparent" />
-      <style:text-properties text:display="block" fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="complexform" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="24pt" />
-    </style:style>
-    <style:style style:name="xitem_.tpi" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="example" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="examplesub" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="pronunciation" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="pronunciationminor" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="pronunciationsub" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="subentries" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:background-color="transparent" />
-    </style:style>
-    <style:style style:name="pictureLeft" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties text:display="block" />
-    </style:style>
-    <style:style style:name="BookReferenceDiv" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties text:display="none" />
-    </style:style>
-    <style:style style:name="hideDiv" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:break-before="page" />
-      <style:text-properties text:display="none" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
@@ -840,20 +385,20 @@
     </style:default-style>
     <style:style style:name="Standard" style:family="paragraph" style:class="text" />
     <style:style style:name="Internet_20_link" style:display-name="Internet link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="Visited_20_Internet_20_Link" style:display-name="Visited Internet Link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="block_5f_p" style:display-name="block_p" style:family="paragraph">
       <style:paragraph-properties fo:margin-left="0.1665in" fo:margin-right="0in" fo:line-height="0.2in" fo:text-align="start" style:justify-single-word="false" fo:orphans="2" fo:text-indent="-0.1665in" style:auto-text-indent="false" style:page-number="auto" fo:background-color="transparent" fo:padding-left="0in" fo:padding-right="0in" fo:padding-top="0.0138in" fo:padding-bottom="0.028in" fo:border="none" fo:keep-with-next="always" />
       <style:text-properties text:display="none" />
     </style:style>
     <style:style style:name="Header" style:family="paragraph" style:parent-style-name="headerFontStyleName" style:next-style-name="Text_20_body" style:class="text">
-      <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:padding-bottom="0.0499in" fo:keep-with-next="always" fo:border-bottom=".5 solid #808080" text:number-lines="false" text:line-number="0">
+      <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:padding-bottom="0.0499in" fo:keep-with-next="always" fo:border-bottom=".5 solid #aa0000" text:number-lines="false" text:line-number="0">
         <style:tab-stops>
-          <style:tab-stop style:position="2.401575in" style:type="center" />
-          <style:tab-stop style:position="4.80315in" style:type="right" />
+          <style:tab-stop style:position="3.4625in" style:type="center" />
+          <style:tab-stop style:position="6.925in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
       <style:text-properties style:font-name="Times New Roman" fo:font-weight="regular" fo:font-size="12pt" />
@@ -861,8 +406,8 @@
     <style:style style:name="Footer" style:family="paragraph" style:parent-style-name="Standard" style:next-style-name="Text_20_body" style:class="text">
       <style:paragraph-properties fo:margin-top="0.0005in" fo:margin-bottom="0.0835in" fo:keep-with-next="always" text:number-lines="false" text:line-number="0">
         <style:tab-stops>
-          <style:tab-stop style:position="2.401575in" style:type="center" />
-          <style:tab-stop style:position="4.80315in" style:type="right" />
+          <style:tab-stop style:position="3.4625in" style:type="center" />
+          <style:tab-stop style:position="6.925in" style:type="right" />
         </style:tab-stops>
       </style:paragraph-properties>
     </style:style>
@@ -897,19 +442,10 @@
       <style:text-properties style:font-name="Times New Roman" fo:language="zxx" fo:country="none" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style style:family="graphic" style:name="Graphics2">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
-    <style:style style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Graphics3">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
-    <style:style style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Graphics4">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
-    <style:style style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Graphics5">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
+      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
     </style:style>
     <style:style style:name="Graphics" style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
+      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" style:mirror="none" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
     </style:style>
     <style:style style:name="GraphicsI1" style:family="graphic" style:parent-style-name="Graphics1">
       <style:graphic-properties style:vertical-pos="bottom" style:vertical-rel="page-content" style:horizontal-pos="center" style:horizontal-rel="page" />
@@ -919,15 +455,6 @@
     </style:style>
     <style:style style:family="graphic" style:name="fr2" style:parent-style-name="Graphics2">
       <style:graphic-properties text:anchor-type="paragraph" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
-    <style:style style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="fr3" style:parent-style-name="Graphics3">
-      <style:graphic-properties text:anchor-type="paragraph" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
-    <style:style style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="fr4" style:parent-style-name="Graphics4">
-      <style:graphic-properties text:anchor-type="paragraph" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
-    <style:style style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="fr5" style:parent-style-name="Graphics5">
-      <style:graphic-properties text:anchor-type="paragraph" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
     </style:style>
     <style:style style:name="Frame" style:family="graphic" style:parent-style-name="Graphics" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:graphic-properties text:anchor-type="paragraph" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" style:flow-with-text="false" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
@@ -969,61 +496,61 @@
   </office:styles>
   <office:automatic-styles>
     <style:style style:name="PageHeaderFooter0" style:family="text">
-      <style:text-properties content="" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter1" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter2" style:family="text">
-      <style:text-properties content="" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter3" style:family="text">
-      <style:text-properties content="|counter(page)|" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter4" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter5" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter12" style:family="text">
-      <style:text-properties content="string(guidewordfirst)" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter13" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter14" style:family="text">
-      <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter15" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter16" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter17" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter18" style:family="text">
-      <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter19" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter20" style:family="text">
-      <style:text-properties content="string(guidewordlast)" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter21" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter22" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="PageHeaderFooter23" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties />
     </style:style>
     <style:style style:name="MP1" style:family="paragraph" style:parent-style-name="Frame_20_contents">
-      <style:paragraph-properties fo:text-align="end" style:justify-single-word="false" />
+      <style:paragraph-properties fo:text-align="start" style:justify-single-word="false" />
     </style:style>
     <style:style style:name="MT1" style:family="text">
       <style:text-properties style:font-name="Times New Roman" style:font-name-asian="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="12pt" />
@@ -1035,7 +562,7 @@
       <style:text-properties style:font-name="Charis SIL" style:font-name-asian="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
-      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="right" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="left" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false" draw:textarea-vertical-align="middle">
         <style:background-image />
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>
@@ -1046,15 +573,15 @@
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>
     </style:style>
-    <style:page-layout style:name="pm1" style:page-usage="mirrored">
-      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="56.69291pt" fo:margin-right="56.69291pt" fo:margin-bottom="56.69291pt" fo:margin-left="56.69291pt">
+    <style:page-layout style:name="pm1">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
       <style:header-style />
       <style:footer-style />
     </style:page-layout>
-    <style:page-layout style:name="pm2" style:page-usage="mirrored">
-      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="56.69291pt" fo:margin-right="56.69291pt" fo:margin-bottom="56.69291pt" fo:margin-left="56.69291pt">
+    <style:page-layout style:name="pm2">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
       </style:page-layout-properties>
       <style:header-style>
@@ -1065,7 +592,7 @@
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm3">
-      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="56.69291pt" fo:margin-right="56.69291pt" fo:margin-bottom="56.69291pt" fo:margin-left="56.69291pt">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
         <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
@@ -1073,11 +600,11 @@
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="0.0pt" svg:height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm6">
-      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="56.69291pt" fo:margin-right="56.69291pt" fo:margin-bottom="56.69291pt" fo:margin-left="56.69291pt">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
         <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
@@ -1086,38 +613,14 @@
         <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
-    <style:page-layout style:name="pm4" style:page-usage="mirrored">
-      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="56.69291pt" fo:margin-right="56.69291pt" fo:margin-bottom="56.69291pt" fo:margin-left="56.69291pt">
-        <style:background-image />
-        <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
-      </style:page-layout-properties>
-      <style:header-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:header-style>
-      <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="15.84pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:footer-style>
-    </style:page-layout>
-    <style:page-layout style:name="pm5" style:page-usage="mirrored">
-      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="56.69291pt" fo:margin-right="56.69291pt" fo:margin-bottom="56.69291pt" fo:margin-left="56.69291pt">
-        <style:background-image />
-        <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
-      </style:page-layout-properties>
-      <style:header-style>
-        <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:header-style>
-      <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="0.0pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
-      </style:footer-style>
-    </style:page-layout>
     <style:page-layout style:name="pm12">
-      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="56.69291pt" fo:margin-right="56.69291pt" fo:margin-bottom="56.69291pt" fo:margin-left="56.69291pt" />
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt" />
     </style:page-layout>
     <style:page-layout style:name="pm13">
-      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="56.69291pt" fo:margin-right="56.69291pt" fo:margin-bottom="56.69291pt" fo:margin-left="56.69291pt" />
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt" />
     </style:page-layout>
     <style:page-layout style:name="pm7">
-      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="56.69291pt" fo:margin-right="56.69291pt" fo:margin-bottom="56.69291pt" fo:margin-left="56.69291pt">
+      <style:page-layout-properties fo:page-height="792pt" fo:page-width="612pt" fo:margin-left="56.7pt" fo:margin-right="56.7pt" fo:margin-top="56.7pt" fo:margin-bottom="56.7pt">
         <style:background-image />
         <style:footnote-sep style:distance-before-sep="0.0398in" style:distance-after-sep="0.0398in" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
       </style:page-layout-properties>
@@ -1138,64 +641,7 @@
       </style:footer>
     </style:master-page>
     <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3">
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <text:span text:style-name="MT3">
-            <text:page-number text:select-page="current">4</text:page-number>
-          </text:span>
-        </text:p>
-      </style:footer>
-    </style:master-page>
-    <style:master-page style:name="Left_20_Page" style:display-name="Left Page" style:page-layout-name="pm4" style:next-style-name="Right_20_Page">
-      <style:header>
-        <text:p text:style-name="Header">
-          <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
-          </text:span>
-          <text:span text:style-name="MT2">
-            <text:variable-get text:name="RLeft_Guideword_L" office:value-type="string" />
-          </text:span>
-          <text:tab />
-          <text:tab />
-          <text:span text:style-name="MT3">
-            <text:page-number text:select-page="current">4</text:page-number>
-          </text:span>
-        </text:p>
-      </style:header>
-    </style:master-page>
-    <style:master-page style:name="Right_20_Page" style:display-name="Right Page" style:page-layout-name="pm5" style:next-style-name="Left_20_Page">
-      <style:header>
-        <text:p text:style-name="Header">
-          <text:span text:style-name="MT3">
-            <text:page-number text:select-page="current">4</text:page-number>
-          </text:span>
-          <text:tab />
-          <text:tab />
-          <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
-          </text:span>
-          <text:span text:style-name="MT2">
-            <text:variable-get text:name="RLeft_Guideword_L" office:value-type="string" />
-          </text:span>
-        </text:p>
-      </style:header>
-      <style:footer>
-        <text:p text:style-name="Footer">
-          <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="55.94291pt" fo:min-width="100pt" draw:z-index="1">
-            <draw:text-box fo:min-height="19.00pt">
-              <text:p text:style-name="MP1">
-                <text:span text:style-name="MT1">
-                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
-                </text:span>
-                <text:span text:style-name="MT2">
-                  <text:variable-get text:name="RRight_Guideword_R" office:value-type="string" />
-                </text:span>
-              </text:p>
-            </draw:text-box>
-          </draw:frame>
-        </text:p>
-      </style:footer>
-    </style:master-page>
+    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="XHTML" style:page-layout-name="pm3" />
+    <style:master-page style:name="XHTML" style:page-layout-name="pm2" style:next-style-name="XHTML" />
   </office:master-styles>
 </office:document-styles>

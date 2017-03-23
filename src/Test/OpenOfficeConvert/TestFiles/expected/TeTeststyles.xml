@@ -45,9 +45,6 @@
       <style:paragraph-properties fo:text-indent="12pt" fo:margin-left="0pt" />
       <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pictureCenter_Paragraph_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:float="center" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-indent="0pt" fo:text-align="center" />
-    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber_.x-kal_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:country="none" fo:language="zxx" fo:font-weight="700" style:font-weight-complex="700" />
     </style:style>
@@ -72,48 +69,6 @@
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Emphasis_.x-kal_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="pictureCenter_Paragraph_scrSection_scrBook_scrBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Emphasis_.x-kal_pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="pictureCaption_pictureCenter_Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="OrdinalNumberEnding_.x-kal_NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="NoteGeneralParagraph_Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="6pt" style:font-size-complex="6pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Foreign_.x-kal_Paragraph_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Line1_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-align="left" fo:text-indent="-36pt" fo:margin-left="36pt" fo:padding-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_Line1_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NameOfGod_.x-kal_Line1_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="italic" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_.x-kal_Line1_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="7.5pt" style:font-size-complex="7.5pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Emphasis_.x-kal_Line1_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="Line1_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-style="italic" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ParagraphContinuation_scrSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" />
-      <style:text-properties fo:font-family="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="10pt" style:font-size-complex="10pt" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="VerseNumber_.x-kal_ParagraphContinuation_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="7.5pt" style:font-size-complex="7.5pt" style:text-position="super 55%" fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.x-kal_ParagraphContinuation_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_scrBook_scrBody">
-      <style:text-properties fo:language="zxx" fo:country="none" />
-    </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="NameOfGod_.x-kal_ParagraphContinuation_scrSection_scrBook_scrBody" style:family="text" style:parent-style-name="ParagraphContinuation_scrSection_scrBook_scrBody">
-      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" style:font-weight-complex="700" fo:font-style="italic" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style style:name="Empty" style:family="text" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" />
     <style:style style:name="hide" style:family="paragraph" style:parent-style-name="Heading_20_9" style:class="text">
@@ -302,7 +257,7 @@
     </style:default-style>
     <style:default-style style:family="paragraph">
       <style:paragraph-properties fo:hyphenation-ladder-count="no-limit" style:text-autospace="ideograph-alpha" style:punctuation-wrap="hanging" style:line-break="strict" style:tab-stop-distance="0.4925in" style:writing-mode="page" />
-      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="10pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Times New Roman" style:font-size-asian="10pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Times New Roman" style:font-size-complex="10pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="false" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
+      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="10pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Times New Roman" style:font-size-asian="10pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Times New Roman" style:font-size-complex="10pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="true" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
     </style:default-style>
     <style:default-style style:family="table">
       <style:table-properties table:border-model="collapsing" />
@@ -312,10 +267,10 @@
     </style:default-style>
     <style:style style:name="Standard" style:family="paragraph" style:class="text" />
     <style:style style:name="Internet_20_link" style:display-name="Internet link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties fo:color="" style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="Visited_20_Internet_20_Link" style:display-name="Visited Internet Link" style:family="text">
-      <style:text-properties fo:color="#0000ff" style:text-line-through-style="none" style:text-underline-style="none" />
+      <style:text-properties fo:color="" style:text-line-through-style="none" style:text-underline-style="none" />
     </style:style>
     <style:style style:name="block_5f_p" style:display-name="block_p" style:family="paragraph">
       <style:paragraph-properties fo:margin-left="0.1665in" fo:margin-right="0in" fo:line-height="0.2in" fo:text-align="start" style:justify-single-word="false" fo:orphans="2" fo:text-indent="-0.1665in" style:auto-text-indent="false" style:page-number="auto" fo:background-color="transparent" fo:padding-left="0in" fo:padding-right="0in" fo:padding-top="0.0138in" fo:padding-bottom="0.028in" fo:border="none" fo:keep-with-next="always" />
@@ -371,9 +326,6 @@
     <style:style style:family="graphic" style:name="Graphics2">
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
     </style:style>
-    <style:style style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Graphics3">
-      <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
     <style:style style:name="Graphics" style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:graphic-properties text:anchor-type="paragraph" svg:x="0in" svg:y="0in" fo:clip="rect(0in 0in 0in 0in)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
     </style:style>
@@ -385,9 +337,6 @@
     </style:style>
     <style:style style:family="graphic" style:name="fr2" style:parent-style-name="Graphics2">
       <style:graphic-properties text:anchor-type="paragraph" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
-    </style:style>
-    <style:style style:family="graphic" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="fr3" style:parent-style-name="Graphics3">
-      <style:graphic-properties text:anchor-type="paragraph" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" style:run-through="foreground" style:wrap="dynamic" style:number-wrapped-paragraphs="1" style:wrap-contour="false" style:vertical-pos="from-top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph" style:flow-with-text="true" />
     </style:style>
     <style:style style:name="Frame" style:family="graphic" style:parent-style-name="Graphics" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
       <style:graphic-properties text:anchor-type="paragraph" style:wrap="parallel" style:number-wrapped-paragraphs="no-limit" style:wrap-contour="false" style:vertical-pos="top" style:vertical-rel="paragraph-content" style:horizontal-pos="center" style:horizontal-rel="paragraph-content" style:flow-with-text="false" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" />
@@ -493,7 +442,7 @@
       <style:text-properties style:font-name="Charis SIL" style:font-name-asian="Charis SIL" style:font-name-complex="Charis SIL" fo:font-size="9pt" />
     </style:style>
     <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Frame">
-      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="center" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false">
+      <style:graphic-properties style:vertical-pos="from-top" style:vertical-rel="page" style:horizontal-pos="center" style:horizontal-rel="paragraph" fo:background-color="transparent" style:background-transparency="100%" fo:padding="0in" fo:border="none" style:shadow="none" style:flow-with-text="false" draw:textarea-vertical-align="middle">
         <style:background-image />
         <style:columns fo:column-count="1" fo:column-gap="0in" />
       </style:graphic-properties>

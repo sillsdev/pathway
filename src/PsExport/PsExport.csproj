@@ -246,6 +246,10 @@
       <Project>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</Project>
       <Name>CssDialog</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CssParser\CssParser.csproj">
+      <Project>{b58fd9ba-1783-43f2-86d1-d79e1eacc365}</Project>
+      <Name>CssParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool.csproj">
       <Project>{448F846F-CE23-462C-BF7E-827875A36F82}</Project>
       <Name>PsTool</Name>
