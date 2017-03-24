@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<usx version="2.0">
+  <book code="MAT" style="id">- Ayta, Mag-antsi NT [sgb] - Philippines 2006 (web 2017)</book>
+  <para style="h">Mateo</para>
+  <para style="toc1">Ya Mangêd ya Habi tungkol kan Apo Jesu-Cristo ya inhulat ni apostol Mateo</para>
+  <para style="toc2">Mateo</para>
+  <para style="toc3">MAT</para>
+  <para style="mt2">Ya Mangêd ya Habi tungkol kan Apo Jesu-Cristo ya inhulat ni apostol</para>
+  <para style="mt1">Mateo</para>
+  <chapter number="1" style="c" />
+  <para style="p">
+    <verse number="1" style="v" />Daygên tamon alimbawa hi apo Abraham. Habaytsi ya impahulat ni Apo Namalyari ya tungkol kana, “Naniwala hi apo Abraham ha hinabi ni Apo Namalyari, kabay intad ya ni Apo Namalyari hên ayn kasalanan.”<note caller="+" style="x"><char style="xo" closed="false">3:6 </char><char style="xt" closed="false">Genesis 15:6</char></note> “Gawan kamo bansa.”<note caller="+" style="x"><char style="xo" closed="false">3:8 </char><char style="xt" closed="false">Genesis 12:3b; 18:18; haka 22:18</char></note> ‘Bat la kon kinahêmêkan.’”<note caller="+" style="x"><char style="xo" closed="false">15:25 </char><char style="xt" closed="false">Awit 35:19; haka Awit 69:4</char></note> ay miligtas.<note caller="+" style="x"><char style="xo" closed="false">11:7 </char><char style="xt" closed="false">Genesis 6:9; angga ha 8:22</char></note> habaytoy anlugurên la.<note caller="+" style="x"><char style="xo" closed="false">11:35 </char><char style="xt" closed="false">1 Hari 17:19-24; haka 2 Hari 4:18-37</char></note></para>
+</usx>

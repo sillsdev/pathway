@@ -1001,18 +1001,41 @@
                     </xsl:call-template>
                 </xsl:if>
             </xsl:when>
-            <!-- book name is a digit followed by a space and then the rest of book abbr -->
-            <xsl:when test="contains(substring-after($ref, concat($refAbbr, ' ')), ' ')">
-                <xsl:call-template name="ReferenceFindBook">
-                    <xsl:with-param name="book" select="$book"/>
-                    <xsl:with-param name="chap" select="$chap"/>
-                    <xsl:with-param name="ref" select="$ref"/>
-                    <xsl:with-param name="refsLeft" select="$refsLeft"/>
-                    <xsl:with-param name="verseListLeft" select="$verseListLeft"/>
-                    <xsl:with-param name="bookSoFar" select="concat($refAbbr, ' ')"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
+        	<xsl:when test="contains($refMaterial, $refAbbr)">
+        		<xsl:value-of select="$refAbbr"/>
+        		<xsl:text> </xsl:text>
+        		<xsl:call-template name="ReferenceFindBook">
+        			<xsl:with-param name="ref" select="normalize-space(substring-after($ref, $refAbbr))"/>
+        			<xsl:with-param name="book" select="$book"/>
+        			<xsl:with-param name="chap" select="$chap"/>
+        			<xsl:with-param name="verseListLeft" select="$verseListLeft"/>
+        			<xsl:with-param name="refsLeft" select="$refsLeft"/>
+        			<xsl:with-param name="bookSoFar" select="$bookSoFar"/>
+        		</xsl:call-template>
+        	</xsl:when>
+        	<!-- book name is a digit followed by a space and then the rest of book abbr -->
+        	<xsl:when test="contains(substring-after($ref, concat($refAbbr, ' ')), ' ')">
+        		<xsl:call-template name="ReferenceFindBook">
+        			<xsl:with-param name="book" select="$book"/>
+        			<xsl:with-param name="chap" select="$chap"/>
+        			<xsl:with-param name="ref" select="$ref"/>
+        			<xsl:with-param name="refsLeft" select="$refsLeft"/>
+        			<xsl:with-param name="verseListLeft" select="$verseListLeft"/>
+        			<xsl:with-param name="bookSoFar" select="concat($refAbbr, ' ')"/>
+        		</xsl:call-template>
+        	</xsl:when>
+        	<xsl:when test="normalize-space($bookSoFar) != '' and contains($refMaterial, $bookSoFar)">
+        		<xsl:value-of select="$bookSoFar"/>
+        		<xsl:text> </xsl:text>
+        		<xsl:call-template name="ReferenceFindBook">
+        			<xsl:with-param name="ref" select="normalize-space(substring-after($ref, $bookSoFar))"/>
+        			<xsl:with-param name="book" select="$book"/>
+        			<xsl:with-param name="chap" select="$chap"/>
+        			<xsl:with-param name="verseListLeft" select="$verseListLeft"/>
+        			<xsl:with-param name="refsLeft" select="$refsLeft"/>
+        		</xsl:call-template>
+        	</xsl:when>
+        	<xsl:otherwise>
                 <xsl:message terminate="no">
                     <xsl:text>Book abbreviation </xsl:text>
                     <xsl:value-of select="$refAbbr"/>

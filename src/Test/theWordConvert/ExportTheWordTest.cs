@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ExportTheWordTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // TheWord Test Support
 // </remarks>
@@ -487,7 +487,14 @@ namespace Test.theWordConvert
             TestDataCase("MAT", "msbMAT.usx", 23, "<PI>“Tandai, may birhen na magabudos tapos magaanak sin lalaki na pagatawagon Emmanuel (na an gusto sabihon, ‘An Dios adi sa aton.’)”<RF q=+>Kitaa sa <a href=\"tw://bible.*?23.7.14\">Isaias 7:14</a><Rf><CM>", bookNames, ":", null, "Kitaa sa ");
         }
 
-        [Test]
+		[Test]
+		public void ExtraMaterialInsideTest()
+		{
+			var bookNames = "file://" + FileInput("sgbBookNames.xml");
+			TestDataCase("MAT", "sgbMAT.usx", 1, "<TS1><font color=teal>Ya Mangêd ya Habi tungkol kan Apo Jesu-Cristo ya inhulat ni apostol Mateo</font><Ts>Daygên tamon alimbawa hi apo Abraham. Habaytsi ya impahulat ni Apo Namalyari ya tungkol kana, “Naniwala hi apo Abraham ha hinabi ni Apo Namalyari, kabay intad ya ni Apo Namalyari hên ayn kasalanan.”<RF q=+><a href=\"tw://bible.*?1.15.6\">Genesis 15:6</a><Rf> “Gawan kamo bansa.”<RF q=+><a href=\"tw://bible.*?1.12.3b\">Genesis 12:3b</a>; <a href=\"tw://bible.*?1.18.18\">18:18</a>; haka <a href=\"tw://bible.*?1.22.18\">22:18</a><Rf> ‘Bat la kon kinahêmêkan.’”<RF q=+><a href=\"tw://bible.*?19.35.19\">Awit 35:19</a>; haka <a href=\"tw://bible.*?19.69.4\">Awit 69:4</a><Rf> ay miligtas.<RF q=+><a href=\"tw://bible.*?1.6.9\">Genesis 6:9</a>; angga ha <a href=\"tw://bible.*?1.8.22\">8:22</a><Rf> habaytoy anlugurên la.<RF q=+><a href=\"tw://bible.*?11.17.19-24\">1 Hari 17:19-24</a>; haka <a href=\"tw://bible.*?12.4.18-37\">2 Hari 4:18-37</a><Rf>", bookNames, ":", null, "haka |angga ha");
+		}
+
+		[Test]
         public void RefSingleChapterTest()
         {
             var bookNames = "file://" + FileInput("BookNames-refList.xml");
@@ -658,7 +665,7 @@ namespace Test.theWordConvert
             // Throws Win32Exception on Windows, ArgumentException on Ubuntu
             try
             {
-                //var actual = 
+                //var actual =
                 ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
             }
             catch (Win32Exception) // Windows
@@ -669,7 +676,7 @@ namespace Test.theWordConvert
             }
             //Assert.Throws(typeof (Win32Exception), delegate
             //    {
-            //        //var actual = 
+            //        //var actual =
             //        ConvertToMySword(resultName, tempTheWordCreatorPath, exportTheWordInputPath);
             //    });
             //Assert.AreEqual("<No MySword Result>", actual);
