@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
-  <UsingTask TaskName="MSBuild.ExtensionPack.UI.Dialog" AssemblyFile="..\packages\MSBuild.Extension.Pack.1.8.0\tools\net40\MSBuild.ExtensionPack.dll" />
+  <UsingTask TaskName="MSBuild.ExtensionPack.UI.Dialog" AssemblyFile="..\packages\MSBuild.Extension.Pack.1.9.0\tools\net40\MSBuild.ExtensionPack.dll" />
   <!-- Extension pack from http://msbuildextensionpack.codeplex.com/ -->
   <!-- Documentation at: http://www.msbuildextensionpack.com/help/4.0.3.0/index.html (also in extension pack) -->
   <PropertyGroup>
@@ -312,7 +312,7 @@
     <Copy SourceFiles="@(SeHelp)" DestinationFiles="@(SeHelp->'$(OutputPath)Help\Pathway_Configuration_Tool.chm')" Condition=" '$(Edition)' == 'SE' " />
     <Copy SourceFiles="@(BteStudent)" DestinationFiles="@(BteStudent->'$(OutputPath)Help\Pathway_Student_Manual.pdf')" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB'  " />
     <Copy SourceFiles="@(SeStudent)" DestinationFiles="@(SeStudent->'$(OutputPath)Help\Pathway_Student_Manual.pdf')" Condition=" '$(Edition)' == 'SE' " />
-	<Copy SourceFiles="@(DicHtml5)" DestinationFiles="@(DicHtml5->'$(OutputPath)Html5\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(DicHtml5)" DestinationFiles="@(DicHtml5->'$(OutputPath)Html5\Dictionary\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(Readme)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(License)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(Mets)" DestinationFolder="$(OutputPath)" />
@@ -333,7 +333,7 @@
     <Copy SourceFiles="@(TheWordFiles)" DestinationFiles="@(TheWordFiles->'$(OutputPath)TheWord\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(SwordFiles)" DestinationFiles="@(SwordFiles->'$(OutputPath)Sword\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' == 'BTE' and $(OS) != 'Linux'" />
     <Copy SourceFiles="@(InDesignFiles)" DestinationFiles="@(InDesignFiles->'$(OutputPath)InDesignFiles\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Edition)' != 'EPUB'" />
-	<Copy SourceFiles="@(DocConverter)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(DocConverter)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(AllTransform)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(BteTransform)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'BTE' " />
     <Copy SourceFiles="@(WordpressFiles)" DestinationFiles="@(WordpressFiles->'$(OutputPath)Wordpress\%(RecursiveDir)%(Filename)%(Extension)')" Condition=" '$(Status)' == 'Testing' " />
@@ -360,7 +360,7 @@
     <SeHelp Include="Help\Pathway_Configuration_Tool_SE.chm" />
     <BteStudent Include="Training\Pathway_Student_Manual_BTE.pdf" />
     <SeStudent Include="Training\Pathway_Student_Manual_SE.pdf" />
-	<DicHtml5 Include="Html5\Dictionary\**\*.*" />
+    <DicHtml5 Include="Html5\Dictionary\**\*.*" />
     <License Include="..\Installer\License.rtf" />
     <Readme Include="Readme\ReadMePw.rtf" />
     <Mets Include="mets.xml" />
@@ -382,7 +382,7 @@
     <SwordFiles Include="Sword\**\*.*" />
     <InDesignFiles Include="InDesignFiles\**\*.*" />
     <LiftFiles Include="LiftSupport\**\*.*" />
-	<DocConverter Include="..\src\CssSimpler\FlexXhtmlToDoc.bat" />
+    <DocConverter Include="..\src\CssSimpler\FlexXhtmlToDoc.bat" />
     <AllTransform Include="AddBidi.xsl" />
     <AllTransform Include="ConvertUSXtoOSIS.xsl" />
     <AllTransform Include="addDicTocHeads.xsl" />
@@ -478,11 +478,11 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" />
+  <Import Project="..\packages\MSBuild.Extension.Pack.1.9.0\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\packages\MSBuild.Extension.Pack.1.9.0\build\net40\MSBuild.Extension.Pack.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Extension.Pack.1.9.0\build\net40\MSBuild.Extension.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Extension.Pack.1.9.0\build\net40\MSBuild.Extension.Pack.targets'))" />
   </Target>
 </Project>

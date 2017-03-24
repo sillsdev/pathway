@@ -255,9 +255,9 @@
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Prince, Version=1.0.5259.35182, Culture=neutral, PublicKeyToken=8d9b0a8b53aaa3c7">
-      <HintPath>..\..\packages\PrinceXML.10.7\lib\net20\Prince.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Prince, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\PrinceXML.11.0.0\lib\net40\Prince.dll</HintPath>
     </Reference>
     <Reference Include="SIL.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

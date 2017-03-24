@@ -224,8 +224,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Prince, Version=1.0.5259.35182, Culture=neutral, PublicKeyToken=8d9b0a8b53aaa3c7">
-      <HintPath>..\..\packages\PrinceXML.10.7\lib\net20\Prince.dll</HintPath>
+    <Reference Include="Prince, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PrinceXML.11.0.0\lib\net40\Prince.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
