@@ -2006,4 +2006,11 @@
   <File Path="Preprocessing\Dictionary\Remove Invalid Letter Dividers.xsl" ComponentGuid="56CD1810-0836-43A6-ABD7-0E1C85FE7036" />
   <File Path="Preprocessing\Dictionary\Reset Columns using letter headers.xsl" ComponentGuid="54291D4D-064B-48ED-B3F2-D4D540FB2CD9" />
   <File Path="FlexXhtmlToDoc.bat" ComponentGuid="20CD33E1-A15B-47F8-871D-0DE1C13D1C89" />
+  <File Path="Export\BuildStep.exe" ComponentGuid="A9E601B7-9843-4375-A9C0-CB634675F16A" />
+  <File Path="Export\BuildStep.pdb" ComponentGuid="A969E72F-F942-4CAF-ABEC-638F01E9411B" />
+  <File Path="Export\NMock2.dll" ComponentGuid="1F631112-D273-43A8-82D6-BF1D740BFBFD" />
+  <File Path="Export\nunit.framework.dll" ComponentGuid="769F6013-83C3-4A02-89F9-5A573041E51C" />
+  <File Path="Export\Test.dll" ComponentGuid="C4F0CAED-64B1-48D9-A3DA-A843409190AC" />
+  <File Path="Export\Test.dll.config" ComponentGuid="37612F28-6D14-465F-9AE5-527C5A598D3F" />
+  <File Path="Export\Test.pdb" ComponentGuid="DA762EB4-0332-450B-BF3D-DBC50ED4CA17" />
 </FileLibrary>
