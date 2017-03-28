@@ -96,11 +96,6 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "InstallerXeLaTeX", "Install
 		{168871A6-2191-4E4A-85E1-E2BB8592265E} = {168871A6-2191-4E4A-85E1-E2BB8592265E}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D3FEB5E9-31D7-4EC8-9160-6EFAF8B44C8C}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsTool4", "src\PsTool\PsTool4.csproj", "{422C5127-260D-4F16-B476-33AA38DBF919}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CssParser4", "src\CssParser\CssParser4.csproj", "{EB7EB8FE-6414-4C53-B5E6-54352EE25364}"

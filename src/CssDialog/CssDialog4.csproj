@@ -31,6 +31,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -212,14 +214,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DesktopAnalytics">
-      <HintPath>..\..\packages\DesktopAnalytics.1.2.3\lib\net40\DesktopAnalytics.dll</HintPath>
+    <Reference Include="Analytics.NET, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Analytics.2.0.3\lib\Analytics.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CssParser, Version=1.15.7.5693, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\CssParser.dll</HintPath>
+    </Reference>
+    <Reference Include="DesktopAnalytics, Version=1.2.4.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DesktopAnalytics.1.2.4.5\lib\net40\DesktopAnalytics.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="L10NSharp">
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Prince">
-      <HintPath>..\..\packages\PrinceXML.10.7\lib\net20\Prince.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prince, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PrinceXML.11.0.0\lib\net40\Prince.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PsTool, Version=1.15.7.5693, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\PsTool.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -230,12 +250,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="SIL.Core">
       <HintPath>..\..\lib\SIL.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CssParser">
-      <HintPath>..\..\output\Release\CssParser.dll</HintPath>
-    </Reference>
-    <Reference Include="PsTool">
-      <HintPath>..\..\output\Release\PsTool.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -389,6 +403,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>

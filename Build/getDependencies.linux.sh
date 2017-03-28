@@ -93,4 +93,5 @@ copy_auto http://build.palaso.org/guestAuth/repository/download/bt324/pathway.tc
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt324/pathway.tcbuildtag/SIL.Windows.Forms.dll ../lib/SIL.Windows.Forms.dll
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt324/pathway.tcbuildtag/SIL.Windows.Forms.dll.config ../lib/SIL.Windows.Forms.dll.config
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt324/pathway.tcbuildtag/SIL.WritingSystems.dll ../lib/SIL.WritingSystems.dll
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt324/pathway.tcbuildtag/Palaso.BuildTasks.dll ../lib/Palaso.BuildTasks.dll
 # End of script

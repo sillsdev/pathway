@@ -1,16 +1,16 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="XeLaTexInstallation.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ namespace SIL.Tool
         /// <summary>
         /// Gets the directory for the XeLaTeX software for the XeTeX back end.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// name or the directory or string.Empty if the directory name isn't in the registry.
         /// </returns>
@@ -64,7 +64,7 @@ namespace SIL.Tool
         /// <summary>
         /// Check the XeLaTeX version.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// True if the installed version of XeLaTeX matches the expected version of Pathway.
         /// </returns>
@@ -75,7 +75,7 @@ namespace SIL.Tool
             if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
                                                   "PathwayXeLaTeX", "XeLaTexVer", out regObj))
             {
-				return (string)regObj == "1.13.3";
+				return (string)regObj == "1.15.4";
             }
             return false;
         }
@@ -84,7 +84,7 @@ namespace SIL.Tool
         /// <summary>
         /// Gets the directory for the XeLaTeX software for the XeTeX back end.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// name or the directory or string.Empty if the directory name isn't in the registry.
         /// </returns>
@@ -98,7 +98,7 @@ namespace SIL.Tool
         /// <summary>
         /// Gets the directory for the XeLaTeX software for the XeTeX back end.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// name or the directory or string.Empty if the directory name isn't in the registry.
         /// </returns>

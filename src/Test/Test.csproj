@@ -36,6 +36,8 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <TeamCityRootDir>$(teamcity_build_checkoutDir)</TeamCityRootDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -1318,7 +1320,7 @@
     <Content Include="OpenOfficeConvert\TestFiles\tvf.py" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
          -->
   <Target Name="TeamCityTest" DependsOnTargets="Build">

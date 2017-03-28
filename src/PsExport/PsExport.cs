@@ -27,6 +27,7 @@ using L10NSharp;
 using SilTools;
 using SIL.Tool;
 using SIL.Tool.Localization;
+using System.Collections;
 
 namespace SIL.PublishingSolution
 {
@@ -85,6 +86,9 @@ namespace SIL.PublishingSolution
 			Debug.Assert(DataType == "Scripture" || DataType == "Dictionary", "DataType must be Scripture or Dictionary");
 			Debug.Assert(outFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "full path for output must be given");
 			string caption = LocalizationManager.GetString("PsExport.ExportClick.Caption", "Pathway Export", "");
+
+			Common.FindParatextProject();
+			Common.GetFontFeatures();
 
 			#endregion
 
@@ -262,9 +266,7 @@ namespace SIL.PublishingSolution
 				fontName = "Charis SIL";
 				fontSize = "24";
 			}
-
-			string fontNameFontSize = "{font-family: \"" + fontName + "\"; \r\n " + "font-size: " + fontSize + "pt; \r\n }";
-
+			string fontNameFontSize = "{font-family: \"" + fontName + "\"; \r\n " + "font-size: " + fontSize + "pt; \r\n " + Common.FontFeaturesSettingsString + "}";
 			cssFileInsert = "\r\n.BookTitle " + fontNameFontSize + "\r\n.BookCreator" + fontNameFontSize + "\r\n.BookPublisher" +
 			                fontNameFontSize
 			                + "\r\n.BookDescription" + fontNameFontSize + "\r\n.BookCopyrightHolder" + fontNameFontSize;
@@ -487,7 +489,7 @@ namespace SIL.PublishingSolution
 			try
 			{
 				StringBuilder revAddStyle = new StringBuilder();
-				StringBuilder newProperty = new StringBuilder();
+				StringBuilder newProperty = new StringBuilder();				
 				XmlDocument xdoc = Common.DeclareXMLDocument(false);
 				xdoc.Load(inputXhtmlFileName);
 				XmlNodeList fontList = xdoc.GetElementsByTagName("meta");
@@ -499,17 +501,17 @@ namespace SIL.PublishingSolution
 					{
 						string fntName = fontName.Attributes["name"].Value;
 						string fntContent = fontName.Attributes["content"].Value;
-						newProperty.AppendLine("div[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
-						newProperty.AppendLine("span[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
+						newProperty.AppendLine("div[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
+						newProperty.AppendLine("span[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
 
-						revAddStyle.AppendLine("div[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
-						revAddStyle.AppendLine("span[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
+						revAddStyle.AppendLine("div[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
+						revAddStyle.AppendLine("span[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
 					}
 					else if (!isFLEX && fontName.OuterXml.IndexOf("name=\"fontName\"") > 0)
 					{
 						string fntContent = fontName.Attributes["content"].Value;
-						newProperty.AppendLine("div{ font-family: \"" + fntContent + "\";}");
-						newProperty.AppendLine("span{ font-family: \"" + fntContent + "\";}");
+						newProperty.AppendLine("div{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
+						newProperty.AppendLine("span{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
 					}
 				}
 				Common.FileInsertText(inputCssFileName, newProperty.ToString());

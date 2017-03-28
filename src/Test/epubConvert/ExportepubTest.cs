@@ -268,20 +268,20 @@ namespace Test.epubConvert
 			XmlNode node = resultDoc.SelectSingleNode(xPath, nsmgr);
 			if (!Common.UsingMonoVM)
 			{
-				Assert.AreEqual(node.InnerText.Trim(), "[b] Bahasa Yunani bilang “Badiri di Allah pung muka”. Ini bisa pung arti ‘Karja par Tuhan’. Mar bisa pung arti lai ‘Badiri di Allah pung muka’. Malekat yang badiri di Allah pung muka pung kuasa labe dari malekat laeng. Jadi, Gabriel bukang malekat biasa.");
+				Assert.AreEqual("[b]Bahasa Yunani bilang “Badiri di Allah pung muka”. Ini bisa pung arti ‘Karja par Tuhan’. Mar bisa pung arti lai ‘Badiri di Allah pung muka’. Malekat yang badiri di Allah pung muka pung kuasa labe dari malekat laeng. Jadi, Gabriel bukang malekat biasa.", node.InnerText.Trim());
 			}
 			//1.27
 			xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-7']";
 			node = resultDoc.SelectSingleNode(xPath, nsmgr);
-			Assert.AreEqual(node.InnerText.Trim(), "1.27  Mat. 1:18");
+			Assert.AreEqual("1.27 1.27 Mat. 1:18", node.InnerText.Trim());
 			//1.32-33
 			xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-9']";
 			node = resultDoc.SelectSingleNode(xPath, nsmgr);
-			Assert.AreEqual(node.InnerText.Trim(), "1.32-33  2Sam. 7:12, 13, 16; Yes. 9:6");
+			Assert.AreEqual("1.32-33 1.32-33 2Sam. 7:12, 13, 16; Yes. 9:6", node.InnerText.Trim());
 			//2.41
 			xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-22']";
 			node = resultDoc.SelectSingleNode(xPath, nsmgr);
-			Assert.AreEqual(node.InnerText.Trim(), "[c] 2.41 Hari basar Paska Yahudi tu, orang Yahudi inga waktu dong pung tete nene moyang kaluar dari negara Mesir. Dolo dong jadi orang suru-suru di tampa tu, mar Allah kasi kaluar dong la bawa dong ka tana yang Antua su janji par dong.");
+			Assert.AreEqual("[c]2.41 Hari basar Paska Yahudi tu, orang Yahudi inga waktu dong pung tete nene moyang kaluar dari negara Mesir. Dolo dong jadi orang suru-suru di tampa tu, mar Allah kasi kaluar dong la bawa dong ka tana yang Antua su janji par dong.", node.InnerText.Trim());
 		}
 
 		[Test]
@@ -541,7 +541,7 @@ namespace Test.epubConvert
 			if (target.EmbedAllFonts(langArray, FileOutput("")))
 			{
 				target.ReferenceFonts(FileOutput(CssName), projInfo);
-				TextFileAssert.AreEqualEx(FileOutput(CssName), FileExpected(CssName), new ArrayList { 4, 8, 12});
+				TextFileAssert.AreEqualEx(FileExpected(CssName), FileOutput(CssName), new ArrayList { 4, 8, 12});
 			}
 		}
 
@@ -834,7 +834,7 @@ namespace Test.epubConvert
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
-		public void ScriptureaaiProjectExportTest()
+		public void aaiScriptureProjectExportTest()
 		{
 			CleanOutputDirectory();
 			string inputDataFolder = Common.PathCombine(_inputPath, "aaiScriptureExportTest");

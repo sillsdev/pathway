@@ -10,11 +10,11 @@
 		<Version>3.0</Version>
 	</PropertyGroup>
 
-	<UsingTask TaskName="StampAssemblies" AssemblyFile="$(RootDir)/$(BuilTaskDir)/Palaso.BuildTasks.dll" />
-	<UsingTask TaskName="Archive" AssemblyFile="$(RootDir)/$(BuilTaskDir)/Palaso.BuildTasks.dll" />
-	<UsingTask TaskName="Split" AssemblyFile="$(RootDir)/$(BuilTaskDir)/Palaso.BuildTasks.dll" />
-	<UsingTask TaskName="FileUpdate" AssemblyFile="$(RootDir)/$(BuilTaskDir)/Palaso.BuildTasks.dll" />
-	<UsingTask TaskName="NUnit" AssemblyFile="$(RootDir)/$(BuilTaskDir)/Palaso.BuildTasks.dll" />
+	<UsingTask TaskName="StampAssemblies" AssemblyFile="$(RootDir)/lib/Palaso.BuildTasks.dll" />
+	<UsingTask TaskName="Archive" AssemblyFile="$(RootDir)/lib/Palaso.BuildTasks.dll" />
+	<UsingTask TaskName="Split" AssemblyFile="$(RootDir)/lib/Palaso.BuildTasks.dll" />
+	<UsingTask TaskName="FileUpdate" AssemblyFile="$(RootDir)/lib/Palaso.BuildTasks.dll" />
+	<UsingTask TaskName="NUnit" AssemblyFile="$(RootDir)/lib/Palaso.BuildTasks.dll" />
 	<UsingTask TaskName="NUnitTeamCity"
 		AssemblyFile="$(teamcity_dotnet_nunitlauncher_msbuild_task)"
 		Condition=" '$(teamcity_version)' != '' And '$(OS)'=='Windows_NT'"/>

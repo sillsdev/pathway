@@ -211,14 +211,14 @@ namespace SIL.Tool
         private void ReplaceHyperlinkHref(XmlReader r)
         {
             if (r.Name != "href") return;
-            if (!r.Value.StartsWith("#") || !r.Value.Contains("-")) return;
+            if (!r.Value.StartsWith("#") || !r.Value.Contains("-") || r.Value.Length < 20) return;
             ReplaceAttrValue = r.Value.Substring(0, r.Value.IndexOf('-'));
         }
 
         private void ReplaceHyperlinkId(XmlReader r)
         {
             if (r.Name != "id" && r.Name != "entryguid") return;
-            if (!r.Value.Contains("-")) return;
+            if (!r.Value.Contains("-") || r.Value.Length < 20) return;
             ReplaceAttrValue = r.Value.Substring(0, r.Value.IndexOf('-'));
             if (r.Name != "id") return;
             IdLinks[ReplaceAttrValue] = Path.GetFileName(CurrentFileName());
