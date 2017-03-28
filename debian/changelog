@@ -1,4 +1,4 @@
-pathway (1.15.8.5891)  experimental; urgency=high
+pathway (1.15.8.5715)  experimental; urgency=high
 
   * Common:TD-4758 Enable hyphenation for Scripture.
   * Common:TD-4780 Spaces in username leads to problems
