@@ -142,8 +142,8 @@ namespace Test.theWordConvert
         [Test]
         public void LoadXsltParametersTest()
         {
-            ParatextData = @"C:\";
-            Ssf = FileInput("MP1.ssf");
+			Common.ParatextData = @"C:\";
+			Common.Ssf = FileInput("MP1.ssf");
             var actual = LoadXsltParameters(_inputPath);
             Assert.AreEqual(":", actual.GetParam("refPunc", ""));
             Assert.AreEqual(FileUrlPrefix + Common.PathCombine(@"C:\MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
@@ -777,7 +777,7 @@ namespace Test.theWordConvert
             var vrsPath = PathPart.Bin(Environment.CurrentDirectory, @"/../theWordConvert");
             VrsName = Path.Combine(vrsPath, "vrs.xml");
             projInfo.DefaultXhtmlFileWithPath = Path.Combine(_outputPath, "name.xhtml"); //Directory name used as output folder
-            Ssf = Path.Combine(_inputPath, "nkoNT.ssf"); // Ssf file used for Paratext settings
+            Common.Ssf = Path.Combine(_inputPath, "nkoNT.ssf"); // Ssf file used for Paratext settings
             const string usxFolder = "USX"; //USX folder must be present for input
             FolderTree.Copy(Path.Combine(_inputPath, usxFolder), Path.Combine(_outputPath, usxFolder));
             var target = new ExportTheWord();
@@ -807,8 +807,8 @@ namespace Test.theWordConvert
         [Test]
         public void FindParatextProjectTest()
         {
-            FindParatextProject();
-            Assert.AreEqual(0, Ssf.Length); // Since we are not running from Paratext or PathwayB
+            Common.FindParatextProject();
+            Assert.AreEqual(0, Common.Ssf.Length); // Since we are not running from Paratext or PathwayB
         }
 
         /// <summary>
@@ -817,8 +817,8 @@ namespace Test.theWordConvert
         [Test]
         public void GetBookNamesUriTest()
         {
-            ParatextData = null;
-            Ssf = "";
+			Common.ParatextData = null;
+			Common.Ssf = "";
             string expected = FileUrlPrefix + Path.Combine(_inputPath, Path.Combine("USX", "BookNames.xml"));
             string actual = GetBookNamesUri(_inputPath);
             Assert.AreEqual(expected, actual);
@@ -844,11 +844,11 @@ namespace Test.theWordConvert
         public void GetRtlParamTest()
         {
             const XsltArgumentList xsltArgs = null;
-            Ssf = Path.Combine(_inputPath, "nkoNT.ssf");
+            Common.Ssf = Path.Combine(_inputPath, "nkoNT.ssf");
             // This test uses English.LDS in the input testfiles.
             GetRtlParam(xsltArgs);
             Assert.False(R2L);
-            Ssf = string.Empty;
+            Common.Ssf = string.Empty;
         }
 
         /// <summary>
@@ -860,7 +860,8 @@ namespace Test.theWordConvert
             const string xpath = "//EthnologueCode";
             const string def = "zxx"; // Default
             const string expected = "zxx";
-            string actual = GetSsfValue(xpath, def);
+			string ssf = string.Empty;
+			string actual = Common.GetSsfValue(xpath, def);
             Assert.AreEqual(expected, actual);
         }
 
@@ -871,7 +872,8 @@ namespace Test.theWordConvert
         public void GetSsfValueTest1()
         {
             const string xpath = "//Name";
-            string actual = GetSsfValue(xpath);
+			string ssf = string.Empty;
+			string actual = Common.GetSsfValue(xpath);
             Assert.Null(actual);
         }
 

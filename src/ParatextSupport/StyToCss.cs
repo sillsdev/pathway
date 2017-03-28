@@ -402,6 +402,8 @@ namespace SIL.PublishingSolution
             var languageCode = "";
             var languageDirection = "ltr";
             var textAlign = "left";
+			Common.FindParatextProject();
+			Common.GetFontFeatures();
             if (languageCodeNode != null)
             {
                 languageCode = languageCodeNode.InnerText;
@@ -436,6 +438,10 @@ namespace SIL.PublishingSolution
                     cssFile.Write(" font-family: \"{0}\";", fontFamily);
                 }
                 cssFile.Write(" font-size: {0}pt;", fontSize);
+				if (Common.FontFeaturesSettingsString != string.Empty)
+				{
+					cssFile.Write(Common.FontFeaturesSettingsString);
+				}
                 if (languageDirection != "ltr")
                 {
                     cssFile.Write(" direction: {0}; text-align: {1};", languageDirection, textAlign);
@@ -447,6 +453,10 @@ namespace SIL.PublishingSolution
                 {
                     cssFile.Write(" font-family: \"{0}\";", fontFamily);
                 }
+				if (Common.FontFeaturesSettingsString != string.Empty)
+				{
+					cssFile.Write(Common.FontFeaturesSettingsString);
+				}
                 cssFile.WriteLine("}");
                 cssFile.WriteLine();
             }

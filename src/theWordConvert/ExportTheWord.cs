@@ -35,8 +35,6 @@ namespace SIL.PublishingSolution
     public class ExportTheWord : IExportProcess
     {
         protected static int Verbosity;
-        protected static object ParatextData;
-        protected static string Ssf;
         protected static bool R2L;
         protected static string VrsName = "vrs.xml";
         private static object _theWorProgPath;
@@ -115,7 +113,7 @@ namespace SIL.PublishingSolution
                 LoadMetadata();
                 inProcess.PerformStep();
 
-                FindParatextProject();
+				Common.FindParatextProject();
                 inProcess.PerformStep();
 
                 CreateUsxIfNecessary(projInfo.DefaultXhtmlFileWithPath);
@@ -128,7 +126,7 @@ namespace SIL.PublishingSolution
                 CollectTestamentBooks(otBooks, ntBooks);
                 inProcess.PerformStep();
 
-                var output = GetSsfValue("//EthnologueCode", _defaultLanguage);
+                var output = Common.GetSsfValue("//EthnologueCode", _defaultLanguage);
                 var fullName = UsxDir(exportTheWordInputPath);
                 LogStatus("Processing: {0}", fullName);
                 xsltArgs.XsltMessageEncountered += XsltMessage;
@@ -190,7 +188,7 @@ namespace SIL.PublishingSolution
                 Cursor.Current = myCursor;
                 ReportFailure(ex);
             }
-            Ssf = string.Empty;
+            Common.Ssf = string.Empty;
             return success;
         }
 
@@ -559,33 +557,11 @@ namespace SIL.PublishingSolution
             return otFlag;
         }
 
-        protected static void FindParatextProject()
-        {
-            if (!string.IsNullOrEmpty(Ssf)) return;
-            RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out ParatextData);
-            var sh = new SettingsHelper(Param.DatabaseName);
-            Ssf = sh.GetSettingsFilename();
-        }
-
-        protected static string GetSsfValue(string xpath, string def)
-        {
-            var node = Common.GetXmlNode(Ssf, xpath);
-            return (node != null)? node.InnerText : def;
-        }
-
-        protected static string GetSsfValue(string xpath)
-        {
-// Default Parameters are not allowed in Team City build server.
-// ReSharper disable IntroduceOptionalParameters.Global
-            return GetSsfValue(xpath, null);
-// ReSharper restore IntroduceOptionalParameters.Global
-        }
-
-        protected static XsltArgumentList LoadXsltParameters(string path)
+		protected static XsltArgumentList LoadXsltParameters(string path)
         {
             var xsltArgs = new XsltArgumentList();
-            xsltArgs.AddParam("refPunc", "", GetSsfValue("//ChapterVerseSeparator", ":"));
-            xsltArgs.AddParam("refMaterial", "", GetSsfValue("//ReferenceExtraMaterial", ""));
+            xsltArgs.AddParam("refPunc", "", Common.GetSsfValue("//ChapterVerseSeparator", ":"));
+            xsltArgs.AddParam("refMaterial", "", Common.GetSsfValue("//ReferenceExtraMaterial", ""));
             xsltArgs.AddParam("bookNames", "", GetBookNamesUri(path));
             xsltArgs.AddParam("glossary", "", GetGlossaryUri(path));
             xsltArgs.AddParam("versification", "", VrsName);
@@ -630,9 +606,9 @@ namespace SIL.PublishingSolution
         protected static void GetRtlParam(XsltArgumentList xsltArgs)
         {
             R2L = false;
-            if (string.IsNullOrEmpty(Ssf)) return;
-            var language = GetSsfValue("//Language", "English");
-            var languagePath = Path.GetDirectoryName(Ssf);
+            if (string.IsNullOrEmpty(Common.Ssf)) return;
+			var language = Common.GetSsfValue("//Language", "English");
+			var languagePath = Path.GetDirectoryName(Common.Ssf);
             var languageFile = Common.PathCombine(languagePath, language);
             if (File.Exists(languageFile + ".LDS"))
             {
@@ -662,11 +638,11 @@ namespace SIL.PublishingSolution
 
         protected static string GetBookNamesUri(string exportTheWordInputPath)
         {
-            if (string.IsNullOrEmpty(Ssf))
+            if (string.IsNullOrEmpty(Common.Ssf))
             {
                 return FileUrlPrefix + Common.PathCombine(UsxDir(exportTheWordInputPath), "BookNames.xml");
             }
-            var myProj = Common.PathCombine((string) ParatextData, GetSsfValue("//Name"));
+			var myProj = Common.PathCombine((string)Common.ParatextData, Common.GetSsfValue("//Name"));
             return FileUrlPrefix + Common.PathCombine(myProj, "BookNames.xml");
         }
 
@@ -749,17 +725,17 @@ about={2} \
 <p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 4.0</i>\
 <p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/4.0</i></font>\
 ";
-            var langCode = GetSsfValue("//EthnologueCode", _defaultLanguage);
+			var langCode = Common.GetSsfValue("//EthnologueCode", _defaultLanguage);
             const bool isConfigurationTool = false;
             var shortTitle = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
-            var fullTitle = GetSsfValue("//FullName", shortTitle);
+			var fullTitle = Common.GetSsfValue("//FullName", shortTitle);
             var description = Param.GetMetadataValue("Description");
             var copyright = Common.UpdateCopyrightYear(Param.GetMetadataValue("Copyright Holder"));
             var createDate = DateTime.Now.ToString("yyyy.M.d");
             var publisher = Param.GetMetadataValue("Publisher");
             var publishDate = createDate;
             var creator = Param.GetMetadataValue("Creator");
-            var font = GetSsfValue("//DefaultFont", "Charis SIL");
+			var font = Common.GetSsfValue("//DefaultFont", "Charis SIL");
             var myFormat = GetFormat("theWordFormat.txt", format);
             if (R2L)
             {

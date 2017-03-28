@@ -277,6 +277,11 @@ namespace SIL.Tool
 		public static bool Testing; // To differentiate between Nunit test or from Application(UI or Flex).
 		public static bool ShowMessage; // Show or Suppress MessageBox in Creating Zip Folder.
 
+		public static object ParatextData;
+		public static string Ssf;
+		public static string FontFeaturesString;
+		public static string FontFeaturesSettingsString;
+
 		#endregion
 
 		#region AlwaysPreProcessingXsltFiles
@@ -2651,8 +2656,6 @@ namespace SIL.Tool
 		/// <remarks>See: http://stackoverflow.com/questions/4683142/c-sharp-waiting-for-a-copy-operation-to-complete</remarks>
 		public static void FileInsertText(string sourceFile, string textToInsert)
 		{
-			if (string.IsNullOrEmpty(textToInsert)) return;
-
 			string cssFileName = Path.GetFileName(sourceFile);
 
 			if (textToInsert.IndexOf(cssFileName) > 0)
@@ -3676,14 +3679,14 @@ namespace SIL.Tool
 				{
 					string fntName = fontName.Attributes["name"].Value;
 					string fntContent = fontName.Attributes["content"].Value;
-					newProperty.AppendLine("div[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
-					newProperty.AppendLine("span[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";}");
+					newProperty.AppendLine("div[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
+					newProperty.AppendLine("span[lang='" + fntName + "']{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
 				}
 				else if (!isFLEX && fontName.OuterXml.IndexOf("name=\"fontName\"") > 0)
 				{
 					string fntContent = fontName.Attributes["content"].Value;
-					newProperty.AppendLine("div{ font-family: \"" + fntContent + "\";}");
-					newProperty.AppendLine("span{ font-family: \"" + fntContent + "\";}");
+					newProperty.AppendLine("div{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
+					newProperty.AppendLine("span{ font-family: \"" + fntContent + "\";" + Common.FontFeaturesSettingsString + "}");
 				}
 			}
 			FileInsertText(inputCssFileName, newProperty.ToString());
@@ -4134,9 +4137,9 @@ namespace SIL.Tool
 				}
 				if (inputCssFileName != string.Empty)
 				{
-					newProperty.AppendLine("div[lang='zxx']{ font-family: \"" + paraTextFontName + "\";}");
-					newProperty.AppendLine("span[lang='zxx']{ font-family: \"" + paraTextFontName + "\";}");
-					newProperty.AppendLine("@page{ font-family: \"" + paraTextFontName + "\";}");
+					newProperty.AppendLine("div[lang='zxx']{ font-family: \"" + paraTextFontName + "\";" + Common.FontFeaturesSettingsString + "}");
+					newProperty.AppendLine("span[lang='zxx']{ font-family: \"" + paraTextFontName + "\";" + Common.FontFeaturesSettingsString + "}");
+					newProperty.AppendLine("@page{ font-family: \"" + paraTextFontName + "\";" + Common.FontFeaturesSettingsString + "}");
 
 					FileInsertText(inputCssFileName, newProperty.ToString());
 				}
@@ -5346,6 +5349,78 @@ namespace SIL.Tool
 				node.Attributes["value"].Value = inputType;
 			}
 			xmlDoc.Save(allUserXmlPath);
+		}
+
+		public static void FindParatextProject()
+		{
+			if (!string.IsNullOrEmpty(Ssf)) return;
+			RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out ParatextData);
+			var sh = new SettingsHelper(Param.DatabaseName);
+			Common.Ssf = sh.GetSettingsFilename();
+		}
+
+		public static string GetSsfValue(string xpath, string def)
+		{
+			var node = GetXmlNode(Ssf, xpath);
+			return (node != null) ? node.InnerText : def;
+		}
+
+		public static string GetSsfValue(string xpath)
+		{
+			// Default Parameters are not allowed in Team City build server.
+			// ReSharper disable IntroduceOptionalParameters.Global
+			return GetSsfValue(xpath, null);
+			// ReSharper restore IntroduceOptionalParameters.Global
+		}
+
+		public static void GetFontFeatures()
+		{
+			if (string.IsNullOrEmpty(Ssf)) return;
+			var language = GetSsfValue("//Language", "English");
+			var languagePath = Path.GetDirectoryName(Ssf);
+			var languageFile = PathCombine(languagePath, language);
+			if (File.Exists(languageFile + ".LDS"))
+			{
+				languageFile += ".LDS";
+			}
+			else if (File.Exists(languageFile + ".lds"))
+			{
+				languageFile += ".lds";
+			}
+			else
+			{
+				return;
+			}
+			StringBuilder fontFeatures = new StringBuilder();
+			foreach (string line in FileData.Get(languageFile).Split(new[] { '\n' }))
+			{
+				var cleanLine = line.ToLower().Trim();
+				if (cleanLine.StartsWith("fontfeaturesettings="))
+				{
+					if (cleanLine.Length > 20)
+					{
+						string[] fts = cleanLine.Substring(20).Split(',');
+						foreach (string s in fts)
+						{
+							string[] parts = s.Split('=');
+							fontFeatures.Append("\"" + parts[0] + "\" " + parts[1] + ",");
+						}
+						FontFeaturesString = fontFeatures.ToString().Trim().TrimEnd(',');
+						if (FontFeaturesString.Length > 0)
+						{
+							FontFeaturesSettingsString = "\r\n -webkit-font-feature-settings: " + FontFeaturesString + "; \r\n" +
+														" -moz-font-feature-settings: " + Common.FontFeaturesString + "; \r\n" +
+														" -ms-font-feature-settings: " + Common.FontFeaturesString + "; \r\n" +
+														" font-feature-settings: " + Common.FontFeaturesString + "; \r\n";
+						}
+						else
+						{
+							FontFeaturesSettingsString = string.Empty;
+						}
+					}
+				}
+			}
+			return;
 		}
 	}
 }
