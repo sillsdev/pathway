@@ -105,7 +105,7 @@ EndFunc
 Func GetInstaller($name)
 	Global $InstallStable, $Version
 	Local $urlPath
-	$urlPath = 'http://downloads.sil.org/Pathway/' & $Version & '/' & $name
+	$urlPath = 'http://software.sil.org/downloads/r/pathway/' & $name
 	if not FileExists($name) Then
 		;MsgBox(4096,"Status","Downloading " & $urlPath & " " & $name)
 		RunWait("wget.exe --output-document=" & $name & " " & $urlPath)
