@@ -1,4 +1,4 @@
-pathway (1.15.7.5891)  experimental; urgency=high
+pathway (1.15.8.5891)  experimental; urgency=high
 
   * Common:TD-4758 Enable hyphenation for Scripture.
   * Common:TD-4780 Spaces in username leads to problems
@@ -7,6 +7,8 @@ pathway (1.15.7.5891)  experimental; urgency=high
   * Epub/HTML5:TD-4689 Epub too much space between entries
   * Epub/HTML5:TD-4744 Epub validator error in linux
   * Epub/HTML5:TD-4784 Improve file splitting, Update TOC
+  * Epub/HTML5:Td-4791 Fix audio export for HTML5
+  * Epub/HTML5:TD-4793 HTML5 add simple search
   * Epub/HTML5:Make a separate cross-platform option for HTML5
   * General:TD-4681 Handle audio writing system export
   * General:TD-4721 Formatting via pathway is not following flex
@@ -39,6 +41,8 @@ pathway (1.15.7.5891)  experimental; urgency=high
   * LO/OO:TD-4383 The option to split files fails to produce a LibreOffice file
   * LO/OO:TD-4519 Ask about running macro 2nd time
   * LO/OO:TD-4719 Characters and colors changed
+  * Paratext:TD-4005 error of my version of Paratext is not supported
+  * Paratext:TD-4506 Font Features from Paratext
   * Paratext:TD-4512 Marker rq missing
   * Paratext:TD-4513 Use Styles from Custom sty file
   * Paratext:TD-4614 PT export with Pathway on Linux doesn't use styles from the projects sty file.
@@ -46,6 +50,8 @@ pathway (1.15.7.5891)  experimental; urgency=high
   * Paratext:TD-4763 Footnotes in rq prevent output
   * Paratext:TD-4797 remove modifications to resolver for readding ssf file.
   * Paratext:TD-4805 Paratext complains that Pathway is incompatible
+  * Parser:TD-4805 Make sure write to CSS completes and objects are released.
+  * Smart:TD-4806 Extra material in reference list
   * Stylesheet:TD-4757 Right aligned Scripture quote reference
   * Stylesheet:Apply justification to variant and complex minor entries
   * UI:TD-4045 Text merging happens when I set the Font size ‘0’ ...
