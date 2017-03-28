@@ -273,11 +273,11 @@ namespace Test.epubConvert
 			//1.27
 			xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-7']";
 			node = resultDoc.SelectSingleNode(xPath, nsmgr);
-			Assert.AreEqual("1.27 Mat. 1:18", node.InnerText.Trim());
+			Assert.AreEqual("1.27 1.27 Mat. 1:18", node.InnerText.Trim());
 			//1.32-33
 			xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-9']";
 			node = resultDoc.SelectSingleNode(xPath, nsmgr);
-			Assert.AreEqual("1.32-33 2Sam. 7:12, 13, 16; Yes. 9:6", node.InnerText.Trim());
+			Assert.AreEqual("1.32-33 1.32-33 2Sam. 7:12, 13, 16; Yes. 9:6", node.InnerText.Trim());
 			//2.41
 			xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-22']";
 			node = resultDoc.SelectSingleNode(xPath, nsmgr);
@@ -834,7 +834,7 @@ namespace Test.epubConvert
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
-		public void ScriptureaaiProjectExportTest()
+		public void aaiScriptureProjectExportTest()
 		{
 			CleanOutputDirectory();
 			string inputDataFolder = Common.PathCombine(_inputPath, "aaiScriptureExportTest");
