@@ -218,6 +218,10 @@
       <HintPath>..\..\packages\Analytics.2.0.3\lib\Analytics.NET.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CssParser, Version=1.15.7.5693, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\CssParser.dll</HintPath>
+    </Reference>
     <Reference Include="DesktopAnalytics, Version=1.2.4.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DesktopAnalytics.1.2.4.5\lib\net40\DesktopAnalytics.dll</HintPath>
       <Private>True</Private>
@@ -233,6 +237,10 @@
       <HintPath>..\..\packages\PrinceXML.11.0.0\lib\net40\Prince.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PsTool, Version=1.15.7.5693, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\PsTool.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -242,12 +250,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="SIL.Core">
       <HintPath>..\..\lib\SIL.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CssParser">
-      <HintPath>..\..\output\Release\CssParser.dll</HintPath>
-    </Reference>
-    <Reference Include="PsTool">
-      <HintPath>..\..\output\Release\PsTool.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
