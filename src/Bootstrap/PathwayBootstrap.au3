@@ -46,7 +46,7 @@ Func DoUI()
 	Local $BuildNumber = IniRead("PathwayBuild.ini", "PathwayVersion", "buildNumber", "1.13.4.4657")
 	;Global $StableVersionDate = '-0.7.1-2011-04-12'
 	Global $Version = "1.13.4"
-	Local $asResult = StringRegExp($BuildNumber, "([0-9]+.[0-9]+.[0-9]+).[0-9]+", 1)
+	Local $asResult = StringRegExp($BuildNumber, "([0-9]+.[0-9]+.[0-9]+.[0-9]+)", 1)
 	If @error == 0 Then
 		$Version = $asResult[0]
 	EndIf
