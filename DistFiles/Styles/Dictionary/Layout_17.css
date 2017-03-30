@@ -1,0 +1,17 @@
+@import "Dictionary.css";
+@import "Justified_No.css";
+@import "Page_size_6x8.5onLetter.css";
+@import "Columns_2.css";
+@import "Font_Size_nc.css";
+@import "Leading_12.css";
+@import "Pictures_Yes.css";
+@import "Running_Head_Mirrored.css";
+@import "PageNumber_TopInside.css";
+@import "Rules_No.css";
+@import "Sense_nc.css";
+@import "MexicoStyles.css";
+@page{
+	-ps-center-title-header:"True";
+	-ps-header-font-size:"Same as headword";
+}
+
