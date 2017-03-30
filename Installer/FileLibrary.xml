@@ -2013,4 +2013,6 @@
   <File Path="Export\Test.dll" ComponentGuid="C4F0CAED-64B1-48D9-A3DA-A843409190AC" />
   <File Path="Export\Test.dll.config" ComponentGuid="37612F28-6D14-465F-9AE5-527C5A598D3F" />
   <File Path="Export\Test.pdb" ComponentGuid="DA762EB4-0332-450B-BF3D-DBC50ED4CA17" />
+  <File Path="Styles\Dictionary\Layout_17.css" ComponentGuid="1236175A-2F0C-429F-886E-764655EF6578" />
+  <File Path="Styles\Dictionary\Page_size_6x8.5onLetter.css" ComponentGuid="F365609D-29F1-4ED0-8162-B49DC0ED3945" />
 </FileLibrary>
