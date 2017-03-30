@@ -3,8 +3,8 @@ a {color: rgb(0,0,255);}
 
 .visiblecomplexformbackrefs{
 	text-indent: -12pt;
-	margin-left: 12pt;	
-	color: rgb(0,0,0);	
+	margin-left: 12pt;
+	color: rgb(0,0,0);
 }
 
 .complexform:before {
@@ -34,7 +34,7 @@ a {color: rgb(0,0,255);}
 .LexEntry-publishStemMinorPara-CommentPub {
     color: rgb(128,0,0);
 }
-.LexEntry-publishStemPara-CommentPub {    
+.LexEntry-publishStemPara-CommentPub {
     color: rgb(128,0,0);
 }
 .LexEntryType-publishStemEntryType-AbbreviationPub {
@@ -43,11 +43,11 @@ a {color: rgb(0,0,255);}
 .LexEntryType-publishStemMinorEntryType-AbbreviationPub {
     color: rgb(128,0,0);
 }
-.LexEntryType-publishStemVariantType-ReverseAbbrPub {   
+.LexEntryType-publishStemVariantType-ReverseAbbrPub {
     color: rgb(128,0,0);
 }
 .partofspeech {
-	font-style: italic;	
+	font-style: italic;
     color: rgb(128,0,0);
 }
 .partofspeech-complexform {
@@ -59,17 +59,17 @@ a {color: rgb(0,0,255);}
 }
 
 .restrictionsentry-minor {
-    color: rgb(128,128,0);    
+    color: rgb(128,128,0);
 }
 
 .scientific-name {
 	color: rgb(0,0,128);
 }
 .translations {
-    color: rgb(0,128,0); 
+    color: rgb(0,128,0);
 }
 
-.variantref-entry-type {    
+.variantref-entry-type {
     text-indent: -12pt;
     margin-left: 12pt;
 }
@@ -117,7 +117,7 @@ a {color: rgb(0,0,255);}
 	display: inline;
 }
 
-.mainentrycomplex .visiblecomplexformbackref{	
+.mainentrycomplex .visiblecomplexformbackref{
 	display: inline;
 }
 .morphosyntaxanalyses-ps{
@@ -144,13 +144,13 @@ a {color: rgb(0,0,255);}
 .LexSense-publishStem-Comentario--restrictivo {
 	color: rgb(128,128,0);
 }
-	
+
 .LexSense-publishStem-Definición--descriptiva {
 	color: rgb(128,128,0);
 }
-.variantref-entry-type:before { 
+.variantref-entry-type:before {
 	content: "[";
 }
-.variantref-form:after { 
+.variantref-form:after {
 	content: "]";
 }
