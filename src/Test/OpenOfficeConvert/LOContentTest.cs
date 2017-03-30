@@ -452,7 +452,7 @@ namespace Test.OpenOfficeConvert
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
-		public void TextDecorationColorTest()
+		public void DecorationColorTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "TextDecorationColor";

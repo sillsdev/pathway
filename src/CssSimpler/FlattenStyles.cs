@@ -93,7 +93,7 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             SkipNode = r.Name == "span";
-			//if (nextClass != null && nextClass.StartsWith("abbreviation"))
+			//if (nextClass != null && nextClass.StartsWith("subentry"))
 			//{
 			//	Debug.Print("break;");
 			//}
@@ -107,8 +107,12 @@ namespace CssSimpler
             SkipNode = IsNotBlockRule(r.Depth);
             if (!SkipNode)
             {
-                GetStyle(r);
-                if (r.Name == "span" && DivBlocks)
+                var outClass = GetStyle(r);
+	            if (nextClass != null && nextClass != outClass)
+	            {
+					ReplaceClass = outClass;
+				}
+				if (r.Name == "span" && DivBlocks)
                 {
                     ReplaceLocalName = "div";
                 }

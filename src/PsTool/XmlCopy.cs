@@ -43,6 +43,7 @@ namespace SIL.Tool
 		protected readonly List<string> DecorateExceptions = new List<string> {"letHead", "letter", "letData", "reversalindexentry", "dicBody"};
         protected string Suffix = "-ps";
         protected string ReplaceLocalName;
+        protected string ReplaceClass;
 		public string SpaceClass = "sp";
 		public string TitleDefault;
         public string AuthorDefault;
@@ -57,11 +58,12 @@ namespace SIL.Tool
             _noXmlHeader = noXmlHeader;
             var wrtSettings = new XmlWriterSettings {OmitXmlDeclaration = noXmlHeader};
             _wtr = XmlWriter.Create(xmlOutFullName, wrtSettings);
+	        ReplaceClass = string.Empty;
         }
 
         public void Parse()
         {
-	        int _inDiv = 0;
+	        int inDiv = 0;
 
             while (_rdr.Read())
             {
@@ -110,15 +112,17 @@ namespace SIL.Tool
                                     }
                                     else
                                     {
-	                                    if (_rdr.Name == "class" && !DecorateExceptions.Contains(_rdr.Value))
+										var className = string.IsNullOrEmpty(ReplaceClass)? _rdr.Value: ReplaceClass;
+										if (_rdr.Name == "class" && !DecorateExceptions.Contains(className))
 	                                    {
-											_wtr.WriteAttributeString(_rdr.Name, _rdr.Value + StyleDecorate);
+											_wtr.WriteAttributeString(_rdr.Name, className + StyleDecorate);
 										}
 	                                    else
 	                                    {
-											_wtr.WriteAttributeString(_rdr.Name, _rdr.Value);
+											_wtr.WriteAttributeString(_rdr.Name, className);
 										}
-									}
+	                                    ReplaceClass = string.Empty;
+                                    }
                                 }
                                 AfterProcessMethods();
                             }
@@ -149,7 +153,7 @@ namespace SIL.Tool
                             }
                         } else if (name == "div")
 						{
-							_inDiv += 1;
+							inDiv += 1;
 						}
 						break;
                     case XmlNodeType.Text:
@@ -161,7 +165,7 @@ namespace SIL.Tool
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
                         //Debug.Print("space");
-		                if (_inDiv > 0 && !string.IsNullOrEmpty(SpaceClass))
+		                if (inDiv > 0 && !string.IsNullOrEmpty(SpaceClass))
 		                {
 							_wtr.WriteStartElement("span", "http://www.w3.org/1999/xhtml");
 							WriteClassAttr(SpaceClass);
@@ -208,7 +212,7 @@ namespace SIL.Tool
                             _wtr.WriteFullEndElement();
 	                        if (_rdr.Name == "div")
 	                        {
-		                        _inDiv -= 1;
+		                        inDiv -= 1;
 	                        }
                         }
                         break;
