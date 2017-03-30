@@ -2,11 +2,11 @@
 @import "Page_size_Letter.css";
 @import "Columns_2.css";
 @import "Pictures_Yes.css";
-@import "Font_Size_11_13.css";
+@import "font_size_nc.css";
 @import "Running_Head_Mirrored.css";
 @import "Running_Head_Mirrored_Chapter.css";
 @import "Rules_Yes.css";
 @import "PageNumber_TopCenter_Mirrored.css";
 @import "PageNumber_FirstPage.css";
-@import "Font_HeaderSize_11.css";
+@import "Font_HeaderSize_nc.css";
 @import "custom.css";

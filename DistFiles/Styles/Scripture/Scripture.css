@@ -7,7 +7,7 @@
     ps-NonConsecutiveReferenceSeparator-string:",";
 }
 
-.footnote_query {    
+.footnote_query {
     display: inline;
     /* http://dev.w3.org/csswg/css-gcpm/#creating-footnotes */
     float: footnote;
@@ -255,7 +255,7 @@
     font-style : italic;
     font-size: 12pt;
 }
-.Glossaryvaluehref{    
+.Glossaryvaluehref{
     font-weight : bold;
     font-style : italic;
     font-size: 12pt;
@@ -283,6 +283,9 @@ span {
 }
 .Title_Secondary {
     display: block;
+	padding-bottom: 10pt;
+	padding-top: 10pt;
+	font-weight : normal;
 }
 .Verse_Number {
     font-size:6pt;
@@ -345,6 +348,6 @@ string-set: chapter '1';
 }
 
 .intropara {
-    text-indent: 20pt; 
+    text-indent: 20pt;
 }
 /* End Scripture.css */

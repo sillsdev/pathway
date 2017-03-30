@@ -98,6 +98,8 @@ namespace Test.XhtmlExport
 			var cssOutput = _tf.SubOutput(project, cssName);
 			File.Copy(cssInput, cssOutput, overwrite);
 			var workingFolder = Path.GetDirectoryName(xhtmlInput);
+			Param.SetLoadType = inputType;
+			Param.LoadSettings();
 			if (format == "usx")
 			{
 				FolderTree.Copy(_tf.Input("gather"), Common.PathCombine(_tf.Output("NKOu3"), "gather"));
@@ -127,9 +129,6 @@ namespace Test.XhtmlExport
 				pathwayBFile = Path.GetDirectoryName(Common.AssemblyPath);
 				pathwayBFile = Common.PathCombine(pathwayBFile, "PathwayB.exe");
 			}
-
-			Param.SetLoadType = inputType;
-			Param.LoadSettings();
 
 			EnableConfigurationSettings(workingFolder, project);
 
