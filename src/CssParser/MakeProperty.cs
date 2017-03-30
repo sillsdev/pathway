@@ -1,16 +1,16 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="MakeProperty.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// Maps all property of Css 
+// Maps all property of Css
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -225,7 +225,7 @@ namespace SIL.PublishingSolution
 
         /// -------------------------------------------------------------------------------------------
         /// Map _attributeInfo to MapPropertys.cs
-        /// -------------------------------------------------------------------------------------------        
+        /// -------------------------------------------------------------------------------------------
 
         public Dictionary<string, string> CreateProperty(StyleAttribute styleAttributeInfo)
         {
@@ -305,7 +305,8 @@ namespace SIL.PublishingSolution
                 case "line-height":
                     LineHeight(styleAttributeInfo);
                     break;
-                case "-ps-fixed-line-height":
+				case "flex-line-height":
+				case "-ps-fixed-line-height":
                     FixedLineHeight(styleAttributeInfo);
                     break;
                 case "-ps-disable-widow-orphan":
@@ -701,8 +702,8 @@ namespace SIL.PublishingSolution
 
         /// -------------------------------------------------------------------------------------------
         /// <summary>
-        /// Margin and Padding Values 
-        /// 
+        /// Margin and Padding Values
+        ///
         /// <list>
         /// </list>
         /// </summary>
@@ -854,8 +855,8 @@ namespace SIL.PublishingSolution
                 fontFamily.StringValue = fontFaceClean;
                 FontFamily(fontFamily);
 
-                // font-style: italic,  font-variant: small-caps,  
-                // font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 
+                // font-style: italic,  font-variant: small-caps,
+                // font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
                 for (int counter = 0; counter <= fontsizeBegin; counter++)
                 {
                     param = parameters[counter];
@@ -893,7 +894,7 @@ namespace SIL.PublishingSolution
                 return;
             }
 
-            string fontName; // Gentium 
+            string fontName; // Gentium
             FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
             for (int counter = 0; counter < fontLength; counter++)
             {
@@ -938,7 +939,7 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Delete seperators
-        /// 
+        ///
         /// <list>
         /// </list>
         /// </summary>
@@ -962,7 +963,7 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// For include space between seperators - BorderMethod1 bottom
-        /// 
+        ///
         /// <list>
         /// </list>
         /// </summary>
@@ -1095,7 +1096,7 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Converts rgb(47,96,255) to "#ff0000" format
-        /// 
+        ///
         /// <list>
         /// </list>
         /// </summary>
@@ -1165,7 +1166,7 @@ namespace SIL.PublishingSolution
 
         /// <summary>
         /// Converts cmyk to "#ff0000" format
-        /// 
+        ///
         /// <list>
         /// </list>
         /// </summary>
