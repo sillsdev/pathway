@@ -144,7 +144,7 @@
       <option name="No Change" file="Embedded_Spans_nc.css"/>
     </feature>
     <feature name="Pictures">
-      <option name="Yes" file="Pictures_Yes.css"/>      
+      <option name="Yes" file="Pictures_Yes.css"/>
       <option name="No" file="Pictures_No.css"/>
     </feature>
     <feature name="Running Head">
@@ -248,10 +248,10 @@
         shown="Yes">
         <description>Letter ruled double column with Flex formatting</description>
       </style>
-      <style name="Mexico65x9" file="Layout_16.css" approvedBy="GPS"
+      <style name="Mexico6x85" file="Layout_17.css" approvedBy="GPS"
         previewfile1="FieldWorksLetterStyles P1.jpg" previewfile2="FieldWorksLetterStyles P2.jpg"
         shown="Yes">
-        <description>6.5x9 on letter double column with Flex formatting</description>
+        <description>6x8.5 on letter double column with Flex formatting</description>
       </style>
       <style name="OneColumn" file="LayoutOneCol.css" approvedBy="GPS"
         previewfile1="OneColumn_LayoutOneCol p1.jpg" previewfile2="OneColumn_LayoutOneCol p2.jpg"
