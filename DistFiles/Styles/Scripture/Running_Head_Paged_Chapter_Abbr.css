@@ -1,10 +1,10 @@
 @page {
-    @top-left      { 
+    @top-left      {
         -ps-referenceFormat: "Gen 1";
         content: string(bookname, first) " "  string(chapter, first);
 	}
-    @top-center    { content: ''; }    
-    @top-right     { 
+    @top-center    { content: ''; }
+    @top-right     {
         -ps-referenceFormat: "Gen 1";
         content: string(bookname, last) " "  string(chapter, last);
 	}

@@ -9,7 +9,7 @@ the user's preferences from the Configuration Tool:
 font-weight: normal;
 font-style: normal;
 }
-.footnote_query {    
+.footnote_query {
     display: inline;
     list-style-position: inside;
 }
@@ -169,13 +169,13 @@ the user's preferences from the Configuration Tool:
     margin-right: 4%;
 }
 
-.Parallel_Passage_Reference, .Parallel_Passage_Reference {  
+.Parallel_Passage_Reference, .Parallel_Passage_Reference {
     font-style: italic;
     text-align: center;
     text-indent: 0pt;
     margin-left: 0pt;
     margin-top: 0pt;
-    margin-bottom: 3pt;	
+    margin-bottom: 3pt;
 }
 .scrBook {
     clear: both;
@@ -296,7 +296,7 @@ font-family: inherit;
     font-style : italic;
     font-size: 12pt;
 }
-.Glossaryvaluehref{    
+.Glossaryvaluehref{
     font-weight : bold;
     font-style : italic;
     font-size: 12pt;
@@ -306,16 +306,16 @@ font-family: inherit;
     font-size: 12pt;
 }
 
-.chapternumberlink{ 
-font-size: 0.9em; 
-line-height: 1.25em; 
-vertical-align: top; 
-background-color: rgb(255, 200, 255); 
-border-radius: 1em; 
-width: 1.25em; 
-height: 1.25em; 
-text-align: center; 
-display: inline-block; 
-text-indent: 0; 
+.chapternumberlink{
+font-size: 0.9em;
+line-height: 1.25em;
+vertical-align: top;
+background-color: rgb(255, 200, 255);
+border-radius: 1em;
+width: 1.25em;
+height: 1.25em;
+text-align: center;
+display: inline-block;
+text-indent: 0;
 font-family: sans-serif;
  }
