@@ -798,7 +798,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 129, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 132, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
