@@ -1661,10 +1661,10 @@ namespace SIL.Tool
 			{
 				if (_reader.NodeType == XmlNodeType.Element)
 				{
-					if (_reader.Name == "div" || _reader.Name == "span")
+					if (_reader.Name == "div")
 					{
 						string name = _reader.GetAttribute("class");
-						if (name != null && (name.ToLower() == "headword" || name.ToLower() == "mainheadword"))
+						if (name != null && (name.ToLower() == "entry" || name.ToLower() == "mainentry") || name.ToLower() == "minorentry")
 						{
 							isHeadword = true;
 						}

@@ -1183,7 +1183,7 @@ namespace Test.XeLatex
 
 
 		[Test]
-		[Category("ShortTest")]
+		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
 		public void VisibilityCensorPackageTest()
 		{
