@@ -87,9 +87,6 @@ namespace SIL.PublishingSolution
 			Debug.Assert(outFullName.IndexOf(Path.DirectorySeparatorChar) >= 0, "full path for output must be given");
 			string caption = LocalizationManager.GetString("PsExport.ExportClick.Caption", "Pathway Export", "");
 
-			Common.FindParatextProject();
-			Common.GetFontFeatures();
-
 			#endregion
 
 			try
@@ -167,6 +164,9 @@ namespace SIL.PublishingSolution
 
 				if (DataType == "Scripture")
 				{
+					Common.FindParatextProject();
+					Common.GetFontFeatures();
+
 					SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);
 				}
 				else if (DataType == "Dictionary")

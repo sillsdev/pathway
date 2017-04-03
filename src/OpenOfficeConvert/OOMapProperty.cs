@@ -682,6 +682,11 @@ namespace SIL.PublishingSolution
 
             string fontName = string.Empty;
             System.Drawing.FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
+			string fontSettingValue = string.Empty;
+			if(!string.IsNullOrEmpty(Common.FontFeaturesString))
+			{
+				fontSettingValue = ((Common.FontFeaturesString.Length > 0) ? ":" + Common.FontFeaturesString.Replace(" ", " = ").Replace("\"", "").Replace(";", "&").Replace(",", " & ") : "");
+			}
             for (int counter = 0; counter < fontLength; counter++)
             {
                 fontName = font[counter].Replace("\"", "").Trim();
@@ -690,7 +695,7 @@ namespace SIL.PublishingSolution
                     if (fontName.ToLower() == systemFont.Name.ToLower())
                     {
                         propertyValue = systemFont.Name;
-                        _idProperty["font-family"] = propertyValue;
+						_idProperty["font-family"] = propertyValue + fontSettingValue;
                         return;
                     }
                 }
@@ -716,8 +721,7 @@ namespace SIL.PublishingSolution
             {
                 fontName = font[0];
             }
-
-            propertyValue = fontName.Trim();
+			propertyValue = fontName.Trim() + fontSettingValue;
             _idProperty[_propertyKey] = propertyValue;
         }
 
