@@ -1412,9 +1412,7 @@ namespace SIL.Tool
 					}
 					foreach (string styleName in IdAllClass.Keys)
 					{
-						if (styleName.EndsWith("pb") || styleName.EndsWith("pa")) continue;
-
-						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("margin-left"))
+						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("margin-left") && !_tempStyle.ContainsKey("margin-left"))
 						{
 							string stylePropertyValue = (subEntrySize + entrySize).ToString();
 							_tempStyle["margin-left"] = stylePropertyValue + "pt";
@@ -1422,7 +1420,7 @@ namespace SIL.Tool
 
 						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("text-indent"))
 						{
-							if (IdAllClass[currentStyleName].ContainsKey("text-indent"))
+							if (IdAllClass[currentStyleName].ContainsKey("text-indent") && !_tempStyle.ContainsKey("text-indent"))
 							{
 								if (IdAllClass[currentStyleName]["text-indent"].Contains("%"))
 									return;
