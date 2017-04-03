@@ -1132,16 +1132,7 @@ namespace SIL.PublishingSolution
 				{
 					_writer.WriteRaw(_verseContent.ToString());
 					_verseContent.Remove(0, _verseContent.Length);
-				}
-
-				if (_classNameWithLang.IndexOf("reference") == 0)
-				{
-					if (content.IndexOf(" ") >= 0)
-					{
-						_writer.WriteString(" ");
-						content.Replace(" ", "");
-					}
-				}
+				}			
 
 				if (!IsParentPrecedeSpace())
 					content = SignificantSpace(content, true);
