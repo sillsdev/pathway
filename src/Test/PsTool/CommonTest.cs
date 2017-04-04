@@ -885,6 +885,24 @@ namespace Test.PsTool
             XmlAssert.AreEqual(expected, actual, "Scripture migration test failed");
         }
 
+		/// <summary>
+		/// GetFontFeaturesTest
+		/// Reads .ssf File and .lds File - Gets the Font Features
+		/// Then Tested whether the FontFeaturesString and FontFeaturesSettingsString are correct
+		/// </summary>
+		[Test]
+		public void GetFontFeaturesTest()
+		{
+			String fileName = "ncoSibe.ssf";
+			string inputFolder = Common.PathCombine(_inputBasePath, "GetFontFeaturesTest");
+			Common.Ssf = Common.PathCombine(inputFolder, fileName);
+			Common.GetFontFeatures();
+			Assert.AreEqual("\"litr\" 0,\"apos\" 1", Common.FontFeaturesString);
+			Assert.AreEqual("\r\n -webkit-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n -moz-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n" +
+										" -ms-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n" +
+										" font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n", Common.FontFeaturesSettingsString);
+		}
+
         #region LanguageTests
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
