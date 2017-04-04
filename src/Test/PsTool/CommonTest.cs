@@ -897,6 +897,7 @@ namespace Test.PsTool
 			string inputFolder = Common.PathCombine(_inputBasePath, "GetFontFeaturesTest");
 			Common.Ssf = Common.PathCombine(inputFolder, fileName);
 			Common.GetFontFeatures();
+			Common.Ssf = string.Empty;
 			Assert.AreEqual("\"litr\" 0,\"apos\" 1", Common.FontFeaturesString);
 			Assert.AreEqual("\r\n -webkit-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n -moz-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n" +
 										" -ms-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n" +
