@@ -1664,9 +1664,13 @@ namespace SIL.Tool
 					if (_reader.Name == "div")
 					{
 						string name = _reader.GetAttribute("class");
-						if (name != null && (name.ToLower() == "entry" || name.ToLower() == "mainentry") || name.ToLower() == "minorentry")
+						if (name != null)
 						{
-							isHeadword = true;
+							var lcName = name.ToLower();
+							if (lcName == "entry" || lcName == "mainentry" || lcName == "minorentry")
+							{
+								isHeadword = true;
+							}
 						}
 					}
 				}

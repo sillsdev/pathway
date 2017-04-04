@@ -496,7 +496,6 @@ namespace SIL.PublishingSolution
 			}
 
 			_styleFilePath = targetPath + "styles.xml";
-			_headwordIndex = 0;
 			try
 			{
 				using (_reader = Common.DeclareXmlTextReader(Sourcefile, true))
