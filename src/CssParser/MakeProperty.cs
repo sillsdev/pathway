@@ -278,6 +278,9 @@ namespace SIL.PublishingSolution
                 case "font-family":
                     FontFamily(styleAttributeInfo);
                     break;
+				case "font-feature-settings":
+					FontFeatureSettings(styleAttributeInfo);
+                    break;
                 case "font":
                     Font(styleAttributeInfo);
                     break;
@@ -608,94 +611,97 @@ namespace SIL.PublishingSolution
         public void SimpleProperty(StyleAttribute styleAttributeInfo)
         {
             string value = DeleteSeperator(styleAttributeInfo.StringValue);
-            switch (styleAttributeInfo.Name.ToLower())
-            {
-                case "column-fill":
-                case "columns":
-                case "page-break-before":
-                case "page-break-after":
-                case "page-break-inside":
-                case "visibility":
-                case "display":
-                case "vertical-align":
-                case "column-count":
-                case "column-gap":
-                case "text-transform":
-                case "white-space":
-                case "list-style-position":
-                case "list-style-type":
-                case "list-style":
-                case "direction":
-                case "float":
-                case "clear":
-                case "hyphens":
-                case "hyphenate-before":
-                case "hyphenate-after":
-                case "hyphenate-lines":
-                case "counter-reset":
-                case "content":
-                case "position":
-                case "-ps-vertical-justification":
-                case "-ps-fileproduce":
-                case "prince-text-replace":
-                case "-ps-referenceformat":
-                case "-ps-positionchapternumbers-string":
-                case "-ps-includeversenumber-string":
-                case "-ps-includeverseinheaderreferences-string":
-                case "ps-nonconsecutivereferenceseparator-string":
-                case "-ps-nonconsecutivereferenceseparator-string":
-                case "-ps-custom-footnote-caller":
-                case "-ps-custom-xref-caller":
-                case "-ps-hide-versenumber-one":
-                case "-ps-hide-space-versenumber":
-                case "prince-hyphenate-patterns":
-                case "guideword-length":
-                case "-ps-split-file-by-letter":
-                case "-ps-center-title-header":
-                case "-ps-header-font-size":
+			switch (styleAttributeInfo.Name.ToLower())
+			{
+				case "column-fill":
+				case "columns":
+				case "page-break-before":
+				case "page-break-after":
+				case "page-break-inside":
+				case "visibility":
+				case "display":
+				case "vertical-align":
+				case "column-count":
+				case "column-gap":
+				case "text-transform":
+				case "white-space":
+				case "list-style-position":
+				case "list-style-type":
+				case "list-style":
+				case "direction":
+				case "float":
+				case "clear":
+				case "hyphens":
+				case "hyphenate-before":
+				case "hyphenate-after":
+				case "hyphenate-lines":
+				case "counter-reset":
+				case "content":
+				case "position":
+				case "-ps-vertical-justification":
+				case "-ps-fileproduce":
+				case "prince-text-replace":
+				case "-ps-referenceformat":
+				case "-ps-positionchapternumbers-string":
+				case "-ps-includeversenumber-string":
+				case "-ps-includeverseinheaderreferences-string":
+				case "ps-nonconsecutivereferenceseparator-string":
+				case "-ps-nonconsecutivereferenceseparator-string":
+				case "-ps-custom-footnote-caller":
+				case "-ps-custom-xref-caller":
+				case "-ps-hide-versenumber-one":
+				case "-ps-hide-space-versenumber":
+				case "prince-hyphenate-patterns":
+				case "guideword-length":
+				case "-ps-split-file-by-letter":
+				case "-ps-center-title-header":
+				case "-ps-header-font-size":
 				case "top":
-                    _cssProperty[styleAttributeInfo.Name] = value;
-                    break;
+					_cssProperty[styleAttributeInfo.Name] = value;
+					break;
 
-                // convert to pt
-                case "text-indent":
-                case "margin-top":
-                case "margin-right":
-                case "margin-bottom":
-                case "margin-left":
-                case "class-margin-top":
-                case "class-margin-right":
-                case "class-margin-bottom":
-                case "class-margin-left":
-                case "padding-top":
-                case "padding-bottom":
-                case "padding-right":
-                case "padding-left":
-                case "line-height":
-                case "letter-spacing":
-                case "word-spacing":
-                case "left":
-                case "right":
-                case "border-radius":
-                    _cssProperty[styleAttributeInfo.Name] = Common.UnitConverter(value);
-                    break;
-                case "height":
-                case "width":
+				// convert to pt
+				case "text-indent":
+				case "margin-top":
+				case "margin-right":
+				case "margin-bottom":
+				case "margin-left":
+				case "class-margin-top":
+				case "class-margin-right":
+				case "class-margin-bottom":
+				case "class-margin-left":
+				case "padding-top":
+				case "padding-bottom":
+				case "padding-right":
+				case "padding-left":
+				case "line-height":
+				case "letter-spacing":
+				case "word-spacing":
+				case "left":
+				case "right":
+				case "border-radius":
+					_cssProperty[styleAttributeInfo.Name] = Common.UnitConverter(value);
+					break;
+				case "height":
+				case "width":
 				case "max-height":
-                    value = styleAttributeInfo.StringValue.ToLower() == "auto" ? "72" : Common.UnitConverter(value);
-                    _cssProperty[styleAttributeInfo.Name] = value;
-                    break;
-                case "-ps-fixed-line-height":
-                case "-ps-disable-widow-orphan":
-                case "string-set":
-                case "unicode-bidi":
-                case "pathway":
+					value = styleAttributeInfo.StringValue.ToLower() == "auto" ? "72" : Common.UnitConverter(value);
+					_cssProperty[styleAttributeInfo.Name] = value;
+					break;
+				case "-ps-fixed-line-height":
+				case "-ps-disable-widow-orphan":
+				case "string-set":
+				case "unicode-bidi":
+				case "pathway":
 				case "-webkit-column-count":
-                case "overflow-wrap":
-                    break;
-                default:
-                    throw new Exception("Not a valid CSS Command: " + styleAttributeInfo.Name);
-            }
+				case "overflow-wrap":
+				case "-webkit-font-feature-settings":
+				case "-moz-font-feature-settings":
+				case "-ms-font-feature-settings":
+					break;
+				default:
+					throw new Exception("Not a valid CSS Command: " + styleAttributeInfo.Name);
+			}
         }
 
         #endregion Public Functions
@@ -935,6 +941,19 @@ namespace SIL.PublishingSolution
             _cssProperty["font-family"] = fontName.Trim();
 
         }
+
+		private void FontFeatureSettings(StyleAttribute styleAttributeInfo)
+		{
+			string fontFeatureProperyValue = styleAttributeInfo.StringValue;
+			int fontLength = fontFeatureProperyValue.Length;
+			if (fontLength == 0 || styleAttributeInfo.StringValueLower == "inherit")
+			{
+				return;
+			}
+
+			_cssProperty[styleAttributeInfo.Name] = fontFeatureProperyValue;
+			return;
+		}
 
         /// -------------------------------------------------------------------------------------------
         /// <summary>

@@ -323,6 +323,26 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue);
         }
 
+		///<summary>
+		///font-family with font-feature-settings: in Styles.xml
+		///To Test whether the font-feature-settings have been applied for the OpenOfficeOutpuut
+		/// </summary>
+		[Test]
+		public void FontFamily_Node2()
+		{
+			const string file = "FontFamily2";
+
+			string input = FileInput(file + ".css");
+			string output = FileOutput(file + "styles.xml");
+			GetCssClass(input, output);
+
+			_validate = new ValidateXMLFile(output);
+			_validate.ClassName = "span_.nco";
+			_validate.ClassProperty.Add("fo:font-family", "Andika New Basic:litr = 0 & apos = 1");			
+			returnValue = _validate.ValidateNodeAttributesNS(false);
+			Assert.IsTrue(returnValue);
+		}
+
 
         [Test]
         public void TextAlignTestA_Node()

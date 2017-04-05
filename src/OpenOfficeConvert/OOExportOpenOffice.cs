@@ -90,12 +90,6 @@ namespace SIL.PublishingSolution
             Common.OdType = Common.OdtType.OdtChild;
             bool returnValue = false;
 
-			if (projInfo.ProjectInputType.ToLower() == "scripture")
-			{
-				Common.FindParatextProject();
-				Common.GetFontFeatures();
-			}
-
 			Common.CheckAndGetStyle(defaultXhtml, projInfo.ProjectInputType);
             _isFromExe = Common.CheckExecutionPath();
             var glossorywords = WriteGlossaryLink(projInfo);

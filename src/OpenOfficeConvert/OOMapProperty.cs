@@ -287,6 +287,10 @@ namespace SIL.PublishingSolution
                     FontFamily(property.Value);
                     isPropertyWritten = true;
                     break;
+				case "font-feature-settings":
+                    FontFeatureSettings(property.Value);
+                    isPropertyWritten = true;
+                    break;
                 case "page-width":
                     PageWidth(property.Value);
                     isPropertyWritten = true;
@@ -723,6 +727,32 @@ namespace SIL.PublishingSolution
             }
 			propertyValue = fontName.Trim() + fontSettingValue;
             _idProperty[_propertyKey] = propertyValue;
+        }
+
+		public void FontFeatureSettings(string propertyValue)
+        {
+            string[] font = propertyValue.Split(',');
+            int fontLength = font.Length;
+            if (fontLength == 0)
+            {
+                return;
+            }
+
+            string fontName = string.Empty;
+            System.Drawing.FontFamily[] systemFontList = System.Drawing.FontFamily.Families;
+			string fontSettingValue = string.Empty;
+			if (!string.IsNullOrEmpty(propertyValue))
+			{
+				//// Ex: To Convert a string the following
+				////"litr",0,"apos",1
+				////to
+				////litr = 0 & apos = 1
+				fontSettingValue = propertyValue.Replace("\",", " = ").Replace(",\"", " & ").Replace("\"", "");
+				fontSettingValue = (propertyValue.Length > 0) ? ":" + fontSettingValue : "";
+			}
+
+			_idProperty["font-family"] = _idProperty["font-family"] + fontSettingValue;
+            return;
         }
 
         public void TextIndent(string propertyValue)
