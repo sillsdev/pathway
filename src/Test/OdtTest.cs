@@ -200,15 +200,22 @@ namespace Test
         /// <returns>xmlDocument with <paramref name="sectionName">sectionName</paramref> loaded</returns>
         public static XmlDocument LoadXml(string odtPath, string sectionName)
         {
-            var odtFile = new ZipFile(odtPath);
-            var reader = new StreamReader(odtFile.GetInputStream(odtFile.GetEntry(sectionName).ZipFileIndex));
-            var text = reader.ReadToEnd();
-            reader.Close();
-            odtFile.Close();
-            var xmlDocument = new XmlDocument();
-            xmlDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
-            xmlDocument.LoadXml(text);
-            return xmlDocument;
+			if (File.Exists(odtPath))
+			{
+				var odtFile = new ZipFile(odtPath);
+				var reader = new StreamReader(odtFile.GetInputStream(odtFile.GetEntry(sectionName).ZipFileIndex));
+				var text = reader.ReadToEnd();
+				reader.Close();
+				odtFile.Close();
+				var xmlDocument = new XmlDocument();
+				xmlDocument.XmlResolver = FileStreamXmlResolver.GetNullResolver();
+				xmlDocument.LoadXml(text);
+				return xmlDocument;
+			}
+			else
+			{
+				return null;
+			}
         }
     }
 }

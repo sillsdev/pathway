@@ -798,7 +798,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 129, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 132, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -1131,6 +1131,60 @@ namespace Test.CssSimplerTest
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 2, "//*[@class='examplescontent-pb']", "examplebullet");
         }
+
+		/// <summary>
+		/// When there is a sub sub entry, the rules apply at multiple points in the hierarchy
+		/// </summary>
+		[Test]
+		public void SubSubBulletsAndIndentsTest()
+		{
+			const string testName = "SubSubBullets";
+			_testFiles.Copy(testName + ".css");
+			var cssFullName = _testFiles.Output(testName + ".css");
+			var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+			var outFullName = _testFiles.Output(testName + ".xhtml");
+			var ctp = new CssTreeParser();
+			ctp.Parse(cssFullName);
+			var root = ctp.Root;
+			Assert.True(root != null);
+			var xml = new XmlDocument();
+			xml.LoadXml("<root/>");
+			var lc = new LoadClasses(xhtmlFullName);
+			UniqueClasses = lc.UniqueClasses;
+			AddSubTree(xml.DocumentElement, root, ctp);
+			_testFiles.Copy(testName + ".css");
+			WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+			new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+			NodeTest(outFullName, 1, "//*[contains(@class,'subentry')]//*[contains(@class,'subentry')]//*[@class='subentry-pb']", "sub sub bullet");
+		}
+
+		/// <summary>
+		/// When there is a sub sub entry, the rules apply at multiple points in the hierarchy
+		/// </summary>
+		[Test]
+		public void SubSubRootBulletAndIndentsTest()
+		{
+			const string testName = "SubSubRootBullet";
+			_testFiles.Copy(testName + ".css");
+			var cssFullName = _testFiles.Output(testName + ".css");
+			var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+			var outFullName = _testFiles.Output(testName + ".xhtml");
+			var ctp = new CssTreeParser();
+			ctp.Parse(cssFullName);
+			var root = ctp.Root;
+			Assert.True(root != null);
+			var xml = new XmlDocument();
+			xml.LoadXml("<root/>");
+			var lc = new LoadClasses(xhtmlFullName);
+			UniqueClasses = lc.UniqueClasses;
+			AddSubTree(xml.DocumentElement, root, ctp);
+			_testFiles.Copy(testName + ".css");
+			WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+			new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+			NodeTest(outFullName, 1, "//*[contains(@class,'subentry')]//*[contains(@class,'subentry')]//*[@class='subentry-pb']", "sub sub bullet");
+		}
 
 		/// <summary>
 		/// .letter rule has a green color but span for en lang has blue color and more terms

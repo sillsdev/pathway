@@ -664,7 +664,7 @@ namespace SIL.PublishingSolution
 
                 foreach (var prop in getProperty)
                 {
-                    if(prop.Key != "prince-text-replace")
+					if (prop.Key != "prince-text-replace" && prop.Key != "font-feature-settings")
                      _cssProperty[prop.Key] = prop.Value.Replace("\"","");
                     else
                         _cssProperty[prop.Key] = prop.Value;

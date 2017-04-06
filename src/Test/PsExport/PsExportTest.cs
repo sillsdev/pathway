@@ -61,7 +61,9 @@ namespace Test.PsExport
             Common.ProgInstall = Environment.CurrentDirectory;
             //FolderTree.Copy(Common.PathCombine(testPath, "../../../../DistFiles/OfficeFiles"),Common.PathCombine(Common.ProgInstall,"OfficeFiles"));
             Backend.Load(Common.ProgInstall);
-	        Common.UseAfterBeforeProcess = true;
+			Common.UseAfterBeforeProcess = true;
+			Common.FontFeaturesString = string.Empty;
+			Common.FontFeaturesSettingsString = string.Empty;
         }
 
         /// <summary>

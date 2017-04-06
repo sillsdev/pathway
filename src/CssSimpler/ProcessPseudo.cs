@@ -75,16 +75,11 @@ namespace CssSimpler
             var index = depth + 1;
 			if (index >= _classes.Count) return;
             var endClass = _classes[index] as string;
-            var lookUp = index;
-            while ((endClass == null || _needHigher.Contains(endClass)) && lookUp > 0)
-            {
-                lookUp -= 1;
-                endClass = _classes[lookUp] as string;
-            }
+	        if (endClass == null) return;
 	        Suffix = "-pa";
-            var target1 = GetTargetKey(_classes[index] as string, endClass);
+            var target1 = GetTargetKey(name, _classes[depth] as string);
             var target2 = GetTargetKey(name, endClass);
-            if (ApplyBestRule(depth, target1, _afterTargets, endClass)) return;
+            if (ApplyBestRule(index, target1, _afterTargets, endClass)) return;
             if (ApplyBestRule(index, target2, _afterTargets, endClass)) return;
             ApplyBestRule(index, endClass, _afterTargets, endClass);
         }
@@ -130,9 +125,18 @@ namespace CssSimpler
             return false;
         }
 
-        private bool Applies(XmlNode node, int index)
-        {
-            if (!RequiredFirst(node)) return false;
+	    private bool Applies(XmlNode node, int index)
+	    {
+		    for (var i = index; i > 0; i--)
+		    {
+			    if (AppliesAtLevel(node, i)) return true;
+		    }
+		    return false;
+	    }
+
+	    private bool AppliesAtLevel(XmlNode node, int index)
+		{
+			if (!RequiredFirst(node)) return false;
             if (!RequiredNotFirst(node)) return false;
             while (node != null && node.Name == "PSEUDO")
             {

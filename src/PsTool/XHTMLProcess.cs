@@ -130,6 +130,7 @@ namespace SIL.Tool
 		#endregion
 
 		protected string _paragraphName;
+		protected string _paragraphId;
 		protected string _previousParagraphName;
 		protected string _previousChildName = string.Empty;
 		protected string _characterName;
@@ -227,6 +228,14 @@ namespace SIL.Tool
 			if (_divType.Contains(_tagType))
 			{
 				_paragraphName = _childName;
+				try
+				{
+					_paragraphId = _reader.GetAttribute("id");
+				}
+				catch
+				{
+					_paragraphId = null;
+				}
 				_allParagraph.Push(_paragraphName);
 				_isNewParagraph = true;
 
@@ -1412,9 +1421,7 @@ namespace SIL.Tool
 					}
 					foreach (string styleName in IdAllClass.Keys)
 					{
-						if (styleName.EndsWith("pb") || styleName.EndsWith("pa")) continue;
-
-						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("margin-left"))
+						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("margin-left") && !_tempStyle.ContainsKey("margin-left"))
 						{
 							string stylePropertyValue = (subEntrySize + entrySize).ToString();
 							_tempStyle["margin-left"] = stylePropertyValue + "pt";
@@ -1422,7 +1429,7 @@ namespace SIL.Tool
 
 						if (styleName.IndexOf(currentStyleName, StringComparison.Ordinal) == 0 && IdAllClass[currentStyleName].ContainsKey("text-indent"))
 						{
-							if (IdAllClass[currentStyleName].ContainsKey("text-indent"))
+							if (IdAllClass[currentStyleName].ContainsKey("text-indent") && !_tempStyle.ContainsKey("text-indent"))
 							{
 								if (IdAllClass[currentStyleName]["text-indent"].Contains("%"))
 									return;

@@ -74,6 +74,9 @@ namespace Test.OpenOfficeConvert
 			Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFIles");
 			Common.ProgBase = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles"); // for masterDocument
 			Common.UseAfterBeforeProcess = true;
+			Common.FontFeaturesString = string.Empty;
+			Common.FontFeaturesSettingsString = string.Empty;
+
 			_styleFile = "styles.xml";
 			_contentFile = "content.xml";
 			_isLinux = Common.IsUnixOS();

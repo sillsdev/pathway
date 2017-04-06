@@ -1,0 +1,69 @@
+﻿<ScriptureText>
+  <Name>ncoSibe</Name>
+  <StyleSheet>usfm.sty</StyleSheet>
+  <ChapterMarker>c</ChapterMarker>
+  <VerseMarker>v</VerseMarker>
+  <FullName>nco Sibe Translation 2012</FullName>
+  <Directory>D:\My Paratext Projects\ncoSibe</Directory>
+  <FileNameBookNameForm>41MAT</FileNameBookNameForm>
+  <FileNameChapterNumberForm />
+  <FileNamePostPart>ncoSibe.SFM</FileNamePostPart>
+  <FileNamePrePart />
+  <Versification>4</Versification>
+  <CreatedWithPTW6>T</CreatedWithPTW6>
+  <Encoding>65001</Encoding>
+  <Language>Sibe</Language>
+  <DefaultFontSize>14</DefaultFontSize>
+  <BiblicalTermsListSetting>Major::BiblicalTerms.xml</BiblicalTermsListSetting>
+  <Editable>T</Editable>
+  <NeedsEnglishLanguageFix>No</NeedsEnglishLanguageFix>
+  <NeedsPortugueseLanguageFix>No</NeedsPortugueseLanguageFix>
+  <InitialImportBooksDirectory>/home/ba-31/ParatextProjects/ncoSibeT</InitialImportBooksDirectory>
+  <LanguageIsoCode>nco:::</LanguageIsoCode>
+  <TextEntryFontSizeAdjustment>0</TextEntryFontSizeAdjustment>
+  <CrossReferenceSettingsHaveBeenReviewed>T</CrossReferenceSettingsHaveBeenReviewed>
+  <RangeIndicator>-</RangeIndicator>
+  <SequenceIndicator>,</SequenceIndicator>
+  <ChapterVerseSeparator>:</ChapterVerseSeparator>
+  <ChapterRangeSeparator>—</ChapterRangeSeparator>
+  <BookSequenceSeparator>; </BookSequenceSeparator>
+  <ChapterNumberSeparator>; </ChapterNumberSeparator>
+  <BookSourceForMarkerXt>Abbreviation</BookSourceForMarkerXt>
+  <BookSourceForMarkerR>ShortName</BookSourceForMarkerR>
+  <AdvancedView>True</AdvancedView>
+  <ValidCharacters>  a A b B d D e E g G H i I k K l L m M n N o O p P ꞌ q Q r R s S t T u U V w W X Y z Z - ‌ ‍ ! 5 7 4 1 ” “ ’ ‘ ? 3 0 8 6 2 9 . , ) ( |  
+ + \ &amp; © * c C f F h j J v x y</ValidCharacters>
+  <InvalidCharacters>* ʼ " ͚ ' / [ ] J y v c F C f j h x ` ɑ &gt;</InvalidCharacters>
+  <Quotes>“ ”</Quotes>
+  <InnerQuotes>‘ ’</InnerQuotes>
+  <InnerInnerQuotes>“ ”</InnerInnerQuotes>
+  <ContinueQuotes>Yes</ContinueQuotes>
+  <VerboseQuotes>No</VerboseQuotes>
+  <ContinueAt>p p/q p/q1</ContinueAt>
+  <ValidPunctuation>_[ - ?_ _‘ ’_ ,_ ._ _“ :_ ”_ | _| )_ _( !_ ;_ ‌ ‍ .”_ ?”_ ,_“</ValidPunctuation>
+  <InvalidPunctuation>/ : ’ _)_ [ _]_ -_ ; ( _“_ "_ _; _?_ _;_ _’_ *_ _:_ _[_ _‘_ _(_ _,_ . , _- ?</InvalidPunctuation>
+  <ValidUncapitalizedStyles>q3 q2</ValidUncapitalizedStyles>
+  <InvalidUncapitalizedStyles>s mt2 p</InvalidUncapitalizedStyles>
+  <ValidSentenceFinalPunctCapitalization>) ” , ; ’</ValidSentenceFinalPunctCapitalization>
+  <InvalidSentenceFinalPunctCapitalization>. ? :</InvalidSentenceFinalPunctCapitalization>
+  <Pairs>(/) [/] {/}</Pairs>
+  <ClosedByParagraph>No</ClosedByParagraph>
+  <PoeticStyles>ib iq iq1 iq2 iq3 q q1 q2 q3 q4 qc qr qs qa qac qm qm1 qm2 qm3 b</PoeticStyles>
+  <IntroductionOutlineStyles>io io1 io2 io3 io4</IntroductionOutlineStyles>
+  <UnmatchedPairingCharacters>[ (</UnmatchedPairingCharacters>
+  <ContinueInnerQuotes>Yes</ContinueInnerQuotes>
+  <TranslationInfo>Standard::</TranslationInfo>
+  <EthnologueCode>nco</EthnologueCode>
+  <DefaultFont>Andika New Basic</DefaultFont>
+  <InterlinearModelText>ncoGLOSS</InterlinearModelText>
+  <InterlinearRelatedLanguages.ncoBT15>False</InterlinearRelatedLanguages.ncoBT15>
+  <InterlinearExportText.ncoBT15 />
+  <InterlinearExportOnApprove.ncoBT15>False</InterlinearExportOnApprove.ncoBT15>
+  <InterlinearRelatedLanguages.ncoGLOSS>False</InterlinearRelatedLanguages.ncoGLOSS>
+  <InterlinearExportText.ncoGLOSS />
+  <InterlinearExportOnApprove.ncoGLOSS>False</InterlinearExportOnApprove.ncoGLOSS>
+  <CharacterAdvancedView>True</CharacterAdvancedView>
+  <BibleModuleAssociations>XXD:Christmas story LUK 2015.sfm</BibleModuleAssociations>
+  <BooksPresent>110000010000000000000000000000010000000101110000111101111100011100000000000000000000000000000001000110000000000000000000000</BooksPresent>
+  <Naming PrePart="" PostPart="ncoSibe.SFM" BookNameForm="41MAT" ChapterNumberForm="" />
+</ScriptureText>

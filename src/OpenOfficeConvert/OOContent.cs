@@ -1134,15 +1134,6 @@ namespace SIL.PublishingSolution
 					_verseContent.Remove(0, _verseContent.Length);
 				}
 
-				if (_classNameWithLang.IndexOf("reference") == 0)
-				{
-					if (content.IndexOf(" ") >= 0)
-					{
-						_writer.WriteString(" ");
-						content.Replace(" ", "");
-					}
-				}
-
 				if (!IsParentPrecedeSpace())
 					content = SignificantSpace(content, true);
 
@@ -3576,20 +3567,12 @@ namespace SIL.PublishingSolution
 
 			if (_classNameWithLang.IndexOf("headword") >= 0)
 			{
-				if (_headwordVariable.Count - 1 > _headwordIndex + 1)
+				_headwordIndex += 1;
+				if (IsFirstEntry && _headwordVariable.Count > _headwordIndex)
 				{
-					if (IsFirstEntry)
-					{
-						leftHeadword = _headwordVariable[_headwordIndex];
-						++_headwordIndex;
-						IsFirstEntry = false;
-					}
-					else
-					{
-						++_headwordIndex;
-						leftHeadword = content; // _headwordVariable[++_headwordIndex];
-					}
+					leftHeadword = _headwordVariable[_headwordIndex];
 				}
+				IsFirstEntry = false;
 			}
 
 			string chapterNo = content;
@@ -3644,11 +3627,6 @@ namespace SIL.PublishingSolution
 			{
 				if (_previousParagraphName == null) _previousParagraphName = string.Empty;
 
-				//if (_childName.IndexOf("reversalform") >= 0 && _previousChildName.IndexOf("headword") >= 0)
-				//{
-				//	_previousChildName = "This_is_some_blabla_text";
-				//}
-
 				if (IsHeadwordMatches())
 				{
 					fillHeadword = true;
@@ -3667,7 +3645,6 @@ namespace SIL.PublishingSolution
 						_strPreviousChapterNumber = content;
 					}
 					if (_classNameWithLang.IndexOf("versenumber", StringComparison.InvariantCultureIgnoreCase) == 0)
-					// && (_previousParagraphName.ToLower().IndexOf("paragraph") == 0)
 					{
 						fillHeadword = true;
 						_nextVerse = true;
@@ -3687,6 +3664,7 @@ namespace SIL.PublishingSolution
 		}
 
 
+		private string _lastHeadwordId;
 		/// <summary>
 		/// Method validating the possible matching case with the possible classname, Then will enable headword when all case matches.
 		/// </summary>
@@ -3708,12 +3686,13 @@ namespace SIL.PublishingSolution
 			//Check possible classname in _previousParagraphName string.
 			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentryr1_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entryr1_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0 || _previousParagraphName.IndexOf("reversalindexentry", StringComparison.Ordinal) == 0);
 
-			//Check possible classname in _previousChildName string.
-			bool isPrevChildNameMatches = (_previousChildName.IndexOf("headword", StringComparison.Ordinal) == -1 && _previousChildName.IndexOf("reversalform", StringComparison.Ordinal) == -1);
-
-			if (isClassNameWithLangMatches && isClassNameMatches && isPrevParagraphMatches && isPrevChildNameMatches)
+			if (isClassNameWithLangMatches && isClassNameMatches && isPrevParagraphMatches)
 			{
-				fillHeadword = true;
+				if (string.IsNullOrEmpty(_paragraphId) || _paragraphId != _lastHeadwordId)
+				{
+					fillHeadword = true;
+					_lastHeadwordId = _paragraphId;
+				}
 			}
 			return fillHeadword;
 		}
