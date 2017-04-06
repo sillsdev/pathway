@@ -93,10 +93,6 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             SkipNode = r.Name == "span";
-			if (nextClass != null && nextClass.StartsWith("subentry"))
-			{
-				Debug.Print("break;");
-			}
 			CollectRules(r, GetRuleKey(r.Name, nextClass));
 	        for (var i = r.Depth; i >= 0; i--)
 	        {
@@ -173,7 +169,6 @@ namespace CssSimpler
                 {
                     if (!Applies(node, r)) continue;
 	                AddInTermOrder(found, node);
-                    found.Add(node);
                     dirty = true;
                 }
             }
@@ -257,10 +252,13 @@ namespace CssSimpler
                         {
                             index -= 1;
                         }
-                        requireParent = false;
                         if (!MatchClass(index, name)) return false;
-						_matchIndex.Push(index);
-						_matchNode.Push(node);
+		                if (!requireParent)
+		                {
+							_matchIndex.Push(index);
+							_matchNode.Push(node);
+						}
+						requireParent = false;
 						index -= 1;
                         break;
                     case "PRECEDES":
