@@ -1,5 +1,6 @@
-pathway (1.15.12.5735)  experimental; urgency=high
+pathway (1.15.13.5751)  experimental; urgency=high
 
+  * Common:TD-4808 adjusted so sub sub entries margins match FLEx 8.3.x
   * Common:TD-4758 Enable hyphenation for Scripture.
   * Common:TD-4780 Spaces in username leads to problems
   * Epub/HTML5:TD-1812 Epub validation errors
@@ -23,6 +24,8 @@ pathway (1.15.12.5735)  experimental; urgency=high
   * Linux:TD-4744 adjust validator to have extra slash for linux
   * Linux:TD-4454 Text Merges in the Prince Pdf Output If I set Stylesheet as Two Column
   * Linux:TD-4766 mono-basic4-sil dependency error
+  * LO/OO:TD-4807 remove space being inserted before commas
+  * LO/OO:TD-4800 Pictures widths adjusted so they aren't vertical lines
   * LO/OO:TD-4269 Running Header appears twice in the page view
   * LO/OO:TD-4301 Space after footnote marker before period
   * LO/OO:TD-4396 Pathway justify not working on minor entries
