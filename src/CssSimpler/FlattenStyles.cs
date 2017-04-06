@@ -93,10 +93,10 @@ namespace CssSimpler
         {
             var nextClass = r.GetAttribute("class");
             SkipNode = r.Name == "span";
-			//if (nextClass != null && nextClass.StartsWith("subentry"))
-			//{
-			//	Debug.Print("break;");
-			//}
+			if (nextClass != null && nextClass.StartsWith("subentry"))
+			{
+				Debug.Print("break;");
+			}
 			CollectRules(r, GetRuleKey(r.Name, nextClass));
 	        for (var i = r.Depth; i >= 0; i--)
 	        {
@@ -209,20 +209,37 @@ namespace CssSimpler
 
 	    }
 
-	    private bool Applies(XmlNode node, XmlReader r)
-        {
-            var index = r.Depth;
-            while (node != null && node.Name == "PROPERTY")
-            {
-                node = node.PreviousSibling;
-            }
-            var requireParent = false;
-            // We should be at the tag / class for the rule being applied so look before it.
-            if (node != null && node.ChildNodes.Count == 1)
-            {
-                node = node.PreviousSibling;
-            }
-            while (node != null)
+		private bool Applies(XmlNode node, XmlReader r)
+		{
+			var index = r.Depth;
+			while (node != null && node.Name == "PROPERTY")
+			{
+				node = node.PreviousSibling;
+			}
+			// We should be at the tag / class for the rule being applied so look before it.
+			if (node != null && node.ChildNodes.Count == 1)
+			{
+				node = node.PreviousSibling;
+			}
+			_matchIndex.Clear();
+			_matchNode.Clear();
+			while (true)
+			{
+				if (ApplyBacktrack(node, r, index)) return true;
+				if (_matchIndex.Count == 0) break;
+				index = _matchIndex.Pop() - 1;
+				node = _matchNode.Pop();
+			}
+			return false;
+		}
+
+		private readonly Stack<int> _matchIndex = new Stack<int>();
+		private readonly Stack<XmlNode> _matchNode = new Stack<XmlNode>();
+
+		private bool ApplyBacktrack(XmlNode node, XmlReader r, int index)
+		{
+			var requireParent = false;
+			while (node != null)
             {
                 switch (node.Name)
                 {
@@ -242,7 +259,9 @@ namespace CssSimpler
                         }
                         requireParent = false;
                         if (!MatchClass(index, name)) return false;
-                        index -= 1;
+						_matchIndex.Push(index);
+						_matchNode.Push(node);
+						index -= 1;
                         break;
                     case "PRECEDES":
                         if (_firstSibling) return false;
