@@ -839,21 +839,22 @@ namespace Test.XeLatex
 			_projInfo.ProjectInputType = "Scripture";
 			ExportProcess(file);
 			string texOutput = FileOutput(file + ".tex");
-			string expectedString = "\\font\\divnco=\"Times New Roman/GR:litr = 0:apos = 1\" at 14pt";
+			string expectedString1 = "\\font\\divnco=";
+			string expectedString2 = "/GR:litr = 0:apos = 1\" at 14pt";
 			bool isFound = false;
 			using (StreamReader sr = File.OpenText(texOutput))
 			{
 				string outputFileString = string.Empty;
 				while ((outputFileString = sr.ReadLine()) != null)
 				{
-					if(outputFileString.Contains(expectedString))
+					if (outputFileString.Contains(expectedString1) && outputFileString.Contains(expectedString2))
 					{
 						isFound = true;
 						break;
 					}
 				}
 			}
-			Assert.AreEqual(isFound, true);
+			Assert.AreEqual(true, isFound);
 		}
 
 		[Test]
