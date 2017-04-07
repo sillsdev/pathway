@@ -828,6 +828,34 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
+		///<summary>
+		///font with font-feature-settings
+		///To Test whether the font-feature-settings have been applied for the XeLaTex Output
+		/// </summary>
+		[Test]
+		public void FontFamily7()
+		{
+			const string file = "FontFamily7";
+			_projInfo.ProjectInputType = "Scripture";
+			ExportProcess(file);
+			string texOutput = FileOutput(file + ".tex");
+			string expectedString = "\\font\\divnco=\"Times New Roman/GR:litr = 0:apos = 1\" at 14pt";
+			bool isFound = false;
+			using (StreamReader sr = File.OpenText(texOutput))
+			{
+				string outputFileString = string.Empty;
+				while ((outputFileString = sr.ReadLine()) != null)
+				{
+					if(outputFileString.Contains(expectedString))
+					{
+						isFound = true;
+						break;
+					}
+				}
+			}
+			Assert.AreEqual(isFound, true);
+		}
+
 		[Test]
 		//TD-2059 font-family: "<default serif>", serif;
 		public void FontFamily6()

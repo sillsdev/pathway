@@ -28,6 +28,7 @@ namespace SIL.PublishingSolution
         private bool _isLinux = false;
         private string _className;
         private string _fontName;
+		private string _fontFeatures;
         private readonly List<string> _fontOption = new List<string>();
         private readonly List<string> _fontStyle = new List<string>();
         private string _fontSize;
@@ -89,6 +90,9 @@ namespace SIL.PublishingSolution
                     case "font-family":
                         FontFamily(propertyValue);
                         break;
+					case "font-feature-settings":
+						FontFeatureSettings(propertyValue);
+						break;
                     case "page-width":
                         PageWidth(propertyValue);
                         break;
@@ -270,6 +274,10 @@ namespace SIL.PublishingSolution
             else
             {
 				style = @"\font\" + _className + "=\"" + _fontName + "/GR";
+				if (!string.IsNullOrEmpty(_fontFeatures))
+				{
+					style += _fontFeatures;
+				}
                 foreach (string sty in _fontOption)
                 {
                     style += sty;
@@ -625,6 +633,23 @@ namespace SIL.PublishingSolution
             return _fontName;
         }
 
+		public string FontFeatureSettings(string propertyValue)
+		{
+			string fontSettingValue = string.Empty;
+
+			if (!string.IsNullOrEmpty(propertyValue))
+			{
+				//// Ex: To Convert a string the following
+				////"litr",0,"apos",1
+				////to
+				////:litr = 0:apos = 1
+				fontSettingValue = propertyValue.Replace("\",", " = ").Replace(",\"", ":").Replace("\"", "");
+				fontSettingValue = (propertyValue.Length > 0) ? ":" + fontSettingValue : "";
+			}
+
+			_fontFeatures = fontSettingValue;
+			return _fontFeatures;
+		}
         public void TextIndent(string propertyValue, string className, Dictionary<string, string> cssProperty)
         {
             if (propertyValue == string.Empty)
