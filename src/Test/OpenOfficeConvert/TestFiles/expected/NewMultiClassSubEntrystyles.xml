@@ -89,7 +89,7 @@
       <style:text-properties fo:background-color="transparent" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_body" style:family="paragraph" style:parent-style-name="mainentrysubentries_subentries_entry_letData_body">
-      <style:paragraph-properties fo:margin-left="33pt" fo:text-indent="-12pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:padding-left="12pt" fo:text-align="left" fo:background-color="transparent" />
+      <style:paragraph-properties fo:margin-left="57pt" fo:text-indent="0pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:padding-left="12pt" fo:text-align="left" fo:background-color="transparent" />
       <style:text-properties text:display="block" fo:font-size="10pt" style:font-size-complex="10pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_body" style:family="text" style:parent-style-name="mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_body">
@@ -692,7 +692,7 @@
     </style:default-style>
     <style:default-style style:family="paragraph">
       <style:paragraph-properties fo:hyphenation-ladder-count="no-limit" style:text-autospace="ideograph-alpha" style:punctuation-wrap="hanging" style:line-break="strict" style:tab-stop-distance="0.4925in" style:writing-mode="page" />
-      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="10pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Times New Roman" style:font-size-asian="10pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Times New Roman" style:font-size-complex="10pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="true" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
+      <style:text-properties style:use-window-font-color="true" style:font-name="Times New Roman" fo:font-size="10pt" fo:language="none" fo:country="none" style:letter-kerning="true" style:font-name-asian="Times New Roman" style:font-size-asian="10pt" style:language-asian="none" style:country-asian="none" style:font-name-complex="Times New Roman" style:font-size-complex="10pt" style:language-complex="zxx" style:country-complex="none" fo:hyphenate="false" fo:hyphenation-remain-char-count="2" fo:hyphenation-push-char-count="2" />
     </style:default-style>
     <style:default-style style:family="table">
       <style:table-properties table:border-model="collapsing" />

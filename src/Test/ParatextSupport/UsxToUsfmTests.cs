@@ -46,7 +46,7 @@ namespace Test.ParatextSupport
         private const string usxParaVerse = "<para style=\"p\"><verse number=\"1\" style=\"v\" />Para 1</para>";
         private const string usxPara = "<para style=\"p\">Para</para><para style=\"p\">Para</para>";
         private const string introSectionHead = "<h1 class=\"Intro_Section_Head\"><span lang=\"zxx\">Intro Section</span></h1>";
-		private const string introSectionContent = "<p class=\"intropara\"><span lang=\"zxx\">Intro Para</span></p>";
+		private const string introSectionContent = "<p class=\"Intro_Paras\"><span lang=\"zxx\">Intro Para</span></p>";
         private const string chapterVersePara = "<p class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span>" +
             "<span class=\"Verse_Number\" lang=\"zxx\">1</span><span lang=\"zxx\">Para 1</span></p>";
         private const string scrSectionHead = "<h1 class=\"Section_Head\"><span lang=\"zxx\">Section</span></h1>";

@@ -347,7 +347,7 @@ page-break-before: always;
 string-set: chapter '1';
 }
 
-.intropara {
+.Intro_Paras {
     text-indent: 20pt;
 }
 /* End Scripture.css */

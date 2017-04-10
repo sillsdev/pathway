@@ -266,10 +266,7 @@ namespace Test.epubConvert
 			//1.19
 			string xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-6']";
 			XmlNode node = resultDoc.SelectSingleNode(xPath, nsmgr);
-			if (!Common.UsingMonoVM)
-			{
-				Assert.AreEqual("[b]Bahasa Yunani bilang “Badiri di Allah pung muka”. Ini bisa pung arti ‘Karja par Tuhan’. Mar bisa pung arti lai ‘Badiri di Allah pung muka’. Malekat yang badiri di Allah pung muka pung kuasa labe dari malekat laeng. Jadi, Gabriel bukang malekat biasa.", node.InnerText.Trim());
-			}
+			Assert.AreEqual("[b]Bahasa Yunani bilang “Badiri di Allah pung muka”. Ini bisa pung arti ‘Karja par Tuhan’. Mar bisa pung arti lai ‘Badiri di Allah pung muka’. Malekat yang badiri di Allah pung muka pung kuasa labe dari malekat laeng. Jadi, Gabriel bukang malekat biasa.", node.InnerText.Trim());
 			//1.27
 			xPath = "//xhtml:ul[@class='footnotes']/xhtml:li[@id='FN_Footnote-LUK-7']";
 			node = resultDoc.SelectSingleNode(xPath, nsmgr);

@@ -190,7 +190,7 @@
 				</h1>
 			</xsl:when>
 			<xsl:when test="@style = 'ip'">
-				<p class="intropara" xmlns="http://www.w3.org/1999/xhtml">
+				<p class="Intro_Paras" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
 				</p>
 			</xsl:when>

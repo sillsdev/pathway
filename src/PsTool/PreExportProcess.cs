@@ -3252,7 +3252,7 @@ namespace SIL.Tool
 				tw.WriteLine("display: none;");
 				tw.WriteLine("}");
 
-				tw.WriteLine(".intropara{");
+				tw.WriteLine(".Intro_Paras{");
 				tw.WriteLine("text-indent: 20pt;");
 				tw.WriteLine("}");
 

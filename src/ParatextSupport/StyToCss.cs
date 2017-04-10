@@ -511,8 +511,17 @@ namespace SIL.PublishingSolution
             _mapClassName["sc"] = "Inscription";
 			_mapClassName["pn"] = "pn";
 			_mapClassName["rq"] = "rq";
-			_mapClassName["ip"] = "intropara";
+			_mapClassName["ip"] = "Intro_Paras";
 			_mapClassName["ft"] = "ft";
+			_mapClassName["imt"] = "Intro_Title_Main";
+			_mapClassName["im2"] = "Intro_Title_Secondary";
+			_mapClassName["im3"] = "Intro_Title_Tertiary";
+			_mapClassName["is"] = "Intro_Section_Head";
+			_mapClassName["iq"] = "Intro_Citation_Line";
+			_mapClassName["iq1"] = "Intro_Citation_Line1";
+			_mapClassName["iq2"] = "Intro_Citation_Line2";
+			_mapClassName["imq"] = "Intro_Citation_Paragraph";
+
         }
     }
 }

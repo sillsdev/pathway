@@ -3555,8 +3555,8 @@ namespace Test.OpenOfficeConvert
 			_validate = new ValidateXMLFile(styleOutput);
 
 			_validate.ClassName = "mainentrysubentry_subentry_mainentrysubentries_subentries_entry_letData_body";
-			_validate.ClassProperty.Add("fo:text-indent", "-12pt");
-			_validate.ClassProperty.Add("fo:margin-left", "33pt");
+			_validate.ClassProperty.Add("fo:text-indent", "0pt");
+			_validate.ClassProperty.Add("fo:margin-left", "57pt");
 			bool returnValue = _validate.ValidateNodeAttributesNS(true);
 			Assert.IsTrue(returnValue);
 
