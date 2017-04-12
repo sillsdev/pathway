@@ -48,7 +48,7 @@ namespace CssSimpler
             _xmlCss = xmlCss;
             Suffix = string.Empty;
 	        _stylesheetPresent = false;
-            DeclareBefore(XmlNodeType.Attribute, SaveClassLang);
+            DeclareBefore(XmlNodeType.Attribute, SaveClassLangDir);
             DeclareBefore(XmlNodeType.Element, SaveSibling);
             DeclareBefore(XmlNodeType.Element, InsertBefore);
 			DeclareBefore(XmlNodeType.Element, RemoveExtraStylesheets);
@@ -416,12 +416,12 @@ namespace CssSimpler
         private readonly SortedDictionary<string, string> _reverseMap = new SortedDictionary<string, string>();
         private readonly XmlDocument _flatCss = new XmlDocument();
         private readonly XmlDocument _xmlCss;
-        private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column-count", "float", "clear", "width", "margin-left", "padding-bottom", "padding-top", "padding-right", "padding-left", "pading", "display"};
+        private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column-count", "float", "clear", "width", "margin-left", "margin-right", "margin-top", "margin-bottom", "margin", "padding-bottom", "padding-top", "padding-right", "padding-left", "pading", "display"};
         public XmlDocument MakeFlatCss()
         {
             _flatCss.RemoveAll();
             _flatCss.LoadXml("<ROOT/>");
-            CopyTagNodes();
+            CopyNonStyleNodes();
             foreach (var key in RuleStyleMap.Keys)
             {
                 _reverseMap[RuleStyleMap[key]] = key;
@@ -479,11 +479,17 @@ namespace CssSimpler
             return _flatCss;
         }
 
-        private void CopyTagNodes()
+	    private void CopyNonStyleNodes()
+	    {
+			CopyMatchedNodes("//*[@term='1' and count(TAG) = 1]");
+			CopyMatchedNodes("//*[ANY]");
+	    }
+
+	    private void CopyMatchedNodes(string pattern)
         {
-            var tagNodes = _xmlCss.SelectNodes("//*[@term='1' and count(TAG) = 1]");
-            Debug.Assert(tagNodes != null, "tagNodes != null");
-            foreach (XmlElement node in tagNodes)
+            var nodes = _xmlCss.SelectNodes(pattern);
+	        if (nodes == null) return;
+            foreach (XmlElement node in nodes)
             {
                 Debug.Assert(_flatCss.DocumentElement != null, "_flatCss.DocumentElement != null");
                 _flatCss.DocumentElement.AppendChild(_flatCss.ImportNode(node, true));
@@ -495,7 +501,7 @@ namespace CssSimpler
             SkipNode = false;
         }
 
-        private void SaveClassLang(XmlReader r)
+        private void SaveClassLangDir(XmlReader r)
         {
             if (r.Name == "class")
             {
@@ -520,9 +526,13 @@ namespace CssSimpler
             {
                 AddInHierarchy(r, Langs);
             }
-        }
+			else if (r.Name == "dir")
+            {
+	            Dir = r.Value;
+            }
+		}
 
-        private int _nextFirst = -1;
+		private int _nextFirst = -1;
         private bool _firstSibling;
 
         private void SaveSibling(XmlReader r)
