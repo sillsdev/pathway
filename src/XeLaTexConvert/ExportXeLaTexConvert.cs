@@ -92,7 +92,7 @@ namespace SIL.PublishingSolution
             _langFontCodeandName = new Dictionary<string, string>();
             string mainXhtmlFileWithPath = projInfo.DefaultXhtmlFileWithPath;
             projInfo.OutputExtension = "pdf";
-
+			ModifyCssStyle(projInfo);
             var preProcessor = new PreExportProcess(projInfo);
             ExportPreprocessForXelatex(projInfo, preProcessor);
             var organization = SettingFrontmatter();
@@ -138,6 +138,19 @@ namespace SIL.PublishingSolution
 	        }
 	        return true;
         }
+
+		public void ModifyCssStyle(PublicationInformation projInfo)
+		{
+			TextWriter tw = new StreamWriter(projInfo.DefaultCssFileWithPath, true);
+
+			if (projInfo.ProjectInputType.ToLower() == "scripture")
+			{
+				tw.WriteLine(".Intro_Paras{");
+				tw.WriteLine("text-indent: 20pt;");
+				tw.WriteLine("}");
+			}
+			tw.Close();
+		}
 
         private Dictionary<string, Dictionary<string, string>> WrittingTexFile(PublicationInformation projInfo, string fileName, out string xeLatexFullFile,
                                            out StreamWriter xeLatexFile, out XeLaTexStyles xeLaTexStyles,

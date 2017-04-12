@@ -1,14 +1,14 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="XeLaTexContent.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 //
 // </remarks>
@@ -238,7 +238,7 @@ namespace SIL.PublishingSolution
                     ContentCounterReset[className] = IdAllClass[className][searchKey];
                 }
 
-                // Footnote process 
+                // Footnote process
                 searchKey = "display";
                 if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
                 {
@@ -311,7 +311,7 @@ namespace SIL.PublishingSolution
                     ContentCounterReset[className] = IdAllClass[className][searchKey];
                 }
 
-                //// Footnote process 
+                //// Footnote process
                 searchKey = "display";
                 if (IdAllClass[className].ContainsKey(searchKey) && className.IndexOf("..footnote") > 0)
                 {
@@ -745,7 +745,7 @@ namespace SIL.PublishingSolution
 							}
 							break;
 						}
-					}  
+					}
 				}
 			}
 
@@ -807,8 +807,8 @@ namespace SIL.PublishingSolution
                         _xetexFile.Write(property);
                         _xetexFile.Write("{");
 
-						if (property.Contains("\\section*{"))
-							letterInlineCount++;
+						//if (property.Contains("\\section*{"))
+						//	letterInlineCount++;
                     }
                     _inlineCount = (inlineStyle.Count - paraStyleCount) + letterInlineCount;
                     mergedParaStyle = Common.ReplaceSeperators(mergedParaStyle);
@@ -973,7 +973,7 @@ namespace SIL.PublishingSolution
                     foreach (string sty in _classInlineStyle[parentClass])
                     {
                         string parentProp = Common.LeftString(sty, " ");
-                        if (_paragraphPropertyList.Contains(parentProp)) continue; // skip parent paragraph property 
+                        if (_paragraphPropertyList.Contains(parentProp)) continue; // skip parent paragraph property
                         bool IsContains = false;
                         foreach (string styl in _mergedInlineStyle)
                         {
@@ -1087,11 +1087,11 @@ namespace SIL.PublishingSolution
                     }
 
                 }
-                else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72 
+                else if (rectWidth != "0" && rectWidth != "72") //H=0; W != 0,72
                 {
                     rectHeight = Common.CalcDimension(fromPath, ref rectWidth, Common.CalcType.Height);
                 }
-                else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0, 
+                else if (rectWidth == "0" && rectHeight == "0") //H=0; W = 0,
                 {
 
                     rectWidth = Convert.ToString(Common.ColumnWidth * .9);
@@ -1099,7 +1099,7 @@ namespace SIL.PublishingSolution
                 }
                 else
                 {
-                    //Default value is 72 
+                    //Default value is 72
                     rectHeight = defaultHeight.ToString(); // fixed the width as 1 in = 72pt;
                     rectWidth = Common.CalcDimension(fromPath, ref rectHeight, Common.CalcType.Width);
                 }
@@ -1419,11 +1419,11 @@ namespace SIL.PublishingSolution
 
             Direction();
 
-			if (_className.ToLower().Contains("sectionhead"))
-				_xetexFile.Write("\\section*{\\needspace {8\\baselineskip}");
-			
+			//if (_className.ToLower().Contains("sectionhead"))
+			//	_xetexFile.Write("\\section*{\\needspace {1\\baselineskip}");
+
             WriteParagraphInline();
-	        
+
             if (IdAllClass.ContainsKey(_classNameWithLang))
             {
                 bool isPageBreak = false;
@@ -1729,7 +1729,7 @@ namespace SIL.PublishingSolution
         private void EndElement()
         {
             _characterName = null;
-			
+
             if (_hasImgCloseTag && _imageInserted)
             {
                 _hasImgCloseTag = false;
@@ -1739,9 +1739,9 @@ namespace SIL.PublishingSolution
                 _closeChildName = StackPop(_allStyle);
             }
             CloseBrace(_closeChildName);
-			if (_classNameWithLang.ToLower().Contains("sectionhead"))
-				_xetexFile.Write("}");
-			
+			//if (_classNameWithLang.ToLower().Contains("sectionhead"))
+			//	_xetexFile.Write("}");
+
             DoNotInheritClassEnd(_closeChildName);
             SetHeadwordFalse();
             ClosefooterNote();
@@ -1776,7 +1776,7 @@ namespace SIL.PublishingSolution
                 _bookPageBreak = false;
             }
             _classNameWithLang = StackPeek(_allStyle);
-			
+
             _classNameWithLang = Common.LeftString(_classNameWithLang, "_");
         }
 
@@ -1910,7 +1910,7 @@ namespace SIL.PublishingSolution
             _classFamily = classFamily;
 
             _isNewParagraph = false;
-            _characterName = "$ID/[No character style]";// "[No character style]"; 
+            _characterName = "$ID/[No character style]";// "[No character style]";
 
             _paragraphPropertyList = new List<string>();
             ////Padding
@@ -1955,8 +1955,8 @@ namespace SIL.PublishingSolution
         /// -------------------------------------------------------------------------------------------
         /// <summary>
         /// Close the Xhtml and CSS files.
-        /// 
-        /// <list> 
+        ///
+        /// <list>
         /// </list>
         /// </summary>
         /// <returns> </returns>
