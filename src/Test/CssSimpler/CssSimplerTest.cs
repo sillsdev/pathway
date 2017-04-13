@@ -1287,6 +1287,43 @@ namespace Test.CssSimplerTest
 		}
 
 		/// <summary>
+		/// .letter rule has a green color but span for en lang has blue color and more terms
+		/// </summary>
+		[Test]
+		public void RtlTest()
+		{
+			const string testName = "Rtl";
+			_testFiles.Copy(testName + ".css");
+			_testFiles.Copy(testName + ".xhtml");
+			var cssFullName = _testFiles.Output(testName + ".css");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			var xhtmlOutFullName = _testFiles.Output(testName + "Out.xhtml");
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			var lc = new LoadClasses(xhtmlFullName);
+			var styleSheet = lc.StyleSheet;
+			UniqueClasses = lc.UniqueClasses;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			// ReSharper disable once UnusedVariable
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			fs.Structure = 0;
+			fs.DivBlocks = false;
+			MetaData(fs);
+			fs.Parse();
+			var xmlCssFullName = _testFiles.Output(testName + ".xml");
+			SavedXmlCssFileName = xmlCssFullName;
+			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
+			NodeTest(xmlCssFullName, 1, "//RULE[count(ANY)=1 and contains(ANY//value,'ltr') and contains(PROPERTY/value,'isolate')]", "rtl isolate rule");
+			NodeTest(xhtmlOutFullName, 2, "//*[@class='partofspeech' and @dir='ltr']", "check for dir=ltr attribute on partofspeech");
+		}
+
+		/// <summary>
 		/// By default spans are created for significant space since it is needed for Pathway to Libre Office
 		/// </summary>
 		[Test]

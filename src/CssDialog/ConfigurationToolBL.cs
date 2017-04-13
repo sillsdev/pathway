@@ -1234,7 +1234,12 @@ namespace SIL.PublishingSolution
 			string alignment = string.Empty;
 
 			if (cTool.DdlJustified.SelectedItem != null)
-				alignment = ((ComboBoxItem)cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture);
+			{
+				if (cTool.DdlDefaultAlignment.SelectedItem != null)
+				{
+					alignment = ((ComboBoxItem)cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture);
+				}
+			}
 
 			string epubStyleProperties = "body {  \r\n font-size:" + cTool.TxtBaseFontSize.Text + "pt; \r\n" +
 				" line-height:" + cTool.TxtDefaultLineHeight.Text + "%; \r\n" + "} \r\n";
@@ -3513,9 +3518,15 @@ namespace SIL.PublishingSolution
 			sb.Append(cTool.TxtBaseFontSize.Text);
 			sb.Append("pt Font, ");
 			sb.Append(cTool.TxtDefaultLineHeight.Text);
-			sb.Append("% Line Height, Alignment: ");
+			sb.Append("% Line Height");
 			if (cTool.DdlJustified.SelectedItem != null)
-				sb.Append(((ComboBoxItem)cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture));
+			{
+				if (cTool.DdlDefaultAlignment.SelectedItem != null)
+				{
+					sb.Append(", Alignment: ");
+					sb.Append(((ComboBoxItem)cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture));
+				}
+			}
 
 			cTool.TxtCss.Text = sb.ToString();
 		}
@@ -3536,11 +3547,27 @@ namespace SIL.PublishingSolution
 				cTool.TxtCss.Text = @"No custom properties for DictionaryForMIDs";
 			}
 			string comma = ", ";
-			string red = (((ComboBoxItem)cTool.DdlRedLetter.SelectedItem).Value.Length > 0 && ((ComboBoxItem)cTool.DdlRedLetter.SelectedItem).Value.ToLower() == "yes") ? " Red Letter  " : "";
+			string red = string.Empty;
+			if (cTool.DdlRedLetter.SelectedItem != null)
+			{
+				if(((ComboBoxItem)cTool.DdlRedLetter.SelectedItem).Value.Length > 0)
+				{
+					if(((ComboBoxItem)cTool.DdlRedLetter.SelectedItem).Value.ToLower() == "yes")
+					{
+						red = " Red Letter  ";
+					}
+				}
+			}
 			if (red.Length == 0)
 				comma = "";
-			string files = (((ComboBoxItem)cTool.DdlFiles.SelectedItem).Value.Length > 0) ? " Numbers of files produced -  " + ((ComboBoxItem)cTool.DdlFiles.SelectedItem).Value + comma : " ";
-
+			string files = "";
+			if (cTool.DdlFiles.SelectedItem != null)
+			{
+				if (((ComboBoxItem)cTool.DdlFiles.SelectedItem).Value.Length > 0)
+				{
+					files = " Numbers of files produced -  " + ((ComboBoxItem)cTool.DdlFiles.SelectedItem).Value + comma;
+				}
+			}
 			string combined =
 				files + " " +
 				red;

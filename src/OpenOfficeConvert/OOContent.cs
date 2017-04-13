@@ -1422,6 +1422,7 @@ namespace SIL.PublishingSolution
 						content = content.Replace("-", Common.ConvertUnicodeToString("\\2011")) + _zeroWidthNoBreakSpace;
 					}
 				}
+				CheckIssolate(ref content);
 			}
 
 			AddUsedStyleName(characterStyle);
@@ -1452,6 +1453,15 @@ namespace SIL.PublishingSolution
 			if (_imageClass.Length <= 0)
 				_textWritten = true;
 
+		}
+
+		private void CheckIssolate(ref string content)
+		{
+			var paragraphProperties = IdAllClass[_allParagraph.Peek()];
+			if (!paragraphProperties.ContainsKey("writing-mode")) return;
+			if (paragraphProperties["writing-mode"] != "rl-tb") return;
+			if (!_xhtmlClassAttrib.Attribute.Contains("dirltr")) return;
+			content = "\u2066" + content + "\u2069";
 		}
 
 		private bool AnchorBookMark(ref string content)

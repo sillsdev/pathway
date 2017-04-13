@@ -11,7 +11,7 @@ Vcs-Browser: http://github.com/sillsdev/pathway/
 
 Package: pathway
 Architecture: all
-Depends: default-jre-headless, fonts-sil-charissil, mono4-sil, lame, xchm,
+Depends: default-jre-headless, fonts-sil-charis, mono4-sil, lame, xchm,
  libsword-utils, nautilus
 Recommends: libreoffice-writer, prince, calibre, evince
 Description: Prepare dictionary and Scripture data for distribution in various formats

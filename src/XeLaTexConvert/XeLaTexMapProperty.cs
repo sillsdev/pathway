@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="XeLaTexMapProperty.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 //
 // </remarks>
@@ -577,6 +577,7 @@ namespace SIL.PublishingSolution
             if (!_includePackageList.Contains(propertyValue))
                 _includePackageList.Add(propertyValue);
         }
+
         public void MarginBottom(string propertyValue)
         {
             if (propertyValue == string.Empty)
@@ -586,7 +587,8 @@ namespace SIL.PublishingSolution
             _idProperty["Margin-Bottom"] = propertyValue;
             //propertyValue = Common.SetPropertyValue("\\needspace\\baselineskip","");//propertyValue
             //\section*{\needspace {3\baselineskip}{\topskip 18pt{\letterhiletHeaddicBody{र sam}}}}
-            propertyValue = "\\section*{\\needspace {8\\baselineskip}";
+            //propertyValue = "\\section*{\\needspace {1\\baselineskip}";
+			propertyValue = "\r\n \\setlength{\\parskip}{" + propertyValue + "pt plus 1pt minus 2pt}";
             _idProperty["margin-bottom"] = propertyValue;
             _inlineStyle.Add(propertyValue);
 
@@ -594,6 +596,7 @@ namespace SIL.PublishingSolution
             if (!_includePackageList.Contains(propertyValue))
                 _includePackageList.Add(propertyValue);
         }
+
         public string FontFamily(string propertyValue)
         {
             string fontName = "Times New Roman";

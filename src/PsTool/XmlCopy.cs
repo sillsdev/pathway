@@ -39,6 +39,7 @@ namespace SIL.Tool
 		private const int StackSize = 30;
 		protected readonly ArrayList Classes = new ArrayList(StackSize);
 		protected readonly ArrayList Langs = new ArrayList(StackSize);
+	    protected string Dir;
 		protected string StyleDecorate;
 		protected readonly List<string> DecorateExceptions = new List<string> {"letHead", "letter", "letData", "reversalindexentry", "dicBody"};
         protected string Suffix = "-ps";
@@ -122,11 +123,12 @@ namespace SIL.Tool
 											_wtr.WriteAttributeString(_rdr.Name, className);
 										}
 	                                    ReplaceClass = string.Empty;
+	                                    if (_rdr.Name == "dir") Dir = null;
                                     }
                                 }
                                 AfterProcessMethods();
                             }
-                            SkipAttr = false;
+							SkipAttr = false;
                         }
                         else
                         {
@@ -384,7 +386,11 @@ namespace SIL.Tool
             {
                 WriteLangAttr(myLang);
             }
-            if (val.StartsWith(" ") || val.EndsWith(" "))
+			if (!string.IsNullOrEmpty(Dir))
+			{
+				WriteDirAttr();
+			}
+			if (val.StartsWith(" ") || val.EndsWith(" "))
             {
                 _wtr.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "preserve");
             }
@@ -434,7 +440,13 @@ namespace SIL.Tool
             _wtr.WriteAttributeString("lang", myLang);
         }
 
-        protected void Finished()
+		protected void WriteDirAttr()
+		{
+			_wtr.WriteAttributeString("dir", Dir);
+			Dir = null;
+		}
+
+		protected void Finished()
         {
             _finish = true;
         }
