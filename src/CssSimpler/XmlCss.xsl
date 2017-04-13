@@ -65,7 +65,12 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="ATTRIB" mode="inRule">
+	<xsl:template match="ANY" mode="inRule">
+		<xsl:text>*</xsl:text>
+		<xsl:apply-templates select="*" mode="inRule"/>
+	</xsl:template>
+
+	<xsl:template match="ATTRIB" mode="inRule">
         <xsl:text>[</xsl:text>
         <xsl:apply-templates select="*" mode="inRule"/>
         <xsl:text>]</xsl:text>
