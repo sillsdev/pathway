@@ -390,7 +390,8 @@ namespace Test.OpenOfficeConvert
 				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
 			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.Ignore(styleOutput, "//*[@style:name = 'span_.hi']", new Dictionary<string, string> { { "style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 
@@ -416,7 +417,8 @@ namespace Test.OpenOfficeConvert
 				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
 			}
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+			XmlAssert.Ignore(styleOutput, "//*[@style:name = 'span_.hi']", new Dictionary<string, string> { { "style", "urn:oasis:names:tc:opendocument:xmlns:style:1.0" } });
+			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
             XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
         }
 

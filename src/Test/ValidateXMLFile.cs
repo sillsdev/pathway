@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
 using NUnit.Framework;
 using SIL.Tool;
@@ -38,7 +39,7 @@ namespace Test
             FileNameWithPath = fileName;
             LoadedDoc = GetDoc();
             TestFilesIndesign();
-           
+
         }
         public ValidateXMLFile()
         {
@@ -152,7 +153,7 @@ namespace Test
         {
             string propertyValue = string.Empty;
             bool match = true;
-            
+
             XPath = "//style:style[@style:name='" + ClassName + "']";
             if (xpath.Length <= 0)
             {
@@ -226,6 +227,7 @@ namespace Test
             return node.Attributes.GetNamedItem(key, nsmgr.LookupNamespace(ns));
         }
 
+
         public bool ValidateNodeInnerXml(string xpath, string value)
         {
             bool match = true;
@@ -250,7 +252,8 @@ namespace Test
                 {
                     inner = GetReplacedInnerXml(node);
                 }
-
+	            inner = Regex.Replace(inner, @"font-(family|name-complex)=""[^""]+""", "fontName");
+	            value = Regex.Replace(value, @"font-(family|name-complex)=""[^""]+""", "fontName");
                 if (inner != value)
                 {
                     match = false;
@@ -288,7 +291,7 @@ namespace Test
             bool match = true;
 
             XmlNode node = GetOfficeNode();
-            if (node == null) 
+            if (node == null)
             {
                 match = false;
             }
@@ -654,7 +657,7 @@ namespace Test
                     {
                         inner = GetReplacedInnerXml(node);
                     }
-   
+
                     if (inner != value)
                     {
                         match = false;
@@ -787,7 +790,7 @@ namespace Test
                 nsmgr.AddNamespace("draw", "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0");
 				nsmgr.AddNamespace("svg", "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0");
                 nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-                
+
             }
             return doc;
         }
@@ -829,7 +832,7 @@ namespace Test
                     {
                         value = node.ChildNodes[0].InnerText;
                     }
-                    
+
                     if (value != ClassProperty[propertyKey])
                     {
                         match = false;
@@ -859,13 +862,13 @@ namespace Test
                     {
                         value = node.ChildNodes[0].InnerText;
                     }
-                    
+
                 }
                 match = value == content;
             }
             else
             {
-                FileNameWithPath = Common.PathCombine(outputStory, "Story_2.xml"); 
+                FileNameWithPath = Common.PathCombine(outputStory, "Story_2.xml");
                 node = Common.GetXmlNode(FileNameWithPath, XPath);
                 if (node != null)
                 {

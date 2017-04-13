@@ -112,9 +112,7 @@
     <style:style style:name="div_.hi" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-family="Mangal" />
     </style:style>
-    <style:style style:name="span_.hi" style:family="paragraph" style:parent-style-name="none">
-      <style:text-properties fo:font-family="Mangal" fo:font-size="10pt" />
-    </style:style>
+    <style:style style:name="span_.hi" style:family="paragraph" style:parent-style-name="none">Ignore</style:style>
     <style:style style:name="div_.ggo-Telu-IN" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-family="Gautami" />
     </style:style>
