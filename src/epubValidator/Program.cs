@@ -128,8 +128,15 @@ namespace epubValidator
                         sb.Append(Path.DirectorySeparatorChar);
 						sb.Append("epubcheck.jar");
 						sb.Append("\" ");
-	                    sb.Append(" -e "); // Include only error and fatal severity messages in output
-						sb.Append(" -c \""); // Custom rule file to change priority of RSC-005 (lang tag value)
+	                    if (UsingMonoVM)
+	                    {
+		                    sb.Append(" -f "); // Include only error and fatal severity messages in output
+	                    }
+	                    else
+	                    {
+							sb.Append(" -e "); // Include only error and fatal severity messages in output
+	                    }
+	                    sb.Append(" -c \""); // Custom rule file to change priority of RSC-005 (lang tag value)
 						if (UsingMonoVM)
 						{
 							sb.Append(Path.DirectorySeparatorChar);
