@@ -416,7 +416,7 @@ namespace CssSimpler
         private readonly SortedDictionary<string, string> _reverseMap = new SortedDictionary<string, string>();
         private readonly XmlDocument _flatCss = new XmlDocument();
         private readonly XmlDocument _xmlCss;
-        private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column-count", "float", "clear", "width", "margin-left", "margin-right", "margin-top", "margin-bottom", "margin", "padding-bottom", "padding-top", "padding-right", "padding-left", "pading", "display"};
+        private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column-count", "float", "clear", "width", "margin-left", "margin-right", "margin-top", "margin-bottom", "margin", "padding-bottom", "padding-top", "padding-right", "padding-left", "padding", "display"};
         public XmlDocument MakeFlatCss()
         {
             _flatCss.RemoveAll();
