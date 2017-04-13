@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ModifyLOStyles.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Modify the OOStyle file
 // </remarks>
@@ -48,7 +48,7 @@ namespace SIL.PublishingSolution
             LoadAllProperty();
             LoadSpellCheck();
             CreateFontLanguageMap();
-            
+
             _childStyle = childStyle;
             _projectPath = projectPath;
 	        _languageStyleName = languageStyleName;
@@ -101,7 +101,7 @@ namespace SIL.PublishingSolution
                                 _childStyle["headword_entry_letData_dicBody"]["font-family"];
                         }
                     }
-                    else if(_childStyle.ContainsKey("headword_entry_letData_body")) 
+                    else if(_childStyle.ContainsKey("headword_entry_letData_body"))
                     {
                         if (_childStyle["headword_entry_letData_body"].ContainsKey("font-family"))
                         {
@@ -297,14 +297,27 @@ namespace SIL.PublishingSolution
             _paragraphProperty.Clear();
             _textProperty.Clear();
             _columnProperty.Clear();
+	        var rtl = className.Value.ContainsKey("writing-mode") && className.Value["writing-mode"] == "rl-tb";
 
             foreach (KeyValuePair<string, string> prop in className.Value)
             {
                 string propName = prop.Key;
                 if (_allParagraphProperty.ContainsKey(propName))
                 {
+	                var target = prop.Key;
+	                if (rtl)
+	                {
+		                if (target.Contains("-right"))
+		                {
+			                target = target.Replace("-right", "-left");
+		                }
+						else if (target.Contains("-left"))
+		                {
+			                target = target.Replace("-left", "-right");
+		                }
+	                }
                     if (!_paragraphProperty.ContainsKey(prop.Key))
-                        _paragraphProperty[_allParagraphProperty[propName]  + prop.Key] = prop.Value;
+                        _paragraphProperty[_allParagraphProperty[propName]  + target] = prop.Value;
                 }
                 else if (_allTextProperty.ContainsKey(propName))
                 {
@@ -370,7 +383,7 @@ namespace SIL.PublishingSolution
 
             if (_paragraphProperty.Count > 0)
             {
-                for (int i = 0; i < node.ChildNodes.Count; i++) 
+                for (int i = 0; i < node.ChildNodes.Count; i++)
                 {
                     if (node.ChildNodes[i].Name == "style:paragraph-properties")
                     {
@@ -426,7 +439,7 @@ namespace SIL.PublishingSolution
             }
         }
 
-        
+
         /// <summary>
         /// For Header/Footer variables, all entry shouldn't be partial on page end.
         /// TD-2403
@@ -677,7 +690,7 @@ namespace SIL.PublishingSolution
                 {
                     lang = lang_coun[0];
                     switch (lang)
-                    { 
+                    {
                         case "es":
                             coun = "ES";
                             break;
@@ -712,7 +725,7 @@ namespace SIL.PublishingSolution
         /// New style inherits its parent.
         /// float = floatProperty =  left/ right/ center
         /// display = displayproperty = none/ block
-        /// <list> 
+        /// <list>
         /// </list>
         /// </summary>
         /// <param name="styleFilePath">syles.xml path</param>
@@ -862,7 +875,7 @@ namespace SIL.PublishingSolution
         /// <summary>
         /// Create a Graphics style in style.xml, if style has parent.
         /// New style inherits its parent.
-        /// <list> 
+        /// <list>
         /// </list>
         /// </summary>
         /// <param name="styleFilePath">syles.xml path</param>
@@ -1082,7 +1095,7 @@ namespace SIL.PublishingSolution
             }
             _styleXMLdoc.Save(styleFilePath);
         }
- 
+
         /// <summary>
         /// Creates a Style for Drop caps according to no of Characters
         /// </summary>

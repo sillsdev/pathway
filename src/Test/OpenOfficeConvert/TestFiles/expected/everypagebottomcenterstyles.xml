@@ -40,7 +40,7 @@
       <style:text-properties fo:font-family="Faruma" style:font-name-complex="Faruma" fo:font-style="italic" text:display="none" fo:font-weight="700" style:font-weight-complex="700" fo:font-size="14pt" style:font-size-complex="14pt" fo:color="#400000" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="TitleMain_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:orphans="5" fo:text-align="center" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="24pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-right="0pt" fo:orphans="5" fo:text-align="center" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="24pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="normal" fo:font-weight="700" style:font-weight-complex="700" fo:font-size="22pt" style:font-size-complex="22pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.dv_TitleMain_scrBook_scrBody" style:family="text" style:parent-style-name="TitleMain_scrBook_scrBody">
@@ -50,14 +50,14 @@
       <style:paragraph-properties fo:text-align="end" style:writing-mode="rl-tb" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="IntroSectionHead_scrIntroSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrIntroSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:margin-top="3pt" fo:margin-bottom="3pt" fo:text-align="end" style:line-height-at-least="12pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-right="0pt" fo:margin-top="3pt" fo:margin-bottom="3pt" fo:text-align="end" style:line-height-at-least="12pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.dv_IntroSectionHead_scrIntroSection_scrBook_scrBody" style:family="text" style:parent-style-name="IntroSectionHead_scrIntroSection_scrBook_scrBody">
       <style:text-properties fo:font-family="Faruma" style:font-name-complex="Faruma" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="IntroParagraph_scrIntroSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrIntroSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="14.4pt" fo:margin-left="0pt" style:line-height-at-least="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:text-indent="14.4pt" fo:margin-right="0pt" style:line-height-at-least="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.dv_IntroParagraph_scrIntroSection_scrBook_scrBody" style:family="text" style:parent-style-name="IntroParagraph_scrIntroSection_scrBook_scrBody">
@@ -73,7 +73,7 @@
       <style:text-properties fo:font-family="Faruma" style:font-name-complex="Faruma" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="IntroListItem1_scrIntroSection_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrIntroSection_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="36pt" style:line-height-at-least="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-right="36pt" style:line-height-at-least="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.dv_IntroListItem1_scrIntroSection_scrBook_scrBody" style:family="text" style:parent-style-name="IntroListItem1_scrIntroSection_scrBook_scrBody">
@@ -90,14 +90,14 @@
       <style:paragraph-properties fo:text-align="end" style:writing-mode="rl-tb" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="SectionHead_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:margin-top="12pt" fo:margin-bottom="0pt" fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="12pt" fo:keep-with-next="always" fo:orphans="2" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-right="0pt" fo:margin-top="12pt" fo:margin-bottom="0pt" fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="12pt" fo:keep-with-next="always" fo:orphans="2" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.dv_SectionHead_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="SectionHead_scrSection_columns_scrBook_scrBody">
       <style:text-properties fo:font-family="Faruma" style:font-name-complex="Faruma" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="Paragraph_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:margin-left="0pt" fo:orphans="2" fo:widows="2" fo:text-indent=".591pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:margin-right="0pt" fo:orphans="2" fo:widows="2" fo:text-indent=".591pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber_.dv_Paragraph_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="Paragraph_scrSection_columns_scrBook_scrBody">

@@ -27,8 +27,6 @@
 .entry {
         padding-bottom: 2pt;
         padding-top: 1pt;
-        margin-left: 12pt;
-        text-indent: -12pt;
 }
 .entryref-primary-minor { }
 .entryref-type-minor { }
@@ -181,8 +179,6 @@
 }
 .revEntry {
         font-size: 10pt;
-        margin-left: 1pc;
-        text-indent: -1pc;
 }
 .revHeader {
         font-size: 18pt;
@@ -272,18 +268,12 @@ text-align: justify;
 }
 .minorentry {
        text-align: left;
-       margin-left: 12pt;
-       text-indent: -12pt;
 }
 .minorentryvariant {
        text-align: left;
-       margin-left: 12pt;
-       text-indent: -12pt;
 }
 .minorentrycomplex {
        text-align: left;
-       margin-left: 12pt;
-       text-indent: -12pt;
 }
 
 .configtargets .configtarget .headword > span {
