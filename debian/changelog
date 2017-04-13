@@ -1,4 +1,4 @@
-pathway (1.15.13.5751)  experimental; urgency=high
+pathway (1.15.14.5765)  experimental; urgency=high
 
   * Common:TD-4808 adjusted so sub sub entries margins match FLEx 8.3.x
   * Common:TD-4758 Enable hyphenation for Scripture.
@@ -17,6 +17,7 @@ pathway (1.15.13.5751)  experimental; urgency=high
   * General:TD-4775 Pass Paratext database name to PathwayExport
   * General:TD-4785 Add logic to handle css overrides.
   * General:TD-4792 Forming Export Directory name
+  * General:change required linux font package
   * Help:TD-4796 Help/More Help still opens web to old Pathway site
   * Help:TD-4802 Update preprocessing descriptions
   * Linux:TD-4725 fix crash from missing name of bold font
@@ -24,6 +25,8 @@ pathway (1.15.13.5751)  experimental; urgency=high
   * Linux:TD-4744 adjust validator to have extra slash for linux
   * Linux:TD-4454 Text Merges in the Prince Pdf Output If I set Stylesheet as Two Column
   * Linux:TD-4766 mono-basic4-sil dependency error
+  * LO/OO:TD-4821 Adjust right-to-left margin styles
+  * LO/OO:TD-4812 Isolate bidi fields
   * LO/OO:TD-4807 remove space being inserted before commas
   * LO/OO:TD-4800 Pictures widths adjusted so they aren't vertical lines
   * LO/OO:TD-4269 Running Header appears twice in the page view
@@ -54,10 +57,11 @@ pathway (1.15.13.5751)  experimental; urgency=high
   * Paratext:TD-4763 Footnotes in rq prevent output
   * Paratext:TD-4797 remove modifications to resolver for readding ssf file.
   * Paratext:TD-4805 Paratext complains that Pathway is incompatible
+  * Paratext:TD-4506 Add font features
   * Parser:TD-4805 Make sure write to CSS completes and objects are released.
   * Smart:TD-4806 Extra material in reference list
   * Stylesheet:TD-4757 Right aligned Scripture quote reference
-  * Stylesheet:TD-4801 Fix mt2 mt1 is1 styles
+  * Stylesheet:TD-4801 Fix mt2 mt1 is1 and intro styles
   * Stylesheet:Apply justification to variant and complex minor entries
   * UI:TD-4045 Text merging happens when I set the Font size ‘0’ ...
   * UI:TD-4737 Running Header, Reference Format did not save
@@ -65,6 +69,7 @@ pathway (1.15.13.5751)  experimental; urgency=high
   * UI:TD-4774 update link on about box for new web site
   * UI:TD-4779 custom sheet is getting recreated after reset
   * UI:TD-4241 Inform user of what is happening when the process takes a long time
+  * XeLaTeX:TD-4810 Scripture section heads leave too much space
   * XeLaTeX:TD-4368 One empty page is created between main and reversal
   * XeLaTeX:TD-4702 Fields begin at new line instead of continuing in the paragraph
 
