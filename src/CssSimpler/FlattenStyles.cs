@@ -60,7 +60,8 @@ namespace CssSimpler
             DeclareBefore(XmlNodeType.CDATA, OtherNode);
             DeclareBeforeEnd(XmlNodeType.EndElement, DivEnds);
             DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveClass);
-	        SpaceClass = "sp";
+			DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveLang);
+			SpaceClass = "sp";
 			Classes.RemoveRange(0, Classes.Count);
 			Langs.RemoveRange(0, Langs.Count);
         }
@@ -155,7 +156,14 @@ namespace CssSimpler
             Classes[index] = null;
         }
 
-        private void CollectRules(XmlReader r, string target)
+		private void UnsaveLang(int depth, string name)
+		{
+			var index = depth + 1;
+			if (index >= Langs.Count) return;
+			Langs[index] = null;
+		}
+
+		private void CollectRules(XmlReader r, string target)
         {
             if (target == null) return;
             var dirty = false;
@@ -416,7 +424,7 @@ namespace CssSimpler
         private readonly SortedDictionary<string, string> _reverseMap = new SortedDictionary<string, string>();
         private readonly XmlDocument _flatCss = new XmlDocument();
         private readonly XmlDocument _xmlCss;
-        private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column-count", "float", "clear", "width", "margin-left", "margin-right", "margin-top", "margin-bottom", "margin", "padding-bottom", "padding-top", "padding-right", "padding-left", "padding", "display"};
+        private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column", "float", "clear", "width", "margin", "padding", "display", "border"};
         public XmlDocument MakeFlatCss()
         {
             _flatCss.RemoveAll();
@@ -470,7 +478,8 @@ namespace CssSimpler
                         if (propNameNode == null) continue;
                         var name = propNameNode.InnerText;
                         if (incProps.Contains(name)) continue;
-                        if (inherited && (_notInherted.Contains(name) || name.StartsWith("-"))) continue;
+	                    var prefixMatch = Regex.Match(name, @"[a-z]+");
+                        if (inherited && (_notInherted.Contains(prefixMatch.Value) || name.StartsWith("-"))) continue;
                         incProps.Add(name);
                         ruleNode.AppendChild(_flatCss.ImportNode(node, true));
                     }
