@@ -5422,5 +5422,25 @@ namespace SIL.Tool
 			}
 			return;
 		}
+
+		/// <summary>
+		/// Get the line number from the exception message
+		/// </summary>
+		/// <param name="ex">Exception message</param>
+		/// <returns></returns>
+		public static int GetLineNumber(Exception ex)
+		{
+			var lineNumber = 0;
+			const string lineSearch = ":line ";
+			var index = ex.StackTrace.LastIndexOf(lineSearch);
+			if (index != -1)
+			{
+				var lineNumberText = ex.StackTrace.Substring(index + lineSearch.Length);
+				if (int.TryParse(lineNumberText, out lineNumber))
+				{
+				}
+			}
+			return lineNumber;
+		}
 	}
 }
