@@ -1217,13 +1217,13 @@ namespace SIL.PublishingSolution
 
             if (_isCenterTabStopNeeded)
             {
-                _writer.WriteAttributeString("style:position", mid.ToString() + "in");
+                _writer.WriteAttributeString("style:position", mid.ToString(CultureInfo.InvariantCulture).Replace(",", ".") + "in");
                 _writer.WriteAttributeString("style:type", "center");
                 _writer.WriteEndElement();
             }
 
             _writer.WriteStartElement("style:tab-stop");//style:tab-stop
-            _writer.WriteAttributeString("style:position", rightGuide.ToString() + "in");
+            _writer.WriteAttributeString("style:position", rightGuide.ToString(CultureInfo.InvariantCulture).Replace(",", ".") + "in");
             _writer.WriteAttributeString("style:type", "right");
             _writer.WriteEndElement();
 

@@ -1271,15 +1271,15 @@ namespace SIL.Tool
 				int counter;
 				attribute = attribute.Replace(" ", "");
 				string attrib = GetNumericChar(attribute, out counter);
-				attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"));
+				attributeValue = float.Parse(attrib, new CultureInfo("en-US").NumberFormat);
 				string attributeUnit = attribute.Substring(counter);
 				if (attributeUnit == "cm")
 				{
-					attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.3937008F;
+					attributeValue = float.Parse(attrib, new CultureInfo("en-US").NumberFormat) * 0.3937008F;
 				}
 				else if (attributeUnit == "pt")
 				{
-					attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 72F;
+					attributeValue = float.Parse(attrib, new CultureInfo("en-US").NumberFormat) / 72F;
 				}
 			}
 			catch
