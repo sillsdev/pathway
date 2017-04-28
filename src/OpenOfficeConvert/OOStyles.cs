@@ -354,34 +354,56 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void BorderPropertyMerge(Dictionary<string, string> OOProperty, string pos)
-        {
-            string key1 = "border-" + pos + "-style";
-            if (OOProperty.ContainsKey(key1))
-            {
+		private void BorderPropertyMerge(Dictionary<string, string> OOProperty, string pos)
+		{
+			string property = string.Empty;
+			string key1 = "border-" + pos + "-style";
+			if (OOProperty.ContainsKey(key1))
+			{
+				property = OOProperty[key1] + " ";
+				OOProperty.Remove(key1);
+				key1 = "border-" + pos + "-width";
+				if (OOProperty.ContainsKey(key1))
+				{
+					string point = string.Empty;
+					if (OOProperty[key1].IndexOf("pt") == -1)
+						point = "pt";
+					property += OOProperty[key1] + point + " ";
+					OOProperty.Remove(key1);
+				}
 
-                string property = OOProperty[key1] + " ";
-                OOProperty.Remove(key1);
-                key1 = "border-" + pos + "-width";
-                if (OOProperty.ContainsKey(key1))
-                {
-                    string point = string.Empty;
-                    if (OOProperty[key1].IndexOf("pt") == -1)
-                        point = "pt";
-                    property += OOProperty[key1] + point + " ";
-                    OOProperty.Remove(key1);
-                }
+				key1 = "border-" + pos + "-color";
+				if (OOProperty.ContainsKey(key1))
+				{
+					property += OOProperty[key1] + " ";
+					OOProperty.Remove(key1);
+				}
 
-                key1 = "border-" + pos + "-color";
-                if (OOProperty.ContainsKey(key1))
-                {
-                    property += OOProperty[key1] + " ";
-                    OOProperty.Remove(key1);
-                }
+				OOProperty["border-" + pos] = property;
+			}
+			else
+			{
+				key1 = "border-" + pos + "-width";
+				if (OOProperty.ContainsKey(key1))
+				{
+					string point = string.Empty;
+					if (OOProperty[key1].IndexOf("pt") == -1)
+						point = "pt";
+					property = OOProperty[key1] + point + " ";
+					OOProperty.Remove(key1);
+				}
 
-                OOProperty["border-" + pos] = property;
-            }
-        }
+				key1 = "border-" + pos + "-color";
+				if (OOProperty.ContainsKey(key1))
+				{
+					property += "none ";
+					property += OOProperty[key1] + " ";
+					OOProperty.Remove(key1);
+				}
+
+				OOProperty["border-" + pos] = property;
+			}
+		}
 
         private void ListReplace(string className, Dictionary<string, string> OOProperty)
         {
@@ -2549,7 +2571,8 @@ namespace SIL.PublishingSolution
 	                }
 	                else
 	                {
-						_writer.WriteAttributeString("style:horizontal-pos", "left");	                }
+						_writer.WriteAttributeString("style:horizontal-pos", "left");
+	                }
                 }
             }
         }

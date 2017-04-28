@@ -40,6 +40,7 @@ namespace Test.OpenOfficeConvert
         private string _inputPath;
         private string _outputPath;
         private ValidateXMLFile _validate;
+		private ValidateXMLFile _validate2;
         private bool returnValue;
         private PublicationInformation projInfo = new PublicationInformation();
         #endregion Private Variables
@@ -730,14 +731,131 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(output);
             _validate.ClassName = "entry";
-            _validate.ClassProperty.Add("fo:border-left", "0.5pt solid #ffffff");
-            _validate.ClassProperty.Add("fo:border-right", "0.5pt solid #ffffff");
-            _validate.ClassProperty.Add("fo:border-top", "0.5pt solid #ffffff");
-            _validate.ClassProperty.Add("fo:border-bottom", "0.5pt solid #ffffff");
+            _validate.ClassProperty.Add("fo:padding-left", "9pt");
+            _validate.ClassProperty.Add("fo:padding-top", "1pt");
+            _validate.ClassProperty.Add("fo:padding-bottom", "2pt");
 
             returnValue = _validate.ValidateNodeAttributesNS(true);
             Assert.IsTrue(returnValue);
         }
+
+		[Test]
+		public void BorderTest1()
+		{
+			const string file = "EntryBorderSubEntryBorderless";
+			
+			string input = FileInput(file + ".css");
+			string output = FileOutput(file + "styles.xml");
+			GetCssClass(input, output);
+
+			_validate = new ValidateXMLFile(output);
+			_validate.ClassName = "entry";
+			_validate.ClassProperty.Add("fo:border-left", "6pt");
+			_validate.ClassProperty.Add("fo:border-right", "6pt");
+			_validate.ClassProperty.Add("fo:border-top", "6pt");
+			_validate.ClassProperty.Add("fo:border-bottom", "6pt");
+
+			returnValue = _validate.ValidateNodeAttributesNS(true);
+			Assert.IsTrue(returnValue);
+
+			_validate2 = new ValidateXMLFile(output);
+			_validate2.ClassName = "subentry";
+			_validate2.ClassProperty.Add("fo:border-left", "0pt");
+			_validate2.ClassProperty.Add("fo:border-right", "0pt");
+			_validate2.ClassProperty.Add("fo:border-top", "0pt");
+			_validate2.ClassProperty.Add("fo:border-bottom", "0pt");
+
+			returnValue = _validate2.ValidateNodeAttributesNS(true);
+			Assert.IsTrue(returnValue);
+		}
+
+		[Test]
+		public void BorderTest2()
+		{
+			const string file = "EntryBorderSubEntryBorder";
+			string input = FileInput(file + ".css");
+			string output = FileOutput(file + "styles.xml");
+			GetCssClass(input, output);
+
+			_validate = new ValidateXMLFile(output);
+			_validate.ClassName = "entry";
+			_validate.ClassProperty.Add("fo:border-left", "6pt");
+			_validate.ClassProperty.Add("fo:border-right", "6pt");
+			_validate.ClassProperty.Add("fo:border-top", "6pt");
+			_validate.ClassProperty.Add("fo:border-bottom", "6pt");
+
+			returnValue = _validate.ValidateNodeAttributesNS(true);
+			Assert.IsTrue(returnValue);
+
+			_validate2 = new ValidateXMLFile(output);
+			_validate2.ClassName = "subentry";
+			_validate2.ClassProperty.Add("fo:border-left", "3pt none #36F");
+			_validate2.ClassProperty.Add("fo:border-right", "3pt none #36F");
+			_validate2.ClassProperty.Add("fo:border-top", "3pt none #36F");
+			_validate2.ClassProperty.Add("fo:border-bottom", "3pt none #36F");
+
+			returnValue = _validate2.ValidateNodeAttributesNS(true);
+			Assert.IsTrue(returnValue);
+		}
+
+		[Test]
+		public void BorderTest3()
+		{
+			const string file = "EntryBorderlessSubEntryBorder";
+			string input = FileInput(file + ".css");
+			string output = FileOutput(file + "styles.xml");
+			GetCssClass(input, output);
+
+			_validate = new ValidateXMLFile(output);
+			_validate.ClassName = "entry";
+			_validate.ClassProperty.Add("fo:border-left", "0pt");
+			_validate.ClassProperty.Add("fo:border-right", "0pt");
+			_validate.ClassProperty.Add("fo:border-top", "0pt");
+			_validate.ClassProperty.Add("fo:border-bottom", "0pt");
+
+			returnValue = _validate.ValidateNodeAttributesNS(true);
+			Assert.IsTrue(returnValue);
+
+			_validate2 = new ValidateXMLFile(output);
+			_validate2.ClassName = "subentry";
+			_validate2.ClassProperty.Add("fo:border-left", "3pt none #36F");
+			_validate2.ClassProperty.Add("fo:border-right", "3pt none #36F");
+			_validate2.ClassProperty.Add("fo:border-top", "3pt none #36F");
+			_validate2.ClassProperty.Add("fo:border-bottom", "3pt none #36F");
+
+			returnValue = _validate2.ValidateNodeAttributesNS(true);
+			Assert.IsTrue(returnValue);
+		}
+
+		[Test]
+		public void BorderTest4()
+		{
+			const string file = "EntryBorderlessSubEntryBorderless";
+			
+			string input = FileInput(file + ".css");
+			string output = FileOutput(file + "styles.xml");
+			GetCssClass(input, output);
+
+			_validate = new ValidateXMLFile(output);
+			_validate.ClassName = "entry";
+			_validate.ClassProperty.Add("fo:border-left", "0pt");
+			_validate.ClassProperty.Add("fo:border-right", "0pt");
+			_validate.ClassProperty.Add("fo:border-top", "0pt");
+			_validate.ClassProperty.Add("fo:border-bottom", "0pt");
+
+			returnValue = _validate.ValidateNodeAttributesNS(true);
+			Assert.IsTrue(returnValue);
+
+			_validate2 = new ValidateXMLFile(output);
+			_validate2.ClassName = "subentry";
+			_validate2.ClassProperty.Add("fo:border-left", "0pt none #36F");
+			_validate2.ClassProperty.Add("fo:border-right", "0pt none #36F");
+			_validate2.ClassProperty.Add("fo:border-top", "0pt none #36F");
+			_validate2.ClassProperty.Add("fo:border-bottom", "0pt none #36F");
+
+			returnValue = _validate2.ValidateNodeAttributesNS(true);
+			Assert.IsTrue(returnValue);
+		}
 
         ///<summary>
         ///TD-270 (Direction:ltr)
