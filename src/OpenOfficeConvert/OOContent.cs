@@ -1319,8 +1319,8 @@ namespace SIL.PublishingSolution
 					_writer.WriteAttributeString("draw:style-name", "GraphicsI2");
 					_writer.WriteAttributeString("draw:name", "graphics1");
 					_writer.WriteAttributeString("text:anchor-type", "paragraph");
-					_writer.WriteAttributeString("svg:height", height);
-					_writer.WriteAttributeString("svg:width", width);
+					_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
+					_writer.WriteAttributeString("svg:width", width.Replace(",", "."));
 					_writer.WriteStartElement("draw:image");
 					_writer.WriteAttributeString("xlink:type", "simple");
 					_writer.WriteAttributeString("xlink:show", "embed");
@@ -2523,7 +2523,7 @@ namespace SIL.PublishingSolution
 			string[] cc = _allStyle.ToArray();
 			imageClass = cc[0]; //cc[1];
 			srcFile = _imageSource;
-			string srcFilrLongDesc = _imageLongDesc;
+			string srcFilrLongDesc = _imageSrcClass;
 			string currentPicturePath = _sourcePicturePath;
 			if (_allStyle.Peek().IndexOf("logo") == 0)
 			{
@@ -2591,12 +2591,12 @@ namespace SIL.PublishingSolution
 			if (rectWidth.IndexOf("%") == -1)
 			{
 				width = rectWidth + imgWUnit;
-				_writer.WriteAttributeString("svg:width", width);
+				_writer.WriteAttributeString("svg:width", width.Replace(",","."));
 			}
 			if (rectHeight.IndexOf("%") == -1)
 			{
 				height = rectHeight + imgWUnit;
-				_writer.WriteAttributeString("svg:height", height);
+				_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
 			}
 
 			_writer.WriteStartElement("draw:image");
@@ -2681,8 +2681,8 @@ namespace SIL.PublishingSolution
 			else
 			{
 				if (width != "100%")
-					_writer.WriteAttributeString("svg:width", width);
-				_writer.WriteAttributeString("svg:height", height);
+					_writer.WriteAttributeString("svg:width", width.Replace(",", "."));
+				_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
 			}
 
 			//TD-349(width:auto)
@@ -2707,7 +2707,7 @@ namespace SIL.PublishingSolution
 				{
 					var tempStyle = new string[counter];
 					_allParagraph.CopyTo(tempStyle, 0);
-					divTagName = counter > 1 ? tempStyle[1] : tempStyle[0];
+					divTagName = counter > 1 ? tempStyle[0] : tempStyle[1];
 				}
 
 				_writer.WriteStartElement("text:p");
@@ -2731,7 +2731,7 @@ namespace SIL.PublishingSolution
 				rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
 				if (rectHeight == "0" && rectWidth == "0")
 				{
-					rectHeight = GetPropertyValue(clsName, "height", rectHeight);
+					 rectHeight = GetPropertyValue(clsName, "height", rectHeight);
 					rectWidth = GetPropertyValue(clsName, "width", rectWidth);
 				}
 				GetAlignment(ref HoriAlignment, srcFilrLongDesc);
@@ -2922,8 +2922,8 @@ namespace SIL.PublishingSolution
 			else
 			{
 				if (width != "100%")
-					_writer.WriteAttributeString("svg:width", width);
-				_writer.WriteAttributeString("svg:height", height);
+					_writer.WriteAttributeString("svg:width", width.Replace(",", "."));
+				_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
 			}
 
 			//TD-349(width:auto)
@@ -2968,12 +2968,12 @@ namespace SIL.PublishingSolution
 			if (rectWidth.IndexOf("%") == -1)
 			{
 				width = rectWidth + imgWUnit;
-				_writer.WriteAttributeString("svg:width", width);
+				_writer.WriteAttributeString("svg:width", width.Replace(",", "."));
 			}
 			if (rectHeight.IndexOf("%") == -1)
 			{
 				height = rectHeight + imgWUnit;
-				_writer.WriteAttributeString("svg:height", height);
+				_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
 			}
 
 			_writer.WriteStartElement("draw:image");
@@ -3107,11 +3107,11 @@ namespace SIL.PublishingSolution
 
 			if (rectWidth.Contains("pt"))
 			{
-				_writer.WriteAttributeString("svg:width", rectWidth);
+				_writer.WriteAttributeString("svg:width", rectWidth.Replace(",", "."));
 			}
 			else
 			{
-				_writer.WriteAttributeString("svg:width", rectWidth + "pt");
+				_writer.WriteAttributeString("svg:width", rectWidth.Replace(",", ".") + "pt");
 			}
 
 			_writer.WriteStartElement("draw:image");
