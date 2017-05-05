@@ -630,9 +630,8 @@ namespace SIL.PublishingSolution
             string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
             if (!Directory.Exists(xeLaTexInstallationPath))
             {
-                var msg = LocalizationManager.GetString("ExportXelatex.CallXelatex.Message", "Please install the Xelatex application.", "");
-                MessageBox.Show(msg);
-                return;
+				var msg = LocalizationManager.GetString ("ExportXelatex.CallXelatex.Message", "Please install the Xelatex application.", "");
+				throw new FileNotFoundException (msg);
             }
             string name = "xelatex.exe";
             string arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";
