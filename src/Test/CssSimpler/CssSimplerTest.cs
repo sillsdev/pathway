@@ -296,7 +296,6 @@ namespace Test.CssSimplerTest
         /// A test of moving inline styles to css
         /// </summary>
         [Test]
-        [Category("SkipOnPrecise")]
         public void InlineStyleTest()
         {
             const string testName = "InlineStyle";
@@ -332,7 +331,6 @@ namespace Test.CssSimplerTest
         /// A test of moving inline styles to css
         /// </summary>
         [Test]
-        [Category("SkipOnPrecise")]
         public void InlineStyle2Test()
         {
             const string testName = "InlineStyle2";

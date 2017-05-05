@@ -47,7 +47,6 @@ namespace Test.CssParserTest
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
-        [Category("SkipOnLinux")]
         public void GetFontList()
         {
             string cssFile = "GetFontList.css";
