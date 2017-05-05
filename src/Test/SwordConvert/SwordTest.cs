@@ -23,6 +23,7 @@ using SIL.Tool;
 namespace Test.SwordConvert
 {
     [TestFixture]
+	[Category("SkipOnTeamCity")]
     public class SwordTest : ExportThroughPathway
     {
 
@@ -95,7 +96,7 @@ namespace Test.SwordConvert
         ///A test for Export
         ///</summary>
         [Test]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void ExportSwordTest()
         {
             string inputSourceDirectory = FileInput("SwordExportTest");

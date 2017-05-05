@@ -1213,7 +1213,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTC")]
+		[Category("SkipOnTeamCity")]
 		public void VisibilityCensorPackageTest()
 		{
 			const string testFileName = "VisibilityPackage";
@@ -1323,7 +1323,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTC")]
+		[Category("SkipOnTeamCity")]
 		public void XeLaTexUpdateCache()
 		{
 			UpdateXeLaTexFontCacheIfNecessary();

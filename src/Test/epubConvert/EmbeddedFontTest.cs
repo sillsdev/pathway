@@ -27,13 +27,13 @@ namespace Test.epubConvert
     ///</summary>
     [TestFixture]
     [Category("ShortTest")]
+	[Category("SkipOnTeamCity")]
     public class EmbeddedFontTest
     {
         /// <summary>
         /// Test a known Free font
         /// </summary>
         [Test]
-        [Category("SkipOnTC")]
         public void FreeFontTest()
         {
             Assert.IsTrue(FontInternals.IsInstalled("Arial"));

@@ -387,7 +387,7 @@ namespace Test
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void ScriptureEpubExportTest()
         {
             // clean out old files
@@ -446,7 +446,7 @@ namespace Test
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTC")]
+		[Category("SkipOnTeamCity")]
 		public void KFYScriptureEpubExportTest()
 		{
 			// clean out old files

@@ -38,6 +38,7 @@ namespace Test.XhtmlExport
 	/// </summary>
 	[TestFixture]
 	[Category("BatchTest")]
+	[Category("SkipOnTeamCity")]
 	//[assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum, ViewAndModify = "HKEY_LOCAL_MACHINE")]
 	public class XhtmlExportTest
 	{

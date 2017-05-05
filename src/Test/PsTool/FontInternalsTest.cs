@@ -27,6 +27,7 @@ namespace Test.PsTool
     ///</summary>
     [TestFixture]
     [Category("ShortTest")]
+	[Category("SkipOnTeamCity")]
     public class FontTest
     {
         private readonly bool _isLinux = Common.IsUnixOS();
