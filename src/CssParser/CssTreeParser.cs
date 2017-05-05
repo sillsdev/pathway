@@ -61,7 +61,7 @@ namespace SIL.PublishingSolution
 
 	        if (!File.Exists(fullpath))
 	        {
-				System.Environment.Exit(-1);
+				throw new FileNotFoundException (fullpath);
 	        }
 
             ICharStream input = new ANTLRFileStream(fullpath, Encoding.UTF8);
