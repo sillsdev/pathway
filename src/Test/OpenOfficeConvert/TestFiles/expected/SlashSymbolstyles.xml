@@ -38,7 +38,7 @@
       <style:paragraph-properties fo:text-align="left" style:line-height-at-least="12pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="minorentryvariant_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_minorentryvariant_letData_dicBody" style:family="text" style:parent-style-name="minorentryvariant_letData_dicBody">
@@ -58,7 +58,7 @@
       <style:text-properties fo:font-weight="400" style:font-weight-complex="400" fo:font-style="italic" fo:color="#808000" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:language="es" fo:country="ES" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="mainentrycomplex_letData_dicBody" style:family="paragraph" style:parent-style-name="letData_dicBody">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-weight="400" style:font-weight-complex="400" fo:font-style="normal" fo:color="#008000" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="headword_mainentrycomplex_letData_dicBody" style:family="text" style:parent-style-name="mainentrycomplex_letData_dicBody">
@@ -218,7 +218,7 @@
       <style:text-properties fo:font-style="normal" fo:font-weight="700" />
     </style:style>
     <style:style style:name="letter" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-11.339pt" fo:margin-left="11.339pt" style:line-height-at-least="12pt" fo:padding-bottom="3pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="12pt" style:writing-mode="lr-tb" fo:margin-bottom="18pt" fo:margin-top="18pt" fo:text-align="center" fo:keep-with-next="always" fo:orphans="5" fo:widows="5" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:text-indent="-11.339pt" fo:margin-left="11.339pt" style:line-height-at-least="12pt" fo:padding-bottom="3pt" fo:padding-top="12pt" style:writing-mode="lr-tb" fo:margin-bottom="18pt" fo:margin-top="18pt" fo:text-align="center" fo:keep-with-next="always" fo:orphans="5" fo:widows="5" />
       <style:text-properties fo:font-style="normal" fo:color="#008000" fo:font-size="18pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="body" style:family="paragraph" style:parent-style-name="none">
@@ -228,15 +228,15 @@
       <style:text-properties fo:color="#0000FF" />
     </style:style>
     <style:style style:name="entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-weight="400" fo:font-style="normal" fo:color="#008000" />
     </style:style>
     <style:style style:name="span_.mxb_mainheadword.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_mainheadword.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="sensenumber.-sensecontent_senses_entry" style:family="paragraph" style:parent-style-name="none">
@@ -282,7 +282,7 @@
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#808000" />
     </style:style>
     <style:style style:name="extendednotecontent.-extendednotecontents.-sense.-sensecontent_senses_entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="51.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:text-indent="-18pt" fo:margin-left="51.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" />
       <style:text-properties fo:font-weight="400" fo:font-style="normal" fo:color="#008000" text:display="block" />
     </style:style>
     <style:style style:name="span_.es_discussion.-extendednotecontents.-sense.-sensecontent_senses_entry" style:family="paragraph" style:parent-style-name="none">
@@ -292,7 +292,7 @@
       <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="examplescontent.-examplescontents.-extendednotecontents.-sense.-sensecontent_senses_entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="-45pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="-45pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" />
       <style:text-properties fo:color="#000000" text:display="block" />
     </style:style>
     <style:style style:name="examplescontentps" style:family="paragraph" style:parent-style-name="none">
@@ -305,102 +305,102 @@
       <style:text-properties fo:font-size="10pt" fo:font-weight="700" fo:font-style="normal" fo:color="#000080" />
     </style:style>
     <style:style style:name="span_.es_comment.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_comment.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.es_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefsinflectionalvariants.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefsinflectionalvariants.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_variantformentrybackrefinflectionalvariants.-variantformentrybackrefsinflectionalvariants.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_variantformentrybackrefinflectionalvariants.-variantformentrybackrefsinflectionalvariants.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.es_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefs.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefs.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_variantformentrybackref.-variantformentrybackrefs.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_variantformentrybackref.-variantformentrybackrefs.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.es_ownertypeabbreviation_minimallexreference.-minimallexreferences.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_ownertypeabbreviation_minimallexreference.-minimallexreferences.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="configtarget.-configtargets_minimallexreference.-minimallexreferences.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.mxb_headword_referencedentry.-referencedentries.-primaryentryrefs.-configtargets.-minimallexreferences.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_headword_referencedentry.-referencedentries.-primaryentryrefs.-configtargets.-minimallexreferences.-groupingreferencessection.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.es_reverseabbr.-complexformtypes.-complexformentryrefs.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_reverseabbr.-complexformtypes.-complexformentryrefs.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_referencedentry.-referencedentries.-complexformentryrefs.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_referencedentry.-referencedentries.-complexformentryrefs.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="subentry.-subentries.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-11.339pt" fo:margin-left="11.339pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:text-indent="-11.339pt" fo:margin-left="11.339pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="1pt" fo:text-align="left" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="normal" fo:color="#000080" text:display="block" />
     </style:style>
     <style:style style:name="subentryps" style:family="paragraph" style:parent-style-name="none">
       <style:text-properties fo:font-size="10pt" fo:color="#000000" />
     </style:style>
     <style:style style:name="picturesofsense.-picturesofsenses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="33.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:text-indent="0pt" fo:margin-left="33.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" />
       <style:text-properties fo:font-weight="400" fo:font-style="normal" fo:color="#000000" />
     </style:style>
     <style:style style:name="headword_.mxb_picturesofsense.-picturesofsenses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="headword_picturesofsense.-picturesofsenses.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-weight="400" fo:font-style="normal" fo:color="#008000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
@@ -440,7 +440,7 @@
       <style:text-properties fo:font-size="10pt" fo:font-weight="700" fo:font-style="normal" fo:color="#000080" />
     </style:style>
     <style:style style:name="extendednotecontent.-extendednotecontents.-sense.-sensecontent_senses_mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="51.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:text-indent="-18pt" fo:margin-left="51.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" />
       <style:text-properties fo:font-weight="400" fo:font-style="normal" fo:color="#008000" text:display="block" />
     </style:style>
     <style:style style:name="span_.es_discussion.-extendednotecontents.-sense.-sensecontent_senses_mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
@@ -450,7 +450,7 @@
       <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="examplescontent.-examplescontents.-extendednotecontents.-sense.-sensecontent_senses_mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="-45pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="-45pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" />
       <style:text-properties fo:color="#000000" text:display="block" />
     </style:style>
     <style:style style:name="span_.mxb_example.-examplescontents.-extendednotecontents.-sense.-sensecontent_senses_mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
@@ -460,139 +460,139 @@
       <style:text-properties fo:font-size="10pt" fo:font-weight="700" fo:font-style="normal" fo:color="#000080" />
     </style:style>
     <style:style style:name="span_.es_comment.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_comment.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.es_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefsinflectionalvariants.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefsinflectionalvariants.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_variantformentrybackrefinflectionalvariants.-variantformentrybackrefsinflectionalvariants.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_variantformentrybackrefinflectionalvariants.-variantformentrybackrefsinflectionalvariants.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.es_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefs.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefs.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_variantformentrybackref.-variantformentrybackrefs.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_variantformentrybackref.-variantformentrybackrefs.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.es_ownertypeabbreviation_minimallexreference.-minimallexreferences.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_ownertypeabbreviation_minimallexreference.-minimallexreferences.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_configtarget.-configtargets_minimallexreference.-minimallexreferences.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_headword_configtarget.-configtargets_minimallexreference.-minimallexreferences.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_headwor.-headword.-primaryentryrefs.-configtargets.-minimallexreferences.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_headword_headwor.-headword.-primaryentryrefs.-configtargets.-minimallexreferences.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.es_reverseabbr.-complexformtypes.-complexformentryrefs.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_reverseabbr.-complexformtypes.-complexformentryrefs.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_referencedentry.-referencedentries.-complexformentryrefs.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_headword_referencedentry.-referencedentries.-complexformentryrefs.-groupingreferencessection.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="subentry.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-11.339pt" fo:margin-left="11.339pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:text-indent="-11.339pt" fo:margin-left="11.339pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="1pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="normal" fo:color="#000080" text:display="block" />
     </style:style>
     <style:style style:name="span_.mxb_headword_subentry.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_subentry.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.es_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefsinflectionalvariants.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefsinflectionalvariants.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_variantformentrybackrefinflectionalvariants.-variantformentrybackrefsinflectionalvariants.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_headword_variantformentrybackrefinflectionalvariants.-variantformentrybackrefsinflectionalvariants.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="complexformsnotsubentry.-complexformsnotsubentries.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties text:display="block" fo:font-weight="400" fo:font-style="normal" fo:color="#008000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_complexformsnotsubentry.-complexformsnotsubentries.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_headword_complexformsnotsubentry.-complexformsnotsubentries.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="picture.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:float="right" fo:text-align="center" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="12pt" fo:padding-top="3pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="0pt" fo:padding-left="2pt" fo:text-indent="-12pt" style:line-height-at-least="12pt" />
+      <style:paragraph-properties fo:float="right" fo:text-align="center" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="12pt" fo:padding-top="3pt" fo:padding-right="2pt" fo:padding-bottom="0pt" fo:padding-left="2pt" fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:text-indent="-12pt" style:line-height-at-least="12pt" />
       <style:text-properties fo:font-weight="400" fo:font-style="normal" fo:color="#008000" />
     </style:style>
     <style:style style:name="headword_.mxb.-captionContent.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="headword.-captionContent.-subentries.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-weight="400" fo:font-style="normal" fo:color="#008000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_minorentryvariant" style:family="paragraph" style:parent-style-name="none">
@@ -602,27 +602,27 @@
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.es_reverseabbr.-variantentrytypes.-visiblevariantentryrefs.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_reverseabbr.-variantentrytypes.-visiblevariantentryrefs.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_referencedentry.-referencedentries.-visiblevariantentryrefs.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_referencedentry.-referencedentries.-visiblevariantentryrefs.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.es_restrictions.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#808000" />
     </style:style>
     <style:style style:name="span_restrictions.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#808000" />
     </style:style>
     <style:style style:name="sensenumber.-sensecontent_senses_minorentryvariant" style:family="paragraph" style:parent-style-name="none">
@@ -644,7 +644,7 @@
       <style:text-properties fo:font-size="10pt" fo:font-weight="700" fo:font-style="normal" fo:color="#000080" />
     </style:style>
     <style:style style:name="extendednotecontent.-extendednotecontents.-sense.-sensecontent_senses_minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="51.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:text-indent="-18pt" fo:margin-left="51.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" />
       <style:text-properties fo:font-weight="400" fo:font-style="normal" fo:color="#008000" text:display="block" />
     </style:style>
     <style:style style:name="span_.es_discussion.-extendednotecontents.-sense.-sensecontent_senses_minorentryvariant" style:family="paragraph" style:parent-style-name="none">
@@ -654,7 +654,7 @@
       <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="examplescontent.-examplescontents.-extendednotecontents.-sense.-sensecontent_senses_minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="-45pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="-45pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" />
       <style:text-properties fo:color="#000000" text:display="block" />
     </style:style>
     <style:style style:name="span_.mxb_example.-examplescontents.-extendednotecontents.-sense.-sensecontent_senses_minorentryvariant" style:family="paragraph" style:parent-style-name="none">
@@ -667,67 +667,67 @@
       <style:text-properties fo:font-size="10pt" fo:font-weight="700" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.es_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefsinflectionalvariants.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefsinflectionalvariants.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_variantformentrybackrefinflectionalvariants.-variantformentrybackrefsinflectionalvariants.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_variantformentrybackrefinflectionalvariants.-variantformentrybackrefsinflectionalvariants.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.es_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefs.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_abbreviation_variantentrytype.-variantentrytypes.-variantformentrybackrefs.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_variantformentrybackref.-variantformentrybackrefs.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_headword_variantformentrybackref.-variantformentrybackrefs.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="11pt" fo:font-weight="700" fo:font-style="normal" fo:color="#0000FF" />
     </style:style>
     <style:style style:name="span_.es_comment.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_comment.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.es_ownertypeabbreviation_minimallexreference.-minimallexreferences.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_ownertypeabbreviation_minimallexreference.-minimallexreferences.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_configtarget.-configtargets_minimallexreference.-minimallexreferences.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_headword_configtarget.-configtargets_minimallexreference.-minimallexreferences.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_.mxb_headword_headwor.-headword.-primaryentryrefs.-configtargets.-minimallexreferences.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="span_headword_headwor.-headword.-primaryentryrefs.-configtargets.-minimallexreferences.-minorentryvariant" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="mainentrysubsense.-mainentrysubsenses" style:family="paragraph" style:parent-style-name="none" />
@@ -765,7 +765,7 @@
       <style:text-properties fo:font-size="10pt" fo:font-weight="400" fo:font-style="italic" fo:color="#800000" />
     </style:style>
     <style:style style:name="extendednotecontent.-extendednotecontents.-mainentrysubsenses" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="51.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:text-indent="-18pt" fo:margin-left="51.661pt" style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="0pt" />
       <style:text-properties fo:font-weight="400" fo:font-style="normal" fo:color="#008000" text:display="block" />
     </style:style>
     <style:style style:name="span_.es_discussion.-extendednotecontents.-mainentrysubsenses" style:family="paragraph" style:parent-style-name="none">
@@ -775,7 +775,7 @@
       <style:text-properties fo:font-weight="700" />
     </style:style>
     <style:style style:name="examplescontent.-examplescontents.-extendednotecontents.-mainentrysubsenses" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="-45pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:text-indent="-18pt" fo:margin-left="-45pt" style:line-height-at-least="12pt" fo:padding-bottom="6pt" />
       <style:text-properties fo:color="#000000" text:display="block" />
     </style:style>
     <style:style style:name="span_.mxb_example.-examplescontents.-extendednotecontents.-mainentrysubsenses" style:family="paragraph" style:parent-style-name="none">
@@ -850,7 +850,7 @@
     </style:style>
     <style:style style:name="picture" style:family="paragraph" style:parent-style-name="none" />
     <style:style style:name="pictureRight" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:float="right" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-align="center" fo:text-indent="0pt" />
+      <style:paragraph-properties fo:float="right" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-top="2pt" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-align="center" fo:text-indent="0pt" />
       <style:text-properties text:display="block" />
     </style:style>
     <style:style style:name="revData" style:family="paragraph" style:parent-style-name="none">
@@ -901,7 +901,7 @@
       <style:paragraph-properties fo:margin-left="12pt" fo:margin-right="12pt" style:writing-mode="lr-tb" fo:text-align="left" />
     </style:style>
     <style:style style:name="pictureCenter" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-indent="0pt" fo:text-align="center" />
+      <style:paragraph-properties fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-top="2pt" fo:padding-right="2pt" fo:padding-bottom="2pt" fo:padding-left="2pt" fo:text-indent="0pt" fo:text-align="center" />
       <style:text-properties text:display="block" />
     </style:style>
     <style:style style:name="CoverPageTitle" style:family="paragraph" style:parent-style-name="none">
@@ -917,7 +917,7 @@
       <style:text-properties fo:font-weight="400" />
     </style:style>
     <style:style style:name="captionContent" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-bottom="20pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:text-indent="0pt" fo:text-align="center" />
+      <style:paragraph-properties fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="4pt" fo:margin-left="4pt" fo:padding-bottom="20pt" fo:text-indent="0pt" fo:text-align="center" />
     </style:style>
     <style:style style:name="subentry" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="left" fo:text-indent="-12pt" fo:margin-left="36pt" />
@@ -992,11 +992,11 @@
       <style:text-properties text:display="inline" />
     </style:style>
     <style:style style:name="visiblecomplexformbackref.-entry" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" style:line-height-at-least="12pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties text:display="inline" fo:font-weight="400" fo:font-style="normal" fo:color="#008000" />
     </style:style>
     <style:style style:name="visiblecomplexformbackref.-mainentrycomplex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
+      <style:paragraph-properties fo:border-left="0pt " fo:border-right="0pt " fo:border-top="0pt " fo:border-bottom="0pt " style:line-height-at-least="12pt" fo:padding-bottom="0pt" fo:padding-top="3pt" fo:text-indent="-12pt" fo:margin-left="12pt" />
       <style:text-properties text:display="inline" fo:font-weight="400" fo:font-style="normal" fo:color="#008000" />
     </style:style>
     <style:style style:name="morphosyntaxanalysesps" style:family="paragraph" style:parent-style-name="none">
@@ -1025,31 +1025,31 @@
       <style:text-properties text:display="none" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="12pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="24pt" />
     </style:style>
     <style:style style:name="h2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="8pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="18pt" />
     </style:style>
     <style:style style:name="h3" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="7pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="7pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="h4" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="6pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="h5" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="5.5pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="5.5pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="10pt" />
     </style:style>
     <style:style style:name="h6" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="5.5pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="5.5pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="8pt" />
     </style:style>
     <style:style style:name="p" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="12pt" />
+      <style:paragraph-properties fo:padding-top="12pt" fo:padding-bottom="12pt" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:margin-top="0.1in" fo:margin-bottom="0.1in" style:line-spacing="100%" />

@@ -35,6 +35,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -794,31 +796,42 @@ namespace SIL.PublishingSolution
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (!Common.IsUnixOS())
-                {
-                    int outputFolderLength = OutputFolder.Length;
-                    if (OutputFolder.Substring(outputFolderLength - 2, 2) != "\\")
-                        OutputFolder = OutputFolder + "\\";
-                }
-				txtSaveInFolder.Text = ReplaceInvalidChars(txtSaveInFolder.Text);
-	            string saveInFolderFirstPart = Path.GetDirectoryName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
-				string saveInFolderSecondPart = Path.GetFileName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
-	            txtSaveInFolder.Text = Path.Combine(saveInFolderFirstPart, GetStyleInLowerCaseWithoutSpecialCharacters(saveInFolderSecondPart));
-                if (!Directory.Exists(OutputFolder))
-                    Directory.CreateDirectory(OutputFolder);
-            }
-            catch (Exception)
-            {
-                var message = LocalizationManager.GetString("ExportThroughPathway.OkButtonClick.Message", "Please select a folder for which you have creation permission", "");
-				string caption = LocalizationManager.GetString("ExportThroughPathway.MessageBoxCaption.projectname", "Pathway", "");
-				Utils.MsgBox(message, caption, MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-                return;
-            }
+	        try
+	        {
+		        if (!Common.IsUnixOS())
+		        {
+			        int outputFolderLength = OutputFolder.Length;
+			        if (OutputFolder.Substring(outputFolderLength - 2, 2) != "\\")
+				        OutputFolder = OutputFolder + "\\";
+		        }
+		        txtSaveInFolder.Text = ReplaceInvalidChars(txtSaveInFolder.Text);
+		        string saveInFolderFirstPart =
+			        Path.GetDirectoryName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
+		        string saveInFolderSecondPart = Path.GetFileName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
+		        txtSaveInFolder.Text = Path.Combine(saveInFolderFirstPart,
+			        GetStyleInLowerCaseWithoutSpecialCharacters(saveInFolderSecondPart));
+		        if (!Directory.Exists(OutputFolder))
+			        Directory.CreateDirectory(OutputFolder);
+	        }
+	        catch (Exception ex)
+	        {
+		        var folderName = Path.GetDirectoryName(OutputFolder);
+		        string currentFile = new StackTrace(true).GetFrame(0).GetFileName();
+		        string msg = "The selected folder '" + Path.GetFileName(folderName) +
+		                     "' doesn't have valid permission to create a file/folder. The error thrown in the Module '"
+		                     + Path.GetFileNameWithoutExtension(currentFile) + "' and the line number is '"
+		                     + Common.GetLineNumber(ex) +
+		                     "', So choose the different folder and Please report this error at URL:"
+		                     + "http://software.sil.org/pathway/support/";
+		        var message = LocalizationManager.GetString("ExportThroughPathway.OkButtonClick.Message", msg, "");
+		        string caption = LocalizationManager.GetString("ExportThroughPathway.MessageBoxCaption.projectname", "Pathway",
+			        "");
+		        Utils.MsgBox(message, caption, MessageBoxButtons.OK,
+			        MessageBoxIcon.Error);
+		        return;
+	        }
 
-            ProcessSendingHelpImprove();
+	        ProcessSendingHelpImprove();
 
             HyphenationSettings();
             if (!File.Exists(CoverPageImagePath))
@@ -873,7 +886,7 @@ namespace SIL.PublishingSolution
             this.Close();
         }
 
-        private void HyphenationSettings()
+		private void HyphenationSettings()
         {
             Param.HyphenEnable = chkHyphen.Checked;
             var hyphenlang = string.Empty;

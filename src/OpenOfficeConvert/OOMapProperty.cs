@@ -186,9 +186,9 @@ namespace SIL.PublishingSolution
                 case "border-bottom":
                 case "border-left":
                 case "border-right":
-                    Border(property.Value);
+					Border(property.Value);
                     isPropertyWritten = true;
-                    break;
+					break;
                 case "column-count":
                 case "columns":
                     ColumnCount(property.Value);
@@ -590,47 +590,22 @@ namespace SIL.PublishingSolution
         {
             RemoveClassHyphen();
             _idProperty[_propertyKey] = Add_pt(propertyValue);
-            IncludeBorder(_propertyKey);
         }
 
         public void PaddingRight(string propertyValue)
         {
             RemoveClassHyphen();
             _idProperty[_propertyKey] = Add_pt(propertyValue);
-            IncludeBorder(_propertyKey);
         }
         public void PaddingTop(string propertyValue)
         {
             RemoveClassHyphen();
             _idProperty[_propertyKey] = Add_pt(propertyValue);
-            IncludeBorder(_propertyKey);
         }
         public void PaddingBottom(string propertyValue)
         {
             RemoveClassHyphen();
             _idProperty[_propertyKey] = Add_pt(propertyValue);
-            IncludeBorder(_propertyKey);
-        }
-
-        public void IncludeBorder(string propertyKey)
-        {
-            if (propertyKey.IndexOf("padding") == -1) return;
-            string borderPos = "border-bottom";
-            AppendBorderToPadding(borderPos);
-            borderPos = "border-top";
-            AppendBorderToPadding(borderPos);
-            borderPos = "border-left";
-            AppendBorderToPadding(borderPos);
-            borderPos = "border-right";
-            AppendBorderToPadding(borderPos);
-        }
-
-        private void AppendBorderToPadding(string borderPos)
-        {
-            if (!_idProperty.ContainsKey(borderPos))
-            {
-                _idProperty[borderPos] = "0.5pt solid #ffffff";
-            }
         }
 
         public void Mirror(string propertyValue)
@@ -916,8 +891,8 @@ namespace SIL.PublishingSolution
 
         private void Border(string propertyValue)
         {
-            _idProperty[_propertyKey] = propertyValue;
-        }
+			_idProperty[_propertyKey] = propertyValue;
+		}
 
         private void ColumnFill(string propertyValue)
         {

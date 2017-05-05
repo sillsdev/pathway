@@ -1,0 +1,1905 @@
+.complexentryform {
+        font-weight: bold;
+}
+.complexentrytype { }
+.complexformrefs :after {
+        content: " ";
+}
+.complexformrefs { }
+.crossref {
+        font-weight: bold;
+}
+.crossrefs { }
+.crossreftargets { }
+.crossref-targets { }
+.crossreftype {
+        font-style: italic;
+        font-weight: bold;
+}
+.crossref-type {
+        font-style: italic;
+        font-weight: bold;
+}
+.definition { }
+.definition-minor { }
+.definition-sub { }
+.dicBody { }
+.entry {
+        padding-bottom: 2pt;
+        padding-top: 1pt;
+}
+.entryref-primary-minor { }
+.entryref-type-minor { }
+.entryreftype { }
+.entrytypeabbr-minor { }
+.entrytypeabbr { }
+.entry-type-abbr-sub { }
+.entrytypeabbrminor { }
+.examples { }
+.examples-minor { }
+.examples-sub { }
+.grammaticalinfo {
+        font-style: italic;
+}
+.grammatical-info {
+        font-style: italic;
+}
+.grammatical-info-minor {
+        font-style: italic;
+}
+.grammatical-info-sub {
+        font-style: italic;
+}
+.headword-minor {
+        font-weight: bold;
+}
+.headword-sub {
+        font-weight: bold;
+        string-set: guideword content();
+}
+.headwordminor {
+        font-weight: bold;
+}
+.LexEntry-publishRootMinorPrimaryTarget-MLHeadWordPub {
+        font-weight: bold;
+}
+.LexEntry-publishStemMinorPrimaryTarget-MLHeadWordPub {
+        font-weight: bold;
+}
+.letData {
+        column-count: 2;
+        column-fill: balance;
+        column-gap: 18pt;
+        column-rule: solid 1pt #aa0000;
+        text-align: left;
+}
+.letHead {
+        border-bottom: .5pt solid #a00;
+        clear: both;
+        column-count: 1;
+        font-style: normal;
+        font-weight: bold;
+        line-height: 26pt;
+        margin: 18pt 9pt;
+        margin-left: .75in;
+        margin-right: .75in;
+        /* padding-bottom: 36pt; */
+        /* padding-top: 36pt; */
+        text-align: center;
+}
+.letter {
+        direction: ltr;
+        font-size: 18pt;
+        font-weight: bold;
+        margin-bottom: 18pt;
+        margin-top: 18pt;
+        text-align: center;
+        width: 100%;
+		/*page-break-after:avoid;*/
+		page-break-inside:avoid;
+		orphans:5;
+		widows:5;
+        -ps-outline-level:2;
+}
+.LexEntrypublishStemParaHomographNumber {
+        font-size: 8pt;
+        vertical-align: super;
+}
+.LexEntry-publishStemParaHomographNumber {
+        font-size: 8pt;
+        vertical-align: super;
+}
+.LexEntryTypepublishStemEntryTypeAbbreviationPub { }
+.LexEntryType-publishStemEntryType-AbbreviationPub { }
+.LexEntryType-publishRootEntryType-AbbreviationPub { }
+.LexEntryType-publishRootEntryType-RootSubEntryType { }
+.lexreftargets { }
+.lexref-targets { }
+.lexref-targets-sub { }
+.lexreftype {
+        font-style: italic;
+        font-weight: bold;
+}
+.lexref-type {
+        font-style: italic;
+        font-weight: bold;
+}
+.lexref-type-sub {
+        font-style: italic;
+        font-weight: bold;
+}
+.mainentryref-minor {
+        font-weight: bold;
+}
+.mainentryref {
+        font-weight: bold;
+}
+.mainentryrefminor {
+        font-weight: bold;
+}
+.minorentrycondition { }
+.partofspeech { }
+.partofspeech-minor { }
+.partofspeech-sub { }
+.picture {
+        height: 1.0in;
+}
+.pictureCaption { }
+.pictureLabel { }
+.pictureRight {
+        float: right;
+        margin: 0pt 0pt 4pt 4pt;
+        padding: 2pt;
+        text-align: center;
+        text-indent: 0pt;
+}
+.pictureSense { }
+.primaryrefs-minor { }
+.primaryrefs { }
+.primaryrefsminor { }
+.pronunciation-minor { }
+.pronunciation-sub { }
+.pronunciation { }
+
+.pronunciationminor { }
+.pronunciations-minor { }
+.pronunciations-sub { }
+
+.pronunciations { }
+.pronunciationsminor { }
+.relations { }
+.relations-sub { }
+.revAppendix { }
+.revData {
+        column-count: 1;
+        column-fill: balance;
+        column-gap: 18pt;
+        column-rule: none;
+        text-align: left;
+}
+.revEntry {
+        font-size: 10pt;
+}
+.revHeader {
+        font-size: 18pt;
+        font-weight: bold;
+        text-align: center;
+}
+.revhomographnumber {
+        font-size: 55%;
+        font-weight: bold;
+        vertical-align: sub;
+}
+.revSense { }
+.revsensenumber {
+        font-weight: bold;
+}
+.scientificname { }
+.scientific-name { }
+.semanticdomainabbr { }
+.semanticdomainname { }
+.semantic-domain-abbr { }
+.semantic-domain-name { }
+.semanticdomains { }
+.semantic-domains { }
+.semantic-domains-sub { }
+.sense {
+        font-weight: normal;
+}
+.sensecomplexentryform {
+        font-weight: bold;
+}
+.sensecomplexentrytype { }
+.sensecomplexformrefs { }
+.sensecrossref {
+        font-weight: bold;
+}
+.sense-crossref {
+        font-weight: bold;
+}
+.sense-crossref-sub {
+        font-weight: bold;
+}
+.sensemainentryref {
+        font-weight: bold;
+}
+.slotname { }
+.slot-name { }
+.slots { }
+.subentry { }
+.subentry-type { }
+.translations { }
+.translations-minor { }
+.translations-sub { }
+.variantrefcondition { }
+.variantrefentrytype { }
+.variantrefform {
+        font-weight: bold;
+}
+.variantrefs { }
+.xhomographnumber {
+        font-size: 55%;
+        font-weight: bold;
+        vertical-align: sub;
+}
+.xlanguagetag {
+        display: none;
+}
+.xsensenumber {
+        font-weight: bold;
+}
+.Front_Matter {
+margin-left : 48pt;
+margin-right: 48pt;
+text-align: justify;
+}
+
+.pictureCenter {
+    clear: both;
+    margin: 0pt 0pt 4pt 4pt;
+    padding: 2pt;
+    text-indent: 0pt;
+    text-align: center;
+}
+
+.CoverPageTitle {
+	font-family: "Charis SIL";
+	font-size: 24pt;
+}
+.minorentry {
+       text-align: left;
+}
+.minorentryvariant {
+       text-align: left;
+}
+.minorentrycomplex {
+       text-align: left;
+}
+
+.configtargets .configtarget .headword > span {
+	font-weight: normal;
+}
+
+.captionContent{
+    clear: both;
+    margin: 0pt 0pt 4pt 4pt;
+    padding-bottom: 20pt;
+    text-indent: 0pt;
+    text-align: center;
+}
+
+.mainheadword {
+	font-weight: bold;
+	string-set: guideword content();
+}
+.entry {
+       text-align: left;
+}
+.revEntry {
+       text-align: left;
+}
+.subentry {
+       text-align: left;
+       margin-left: 0pt;
+       display: block;
+}
+
+.complexform {
+    counter-reset: complexformpara;
+    text-indent: 2pc;
+}
+@page {
+    size: 6in 8.5in;
+    counter-increment: page;
+    margin: 0.5in 0.5in;
+}
+/* two column dictionary */
+.letData {
+       column-count: 2; -moz-column-count: 2;
+       column-gap: 12pt; -moz-column-gap: 12pt;
+       column-fill: balance;
+       overflow-wrap: break-word;
+}
+.revData {
+       column-count: 2; -moz-column-count: 2;
+       column-gap: 12pt; -moz-column-gap: 12pt;
+       column-fill: balance;
+       overflow-wrap: break-word;
+}
+
+
+.letData, .revData {
+       line-height: 12pt;
+       -ps-fixed-line-height: 12pt;
+}
+.entry {
+       line-height: 12pt;
+       -ps-fixed-line-height: 12pt;
+}
+.revEntry {
+       line-height: 12pt;
+       -ps-fixed-line-height: 12pt;
+}
+.letHead {
+       line-height: 24pt;
+       -ps-fixed-line-height: 24pt;
+}
+.revHeader {
+       line-height: 24pt;
+       -ps-fixed-line-height: 24pt;
+}
+.pictureRight {
+    display: block;
+}
+.pictureLeft {
+    display: block;
+}
+.pictureCenter {
+    display: block;
+}
+/* Running Head Mirrored.css */
+@page :left {
+    @top-left {
+           content: string( guideword, first);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @top-center    { content: ''; }
+    @top-right  { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left   { content: ''; }
+    @top-center { content: ''; }
+    @top-right  {
+           content: string( guideword, last);
+           direction: ltr;
+           font-weight: bold;
+           font-size: 12pt;
+           margin-top: 1cm;
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+
+
+
+/* Page number  Top Inside.css */
+@page :left {
+    @top-right {
+          content: counter( page);
+           margin-top: 1cm;
+    }
+}
+
+@page :right {
+    @top-left {
+           content: counter( page);
+           margin-top: 1cm;
+    }
+}
+
+
+@page :first {
+    @bottom-left {
+           content: counter( page);
+    }
+}
+.letData {
+       column-rule: solid 0pt #aa0000;
+}
+.letHead {
+       border-bottom: 0pt solid #a00;
+       margin: 18pt 9pt;
+       /* padding-bottom: 36pt; */
+       /* padding-top: 36pt; */
+}
+.revData {       column-rule: solid 0pt #aa0000;
+}
+.revHeader {
+       border-bottom: 0pt solid #a00;
+       margin: 18pt 9pt;
+       /* padding-bottom: 36pt; */
+       /* padding-top: 36pt; */
+}
+
+
+
+
+
+
+/* Mexico styles */
+a {color: rgb(0,0,255);}
+
+.visiblecomplexformbackrefs{
+	text-indent: -12pt;
+	margin-left: 12pt;
+	color: rgb(0,0,0);
+}
+
+.complexform:before {
+    content: "";
+}
+
+.complexform-summary {
+    color: rgb(128,128,0);
+}
+
+.grammatical-info {
+    color: rgb(128,0,0);
+}
+
+.headword {
+    color: rgb(0,0,255);
+}
+.headword-minor {
+    color: rgb(0,0,255);
+}
+.LexEntry-publishStemMinorPrimaryTarget-HeadWordRef {
+	color: rgb(0,0,255);
+}
+.LexEntry-publishStemComponentTarget-HeadWordRef {
+	color: rgb(0,0,255);
+}
+.LexEntry-publishStemMinorPara-CommentPub {
+    color: rgb(128,0,0);
+}
+.LexEntry-publishStemPara-CommentPub {
+    color: rgb(128,0,0);
+}
+.LexEntryType-publishStemEntryType-AbbreviationPub {
+	color: rgb(128,0,0);
+}
+.LexEntryType-publishStemMinorEntryType-AbbreviationPub {
+    color: rgb(128,0,0);
+}
+.LexEntryType-publishStemVariantType-ReverseAbbrPub {
+    color: rgb(128,0,0);
+}
+.partofspeech {
+	font-style: italic;
+    color: rgb(128,0,0);
+}
+.partofspeech-complexform {
+   color: rgb(128,0,0);
+}
+
+.restrictions {
+    color: rgb(128,128,0);
+}
+
+.restrictionsentry-minor {
+    color: rgb(128,128,0);
+}
+
+.scientific-name {
+	color: rgb(0,0,128);
+}
+.translations {
+    color: rgb(0,128,0);
+}
+
+.variantref-entry-type {
+    text-indent: -12pt;
+    margin-left: 12pt;
+}
+
+.subentry:before {
+    content: "";
+    counter-increment: subentryCounter;
+}
+.subentry .subentry:before {
+    content: "\25C6\0009";
+    counter-increment: subentryCounter;
+}
+
+.complexform-form + .grammatical-info-complexform:before {
+    content: "\A0";
+}
+.complexform-form + .complexform-summarydef:before {
+    content: "\A0";
+}
+
+.complexform-summarydef:before {
+    content: "\A0";
+}
+.scientific-name:before {
+    content: "\A0";
+}
+
+.variantrefs1:before{
+    content: "\A0\A0";
+}
+
+.visiblecomplexformbackrefs .visiblecomplexformbackref-ps
+{
+	display: inline;
+}
+.visiblecomplexformbackref-ps{
+	display: inline;
+}
+
+.visiblecomplexformbackref{
+	display: inline;
+}
+
+.entry .visiblecomplexformbackref {
+	display: inline;
+}
+
+.mainentrycomplex .visiblecomplexformbackref{
+	display: inline;
+}
+.morphosyntaxanalyses-ps{
+	display: inline;
+}
+.morphosyntaxanalyses{
+	display: inline;
+}
+.partofspeech{
+	display: inline;
+}
+
+.partofspeech-ps{
+	display: inline;
+}
+.headword{
+	display: inline;
+}
+
+.Emphasized_Text {
+	color: rgb(128,128,0);
+}
+
+.LexSense-publishStem-Comentario--restrictivo {
+	color: rgb(128,128,0);
+}
+
+.LexSense-publishStem-Definición--descriptiva {
+	color: rgb(128,128,0);
+}
+.variantref-entry-type:before {
+	content: "[";
+}
+.variantref-form:after {
+	content: "]";
+}
+@page{
+	-ps-center-title-header:"True";
+	-ps-header-font-size:"Same as headword";
+}
+
+body {
+   font-size: 10pt;
+}
+a {
+   text-decoration: inherit;
+   color: inherit;
+}
+*[dir= 'ltr']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: -moz-isolate;
+}
+*[dir= 'rtl']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: -moz-isolate;
+}
+.abbreviation {
+   /* Rule List: 6,19,3,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.abbreviation2 {
+   /* Rule List: -1,292,7,20,4,293,720,5,22,21,2 */
+   border-color: #36F;
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.abbreviation3 {
+   /* Rule List: 292,7,20,4,-1,293,720,5,22,21,2 */
+   border-color: #36F;
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.abbreviation4 {
+   /* Rule List: -1,293,720,5,22,21,2 */
+   border-color: #36F;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   color: #000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.abbreviation5 {
+   /* Rule List: 96,6,19,3,-1,99,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.abbreviation6 {
+   /* Rule List: 291,6,19,3,-1,293,720,5,22,21,2 */
+   border-color: #36F;
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.abbreviation7 {
+   /* Rule List: 11,295,3,-1,10,298,297,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.abbreviation8 {
+   /* Rule List: 14,436,3,-1,13,439,438,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.abbreviation9 {
+   /* Rule List: 7,20,4,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.caption {
+   /* Rule List: 277,7,20,4,-1,280,274,5,22,21,2 */
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   flex-line-height: 12pt;
+   text-align: center;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.complexformentryrefs {
+   /* Rule List: -1,10,298,297,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.definitionorgloss {
+   /* Rule List: 6,19,3,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.definitionorgloss2 {
+   /* Rule List: 291,6,19,3,-1,293,720,5,22,21,2 */
+   border-color: #36F;
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.dialectlabelsrs {
+   /* Rule List: -1,293,720,5,22,21,2 */
+   border-color: #36F;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   color: #000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.dialectlabelsrs2 {
+   /* Rule List: -1,10,298,297,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.dialectlabelsrs3 {
+   /* Rule List: -1,13,439,438,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.dicBody {
+   /* Rule List: 2,-1 */
+   font-size: 10pt;
+}
+.encyclopedicinfo {
+   /* Rule List: -1,5,22,21,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.encyclopedicinfo2 {
+   /* Rule List: 6,19,3,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.entry {
+   /* Rule List: 5,22,21,-1,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   margin-left: 8.504pt;
+   flex-line-height: 12pt;
+   padding-bottom: 0pt;
+   padding-top: 3pt;
+   color: #008000;
+   clear: both;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.example {
+   /* Rule List: 135,133,138,7,20,4,-1,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #000080;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.example2 {
+   /* Rule List: 864,862,867,292,7,20,4,-1,293,720,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #000080;
+   border-color: #36F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.form {
+   /* Rule List: -1,7,20,4,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.form2 {
+   /* Rule List: 7,20,4,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.form3 {
+   /* Rule List: -1,5,22,21,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.glossorsummary {
+   /* Rule List: 14,436,3,-1,13,439,438,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.headword {
+   /* Rule List: 16,-1,47,45,49,7,20,4,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword10 {
+   /* Rule List: 16,-1,384,382,386,12,296,4,10,298,297,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword11 {
+   /* Rule List: 16,-1,404,402,405,12,296,4,10,298,297,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword12 {
+   /* Rule List: 16,-1,510,508,511,493,491,495,15,437,4,13,439,438,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword13 {
+   /* Rule List: 16,-1,778,776,780,292,7,20,4,293,720,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   border-color: #36F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword14 {
+   /* Rule List: 285,277,7,20,4,-1,288,280,274,5,22,21,2 */
+   font-size: 11pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   flex-line-height: 12pt;
+   text-align: center;
+   white-space: pre-wrap;
+}
+.headword15 {
+   /* Rule List: 16,-1,258,256,260,7,20,4,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword16 {
+   /* Rule List: 16,-1,272,270,273,265,7,20,4,269,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword2 {
+   /* Rule List: 16,-1,442,440,445,15,437,4,13,439,438,2 */
+   font-size: 11pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword3 {
+   /* Rule List: 16,-1,493,491,495,15,437,4,13,439,438,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword4 {
+   /* Rule List: 16,-1,78,76,80,7,20,4,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword5 {
+   /* Rule List: 16,-1,90,88,91,7,20,4,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword6 {
+   /* Rule List: 16,-1,723,721,292,726,7,20,4,293,720,5,22,21,2 */
+   font-size: 11pt;
+   font-weight: bold;
+   color: #00F;
+   border-color: #36F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword7 {
+   /* Rule List: 16,-1,301,299,304,12,296,4,10,298,297,2 */
+   font-size: 11pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword8 {
+   /* Rule List: 16,-1,747,745,749,292,7,20,4,293,720,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   border-color: #36F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.headword9 {
+   /* Rule List: 16,-1,323,321,325,12,296,4,10,298,297,2 */
+   font-size: 10pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.letData {
+   /* Rule List: -1,2 */
+   font-size: 10pt;
+}
+.letHead {
+   /* Rule List: 1,-1,2 */
+   -moz-column-count: 1;
+   -webkit-column-count: 1;
+   column-count: 1;
+   clear: both;
+   width: 100%;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   margin-left: 8.504pt;
+   flex-line-height: 12pt;
+   padding-bottom: 3pt;
+   padding-top: 12pt;
+   font-size: 10pt;
+}
+.letter {
+   /* Rule List: 9,4,-1,1,2 */
+   font-size: 14pt;
+   font-weight: bold;
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+}
+.mainheadword {
+   /* Rule List: 16,-1,25,23,28,7,20,4,5,22,21,2 */
+   font-size: 11pt;
+   font-weight: bold;
+   color: #00F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.minimallexreferences {
+   /* Rule List: -1,5,22,21,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.minimallexreferences2 {
+   /* Rule List: -1,293,720,5,22,21,2 */
+   border-color: #36F;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   color: #000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.minorentrycomplex {
+   /* Rule List: 10,298,297,-1,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   margin-left: 8.504pt;
+   flex-line-height: 12pt;
+   padding-bottom: 0pt;
+   padding-top: 3pt;
+   color: #008000;
+   clear: both;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.minorentryvariant {
+   /* Rule List: 13,439,438,-1,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   margin-left: 8.504pt;
+   flex-line-height: 12pt;
+   padding-bottom: 0pt;
+   padding-top: 3pt;
+   color: #008000;
+   clear: both;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.nontrivialentryroots {
+   /* Rule List: -1,10,298,297,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.nontrivialentryroots2 {
+   /* Rule List: -1,5,22,21,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.owner_gloss {
+   /* Rule List: 276,6,19,3,-1,280,274,5,22,21,2 */
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   flex-line-height: 12pt;
+   text-align: center;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.ownertype_abbreviation {
+   /* Rule List: 69,68,73,6,19,3,-1,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.ownertype_abbreviation2 {
+   /* Rule List: 73,-1,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.ownertype_abbreviation3 {
+   /* Rule List: 769,768,773,291,6,19,3,-1,293,720,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+   border-color: #36F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.ownertype_abbreviation4 {
+   /* Rule List: 773,-1,293,720,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+   border-color: #36F;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.owningentry_summarydefinition {
+   /* Rule List: 6,19,3,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.owningentry_summarydefinition2 {
+   /* Rule List: 291,6,19,3,-1,293,720,5,22,21,2 */
+   border-color: #36F;
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.owningentry_summarydefinition3 {
+   /* Rule List: 11,295,3,-1,10,298,297,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.partofspeech {
+   /* Rule List: 96,6,19,3,-1,99,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.partofspeech2 {
+   /* Rule List: 108,6,19,3,-1,111,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.partofspeech3 {
+   /* Rule List: 825,291,6,19,3,-1,828,293,720,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+   border-color: #36F;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.partofspeech4 {
+   /* Rule List: 97,7,20,4,-1,96,6,19,3,99,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #808000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.primaryentryrefs {
+   /* Rule List: -1,5,22,21,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.primaryentryrefs2 {
+   /* Rule List: -1,13,439,438,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.referencedentry {
+   /* Rule List: -1,10,298,297,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.referencedentry2 {
+   /* Rule List: -1,13,439,438,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.restrictions {
+   /* Rule List: -1,6,19,3,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.restrictions2 {
+   /* Rule List: 6,19,3,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.restrictions3 {
+   /* Rule List: -1,5,22,21,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.restrictions4 {
+   /* Rule List: -1,291,6,19,3,293,720,5,22,21,2 */
+   border-color: #36F;
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.restrictions5 {
+   /* Rule List: 291,6,19,3,-1,293,720,5,22,21,2 */
+   border-color: #36F;
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.restrictions6 {
+   /* Rule List: -1,293,720,5,22,21,2 */
+   border-color: #36F;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   color: #000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.reverseabbr {
+   /* Rule List: 14,436,3,-1,13,439,438,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.reverseabbr2 {
+   /* Rule List: 6,19,3,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.reverseabbr3 {
+   /* Rule List: 11,295,3,-1,10,298,297,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.scientificname {
+   /* Rule List: 7,20,4,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.sensenumber {
+   /* Rule List: 94,-1,5,22,21,2 */
+   font-weight: bold;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.sensenumber2 {
+   /* Rule List: -1,94,5,22,21,2 */
+   font-weight: bold;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.stxfintranslation {
+   /* Rule List: 1020,6,19,3,-1,5,22,21,2 */
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: #396;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.subentry {
+   /* Rule List: 293,720,-1,5,22,21,2 */
+   border-color: #36F;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   margin-left: 19.843pt;
+   flex-line-height: 12pt;
+   padding-bottom: 0pt;
+   padding-top: 0pt;
+   color: #000;
+   display: block;
+   clear: both;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.subentry-pb {
+   /* Rule List: 294,-1,293,720,5,22,21,2 */
+   font-size: 10pt;
+   color: Black;
+   border-color: #36F;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+}
+.summary {
+   /* Rule List: 11,295,3,-1,10,298,297,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.summarydefinition {
+   /* Rule List: 14,436,3,-1,13,439,438,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.summarydefinition2 {
+   /* Rule List: 11,295,3,-1,10,298,297,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.thumbnail {
+   /* Rule List: 275,-1,280,274,5,22,21,2 */
+   max-height: 1in;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: 0pt;
+   flex-line-height: 12pt;
+   color: #000;
+   text-align: center;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.translation {
+   /* Rule List: 6,19,3,-1,5,22,21,2 */
+   color: #008000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.translation2 {
+   /* Rule List: 291,6,19,3,-1,293,720,5,22,21,2 */
+   border-color: #36F;
+   color: #000;
+   font-family: 'Charis SIL AmArea',serif;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.variantentrytypes {
+   /* Rule List: -1,5,22,21,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.variantformentrybackref {
+   /* Rule List: -1,5,22,21,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.variantformentrybackrefs {
+   /* Rule List: -1,5,22,21,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.variantformentrybackrefs2 {
+   /* Rule List: -1,293,720,5,22,21,2 */
+   border-color: #36F;
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -11.339pt;
+   flex-line-height: 12pt;
+   color: #000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+.variantformentrybackrefs3 {
+   /* Rule List: -1,10,298,297,2 */
+   border-left-width: 0pt;
+   border-right-width: 0pt;
+   border-top-width: 0pt;
+   border-bottom-width: 0pt;
+   text-indent: -8.504pt;
+   flex-line-height: 12pt;
+   color: #008000;
+   white-space: pre-wrap;
+   font-size: 10pt;
+}
+div[lang='es']{ font-family: "Charis SIL AmArea";}
+span[lang='es']{ font-family: "Charis SIL AmArea";}
+div[lang='en']{ font-family: "Charis SIL AmArea";}
+span[lang='en']{ font-family: "Charis SIL AmArea";}
+
+
+
+.BookTitle {font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookCreator{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookPublisher{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookDescription{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }
+.BookCopyrightHolder{font-family: "Microsoft Sans Serif"; 
+ font-size: 8pt; 
+ }

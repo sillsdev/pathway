@@ -1405,7 +1405,8 @@ namespace SIL.Tool
 						return;
 					try
 					{
-						subEntrySize = Math.Round(Convert.ToDecimal(IdAllClass[currentStyleName]["margin-left"].Replace("pt", "")));
+						subEntrySize = Math.Round(Convert.ToDecimal(IdAllClass[currentStyleName]["margin-left"].Replace("pt", ""),
+							new CultureInfo("en-US").NumberFormat));
 					}
 					catch (Exception)
 					{
@@ -1413,7 +1414,8 @@ namespace SIL.Tool
 					}
 					try
 					{
-						entrySize = Math.Round(Convert.ToDecimal(previousStyleProperty["margin-left"].Replace("pt", "")));
+						entrySize = Math.Round(Convert.ToDecimal(previousStyleProperty["margin-left"].Replace("pt", ""),
+							new CultureInfo("en-US").NumberFormat));
 					}
 					catch (Exception)
 					{
