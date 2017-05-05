@@ -265,7 +265,7 @@ namespace SIL.PublishingSolution
 				if (className.IndexOf("SectColumnWidth_") >= 0)
 				{
 					colWidth = IdAllClass[className]["ColumnWidth"];
-					Common.ColumnWidth = double.Parse(colWidth, CultureInfo.GetCultureInfo("en-US"));
+					Common.ColumnWidth = double.Parse(colWidth, new CultureInfo("en-US").NumberFormat);
 				}
 
 				searchKey = "visibility";
