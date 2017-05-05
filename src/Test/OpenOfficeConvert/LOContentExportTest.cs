@@ -190,7 +190,7 @@ namespace Test.OpenOfficeConvert
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void DictionaryTabUnicodeTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -218,7 +218,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void DictionaryMainStyleExport()
 		{
 			Common.UseAfterBeforeProcess = false;
@@ -247,7 +247,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void EveryPageBottomCenterExport()
 		{
 			Common.UseAfterBeforeProcess = false;

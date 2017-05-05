@@ -109,7 +109,7 @@ namespace Test.XeLatex
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void ScriptureExportTest()
 		{
 			string inputSourceDirectory = FileInput("ExportXelatex");
@@ -181,7 +181,7 @@ namespace Test.XeLatex
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void DictionaryExportTest()
 		{
 			string inputSourceDirectory = FileInput("ExportXelatex");
@@ -214,7 +214,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TextAlignTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -225,7 +225,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TextIndentTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -236,7 +236,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void ListSmallTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -247,7 +247,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TextColorTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -258,7 +258,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void ChapterNumberTest()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -269,7 +269,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void ChapterNumberOnHeaderTest()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -280,7 +280,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void DropCapTest()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -291,7 +291,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontStyleItalicTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -302,7 +302,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void Inherit()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -313,7 +313,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontStyleNormalTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -324,7 +324,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontWeight()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -335,7 +335,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontVariantSmallCapTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -346,7 +346,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontVariantNormalTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -357,7 +357,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontSizePointTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -368,7 +368,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void WordSpace()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -379,7 +379,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void LineHeight()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -390,7 +390,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontSizeCmToPointTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -401,7 +401,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontSizeXXSmallTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -412,7 +412,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontWeightBoldTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -423,7 +423,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontWeightNormalTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -435,7 +435,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontWeightBoldRegular()  // TD-2330()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -447,7 +447,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontBoldItalicTest()  // TD-2188()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -458,7 +458,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontWeight400Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -469,7 +469,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FontWeight700Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -480,7 +480,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TextAlignCenterTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -491,7 +491,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void MarginTopTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -502,7 +502,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void MarginBottomTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -513,7 +513,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void DisplayBlockTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -524,7 +524,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TextAlignRightTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -535,7 +535,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void PseudoAfterTest()
 		{
 			//Added with Unicode
@@ -547,7 +547,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void GautamiFontTest()
 		{
 			//Added with Unicode
@@ -559,7 +559,7 @@ namespace Test.XeLatex
 
 
 		//[Test]
-		//[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTC")]
 		//public void TextDecorationTest()
 		//{
 		//    _projInfo.ProjectInputType = "Dictionary";
@@ -666,7 +666,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void PictureCaptionTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -677,7 +677,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void ImageBaseTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -689,7 +689,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TextIndentPcTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -700,7 +700,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void MarginRightTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -712,7 +712,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void UnderlineTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -733,7 +733,7 @@ namespace Test.XeLatex
 
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void InputCaseFW83Alpha()
 		{
 			const string file = "inputcasefw83alpha";
@@ -784,7 +784,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		//TD-2303 font-family: Gentium
 		public void FontFamily2a()
 		{
@@ -796,7 +796,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		//TD-2303 font-family: Gentium
 		public void FontFamily3()
 		{
@@ -818,7 +818,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		//TD-2303 font-family: Gentium
 		public void FontFamily5()
 		{
@@ -869,7 +869,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TextAlignJustifyTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -881,7 +881,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void Counter1Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -892,7 +892,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void Counter2Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -903,7 +903,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void Counter3Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -914,7 +914,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void LanguageTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -925,7 +925,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void LetterspaceTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -936,7 +936,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void LineHeightNoneTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -946,7 +946,7 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void LineHeightPercentageTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -956,7 +956,7 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void LineHeightPointTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -967,7 +967,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void PaddingLeftTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -978,7 +978,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void PageBGColorTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -989,7 +989,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void PageSizeTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1000,7 +1000,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FootNote1Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1011,7 +1011,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FootNote2Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1022,7 +1022,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FootNoteUnicodeTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1034,7 +1034,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void ReplaceStringTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1044,7 +1044,7 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FlexRevTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1056,7 +1056,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void VerticalAlignTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1067,7 +1067,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void UnicodeSymbolTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1079,7 +1079,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void HashSymbolTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1091,7 +1091,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void Precede1()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1102,7 +1102,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void PrecedesPseudoLangTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1113,7 +1113,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void PrecedesPseudoTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1124,7 +1124,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void PrecedesPseudoTestA()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1135,7 +1135,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void PrecedesPseudoTestB()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1146,7 +1146,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void Parent1()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1157,7 +1157,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void VisibilityTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1168,7 +1168,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void multiClass()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1179,7 +1179,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TaggedText()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1190,7 +1190,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TextFontSizeTestC()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1201,7 +1201,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void MissingCurlyBracesTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1213,7 +1213,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void VisibilityCensorPackageTest()
 		{
 			const string testFileName = "VisibilityPackage";
@@ -1231,7 +1231,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void ColumnCount()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1242,7 +1242,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void ColumnGap()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1253,7 +1253,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void XeLaTexPath()
 		{
 			if (Directory.Exists(XeLaTexInstallation.GetXeLaTexDir()))
@@ -1262,7 +1262,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void XeLaTexVersion()
 		{
 			Assert.IsTrue(XeLaTexInstallation.CheckXeLaTexVersion());
@@ -1277,7 +1277,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void LineBreak()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -1290,7 +1290,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void DoubleUnderlineTest()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -1301,7 +1301,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void FootNoteMarker()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -1312,7 +1312,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TOCLetters()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1323,7 +1323,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void XeLaTexUpdateCache()
 		{
 			UpdateXeLaTexFontCacheIfNecessary();
@@ -1334,7 +1334,7 @@ namespace Test.XeLatex
 
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void TwoColumnInputCase()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1344,7 +1344,7 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void HangingIndent()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1354,7 +1354,7 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void BRTagInputCase()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1364,7 +1364,7 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void BidiTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1374,7 +1374,7 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void HideVerseNumYes()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -1384,7 +1384,7 @@ namespace Test.XeLatex
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void HideVerseNumNo()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -1397,7 +1397,7 @@ namespace Test.XeLatex
 		///A test for Export Xelatex For Scripture
 		///</summary>
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void XelatexCoverPageTitleTest()
 		{
 			string inputSourceDirectory = FileInput("ExportXelatex");

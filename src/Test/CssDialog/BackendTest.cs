@@ -44,7 +44,7 @@ namespace Test.CssDialog
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void GetExportTypeTest()
         {
             ArrayList exportType = Backend.GetExportType("Dictionary");

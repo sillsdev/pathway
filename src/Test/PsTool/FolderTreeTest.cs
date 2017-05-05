@@ -67,7 +67,7 @@ namespace Test.PsTool
 		///A test for Get
 		///</summary>
 		[Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void LongShortDirectoryNameTest()
 		{
 			if (Common.UsingMonoVM)

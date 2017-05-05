@@ -1835,7 +1835,7 @@ namespace Test.InDesignConvert
 
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void TokPisin()
         {
             //Scripture
@@ -1847,7 +1847,7 @@ namespace Test.InDesignConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void TeTest()
         {
             //Scripture
@@ -1859,7 +1859,7 @@ namespace Test.InDesignConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void Bughotugospels()
         {
             //Scripture
@@ -1871,7 +1871,7 @@ namespace Test.InDesignConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void B1pe()
         {
             //Scripture
@@ -1883,7 +1883,7 @@ namespace Test.InDesignConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void Kabwa()
         {
             //Scripture
@@ -1895,7 +1895,7 @@ namespace Test.InDesignConvert
 
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void BuangExportDictionary()
         {
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/BuangExport.xhtml");

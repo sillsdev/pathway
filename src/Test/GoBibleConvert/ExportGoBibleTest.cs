@@ -84,7 +84,7 @@ namespace Test.GoBibleConvert
         ///A test for BuildApplication
         ///</summary>
         [Ignore]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void BuildApplicationTest()
         {
             ExportGoBible target = new ExportGoBible();
@@ -98,7 +98,7 @@ namespace Test.GoBibleConvert
         ///A test for CreateCollectionsTextFile
         ///</summary>
         [Ignore]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void CreateCollectionsTextFileTest()
         {
             ExportGoBible target = new ExportGoBible();
@@ -112,7 +112,7 @@ namespace Test.GoBibleConvert
         ///A test for CreateRamp
         ///</summary>
         [Ignore]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void CreateRampTest()
         {
             ExportGoBible target = new ExportGoBible(); // TODO: Initialize to an appropriate value
@@ -125,7 +125,7 @@ namespace Test.GoBibleConvert
         ///A test for Export
         ///</summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void ExportTest()
         {
             string inputSourceDirectory = FileInput("ExportGoBible");
@@ -151,7 +151,7 @@ namespace Test.GoBibleConvert
         ///A test for GetInfo
         ///</summary>
         [Ignore]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void GetInfoTest()
         {
             ExportGoBible target = new ExportGoBible(); // TODO: Initialize to an appropriate value
@@ -167,7 +167,7 @@ namespace Test.GoBibleConvert
         ///A test for GetProjectName
         ///</summary>
         [Ignore]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void GetProjectNameTest()
         {
             ExportGoBible target = new ExportGoBible(); // TODO: Initialize to an appropriate value
@@ -183,7 +183,7 @@ namespace Test.GoBibleConvert
         ///A test for GoBibleCreatorTempDirectory
         ///</summary>
         [Ignore]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void GoBibleCreatorTempDirectoryTest()
         {
             ExportGoBible target = new ExportGoBible(); // TODO: Initialize to an appropriate value
@@ -199,7 +199,7 @@ namespace Test.GoBibleConvert
         ///A test for Handle
         ///</summary>
         [Ignore]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void HandleTest()
         {
             ExportGoBible target = new ExportGoBible(); // TODO: Initialize to an appropriate value
