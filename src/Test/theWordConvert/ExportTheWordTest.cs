@@ -700,7 +700,7 @@ namespace Test.theWordConvert
         ///</summary>
         [Test]
         [NUnit.Framework.Category("LongTest")]
-        [NUnit.Framework.Category("SkipOnTeamCity")]
+        [NUnit.Framework.Category("SkipOnTC")]
         public void ConvertToMySwordTest()
         {
             const string vrsName = "vrs.xml";
@@ -769,7 +769,7 @@ namespace Test.theWordConvert
         ///</summary>
         [Test]
         [NUnit.Framework.Category("LongTest")]
-        [NUnit.Framework.Category("SkipOnTeamCity")]
+        [NUnit.Framework.Category("SkipOnTC")]
         public void ExportTest()
         {
             Common.Testing = true;

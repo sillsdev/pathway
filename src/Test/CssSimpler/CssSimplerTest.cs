@@ -296,7 +296,6 @@ namespace Test.CssSimplerTest
         /// A test of moving inline styles to css
         /// </summary>
         [Test]
-        [Category("SkipOnPrecise")]
         public void InlineStyleTest()
         {
             const string testName = "InlineStyle";
@@ -332,7 +331,6 @@ namespace Test.CssSimplerTest
         /// A test of moving inline styles to css
         /// </summary>
         [Test]
-        [Category("SkipOnPrecise")]
         public void InlineStyle2Test()
         {
             const string testName = "InlineStyle2";
@@ -718,7 +716,6 @@ namespace Test.CssSimplerTest
         /// This test fails on Windows Team City b/c a newline is missing from the end of the file but succeeds locally and on Linux
         /// </summary>
         [Test]
-		[Category("SkipOnTeamCity")] //Team City doesn't add a new line to the end of the generated XML file and throws a comparison error
         public void PseudoExtraSemDomParenTest()
         {
             const string testName = "PseudoExtraSemDomParen";

@@ -324,7 +324,7 @@ namespace Test.PsExport
         /// Simple test where no changes are made to the settings.
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void AcquireUserSettingsT1()
         {
             AcquireUserSettingsTest("T1", "1pe.xhtml", "Layout_02.css", "T1: Style sheet default preparation");
@@ -338,7 +338,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void SeExportT2()
         {
             SeExportTest("T2", "1pe.xhtml", "Layout_02.css", "OpenOffice/LibreOffice",  "T2: ODT Export Test");
@@ -350,7 +350,7 @@ namespace Test.PsExport
         /// Test PDF export
         /// </summary>
         [Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
         public void SeExportT3()
         {
             SeExportTest("T3", "1pe.xhtml", "Layout_02.css", "Pdf (using Prince)", "T3: PDF Export Test");
@@ -363,7 +363,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void AcceptT4NkonyaLO()
         {
             var tests = new ArrayList
@@ -423,7 +423,7 @@ namespace Test.PsExport
         /// </remarks>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void AcceptT5BuangALO()
         {
             var tests = new ArrayList
@@ -514,7 +514,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void MainAndRevT6()
         {
             var tests = new ArrayList
@@ -599,7 +599,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void RevT7()
         {
             var tests = new ArrayList
@@ -684,7 +684,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void PsExportT8()
         {
             ExportTest("T8", "main.xhtml", "Dictionary", "OpenOffice", "T8: Flex ODT Export Test");
@@ -696,7 +696,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void TD3661LineSpace24()
         {
             var tests = new ArrayList
@@ -723,7 +723,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void TD3661vLineSpace24()
         {
             var tests = new ArrayList
@@ -749,7 +749,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void T11()
         {
             var tests = new ArrayList
@@ -776,7 +776,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void T12()
         {
             var tests = new ArrayList
@@ -801,7 +801,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void T13()
         {
             var tests = new ArrayList
@@ -833,7 +833,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void T14FieldWorksA4()
         {
             var tests = new ArrayList
@@ -890,7 +890,7 @@ namespace Test.PsExport
         /// </remarks>
         [Test]
 		[Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void T15DictionaryRights()
         {
             var tests = new ArrayList
@@ -954,7 +954,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void T16A5ScriptureWideGap()
         {
             var tests = new ArrayList
@@ -1013,7 +1013,7 @@ namespace Test.PsExport
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void T17NoSpaceAfterVerse()
         {
             var tests = new ArrayList

@@ -193,7 +193,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void DivEntrySubEntrySameMarginLeft_NodeTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -219,7 +219,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void DivEntrySubEntryMarginLeft2Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -245,7 +245,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void MexicoStyleExport()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -272,7 +272,7 @@ namespace Test.OpenOfficeConvert
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void SubscriptForNewFlexTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -347,7 +347,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void RunningHeaderNoneTest()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -373,7 +373,7 @@ namespace Test.OpenOfficeConvert
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void RunningHeaderMainTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -400,7 +400,7 @@ namespace Test.OpenOfficeConvert
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void RunningHeaderReversalTest()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -427,7 +427,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void ParagraphBreakingTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -453,7 +453,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void DecorationColorTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -479,7 +479,7 @@ namespace Test.OpenOfficeConvert
         /// </summary>
         [Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
 		public void NewGuidewordStyleTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";

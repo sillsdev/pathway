@@ -27,13 +27,13 @@ namespace Test.epubConvert
     ///</summary>
     [TestFixture]
     [Category("ShortTest")]
+	[Category("SkipOnTeamCity")]
     public class EmbeddedFontTest
     {
         /// <summary>
         /// Test a known Free font
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
         public void FreeFontTest()
         {
             Assert.IsTrue(FontInternals.IsInstalled("Arial"));
@@ -47,7 +47,7 @@ namespace Test.epubConvert
         /// Test the SIL Abyssinica font
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void AbyssinicaTest()
         {
             Assert.IsTrue(FontInternals.IsInstalled("Abyssinica SIL"));
@@ -60,7 +60,7 @@ namespace Test.epubConvert
         /// Test the SIL Andika font
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void AndikaTest()
         {
             string fontName = "Andika Basic";
@@ -78,7 +78,7 @@ namespace Test.epubConvert
         /// Test the Charis SIL font
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void CharisTest()
         {
             var silFont = new EmbeddedFont("Charis SIL");
@@ -90,7 +90,7 @@ namespace Test.epubConvert
         /// Test the Dai Banna font
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void DaiBannaTest()
         {
             string fontName = "Dai Banna SIL Book";
@@ -110,7 +110,7 @@ namespace Test.epubConvert
         /// Test the Doulos SIL font
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void DoulosTest()
         {
             var silFont = new EmbeddedFont("Doulos SIL");
@@ -122,7 +122,7 @@ namespace Test.epubConvert
         /// Test the SIL Gentium Basic font
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void GentiumTest()
         {
             string fontName = "Gentium";
@@ -144,7 +144,7 @@ namespace Test.epubConvert
         /// here: http://www.linuxlibertine.org/
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void LibertineTest()
         {
             var font = new EmbeddedFont("Linux Libertine");
@@ -159,7 +159,7 @@ namespace Test.epubConvert
         /// Test the SIL Scheharazade) font
         /// </summary>
         [Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTC")]
         public void ScheharazadeTest()
         {
             var silFont = new EmbeddedFont("Scheherazade");

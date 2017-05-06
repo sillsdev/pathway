@@ -64,7 +64,7 @@ namespace Test.PdfConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void ScriptureReplaceBookNametoBookCodeTest()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -167,7 +167,7 @@ namespace Test.PdfConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void CSSStyleForHeaderShowInPrincePdfTest()
         {
             _projInfo.ProjectInputType = "Scripture";

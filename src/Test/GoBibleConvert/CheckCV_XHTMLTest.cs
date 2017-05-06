@@ -46,7 +46,7 @@ namespace Test.GoBibleConvert
         ///</summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void IsDuplicateBooksTest()
         {
             XmlDocument xmlDocument = new XmlDocument();
@@ -61,7 +61,7 @@ namespace Test.GoBibleConvert
         ///</summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void NotIsDuplicateBooksTest()
         {
             XmlDocument xmlDocument = new XmlDocument();
@@ -76,7 +76,7 @@ namespace Test.GoBibleConvert
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void GetProjectNameTest()
         {
             const string fileName = "1pe.xhtml";

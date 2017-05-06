@@ -220,7 +220,7 @@ namespace Test.DictionaryForMIDsConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void CleanUpTest()
         {
             Common.Testing = true;
@@ -262,7 +262,7 @@ namespace Test.DictionaryForMIDsConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void MoveJarFileTest()
         {
             Common.Testing = true;
@@ -275,7 +275,7 @@ namespace Test.DictionaryForMIDsConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void CreateSubmissionTest()
         {
             Common.Testing = true;

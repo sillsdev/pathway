@@ -5353,7 +5353,7 @@ namespace SIL.Tool
 
 		public static void FindParatextProject()
 		{
-			if (!string.IsNullOrEmpty(Ssf)) return;
+			if (!string.IsNullOrEmpty(Ssf)  || Param.DatabaseName == "DatabaseName") return;
 			RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out ParatextData);
 			var sh = new SettingsHelper(Param.DatabaseName);
 			Common.Ssf = sh.GetSettingsFilename();
