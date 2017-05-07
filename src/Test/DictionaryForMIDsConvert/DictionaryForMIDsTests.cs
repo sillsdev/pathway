@@ -190,7 +190,7 @@ namespace Test.DictionaryForMIDsConvert
 
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void CreateDictionaryForMIDsTest()
         {
             Common.Testing = true;
@@ -246,7 +246,7 @@ namespace Test.DictionaryForMIDsConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         public void LaunchTest()
         {
             Common.Testing = true;

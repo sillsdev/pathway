@@ -84,7 +84,7 @@ namespace Test.PdfConvert
         ///A test for Export
         ///</summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         [Category("LongTest")]
         public void ExportDictionaryTest()
         {
@@ -112,7 +112,7 @@ namespace Test.PdfConvert
         ///A test for Dictionary Guideword
         ///</summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         [Category("LongTest")]
         public void ExportDictionaryGuidewordTest()
         {
@@ -140,7 +140,7 @@ namespace Test.PdfConvert
         ///A test for Export
         ///</summary>
         [Test]
-        [Category("SkipOnTeamCity")]
+        [Category("SkipOnTC")]
         [Category("LongTest")]
         public void ExportScriptureTest()
         {
