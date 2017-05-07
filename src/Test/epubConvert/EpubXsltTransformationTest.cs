@@ -68,7 +68,7 @@ namespace Test.epubConvert
         }
 
         [Test]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void ExportTypeEpub3TocTest()
         {
             const string file = "Epub3TOCTransformation";

@@ -579,7 +579,7 @@ namespace Test.CssParserTest
         }
 
 	    [Test]
-		[Category("SkipOnTC")]
+		[Category("SkipOnTeamCity")]
 	    public void FontFamily10()
 	    {
 			_input.Name = "font-family";

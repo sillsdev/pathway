@@ -46,7 +46,7 @@ namespace Test.CssParserTest
         #endregion Setup
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void GetFontList()
         {
             string cssFile = "GetFontList.css";

@@ -46,7 +46,7 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTC")]
+		[Category("SkipOnTeamCity")]
 		public void ADictionaryEpubExportPassTest()
 		{
 			// clean out old files

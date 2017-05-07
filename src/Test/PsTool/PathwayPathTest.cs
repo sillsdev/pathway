@@ -46,7 +46,7 @@ namespace Test.PsTool
         ///</summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void GetPathwayDirTest()
         {
 			string actual = Common.AssemblyPath;

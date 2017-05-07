@@ -131,7 +131,7 @@ namespace Test.InDesignConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void FontFamily3()
         {
             _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontFamily3.css");

@@ -132,7 +132,7 @@ namespace Test.PsTool
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void AddContributorTest()
         {
             const string TestFolder = "rampInput";
@@ -147,7 +147,7 @@ namespace Test.PsTool
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void RampFormatExtentImagesTest()
         {
             const string TestFolder = "rampInput";
@@ -160,7 +160,7 @@ namespace Test.PsTool
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void RampRelRequiresTest()
         {
             RelRequires = new List<string>();
@@ -174,7 +174,7 @@ namespace Test.PsTool
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void RampRightsTest()
         {
             const string TestFolder = "rampInput";
@@ -188,7 +188,7 @@ namespace Test.PsTool
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void RampCreatedOnTest()
         {
             const string TestFolder = "rampInput";
@@ -201,7 +201,7 @@ namespace Test.PsTool
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void RampModifiedDateTest()
         {
             const string TestFolder = "rampInput";
@@ -214,7 +214,7 @@ namespace Test.PsTool
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void RampDescriptionTest()
         {
             const string TestFolder = "rampInput";

@@ -114,7 +114,7 @@ namespace Test.ParatextSupport
         #region Tests
 
         [Test]
-		[Category("SkipOnTC")]
+		[Category("SkipOnTeamCity")]
         public void ExportToPathwayTest()
         {
             List<XmlDocument> usxBooksToExport = new List<XmlDocument>();
@@ -141,7 +141,7 @@ namespace Test.ParatextSupport
         }
 
         [Test]
-		[Category("SkipOnTC")]
+		[Category("SkipOnTeamCity")]
         public void ExportToPathwayTheWordTest()
         {
             List<XmlDocument> usxBooksToExport = new List<XmlDocument>();

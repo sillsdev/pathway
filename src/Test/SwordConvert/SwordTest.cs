@@ -95,7 +95,7 @@ namespace Test.SwordConvert
         ///A test for Export
         ///</summary>
         [Test]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void ExportSwordTest()
         {
             string inputSourceDirectory = FileInput("SwordExportTest");
@@ -121,7 +121,7 @@ namespace Test.SwordConvert
         ///Compare files
         /// </summary>
         [Test]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void RutBookTest()
         {
             const string file = "rut";
@@ -180,7 +180,7 @@ namespace Test.SwordConvert
         ///Compare files
         /// </summary>
         [Test]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void JN2BookTest()
         {
             const string file = "2JN";
@@ -239,7 +239,7 @@ namespace Test.SwordConvert
         ///Compare files
         /// </summary>
         [Test]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void EzraBookTest()
         {
             const string file = "EZR";
@@ -298,7 +298,7 @@ namespace Test.SwordConvert
         ///Compare files
         /// </summary>
         [Test]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void JudgesBookTest()
         {
             const string file = "JDG";

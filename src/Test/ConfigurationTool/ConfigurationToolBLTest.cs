@@ -146,7 +146,7 @@ namespace Test.UIConfigurationToolBLTest
 
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void NewWithDefaultTest()
         {
             SetUp();
@@ -216,7 +216,7 @@ namespace Test.UIConfigurationToolBLTest
 
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTC")]
+        [Category("SkipOnTeamCity")]
         public void SaveAsWithDefaultTest()
         {
             SetUp();
