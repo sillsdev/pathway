@@ -7,4 +7,5 @@ export MONO_GAC_PREFIX=${MONO_PREFIX}:${MONO_GAC_PREFIX}
 export MONO_MWF_SCALING=disable
 export PATH=${MONO_PREFIX}/bin:$PATH
 export MONO_REGISTRY_PATH=${HOME}/.mono:${HOME}/.config/paratext/registry:${HOME}/.config/fieldworks/registry
+rm Test-*.*
 mono ../packages/NUnit.Runners.Net4.2.6.4/tools/nunit-console-x86.exe ../output/Debug/Export/Test.dll -xml=Test-Result.xml -labels -exclude=SkipOnTeamCity ${1}
