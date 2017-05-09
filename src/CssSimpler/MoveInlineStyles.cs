@@ -40,7 +40,7 @@ namespace CssSimpler
             }
             foreach (var key in SavedStyles.Keys)
             {
-                sw.WriteLine("span > span." + key + " { " + SavedStyles[key] + " }");
+                sw.WriteLine("." + key + " { " + SavedStyles[key] + " }");
             }
             sw.Close();
             sr.Close();
@@ -80,21 +80,16 @@ namespace CssSimpler
                     if (SavedStyles[newClass] != r.Value)
                     {
                         count += 1;
-						newClass = string.Format("stxfin{0}{1}", LastClass, count);
+						newClass = $"stxfin{LastClass}{count}";
                     }
                     else
                     {
                         break;
                     }
                 }
-                var saveAs = newClass;
-                if (!string.IsNullOrEmpty(_currentLang))
+                if (!SavedStyles.ContainsKey(newClass))
                 {
-                    saveAs += string.Format("[lang='{0}']", _currentLang.Trim());
-                }
-                if (!SavedStyles.ContainsKey(saveAs))
-                {
-                    SavedStyles[saveAs] = r.Value;
+                    SavedStyles[newClass] = r.Value;
                 }
                 if (_currentClass == string.Empty)
                 {

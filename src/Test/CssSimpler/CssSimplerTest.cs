@@ -1321,6 +1321,50 @@ namespace Test.CssSimplerTest
 		}
 
 		/// <summary>
+		/// .letter rule has a green color but span for en lang has blue color and more terms
+		/// </summary>
+		[Test]
+		public void HomographTest()
+		{
+			const string testName = "Homograph";
+			_testFiles.Copy(testName + ".css");
+			_testFiles.Copy(testName + ".xhtml");
+			var cssFullName = _testFiles.Output(testName + ".css");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			var xhtmlOutFullName = _testFiles.Output(testName + "Out.xhtml");
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			var lc = new LoadClasses(xhtmlFullName);
+			var styleSheet = lc.StyleSheet;
+			UniqueClasses = lc.UniqueClasses;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			var tmp2Out = Path.GetTempFileName();
+			// ReSharper disable once UnusedVariable
+			var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmp3Out = Path.GetTempFileName();
+			// ReSharper disable once UnusedVariable
+			var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			var fs = new FlattenStyles(tmp3Out, xhtmlOutFullName, xml, NeedHigher, false, "");
+			fs.Structure = 0;
+			fs.DivBlocks = false;
+			MetaData(fs);
+			fs.Parse();
+			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
+			OutputXml = true;
+			LoadCssXml(parser, styleSheet, xml);
+			OutputXml = false;
+			var xmlCssFullName = _testFiles.Output(testName + ".xml");
+			NodeTest(xmlCssFullName, 3, "//RULE[@term='99' and starts-with(@target,'stxfin')]", "inline rules take high priority");
+			NodeTest(xmlCssFullName, 2, "//RULE[starts-with(@lastClass,'mainheadword') and PROPERTY/value='#00F']", "headword color remains blue");
+			NodeTest(xmlCssFullName, 1, "//RULE[starts-with(@lastClass,'stxfinmainheadword') and PROPERTY[name='font-size'][value='58'][unit='%']]", "subscripted homograph number");
+		}
+
+		/// <summary>
 		/// By default spans are created for significant space since it is needed for Pathway to Libre Office
 		/// </summary>
 		[Test]

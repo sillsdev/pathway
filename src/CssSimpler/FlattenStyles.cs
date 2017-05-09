@@ -394,34 +394,64 @@ namespace CssSimpler
         private string GetRuleNumbers(XmlReader r, int adjustLevel)
         {
             _ruleNums.Clear();
-            var inherited = false;
-            for (var i = r.Depth - adjustLevel; i >= 0; i -= 1)
-            {
-                GetLevelRules(i);
-                if (inherited) continue;
-                inherited = true;
-                _ruleNums.Add(-1);
-            }
+			GetLevelRules(r.Depth - adjustLevel);
+			_ruleNums.Add(-1);
+	        MergeLevelRules(r.Depth - adjustLevel - 1);
             return string.Join(",", _ruleNums);
         }
 
-        private bool GetLevelRules(int i)
+	    private bool GetLevelRules(int i)
         {
             if (_levelRules.Count <= i) return false;
             var levelList = _levelRules[i] as List<XmlElement>;
             if (levelList == null) return false;
             foreach (XmlElement node in levelList)
             {
-                var numNode = node.SelectSingleNode("parent::*/@pos");
-                if (numNode == null) continue;
-                var num = int.Parse(numNode.InnerText);
-                if (_ruleNums.Contains(num)) continue;
-                _ruleNums.Add(num);
+	            var pos = GetPos(GetRule(node));
+                if (_ruleNums.Contains(pos)) continue;
+                _ruleNums.Add(pos);
             }
-            return true;
+	        return true;
         }
 
-        private readonly SortedDictionary<string, string> _reverseMap = new SortedDictionary<string, string>();
+		private void MergeLevelRules(int level)
+		{
+			var rulePos = new List<int>();
+			var ruleTerms = new List<int>();
+			for (var i = level; i >= 0; i -= 1)
+			{
+				if (_levelRules.Count <= i) continue;
+				var levelList = _levelRules[i] as List<XmlElement>;
+				if (levelList == null) continue;
+				foreach (XmlElement node in levelList)
+				{
+					var rule = GetRule(node);
+					var pos = GetPos(rule);
+					if (rulePos.Contains(pos)) continue;
+					var terms = GetTerms(rule);
+					var addAt = 0;
+					for (var j = ruleTerms.Count; --j >= 0;)
+					{
+						if (terms > ruleTerms[j]) continue;
+						addAt = j + 1;
+						break;
+					}
+					if (addAt >= ruleTerms.Count)
+					{
+						ruleTerms.Add(terms);
+						rulePos.Add(pos);
+					}
+					else
+					{
+						ruleTerms.Insert(addAt, pos);
+						rulePos.Insert(addAt, pos);
+					}
+				}
+			}
+			_ruleNums.AddRange(rulePos);
+		}
+
+		private readonly SortedDictionary<string, string> _reverseMap = new SortedDictionary<string, string>();
         private readonly XmlDocument _flatCss = new XmlDocument();
         private readonly XmlDocument _xmlCss;
         private readonly SortedSet<string> _notInherted = new SortedSet<string> {"column", "float", "clear", "width", "margin", "padding", "display", "border"};
@@ -602,7 +632,12 @@ namespace CssSimpler
             }
         }
 
-	    private static int GetTerms(XmlElement targetRule)
+		private static int GetPos(XmlElement targetRule)
+		{
+			return int.Parse(targetRule.GetAttribute("pos"));
+		}
+
+		private static int GetTerms(XmlElement targetRule)
 	    {
 		    var ruleTerms = int.Parse(targetRule.GetAttribute("term"));
 		    return ruleTerms;

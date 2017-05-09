@@ -602,6 +602,10 @@ namespace CssSimpler
                         term = _term;
                         var termAttr = n.OwnerDocument.CreateAttribute("term");
                         termAttr.Value = term.ToString();
+	                    if (_target.StartsWith("stxfin"))
+	                    {
+		                    termAttr.Value = "99";
+	                    }
                         Debug.Assert(n.Attributes != null, "Attributes != null");
                         n.Attributes.Append(termAttr);
                     }
