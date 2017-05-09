@@ -67,7 +67,8 @@ namespace Test.PsTool
         ///A test Arial Postscript font name
         ///</summary>
         [Test]
-        public void ArialTest()
+		[Category("SkipOnTeamCity")] // Requires font to be installed
+		public void ArialTest()
         {
             string fontName = "Arial";
             var expected = "ArialMT";
