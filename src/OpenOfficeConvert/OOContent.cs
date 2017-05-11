@@ -1184,9 +1184,11 @@ namespace SIL.PublishingSolution
 				}
 				if (_imageClass.Length > 0)
 				{
-					_writer.WriteStartElement("text:p");
+					_writer.WriteStartElement("text:span");
 					_writer.WriteAttributeString("text:style-name", _childName);
 					_writer.WriteString(content);
+					if (!VisibleHidden())
+						_pseudoSingleSpace = false; //Resets after picture caption space
 				}
 				else if (_isVerseNumberContent)
 				{
@@ -2206,6 +2208,17 @@ namespace SIL.PublishingSolution
 			_writer.WriteEndElement();
 			_writer.WriteEndElement();
 
+			//Paragraph style for Picture Caption
+			_writer.WriteStartElement("style:style");
+			_writer.WriteAttributeString("style:name", "P5");
+			_writer.WriteAttributeString("style:family", "paragraph");
+			_writer.WriteAttributeString("style:parent-style-name", "Text");
+			_writer.WriteStartElement("style:paragraph-properties");
+			_writer.WriteAttributeString("fo:text-align", "center");
+			_writer.WriteAttributeString("style:justify-single-word", "false");
+			_writer.WriteEndElement();
+			_writer.WriteEndElement();
+
 			//Text style for display:none
 			_writer.WriteStartElement("style:style");
 			_writer.WriteAttributeString("style:name", "T4");
@@ -2583,6 +2596,8 @@ namespace SIL.PublishingSolution
 			modifyIDStyles.CreateFrameStyle(_styleFilePath, strFrameStyCount, _util.ParentName, _displayProperty,
 											strGraphicsCount);
 
+			_writer.WriteStartElement("text:p"); //Para introduced outside to Picture frame
+			_writer.WriteAttributeString("text:style-name", "P5");
 			_writer.WriteStartElement("draw:frame");
 			_writer.WriteAttributeString("draw:style-name", "gr" + (_frameCount));
 			_writer.WriteAttributeString("draw:name", strGraphicsCount);
@@ -3221,7 +3236,8 @@ namespace SIL.PublishingSolution
 
 					if (_closeChildName.IndexOf("coverImage") != 0)
 					{
-						_writer.WriteEndElement();// for ParagraphStyle
+						_writer.WriteEndElement(); //Para ends which introduced outside to Picture frame
+						_writer.WriteEndElement(); // for ParagraphStyle
 						_writer.WriteEndElement(); // for Textframe
 					}
 
