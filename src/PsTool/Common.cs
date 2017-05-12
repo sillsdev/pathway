@@ -3076,7 +3076,7 @@ namespace SIL.Tool
 			catch
 			{
 			}
-			return retValue.ToString();
+			return retValue.ToString(CultureInfo.CreateSpecificCulture("en-US"));
 		}
 
 		public static string GetLeadingType(Dictionary<string, string> Properties)

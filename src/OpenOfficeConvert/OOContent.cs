@@ -1321,8 +1321,8 @@ namespace SIL.PublishingSolution
 					_writer.WriteAttributeString("draw:style-name", "GraphicsI2");
 					_writer.WriteAttributeString("draw:name", "graphics1");
 					_writer.WriteAttributeString("text:anchor-type", "paragraph");
-					_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
-					_writer.WriteAttributeString("svg:width", width.Replace(",", "."));
+					_writer.WriteAttributeString("svg:height", height);
+					_writer.WriteAttributeString("svg:width", width);
 					_writer.WriteStartElement("draw:image");
 					_writer.WriteAttributeString("xlink:type", "simple");
 					_writer.WriteAttributeString("xlink:show", "embed");
@@ -2606,12 +2606,12 @@ namespace SIL.PublishingSolution
 			if (rectWidth.IndexOf("%") == -1)
 			{
 				width = rectWidth + imgWUnit;
-				_writer.WriteAttributeString("svg:width", width.Replace(",","."));
+				_writer.WriteAttributeString("svg:width", width);
 			}
 			if (rectHeight.IndexOf("%") == -1)
 			{
 				height = rectHeight + imgWUnit;
-				_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
+				_writer.WriteAttributeString("svg:height", height);
 			}
 
 			_writer.WriteStartElement("draw:image");
@@ -2696,8 +2696,8 @@ namespace SIL.PublishingSolution
 			else
 			{
 				if (width != "100%")
-					_writer.WriteAttributeString("svg:width", width.Replace(",", "."));
-				_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
+					_writer.WriteAttributeString("svg:width", width);
+				_writer.WriteAttributeString("svg:height", height);
 			}
 
 			//TD-349(width:auto)
@@ -2937,8 +2937,8 @@ namespace SIL.PublishingSolution
 			else
 			{
 				if (width != "100%")
-					_writer.WriteAttributeString("svg:width", width.Replace(",", "."));
-				_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
+					_writer.WriteAttributeString("svg:width", width);
+				_writer.WriteAttributeString("svg:height", height);
 			}
 
 			//TD-349(width:auto)
@@ -2983,12 +2983,12 @@ namespace SIL.PublishingSolution
 			if (rectWidth.IndexOf("%") == -1)
 			{
 				width = rectWidth + imgWUnit;
-				_writer.WriteAttributeString("svg:width", width.Replace(",", "."));
+				_writer.WriteAttributeString("svg:width", width);
 			}
 			if (rectHeight.IndexOf("%") == -1)
 			{
 				height = rectHeight + imgWUnit;
-				_writer.WriteAttributeString("svg:height", height.Replace(",", "."));
+				_writer.WriteAttributeString("svg:height", height);
 			}
 
 			_writer.WriteStartElement("draw:image");
@@ -3122,11 +3122,11 @@ namespace SIL.PublishingSolution
 
 			if (rectWidth.Contains("pt"))
 			{
-				_writer.WriteAttributeString("svg:width", rectWidth.Replace(",", "."));
+				_writer.WriteAttributeString("svg:width", rectWidth);
 			}
 			else
 			{
-				_writer.WriteAttributeString("svg:width", rectWidth.Replace(",", ".") + "pt");
+				_writer.WriteAttributeString("svg:width", rectWidth + "pt");
 			}
 
 			_writer.WriteStartElement("draw:image");

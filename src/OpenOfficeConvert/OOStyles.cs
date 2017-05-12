@@ -1217,13 +1217,13 @@ namespace SIL.PublishingSolution
 
             if (_isCenterTabStopNeeded)
             {
-                _writer.WriteAttributeString("style:position", mid.ToString(CultureInfo.InvariantCulture).Replace(",", ".") + "in");
+                _writer.WriteAttributeString("style:position", mid.ToString(CultureInfo.InvariantCulture) + "in");
                 _writer.WriteAttributeString("style:type", "center");
                 _writer.WriteEndElement();
             }
 
             _writer.WriteStartElement("style:tab-stop");//style:tab-stop
-            _writer.WriteAttributeString("style:position", rightGuide.ToString(CultureInfo.InvariantCulture).Replace(",", ".") + "in");
+            _writer.WriteAttributeString("style:position", rightGuide.ToString(CultureInfo.InvariantCulture) + "in");
             _writer.WriteAttributeString("style:type", "right");
             _writer.WriteEndElement();
 
@@ -1273,14 +1273,14 @@ namespace SIL.PublishingSolution
             if (_isCenterTabStopNeeded)
             {
                 _writer.WriteStartElement("style:tab-stop");//style:tab-stop
-                _writer.WriteAttributeString("style:position", mid.ToString(CultureInfo.InvariantCulture).Replace(",", ".") + "in");
+                _writer.WriteAttributeString("style:position", mid.ToString(CultureInfo.InvariantCulture) + "in");
                 _writer.WriteAttributeString("style:type", "center");
                 _writer.WriteEndElement();
             }
 
 
             _writer.WriteStartElement("style:tab-stop");//style:tab-stop
-            _writer.WriteAttributeString("style:position", rightGuide.ToString(CultureInfo.InvariantCulture).Replace(",", ".") + "in");
+            _writer.WriteAttributeString("style:position", rightGuide.ToString(CultureInfo.InvariantCulture) + "in");
             _writer.WriteAttributeString("style:type", "right");
             _writer.WriteEndElement();
 
@@ -2089,7 +2089,7 @@ namespace SIL.PublishingSolution
                     Array arValue = value.Split('p');
                     value = Convert.ToDouble(arValue.GetValue(0), new CultureInfo("en-US").NumberFormat) - 0.75 + "pt";
                 }
-                _writer.WriteAttributeString("svg:y", value.Replace(",", "."));
+                _writer.WriteAttributeString("svg:y", value);
 
 				_writer.WriteAttributeString("fo:min-width", GetRightGUidewordFrameWidth());
 
@@ -2281,7 +2281,7 @@ namespace SIL.PublishingSolution
                 Array arValue = value.Split('p');
                 value = Convert.ToDouble(arValue.GetValue(0), new CultureInfo("en-US").NumberFormat) - 0.75 + "pt";
             }
-	        _writer.WriteAttributeString("svg:y", value.Replace(",", "."));
+	        _writer.WriteAttributeString("svg:y", value);
 
             _writer.WriteAttributeString("fo:min-width", "35pt");
             _writer.WriteAttributeString("draw:z-index", "1");
