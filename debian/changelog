@@ -1,3 +1,33 @@
+pathway (1.15.15.5800)  experimental; urgency=high
+
+  * Common:TD-4811 Formatting rtl data - order and spacing is wrong
+  * Common:TD-4805 Crash updating css file
+  * Epub:TD-4744 Wasta-14 Validation errors appears while exporting FLEx project via EPub
+  * General:TD-4816 homograph remains subscripted.
+  * General:TD-4827 Regional Langauge Formats set to Russian disables header
+  * General:TD-4830 Pictures show as vertical lines
+  * General:TD-4816 Homograph number did not subscript for picture headword.
+  * General:TD-4721 Formatting via Pathway is not following Flex formatting
+  * Office:TD-4818 Adjust oncolumn layout files to end in a newline.
+  * Office:TD-4821 Adjuste right-to-left margins in Libre Office.
+  * Office:TD-4825 space before subentries
+  * Office:TD-4826 program gives directory access error
+  * Office:TD-4829 Right guideword shows left content
+  * Office:TD-4831 Not all indents rendered correctly
+  * Office:TD-4835 homograph headword retain color
+  * Office:TD-4812 Libre Office implements ltr issolated fields
+  * Office:TD-4809 Headwords not coming out correctly
+  * Office:TD-4786 Pathway exports are missing alignments and some entries are truncated
+  * Office:TD-4777 Header Ever Page gives Mirrored
+  * Office:TD-3436 SIL International Logo doesn't look good.
+  * UI:TD-4827 Regional Langauge Formats set to Russian disables header and guideword formatting
+  * UI:TD-4828 Missing Minor entry guidewords and wrong language code.
+  * UI:TD-4795 Warning box appears in Config Tool from clicking Scripture in left pane
+  * XeLaTeX:TD-4722 Fix Xelatex Indent issue
+  * XeLaTeX:TD-4810 Scripture export leaves too much space around headers
+
+ -- Greg Trihus <greg_trihus@sil.org>  Fri, 12 May 2017 15:37:20 -0600
+
 pathway (1.15.14.5765)  experimental; urgency=high
 
   * Common:TD-4808 adjusted so sub sub entries margins match FLEx 8.3.x
