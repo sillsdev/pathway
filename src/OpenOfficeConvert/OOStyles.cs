@@ -90,26 +90,41 @@ namespace SIL.PublishingSolution
         private void HandleMexioStyleSheet()
         {
             if (_projInfo.ProjectInputType.ToLower()!= "dictionary") return;
-            if (_projInfo._selectedTemplateStyle.ToLower() == "layout_16" && _cssProperty.ContainsKey("@page") &&
-                _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
-            {
-                const string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
-                string headerText = Param.GetItem(titlePath).InnerText;
-                string headerFontSize = "10pt";
-                string[] pageDir = { "@page:left-top-center", "@page:right-top-center" };
-                if (_cssProperty.ContainsKey("headword") && _cssProperty["headword"].ContainsKey("font-size"))
-                {
-					if (_cssProperty["entry"].ContainsKey("font-size") && _cssProperty["entry"]["font-size"] != null)
-						headerFontSize = _cssProperty["entry"]["font-size"];
-                }
 
-                for (int i = 0; i < pageDir.Count(); i++)
+            // Check whether Mexico standard stylesheet - layout_17 / layout_16 / epubMexico
+            string selectedCSSFileName = string.Empty;
+            string selectedCSS = string.Empty;
+            selectedCSSFileName = Param.GetCSSFileNameFromLayoutSelected(Path.Combine(Path.Combine(Common.GetAllUserPath(), "Dictionary"), "DictionaryStyleSettings.xml"));            
+            if (!string.IsNullOrEmpty(selectedCSSFileName))
+            {
+                selectedCSS = Path.GetFileNameWithoutExtension(selectedCSSFileName).ToLower().Trim();
+            }
+            if (!string.IsNullOrEmpty(selectedCSS))
+            {
+                if (selectedCSS == "layout_17" || selectedCSS == "layout_16" || selectedCSS == "epubMexico")
                 {
-                    if (_cssProperty.ContainsKey(pageDir[i]))
+                    if (_cssProperty.ContainsKey("@page") &&
+                    _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
                     {
-                        _cssProperty[pageDir[i]]["content"] = headerText;
-                        _cssProperty[pageDir[i]]["font-size"] = headerFontSize;
-                        _cssProperty[pageDir[i]]["font-weight"] = "bold";
+                        const string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
+                        string headerText = Param.GetItem(titlePath).InnerText;
+                        string headerFontSize = "10pt";
+                        string[] pageDir = { "@page:left-top-center", "@page:right-top-center" };
+                        if (_cssProperty.ContainsKey("headword") && _cssProperty["headword"].ContainsKey("font-size"))
+                        {
+                            if (_cssProperty["entry"].ContainsKey("font-size") && _cssProperty["entry"]["font-size"] != null)
+                                headerFontSize = _cssProperty["entry"]["font-size"];
+                        }
+
+                        for (int i = 0; i < pageDir.Count(); i++)
+                        {
+                            if (_cssProperty.ContainsKey(pageDir[i]))
+                            {
+                                _cssProperty[pageDir[i]]["content"] = headerText;
+                                _cssProperty[pageDir[i]]["font-size"] = headerFontSize;
+                                _cssProperty[pageDir[i]]["font-weight"] = "bold";
+                            }
+                        }
                     }
                 }
             }
