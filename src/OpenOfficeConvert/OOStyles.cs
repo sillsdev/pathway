@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -50,7 +51,6 @@ namespace SIL.PublishingSolution
 
         public Dictionary<string, Dictionary<string, string>> CreateStyles(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssProperty, string outputFileName)
         {
-
             try
             {
                 string outputFile = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
@@ -58,7 +58,8 @@ namespace SIL.PublishingSolution
                 _isFromExe = Common.CheckExecutionPath();
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
-                HandleMexioStyleSheet();
+	            SetUpNumberDecimalSeperator();
+				HandleMexioStyleSheet();
                 if (Param.HyphenEnable)
 	            {
 		            IsHyphenEnabled = true;
@@ -84,10 +85,21 @@ namespace SIL.PublishingSolution
             return _LOAllClass;
         }
 
-        /// <summary>
-        /// Header center values should be added for Mexico standard stylesheet,
-        /// </summary>
-        private void HandleMexioStyleSheet()
+		/// <summary>
+		/// Method to set the constant NumberDecimalSeperator in CultureInfo on all Culture
+		/// </summary>
+		private void SetUpNumberDecimalSeperator()
+		{
+			var culture = CultureInfo.CreateSpecificCulture("en-US");
+			culture.NumberFormat.NumberDecimalSeparator = ".";
+			Thread.CurrentThread.CurrentCulture = culture;
+			Thread.CurrentThread.CurrentUICulture = culture;
+		}
+
+		/// <summary>
+		/// Header center values should be added for Mexico standard stylesheet,
+		/// </summary>
+		private void HandleMexioStyleSheet()
         {
             if (_projInfo.ProjectInputType.ToLower()!= "dictionary") return;
 
