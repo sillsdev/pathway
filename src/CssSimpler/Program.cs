@@ -383,6 +383,7 @@ namespace CssSimpler
 
         private static void RemoveError(List<string> errors, string styleSheet)
         {
+	        if (errors == null || errors.Count == 0) return;
             List<int> lines = new List<int>();
             foreach (var error in errors)
             {
