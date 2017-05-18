@@ -426,8 +426,12 @@ namespace SIL.PublishingSolution
             // load the settings file and migrate it if necessary
 			Param.SetLoadType = InputType;
             Param.LoadSettings();
-            isFromConfigurationTool = true;
-        }
+			var exePath = Assembly.GetEntryAssembly().Location;
+			if (exePath != null && exePath.ToLower().IndexOf("fieldworks", StringComparison.Ordinal) == -1)
+			{
+				isFromConfigurationTool = true;
+			}
+		}
 
 	    private void AssignFolderDateTime()
         {
