@@ -1,11 +1,13 @@
 ﻿// ---------------------------------------------------------------------------------------------
 #region // Copyright (c) 2016, SIL International. All Rights Reserved.
-// <copyright from='2016' to='2016' company='SIL International'>
-//		Copyright (c) 2016, SIL International. All Rights Reserved.
+
+// <copyright from='2016' to='2017' company='SIL International'>
+//		Copyright (c) 2017, SIL International. All Rights Reserved.
 //
 //		Distributable under the terms of either the Common Public License or the
 //		GNU Lesser General Public License, as specified in the LICENSING.txt file.
 // </copyright>
+
 #endregion
 //
 // File: program.cs (from CssSimpler.cs)
@@ -26,119 +28,149 @@ using SIL.Tool;
 
 namespace CssSimpler
 {
-    public class Program
-    {
-        private static bool _showHelp;
-        protected static bool OutputXml;
-        private static int _verbosity;
-        private static bool _makeBackup;
-        private static bool _flatten;
-        private static int _headerStyles;
-        private static bool _embedStyles;
-        //private static bool _combineMainRev;
-        private static bool _incMeta;
-        private static bool _noXmlHeader;
-        private static bool _divBlocks;
-	    private static string _decorateStyles;
+	public class Program
+	{
+		private static bool _showHelp;
+		protected static bool OutputXml;
+		private static int _verbosity;
+		private static bool _makeBackup;
+		private static bool _flatten;
+		private static int _headerStyles;
+		private static bool _embedStyles;
+		//private static bool _combineMainRev;
+		private static bool _incMeta;
+		private static bool _noXmlHeader;
+		private static bool _divBlocks;
+		private static string _decorateStyles;
 
-        protected static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
-        protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
-        protected static List<string> UniqueClasses;
-        private static readonly XmlReaderSettings ReaderSettings = new XmlReaderSettings { XmlResolver = new NullResolver(), DtdProcessing = DtdProcessing.Ignore };
-        private static readonly XsltSettings XsltSettings = new XsltSettings{EnableDocumentFunction = false, EnableScript = false};
+		protected static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
+		protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
+		protected static List<string> UniqueClasses;
 
-        static void Main(string[] args)
-        {
-	        // ReSharper disable AssignNullToNotNullAttribute
-            XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
+		private static readonly XmlReaderSettings ReaderSettings = new XmlReaderSettings
+		{
+			XmlResolver = new NullResolver(),
+			DtdProcessing = DtdProcessing.Ignore
+		};
+
+		private static readonly XsltSettings XsltSettings = new XsltSettings
+		{
+			EnableDocumentFunction = false,
+			EnableScript = false
+		};
+
+		static void Main(string[] args)
+		{
+			// ReSharper disable AssignNullToNotNullAttribute
+			XmlCss.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
 				"CssSimpler.XmlCss.xsl")));
-            SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                "CssSimpler.XhtmlSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
+			SimplifyXhtml.Load(XmlReader.Create(Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"CssSimpler.XhtmlSimplify.xsl"), ReaderSettings), XsltSettings, new NullResolver());
 			// ReSharper enable AssignNullToNotNullAttribute
 			// see: http://stackoverflow.com/questions/491595/best-way-to-parse-command-line-arguments-in-c
 			var p = new OptionSet
-            {
-                {
-                    "x|xml", "produce XML output of CSS",
-                    v => OutputXml = !OutputXml
-                },
-                {
-                    "b|backup", "make a backup of the original CSS file",
-                    v => _makeBackup = !_makeBackup
-                },
-                {
-                    "v|verbose", "increase debug message verbosity",
-                    v => { if (v != null) ++_verbosity; }
-                },
-                {
-                    "h|help", "show this message and exit",
-                    v => _showHelp = !_showHelp
-                },
-                {
-                    "f|flat", "flattens the hierarchy simplifies the css required for -secmrd",
-                    v => _flatten = !_flatten
-                },
-                {
-                    "s|structure", "Use header tags for structure (1-3)",
-                    v => _headerStyles += 1
-                },
-                {
-                    "e|embed", "embed styles in output",
-                    v => _embedStyles = !_embedStyles
-                },
-                //{
-                //    "c|combine", "combine main and reversal(s) in a single output",
-                //    v => _combineMainRev = !_combineMainRev
-                //},
-                {
-                    "m|meta", "include title and author meta data",
-                    v => _incMeta = !_incMeta
-                },
-                {
-                    "r|remove", "remove Xml header and DOCTYPE",
-                    v => _noXmlHeader = !_noXmlHeader
-                },
-                {
-                    "d|div", "replace span with div for display block",
-                    v => _divBlocks = !_divBlocks
-                },
+			{
+				{
+					"x|xml", "produce XML output of CSS",
+					v => OutputXml = !OutputXml
+				},
+				{
+					"b|backup", "make a backup of the original CSS file",
+					v => _makeBackup = !_makeBackup
+				},
+				{
+					"v|verbose", "increase debug message verbosity",
+					v =>
+					{
+						if (v != null) ++_verbosity;
+					}
+				},
+				{
+					"h|help", "show this message and exit",
+					v => _showHelp = !_showHelp
+				},
+				{
+					"f|flat", "flattens the hierarchy simplifies the css required for -secmrd",
+					v => _flatten = !_flatten
+				},
+				{
+					"s|structure", "Use header tags for structure (1-3)",
+					v => _headerStyles += 1
+				},
+				{
+					"e|embed", "embed styles in output",
+					v => _embedStyles = !_embedStyles
+				},
+				//{
+				//    "c|combine", "combine main and reversal(s) in a single output",
+				//    v => _combineMainRev = !_combineMainRev
+				//},
+				{
+					"m|meta", "include title and author meta data",
+					v => _incMeta = !_incMeta
+				},
+				{
+					"r|remove", "remove Xml header and DOCTYPE",
+					v => _noXmlHeader = !_noXmlHeader
+				},
+				{
+					"d|div", "replace span with div for display block",
+					v => _divBlocks = !_divBlocks
+				},
 				{
 					"p|prefix=", "prefix style names with value",
 					v => { _decorateStyles = v; }
 				},
 			};
 
-            List<string> extra;
-            try
-            {
-                extra = p.Parse(args);
-                if (extra.Count == 0)
-                {
-                    Console.WriteLine(@"Enter full file name to process");
-                    extra.Add(Console.ReadLine());
-                }
-            }
-            catch (OptionException e)
-            {
-                Console.Write(@"SimpleCss: ");
-                Console.WriteLine(e.Message);
-                Console.WriteLine(@"Try `CssSimple --help' for more information.");
-                return;
-            }
-            if (_showHelp || extra.Count != 1)
-            {
-                ShowHelp(p);
-                return;
-            }
-            var lc = new LoadClasses(extra[0]);
-            var styleSheet = lc.StyleSheet;
-            MakeBackupIfNecessary(styleSheet, extra[0]);
-            DebugWriteClassNames(lc.UniqueClasses);
-            VerboseMessage("Clean up Stylesheet: {0}", styleSheet);
-            var parser = new CssTreeParser();
-            var xml = new XmlDocument();
-            UniqueClasses = lc.UniqueClasses;
-            LoadCssXml(parser, styleSheet, xml);
+			List<string> extra;
+			try
+			{
+				extra = p.Parse(args);
+				if (extra.Count == 0)
+				{
+					Console.WriteLine(@"Enter full file name to process");
+					extra.Add(Console.ReadLine());
+				}
+			}
+			catch (OptionException e)
+			{
+				Console.Write(@"SimpleCss: ");
+				Console.WriteLine(e.Message);
+				Console.WriteLine(@"Try `CssSimple --help' for more information.");
+				return;
+			}
+			if (_showHelp || extra.Count != 1)
+			{
+				ShowHelp(p);
+				return;
+			}
+			var lc = new LoadClasses(extra[0]);
+			var styleSheet = lc.StyleSheet;
+			MakeBackupIfNecessary(styleSheet, extra[0]);
+			DebugWriteClassNames(lc.UniqueClasses);
+			VerboseMessage("Clean up Stylesheet: {0}", styleSheet);
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			UniqueClasses = lc.UniqueClasses;
+			if (!File.Exists(styleSheet))
+			{
+				var errName = styleSheet;
+				var proposed = extra[0].Replace(".xhtml", ".css");
+				styleSheet = proposed;
+				if (!File.Exists(proposed))
+				{
+					proposed = proposed.Replace("_", "");
+					styleSheet = proposed;
+					if (!File.Exists(proposed))
+					{
+						proposed = Path.Combine(Path.GetDirectoryName(proposed), "main.css");
+						if (!File.Exists(proposed)) throw new FileNotFoundException(errName);
+						File.Copy(proposed, styleSheet, true);
+					}
+				}
+			}
+			LoadCssXml(parser, styleSheet, xml);
             var tmpXhtmlFullName = WriteSimpleXhtml(extra[0]);
             var tmp2Out = Path.GetTempFileName();
 	        // ReSharper disable once UnusedVariable
@@ -366,13 +398,13 @@ namespace CssSimpler
             var error = true;
             while (error)
             {
-                try
-                {
-                    parser.Parse(styleSheet);
-                    if (parser.Errors.Count > 0)
-                        throw new Antlr.Runtime.RecognitionException(string.Format("{0} errors in CSS", parser.Errors.Count));
-                    error = false;
-                }
+	            try
+	            {
+		            parser.Parse(styleSheet);
+		            if (parser.Errors.Count > 0)
+			            throw new Antlr.Runtime.RecognitionException(string.Format("{0} errors in CSS", parser.Errors.Count));
+		            error = false;
+	            }
                 catch (Exception)
                 {
                     error = true;
@@ -603,7 +635,7 @@ namespace CssSimpler
                         term = _term;
                         var termAttr = n.OwnerDocument.CreateAttribute("term");
                         termAttr.Value = term.ToString();
-	                    if (_target.StartsWith("stxfin"))
+	                    if (_target != null && _target.StartsWith("stxfin"))
 	                    {
 		                    termAttr.Value = "99";
 	                    }
