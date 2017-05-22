@@ -2722,7 +2722,10 @@ namespace SIL.PublishingSolution
 				{
 					var tempStyle = new string[counter];
 					_allParagraph.CopyTo(tempStyle, 0);
-					divTagName = counter > 1 ? tempStyle[0] : tempStyle[1];
+				    if (counter > 1)
+                        divTagName = tempStyle[1];
+				    else
+                        divTagName = tempStyle[0];
 				}
 
 				_writer.WriteStartElement("text:p");
