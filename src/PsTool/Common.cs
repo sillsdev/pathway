@@ -36,6 +36,8 @@ using Microsoft.Win32;
 using SIL.Tool.Localization;
 using System.Reflection;
 using System.Threading;
+using SIL.CommandLineProcessing;
+using SIL.Progress;
 using Test;
 using SIL.PublishingSolution;
 using SIL.WritingSystems;
@@ -5441,6 +5443,88 @@ namespace SIL.Tool
 				}
 			}
 			return lineNumber;
+		}
+
+		public static bool ShowPdfPreview(PublicationInformation projInfo)
+		{
+			var success = CallPathwayExport("PDF (using Prince)", projInfo); //PDF Using Prince
+			if (!success)
+			{
+				success = CallPathwayExport("Pdf (Using OpenOffice/LibreOffice)", projInfo); //PDF Using LibreOffice
+				if (success)
+				{
+					string os = Common.GetOsName();
+					string libre = Common.GetLibreofficeVersion(os);
+					if (os.IndexOf("Windows") == 0 && libre == null)
+					{
+						success = false;
+					}
+				}
+			}
+			if (success)
+			{
+				var allUserPath = PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
+					Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + ".pdf");
+				var appPath = GetPSApplicationPath();
+				if (File.Exists(allUserPath) && !appPath.Contains("Debug"))
+				{
+					File.Copy(allUserPath, PathCombine(Path.GetDirectoryName(allUserPath),
+						PathCombine(projInfo.ProjectInputType, Path.GetFileNameWithoutExtension(projInfo.DefaultCssFileWithPath)) + ".pdf"), true);
+				}
+			}
+			return success;
+		}
+
+		/// <summary>
+		/// Method which calls the Pathway Export workflow which is using in Backend
+		/// </summary>
+		/// <param name="outputType">Want Pdf using Prince/Libre Office</param>
+		/// <param name="projInfo">PublicationInformation</param>
+		/// <returns>True when successfully generates Pdf file else return False</returns>
+		private static bool CallPathwayExport(string outputType, PublicationInformation projInfo)
+		{
+			bool success;
+			string xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
+			var localType = outputType.Replace(@"\", "/").ToLower();
+			try
+			{
+				//Code to call PathwayExport Commandline Utility
+				StringBuilder sb = new StringBuilder();
+				sb.Append("\"");
+				sb.Append(projInfo.DefaultXhtmlFileWithPath);
+				sb.Append(",\" ");
+				sb.Append("\"");
+				sb.Append(projInfo.DefaultCssFileWithPath);
+				sb.Append("\"");
+
+				Common.SaveInputType(projInfo.ProjectInputType);
+
+				string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3} --database \"{4}\"",
+					localType.Replace(@"\", "/").ToLower(), projInfo.DictionaryPath, sb.ToString(), Common.Testing.ToString(),
+					Param.DatabaseName);
+
+				string pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "PathwayExport.exe");
+
+				if (!File.Exists(pathwayExportFile))
+					pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "Export", "PathwayExport.exe");
+
+				var cmd = Common.IsUnixOS()
+					? "/usr/bin/PathwayExport"
+					: pathwayExportFile;
+
+				CommandLineRunner.Run(cmd, argument, projInfo.DictionaryPath, 50000, new ConsoleProgress());
+				success = true;
+			}
+			catch (Exception ex)
+			{
+
+				throw new Exception(ex.Message);
+			}
+			finally
+			{
+				projInfo.DefaultXhtmlFileWithPath = xhtmlFile;
+			}
+			return success;
 		}
 	}
 }

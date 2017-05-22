@@ -16,6 +16,7 @@
 
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -374,11 +375,12 @@ namespace SIL.PublishingSolution
 				string _loadType = Param.Value["InputType"];// "Dictionary";
 				if (selectedTypeValue != "standard")
 				{
+					string FileName = grid.SelectedRows[0].Cells[5].Value.ToString();
+					_previewFileName1 = Common.PathCombine(Path.GetDirectoryName(Param.StylePath(FileName)), Path.GetFileNameWithoutExtension(Param.StylePath(FileName)) + ".pdf");
 					bool isPreviewFileExist = File.Exists(_previewFileName1);
 
 					if (isPreviewFileExist == false)
 					{
-						string FileName = grid.SelectedRows[0].Cells[5].Value.ToString();
 						string cssMergeFullFileName = Param.StylePath(FileName);
 						string PsSupportPath = Common.PathCombine(Common.LeftString(cssMergeFullFileName, "Pathway"),
 															"Pathway");
@@ -408,12 +410,7 @@ namespace SIL.PublishingSolution
 						ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
 						ps.ProjectInputType = _loadType;
 
-						bool success = PrincePreview(ps);
-
-						if (!success)
-						{
-							success = LOPreview(ps);
-						}
+						bool success = Common.ShowPdfPreview(ps);
 
 						if (!success)
 						{
@@ -425,29 +422,14 @@ namespace SIL.PublishingSolution
 						_previewFileName1 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");
 
 					}
+					else
+					{
+						Process.Start(_previewFileName1);
+					}
 
 				}
 			}
 			catch { }
-		}
-
-		private bool PrincePreview(PublicationInformation projInfo)
-		{
-			bool success = false;
-            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
-            //ExportPdf exportPdf = new ExportPdf();
-			//success = exportPdf.Export(projInfo);
-			// copy to preview folder *******************
-			return success;
-		}
-
-		private bool LOPreview(PublicationInformation projInfo)
-		{
-			bool success = false;
-            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
-            //ExportLibreOffice openOffice = new ExportLibreOffice();
-			//success = openOffice.Export(projInfo);
-			return success;
 		}
 
 		private void btnNext_Click(object sender, EventArgs e)
