@@ -3835,6 +3835,7 @@ namespace SIL.PublishingSolution
 				string selectedTypeValue = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
 				if (selectedTypeValue != TypeStandard)
 				{
+					PreviewFileName1 = Common.PathCombine(Path.GetDirectoryName(Param.StylePath(FileName)), Path.GetFileNameWithoutExtension(Param.StylePath(FileName)) + ".pdf");
 					bool isPreviewFileExist = File.Exists(PreviewFileName1) || File.Exists(PreviewFileName2);
 
 					if (isPreviewFileExist == false || IsPropertyModified())
@@ -3871,22 +3872,7 @@ namespace SIL.PublishingSolution
 						ps.DictionaryPath = Path.GetDirectoryName(xhtmlPreviewFilePath);
 						ps.ProjectInputType = _loadType;
 
-						bool success = PrincePreview(ps);
-
-						if (!success)
-						{
-							success = LOPreview(ps);
-
-							if (success)
-							{
-								string os = Common.GetOsName();
-								string libre = Common.GetLibreofficeVersion(os);
-								if (os.IndexOf("Windows") == 0 && libre == null)
-								{
-									success = false;
-								}
-							}
-						}
+						bool success = Common.ShowPdfPreview(ps);
 
 						if (!success)
 						{
@@ -3897,7 +3883,10 @@ namespace SIL.PublishingSolution
 						PreviewFileName1 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");
 						PreviewFileName2 = Common.PathCombine(stylenamePath, "PreviewMessage.jpg");
 					}
-
+					else
+					{
+						Process.Start(PreviewFileName1);
+					}
 				}
 				else
 				{
@@ -3906,25 +3895,6 @@ namespace SIL.PublishingSolution
 				}
 			}
 			catch { }
-		}
-
-		private bool PrincePreview(PublicationInformation projInfo)
-		{
-			bool success = false;
-            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
-			//ExportPdf exportPdf = new ExportPdf();
-			//success = exportPdf.Export(projInfo);
-			// copy to preview folder *******************
-			return success;
-		}
-
-		private bool LOPreview(PublicationInformation projInfo)
-		{
-			bool success = false;
-            //TODO: REPLACE WITH CALL TO PATHWY EXPORT
-            //ExportLibreOffice openOffice = new ExportLibreOffice();
-            //success = openOffice.Export(projInfo);
-            return success;
 		}
 
 		/// <summary>
@@ -3969,11 +3939,6 @@ namespace SIL.PublishingSolution
 					}
 				}
 
-				if (control.GetType().Name == "CheckBox")
-				{
-					propertyModified = true;
-					//break;
-				}
 				string val = control.Text;
 				if (_propertyValue.Count > 0 && _propertyValue.Count >= i && _propertyValue[i++] != val)
 				{
