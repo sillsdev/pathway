@@ -640,7 +640,7 @@
       <style:text-properties content="" fo:margin-top="28.34646pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter1" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties content="" fo:font-size="10pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="PageHeaderFooter2" style:family="text">
       <style:text-properties content="" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
@@ -658,7 +658,7 @@
       <style:text-properties content="string(guidewordfirst)" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter13" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties fo:font-size="10pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="PageHeaderFooter14" style:family="text">
       <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" />
@@ -676,7 +676,7 @@
       <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter19" style:family="text">
-      <style:text-properties content="" />
+      <style:text-properties fo:font-size="10pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="PageHeaderFooter20" style:family="text">
       <style:text-properties content="string(guidewordlast)" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" />

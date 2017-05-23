@@ -109,7 +109,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "ScriptureInput.xhtml");
             _projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "ScriptureInput.css");
             _projInfo.OutputExtension = "odt";
-            EnableConfigurationSettings(outputDirectory);
+            //EnableConfigurationSettings(outputDirectory);
 
             var target = new ExportLibreOffice();
             const bool expectedResult = true;

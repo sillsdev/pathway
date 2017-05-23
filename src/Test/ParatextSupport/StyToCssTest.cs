@@ -106,6 +106,22 @@ namespace Test.ParatextSupport
         }
 
 		[Test]
+		public void IntroductionStytoCSSTest()
+		{
+			const string TestName = "Introduction";
+			var cssFile = TestName + ".css";
+			string cssFileOutput = FileOutput(cssFile);
+			StyToCss styToCssObj = new StyToCss();
+			styToCssObj.StyFullPath = FileInput(TestName + ".sty");
+			styToCssObj.ConvertStyToCss(cssFileOutput);
+
+			string expectedFile = FileExpected(cssFile);
+			string outputFile = FileOutput(cssFile);
+
+			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
+		}
+
+		[Test]
 		[Category("SkipOnTeamCity")]
 		public void StytoCSSPnCSSTest()
 		{

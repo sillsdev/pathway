@@ -521,7 +521,7 @@ namespace SIL.PublishingSolution
 			_mapClassName["iq1"] = "Intro_Citation_Line1";
 			_mapClassName["iq2"] = "Intro_Citation_Line2";
 			_mapClassName["imq"] = "Intro_Citation_Paragraph";
-
+			_mapClassName["periph"] = "Intro_Heading";
         }
     }
 }

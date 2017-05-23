@@ -193,6 +193,7 @@ namespace Test.OpenOfficeConvert
 		[Category("SkipOnTeamCity")]
 		public void DictionaryTabUnicodeTest()
 		{
+			Common.UseAfterBeforeProcess = false;
 			_projInfo.ProjectInputType = "Dictionary";
 			const string file = "TabUnicode";
 			DateTime startTime = DateTime.Now;

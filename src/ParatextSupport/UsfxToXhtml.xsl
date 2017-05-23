@@ -174,6 +174,13 @@
 					<xsl:apply-templates/>
 				</h1>
 			</xsl:when>
+			
+			<xsl:when test="@style = 'periph'">
+				<h1 class="Intro_Heading" xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:apply-templates/>
+				</h1>
+			</xsl:when>
+			
 			<xsl:when test="@style = 'im2' or @style = 'imt2'">
 				<h1 class="Intro_Title_Secondary" xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:apply-templates/>
