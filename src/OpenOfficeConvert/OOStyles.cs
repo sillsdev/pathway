@@ -103,11 +103,15 @@ namespace SIL.PublishingSolution
         {
             if (_projInfo.ProjectInputType.ToLower()!= "dictionary") return;
 
+            string headerText = string.Empty;
             if (_cssProperty.ContainsKey("@page") &&
             _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
             {
                 const string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
-                string headerText = Param.GetItem(titlePath).InnerText;
+                if (Param.GetItem(titlePath) != null)
+                {
+                    headerText = Param.GetItem(titlePath).InnerText;
+                }
                 string headerFontSize = "10";
                 string[] pageDir = { "@page:left-top-center", "@page:right-top-center" };
                 if (_cssProperty.ContainsKey("headword") && _cssProperty["headword"].ContainsKey("font-size"))
