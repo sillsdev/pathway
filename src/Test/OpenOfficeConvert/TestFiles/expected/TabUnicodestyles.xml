@@ -684,7 +684,7 @@
       <style:text-properties content="" style:writing-mode="lr-tb" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="100%" />
     </style:style>
     <style:style style:name="PageHeaderFooter1" style:family="text">
-      <style:text-properties content="" fo:margin-top="100%" />
+      <style:text-properties content="" fo:margin-top="100%" fo:font-size="10pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="PageHeaderFooter2" style:family="text">
       <style:text-properties content="" style:writing-mode="lr-tb" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="100%" />
@@ -702,7 +702,7 @@
       <style:text-properties content="string(guidewordfirst)" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" />
     </style:style>
     <style:style style:name="PageHeaderFooter13" style:family="text">
-      <style:text-properties content="" fo:margin-top="100%" />
+      <style:text-properties fo:margin-top="100%" fo:font-size="10pt" fo:font-weight="700" content="|counter(page)|" />
     </style:style>
     <style:style style:name="PageHeaderFooter14" style:family="text">
       <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" style:writing-mode="lr-tb" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" fo:font-size="12pt" />
@@ -720,7 +720,7 @@
       <style:text-properties content="|counter(page)|" fo:margin-top="28.34646pt" style:writing-mode="lr-tb" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-weight="700" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="PageHeaderFooter19" style:family="text">
-      <style:text-properties content="" fo:margin-top="100%" />
+      <style:text-properties fo:margin-top="100%" fo:font-size="10pt" fo:font-weight="700" content="|counter(page)|" />
     </style:style>
     <style:style style:name="PageHeaderFooter20" style:family="text">
       <style:text-properties content="string(guidewordlast)" style:writing-mode="lr-tb" fo:font-weight="700" fo:font-size="12pt" fo:margin-top="28.34646pt" fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" />
@@ -871,6 +871,10 @@
             <text:variable-get text:name="RLeft_Guideword_L" office:value-type="string" />
           </text:span>
           <text:tab />
+          <text:span text:style-name="MT3">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
+          <text:tab />
           <text:tab />
           <text:span text:style-name="MT3">
             <text:page-number text:select-page="current">4</text:page-number>
@@ -892,6 +896,17 @@
             <text:page-number text:select-page="current">4</text:page-number>
           </text:span>
           <text:tab />
+          <text:tab />
+          <text:span text:style-name="MT1">
+            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+          </text:span>
+          <text:span text:style-name="MT2">
+            <text:variable-get text:name="RLeft_Guideword_L" office:value-type="string" />
+          </text:span>
+          <text:tab />
+          <text:span text:style-name="MT3">
+            <text:page-number text:select-page="current">4</text:page-number>
+          </text:span>
           <text:tab />
           <text:span text:style-name="MT1">
             <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />

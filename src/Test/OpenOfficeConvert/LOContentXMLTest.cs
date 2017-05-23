@@ -60,36 +60,62 @@ namespace Test.OpenOfficeConvert
         [TestFixtureSetUp]
         protected void SetUp()
         {
+
             Common.Testing = true;
-            //_styleName = new Styles();
-            //_util = new Utility();
+            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
+            Common.SupportFolder = "";
+            Common.ProgBase = Common.ProgInstall;
+
             _projInfo = new PublicationInformation();
-            _progressBar = new ProgressBar();
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/OpenOfficeConvert/TestFiles");
             _inputPath = Common.PathCombine(testPath, "input");
             _outputPath = Common.PathCombine(testPath, "output");
-			_expectedlinuxPath = Common.PathCombine(testPath, "expectedlinux");
-			_expectedPath = Common.PathCombine(testPath, "expected");
-
-            Common.DeleteDirectory(_outputPath);
+            _expectedPath = Common.PathCombine(testPath, "expected");
+            if (Directory.Exists(_outputPath))
+                Directory.Delete(_outputPath, true);
             Directory.CreateDirectory(_outputPath);
-            FolderTree.Copy(FileInput("Pictures"), FileOutput("Pictures"));
-            _projInfo.ProgressBar = _progressBar;
+            _projInfo.ProjectPath = testPath;
             _projInfo.OutputExtension = "odt";
-            _projInfo.ProjectInputType = "Dictionary";
-            _projInfo.IsFrontMatterEnabled = false;
-            _projInfo.FinalOutput = "odt";
-            Common.SupportFolder = "";
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFIles");
-            Common.ProgBase = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles"); // for masterDocument
-	        Common.UseAfterBeforeProcess = true;
+            string pathwayDirectory = Path.GetDirectoryName(Common.AssemblyPath);
+            string styleSettingFile = Common.PathCombine(pathwayDirectory, "StyleSettings.xml");
+            Common.UseAfterBeforeProcess = true;
+            ValidateXMLVersion(styleSettingFile);
+            Common.ProgInstall = pathwayDirectory;
+            Param.LoadSettings();
+            Param.SetValue(Param.InputType, "Dictionary");
+            Param.LoadSettings();
+            EnableConfigurationSettings(_outputPath);
             _styleFile = "styles.xml";
             _contentFile = "content.xml";
 
-            _isLinux = Common.IsUnixOS();
+            Param.LoadSettings();
+           
+        }
 
-			if (!_isLinux)
-				LoadParam("Dictionary", "false");
+        private void EnableConfigurationSettings(string outputDirectory)
+        {
+            Param.UpdateMetadataValue(Param.CoverPageTitle, "False");
+            Param.UpdateMetadataValue(Param.TitlePage, "False");
+            Param.UpdateMetadataValue(Param.CopyrightPage, "False");
+            Param.UpdateMetadataValue(Param.TableOfContents, "False");
+            Param.SetValue(Param.PublicationLocation, outputDirectory);
+            Param.Write();
+
+        }
+
+        
+        private void ValidateXMLVersion(string filePath)
+        {
+            var versionControl = new SettingsVersionControl();
+            var validator = new SettingsValidator();
+            if (File.Exists(filePath))
+            {
+                versionControl.UpdateSettingsFile(filePath);
+                bool isValid = validator.ValidateSettingsFile(filePath, true);
+                if (!isValid)
+                {
+                }
+            }
         }
 
         #endregion
