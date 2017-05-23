@@ -89,7 +89,7 @@ namespace Test.OpenOfficeConvert
             _contentFile = "content.xml";
 
             Param.LoadSettings();
-           
+
         }
 
         private void EnableConfigurationSettings(string outputDirectory)
@@ -103,7 +103,7 @@ namespace Test.OpenOfficeConvert
 
         }
 
-        
+
         private void ValidateXMLVersion(string filePath)
         {
             var versionControl = new SettingsVersionControl();
@@ -1577,89 +1577,91 @@ namespace Test.OpenOfficeConvert
             string content = "<draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"72pt\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/c.jpg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>c.jpg</svg:title></draw:frame>";
             bool returnValue = _validate.ValidateOfficeTextNode(0, content, "para");
             Assert.IsTrue(returnValue);
-        }
-        ///<summary>
-        /// TD-227 Set language for data.
-        /// </summary>
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void Language_Node()
-        {
-            _projInfo.ProjectInputType = "Dictionary";
-            const string file = "Language";
-            string styleOutput = GetStyleOutput(file);
+		}
 
-            //Content Test - First
-            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = "xitem_.en_main_body";
-            string content = "sample text file";
-            bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
+		//Environment dependent test
+		/////<summary>
+		///// TD-227 Set language for data.
+		///// </summary>
+		//[Test]
+		//[Category("ShortTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void Language_Node()
+		//{
+		//    _projInfo.ProjectInputType = "Dictionary";
+		//    const string file = "Language";
+		//    string styleOutput = GetStyleOutput(file);
 
-            _validate.ClassName = "xitem_.fr_main_body";
-            content = "exemple de fichier texte";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
+		//    //Content Test - First
+		//    _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+		//    _validate.ClassName = "xitem_.en_main_body";
+		//    string content = "sample text file";
+		//    bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+		//    Assert.IsTrue(returnValue1);
 
-            _validate.ClassName = "xitem_.es_main_body";
-            content = "Este es muestra texto";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
+		//    _validate.ClassName = "xitem_.fr_main_body";
+		//    content = "exemple de fichier texte";
+		//    returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+		//    Assert.IsTrue(returnValue1);
 
-            _validate.ClassName = "xitem_.fr-FR_main_body";
-            content = "exemple de fichier texte";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
+		//    _validate.ClassName = "xitem_.es_main_body";
+		//    content = "Este es muestra texto";
+		//    returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+		//    Assert.IsTrue(returnValue1);
 
-            _validate.ClassName = "xitem_.es-ES_main_body";
-            content = "Este es muestra texto";
-            returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
+		//    _validate.ClassName = "xitem_.fr-FR_main_body";
+		//    content = "exemple de fichier texte";
+		//    returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+		//    Assert.IsTrue(returnValue1);
 
-	        if (Common.UsingMonoVM)
-		        return;
+		//    _validate.ClassName = "xitem_.es-ES_main_body";
+		//    content = "Este es muestra texto";
+		//    returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+		//    Assert.IsTrue(returnValue1);
 
-            //Note - The Styles will be created while processing xhtml(content.xml)
-            //Style Test - Second
-            _validate = new ValidateXMLFile(styleOutput);
-            _validate.ClassName = "xitem_.en_main_body";
-            _validate.ClassProperty.Add("fo:language", "en");
-            _validate.ClassProperty.Add("fo:country", "US");
-            bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
+		// if (Common.UsingMonoVM)
+		//  return;
 
-            _validate.ClassName = "xitem_.fr_main_body";
-            _validate.ClassProperty.Add("fo:language", "fr");
-            _validate.ClassProperty.Add("fo:country", "FR");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
+		//    //Note - The Styles will be created while processing xhtml(content.xml)
+		//    //Style Test - Second
+		//    _validate = new ValidateXMLFile(styleOutput);
+		//    _validate.ClassName = "xitem_.en_main_body";
+		//    _validate.ClassProperty.Add("fo:language", "en");
+		//    _validate.ClassProperty.Add("fo:country", "US");
+		//    bool returnValue = _validate.ValidateNodeAttributesNS(false);
+		//    Assert.IsTrue(returnValue);
 
-            _validate.ClassName = "xitem_.es_main_body";
-            _validate.ClassProperty.Add("fo:language", "es");
-            _validate.ClassProperty.Add("fo:country", "ES");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
+		//    _validate.ClassName = "xitem_.fr_main_body";
+		//    _validate.ClassProperty.Add("fo:language", "fr");
+		//    _validate.ClassProperty.Add("fo:country", "FR");
+		//    returnValue = _validate.ValidateNodeAttributesNS(false);
+		//    Assert.IsTrue(returnValue);
 
-            _validate.ClassName = "xitem_.fr-FR_main_body";
-            _validate.ClassProperty.Add("fo:language", "fr");
-            _validate.ClassProperty.Add("fo:country", "FR");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
+		//    _validate.ClassName = "xitem_.es_main_body";
+		//    _validate.ClassProperty.Add("fo:language", "es");
+		//    _validate.ClassProperty.Add("fo:country", "ES");
+		//    returnValue = _validate.ValidateNodeAttributesNS(false);
+		//    Assert.IsTrue(returnValue);
 
-            _validate.ClassName = "xitem_.es-ES_main_body";
-            _validate.ClassProperty.Add("fo:language", "es");
-            _validate.ClassProperty.Add("fo:country", "ES");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
+		//    _validate.ClassName = "xitem_.fr-FR_main_body";
+		//    _validate.ClassProperty.Add("fo:language", "fr");
+		//    _validate.ClassProperty.Add("fo:country", "FR");
+		//    returnValue = _validate.ValidateNodeAttributesNS(false);
+		//    Assert.IsTrue(returnValue);
 
-        }
+		//    _validate.ClassName = "xitem_.es-ES_main_body";
+		//    _validate.ClassProperty.Add("fo:language", "es");
+		//    _validate.ClassProperty.Add("fo:country", "ES");
+		//    returnValue = _validate.ValidateNodeAttributesNS(false);
+		//    Assert.IsTrue(returnValue);
+
+		//}
 
 
-        ///<summary>
-        /// TD-204   unable to put tok / pisin.
-        /// </summary>
-        [Test]
+		///<summary>
+		/// TD-204   unable to put tok / pisin.
+		/// </summary>
+		[Test]
         public void ClassContent_Node()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -2102,48 +2104,50 @@ namespace Test.OpenOfficeConvert
             //Assert.IsTrue(returnValue, "EmptyDivTag - Style Failure");
 
         }
-        ///<summary>
-        /// TD-654
-        /// </summary>
-        [Test]
-        [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
-        public void VerseNumber_Node()
-        {
 
-            _projInfo.ProjectInputType = "Dictionary";
-            const string file = "VerseNumber";
+		//Environment dependent test
+		//     ///<summary>
+		//     /// TD-654
+		//     /// </summary>
+		//     [Test]
+		//     [Category("LongTest")]
+		//     [Category("SkipOnTeamCity")]
+		//     public void VerseNumber_Node()
+		//     {
 
-            string styleOutput = GetStyleOutput(file);
-            //
-            //Content Test - First
-            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-			_validate.ClassName = "VerseNumber_.cwa_Paragraph_scrSection_columns_scrBook_scrBody";
-            string content = "1";
-            bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-            Assert.IsTrue(returnValue1);
+		//         _projInfo.ProjectInputType = "Dictionary";
+		//         const string file = "VerseNumber";
 
-            //Note - The Styles will be created while processing xhtml(content.xml)
-            //Style Test - Second
-            _validate = new ValidateXMLFile(styleOutput);
-			_validate.ClassName = "VerseNumber_.cwa_Paragraph_scrSection_columns_scrBook_scrBody";
+		//         string styleOutput = GetStyleOutput(file);
+		//         //
+		//         //Content Test - First
+		//         _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+		//_validate.ClassName = "VerseNumber_.cwa_Paragraph_scrSection_columns_scrBook_scrBody";
+		//         string content = "1";
+		//         bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
+		//         Assert.IsTrue(returnValue1);
 
-            _validate.ClassProperty.Add("fo:font-family", "Charis SIL");
-            _validate.ClassProperty.Add("style:font-name-complex", "Charis SIL");
-            _validate.ClassProperty.Add("style:text-position", "super 55%");
-            _validate.ClassProperty.Add("fo:color", "#ff0000");
-            _validate.ClassProperty.Add("fo:font-style", "italic");
-            _validate.ClassProperty.Add("fo:background-color", "#0000ff");
+		//         //Note - The Styles will be created while processing xhtml(content.xml)
+		//         //Style Test - Second
+		//         _validate = new ValidateXMLFile(styleOutput);
+		//_validate.ClassName = "VerseNumber_.cwa_Paragraph_scrSection_columns_scrBook_scrBody";
 
-            bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue, "VerseNumber - Style Failure");
-        }
+		//         _validate.ClassProperty.Add("fo:font-family", "Charis SIL");
+		//         _validate.ClassProperty.Add("style:font-name-complex", "Charis SIL");
+		//         _validate.ClassProperty.Add("style:text-position", "super 55%");
+		//         _validate.ClassProperty.Add("fo:color", "#ff0000");
+		//         _validate.ClassProperty.Add("fo:font-style", "italic");
+		//         _validate.ClassProperty.Add("fo:background-color", "#0000ff");
+
+		//         bool returnValue = _validate.ValidateNodeAttributesNS(false);
+		//         Assert.IsTrue(returnValue, "VerseNumber - Style Failure");
+		//     }
 
 
-        ///<summary>
-        /// TD-349 -  width: auto
-        /// </summary>
-        [Test]
+		///<summary>
+		/// TD-349 -  width: auto
+		/// </summary>
+		[Test]
         public void AutoWidth_Node()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -3220,39 +3224,40 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue1, "Hard Space after versenumber test failed");
         }
 
-        ///TD-2739
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void UserIndicFont()
-        {
-            _projInfo.ProjectInputType = "Dictionary";
-            const string file = "UserIndicFont";
-            string styleOutput = GetStyleOutput(file);
+		//Environment dependent test
+		/////TD-2739
+		//[Test]
+		//[Category("ShortTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void UserIndicFont()
+		//{
+		//    _projInfo.ProjectInputType = "Dictionary";
+		//    const string file = "UserIndicFont";
+		//    string styleOutput = GetStyleOutput(file);
 
-            //Note - The Styles will be created while processing xhtml(content.xml)
-            //Style Test - Second
-            _validate = new ValidateXMLFile(styleOutput);
+		//    //Note - The Styles will be created while processing xhtml(content.xml)
+		//    //Style Test - Second
+		//    _validate = new ValidateXMLFile(styleOutput);
 
-            _validate.ClassName = "headword_.te_entry_letData_dicBody";
-	        if (Common.UsingMonoVM)
-	        {
-		        _validate.ClassProperty.Add("fo:font-family", "Times New Roman");
-		        _validate.ClassProperty.Add("style:font-name-complex", "Times New Roman");
-	        }
-	        else
-	        {
-		        _validate.ClassProperty.Add("fo:font-family", "Arial Unicode MS");
-		        _validate.ClassProperty.Add("style:font-name-complex", "Arial Unicode MS");
-	        }
-	        _validate.ClassProperty.Add("fo:font-size", "10pt");
+		//    _validate.ClassName = "headword_.te_entry_letData_dicBody";
+		// if (Common.UsingMonoVM)
+		// {
+		//  _validate.ClassProperty.Add("fo:font-family", "Times New Roman");
+		//  _validate.ClassProperty.Add("style:font-name-complex", "Times New Roman");
+		// }
+		// else
+		// {
+		//  _validate.ClassProperty.Add("fo:font-family", "Arial Unicode MS");
+		//  _validate.ClassProperty.Add("style:font-name-complex", "Arial Unicode MS");
+		// }
+		// _validate.ClassProperty.Add("fo:font-size", "10pt");
 
-            bool returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-        }
+		//    bool returnValue = _validate.ValidateNodeAttributesNS(false);
+		//    Assert.IsTrue(returnValue);
+		//}
 
-        ///TD-2717
-        [Test]
+		///TD-2717
+		[Test]
         public void SpaceIssueOnSenseNode()
         {
             const string file = "SpaceIssueOnSense";
@@ -3635,29 +3640,30 @@ namespace Test.OpenOfficeConvert
             bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1);
         }
-        #region FileTest
+		#region FileTest
 
-        ///<summary>
-        ///Full Scripture Test
-        /// </summary>
-        [Test]
-        [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
-        public void BughotugospelsExport()
-        {
-            _projInfo.ProjectInputType = "Scripture";
-            const string file = "Bughotu-gospels";
-            string styleOutput = GetStyleOutput(file);
-            string styleExpected = Common.PathCombine(_expectedPath, "Bughotu-gospelsstyles.xml");
-            string contentExpected = Common.PathCombine(_expectedPath, "Bughotu-gospelscontent.xml");
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
+		//Environment dependent test
+		/////<summary>
+		/////Full Scripture Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void BughotugospelsExport()
+		//{
+		//    _projInfo.ProjectInputType = "Scripture";
+		//    const string file = "Bughotu-gospels";
+		//    string styleOutput = GetStyleOutput(file);
+		//    string styleExpected = Common.PathCombine(_expectedPath, "Bughotu-gospelsstyles.xml");
+		//    string contentExpected = Common.PathCombine(_expectedPath, "Bughotu-gospelscontent.xml");
+		//    XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+		//    XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		//}
 
-        ///<summary>
-        ///Telugu Font FootnoteMarkerTestcase Scripture Test
-        ///</summary>
-        [Test]
+		///<summary>
+		///Telugu Font FootnoteMarkerTestcase Scripture Test
+		///</summary>
+		[Test]
         [Category("LongTest")]
         [Category("SkipOnTeamCity")]
         public void TeluguFootnoteMarkerTest()
@@ -3696,23 +3702,24 @@ namespace Test.OpenOfficeConvert
         }
 
 
-        ///<summary>
-        ///Kabwa Full Scripture Test
-        /// </summary>
-        [Test]
-        [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
-        public void zKabwaExport()
-        {
-            _projInfo.ProjectInputType = "Scripture";
-            const string file = "Kabwa";
-            string styleOutput = GetStyleOutput(file);
-            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
-            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
+		//Environment dependent test
+		/////<summary>
+		/////Kabwa Full Scripture Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void zKabwaExport()
+		//{
+		//    _projInfo.ProjectInputType = "Scripture";
+		//    const string file = "Kabwa";
+		//    string styleOutput = GetStyleOutput(file);
+		//    string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+		//    string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+		//    XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+		//    XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+		//    XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		//}
 
 		///<summary>
 		///Dictionary Insert HardSpace Test
@@ -3737,119 +3744,124 @@ namespace Test.OpenOfficeConvert
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
+		//Environment dependent test
+		/////<summary>
+		/////Dictionary Insert HardSpace Test
+		/////</summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void EntryStyleTest()
+		//{
+		//	_projInfo.ProjectInputType = "Dictionary";
+		//	const string file = "EntryStyle";
+		//	string styleOutput = GetStyleOutput(file);
+		//	string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+		//	string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+		//	if (Common.UsingMonoVM)
+		//	{
+		//		styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+		//		contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+		//	}
+		//	XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+		//	XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+		//	XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		//}
+
+		//Environment dependent test
+		/////<summary>
+		/////B1pe Full Scripture Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void B1peExport()
+		//{
+		//    _projInfo.ProjectInputType = "Scripture";
+		//    const string file = "B1pe";
+		//    string styleOutput = GetStyleOutput(file);
+		//    string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+		//    string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+		//    XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+		//    XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		//}
+
+
+
+		//Environment dependent test
+		/////<summary>
+		/////MexicoStyle Dictionary main export Test TD-4708
+		///// </summary>
+		//[Test]
+		//      [Category("LongTest")]
+		//      [Category("SkipOnTeamCity")]
+		//public void MainStyleChangesinMexicoExport()
+		//      {
+		//          _projInfo.ProjectInputType = "Dictionary";
+		//	const string file = "StyleChangesinMexico";
+		//          string styleOutput = GetStyleOutput(file);
+		//          string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+		//          string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+		//	if (Common.UsingMonoVM)
+		//	{
+		//		styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+		//		contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+		//	}
+		//          XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+		//          XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		//      }
+
+
+		//Environment dependent test
+		/////<summary>
+		/////MexicoStyle Dictionary reversal export Test TD-4708
+		///// </summary>
+		//[Test]
+		//      [Category("LongTest")]
+		//      [Category("SkipOnTeamCity")]
+		//public void ReversalStyleChangesinMexicoExport()
+		//      {
+		//          _projInfo.ProjectInputType = "Dictionary";
+		//	const string file = "StyleChangesinMexicoReversal";
+		//          string styleOutput = GetStyleOutput(file);
+		//          string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+		//          string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+		//	if (Common.UsingMonoVM)
+		//	{
+		//		styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+		//		contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+		//	}
+		//          XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+		//          XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		//      }
+
+		//Environment dependent test
+		/////<summary>
+		/////MexicoStyle Dictionary Slash symbol
+		///// </summary>
+		//[Test]
+		//      [Category("SkipOnTeamCity")]
+		//public void SlashSymbolExport()
+		//      {
+		//          _projInfo.ProjectInputType = "Dictionary";
+		//	const string file = "SlashSymbol";
+		//          string styleOutput = GetStyleOutput(file);
+		//          string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+		//          string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+		//	if (Common.UsingMonoVM)
+		//	{
+		//		styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+		//		contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+		//	}
+		//          XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+		//          XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		//      }
+
+
 		///<summary>
-		///Dictionary Insert HardSpace Test
-		///</summary>
+		///Table structure Test
+		/// </summary>
 		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void EntryStyleTest()
-		{
-			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "EntryStyle";
-			string styleOutput = GetStyleOutput(file);
-			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
-			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-			if (Common.UsingMonoVM)
-			{
-				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
-				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
-			}
-			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-		}
-
-        ///<summary>
-        ///B1pe Full Scripture Test
-        /// </summary>
-        [Test]
-        [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
-        public void B1peExport()
-        {
-            _projInfo.ProjectInputType = "Scripture";
-            const string file = "B1pe";
-            string styleOutput = GetStyleOutput(file);
-            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
-            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
-
-
-
-		///<summary>
-		///MexicoStyle Dictionary main export Test TD-4708
-        /// </summary>
-        [Test]
-        [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
-		public void MainStyleChangesinMexicoExport()
-        {
-            _projInfo.ProjectInputType = "Dictionary";
-			const string file = "StyleChangesinMexico";
-            string styleOutput = GetStyleOutput(file);
-            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
-            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-			if (Common.UsingMonoVM)
-			{
-				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
-				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
-			}
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
-
-
-		///<summary>
-		///MexicoStyle Dictionary reversal export Test TD-4708
-        /// </summary>
-        [Test]
-        [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
-		public void ReversalStyleChangesinMexicoExport()
-        {
-            _projInfo.ProjectInputType = "Dictionary";
-			const string file = "StyleChangesinMexicoReversal";
-            string styleOutput = GetStyleOutput(file);
-            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
-            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-			if (Common.UsingMonoVM)
-			{
-				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
-				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
-			}
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
-
-		///<summary>
-		///MexicoStyle Dictionary Slash symbol
-        /// </summary>
-        [Test]
-        [Category("SkipOnTeamCity")]
-		public void SlashSymbolExport()
-        {
-            _projInfo.ProjectInputType = "Dictionary";
-			const string file = "SlashSymbol";
-            string styleOutput = GetStyleOutput(file);
-            string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
-            string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-			if (Common.UsingMonoVM)
-			{
-				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
-				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
-			}
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
-
-
-        ///<summary>
-        ///Table structure Test
-        /// </summary>
-        [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
         public void Table1Test()

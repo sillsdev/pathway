@@ -1,15 +1,15 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="StylesXMLTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
+// Last reviewed:
 
-// 
+//
 // <remarks>
 // Test Cases for Stylesxml
 // </remarks>
@@ -84,8 +84,8 @@ namespace Test.OpenOfficeConvert
         //#region File Comparision
         ///<summary>
         ///TD100 text-transform syntax in Styles.xml
-        /// 
-        /// </summary>      
+        ///
+        /// </summary>
         [Test]
         public void TextTransformTest_Node()
         {
@@ -115,29 +115,30 @@ namespace Test.OpenOfficeConvert
 
         }
 
-	    [Test]
-	    [Category("SkipOnTeamCity")]
-	    public void ApplySpanFontStyleTest()
-	    {
-			const string file = "ApplySpanFontStyleTest";
-			string input = FileInput(file + ".css");
-			string output = FileOutput(file + "styles.xml");
-			GetCssClass(input, output);
+		//Environment dependent test
+		//  [Test]
+		//  [Category("SkipOnTeamCity")]
+		//  public void ApplySpanFontStyleTest()
+		//  {
+		//const string file = "ApplySpanFontStyleTest";
+		//string input = FileInput(file + ".css");
+		//string output = FileOutput(file + "styles.xml");
+		//GetCssClass(input, output);
 
-			string xpath = "//style:style[@style:name='span_.bzh']";
-			_validate = new ValidateXMLFile(output);
-			_validate.ClassName = string.Empty;
-			_validate.ClassProperty.Add("fo:font-family", "Charis SIL");
+		//string xpath = "//style:style[@style:name='span_.bzh']";
+		//_validate = new ValidateXMLFile(output);
+		//_validate.ClassName = string.Empty;
+		//_validate.ClassProperty.Add("fo:font-family", "Charis SIL");
 
-			returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
-			Assert.IsTrue(returnValue);
-	    }
+		//returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
+		//Assert.IsTrue(returnValue);
+		//  }
 
-        ///<summary>
-        ///TD55 font-Weigth: 700 syntax in Styles.xml
+		///<summary>
+		///TD55 font-Weigth: 700 syntax in Styles.xml
 
-        /// </summary>      
-        [Test]
+		/// </summary>
+		[Test]
         public void TextFontWeightTestA_Node()
         {
             const string file = "TextFontWeightTestA";
@@ -155,7 +156,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD55 font-Weigth: 700 syntax in Styles.xml
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontWeightTestB_Node()
         {
@@ -175,7 +176,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD37 font-Weigtht: bold syntax in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontWeightTestC_Node()
         {
@@ -193,7 +194,7 @@ namespace Test.OpenOfficeConvert
         }
         ///<summary>
         ///TD50 font-Weigtht: normal syntax in Styles.xml
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontWeightTestD_Node()
         {
@@ -213,7 +214,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD53 font-Weigtht: inherit; syntax in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontWeightTestE_Node()
         {
@@ -239,7 +240,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD-662 (Rudimentary table formatting)
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TableProperty()
         {
@@ -259,7 +260,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD42 font-style: normal; syntax in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontStyleTestA_Node()
         {
@@ -278,7 +279,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD43 font-style: inherit; syntax in Styles.xml
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontStyleTestB_Node()
         {
@@ -306,7 +307,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD49 font-family: in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void FontFamily_Node()
         {
@@ -339,7 +340,7 @@ namespace Test.OpenOfficeConvert
 
 			_validate = new ValidateXMLFile(output);
 			_validate.ClassName = "span_.nco";
-			_validate.ClassProperty.Add("fo:font-family", "Andika New Basic:litr = 0 & apos = 1");			
+			_validate.ClassProperty.Add("fo:font-family", "Andika New Basic:litr = 0 & apos = 1");
 			returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
 		}
@@ -371,7 +372,7 @@ namespace Test.OpenOfficeConvert
             Dictionary<string, Dictionary<string, string>> cssClass = new Dictionary<string, Dictionary<string, string>>();
             CssTree cssTree = new CssTree();
             cssClass = cssTree.CreateCssProperty(projInfo.DefaultCssFileWithPath, true);
-			
+
             LOStyles ooStyles = new LOStyles();
             ooStyles.CreateStyles(projInfo, cssClass, output);
             return cssClass;
@@ -398,7 +399,7 @@ namespace Test.OpenOfficeConvert
 
         ///<summary>
         ///TD60 font-size: 3cm; syntax in Styles.xml
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontSizeTestA_Node()
         {
@@ -428,7 +429,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD58 font-size: 1.5em; syntax in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontSizeTestB_Node()
         {
@@ -463,7 +464,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD57 font-size: xx-small; syntax in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontSizeTestC_Node()
         {
@@ -496,7 +497,7 @@ namespace Test.OpenOfficeConvert
         }
         ///<summary>
         ///TD61 font-size: inherit; syntax in Styles.xml
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontSizeTestD_Node()
         {
@@ -531,7 +532,7 @@ namespace Test.OpenOfficeConvert
 
                 ///<summary>
                 ///TD70 padding-bottom: 9pt; syntax in Styles.xml
-                /// </summary>     
+                /// </summary>
                 ///
                 [Ignore]
                 [Test]
@@ -567,7 +568,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD81 page-break-before: always syntax in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void PageBreakBeforeTest_Node()
         {
@@ -588,7 +589,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD63 font-variant: normal; syntax in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void TextFontVariantTestA_Node()
         {
@@ -614,7 +615,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD51 font-weight: bolder;  in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void FontWeightBolder_Node()
         {
@@ -650,7 +651,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD-64 font: 80% san-serif; in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void Font_Node()
         {
@@ -743,7 +744,7 @@ namespace Test.OpenOfficeConvert
 		public void BorderTest1()
 		{
 			const string file = "EntryBorderSubEntryBorderless";
-			
+
 			string input = FileInput(file + ".css");
 			string output = FileOutput(file + "styles.xml");
 			GetCssClass(input, output);
@@ -831,7 +832,7 @@ namespace Test.OpenOfficeConvert
 		public void BorderTest4()
 		{
 			const string file = "EntryBorderlessSubEntryBorderless";
-			
+
 			string input = FileInput(file + ".css");
 			string output = FileOutput(file + "styles.xml");
 			GetCssClass(input, output);
@@ -860,7 +861,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD-270 (Direction:ltr)
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void DirectionTest_Node()
         {
@@ -894,7 +895,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD-305 (widows) and TD-306(orphans)
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void WidowsandOrphans_Node()
         {
@@ -916,7 +917,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD344 page-break-after: always syntax in Styles.xml
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void PageBreakAfterTest_Node()
         {
@@ -936,7 +937,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD307 Open Office: border-style, border-color, border-width
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void BorderTest_Node()
         {
@@ -962,7 +963,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD350 position:relative;
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void PositionTest_Node()
         {
@@ -988,7 +989,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD-407 Unit Conversions in Map Property;
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void UnitConversionTest_Node()
         {
@@ -1048,7 +1049,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD-428 Impliment Start and Last References in Mirror page
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void MirroredPageRefTest_Node()
         {
@@ -1079,7 +1080,7 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:margin-right", "42.51968pt");
             _validate.ClassProperty.Add("fo:margin-bottom", "32.59842pt");
             _validate.ClassProperty.Add("fo:margin-left", "42.51968pt");
-						
+
             returnValue = _validate.ValidateNodeAttributesNS(1, xpath); // style:page-layout-properties
             Assert.IsTrue(returnValue);
 
@@ -1106,7 +1107,7 @@ namespace Test.OpenOfficeConvert
 
             returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
             Assert.IsTrue(returnValue);
-			
+
             //Fourth Node
             xpath = "//style:master-page[@style:name='";
             _validate.ClassName = "First_20_Page";
@@ -1122,7 +1123,7 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD-245 Handle hyphenation related keywords
 
-        /// </summary>      
+        /// </summary>
         [Test]
         public void HyphenationKeywordsTest_Node()
         {
@@ -1151,8 +1152,8 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         ///TD-46  - Open Office font-family: Gentium
 
-        /// 
-        /// </summary>      
+        ///
+        /// </summary>
         //Note : This is already in Node check
         [Test]
         public void GentiumFont()
@@ -1189,57 +1190,57 @@ namespace Test.OpenOfficeConvert
             //XmlAssert.AreEqual(expected, output, file + " syntax failed in styles.xml");
         }
 
-        ///<summary>
-        ///TD-432 Charis SIL Font
+		//Environment dependent test
+		/////<summary>
+		/////TD-432 Charis SIL Font
+		///// </summary>
+		//[Test]
+		//[Category("ShortTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void CharisSILFont_Node()
+		//{
+		//    const string file = "CharisSILFont";
 
-        /// </summary>      
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void CharisSILFont_Node()
-        {
-            const string file = "CharisSILFont";
+		//    string input = FileInput(file + ".css");
+		//    string output = FileOutput(file + "styles.xml");
+		//    GetCssClass(input, output);
 
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "styles.xml");
-            GetCssClass(input, output);
+		//    _validate = new ValidateXMLFile(output);
+		//    _validate.ClassName = "CharisSIL";
+		//    _validate.ClassProperty.Add("fo:font-family", "Charis SIL");
+		//    _validate.ClassProperty.Add("fo:font-name-complex", "Charis SIL");
+		//    returnValue = _validate.ValidateNodeAttributesNS(false);
+		//    Assert.IsTrue(returnValue);
+		//}
 
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "CharisSIL";
-            _validate.ClassProperty.Add("fo:font-family", "Charis SIL");
-            _validate.ClassProperty.Add("fo:font-name-complex", "Charis SIL");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-        }
+		//Environment dependent test
+		/////<summary>
+		/////TD-59 (Open Office font-size: larger;) -  Doulos SIL Font
+		///// </summary>
+		//[Test]
+		//      [Category("ShortTest")]
+		//      [Category("SkipOnTeamCity")]
+		//      public void DoulosSILFont_Node()
+		//      {
+		//          const string file = "DoulosSILFont";
 
-        ///<summary>
-        ///TD-59 (Open Office font-size: larger;) -  Doulos SIL Font
+		//          string input = FileInput(file + ".css");
+		//          string output = FileOutput(file + "styles.xml");
+		//          GetCssClass(input, output);
 
-        /// </summary>      
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void DoulosSILFont_Node()
-        {
-            const string file = "DoulosSILFont";
-
-            string input = FileInput(file + ".css");
-            string output = FileOutput(file + "styles.xml");
-            GetCssClass(input, output);
-
-            _validate = new ValidateXMLFile(output);
-            _validate.ClassName = "DoulosSIL";
-            _validate.ClassProperty.Add("fo:font-family", "Doulos SIL");
-            _validate.ClassProperty.Add("fo:font-name-complex", "Doulos SIL");
-            returnValue = _validate.ValidateNodeAttributesNS(false);
-            Assert.IsTrue(returnValue);
-        }
+		//          _validate = new ValidateXMLFile(output);
+		//          _validate.ClassName = "DoulosSIL";
+		//          _validate.ClassProperty.Add("fo:font-family", "Doulos SIL");
+		//          _validate.ClassProperty.Add("fo:font-name-complex", "Doulos SIL");
+		//          returnValue = _validate.ValidateNodeAttributesNS(false);
+		//          Assert.IsTrue(returnValue);
+		//      }
 
 
-        ///<summary>
-        ///TD-461 (Open Office fixed-line-height: 14pt;)
-        ///</summary>      
-        [Test]
+		///<summary>
+		///TD-461 (Open Office fixed-line-height: 14pt;)
+		///</summary>
+		[Test]
         public void FixedLineHeightTest_Node()
         {
             const string file = "fixed-line-height";
@@ -1257,9 +1258,9 @@ namespace Test.OpenOfficeConvert
 
 
         ///<summary>
-        ///TD-663 Space between header and text  
+        ///TD-663 Space between header and text
 
-        /// </summary> 
+        /// </summary>
         [Test]
         public void HeaderSpace_Node()
         {
@@ -1293,7 +1294,7 @@ namespace Test.OpenOfficeConvert
         ///TD-3807 Page ends with Parallel reference
 
         /// Add Keep with next paragraph property for parallel reference class
-        /// </summary> 
+        /// </summary>
         [Test]
         public void ParallerReferenceKeepWith_Node()
         {

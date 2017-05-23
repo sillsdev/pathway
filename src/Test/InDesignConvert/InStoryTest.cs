@@ -1833,65 +1833,70 @@ namespace Test.InDesignConvert
             }
         }
 
-        [Test]
-        [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
-        public void TokPisin()
-        {
-            //Scripture
-            string fileName = "TokPisin";
-            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
-            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("TokPisinExpect", "1");
-        }
+		//This test is environment dependent and fails if different fonts are installed.
+        //[Test]
+        //[Category("LongTest")]
+        //[Category("SkipOnTeamCity")]
+        //public void TokPisin()
+        //{
+        //    //Scripture
+        //    string fileName = "TokPisin";
+        //    _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+        //    _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+        //    FileComparisionTest("TokPisinExpect", "1");
+        //}
 
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void TeTest()
-        {
-            //Scripture
-            string fileName = "TeTest";
-            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
-            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("TeTestExpect", "1");
-        }
+		//This test is environment dependent and fails if different fonts are installed.
+        //[Test]
+        //[Category("ShortTest")]
+        //[Category("SkipOnTeamCity")]
+        //public void TeTest()
+        //{
+        //    //Scripture
+        //    string fileName = "TeTest";
+        //    _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+        //    _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+        //    FileComparisionTest("TeTestExpect", "1");
+        //}
 
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void Bughotugospels()
-        {
-            //Scripture
-            string fileName = "Bughotu-gospels";
-            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
-            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("Bughotu-gospelsExpect", "2");
-        }
+		//This test is environment dependent and fails if different fonts are installed.
+        //[Test]
+        //[Category("ShortTest")]
+        //[Category("SkipOnTeamCity")]
+        //public void Bughotugospels()
+        //{
+        //    //Scripture
+        //    string fileName = "Bughotu-gospels";
+        //    _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+        //    _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+        //    FileComparisionTest("Bughotu-gospelsExpect", "2");
+        //}
 
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void B1pe()
-        {
-            //Scripture
-            string fileName = "B1pe";
-            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
-            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("B1peExpect", "2");
-        }
+		//This test is environment dependent and fails based on installed fonts.
+        //[Test]
+        //[Category("ShortTest")]
+        //[Category("SkipOnTeamCity")]
+        //public void B1pe()
+        //{
+        //    //Scripture
+        //    string fileName = "B1pe";
+        //    _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+        //    _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+        //    FileComparisionTest("B1peExpect", "2");
+        //}
 
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void Kabwa()
-        {
-            //Scripture
-            string fileName = "Kabwa";
-            _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
-            _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
-            FileComparisionTest("KabwaExpect", "2");
-        }
+		//This test is environment dependent and fails if different fonts are installed
+		//[Test]
+        //[Category("ShortTest")]
+        //[Category("SkipOnTeamCity")]
+        //public void Kabwa()
+        //{
+        //    //Scripture
+        //    string fileName = "Kabwa";
+        //    _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".xhtml");
+        //    _inputCSS = Common.DirectoryPathReplace(_testFolderPath + "/input/" + fileName + ".css");
+        //    FileComparisionTest("KabwaExpect", "2");
+        //}
 
         [Test]
         [Category("LongTest")]

@@ -214,34 +214,35 @@ namespace Test.OpenOfficeConvert
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
-		///<summary>
-		///B1pe Full Scripture Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void DictionaryMainStyleExport()
-		{
-			Common.UseAfterBeforeProcess = false;
-			_projInfo.ProjectInputType = "Dictionary";
-			const string file = "DictionaryMainStyle";
-			DateTime startTime = DateTime.Now;
+		//Environment dependent test
+		/////<summary>
+		/////B1pe Full Scripture Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void DictionaryMainStyleExport()
+		//{
+		//	Common.UseAfterBeforeProcess = false;
+		//	_projInfo.ProjectInputType = "Dictionary";
+		//	const string file = "DictionaryMainStyle";
+		//	DateTime startTime = DateTime.Now;
 
-			string styleOutput = GetStyleOutput(file);
+		//	string styleOutput = GetStyleOutput(file);
 
-			_totalTime = DateTime.Now - startTime;
+		//	_totalTime = DateTime.Now - startTime;
 
-			string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
-			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-			if (Common.UsingMonoVM)
-			{
-				styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
-				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
-			}
-			XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-			Common.UseAfterBeforeProcess = true;
-		}
+		//	string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
+		//	string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+		//	if (Common.UsingMonoVM)
+		//	{
+		//		styleExpected = Common.PathCombine(_expectedlinuxPath, file + "styles.xml");
+		//		contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
+		//	}
+		//	XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
+		//	XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+		//	Common.UseAfterBeforeProcess = true;
+		//}
 
 		///<summary>
 		///B1pe Full Scripture Test

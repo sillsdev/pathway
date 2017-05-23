@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="CSSTreeTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// Tests for Css Parser 
+// Tests for Css Parser
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -43,54 +43,56 @@ namespace Test.CssParserTest
             _expected = new Dictionary<string, Dictionary<string, string>>();
             _testFolderPath = PathPart.Bin(Environment.CurrentDirectory, "/CssParser/TestFiles/cssInput");
         }
-        #endregion Setup
-        [Test]
-        [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void GetFontList()
-        {
-            string cssFile = "GetFontList.css";
-            _inputCSSFileWithPath = Common.PathCombine(_testFolderPath, cssFile);
-            ArrayList fontList = GetFontList(_inputCSSFileWithPath);
-            for (int i = 0; i < fontList.Count; i += 1)
-                fontList[i] = fontList[i].ToString().ToUpper();
-            ArrayList expectedFontList = new ArrayList();
-			if (Common.UsingMonoVM)
-			{
-				// Microsoft font packaging for linux has some different file names (and less choices)
-				expectedFontList.Add("ARIAL_BLACK.TTF");
-				expectedFontList.Add("ARIAL.TTF");
-				expectedFontList.Add("ARIAL_BOLD.TTF");
-				expectedFontList.Add("ARIAL_ITALIC.TTF");
-				expectedFontList.Add("ARIALBI.TTF");
-				expectedFontList.Add("TIMES.TTF");
-				expectedFontList.Add("TIMESBD.TTF");
-				expectedFontList.Add("TIMESI.TTF");
-				expectedFontList.Add("TIMES_NEW_ROMAN_BOLD_ITALIC.TTF");
-			}
-			else 
-			{
-	            expectedFontList.Add("ARIAL.TTF");
-	            expectedFontList.Add("ARIALBD.TTF");
-	            expectedFontList.Add("ARIALBI.TTF");
-	            expectedFontList.Add("ARIALI.TTF");
-	            expectedFontList.Add("ARIBLK.TTF");
-	            expectedFontList.Add("ARIALN.TTF");
-	            expectedFontList.Add("ARLRDBD.TTF");
-	            expectedFontList.Add("ARIALNB.TTF");
-	            expectedFontList.Add("ARIALNBI.TTF");
-	            expectedFontList.Add("ARIALNI.TTF");
-	            expectedFontList.Add("ARIALUNI.TTF");
-	            expectedFontList.Add("TIMES.TTF");
-	            expectedFontList.Add("TIMESBD.TTF");
-	            expectedFontList.Add("TIMESBI.TTF");
-	            expectedFontList.Add("TIMESI.TTF");
-			}
-			// sort both lists to line them up
-            expectedFontList.Sort();
-			fontList.Sort();
-            CollectionAssert.AreEqual(expectedFontList, fontList, "GetFontList Error");
-        }
+		#endregion Setup
+
+		//This test is environment dependent and fails if the right fonts are installed.
+		//[Test]
+  //      [Category("ShortTest")]
+  //      [Category("SkipOnTeamCity")]
+  //      public void GetFontList()
+  //      {
+  //          string cssFile = "GetFontList.css";
+  //          _inputCSSFileWithPath = Common.PathCombine(_testFolderPath, cssFile);
+  //          ArrayList fontList = GetFontList(_inputCSSFileWithPath);
+  //          for (int i = 0; i < fontList.Count; i += 1)
+  //              fontList[i] = fontList[i].ToString().ToUpper();
+  //          ArrayList expectedFontList = new ArrayList();
+		//	if (Common.UsingMonoVM)
+		//	{
+		//		// Microsoft font packaging for linux has some different file names (and less choices)
+		//		expectedFontList.Add("ARIAL_BLACK.TTF");
+		//		expectedFontList.Add("ARIAL.TTF");
+		//		expectedFontList.Add("ARIAL_BOLD.TTF");
+		//		expectedFontList.Add("ARIAL_ITALIC.TTF");
+		//		expectedFontList.Add("ARIALBI.TTF");
+		//		expectedFontList.Add("TIMES.TTF");
+		//		expectedFontList.Add("TIMESBD.TTF");
+		//		expectedFontList.Add("TIMESI.TTF");
+		//		expectedFontList.Add("TIMES_NEW_ROMAN_BOLD_ITALIC.TTF");
+		//	}
+		//	else
+		//	{
+	 //           expectedFontList.Add("ARIAL.TTF");
+	 //           expectedFontList.Add("ARIALBD.TTF");
+	 //           expectedFontList.Add("ARIALBI.TTF");
+	 //           expectedFontList.Add("ARIALI.TTF");
+	 //           expectedFontList.Add("ARIBLK.TTF");
+	 //           expectedFontList.Add("ARIALN.TTF");
+	 //           expectedFontList.Add("ARLRDBD.TTF");
+	 //           expectedFontList.Add("ARIALNB.TTF");
+	 //           expectedFontList.Add("ARIALNBI.TTF");
+	 //           expectedFontList.Add("ARIALNI.TTF");
+	 //           expectedFontList.Add("ARIALUNI.TTF");
+	 //           expectedFontList.Add("TIMES.TTF");
+	 //           expectedFontList.Add("TIMESBD.TTF");
+	 //           expectedFontList.Add("TIMESBI.TTF");
+	 //           expectedFontList.Add("TIMESI.TTF");
+		//	}
+		//	// sort both lists to line them up
+  //          expectedFontList.Sort();
+		//	fontList.Sort();
+  //          CollectionAssert.AreEqual(expectedFontList, fontList, "GetFontList Error");
+  //      }
 
 
         [Test]
@@ -141,7 +143,7 @@ namespace Test.CssParserTest
             _expectedProperty["font-family"] = "System";
             _expectedProperty["font-size"] = "7";
 
-            // @page :first 
+            // @page :first
             _expectedProperty = new Dictionary<string, string>();
             _expected["@page:first"] = _expectedProperty;
             _expectedProperty["margin-top"] = "2";
@@ -182,7 +184,7 @@ namespace Test.CssParserTest
             _expectedProperty["font-family"] = "System";
             _expectedProperty["font-size"] = "7";
 
-            // @page:left :left 
+            // @page:left :left
             _expectedProperty = new Dictionary<string, string>();
             _expected["@page:left"] = _expectedProperty;
             _expectedProperty["margin-top"] = "2";
@@ -321,7 +323,7 @@ namespace Test.CssParserTest
             _expectedProperty["font-family"] = "System";
             _expectedProperty["font-size"] = "7";
 
-            // @page :first 
+            // @page :first
             _expectedProperty = new Dictionary<string, string>();
             _expected["@page:first"] = _expectedProperty;
             _expectedProperty["margin-top"] = "2";
@@ -406,7 +408,7 @@ namespace Test.CssParserTest
 	    {
 	        public KeyValuePair<string, Dictionary<string, string>> ClassName { get; set; }
 	        public KeyValuePair<string, string> Property { get; set; }
-	        
+
 	        public override string ToString()
 	        {
 	            return string.Format("{0} of {1} not valid", Property.Key, ClassName.Key);
