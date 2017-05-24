@@ -929,65 +929,66 @@ namespace Test.epubConvert
 
 		}
 
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void XPathwayDictionarySettingTest()
-		{
-			_tf = new TestFiles("epubConvert");
-			var pwf = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
-			string pathwaySettingFolder = Common.PathCombine(pwf, "Pathway");
+		//Evironment dependent test
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void XPathwayDictionarySettingTest()
+		//{
+		//	_tf = new TestFiles("epubConvert");
+		//	var pwf = Common.PathCombine(Common.GetAllUserAppPath(), "SIL");
+		//	string pathwaySettingFolder = Common.PathCombine(pwf, "Pathway");
 
-			if (Directory.Exists(pathwaySettingFolder))
-			{
-				Common.CopyFolderandSubFolder(pathwaySettingFolder, pathwaySettingFolder + "test", true);
-			}
+		//	if (Directory.Exists(pathwaySettingFolder))
+		//	{
+		//		Common.CopyFolderandSubFolder(pathwaySettingFolder, pathwaySettingFolder + "test", true);
+		//	}
 
-			ExtractzipFilesBasedOnOS(_tf.Input("Pathway.zip"), pwf);
+		//	ExtractzipFilesBasedOnOS(_tf.Input("Pathway.zip"), pwf);
 
-			LoadParamValue("Dictionary");
+		//	LoadParamValue("Dictionary");
 
-			CleanOutputDirectory();
-			string inputDataFolder = Common.PathCombine(_inputPath, "DictionarySettingTest");
-			string outputDataFolder = Common.PathCombine(_outputPath, "DictionarySettingTest");
-			Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
+		//	CleanOutputDirectory();
+		//	string inputDataFolder = Common.PathCombine(_inputPath, "DictionarySettingTest");
+		//	string outputDataFolder = Common.PathCombine(_outputPath, "DictionarySettingTest");
+		//	Common.CopyFolderandSubFolder(inputDataFolder, outputDataFolder, true);
 
-			const string xhtmlName = "main.xhtml";
-			const string cssName = "main.css";
-			var projInfo = new PublicationInformation();
-			projInfo.ProjectInputType = "Dictionary";
-			projInfo.ProjectPath = outputDataFolder;
-			projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDataFolder, xhtmlName);
-			projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
-			projInfo.ProjectName = "ABSDictionaryTestCase";
-			projInfo.IsLexiconSectionExist = true;
-			Common.Testing = true;
-			var target = new Exportepub();
-			var actual = target.Export(projInfo);
+		//	const string xhtmlName = "main.xhtml";
+		//	const string cssName = "main.css";
+		//	var projInfo = new PublicationInformation();
+		//	projInfo.ProjectInputType = "Dictionary";
+		//	projInfo.ProjectPath = outputDataFolder;
+		//	projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDataFolder, xhtmlName);
+		//	projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
+		//	projInfo.ProjectName = "ABSDictionaryTestCase";
+		//	projInfo.IsLexiconSectionExist = true;
+		//	Common.Testing = true;
+		//	var target = new Exportepub();
+		//	var actual = target.Export(projInfo);
 
-			Common.CopyFolderandSubFolder(pathwaySettingFolder + "test", pathwaySettingFolder, true);
-
-
-			Assert.IsTrue(actual);
+		//	Common.CopyFolderandSubFolder(pathwaySettingFolder + "test", pathwaySettingFolder, true);
 
 
-			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
-			ExtractzipFilesBasedOnOS(result, FileOutput("main"));
-			result = Common.PathCombine(_expectedPath, "mainExpected.epub");
-			ExtractzipFilesBasedOnOS(result, FileOutput("mainExpected"));
+		//	Assert.IsTrue(actual);
 
-			string expectedFilesPath = FileOutput("mainExpected");
-			expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
-			string[] filesList = Directory.GetFiles(expectedFilesPath);
-			foreach (var fileName in filesList)
-			{
-				var info = new FileInfo(fileName);
-				if (info.Extension == ".xhtml" && !info.Name.Contains("File2Cpy"))
-				{
-					FileCompare("main/OEBPS/" + info.Name, "mainExpected/OEBPS/" + info.Name);
-				}
-			}
-		}
+
+		//	var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
+		//	ExtractzipFilesBasedOnOS(result, FileOutput("main"));
+		//	result = Common.PathCombine(_expectedPath, "mainExpected.epub");
+		//	ExtractzipFilesBasedOnOS(result, FileOutput("mainExpected"));
+
+		//	string expectedFilesPath = FileOutput("mainExpected");
+		//	expectedFilesPath = Common.PathCombine(expectedFilesPath, "OEBPS");
+		//	string[] filesList = Directory.GetFiles(expectedFilesPath);
+		//	foreach (var fileName in filesList)
+		//	{
+		//		var info = new FileInfo(fileName);
+		//		if (info.Extension == ".xhtml" && !info.Name.Contains("File2Cpy"))
+		//		{
+		//			FileCompare("main/OEBPS/" + info.Name, "mainExpected/OEBPS/" + info.Name);
+		//		}
+		//	}
+		//}
 
 		private void LoadParamValue(string inputType)
 		{
