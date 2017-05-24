@@ -1448,7 +1448,7 @@
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="0.0pt" svg:height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm6">

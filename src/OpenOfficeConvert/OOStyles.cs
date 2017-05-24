@@ -3100,19 +3100,15 @@ namespace SIL.PublishingSolution
                 cspace = calcSpace + defaultUnit;
             }
 
-            string ht = "svg:height";
-            if (_pageHeaderFooter[index].ContainsKey("content") && _pageHeaderFooter[index]["content"].Length > 0
-                || _pageHeaderFooter[index + 1].ContainsKey("content") && _pageHeaderFooter[index + 1]["content"].Length > 0
-                || _pageHeaderFooter[index + 2].ContainsKey("content") && _pageHeaderFooter[index + 2]["content"].Length > 0)
-            {
-                space = cspace;
-                height = "14.21" + defaultUnit;
-            }
-            else
-            {
-                ht = "fo:min-height";
-            }
-	        if (index == 15)
+			if (_pageHeaderFooter[index].ContainsKey("content") && _pageHeaderFooter[index]["content"].Length > 0
+				|| _pageHeaderFooter[index + 1].ContainsKey("content") && _pageHeaderFooter[index + 1]["content"].Length > 0
+				|| _pageHeaderFooter[index + 2].ContainsKey("content") && _pageHeaderFooter[index + 2]["content"].Length > 0)
+			{
+				space = cspace;
+				height = "14.21" + defaultUnit;
+			}
+			string ht = "fo:min-height";
+			if (index == 15)
 	        {
 				if (_projInfo.ProjectInputType.ToLower() == "dictionary")
 					height = "15.84pt";

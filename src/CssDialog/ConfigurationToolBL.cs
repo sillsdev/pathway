@@ -449,7 +449,7 @@ namespace SIL.PublishingSolution
 		{
 			get
 			{
-				string task = "entry";
+				string task = "basefontsize";
 				if (_loadType == "Scripture")
 				{
 					task = "Paragraph";
