@@ -36,8 +36,8 @@ namespace Test.XhtmlExport
 	/// <summary>
 	/// Test methods of FlexDePlugin
 	/// </summary>
-	[TestFixture]
-	[Category("BatchTest")]
+	//[TestFixture]
+	//[Category("BatchTest")]
 	//[assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum, ViewAndModify = "HKEY_LOCAL_MACHINE")]
 	public class XhtmlExportTest
 	{
