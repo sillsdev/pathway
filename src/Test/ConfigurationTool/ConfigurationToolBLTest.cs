@@ -144,146 +144,144 @@ namespace Test.UIConfigurationToolBLTest
 		#endregion
 
 
-		//Test produces environment dependent results
-		//     [Test]
-		//     [Category("LongTest")]
-		//     [Category("SkipOnTeamCity")]
-		//     public void NewWithDefaultTest()
-		//     {
-		//         SetUp();
-		//         CopyFile();
-		//         LoadParam();
-		//         cTool._cToolBL = new ConfigurationToolBL();
-		//         cTool._cToolBL.inputTypeBL = "Dictionary";
-		//         cTool._cToolBL.MediaTypeEXE = "paper";
-		//         cTool._cToolBL.StyleEXE = "OneColumn"; //
-		//         cTool._cToolBL.SetClassReference(cTool);
-		//         cTool._cToolBL.CreateToolTip();
-		//         cTool._cToolBL.ConfigurationTool_LoadBL();
-		//         cTool._cToolBL.tsNew_ClickBL();
-		//         cTool.TabControl1.SelectedIndex = 1;
-		//         cTool._cToolBL.tabControl1_SelectedIndexChangedBL();
-		//         int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
-		//         string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
-		//         Assert.AreEqual("CustomSheet-1", actualStyleName, "GridRowValueTest Test Failes");
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void NewWithDefaultTest()
+		{
+			SetUp();
+			CopyFile();
+			LoadParam();
+			cTool._cToolBL = new ConfigurationToolBL();
+			cTool._cToolBL.inputTypeBL = "Dictionary";
+			cTool._cToolBL.MediaTypeEXE = "paper";
+			cTool._cToolBL.StyleEXE = "OneColumn"; //
+			cTool._cToolBL.SetClassReference(cTool);
+			cTool._cToolBL.CreateToolTip();
+			cTool._cToolBL.ConfigurationTool_LoadBL();
+			cTool._cToolBL.tsNew_ClickBL();
+			cTool.TabControl1.SelectedIndex = 1;
+			cTool._cToolBL.tabControl1_SelectedIndexChangedBL();
+			int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
+			string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
+			Assert.AreEqual("CustomSheet-1", actualStyleName, "GridRowValueTest Test Failes");
 
-		////We skipped because the dropdown value not loading in the Linux Testcases.
-		//if (Common.UsingMonoVM)
-		//	return;
+			//We skipped because the dropdown value not loading in the Linux Testcases.
+			if (Common.UsingMonoVM)
+				return;
 
-		//         string actual = cTool.StylesGrid[1, SelectedRowIndex].Value.ToString();
-		//         Assert.AreEqual("5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13", actual.Trim(), "Grid description Test Failes");
-		//         actual = cTool.StylesGrid[4, SelectedRowIndex].Value.ToString();
-		//         Assert.AreEqual("Yes", actual, "Grid available Test Failes");
-		//         actual = cTool.StylesGrid[2, SelectedRowIndex].Value.ToString();
-		//         Assert.AreEqual("", actual, "Grid comment Test Failes");
-		//         actual = cTool.TxtApproved.Text;
-		//         Assert.AreEqual("", actual, "Grid approvedby Test Failes");
-		//         actual = cTool.DdlPagePageSize.Text;
-		//         Assert.AreEqual("5.25in x 8.25in", actual, "Grid page size Test Failes");
-		//         actual = cTool.TxtPageInside.Text;
-		//         Assert.AreEqual("36pt", actual, "Grid page inside Test Failes");
-		//         actual = cTool.TxtPageOutside.Text;
-		//         Assert.AreEqual("36pt", actual, "Grid page outside Test Failes");
-		//         actual = cTool.TxtPageTop.Text;
-		//         Assert.AreEqual("36pt", actual, "Grid page top Test Failes");
-		//         actual = cTool.TxtPageBottom.Text;
-		//         Assert.AreEqual("36pt", actual, "Grid page bottom Test Failes");
-		//         actual = cTool.DdlPageColumn.Text;
-		//         Assert.AreEqual("1", actual, "Grid page column Test Failes");
-		//         actual = cTool.TxtPageGutterWidth.Text;
-		//         Assert.AreEqual("18pt", actual, "Grid page gutter width Test Failes");
-		//         actual = cTool.DdlJustified.Text;
-		//         Assert.AreEqual("No", actual, "Grid justify Test Failes");
-		//         actual = cTool.DdlVerticalJustify.Text;
-		//         Assert.AreEqual("Top", actual, "Grid vertical justify Test Failes");
-		//         actual = cTool.DdlPicture.Text;
-		//         Assert.AreEqual("Yes", actual, "Grid picture Test Failes");
-		//         actual = cTool.DdlLeading.Text;
-		//         Assert.AreEqual("13", actual, "Grid leading Test Failes");
-		//         actual = cTool.DdlRunningHead.Text;
-		//         Assert.AreEqual("Mirrored", actual, "Grid mirrored Test Failes");
-		//         actual = cTool.DdlRules.Text;
-		//         Assert.AreEqual("Yes", actual, "Grid rules Test Failes");
-		//         actual = cTool.DdlFontSize.Text;
-		//Assert.AreEqual("11", actual, "Grid font size Test Failes");
-		//         actual = cTool.DdlFileProduceDict.Text;
-		//         Assert.AreEqual("One", actual, "Grid file produce Test Failes");
-		//         actual = cTool.DdlSense.Text;
-		//         Assert.AreEqual("No change", actual, "Grid sense Test Failes");
+			string actual = cTool.StylesGrid[1, SelectedRowIndex].Value.ToString();
+			Assert.AreEqual("5.25x8.25in - 1 Col - Left aligned - Charis 11 on 13", actual.Trim(), "Grid description Test Failes");
+			actual = cTool.StylesGrid[4, SelectedRowIndex].Value.ToString();
+			Assert.AreEqual("Yes", actual, "Grid available Test Failes");
+			actual = cTool.StylesGrid[2, SelectedRowIndex].Value.ToString();
+			Assert.AreEqual("", actual, "Grid comment Test Failes");
+			actual = cTool.TxtApproved.Text;
+			Assert.AreEqual("", actual, "Grid approvedby Test Failes");
+			actual = cTool.DdlPagePageSize.Text;
+			Assert.AreEqual("5.25in x 8.25in", actual, "Grid page size Test Failes");
+			actual = cTool.TxtPageInside.Text;
+			Assert.AreEqual("36pt", actual, "Grid page inside Test Failes");
+			actual = cTool.TxtPageOutside.Text;
+			Assert.AreEqual("36pt", actual, "Grid page outside Test Failes");
+			actual = cTool.TxtPageTop.Text;
+			Assert.AreEqual("36pt", actual, "Grid page top Test Failes");
+			actual = cTool.TxtPageBottom.Text;
+			Assert.AreEqual("36pt", actual, "Grid page bottom Test Failes");
+			actual = cTool.DdlPageColumn.Text;
+			Assert.AreEqual("1", actual, "Grid page column Test Failes");
+			actual = cTool.TxtPageGutterWidth.Text;
+			Assert.AreEqual("18pt", actual, "Grid page gutter width Test Failes");
+			actual = cTool.DdlJustified.Text;
+			Assert.AreEqual("No", actual, "Grid justify Test Failes");
+			actual = cTool.DdlVerticalJustify.Text;
+			Assert.AreEqual("Top", actual, "Grid vertical justify Test Failes");
+			actual = cTool.DdlPicture.Text;
+			Assert.AreEqual("Yes", actual, "Grid picture Test Failes");
+			actual = cTool.DdlLeading.Text;
+			Assert.AreEqual("13", actual, "Grid leading Test Failes");
+			actual = cTool.DdlRunningHead.Text;
+			Assert.AreEqual("Mirrored", actual, "Grid mirrored Test Failes");
+			actual = cTool.DdlRules.Text;
+			Assert.AreEqual("Yes", actual, "Grid rules Test Failes");
+			actual = cTool.DdlFontSize.Text;
+			Assert.AreEqual("11", actual, "Grid font size Test Failes");
+			actual = cTool.DdlFileProduceDict.Text;
+			Assert.AreEqual("One", actual, "Grid file produce Test Failes");
+			actual = cTool.DdlSense.Text;
+			Assert.AreEqual("No change", actual, "Grid sense Test Failes");
 
-		//         cTool.Close();
-		//     }
+			cTool.Close();
+		}
 
-		//Test produces environment dependent results
-		//[Test]
-		//      [Category("LongTest")]
-		//      [Category("SkipOnTeamCity")]
-		//      public void SaveAsWithDefaultTest()
-		//      {
-		//          SetUp();
-		//          CopyFile();
-		//          LoadParam();
-		//          cTool._cToolBL = new ConfigurationToolBL();
-		//          cTool._cToolBL.inputTypeBL = "Dictionary";
-		//          cTool._cToolBL.MediaTypeEXE = "paper";
-		//          cTool._cToolBL.StyleEXE = "OneColumn"; //
-		//          cTool._cToolBL.SetClassReference(cTool);
-		//          cTool._cToolBL.CreateToolTip();
-		//          cTool._cToolBL.ConfigurationTool_LoadBL();
-		//          cTool._cToolBL.tsSaveAs_ClickBL();
-		//          cTool.TabControl1.SelectedIndex = 1;
-		//          cTool._cToolBL.tabControl1_SelectedIndexChangedBL();
-		//          int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
-		//          string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
-		//          Assert.AreEqual("Copy of OneColumn", actualStyleName, "GridRowValueTest Test Failes");
-		//          string actual = cTool.StylesGrid[1, SelectedRowIndex].Value.ToString();
-		//          Assert.AreEqual("Based on GPS stylesheet OneColumn", actual.Trim(), "GridRowValueTest Test Failes");
-		//          actual = cTool.StylesGrid[4, SelectedRowIndex].Value.ToString();
-		//          Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.StylesGrid[2, SelectedRowIndex].Value.ToString();
-		//          Assert.AreEqual("", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.TxtApproved.Text;
-		//          Assert.AreEqual("", actual, "GridRowValueTest Test Failes");
+		[Test]
+		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
+		public void SaveAsWithDefaultTest()
+		{
+			SetUp();
+			CopyFile();
+			LoadParam();
+			cTool._cToolBL = new ConfigurationToolBL();
+			cTool._cToolBL.inputTypeBL = "Dictionary";
+			cTool._cToolBL.MediaTypeEXE = "paper";
+			cTool._cToolBL.StyleEXE = "OneColumn"; //
+			cTool._cToolBL.SetClassReference(cTool);
+			cTool._cToolBL.CreateToolTip();
+			cTool._cToolBL.ConfigurationTool_LoadBL();
+			cTool._cToolBL.tsSaveAs_ClickBL();
+			cTool.TabControl1.SelectedIndex = 1;
+			cTool._cToolBL.tabControl1_SelectedIndexChangedBL();
+			int SelectedRowIndex = cTool.StylesGrid.RowCount - 1;
+			string actualStyleName = cTool.StylesGrid[0, SelectedRowIndex].Value.ToString();
+			Assert.AreEqual("Copy of OneColumn", actualStyleName, "GridRowValueTest Test Failes");
+			string actual = cTool.StylesGrid[1, SelectedRowIndex].Value.ToString();
+			Assert.AreEqual("Based on GPS stylesheet OneColumn", actual.Trim(), "GridRowValueTest Test Failes");
+			actual = cTool.StylesGrid[4, SelectedRowIndex].Value.ToString();
+			Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
+			actual = cTool.StylesGrid[2, SelectedRowIndex].Value.ToString();
+			Assert.AreEqual("", actual, "GridRowValueTest Test Failes");
+			actual = cTool.TxtApproved.Text;
+			Assert.AreEqual("", actual, "GridRowValueTest Test Failes");
 
-		//	//We skipped because the dropdown value not loading in the Linux Testcases.
-		//	if (Common.UsingMonoVM)
-		//		return;
+			//We skipped because the dropdown value not loading in the Linux Testcases.
+			if (Common.UsingMonoVM)
+				return;
 
-		//          actual = cTool.DdlPagePageSize.Text;
-		//          Assert.AreEqual("5.25in x 8.25in", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.TxtPageInside.Text;
-		//          Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.TxtPageOutside.Text;
-		//          Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.TxtPageTop.Text;
-		//          Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.TxtPageBottom.Text;
-		//          Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlPageColumn.Text;
-		//          Assert.AreEqual("1", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.TxtPageGutterWidth.Text;
-		//          Assert.AreEqual("18pt", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlJustified.Text;
-		//          Assert.AreEqual("No", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlVerticalJustify.Text;
-		//          Assert.AreEqual("Top", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlPicture.Text;
-		//          Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlLeading.Text;
-		//          Assert.AreEqual("13", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlRunningHead.Text;
-		//          Assert.AreEqual("Mirrored", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlRules.Text;
-		//          Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlFontSize.Text;
-		//	Assert.AreEqual("11", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlFileProduceDict.Text;
-		//          Assert.AreEqual("One", actual, "GridRowValueTest Test Failes");
-		//          actual = cTool.DdlSense.Text;
-		//          Assert.AreEqual("No change", actual, "GridRowValueTest Test Failes");
-		//          cTool.Close();
-		//      }
+			actual = cTool.DdlPagePageSize.Text;
+			Assert.AreEqual("5.25in x 8.25in", actual, "GridRowValueTest Test Failes");
+			actual = cTool.TxtPageInside.Text;
+			Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
+			actual = cTool.TxtPageOutside.Text;
+			Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
+			actual = cTool.TxtPageTop.Text;
+			Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
+			actual = cTool.TxtPageBottom.Text;
+			Assert.AreEqual("36pt", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlPageColumn.Text;
+			Assert.AreEqual("1", actual, "GridRowValueTest Test Failes");
+			actual = cTool.TxtPageGutterWidth.Text;
+			Assert.AreEqual("18pt", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlJustified.Text;
+			Assert.AreEqual("No", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlVerticalJustify.Text;
+			Assert.AreEqual("Top", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlPicture.Text;
+			Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlLeading.Text;
+			Assert.AreEqual("13", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlRunningHead.Text;
+			Assert.AreEqual("Mirrored", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlRules.Text;
+			Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlFontSize.Text;
+			Assert.AreEqual("11", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlFileProduceDict.Text;
+			Assert.AreEqual("One", actual, "GridRowValueTest Test Failes");
+			actual = cTool.DdlSense.Text;
+			Assert.AreEqual("No change", actual, "GridRowValueTest Test Failes");
+			cTool.Close();
+		}
 
 		[Test]
         [Category("LongTest")]
