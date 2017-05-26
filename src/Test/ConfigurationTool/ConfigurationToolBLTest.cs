@@ -205,7 +205,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlRules.Text;
             Assert.AreEqual("Yes", actual, "Grid rules Test Failes");
             actual = cTool.DdlFontSize.Text;
-			Assert.AreEqual("No Change", actual, "Grid font size Test Failes");
+			Assert.AreEqual("11", actual, "Grid font size Test Failes");
             actual = cTool.DdlFileProduceDict.Text;
             Assert.AreEqual("One", actual, "Grid file produce Test Failes");
             actual = cTool.DdlSense.Text;
@@ -275,7 +275,7 @@ namespace Test.UIConfigurationToolBLTest
             actual = cTool.DdlRules.Text;
             Assert.AreEqual("Yes", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlFontSize.Text;
-			Assert.AreEqual("No Change", actual, "GridRowValueTest Test Failes");
+			Assert.AreEqual("11", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlFileProduceDict.Text;
             Assert.AreEqual("One", actual, "GridRowValueTest Test Failes");
             actual = cTool.DdlSense.Text;

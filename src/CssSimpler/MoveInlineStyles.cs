@@ -80,7 +80,7 @@ namespace CssSimpler
                     if (SavedStyles[newClass] != r.Value)
                     {
                         count += 1;
-						newClass = $"stxfin{LastClass}{count}";
+						newClass = "stxfin{LastClass}{count}";
                     }
                     else
                     {

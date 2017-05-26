@@ -85,10 +85,19 @@
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="variantrefform_.en_xitem_variantrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="xitem_variantrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:color="#0000FF" fo:font-weight="700" style:font-weight-complex="700" fo:language="en" fo:country="US" />
     </style:style>
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexform_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="complexformrefs_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="subentry_complexform_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="complexform_complexformrefs_entry_letData_dicBody" />
-    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="subentry_subentry_complexform_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="subentry_complexform_complexformrefs_entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformrefs_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="entry_letData_dicBody" />
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexform_complexformrefs_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="complexformrefs_entry_letData_dicBody">
+      <style:paragraph-properties fo:border-top="solid 0pt " fo:border-bottom="solid 0pt " fo:border-left="solid 0pt " fo:border-right="solid 0pt " fo:margin-left="0pt" style:line-height-at-least="12pt" fo:padding-bottom="2pt" fo:padding-top="0pt" fo:text-indent="24pt" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:color="#000080" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="subentry_complexform_complexformrefs_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="complexform_complexformrefs_entry_letData_dicBody">
+      <style:paragraph-properties fo:margin-left="36pt" fo:text-indent="-12pt" fo:border-top="solid 0pt " fo:border-bottom="solid 0pt " fo:border-left="solid 0pt " fo:border-right="solid 0pt " style:line-height-at-least="12pt" fo:padding-left="12pt" fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:color="#008000" text:display="block" />
+    </style:style>
+    <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="subentry_subentry_complexform_complexformrefs_entry_letData_dicBody" style:family="paragraph" style:parent-style-name="subentry_complexform_complexformrefs_entry_letData_dicBody">
+      <style:paragraph-properties fo:margin-left="72pt" fo:text-indent="-12pt" fo:border-top="solid 0pt " fo:border-bottom="solid 0pt " fo:border-left="solid 0pt " fo:border-right="solid 0pt " style:line-height-at-least="12pt" fo:padding-left="12pt" fo:padding-bottom="2pt" fo:padding-top="1pt" fo:text-align="left" />
+      <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:color="#008000" text:display="block" />
+    </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="complexformform_.en_subentry_subentry_complexform_complexformrefs_entry_letData_dicBody" style:family="text" style:parent-style-name="subentry_subentry_complexform_complexformrefs_entry_letData_dicBody">
       <style:text-properties fo:font-family="Times New Roman" style:font-name-complex="Times New Roman" fo:font-size="10pt" style:font-size-complex="10pt" fo:font-weight="700" style:font-weight-complex="700" fo:color="#0000FF" fo:language="en" fo:country="US" />
     </style:style>

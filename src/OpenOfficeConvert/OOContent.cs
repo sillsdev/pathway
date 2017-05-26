@@ -2548,10 +2548,23 @@ namespace SIL.PublishingSolution
 			string normalTargetFile = _projInfo.TempOutputFolder;
 			string basePath = normalTargetFile.Substring(0, normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
 			String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
-			if (File.Exists(fromPath))
+			string pictureDirectory = Common.DirectoryPathReplace(basePath + "/Pictures");
+			if (Directory.Exists(pictureDirectory))
 			{
-				File.Copy(fromPath, toPath, true);
+				if (File.Exists(fromPath))
+				{
+					File.Copy(fromPath, toPath, true);
+				}
 			}
+			else
+			{
+				Directory.CreateDirectory(pictureDirectory);
+				if (File.Exists(fromPath))
+				{
+					File.Copy(fromPath, toPath, true);
+				}
+			}
+
 			CalculatingPictureWidthandHeight(wrapSide, ref HoriAlignment, srcFilrLongDesc, wrapMode, fromPath, ref rectHeight, ref rectWidth);
 			// End - Calculating picture width and height
 
