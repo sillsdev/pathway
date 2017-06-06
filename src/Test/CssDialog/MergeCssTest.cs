@@ -150,8 +150,6 @@ namespace Test.CssDialog
             string css = Common.PathCombine(_inputBasePath, "MergeFile7.css");
             string actual = target.Make(css, "Temp1.css");
 	        var fileName = "MergeBottomImportFile.css";
-			if (Common.UsingMonoVM)
-				fileName = fileName.Replace(".css", "_Linux.css");
 			string expected = Common.PathCombine(_expectBasePath, fileName);
             TextFileAssert.AreEqual(expected, actual, "Make Funtion test failed");
 

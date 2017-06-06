@@ -1262,6 +1262,8 @@ namespace Test.PsTool
         [Category("SkipOnTeamCity")]
         public void GetSaveInFolderTest()
         {
+			if(Common.UsingMonoVM)
+				return;
             string template = "$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s";
             string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string database = "{Current_Project}";
