@@ -552,13 +552,6 @@ namespace Test.OpenOfficeConvert
 			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
 			returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
-
-			////Parent style for the above two test, which applied to all chile tags
-			//_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_body";
-			//_validate.ClassProperty.Add("fo:font-style", "italic");
-			//returnValue = _validate.ValidateNodeAttributesNS(false);
-			//Assert.IsTrue(returnValue);
-
 		}
 
 		///<summary>
@@ -651,7 +644,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.ProjectInputType = "Dictionary";
             GetStyleOutput(file);
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            if (!_isLinux)
+            if (!Common.UsingMonoVM)
             {
                 using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
                 {
@@ -1550,7 +1543,10 @@ namespace Test.OpenOfficeConvert
 			_validate.ClassName = "img_section_scriptureText_body";
 			_validate.ClassNameTrim = true;
 			_validate.GetOuterXml = true;
-			string content = "<text:p text:style-name=\"img_section_scriptureText_body\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"292.5pt\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><text:p text:style-name=\"P5\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"292.5pt\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/lb00296c.png\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>lb00296c.png</svg:title></draw:frame><text:p text:style-name=\"caption_img_section_scriptureText_body\"><text:span text:style-name=\"caption_img_section_scriptureText_body\">Yohanis, Tuka Sarani Dh (Mark.1.4-6)</text:span></text:p></text:p></draw:text-box></draw:frame><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu. </text:p><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu.</text:p><text:p text:style-name=\"p_section_scriptureText_body\"><text:span text:style-name=\"verseNumber_p_section_scriptureText_body\">  7 </text:span>Tuka Sarani hia Lamatua Yesus!.  <text:span text:style-name=\"verseNumber_p_section_scriptureText_body\"> 8 </text:span>intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here </text:p></text:p>";
+			string content = "<text:p text:style-name=\"img_section_scriptureText_body\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"292.5pt\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><text:p text:style-name=\"P5\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"292.5pt\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/lb00296c.png\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>lb00296c.png</svg:title></draw:frame><text:p text:style-name=\"caption_img_section_scriptureText_body\"><text:span text:style-name=\"caption_img_section_scriptureText_body\">Yohanis, Tuka Sarani Dh (Mark.1.4-6)</text:span></text:p></text:p></draw:text-box></draw:frame><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu. </text:p><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu.</text:p><text:p text:style-name=\"p_section_scriptureText_body\"><text:span text:style-name=\"verseNumber_p_section_scriptureText_body\">  7 </text:span>Tuka Sarani hia Lamatua Yesus!.  <text:span text:style-name=\"verseNumber_p_section_scriptureText_body\"> 8 </text:span>intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here </text:p></text:p>";
+
+			if (Common.UsingMonoVM)
+				content = "<text:p text:style-name=\"img_section_scriptureText_body\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"292.5pt\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><text:p text:style-name=\"P5\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"292.5pt\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/figure\\lb00296c.png\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>figure\\lb00296c.png</svg:title></draw:frame><text:p text:style-name=\"caption_img_section_scriptureText_body\"><text:span text:style-name=\"caption_img_section_scriptureText_body\">Yohanis, Tuka Sarani Dh (Mark.1.4-6)</text:span></text:p></text:p></draw:text-box></draw:frame><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu. </text:p><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu.</text:p><text:p text:style-name=\"p_section_scriptureText_body\"><text:span text:style-name=\"verseNumber_p_section_scriptureText_body\">  7\u00a0</text:span>Tuka Sarani hia Lamatua Yesus!.  <text:span text:style-name=\"verseNumber_p_section_scriptureText_body\"> 8\u00a0</text:span>intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here </text:p></text:p>";
 
 			bool returnValue1 = _validate.ValidateOfficeTextNodeForPicture(content, "para");
 			Assert.IsTrue(returnValue1, "Picture_Mrk - Content 1 Failure");
@@ -3671,10 +3667,9 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, "TeluguFootnoteMarkerTeststyles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, "TeluguFootnoteMarkerTestcontent.xml");
-            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
+			StringCompare(styleExpected, styleOutput);
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
+		}
 
 		//Evironment dependent test
 		//     ///<summary>
@@ -3873,10 +3868,11 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-            TextFileAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            TextFileAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
+			if (Common.UsingMonoVM)
+				return;
+			StringCompare(styleExpected, styleOutput);
+		}
 
         ///<summary>
         ///Table structure Test
@@ -3913,8 +3909,8 @@ namespace Test.OpenOfficeConvert
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
             XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
             XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            if (!_isLinux)
-            {
+			if (!Common.UsingMonoVM)
+			{
                 using (var p = Process.Start(Environment.GetEnvironmentVariable("COMSPEC"), string.Format("/c fc {0} {1} >{2}temp.txt", contentExpected, _projInfo.TempOutputFolder, file)))
                 {
                     p.WaitForExit();
@@ -3937,10 +3933,9 @@ namespace Test.OpenOfficeConvert
 
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
+			StringCompare(styleExpected, styleOutput);
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
+		}
 
         ///<summary>
         ///B1pe Full Scripture Test
@@ -4018,10 +4013,9 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
+			StringCompare(styleExpected, styleOutput);
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
+		}
 
         ///<summary>
         /// TD-3554
@@ -4174,10 +4168,9 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
+			StringCompare(styleExpected, styleOutput);
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
+		}
 
 
 		//Evironment dependent test
@@ -4218,10 +4211,9 @@ namespace Test.OpenOfficeConvert
             string styleOutput = GetStyleOutput(file);
             string styleExpected = Common.PathCombine(_expectedPath, file + "styles.xml");
             string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-            XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-            XmlAssert.AreEqual(styleExpected, styleOutput, file + " in styles.xml");
-            XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
-        }
+			StringCompare(styleExpected, styleOutput);
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
+		}
 
 
 		//Evironment dependent test
@@ -4269,8 +4261,12 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
             _validate.ClassName = "Paragraph_scrBook_scrBody";
-			const string content = "17 Epʉraꞌan awonsiꞌkɨ Tepiꞌ, kin pe teꞌsen pʉꞌkʉ pona, 14 kaisa rɨ itamokori ton uꞌtɨsaꞌ esiꞌpʉ mɨrɨ.";
-            bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
+			string content = "17 Epʉraꞌan awonsiꞌkɨ Tepiꞌ, kin pe teꞌsen pʉꞌkʉ pona, 14 kaisa rɨ itamokori ton uꞌtɨsaꞌ esiꞌpʉ mɨrɨ.";
+
+			if (Common.UsingMonoVM)
+				content = "17\n Epʉraꞌan awonsiꞌkɨ Tepiꞌ, kin pe teꞌsen pʉꞌkʉ pona, 14 kaisa rɨ itamokori ton uꞌtɨsaꞌ esiꞌpʉ mɨrɨ.";
+
+			bool returnValue1 = _validate.ValidateOfficeTextNode(content, "para");
             Assert.IsTrue(returnValue1, "Hyphenation word test failure");
             Param.HyphenEnable = false;
 
@@ -4292,8 +4288,7 @@ namespace Test.OpenOfficeConvert
 			{
 				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
 			}
-			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
 		}
 
 		//Evironment dependent test
@@ -4332,10 +4327,7 @@ namespace Test.OpenOfficeConvert
 			const string file = "AnchorSpaceFlex83";
 			string styleOutput = GetStyleOutput(file);
 			string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
-			if (Common.UsingMonoVM)
-				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
-			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
 		}
 
 		//Evironment dependent test
@@ -4378,8 +4370,7 @@ namespace Test.OpenOfficeConvert
 			{
 				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
 			}
-			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
 		}
 
 		///<summary>
@@ -4398,8 +4389,7 @@ namespace Test.OpenOfficeConvert
 			{
 				contentExpected = Common.PathCombine(_expectedlinuxPath, file + "content.xml");
 			}
-			XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
-			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+			StringCompare(contentExpected, _projInfo.TempOutputFolder);
 		}
 
 		///<summary>
@@ -4555,5 +4545,22 @@ namespace Test.OpenOfficeConvert
             Param.Value["OutputPath"] = _outputBasePath;
             Param.Value["UserSheetPath"] = _outputBasePath;
         }
-    }
+
+		private void StringCompare(string file1, string file2)
+		{
+			string xhtmlOutput = GetBodyContent(FileOutput(file1));
+			string xhtmlExpected = GetBodyContent(FileOutput(file2));
+			StringAssert.AreEqualIgnoringCase(xhtmlOutput, xhtmlExpected);
+		}
+
+		private string GetBodyContent(string filePath)
+		{
+			XmlDocument xDoc = new XmlDocument();
+			xDoc.Load(filePath);
+			XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
+			namespaceManager.AddNamespace("office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0");
+			XmlNode bodyContent = xDoc.SelectSingleNode("//office:body", namespaceManager);
+			return bodyContent.InnerXml;
+		}
+	}
 }
