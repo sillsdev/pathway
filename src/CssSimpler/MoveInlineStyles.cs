@@ -49,11 +49,9 @@ namespace CssSimpler
         }
 
         private string _currentClass = String.Empty;
-        private string _currentLang = string.Empty;
         private void ResetClassName(XmlReader r)
         {
             _currentClass = String.Empty;
-            _currentLang = r.GetAttribute("lang");
         }
 
         protected  Dictionary<string, string> SavedStyles = new Dictionary<string, string>();
@@ -80,7 +78,8 @@ namespace CssSimpler
                     if (SavedStyles[newClass] != r.Value)
                     {
                         count += 1;
-						newClass = "stxfin{LastClass}{count}";
+	                    // ReSharper disable once UseStringInterpolation
+						newClass = string.Format("stxfin{0}{1}", LastClass, count);
                     }
                     else
                     {
