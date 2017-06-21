@@ -68,14 +68,7 @@ namespace Test.ParatextSupport
 
             _sfmToUsx.ConvertSFMtoUsx(input, output);
 
-	        if (Common.UsingMonoVM)
-	        {
-		        Assert.IsTrue(File.Exists(output), file + " test fails");
-	        }
-	        else
-	        {
-		        FileAssert.AreEqual(expected, output, file + " test fails");
-	        }
+            FileAssert.AreEqual(expected, output, file + " test fails");
         }
 
 		///<summary>
@@ -94,14 +87,7 @@ namespace Test.ParatextSupport
 
 			_sfmToUsx.ConvertSFMtoUsx(input, output);
 
-			if (Common.UsingMonoVM)
-			{
-				Assert.IsTrue(File.Exists(output), file + " test fails");
-			}
-			else
-			{
-				FileAssert.AreEqual(expected, output, file + " test fails");
-			}
+			FileAssert.AreEqual(expected, output, file + " test fails");
 		}
 
         ///<summary>
@@ -120,14 +106,7 @@ namespace Test.ParatextSupport
 
             _sfmToUsx.ConvertSFMtoUsx(input, output);
 
-	        if (Common.UsingMonoVM)
-	        {
-		        Assert.IsTrue(File.Exists(output), file + " test fails");
-	        }
-	        else
-	        {
-		        FileAssert.AreEqual(expected, output, file + " test fails");
-	        }
+            FileAssert.AreEqual(expected, output, file + " test fails");
         }
 
     }
