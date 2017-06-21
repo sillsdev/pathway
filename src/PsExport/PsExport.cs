@@ -28,6 +28,7 @@ using SilTools;
 using SIL.Tool;
 using SIL.Tool.Localization;
 using System.Collections;
+using System.Globalization;
 
 namespace SIL.PublishingSolution
 {
@@ -301,17 +302,21 @@ namespace SIL.PublishingSolution
 						UserOptionSelectionBasedXsltPreProcess(filename);
 						if (DataType.ToLower() == "dictionary")
 						{
-							string prefix;
+							string option;
 							if (filename.ToLower().Contains("rev"))
 							{
 								indexCnt += 1;
-								prefix = "-p=r" + indexCnt + " ";
+								option = "-p=r" + indexCnt + " ";
 							}
 							else
 							{
-								prefix = "";
+								option = "";
 							}
-							Common.RunCommand(cssSimplerExe, String.Format("{0}-f \"{1}\"", prefix, filename), 1);
+							if (!Destination.ToLower(CultureInfo.InvariantCulture).StartsWith("dictionaryformids"))
+							{
+								option += "-f";
+							}
+							Common.RunCommand(cssSimplerExe, String.Format("{0} \"{1}\"", option, filename), 1);
 						}
 					}
 				}
@@ -489,7 +494,7 @@ namespace SIL.PublishingSolution
 			try
 			{
 				StringBuilder revAddStyle = new StringBuilder();
-				StringBuilder newProperty = new StringBuilder();				
+				StringBuilder newProperty = new StringBuilder();
 				XmlDocument xdoc = Common.DeclareXMLDocument(false);
 				xdoc.Load(inputXhtmlFileName);
 				XmlNodeList fontList = xdoc.GetElementsByTagName("meta");
