@@ -150,17 +150,12 @@ namespace CssSimpler
 
         private void UnsaveClass(int depth, string name)
         {
-            var index = depth + 1;
-            if (index >= Classes.Count) return;
-            _precedingClass = Classes[index] as string;
-            Classes[index] = null;
+	        _precedingClass = RemoveFromHierarchy(depth, Classes);
         }
 
 		private void UnsaveLang(int depth, string name)
 		{
-			var index = depth + 1;
-			if (index >= Langs.Count) return;
-			Langs[index] = null;
+			RemoveFromHierarchy(depth, Langs);
 		}
 
 		private void CollectRules(XmlReader r, string target)

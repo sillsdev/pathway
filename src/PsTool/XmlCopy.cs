@@ -162,6 +162,10 @@ namespace SIL.Tool
                         if (!SkipNode)
                         {
                             _wtr.WriteString(_rdr.Value);
+	                        if (DebugPrint)
+	                        {
+								Debug.Print(_rdr.Value);
+	                        }
                         }
                         break;
                     case XmlNodeType.Whitespace:
@@ -276,6 +280,16 @@ namespace SIL.Tool
 				arrayList[index] = value;
 			}
 		}
+
+		protected static string RemoveFromHierarchy(int depth, IList arrayList)
+		{
+			var index = depth + 1;
+			if (index >= arrayList.Count) return null;
+			var previousValue = arrayList[index] as string;
+			arrayList[index] = null;
+			return previousValue;
+		}
+
 
 		protected string GetClass(XmlReader r)
 		{
