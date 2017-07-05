@@ -38,6 +38,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -188,7 +189,7 @@ namespace SIL.PublishingSolution
 
 			CreateEpubManifest(projInfo, inProcess, contentFolder, bookId, epubToc, tempCssFile);
 
-			var epub3Path = MakeCopyOfEpub2(projInfo);
+			var epub3Path = MakeCopyOfEpub2(inProcess, projInfo);
 
 			string outputPathWithFileName;
 			var fileName = PackageEpub2(projInfo, inProcess, contentFolder, outputFolder, out outputPathWithFileName);
@@ -370,7 +371,7 @@ namespace SIL.PublishingSolution
 		    return fileName;
 	    }
 
-	    protected string MakeCopyOfEpub2(PublicationInformation projInfo)
+	    protected string MakeCopyOfEpub2(InProcess inProcess, PublicationInformation projInfo)
 	    {
 		    string epub3Path = projInfo.ProjectPath;
 		    epub3Path = Common.PathCombine(epub3Path, "Epub3");
@@ -389,6 +390,7 @@ namespace SIL.PublishingSolution
 
 		    _exportEpub3 = new Epub3Transformation(this, _epubFont);
 		    _exportEpub3.Epub3Directory = epub3Path;
+		    _exportEpub3.InProcess = inProcess;
 		    _exportEpub3.Export(projInfo);
 		    return epub3Path;
 	    }
@@ -398,9 +400,9 @@ namespace SIL.PublishingSolution
 	    {
 		    inProcess.SetStatus("Generating .epub TOC and manifest");
 		    _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
-		    epubToc.CreateNcx(projInfo, contentFolder, bookId);
-		    ModifyTOCFile(contentFolder);
-		    ReplaceEmptyHrefandXmlLangtoLang(contentFolder);
+			epubToc.CreateNcx(projInfo, contentFolder, bookId);
+			ModifyTOCFile(contentFolder);
+			ReplaceEmptyHrefandXmlLangtoLang(inProcess, contentFolder);
 		    if (File.Exists(tempCssFile))
 		    {
 			    File.Delete(tempCssFile);
@@ -447,7 +449,7 @@ namespace SIL.PublishingSolution
 		    string contentFolder)
 	    {
 		    inProcess.SetStatus("Copy contents and styles to Epub");
-		    CopyStylesAndContentToEpub(mergedCss, defaultCss, htmlFiles, contentFolder);
+		    CopyStylesAndContentToEpub(inProcess, mergedCss, defaultCss, htmlFiles, contentFolder);
 		    inProcess.PerformStep();
 	    }
 
@@ -633,14 +635,16 @@ namespace SIL.PublishingSolution
             return newEpubFileName;
         }
 
-        protected void ReplaceEmptyHrefandXmlLangtoLang(string contentFolder)
+        protected void ReplaceEmptyHrefandXmlLangtoLang(InProcess inProcess, string contentFolder)
         {
             string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+			inProcess?.AddToMaximum(files.Length);
             foreach (string file in files)
             {
 				Common.StreamReplaceInFile(file, " xml:lang=\"", " lang=\"");
 				Common.StreamReplaceInFile(file, "a href=\"#\"", "a");
 				Common.StreamReplaceInFile(file, " lang=\"\"", "");
+				inProcess?.PerformStep();
             }
         }
         private void GlossaryLinkReferencing(PublicationInformation projInfo,Dictionary<string,Dictionary<string,string>> glossoryreferncelist)
@@ -934,14 +938,14 @@ namespace SIL.PublishingSolution
             return fileName;
         }
 
-        private void CopyStylesAndContentToEpub(string mergedCss, string defaultCss, IEnumerable<string> htmlFiles, string contentFolder)
+        private void CopyStylesAndContentToEpub(InProcess inProcess, string mergedCss, string defaultCss, List<string> htmlFiles, string contentFolder)
         {
             var cssPath = Common.PathCombine(contentFolder, defaultCss);
             if (File.Exists(mergedCss))
                 File.Copy(mergedCss, cssPath, true);
 
             var tocFiletoUpdate = string.Empty;
-            SplitPageSections(htmlFiles, contentFolder, tocFiletoUpdate);
+            SplitPageSections(inProcess, htmlFiles, contentFolder, tocFiletoUpdate);
             RemoveDuplicateBookName(contentFolder);
         }
 
@@ -990,7 +994,7 @@ namespace SIL.PublishingSolution
             return contentFolder;
         }
 
-        private void AddBooksMoveNotes(InProcess inProcess, List<string> htmlFiles, IEnumerable<string> splitFiles)
+        private void AddBooksMoveNotes(InProcess inProcess, List<string> htmlFiles, List<string> splitFiles)
         {
             string xsltFullName = GetXsltFile();
 			string getPsApplicationPath = Common.AssemblyPath;
@@ -1004,6 +1008,7 @@ namespace SIL.PublishingSolution
             inProcess.SetStatus("Apply Xslt Process in html file");
             if (File.Exists(xsltProcessExe))
             {
+				inProcess.AddToMaximum(splitFiles.Count);
                 foreach (string file in splitFiles)
                 {
                     const string outputExtension = "_.xhtml";
@@ -1012,22 +1017,13 @@ namespace SIL.PublishingSolution
                     var xhtmlOutputFile = file.Replace(inputExtension, outputExtension);
 					if (!File.Exists(file))
 						continue;
-                    if (_isUnixOs)
+                    if (file.Contains("File2Cpy"))
                     {
-                        if (file.Contains("File2Cpy"))
-                        {
-                            File.Copy(file, xhtmlOutputFile);
-                        }
-                        else
-                        {
-                            Common.XsltProcess(file, xsltFullName, outputExtension);
-                        }
+                        File.Copy(file, xhtmlOutputFile);
                     }
                     else
                     {
-                        var args = string.Format(@"""{0}"" ""{1}"" {2} ""{3}""", file, xsltFullName,
-                                                outputExtension, getPsApplicationPath);
-                        Common.RunCommand(xsltProcessExe, args, 1);
+                        Common.XsltProcess(file, xsltFullName, outputExtension);
                     }
                     if (File.Exists(xhtmlOutputFile))
                     {
@@ -1038,6 +1034,7 @@ namespace SIL.PublishingSolution
                         File.Move(file, xhtmlOutputFile);
                     }
                     htmlFiles.Add(xhtmlOutputFile);
+					inProcess.PerformStep();
                 }
             }
         }
@@ -1258,57 +1255,58 @@ namespace SIL.PublishingSolution
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".epub", projInfo.ProjectInputType);
         }
 
-        protected void SplitPageSections(IEnumerable<string> htmlFiles, string contentFolder, string tocFiletoUpdate)
+        protected void SplitPageSections(InProcess inProcess, List<string> htmlFiles, string contentFolder, string tocFiletoUpdate)
         {
-            foreach (string file in htmlFiles)
+	        inProcess?.AddToMaximum(htmlFiles.Count);
+	        foreach (string file in htmlFiles)
             {
                 var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                if (fileNameWithoutExtension != null)
-                {
-                    string name = fileNameWithoutExtension.Substring(0, 8);
-                    string substring = fileNameWithoutExtension.Substring(8);
-                    string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
+	            if (fileNameWithoutExtension == null) continue;
+	            var prefixLen = fileNameWithoutExtension.Length > 7 ? 8 : 1;
+	            string name = fileNameWithoutExtension.Substring(0, prefixLen);
+	            string substring = fileNameWithoutExtension.Substring(prefixLen);
+	            string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
 
-                    if (_isUnixOs)
-                    {
-                        Common.RemoveDTDForLinuxProcess(file, "epub");
-                    }
+	            if (_isUnixOs)
+	            {
+		            Common.RemoveDTDForLinuxProcess(file, "epub");
+	            }
 
-	                if (File.Exists(file))
-	                {
-		                File.Move(file, dest);
-	                }
+	            if (File.Exists(file))
+	            {
+		            File.Move(file, dest);
+	            }
 
-	                // split the file into smaller pieces if needed
-                    var files = new List<string>();
+	            // split the file into smaller pieces if needed
+	            var files = new List<string>();
 
-                    if (!PageBreak && InputType.ToLower() == "dictionary")
-                    {
-                        files = SplitBook(dest);
-                    }
+	            if (!PageBreak && InputType.ToLower() == "dictionary")
+	            {
+		            files = SplitBook(dest);
+	            }
 
-                    if (InputType.ToLower() == "scripture")
-                    {
-                        files = SplitBook(dest);
-                    }
+	            if (InputType.ToLower() == "scripture")
+	            {
+		            files = SplitBook(dest);
+	            }
 
-					if (files != null && files.Count > 1)
-                    {
-                        if (File.Exists(dest))
-                            File.Delete(dest);
-                    }
+	            if (files != null && files.Count > 1)
+	            {
+		            if (File.Exists(dest))
+			            File.Delete(dest);
+	            }
 
-                    if (dest.Contains("File3TOC"))
-                    {
-                        tocFiletoUpdate = dest;
-                        GetTocId(tocFiletoUpdate);
-                    }
+	            if (dest.Contains("File3TOC"))
+	            {
+		            tocFiletoUpdate = dest;
+		            GetTocId(tocFiletoUpdate);
+	            }
 
-					if (files != null && files.Count > 0 && files[0].Contains("PartFile"))
-                    {
-                        MapTocIdAndSectionHeadId(files);
-                    }
-                }
+	            if (files != null && files.Count > 0 && files[0].Contains("PartFile"))
+	            {
+		            MapTocIdAndSectionHeadId(files);
+	            }
+	            inProcess?.PerformStep();
             }
             UpdateTocIdAfterFileSplit(tocFiletoUpdate);
         }

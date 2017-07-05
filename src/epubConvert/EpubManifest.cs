@@ -1,15 +1,15 @@
 ﻿#region // Copyright (C) 2014, SIL International. All Rights Reserved.
 // --------------------------------------------------------------------------------------------
 // <copyright file="EpubManifest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ namespace epubConvert
         #region void CreateOpf(PublicationInformation projInfo, string contentFolder, Guid bookId)
         /// <summary>
         /// Generates the manifest and metadata information file used by the .epub reader
-        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/> 
+        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/>
         /// </summary>
         /// <param name="projInfo">Project information</param>
         /// <param name="contentFolder">Content folder (.../OEBPS)</param>
@@ -79,8 +79,8 @@ namespace epubConvert
             }
             string[] files = Directory.GetFiles(contentFolder);
             ManifestContent(opf, files, "epub2");
-            Spine(opf, files);
-            Guide(projInfo, opf, files, "epub2");
+			Spine(opf, files);
+			Guide(projInfo, opf, files, "epub2");
             opf.WriteEndElement(); // package
             opf.WriteEndDocument();
             opf.Close();
@@ -88,7 +88,7 @@ namespace epubConvert
 
         /// <summary>
         /// Generates the manifest and metadata information file used by the .epub reader
-        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/> 
+        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/>
         /// </summary>
         /// <param name="projInfo">Project information</param>
         /// <param name="contentFolder">Content folder (.../OEBPS)</param>
@@ -155,7 +155,7 @@ namespace epubConvert
             opf.WriteEndElement();
             opf.WriteElementString("dc", "date", null, DateTime.Today.ToString("yyyy-MM-dd"));
             // .epub standard date format (http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.2.7)
-            opf.WriteElementString("dc", "type", null, "Text"); // 
+            opf.WriteElementString("dc", "type", null, "Text"); //
             if (Format.Length > 0)
                 opf.WriteElementString("dc", "format", null, Format);
             if (Source.Length > 0)
@@ -701,7 +701,7 @@ namespace epubConvert
             }
             catch (Exception)
             {
-                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization),
                 // but just in case, specify a default org.
                 organization = "SIL International";
             }

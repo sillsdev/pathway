@@ -190,7 +190,7 @@ namespace Test.epubConvert
 			}
 
 			PageBreak = false;
-			SplitPageSections(htmlFiles, FileOutput(FolderName), "");
+			SplitPageSections(null, htmlFiles, FileOutput(FolderName), "");
 			outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
 
 			if (Directory.Exists(TestFolderName))
@@ -230,7 +230,7 @@ namespace Test.epubConvert
 			}
 
 			PageBreak = true;
-			SplitPageSections(htmlFiles, FileOutput(FolderName), "");
+			SplitPageSections(null, htmlFiles, FileOutput(FolderName), "");
 			outputFiles = Directory.GetFiles(FileOutput(FolderName), "PartFile*.xhtml");
 
 			if (Directory.Exists(TestFolderName))
@@ -285,7 +285,7 @@ namespace Test.epubConvert
 			CleanOutputDirectory();
 			const string folderName = "RemoveEmptyHrefTest";
 			FolderTree.Copy(FileInput(folderName), FileOutput(folderName));
-			ReplaceEmptyHrefandXmlLangtoLang(FileOutput(folderName));
+			ReplaceEmptyHrefandXmlLangtoLang(null, FileOutput(folderName));
 			string expectedFilesPath = FileExpected(folderName.Replace("Test", "Expected"));
 			StringCompare(FileOutput(folderName) + "/PartFile00001_01.xhtml", expectedFilesPath + "/PartFile00001_01.xhtml");
 			StringCompare(FileOutput(folderName) + "/PartFile00001_03.xhtml", expectedFilesPath + "/PartFile00001_03.xhtml");
@@ -418,7 +418,7 @@ namespace Test.epubConvert
 
 		}
 
-		
+
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]
@@ -482,7 +482,7 @@ namespace Test.epubConvert
 			StringCompare("entryguidcomparison/OEBPS/PartFile00001_.xhtml", "entryguidexpect/OEBPS/PartFile00001_.xhtml");
 
 		}
-		
+
 		[Test]
 		[Category("LongTest")]
 		[Category("SkipOnTeamCity")]

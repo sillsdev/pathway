@@ -3350,7 +3350,7 @@ namespace SIL.Tool
 		/// <param name="sourceFolder"></param>
 		/// <param name="destFolder"></param>
 		/// <param name="ignoreFiles"> </param>
-		public static void CustomizedFileCopy(string sourceFolder, string destFolder, string ignoreFiles)
+		public static void CustomizedFileCopy(InProcess inProcess, string sourceFolder, string destFolder, string ignoreFiles)
 		{
 			if (Directory.Exists(destFolder))
 			{
@@ -3360,17 +3360,13 @@ namespace SIL.Tool
 			Directory.CreateDirectory(destFolder);
 			FolderTree.Copy(FromRegistry(Path.Combine("Html5", "Dictionary")), destFolder, false);
 			var template = FileData.Get(Path.Combine(destFolder, "pages", "template.html"));
-			var tocDoc = DeclareXMLDocument(false);
-			var sr = new StreamReader(Path.Combine(sourceFolder, "..", "bootstrapToc.html"));
-			tocDoc.Load(sr);
-			sr.Close();
+			var indexTemplate = FileData.Get(Path.Combine(destFolder, "pages", "indexTemplate.html"));
 			var opfDoc = DeclareXMLDocument(false);
-			sr = new StreamReader(Path.Combine(sourceFolder, "content.opf"));
+			var sr = new StreamReader(Path.Combine(sourceFolder, "content.opf"));
 			opfDoc.Load(sr);
 			sr.Close();
 			var fileOrderQ = opfDoc.SelectNodes("//*[local-name()='item']/@href[contains(.,'.html')]");
 			var fileOrder = (from XmlAttribute attr in fileOrderQ let val = attr.Value where !val.Contains("TOC") select attr.Value).ToList();
-			var contDoc = DeclareXMLDocument(false);
 			var pagetitle = Param.GetMetadataValue("Title");
 			var head = Param.GetMetadataValue("Title");
 			var author = Param.GetMetadataValue("Creator");
@@ -3379,12 +3375,19 @@ namespace SIL.Tool
 			var categorylink = "#";
 			var aboutlink = "File2Cpy00000_.html";
 			var pageCss = "book.css";
-			var sidebar = tocDoc.SelectSingleNode("//*[local-name()='body']").InnerXml.Replace(@" xmlns=""http://www.w3.org/1999/xhtml""","");
+			var contDoc = DeclareXMLDocument(false);
+			var titleContent = GetBodyContent(Path.Combine(sourceFolder, "File1Ttl00000_.html"), contDoc);
+			var sidebar = GetBodyContent(Path.Combine(sourceFolder, "..", "bootstrapToc.html"), contDoc);
+			var indexResult = string.Format(indexTemplate, pagetitle, head, version, "#", fileOrder[1], categorylink, aboutlink,
+				sidebar, pageCss, author, description, titleContent);
+			var indexSw = new StreamWriter(Path.Combine(destFolder, "pages", "index.html"));
+			indexSw.Write(indexResult);
+			indexSw.Close();
 			var files = Directory.GetFiles(sourceFolder);
 			var iFiles = ignoreFiles.Split(',');
 			try
 			{
-				var first = true;
+				inProcess.AddToMaximum(files.Length);
 				foreach (var file in files)
 				{
 					var name = Path.GetFileName(file);
@@ -3393,34 +3396,37 @@ namespace SIL.Tool
 					var dest = Path.Combine(destFolder, "pages", name);
 					if (Path.GetExtension(name) == ".html")
 					{
-						sr = new StreamReader(file);
-						contDoc.Load(sr);
-						sr.Close();
+						var content = GetBodyContent(file, contDoc);
 						var index = fileOrder.IndexOf(name);
 						var backlink = index > 0? fileOrder[index - 1]: "#";
 						var forelink = index + 1 < fileOrder.Count ? fileOrder[index + 1]: "#";
-						var content = contDoc.SelectSingleNode("//*[local-name()='body']").InnerXml;
 						var result = string.Format(template, pagetitle, head, version, backlink, forelink, categorylink, aboutlink,
-							sidebar, content, pageCss, author, description);
+							content, pageCss, author, description);
 						var sw = new StreamWriter(dest);
 						sw.Write(result);
 						sw.Close();
-						if (first)
-						{
-							File.Copy(dest, Path.Combine(destFolder, "pages", "index.html"), true);
-							first = false;
-						}
 					}
 					else
 					{
 						File.Copy(file, dest);
 					}
+					inProcess.PerformStep();
 				}
 			}
 			catch
 			{
 				return;
 			}
+		}
+
+		private static string GetBodyContent(string file, XmlDocument contDoc)
+		{
+			if (!File.Exists(file)) return "";
+			var sr = new StreamReader(file);
+			contDoc.Load(sr);
+			sr.Close();
+			var content = contDoc.SelectSingleNode("//*[local-name()='body']").InnerXml;
+			return content;
 		}
 
 		public static string ReplaceSeperators(string styleName)

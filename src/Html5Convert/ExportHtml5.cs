@@ -92,12 +92,12 @@ namespace SIL.PublishingSolution
 			var frontMatter = AddFrontMatter(inProcess, preProcessor, tempFolder);
 
 			List<string> splitFiles;
+			Common.SplitEveryEntry = true;
 			var htmlFiles = SplitIntoSections(projInfo, inProcess, frontMatter, preProcessor, defaultCss, langArray, out splitFiles);
 
 			var contentFolder = CreateContentStructure(projInfo, inProcess, tempFolder);
 
 			AddEndNotesIfNecessary(inProcess, contentFolder, preProcessor, splitFiles);
-
 			if (!FontEmbedding(projInfo, inProcess, langArray, mergedCss, contentFolder, curdir, myCursor)) return false;
 
 			CopyContentToEpubFolder(inProcess, mergedCss, defaultCss, htmlFiles, contentFolder);
@@ -110,7 +110,7 @@ namespace SIL.PublishingSolution
 
 			CreateEpubManifest(projInfo, inProcess, contentFolder, bookId, epubToc, tempCssFile);
 
-			var epub3Path = MakeCopyOfEpub2(projInfo);
+			var epub3Path = MakeCopyOfEpub2(inProcess, projInfo);
 
 			var html5Folder = CreateHtml5(projInfo, inProcess, epub3Path);
 
@@ -149,7 +149,7 @@ namespace SIL.PublishingSolution
 			File.Copy(Path.Combine(oebpsFolderPath, "toc.ncx"), bootstrapToc);
 			Common.ApplyXslt(bootstrapToc, _toc2Html5);
 
-			Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf,toc.xhtml,toc.ncx,File3TOC00000_.html,File2TOC00000_.html,File1TOC00000_.html,File0TOC00000_.html");
+			Common.CustomizedFileCopy(inProcess, oebpsFolderPath, htmlFolderPath, "content.opf,toc.xhtml,toc.ncx,File3TOC00000_.html,File2TOC00000_.html,File1TOC00000_.html,File0TOC00000_.html");
 			var avFolder = Path.Combine(projInfo.ProjectPath, "AudioVisual");
 			if (Directory.Exists(avFolder))
 			{
