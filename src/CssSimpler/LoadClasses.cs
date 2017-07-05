@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using SIL.Tool;
 
@@ -35,6 +36,7 @@ namespace CssSimpler
 			Debug.Assert(_folder != null, "_folder != null");
 			StyleSheet = string.Empty;
 			Declare(XmlNodeType.Element, CaptureStylesheet);
+			Declare(XmlNodeType.Element, Program.EntryCounter);
 			Declare(XmlNodeType.Attribute, GetClasses);
 			Parse();
 			Close();

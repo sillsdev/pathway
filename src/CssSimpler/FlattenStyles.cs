@@ -49,7 +49,8 @@ namespace CssSimpler
             Suffix = string.Empty;
 	        _stylesheetPresent = false;
             DeclareBefore(XmlNodeType.Attribute, SaveClassLangDir);
-            DeclareBefore(XmlNodeType.Element, SaveSibling);
+			DeclareBefore(XmlNodeType.Element, Program.EntryReporter);
+			DeclareBefore(XmlNodeType.Element, SaveSibling);
             DeclareBefore(XmlNodeType.Element, InsertBefore);
 			DeclareBefore(XmlNodeType.Element, RemoveExtraStylesheets);
             DeclareBefore(XmlNodeType.EndElement, SetForEnd);

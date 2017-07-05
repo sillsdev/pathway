@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -46,6 +47,7 @@ namespace CssSimpler
 		protected static readonly XslCompiledTransform XmlCss = new XslCompiledTransform();
 		protected static readonly XslCompiledTransform SimplifyXhtml = new XslCompiledTransform();
 		protected static List<string> UniqueClasses;
+		public static bool ReportStatus;
 
 		private static readonly XmlReaderSettings ReaderSettings = new XmlReaderSettings
 		{
@@ -121,6 +123,10 @@ namespace CssSimpler
 					"p|prefix=", "prefix style names with value",
 					v => { _decorateStyles = v; }
 				},
+				{
+					"u|update", "report status",
+					v => ReportStatus = !ReportStatus
+				},
 			};
 
 			List<string> extra;
@@ -146,6 +152,7 @@ namespace CssSimpler
 				return;
 			}
 			var lc = new LoadClasses(extra[0]);
+			EntryReportInit();
 			var styleSheet = lc.StyleSheet;
 			MakeBackupIfNecessary(styleSheet, extra[0]);
 			DebugWriteClassNames(lc.UniqueClasses);
@@ -204,7 +211,51 @@ namespace CssSimpler
             }
         }
 
-        protected static void OutputFlattenedStylesheet(string outFullName, string styleSheet, FlattenStyles fs)
+		private static void EntryReportInit()
+		{
+			if (!ReportStatus) return;
+			Console.WriteLine("mx{0}", _entryCount*3);
+			System.Threading.Thread.Sleep(100);
+			_nextEntryReport = _entryReportFreq = _entryCount*3/20;
+			if (_nextEntryReport <= 0) ReportStatus = false;
+		}
+
+		private static readonly List<string> EntryStarts = new List<string> {"entry", "minorentry", "reversalentry"};
+		public static bool IsEntryClass(string myClass)
+		{
+			return EntryStarts.Any(myClass.StartsWith);
+		}
+
+		private static int _entryCount = 0;
+		public static void EntryCounter(XmlReader r)
+		{
+			if (r.LocalName != "div") return;
+			var myClass = r.GetAttribute("class");
+			if (string.IsNullOrEmpty(myClass)) return;
+			if (!IsEntryClass(myClass)) return;
+			_entryCount += 1;
+		}
+
+		private static int _nextEntryReport = 0;
+		private static int _entryReportFreq = 0;
+		private static int _entryStatus = 0;
+		public static void EntryReporter(XmlReader r)
+		{
+			if (!ReportStatus) return;
+			if (r.LocalName != "div") return;
+			var myClass = r.GetAttribute("class");
+			if (string.IsNullOrEmpty(myClass)) return;
+			if (!IsEntryClass(myClass)) return;
+			_entryStatus += 1;
+			if (_entryStatus > _nextEntryReport)
+			{
+				Console.WriteLine("st{0}", _entryStatus);
+				System.Threading.Thread.Sleep(100);
+				_nextEntryReport += _entryReportFreq;
+			}
+		}
+
+		protected static void OutputFlattenedStylesheet(string outFullName, string styleSheet, FlattenStyles fs)
         {
             if (_embedStyles)
             {
