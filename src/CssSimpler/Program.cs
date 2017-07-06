@@ -215,13 +215,15 @@ namespace CssSimpler
 		private static void EntryReportInit()
 		{
 			if (!ReportStatus) return;
-			Console.WriteLine("mx{0}", _entryCount*3);
+			const int whenToReport = 500;
+			var reportsPlanned = _entryCount*3/whenToReport;
+			Console.WriteLine("mx{0}", reportsPlanned);
 			System.Threading.Thread.Sleep(100);
-			_nextEntryReport = _entryReportFreq = _entryCount*3/20;
-			if (_nextEntryReport <= 0) ReportStatus = false;
+			_nextEntryReport = _entryReportFreq = whenToReport;
+			if (reportsPlanned <= 0 || _nextEntryReport <= 0) ReportStatus = false;
 		}
 
-		private static readonly List<string> EntryStarts = new List<string> {"entry", "minorentry", "reversalentry"};
+		private static readonly List<string> EntryStarts = new List<string> {"entry", "minorentry", "reversalindexentry"};
 
 		public static bool IsEntryClass(string myClass)
 		{

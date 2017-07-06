@@ -3811,6 +3811,11 @@ namespace SIL.Tool
 
 		public static bool RunCommand(string szCmd, string szArgs, int wait)
 		{
+			return RunCommand(szCmd, szArgs, wait, null);
+		}
+
+		public static bool RunCommand(string szCmd, string szArgs, int wait, SIL.PublishingSolution.InProcess inProcess)
+		{
 			if (szCmd == null) return false;
 			using (var myproc = new Process())
 			{
@@ -3819,6 +3824,10 @@ namespace SIL.Tool
 				myproc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 				myproc.StartInfo.FileName = szCmd;
 				myproc.StartInfo.Arguments = szArgs;
+				myproc.StartInfo.UseShellExecute = false;
+				myproc.StartInfo.RedirectStandardInput = true;
+				myproc.StartInfo.RedirectStandardOutput = true;
+				myproc.StartInfo.RedirectStandardError = true;
 
 				if (!myproc.Start())
 					return false;
@@ -3828,6 +3837,39 @@ namespace SIL.Tool
 				if (wait == 1)
 				{
 					myproc.WaitForExit();
+					exitCode = myproc.ExitCode;
+				} else if (wait == 2) /* This allows monitoring the status of the program */
+				{
+					var progOutput = "";
+					myproc.BeginErrorReadLine();
+					while (!myproc.HasExited)
+					{
+						var buffer = myproc.StandardOutput.ReadLine();
+						if (buffer == null)
+						{
+							Thread.Sleep(100);
+							continue;
+						}
+						var data = Regex.Match(buffer, @"([mxst]+)([0-9]+)");
+						if (data.Success)
+						{
+							var value = int.Parse(data.Groups[2].Value);
+							switch (data.Groups[1].Value)
+							{
+								case "mx":
+									inProcess.AddToMaximum(value);
+									break;
+								case "st":
+									inProcess.PerformStep();
+									break;
+							}
+						}
+						else
+						{
+							progOutput += buffer + "\n";
+						}
+					}
+					if (progOutput != "") MessageBox.Show(progOutput, "Style results", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					exitCode = myproc.ExitCode;
 				}
 				myproc.Close();
