@@ -38,6 +38,7 @@ namespace CssSimpler
             _needHigher = needHigher;
             CollectTargets(xmlCss);
             DeclareBefore(XmlNodeType.Attribute, SaveClass);
+			DeclareBefore(XmlNodeType.Element, Program.EntryReporter);
 			DeclareBefore(XmlNodeType.Element, SaveSibling);
             DeclareBefore(XmlNodeType.Element, InsertBefore);
             DeclareFirstChild(XmlNodeType.Element, InsertFirstChild);
