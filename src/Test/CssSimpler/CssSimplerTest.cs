@@ -399,10 +399,48 @@ namespace Test.CssSimplerTest
             NodeTest(xhtmlFullName, 14, "//*[@xml:space]", "Wrong number of list punctuation");
         }
 
-        /// <summary>
-        /// A test to use the css to insert pseudo content into xhtml
-        /// </summary>
-        [Test]
+		/// <summary>
+		/// A test to use the css to insert pseudo content for between and after into xhtml
+		/// </summary>
+		[Test]
+		public void DoubleCommaTest()
+		{
+			const string testName = "DoubleComma";
+			_testFiles.Copy(testName + ".xhtml");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			_testFiles.Copy(testName + ".css");
+			var styleSheet = _testFiles.Output(testName + ".css");
+			var lc = new LoadClasses(xhtmlFullName);
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			UniqueClasses = lc.UniqueClasses;
+			OutputXml = true;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			var tmp2Out = Path.GetTempFileName();
+			new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			try
+			{
+				File.Delete(tmpXhtmlFullName);
+				File.Delete(tmp2Out);
+			}
+			catch
+			{
+				// ignored
+			}
+			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+			NodeTest(xhtmlFullName, 3, "//*[@class='gloss']//*", "Wrong number of gloss decendants");
+		}
+
+		/// <summary>
+		/// A test to use the css to insert pseudo content into xhtml
+		/// </summary>
+		[Test]
         public void PseudoComplexSubentryTest()
         {
             const string testName = "PseudoComplexSubentry";
@@ -577,10 +615,36 @@ namespace Test.CssSimplerTest
             NodeTest(outFullName, 3023, "//*[@xml:space]", "Nodes with pseudo content changed for Fw 8.2.8");
         }
 
-        /// <summary>
-        /// A test to see if lexsensereferences > span + span:before works correctly
-        /// </summary>
-        [Test]
+		/// <summary>
+		/// A test .headword span[lang='en'] a:before {content:'('} (no class name with pseudo
+		/// </summary>
+		[Test]
+		public void ParenSenseTest()
+		{
+			const string testName = "ParenSense";
+			var cssFullName = _testFiles.Input(testName + ".css");
+			var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+			var outFullName = _testFiles.Output(testName + ".xhtml");
+			var ctp = new CssTreeParser();
+			ctp.Parse(cssFullName);
+			var root = ctp.Root;
+			Assert.True(root != null);
+			var xml = new XmlDocument();
+			xml.LoadXml("<root/>");
+			var lc = new LoadClasses(xhtmlFullName);
+			UniqueClasses = lc.UniqueClasses;
+			AddSubTree(xml.DocumentElement, root, ctp);
+			_testFiles.Copy(testName + ".css");
+			WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+			new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+			NodeTest(outFullName, 2, "//*[@class='headword']//*[local-name()='a']/*", "Expected open and close parenthesis");
+		}
+
+		/// <summary>
+		/// A test to see if lexsensereferences > span + span:before works correctly
+		/// </summary>
+		[Test]
         public void PseudoMultiRelTest()
         {
             const string testName = "PseudoMultiRel";
@@ -795,7 +859,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 132, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 131, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -1044,7 +1108,7 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 7, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 6, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>

@@ -15,6 +15,7 @@ namespace SIL.PublishingSolution
         private readonly EpubFont _epubFont;
         public bool IsUnixOs;
         public string Epub3Directory = string.Empty;
+	    public InProcess InProcess = null;
 
         public Epub3Transformation()
         {
@@ -54,13 +55,13 @@ namespace SIL.PublishingSolution
 
             Convertxhtmltohtml5(oebpsPath, xhmltohtml5Space);
 
-            ModifyContainerXML();
+			ModifyContainerXML();
 
-            ModifyContentOPF(projInfo, oebpsPath);
+			ModifyContentOPF(projInfo, oebpsPath);
 
-            ModifyTocContent(oebpsPath);
+			ModifyTocContent(oebpsPath);
 
-            ModifyCoverpage(oebpsPath);
+			ModifyCoverpage(oebpsPath);
 
             epub3Export = true;
 
@@ -107,7 +108,7 @@ namespace SIL.PublishingSolution
                 File.Delete(contentOPFFile);
 
             var epubManifest = new EpubManifest(_parent, _epubFont);
-            var bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run. 
+            var bookId = Guid.NewGuid(); // NOTE: this creates a new ID each time Pathway is run.
             epubManifest.CreateOpfV3(projInfo, oebpsPath, bookId);
         }
 
@@ -123,25 +124,20 @@ namespace SIL.PublishingSolution
 
         private void Convertxhtmltohtml5(string oebpsPath, XslCompiledTransform xhmltohtml5Space)
         {
-            string[] filesList = null;
-            if (Directory.Exists(oebpsPath))
-            {
-                filesList = Directory.GetFiles(oebpsPath);
-                foreach (var curFile in filesList)
-                {
-                    FileInfo fileInfo = new FileInfo(curFile);
-                    if (fileInfo.Extension == ".xhtml")
-                    {
-                        Common.ApplyXslt(curFile, xhmltohtml5Space);
+	        if (!Directory.Exists(oebpsPath)) return;
+	        var filesList = Directory.GetFiles(oebpsPath);
+			InProcess?.AddToMaximum(filesList.Length);
+	        foreach (var curFile in filesList)
+	        {
+				InProcess?.PerformStep();
+		        var fileInfo = new FileInfo(curFile);
+		        if (fileInfo.Extension != ".xhtml") continue;
+		        Common.ApplyXslt(curFile, xhmltohtml5Space);
 
-                        if (File.Exists(curFile))
-                        {
-                            File.Copy(curFile, curFile.Replace(".xhtml", ".html"), true);
-                            File.Delete(curFile);
-                        }
-                    }
-                }
-            }
+		        if (!File.Exists(curFile)) continue;
+		        File.Copy(curFile, curFile.Replace(".xhtml", ".html"), true);
+		        File.Delete(curFile);
+	        }
         }
 
         private void ModifyContainerXMLForEpub3(string containerXmlFile)

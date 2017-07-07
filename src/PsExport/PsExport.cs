@@ -101,7 +101,7 @@ namespace SIL.PublishingSolution
 				string revFileName = string.Empty;
 				var outDir = Path.GetDirectoryName(outFullName);
 
-				SimplifyExportFiles(outFullName);
+				SimplifyExportFiles(outFullName, inProcess);
 
 				#endregion
 
@@ -275,7 +275,7 @@ namespace SIL.PublishingSolution
 			Common.FileInsertText(cssFileName, cssFileInsert);
 		}
 
-		private void SimplifyExportFiles(string exportedDirectory)
+		private void SimplifyExportFiles(string exportedDirectory, SIL.PublishingSolution.InProcess inProcess)
 		{
 			string cssSimplerFile = Path.Combine(Common.GetApplicationPath(), "Export", "CssSimpler.exe");
 
@@ -316,7 +316,7 @@ namespace SIL.PublishingSolution
 							{
 								option += "-f";
 							}
-							Common.RunCommand(cssSimplerExe, String.Format("{0} \"{1}\"", option, filename), 1);
+							Common.RunCommand(cssSimplerExe, String.Format("-u {0} \"{1}\"", option, filename), 2, inProcess);
 						}
 					}
 				}

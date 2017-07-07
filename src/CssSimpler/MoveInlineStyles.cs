@@ -27,7 +27,8 @@ namespace CssSimpler
             : base(input, output, false)
         {
             DeclareBefore(XmlNodeType.Element, ResetClassName);
-            DeclareBefore(XmlNodeType.Attribute, LookForStyle);
+			DeclareBefore(XmlNodeType.Element, Program.EntryReporter);
+			DeclareBefore(XmlNodeType.Attribute, LookForStyle);
 	        SpaceClass = null;
             Parse();
             var sr = new StreamReader(cssName);
