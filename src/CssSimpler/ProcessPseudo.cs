@@ -39,10 +39,12 @@ namespace CssSimpler
             CollectTargets(xmlCss);
             DeclareBefore(XmlNodeType.Attribute, SaveClass);
 			DeclareBefore(XmlNodeType.Element, Program.EntryReporter);
+			DeclareBefore(XmlNodeType.Element, InsertLastChildBefore);
 			DeclareBefore(XmlNodeType.Element, SaveSibling);
             DeclareBefore(XmlNodeType.Element, InsertBefore);
             DeclareFirstChild(XmlNodeType.Element, InsertFirstChild);
-            DeclareBeforeEnd(XmlNodeType.EndElement, InsertAfter);
+			DeclareAfter(XmlNodeType.EndElement, InsertLastChildAfter);
+			DeclareBeforeEnd(XmlNodeType.EndElement, InsertAfter);
             DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveClass);
 			DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveLang);
 			SpaceClass = null;
@@ -72,7 +74,31 @@ namespace CssSimpler
 	        _firstClass = string.Empty;
         }
 
-        private void InsertAfter(int depth, string name)
+		private XmlNode _savedLastNode;
+		private string _lastChildClass = string.Empty;
+	    private int _lastDepth = 0;
+		private void InsertLastChildBefore(XmlReader r)
+		{
+			InsertLastChildAfter(r);
+			_lastDepth = r.Depth;
+			ClearLastChild();
+		}
+
+	    private void InsertLastChildAfter(XmlReader r)
+	    {
+		    if (r.Depth == _lastDepth) return;
+		    if (_savedLastNode == null) return;
+		    InsertContent(_savedLastNode, _lastChildClass);
+			ClearLastChild();
+		}
+
+		private void ClearLastChild()
+		{
+			_savedLastNode = null;
+			_lastChildClass = string.Empty;
+		}
+
+		private void InsertAfter(int depth, string name)
         {
             var index = depth + 1;
             var endClass = Classes.Count > index? Classes[index] as string: null;
@@ -113,17 +139,27 @@ namespace CssSimpler
                         }
                         if (targets == _beforeTargets)
                         {
-	                        if (_savedFirstNode == null)
-	                        {
-								_savedFirstNode = node;
-								_firstClass = myClass;
-							}
-						}
+	                        if (_savedFirstNode != null) continue;
+	                        _savedFirstNode = node;
+	                        _firstClass = myClass;
+                        }
                         else
                         {
-                            var inserted = InsertContent(node, myClass);
-	                        if (inserted) return true;
-                        }
+	                        if (_lastChild)
+	                        {
+		                        if (_savedLastNode == null)
+		                        {
+									_savedLastNode = node;
+									_lastChildClass = myClass;
+									// We keep scanning because other rules will apply
+								}
+							}
+	                        else
+	                        {
+								var inserted = InsertContent(node, myClass);
+								if (inserted) return true;
+							}
+						}
                     }
                 }
             }
@@ -139,12 +175,16 @@ namespace CssSimpler
 		    return false;
 	    }
 
+	    private bool _lastChild;
+
 	    private bool AppliesAtLevel(XmlNode node, int index)
 		{
 			if (!RequiredFirst(node)) return false;
             if (!RequiredNotFirst(node)) return false;
+			_lastChild = false;
             while (node != null && node.Name == "PSEUDO")
             {
+	            if (node.FirstChild.InnerText == "last-child") _lastChild = true;
                 node = node.PreviousSibling;
             }
             var requireParent = false;
@@ -178,7 +218,6 @@ namespace CssSimpler
                         Debug.Assert(node != null, "Nothing preceding PRECEDES");
                         string precedingName = node.FirstChild.InnerText;
                         if (_precedingClass != precedingName && precedingName != "span") return false;
-                        //if (precedingName != "span") index -= 1;
                         break;
                     case "SIBLING":
                         node = node.PreviousSibling;
@@ -186,7 +225,6 @@ namespace CssSimpler
                         string siblingName = node.FirstChild.InnerText;
                         int position = _savedSibling.IndexOf(siblingName);
                         if (position == -1 || position == _savedSibling.Count - 1) return false;
-                        //index -= 1;
                         break;
                     case "TAG":
                         string tagName = node.FirstChild.InnerText;

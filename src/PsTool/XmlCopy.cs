@@ -29,7 +29,7 @@ namespace SIL.Tool
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _firstChildNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
         private readonly Dictionary<XmlNodeType, List<EndTagMethod>> _beforeEndNodeTypeMap = new Dictionary<XmlNodeType, List<EndTagMethod>>();
         private readonly Dictionary<XmlNodeType, List<ParserMethod>> _afterNodeTypeMap = new Dictionary<XmlNodeType, List<ParserMethod>>();
-        private readonly StreamReader _sr;
+		private readonly StreamReader _sr;
         private readonly XmlReader _rdr;
         private readonly XmlWriter _wtr;
         private bool _finish;
@@ -229,7 +229,7 @@ namespace SIL.Tool
             }
             for (var depth = _rdr.Depth; depth > 0; depth--)
             {
-                BeforeEndProcessMethods(XmlNodeType.EndElement, _rdr.Depth, _rdr.Name);
+                BeforeEndProcessMethods(XmlNodeType.EndElement, depth, _rdr.Name);
                 _wtr.WriteFullEndElement();
             }
             _wtr.Close();
@@ -363,7 +363,7 @@ namespace SIL.Tool
             }
         }
 
-	    protected void WriteTextValue(string val)
+		protected void WriteTextValue(string val)
 	    {
 			_wtr.WriteValue(val);
 	    }
@@ -388,7 +388,7 @@ namespace SIL.Tool
 
         protected void WriteContent(string val, string myClass, string myLang, bool quotedEntities)
         {
-            var localName = string.IsNullOrEmpty(ReplaceLocalName) ? "span" : ReplaceLocalName;
+			var localName = string.IsNullOrEmpty(ReplaceLocalName) ? "span" : ReplaceLocalName;
             ReplaceLocalName = null;
             _wtr.WriteStartElement(localName, "http://www.w3.org/1999/xhtml");
             if (!string.IsNullOrEmpty(myClass))
@@ -417,10 +417,6 @@ namespace SIL.Tool
                 _wtr.WriteValue(val);
             }
             _wtr.WriteEndElement();
-            //if (val == "car area for suitcases")
-            //{
-            //    Debug.Print("found it");
-            //}
         }
 
         protected void WriteValueEmbedEntities(string val)
@@ -528,5 +524,5 @@ namespace SIL.Tool
                 _doAttributes = true;
             }
         }
-    }
+	}
 }

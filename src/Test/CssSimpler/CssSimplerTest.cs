@@ -399,10 +399,48 @@ namespace Test.CssSimplerTest
             NodeTest(xhtmlFullName, 14, "//*[@xml:space]", "Wrong number of list punctuation");
         }
 
-        /// <summary>
-        /// A test to use the css to insert pseudo content into xhtml
-        /// </summary>
-        [Test]
+		/// <summary>
+		/// A test to use the css to insert pseudo content for between and after into xhtml
+		/// </summary>
+		[Test]
+		public void DoubleCommaTest()
+		{
+			const string testName = "DoubleComma";
+			_testFiles.Copy(testName + ".xhtml");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			_testFiles.Copy(testName + ".css");
+			var styleSheet = _testFiles.Output(testName + ".css");
+			var lc = new LoadClasses(xhtmlFullName);
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			UniqueClasses = lc.UniqueClasses;
+			OutputXml = true;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			var tmp2Out = Path.GetTempFileName();
+			new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			try
+			{
+				File.Delete(tmpXhtmlFullName);
+				File.Delete(tmp2Out);
+			}
+			catch
+			{
+				// ignored
+			}
+			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+			NodeTest(xhtmlFullName, 3, "//*[@class='gloss']//*", "Wrong number of gloss decendants");
+		}
+
+		/// <summary>
+		/// A test to use the css to insert pseudo content into xhtml
+		/// </summary>
+		[Test]
         public void PseudoComplexSubentryTest()
         {
             const string testName = "PseudoComplexSubentry";
@@ -821,7 +859,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 143, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 131, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
