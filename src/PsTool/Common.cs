@@ -3372,17 +3372,12 @@ namespace SIL.Tool
 			var author = Param.GetMetadataValue("Creator");
 			var description = Param.GetMetadataValue("Description");
 			var version = DateTime.Today.ToShortDateString();
-			var categorylink = "#";
+			var categorylink = "sindex.html";
 			var aboutlink = "File2Cpy00000_.html";
 			var pageCss = "book.css";
 			var contDoc = DeclareXMLDocument(false);
-			var titleContent = GetBodyContent(Path.Combine(sourceFolder, "File1Ttl00000_.html"), contDoc);
-			var sidebar = GetBodyContent(Path.Combine(sourceFolder, "..", "bootstrapToc.html"), contDoc);
-			var indexResult = string.Format(indexTemplate, pagetitle, head, version, "#", fileOrder[1], categorylink, aboutlink,
-				sidebar, pageCss, author, description, titleContent);
-			var indexSw = new StreamWriter(Path.Combine(destFolder, "pages", "index.html"));
-			indexSw.Write(indexResult);
-			indexSw.Close();
+			MakeIndex(sourceFolder, destFolder, contDoc, indexTemplate, pagetitle, head, version, fileOrder, categorylink, aboutlink, pageCss, author, description, "bootstrapToc.html", "index.html");
+			MakeIndex(sourceFolder, destFolder, contDoc, indexTemplate, pagetitle, head, version, fileOrder, categorylink, aboutlink, pageCss, author, description, "bootstrapSem.html", "sindex.html");
 			var files = Directory.GetFiles(sourceFolder);
 			var iFiles = ignoreFiles.Split(',');
 			try
@@ -3417,6 +3412,19 @@ namespace SIL.Tool
 			{
 				return;
 			}
+		}
+
+		private static void MakeIndex(string sourceFolder, string destFolder, XmlDocument contDoc, string indexTemplate,
+			string pagetitle, string head, string version, List<string> fileOrder, string categorylink, string aboutlink, string pageCss,
+			string author, string description, string sideBarFile, string indexFile)
+		{
+			var titleContent = GetBodyContent(Path.Combine(sourceFolder, "File1Ttl00000_.html"), contDoc).Replace(@"xmlns=""http://www.w3.org/1999/xhtml""", "").Replace(@"xmlns=""""", "");
+			var sidebar = GetBodyContent(Path.Combine(sourceFolder, "..", sideBarFile), contDoc).Replace(@"xmlns=""http://www.w3.org/1999/xhtml""","").Replace(@"xmlns=""""","");
+			var indexResult = string.Format(indexTemplate, pagetitle, head, version, "#", fileOrder[1], categorylink, aboutlink,
+				sidebar, pageCss, author, description, titleContent);
+			var indexSw = new StreamWriter(Path.Combine(destFolder, "pages", indexFile));
+			indexSw.Write(indexResult);
+			indexSw.Close();
 		}
 
 		private static string GetBodyContent(string file, XmlDocument contDoc)
