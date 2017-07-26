@@ -1267,7 +1267,7 @@ namespace Test.PsTool
             string database = "Ernest's Northern Ninam";
             string layout = "Quick";
             string dateTime = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
-            string expected = Common.PathCombine(ManageDirectory.ShortFileName(documents), @"Publications\Ernest\Dictionary\Quick_" + dateTime);
+            string expected = Common.PathCombine(ManageDirectory.ShortFileName(documents), @"Publications\ErnestsNorthernNinam\Dictionary\Quick_" + dateTime);
             string actual = Common.GetSaveInFolder(template, database, layout);
             Assert.AreEqual(expected, actual);
         }

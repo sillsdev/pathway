@@ -56,7 +56,8 @@ namespace SIL.Tool
 					str += match.Value;
 				}
 				var len = str.Length;
-                result += str.Substring(0, len < 6 ? len : 6) + Path.DirectorySeparatorChar.ToString();
+                const int MaxLength = 20;
+                result += str.Substring(0, len < MaxLength ? len : MaxLength) + Path.DirectorySeparatorChar.ToString();
 			}
             lpszShortPath = result.ToCharArray();
             return lpszShortPath.Length - 1;
