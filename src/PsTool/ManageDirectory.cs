@@ -13,6 +13,9 @@
 // Works with folder trees in file system
 // </remarks>
 // --------------------------------------------------------------------------------------------
+#if !__MonoCS__
+#define UNITY_STANDALONE_WIN
+#endif
 
 using System.IO;
 using System.Text.RegularExpressions;
@@ -25,9 +28,6 @@ namespace SIL.Tool
 	/// </summary>
 	public static class ManageDirectory
     {
-#if !__MonoCS__
-#define UNITY_STANDALONE_WIN
-#endif
 #if UNITY_STANDALONE_WIN
         // Define GetShortPathName API function.
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -46,7 +46,7 @@ namespace SIL.Tool
                 result += str.Substring(0, len < 6 ? len : 6) + Path.DirectorySeparatorChar.ToString();
 			}
             lpszShortPath = result.ToCharArray();
-            return lpszShortPath.Length;
+            return lpszShortPath.Length - 1;
 		}
 #endif
 

@@ -150,7 +150,8 @@ namespace SIL.Tool
 
 		        Common.SaveInputType(publicationInformation.ProjectInputType);
 
-                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3} --database \"{4}\"", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString(), Param.DatabaseName);
+                string dbName = Common.IsUnixOS() ? Param.DatabaseName.Replace(" ", "\\ ").Replace("'", "\\'") : Param.DatabaseName;
+                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3} --database \"{4}\"", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString(), dbName);
 
 				string pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "PathwayExport.exe");
 

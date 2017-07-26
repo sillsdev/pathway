@@ -7,14 +7,15 @@
 // </copyright> 
 #endregion
 // 
+#if !__MonoCS__
+#define UNITY_STANDALONE_WIN
+#endif
+
 using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-#if !__MonoCS__
-#define UNITY_STANDALONE_WIN
-#endif
 #if UNITY_STANDALONE_WIN
 using System.Management;
 #endif

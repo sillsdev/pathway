@@ -1286,6 +1286,8 @@ namespace SIL.PublishingSolution
 			StringBuilder styleWithoutSpecialCharacters = new StringBuilder(theStyle.Replace(" ", "_"));
 			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace("(", "");
 			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace(")", "");
+			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace("'", "");
+			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace("$", "");
 			return styleWithoutSpecialCharacters.ToString().ToLower();
 	    }
 
@@ -1376,14 +1378,7 @@ namespace SIL.PublishingSolution
             var dlg = new FolderBrowserDialog();
 	        string documentsPath = string.Empty;
 
-	        if (Common.UsingMonoVM)
-	        {
-		        documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-	        }
-	        else
-	        {
-				documentsPath = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-	        }
+			documentsPath = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
             dlg.SelectedPath = Common.PathCombine(documentsPath, Common.SaveInFolderBase);
             DirectoryInfo directoryInfo = new DirectoryInfo(dlg.SelectedPath);
             if (!directoryInfo.Exists)
@@ -1392,14 +1387,7 @@ namespace SIL.PublishingSolution
             {
 				string styleInLowerCaseWithoutSpecialCharacters = GetStyleInLowerCaseWithoutSpecialCharacters(ddlStyle.Text);
 				string folderName = styleInLowerCaseWithoutSpecialCharacters + "_" + _sDateTime;
-				if (Common.UsingMonoVM)
-				{
-					_newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
-				}
-				else
-				{
-					_newSaveInFolderPath = Common.PathCombine(ManageDirectory.ShortFileName(dlg.SelectedPath), folderName);
-				}
+				_newSaveInFolderPath = Common.PathCombine(ManageDirectory.ShortFileName(dlg.SelectedPath), folderName);
 
                 Param.SetValue(Param.PublicationLocation, _newSaveInFolderPath);
                 txtSaveInFolder.Text = _newSaveInFolderPath;

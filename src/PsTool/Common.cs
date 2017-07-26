@@ -3104,13 +3104,10 @@ namespace SIL.Tool
 		{
 			Dictionary<string, string> map = new Dictionary<string, string>();
 
-			if(UsingMonoVM)
-				map["Documents"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			else
-				map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+			map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
 			map["Base"] = SaveInFolderBase;
-			map["CurrentProject"] = database;
+            map["CurrentProject"] = ManageDirectory.ShortFileName(database);
 			map["StyleSheet"] = layout;
 			map["DateTime"] = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
 			Substitution substitution = new Substitution();
