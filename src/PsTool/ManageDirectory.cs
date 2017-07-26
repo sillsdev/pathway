@@ -32,6 +32,19 @@ namespace SIL.Tool
         // Define GetShortPathName API function.
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         static extern uint GetShortPathName(string lpszLongPath, char[] lpszShortPath, int cchBuffer);
+
+		// Return the short file name for a long file name.
+		public static string ShortFileName(string long_name)
+		{
+			char[] name_chars = new char[2048];
+			long length = GetShortPathName(
+				long_name, name_chars,
+				name_chars.Length);
+
+			string short_name = new string(name_chars);
+			return short_name.Substring(0, (int)length);
+		}
+
 #else
 		private static long GetShortPathName(string lpszLongPath, ref char[] lpszShortPath, int cchBuffer)
 		{
@@ -48,7 +61,6 @@ namespace SIL.Tool
             lpszShortPath = result.ToCharArray();
             return lpszShortPath.Length - 1;
 		}
-#endif
 
 		// Return the short file name for a long file name.
 		public static string ShortFileName(string long_name)
@@ -61,6 +73,8 @@ namespace SIL.Tool
 			string short_name = new string(name_chars);
 			return short_name.Substring(0, (int)length);
 		}
+
+#endif
 
 		// Return the long file name for a short file name.
 		public static string LongFileName(string short_name)
