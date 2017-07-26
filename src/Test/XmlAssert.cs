@@ -34,9 +34,11 @@ namespace Test
         {
             XmlDocument outputDocument = Common.DeclareXMLDocument(false);
             outputDocument.Load(outputPath);
+            RemoveTextNl(outputDocument); //Linux adds \n into serialized output
             XmlDocument expectDocument = Common.DeclareXMLDocument(false);
             expectDocument.Load(expectPath);
-            XmlDsigC14NTransform outputCanon = new XmlDsigC14NTransform();
+            RemoveTextNl(expectDocument); //Linux adds \n into serialized output
+			XmlDsigC14NTransform outputCanon = new XmlDsigC14NTransform();
             outputCanon.Resolver = null;
             outputCanon.LoadInput(outputDocument);
             XmlDsigC14NTransform expectCanon = new XmlDsigC14NTransform();
@@ -46,6 +48,14 @@ namespace Test
             Stream expectStream = (Stream)expectCanon.GetOutput(typeof(Stream));
             FileAssert.AreEqual(expectStream, outputStream, msg);
         }
+
+        private static void RemoveTextNl(XmlDocument xdoc){
+            var nodes = xdoc.SelectNodes("//text()");
+			foreach (XmlNode node in nodes)
+			{
+                node.Value = node.Value.Replace("\n", "").Replace("\r","");
+			}
+		}
 
         public static void Ignore(string path, string xpath, Dictionary<string, string> nameSpaces)
         {

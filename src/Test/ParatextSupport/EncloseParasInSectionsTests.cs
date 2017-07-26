@@ -81,6 +81,10 @@ namespace Test.ParatextSupport
             ParatextPathwayLink converter = new ParatextPathwayLink("testDb", xslParams);
             encloseParasInSections = ParatextSupportExtensions.EncloseParasInSectionsXslt(converter);
         }
+        [TestFixtureTearDown]
+        public void FixtureTearDown(){
+            Param.DatabaseName = "DatabaseName";
+        }
         #endregion
 
         #region Paragraph-handling tests

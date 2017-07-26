@@ -336,7 +336,7 @@ namespace Test
                             inner = GetReplacedInnerXml(node);
                         }
 
-                        if (inner != value)
+                        if (inner.Replace("\n","") != value)
                         {
                             match = false;
                         }
@@ -398,7 +398,7 @@ namespace Test
                         {
                             inner = GetReplacedInnerXml(node);
                         }
-                        if (inner != value)
+                        if (inner.Replace("\n","") != value)
                         {
                             match = false;
 							Assert.Fail("Exception - TC Output :" + inner);
@@ -524,7 +524,7 @@ namespace Test
                         {
                             inner = GetReplacedInnerXml(node);
                         }
-                        if (inner != value)
+                        if (inner.Replace("\n","") != value)
                         {
                             match = false;
 							Assert.Fail("Exception - TC Output :" + inner);
@@ -590,7 +590,7 @@ namespace Test
                         {
                             inner = GetReplacedInnerXml(node);
                         }
-                        if (inner != value)
+                        if (inner.Replace("\n","") != value)
                         {
 							Assert.Fail("Exception - TC Output :" + inner);
                             match = false;
@@ -658,7 +658,7 @@ namespace Test
                         inner = GetReplacedInnerXml(node);
                     }
 
-                    if (inner != value)
+                    if (inner.Replace("\n","") != value)
                     {
                         match = false;
                     }

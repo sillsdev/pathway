@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -122,15 +121,6 @@ namespace SIL.Tool
             var localType = type.Replace(@"\", "/").ToLower();
 	        try
 	        {
-                //foreach (IExportProcess process in _backend)
-                //{
-                //    if (process.ExportType.ToLower() == "openoffice/libreoffice")
-                //        localType = OpenOfficeClassifier(publicationInformation, localType); // Cross checking for OpenOffice
-
-                //    if (process.ExportType.ToLower() == localType.ToLower())
-                //        return process.Export(publicationInformation);
-                //}
-
                 //Code to call PathwayExport Commandline Utility -commented for now
 		        string mainXhtmlFile = Path.GetFileNameWithoutExtension(publicationInformation.DefaultXhtmlFileWithPath);
 
@@ -191,7 +181,7 @@ namespace SIL.Tool
 		        }
 		        else
 		        {
-					CommandLineRunner.Run(cmd, argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
+                    SubProcess.Run(publicationInformation.DictionaryPath, cmd, argument, true);
 				}
 
 			}

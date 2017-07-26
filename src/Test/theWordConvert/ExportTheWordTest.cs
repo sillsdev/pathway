@@ -808,8 +808,8 @@ namespace Test.theWordConvert
         public void FindParatextProjectTest()
         {
             Common.FindParatextProject();
-            Assert.AreEqual(0, Common.Ssf.Length); // Since we are not running from Paratext or PathwayB
-        }
+            Assert.True(string.IsNullOrEmpty(Common.Ssf));  // Since we are not running from Paratext or PathwayB
+		}
 
         /// <summary>
         ///A test for GetBookNamesUri

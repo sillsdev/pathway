@@ -1,8 +1,9 @@
-pathway (1.15.17.5844)  experimental; urgency=high
+pathway (1.15.19.5845)  experimental; urgency=high
 
+  * Common:Force version numbers of dependencies in plugin
   * HTML5:Add Classified or Semantic domain index
 
- -- Greg Trihus <greg_trihus@sil.org>  Tue, 21 Jun 2017 10:24:20 -0600
+ -- Greg Trihus <greg_trihus@sil.org>  Tue, 25 Jun 2017 22:36:20 -0600
 
 pathway (1.15.15.5832)  experimental; urgency=high
 

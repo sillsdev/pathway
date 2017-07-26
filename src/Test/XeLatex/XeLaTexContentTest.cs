@@ -53,14 +53,14 @@ namespace Test.XeLatex
 			_inputPath = Common.PathCombine(testPath, "input");
 			_outputPath = Common.PathCombine(testPath, "output");
 
-			if (_isLinux)
-			{
-				_expectedPath = Common.PathCombine(testPath, "LinuxExpected");
-			}
-			else
-			{
+			//if (_isLinux)
+			//{
+			//	_expectedPath = Common.PathCombine(testPath, "LinuxExpected");
+			//}
+			//else
+			//{
 				_expectedPath = Common.PathCombine(testPath, "Expected");
-			}
+			//}
 
 			if (Directory.Exists(_outputPath))
 				Directory.Delete(_outputPath, true);

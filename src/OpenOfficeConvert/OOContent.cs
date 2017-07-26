@@ -120,7 +120,6 @@ namespace SIL.PublishingSolution
 		public bool _multiLanguageHeader = false;
 		public bool IsMirrorPage;
 		public bool IsFirstEntry;
-		//private bool isPageBreak;
 		private string _previousContent = "Reversal";
 		private bool _previousSignificant = false;
 		private bool _isWhiteSpaceSkipped = true;
@@ -128,7 +127,6 @@ namespace SIL.PublishingSolution
 		private bool _isParaPicture, _isFirstPicture;
 		private int _pictureNo;
 		private bool _isReversalFile = false;
-		private bool _isLinux = false;
 		Dictionary<string, string> _glossaryList = new Dictionary<string, string>();
 		private bool _glossaryWrite;
 		private Dictionary<string, string> _glossaryTitleLst = new Dictionary<string, string>();
@@ -146,7 +144,6 @@ namespace SIL.PublishingSolution
 			Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
 		{
 
-			_isLinux = Common.UnixVersionCheck();
 			OldStyles styleInfo = new OldStyles();
 			GetRefFormat(projInfo, idAllClass);
 			SetReversalFile(projInfo);
@@ -1920,14 +1917,7 @@ namespace SIL.PublishingSolution
 
 			TableClose();
 
-			if (_isLinux)
-			{
-				SectionClose(_closeChildName);
-			}
-			else
-			{
 				SectionClose(closeChild);
-			}
 
 			ClosefooterNote();
 			bool isImageEnd = EndElementForImage();
@@ -2543,7 +2533,7 @@ namespace SIL.PublishingSolution
 				currentPicturePath = Common.FromRegistry("Copyrights");
 			}
 			string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, currentPicturePath);
-			string fileName = Path.GetFileName(srcFile);
+			string fileName = Path.GetFileName(srcFile.Replace('\\', Path.DirectorySeparatorChar));
 
 			string normalTargetFile = _projInfo.TempOutputFolder;
 			string basePath = normalTargetFile.Substring(0, normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));

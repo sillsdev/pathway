@@ -15,6 +15,7 @@
 // --------------------------------------------------------------------------------------------
 
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 
 namespace SIL.Tool
@@ -23,17 +24,38 @@ namespace SIL.Tool
 	/// Works with Directory FileNames in file system
 	/// </summary>
 	public static class ManageDirectory
-	{
-		// Define GetShortPathName API function.
-		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-		static extern uint GetShortPathName(string lpszLongPath, char[] lpszShortPath, int cchBuffer);
+    {
+#if !__MonoCS__
+#define UNITY_STANDALONE_WIN
+#endif
+#if UNITY_STANDALONE_WIN
+        // Define GetShortPathName API function.
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern uint GetShortPathName(string lpszLongPath, char[] lpszShortPath, int cchBuffer);
+#else
+		private static long GetShortPathName(string lpszLongPath, ref char[] lpszShortPath, int cchBuffer)
+		{
+            var result = string.Empty;
+            foreach (var part in lpszLongPath.Split(Path.DirectorySeparatorChar)){
+                var str = string.Empty;
+				foreach (Match match in Regex.Matches(part, "[a-zA-Z0-9]+"))
+				{
+					str += match.Value;
+				}
+				var len = str.Length;
+                result += str.Substring(0, len < 6 ? len : 6) + Path.DirectorySeparatorChar.ToString();
+			}
+            lpszShortPath = result.ToCharArray();
+            return lpszShortPath.Length;
+		}
+#endif
 
 		// Return the short file name for a long file name.
 		public static string ShortFileName(string long_name)
 		{
 			char[] name_chars = new char[2048];
 			long length = GetShortPathName(
-				long_name, name_chars,
+				long_name, ref name_chars,
 				name_chars.Length);
 
 			string short_name = new string(name_chars);

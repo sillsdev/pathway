@@ -403,7 +403,7 @@ namespace SIL.Tool
 			{
 				if (!File.Exists(fromPath))
 				{
-					fileName = Path.GetFileName(src); // sil + fileName
+                    fileName = Path.GetFileName(src.Replace('\\',Path.DirectorySeparatorChar)); // sil + fileName
 					string flexPict = PathCombine(GetFiledWorksPath(), fileName);
 					if (File.Exists(flexPict))
 					{

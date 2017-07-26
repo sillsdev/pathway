@@ -68,7 +68,7 @@ namespace Test.ParatextSupport
 
             _sfmToUsx.ConvertSFMtoUsx(input, output);
 
-            FileAssert.AreEqual(expected, output, file + " test fails");
+            XmlAssert.AreEqual(expected, output, file + " test fails");
         }
 
 		///<summary>
@@ -87,7 +87,7 @@ namespace Test.ParatextSupport
 
 			_sfmToUsx.ConvertSFMtoUsx(input, output);
 
-			FileAssert.AreEqual(expected, output, file + " test fails");
+            XmlAssert.AreEqual(expected, output, file + " test fails");
 		}
 
         ///<summary>
@@ -106,7 +106,7 @@ namespace Test.ParatextSupport
 
             _sfmToUsx.ConvertSFMtoUsx(input, output);
 
-            FileAssert.AreEqual(expected, output, file + " test fails");
+            XmlAssert.AreEqual(expected, output, file + " test fails");
         }
 
     }

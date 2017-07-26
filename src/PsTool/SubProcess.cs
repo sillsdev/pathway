@@ -285,8 +285,10 @@ namespace SIL.Tool
                 try
                 {
                     var myDirectory = directory.Replace("\"", "");
-                    if (!Directory.Exists(myDirectory)) continue;
-                    if (File.Exists(Common.PathCombine(myDirectory, name)))
+                    var dirInfo = new DirectoryInfo(myDirectory);
+                    if (!dirInfo.Exists) continue;
+                    var fileInfo = new FileInfo(Common.PathCombine(myDirectory, name));
+                    if (fileInfo.IsReadOnly)
                     {
                         Location = myDirectory;
                         return true;
