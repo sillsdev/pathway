@@ -445,16 +445,18 @@ namespace SIL.PublishingSolution
             var settingsFolder = Path.Combine(Common.GetAllUserPath(), InputType);
             if (Directory.Exists(settingsFolder))
             {
-                foreach (string filePath in Directory.GetFiles(settingsFolder, "*.xsl"))
-                {
-                    var processName = Path.GetFileNameWithoutExtension(filePath);
-					if (!lstxsltFiles.Contains(processName))
-	                {
-		                Debug.Assert(processName != null);
-		                chkLbPreprocess.Items.Add(processName, false);
-	                }
-                }
-            }
+	            var verDocName = Path.Combine(settingsFolder, "byVer.xml");
+	            if (!LoadVersionProcesses(verDocName))
+	            {
+					foreach (string filePath in Directory.GetFiles(settingsFolder, "*.xsl"))
+					{
+						var processName = Path.GetFileNameWithoutExtension(filePath);
+						if (lstxsltFiles.Contains(processName)) continue;
+						Debug.Assert(processName != null);
+						chkLbPreprocess.Items.Add(processName, false);
+					}
+				}
+			}
 
             string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\");// + xsltFile[0]
 
@@ -466,24 +468,40 @@ namespace SIL.PublishingSolution
             xsltFullName = Common.PathCombine(xsltFullName, InputType + "\\"); //TD-2871 - separate dictionary and Scripture xslt
             if (Directory.Exists(xsltFullName))
             {
-                string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
-                // In case the xsl file name change and updated in the psexport.cs file XsltPreProcess
-                foreach (var filePath in filePaths)
-                {
-                    var processName = Path.GetFileNameWithoutExtension(filePath);
-                    Debug.Assert(processName != null);
-					if (!lstxsltFiles.Contains(processName))
-					{
-						if (!chkLbPreprocess.Items.Contains(processName))
-						{
-							chkLbPreprocess.Items.Add(processName, false);
-						}
-					}
-                }
+				var verDocName = Path.Combine(xsltFullName, "byVer.xml");
+	            if (LoadVersionProcesses(verDocName)) return;
+	            string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
+	            // In case the xsl file name change and updated in the psexport.cs file XsltPreProcess
+	            foreach (var filePath in filePaths)
+	            {
+		            var processName = Path.GetFileNameWithoutExtension(filePath);
+		            Debug.Assert(processName != null);
+		            if (lstxsltFiles.Contains(processName)) continue;
+		            if (!chkLbPreprocess.Items.Contains(processName))
+		            {
+			            chkLbPreprocess.Items.Add(processName, false);
+		            }
+	            }
             }
         }
 
-        /// <summary>
+	    private bool LoadVersionProcesses(string verDocName)
+	    {
+		    if (!File.Exists(verDocName)) return false;
+			var verDoc = new XmlDocument();
+			var sr = new StreamReader(verDocName);
+		    verDoc.Load(sr);
+		    sr.Close();
+		    var nodes = verDoc.SelectNodes("//*[contains(@ver,//@default)]");
+		    Debug.Assert(nodes != null, "nodes != null");
+		    foreach (XmlNode node in nodes)
+		    {
+			    chkLbPreprocess.Items.Add(node.InnerText);
+		    }
+		    return true;
+	    }
+
+	    /// <summary>
         /// Attempts to pull in values from the Settings helper (either from the .ldml or
         /// .ssf file) that should override the StyleSettings.xml defaults. There are only
         /// a couple values that fall in this category.
