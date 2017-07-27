@@ -3107,13 +3107,25 @@ namespace SIL.Tool
 			map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
 			map["Base"] = SaveInFolderBase;
-            map["CurrentProject"] = ManageDirectory.ShortFileName(database);
-			map["StyleSheet"] = layout;
+            map["CurrentProject"] = MakeValidFileName(database);
+			map["StyleSheet"] = MakeValidFileName(layout);
 			map["DateTime"] = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
 			Substitution substitution = new Substitution();
 			var del = new Substitution.MyDelegate(map);
 			var result = substitution.DoSubstitute(template, @"\$\(([^)]*)\)s", RegexOptions.None, del.myValue);
 			return DirectoryPathReplace(result);
+		}
+
+		/// <summary>
+		/// Returns a file name with invalid characters replaced with _
+		/// See: https://stackoverflow.com/questions/309485/c-sharp-sanitize-file-name
+		/// </summary>
+		public static string MakeValidFileName(string name)
+		{
+			string invalidChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+			string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
+
+			return Regex.Replace(name, invalidRegStr, "_").Replace("'", "");
 		}
 
 		/// <summary>
