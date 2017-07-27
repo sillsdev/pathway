@@ -110,7 +110,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationPriority(this.chkHelpToImprove, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.chkHelpToImprove, "AboutPw.chkHelpToImprove");
 			this.chkHelpToImprove.Location = new System.Drawing.Point(228, 303);
-			this.chkHelpToImprove.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.chkHelpToImprove.Margin = new System.Windows.Forms.Padding(4);
 			this.chkHelpToImprove.Name = "chkHelpToImprove";
 			this.chkHelpToImprove.Size = new System.Drawing.Size(112, 20);
 			this.chkHelpToImprove.TabIndex = 6;
@@ -125,7 +125,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationPriority(this.btnOk, L10NSharp.LocalizationPriority.High);
 			this.l10NSharpExtender1.SetLocalizingId(this.btnOk, "AboutPw.btnOk");
 			this.btnOk.Location = new System.Drawing.Point(573, 303);
-			this.btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnOk.Margin = new System.Windows.Forms.Padding(4);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(100, 28);
 			this.btnOk.TabIndex = 7;
@@ -204,7 +204,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizationComment(this.pictureBox1, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.pictureBox1, "AboutPw.AboutPw.pictureBox1");
 			this.pictureBox1.Location = new System.Drawing.Point(29, 30);
-			this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(164, 158);
 			this.pictureBox1.TabIndex = 17;
@@ -284,7 +284,7 @@ namespace SIL.PublishingSolution
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(222, 16);
 			this.label2.TabIndex = 15;
-			this.label2.Text = "(C) 2008 - 2016 SIL International  ";
+			this.label2.Text = "(C) 2008 - 2017 SIL International  ";
 			// 
 			// AboutPw
 			// 
@@ -313,7 +313,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this, null);
 			this.l10NSharpExtender1.SetLocalizingId(this, "AboutPw.WindowTitle");
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "AboutPw";
