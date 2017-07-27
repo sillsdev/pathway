@@ -79,6 +79,7 @@ namespace epubConvert
             }
             string[] files = Directory.GetFiles(contentFolder);
             ManifestContent(opf, files, "epub2");
+			opf.WriteEndElement(); // manifest
 			Spine(opf, files);
 			Guide(projInfo, opf, files, "epub2");
             opf.WriteEndElement(); // package
@@ -114,7 +115,14 @@ namespace epubConvert
             }
             string[] files = Directory.GetFiles(contentFolder);
             ManifestContent(opf, files, "epub3");
-            SpineV3(opf, files);
+	        var avFolder = Path.Combine(contentFolder, "AudioVisual");
+	        if (Directory.Exists(avFolder))
+	        {
+		        var avFiles = Directory.GetFiles(avFolder);
+				ManifestAvContent(opf, avFiles);
+			}
+			opf.WriteEndElement(); // manifest
+			SpineV3(opf, files);
             Guide(projInfo, opf, files, "epub3");
             opf.WriteEndElement(); // package
             opf.WriteEndDocument();
@@ -445,7 +453,11 @@ namespace epubConvert
                     opf.WriteAttributeString("id", itemId);
                     opf.WriteAttributeString("href", name);
                     opf.WriteAttributeString("media-type", "application/xhtml+xml");
-                    opf.WriteEndElement(); // item
+					if (epubVersion == "epub3" && isScripted(file))
+					{
+						opf.WriteAttributeString("properties", "scripted");
+					}
+					opf.WriteEndElement(); // item
                 }
                 else if (name.EndsWith(".css"))
                 {
@@ -508,13 +520,54 @@ namespace epubConvert
 
                     opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
                     opf.WriteEndElement(); // item
-                    continue;
                 }
             }
-            opf.WriteEndElement(); // manifest
         }
 
-        private void Spine(XmlWriter opf, IEnumerable<string> files)
+		private void ManifestAvContent(XmlWriter opf, IEnumerable<string> files)
+		{
+			int counterSet = 1;
+
+			foreach (string file in files)
+			{
+				// iterate through the file set and add <item> elements for each xhtml file
+				string name = Path.GetFileName(file);
+				Debug.Assert(name != null);
+				string nameNoExt = Path.GetFileNameWithoutExtension(file);
+
+				if (name.ToLower().EndsWith(".wav"))
+				{
+					opf.WriteStartElement("item"); // item (image)
+					opf.WriteAttributeString("id", string.Format("av{0}", counterSet));
+					opf.WriteAttributeString("href", Path.Combine("AudioVisual",name).Replace("\\","/"));
+					opf.WriteAttributeString("media-type", "audio/x-wav");
+					opf.WriteEndElement(); // item
+					counterSet += 1;
+				}
+			}
+		}
+
+		private bool isScripted(string file)
+		{
+			XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
+			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
+			var xmlReader = XmlReader.Create(file, xmlReaderSettings);
+			xmlDocument.Load(xmlReader);
+			xmlReader.Close();
+			var scriptAttrNode = xmlDocument.SelectSingleNode("//@onclick");
+			if (scriptAttrNode == null) return false;
+			var audioNodes = xmlDocument.SelectNodes("//xhtml:audio", namespaceManager);
+			foreach (XmlElement node in audioNodes)
+			{
+				node.InnerText = "Missing " + Path.GetFileName(node.FirstChild.Attributes["src"].Value);
+			}
+			xmlDocument.Save(file);
+			return true;
+		}
+
+		private void Spine(XmlWriter opf, IEnumerable<string> files)
         {
             // spine
             opf.WriteStartElement("spine");

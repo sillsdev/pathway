@@ -191,6 +191,8 @@ namespace SIL.PublishingSolution
 
 			var epub3Path = MakeCopyOfEpub2(inProcess, projInfo);
 
+			RemoveAudioVisual(inProcess, contentFolder);
+
 			string outputPathWithFileName;
 			var fileName = PackageEpub2(projInfo, inProcess, contentFolder, outputFolder, out outputPathWithFileName);
 
@@ -388,14 +390,47 @@ namespace SIL.PublishingSolution
 			    File.Copy(projInfo.DefaultRevCssFileWithPath,
 				    Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultRevCssFileWithPath)), true);
 
-		    _exportEpub3 = new Epub3Transformation(this, _epubFont);
+			var avFolder = Path.Combine(projInfo.ProjectPath, "AudioVisual");
+			if (Directory.Exists(avFolder))
+			{
+				FolderTree.Copy(avFolder, Path.Combine(epub3Path, "OEBPS", "AudioVisual"));
+			}
+
+			_exportEpub3 = new Epub3Transformation(this, _epubFont);
 		    _exportEpub3.Epub3Directory = epub3Path;
 		    _exportEpub3.InProcess = inProcess;
 		    _exportEpub3.Export(projInfo);
 		    return epub3Path;
 	    }
 
-	    protected void CreateEpubManifest(PublicationInformation projInfo, InProcess inProcess, string contentFolder, Guid bookId,
+		private void RemoveAudioVisual(InProcess inProcess, string contentFolder)
+		{
+			XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
+			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
+			var files = Directory.GetFiles(contentFolder, "PartFile*.*");
+			inProcess.AddToMaximum(files.Length);
+			foreach (var file in files)
+			{
+				inProcess.PerformStep();
+				xmlDocument.RemoveAll();
+				var xmlReader = XmlReader.Create(file, xmlReaderSettings);
+				xmlDocument.Load(xmlReader);
+				xmlReader.Close();
+				var scriptAttrNode = xmlDocument.SelectSingleNode("//@onclick");
+				if (scriptAttrNode == null) continue;
+				var audioNodes = xmlDocument.SelectNodes("//xhtml:audio", namespaceManager);
+				foreach (XmlElement node in audioNodes)
+				{
+					node.ParentNode.RemoveChild(node.NextSibling);
+					node.ParentNode.RemoveChild(node);
+				}
+				xmlDocument.Save(file);
+			}
+		}
+
+		protected void CreateEpubManifest(PublicationInformation projInfo, InProcess inProcess, string contentFolder, Guid bookId,
 		    EpubToc epubToc, string tempCssFile)
 	    {
 		    inProcess.SetStatus("Generating .epub TOC and manifest");
@@ -2277,14 +2312,14 @@ namespace SIL.PublishingSolution
             }
         }
 
-        /// <summary>
-        /// Creates a separate references file at the end of the xhtml files in scripture content, for both footnotes and cross-references.
-        /// Each reference links back relatively to the source xhtml, so that the links can be updated when the content is split into
-        /// smaller chunks.
-        /// </summary>
-        /// <param name="outputFolder"></param>
-        /// <param name="xhtmlFileName"></param>
-        private void CreateReferencesFile(string outputFolder, string xhtmlFileName)
+		/// <summary>
+		/// Creates a separate references file at the end of the xhtml files in scripture content, for both footnotes and cross-references.
+		/// Each reference links back relatively to the source xhtml, so that the links can be updated when the content is split into
+		/// smaller chunks.
+		/// </summary>
+		/// <param name="outputFolder"></param>
+		/// <param name="xhtmlFileName"></param>
+		private void CreateReferencesFile(string outputFolder, string xhtmlFileName)
         {
             // sanity check - return if the references are to be left in the text
             if (References.Contains("Section")) { return; }
@@ -2615,6 +2650,12 @@ namespace SIL.PublishingSolution
             {
                 string[] files = Directory.GetFiles(contentFolder);
                 mOdt.AddToZip(files, zipFile);
+	            var avFolder = Common.PathCombine(contentFolder, "AudioVisual");
+	            if (Directory.Exists(avFolder))
+	            {
+		            var avFiles = Directory.GetFiles(avFolder);
+					mOdt.AddToZip(avFiles, zipFile);
+	            }
                 var sb = new StringBuilder();
                 sb.Append(sourceFolder);
                 sb.Append(Path.DirectorySeparatorChar);
