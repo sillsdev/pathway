@@ -405,7 +405,7 @@ namespace SIL.PublishingSolution
 
 		private void RemoveAudioVisual(InProcess inProcess, string contentFolder)
 		{
-			XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
+			var xmlDocument = Common.DeclareXMLDocument(false);
 			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
 			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
 			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
@@ -421,12 +421,18 @@ namespace SIL.PublishingSolution
 				var scriptAttrNode = xmlDocument.SelectSingleNode("//@onclick");
 				if (scriptAttrNode == null) continue;
 				var audioNodes = xmlDocument.SelectNodes("//xhtml:audio", namespaceManager);
+				Debug.Assert(audioNodes != null);
 				foreach (XmlElement node in audioNodes)
 				{
+					Debug.Assert(node.ParentNode != null);
+					Debug.Assert(node.NextSibling != null);
 					node.ParentNode.RemoveChild(node.NextSibling);
 					node.ParentNode.RemoveChild(node);
 				}
-				xmlDocument.Save(file);
+				var xws = new XmlWriterSettings { Indent = false, Encoding = Encoding.UTF8 };
+				var xw = XmlWriter.Create(file, xws);
+				xmlDocument.Save(xw);
+				xw.Close();
 			}
 		}
 

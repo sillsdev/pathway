@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Xml;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -559,11 +560,20 @@ namespace epubConvert
 			var scriptAttrNode = xmlDocument.SelectSingleNode("//@onclick");
 			if (scriptAttrNode == null) return false;
 			var audioNodes = xmlDocument.SelectNodes("//xhtml:audio", namespaceManager);
+			Debug.Assert(audioNodes != null);
 			foreach (XmlElement node in audioNodes)
 			{
+				if (!string.IsNullOrEmpty(node.InnerText.Trim())) continue;
+				if (node.FirstChild == null) continue;
+				if (!node.HasAttributes) continue;
+				if (node.Attributes["src"] == null) continue;
+				// ReSharper disable once PossibleNullReferenceException
 				node.InnerText = "Missing " + Path.GetFileName(node.FirstChild.Attributes["src"].Value);
 			}
-			xmlDocument.Save(file);
+			var xws= new XmlWriterSettings {Indent = false, Encoding = Encoding.UTF8};
+			var xw = XmlWriter.Create(file, xws);
+			xmlDocument.Save(xw);
+			xw.Close();
 			return true;
 		}
 
