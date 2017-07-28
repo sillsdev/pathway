@@ -525,7 +525,12 @@ namespace epubConvert
             }
         }
 
-		private void ManifestAvContent(XmlWriter opf, IEnumerable<string> files)
+		private static Dictionary<string, string> _audioMime = new Dictionary<string, string>
+		{ {".wav", "audio/vnd.wav"}, {".mp3", "audio/mpeg3"}, {".ogg", "audio/ogg"}, {".mp4", "audio/mp4"} } ;
+		/// <summary>
+		/// Adds audio files to the opf xml file
+		/// </summary>
+		protected void ManifestAvContent(XmlWriter opf, IEnumerable<string> files)
 		{
 			int counterSet = 1;
 
@@ -534,14 +539,14 @@ namespace epubConvert
 				// iterate through the file set and add <item> elements for each xhtml file
 				string name = Path.GetFileName(file);
 				Debug.Assert(name != null);
-				string nameNoExt = Path.GetFileNameWithoutExtension(file);
+				var ext = Path.GetExtension(file).ToLower();
 
-				if (name.ToLower().EndsWith(".wav"))
+				if (_audioMime.ContainsKey(ext))
 				{
 					opf.WriteStartElement("item"); // item (image)
 					opf.WriteAttributeString("id", string.Format("av{0}", counterSet));
 					opf.WriteAttributeString("href", Path.Combine("AudioVisual",name).Replace("\\","/"));
-					opf.WriteAttributeString("media-type", "audio/x-wav");
+					opf.WriteAttributeString("media-type", _audioMime[ext]);
 					opf.WriteEndElement(); // item
 					counterSet += 1;
 				}

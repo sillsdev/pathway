@@ -14,6 +14,7 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
+using System;
 using System.Xml;
 using epubConvert;
 using NUnit.Framework;
@@ -73,6 +74,40 @@ namespace Test.epubConvert
 			Assert.AreEqual(srcNode.InnerText, "AudioVisual/ninth day of Bhadra.wav");
 		}
 
+		[Test]
+		public void ManifestAvContentTest()
+		{
+			const string testName = "ManifestAvContent";
+			var output = _tf.Output(testName + ".opf");
+			var wavInput = _tf.Input(testName + ".wav");
+			var mp3Input = _tf.Input(testName + ".mp3");
+			var oggInput = _tf.Input(testName + ".ogg");
+			var mp4Input = _tf.Input(testName + ".mp4");
+			var files = new String[] {wavInput, mp3Input, oggInput, mp4Input};
+			var xws = new XmlWriterSettings {Indent = false};
+			var xw = XmlWriter.Create(output, xws);
+			xw.WriteStartElement("opf");
+			ManifestAvContent(xw, files);
+			xw.WriteEndElement();
+			xw.Close();
+			var xDoc = Common.DeclareXMLDocument(true);
+			var xrs = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+			var xr = XmlReader.Create(output, xrs);
+			xDoc.Load(xr);
+			xr.Close();
+			var wavNode = xDoc.SelectSingleNode("//item") as XmlElement;
+			Assert.IsNotNull(wavNode);
+			Assert.AreEqual("audio/vnd.wav", wavNode.Attributes["media-type"].Value);
+			var mp3Node = xDoc.SelectSingleNode("//item[contains(@href,'.mp3')]") as XmlElement;
+			Assert.IsNotNull(mp3Node);
+			Assert.AreEqual("audio/mpeg3", mp3Node.Attributes["media-type"].Value);
+			var oggNode = xDoc.SelectSingleNode("//item[contains(@href,'.ogg')]") as XmlElement;
+			Assert.IsNotNull(oggNode);
+			Assert.AreEqual("audio/ogg", oggNode.Attributes["media-type"].Value);
+			var mp4Node = xDoc.SelectSingleNode("//item[contains(@href,'.mp4')]") as XmlElement;
+			Assert.IsNotNull(mp4Node);
+			Assert.AreEqual("audio/mp4", mp4Node.Attributes["media-type"].Value);
+		}
 	}
 }
 
