@@ -15,16 +15,15 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Xml;
 using epubConvert;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
-using epubValidator;
 
 namespace Test.epubConvert
 {
@@ -866,6 +865,35 @@ namespace Test.epubConvert
 				}
 			}
 
+		}
+
+		[Test]
+		public void RemoveAudioVisualTest()
+		{
+			const string testName = "RemoveAudioVisual";
+			_tf = new TestFiles("epubConvert");
+			var inputFileName = "PartFile00008.xhtml";
+			var input = _tf.Copy(inputFileName);
+			var outputFolder = _tf.Output(testName);
+			if (Directory.Exists(outputFolder))
+			{
+				Directory.Delete(outputFolder);
+				Thread.Sleep(1000);
+			}
+			Directory.CreateDirectory(outputFolder);
+			var outFullName = Path.Combine(outputFolder, inputFileName);
+			File.Copy(input, outFullName, true);
+			RemoveAudioVisual(new InProcess(), outputFolder);
+			var xDoc = Common.DeclareXMLDocument(true);
+			var xrs = new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore};
+			var xr = XmlReader.Create(outFullName, xrs);
+			xDoc.Load(xr);
+			xr.Close();
+			var ns = new XmlNamespaceManager(xDoc.NameTable);
+			Assert.IsNotNull(xDoc.DocumentElement, "output file doesn't load as XML document");
+			ns.AddNamespace("xhtml", xDoc.DocumentElement.NamespaceURI);
+			var node = xDoc.SelectSingleNode("//xhtml:audio", ns);
+			Assert.IsNull(node);
 		}
 
 		private void LoadParamValue(string inputType)

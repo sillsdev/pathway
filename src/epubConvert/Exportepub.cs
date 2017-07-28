@@ -403,7 +403,7 @@ namespace SIL.PublishingSolution
 		    return epub3Path;
 	    }
 
-		private void RemoveAudioVisual(InProcess inProcess, string contentFolder)
+		protected void RemoveAudioVisual(InProcess inProcess, string contentFolder)
 		{
 			var xmlDocument = Common.DeclareXMLDocument(false);
 			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);

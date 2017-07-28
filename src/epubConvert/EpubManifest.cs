@@ -548,7 +548,7 @@ namespace epubConvert
 			}
 		}
 
-		private bool isScripted(string file)
+		protected bool isScripted(string file)
 		{
 			XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
 			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
@@ -564,11 +564,16 @@ namespace epubConvert
 			foreach (XmlElement node in audioNodes)
 			{
 				if (!string.IsNullOrEmpty(node.InnerText.Trim())) continue;
-				if (node.FirstChild == null) continue;
-				if (!node.HasAttributes) continue;
-				if (node.Attributes["src"] == null) continue;
-				// ReSharper disable once PossibleNullReferenceException
-				node.InnerText = "Missing " + Path.GetFileName(node.FirstChild.Attributes["src"].Value);
+				var fc = node.FirstChild;
+				if (fc?.NodeType != XmlNodeType.Element) continue;
+				var fce = fc as XmlElement;
+				Debug.Assert(fce != null);
+				if (!fce.HasAttributes) continue;
+				if (fce.Attributes["src"] == null) continue;
+				fce.Attributes["src"].Value = string.Join("/", fce.Attributes["src"].Value.Split('\\'));
+				if (!string.IsNullOrEmpty(node.InnerText)) continue;
+				var fallBack = xmlDocument.CreateTextNode("Missing " + Path.GetFileName(node.FirstChild.Attributes["src"].Value));
+				node.AppendChild(fallBack);
 			}
 			var xws= new XmlWriterSettings {Indent = false, Encoding = Encoding.UTF8};
 			var xw = XmlWriter.Create(file, xws);
