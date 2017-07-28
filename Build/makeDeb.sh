@@ -29,8 +29,8 @@ find pathway-${RELEASE} -type f -iname "*.hhc" -delete
 #find pathway-${RELEASE} -type f -iname "*.dll" -delete
 find pathway-${RELEASE} -type f -iname "*.exe" -delete
 find pathway-${RELEASE} -type f -iname "pathway-xelatex*" -delete
-find pathway-${RELEASE} -type d -iname "bin" -exec rm -rf '{}' \;
-find pathway-${RELEASE} -type d -iname "obj" -exec rm -rf '{}' \;
+find pathway-${RELEASE} -type d -iname bin -exec rm -rf {} \;
+find pathway-${RELEASE} -type d -iname obj -exec rm -rf {} \;
 
 # Tar it up and create symlink for .orig.bz2
 tar jcf pathway-${RELEASE}.tar.bz2 pathway-${RELEASE} || exit 3
