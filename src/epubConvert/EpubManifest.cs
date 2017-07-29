@@ -564,7 +564,7 @@ namespace epubConvert
 			xmlReader.Close();
 			var scriptAttrNode = xmlDocument.SelectSingleNode("//@onclick");
 			if (scriptAttrNode == null) return false;
-			var audioNodes = xmlDocument.SelectNodes("//xhtml:audio", namespaceManager);
+			var audioNodes = xmlDocument.SelectNodes("//xhtml:audio|//xhtml:video", namespaceManager);
 			Debug.Assert(audioNodes != null);
 			foreach (XmlElement node in audioNodes)
 			{
@@ -575,7 +575,10 @@ namespace epubConvert
 				Debug.Assert(fce != null);
 				if (!fce.HasAttributes) continue;
 				if (fce.Attributes["src"] == null) continue;
-				fce.Attributes["src"].Value = string.Join("/", fce.Attributes["src"].Value.Split('\\'));
+				if (fce.Attributes["src"].Value.Contains("\\"))
+				{
+					fce.Attributes["src"].Value = string.Join("/", fce.Attributes["src"].Value.Split('\\'));
+				}
 				if (!string.IsNullOrEmpty(node.InnerText)) continue;
 				var fallBack = xmlDocument.CreateTextNode("Missing " + Path.GetFileName(node.FirstChild.Attributes["src"].Value));
 				node.AppendChild(fallBack);

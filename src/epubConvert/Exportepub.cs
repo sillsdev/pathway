@@ -420,13 +420,16 @@ namespace SIL.PublishingSolution
 				xmlReader.Close();
 				var scriptAttrNode = xmlDocument.SelectSingleNode("//@onclick");
 				if (scriptAttrNode == null) continue;
-				var audioNodes = xmlDocument.SelectNodes("//xhtml:audio", namespaceManager);
+				var audioNodes = xmlDocument.SelectNodes("//xhtml:audio|//xhtml:video", namespaceManager);
 				Debug.Assert(audioNodes != null);
 				foreach (XmlElement node in audioNodes)
 				{
 					Debug.Assert(node.ParentNode != null);
 					Debug.Assert(node.NextSibling != null);
-					node.ParentNode.RemoveChild(node.NextSibling);
+					if (node.NextSibling.LocalName == "a")
+					{
+						node.ParentNode.RemoveChild(node.NextSibling);
+					}
 					node.ParentNode.RemoveChild(node);
 				}
 				var xws = new XmlWriterSettings { Indent = false, Encoding = Encoding.UTF8 };
