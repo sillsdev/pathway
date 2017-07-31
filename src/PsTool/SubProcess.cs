@@ -1,21 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="SubProcess.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Works with SubProcesses.
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Resources;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -154,6 +153,7 @@ namespace SIL.Tool
             Run(instPath, name, null, wait);
         }
 
+		public static ProcessWindowStyle WindowStyle = ProcessWindowStyle.Normal;
         public static void Run(string instPath, string name, string arg, bool wait)
         {
             // clean out the results of any previous runs
@@ -165,7 +165,8 @@ namespace SIL.Tool
                                RedirectStandardOutput = !string.IsNullOrEmpty(RedirectOutput),
                                RedirectStandardError = !string.IsNullOrEmpty(RedirectOutput),
                                UseShellExecute = string.IsNullOrEmpty(RedirectOutput),
-                               WorkingDirectory = instPath
+							   WindowStyle = WindowStyle,
+							   WorkingDirectory = instPath
                            };
             if (arg != null)
                 info.Arguments = arg;
@@ -233,7 +234,7 @@ namespace SIL.Tool
                 return;
             }
 
-            // Wait for Exited event, but not more than 30 seconds. 
+            // Wait for Exited event, but not more than 30 seconds.
             const int SLEEP_AMOUNT = 100;
             while (!eventHandled)
             {
@@ -247,7 +248,7 @@ namespace SIL.Tool
             myProcess.Close();
         }
 
-        // Handle Exited event and display process information. 
+        // Handle Exited event and display process information.
         private static void myProcess_Exited(object sender, System.EventArgs e)
         {
 

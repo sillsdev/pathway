@@ -107,10 +107,9 @@ namespace SIL.PublishingSolution
             if (_cssProperty.ContainsKey("@page") &&
             _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
             {
-                const string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
-                if (Param.GetItem(titlePath) != null)
+                if (Param.GetMetadataValue("Title") != null)
                 {
-                    headerText = Param.GetItem(titlePath).InnerText;
+                    headerText = Param.GetMetadataValue("Title");
                 }
                 string headerFontSize = "10";
                 string[] pageDir = { "@page:left-top-center", "@page:right-top-center" };

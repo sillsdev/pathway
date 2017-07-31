@@ -5361,6 +5361,7 @@ namespace SIL.Tool
 			inProcess.Text = LocalizationManager.GetString("ProgressTitle.InProcessWindow.Title", exportMsg, "");
 			inProcess.Show();
 			inProcess.ShowStatus = true;
+			inProcess.WindowState = FormWindowState.Normal;
 			return inProcess;
 		}
 

@@ -182,6 +182,7 @@ namespace SIL.Tool
 		        }
 		        else
 		        {
+					SubProcess.WindowStyle = ProcessWindowStyle.Minimized;
                     SubProcess.Run(publicationInformation.DictionaryPath, cmd, argument, true);
 				}
 
