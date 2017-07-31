@@ -4853,7 +4853,7 @@ namespace SIL.Tool
 			var folder = Path.GetDirectoryName(fileFullPath);
 			var name = Path.GetFileNameWithoutExtension(fileFullPath);
 			var tempFullName = Common.PathCombine(folder, name) + "-1.xml";
-			File.Copy(fileFullPath, tempFullName);
+			File.Copy(fileFullPath, tempFullName, true);
 
 			XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, true);
 			FileStream xmlFile = new FileStream(fileFullPath, FileMode.Create);

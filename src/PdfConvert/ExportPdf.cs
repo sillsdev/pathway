@@ -30,7 +30,7 @@ namespace SIL.PublishingSolution
     {
         private static string _fullPrincePath;
         private static string _processedXhtml;
-		private readonly XslCompiledTransform _pdfSymbols = new XslCompiledTransform();
+		protected readonly XslCompiledTransform _pdfSymbols = new XslCompiledTransform();
 
 		#region Properties
 		#region ExportType
