@@ -2636,18 +2636,16 @@ namespace SIL.Tool
 		/// ReplaceProcessForPrinceOutput
 		/// </summary>
 		/// <param name="fileName"></param>
-		public bool ReplaceProcessForPrinceOutput(string fileName)
+		public void ReplaceProcessForPrinceOutput(string fileName)
 		{
-			bool checkAudioVisualAvailable = false;
-
-			if (!File.Exists(fileName)) return false;
+			if (!File.Exists(fileName)) return;
 			XmlDocument xDoc = Common.DeclareXMLDocument(true);
 			XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
 			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
 			xDoc.Load(fileName);
 			string xPath = "//xhtml:div[@class='scrSection']";
 			XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
-			if (SectionNodeList == null) return false;
+			if (SectionNodeList == null) return;
 			for (int i = 0; i < SectionNodeList.Count; i++)
 			{
 				if (SectionNodeList[i].InnerText.IndexOf(" // ") > 0)
@@ -2655,49 +2653,7 @@ namespace SIL.Tool
 					SectionNodeList[i].InnerXml = SectionNodeList[i].InnerXml.Replace(" // ", " <br/>");
 				}
 			}
-			xPath = "//xhtml:a";
-			XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
-			if (nodeList == null) return false;
-			for (int i = 0; i < nodeList.Count; i++)
-			{
-				var fallbackStr = "&#x1f50a;";
-				Encoding enc = Encoding.GetEncoding(Encoding.ASCII.CodePage, new EncoderReplacementFallback(fallbackStr), new DecoderReplacementFallback(fallbackStr));
-				string cleanStr = enc.GetString(enc.GetBytes(nodeList[i].InnerText));
-				if (!cleanStr.Contains("&#x1f50a;")) continue;
-				nodeList[i].InnerXml = "<img src=\"speaker.png\" alt=\"Play\" height=\"16\" width=\"21\"/>";
-				checkAudioVisualAvailable = true;
-				var attributeCollection = nodeList[i].Attributes;
-				if (attributeCollection == null) continue;
-				try
-				{
-					var xmlAttributeCollection = attributeCollection["class"].InnerText;
-					if (!xmlAttributeCollection.Contains("audio")) continue;
-					var hrefText = attributeCollection["href"].InnerText;
-					hrefText = hrefText.Replace("#", "") + ".wav";
-					attributeCollection["href"].InnerText = hrefText;
-					var parentNode = nodeList[i].ParentNode.ChildNodes;
-					foreach (XmlNode subnode in parentNode)
-					{
-						if (subnode == null || subnode.Name.ToLower() != "audio") continue;
-						if (subnode.FirstChild.Name.ToLower() != "source") continue;
-						var sourceAttributeCollection = subnode.FirstChild.Attributes;
-						if (sourceAttributeCollection == null) continue;
-						var sourceXmlAttributeCollection = sourceAttributeCollection["src"].InnerText;
-						if (sourceXmlAttributeCollection.ToLower().Contains("audiovisual"))
-						{
-							//<source src="file://636130973644990987summer.mp3"/>
-							sourceAttributeCollection["src"].InnerText = sourceXmlAttributeCollection.Replace("AudioVisual\\", "file://");
-						}
-					}
-				}
-				catch
-				{
-					// if the class attribute generates a null exception, do nothing.
-				}
-			}
-
 			xDoc.Save(fileName);
-			return checkAudioVisualAvailable;
 		}
 
 		/// <summary>
@@ -3135,7 +3091,13 @@ namespace SIL.Tool
 			tw.WriteLine("}");
 
 			tw.WriteLine(".picture {");
-			tw.WriteLine("height: 1.0in;");
+			tw.WriteLine("text-indent: 0pt;");
+			tw.WriteLine("float: right;");
+			tw.WriteLine("text-align: center;");
+			tw.WriteLine("margin: 0pt 0pt 4pt 4pt;");
+			tw.WriteLine("padding: 2pt;");
+			tw.WriteLine("white-space: pre-wrap;");
+			tw.WriteLine("font-size: 10pt;");
 			tw.WriteLine("}");
 
 			tw.Close();

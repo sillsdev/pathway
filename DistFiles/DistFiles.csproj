@@ -390,6 +390,7 @@
     <AllTransform Include="addDicTocHeads.xsl" />
     <AllTransform Include="FixEpub.xsl" />
     <AllTransform Include="FixEpubToc.xsl" />
+    <AllTransform Include="PdfSymbols.xsl" />
     <AllTransform Include="Xhtml-Usx.xsl" />
     <AllTransform Include="Xhtml2BookNames.xsl" />
     <AllTransform Include="StyleMap.xml" />
