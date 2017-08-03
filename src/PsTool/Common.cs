@@ -3122,10 +3122,11 @@ namespace SIL.Tool
 		/// </summary>
 		public static string MakeValidFileName(string name)
 		{
+			if (string.IsNullOrEmpty(name)) return string.Empty;
 			string invalidChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
 			string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
-			return Regex.Replace(name, invalidRegStr, "_").Replace("'", "");
+			return Regex.Replace(name, invalidRegStr, "_").Replace("'", "").Replace(" ", "");
 		}
 
 		/// <summary>
@@ -3168,7 +3169,7 @@ namespace SIL.Tool
 		{
 			try
 			{
-				var pathwayFolder = FromRegistry("");
+				var pathwayFolder = FromRegistry(".."); // Exit from Export folder
 				var directoryInfo = new DirectoryInfo(Path.Combine(pathwayFolder, "Help"));
 				var fileInfoList = directoryInfo.GetFiles("Pathway_Student_Manual*.pdf");
 				using (Process process = new Process())
@@ -4848,6 +4849,7 @@ namespace SIL.Tool
 			return inputText;
 		}
 
+		public static XsltArgumentList ApplyXsltArgs;
 		public static void ApplyXslt(string fileFullPath, XslCompiledTransform xslt)
 		{
 			var folder = Path.GetDirectoryName(fileFullPath);
@@ -4858,7 +4860,7 @@ namespace SIL.Tool
 			XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, true);
 			FileStream xmlFile = new FileStream(fileFullPath, FileMode.Create);
 			XmlWriter writer = XmlWriter.Create(xmlFile, xslt.OutputSettings);
-			xslt.Transform(reader, null, writer, null);
+			xslt.Transform(reader, ApplyXsltArgs, writer, null);
 			xmlFile.Close();
 			reader.Close();
 

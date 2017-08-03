@@ -237,7 +237,8 @@ namespace SIL.Tool
 					_paragraphId = null;
 				}
 				_allParagraph.Push(_paragraphName);
-				_isNewParagraph = true;
+
+				if (string.IsNullOrEmpty(_imageClass)) _isNewParagraph = true;
 
 				if (_tagType == "ol" || _tagType == "ul")
 				{

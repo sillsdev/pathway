@@ -526,7 +526,7 @@ namespace epubConvert
         }
 
 		private static Dictionary<string, string> _audioMime = new Dictionary<string, string>
-		{ {".wav", "audio/vnd.wav"}, {".mp3", "audio/mpeg3"}, {".ogg", "audio/ogg"}, {".mp4", "audio/mp4"} } ;
+		{ {".wav", "audio/vnd.wav"}, {".mp3", "audio/mpeg3"}, {".ogg", "audio/ogg"}, {".mp4", "video/mp4"}, {".avi", "video/avi"}, {".3gp", "video/3gp"} } ;
 		/// <summary>
 		/// Adds audio files to the opf xml file
 		/// </summary>
@@ -543,6 +543,11 @@ namespace epubConvert
 
 				if (_audioMime.ContainsKey(ext))
 				{
+					if (_audioMime[ext].StartsWith("video"))
+					{
+						File.Delete(file);
+						continue;
+					}
 					opf.WriteStartElement("item"); // item (image)
 					opf.WriteAttributeString("id", string.Format("av{0}", counterSet));
 					opf.WriteAttributeString("href", Path.Combine("AudioVisual",name).Replace("\\","/"));

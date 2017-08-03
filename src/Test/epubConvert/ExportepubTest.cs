@@ -883,7 +883,7 @@ namespace Test.epubConvert
 			Directory.CreateDirectory(outputFolder);
 			var outFullName = Path.Combine(outputFolder, inputFileName);
 			File.Copy(input, outFullName, true);
-			RemoveAudioVisual(new InProcess(), outputFolder);
+			RemoveAudioVisual(new InProcess(), outputFolder, outputFolder);
 			var xDoc = Common.DeclareXMLDocument(true);
 			var xrs = new XmlReaderSettings {DtdProcessing = DtdProcessing.Ignore};
 			var xr = XmlReader.Create(outFullName, xrs);
@@ -894,6 +894,9 @@ namespace Test.epubConvert
 			ns.AddNamespace("xhtml", xDoc.DocumentElement.NamespaceURI);
 			var node = xDoc.SelectSingleNode("//xhtml:audio", ns);
 			Assert.IsNull(node);
+			var href = xDoc.SelectSingleNode("//*[@class='CmFile']/@href") as XmlAttribute;
+			Assert.IsNotNull(href, "missing location link");
+			Assert.IsTrue(href.Value.EndsWith("epubConvert/TestFiles/output/RemoveAudioVisual/AudioVisual/ninth%20day%20of%20Bhadra.wav"));
 		}
 
 		private void LoadParamValue(string inputType)

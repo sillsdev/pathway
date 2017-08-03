@@ -1369,8 +1369,8 @@ namespace SIL.Tool
 				if (!File.Exists(tempFile)) return string.Empty;
 				var xmldoc = new XmlDocument();
 				// xml image copy
-				try
-				{
+				//try
+				//{
 					xmldoc = Common.DeclareXMLDocument(true);
 					xmldoc.Load(tempFile);
 
@@ -1405,19 +1405,19 @@ namespace SIL.Tool
 							pictureCount++;
 						}
 					}
-					try
-					{
+					//try
+					//{
 						ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
-					}
-					catch (Exception ex)
-					{
-						Console.Write(ex.Message);
-					}
+					//}
+					//catch (Exception ex)
+					//{
+					//	Console.Write(ex.Message);
+					//}
 					xmldoc.Save(tempFile);
-				}
-				catch
-				{
-				}
+				//}
+				//catch
+				//{
+				//}
 			}
 			else
 			{
@@ -1428,8 +1428,8 @@ namespace SIL.Tool
 				if (!File.Exists(tempFile)) return string.Empty;
 				var xmldoc = new XmlDocument();
 				// xml image copy
-				try
-				{
+				//try
+				//{
 					xmldoc = Common.DeclareXMLDocument(true);
 					xmldoc.Load(tempFile);
 
@@ -1487,19 +1487,19 @@ namespace SIL.Tool
 							}
 						}
 					}
-					try
-					{
+					//try
+					//{
 						ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
-					}
-					catch (Exception ex)
-					{
-						Console.Write(ex.Message);
-					}
+					//}
+					//catch (Exception ex)
+					//{
+					//	Console.Write(ex.Message);
+					//}
 					xmldoc.Save(tempFile);
-				}
-				catch
-				{
-				}
+				//}
+				//catch
+				//{
+				//}
 			}
 
 			return tempFile;
@@ -2454,6 +2454,7 @@ namespace SIL.Tool
 							string href = _reader.GetAttribute("href");
 							if (href != null)
 							{
+								if (!href.StartsWith("#")) continue;
 								st = href.Replace("#", "").ToLower();
 								if (sourceList.Contains(st)) continue;
 								sourceList.Add(st);
@@ -3063,41 +3064,9 @@ namespace SIL.Tool
 
 			tw.WriteLine(".scrBookName { display: block; font-size: 0pt; string-set: bookname content();}");
 
-			//Picture Property
-			tw.WriteLine(".pictureRight {");
-			tw.WriteLine("padding: 10pt;");
-			tw.WriteLine("}");
-
-			tw.WriteLine(".pictureLeft {");
-			tw.WriteLine("padding: 10pt;");
-			tw.WriteLine("}");
-
-			tw.WriteLine(".pictureCenter {");
-			tw.WriteLine("padding: 10pt;");
-			tw.WriteLine("}");
-
-			tw.WriteLine(".picturePage {");
-			tw.WriteLine("padding: 10pt;");
-			tw.WriteLine("}");
-
-			//Space adjustment between letHead and LetData
-			tw.WriteLine(".letData {");
-			tw.WriteLine("padding: 20pt;");
-			tw.WriteLine("}");
-
 			//Avoid letHead as lastline of the page
 			tw.WriteLine(".letHead {");
 			tw.WriteLine("page-break-after: avoid;");
-			tw.WriteLine("}");
-
-			tw.WriteLine(".picture {");
-			tw.WriteLine("text-indent: 0pt;");
-			tw.WriteLine("float: right;");
-			tw.WriteLine("text-align: center;");
-			tw.WriteLine("margin: 0pt 0pt 4pt 4pt;");
-			tw.WriteLine("padding: 2pt;");
-			tw.WriteLine("white-space: pre-wrap;");
-			tw.WriteLine("font-size: 10pt;");
 			tw.WriteLine("}");
 
 			tw.Close();

@@ -20,14 +20,10 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Threading;
 using System.Xml;
-using JWTools;
 using L10NSharp;
 using SilTools;
 using SIL.Tool;
-using SIL.Tool.Localization;
-using System.Collections;
 using System.Globalization;
 
 namespace SIL.PublishingSolution

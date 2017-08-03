@@ -134,7 +134,10 @@ namespace SIL.PublishingSolution
                     preProcessor.MovePictureAsLastChild(preProcessor.ProcessedXhtml);
                     preProcessor.SetNonBreakInVerseNumber(preProcessor.ProcessedXhtml);
 	                preProcessor.ReplaceProcessForPrinceOutput(preProcessor.ProcessedXhtml);
+				    Common.ApplyXsltArgs = new XsltArgumentList();
+				    Common.ApplyXsltArgs.AddParam("avPath", string.Empty, new Uri(projInfo.ProjectPath).AbsoluteUri);
 					Common.ApplyXslt(preProcessor.ProcessedXhtml, _pdfSymbols);
+	                Common.ApplyXsltArgs = null;
 	                RenameAudioVisual(projInfo.ProjectPath, Path.GetDirectoryName(preProcessor.ProcessedXhtml));
 
 					preProcessor.MoveCallerToPrevText(preProcessor.ProcessedXhtml);
@@ -240,7 +243,6 @@ namespace SIL.PublishingSolution
 			    if (!file.Contains(" ")) continue;
 				File.Move(file, file.Replace(" ", "_"));
 		    }
-			FolderTree.Copy(folder, Path.Combine(tempFolder, avName));
 	    }
 
 	    private static bool ExportPrince(PublicationInformation projInfo, string xhtmlFileName, bool isUnixOS,

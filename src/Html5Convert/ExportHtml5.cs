@@ -84,6 +84,8 @@ namespace SIL.PublishingSolution
 			string mergedCss;
 			string defaultCss;
 			string tempCssFile;
+			// float: is not in the list like it is in the Epub.
+			CssRemoved = new List<string> { "string-set:", "-moz-column-", "column-fill:", "-ps-outline-", "-ps-fixed-line-height:", "content: leader(" };
 			var tempFolder = ProcessingCss(projInfo, inProcess, preProcessor, out mergedCss, out defaultCss, out tempCssFile);
 
 			FixIssuesWithFlexXhtml(projInfo, preProcessor, langArray, inProcess);

@@ -13,6 +13,8 @@
     xmlns:x="http://www.w3.org/1999/xhtml"
     version="1.0">
 
+	<xsl:param name="avPath"/>
+
     <xsl:output encoding="UTF-8" method="xml" />
 
     <xsl:template match="/">
@@ -31,7 +33,7 @@
 
     <!-- Recursive template -->
     <xsl:template match="node() | @*">
-    	<xsl:if test="not(preceding-sibling::*[@class='thumbnail'])">
+    	<xsl:if test="not(preceding-sibling::*[@class='thumbnail']) or @class='captionContent'">
     		<xsl:copy>
     			<xsl:apply-templates select="node() | @*"/>
     		</xsl:copy>
@@ -89,29 +91,29 @@
 		<xsl:copy>
 			<xsl:apply-templates select="@class"/>
 			<xsl:attribute name="href">
-				<xsl:call-template name="link">
-					<xsl:with-param name="value" select="preceding-sibling::*[1]//@src"/>
-				</xsl:call-template>
+				<xsl:value-of select="$avPath"/>
+				<xsl:text>/</xsl:text>
+				<xsl:variable name="link" select="preceding-sibling::*[1]//@src"/>
+				<xsl:value-of select="translate(translate($link,' ','_'),'\','/')"/>
 			</xsl:attribute>
 			<xsl:apply-templates select="node()"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<!-- Replace spaces in file name links with _ -->
-	<xsl:template name="link">
-		<xsl:param name="value"/>
-		<xsl:choose>
-			<xsl:when test="contains($value, ' ')">
-				<xsl:value-of select="substring-before($value,' ')"/>
-				<xsl:text>_</xsl:text>
-				<xsl:call-template name="link">
-					<xsl:with-param name="value" select="substring-after($value,' ')"/>
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$value"/>
-			</xsl:otherwise>
-		</xsl:choose>
+	<xsl:template match="x:audio|x:video"/>
+
+	<!-- Use eternal video file -->
+	<xsl:template match="x:a[contains(@href,'AudioVisual')]">
+		<xsl:copy>
+			<xsl:apply-templates select="@class"/>
+			<xsl:attribute name="href">
+				<xsl:value-of select="$avPath"/>
+				<xsl:text>/</xsl:text>
+				<xsl:variable name="link" select="@href"/>
+				<xsl:value-of select="translate(translate($link,' ','_'),'\','/')"/>
+			</xsl:attribute>
+			<xsl:apply-templates select="node()"/>
+		</xsl:copy>
 	</xsl:template>
 
 	<!-- Add font family for symbols -->

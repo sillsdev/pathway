@@ -104,9 +104,6 @@ namespace Test.epubConvert
 			var oggNode = xDoc.SelectSingleNode("//item[contains(@href,'.ogg')]") as XmlElement;
 			Assert.IsNotNull(oggNode);
 			Assert.AreEqual("audio/ogg", oggNode.Attributes["media-type"].Value);
-			var mp4Node = xDoc.SelectSingleNode("//item[contains(@href,'.mp4')]") as XmlElement;
-			Assert.IsNotNull(mp4Node);
-			Assert.AreEqual("audio/mp4", mp4Node.Attributes["media-type"].Value);
 		}
 	}
 }

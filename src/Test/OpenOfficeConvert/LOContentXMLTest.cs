@@ -549,13 +549,6 @@ namespace Test.OpenOfficeConvert
 			_validate.ClassProperty.Add("style:font-size-complex", "10pt");
 			returnValue = _validate.ValidateNodeAttributesNS(false);
 			Assert.IsTrue(returnValue);
-
-			////Parent style for the above two test, which applied to all chile tags
-			//_validate.ClassName = "span_.en_name_slot_slots_morphosyntaxanalysis_sense_sensecontent_senses_entry_letData_body";
-			//_validate.ClassProperty.Add("fo:font-style", "italic");
-			//returnValue = _validate.ValidateNodeAttributesNS(false);
-			//Assert.IsTrue(returnValue);
-
 		}
 
 		///<summary>
@@ -1102,8 +1095,6 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:font-size", "12pt");
             _validate.ClassProperty.Add("style:text-position", "super 55%");
             _validate.ClassProperty.Add("text:display", "prince-footnote");
-            //NOTE: If ttf-mscorefonts-installer is on Linux, the font-family is Arial, if not it is Verdana
-            //_validate.ClassProperty.Add("fo:font-family", Common.IsUnixOS() ? "Verdana" : "Arial");
             _validate.ClassProperty.Add("fo:font-weight", "400");
             bool returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue, "Footnote cal - Style Failure");
@@ -1113,8 +1104,6 @@ namespace Test.OpenOfficeConvert
             _validate.ClassProperty.Add("fo:color", "#ff0000");
             _validate.ClassProperty.Add("fo:font-size", "10pt");
             _validate.ClassProperty.Add("text:display", "prince-footnote");
-            //NOTE: If ttf-mscorefonts-installer is on Linux, the font-family is Arial, if not it is Verdana
-            //_validate.ClassProperty.Add("fo:font-family", Common.IsUnixOS() ? "Verdana" : "Arial");
             _validate.ClassProperty.Add("fo:font-weight", "700");
             returnValue = _validate.ValidateNodeAttributesNS(false);
             Assert.IsTrue(returnValue, "Footnote Marker - Style Failure");
@@ -1539,7 +1528,7 @@ namespace Test.OpenOfficeConvert
 			_validate.ClassName = "img_section_scriptureText_body";
 			_validate.ClassNameTrim = true;
 			_validate.GetOuterXml = true;
-			string content = "<text:p text:style-name=\"img_section_scriptureText_body\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"292.5pt\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><text:p text:style-name=\"P5\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"292.5pt\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/lb00296c.png\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>lb00296c.png</svg:title></draw:frame><text:p text:style-name=\"caption_img_section_scriptureText_body\"><text:span text:style-name=\"caption_img_section_scriptureText_body\">Yohanis, Tuka Sarani Dh (Mark.1.4-6)</text:span></text:p></text:p></draw:text-box></draw:frame><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu. </text:p><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu.</text:p><text:p text:style-name=\"p_section_scriptureText_body\"><text:span text:style-name=\"verseNumber_p_section_scriptureText_body\">  7 </text:span>Tuka Sarani hia Lamatua Yesus!.  <text:span text:style-name=\"verseNumber_p_section_scriptureText_body\"> 8 </text:span>intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here </text:p></text:p>";
+			string content = "<text:p text:style-name=\"img_section_scriptureText_body\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><draw:frame draw:style-name=\"fr2\" draw:name=\"Frame2\" text:anchor-type=\"paragraph\" draw:z-index=\"1\" svg:width=\"292.5pt\" svg:height=\"72pt\" xmlns:svg=\"urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0\" xmlns:draw=\"urn:oasis:names:tc:opendocument:xmlns:drawing:1.0\"><draw:text-box fo:min-height=\"1in\" xmlns:fo=\"urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0\"><text:p text:style-name=\"P5\"><draw:frame draw:style-name=\"gr2\" draw:name=\"Graphics2\" text:anchor-type=\"paragraph\" svg:width=\"292.5pt\" svg:height=\"72pt\"><draw:image xlink:type=\"simple\" xlink:show=\"embed\" xlink:actuate=\"onLoad\" xlink:href=\"Pictures/lb00296c.png\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" /><svg:title>lb00296c.png</svg:title></draw:frame><text:span text:style-name=\"caption_img_section_scriptureText_body\">Yohanis, Tuka Sarani Dh (Mark.1.4-6)</text:span></text:p></draw:text-box></draw:frame><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu. </text:p><text:p text:style-name=\"p_section_scriptureText_body\">Lodo Yerusalem, saku eele sasala miu.</text:p><text:p text:style-name=\"p_section_scriptureText_body\"><text:span text:style-name=\"verseNumber_p_section_scriptureText_body\">  7 </text:span>Tuka Sarani hia Lamatua Yesus!.  <text:span text:style-name=\"verseNumber_p_section_scriptureText_body\"> 8 </text:span>intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here intro text goes here </text:p></text:p>";
 
 			bool returnValue1 = _validate.ValidateOfficeTextNodeForPicture(content, "para");
 			Assert.IsTrue(returnValue1, "Picture_Mrk - Content 1 Failure");
@@ -1564,85 +1553,6 @@ namespace Test.OpenOfficeConvert
             bool returnValue = _validate.ValidateOfficeTextNode(0, content, "para");
             Assert.IsTrue(returnValue);
 		}
-
-		//Environment dependent test
-		/////<summary>
-		///// TD-227 Set language for data.
-		///// </summary>
-		//[Test]
-		//[Category("ShortTest")]
-		//[Category("SkipOnTeamCity")]
-		//public void Language_Node()
-		//{
-		//    _projInfo.ProjectInputType = "Dictionary";
-		//    const string file = "Language";
-		//    string styleOutput = GetStyleOutput(file);
-
-		//    //Content Test - First
-		//    _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-		//    _validate.ClassName = "xitem_.en_main_body";
-		//    string content = "sample text file";
-		//    bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-		//    Assert.IsTrue(returnValue1);
-
-		//    _validate.ClassName = "xitem_.fr_main_body";
-		//    content = "exemple de fichier texte";
-		//    returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-		//    Assert.IsTrue(returnValue1);
-
-		//    _validate.ClassName = "xitem_.es_main_body";
-		//    content = "Este es muestra texto";
-		//    returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-		//    Assert.IsTrue(returnValue1);
-
-		//    _validate.ClassName = "xitem_.fr-FR_main_body";
-		//    content = "exemple de fichier texte";
-		//    returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-		//    Assert.IsTrue(returnValue1);
-
-		//    _validate.ClassName = "xitem_.es-ES_main_body";
-		//    content = "Este es muestra texto";
-		//    returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-		//    Assert.IsTrue(returnValue1);
-
-		// if (Common.UsingMonoVM)
-		//  return;
-
-		//    //Note - The Styles will be created while processing xhtml(content.xml)
-		//    //Style Test - Second
-		//    _validate = new ValidateXMLFile(styleOutput);
-		//    _validate.ClassName = "xitem_.en_main_body";
-		//    _validate.ClassProperty.Add("fo:language", "en");
-		//    _validate.ClassProperty.Add("fo:country", "US");
-		//    bool returnValue = _validate.ValidateNodeAttributesNS(false);
-		//    Assert.IsTrue(returnValue);
-
-		//    _validate.ClassName = "xitem_.fr_main_body";
-		//    _validate.ClassProperty.Add("fo:language", "fr");
-		//    _validate.ClassProperty.Add("fo:country", "FR");
-		//    returnValue = _validate.ValidateNodeAttributesNS(false);
-		//    Assert.IsTrue(returnValue);
-
-		//    _validate.ClassName = "xitem_.es_main_body";
-		//    _validate.ClassProperty.Add("fo:language", "es");
-		//    _validate.ClassProperty.Add("fo:country", "ES");
-		//    returnValue = _validate.ValidateNodeAttributesNS(false);
-		//    Assert.IsTrue(returnValue);
-
-		//    _validate.ClassName = "xitem_.fr-FR_main_body";
-		//    _validate.ClassProperty.Add("fo:language", "fr");
-		//    _validate.ClassProperty.Add("fo:country", "FR");
-		//    returnValue = _validate.ValidateNodeAttributesNS(false);
-		//    Assert.IsTrue(returnValue);
-
-		//    _validate.ClassName = "xitem_.es-ES_main_body";
-		//    _validate.ClassProperty.Add("fo:language", "es");
-		//    _validate.ClassProperty.Add("fo:country", "ES");
-		//    returnValue = _validate.ValidateNodeAttributesNS(false);
-		//    Assert.IsTrue(returnValue);
-
-		//}
-
 
 		///<summary>
 		/// TD-204   unable to put tok / pisin.
@@ -2091,66 +2001,6 @@ namespace Test.OpenOfficeConvert
 
         }
 
-		//Environment dependent test
-		//     ///<summary>
-		//     /// TD-654
-		//     /// </summary>
-		//     [Test]
-		//     [Category("LongTest")]
-		//     [Category("SkipOnTeamCity")]
-		//     public void VerseNumber_Node()
-		//     {
-
-		//         _projInfo.ProjectInputType = "Dictionary";
-		//         const string file = "VerseNumber";
-
-		//         string styleOutput = GetStyleOutput(file);
-		//         //
-		//         //Content Test - First
-		//         _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-		//_validate.ClassName = "VerseNumber_.cwa_Paragraph_scrSection_columns_scrBook_scrBody";
-		//         string content = "1";
-		//         bool returnValue1 = _validate.ValidateOfficeTextNode(content, "span");
-		//         Assert.IsTrue(returnValue1);
-
-		//         //Note - The Styles will be created while processing xhtml(content.xml)
-		//         //Style Test - Second
-		//         _validate = new ValidateXMLFile(styleOutput);
-		//_validate.ClassName = "VerseNumber_.cwa_Paragraph_scrSection_columns_scrBook_scrBody";
-
-		//         _validate.ClassProperty.Add("fo:font-family", "Charis SIL");
-		//         _validate.ClassProperty.Add("style:font-name-complex", "Charis SIL");
-		//         _validate.ClassProperty.Add("style:text-position", "super 55%");
-		//         _validate.ClassProperty.Add("fo:color", "#ff0000");
-		//         _validate.ClassProperty.Add("fo:font-style", "italic");
-		//         _validate.ClassProperty.Add("fo:background-color", "#0000ff");
-
-		//         bool returnValue = _validate.ValidateNodeAttributesNS(false);
-		//         Assert.IsTrue(returnValue, "VerseNumber - Style Failure");
-		//     }
-
-
-		///<summary>
-		/// TD-349 -  width: auto
-		/// </summary>
-		[Test]
-        public void AutoWidth_Node()
-        {
-            _projInfo.ProjectInputType = "Dictionary";
-            const string file = "AutoWidth";
-
-            GetStyleOutput(file);
-
-            //First Node
-            string xpath = "//text:p[@text:style-name='pictureCaption_scrBody']";
-            _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
-            _validate.ClassName = string.Empty;
-            _validate.ClassProperty.Add("fo:min-width", "111.529411764706pt");
-
-            bool returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
-            Assert.IsTrue(returnValue);
-        }
-
         /// <summary>
         /// Remove color if the background color is white. This is done for
         /// pdf output thru odt output.
@@ -2534,30 +2384,6 @@ namespace Test.OpenOfficeConvert
 			returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
 			Assert.IsTrue(returnValue1, "Mirrored Page with Bottom Outside Margin - Right Page Test failed");
 		}
-
-		//Evironment dependent test
-		//[Test]
-		//[Category("SkipOnTeamCity")]
-		//public void ApplySpanFontStyleTestFull()
-		//{
-		//	const string file = "ApplySpanFontStyleTestFull";
-		//	_projInfo.ProjectInputType = "Dictionary";
-		//	string styleOutput = GetStyleOutput(file);
-		//	string xpath = "//style:style[@style:name='span_.bzh-fonipa_form_pronunciation_pronunciations_entry_letData_dicBody']";
-		//	_validate = new ValidateXMLFile(styleOutput);
-		//	_validate.ClassName = string.Empty;
-		//	_validate.ClassProperty.Add("fo:font-family", "Doulos SIL");
-		//	bool returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
-		//	Assert.IsTrue(returnValue, "Apply Span Font Doulos SIL Test failed");
-
-		//	xpath = "//style:style[@style:name='span_.bzh_mainheadword_entry_letData_dicBody']";
-		//	_validate = new ValidateXMLFile(styleOutput);
-		//	_validate.ClassName = string.Empty;
-		//	_validate.ClassProperty.Add("fo:font-family", "Charis SIL");
-		//	returnValue = _validate.ValidateNodeAttributesNS(1, xpath);
-		//	Assert.IsTrue(returnValue, "Apply Span Font Charis SIL Test failed");
-		//}
-
 
 		[Test]
 		public void PageDictionaryTest7()
@@ -3210,38 +3036,6 @@ namespace Test.OpenOfficeConvert
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Hard Space after versenumber test failed");
         }
-
-		//Environment dependent test
-		/////TD-2739
-		//[Test]
-		//[Category("ShortTest")]
-		//[Category("SkipOnTeamCity")]
-		//public void UserIndicFont()
-		//{
-		//    _projInfo.ProjectInputType = "Dictionary";
-		//    const string file = "UserIndicFont";
-		//    string styleOutput = GetStyleOutput(file);
-
-		//    //Note - The Styles will be created while processing xhtml(content.xml)
-		//    //Style Test - Second
-		//    _validate = new ValidateXMLFile(styleOutput);
-
-		//    _validate.ClassName = "headword_.te_entry_letData_dicBody";
-		// if (Common.UsingMonoVM)
-		// {
-		//  _validate.ClassProperty.Add("fo:font-family", "Times New Roman");
-		//  _validate.ClassProperty.Add("style:font-name-complex", "Times New Roman");
-		// }
-		// else
-		// {
-		//  _validate.ClassProperty.Add("fo:font-family", "Arial Unicode MS");
-		//  _validate.ClassProperty.Add("style:font-name-complex", "Arial Unicode MS");
-		// }
-		// _validate.ClassProperty.Add("fo:font-size", "10pt");
-
-		//    bool returnValue = _validate.ValidateNodeAttributesNS(false);
-		//    Assert.IsTrue(returnValue);
-		//}
 
 		///TD-2717
 		[Test]

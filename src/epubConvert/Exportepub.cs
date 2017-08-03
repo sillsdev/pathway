@@ -38,7 +38,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -161,6 +160,7 @@ namespace SIL.PublishingSolution
 			string mergedCss;
 			string defaultCss;
 			string tempCssFile;
+			CssRemoved = new List<string> { "string-set:", "-moz-column-", "column-fill:", "-ps-outline-", "float:", "-ps-fixed-line-height:", "content: leader(" };
 			var tempFolder = ProcessingCss(projInfo, inProcess, preProcessor, out mergedCss, out defaultCss, out tempCssFile);
 
 			FixIssuesWithFlexXhtml(projInfo, preProcessor, langArray, inProcess);
@@ -191,7 +191,9 @@ namespace SIL.PublishingSolution
 
 			var epub3Path = MakeCopyOfEpub2(inProcess, projInfo);
 
-			RemoveAudioVisual(inProcess, contentFolder);
+			RemoveAudioVisual(inProcess, contentFolder, projInfo.ProjectPath);
+
+			LinkVideoFiles(inProcess, epub3Path, projInfo.ProjectPath);
 
 			string outputPathWithFileName;
 			var fileName = PackageEpub2(projInfo, inProcess, contentFolder, outputFolder, out outputPathWithFileName);
@@ -237,18 +239,6 @@ namespace SIL.PublishingSolution
 					catch
 					{
 						// don't worry if we can't clean up pictures folder
-					}
-			    }
-			    var audioVisual = Path.Combine(folder, "AudioVisual");
-			    if (Directory.Exists(audioVisual))
-			    {
-					try
-					{
-						Directory.Delete(audioVisual, true);
-					}
-					catch
-					{
-						// don't worry if we can't clean up folder
 					}
 			    }
 		    }
@@ -403,7 +393,7 @@ namespace SIL.PublishingSolution
 		    return epub3Path;
 	    }
 
-		protected void RemoveAudioVisual(InProcess inProcess, string contentFolder)
+		protected void RemoveAudioVisual(InProcess inProcess, string contentFolder, string avPath)
 		{
 			var xmlDocument = Common.DeclareXMLDocument(false);
 			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
@@ -418,26 +408,74 @@ namespace SIL.PublishingSolution
 				var xmlReader = XmlReader.Create(file, xmlReaderSettings);
 				xmlDocument.Load(xmlReader);
 				xmlReader.Close();
-				var scriptAttrNode = xmlDocument.SelectSingleNode("//@onclick");
-				if (scriptAttrNode == null) continue;
 				var audioNodes = xmlDocument.SelectNodes("//xhtml:audio|//xhtml:video", namespaceManager);
 				Debug.Assert(audioNodes != null);
+				bool changed = false;
 				foreach (XmlElement node in audioNodes)
 				{
 					Debug.Assert(node.ParentNode != null);
-					Debug.Assert(node.NextSibling != null);
-					if (node.NextSibling.LocalName == "a")
+					var aNode = node.NextSibling;
+					if (aNode != null && aNode.LocalName == "a")
 					{
-						node.ParentNode.RemoveChild(node.NextSibling);
+						var href = aNode.Attributes["href"];
+						var uri = new Uri(Path.Combine(avPath, node.FirstChild.Attributes["src"].Value));
+						href.Value = uri.AbsoluteUri;
+						var onclick = aNode.Attributes["onclick"];
+						if (onclick != null)
+						{
+							aNode.Attributes.Remove(onclick);
+						}
 					}
 					node.ParentNode.RemoveChild(node);
+					changed = true;
 				}
+				if (!UpdateAvLinks(avPath, xmlDocument, namespaceManager, changed)) continue;
 				var xws = new XmlWriterSettings { Indent = false, Encoding = Encoding.UTF8 };
 				var xw = XmlWriter.Create(file, xws);
 				xmlDocument.Save(xw);
 				xw.Close();
 			}
 		}
+
+		private static bool UpdateAvLinks(string avPath, XmlDocument xmlDocument, XmlNamespaceManager namespaceManager,
+			bool changed)
+		{
+			var linkNodes = xmlDocument.SelectNodes("//xhtml:a", namespaceManager);
+			Debug.Assert(linkNodes != null);
+			foreach (XmlElement node in linkNodes)
+			{
+				var href = node.Attributes["href"];
+				if (href == null || !href.Value.StartsWith("AudioVisual")) continue;
+				var uri = new Uri(Path.Combine(avPath, href.Value));
+				href.Value = uri.AbsoluteUri;
+				changed = true;
+			}
+			return changed;
+		}
+
+		protected void LinkVideoFiles(InProcess inProcess, string contentFolder, string avPath)
+		{
+			var xmlDocument = Common.DeclareXMLDocument(false);
+			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
+			var files = Directory.GetFiles(Path.Combine(contentFolder, "OEBPS"), "PartFile*.*");
+			inProcess.AddToMaximum(files.Length);
+			foreach (var file in files)
+			{
+				inProcess.PerformStep();
+				xmlDocument.RemoveAll();
+				var xmlReader = XmlReader.Create(file, xmlReaderSettings);
+				xmlDocument.Load(xmlReader);
+				xmlReader.Close();
+				if (!UpdateAvLinks(avPath, xmlDocument, namespaceManager, false)) continue;
+				var xws = new XmlWriterSettings { Indent = false, Encoding = Encoding.UTF8 };
+				var xw = XmlWriter.Create(file, xws);
+				xmlDocument.Save(xw);
+				xw.Close();
+			}
+		}
+
 
 		protected void CreateEpubManifest(PublicationInformation projInfo, InProcess inProcess, string contentFolder, Guid bookId,
 		    EpubToc epubToc, string tempCssFile)
@@ -1224,6 +1262,8 @@ namespace SIL.PublishingSolution
 
         private static MergeCss _mc; // When mc is disposed it also deletes the merged file
 
+		protected static List<string> CssRemoved;
+
         private static string MergeAndFilterCss(PreExportProcess preProcessor, string tempFolder, string cssFullPath)
         {
             var tempFolderName = Path.GetFileName(tempFolder);
@@ -1233,13 +1273,10 @@ namespace SIL.PublishingSolution
             preProcessor.RemoveDeclaration(mergedCss, "@bottom-");
             preProcessor.RemoveDeclaration(mergedCss, "@footnote");
             preProcessor.RemoveDeclaration(mergedCss, "@page");
-            preProcessor.RemoveStringInCss(mergedCss, "string-set:");
-            preProcessor.RemoveStringInCss(mergedCss, "-moz-column-");
-            preProcessor.RemoveStringInCss(mergedCss, "column-fill:");
-            preProcessor.RemoveStringInCss(mergedCss, "-ps-outline-");
-            preProcessor.RemoveStringInCss(mergedCss, "float:");
-            preProcessor.RemoveStringInCss(mergedCss, "-ps-fixed-line-height:");
-            preProcessor.RemoveStringInCss(mergedCss, "content: leader(");
+	        foreach (var target in CssRemoved)
+	        {
+				preProcessor.RemoveStringInCss(mergedCss, target);
+			}
             preProcessor.ReplaceStringInCss(mergedCss);
             preProcessor.SetDropCapInCSS(mergedCss);
             preProcessor.InsertCoverPageImageStyleInCSS(mergedCss);
@@ -1887,6 +1924,7 @@ namespace SIL.PublishingSolution
                 {
                     RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
                     ReplaceAllBrokenHrefs(targetFile, dictHyperlinks);
+	                ConvertAnchorToUrl(targetFile);
                 }
                 foreach (string targetFile in revFiles)
                 {
@@ -1913,7 +1951,27 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void RemoveSpanVerseNumberNodeInXhtmlFile(string fileName)
+		private void ConvertAnchorToUrl(string targetFile)
+		{
+			var xDoc = Common.DeclareXMLDocument(true);
+			var xrs = new XmlReaderSettings {XmlResolver = null, DtdProcessing = DtdProcessing.Ignore};
+			var xr = XmlReader.Create(targetFile, xrs);
+			xDoc.Load(xr);
+			xr.Close();
+			var nodes = xDoc.SelectNodes(@"//*[contains(@href,'\')]/@href");
+			Debug.Assert(nodes != null);
+			if (nodes.Count == 0) return;
+			foreach (XmlAttribute href in nodes)
+			{
+				href.Value = href.Value.Replace(@"\", "/");
+			}
+			var xws = new XmlWriterSettings {Indent = false};
+			var xw = XmlWriter.Create(targetFile, xws);
+			xDoc.Save(xw);
+			xw.Close();
+		}
+
+		private void RemoveSpanVerseNumberNodeInXhtmlFile(string fileName)
         {
             //Removed NoteTargetReference tag from XHTML file
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
