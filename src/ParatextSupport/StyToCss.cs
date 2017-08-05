@@ -266,7 +266,7 @@ namespace SIL.PublishingSolution
                     break;
                 case "\\fontname":
                     value = PropertyValue(line);
-                    _cssProp["font-name"] = value;
+                    _cssProp["font-family"] = value;
                     break;
                 case "\\italic":
                     _cssProp["font-style"] = "italic";
