@@ -2127,7 +2127,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:style-name", "MT1");
                 _writer.WriteStartElement("text:variable-get");
                 _writer.WriteAttributeString("text:name", "Right_Guideword_R");
-                _writer.WriteAttributeString("office:value-type", "string");
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
 
@@ -2137,7 +2136,6 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:style-name", "MT2");
                     _writer.WriteStartElement("text:variable-get");
                     _writer.WriteAttributeString("text:name", "RRight_Guideword_R");
-                    _writer.WriteAttributeString("office:value-type", "string");
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
                 }
@@ -2213,7 +2211,6 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:style-name", "MT1");
             _writer.WriteStartElement("text:variable-get");
             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-            _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteEndElement(); //text:variable-get
             _writer.WriteEndElement();
 
@@ -2223,7 +2220,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:style-name", "MT2");
                 _writer.WriteStartElement("text:variable-get");
                 _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
-                _writer.WriteAttributeString("office:value-type", "string");
                 _writer.WriteEndElement(); //text:variable-get
                 _writer.WriteEndElement(); //text:span
             }

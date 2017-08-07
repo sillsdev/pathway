@@ -602,7 +602,7 @@
       <style:header>
         <text:p text:style-name="Header">
           <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+            <text:variable-get text:name="Left_Guideword_L" />
           </text:span>
           <text:tab />
           <text:span text:style-name="MT3">
@@ -620,7 +620,7 @@
           </text:span>
           <text:tab />
           <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+            <text:variable-get text:name="Left_Guideword_L" />
           </text:span>
         </text:p>
       </style:header>
@@ -630,7 +630,7 @@
             <draw:text-box fo:min-height="14.14pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">
-                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                  <text:variable-get text:name="Right_Guideword_R" />
                 </text:span>
               </text:p>
             </draw:text-box>

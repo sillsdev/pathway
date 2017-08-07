@@ -717,7 +717,6 @@ namespace SIL.PublishingSolution
 				{
 					_writer.WriteStartElement("text:s");
 					_writer.WriteAttributeString("text:c", "1");
-					_writer.WriteString(" ");
 					_writer.WriteEndElement();
 					_significant = true;
 				}
@@ -2114,7 +2113,6 @@ namespace SIL.PublishingSolution
 			_writer.WriteAttributeString("xmlns:grddl", "http://www.w3.org/2003/g/data-view#");
 			_writer.WriteAttributeString("xmlns:field", "urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0");
 			_writer.WriteAttributeString("xmlns:formx", "urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0");
-			_writer.WriteAttributeString("grddl:transformation", "http://docs.oasis-open.org/office/1.2/xslt/odf2rdf.xsl");
 			_writer.WriteStartElement("office:scripts");
 			if (_structStyles.IsMacroEnable)
 			{
@@ -2280,6 +2278,7 @@ namespace SIL.PublishingSolution
 				_writer.WriteAttributeString("style:parent-style-name", "Frame");
 				_writer.WriteStartElement("style:graphic-properties");
 				_writer.WriteAttributeString("fo:margin-left", "0.2in");
+				_writer.WriteAttributeString("fo:margin-bottom", "0.2in");
 				_writer.WriteAttributeString("fo:margin-right", "0in");
 				_writer.WriteAttributeString("style:wrap", "none");
 				_writer.WriteAttributeString("style:vertical-pos", "bottom");
@@ -2719,7 +2718,7 @@ namespace SIL.PublishingSolution
 			strFrameCount = "Frame" + (_frameCount + 1);
 			strFrameStyCount = "fr" + (_frameCount + 1);
 			_imageGraphicsName = strFrameCount;
-			if (_isParagraphClosed) // Forcing a Paragraph Style, if it is not exist
+			if (_isParagraphClosed && !_isInPictureParagraph) // Forcing a Paragraph Style, if it is not exist
 			{
 				int counter = _allParagraph.Count;
 				string divTagName = string.Empty;
@@ -3207,6 +3206,7 @@ namespace SIL.PublishingSolution
 					_writer.WriteEndElement(); // for Textframe
 
 					_imageClass = "";
+					_isInPictureParagraph = true;
 					_isNewParagraph = false;
 					_isParagraphClosed = true;
 
@@ -3850,6 +3850,7 @@ namespace SIL.PublishingSolution
 		{
 			if (_className == "entry")
 			{
+				_isInPictureParagraph = false;
 				_isFirstPicture = true;
 				if (_entryIdList.Contains(_anchorIdValue))
 				{

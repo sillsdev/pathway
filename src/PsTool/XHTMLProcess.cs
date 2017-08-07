@@ -126,6 +126,7 @@ namespace SIL.Tool
 		protected string _imageAltText;
 		protected bool _isAutoWidthforCaption;
 		protected bool _forcedPara;
+		protected bool _isInPictureParagraph;
 
 		#endregion
 
@@ -238,7 +239,10 @@ namespace SIL.Tool
 				}
 				_allParagraph.Push(_paragraphName);
 
-				if (string.IsNullOrEmpty(_imageClass)) _isNewParagraph = true;
+				if (string.IsNullOrEmpty(_imageClass))
+				{
+					_isNewParagraph = true;
+				}
 
 				if (_tagType == "ol" || _tagType == "ul")
 				{
@@ -623,6 +627,12 @@ namespace SIL.Tool
 				{
 					_writer.WriteEndElement();
 				}
+			}
+			string closeChild = Common.LeftString(_closeChildName, "_");
+			if (_isInPictureParagraph && closeChild == "entry")
+			{
+				_writer.WriteEndElement();
+				_isInPictureParagraph = false;
 			}
 			if (_forcedPara)
 			{
