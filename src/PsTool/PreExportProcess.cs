@@ -1369,8 +1369,8 @@ namespace SIL.Tool
 				if (!File.Exists(tempFile)) return string.Empty;
 				var xmldoc = new XmlDocument();
 				// xml image copy
-				try
-				{
+				//try
+				//{
 					xmldoc = Common.DeclareXMLDocument(true);
 					xmldoc.Load(tempFile);
 
@@ -1405,19 +1405,19 @@ namespace SIL.Tool
 							pictureCount++;
 						}
 					}
-					try
-					{
+					//try
+					//{
 						ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
-					}
-					catch (Exception ex)
-					{
-						Console.Write(ex.Message);
-					}
+					//}
+					//catch (Exception ex)
+					//{
+					//	Console.Write(ex.Message);
+					//}
 					xmldoc.Save(tempFile);
-				}
-				catch
-				{
-				}
+				//}
+				//catch
+				//{
+				//}
 			}
 			else
 			{
@@ -1428,8 +1428,8 @@ namespace SIL.Tool
 				if (!File.Exists(tempFile)) return string.Empty;
 				var xmldoc = new XmlDocument();
 				// xml image copy
-				try
-				{
+				//try
+				//{
 					xmldoc = Common.DeclareXMLDocument(true);
 					xmldoc.Load(tempFile);
 
@@ -1487,19 +1487,19 @@ namespace SIL.Tool
 							}
 						}
 					}
-					try
-					{
+					//try
+					//{
 						ParagraphVerserSetUp(xmldoc); // TODO - Seperate it from this method.
-					}
-					catch (Exception ex)
-					{
-						Console.Write(ex.Message);
-					}
+					//}
+					//catch (Exception ex)
+					//{
+					//	Console.Write(ex.Message);
+					//}
 					xmldoc.Save(tempFile);
-				}
-				catch
-				{
-				}
+				//}
+				//catch
+				//{
+				//}
 			}
 
 			return tempFile;
@@ -2454,6 +2454,7 @@ namespace SIL.Tool
 							string href = _reader.GetAttribute("href");
 							if (href != null)
 							{
+								if (!href.StartsWith("#")) continue;
 								st = href.Replace("#", "").ToLower();
 								if (sourceList.Contains(st)) continue;
 								sourceList.Add(st);
@@ -2636,18 +2637,16 @@ namespace SIL.Tool
 		/// ReplaceProcessForPrinceOutput
 		/// </summary>
 		/// <param name="fileName"></param>
-		public bool ReplaceProcessForPrinceOutput(string fileName)
+		public void ReplaceProcessForPrinceOutput(string fileName)
 		{
-			bool checkAudioVisualAvailable = false;
-
-			if (!File.Exists(fileName)) return false;
+			if (!File.Exists(fileName)) return;
 			XmlDocument xDoc = Common.DeclareXMLDocument(true);
 			XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
 			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
 			xDoc.Load(fileName);
 			string xPath = "//xhtml:div[@class='scrSection']";
 			XmlNodeList SectionNodeList = xDoc.SelectNodes(xPath, namespaceManager);
-			if (SectionNodeList == null) return false;
+			if (SectionNodeList == null) return;
 			for (int i = 0; i < SectionNodeList.Count; i++)
 			{
 				if (SectionNodeList[i].InnerText.IndexOf(" // ") > 0)
@@ -2655,49 +2654,7 @@ namespace SIL.Tool
 					SectionNodeList[i].InnerXml = SectionNodeList[i].InnerXml.Replace(" // ", " <br/>");
 				}
 			}
-			xPath = "//xhtml:a";
-			XmlNodeList nodeList = xDoc.SelectNodes(xPath, namespaceManager);
-			if (nodeList == null) return false;
-			for (int i = 0; i < nodeList.Count; i++)
-			{
-				var fallbackStr = "&#x1f50a;";
-				Encoding enc = Encoding.GetEncoding(Encoding.ASCII.CodePage, new EncoderReplacementFallback(fallbackStr), new DecoderReplacementFallback(fallbackStr));
-				string cleanStr = enc.GetString(enc.GetBytes(nodeList[i].InnerText));
-				if (!cleanStr.Contains("&#x1f50a;")) continue;
-				nodeList[i].InnerXml = "<img src=\"speaker.png\" alt=\"Play\" height=\"16\" width=\"21\"/>";
-				checkAudioVisualAvailable = true;
-				var attributeCollection = nodeList[i].Attributes;
-				if (attributeCollection == null) continue;
-				try
-				{
-					var xmlAttributeCollection = attributeCollection["class"].InnerText;
-					if (!xmlAttributeCollection.Contains("audio")) continue;
-					var hrefText = attributeCollection["href"].InnerText;
-					hrefText = hrefText.Replace("#", "") + ".wav";
-					attributeCollection["href"].InnerText = hrefText;
-					var parentNode = nodeList[i].ParentNode.ChildNodes;
-					foreach (XmlNode subnode in parentNode)
-					{
-						if (subnode == null || subnode.Name.ToLower() != "audio") continue;
-						if (subnode.FirstChild.Name.ToLower() != "source") continue;
-						var sourceAttributeCollection = subnode.FirstChild.Attributes;
-						if (sourceAttributeCollection == null) continue;
-						var sourceXmlAttributeCollection = sourceAttributeCollection["src"].InnerText;
-						if (sourceXmlAttributeCollection.ToLower().Contains("audiovisual"))
-						{
-							//<source src="file://636130973644990987summer.mp3"/>
-							sourceAttributeCollection["src"].InnerText = sourceXmlAttributeCollection.Replace("AudioVisual\\", "file://");
-						}
-					}
-				}
-				catch
-				{
-					// if the class attribute generates a null exception, do nothing.
-				}
-			}
-
 			xDoc.Save(fileName);
-			return checkAudioVisualAvailable;
 		}
 
 		/// <summary>
@@ -3107,35 +3064,9 @@ namespace SIL.Tool
 
 			tw.WriteLine(".scrBookName { display: block; font-size: 0pt; string-set: bookname content();}");
 
-			//Picture Property
-			tw.WriteLine(".pictureRight {");
-			tw.WriteLine("padding: 10pt;");
-			tw.WriteLine("}");
-
-			tw.WriteLine(".pictureLeft {");
-			tw.WriteLine("padding: 10pt;");
-			tw.WriteLine("}");
-
-			tw.WriteLine(".pictureCenter {");
-			tw.WriteLine("padding: 10pt;");
-			tw.WriteLine("}");
-
-			tw.WriteLine(".picturePage {");
-			tw.WriteLine("padding: 10pt;");
-			tw.WriteLine("}");
-
-			//Space adjustment between letHead and LetData
-			tw.WriteLine(".letData {");
-			tw.WriteLine("padding: 20pt;");
-			tw.WriteLine("}");
-
 			//Avoid letHead as lastline of the page
 			tw.WriteLine(".letHead {");
 			tw.WriteLine("page-break-after: avoid;");
-			tw.WriteLine("}");
-
-			tw.WriteLine(".picture {");
-			tw.WriteLine("height: 1.0in;");
 			tw.WriteLine("}");
 
 			tw.Close();

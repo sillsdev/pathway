@@ -20,14 +20,11 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Threading;
 using System.Xml;
-using JWTools;
 using L10NSharp;
 using SilTools;
 using SIL.Tool;
-using SIL.Tool.Localization;
-using System.Collections;
+using System.Globalization;
 
 namespace SIL.PublishingSolution
 {
@@ -100,7 +97,7 @@ namespace SIL.PublishingSolution
 				string revFileName = string.Empty;
 				var outDir = Path.GetDirectoryName(outFullName);
 
-				SimplifyExportFiles(outFullName);
+				SimplifyExportFiles(outFullName, inProcess);
 
 				#endregion
 
@@ -274,7 +271,7 @@ namespace SIL.PublishingSolution
 			Common.FileInsertText(cssFileName, cssFileInsert);
 		}
 
-		private void SimplifyExportFiles(string exportedDirectory)
+		private void SimplifyExportFiles(string exportedDirectory, SIL.PublishingSolution.InProcess inProcess)
 		{
 			string cssSimplerFile = Path.Combine(Common.GetApplicationPath(), "Export", "CssSimpler.exe");
 
@@ -301,17 +298,21 @@ namespace SIL.PublishingSolution
 						UserOptionSelectionBasedXsltPreProcess(filename);
 						if (DataType.ToLower() == "dictionary")
 						{
-							string prefix;
+							string option;
 							if (filename.ToLower().Contains("rev"))
 							{
 								indexCnt += 1;
-								prefix = "-p=r" + indexCnt + " ";
+								option = "-p=r" + indexCnt + " ";
 							}
 							else
 							{
-								prefix = "";
+								option = "";
 							}
-							Common.RunCommand(cssSimplerExe, String.Format("{0}-f \"{1}\"", prefix, filename), 1);
+							if (!Destination.ToLower(CultureInfo.InvariantCulture).StartsWith("dictionaryformids"))
+							{
+								option += "-f";
+							}
+							Common.RunCommand(cssSimplerExe, String.Format("-u {0} \"{1}\"", option, filename), 2, inProcess);
 						}
 					}
 				}
@@ -489,7 +490,7 @@ namespace SIL.PublishingSolution
 			try
 			{
 				StringBuilder revAddStyle = new StringBuilder();
-				StringBuilder newProperty = new StringBuilder();				
+				StringBuilder newProperty = new StringBuilder();
 				XmlDocument xdoc = Common.DeclareXMLDocument(false);
 				xdoc.Load(inputXhtmlFileName);
 				XmlNodeList fontList = xdoc.GetElementsByTagName("meta");

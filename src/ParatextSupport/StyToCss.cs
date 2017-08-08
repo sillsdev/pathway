@@ -266,7 +266,7 @@ namespace SIL.PublishingSolution
                     break;
                 case "\\fontname":
                     value = PropertyValue(line);
-                    _cssProp["font-name"] = value;
+                    _cssProp["font-family"] = value;
                     break;
                 case "\\italic":
                     _cssProp["font-style"] = "italic";
@@ -521,7 +521,7 @@ namespace SIL.PublishingSolution
 			_mapClassName["iq1"] = "Intro_Citation_Line1";
 			_mapClassName["iq2"] = "Intro_Citation_Line2";
 			_mapClassName["imq"] = "Intro_Citation_Paragraph";
-
+			_mapClassName["periph"] = "Intro_Heading";
         }
     }
 }

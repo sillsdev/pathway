@@ -1108,13 +1108,13 @@ namespace SIL.PublishingSolution
                 try
                 {
                     if (cssClass["@page"].ContainsKey("page-width"))
-                        pageWidth = Convert.ToDouble(cssClass["@page"]["page-width"], CultureInfo.GetCultureInfo("en-US"));
+                        pageWidth = Convert.ToDouble(cssClass["@page"]["page-width"], new CultureInfo("en-US").NumberFormat);
 
                     if (cssClass["@page"].ContainsKey("margin-left"))
-                        pageMarginLeft = Convert.ToDouble(cssClass["@page"]["margin-left"], CultureInfo.GetCultureInfo("en-US"));
+                        pageMarginLeft = Convert.ToDouble(cssClass["@page"]["margin-left"], new CultureInfo("en-US").NumberFormat);
 
                     if (cssClass["@page"].ContainsKey("margin-right"))
-                        pageMarginRight = Convert.ToDouble(cssClass["@page"]["margin-right"], CultureInfo.GetCultureInfo("en-US"));
+                        pageMarginRight = Convert.ToDouble(cssClass["@page"]["margin-right"], new CultureInfo("en-US").NumberFormat);
 
                     pageWidth = pageWidth - (pageMarginLeft + pageMarginRight);
                     pictureWidth = Convert.ToInt32(pageWidth);

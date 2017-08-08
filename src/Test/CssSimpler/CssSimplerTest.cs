@@ -296,7 +296,6 @@ namespace Test.CssSimplerTest
         /// A test of moving inline styles to css
         /// </summary>
         [Test]
-        [Category("SkipOnPrecise")]
         public void InlineStyleTest()
         {
             const string testName = "InlineStyle";
@@ -332,7 +331,6 @@ namespace Test.CssSimplerTest
         /// A test of moving inline styles to css
         /// </summary>
         [Test]
-        [Category("SkipOnPrecise")]
         public void InlineStyle2Test()
         {
             const string testName = "InlineStyle2";
@@ -401,10 +399,48 @@ namespace Test.CssSimplerTest
             NodeTest(xhtmlFullName, 14, "//*[@xml:space]", "Wrong number of list punctuation");
         }
 
-        /// <summary>
-        /// A test to use the css to insert pseudo content into xhtml
-        /// </summary>
-        [Test]
+		/// <summary>
+		/// A test to use the css to insert pseudo content for between and after into xhtml
+		/// </summary>
+		[Test]
+		public void DoubleCommaTest()
+		{
+			const string testName = "DoubleComma";
+			_testFiles.Copy(testName + ".xhtml");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			_testFiles.Copy(testName + ".css");
+			var styleSheet = _testFiles.Output(testName + ".css");
+			var lc = new LoadClasses(xhtmlFullName);
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			UniqueClasses = lc.UniqueClasses;
+			OutputXml = true;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			var tmp2Out = Path.GetTempFileName();
+			new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			try
+			{
+				File.Delete(tmpXhtmlFullName);
+				File.Delete(tmp2Out);
+			}
+			catch
+			{
+				// ignored
+			}
+			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+			NodeTest(xhtmlFullName, 3, "//*[@class='gloss']//*", "Wrong number of gloss decendants");
+		}
+
+		/// <summary>
+		/// A test to use the css to insert pseudo content into xhtml
+		/// </summary>
+		[Test]
         public void PseudoComplexSubentryTest()
         {
             const string testName = "PseudoComplexSubentry";
@@ -579,10 +615,36 @@ namespace Test.CssSimplerTest
             NodeTest(outFullName, 3023, "//*[@xml:space]", "Nodes with pseudo content changed for Fw 8.2.8");
         }
 
-        /// <summary>
-        /// A test to see if lexsensereferences > span + span:before works correctly
-        /// </summary>
-        [Test]
+		/// <summary>
+		/// A test .headword span[lang='en'] a:before {content:'('} (no class name with pseudo
+		/// </summary>
+		[Test]
+		public void ParenSenseTest()
+		{
+			const string testName = "ParenSense";
+			var cssFullName = _testFiles.Input(testName + ".css");
+			var xhtmlFullName = _testFiles.Input(testName + ".xhtml");
+			var outFullName = _testFiles.Output(testName + ".xhtml");
+			var ctp = new CssTreeParser();
+			ctp.Parse(cssFullName);
+			var root = ctp.Root;
+			Assert.True(root != null);
+			var xml = new XmlDocument();
+			xml.LoadXml("<root/>");
+			var lc = new LoadClasses(xhtmlFullName);
+			UniqueClasses = lc.UniqueClasses;
+			AddSubTree(xml.DocumentElement, root, ctp);
+			_testFiles.Copy(testName + ".css");
+			WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
+			new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
+			NodeTest(outFullName, 2, "//*[@class='headword']//*[local-name()='a']/*", "Expected open and close parenthesis");
+		}
+
+		/// <summary>
+		/// A test to see if lexsensereferences > span + span:before works correctly
+		/// </summary>
+		[Test]
         public void PseudoMultiRelTest()
         {
             const string testName = "PseudoMultiRel";
@@ -718,7 +780,6 @@ namespace Test.CssSimplerTest
         /// This test fails on Windows Team City b/c a newline is missing from the end of the file but succeeds locally and on Linux
         /// </summary>
         [Test]
-		[Category("SkipOnTeamCity")] //Team City doesn't add a new line to the end of the generated XML file and throws a comparison error
         public void PseudoExtraSemDomParenTest()
         {
             const string testName = "PseudoExtraSemDomParen";
@@ -798,7 +859,7 @@ namespace Test.CssSimplerTest
             new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
-            NodeTest(outFullName, 132, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 131, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -1047,7 +1108,7 @@ namespace Test.CssSimplerTest
             // ReSharper disable once UnusedVariable
             var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
-            NodeTest(outFullName, 7, "//*[@xml:space]", "semantic domain punctuation");
+            NodeTest(outFullName, 6, "//*[@xml:space]", "semantic domain punctuation");
         }
 
         /// <summary>
@@ -1321,6 +1382,93 @@ namespace Test.CssSimplerTest
 			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
 			NodeTest(xmlCssFullName, 1, "//RULE[count(ANY)=1 and contains(ANY//value,'ltr') and contains(PROPERTY/value,'isolate')]", "rtl isolate rule");
 			NodeTest(xhtmlOutFullName, 2, "//*[@class='partofspeech' and @dir='ltr']", "check for dir=ltr attribute on partofspeech");
+		}
+
+		/// <summary>
+		/// .letter rule has a green color but span for en lang has blue color and more terms
+		/// </summary>
+		[Test]
+		public void HomographTest()
+		{
+			const string testName = "Homograph";
+			_testFiles.Copy(testName + ".css");
+			_testFiles.Copy(testName + ".xhtml");
+			var cssFullName = _testFiles.Output(testName + ".css");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			var xhtmlOutFullName = _testFiles.Output(testName + "Out.xhtml");
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			var lc = new LoadClasses(xhtmlFullName);
+			var styleSheet = lc.StyleSheet;
+			UniqueClasses = lc.UniqueClasses;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			var tmp2Out = Path.GetTempFileName();
+			// ReSharper disable once UnusedVariable
+			var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmp3Out = Path.GetTempFileName();
+			// ReSharper disable once UnusedVariable
+			var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			var fs = new FlattenStyles(tmp3Out, xhtmlOutFullName, xml, NeedHigher, false, "");
+			fs.Structure = 0;
+			fs.DivBlocks = false;
+			MetaData(fs);
+			fs.Parse();
+			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
+			OutputXml = true;
+			LoadCssXml(parser, styleSheet, xml);
+			OutputXml = false;
+			var xmlCssFullName = _testFiles.Output(testName + ".xml");
+			NodeTest(xmlCssFullName, 3, "//RULE[@term='99' and starts-with(@target,'stxfin')]", "inline rules take high priority");
+			NodeTest(xmlCssFullName, 2, "//RULE[starts-with(@lastClass,'mainheadword') and PROPERTY/value='#00F']", "headword color remains blue");
+			NodeTest(xmlCssFullName, 1, "//RULE[starts-with(@lastClass,'stxfinmainheadword') and PROPERTY[name='font-size'][value='58'][unit='%']]", "subscripted homograph number");
+		}
+
+		/// <summary>
+		/// .letter rule has a green color but span for en lang has blue color and more terms
+		/// </summary>
+		[Test]
+		public void Inline2Test()
+		{
+			const string testName = "Inline2";
+			_testFiles.Copy(testName + ".css");
+			_testFiles.Copy(testName + ".xhtml");
+			var cssFullName = _testFiles.Output(testName + ".css");
+			var xhtmlFullName = _testFiles.Output(testName + ".xhtml");
+			var xhtmlOutFullName = _testFiles.Output(testName + "Out.xhtml");
+			var parser = new CssTreeParser();
+			var xml = new XmlDocument();
+			var lc = new LoadClasses(xhtmlFullName);
+			var styleSheet = lc.StyleSheet;
+			UniqueClasses = lc.UniqueClasses;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmpXhtmlFullName = WriteSimpleXhtml(xhtmlFullName);
+			var tmp2Out = Path.GetTempFileName();
+			// ReSharper disable once UnusedVariable
+			var inlineStyle = new MoveInlineStyles(tmpXhtmlFullName, tmp2Out, styleSheet);
+			xml.RemoveAll();
+			UniqueClasses = null;
+			LoadCssXml(parser, styleSheet, xml);
+			var tmp3Out = Path.GetTempFileName();
+			// ReSharper disable once UnusedVariable
+			var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+			RemoveCssPseudo(styleSheet, xml);
+			var fs = new FlattenStyles(tmp3Out, xhtmlOutFullName, xml, NeedHigher, false, "");
+			fs.Structure = 0;
+			fs.DivBlocks = false;
+			MetaData(fs);
+			fs.Parse();
+			OutputFlattenedStylesheet(xhtmlOutFullName, styleSheet, fs);
+			OutputXml = true;
+			LoadCssXml(parser, styleSheet, xml);
+			OutputXml = false;
+			var xmlCssFullName = _testFiles.Output(testName + ".xml");
+			NodeTest(xmlCssFullName, 4, "//RULE[@term='99' and starts-with(@target,'stxfin')]", "inline rules take high priority");
+			NodeTest(xmlCssFullName, 1, "//RULE[starts-with(@lastClass,'stxfindefinitionorgloss') and PROPERTY[name='font-size'][value='58'][unit='%']]", "subscripted homograph number");
 		}
 
 		/// <summary>

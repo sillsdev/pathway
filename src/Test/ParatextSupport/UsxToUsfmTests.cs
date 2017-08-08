@@ -108,12 +108,17 @@ namespace Test.ParatextSupport
             converter = new ParatextPathwayLink("testDb", xslParams);
             usxToXhtmlXslt = ParatextSupportExtensions.UsxToUsfmXslt(converter);
         }
-        #endregion
+		[TestFixtureTearDown]
+		public void FixtureTearDown()
+		{
+			Param.DatabaseName = "DatabaseName";
+		}
+		#endregion
 
 
-        #region Tests
+		#region Tests
 
-        [Test]
+		[Test]
 		[Category("SkipOnTeamCity")]
         public void ExportToPathwayTest()
         {

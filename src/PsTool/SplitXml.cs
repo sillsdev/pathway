@@ -31,6 +31,7 @@ namespace SIL.Tool
         public string FileFullPath;
         public string CssName;
         public long TargetSize = 50L*1024L;
+	    public bool OneEntry;
         private int _entryLevel;
 	    private readonly string _splitterClass;
         public readonly List<string> FileList = new List<string>();
@@ -121,7 +122,8 @@ namespace SIL.Tool
         private void CheckSizeAtEntry(XmlReader r)
         {
             if (r.Depth != _entryLevel) return;
-            if (!Writing || CurrentSize() < TargetSize) return;
+            if (!Writing ) return;
+            if (!OneEntry && CurrentSize() < TargetSize) return;
             SkipNode = true;
             Finished();
         }

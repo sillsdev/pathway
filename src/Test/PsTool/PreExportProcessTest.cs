@@ -15,16 +15,16 @@
 // --------------------------------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using NUnit.Framework;
+using SIL.PublishingSolution;
 using SIL.Tool;
 
 namespace Test.PsTool
 {
     [TestFixture]
-    public class PreExportProcessTest
+    public class PreExportProcessTest : ExportPdf
     {
         PreExportProcess preExportProcess;
 
@@ -98,6 +98,7 @@ namespace Test.PsTool
 		[Test]
 		public void PrinceExportAudioVisualInputcaseTest()
 		{
+			_pdfSymbols.Load(XmlReader.Create(Common.UsersXsl("PdfSymbols.xsl")));
 			string filename = "PrinceExportAudioVisualInputcase.xhtml";
 			string input = GetFileNameWithPath(filename);
 			string expected = GetFileNameWithExpectedPath(filename);
@@ -106,7 +107,7 @@ namespace Test.PsTool
 			CopyToOutput(input, output);
 			projInfo.ProjectInputType = "Dictionary";
 			preExportProcess = new PreExportProcess();
-			preExportProcess.ReplaceProcessForPrinceOutput(output);
+			Common.ApplyXslt(output, _pdfSymbols);
 			XmlAssert.AreEqual(expected, output, "PrinceExport AudioVisual Inputcase failed");
 		}
 

@@ -288,6 +288,7 @@
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsRecTest.cs" />
     <Compile Include="DictionaryForMIDsConvert\DictionaryForMIDsTests.cs" />
     <Compile Include="epubConvert\EpubDictionaryExportTest.cs" />
+    <Compile Include="epubConvert\EpubManifestTest.cs" />
     <Compile Include="epubConvert\EpubXsltTransformationTest.cs" />
     <Compile Include="epubConvert\ExportHtml5Test.cs" />
     <Compile Include="GoBibleConvert\ExportGoBibleTest.cs">

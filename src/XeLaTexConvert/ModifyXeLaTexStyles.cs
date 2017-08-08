@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ModifyXeLaTexStyles.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 //
 // </remarks>
@@ -287,8 +287,15 @@ namespace SIL.PublishingSolution
 
 				sw.WriteLine(_pageStyleFormat);
 
-				sw.WriteLine(@"\parindent=0pt");
-				sw.WriteLine(@"\parskip=\medskipamount");
+				if (!string.IsNullOrEmpty(_projectType) && _projectType.ToLower() == "scripture")
+				{
+					sw.WriteLine(@"\setlength{\parindent}{20pt}");
+				}
+				else
+				{
+					sw.WriteLine(@"\parindent=0pt");
+					sw.WriteLine(@"\parskip=\medskipamount");
+				}
 				sw.WriteLine(@"\begin{document}");
 				sw.WriteLine(@"\pagestyle{plain}");
 				sw.WriteLine(@"\sloppy");

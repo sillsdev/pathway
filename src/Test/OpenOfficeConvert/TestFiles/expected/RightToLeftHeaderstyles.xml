@@ -61,31 +61,31 @@
       <style:text-properties text:display="none" fo:font-size="12pt" fo:font-style="italic" fo:color="#400000" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="12pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="24pt" />
     </style:style>
     <style:style style:name="h2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="8pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="18pt" />
     </style:style>
     <style:style style:name="h3" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="7pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="7pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="h4" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="6pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="h5" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="5.5pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="5.5pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="10pt" />
     </style:style>
     <style:style style:name="h6" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="5.5pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" />
+      <style:paragraph-properties fo:padding-top="5.5pt" />
       <style:text-properties fo:font-weight="700" fo:font-size="8pt" />
     </style:style>
     <style:style style:name="p" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="12pt" />
+      <style:paragraph-properties fo:padding-top="12pt" fo:padding-bottom="12pt" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:margin-top="0.1in" fo:margin-bottom="0.1in" style:line-spacing="100%" />
@@ -438,7 +438,7 @@
             <draw:text-box fo:min-height="14.14pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">
-                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                  <text:variable-get text:name="Right_Guideword_R" />
                 </text:span>
               </text:p>
             </draw:text-box>
@@ -451,7 +451,7 @@
             <text:tab />
             <text:tab />
             <text:span text:style-name="MT1">
-              <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+              <text:variable-get text:name="Left_Guideword_L" />
             </text:span>
           </text:span>
         </text:p>
@@ -461,7 +461,7 @@
       <style:header>
         <text:p text:style-name="Header">
           <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+            <text:variable-get text:name="Left_Guideword_L" />
           </text:span>
         </text:p>
       </style:header>
@@ -473,7 +473,7 @@
             <draw:text-box fo:min-height="14.14pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">
-                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                  <text:variable-get text:name="Right_Guideword_R" />
                 </text:span>
               </text:p>
             </draw:text-box>
@@ -486,7 +486,7 @@
             <text:tab />
             <text:tab />
             <text:span text:style-name="MT1">
-              <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+              <text:variable-get text:name="Left_Guideword_L" />
             </text:span>
           </text:span>
         </text:p>

@@ -36,6 +36,8 @@ using Microsoft.Win32;
 using SIL.Tool.Localization;
 using System.Reflection;
 using System.Threading;
+using SIL.CommandLineProcessing;
+using SIL.Progress;
 using Test;
 using SIL.PublishingSolution;
 using SIL.WritingSystems;
@@ -1271,15 +1273,15 @@ namespace SIL.Tool
 				int counter;
 				attribute = attribute.Replace(" ", "");
 				string attrib = GetNumericChar(attribute, out counter);
-				attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US"));
+				attributeValue = float.Parse(attrib, new CultureInfo("en-US").NumberFormat);
 				string attributeUnit = attribute.Substring(counter);
 				if (attributeUnit == "cm")
 				{
-					attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) * 0.3937008F;
+					attributeValue = float.Parse(attrib, new CultureInfo("en-US").NumberFormat) * 0.3937008F;
 				}
 				else if (attributeUnit == "pt")
 				{
-					attributeValue = float.Parse(attrib, CultureInfo.GetCultureInfo("en-US")) / 72F;
+					attributeValue = float.Parse(attrib, new CultureInfo("en-US").NumberFormat) / 72F;
 				}
 			}
 			catch
@@ -3076,7 +3078,7 @@ namespace SIL.Tool
 			catch
 			{
 			}
-			return retValue.ToString();
+			return retValue.ToString(CultureInfo.CreateSpecificCulture("en-US"));
 		}
 
 		public static string GetLeadingType(Dictionary<string, string> Properties)
@@ -3102,19 +3104,29 @@ namespace SIL.Tool
 		{
 			Dictionary<string, string> map = new Dictionary<string, string>();
 
-			if(UsingMonoVM)
-				map["Documents"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-			else
-				map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+			map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
 			map["Base"] = SaveInFolderBase;
-			map["CurrentProject"] = database;
-			map["StyleSheet"] = layout;
+            map["CurrentProject"] = MakeValidFileName(database);
+			map["StyleSheet"] = MakeValidFileName(layout);
 			map["DateTime"] = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
 			Substitution substitution = new Substitution();
 			var del = new Substitution.MyDelegate(map);
 			var result = substitution.DoSubstitute(template, @"\$\(([^)]*)\)s", RegexOptions.None, del.myValue);
 			return DirectoryPathReplace(result);
+		}
+
+		/// <summary>
+		/// Returns a file name with invalid characters replaced with _
+		/// See: https://stackoverflow.com/questions/309485/c-sharp-sanitize-file-name
+		/// </summary>
+		public static string MakeValidFileName(string name)
+		{
+			if (string.IsNullOrEmpty(name)) return string.Empty;
+			string invalidChars = Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+			string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
+
+			return Regex.Replace(name, invalidRegStr, "_").Replace("'", "").Replace(" ", "");
 		}
 
 		/// <summary>
@@ -3157,7 +3169,7 @@ namespace SIL.Tool
 		{
 			try
 			{
-				var pathwayFolder = FromRegistry("");
+				var pathwayFolder = FromRegistry(".."); // Exit from Export folder
 				var directoryInfo = new DirectoryInfo(Path.Combine(pathwayFolder, "Help"));
 				var fileInfoList = directoryInfo.GetFiles("Pathway_Student_Manual*.pdf");
 				using (Process process = new Process())
@@ -3348,7 +3360,7 @@ namespace SIL.Tool
 		/// <param name="sourceFolder"></param>
 		/// <param name="destFolder"></param>
 		/// <param name="ignoreFiles"> </param>
-		public static void CustomizedFileCopy(string sourceFolder, string destFolder, string ignoreFiles)
+		public static void CustomizedFileCopy(InProcess inProcess, string sourceFolder, string destFolder, string ignoreFiles)
 		{
 			if (Directory.Exists(destFolder))
 			{
@@ -3358,31 +3370,29 @@ namespace SIL.Tool
 			Directory.CreateDirectory(destFolder);
 			FolderTree.Copy(FromRegistry(Path.Combine("Html5", "Dictionary")), destFolder, false);
 			var template = FileData.Get(Path.Combine(destFolder, "pages", "template.html"));
-			var tocDoc = DeclareXMLDocument(false);
-			var sr = new StreamReader(Path.Combine(sourceFolder, "..", "bootstrapToc.html"));
-			tocDoc.Load(sr);
-			sr.Close();
+			var indexTemplate = FileData.Get(Path.Combine(destFolder, "pages", "indexTemplate.html"));
 			var opfDoc = DeclareXMLDocument(false);
-			sr = new StreamReader(Path.Combine(sourceFolder, "content.opf"));
+			var sr = new StreamReader(Path.Combine(sourceFolder, "content.opf"));
 			opfDoc.Load(sr);
 			sr.Close();
 			var fileOrderQ = opfDoc.SelectNodes("//*[local-name()='item']/@href[contains(.,'.html')]");
 			var fileOrder = (from XmlAttribute attr in fileOrderQ let val = attr.Value where !val.Contains("TOC") select attr.Value).ToList();
-			var contDoc = DeclareXMLDocument(false);
 			var pagetitle = Param.GetMetadataValue("Title");
 			var head = Param.GetMetadataValue("Title");
 			var author = Param.GetMetadataValue("Creator");
 			var description = Param.GetMetadataValue("Description");
 			var version = DateTime.Today.ToShortDateString();
-			var categorylink = "#";
+			var categorylink = "sindex.html";
 			var aboutlink = "File2Cpy00000_.html";
 			var pageCss = "book.css";
-			var sidebar = tocDoc.SelectSingleNode("//*[local-name()='body']").InnerXml.Replace(@" xmlns=""http://www.w3.org/1999/xhtml""","");
+			var contDoc = DeclareXMLDocument(false);
+			MakeIndex(sourceFolder, destFolder, contDoc, indexTemplate, pagetitle, head, version, fileOrder, categorylink, aboutlink, pageCss, author, description, "bootstrapToc.html", "index.html");
+			MakeIndex(sourceFolder, destFolder, contDoc, indexTemplate, pagetitle, head, version, fileOrder, categorylink, aboutlink, pageCss, author, description, "bootstrapSem.html", "sindex.html");
 			var files = Directory.GetFiles(sourceFolder);
 			var iFiles = ignoreFiles.Split(',');
 			try
 			{
-				var first = true;
+				inProcess.AddToMaximum(files.Length);
 				foreach (var file in files)
 				{
 					var name = Path.GetFileName(file);
@@ -3391,34 +3401,50 @@ namespace SIL.Tool
 					var dest = Path.Combine(destFolder, "pages", name);
 					if (Path.GetExtension(name) == ".html")
 					{
-						sr = new StreamReader(file);
-						contDoc.Load(sr);
-						sr.Close();
+						var content = GetBodyContent(file, contDoc);
 						var index = fileOrder.IndexOf(name);
 						var backlink = index > 0? fileOrder[index - 1]: "#";
 						var forelink = index + 1 < fileOrder.Count ? fileOrder[index + 1]: "#";
-						var content = contDoc.SelectSingleNode("//*[local-name()='body']").InnerXml;
 						var result = string.Format(template, pagetitle, head, version, backlink, forelink, categorylink, aboutlink,
-							sidebar, content, pageCss, author, description);
+							content, pageCss, author, description);
 						var sw = new StreamWriter(dest);
 						sw.Write(result);
 						sw.Close();
-						if (first)
-						{
-							File.Copy(dest, Path.Combine(destFolder, "pages", "index.html"), true);
-							first = false;
-						}
 					}
 					else
 					{
 						File.Copy(file, dest);
 					}
+					inProcess.PerformStep();
 				}
 			}
 			catch
 			{
 				return;
 			}
+		}
+
+		private static void MakeIndex(string sourceFolder, string destFolder, XmlDocument contDoc, string indexTemplate,
+			string pagetitle, string head, string version, List<string> fileOrder, string categorylink, string aboutlink, string pageCss,
+			string author, string description, string sideBarFile, string indexFile)
+		{
+			var titleContent = GetBodyContent(Path.Combine(sourceFolder, "File1Ttl00000_.html"), contDoc).Replace(@"xmlns=""http://www.w3.org/1999/xhtml""", "").Replace(@"xmlns=""""", "");
+			var sidebar = GetBodyContent(Path.Combine(sourceFolder, "..", sideBarFile), contDoc).Replace(@"xmlns=""http://www.w3.org/1999/xhtml""","").Replace(@"xmlns=""""","");
+			var indexResult = string.Format(indexTemplate, pagetitle, head, version, "#", fileOrder[1], categorylink, aboutlink,
+				sidebar, pageCss, author, description, titleContent);
+			var indexSw = new StreamWriter(Path.Combine(destFolder, "pages", indexFile));
+			indexSw.Write(indexResult);
+			indexSw.Close();
+		}
+
+		private static string GetBodyContent(string file, XmlDocument contDoc)
+		{
+			if (!File.Exists(file)) return "";
+			var sr = new StreamReader(file);
+			contDoc.Load(sr);
+			sr.Close();
+			var content = contDoc.SelectSingleNode("//*[local-name()='body']").InnerXml;
+			return content;
 		}
 
 		public static string ReplaceSeperators(string styleName)
@@ -3803,6 +3829,11 @@ namespace SIL.Tool
 
 		public static bool RunCommand(string szCmd, string szArgs, int wait)
 		{
+			return RunCommand(szCmd, szArgs, wait, null);
+		}
+
+		public static bool RunCommand(string szCmd, string szArgs, int wait, SIL.PublishingSolution.InProcess inProcess)
+		{
 			if (szCmd == null) return false;
 			using (var myproc = new Process())
 			{
@@ -3811,6 +3842,10 @@ namespace SIL.Tool
 				myproc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 				myproc.StartInfo.FileName = szCmd;
 				myproc.StartInfo.Arguments = szArgs;
+				myproc.StartInfo.UseShellExecute = false;
+				myproc.StartInfo.RedirectStandardInput = true;
+				myproc.StartInfo.RedirectStandardOutput = true;
+				myproc.StartInfo.RedirectStandardError = true;
 
 				if (!myproc.Start())
 					return false;
@@ -3820,6 +3855,39 @@ namespace SIL.Tool
 				if (wait == 1)
 				{
 					myproc.WaitForExit();
+					exitCode = myproc.ExitCode;
+				} else if (wait == 2) /* This allows monitoring the status of the program */
+				{
+					var progOutput = "";
+					myproc.BeginErrorReadLine();
+					while (!myproc.HasExited)
+					{
+						var buffer = myproc.StandardOutput.ReadLine();
+						if (buffer == null)
+						{
+							Thread.Sleep(100);
+							continue;
+						}
+						var data = Regex.Match(buffer, @"([mxst]+)([0-9]+)");
+						if (data.Success)
+						{
+							var value = int.Parse(data.Groups[2].Value);
+							switch (data.Groups[1].Value)
+							{
+								case "mx":
+									inProcess.AddToMaximum(value);
+									break;
+								case "st":
+									inProcess.PerformStep();
+									break;
+							}
+						}
+						else
+						{
+							progOutput += buffer + "\n";
+						}
+					}
+					if (progOutput != "") MessageBox.Show(progOutput, "Style results", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					exitCode = myproc.ExitCode;
 				}
 				myproc.Close();
@@ -4781,17 +4849,18 @@ namespace SIL.Tool
 			return inputText;
 		}
 
+		public static XsltArgumentList ApplyXsltArgs;
 		public static void ApplyXslt(string fileFullPath, XslCompiledTransform xslt)
 		{
 			var folder = Path.GetDirectoryName(fileFullPath);
 			var name = Path.GetFileNameWithoutExtension(fileFullPath);
 			var tempFullName = Common.PathCombine(folder, name) + "-1.xml";
-			File.Copy(fileFullPath, tempFullName);
+			File.Copy(fileFullPath, tempFullName, true);
 
 			XmlTextReader reader = Common.DeclareXmlTextReader(tempFullName, true);
 			FileStream xmlFile = new FileStream(fileFullPath, FileMode.Create);
 			XmlWriter writer = XmlWriter.Create(xmlFile, xslt.OutputSettings);
-			xslt.Transform(reader, null, writer, null);
+			xslt.Transform(reader, ApplyXsltArgs, writer, null);
 			xmlFile.Close();
 			reader.Close();
 
@@ -5294,6 +5363,7 @@ namespace SIL.Tool
 			inProcess.Text = LocalizationManager.GetString("ProgressTitle.InProcessWindow.Title", exportMsg, "");
 			inProcess.Show();
 			inProcess.ShowStatus = true;
+			inProcess.WindowState = FormWindowState.Normal;
 			return inProcess;
 		}
 
@@ -5353,7 +5423,7 @@ namespace SIL.Tool
 
 		public static void FindParatextProject()
 		{
-			if (!string.IsNullOrEmpty(Ssf)) return;
+			if (!string.IsNullOrEmpty(Ssf)  || Param.DatabaseName == "DatabaseName") return;
 			RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out ParatextData);
 			var sh = new SettingsHelper(Param.DatabaseName);
 			Common.Ssf = sh.GetSettingsFilename();
@@ -5421,6 +5491,108 @@ namespace SIL.Tool
 				}
 			}
 			return;
+		}
+
+		/// <summary>
+		/// Get the line number from the exception message
+		/// </summary>
+		/// <param name="ex">Exception message</param>
+		/// <returns></returns>
+		public static int GetLineNumber(Exception ex)
+		{
+			var lineNumber = 0;
+			const string lineSearch = ":line ";
+			var index = ex.StackTrace.LastIndexOf(lineSearch);
+			if (index != -1)
+			{
+				var lineNumberText = ex.StackTrace.Substring(index + lineSearch.Length);
+				if (int.TryParse(lineNumberText, out lineNumber))
+				{
+				}
+			}
+			return lineNumber;
+		}
+
+		public static bool ShowPdfPreview(PublicationInformation projInfo)
+		{
+			var success = CallPathwayExport("PDF (using Prince)", projInfo); //PDF Using Prince
+			if (!success)
+			{
+				success = CallPathwayExport("Pdf (Using OpenOffice/LibreOffice)", projInfo); //PDF Using LibreOffice
+				if (success)
+				{
+					string os = Common.GetOsName();
+					string libre = Common.GetLibreofficeVersion(os);
+					if (os.IndexOf("Windows") == 0 && libre == null)
+					{
+						success = false;
+					}
+				}
+			}
+			if (success)
+			{
+				var allUserPath = PathCombine(Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath),
+					Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath) + ".pdf");
+				var appPath = GetPSApplicationPath();
+				if (File.Exists(allUserPath) && !appPath.Contains("Debug"))
+				{
+					File.Copy(allUserPath, PathCombine(Path.GetDirectoryName(allUserPath),
+						PathCombine(projInfo.ProjectInputType, Path.GetFileNameWithoutExtension(projInfo.DefaultCssFileWithPath)) + ".pdf"), true);
+				}
+			}
+			return success;
+		}
+
+		/// <summary>
+		/// Method which calls the Pathway Export workflow which is using in Backend
+		/// </summary>
+		/// <param name="outputType">Want Pdf using Prince/Libre Office</param>
+		/// <param name="projInfo">PublicationInformation</param>
+		/// <returns>True when successfully generates Pdf file else return False</returns>
+		private static bool CallPathwayExport(string outputType, PublicationInformation projInfo)
+		{
+			bool success;
+			string xhtmlFile = projInfo.DefaultXhtmlFileWithPath;
+			var localType = outputType.Replace(@"\", "/").ToLower();
+			try
+			{
+				//Code to call PathwayExport Commandline Utility
+				StringBuilder sb = new StringBuilder();
+				sb.Append("\"");
+				sb.Append(projInfo.DefaultXhtmlFileWithPath);
+				sb.Append(",\" ");
+				sb.Append("\"");
+				sb.Append(projInfo.DefaultCssFileWithPath);
+				sb.Append("\"");
+
+				Common.SaveInputType(projInfo.ProjectInputType);
+
+				string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3} --database \"{4}\"",
+					localType.Replace(@"\", "/").ToLower(), projInfo.DictionaryPath, sb.ToString(), Common.Testing.ToString(),
+					Param.DatabaseName);
+
+				string pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "PathwayExport.exe");
+
+				if (!File.Exists(pathwayExportFile))
+					pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "Export", "PathwayExport.exe");
+
+				var cmd = Common.IsUnixOS()
+					? "/usr/bin/PathwayExport"
+					: pathwayExportFile;
+
+				CommandLineRunner.Run(cmd, argument, projInfo.DictionaryPath, 50000, new ConsoleProgress());
+				success = true;
+			}
+			catch (Exception ex)
+			{
+
+				throw new Exception(ex.Message);
+			}
+			finally
+			{
+				projInfo.DefaultXhtmlFileWithPath = xhtmlFile;
+			}
+			return success;
 		}
 	}
 }

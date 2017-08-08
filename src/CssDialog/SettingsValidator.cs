@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="SettingsValidator.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Validation of settings file
 // </remarks>
@@ -70,8 +70,8 @@ namespace SIL.PublishingSolution
         #endregion
 
         /// <summary>
-        /// Method to validate the each tag in the StyleSettings.xml, DictionaryStyleSettings.xml and 
-        /// ScriptureStyleSettings contains valid data. It will replace to new file when the tag value is 
+        /// Method to validate the each tag in the StyleSettings.xml, DictionaryStyleSettings.xml and
+        /// ScriptureStyleSettings contains valid data. It will replace to new file when the tag value is
         /// incorrect. Before that it will get conformation from the user.
         /// </summary>
         /// <param name="settingsFilewithPath">Filepath of StyleSettings.xml file</param>
@@ -303,7 +303,7 @@ namespace SIL.PublishingSolution
 
         protected static string GetOutputPath(XmlNode parentNode)
         {
-            const string xPath = "//stylePick/settings/property[@name=\"OutputPath\"]";
+            const string xPath = "//property[@name=\"OutputPath\"]";
             XmlNode childNode = parentNode.SelectSingleNode(xPath);
             string path = childNode.Attributes["value"].Value.Replace("%(AppData)s/", "");
             return Common.PathCombine(replaceString["%(AppData)s"], Common.DirectoryPathReplace(path));
@@ -1084,7 +1084,7 @@ namespace SIL.PublishingSolution
 				appPath = PathwayPath.GetSupportPath(appPath, Common.SupportFolder, false);
 
             }
-            const string xPathMaster = "//stylePick/settings/property[@name=\"MasterSheetPath\"]";
+            const string xPathMaster = "//property[@name=\"MasterSheetPath\"]";
             XmlNode masterNode = parentNode.SelectSingleNode(xPathMaster);
             string masterValue = masterNode.Attributes["value"].Value;
 			string fileName = PathwayPath.GetSupportPath(appPath, masterValue, false);

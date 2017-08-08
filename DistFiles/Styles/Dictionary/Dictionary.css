@@ -288,6 +288,11 @@ text-align: justify;
     text-align: center;
 }
 
+.reversalform,.reversalformr1 {
+	font-weight: bold;
+	string-set: guideword content();
+}
+
 .mainheadword {
 	font-weight: bold;
 	string-set: guideword content();

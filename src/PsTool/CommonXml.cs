@@ -403,7 +403,7 @@ namespace SIL.Tool
 			{
 				if (!File.Exists(fromPath))
 				{
-					fileName = Path.GetFileName(src); // sil + fileName
+                    fileName = Path.GetFileName(src.Replace('\\',Path.DirectorySeparatorChar)); // sil + fileName
 					string flexPict = PathCombine(GetFiledWorksPath(), fileName);
 					if (File.Exists(flexPict))
 					{
@@ -991,6 +991,7 @@ namespace SIL.Tool
 		}
 
 		private static readonly List<string> SplitFileList = new List<string>();
+		public static bool SplitEveryEntry;
 
 		/// <summary>
 		/// This method splits the input xhtml into different files
@@ -1008,7 +1009,8 @@ namespace SIL.Tool
 			var split = new SplitXml(xhtmlFileWithPath, bookSplitterClass)
 			{
 				Folder = ".",
-				Prefix = filenamePrefix
+				Prefix = filenamePrefix,
+				OneEntry = SplitEveryEntry
 			};
 			var folder = Path.GetDirectoryName(xhtmlFileWithPath);
 			split.CreateOutputFolderAt(folder);

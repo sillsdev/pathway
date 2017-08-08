@@ -217,6 +217,26 @@ namespace SIL.Tool
 			return projectInputType;
 		}
 
+        public static string GetCSSFileNameFromLayoutSelected(string settingsPath)
+        {
+            string projectLayoutSelected = string.Empty;
+            string cssFileName = string.Empty;
+            if (File.Exists(settingsPath))
+            {
+                var settingsReader = XmlReader.Create(settingsPath);
+                var settingsDoc = new XmlDocument();
+                settingsDoc.Load(settingsReader);
+                settingsReader.Close();
+                // ReSharper disable once PossibleNullReferenceException
+                projectLayoutSelected = settingsDoc.SelectSingleNode("//settings/property[@name='LayoutSelected']/@value").InnerText;
+                if(!string.IsNullOrEmpty(projectLayoutSelected))
+                {
+                    cssFileName = settingsDoc.SelectSingleNode(string.Format("//paper/style[@name='{0}']/@file", projectLayoutSelected)).InnerText;
+                }
+            }
+            return cssFileName;
+        }
+
         /// <summary>
         /// Function for renaming PublishingSolutions to Pathway.
         /// </summary>

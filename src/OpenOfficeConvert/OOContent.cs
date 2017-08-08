@@ -120,7 +120,6 @@ namespace SIL.PublishingSolution
 		public bool _multiLanguageHeader = false;
 		public bool IsMirrorPage;
 		public bool IsFirstEntry;
-		//private bool isPageBreak;
 		private string _previousContent = "Reversal";
 		private bool _previousSignificant = false;
 		private bool _isWhiteSpaceSkipped = true;
@@ -128,7 +127,6 @@ namespace SIL.PublishingSolution
 		private bool _isParaPicture, _isFirstPicture;
 		private int _pictureNo;
 		private bool _isReversalFile = false;
-		private bool _isLinux = false;
 		Dictionary<string, string> _glossaryList = new Dictionary<string, string>();
 		private bool _glossaryWrite;
 		private Dictionary<string, string> _glossaryTitleLst = new Dictionary<string, string>();
@@ -146,7 +144,6 @@ namespace SIL.PublishingSolution
 			Dictionary<string, ArrayList> classFamily, ArrayList cssClassOrder, int pageWidth, Dictionary<string, string> pageSize)
 		{
 
-			_isLinux = Common.UnixVersionCheck();
 			OldStyles styleInfo = new OldStyles();
 			GetRefFormat(projInfo, idAllClass);
 			SetReversalFile(projInfo);
@@ -265,7 +262,7 @@ namespace SIL.PublishingSolution
 				if (className.IndexOf("SectColumnWidth_") >= 0)
 				{
 					colWidth = IdAllClass[className]["ColumnWidth"];
-					Common.ColumnWidth = double.Parse(colWidth, CultureInfo.GetCultureInfo("en-US"));
+					Common.ColumnWidth = double.Parse(colWidth, new CultureInfo("en-US").NumberFormat);
 				}
 
 				searchKey = "visibility";
@@ -720,7 +717,6 @@ namespace SIL.PublishingSolution
 				{
 					_writer.WriteStartElement("text:s");
 					_writer.WriteAttributeString("text:c", "1");
-					_writer.WriteString(" ");
 					_writer.WriteEndElement();
 					_significant = true;
 				}
@@ -1184,9 +1180,11 @@ namespace SIL.PublishingSolution
 				}
 				if (_imageClass.Length > 0)
 				{
-					_writer.WriteStartElement("text:p");
+					_writer.WriteStartElement("text:span");
 					_writer.WriteAttributeString("text:style-name", _childName);
 					_writer.WriteString(content);
+					if (!VisibleHidden())
+						_pseudoSingleSpace = false; //Resets after picture caption space
 				}
 				else if (_isVerseNumberContent)
 				{
@@ -1918,14 +1916,7 @@ namespace SIL.PublishingSolution
 
 			TableClose();
 
-			if (_isLinux)
-			{
-				SectionClose(_closeChildName);
-			}
-			else
-			{
 				SectionClose(closeChild);
-			}
 
 			ClosefooterNote();
 			bool isImageEnd = EndElementForImage();
@@ -2122,7 +2113,6 @@ namespace SIL.PublishingSolution
 			_writer.WriteAttributeString("xmlns:grddl", "http://www.w3.org/2003/g/data-view#");
 			_writer.WriteAttributeString("xmlns:field", "urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0");
 			_writer.WriteAttributeString("xmlns:formx", "urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0");
-			_writer.WriteAttributeString("grddl:transformation", "http://docs.oasis-open.org/office/1.2/xslt/odf2rdf.xsl");
 			_writer.WriteStartElement("office:scripts");
 			if (_structStyles.IsMacroEnable)
 			{
@@ -2206,6 +2196,17 @@ namespace SIL.PublishingSolution
 			_writer.WriteEndElement();
 			_writer.WriteEndElement();
 
+			//Paragraph style for Picture Caption
+			_writer.WriteStartElement("style:style");
+			_writer.WriteAttributeString("style:name", "P5");
+			_writer.WriteAttributeString("style:family", "paragraph");
+			_writer.WriteAttributeString("style:parent-style-name", "Text");
+			_writer.WriteStartElement("style:paragraph-properties");
+			_writer.WriteAttributeString("fo:text-align", "center");
+			_writer.WriteAttributeString("style:justify-single-word", "false");
+			_writer.WriteEndElement();
+			_writer.WriteEndElement();
+
 			//Text style for display:none
 			_writer.WriteStartElement("style:style");
 			_writer.WriteAttributeString("style:name", "T4");
@@ -2276,14 +2277,17 @@ namespace SIL.PublishingSolution
 				_writer.WriteAttributeString("style:family", "graphic");
 				_writer.WriteAttributeString("style:parent-style-name", "Frame");
 				_writer.WriteStartElement("style:graphic-properties");
+				_writer.WriteAttributeString("fo:margin-left", "0.2in");
+				_writer.WriteAttributeString("fo:margin-bottom", "0.2in");
+				_writer.WriteAttributeString("fo:margin-right", "0in");
 				_writer.WriteAttributeString("style:wrap", "none");
-				_writer.WriteAttributeString("style:vertical-pos", "center");
+				_writer.WriteAttributeString("style:vertical-pos", "bottom");
 				_writer.WriteAttributeString("style:vertical-rel", "paragraph-content");
-				_writer.WriteAttributeString("style:horizontal-pos", "center");
-				_writer.WriteAttributeString("style:horizontal-rel", "paragraph-content");
+				_writer.WriteAttributeString("style:horizontal-pos", "right");
+				_writer.WriteAttributeString("style:horizontal-rel", "paragraph");
 				_writer.WriteAttributeString("fo:padding", "0in");
 				_writer.WriteAttributeString("fo:border", "none");
-				_writer.WriteAttributeString("style:flow-with-text", "false");
+				_writer.WriteAttributeString("style:flow-with-text", "true");
 				_writer.WriteEndElement();
 				_writer.WriteEndElement();
 				pictureCount--;
@@ -2523,22 +2527,35 @@ namespace SIL.PublishingSolution
 			string[] cc = _allStyle.ToArray();
 			imageClass = cc[0]; //cc[1];
 			srcFile = _imageSource;
-			string srcFilrLongDesc = _imageLongDesc;
+			string srcFilrLongDesc = _imageSrcClass;
 			string currentPicturePath = _sourcePicturePath;
 			if (_allStyle.Peek().IndexOf("logo") == 0)
 			{
 				currentPicturePath = Common.FromRegistry("Copyrights");
 			}
 			string fromPath = Common.GetPictureFromPath(srcFile, _metaValue, currentPicturePath);
-			string fileName = Path.GetFileName(srcFile);
+			string fileName = Path.GetFileName(srcFile.Replace('\\', Path.DirectorySeparatorChar));
 
 			string normalTargetFile = _projInfo.TempOutputFolder;
 			string basePath = normalTargetFile.Substring(0, normalTargetFile.LastIndexOf(Path.DirectorySeparatorChar));
 			String toPath = Common.DirectoryPathReplace(basePath + "/Pictures/" + fileName);
-			if (File.Exists(fromPath))
+			string pictureDirectory = Common.DirectoryPathReplace(basePath + "/Pictures");
+			if (Directory.Exists(pictureDirectory))
 			{
-				File.Copy(fromPath, toPath, true);
+				if (File.Exists(fromPath))
+				{
+					File.Copy(fromPath, toPath, true);
+				}
 			}
+			else
+			{
+				Directory.CreateDirectory(pictureDirectory);
+				if (File.Exists(fromPath))
+				{
+					File.Copy(fromPath, toPath, true);
+				}
+			}
+
 			CalculatingPictureWidthandHeight(wrapSide, ref HoriAlignment, srcFilrLongDesc, wrapMode, fromPath, ref rectHeight, ref rectWidth);
 			// End - Calculating picture width and height
 
@@ -2583,6 +2600,8 @@ namespace SIL.PublishingSolution
 			modifyIDStyles.CreateFrameStyle(_styleFilePath, strFrameStyCount, _util.ParentName, _displayProperty,
 											strGraphicsCount);
 
+			_writer.WriteStartElement("text:p"); //Para introduced outside to Picture frame
+			_writer.WriteAttributeString("text:style-name", "P5");
 			_writer.WriteStartElement("draw:frame");
 			_writer.WriteAttributeString("draw:style-name", "gr" + (_frameCount));
 			_writer.WriteAttributeString("draw:name", strGraphicsCount);
@@ -2699,7 +2718,7 @@ namespace SIL.PublishingSolution
 			strFrameCount = "Frame" + (_frameCount + 1);
 			strFrameStyCount = "fr" + (_frameCount + 1);
 			_imageGraphicsName = strFrameCount;
-			if (_isParagraphClosed) // Forcing a Paragraph Style, if it is not exist
+			if (_isParagraphClosed && !_isInPictureParagraph) // Forcing a Paragraph Style, if it is not exist
 			{
 				int counter = _allParagraph.Count;
 				string divTagName = string.Empty;
@@ -2707,7 +2726,10 @@ namespace SIL.PublishingSolution
 				{
 					var tempStyle = new string[counter];
 					_allParagraph.CopyTo(tempStyle, 0);
-					divTagName = counter > 1 ? tempStyle[1] : tempStyle[0];
+				    if (counter >= 1)
+                        divTagName = tempStyle[0];
+				    else
+                        divTagName = tempStyle[1];
 				}
 
 				_writer.WriteStartElement("text:p");
@@ -2731,7 +2753,7 @@ namespace SIL.PublishingSolution
 				rectWidth = GetPropertyValue(srcFilrLongDesc, "width", rectWidth);
 				if (rectHeight == "0" && rectWidth == "0")
 				{
-					rectHeight = GetPropertyValue(clsName, "height", rectHeight);
+					 rectHeight = GetPropertyValue(clsName, "height", rectHeight);
 					rectWidth = GetPropertyValue(clsName, "width", rectWidth);
 				}
 				GetAlignment(ref HoriAlignment, srcFilrLongDesc);
@@ -3184,6 +3206,7 @@ namespace SIL.PublishingSolution
 					_writer.WriteEndElement(); // for Textframe
 
 					_imageClass = "";
+					_isInPictureParagraph = true;
 					_isNewParagraph = false;
 					_isParagraphClosed = true;
 
@@ -3221,7 +3244,8 @@ namespace SIL.PublishingSolution
 
 					if (_closeChildName.IndexOf("coverImage") != 0)
 					{
-						_writer.WriteEndElement();// for ParagraphStyle
+						_writer.WriteEndElement(); //Para ends which introduced outside to Picture frame
+						_writer.WriteEndElement(); // for ParagraphStyle
 						_writer.WriteEndElement(); // for Textframe
 					}
 
@@ -3694,7 +3718,7 @@ namespace SIL.PublishingSolution
                       _childName.Replace("span_", "").IndexOf("reversalform", StringComparison.Ordinal) == 0);
 
 			//Check possible classname in _previousParagraphName string.
-			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentryr1_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entryr1_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div.entry_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0 || _previousParagraphName.IndexOf("reversalindexentry", StringComparison.Ordinal) == 0);
+			bool isPrevParagraphMatches = (_previousParagraphName.IndexOf("minorentries_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("minorentry", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entry", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("entryr1_", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("div_pictureCaption", StringComparison.Ordinal) == 0 || _previousParagraphName.IndexOf("picture", StringComparison.Ordinal) >= 0 || _previousParagraphName.IndexOf("reversalindexentry", StringComparison.Ordinal) == 0);
 
 			if (isClassNameWithLangMatches && isClassNameMatches && isPrevParagraphMatches)
 			{
@@ -3826,6 +3850,7 @@ namespace SIL.PublishingSolution
 		{
 			if (_className == "entry")
 			{
+				_isInPictureParagraph = false;
 				_isFirstPicture = true;
 				if (_entryIdList.Contains(_anchorIdValue))
 				{

@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
+using System.Xml.Xsl;
 using Microsoft.Win32;
 using SIL.Tool;
 
@@ -29,10 +30,11 @@ namespace SIL.PublishingSolution
     {
         private static string _fullPrincePath;
         private static string _processedXhtml;
+		protected readonly XslCompiledTransform _pdfSymbols = new XslCompiledTransform();
 
-        #region Properties
-        #region ExportType
-        public string ExportType
+		#region Properties
+		#region ExportType
+		public string ExportType
         {
             get
             {
@@ -114,14 +116,16 @@ namespace SIL.PublishingSolution
                 {
                     var curdir = Environment.CurrentDirectory;
                     projInfo.OutputExtension = "pdf";
-                    PreExportProcess preProcessor = new PreExportProcess(projInfo);
+					_pdfSymbols.Load(XmlReader.Create(Common.UsersXsl("PdfSymbols.xsl")));
+					PreExportProcess preProcessor = new PreExportProcess(projInfo);
                     if (isUnixOS)
                     {
                         projInfo.DefaultXhtmlFileWithPath =
                             Common.RemoveDTDForLinuxProcess(projInfo.DefaultXhtmlFileWithPath,"pdfconvert");
                     }
                     Environment.CurrentDirectory = Path.GetDirectoryName(projInfo.DefaultXhtmlFileWithPath);
-                    preProcessor.IncludeHyphenWordsOnXhtml(preProcessor.ProcessedXhtml);
+
+				    preProcessor.IncludeHyphenWordsOnXhtml(preProcessor.ProcessedXhtml);
                     preProcessor.GetTempFolderPath();
                     preProcessor.ImagePreprocess(false, delegate(string s, string to) { ImageMods.ResizeImage(s, to, 1,1); });
                     preProcessor.ReplaceSlashToREVERSE_SOLIDUS();
@@ -129,12 +133,14 @@ namespace SIL.PublishingSolution
                         preProcessor.SwapHeadWordAndReversalForm();
                     preProcessor.MovePictureAsLastChild(preProcessor.ProcessedXhtml);
                     preProcessor.SetNonBreakInVerseNumber(preProcessor.ProcessedXhtml);
-					if (preProcessor.ReplaceProcessForPrinceOutput(preProcessor.ProcessedXhtml))
-	                {
-						AudioVisualImageProcess(preProcessor);
-	                }
+	                preProcessor.ReplaceProcessForPrinceOutput(preProcessor.ProcessedXhtml);
+				    Common.ApplyXsltArgs = new XsltArgumentList();
+				    Common.ApplyXsltArgs.AddParam("avPath", string.Empty, new Uri(projInfo.ProjectPath).AbsoluteUri);
+					Common.ApplyXslt(preProcessor.ProcessedXhtml, _pdfSymbols);
+	                Common.ApplyXsltArgs = null;
+	                RenameAudioVisual(projInfo.ProjectPath, Path.GetDirectoryName(preProcessor.ProcessedXhtml));
 
-                    preProcessor.MoveCallerToPrevText(preProcessor.ProcessedXhtml);
+					preProcessor.MoveCallerToPrevText(preProcessor.ProcessedXhtml);
                     string tempFolder = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
 					var mc = new MergeCss { OutputLocation = tempFolder };
 
@@ -227,29 +233,16 @@ namespace SIL.PublishingSolution
             return success;
         }
 
-	    private void AudioVisualImageProcess(PreExportProcess preProcessor)
+	    private void RenameAudioVisual(string projInfoProjectPath, string tempFolder)
 	    {
-		    string strImageFolder = Common.PathCombine(Common.GetPSApplicationPath(), "Graphic");
-		    if (!Directory.Exists(strImageFolder))
+		    const string avName = "AudioVisual";
+		    var folder = Common.PathCombine(projInfoProjectPath, avName);
+		    if (!Directory.Exists(folder)) return;
+		    foreach (var file in Directory.GetFiles(folder))
 		    {
-			    strImageFolder = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "Graphic");
+			    if (!file.Contains(" ")) continue;
+				File.Move(file, file.Replace(" ", "_"));
 		    }
-		    string speakerSourceFile = Common.PathCombine(strImageFolder, "speaker.png");
-		    string speakerDestination = Path.GetDirectoryName(preProcessor.ProcessedXhtml);
-			string speakerDestinationFile = Path.Combine(speakerDestination, "speaker.png");
-		    File.Copy(speakerSourceFile, speakerDestinationFile, true);
-
-		    string speakerDestinationAudioVisual = Path.Combine(speakerDestination, "AudioVisual");
-		    if (Directory.Exists(speakerDestinationAudioVisual))
-		    {
-				string[] files = Directory.GetFiles(speakerDestinationAudioVisual);
-                foreach (string file in files)
-                {
-                    string name = Path.GetFileName(file);
-					string dest = Common.PathCombine(speakerDestination, name);
-                    File.Copy(file, dest, true);
-                }
-			}
 	    }
 
 	    private static bool ExportPrince(PublicationInformation projInfo, string xhtmlFileName, bool isUnixOS,

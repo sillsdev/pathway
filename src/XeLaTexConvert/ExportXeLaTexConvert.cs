@@ -103,7 +103,7 @@ namespace SIL.PublishingSolution
             AssignExportFile(projInfo, preProcessor);
             ModifyXeLaTexStyles modifyXeLaTexStyles = new ModifyXeLaTexStyles();
             modifyXeLaTexStyles.LangFontDictionary = _langFontCodeandName;
-
+	        modifyXeLaTexStyles.ProjectType = projInfo.ProjectInputType;
             Dictionary<string, Dictionary<string, string>> newProperty;
             var cssClass = WrittingTexFile(projInfo, fileName, out xeLatexFullFile, out xeLatexFile, out xeLaTexStyles, out newProperty);
             string include = xeLaTexStyles.PageStyle.ToString();
@@ -141,15 +141,14 @@ namespace SIL.PublishingSolution
 
 		public void ModifyCssStyle(PublicationInformation projInfo)
 		{
-			TextWriter tw = new StreamWriter(projInfo.DefaultCssFileWithPath, true);
-
 			if (projInfo.ProjectInputType.ToLower() == "scripture")
 			{
+				TextWriter tw = new StreamWriter(projInfo.DefaultCssFileWithPath, true);
 				tw.WriteLine(".Intro_Paras{");
 				tw.WriteLine("text-indent: 20pt;");
 				tw.WriteLine("}");
+				tw.Close();
 			}
-			tw.Close();
 		}
 
         private Dictionary<string, Dictionary<string, string>> WrittingTexFile(PublicationInformation projInfo, string fileName, out string xeLatexFullFile,
@@ -631,9 +630,8 @@ namespace SIL.PublishingSolution
             string xeLaTexInstallationPath = XeLaTexInstallation.GetXeLaTexDir();
             if (!Directory.Exists(xeLaTexInstallationPath))
             {
-                var msg = LocalizationManager.GetString("ExportXelatex.CallXelatex.Message", "Please install the Xelatex application.", "");
-                MessageBox.Show(msg);
-                return;
+				var msg = LocalizationManager.GetString ("ExportXelatex.CallXelatex.Message", "Please install the Xelatex application.", "");
+				throw new FileNotFoundException (msg);
             }
             string name = "xelatex.exe";
             string arguments = "-interaction=batchmode \"" + Path.GetFileName(xeLatexFullFile) + "\"";

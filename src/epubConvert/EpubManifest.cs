@@ -1,15 +1,15 @@
 ﻿#region // Copyright (C) 2014, SIL International. All Rights Reserved.
 // --------------------------------------------------------------------------------------------
 // <copyright file="EpubManifest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Xml;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -55,7 +56,7 @@ namespace epubConvert
         #region void CreateOpf(PublicationInformation projInfo, string contentFolder, Guid bookId)
         /// <summary>
         /// Generates the manifest and metadata information file used by the .epub reader
-        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/> 
+        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/>
         /// </summary>
         /// <param name="projInfo">Project information</param>
         /// <param name="contentFolder">Content folder (.../OEBPS)</param>
@@ -79,8 +80,9 @@ namespace epubConvert
             }
             string[] files = Directory.GetFiles(contentFolder);
             ManifestContent(opf, files, "epub2");
-            Spine(opf, files);
-            Guide(projInfo, opf, files, "epub2");
+			opf.WriteEndElement(); // manifest
+			Spine(opf, files);
+			Guide(projInfo, opf, files, "epub2");
             opf.WriteEndElement(); // package
             opf.WriteEndDocument();
             opf.Close();
@@ -88,7 +90,7 @@ namespace epubConvert
 
         /// <summary>
         /// Generates the manifest and metadata information file used by the .epub reader
-        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/> 
+        /// (content.opf). For more information, refer to <see cref="http://www.idpf.org/doc_library/epub/OPF_2.0.1_draft.htm#Section2.0"/>
         /// </summary>
         /// <param name="projInfo">Project information</param>
         /// <param name="contentFolder">Content folder (.../OEBPS)</param>
@@ -114,7 +116,14 @@ namespace epubConvert
             }
             string[] files = Directory.GetFiles(contentFolder);
             ManifestContent(opf, files, "epub3");
-            SpineV3(opf, files);
+	        var avFolder = Path.Combine(contentFolder, "AudioVisual");
+	        if (Directory.Exists(avFolder))
+	        {
+		        var avFiles = Directory.GetFiles(avFolder);
+				ManifestAvContent(opf, avFiles);
+			}
+			opf.WriteEndElement(); // manifest
+			SpineV3(opf, files);
             Guide(projInfo, opf, files, "epub3");
             opf.WriteEndElement(); // package
             opf.WriteEndDocument();
@@ -155,7 +164,7 @@ namespace epubConvert
             opf.WriteEndElement();
             opf.WriteElementString("dc", "date", null, DateTime.Today.ToString("yyyy-MM-dd"));
             // .epub standard date format (http://www.idpf.org/2007/opf/OPF_2.0_final_spec.html#Section2.2.7)
-            opf.WriteElementString("dc", "type", null, "Text"); // 
+            opf.WriteElementString("dc", "type", null, "Text"); //
             if (Format.Length > 0)
                 opf.WriteElementString("dc", "format", null, Format);
             if (Source.Length > 0)
@@ -445,7 +454,11 @@ namespace epubConvert
                     opf.WriteAttributeString("id", itemId);
                     opf.WriteAttributeString("href", name);
                     opf.WriteAttributeString("media-type", "application/xhtml+xml");
-                    opf.WriteEndElement(); // item
+					if (epubVersion == "epub3" && isScripted(file))
+					{
+						opf.WriteAttributeString("properties", "scripted");
+					}
+					opf.WriteEndElement(); // item
                 }
                 else if (name.EndsWith(".css"))
                 {
@@ -508,13 +521,81 @@ namespace epubConvert
 
                     opf.WriteAttributeString("media-type", "application/x-dtbncx+xml");
                     opf.WriteEndElement(); // item
-                    continue;
                 }
             }
-            opf.WriteEndElement(); // manifest
         }
 
-        private void Spine(XmlWriter opf, IEnumerable<string> files)
+		private static Dictionary<string, string> _audioMime = new Dictionary<string, string>
+		{ {".wav", "audio/vnd.wav"}, {".mp3", "audio/mpeg3"}, {".ogg", "audio/ogg"}, {".mp4", "video/mp4"}, {".avi", "video/avi"}, {".3gp", "video/3gp"} } ;
+		/// <summary>
+		/// Adds audio files to the opf xml file
+		/// </summary>
+		protected void ManifestAvContent(XmlWriter opf, IEnumerable<string> files)
+		{
+			int counterSet = 1;
+
+			foreach (string file in files)
+			{
+				// iterate through the file set and add <item> elements for each xhtml file
+				string name = Path.GetFileName(file);
+				Debug.Assert(name != null);
+				var ext = Path.GetExtension(file).ToLower();
+
+				if (_audioMime.ContainsKey(ext))
+				{
+					if (_audioMime[ext].StartsWith("video"))
+					{
+						File.Delete(file);
+						continue;
+					}
+					opf.WriteStartElement("item"); // item (image)
+					opf.WriteAttributeString("id", string.Format("av{0}", counterSet));
+					opf.WriteAttributeString("href", Path.Combine("AudioVisual",name).Replace("\\","/"));
+					opf.WriteAttributeString("media-type", _audioMime[ext]);
+					opf.WriteEndElement(); // item
+					counterSet += 1;
+				}
+			}
+		}
+
+		protected bool isScripted(string file)
+		{
+			XmlDocument xmlDocument = Common.DeclareXMLDocument(false);
+			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
+			var xmlReader = XmlReader.Create(file, xmlReaderSettings);
+			xmlDocument.Load(xmlReader);
+			xmlReader.Close();
+			var scriptAttrNode = xmlDocument.SelectSingleNode("//@onclick");
+			if (scriptAttrNode == null) return false;
+			var audioNodes = xmlDocument.SelectNodes("//xhtml:audio|//xhtml:video", namespaceManager);
+			Debug.Assert(audioNodes != null);
+			foreach (XmlElement node in audioNodes)
+			{
+				if (!string.IsNullOrEmpty(node.InnerText.Trim())) continue;
+				var fc = node.FirstChild;
+				if (fc?.NodeType != XmlNodeType.Element) continue;
+				var fce = fc as XmlElement;
+				Debug.Assert(fce != null);
+				if (!fce.HasAttributes) continue;
+				if (fce.Attributes["src"] == null) continue;
+				if (fce.Attributes["src"].Value.Contains("\\"))
+				{
+					fce.Attributes["src"].Value = string.Join("/", fce.Attributes["src"].Value.Split('\\'));
+				}
+				if (!string.IsNullOrEmpty(node.InnerText)) continue;
+				var fallBack = xmlDocument.CreateTextNode("Missing " + Path.GetFileName(node.FirstChild.Attributes["src"].Value));
+				node.AppendChild(fallBack);
+			}
+			var xws= new XmlWriterSettings {Indent = false, Encoding = Encoding.UTF8};
+			var xw = XmlWriter.Create(file, xws);
+			xmlDocument.Save(xw);
+			xw.Close();
+			return true;
+		}
+
+		private void Spine(XmlWriter opf, IEnumerable<string> files)
         {
             // spine
             opf.WriteStartElement("spine");
@@ -701,7 +782,7 @@ namespace epubConvert
             }
             catch (Exception)
             {
-                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization), 
+                // shouldn't happen (ExportThroughPathway dialog forces the user to select an organization),
                 // but just in case, specify a default org.
                 organization = "SIL International";
             }

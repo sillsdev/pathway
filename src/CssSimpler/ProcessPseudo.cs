@@ -27,7 +27,6 @@ namespace CssSimpler
         private readonly Dictionary<string, List<XmlElement>> _beforeTargets = new Dictionary<string, List<XmlElement>>();
         private readonly Dictionary<string, List<XmlElement>> _afterTargets = new Dictionary<string, List<XmlElement>>();
         private const int StackSize = 30;
-        private readonly ArrayList _classes = new ArrayList(StackSize);
         private readonly ArrayList _savedSibling = new ArrayList(StackSize);
         private string _lastClass = String.Empty;
         private string _precedingClass = String.Empty;
@@ -39,23 +38,28 @@ namespace CssSimpler
             _needHigher = needHigher;
             CollectTargets(xmlCss);
             DeclareBefore(XmlNodeType.Attribute, SaveClass);
-            DeclareBefore(XmlNodeType.Element, SaveSibling);
+			DeclareBefore(XmlNodeType.Element, Program.EntryReporter);
+			DeclareBefore(XmlNodeType.Element, InsertLastChildBefore);
+			DeclareBefore(XmlNodeType.Element, SaveSibling);
             DeclareBefore(XmlNodeType.Element, InsertBefore);
             DeclareFirstChild(XmlNodeType.Element, InsertFirstChild);
-            DeclareBeforeEnd(XmlNodeType.EndElement, InsertAfter);
+			DeclareAfter(XmlNodeType.EndElement, InsertLastChildAfter);
+			DeclareBeforeEnd(XmlNodeType.EndElement, InsertAfter);
             DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveClass);
-	        SpaceClass = null;
+			DeclareBeforeEnd(XmlNodeType.EndElement, UnsaveLang);
+			SpaceClass = null;
             Parse();
         }
 
-        private void InsertBefore(XmlReader r)
+		private void InsertBefore(XmlReader r)
         {
             var nextClass = r.GetAttribute("class");
+			AddInHierarchy(Langs, r.Depth, r.GetAttribute("lang"));
 	        Suffix = "-pb";
 			if (ApplyBestRule(r.Depth, nextClass, _beforeTargets, nextClass)) return;
             if (ApplyBestRule(r.Depth, GetTargetKey(r.Name, nextClass), _beforeTargets, nextClass)) return;
             var keyClass = KeyClass(r.Depth);
-            if (_classes.Count > r.Depth && ApplyBestRule(r.Depth, GetTargetKey(r.Name, keyClass), _beforeTargets, keyClass)) return;
+            if (Classes.Count > r.Depth && ApplyBestRule(r.Depth, GetTargetKey(r.Name, keyClass), _beforeTargets, keyClass)) return;
             var target = GetTargetKey(r.Name, _lastClass);
             ApplyBestRule(r.Depth, target, _beforeTargets, _lastClass);
         }
@@ -70,29 +74,52 @@ namespace CssSimpler
 	        _firstClass = string.Empty;
         }
 
-        private void InsertAfter(int depth, string name)
+		private XmlNode _savedLastNode;
+		private string _lastChildClass = string.Empty;
+	    private int _lastDepth = 0;
+		private void InsertLastChildBefore(XmlReader r)
+		{
+			InsertLastChildAfter(r);
+			_lastDepth = r.Depth;
+			ClearLastChild();
+		}
+
+	    private void InsertLastChildAfter(XmlReader r)
+	    {
+		    if (r.Depth == _lastDepth) return;
+		    if (_savedLastNode == null) return;
+		    InsertContent(_savedLastNode, _lastChildClass);
+			ClearLastChild();
+		}
+
+		private void ClearLastChild()
+		{
+			_savedLastNode = null;
+			_lastChildClass = string.Empty;
+		}
+
+		private void InsertAfter(int depth, string name)
         {
             var index = depth + 1;
-			if (index >= _classes.Count) return;
-            var endClass = _classes[index] as string;
-	        if (endClass == null) return;
-	        Suffix = "-pa";
-            var target1 = GetTargetKey(name, _classes[depth] as string);
-            var target2 = GetTargetKey(name, endClass);
+            var endClass = Classes.Count > index? Classes[index] as string: null;
+			var prevClass = Classes.Count > depth ? Classes[depth] as string : null;
+			Suffix = "-pa";
+            var target1 = GetTargetKey(name, prevClass);
             if (ApplyBestRule(index, target1, _afterTargets, endClass)) return;
-            if (ApplyBestRule(index, target2, _afterTargets, endClass)) return;
             ApplyBestRule(index, endClass, _afterTargets, endClass);
         }
 
         private void UnsaveClass(int depth, string name)
         {
-            var index = depth + 1;
-            if (index >= _classes.Count) return;
-            _precedingClass = _classes[index] as string;
-            _classes[index] = null;
+	        _precedingClass = RemoveFromHierarchy(depth, Classes);
         }
 
-        private bool ApplyBestRule(int index, string target, Dictionary<string, List<XmlElement>> targets, string myClass)
+		private void UnsaveLang(int depth, string name)
+		{
+			RemoveFromHierarchy(depth, Langs);
+		}
+
+		private bool ApplyBestRule(int index, string target, Dictionary<string, List<XmlElement>> targets, string myClass)
         {
             if (target == null) return false;
             foreach (var t in target.Split(' '))
@@ -102,23 +129,37 @@ namespace CssSimpler
                 {
                     if (Applies(node, index))
                     {
-                        if (myClass.Contains(' '))
+	                    if (myClass == null)
+	                    {
+		                    myClass = t.Contains(":") ? t.Split(new[] {':'})[1] : t;
+	                    }
+                        else if (myClass.Contains(' '))
                         {
                             myClass = myClass.Split(' ')[0];
                         }
                         if (targets == _beforeTargets)
                         {
-	                        if (_savedFirstNode == null)
-	                        {
-								_savedFirstNode = node;
-								_firstClass = myClass;
-							}
-						}
+	                        if (_savedFirstNode != null) continue;
+	                        _savedFirstNode = node;
+	                        _firstClass = myClass;
+                        }
                         else
                         {
-                            var inserted = InsertContent(node, myClass);
-	                        if (inserted) return true;
-                        }
+	                        if (_lastChild)
+	                        {
+		                        if (_savedLastNode == null)
+		                        {
+									_savedLastNode = node;
+									_lastChildClass = myClass;
+									// We keep scanning because other rules will apply
+								}
+							}
+	                        else
+	                        {
+								var inserted = InsertContent(node, myClass);
+								if (inserted) return true;
+							}
+						}
                     }
                 }
             }
@@ -134,16 +175,24 @@ namespace CssSimpler
 		    return false;
 	    }
 
+	    private bool _lastChild;
+
 	    private bool AppliesAtLevel(XmlNode node, int index)
 		{
 			if (!RequiredFirst(node)) return false;
             if (!RequiredNotFirst(node)) return false;
+			_lastChild = false;
             while (node != null && node.Name == "PSEUDO")
             {
+	            if (node.FirstChild.InnerText == "last-child") _lastChild = true;
                 node = node.PreviousSibling;
             }
             var requireParent = false;
             // We should be at the tag / class for the rule being applied so look before it.
+			if (node != null && node.ChildNodes.Count > 1 && node.ChildNodes[1].Name == "ATTRIB")
+			{
+				node = node.NextSibling;
+			}
             while (node != null)
             {
                 node = node.PreviousSibling;
@@ -169,7 +218,6 @@ namespace CssSimpler
                         Debug.Assert(node != null, "Nothing preceding PRECEDES");
                         string precedingName = node.FirstChild.InnerText;
                         if (_precedingClass != precedingName && precedingName != "span") return false;
-                        //if (precedingName != "span") index -= 1;
                         break;
                     case "SIBLING":
                         node = node.PreviousSibling;
@@ -177,13 +225,13 @@ namespace CssSimpler
                         string siblingName = node.FirstChild.InnerText;
                         int position = _savedSibling.IndexOf(siblingName);
                         if (position == -1 || position == _savedSibling.Count - 1) return false;
-                        //index -= 1;
                         break;
                     case "TAG":
                         string tagName = node.FirstChild.InnerText;
                         if (tagName != "span" && tagName != "a")
                             throw new NotImplementedException();
-                        break;
+						if (!CheckAttrib(node, index)) return false;
+						break;
                     default:
                         throw new NotImplementedException();
                 }
@@ -192,10 +240,45 @@ namespace CssSimpler
 
         }
 
-        private bool MatchClass(int index, string name)
+		private bool CheckAttrib(XmlNode node, int index)
+		{
+			if (node.ChildNodes.Count <= 1) return true;
+			var attrNode = node.ChildNodes[1];
+			if (attrNode.Name == "ATTRIB")
+			{
+				if (!AttribEval(index, attrNode)) return false;
+			}
+			else
+			{
+				throw new NotImplementedException("non-ATTRIB modifier");
+			}
+			return true;
+		}
+
+		private static readonly char[] Quotes = { '\'', '"' };
+		private bool AttribEval(int index, XmlNode attrNode)
+		{
+			var attrName = attrNode.FirstChild.InnerText;
+			if (attrName != "lang") throw new NotImplementedException("Attributes other than lang not implemented");
+			var actualVal = (Langs.Count > index)? Langs[index] as string: null;
+			var attrOp = attrNode.ChildNodes[1].Name;
+			switch (attrOp)
+			{
+				case "BEGINSWITH":
+				case "ATTRIBEQUAL":
+					var expVal = attrNode.LastChild.InnerText.Trim(Quotes);
+					if (actualVal != expVal) return false;
+					break;
+				default:
+					throw new NotImplementedException("Attribute operator not equal or begins with");
+			}
+			return true;
+		}
+
+		private bool MatchClass(int index, string name)
         {
-            if (index >= _classes.Count) return false;
-            var classNames = _classes[index] as string;
+            if (index >= Classes.Count) return false;
+            var classNames = Classes[index] as string;
             if (classNames == null) return false;
             return classNames.Split(' ').Contains(name);
         }
@@ -206,7 +289,7 @@ namespace CssSimpler
             return reqFirstChild == null || _firstSibling;
         }
 
-        private bool RequiredNotFirst(XmlNode node)
+		private bool RequiredNotFirst(XmlNode node)
         {
             var reqNotFirstChild = LookupNotFirstChild(node);
             return reqNotFirstChild == null || !_firstSibling;
@@ -232,37 +315,21 @@ namespace CssSimpler
         private void SaveClass(XmlReader r)
         {
 	        if (r.Name != "class") return;
-	        if (!_needHigher.Contains(r.Value))
-	        {
-		        _lastClass = r.Value;
-	        }
-	        if (r.Depth >= _classes.Count)
-	        {
-		        while (_classes.Count < r.Depth)
-		        {
-			        // ReSharper disable once AssignNullToNotNullAttribute
-			        _classes.Add(null);
-		        }
-		        _classes.Add(r.Value);
-	        }
-	        else
-	        {
-		        _classes[r.Depth] = r.Value;
-	        }
+			AddInHierarchy(r, Classes);
         }
 
-        private int _nextFirst = -1;
+		private int _nextFirst = -1;
         private bool _firstSibling;
         private void SaveSibling(XmlReader r)
         {
             _firstSibling = r.Depth == _nextFirst;
-            var myClass = r.GetAttribute("class");
+			if (_firstSibling)
+			{
+				_savedSibling.Clear();
+			}
+			var myClass = r.GetAttribute("class");
             if (!string.IsNullOrEmpty(myClass))
             {
-                if (_firstSibling)
-                {
-                    _savedSibling.Clear();
-                }
                 _savedSibling.Add(myClass);
             }
             _nextFirst = r.Depth + 1;
@@ -348,10 +415,10 @@ namespace CssSimpler
 
         private string KeyClass(int depth)
         {
-            if (_classes.Count <= depth) return null;
+            if (Classes.Count <= depth) return null;
             while (depth > 0)
             {
-                var proposedClass = _classes[depth] as string;
+                var proposedClass = Classes[depth] as string;
                 if (proposedClass != null && !_needHigher.Contains(proposedClass))
                     return proposedClass;
                 depth -= 1;

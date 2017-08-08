@@ -35,6 +35,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -424,8 +426,12 @@ namespace SIL.PublishingSolution
             // load the settings file and migrate it if necessary
 			Param.SetLoadType = InputType;
             Param.LoadSettings();
-            isFromConfigurationTool = true;
-        }
+			var exePath = Assembly.GetEntryAssembly().Location;
+			if (exePath != null && exePath.ToLower().IndexOf("fieldworks", StringComparison.Ordinal) == -1)
+			{
+				isFromConfigurationTool = true;
+			}
+		}
 
 	    private void AssignFolderDateTime()
         {
@@ -439,16 +445,18 @@ namespace SIL.PublishingSolution
             var settingsFolder = Path.Combine(Common.GetAllUserPath(), InputType);
             if (Directory.Exists(settingsFolder))
             {
-                foreach (string filePath in Directory.GetFiles(settingsFolder, "*.xsl"))
-                {
-                    var processName = Path.GetFileNameWithoutExtension(filePath);
-					if (!lstxsltFiles.Contains(processName))
-	                {
-		                Debug.Assert(processName != null);
-		                chkLbPreprocess.Items.Add(processName, false);
-	                }
-                }
-            }
+	            var verDocName = Path.Combine(settingsFolder, "byVer.xml");
+	            if (!LoadVersionProcesses(verDocName))
+	            {
+					foreach (string filePath in Directory.GetFiles(settingsFolder, "*.xsl"))
+					{
+						var processName = Path.GetFileNameWithoutExtension(filePath);
+						if (lstxsltFiles.Contains(processName)) continue;
+						Debug.Assert(processName != null);
+						chkLbPreprocess.Items.Add(processName, false);
+					}
+				}
+			}
 
             string xsltFullName = Common.PathCombine(Common.GetApplicationPath(), "Preprocessing\\");// + xsltFile[0]
 
@@ -460,24 +468,40 @@ namespace SIL.PublishingSolution
             xsltFullName = Common.PathCombine(xsltFullName, InputType + "\\"); //TD-2871 - separate dictionary and Scripture xslt
             if (Directory.Exists(xsltFullName))
             {
-                string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
-                // In case the xsl file name change and updated in the psexport.cs file XsltPreProcess
-                foreach (var filePath in filePaths)
-                {
-                    var processName = Path.GetFileNameWithoutExtension(filePath);
-                    Debug.Assert(processName != null);
-					if (!lstxsltFiles.Contains(processName))
-					{
-						if (!chkLbPreprocess.Items.Contains(processName))
-						{
-							chkLbPreprocess.Items.Add(processName, false);
-						}
-					}
-                }
+				var verDocName = Path.Combine(xsltFullName, "byVer.xml");
+	            if (LoadVersionProcesses(verDocName)) return;
+	            string[] filePaths = Directory.GetFiles(xsltFullName, "*.xsl");
+	            // In case the xsl file name change and updated in the psexport.cs file XsltPreProcess
+	            foreach (var filePath in filePaths)
+	            {
+		            var processName = Path.GetFileNameWithoutExtension(filePath);
+		            Debug.Assert(processName != null);
+		            if (lstxsltFiles.Contains(processName)) continue;
+		            if (!chkLbPreprocess.Items.Contains(processName))
+		            {
+			            chkLbPreprocess.Items.Add(processName, false);
+		            }
+	            }
             }
         }
 
-        /// <summary>
+	    private bool LoadVersionProcesses(string verDocName)
+	    {
+		    if (!File.Exists(verDocName)) return false;
+			var verDoc = new XmlDocument();
+			var sr = new StreamReader(verDocName);
+		    verDoc.Load(sr);
+		    sr.Close();
+		    var nodes = verDoc.SelectNodes("//*[contains(@ver,//@default)]");
+		    Debug.Assert(nodes != null, "nodes != null");
+		    foreach (XmlNode node in nodes)
+		    {
+			    chkLbPreprocess.Items.Add(node.InnerText);
+		    }
+		    return true;
+	    }
+
+	    /// <summary>
         /// Attempts to pull in values from the Settings helper (either from the .ldml or
         /// .ssf file) that should override the StyleSettings.xml defaults. There are only
         /// a couple values that fall in this category.
@@ -794,31 +818,42 @@ namespace SIL.PublishingSolution
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (!Common.IsUnixOS())
-                {
-                    int outputFolderLength = OutputFolder.Length;
-                    if (OutputFolder.Substring(outputFolderLength - 2, 2) != "\\")
-                        OutputFolder = OutputFolder + "\\";
-                }
-				txtSaveInFolder.Text = ReplaceInvalidChars(txtSaveInFolder.Text);
-	            string saveInFolderFirstPart = Path.GetDirectoryName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
-				string saveInFolderSecondPart = Path.GetFileName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
-	            txtSaveInFolder.Text = Path.Combine(saveInFolderFirstPart, GetStyleInLowerCaseWithoutSpecialCharacters(saveInFolderSecondPart));
-                if (!Directory.Exists(OutputFolder))
-                    Directory.CreateDirectory(OutputFolder);
-            }
-            catch (Exception)
-            {
-                var message = LocalizationManager.GetString("ExportThroughPathway.OkButtonClick.Message", "Please select a folder for which you have creation permission", "");
-				string caption = LocalizationManager.GetString("ExportThroughPathway.MessageBoxCaption.projectname", "Pathway", "");
-				Utils.MsgBox(message, caption, MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-                return;
-            }
+	        try
+	        {
+		        if (!Common.IsUnixOS())
+		        {
+			        int outputFolderLength = OutputFolder.Length;
+			        if (OutputFolder.Substring(outputFolderLength - 2, 2) != "\\")
+				        OutputFolder = OutputFolder + "\\";
+		        }
+		        txtSaveInFolder.Text = ReplaceInvalidChars(txtSaveInFolder.Text);
+		        string saveInFolderFirstPart =
+			        Path.GetDirectoryName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
+		        string saveInFolderSecondPart = Path.GetFileName((txtSaveInFolder.Text).TrimEnd(Path.DirectorySeparatorChar));
+		        txtSaveInFolder.Text = Path.Combine(saveInFolderFirstPart,
+			        GetStyleInLowerCaseWithoutSpecialCharacters(saveInFolderSecondPart));
+		        if (!Directory.Exists(OutputFolder))
+			        Directory.CreateDirectory(OutputFolder);
+	        }
+	        catch (Exception ex)
+	        {
+		        var folderName = Path.GetDirectoryName(OutputFolder);
+		        string currentFile = new StackTrace(true).GetFrame(0).GetFileName();
+		        string msg = "The selected folder '" + Path.GetFileName(folderName) +
+		                     "' doesn't have valid permission to create a file/folder. The error thrown in the Module '"
+		                     + Path.GetFileNameWithoutExtension(currentFile) + "' and the line number is '"
+		                     + Common.GetLineNumber(ex) +
+		                     "', So choose the different folder and Please report this error at URL:"
+		                     + "http://software.sil.org/pathway/support/";
+		        var message = LocalizationManager.GetString("ExportThroughPathway.OkButtonClick.Message", msg, "");
+		        string caption = LocalizationManager.GetString("ExportThroughPathway.MessageBoxCaption.projectname", "Pathway",
+			        "");
+		        Utils.MsgBox(message, caption, MessageBoxButtons.OK,
+			        MessageBoxIcon.Error);
+		        return;
+	        }
 
-            ProcessSendingHelpImprove();
+	        ProcessSendingHelpImprove();
 
             HyphenationSettings();
             if (!File.Exists(CoverPageImagePath))
@@ -873,7 +908,7 @@ namespace SIL.PublishingSolution
             this.Close();
         }
 
-        private void HyphenationSettings()
+		private void HyphenationSettings()
         {
             Param.HyphenEnable = chkHyphen.Checked;
             var hyphenlang = string.Empty;
@@ -1269,6 +1304,8 @@ namespace SIL.PublishingSolution
 			StringBuilder styleWithoutSpecialCharacters = new StringBuilder(theStyle.Replace(" ", "_"));
 			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace("(", "");
 			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace(")", "");
+			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace("'", "");
+			styleWithoutSpecialCharacters = styleWithoutSpecialCharacters.Replace("$", "");
 			return styleWithoutSpecialCharacters.ToString().ToLower();
 	    }
 
@@ -1359,14 +1396,7 @@ namespace SIL.PublishingSolution
             var dlg = new FolderBrowserDialog();
 	        string documentsPath = string.Empty;
 
-	        if (Common.UsingMonoVM)
-	        {
-		        documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-	        }
-	        else
-	        {
-				documentsPath = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-	        }
+			documentsPath = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
             dlg.SelectedPath = Common.PathCombine(documentsPath, Common.SaveInFolderBase);
             DirectoryInfo directoryInfo = new DirectoryInfo(dlg.SelectedPath);
             if (!directoryInfo.Exists)
@@ -1375,14 +1405,7 @@ namespace SIL.PublishingSolution
             {
 				string styleInLowerCaseWithoutSpecialCharacters = GetStyleInLowerCaseWithoutSpecialCharacters(ddlStyle.Text);
 				string folderName = styleInLowerCaseWithoutSpecialCharacters + "_" + _sDateTime;
-				if (Common.UsingMonoVM)
-				{
-					_newSaveInFolderPath = Common.PathCombine(dlg.SelectedPath, folderName);
-				}
-				else
-				{
-					_newSaveInFolderPath = Common.PathCombine(ManageDirectory.ShortFileName(dlg.SelectedPath), folderName);
-				}
+				_newSaveInFolderPath = Common.PathCombine(ManageDirectory.ShortFileName(dlg.SelectedPath), folderName);
 
                 Param.SetValue(Param.PublicationLocation, _newSaveInFolderPath);
                 txtSaveInFolder.Text = _newSaveInFolderPath;

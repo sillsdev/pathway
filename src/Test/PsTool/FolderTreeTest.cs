@@ -63,23 +63,24 @@ namespace Test.PsTool
 
         }
 
-		/// <summary>
-		///A test for Get
-		///</summary>
-		[Test]
-		[Category("SkipOnTeamCity")]
-		public void LongShortDirectoryNameTest()
-		{
-			if (Common.UsingMonoVM)
-				return;
+		//Environment dependent test
+		///// <summary>
+		/////A test for Get
+		/////</summary>
+		//[Test]
+		//[Category("SkipOnTeamCity")]
+		//public void LongShortDirectoryNameTest()
+		//{
+		//	if (Common.UsingMonoVM)
+		//		return;
 
-			string directory = "C:\\Program Files (x86)\\Common Files";
-			string shortdirectory = ManageDirectory.ShortFileName(directory);
-			StringAssert.Contains(shortdirectory, "C:\\PROGRA~2\\COMMON~1", "Directory Not matched");
+		//	string directory = "C:\\Program Files (x86)\\Common Files";
+		//	string shortdirectory = ManageDirectory.ShortFileName(directory);
+		//	StringAssert.Contains(shortdirectory, "C:\\PROGRA~2\\COMMON~1", "Directory Not matched");
 
-			string longdirectory = ManageDirectory.LongFileName(shortdirectory);
-			StringAssert.Contains(longdirectory, "C:\\Program Files (x86)\\Common Files", "Directory Not matched");
-		}
+		//	string longdirectory = ManageDirectory.LongFileName(shortdirectory);
+		//	StringAssert.Contains(longdirectory, "C:\\Program Files (x86)\\Common Files", "Directory Not matched");
+		//}
     }
 }
 

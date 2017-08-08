@@ -160,6 +160,7 @@ namespace SIL.PublishingSolution
 			string mergedCss;
 			string defaultCss;
 			string tempCssFile;
+			CssRemoved = new List<string> { "string-set:", "-moz-column-", "column-fill:", "-ps-outline-", "float:", "-ps-fixed-line-height:", "content: leader(" };
 			var tempFolder = ProcessingCss(projInfo, inProcess, preProcessor, out mergedCss, out defaultCss, out tempCssFile);
 
 			FixIssuesWithFlexXhtml(projInfo, preProcessor, langArray, inProcess);
@@ -188,7 +189,11 @@ namespace SIL.PublishingSolution
 
 			CreateEpubManifest(projInfo, inProcess, contentFolder, bookId, epubToc, tempCssFile);
 
-			var epub3Path = MakeCopyOfEpub2(projInfo);
+			var epub3Path = MakeCopyOfEpub2(inProcess, projInfo);
+
+			RemoveAudioVisual(inProcess, contentFolder, projInfo.ProjectPath);
+
+			LinkVideoFiles(inProcess, epub3Path, projInfo.ProjectPath);
 
 			string outputPathWithFileName;
 			var fileName = PackageEpub2(projInfo, inProcess, contentFolder, outputFolder, out outputPathWithFileName);
@@ -234,18 +239,6 @@ namespace SIL.PublishingSolution
 					catch
 					{
 						// don't worry if we can't clean up pictures folder
-					}
-			    }
-			    var audioVisual = Path.Combine(folder, "AudioVisual");
-			    if (Directory.Exists(audioVisual))
-			    {
-					try
-					{
-						Directory.Delete(audioVisual, true);
-					}
-					catch
-					{
-						// don't worry if we can't clean up folder
 					}
 			    }
 		    }
@@ -370,7 +363,7 @@ namespace SIL.PublishingSolution
 		    return fileName;
 	    }
 
-	    protected string MakeCopyOfEpub2(PublicationInformation projInfo)
+	    protected string MakeCopyOfEpub2(InProcess inProcess, PublicationInformation projInfo)
 	    {
 		    string epub3Path = projInfo.ProjectPath;
 		    epub3Path = Common.PathCombine(epub3Path, "Epub3");
@@ -387,20 +380,111 @@ namespace SIL.PublishingSolution
 			    File.Copy(projInfo.DefaultRevCssFileWithPath,
 				    Common.PathCombine(epub3Path, Path.GetFileName(projInfo.DefaultRevCssFileWithPath)), true);
 
-		    _exportEpub3 = new Epub3Transformation(this, _epubFont);
+			var avFolder = Path.Combine(projInfo.ProjectPath, "AudioVisual");
+			if (Directory.Exists(avFolder))
+			{
+				FolderTree.Copy(avFolder, Path.Combine(epub3Path, "OEBPS", "AudioVisual"));
+			}
+
+			_exportEpub3 = new Epub3Transformation(this, _epubFont);
 		    _exportEpub3.Epub3Directory = epub3Path;
+		    _exportEpub3.InProcess = inProcess;
 		    _exportEpub3.Export(projInfo);
 		    return epub3Path;
 	    }
 
-	    protected void CreateEpubManifest(PublicationInformation projInfo, InProcess inProcess, string contentFolder, Guid bookId,
+		protected void RemoveAudioVisual(InProcess inProcess, string contentFolder, string avPath)
+		{
+			var xmlDocument = Common.DeclareXMLDocument(false);
+			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
+			var files = Directory.GetFiles(contentFolder, "PartFile*.*");
+			inProcess.AddToMaximum(files.Length);
+			foreach (var file in files)
+			{
+				inProcess.PerformStep();
+				xmlDocument.RemoveAll();
+				var xmlReader = XmlReader.Create(file, xmlReaderSettings);
+				xmlDocument.Load(xmlReader);
+				xmlReader.Close();
+				var audioNodes = xmlDocument.SelectNodes("//xhtml:audio|//xhtml:video", namespaceManager);
+				Debug.Assert(audioNodes != null);
+				bool changed = false;
+				foreach (XmlElement node in audioNodes)
+				{
+					Debug.Assert(node.ParentNode != null);
+					var aNode = node.NextSibling;
+					if (aNode != null && aNode.LocalName == "a")
+					{
+						var href = aNode.Attributes["href"];
+						var uri = new Uri(Path.Combine(avPath, node.FirstChild.Attributes["src"].Value));
+						href.Value = uri.AbsoluteUri;
+						var onclick = aNode.Attributes["onclick"];
+						if (onclick != null)
+						{
+							aNode.Attributes.Remove(onclick);
+						}
+					}
+					node.ParentNode.RemoveChild(node);
+					changed = true;
+				}
+				if (!UpdateAvLinks(avPath, xmlDocument, namespaceManager, changed)) continue;
+				var xws = new XmlWriterSettings { Indent = false, Encoding = Encoding.UTF8 };
+				var xw = XmlWriter.Create(file, xws);
+				xmlDocument.Save(xw);
+				xw.Close();
+			}
+		}
+
+		private static bool UpdateAvLinks(string avPath, XmlDocument xmlDocument, XmlNamespaceManager namespaceManager,
+			bool changed)
+		{
+			var linkNodes = xmlDocument.SelectNodes("//xhtml:a", namespaceManager);
+			Debug.Assert(linkNodes != null);
+			foreach (XmlElement node in linkNodes)
+			{
+				var href = node.Attributes["href"];
+				if (href == null || !href.Value.StartsWith("AudioVisual")) continue;
+				var uri = new Uri(Path.Combine(avPath, href.Value));
+				href.Value = uri.AbsoluteUri;
+				changed = true;
+			}
+			return changed;
+		}
+
+		protected void LinkVideoFiles(InProcess inProcess, string contentFolder, string avPath)
+		{
+			var xmlDocument = Common.DeclareXMLDocument(false);
+			var namespaceManager = new XmlNamespaceManager(xmlDocument.NameTable);
+			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+			var xmlReaderSettings = new XmlReaderSettings { XmlResolver = null, DtdProcessing = DtdProcessing.Parse };
+			var files = Directory.GetFiles(Path.Combine(contentFolder, "OEBPS"), "PartFile*.*");
+			inProcess.AddToMaximum(files.Length);
+			foreach (var file in files)
+			{
+				inProcess.PerformStep();
+				xmlDocument.RemoveAll();
+				var xmlReader = XmlReader.Create(file, xmlReaderSettings);
+				xmlDocument.Load(xmlReader);
+				xmlReader.Close();
+				if (!UpdateAvLinks(avPath, xmlDocument, namespaceManager, false)) continue;
+				var xws = new XmlWriterSettings { Indent = false, Encoding = Encoding.UTF8 };
+				var xw = XmlWriter.Create(file, xws);
+				xmlDocument.Save(xw);
+				xw.Close();
+			}
+		}
+
+
+		protected void CreateEpubManifest(PublicationInformation projInfo, InProcess inProcess, string contentFolder, Guid bookId,
 		    EpubToc epubToc, string tempCssFile)
 	    {
 		    inProcess.SetStatus("Generating .epub TOC and manifest");
 		    _epubManifest.CreateOpf(projInfo, contentFolder, bookId);
-		    epubToc.CreateNcx(projInfo, contentFolder, bookId);
-		    ModifyTOCFile(contentFolder);
-		    ReplaceEmptyHrefandXmlLangtoLang(contentFolder);
+			epubToc.CreateNcx(projInfo, contentFolder, bookId);
+			ModifyTOCFile(contentFolder);
+			ReplaceEmptyHrefandXmlLangtoLang(inProcess, contentFolder);
 		    if (File.Exists(tempCssFile))
 		    {
 			    File.Delete(tempCssFile);
@@ -447,7 +531,7 @@ namespace SIL.PublishingSolution
 		    string contentFolder)
 	    {
 		    inProcess.SetStatus("Copy contents and styles to Epub");
-		    CopyStylesAndContentToEpub(mergedCss, defaultCss, htmlFiles, contentFolder);
+		    CopyStylesAndContentToEpub(inProcess, mergedCss, defaultCss, htmlFiles, contentFolder);
 		    inProcess.PerformStep();
 	    }
 
@@ -633,14 +717,16 @@ namespace SIL.PublishingSolution
             return newEpubFileName;
         }
 
-        protected void ReplaceEmptyHrefandXmlLangtoLang(string contentFolder)
+        protected void ReplaceEmptyHrefandXmlLangtoLang(InProcess inProcess, string contentFolder)
         {
             string[] files = Directory.GetFiles(contentFolder, "*.xhtml");
+			inProcess?.AddToMaximum(files.Length);
             foreach (string file in files)
             {
 				Common.StreamReplaceInFile(file, " xml:lang=\"", " lang=\"");
 				Common.StreamReplaceInFile(file, "a href=\"#\"", "a");
 				Common.StreamReplaceInFile(file, " lang=\"\"", "");
+				inProcess?.PerformStep();
             }
         }
         private void GlossaryLinkReferencing(PublicationInformation projInfo,Dictionary<string,Dictionary<string,string>> glossoryreferncelist)
@@ -934,14 +1020,14 @@ namespace SIL.PublishingSolution
             return fileName;
         }
 
-        private void CopyStylesAndContentToEpub(string mergedCss, string defaultCss, IEnumerable<string> htmlFiles, string contentFolder)
+        private void CopyStylesAndContentToEpub(InProcess inProcess, string mergedCss, string defaultCss, List<string> htmlFiles, string contentFolder)
         {
             var cssPath = Common.PathCombine(contentFolder, defaultCss);
             if (File.Exists(mergedCss))
                 File.Copy(mergedCss, cssPath, true);
 
             var tocFiletoUpdate = string.Empty;
-            SplitPageSections(htmlFiles, contentFolder, tocFiletoUpdate);
+            SplitPageSections(inProcess, htmlFiles, contentFolder, tocFiletoUpdate);
             RemoveDuplicateBookName(contentFolder);
         }
 
@@ -990,7 +1076,7 @@ namespace SIL.PublishingSolution
             return contentFolder;
         }
 
-        private void AddBooksMoveNotes(InProcess inProcess, List<string> htmlFiles, IEnumerable<string> splitFiles)
+        private void AddBooksMoveNotes(InProcess inProcess, List<string> htmlFiles, List<string> splitFiles)
         {
             string xsltFullName = GetXsltFile();
 			string getPsApplicationPath = Common.AssemblyPath;
@@ -1004,6 +1090,7 @@ namespace SIL.PublishingSolution
             inProcess.SetStatus("Apply Xslt Process in html file");
             if (File.Exists(xsltProcessExe))
             {
+				inProcess.AddToMaximum(splitFiles.Count);
                 foreach (string file in splitFiles)
                 {
                     const string outputExtension = "_.xhtml";
@@ -1012,22 +1099,13 @@ namespace SIL.PublishingSolution
                     var xhtmlOutputFile = file.Replace(inputExtension, outputExtension);
 					if (!File.Exists(file))
 						continue;
-                    if (_isUnixOs)
+                    if (file.Contains("File2Cpy"))
                     {
-                        if (file.Contains("File2Cpy"))
-                        {
-                            File.Copy(file, xhtmlOutputFile);
-                        }
-                        else
-                        {
-                            Common.XsltProcess(file, xsltFullName, outputExtension);
-                        }
+                        File.Copy(file, xhtmlOutputFile);
                     }
                     else
                     {
-                        var args = string.Format(@"""{0}"" ""{1}"" {2} ""{3}""", file, xsltFullName,
-                                                outputExtension, getPsApplicationPath);
-                        Common.RunCommand(xsltProcessExe, args, 1);
+                        Common.XsltProcess(file, xsltFullName, outputExtension);
                     }
                     if (File.Exists(xhtmlOutputFile))
                     {
@@ -1038,6 +1116,7 @@ namespace SIL.PublishingSolution
                         File.Move(file, xhtmlOutputFile);
                     }
                     htmlFiles.Add(xhtmlOutputFile);
+					inProcess.PerformStep();
                 }
             }
         }
@@ -1183,6 +1262,8 @@ namespace SIL.PublishingSolution
 
         private static MergeCss _mc; // When mc is disposed it also deletes the merged file
 
+		protected static List<string> CssRemoved;
+
         private static string MergeAndFilterCss(PreExportProcess preProcessor, string tempFolder, string cssFullPath)
         {
             var tempFolderName = Path.GetFileName(tempFolder);
@@ -1192,13 +1273,10 @@ namespace SIL.PublishingSolution
             preProcessor.RemoveDeclaration(mergedCss, "@bottom-");
             preProcessor.RemoveDeclaration(mergedCss, "@footnote");
             preProcessor.RemoveDeclaration(mergedCss, "@page");
-            preProcessor.RemoveStringInCss(mergedCss, "string-set:");
-            preProcessor.RemoveStringInCss(mergedCss, "-moz-column-");
-            preProcessor.RemoveStringInCss(mergedCss, "column-fill:");
-            preProcessor.RemoveStringInCss(mergedCss, "-ps-outline-");
-            preProcessor.RemoveStringInCss(mergedCss, "float:");
-            preProcessor.RemoveStringInCss(mergedCss, "-ps-fixed-line-height:");
-            preProcessor.RemoveStringInCss(mergedCss, "content: leader(");
+	        foreach (var target in CssRemoved)
+	        {
+				preProcessor.RemoveStringInCss(mergedCss, target);
+			}
             preProcessor.ReplaceStringInCss(mergedCss);
             preProcessor.SetDropCapInCSS(mergedCss);
             preProcessor.InsertCoverPageImageStyleInCSS(mergedCss);
@@ -1258,57 +1336,58 @@ namespace SIL.PublishingSolution
             ramp.Create(projInfo.DefaultXhtmlFileWithPath, ".epub", projInfo.ProjectInputType);
         }
 
-        protected void SplitPageSections(IEnumerable<string> htmlFiles, string contentFolder, string tocFiletoUpdate)
+        protected void SplitPageSections(InProcess inProcess, List<string> htmlFiles, string contentFolder, string tocFiletoUpdate)
         {
-            foreach (string file in htmlFiles)
+	        inProcess?.AddToMaximum(htmlFiles.Count);
+	        foreach (string file in htmlFiles)
             {
                 var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file);
-                if (fileNameWithoutExtension != null)
-                {
-                    string name = fileNameWithoutExtension.Substring(0, 8);
-                    string substring = fileNameWithoutExtension.Substring(8);
-                    string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
+	            if (fileNameWithoutExtension == null) continue;
+	            var prefixLen = fileNameWithoutExtension.Length > 7 ? 8 : 1;
+	            string name = fileNameWithoutExtension.Substring(0, prefixLen);
+	            string substring = fileNameWithoutExtension.Substring(prefixLen);
+	            string dest = Common.PathCombine(contentFolder, name + substring.PadLeft(6, '0') + ".xhtml");
 
-                    if (_isUnixOs)
-                    {
-                        Common.RemoveDTDForLinuxProcess(file, "epub");
-                    }
+	            if (_isUnixOs)
+	            {
+		            Common.RemoveDTDForLinuxProcess(file, "epub");
+	            }
 
-	                if (File.Exists(file))
-	                {
-		                File.Move(file, dest);
-	                }
+	            if (File.Exists(file))
+	            {
+		            File.Move(file, dest);
+	            }
 
-	                // split the file into smaller pieces if needed
-                    var files = new List<string>();
+	            // split the file into smaller pieces if needed
+	            var files = new List<string>();
 
-                    if (!PageBreak && InputType.ToLower() == "dictionary")
-                    {
-                        files = SplitBook(dest);
-                    }
+	            if (!PageBreak && InputType.ToLower() == "dictionary")
+	            {
+		            files = SplitBook(dest);
+	            }
 
-                    if (InputType.ToLower() == "scripture")
-                    {
-                        files = SplitBook(dest);
-                    }
+	            if (InputType.ToLower() == "scripture")
+	            {
+		            files = SplitBook(dest);
+	            }
 
-					if (files != null && files.Count > 1)
-                    {
-                        if (File.Exists(dest))
-                            File.Delete(dest);
-                    }
+	            if (files != null && files.Count > 1)
+	            {
+		            if (File.Exists(dest))
+			            File.Delete(dest);
+	            }
 
-                    if (dest.Contains("File3TOC"))
-                    {
-                        tocFiletoUpdate = dest;
-                        GetTocId(tocFiletoUpdate);
-                    }
+	            if (dest.Contains("File3TOC"))
+	            {
+		            tocFiletoUpdate = dest;
+		            GetTocId(tocFiletoUpdate);
+	            }
 
-					if (files != null && files.Count > 0 && files[0].Contains("PartFile"))
-                    {
-                        MapTocIdAndSectionHeadId(files);
-                    }
-                }
+	            if (files != null && files.Count > 0 && files[0].Contains("PartFile"))
+	            {
+		            MapTocIdAndSectionHeadId(files);
+	            }
+	            inProcess?.PerformStep();
             }
             UpdateTocIdAfterFileSplit(tocFiletoUpdate);
         }
@@ -1845,6 +1924,7 @@ namespace SIL.PublishingSolution
                 {
                     RemoveSpanVerseNumberNodeInXhtmlFile(targetFile);
                     ReplaceAllBrokenHrefs(targetFile, dictHyperlinks);
+	                ConvertAnchorToUrl(targetFile);
                 }
                 foreach (string targetFile in revFiles)
                 {
@@ -1871,7 +1951,27 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void RemoveSpanVerseNumberNodeInXhtmlFile(string fileName)
+		private void ConvertAnchorToUrl(string targetFile)
+		{
+			var xDoc = Common.DeclareXMLDocument(true);
+			var xrs = new XmlReaderSettings {XmlResolver = null, DtdProcessing = DtdProcessing.Ignore};
+			var xr = XmlReader.Create(targetFile, xrs);
+			xDoc.Load(xr);
+			xr.Close();
+			var nodes = xDoc.SelectNodes(@"//*[contains(@href,'\')]/@href");
+			Debug.Assert(nodes != null);
+			if (nodes.Count == 0) return;
+			foreach (XmlAttribute href in nodes)
+			{
+				href.Value = href.Value.Replace(@"\", "/");
+			}
+			var xws = new XmlWriterSettings {Indent = false};
+			var xw = XmlWriter.Create(targetFile, xws);
+			xDoc.Save(xw);
+			xw.Close();
+		}
+
+		private void RemoveSpanVerseNumberNodeInXhtmlFile(string fileName)
         {
             //Removed NoteTargetReference tag from XHTML file
             XmlDocument xDoc = Common.DeclareXMLDocument(true);
@@ -2279,14 +2379,14 @@ namespace SIL.PublishingSolution
             }
         }
 
-        /// <summary>
-        /// Creates a separate references file at the end of the xhtml files in scripture content, for both footnotes and cross-references.
-        /// Each reference links back relatively to the source xhtml, so that the links can be updated when the content is split into
-        /// smaller chunks.
-        /// </summary>
-        /// <param name="outputFolder"></param>
-        /// <param name="xhtmlFileName"></param>
-        private void CreateReferencesFile(string outputFolder, string xhtmlFileName)
+		/// <summary>
+		/// Creates a separate references file at the end of the xhtml files in scripture content, for both footnotes and cross-references.
+		/// Each reference links back relatively to the source xhtml, so that the links can be updated when the content is split into
+		/// smaller chunks.
+		/// </summary>
+		/// <param name="outputFolder"></param>
+		/// <param name="xhtmlFileName"></param>
+		private void CreateReferencesFile(string outputFolder, string xhtmlFileName)
         {
             // sanity check - return if the references are to be left in the text
             if (References.Contains("Section")) { return; }
@@ -2617,6 +2717,12 @@ namespace SIL.PublishingSolution
             {
                 string[] files = Directory.GetFiles(contentFolder);
                 mOdt.AddToZip(files, zipFile);
+	            var avFolder = Common.PathCombine(contentFolder, "AudioVisual");
+	            if (Directory.Exists(avFolder))
+	            {
+		            var avFiles = Directory.GetFiles(avFolder);
+					mOdt.AddToZip(avFiles, zipFile);
+	            }
                 var sb = new StringBuilder();
                 sb.Append(sourceFolder);
                 sb.Append(Path.DirectorySeparatorChar);

@@ -36,8 +36,8 @@ namespace Test.XhtmlExport
 	/// <summary>
 	/// Test methods of FlexDePlugin
 	/// </summary>
-	[TestFixture]
-	[Category("BatchTest")]
+	//[TestFixture]
+	//[Category("BatchTest")]
 	//[assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum, ViewAndModify = "HKEY_LOCAL_MACHINE")]
 	public class XhtmlExportTest
 	{
@@ -251,108 +251,115 @@ namespace Test.XhtmlExport
 			OdtTest.AreEqual(odtExpectDir, odtOutputDir, message);
 		}
 
-		#region Gondwana Sample Open Office
-		/// <summary>
-		/// Gondwana Sample Open Office Back End Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void GondwanaSampleOpenOfficeTest()
-		{
-			PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "OpenOffice/LibreOffice");
-		}
-		#endregion Gondwana Sample Open Office
+		//Environment dependent test
+		//#region Gondwana Sample Open Office
+		///// <summary>
+		///// Gondwana Sample Open Office Back End Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void GondwanaSampleOpenOfficeTest()
+		//{
+		//	PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "OpenOffice/LibreOffice");
+		//}
+		//#endregion Gondwana Sample Open Office
 
-		#region Nkonya Sample Open Office
-		/// <summary>
-		/// Nkonya Sample Open Office Back End Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void NkonyaSampleOpenOfficeTest()
-		{
-			PathawyB("Nkonya Sample", "Nkonya Sample", "Scripture", "OpenOffice/LibreOffice");
-		}
-		#endregion Nkonya Sample Open Office
+		//Environment dependent test
+		//#region Nkonya Sample Open Office
+		///// <summary>
+		///// Nkonya Sample Open Office Back End Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void NkonyaSampleOpenOfficeTest()
+		//{
+		//	PathawyB("Nkonya Sample", "Nkonya Sample", "Scripture", "OpenOffice/LibreOffice");
+		//}
+		//#endregion Nkonya Sample Open Office
 
-		#region Paratext NKOu3 Open Office
-		/// <summary>
-		/// Paratext NKOu3 Open Office Back End Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void NKOu3OpenOfficeTest()
-		{
-			PathwayB("NKOu3", "NKOu3", "Scripture", "OpenOffice/LibreOffice", "usx");
-		}
-		#endregion Nkonya Sample Open Office
+		//#region Paratext NKOu3 Open Office
+		///// <summary>
+		///// Paratext NKOu3 Open Office Back End Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void NKOu3OpenOfficeTest()
+		//{
+		//	PathwayB("NKOu3", "NKOu3", "Scripture", "OpenOffice/LibreOffice", "usx");
+		//}
+		//#endregion Nkonya Sample Open Office
 
-		#region Gondwana Sample InDesign
-		/// <summary>
-		/// Gondwana Sample InDesign Back End Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void GondwanaSampleInDesignTest()
-		{
-			PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "InDesign");
-		}
-		#endregion Gondwana Sample InDesign
+		//Environment dependent test
+		//#region Gondwana Sample InDesign
+		///// <summary>
+		///// Gondwana Sample InDesign Back End Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void GondwanaSampleInDesignTest()
+		//{
+		//	PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "InDesign");
+		//}
+		//#endregion Gondwana Sample InDesign
 
-		#region Nkonya Sample InDesign
-		/// <summary>
-		/// Nkonya Sample InDesign Back End Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void NkonyaSampleInDesignTest()
-		{
-			PathawyB("Nkonya Sample", "Nkonya Sample", "Scripture", "InDesign");
-		}
-		#endregion Nkonya Sample InDesign
+		//Environment dependent test
+		//#region Nkonya Sample InDesign
+		///// <summary>
+		///// Nkonya Sample InDesign Back End Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void NkonyaSampleInDesignTest()
+		//{
+		//	PathawyB("Nkonya Sample", "Nkonya Sample", "Scripture", "InDesign");
+		//}
+		//#endregion Nkonya Sample InDesign
 
-		#region Paratext NKOu3 InDesign
-		/// <summary>
-		/// Paratext NKOu3 InDesign Back End Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void NKOu3InDesignTest()
-		{
-			PathwayB("NKOu3", "NKOu3", "Scripture", "InDesign", "usx");
-		}
-		#endregion Nkonya Sample Open Office
+		//Environment dependent test
+		//#region Paratext NKOu3 InDesign
+		///// <summary>
+		///// Paratext NKOu3 InDesign Back End Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void NKOu3InDesignTest()
+		//{
+		//	PathwayB("NKOu3", "NKOu3", "Scripture", "InDesign", "usx");
+		//}
+		//#endregion Nkonya Sample Open Office
 
-		#region Gondwana Sample XeLaTex
-		/// <summary>
-		/// Gondwana Sample XeLaTex Back End Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void GondwanaSampleXeLaTexTest()
-		{
-			PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "XeLaTex");
-		}
-		#endregion Gondwana Sample XeLaTex
+		//Environment dependent test
+		//#region Gondwana Sample XeLaTex
+		///// <summary>
+		///// Gondwana Sample XeLaTex Back End Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void GondwanaSampleXeLaTexTest()
+		//{
+		//	PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "XeLaTex");
+		//}
+		//#endregion Gondwana Sample XeLaTex
 
-		#region Paratext NKOu3 XeLaTex
-		/// <summary>
-		/// Paratext NKOu3 XeLaTex Back End Test
-		/// </summary>
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void NKOu3XeLaTexTest()
-		{
-			PathwayB("NKOu3", "NKOu3", "Scripture", "XeLaTex", "usx");
-		}
-		#endregion Nkonya Sample XeLaTex
+		//Environment dependent test
+		//#region Paratext NKOu3 XeLaTex
+		///// <summary>
+		///// Paratext NKOu3 XeLaTex Back End Test
+		///// </summary>
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void NKOu3XeLaTexTest()
+		//{
+		//	PathwayB("NKOu3", "NKOu3", "Scripture", "XeLaTex", "usx");
+		//}
+		//#endregion Nkonya Sample XeLaTex
 	}
 }

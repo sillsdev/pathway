@@ -53,14 +53,14 @@ namespace Test.XeLatex
 			_inputPath = Common.PathCombine(testPath, "input");
 			_outputPath = Common.PathCombine(testPath, "output");
 
-			if (_isLinux)
-			{
-				_expectedPath = Common.PathCombine(testPath, "LinuxExpected");
-			}
-			else
-			{
+			//if (_isLinux)
+			//{
+			//	_expectedPath = Common.PathCombine(testPath, "LinuxExpected");
+			//}
+			//else
+			//{
 				_expectedPath = Common.PathCombine(testPath, "Expected");
-			}
+			//}
 
 			if (Directory.Exists(_outputPath))
 				Directory.Delete(_outputPath, true);
@@ -1211,23 +1211,24 @@ namespace Test.XeLatex
 		}
 
 
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void VisibilityCensorPackageTest()
-		{
-			const string testFileName = "VisibilityPackage";
-			var inputname = testFileName + ".tex";
-			var xeLatexFullFile = FileOutput(inputname);
-			const bool overwrite = true;
-			File.Copy(FileInput(inputname), xeLatexFullFile, overwrite);
-			var imgPath = new Dictionary<string, string>();
-			UpdateXeLaTexFontCacheIfNecessary();
-			Common.Testing = true;
-			CallXeLaTex(_projInfo, xeLatexFullFile, true, imgPath);
-			var outname = testFileName + ".log";
-			TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 2, 13, 14, 15, 16, 17 });
-		}
+		//Environment dependent test
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void VisibilityCensorPackageTest()
+		//{
+		//	const string testFileName = "VisibilityPackage";
+		//	var inputname = testFileName + ".tex";
+		//	var xeLatexFullFile = FileOutput(inputname);
+		//	const bool overwrite = true;
+		//	File.Copy(FileInput(inputname), xeLatexFullFile, overwrite);
+		//	var imgPath = new Dictionary<string, string>();
+		//	UpdateXeLaTexFontCacheIfNecessary();
+		//	Common.Testing = true;
+		//	CallXeLaTex(_projInfo, xeLatexFullFile, true, imgPath);
+		//	var outname = testFileName + ".log";
+		//	TextFileAssert.AreEqualEx(FileExpected(outname), FileOutput(outname), new ArrayList { 2, 13, 14, 15, 16, 17 });
+		//}
 
 		[Test]
 		[Category("LongTest")]
@@ -1260,13 +1261,14 @@ namespace Test.XeLatex
 				Assert.AreEqual(@":\pwtex\", XeLaTexInstallation.GetXeLaTexDir().Substring(1));
 		}
 
-		[Test]
-		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
-		public void XeLaTexVersion()
-		{
-			Assert.IsTrue(XeLaTexInstallation.CheckXeLaTexVersion());
-		}
+		//Environment dependent test
+		//[Test]
+		//[Category("ShortTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void XeLaTexVersion()
+		//{
+		//	Assert.IsTrue(XeLaTexInstallation.CheckXeLaTexVersion());
+		//}
 
 		[Test]
 		public void XeLaTexFontCount()
@@ -1321,15 +1323,16 @@ namespace Test.XeLatex
 			FileCompare(file);
 		}
 
-		[Test]
-		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
-		public void XeLaTexUpdateCache()
-		{
-			UpdateXeLaTexFontCacheIfNecessary();
-			var systemFontList = System.Drawing.FontFamily.Families;
-			Assert.AreEqual(systemFontList.Length, XeLaTexInstallation.GetXeLaTexFontCount());
-		}
+		//Environment dependent test
+		//[Test]
+		//[Category("LongTest")]
+		//[Category("SkipOnTeamCity")]
+		//public void XeLaTexUpdateCache()
+		//{
+		//	UpdateXeLaTexFontCacheIfNecessary();
+		//	var systemFontList = System.Drawing.FontFamily.Families;
+		//	Assert.AreEqual(systemFontList.Length, XeLaTexInstallation.GetXeLaTexFontCount());
+		//}
 
 
 		[Test]

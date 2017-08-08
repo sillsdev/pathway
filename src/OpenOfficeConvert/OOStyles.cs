@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Xml;
 using Microsoft.Win32;
 using SIL.Tool;
@@ -50,7 +51,6 @@ namespace SIL.PublishingSolution
 
         public Dictionary<string, Dictionary<string, string>> CreateStyles(PublicationInformation projInfo, Dictionary<string, Dictionary<string, string>> cssProperty, string outputFileName)
         {
-
             try
             {
                 string outputFile = Path.GetFileNameWithoutExtension(projInfo.DefaultXhtmlFileWithPath);
@@ -58,7 +58,8 @@ namespace SIL.PublishingSolution
                 _isFromExe = Common.CheckExecutionPath();
                 _projInfo = projInfo;
                 _cssProperty = cssProperty;
-                HandleMexioStyleSheet();
+	            SetUpNumberDecimalSeperator();
+				HandleMexioStyleSheet();
                 if (Param.HyphenEnable)
 	            {
 		            IsHyphenEnabled = true;
@@ -84,23 +85,38 @@ namespace SIL.PublishingSolution
             return _LOAllClass;
         }
 
-        /// <summary>
-        /// Header center values should be added for Mexico standard stylesheet,
-        /// </summary>
-        private void HandleMexioStyleSheet()
+		/// <summary>
+		/// Method to set the constant NumberDecimalSeperator in CultureInfo on all Culture
+		/// </summary>
+		private void SetUpNumberDecimalSeperator()
+		{
+			var culture = CultureInfo.CreateSpecificCulture("en-US");
+			culture.NumberFormat.NumberDecimalSeparator = ".";
+			Thread.CurrentThread.CurrentCulture = culture;
+			Thread.CurrentThread.CurrentUICulture = culture;
+		}
+
+		/// <summary>
+		/// Header center values should be added for Mexico standard stylesheet,
+		/// </summary>
+		private void HandleMexioStyleSheet()
         {
             if (_projInfo.ProjectInputType.ToLower()!= "dictionary") return;
-            if (_projInfo._selectedTemplateStyle.ToLower() == "layout_16" && _cssProperty.ContainsKey("@page") &&
-                _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
+
+            string headerText = string.Empty;
+            if (_cssProperty.ContainsKey("@page") &&
+            _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
             {
-                const string titlePath = "//Metadata/meta[@name='Title']/defaultValue";
-                string headerText = Param.GetItem(titlePath).InnerText;
-                string headerFontSize = "10pt";
+                if (Param.GetMetadataValue("Title") != null)
+                {
+                    headerText = Param.GetMetadataValue("Title");
+                }
+                string headerFontSize = "10";
                 string[] pageDir = { "@page:left-top-center", "@page:right-top-center" };
                 if (_cssProperty.ContainsKey("headword") && _cssProperty["headword"].ContainsKey("font-size"))
                 {
-					if (_cssProperty["entry"].ContainsKey("font-size") && _cssProperty["entry"]["font-size"] != null)
-						headerFontSize = _cssProperty["entry"]["font-size"];
+                    if (_cssProperty["entry"].ContainsKey("font-size") && _cssProperty["entry"]["font-size"] != null)
+                        headerFontSize = _cssProperty["entry"]["font-size"];
                 }
 
                 for (int i = 0; i < pageDir.Count(); i++)
@@ -354,34 +370,56 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private void BorderPropertyMerge(Dictionary<string, string> OOProperty, string pos)
-        {
-            string key1 = "border-" + pos + "-style";
-            if (OOProperty.ContainsKey(key1))
-            {
+		private void BorderPropertyMerge(Dictionary<string, string> OOProperty, string pos)
+		{
+			string property = string.Empty;
+			string key1 = "border-" + pos + "-style";
+			if (OOProperty.ContainsKey(key1))
+			{
+				property = OOProperty[key1] + " ";
+				OOProperty.Remove(key1);
+				key1 = "border-" + pos + "-width";
+				if (OOProperty.ContainsKey(key1))
+				{
+					string point = string.Empty;
+					if (OOProperty[key1].IndexOf("pt") == -1)
+						point = "pt";
+					property += OOProperty[key1] + point + " ";
+					OOProperty.Remove(key1);
+				}
 
-                string property = OOProperty[key1] + " ";
-                OOProperty.Remove(key1);
-                key1 = "border-" + pos + "-width";
-                if (OOProperty.ContainsKey(key1))
-                {
-                    string point = string.Empty;
-                    if (OOProperty[key1].IndexOf("pt") == -1)
-                        point = "pt";
-                    property += OOProperty[key1] + point + " ";
-                    OOProperty.Remove(key1);
-                }
+				key1 = "border-" + pos + "-color";
+				if (OOProperty.ContainsKey(key1))
+				{
+					property += OOProperty[key1] + " ";
+					OOProperty.Remove(key1);
+				}
 
-                key1 = "border-" + pos + "-color";
-                if (OOProperty.ContainsKey(key1))
-                {
-                    property += OOProperty[key1] + " ";
-                    OOProperty.Remove(key1);
-                }
+				OOProperty["border-" + pos] = property;
+			}
+			else
+			{
+				key1 = "border-" + pos + "-width";
+				if (OOProperty.ContainsKey(key1))
+				{
+					string point = string.Empty;
+					if (OOProperty[key1].IndexOf("pt") == -1)
+						point = "pt";
+					property = OOProperty[key1] + point + " ";
+					OOProperty.Remove(key1);
+				}
 
-                OOProperty["border-" + pos] = property;
-            }
-        }
+				key1 = "border-" + pos + "-color";
+				if (OOProperty.ContainsKey(key1))
+				{
+					property += "none ";
+					property += OOProperty[key1] + " ";
+					OOProperty.Remove(key1);
+				}
+
+				OOProperty["border-" + pos] = property;
+			}
+		}
 
         private void ListReplace(string className, Dictionary<string, string> OOProperty)
         {
@@ -693,8 +731,8 @@ namespace SIL.PublishingSolution
                     {
                         colWidth = (pageWidth - spacing - marginLeft - marginRight) / 2.0F;
 
-                        var width = Common.UnitConverter(String.Format(CultureInfo.GetCultureInfo("en-US"), "{0}{1}", colWidth, "in"), "pt");
-                        colWidth = float.Parse(width, CultureInfo.GetCultureInfo("en-US"));
+                        var width = Common.UnitConverter(String.Format(new CultureInfo("en-US").NumberFormat, "{0}{1}", colWidth, "in"), "pt");
+                        colWidth = float.Parse(width, new CultureInfo("en-US").NumberFormat);
                         Dictionary<string, string> columnWidth = new Dictionary<string, string>();
                         columnWidth["ColumnWidth"] = colWidth.ToString();
                         _LOAllClass["SectColumnWidth_" + className.Trim()] = columnWidth;
@@ -1195,13 +1233,13 @@ namespace SIL.PublishingSolution
 
             if (_isCenterTabStopNeeded)
             {
-                _writer.WriteAttributeString("style:position", mid.ToString() + "in");
+                _writer.WriteAttributeString("style:position", mid.ToString(CultureInfo.InvariantCulture) + "in");
                 _writer.WriteAttributeString("style:type", "center");
                 _writer.WriteEndElement();
             }
 
             _writer.WriteStartElement("style:tab-stop");//style:tab-stop
-            _writer.WriteAttributeString("style:position", rightGuide.ToString() + "in");
+            _writer.WriteAttributeString("style:position", rightGuide.ToString(CultureInfo.InvariantCulture) + "in");
             _writer.WriteAttributeString("style:type", "right");
             _writer.WriteEndElement();
 
@@ -1251,14 +1289,14 @@ namespace SIL.PublishingSolution
             if (_isCenterTabStopNeeded)
             {
                 _writer.WriteStartElement("style:tab-stop");//style:tab-stop
-                _writer.WriteAttributeString("style:position", mid.ToString() + "in");
+                _writer.WriteAttributeString("style:position", mid.ToString(CultureInfo.InvariantCulture) + "in");
                 _writer.WriteAttributeString("style:type", "center");
                 _writer.WriteEndElement();
             }
 
 
             _writer.WriteStartElement("style:tab-stop");//style:tab-stop
-            _writer.WriteAttributeString("style:position", rightGuide.ToString() + "in");
+            _writer.WriteAttributeString("style:position", rightGuide.ToString(CultureInfo.InvariantCulture) + "in");
             _writer.WriteAttributeString("style:type", "right");
             _writer.WriteEndElement();
 
@@ -2065,7 +2103,7 @@ namespace SIL.PublishingSolution
                 {
                     value = _pageLayoutProperty["fo:margin-top"];
                     Array arValue = value.Split('p');
-                    value = Convert.ToDouble(arValue.GetValue(0)) - 0.75 + "pt";
+                    value = Convert.ToDouble(arValue.GetValue(0), new CultureInfo("en-US").NumberFormat) - 0.75 + "pt";
                 }
                 _writer.WriteAttributeString("svg:y", value);
 
@@ -2089,7 +2127,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:style-name", "MT1");
                 _writer.WriteStartElement("text:variable-get");
                 _writer.WriteAttributeString("text:name", "Right_Guideword_R");
-                _writer.WriteAttributeString("office:value-type", "string");
                 _writer.WriteEndElement();
                 _writer.WriteEndElement();
 
@@ -2099,7 +2136,6 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("text:style-name", "MT2");
                     _writer.WriteStartElement("text:variable-get");
                     _writer.WriteAttributeString("text:name", "RRight_Guideword_R");
-                    _writer.WriteAttributeString("office:value-type", "string");
                     _writer.WriteEndElement();
                     _writer.WriteEndElement();
                 }
@@ -2119,9 +2155,9 @@ namespace SIL.PublishingSolution
 		    string frameWidth = "145pt";
 			if (!String.IsNullOrEmpty(_pageLayoutProperty["fo:page-width"]) && !String.IsNullOrEmpty(_pageLayoutProperty["fo:margin-left"]) && !String.IsNullOrEmpty(_pageLayoutProperty["fo:margin-right"]))
 			{
-				double calcWidth = Convert.ToDouble(_pageLayoutProperty["fo:page-width"].Replace("pt", "")) -
-								   (Convert.ToDouble(_pageLayoutProperty["fo:margin-left"].Replace("pt", "")) +
-									Convert.ToDouble(_pageLayoutProperty["fo:margin-right"].Replace("pt", "")));
+				double calcWidth = Convert.ToDouble(_pageLayoutProperty["fo:page-width"].Replace("pt", ""), new CultureInfo("en-US").NumberFormat) -
+								   (Convert.ToDouble(_pageLayoutProperty["fo:margin-left"].Replace("pt", ""), new CultureInfo("en-US").NumberFormat) +
+									Convert.ToDouble(_pageLayoutProperty["fo:margin-right"].Replace("pt", ""), new CultureInfo("en-US").NumberFormat));
 				if (calcWidth < 400)
 				{
 					frameWidth = "100pt";
@@ -2175,7 +2211,6 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:style-name", "MT1");
             _writer.WriteStartElement("text:variable-get");
             _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-            _writer.WriteAttributeString("office:value-type", "string");
             _writer.WriteEndElement(); //text:variable-get
             _writer.WriteEndElement();
 
@@ -2185,7 +2220,6 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("text:style-name", "MT2");
                 _writer.WriteStartElement("text:variable-get");
                 _writer.WriteAttributeString("text:name", "RLeft_Guideword_L");
-                _writer.WriteAttributeString("office:value-type", "string");
                 _writer.WriteEndElement(); //text:variable-get
                 _writer.WriteEndElement(); //text:span
             }
@@ -2257,9 +2291,9 @@ namespace SIL.PublishingSolution
             {
                 value = _pageLayoutProperty["fo:margin-top"];
                 Array arValue = value.Split('p');
-                value = Convert.ToDouble(arValue.GetValue(0)) - 0.75 + "pt";
+                value = Convert.ToDouble(arValue.GetValue(0), new CultureInfo("en-US").NumberFormat) - 0.75 + "pt";
             }
-            _writer.WriteAttributeString("svg:y", value);
+	        _writer.WriteAttributeString("svg:y", value);
 
             _writer.WriteAttributeString("fo:min-width", "35pt");
             _writer.WriteAttributeString("draw:z-index", "1");
@@ -2549,7 +2583,8 @@ namespace SIL.PublishingSolution
 	                }
 	                else
 	                {
-						_writer.WriteAttributeString("style:horizontal-pos", "left");	                }
+						_writer.WriteAttributeString("style:horizontal-pos", "left");
+	                }
                 }
             }
         }
@@ -3060,19 +3095,15 @@ namespace SIL.PublishingSolution
                 cspace = calcSpace + defaultUnit;
             }
 
-            string ht = "svg:height";
-            if (_pageHeaderFooter[index].ContainsKey("content") && _pageHeaderFooter[index]["content"].Length > 0
-                || _pageHeaderFooter[index + 1].ContainsKey("content") && _pageHeaderFooter[index + 1]["content"].Length > 0
-                || _pageHeaderFooter[index + 2].ContainsKey("content") && _pageHeaderFooter[index + 2]["content"].Length > 0)
-            {
-                space = cspace;
-                height = "14.21" + defaultUnit;
-            }
-            else
-            {
-                ht = "fo:min-height";
-            }
-	        if (index == 15)
+			if (_pageHeaderFooter[index].ContainsKey("content") && _pageHeaderFooter[index]["content"].Length > 0
+				|| _pageHeaderFooter[index + 1].ContainsKey("content") && _pageHeaderFooter[index + 1]["content"].Length > 0
+				|| _pageHeaderFooter[index + 2].ContainsKey("content") && _pageHeaderFooter[index + 2]["content"].Length > 0)
+			{
+				space = cspace;
+				height = "14.21" + defaultUnit;
+			}
+			string ht = "fo:min-height";
+			if (index == 15)
 	        {
 				if (_projInfo.ProjectInputType.ToLower() == "dictionary")
 					height = "15.84pt";

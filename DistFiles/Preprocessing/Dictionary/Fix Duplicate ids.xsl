@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- #############################################################
     # Name:        ConvertNestedDiv.xsl
     # Purpose:     Convert Nested Div to Span to avoid xhtml errors
@@ -26,8 +26,8 @@
     <xsl:template match="x:head/@profile"/>
     <xsl:template match="x:html/@version"/>
 
-    <xsl:template match="x:div">
-        <!-- divs may not be nested in spans -->
+	<!-- divs may not be nested in spans but we need this for pictures -->
+	<!--xsl:template match="x:div">
         <xsl:choose>
             <xsl:when test="count(ancestor::x:span) &gt; 0 and @class != 'picturesofsense'">
                 <xsl:element name="span" namespace="http://www.w3.org/1999/xhtml">
@@ -46,8 +46,8 @@
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
-
+    </xsl:template -->
+	
     <xsl:template match="x:span[@id]">
         <!-- spans must have unique ids -->
         <xsl:variable name="myId">

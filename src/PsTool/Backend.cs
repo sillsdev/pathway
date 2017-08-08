@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -122,15 +121,6 @@ namespace SIL.Tool
             var localType = type.Replace(@"\", "/").ToLower();
 	        try
 	        {
-                //foreach (IExportProcess process in _backend)
-                //{
-                //    if (process.ExportType.ToLower() == "openoffice/libreoffice")
-                //        localType = OpenOfficeClassifier(publicationInformation, localType); // Cross checking for OpenOffice
-
-                //    if (process.ExportType.ToLower() == localType.ToLower())
-                //        return process.Export(publicationInformation);
-                //}
-
                 //Code to call PathwayExport Commandline Utility -commented for now
 		        string mainXhtmlFile = Path.GetFileNameWithoutExtension(publicationInformation.DefaultXhtmlFileWithPath);
 
@@ -160,7 +150,8 @@ namespace SIL.Tool
 
 		        Common.SaveInputType(publicationInformation.ProjectInputType);
 
-                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3} --database \"{4}\"", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString(), Param.DatabaseName);
+                string dbName = Common.IsUnixOS() ? Param.DatabaseName.Replace(" ", "\\ ").Replace("'", "\\'") : Param.DatabaseName;
+                string argument = string.Format("--target \"{0}\" --directory \"{1}\" --files {2} --nunit {3} --database \"{4}\"", type.Replace(@"\", "/").ToLower(), publicationInformation.DictionaryPath, sb.ToString(), Common.Testing.ToString(), dbName);
 
 				string pathwayExportFile = Path.Combine(Common.GetApplicationPath(), "PathwayExport.exe");
 
@@ -191,7 +182,8 @@ namespace SIL.Tool
 		        }
 		        else
 		        {
-					CommandLineRunner.Run(cmd, argument, publicationInformation.DictionaryPath, 50000, new ConsoleProgress());
+					SubProcess.WindowStyle = ProcessWindowStyle.Minimized;
+                    SubProcess.Run(publicationInformation.DictionaryPath, cmd, argument, true);
 				}
 
 			}

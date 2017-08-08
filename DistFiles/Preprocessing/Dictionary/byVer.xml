@@ -1,0 +1,21 @@
+<root default="8.3.x">
+<process perm="true">Add Columns FW83</process>
+<process ver="8.2.x 8.3.x">Add File Prefix to source</process>
+<process ver="8.2.x">Combine Relations</process>
+<process ver="8.2.x">Filter Bogus Category Elements</process>
+<process ver="8.2.x 8.3.x">Filter Broken Links</process>
+<process ver="8.2.x 8.3.x">Filter Empty Entries</process>
+<process perm="true">Fix Duplicate ids</process>
+<process ver="8.2.x">FixLinksBeginWithSpace</process>
+<process ver="8.2.x">InflectionFix</process>
+<process perm="true">Letter Header Language</process>
+<process ver="8.2.x 8.3.x">Remove Duplicate Letter Dividers</process>
+<process ver="8.3.x">Remove Invalid Letter Dividers</process>
+<process ver="8.2.x">Remove Letter Dividers</process>
+<process ver="8.2.x">Remove Letter Dividers2</process>
+<process ver="8.2.x">Remove Space Before Picture Entry</process>
+<process ver="8.2.x">Reset Columns using letter headers</process>
+<process ver="8.2.x">Roman Numeral Homographs</process>
+<process ver="8.2.x">Section Subheaders</process>
+<process ver="8.3.x">Video in Html5</process>
+</root>

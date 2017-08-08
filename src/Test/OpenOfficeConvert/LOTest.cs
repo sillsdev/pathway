@@ -109,7 +109,7 @@ namespace Test.OpenOfficeConvert
             _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "ScriptureInput.xhtml");
             _projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "ScriptureInput.css");
             _projInfo.OutputExtension = "odt";
-            EnableConfigurationSettings(outputDirectory);
+            //EnableConfigurationSettings(outputDirectory);
 
             var target = new ExportLibreOffice();
             const bool expectedResult = true;
@@ -172,7 +172,6 @@ namespace Test.OpenOfficeConvert
             _projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "Dictionarymain.xhtml");
             _projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "Dictionarymain.css");
             _projInfo.OutputExtension = "odt";
-            EnableConfigurationSettings(outputDirectory);
 
             var target = new ExportLibreOffice();
             const bool expectedResult = true;
@@ -201,7 +200,6 @@ namespace Test.OpenOfficeConvert
 			_projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "main.xhtml");
 			_projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "main.css");
 			_projInfo.OutputExtension = "odt";
-			EnableConfigurationSettings(outputDirectory);
 
 			var target = new ExportLibreOffice();
 			const bool expectedResult = true;
@@ -230,7 +228,6 @@ namespace Test.OpenOfficeConvert
 			_projInfo.DefaultXhtmlFileWithPath = Common.PathCombine(outputDirectory, "main.xhtml");
 			_projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDirectory, "main.css");
 			_projInfo.OutputExtension = "odt";
-			EnableConfigurationSettings(outputDirectory);
 
 			var target = new ExportLibreOffice();
 			const bool expectedResult = true;

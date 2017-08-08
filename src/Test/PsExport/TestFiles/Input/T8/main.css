@@ -430,7 +430,7 @@
        column-count: 2;
        column-fill: balance;
        column-gap: 1.5em;
-       column-rule: solid 1pt #aa0000;
+       column-rule: 1pt solid #aa0000;
        text-align: left;
 }
 .letHead {
@@ -554,7 +554,7 @@
 }
 .pronunciationminor {
 }
-.pronunciationminor :before { content: "["; 
+.pronunciationminor :before { content: "[";
 }
 .pronunciationminor :after  { content: "]"; }
 .pronunciationminor > .xitem + .xitem :before {
@@ -591,7 +591,7 @@
 .revhomographnumber {
        vertical-align: sub;
 }
-.revsensenumber { 
+.revsensenumber {
        font-weight: bold;
 }
 
@@ -722,47 +722,47 @@
 .xlanguagetag {
        display: none;
 }
-.complexentryform    { font-family: "Charis SIL", serif; 
+.complexentryform    { font-family: "Charis SIL", serif;
 }
-.crossreftype        { font-family: "Times New Roman", serif; 
+.crossreftype        { font-family: "Times New Roman", serif;
 }
-.crossreftype :after { font-family: "Times New Roman", serif; 
+.crossreftype :after { font-family: "Times New Roman", serif;
 }
-.crossref            { font-family: "Charis SIL", serif; 
+.crossref            { font-family: "Charis SIL", serif;
 }
-.crossref > .xitem + .xitem :before { font-family: "Charis SIL", serif; 
+.crossref > .xitem + .xitem :before { font-family: "Charis SIL", serif;
 }
-.entry               { font-family: "Charis SIL", serif; 
+.entry               { font-family: "Charis SIL", serif;
 }
-.example :before     { font-family: "Charis SIL", serif; 
+.example :before     { font-family: "Charis SIL", serif;
 }
 .example             { font-family: "Charis SIL", serif; }
-.example :after      { font-family: "Charis SIL", serif; 
+.example :after      { font-family: "Charis SIL", serif;
 }
-.example > .xitem + .xitem :before { font-family: "Charis SIL", serif; 
+.example > .xitem + .xitem :before { font-family: "Charis SIL", serif;
 }
 .grammaticalinfo     { font-family: "Charis SIL", serif; }
-.grammaticalinfo :after { font-family: "Charis SIL", serif; 
+.grammaticalinfo :after { font-family: "Charis SIL", serif;
 }
-.headword            { font-family: "Charis SIL", serif; 
+.headword            { font-family: "Charis SIL", serif;
 }
-.headword :after     { font-family: "Charis SIL", serif; 
+.headword :after     { font-family: "Charis SIL", serif;
 }
-.headword > .xitem + .xitem :before { font-family: "Charis SIL", serif; 
+.headword > .xitem + .xitem :before { font-family: "Charis SIL", serif;
 }
-.headwordminor       { font-family: "Charis SIL", serif; 
+.headwordminor       { font-family: "Charis SIL", serif;
 }
-.headwordminor :after { font-family: "Charis SIL", serif; 
+.headwordminor :after { font-family: "Charis SIL", serif;
 }
-.headwordminor > .xitem + .xitem :before { font-family: "Charis SIL", serif; 
+.headwordminor > .xitem + .xitem :before { font-family: "Charis SIL", serif;
 }
 .letHead             { font-family: "Charis SIL", serif; }
 .letter              { font-family: "Charis SIL", serif; }
-.LexEntrypublishStemParaHomographNumber {font-family: "Charis SIL", serif; 
+.LexEntrypublishStemParaHomographNumber {font-family: "Charis SIL", serif;
 }
-.LexEntrypublishStemParaHomographNumber :after { font-family: "Charis SIL", serif; 
+.LexEntrypublishStemParaHomographNumber :after { font-family: "Charis SIL", serif;
 }
-.lexreftype          { font-family: "Times New Roman", serif; 
+.lexreftype          { font-family: "Times New Roman", serif;
 }
 .lexreftype :after   { font-family: "Times New Roman", serif; }
 .mainentryref        { font-family: "Charis SIL", serif; }

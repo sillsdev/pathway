@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- Transform Xhtml file of FieldWorks into a "flatter" Epub Xhtml schema -->
 <!-- For Scripture the output file is neither chapter nor section-centric. -->
 <!-- From Larry W.'s TE_XHTML-to-Phone_XHTML.xslt -->
@@ -53,7 +53,7 @@
 	</xsl:template>
 	
 	<!-- Special processing for a couple divs -->
-	<xsl:template match="xhtml:div|xhtml:audio|xhtml:source">
+	<xsl:template match="xhtml:div|xhtml:audio|xhtml:video|xhtml:source">
 		<xsl:copy>
 			<xsl:for-each select="@*">
 				<xsl:copy/>

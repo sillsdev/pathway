@@ -27,7 +27,8 @@ namespace CssSimpler
             : base(input, output, false)
         {
             DeclareBefore(XmlNodeType.Element, ResetClassName);
-            DeclareBefore(XmlNodeType.Attribute, LookForStyle);
+			DeclareBefore(XmlNodeType.Element, Program.EntryReporter);
+			DeclareBefore(XmlNodeType.Attribute, LookForStyle);
 	        SpaceClass = null;
             Parse();
             var sr = new StreamReader(cssName);
@@ -40,7 +41,7 @@ namespace CssSimpler
             }
             foreach (var key in SavedStyles.Keys)
             {
-                sw.WriteLine("span > span." + key + " { " + SavedStyles[key] + " }");
+                sw.WriteLine("." + key + " { " + SavedStyles[key] + " }");
             }
             sw.Close();
             sr.Close();
@@ -49,11 +50,9 @@ namespace CssSimpler
         }
 
         private string _currentClass = String.Empty;
-        private string _currentLang = string.Empty;
         private void ResetClassName(XmlReader r)
         {
             _currentClass = String.Empty;
-            _currentLang = r.GetAttribute("lang");
         }
 
         protected  Dictionary<string, string> SavedStyles = new Dictionary<string, string>();
@@ -80,6 +79,7 @@ namespace CssSimpler
                     if (SavedStyles[newClass] != r.Value)
                     {
                         count += 1;
+	                    // ReSharper disable once UseStringInterpolation
 						newClass = string.Format("stxfin{0}{1}", LastClass, count);
                     }
                     else
@@ -87,14 +87,9 @@ namespace CssSimpler
                         break;
                     }
                 }
-                var saveAs = newClass;
-                if (!string.IsNullOrEmpty(_currentLang))
+                if (!SavedStyles.ContainsKey(newClass))
                 {
-                    saveAs += string.Format("[lang='{0}']", _currentLang.Trim());
-                }
-                if (!SavedStyles.ContainsKey(saveAs))
-                {
-                    SavedStyles[saveAs] = r.Value;
+                    SavedStyles[newClass] = r.Value;
                 }
                 if (_currentClass == string.Empty)
                 {

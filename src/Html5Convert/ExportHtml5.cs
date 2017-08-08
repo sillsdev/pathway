@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Xsl;
@@ -83,6 +84,8 @@ namespace SIL.PublishingSolution
 			string mergedCss;
 			string defaultCss;
 			string tempCssFile;
+			// float: is not in the list like it is in the Epub.
+			CssRemoved = new List<string> { "string-set:", "-moz-column-", "column-fill:", "-ps-outline-", "-ps-fixed-line-height:", "content: leader(" };
 			var tempFolder = ProcessingCss(projInfo, inProcess, preProcessor, out mergedCss, out defaultCss, out tempCssFile);
 
 			FixIssuesWithFlexXhtml(projInfo, preProcessor, langArray, inProcess);
@@ -92,12 +95,12 @@ namespace SIL.PublishingSolution
 			var frontMatter = AddFrontMatter(inProcess, preProcessor, tempFolder);
 
 			List<string> splitFiles;
+			Common.SplitEveryEntry = true;
 			var htmlFiles = SplitIntoSections(projInfo, inProcess, frontMatter, preProcessor, defaultCss, langArray, out splitFiles);
 
 			var contentFolder = CreateContentStructure(projInfo, inProcess, tempFolder);
 
 			AddEndNotesIfNecessary(inProcess, contentFolder, preProcessor, splitFiles);
-
 			if (!FontEmbedding(projInfo, inProcess, langArray, mergedCss, contentFolder, curdir, myCursor)) return false;
 
 			CopyContentToEpubFolder(inProcess, mergedCss, defaultCss, htmlFiles, contentFolder);
@@ -110,7 +113,9 @@ namespace SIL.PublishingSolution
 
 			CreateEpubManifest(projInfo, inProcess, contentFolder, bookId, epubToc, tempCssFile);
 
-			var epub3Path = MakeCopyOfEpub2(projInfo);
+			var epub3Path = MakeCopyOfEpub2(inProcess, projInfo);
+
+			SemanticDomainIndex(inProcess, contentFolder, epub3Path);
 
 			var html5Folder = CreateHtml5(projInfo, inProcess, epub3Path);
 
@@ -140,6 +145,142 @@ namespace SIL.PublishingSolution
 			return success;
 		}
 
+		private void SemanticDomainIndex(InProcess inProcess, string contentFolder, string html5Folder)
+		{
+			var xDoc = Common.DeclareXMLDocument(false);
+			var domain = new SortedDictionary<string, string>();
+			var entries = new Dictionary<string, List<string>>();
+			var files = new DirectoryInfo(contentFolder).GetFiles("PartFile*.xhtml");
+			inProcess.AddToMaximum(files.Length);
+			foreach (FileInfo fileInfo in files)
+			{
+				var sr = new StreamReader(fileInfo.FullName);
+				xDoc.Load(sr);
+				sr.Close();
+				// ReSharper disable once PossibleNullReferenceException
+				foreach (XmlElement node in xDoc.SelectNodes("//*[starts-with(@class,'semanticdomain')]"))
+				{
+					inProcess.PerformStep();
+					var firstSibling = node.NextSibling as XmlElement;
+					if (firstSibling == null || !firstSibling.GetAttribute("class").StartsWith("abbr")) continue;
+					var domainKey = firstSibling.InnerText;
+					var domainMenuItem = new StringBuilder();
+					var haveAbbr = false;
+					var haveName = false;
+					while (firstSibling != null)
+					{
+						var firstClass = firstSibling.GetAttribute("class");
+						if (firstClass.StartsWith("abbr"))
+						{
+							if (haveAbbr) break;
+							haveAbbr = true;
+						}
+						else if (firstClass.StartsWith("name"))
+						{
+							if (haveName) break;
+							haveName = true;
+						}
+						else if (!firstClass.StartsWith("semanticdomain") || haveName) break;
+						domainMenuItem.Append(firstSibling.InnerText);
+						firstSibling = firstSibling.NextSibling as XmlElement;
+					}
+					domain[domainKey] = domainMenuItem.ToString();
+					AddParts(domainKey, domain);
+					var entryNode = node.SelectSingleNode("ancestor::*[starts-with(@class,'entry') or starts-with(@class,'minorentry') or starts-with(@class,'reversalindexentry')]");
+					var anchor = xDoc.CreateElement("a");
+					anchor.SetAttribute("href", (entryNode.FirstChild as XmlElement).GetAttribute("href").Replace(".xhtml", ".html"));
+					anchor.SetAttribute("lang", (entryNode.FirstChild.FirstChild as XmlElement).GetAttribute("lang"));
+					anchor.InnerText = (entryNode.FirstChild.FirstChild as XmlElement).InnerText;
+					if (entries.ContainsKey(domainKey))
+					{
+						entries[domainKey].Add(anchor.OuterXml);
+					}
+					else
+					{
+						entries[domainKey] = new List<string> {anchor.OuterXml};
+					}
+				}
+				Debug.Assert(xDoc.DocumentElement != null);
+				xDoc.DocumentElement.RemoveAll();
+			}
+			xDoc.LoadXml(@"<html lang=""en"" xmlns=""http://www.w3.org/1999/xhtml""><head><title>sindex</title></head><body></body></html>");
+			var curNode = xDoc.SelectSingleNode("//*[local-name()='body']");
+			var level = 1;
+			XmlElement saveLevel = null;
+			foreach (var domainKey in domain.Keys)
+			{
+				var parts = domainKey.Split('.');
+				while (level > parts.Length)
+				{
+					curNode = curNode.ParentNode.ParentNode;
+					level -= 1;
+				}
+				if (parts.Length > level)
+				{
+					level += 1;
+					if (saveLevel == null)
+					{
+						curNode = curNode.LastChild;
+						var nextLevel = CreateElement(xDoc, "ul");
+						nextLevel.SetAttribute("class", "nav nav-second-level");
+						curNode.AppendChild(nextLevel);
+						curNode = curNode.LastChild;
+					}
+					else
+					{
+						curNode = saveLevel;
+					}
+				}
+				saveLevel = null;
+				var header = CreateElement(xDoc, "li");
+				var headAnchor = CreateElement(xDoc, "a");
+				headAnchor.SetAttribute("class", "s");
+				headAnchor.InnerXml = domain[domainKey];
+				var arrowSpan = CreateElement(xDoc, "span");
+				arrowSpan.SetAttribute("class", "fa arrow");
+				headAnchor.AppendChild(arrowSpan);
+				header.AppendChild(headAnchor);
+				curNode.AppendChild(header);
+				if (entries.ContainsKey(domainKey))
+				{
+					var group = CreateElement(xDoc, "ul");
+					group.SetAttribute("class", "nav nav-third-level");
+					foreach (var entry in entries[domainKey])
+					{
+						var itemNode = CreateElement(xDoc, "li");
+						itemNode.InnerXml = entry;
+						group.AppendChild(itemNode);
+					}
+					header.AppendChild(group);
+					saveLevel = group;
+				}
+			}
+			var sw = new StreamWriter(Path.Combine(html5Folder, "bootstrapSem.html"));
+			xDoc.Save(sw);
+			sw.Close();
+			Debug.Assert(xDoc.DocumentElement != null);
+			xDoc.DocumentElement.RemoveAll();
+		}
+
+		private static XmlElement CreateElement(XmlDocument xDoc, string name)
+		{
+			return xDoc.CreateElement(name, "http://www.w3.org/1999/xhtml");
+		}
+
+		private void AddParts(string domainKey, SortedDictionary<string, string> domain)
+		{
+			var parts = domainKey.Split('.');
+			var partial = new StringBuilder();
+			for (var i = 0; i < parts.Length - 1; i += 1)
+			{
+				partial.Append(parts[i] + ".");
+				var partialString = partial.ToString();
+				partialString = partialString.Substring(0, partialString.Length - 1);
+				if (domain.ContainsKey(partialString)) continue;
+				domain[partialString] = string.Format(@"<span class=""abbreviation"" lang=""en"" xmlns=""http://www.w3.org/1999/xhtml"">{0}</span>", partialString);
+			}
+		}
+
 		protected string CreateHtml5(PublicationInformation projInfo, InProcess inProcess, string epub3Path)
 		{
 			inProcess.SetStatus("Copy html files");
@@ -149,7 +290,7 @@ namespace SIL.PublishingSolution
 			File.Copy(Path.Combine(oebpsFolderPath, "toc.ncx"), bootstrapToc);
 			Common.ApplyXslt(bootstrapToc, _toc2Html5);
 
-			Common.CustomizedFileCopy(oebpsFolderPath, htmlFolderPath, "content.opf,toc.xhtml,toc.ncx,File3TOC00000_.html,File2TOC00000_.html,File1TOC00000_.html,File0TOC00000_.html");
+			Common.CustomizedFileCopy(inProcess, oebpsFolderPath, htmlFolderPath, "content.opf,toc.xhtml,toc.ncx,File3TOC00000_.html,File2TOC00000_.html,File1TOC00000_.html,File0TOC00000_.html");
 			var avFolder = Path.Combine(projInfo.ProjectPath, "AudioVisual");
 			if (Directory.Exists(avFolder))
 			{

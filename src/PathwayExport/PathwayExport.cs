@@ -220,6 +220,7 @@ namespace SIL.PublishingSolution
                         argFilledExportType = true;
                         if (!CheckExportType())
                         {
+                            Console.WriteLine(string.Join(" ", args));
                             Console.Write(@"PathwayExport : Unknown Export Target");
                             Console.WriteLine(@"Try 'PathwayExport --help' for more information.");
                             Environment.Exit(-2);
@@ -232,7 +233,8 @@ namespace SIL.PublishingSolution
                         argFilledDirectory = true;
                         if (!Directory.Exists(exportDirectory))
                         {
-                            Console.Write(@"PathwayExport : Export directory not exists");
+							Console.WriteLine(string.Join(" ", args));
+							Console.Write(@"PathwayExport : Export directory not exists");
                             Console.WriteLine(@"Try 'PathwayExport --help' for more information.");
                             Environment.Exit(-3);
                         }
@@ -263,7 +265,7 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            CheckArgumentMissing(argFilledExportType, argFilledDirectory, argFilledFiles, argFilledCss);
+            CheckArgumentMissing(argFilledExportType, argFilledDirectory, argFilledFiles, argFilledCss, args);
         }
 
         /// <summary>
@@ -273,12 +275,13 @@ namespace SIL.PublishingSolution
         /// <param name="argFilledDirectory"></param>
         /// <param name="argFilledFiles"></param>
         /// <param name="argFilledCss"></param>
-        private static void CheckArgumentMissing(bool argFilledExportType, bool argFilledDirectory, bool argFilledFiles, bool argFilledCss)
+        private static void CheckArgumentMissing(bool argFilledExportType, bool argFilledDirectory, bool argFilledFiles, bool argFilledCss, string[] args)
         {
             // If Files to process is missing, then we cannot proceed
             if (!argFilledFiles)
             {
-                Console.Write("PathwayExport: Files Missing. Cannot Proceed.");
+				Console.WriteLine(string.Join(" ", args));
+				Console.Write("PathwayExport: Files Missing. Cannot Proceed.");
                 Console.WriteLine("Try 'PathwayExport --help' for more information.");
                 Environment.Exit(-4);
             }
@@ -320,7 +323,8 @@ namespace SIL.PublishingSolution
             }
             if (!filledCss)
             {
-                Console.Write("PathwayExport: CSS Files not mentioned");
+				Console.WriteLine(string.Join(" ", args));
+				Console.Write("PathwayExport: CSS Files not mentioned");
                 Console.WriteLine("Try 'PathwayExport --help' for more information.");
                 Environment.Exit(-5);
             }

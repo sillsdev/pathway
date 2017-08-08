@@ -40,7 +40,7 @@
       <style:text-properties fo:font-family="Faruma" style:font-name-complex="Faruma" fo:font-style="italic" text:display="none" fo:font-weight="700" style:font-weight-complex="700" fo:font-size="14pt" style:font-size-complex="14pt" fo:color="#400000" fo:language="zxx" fo:country="none" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="TitleMain_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-right="0pt" fo:orphans="5" fo:text-align="center" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="24pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-right="0pt" fo:orphans="5" fo:text-align="center" fo:padding-top="2pt" fo:padding-bottom="4pt" style:line-height-at-least="24pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="normal" fo:font-weight="700" style:font-weight-complex="700" fo:font-size="22pt" style:font-size-complex="22pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.dv_TitleMain_scrBook_scrBody" style:family="text" style:parent-style-name="TitleMain_scrBook_scrBody">
@@ -90,7 +90,7 @@
       <style:paragraph-properties fo:text-align="end" style:writing-mode="rl-tb" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="SectionHead_scrSection_columns_scrBook_scrBody" style:family="paragraph" style:parent-style-name="scrSection_columns_scrBook_scrBody">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-right="0pt" fo:margin-top="12pt" fo:margin-bottom="0pt" fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="12pt" fo:keep-with-next="always" fo:orphans="2" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-right="0pt" fo:margin-top="12pt" fo:margin-bottom="0pt" fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:line-height-at-least="12pt" fo:keep-with-next="always" fo:orphans="2" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" style:font-weight-complex="700" fo:font-style="normal" fo:font-size="11pt" style:font-size-complex="11pt" />
     </style:style>
     <style:style xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="span_.dv_SectionHead_scrSection_columns_scrBook_scrBody" style:family="text" style:parent-style-name="SectionHead_scrSection_columns_scrBook_scrBody">
@@ -181,15 +181,15 @@
       <style:text-properties fo:font-size="12pt" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="12pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="h2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="8pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="12pt" text:display="none" fo:font-weight="700" />
     </style:style>
     <style:style style:name="h3" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="7pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="7pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="12pt" text:display="none" fo:font-weight="700" />
     </style:style>
     <style:style style:name="scrBookCode" style:family="paragraph" style:parent-style-name="none">
@@ -217,51 +217,51 @@
       <style:text-properties fo:font-size="14pt" fo:color="#ff0000" />
     </style:style>
     <style:style style:name="imt" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="imt1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="imt2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="3pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="6pt" fo:padding-bottom="3pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="13pt" />
     </style:style>
     <style:style style:name="imt3" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="2pt" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="imt4" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="2pt" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="imte" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" fo:text-align="center" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:padding-top="8pt" fo:padding-bottom="4pt" fo:text-align="center" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="20pt" />
     </style:style>
     <style:style style:name="imte1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="20pt" fo:font-weight="700" />
     </style:style>
     <style:style style:name="imte2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="16pt" fo:font-style="italic" />
     </style:style>
     <style:style style:name="is" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="6pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="12pt" fo:padding-bottom="6pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="16pt" />
     </style:style>
     <style:style style:name="is1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="is2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="iot" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="13pt" fo:keep-with-next="always" fo:widows="2" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:line-height-at-least="13pt" fo:keep-with-next="always" fo:widows="2" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="11pt" />
     </style:style>
     <style:style style:name="io" style:family="paragraph" style:parent-style-name="none">
@@ -349,7 +349,7 @@
       <style:text-properties fo:font-style="italic" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="iex" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent=".125pt" fo:padding-top="4pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:text-indent=".125pt" fo:padding-top="4pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="12pt" />
     </style:style>
     <style:style style:name="iqt" style:family="paragraph" style:parent-style-name="none">
@@ -361,34 +361,34 @@
       <style:text-properties fo:font-size="5pt" />
     </style:style>
     <style:style style:family="paragraph" style:name="ChapterNumber1" style:parent-style-name="ChapterNumber" style:master-page-name="">
-      <style:paragraph-properties style:vertical-align="auto" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:float="left" fo:padding-top="8pt" fo:padding-bottom="4pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb">
+      <style:paragraph-properties style:vertical-align="auto" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:float="left" fo:padding-top="8pt" fo:padding-bottom="4pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb">
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="1" />
       </style:paragraph-properties>
     </style:style>
     <style:style style:family="paragraph" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" style:name="ChapterNumber2" style:parent-style-name="ChapterNumber" style:master-page-name="">
-      <style:paragraph-properties style:vertical-align="auto" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:float="left" fo:padding-top="8pt" fo:padding-bottom="4pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
+      <style:paragraph-properties style:vertical-align="auto" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:float="left" fo:padding-top="8pt" fo:padding-bottom="4pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="2" />
       </style:paragraph-properties>
     </style:style>
     <style:style style:name="ChapterNumber" style:family="paragraph" style:parent-style-name="none" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0">
-      <style:paragraph-properties style:vertical-align="auto" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:float="left" fo:padding-top="8pt" fo:padding-bottom="4pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
+      <style:paragraph-properties style:vertical-align="auto" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-right="2pt" fo:float="left" fo:padding-top="8pt" fo:padding-bottom="4pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0">
         <style:drop-cap style:lines="2" style:distance="0.20cm" style:length="2" />
       </style:paragraph-properties>
     </style:style>
     <style:style style:name="ca" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="7pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="3pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="7pt" fo:padding-bottom="3pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-style="italic" fo:font-weight="700" fo:font-size="16pt" fo:color="#228b22" />
     </style:style>
     <style:style style:name="cp" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-weight="700" fo:font-size="18pt" fo:color="#ff0000" />
     </style:style>
     <style:style style:name="cl" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="16pt" />
     </style:style>
     <style:style style:name="cd" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="11pt" />
     </style:style>
     <style:style style:name="VerseNumber" style:family="paragraph" style:parent-style-name="none">
@@ -420,7 +420,7 @@
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="pmc" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:margin-left=".250pt" fo:margin-right=".250pt" fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:margin-left=".250pt" fo:margin-right=".250pt" fo:padding-top="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="pmr" style:family="paragraph" style:parent-style-name="none">
@@ -456,7 +456,7 @@
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="cls" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:padding-top="12pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="q" style:family="paragraph" style:parent-style-name="none">
@@ -464,11 +464,11 @@
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="Line1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:margin-left="1.25pt" fo:text-indent="-1pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:padding-left="0pt" fo:margin-left="1.25pt" fo:text-indent="-1pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="11pt" />
     </style:style>
     <style:style style:name="Line2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:padding-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:margin-left="1.25pt" fo:text-indent="-.75pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:padding-left="0pt" fo:margin-left="1.25pt" fo:text-indent="-.75pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="11pt" />
     </style:style>
     <style:style style:name="q3" style:family="paragraph" style:parent-style-name="none">
@@ -480,7 +480,7 @@
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="qc" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="12pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="12pt" fo:padding-bottom="12pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="qr" style:family="paragraph" style:parent-style-name="none">
@@ -492,7 +492,7 @@
       <style:text-properties fo:font-size="12pt" fo:font-style="italic" />
     </style:style>
     <style:style style:name="qa" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="16pt" />
     </style:style>
     <style:style style:name="qac" style:family="paragraph" style:parent-style-name="none">
@@ -520,91 +520,91 @@
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="mt" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:text-align="center" fo:padding-bottom="16pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:padding-top="8pt" fo:text-align="center" fo:padding-bottom="16pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="26pt" />
     </style:style>
     <style:style style:name="TitleMain" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:orphans="5" fo:text-align="center" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="24pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:orphans="5" fo:text-align="center" fo:padding-top="2pt" fo:padding-bottom="4pt" style:line-height-at-least="24pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="normal" fo:font-weight="700" fo:font-size="22pt" />
     </style:style>
     <style:style style:name="TitleSecondary" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" text:display="block" fo:font-size="16pt" />
     </style:style>
     <style:style style:name="mt3" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="2pt" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="16pt" />
     </style:style>
     <style:style style:name="mt4" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="2pt" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="mte" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="20pt" />
     </style:style>
     <style:style style:name="mte1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="20pt" />
     </style:style>
     <style:style style:name="mte2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="2pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="2pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="16pt" />
     </style:style>
     <style:style style:name="ms" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="16pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="16pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="16pt" />
     </style:style>
     <style:style style:name="ms1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="16pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="16pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="ms2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="16pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="16pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="ms3" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="16pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="16pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="mr" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="4pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="16pt" />
     </style:style>
     <style:style style:name="SectionHead" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:margin-top="12pt" fo:margin-bottom="0pt" fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="12pt" fo:keep-with-next="always" fo:orphans="2" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:margin-top="12pt" fo:margin-bottom="0pt" fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:line-height-at-least="12pt" fo:keep-with-next="always" fo:orphans="2" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-style="normal" fo:font-size="11pt" />
     </style:style>
     <style:style style:name="s1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="s2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="16pt" />
     </style:style>
     <style:style style:name="s3" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:keep-with-next="always" fo:text-align="end" fo:padding-top="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="3pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:keep-with-next="always" fo:text-align="end" fo:padding-top="6pt" fo:padding-bottom="3pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="s4" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:padding-top="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="3pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:padding-top="6pt" fo:padding-bottom="3pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="sr" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="4pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="ParallelPassageReference" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:margin-top="0pt" fo:margin-bottom="3pt" fo:keep-with-next="always" fo:text-align="center" fo:padding-bottom="4pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:margin-top="0pt" fo:margin-bottom="3pt" fo:keep-with-next="always" fo:text-align="center" fo:padding-bottom="4pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="11pt" />
     </style:style>
     <style:style style:name="sp" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:padding-top="8pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="d" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="4pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="4pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-style="italic" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="tr" style:family="paragraph" style:parent-style-name="none">
@@ -780,7 +780,7 @@
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="rq" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-bottom="4pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-bottom="4pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-style="italic" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="efm" style:family="paragraph" style:parent-style-name="none">
@@ -840,7 +840,7 @@
       <style:text-properties fo:font-style="italic" fo:font-weight="700" fo:color="#228b22" />
     </style:style>
     <style:style style:name="lit" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:text-indent=".591pt" fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="12pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:text-indent=".591pt" fo:padding-top="12pt" fo:padding-bottom="12pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-size="14pt" />
     </style:style>
     <style:style style:name="no" style:family="paragraph" style:parent-style-name="none">
@@ -864,7 +864,7 @@
       <style:text-properties fo:font-style="italic" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="Inscription" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:margin-top="12pt" fo:margin-bottom="6pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:margin-top="12pt" fo:margin-bottom="6pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-style="normal" fo:font-size="11pt" />
     </style:style>
     <style:style style:name="pb" style:family="paragraph" style:parent-style-name="none">
@@ -896,7 +896,7 @@
       <style:text-properties fo:font-style="italic" fo:font-weight="700" fo:font-size="14pt" fo:color="#ff00ff" />
     </style:style>
     <style:style style:name="periph" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="16pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="16pt" fo:padding-bottom="4pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="14pt" fo:font-weight="700" fo:color="#80ff00" />
     </style:style>
     <style:style style:name="p1" style:family="paragraph" style:parent-style-name="none">
@@ -1032,7 +1032,7 @@
       <style:text-properties fo:font-family="Faruma" />
     </style:style>
     <style:style style:name="ChapterHead" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="21pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="21pt" style:line-height-at-least="16pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="21pt" fo:padding-bottom="21pt" style:line-height-at-least="16pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="18pt" />
     </style:style>
     <style:style style:name="crossHYPHENReference..footnote-call" style:family="text" style:parent-style-name="none" />
@@ -1057,11 +1057,11 @@
       <style:text-properties fo:font-size="11pt" />
     </style:style>
     <style:style style:name="IntroTitleMain" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="8pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="4pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="8pt" fo:padding-bottom="4pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="11pt" />
     </style:style>
     <style:style style:name="IntroTitleSecondary" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="3pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="6pt" fo:padding-bottom="3pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="13pt" fo:font-style="italic" />
     </style:style>
     <style:style style:name="IntroSectionHead" style:family="paragraph" style:parent-style-name="none">
@@ -1069,16 +1069,16 @@
       <style:text-properties fo:font-weight="700" fo:font-style="normal" fo:font-size="11pt" />
     </style:style>
     <style:style style:name="REVERSESOLIDUSCitationLine1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:margin-left="24pt" fo:text-indent="-12pt" fo:padding-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:margin-left="24pt" fo:text-indent="-12pt" fo:padding-left="0pt" style:writing-mode="rl-tb" />
     </style:style>
     <style:style style:name="REVERSESOLIDUSCitationLine2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:margin-left="24pt" fo:text-indent="-6pt" fo:padding-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:margin-left="24pt" fo:text-indent="-6pt" fo:padding-left="0pt" style:writing-mode="rl-tb" />
     </style:style>
     <style:style style:name="REVERSESOLIDUSCitationLine3" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:margin-left="24pt" fo:text-indent="0pt" fo:padding-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:margin-left="24pt" fo:text-indent="0pt" fo:padding-left="0pt" style:writing-mode="rl-tb" />
     </style:style>
     <style:style style:name="Line3" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:margin-left="24pt" fo:text-indent="0pt" fo:padding-left="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:margin-left="24pt" fo:text-indent="0pt" fo:padding-left="0pt" style:writing-mode="rl-tb" />
     </style:style>
     <style:style style:name="NoteCrossHYPHENReferenceParagraph" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-indent="0pt" fo:margin-left="0pt" fo:float="footnote" style:line-height-at-least="9pt" style:writing-mode="rl-tb" fo:text-align="end" />
@@ -1117,7 +1117,7 @@
       <style:paragraph-properties fo:text-align="end" style:writing-mode="rl-tb" />
     </style:style>
     <style:style style:name="SectionRangeParagraph" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="0pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-top="0pt" fo:margin-top="6pt" fo:margin-bottom="0pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:text-indent="0pt" fo:margin-left="0pt" fo:padding-bottom="0pt" fo:padding-top="0pt" fo:margin-top="6pt" fo:margin-bottom="0pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-weight="700" fo:font-style="normal" />
     </style:style>
     <style:style style:name="SectionHeadMajor" style:family="paragraph" style:parent-style-name="none">
@@ -1174,7 +1174,7 @@
       <style:paragraph-properties fo:float="right" fo:margin-top="0pt" fo:margin-right="0pt" fo:margin-bottom="3.75pt" fo:margin-left="0pt" fo:text-indent="0pt" fo:text-align="center" style:writing-mode="rl-tb" />
     </style:style>
     <style:style style:name="pictureLeft" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:float="left" fo:margin-left="0pt" style:writing-mode="rl-tb" fo:text-align="center" fo:margin-top="0pt" fo:margin-right="3.75pt" fo:margin-bottom="3.75pt" fo:text-indent="0pt" />
+      <style:paragraph-properties fo:float="left" fo:margin-left="0pt" fo:margin-top="0pt" fo:margin-right="3.75pt" fo:margin-bottom="3.75pt" fo:text-indent="0pt" fo:text-align="center" style:writing-mode="rl-tb" />
     </style:style>
     <style:style style:name="pictureCenter" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:float="top" fo:margin-top="0pt" fo:margin-right="3.75pt" fo:margin-bottom="3.75pt" fo:margin-left="0pt" fo:text-indent="0pt" fo:text-align="center" style:writing-mode="rl-tb" />
@@ -1207,14 +1207,14 @@
       <style:text-properties fo:font-size="6pt" text:display="prince-footnote" />
     </style:style>
     <style:style style:name="border" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties style:writing-mode="rl-tb" fo:text-align="center" fo:border-top="solid .5pt #808080 " fo:margin-left="72pt" fo:margin-right="72pt" fo:margin-top="9pt" fo:margin-bottom="18pt" />
+      <style:paragraph-properties fo:border-top="solid .5pt #808080 " fo:text-align="center" fo:margin-left="72pt" fo:margin-right="72pt" fo:margin-top="9pt" fo:margin-bottom="18pt" style:writing-mode="rl-tb" />
     </style:style>
     <style:style style:name="figcap" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:text-align="center" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="CitationParagraph" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:margin-left=".167pt" fo:margin-right=".167pt" fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:margin-left=".167pt" fo:margin-right=".167pt" fo:padding-top="12pt" fo:padding-bottom="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="ef" style:family="paragraph" style:parent-style-name="none">
@@ -1286,11 +1286,11 @@
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="VariantSectionHead" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="12pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-top="12pt" fo:padding-bottom="12pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="16pt" />
     </style:style>
     <style:style style:name="hr" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="center" fo:padding-bottom="12pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="16pt" />
     </style:style>
     <style:style style:name="BookReferenceDiv" style:family="paragraph" style:parent-style-name="none">
@@ -1305,19 +1305,19 @@
       <style:paragraph-properties style:writing-mode="rl-tb" fo:text-align="end" />
     </style:style>
     <style:style style:name="h4" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="6pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="6pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-weight="700" fo:font-size="12pt" />
     </style:style>
     <style:style style:name="h5" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="5.5pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="5.5pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-weight="700" fo:font-size="10pt" />
     </style:style>
     <style:style style:name="h6" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="5.5pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="5.5pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-weight="700" fo:font-size="8pt" />
     </style:style>
     <style:style style:name="p" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-top="12pt" fo:border-bottom="0.5pt solid #ffffff" fo:border-top="0.5pt solid #ffffff" fo:border-left="0.5pt solid #ffffff" fo:border-right="0.5pt solid #ffffff" fo:padding-bottom="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:padding-top="12pt" fo:padding-bottom="12pt" style:writing-mode="rl-tb" fo:text-align="end" />
     </style:style>
     <style:style style:name="h1" style:family="paragraph" style:parent-style-name="none">
       <style:paragraph-properties fo:margin-top="0.1in" fo:margin-bottom="0.1in" style:line-spacing="100%" />
@@ -1591,7 +1591,7 @@
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="0.0pt" svg:height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm3">
@@ -1603,7 +1603,7 @@
         <style:header-footer-properties fo:margin-bottom="14.21pt" fo:min-height="28.42pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:header-style>
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="0.0pt" svg:height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm6">
@@ -1613,7 +1613,7 @@
       </style:page-layout-properties>
       <style:header-style />
       <style:footer-style>
-        <style:header-footer-properties fo:margin-bottom="0.0pt" svg:height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
+        <style:header-footer-properties fo:margin-bottom="0.0pt" fo:min-height="14.21pt" fo:margin-left="0pt" fo:margin-right="0pt" style:dynamic-spacing="false" />
       </style:footer-style>
     </style:page-layout>
     <style:page-layout style:name="pm12">
@@ -1658,7 +1658,7 @@
       <style:header>
         <text:p text:style-name="Header">
           <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" office:value-type="string" />
+            <text:variable-get text:name="Left_Guideword_L" />
           </text:span>
         </text:p>
       </style:header>
@@ -1668,7 +1668,7 @@
             <draw:text-box fo:min-height="14.14pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">
-                  <text:variable-get text:name="Right_Guideword_R" office:value-type="string" />
+                  <text:variable-get text:name="Right_Guideword_R" />
                 </text:span>
               </text:p>
             </draw:text-box>

@@ -1264,10 +1264,10 @@ namespace Test.PsTool
         {
             string template = "$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s";
             string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string database = "{Current_Project}";
+            string database = "Ernest's Northern Ninam";
             string layout = "Quick";
             string dateTime = DateTime.Now.ToString("yyyy-MM-dd_HHmmss");
-            string expected = Common.PathCombine(ManageDirectory.ShortFileName(documents), @"Publications\{Current_Project}\Dictionary\Quick_" + dateTime);
+            string expected = Common.PathCombine(ManageDirectory.ShortFileName(documents), @"Publications\ErnestsNorthernNinam\Dictionary\Quick_" + dateTime);
             string actual = Common.GetSaveInFolder(template, database, layout);
             Assert.AreEqual(expected, actual);
         }

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -430,9 +431,15 @@ namespace SIL.PublishingSolution
                 }
                 BtnOk.Enabled = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                var text = LocalizationManager.GetString("PrintVia.OkButtonClick.Message", "Please select a folder for which you have creation permission", "");
+				var folderName = Path.GetDirectoryName(txtSaveInFolder.Text);
+				string currentFile = new StackTrace(true).GetFrame(0).GetFileName();
+				string msg = "The selected folder '" + Path.GetFileName(folderName) + "' doesn't have valid permission to create a file/folder. The error thrown in the Module '"
+					+ Path.GetFileNameWithoutExtension(currentFile) + "' and the line number is '"
+					+ Common.GetLineNumber(ex) + "', So choose the different folder and Please report this error at URL:"
+					+ "http://software.sil.org/pathway/support/";
+				var text = LocalizationManager.GetString("PrintVia.OkButtonClick.Message", msg, "");
 				string caption = LocalizationManager.GetString("PrintVia.OkButtonClick.projectname", "Pathway", "");
 				Utils.MsgBox(text, caption, MessageBoxButtons.OK,
                 MessageBoxIcon.Error);

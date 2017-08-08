@@ -7,12 +7,16 @@
 // </copyright> 
 #endregion
 // 
+#if !__MonoCS__
+#define UNITY_STANDALONE_WIN
+#endif
+
 using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-#if !__MonoCS__
+#if UNITY_STANDALONE_WIN
 using System.Management;
 #endif
 using System.Reflection;
@@ -39,7 +43,7 @@ namespace SilTools
 		/// ------------------------------------------------------------------------------------
 		public static bool SuppressMsgBoxInteractions { get; set; }
 
-		#region OS-specific stuff
+#region OS-specific stuff
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
 		public struct RECT
 		{
@@ -49,7 +53,7 @@ namespace SilTools
 			public int bottom;
 		}
 
-#if !__MonoCS__
+#if UNITY_STANDALONE_WIN
 		[DllImport("user32")]
 		public static extern int UpdateWindow(IntPtr hwnd);
 #else
@@ -60,7 +64,7 @@ namespace SilTools
 		}
 #endif
 
-#if !__MonoCS__
+#if UNITY_STANDALONE_WIN
 		[DllImport("user32.dll", CharSet = CharSet.Auto)]
 		public static extern int FindWindowEx(IntPtr hWnd, int hwndChildAfter,
 			string windowClass, string windowName);
@@ -73,7 +77,7 @@ namespace SilTools
 		}
 #endif
 
-#if !__MonoCS__
+#if UNITY_STANDALONE_WIN
 		[DllImport("User32.dll")]
 		public extern static bool GetWindowRect(IntPtr hWnd, out RECT rect);
 #else
@@ -88,7 +92,7 @@ namespace SilTools
 		}
 #endif
 
-#if !__MonoCS__
+#if UNITY_STANDALONE_WIN
 		[DllImport("user32.dll", CharSet = CharSet.Auto)]
 		public static extern bool PostMessage(int hWnd, uint msg, int wParam, int lParam);
 #else
@@ -99,7 +103,7 @@ namespace SilTools
 		}
 #endif
 
-#if !__MonoCS__
+#if UNITY_STANDALONE_WIN
 		[DllImport("user32.dll", CharSet = CharSet.Auto)]
 		public static extern uint RegisterWindowMessage(string msgName);
 #else
@@ -150,7 +154,7 @@ namespace SilTools
 		/// <param name="ms">Pointer to a <see cref="MemoryStatus"/>  structure. The 
 		/// <c>GlobalMemoryStatus</c> function stores information about current memory 
 		/// availability into this structure.</param>
-#if !__MonoCS__
+#if UNITY_STANDALONE_WIN
 		[DllImport("Kernel32.dll", CharSet = CharSet.Auto)]
 		extern public static void GlobalMemoryStatus(ref MemoryStatus ms);
 #else
@@ -161,7 +165,7 @@ namespace SilTools
 		}
 #endif
 
-		#endregion
+#endregion
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
@@ -564,7 +568,7 @@ namespace SilTools
 			return Path.GetDirectoryName(asmPath);
 		}
 
-		#region Methods for XML serializing and deserializing data
+#region Methods for XML serializing and deserializing data
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
 		/// Serializes an object to the specified file.
@@ -706,7 +710,7 @@ namespace SilTools
 			return null;
 		}
 
-		#endregion
+#endregion
 
 		/// ------------------------------------------------------------------------------------
 		/// <summary>
