@@ -2015,4 +2015,8 @@
   <File Path="Export\Test.pdb" ComponentGuid="DA762EB4-0332-450B-BF3D-DBC50ED4CA17" />
   <File Path="Styles\Dictionary\Layout_17.css" ComponentGuid="1236175A-2F0C-429F-886E-764655EF6578" />
   <File Path="Styles\Dictionary\Page_size_6x8.5onLetter.css" ComponentGuid="F365609D-29F1-4ED0-8162-B49DC0ED3945" />
+  <File Path="Html5\Dictionary\pages\indexTemplate.html" ComponentGuid="64F56E17-460A-4A6E-A05A-91477DE8D790" />
+  <File Path="Preprocessing\Dictionary\byVer.xml" ComponentGuid="22200FA4-B78D-4E93-B0E8-51EAFD9FC7AC" />
+  <File Path="Preprocessing\Dictionary\Video in Html5.xsl" ComponentGuid="68340F19-5BAF-4AC5-A363-E60879B4B1A9" />
+  <File Path="PdfSymbols.xsl" ComponentGuid="6738D543-8BC9-442B-8783-B29249C59CA1" />
 </FileLibrary>
