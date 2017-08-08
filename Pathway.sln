@@ -1110,7 +1110,6 @@ Global
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7BTE|Mixed Platforms.ActiveCfg = Corporate7BTE|x86
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7BTE|Mixed Platforms.Build.0 = Corporate7BTE|x86
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7BTE|x86.ActiveCfg = Corporate7BTE|x86
-		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7BTE|x86.Build.0 = Corporate7BTE|x86
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7EPUB|Any CPU.ActiveCfg = Corporate7EPUB|Any CPU
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7EPUB|Mixed Platforms.ActiveCfg = Corporate7EPUB|x86
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7EPUB|Mixed Platforms.Build.0 = Corporate7EPUB|x86
@@ -1120,7 +1119,6 @@ Global
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7SE|Mixed Platforms.ActiveCfg = Corporate7SE|x86
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7SE|Mixed Platforms.Build.0 = Corporate7SE|x86
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7SE|x86.ActiveCfg = Corporate7SE|x86
-		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Corporate7SE|x86.Build.0 = Corporate7SE|x86
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65D64C80-2AA4-4BD0-AC87-B4C2B3720012}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
