@@ -1,9 +1,88 @@
-pathway (1.15.21.5847)  experimental; urgency=high
+pathway (1.16.0.5871)  experimental; urgency=high
+
+  * Common:TD-3962 Update link to the student manual</li>
+  * Common:TD-4721 Formatting via Pathway is not following Flex formatting</li>
+  * Common:TD-4780 Spaces in user name leads to problems</li>
+  * Common:TD-4792 Forming Export Directory name</li>
+  * Common:TD-4805 Crash updating css file</li>
+  * Common:TD-4811 Formatting rtl data - order and spacing is wrong</li>
+  * Common:TD-4840 Differing inline styles for same field</li>
+  * Common:TD-4847 Updated Processing Options</li>
+  * Common:TD-4851 Update bootstrap to install prince 11.2</li>
+  * Common:TD-4853 Headword no longer replaced by audio file icon in Prince pdf output file</li>
+  * Common:TD-4856 Audio files play from when copied to the same folder on another computer</li>
+  * EPUB:TD-4365 Epub title page gets stuck</li>
+  * EPUB:TD-4557 Fix Scripture epub creation with PathwayB</li>
+  * EPUB:TD-4606, TD-4744, TD-4848 validation errors</li>
+  * EPUB:TD-4666 Root Element missing fixed</li>
+  * EPUB:TD-4784 Scripture TOC</li>
+  * EPUB:TD-4854 Two Times table of content appears in the TOC</li>
+  * EPUB:TD-4857 TOC duplicated</li>
+  * OO/LO:TD-3436 SIL International Logo doesn't look good.</li>
+  * OO/LO:TD-4665 Getting &quot;CssSimpler stopped working message&quot; and not able to proceed further in using Pathway.</li>
+  * OO/LO:TD-4670:Page number does not appear as full view when increase Base Font Size as 14 and above</li>
+  * OO/LO:TD-4686 baseline alignment of right guidword</li>
+  * OO/LO:TD-4708 headword not bold</li>
+  * OO/LO:TD-4740 Extended Note data content is not appear as paragraph and Surrounding context appeared multiple times</li>
+  * OO/LO:TD-4741 Base font size is not working properly when increase the font size.</li>
+  * OO/LO:TD-4755 Primary Entry References& data content did not appear in PDF output when exporting Reversal</li>
+  * OO/LO:TD-4777 Header Ever Page gives Mirrored</li>
+  * OO/LO:TD-4786 Pathway exports are missing alignments and some entries are truncated as the result</li>
+  * OO/LO:TD-4807 space before comma</li>
+  * OO/LO:TD-4809 Headwords not coming out correctly</li>
+  * OO/LO:TD-4812 Initial Libre Office Isolate bidi</li>
+  * OO/LO:TD-4813:Message stating Please install PrinceXML or LibreOffice to enable the preview for custom style</li>
+  * OO/LO:TD-4816 Homograph number did not subscript for picture headword.</li>
+  * OO/LO:TD-4816 homograph remains subscripted.</li>
+  * OO/LO:TD-4818 Adjust oncolumn layout files to end in a newline.</li>
+  * OO/LO:TD-4821 Adjuste right-to-left margins in Libre Office.</li>
+  * OO/LO:TD-4825 space before subentries</li>
+  * OO/LO:TD-4826:program gives directory access error</li>
+  * OO/LO:TD-4827:Regional Langauge Formats set to Russian disables header and guideword formatting</li>
+  * OO/LO:TD-4827:Regional Langauge Formats set to Russian disables header</li>
+  * OO/LO:TD-4829:Right guideword shows left content</li>
+  * OO/LO:TD-4830:Pictures show as vertical lines</li>
+  * OO/LO:TD-4831:Not all indents rendered correctly</li>
+  * OO/LO:TD-4835 homograph headword retain color</li>
+  * OO/LO:TD-4847 Exporting FW large projects with Preprocessing Transformation options selected gives stopped working</li>
+  * OO/LO:TD-4848 Handle audio types: wav, mp3, ogg and mp4</li>
+  * OO/LO:TD-4848 Handle epub validation and include audio files</li>
+  * OO/LO:TD-4852 Entries with *.tif image files (missing) excluded from the export </li>
+  * Paratext:TD-4513 use styles from custom.sty</li>
+  * Paratext:TD-4763 Footnotes in rq prevent output</li>
+  * Paratext:TD-4861 Paratext 7.5 shows File Missing</li>
+  * Smart:TD-4142 [Linux] Question mark (?) appears in PDF exporting Urdu project</li>
+  * Smart:TD-4806 Extra reference material not being processed for theWord and MySword</li>
+  * Smart:TD-4842 don't flatten when output to DictionaryForMIDs</li>
+  * Smart:TD-4855 Fix running header in PDF output</li>
+  * Smart:TD-4856 Play audio and video files from PDF</li>
+  * Smart:TD-4859 allow embedding video on HTML5 export</li>
+  * UI:TD-4171 Non ascii copyright chars crash program</li>
+  * UI:TD-4380 Config Tool will not close without killing it with Task Manager</li>
+  * UI:TD-4669 Word Wrap is not working while using  Prince Pdf option</li>
+  * UI:TD-4795 Warning box appears in Config Tool from clicking Scripture in left pane</li>
+  * UI:TD-4822 [Linux] Question Mark (?) appears instead of text message in Pdf Prince Output</li>
+  * UI:TD-4855 Running header does not appear in the PDF prince output when exporting Reversal content.</li>
+  * XeLaTeX:TD-4142 [Linux] Square box appears in Xelatex output after exporting Urdu project</li>
+  * XeLaTeX:TD-4368 One empty page is created between main and reversal</li>
+  * XeLaTeX:TD-4722 Fix Xelatex Indent issue</li>
+  * XeLaTeX:TD-4810 Scripture export leaves too much space around headers</li>
+
+ -- Greg Trihus <greg_trihus@sil.org>  Tue, 08 Aug 2017 12:08:20 -0600
+
+pathway (1.15.29.5870)  experimental; urgency=high
 
   * Common:Force version numbers of dependencies in plugin
+  * Common:Sanitize Project name and style sheet for path
+  * EPUB:TD-4848 support audio output in Epub3, fix epu2 audio validations
+  * EPUB:TD-4857 TOC to appear once
   * HTML5:Add Classified or Semantic domain index
+  * OO/LO:Eliminste missing pictures
+  * OO/LO:TD-4828 remove extra space before pictures
+  * OO/LO:Combine multiple pictures in a single paragraph
+  * UI:Only display preprocessing for 8.3.x
 
- -- Greg Trihus <greg_trihus@sil.org>  Tue, 26 Jun 2017 09:26:20 -0600
+ -- Greg Trihus <greg_trihus@sil.org>  Tue, 07 Aug 2017 22:26:20 -0600
 
 pathway (1.15.15.5832)  experimental; urgency=high
 
