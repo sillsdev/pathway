@@ -104,10 +104,10 @@ namespace SIL.Tool
             {
                 if (process.Handle(inputDataType))
                 {
-                    if (process.ExportType.ToLower() == "openoffice/libreoffice")
-                    {
-                        _exportType.Add("Pdf (Using OpenOffice/LibreOffice) ");
-                    }
+                    // if (process.ExportType.ToLower() == "openoffice/libreoffice")
+                    // {
+                        // _exportType.Add("Pdf (Using OpenOffice/LibreOffice) ");
+                    // }
                     _exportType.Add(process.ExportType);
                 }
             }
