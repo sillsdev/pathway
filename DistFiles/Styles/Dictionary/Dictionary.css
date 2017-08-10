@@ -86,6 +86,11 @@
         /* padding-bottom: 36pt; */
         /* padding-top: 36pt; */
         text-align: center;
+		page-break-after:avoid;
+		page-break-inside:avoid;
+		orphans:5;
+		widows:5;
+        -ps-outline-level:2;
 }
 .letter {
         direction: ltr;
