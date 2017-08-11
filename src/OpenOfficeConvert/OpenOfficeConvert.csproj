@@ -240,6 +240,7 @@
     </Compile>
     <Compile Include="OOMetaXML.cs" />
     <Compile Include="OOExportOpenOffice.cs" />
+    <Compile Include="OORootStyle.cs" />
     <Compile Include="OOStyleBase.cs" />
     <Compile Include="OOMapProperty.cs" />
     <Compile Include="OOStyles.cs" />

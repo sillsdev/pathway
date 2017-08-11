@@ -73,7 +73,7 @@ namespace SIL.PublishingSolution
                 FixedLineHeightStatus();
                 GetDefaultFontSize();
                 CreateODTStyles(strStylePath);
-                CreateCssStyle();
+	            CreateCssStyle(MyRootStyle(projInfo));
                 CreatePageStyle();
                 AddTagStyle(); // Add missing tags in styles.xml (h1,h2,..)
                 CloseODTStyles();  // Close Styles.xml for odt
@@ -85,7 +85,18 @@ namespace SIL.PublishingSolution
             return _LOAllClass;
         }
 
-		/// <summary>
+	    private static string MyRootStyle(PublicationInformation projInfo)
+	    {
+		    var myRootStyle = "none";
+		    if (!string.IsNullOrEmpty(projInfo.DefaultXhtmlFileWithPath))
+		    {
+			    var rootStyle = new GetRootStyle(projInfo.DefaultXhtmlFileWithPath);
+			    myRootStyle = rootStyle.RootStyle;
+		    }
+		    return myRootStyle;
+	    }
+
+	    /// <summary>
 		/// Method to set the constant NumberDecimalSeperator in CultureInfo on all Culture
 		/// </summary>
 		private void SetUpNumberDecimalSeperator()
@@ -219,7 +230,7 @@ namespace SIL.PublishingSolution
         //  <style:text-properties fo:font-size="24pt" style:font-size-complex="24pt" fo:color="#ff0000" />
         //  </style:style>
         /// </summary>
-        private void CreateCssStyle()
+        private void CreateCssStyle(string rootStyle)
         {
             Dictionary<string, string> beforeCounter = new Dictionary<string, string>();
             var isDirectionChange = _cssProperty.ContainsKey("scrBody") &&
@@ -257,7 +268,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteStartElement("style:style");
                 _writer.WriteAttributeString("style:name", className);
                 _writer.WriteAttributeString("style:family", familyType); // "paragraph" will override by ContentXML.cs
-                _writer.WriteAttributeString("style:parent-style-name", "none");
+                _writer.WriteAttributeString("style:parent-style-name", rootStyle);
 
                 _paragraphProperty.Clear();
                 _textProperty.Clear();
