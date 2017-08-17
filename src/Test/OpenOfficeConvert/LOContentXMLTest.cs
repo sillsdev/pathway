@@ -92,6 +92,13 @@ namespace Test.OpenOfficeConvert
 
         }
 
+	    [SetUp]
+	    public void TestSetup()
+	    {
+		    _index = 0;
+		    _projInfo.DefaultXhtmlFileWithPath = string.Empty;
+	    }
+
         private void EnableConfigurationSettings(string outputDirectory)
         {
             Param.UpdateMetadataValue(Param.CoverPageTitle, "False");

@@ -872,8 +872,9 @@ namespace SIL.PublishingSolution
 				}
 				else
 				{
+					var leftSide = Common.LeftString(_paragraphName, "_");
 					// Note: Paragraph Start Element //TD-4017 for || _childName == "letter_letHead_body"
-					if ((_childName == "letter_letHead_dicBody" || _childName == "letter_letHead_body" || _childName == "scrBookName_scrBook_scrBody" || IsFlexLetHead()) && IsTocExists())
+					if (((IdAllClass.ContainsKey(leftSide) && IdAllClass[leftSide].ContainsKey("-ps-outline-level")) || _childName == "scrBookName_scrBook_scrBody" || IsFlexLetHead()) && IsTocExists())
 					{
 						_writer.WriteStartElement("text:h");
 						_writer.WriteAttributeString("text:style-name", _paragraphName); //_divClass
@@ -922,8 +923,9 @@ namespace SIL.PublishingSolution
 			string strOutlineLevel = "1";
 			if (_projInfo.ProjectInputType.ToLower() == "dictionary")
 			{
-				if (IdAllClass.ContainsKey("letter") && IdAllClass["letter"].ContainsKey("-ps-outline-level"))
-					strOutlineLevel = IdAllClass["letter"]["-ps-outline-level"];
+				var leftSide = Common.LeftString(_paragraphName, "_");
+				if (IdAllClass.ContainsKey(leftSide) && IdAllClass[leftSide].ContainsKey("-ps-outline-level"))
+					strOutlineLevel = IdAllClass[leftSide]["-ps-outline-level"];
 			}
 			else
 			{

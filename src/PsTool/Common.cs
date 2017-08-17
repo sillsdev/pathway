@@ -1826,14 +1826,22 @@ namespace SIL.Tool
 			}
 			else if (idAllClass.ContainsKey("@page:left-top-left"))
 			{
-				refFormat = idAllClass["@page:left-top-left"]["-ps-referenceformat"];
+				refFormat = GetPageRegionValue(idAllClass, "@page:left-top-left","-ps-referenceformat", refFormat);
 			}
 			else if (idAllClass.ContainsKey("@page-top-center"))
 			{
-				refFormat = idAllClass["@page-top-center"]["-ps-referenceformat"];
+				refFormat = GetPageRegionValue(idAllClass, "@page-top-center", "-ps-referenceformat", refFormat);
 			}
 			return refFormat;
 		}
+
+		private static string GetPageRegionValue(Dictionary<string, Dictionary<string, string>> idAllClass, string pageRegion, string key, string defValue)
+		{
+			return idAllClass.ContainsKey(pageRegion) && idAllClass[pageRegion].ContainsKey(key)
+				? idAllClass[pageRegion][key]
+				: defValue;
+		}
+
 		#endregion
 
 		public static string GetHeaderFontWeight(Dictionary<string, Dictionary<string, string>> _cssProperty) //TD-2815

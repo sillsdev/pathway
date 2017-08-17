@@ -89,6 +89,11 @@ namespace Test.OpenOfficeConvert
 				LoadParam("Dictionary", "false");
 		}
 
+		[SetUp]
+		public void TestSetup()
+		{
+			_projInfo.DefaultXhtmlFileWithPath = string.Empty;
+		}
 		#endregion
 
 		#region Private Functions
