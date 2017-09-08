@@ -1,18 +1,21 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="RegistryHelperLite.cs" from='2010' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>TE Team</author>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Xml;
 using Microsoft.Win32;
 
 namespace SIL.Tool
@@ -24,7 +27,7 @@ namespace SIL.Tool
 		/// Checks if a registry value exists.
 		/// </summary>
 		/// <param name="key">The base registry key of the key to check</param>
-		/// <param name="subKey">Name of the group key, or string.Empty if there is no 
+		/// <param name="subKey">Name of the group key, or string.Empty if there is no
 		/// groupKeyName.</param>
 		/// <param name="regEntry">The name of the registry entry.</param>
 		/// <param name="value">[out] value of the registry entry if it exists; null otherwise.</param>
@@ -87,7 +90,7 @@ namespace SIL.Tool
 		/// <summary>
 		/// Gets the registry key for the current application's company from the local machine
 		/// settings. This is 'HKLM\Software\{Application.CompanyName}'
-		/// NOTE: This key is not opened for write access because it will fail on 
+		/// NOTE: This key is not opened for write access because it will fail on
 		/// non-administrator logins.
 		/// </summary>
 		/// ------------------------------------------------------------------------------------
@@ -107,7 +110,7 @@ namespace SIL.Tool
         /// <summary>
         /// Gets the registry key for the current application's company from the local machine
         /// settings. This is 'HKLM\Software\{Application.CompanyName}'
-        /// NOTE: This key is not opened for write access because it will fail on 
+        /// NOTE: This key is not opened for write access because it will fail on
         /// non-administrator logins.
         /// </summary>
         /// ------------------------------------------------------------------------------------
@@ -127,7 +130,7 @@ namespace SIL.Tool
 		/// <summary>
 		/// Gets the registry key for the Paratext application from the local machine
 		/// settings. This is 'HKLM\Software\ScrChecks\1.0'
-		/// NOTE: This key is not opened for write access because it will fail on 
+		/// NOTE: This key is not opened for write access because it will fail on
 		/// non-administrator logins.
 		/// </summary>
 		/// ------------------------------------------------------------------------------------
@@ -163,5 +166,56 @@ namespace SIL.Tool
         {
             get { return Registry.ClassesRoot.OpenSubKey("jarfile"); }
         }
-    }
+
+		public static string FallbackStringValue(string key)
+		{
+			return FallbackStringValue(key, null);
+		}
+
+		public static string FallbackStringValue(string key, string value)
+		{
+			object result;
+			if (CheckSoftwareKey(Registry.CurrentUser, key, value, out result)) return (string)result;
+			if (CheckSoftwareKey(Registry.LocalMachine, key, value, out result)) return (string)result;
+			return !Common.UnixVersionCheck() ? null : UnixFallbackStringValue(key, value);
+		}
+
+		private static bool CheckSoftwareKey(RegistryKey hive, string key, string value, out object result)
+		{
+			var levels = new List<string> {"software"};
+			levels.AddRange(key.Split('/'));
+			result = GetLevelValue(hive, levels, value);
+			return result != null;
+		}
+
+		private static object GetLevelValue(RegistryKey hive, IList<string> levels, string value)
+		{
+			using (var key = hive.OpenSubKey(levels[0]))
+			{
+				if (key == null) return null;
+				if (levels.Count <= 1) return key.GetValue(value);
+				levels.RemoveAt(0);
+				return GetLevelValue(key, levels, value);
+			}
+		}
+
+		private static readonly XmlDocument XDoc = new XmlDocument();
+		private static string UnixFallbackStringValue(string key, string value)
+		{
+			var userName = Environment.UserName;
+			foreach (var program in new List<string> { "paratest", "fieldworks" })
+			{
+				var registryPath = "/home/" + userName + "/.config/fieldworks/"+ program +"registry/LocalMachine/software/";
+				var valueFile = Path.Combine(registryPath, key.ToLower(), "value.xml");
+				if (!File.Exists(valueFile)) continue;
+				XDoc.RemoveAll();
+				var xr = XmlReader.Create(valueFile);
+				XDoc.Load(xr);
+				xr.Close();
+				var node = value != null? XDoc.SelectSingleNode("*[@name='" + value + "']"): XDoc.DocumentElement;
+				if (node != null) return node.InnerText;
+			}
+			return null;
+		}
+	}
 }

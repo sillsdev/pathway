@@ -245,6 +245,7 @@
       <DependentUpon>ValidationDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ValidationDlg.resx">
       <DependentUpon>ValidationDlg.cs</DependentUpon>

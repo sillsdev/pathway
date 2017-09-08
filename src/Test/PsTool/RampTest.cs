@@ -137,7 +137,7 @@ namespace Test.PsTool
         {
             const string TestFolder = "rampInput";
             _folderPath = FileInput(Common.PathCombine(TestFolder, "Gondwana Sample.xhtml"));
-	        Param.SetLoadType = "Dictionary";
+	        _projInputType = Param.SetLoadType = "Dictionary";
 			Param.Value[Param.InputType] = "Dictionary";
 
             SettingsInput(TestFolder);

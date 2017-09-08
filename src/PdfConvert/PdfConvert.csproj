@@ -235,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExportPdf.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

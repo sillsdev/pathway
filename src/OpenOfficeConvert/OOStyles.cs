@@ -118,7 +118,7 @@ namespace SIL.PublishingSolution
             if (_cssProperty.ContainsKey("@page") &&
             _cssProperty["@page"].ContainsKey("-ps-center-title-header"))
             {
-                if (Param.GetMetadataValue("Title") != null)
+                if (Param.GetMetadataValue("Title") != null && _cssProperty["@page"]["-ps-center-title-header"] == "True")
                 {
                     headerText = Param.GetMetadataValue("Title");
                 }

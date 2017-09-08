@@ -228,6 +228,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddHomographAndSenseNumClassNames.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsExport.cs">
     </Compile>

@@ -93,6 +93,7 @@ namespace SIL.Tool
 		public static Dictionary<string, string> TempVariable = new Dictionary<string, string>();
 		public const string kCompany = "SIL";
 		public const string kProduct = "Pathway";
+		public static CallerSetting CallerSetting;
 		/// <summary>
 		/// The email address people should write to with problems (or new localizations?) for Pathway.
 		/// </summary>
@@ -279,8 +280,6 @@ namespace SIL.Tool
 		public static bool Testing; // To differentiate between Nunit test or from Application(UI or Flex).
 		public static bool ShowMessage; // Show or Suppress MessageBox in Creating Zip Folder.
 
-		public static object ParatextData;
-		public static string Ssf;
 		public static string FontFeaturesString;
 		public static string FontFeaturesSettingsString;
 
@@ -380,8 +379,6 @@ namespace SIL.Tool
 
 		#region GetTextDirection(string languageCode)
 
-		public static string TextDirectionLanguageFile = null; //Set during testing
-
 		/// <summary>
 		/// Looks up the text direction for the specified language code in the appropriate .ldml file.
 		/// This lookup will not work with Paratext, which does not yet use an .ldml file.
@@ -390,60 +387,9 @@ namespace SIL.Tool
 		/// <returns>Text direction (ltr or rtl), or ltr if not found.</returns>
 		public static string GetTextDirection(string language)
 		{
-			string[] langCoun = language.Split('-');
-			string direction = "ltr";
-			try
-			{
-				if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" ||
-					TextDirectionLanguageFile != null) // is paratext
-				{
-					string fileName = TextDirectionLanguageFile;
-					if (fileName == null)
-					{
-						SettingsHelper settingsHelper = new SettingsHelper(Param.DatabaseName);
-						fileName = settingsHelper.GetLanguageFilename();
-					}
-					foreach (string line in FileData.Get(fileName).Split(new[] { '\n' }))
-					{
-						if (line.StartsWith("RTL="))
-						{
-							direction = (line[4] == 'T') ? "rtl" : "ltr";
-							break;
-						}
-					}
-				}
-				else
-				{
-					string wsPath;
-					if (langCoun.Length < 2)
-					{
-						// try the language (no country code) (e.g, "en" for "en-US")
-						wsPath = PathCombine(Common.GetLDMLPath(), langCoun[0] + ".ldml");
-					}
-					else
-					{
-						// try the whole language expression (e.g., "ggo-Telu-IN")
-						wsPath = PathCombine(Common.GetLDMLPath(), language + ".ldml");
-					}
-					if (File.Exists(wsPath))
-					{
-						XmlDocument ldml = DeclareXMLDocument(false);
-						ldml.Load(wsPath);
-						var nsmgr = new XmlNamespaceManager(ldml.NameTable);
-						nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
-						var node = ldml.SelectSingleNode("//orientation/@characters", nsmgr);
-						if (node != null)
-						{
-							// get the text direction specified by the .ldml file
-							direction = (node.Value.ToLower().Equals("right-to-left")) ? "rtl" : "ltr";
-						}
-					}
-				}
-			}
-			catch
-			{
-				direction = "ltr";
-			}
+			string direction;
+			CallerSetting = CallerSetting ?? new CallerSetting(Param.DatabaseName);
+			direction = CallerSetting.IsRightToLeft(language) ? "rtl" : "ltr";
 			return direction;
 		}
 
@@ -996,45 +942,25 @@ namespace SIL.Tool
 			string languageCode = string.Empty;
 			if (projectInputType.ToLower() == "dictionary")
 			{
-
-				List<string> langCodeList = new List<string>();
-				XmlDocument xDoc = Common.DeclareXMLDocument(true);
-				XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
-				namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-				xDoc.Load(xhtmlFileNameWithPath);
-				XmlNodeList fontList = xDoc.GetElementsByTagName("meta");
-				for (int i = 0; i < fontList.Count; i++)
+				var langCodeList = new List<string>();
+				var p = new XmlHeadValue(xhtmlFileNameWithPath, "meta", "name", "dc.language", "content");
+				var punc = string.Empty;
+				foreach (var langContent in p.Results)
 				{
-					string langName = fontList[i].Attributes["name"].Value;
-					string langContent = fontList[i].Attributes["content"].Value;
-
-					if (langName.ToLower().IndexOf("dc.language") != 0)
-						continue;
-
-					if (langContent.IndexOf(':') > 0 && langContent.IndexOf('-') > 0)
-					{
-						if (!langCodeList.Contains(langContent))
-						{
-							langCodeList.Add(langContent);
-							languageCode = languageCode + langContent;
-							if (i < fontList.Count)
-							{
-								languageCode = languageCode + ",";
-							}
-						}
-
-					}
-
+					if (langContent.IndexOf(':') <= 0 || langContent.IndexOf('-') <= 0) continue;
+					if (langCodeList.Contains(langContent)) continue;
+					langCodeList.Add(langContent);
+					languageCode = languageCode + punc + langContent;
+					punc = ", ";
 				}
 			}
 			else
 			{
-				languageCode = Common.ParaTextEthnologueCodeName();
-				if (languageCode.Length > 0 && languageCode.IndexOf('-') > 0)
-				{
-					string[] val = languageCode.Split('-');
-					languageCode = val[1];
-				}
+				CallerSetting = CallerSetting ?? new CallerSetting(Param.DatabaseName);
+				languageCode = ParaTextEthnologueCodeName() ?? string.Empty;
+				if (languageCode.Length <= 0 || languageCode.IndexOf('-') <= 0) return languageCode;
+				var val = languageCode.Split('-');
+				languageCode = val[1];
 			}
 			return languageCode;
 		}
@@ -3329,9 +3255,9 @@ namespace SIL.Tool
 				Common.CleanDirectory(di);
 			}
 			Directory.CreateDirectory(destFolder);
-			string[] files = Directory.GetFiles(sourceFolder);
 			try
 			{
+				string[] files = Directory.GetFiles(sourceFolder);
 				foreach (string file in files)
 				{
 					string name = Path.GetFileName(file);
@@ -4194,32 +4120,15 @@ namespace SIL.Tool
 		/// </summary>
 		public static string ParaTextFontName(string inputCssFileName)
 		{
-			string paraTextFontName = string.Empty;
-			if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext00
-			{
-				// read fontname from ssf
-				StringBuilder newProperty = new StringBuilder();
-				SettingsHelper settingsHelper = new SettingsHelper(Param.DatabaseName);
-				string fileName = settingsHelper.GetSettingsFilename();
-				string xPath = "//ScriptureText/DefaultFont";
-				XmlNode xmlFont = Common.GetXmlNode(fileName, xPath);
-				if (xmlFont == null || xmlFont.InnerText == string.Empty)
-				{
-					paraTextFontName = "Charis SIL";
-				}
-				else
-				{
-					paraTextFontName = xmlFont.InnerText;
-				}
-				if (inputCssFileName != string.Empty)
-				{
-					newProperty.AppendLine("div[lang='zxx']{ font-family: \"" + paraTextFontName + "\";" + Common.FontFeaturesSettingsString + "}");
-					newProperty.AppendLine("span[lang='zxx']{ font-family: \"" + paraTextFontName + "\";" + Common.FontFeaturesSettingsString + "}");
-					newProperty.AppendLine("@page{ font-family: \"" + paraTextFontName + "\";" + Common.FontFeaturesSettingsString + "}");
-
-					FileInsertText(inputCssFileName, newProperty.ToString());
-				}
-			}
+			string paraTextFontName;
+			CallerSetting = CallerSetting ?? new CallerSetting(Param.DatabaseName);
+			paraTextFontName = CallerSetting.GetFont();
+			if (string.IsNullOrEmpty(inputCssFileName)) return paraTextFontName;
+			var newProperty = new StringBuilder();
+			newProperty.AppendLine("div[lang='zxx']{ font-family: \"" + paraTextFontName + "\";" + Common.FontFeaturesSettingsString + "}");
+			newProperty.AppendLine("span[lang='zxx']{ font-family: \"" + paraTextFontName + "\";" + Common.FontFeaturesSettingsString + "}");
+			newProperty.AppendLine("@page{ font-family: \"" + paraTextFontName + "\";" + Common.FontFeaturesSettingsString + "}");
+			FileInsertText(inputCssFileName, newProperty.ToString());
 			return paraTextFontName;
 		}
 
@@ -4228,21 +4137,8 @@ namespace SIL.Tool
 		/// </summary>
 		public static string ParaTextEthnologueCodeName()
 		{
-			string paraLangCode = string.Empty;
-			if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext00
-			{
-				// read Language Code from ssf
-				SettingsHelper settingsHelper = new SettingsHelper(Param.DatabaseName);
-				string fileName = settingsHelper.GetSettingsFilename();
-				string xPath = "//ScriptureText/EthnologueCode";
-				XmlNode xmlLangCode = Common.GetXmlNode(fileName, xPath);
-				if (xmlLangCode == null) return string.Empty;
-				if (xmlLangCode != null && xmlLangCode.InnerText != string.Empty)
-				{
-					paraLangCode = xmlLangCode.InnerText;
-				}
-			}
-			return paraLangCode;
+			CallerSetting = CallerSetting ?? new CallerSetting(Param.DatabaseName);
+			return CallerSetting.GetIsoCode();
 		}
 
 		/// <summary>
@@ -4250,50 +4146,37 @@ namespace SIL.Tool
 		/// </summary>
 		public static string ParaTextDcLanguage(string dataBaseName, bool hyphenlang)
 		{
-			string dcLanguage = string.Empty;
-			if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe" || Param.Value[Param.InputType] == "Scripture") // is scripture
+			string dcLanguage;
+			string languageName;
+			CallerSetting = CallerSetting ?? new CallerSetting(Param.DatabaseName);
+			dcLanguage = CallerSetting.GetIsoCode();
+			languageName = CallerSetting.GetLanguage();
+			if (dcLanguage == string.Empty)
 			{
-				// read Language Code from ssf
-				SettingsHelper settingsHelper = new SettingsHelper(dataBaseName);
-				string fileName = settingsHelper.GetSettingsFilename();
-				string xPath = "//ScriptureText/EthnologueCode";
-				XmlNode xmlLangCode = GetXmlNode(fileName, xPath);
-				if (xmlLangCode != null && xmlLangCode.InnerText != string.Empty)
+				Dictionary<string, string> _languageCodes = new Dictionary<string, string>();
+				_languageCodes = LanguageCodesfromXMLFile();
+				if (_languageCodes.Count > 0)
 				{
-					dcLanguage = xmlLangCode.InnerText;
-				}
-				xPath = "//ScriptureText/Language";
-				XmlNode xmlLangNameNode = GetXmlNode(fileName, xPath);
-				if (xmlLangNameNode != null && xmlLangNameNode.InnerText != string.Empty)
-				{
-					if (dcLanguage == string.Empty)
+					foreach (
+						var languageCode in
+							_languageCodes.Where(
+								languageCode => languageCode.Value.ToLower() == languageName.ToLower()))
 					{
-						Dictionary<string, string> _languageCodes = new Dictionary<string, string>();
-						_languageCodes = LanguageCodesfromXMLFile();
-						if (_languageCodes.Count > 0)
+						if (hyphenlang)
 						{
-							foreach (
-								var languageCode in
-									_languageCodes.Where(
-										languageCode => languageCode.Value.ToLower() == xmlLangNameNode.InnerText.ToLower()))
-							{
-								if (hyphenlang)
-								{
-									dcLanguage = _languageCodes.ContainsValue(languageCode.Key.ToLower())
-										? _languageCodes.FirstOrDefault(x => x.Value == languageCode.Key.ToLower()).Key
-										: languageCode.Key;
-								}
-								else
-								{
-									dcLanguage = languageCode.Key;
-								}
-								break;
-							}
+							dcLanguage = _languageCodes.ContainsValue(languageCode.Key.ToLower())
+								? _languageCodes.FirstOrDefault(x => x.Value == languageCode.Key.ToLower()).Key
+								: languageCode.Key;
 						}
+						else
+						{
+							dcLanguage = languageCode.Key;
+						}
+						break;
 					}
-					dcLanguage += ":" + xmlLangNameNode.InnerText;
 				}
 			}
+			dcLanguage += ":" + languageName;
 			return dcLanguage;
 		}
 
@@ -5237,57 +5120,49 @@ namespace SIL.Tool
 
 		public static void LoadHyphenationSettings()
 		{
-			var _settingsHelper = new SettingsHelper(Param.DatabaseName);
-			_settingsHelper.LoadValues();
-			var ssf = _settingsHelper.GetSettingsFilename(_settingsHelper.Database);
-			if (ssf != null && ssf.Trim().Length > 0)
+			CallerSetting = CallerSetting ?? new CallerSetting(Param.DatabaseName);
+			if (CallerSetting.Caller == DataCreator.CreatorProgram.Paratext7
+				|| CallerSetting.Caller == DataCreator.CreatorProgram.Paratext8
+				|| Param.Value[Param.InputType] == "Scripture")
 			{
-				var app = AppDomain.CurrentDomain.FriendlyName.ToLower();
-				if (app == "paratext.exe" || Param.Value[Param.InputType] == "Scripture")
+				Param.IsHyphen = false;
+				Param.HyphenLang = Common.ParaTextDcLanguage(Param.DatabaseName, true);
+				var filename = CallerSetting.File("hyphenatedWords.txt");
+				if (File.Exists(filename))
 				{
-					var paratextpath = Path.Combine(Path.GetDirectoryName(ssf), _settingsHelper.Database);
-					Param.DatabaseName = _settingsHelper.Database;
-					Param.IsHyphen = false;
-					Param.HyphenLang = Common.ParaTextDcLanguage(_settingsHelper.Database, true);
-					foreach (string filename in Directory.GetFiles(paratextpath, "*.txt"))
-					{
-						if (filename.Contains("hyphen"))
-						{
-							Param.IsHyphen = true;
-							Param.HyphenFilepath = filename;
-							Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
-						}
-					}
+					Param.IsHyphen = true;
+					Param.HyphenFilepath = filename;
+					Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
 				}
-				if (app.Contains("fieldworks") || Param.Value[Param.InputType] == "Dictionary")
-				{
-					try
-					{
-						IDictionary<string, string> value = new Dictionary<string, string>();
-						var settingsFile = ssf;
-						var flexScan = new FlexScan(settingsFile);
-						foreach (var lang in flexScan.VernWs)
-						{
-							var langname = GetLanguageValues(lang);
-							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-								value.Add(lang, langname.Replace(',', ' '));
-						}
-						foreach (var lang in flexScan.AnalWs)
-						{
-							var langname = GetLanguageValues(lang);
-							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-								value.Add(lang, langname.Replace(',', ' '));
-						}
-						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
-					}
-					catch (Exception)
-					{
-					}
-				}
-
 			}
-			Common.EnableHyphenation();
-			CreatingHyphenationSettings.ReadHyphenationSettings(_settingsHelper.Database, Param.Value[Param.InputType]);
+			else if (CallerSetting.Caller == DataCreator.CreatorProgram.FieldWorks
+				|| Param.Value[Param.InputType] == "Dictionary")
+			{
+				try
+				{
+					IDictionary<string, string> value = new Dictionary<string, string>();
+					var flexScan = new FlexScan(CallerSetting.SettingsFullPath);
+					foreach (var lang in flexScan.VernWs)
+					{
+						var langname = GetLanguageValues(lang);
+						if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+							value.Add(lang, langname.Replace(',', ' '));
+					}
+					foreach (var lang in flexScan.AnalWs)
+					{
+						var langname = GetLanguageValues(lang);
+						if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+							value.Add(lang, langname.Replace(',', ' '));
+					}
+					Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
+				}
+				catch (Exception)
+				{
+				}
+			}
+
+			EnableHyphenation();
+			CreatingHyphenationSettings.ReadHyphenationSettings(Param.DatabaseName, Param.Value[Param.InputType]);
 		}
 
 		public static string GetLanguageValues(string lang)
@@ -5429,74 +5304,29 @@ namespace SIL.Tool
 			xmlDoc.Save(allUserXmlPath);
 		}
 
-		public static void FindParatextProject()
-		{
-			if (!string.IsNullOrEmpty(Ssf)  || Param.DatabaseName == "DatabaseName") return;
-			RegistryHelperLite.RegEntryExists(RegistryHelperLite.ParatextKey, "Settings_Directory", "", out ParatextData);
-			var sh = new SettingsHelper(Param.DatabaseName);
-			Common.Ssf = sh.GetSettingsFilename();
-		}
-
-		public static string GetSsfValue(string xpath, string def)
-		{
-			var node = GetXmlNode(Ssf, xpath);
-			return (node != null) ? node.InnerText : def;
-		}
-
-		public static string GetSsfValue(string xpath)
-		{
-			// Default Parameters are not allowed in Team City build server.
-			// ReSharper disable IntroduceOptionalParameters.Global
-			return GetSsfValue(xpath, null);
-			// ReSharper restore IntroduceOptionalParameters.Global
-		}
-
 		public static void GetFontFeatures()
 		{
-			if (string.IsNullOrEmpty(Ssf)) return;
-			var language = GetSsfValue("//Language", "English");
-			var languagePath = Path.GetDirectoryName(Ssf);
-			var languageFile = PathCombine(languagePath, language);
-			if (File.Exists(languageFile + ".LDS"))
+			string features;
+			CallerSetting = CallerSetting ?? new CallerSetting(Param.DatabaseName);
+			features = CallerSetting.LanguageData != null? CallerSetting.LanguageData["General"]["fontFeatureSettings"]: "";
+			StringBuilder fontFeatures = new StringBuilder();
+			string[] fts = features.Split(',');
+			foreach (string s in fts)
 			{
-				languageFile += ".LDS";
+				string[] parts = s.Split('=');
+				if (parts.Length > 1) fontFeatures.Append("\"" + parts[0] + "\" " + parts[1] + ",");
 			}
-			else if (File.Exists(languageFile + ".lds"))
+			FontFeaturesString = fontFeatures.ToString().Trim().TrimEnd(',');
+			if (FontFeaturesString.Length > 0)
 			{
-				languageFile += ".lds";
+				FontFeaturesSettingsString = "\r\n -webkit-font-feature-settings: " + FontFeaturesString + "; \r\n" +
+											" -moz-font-feature-settings: " + Common.FontFeaturesString + "; \r\n" +
+											" -ms-font-feature-settings: " + Common.FontFeaturesString + "; \r\n" +
+											" font-feature-settings: " + Common.FontFeaturesString + "; \r\n";
 			}
 			else
 			{
-				return;
-			}
-			StringBuilder fontFeatures = new StringBuilder();
-			foreach (string line in FileData.Get(languageFile).Split(new[] { '\n' }))
-			{
-				var cleanLine = line.ToLower().Trim();
-				if (cleanLine.StartsWith("fontfeaturesettings="))
-				{
-					if (cleanLine.Length > 20)
-					{
-						string[] fts = cleanLine.Substring(20).Split(',');
-						foreach (string s in fts)
-						{
-							string[] parts = s.Split('=');
-							fontFeatures.Append("\"" + parts[0] + "\" " + parts[1] + ",");
-						}
-						FontFeaturesString = fontFeatures.ToString().Trim().TrimEnd(',');
-						if (FontFeaturesString.Length > 0)
-						{
-							FontFeaturesSettingsString = "\r\n -webkit-font-feature-settings: " + FontFeaturesString + "; \r\n" +
-														" -moz-font-feature-settings: " + Common.FontFeaturesString + "; \r\n" +
-														" -ms-font-feature-settings: " + Common.FontFeaturesString + "; \r\n" +
-														" font-feature-settings: " + Common.FontFeaturesString + "; \r\n";
-						}
-						else
-						{
-							FontFeaturesSettingsString = string.Empty;
-						}
-					}
-				}
+				FontFeaturesSettingsString = string.Empty;
 			}
 			return;
 		}

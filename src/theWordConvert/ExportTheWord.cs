@@ -8,7 +8,7 @@
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
 // Last reviewed:
-// 
+//
 // <remarks>
 // See: http://www.theword.net/
 // </remarks>
@@ -101,6 +101,7 @@ namespace SIL.PublishingSolution
                 var codePath = Path.GetDirectoryName(assemblyLocation);
                 Debug.Assert(codePath != null);
                 Environment.CurrentDirectory = codePath;
+				Common.CallerSetting = Common.CallerSetting ?? new CallerSetting(Param.DatabaseName);
 
                 inProcess.Show();
 
@@ -113,7 +114,6 @@ namespace SIL.PublishingSolution
                 LoadMetadata();
                 inProcess.PerformStep();
 
-				Common.FindParatextProject();
                 inProcess.PerformStep();
 
                 CreateUsxIfNecessary(projInfo.DefaultXhtmlFileWithPath);
@@ -126,7 +126,8 @@ namespace SIL.PublishingSolution
                 CollectTestamentBooks(otBooks, ntBooks);
                 inProcess.PerformStep();
 
-                var output = Common.GetSsfValue("//EthnologueCode", _defaultLanguage);
+	            var output = ValueOrDefault(Common.CallerSetting.GetIsoCode(), _defaultLanguage);
+
                 var fullName = UsxDir(exportTheWordInputPath);
                 LogStatus("Processing: {0}", fullName);
                 xsltArgs.XsltMessageEncountered += XsltMessage;
@@ -177,6 +178,8 @@ namespace SIL.PublishingSolution
 
                 Common.CleanupExportFolder(projInfo.DefaultXhtmlFileWithPath, ".tmp,.de", "layout.css", string.Empty);
                 CreateRamp(projInfo);
+				Common.CallerSetting.Dispose();
+	            Common.CallerSetting = null;
             }
             catch (Exception ex)
             {
@@ -187,12 +190,19 @@ namespace SIL.PublishingSolution
                 Environment.CurrentDirectory = originalDir;
                 Cursor.Current = myCursor;
                 ReportFailure(ex);
+	            if (Common.CallerSetting == null) return success;
+	            Common.CallerSetting.Dispose();
+	            Common.CallerSetting = null;
             }
-            Common.Ssf = string.Empty;
             return success;
         }
 
-        private void CreateUsxIfNecessary(string xhtmlFileName)
+	    private static string ValueOrDefault(string value, string defValue)
+	    {
+		    return string.IsNullOrEmpty(value) ? defValue : value;
+	    }
+
+	    private void CreateUsxIfNecessary(string xhtmlFileName)
         {
             var xhtmlDir = Path.GetDirectoryName(xhtmlFileName);
             var usxPath = Common.PathCombine(xhtmlDir, "USX");
@@ -368,7 +378,7 @@ namespace SIL.PublishingSolution
         {
             var resultName = Path.GetFileName(resultFullName);
             var resultDir = Path.GetDirectoryName(resultFullName);
-            var msgFormat = LocalizationManager.GetString("ExportTheWord.ReportWhenTheWordNotInstalled.Message", 
+            var msgFormat = LocalizationManager.GetString("ExportTheWord.ReportWhenTheWordNotInstalled.Message",
                 "Do you want to open the folder with the results?\n\n\u25CF Click Yes.\n\nThe folder with the \"{0}\" file ({2}) will open so you can manually copy it to {1}.\n\nThe MySword file \"{3}\" is also there so you can copy it to your Android device or send it to pathway@sil.org for uploading. \n\n\u25CF Click Cancel to do neither of the above.\n", "");
             var msg = string.Format(msgFormat, resultName, theWordFolder, resultDir, Path.GetFileName(mySwordResult));
 			string caption = LocalizationManager.GetString("ExportTheWord.ReportWhenTheWordNotInstalled.Caption", "theWord Export", "");
@@ -541,13 +551,25 @@ namespace SIL.PublishingSolution
             var otFlag = false;
             foreach (string file in Directory.GetFiles(fullName, "*.usx"))
             {
-                if (codeStart == -1)
-                {
-                    var fileDir = Path.GetDirectoryName(file);
-                    Debug.Assert(fileDir != null);
-                    codeStart = fileDir.Length + 1;
-                }
-                var curCode = file.Substring(codeStart, 3);
+	            string curCode;
+	            if (codeStart == -1)
+	            {
+		            var fileDir = Path.GetDirectoryName(file);
+		            Debug.Assert(fileDir != null);
+		            codeStart = fileDir.Length + 1;
+		            curCode = file.Substring(codeStart, 3);
+		            try
+		            {
+			            var i = int.Parse(curCode);
+						// if it starts with a number, ckip the number
+			            codeStart += 3;
+		            }
+		            catch (Exception)
+		            {
+			            // it shouldn't be a number what this is what we are hoping for
+		            }
+	            }
+				curCode = file.Substring(codeStart, 3);
                 codeNames[curCode] = file;
                 if (otBooks.Contains(curCode))
                 {
@@ -558,10 +580,10 @@ namespace SIL.PublishingSolution
         }
 
 		protected static XsltArgumentList LoadXsltParameters(string path)
-        {
+		{
             var xsltArgs = new XsltArgumentList();
-            xsltArgs.AddParam("refPunc", "", Common.GetSsfValue("//ChapterVerseSeparator", ":"));
-            xsltArgs.AddParam("refMaterial", "", Common.GetSsfValue("//ReferenceExtraMaterial", ""));
+	        xsltArgs.AddParam("refPunc", "", ValueOrDefault(Common.CallerSetting.GetSettingValue("//ChapterVerseSeparator"), ":"));
+            xsltArgs.AddParam("refMaterial", "", ValueOrDefault(Common.CallerSetting.GetSettingValue("//ReferenceExtraMaterial"), ""));
             xsltArgs.AddParam("bookNames", "", GetBookNamesUri(path));
             xsltArgs.AddParam("glossary", "", GetGlossaryUri(path));
             xsltArgs.AddParam("versification", "", VrsName);
@@ -605,45 +627,15 @@ namespace SIL.PublishingSolution
 
         protected static void GetRtlParam(XsltArgumentList xsltArgs)
         {
-            R2L = false;
-            if (string.IsNullOrEmpty(Common.Ssf)) return;
-			var language = Common.GetSsfValue("//Language", "English");
-			var languagePath = Path.GetDirectoryName(Common.Ssf);
-            var languageFile = Common.PathCombine(languagePath, language);
-            if (File.Exists(languageFile + ".LDS"))
-            {
-                languageFile += ".LDS";
-            }
-            else if (File.Exists(languageFile + ".lds"))
-            {
-                languageFile += ".lds";
-            }
-            else
-            {
-                return;
-            }
-            foreach (string line in FileData.Get(languageFile).Split(new[] {'\n'}))
-            {
-                var cleanLine = line.ToLower().Trim();
-                if (cleanLine.StartsWith("rtl="))
-                {
-                    if (cleanLine.Length > 4 && cleanLine.Substring(4, 1) == "t")
-                    {
-                        xsltArgs.AddParam("rtl", "", "1");
-                        R2L = true;
-                    }
-                }
-            }
+            R2L = Common.CallerSetting.IsRightToLeft();
+			if (R2L) xsltArgs.AddParam("rtl", "", "1");
         }
 
         protected static string GetBookNamesUri(string exportTheWordInputPath)
         {
-            if (string.IsNullOrEmpty(Common.Ssf))
-            {
-                return FileUrlPrefix + Common.PathCombine(UsxDir(exportTheWordInputPath), "BookNames.xml");
-            }
-			var myProj = Common.PathCombine((string)Common.ParatextData, Common.GetSsfValue("//Name"));
-            return FileUrlPrefix + Common.PathCombine(myProj, "BookNames.xml");
+	        //string result = FileUrlPrefix + Common.PathCombine(UsxDir(exportTheWordInputPath), "BookNames.xml");
+	        Common.CallerSetting = Common.CallerSetting ?? new CallerSetting(Param.DatabaseName);
+		    return FileUrlPrefix + Common.CallerSetting.File("BookNames.xml");
         }
 
         protected static string UsxDir(string exportTheWordInputPath)
@@ -685,7 +677,7 @@ namespace SIL.PublishingSolution
 
         protected static string ConvertToMySword(string resultName, string tempTheWordCreatorPath, string exportTheWordInputPath)
         {
-            var converter = new MySwordSqlite();
+            var converter = new MySwordSqlite(VrsName);
             converter.Execute(Path.Combine(tempTheWordCreatorPath, resultName));
             var mySwordFiles = Directory.GetFiles(tempTheWordCreatorPath, "*.mybible");
             var mySwordResult = "<No MySword Result>";
@@ -725,17 +717,17 @@ about={2} \
 <p><b>Creative Commons</b> <i>Atribution-Non Comercial-No Derivatives 4.0</i>\
 <p><font color=blue><i>http://creativecommons.org/licenses/by-nc-nd/4.0</i></font>\
 ";
-			var langCode = Common.GetSsfValue("//EthnologueCode", _defaultLanguage);
+	        var langCode = Common.CallerSetting.GetIsoCode();
             const bool isConfigurationTool = false;
             var shortTitle = Param.GetTitleMetadataValue("Title", Param.GetOrganization(), isConfigurationTool);
-			var fullTitle = Common.GetSsfValue("//FullName", shortTitle);
+	        var fullTitle = Common.CallerSetting.GetName();
             var description = Param.GetMetadataValue("Description");
             var copyright = Common.UpdateCopyrightYear(Param.GetMetadataValue("Copyright Holder"));
             var createDate = DateTime.Now.ToString("yyyy.M.d");
             var publisher = Param.GetMetadataValue("Publisher");
             var publishDate = createDate;
             var creator = Param.GetMetadataValue("Creator");
-			var font = Common.GetSsfValue("//DefaultFont", "Charis SIL");
+	        var font = Common.CallerSetting.GetFont();
             var myFormat = GetFormat("theWordFormat.txt", format);
             if (R2L)
             {

@@ -8,11 +8,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Test")]
 [assembly: AssemblyDescription("Nunit tests")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SIL")]
-[assembly: AssemblyProduct("PublishingSolution")]
-[assembly: AssemblyCopyright("Copyright © 2009 SIL International")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -29,5 +24,3 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.16.0.5871")]
-[assembly: AssemblyFileVersion("1.16.0.5871")]

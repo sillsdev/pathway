@@ -242,6 +242,7 @@
   <ItemGroup>
     <Compile Include="ExportGoBible.cs" />
     <Compile Include="PartialBooks.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

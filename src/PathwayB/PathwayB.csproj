@@ -234,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PathwayB.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

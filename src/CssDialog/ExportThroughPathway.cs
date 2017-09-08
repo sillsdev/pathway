@@ -60,7 +60,6 @@ namespace SIL.PublishingSolution
         private static string _helpTopic = string.Empty;
         public bool _fromPlugIn;
         private static string _media = "paper";
-        private SettingsHelper _settingsHelper;
         public List<string> XsltFile = new List<string>();
         public static bool isFromConfigurationTool = false;
         private bool _isUnixOS = false;
@@ -357,10 +356,6 @@ namespace SIL.PublishingSolution
                 _isUnixOS = Common.UnixVersionCheck();
                 PopulateFilesFromPreprocessingFolder();
 
-                // Load the .ssf or .ldml as appropriate
-                _settingsHelper = new SettingsHelper(DatabaseName);
-                _settingsHelper.LoadValues();
-
                 LoadDefaultSettings();
 
                 // get the current organization
@@ -508,19 +503,12 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void PopulateFromSettings()
         {
-            string valueFromSettings;
-            // title / full name
-            if (_settingsHelper.Value.TryGetValue("FullName", out valueFromSettings))
-            {
-                Title = valueFromSettings;
-            }
-            // copyright holder
-            if (_settingsHelper.Value.TryGetValue("Copyright", out valueFromSettings))
-            {
-                //CopyrightHolder = valueFromSettings;
-                CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
-                CopyrightHolder = Common.UpdateCopyrightYear(CopyrightHolder);
-            }
+	        using (Common.CallerSetting = new CallerSetting(Param.DatabaseName))
+	        {
+		        Title = Common.CallerSetting.GetName();
+			}
+			CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
+			CopyrightHolder = Common.UpdateCopyrightYear(CopyrightHolder);
         }
 
         /// <summary>
@@ -539,7 +527,7 @@ namespace SIL.PublishingSolution
             btnHelp.Top = btnOK.Top;
 
             // Resize the dialog
-            Height = SystemInformation.CaptionHeight + btnOK.Bottom + 15;//(IsExpanded) ? 587 : 265;
+            Height = SystemInformation.CaptionHeight + btnOK.Bottom + 25;//(IsExpanded) ? 587 : 265;
 
             // Set the text and image on the More / Less Options button
             btnMoreLessOptions.Text = (IsExpanded) ? LocalizationManager.GetString("ExportThroughPathway.btnMoreLessOptions.Less", "Less", "") : LocalizationManager.GetString("ExportThroughPathway.btnMoreLessOptions.More", "More", "");
@@ -878,7 +866,6 @@ namespace SIL.PublishingSolution
 
             DictionaryName = OutputFolder;
             Common.TimeStarted = DateTime.Now;
-            _settingsHelper.ClearValues();
 
             Param.LoadSettings();
             if (Param.Value.ContainsKey(Param.Preprocessing))
@@ -893,18 +880,6 @@ namespace SIL.PublishingSolution
                 Param.SetValue(Param.Preprocessing, preprocessing);
             }
             Param.Write();
-
-
-            //StringBuilder sb =new StringBuilder();
-            //sb.Append("file1.xhtml");
-            //sb.Append(", ");
-            //sb.Append("file2.xhtml");
-
-            //string argument = string.Format("--target '{0}' --directory '{1}' --files '{2}'", ddlLayout.SelectedItem.ToString() , OutputFolder, sb.ToString());
-
-            //CommandLineRunner.Run(Common.PathCombine(Common.GetApplicationPath(), "PathwayExport.exe"), argument,
-            //    OutputFolder, 50000, null);
-
             this.Close();
         }
 

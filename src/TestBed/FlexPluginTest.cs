@@ -433,7 +433,7 @@ namespace TestBed
             StyToCss styToCss = new StyToCss();
             styToCss.StyFullPath = txtCSSInput.Text;
             string outputCSS = txtCSSInput.Text.Replace(".sty", ".css");
-            styToCss.ConvertStyToCss("TestBed", outputCSS, string.Empty);
+            styToCss.ConvertStyToCss("TestBed", outputCSS);
             MessageBox.Show(@"Exported in " + outputCSS);
 #endif
         }

@@ -9,11 +9,6 @@ using System.Resources;
 [assembly: AssemblyTitle("PsExport")]
 [assembly: AssemblyDescription("Translation Editor utility for converting XHTML to ODT or PDF")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SIL International")]
-[assembly: AssemblyProduct("Pathway")]
-[assembly: AssemblyCopyright("Copyright ( c ) 2012 SIL International")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -32,6 +27,4 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.16.0.5871")]
-[assembly: AssemblyFileVersion("1.16.0.5871")]
 [assembly: NeutralResourcesLanguageAttribute("")]

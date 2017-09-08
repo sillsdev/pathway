@@ -209,6 +209,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="icu.net, Version=2.0.1.0, Culture=neutral, PublicKeyToken=416fdd914afa6b66, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\icu.net.dll</HintPath>
+    </Reference>
+    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="L10NSharp">
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
@@ -233,6 +241,7 @@
     <Compile Include="AfterBeforeProcessEpub.cs" />
     <Compile Include="AfterBeforeXHTMLProcess.cs" />
     <Compile Include="Backend.cs" />
+    <Compile Include="CallerSetting.cs" />
     <Compile Include="CheckUserFileAccessRights.cs" />
     <Compile Include="ClassInfo.cs" />
     <Compile Include="ComboBoxItem.cs">
@@ -243,6 +252,7 @@
     </Compile>
     <Compile Include="CommonXml.cs" />
     <Compile Include="CreatingHyphenationSettings.cs" />
+    <Compile Include="DataCreator.cs" />
     <Compile Include="FileStreamXmlResolver.cs" />
     <Compile Include="FlexScan.cs" />
     <Compile Include="ImageMods.cs" />
@@ -318,12 +328,14 @@
     </Compile>
     <Compile Include="PreExportProcess.cs" />
     <Compile Include="PublicationInformation.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryAccess.cs" />
     <Compile Include="SubProcess.cs" />
     <Compile Include="Substitution.cs" />
     <Compile Include="XHTMLProcess.cs" />
     <Compile Include="XmlCopy.cs" />
+    <Compile Include="XmlHeadValue.cs" />
     <Compile Include="XmlOneToMany.cs" />
     <Compile Include="XmlParser.cs" />
     <Compile Include="ZipFolder.cs" />
@@ -375,9 +387,10 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="..\..\lib\icudt54.dll;..\..\lib\icuin54.dll;..\..\lib\icuuc54.dll" DestinationFolder="$(OutputPath)" />
+  </Target>
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ProjectInformationTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test methods of FlexDePlugin
 // </remarks>
@@ -193,7 +193,7 @@ namespace Test.PsTool
         [Test]
         public void ProjectPropertyTest()
         {
-            string mode = "new"; 
+            string mode = "new";
             string fileName = "Dictionary1.de";
             string sourceFile = GetFileNameWithPath(fileName);
             string output = GetFileNameWithOutputPath(fileName);
@@ -347,7 +347,9 @@ namespace Test.PsTool
             string fileName = "Dictionary1.de";
             string sourceFile = GetFileNameWithPath(fileName);
 
-            _doc.Load(sourceFile);
+	        var xr = XmlReader.Create(sourceFile);
+            _doc.Load(xr);
+			xr.Close();
             _target.ProjectMode = string.Empty;
             _target.LoadProjectFile(sourceFile);
             _target.PopulateDicExplorer(outputTv);
@@ -370,8 +372,8 @@ namespace Test.PsTool
             _target.LoadProjectFile(output);
 
             string nodeName = "Project";
-            string attributeName = "ShowError"; 
-            string attributeValue = "False"; 
+            string attributeName = "ShowError";
+            string attributeValue = "False";
             _target.DESetAttribute("//" + nodeName, attributeName, attributeValue);
 
             string expected = "False";
@@ -408,8 +410,8 @@ namespace Test.PsTool
         ////[Test]
         //public void AddImageFilesTest()
         //{
-        //    string filename = string.Empty; 
-        //    string projectName = string.Empty; 
+        //    string filename = string.Empty;
+        //    string projectName = string.Empty;
         //    _target.AddImageFiles(filename, projectName);
         //}
 

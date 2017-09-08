@@ -142,11 +142,14 @@ namespace Test.theWordConvert
         [Test]
         public void LoadXsltParametersTest()
         {
-			Common.ParatextData = @"C:\";
-			Common.Ssf = FileInput("MP1.ssf");
-            var actual = LoadXsltParameters(_inputPath);
-            Assert.AreEqual(":", actual.GetParam("refPunc", ""));
-            Assert.AreEqual(FileUrlPrefix + Common.PathCombine(@"C:\MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+	        using (Common.CallerSetting = new CallerSetting {SettingsFullPath = Path.Combine(_inputPath, "MP1.ssf")})
+	        {
+				var actual = LoadXsltParameters(_inputPath);
+				Assert.AreEqual(":", actual.GetParam("refPunc", ""));
+				Assert.AreEqual(FileUrlPrefix + Path.Combine(_inputPath, "MP1", "BookNames.xml"), actual.GetParam("bookNames", ""));
+			}
+	        Common.CallerSetting = null;
         }
 
         [Test]
@@ -196,8 +199,11 @@ namespace Test.theWordConvert
             xsltArgs.AddParam("bookNames", "", "file://" + FileInput("BookNames.xml"));
             var inProcess = (IInProcess)Mocks.NewMock(typeof(IInProcess));
             Expect.Exactly(2).On(inProcess).Method("PerformStep");
-            ProcessAllBooks(fullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
-            var sr = new StreamReader(fullName);
+	        using (Common.CallerSetting = new CallerSetting {SettingsFullPath = Path.Combine(_inputPath, "nkoNt.ssf")})
+	        {
+				ProcessAllBooks(fullName, otFlag, otBooks, ntBooks, codeNames, xsltArgs, inProcess);
+			}
+			var sr = new StreamReader(fullName);
             var data = sr.ReadToEnd();
             sr.Close();
             File.Delete(fullName);
@@ -642,8 +648,12 @@ namespace Test.theWordConvert
             Param.LoadValues(inputParams);
             var memory = new MemoryStream();
             var sw = new StreamWriter(memory, Encoding.UTF8);
-            AttachMetadata(sw);
-            sw.Flush();
+	        using (Common.CallerSetting = new CallerSetting {SettingsFullPath = FileInput("nkoNT.ssf")})
+	        {
+				AttachMetadata(sw);
+			}
+	        Common.CallerSetting = null;
+			sw.Flush();
             memory.Position = 0;
             var sr = new StreamReader(memory);
             var data = sr.ReadToEnd();
@@ -777,11 +787,17 @@ namespace Test.theWordConvert
             var vrsPath = PathPart.Bin(Environment.CurrentDirectory, @"/../theWordConvert");
             VrsName = Path.Combine(vrsPath, "vrs.xml");
             projInfo.DefaultXhtmlFileWithPath = Path.Combine(_outputPath, "name.xhtml"); //Directory name used as output folder
-            Common.Ssf = Path.Combine(_inputPath, "nkoNT.ssf"); // Ssf file used for Paratext settings
-            const string usxFolder = "USX"; //USX folder must be present for input
-            FolderTree.Copy(Path.Combine(_inputPath, usxFolder), Path.Combine(_outputPath, usxFolder));
-            var target = new ExportTheWord();
-            bool actual = target.Export(projInfo);
+	        bool actual;
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext8;
+	        using (Common.CallerSetting = new CallerSetting { SettingsFullPath = FileInput("nkoNT.ssf") })
+	        {
+				const string usxFolder = "USX"; //USX folder must be present for input
+				FolderTree.Copy(FileInput(usxFolder), Path.Combine(_outputPath, usxFolder));
+				var target = new ExportTheWord();
+				actual = target.Export(projInfo);
+			}
+	        Common.CallerSetting = null;
+			DataCreator.Creator = DataCreator.CreatorProgram.Unknown;
             Assert.True(actual);
         }
 
@@ -802,27 +818,22 @@ namespace Test.theWordConvert
         }
 
         /// <summary>
-        ///A test for FindParatextProject
-        ///</summary>
-        [Test]
-        public void FindParatextProjectTest()
-        {
-            Common.FindParatextProject();
-            Assert.True(string.IsNullOrEmpty(Common.Ssf));  // Since we are not running from Paratext or PathwayB
-		}
-
-        /// <summary>
         ///A test for GetBookNamesUri
         ///</summary>
         [Test]
         public void GetBookNamesUriTest()
         {
-			Common.ParatextData = null;
-			Common.Ssf = "";
-            string expected = FileUrlPrefix + Path.Combine(_inputPath, Path.Combine("USX", "BookNames.xml"));
-            string actual = GetBookNamesUri(_inputPath);
-            Assert.AreEqual(expected, actual);
-       }
+	        var bookNamesPath = Path.Combine(_inputPath, "USX");
+            string expected = FileUrlPrefix + Path.Combine(bookNamesPath, "BookNames.xml");
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+	        using (Common.CallerSetting = new CallerSetting {SettingsFullPath = bookNamesPath})
+	        {
+				string actual = GetBookNamesUri(_inputPath);
+				Assert.AreEqual(expected, actual);
+			}
+	        Common.CallerSetting = null;
+			DataCreator.Creator = DataCreator.CreatorProgram.Unknown;
+        }
 
         /// <summary>
         ///A test for GetFormat
@@ -844,37 +855,12 @@ namespace Test.theWordConvert
         public void GetRtlParamTest()
         {
             const XsltArgumentList xsltArgs = null;
-            Common.Ssf = Path.Combine(_inputPath, "nkoNT.ssf");
-            // This test uses English.LDS in the input testfiles.
-            GetRtlParam(xsltArgs);
-            Assert.False(R2L);
-            Common.Ssf = string.Empty;
-        }
-
-        /// <summary>
-        ///A test for GetSsfValue
-        ///</summary>
-        [Test]
-        public void GetSsfValueTest()
-        {
-            const string xpath = "//EthnologueCode";
-            const string def = "zxx"; // Default
-            const string expected = "zxx";
-			string ssf = string.Empty;
-			string actual = Common.GetSsfValue(xpath, def);
-            Assert.AreEqual(expected, actual);
-        }
-
-        /// <summary>
-        ///A test for GetSsfValue
-        ///</summary>
-        [Test]
-        public void GetSsfValueTest1()
-        {
-            const string xpath = "//Name";
-			string ssf = string.Empty;
-			string actual = Common.GetSsfValue(xpath);
-            Assert.Null(actual);
+			// This test uses English.LDS in the input testfiles.
+			using (Common.CallerSetting = new CallerSetting { SettingsFullPath = Path.Combine(_inputPath, "nkoNT.ssf") })
+	        {
+				GetRtlParam(xsltArgs);
+				Assert.False(R2L);
+			}
         }
 
         /// <summary>

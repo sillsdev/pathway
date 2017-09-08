@@ -58,15 +58,20 @@ namespace Test.epubConvert
 			File.Copy(FileInput("FlexRev.xhtml"), FileOutput("FlexRev.xhtml"), true);
 			File.Copy(FileInput("FlexRev.css"), FileOutput("FlexRev.css"), true);
 			File.Copy(FileProg(@"Styles\Dictionary\book.css"), FileOutput("book.css"), true);
+
 			projInfo.IsReversalExist = true;
 			projInfo.IsLexiconSectionExist = true;
 			projInfo.ProjectInputType = "Dictionary";
 			projInfo.DefaultRevCssFileWithPath = Common.PathCombine(_inputPath, "FlexRev.css");
 			projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
 								   DateTime.Now.Date.ToShortTimeString();
-			var target = new Exportepub();
-			var actual = target.Export(projInfo);
-			Assert.IsTrue(actual);
+			DataCreator.Creator = DataCreator.CreatorProgram.FieldWorks;
+			using (Common.CallerSetting = new CallerSetting {SettingsFullPath = projInfo.DefaultXhtmlFileWithPath})
+			{
+				var target = new Exportepub();
+				var actual = target.Export(projInfo);
+				Assert.IsTrue(actual);
+			}
 			var result = projInfo.DefaultXhtmlFileWithPath.Replace(".xhtml", ".epub");
 			ExtractzipFilesBasedOnOS(result, "main");
 			var resultDoc = Common.DeclareXMLDocument(false);

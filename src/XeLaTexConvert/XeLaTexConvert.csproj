@@ -238,6 +238,7 @@
   <ItemGroup>
     <Compile Include="ExportXeLaTexConvert.cs" />
     <Compile Include="ModifyXeLaTexStyles.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XeLaTexContent.cs" />
     <Compile Include="XelatexFontMapping.cs" />

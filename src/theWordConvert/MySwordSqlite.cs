@@ -1,15 +1,15 @@
 ﻿#region // Copyright (C) 2014, SIL International. All Rights Reserved.
 // --------------------------------------------------------------------------------------------
 // <copyright file="MySwordSqlite.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -47,6 +47,14 @@ namespace SIL.PublishingSolution
             }
             _vrs.Load(vrsFullName);
         }
+
+	    public MySwordSqlite(string vrsFullName)
+	    {
+		    Debug.Assert(File.Exists(vrsFullName));
+		    var sr = XmlReader.Create(vrsFullName);
+			_vrs.Load(sr);
+			sr.Close();
+	    }
 
         public void Execute(string inName)
         {

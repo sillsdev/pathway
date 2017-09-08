@@ -61,7 +61,7 @@ namespace Test.ParatextSupport
             "<meta name=\"stylesheet\" content=\"usfm\" />" +
             "<meta name=\"fontName\" content=\"Times\" />" +
             "<meta name=\"fontSize\" content=\"12\" />" +
-            "<meta name=\"dc.language\" content=\"\" scheme=\"DCTERMS.RFC5646\" /></head>";
+            "<meta name=\"dc.language\" content=\":\" scheme=\"DCTERMS.RFC5646\" /></head>";
         private const string bookOpen = "<body class=\"scrBody\"><div class=\"scrBook\"><span class=\"scrBookName\" lang=\"zxx\">Judges</span>" +
             "<span class=\"scrBookCode\" lang=\"zxx\">JDG</span>";
         private const string title = "<div class=\"Title_Main\"><span class=\"Title_Secondary\" lang=\"zxx\">OT: Narrative</span><span lang=\"zxx\">Judges</span></div>";
@@ -105,13 +105,16 @@ namespace Test.ParatextSupport
                     Thread.Sleep(1000);
             }
 
-            converter = new ParatextPathwayLink("testDb", xslParams);
+			Common.CallerSetting = Common.CallerSetting ?? new CallerSetting { SettingsFullPath = FileInput("TestDb.ssf") };
+			converter = new ParatextPathwayLink("testDb", xslParams);
             usxToXhtmlXslt = ParatextSupportExtensions.UsxToUsfmXslt(converter);
         }
 		[TestFixtureTearDown]
 		public void FixtureTearDown()
 		{
 			Param.DatabaseName = "DatabaseName";
+			Common.CallerSetting.Dispose();
+			Common.CallerSetting = null;
 		}
 		#endregion
 

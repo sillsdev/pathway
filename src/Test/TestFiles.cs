@@ -20,23 +20,22 @@ namespace Test
 {
     public class TestFiles
     {
+	    public readonly string InputFolderName;
+	    public readonly string OutputFolderName;
+	    public readonly string ExpectedFolderName;
         private string _inputPath;
         private string _outputPath;
         private string _expectedPath;
 
-        public TestFiles(string testFilesBase)
+        public TestFiles(string testFilesBase, string inputFolderName = "Input", string outputFolderName = "output", string expectedFolderName = "Expected")
         {
+	        InputFolderName = inputFolderName;
+	        OutputFolderName = outputFolderName;
+	        ExpectedFolderName = expectedFolderName;
             string testPath = PathPart.Bin(Environment.CurrentDirectory, "/" + testFilesBase + "/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "Input");
-            _outputPath = Common.PathCombine(testPath, "output");
-	        if (testFilesBase == "XhtmlExport" && Common.UsingMonoVM)
-	        {
-		        _expectedPath = Common.PathCombine(testPath, "ExpectedLinux");
-	        }
-	        else
-	        {
-		        _expectedPath = Common.PathCombine(testPath, "Expected");
-	        }
+            _inputPath = Common.PathCombine(testPath, InputFolderName);
+            _outputPath = Common.PathCombine(testPath, OutputFolderName);
+		    _expectedPath = Common.PathCombine(testPath, ExpectedFolderName);
 	        if (Directory.Exists(_outputPath))
             {
                 Directory.Delete(_outputPath, true);

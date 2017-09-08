@@ -241,6 +241,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>

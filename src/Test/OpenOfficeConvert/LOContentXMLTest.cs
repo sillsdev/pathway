@@ -224,7 +224,8 @@ namespace Test.OpenOfficeConvert
 
         //#region Nodes_Test
         [Test]
-        public void NestedDivCase1_Node()
+		[Category("pageTests")]
+		public void NestedDivCase1_Node()
         {
 
             const string file = "NestedDivCase1";
@@ -599,7 +600,8 @@ namespace Test.OpenOfficeConvert
         /// TD-429 -  Handling Anchor Tag
         /// </summary>
         [Test]
-        public void AnchorTag_Node()
+		[Category("pageTests")]
+		public void AnchorTag_Node()
         {
             const string file = "AnchorTag";
             _projInfo.ProjectInputType = "Scripture";
@@ -620,7 +622,8 @@ namespace Test.OpenOfficeConvert
         }
 
         [Test]
-        public void CrossReference_Node()
+		[Category("pageTests")]
+		public void CrossReference_Node()
         {
             const string file = "CrossRef";
             _projInfo.ProjectInputType = "Dictionary";
@@ -981,7 +984,8 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// </summary>
         [Test]
-        public void GlossaryReferenceNode()
+		[Category("pageTests")]
+		public void GlossaryReferenceNode()
         {
             const string file = "GlossaryReference";
             _projInfo.ProjectInputType = "Scripture";
@@ -1139,7 +1143,8 @@ namespace Test.OpenOfficeConvert
         /// TD-2758
         /// </summary>
         [Test]
-        public void Body()
+		[Category("pageTests")]
+		public void Body()
         {
             const string file = "body";
             _projInfo.ProjectInputType = "Scripture";
@@ -1647,7 +1652,8 @@ namespace Test.OpenOfficeConvert
         /// TD-343 Implement lists
         /// </summary>
         [Test]
-        public void ListOlUl_Node()
+		[Category("pageTests")]
+		public void ListOlUl_Node()
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "ListOlUl";
@@ -1816,7 +1822,8 @@ namespace Test.OpenOfficeConvert
 		/// TD-416 chapter number should align with top of text not with bottom
 		/// </summary>
 		[Test]
-        public void DropCap_Node()
+		[Category("pageTests")]
+		public void DropCap_Node()
         {
             const string file = "DropCap";
             _projInfo.ProjectInputType = "Scripture";
@@ -2265,6 +2272,7 @@ namespace Test.OpenOfficeConvert
         }
 
 		[Test]
+		[Category("pageTests")]
 		public void PageDictionaryTest1()
 	    {
 			// Single Page - Top Center
@@ -2280,6 +2288,7 @@ namespace Test.OpenOfficeConvert
 	    }
 
 		[Test]
+		[Category("pageTests")]
 		public void PageDictionaryTest2()
 		{
 			// Single Page - Bottom Center
@@ -2295,6 +2304,7 @@ namespace Test.OpenOfficeConvert
 		}
 
 		[Test]
+		[Category("pageTests")]
 		public void PageDictionaryTest3()
 		{
 			// Mirrored Page - Top Inside Margin
@@ -2303,9 +2313,13 @@ namespace Test.OpenOfficeConvert
 			_index = 3;
 			string styleOutput = GetStyleOutput(file);
 			string xpath = "//style:master-page[@style:name=\"Left_20_Page\"]";
-			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true};
 			string content = "<style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" /></text:span><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header></style:master-page>";
 			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			if (!returnValue1)
+			{
+				MessageBox.Show(content);
+			}
 			Assert.IsTrue(returnValue1, "Mirrored Page with Top Inside Margin - Left Page Test failed");
 
 			xpath = "//style:master-page[@style:name=\"Right_20_Page\"]";
@@ -2316,6 +2330,7 @@ namespace Test.OpenOfficeConvert
 		}
 
 		[Test]
+		[Category("pageTests")]
 		public void PageDictionaryTest4()
 		{
 			// Mirrored Page - Top Center
@@ -2762,7 +2777,8 @@ namespace Test.OpenOfficeConvert
         [Test]
         [Category("ShortTest")]
         [Category("SkipOnTeamCity")]
-        public void DictionaryT9Test()
+		[Category("pageTests")]
+		public void DictionaryT9Test()
         {
             const string file = "t9";
             _projInfo.ProjectInputType = "Dictionary";
@@ -2921,7 +2937,8 @@ namespace Test.OpenOfficeConvert
 
         ///TD-1944
         [Test]
-        public void FootnoteVerseNumberNode1()
+		[Category("pageTests")]
+		public void FootnoteVerseNumberNode1()
         {
             const string file = "FootnoteVerseNumber";
             _projInfo.ProjectInputType = "Scripture";
@@ -3001,7 +3018,8 @@ namespace Test.OpenOfficeConvert
 
         ///TD-2666
         [Test]
-        public void NoImageNode()
+		[Category("pageTests")]
+		public void NoImageNode()
         {
             const string file = "NoImage";
             _projInfo.ProjectInputType = "Dictionary";

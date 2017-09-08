@@ -1,0 +1,54 @@
+<ScriptureText>
+  <Name>testDb</Name>
+  <StyleSheet>usfm.sty</StyleSheet>
+  <ChapterMarker>c</ChapterMarker>
+  <VerseMarker>v</VerseMarker>
+  <FullName>TestProj</FullName>
+
+  <FileNameBookNameForm>41MAT</FileNameBookNameForm>
+  <FileNameChapterNumberForm />
+  <FileNamePostPart>en.SFM</FileNamePostPart>
+  <FileNamePrePart />
+  <AdvancedView>False</AdvancedView>
+  <ContinueAt>p p/q p/q1</ContinueAt>
+  <ContinueQuotes>Yes</ContinueQuotes>
+  <CreatedWithPTW6>T</CreatedWithPTW6>
+  <DefaultFontSize>14</DefaultFontSize>
+  <Editable>T</Editable>
+  <Encoding>65001</Encoding>
+  <EthnologueCode>en</EthnologueCode>
+  <InitialImportBooksDirectory></InitialImportBooksDirectory>
+  <InnerInnerQuotes>“ ”</InnerInnerQuotes>
+  <InnerQuotes>‘ ’</InnerQuotes>
+  <InvalidCharacters>'</InvalidCharacters>
+  <InvalidPunctuation>___</InvalidPunctuation>
+  <Language></Language>
+  <LanguageIsoCode>:::</LanguageIsoCode>
+  <LeftToRight>T</LeftToRight>
+  <Quotes>“ ”</Quotes>
+  <ValidCharacters>a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z - * ‌ ‍ ’ 3 — 2 4 9 – 8 1 ( . ) ; 7 5 / ‑ © _ ] [ ” “ 6 ? : ! ‘ , 0 •</ValidCharacters>
+  <ValidPunctuation>– ? / _)_ ! :_ _(_ _/_ _—_ _-_ ] _©_ : [ ;_ _“ ”_ )_ ,_ ._ _( ?_ - , _‘ . !_ _•_</ValidPunctuation>
+  <VerboseQuotes>No</VerboseQuotes>
+  <Versification>4</Versification>
+  <Copyright>Wycliffe Bible Translators, Inc.</Copyright>
+  <CrossReferenceSettingsHaveBeenReviewed>T</CrossReferenceSettingsHaveBeenReviewed>
+  <RangeIndicator>-</RangeIndicator>
+  <SequenceIndicator>, </SequenceIndicator>
+  <ChapterVerseSeparator>.</ChapterVerseSeparator>
+  <ChapterRangeSeparator>–</ChapterRangeSeparator>
+  <BookSequenceSeparator>; </BookSequenceSeparator>
+  <ChapterNumberSeparator>; </ChapterNumberSeparator>
+  <BookSourceForMarkerXt>Abbreviation</BookSourceForMarkerXt>
+  <BookSourceForMarkerR>ShortName</BookSourceForMarkerR>
+  <DefaultFont>Charis SIL</DefaultFont>
+  <ReferenceExtraMaterial>a|b</ReferenceExtraMaterial>
+
+
+
+
+  <NeedsEnglishLanguageFix>No</NeedsEnglishLanguageFix>
+  <NeedsPortugueseLanguageFix>No</NeedsPortugueseLanguageFix>
+  <TranslationInfo />
+  <Guid>1f88cbd7bbda41ad09360cc72784f8a6f114d90f</Guid>
+  <Naming PrePart="" PostPart="aai.SFM" BookNameForm="41MAT" ChapterNumberForm="" />
+</ScriptureText>

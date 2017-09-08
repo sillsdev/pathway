@@ -246,6 +246,7 @@
     <Compile Include="InStyleBase.cs" />
     <Compile Include="InStyles.cs" />
     <Compile Include="ModifyIDStyles.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

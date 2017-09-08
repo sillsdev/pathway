@@ -127,7 +127,7 @@ namespace SIL.PublishingSolution
                     Param.Write();
                 }
 
-                var tpe = new PsExport { Destination = Param.PrintVia, DataType = projectInfo.ProjectInputType };
+                var tpe = new PsExport { Destination = Param.Value[Param.PrintVia], DataType = projectInfo.ProjectInputType };
                 tpe.ProgressBar = null;
 				tpe.Export(projectInfo.DefaultXhtmlFileWithPath);
             }
@@ -206,6 +206,7 @@ namespace SIL.PublishingSolution
                 xmlText.Append(@"</usx>" + "\r\n");
                 var fileName = Common.PathCombine(projectInfo.ProjectPath, titleNode.InnerText + ".xhtml");
                 var databaseName = metadata.SelectSingleNode("//identification/abbreviation");
+				Common.CallerSetting = new CallerSetting(databaseName.InnerText);
                 var linkParam = new Dictionary<string, object>();
                 linkParam["dateTime"] = DateTime.Now.ToShortDateString();
                 linkParam["user"] = "ukn";
@@ -231,12 +232,14 @@ namespace SIL.PublishingSolution
             if (inFormat == InputFormat.USFM)
             {
                 // convert from USFM to xhtml
-                UsfmToXhtml(projectInfo, files);
+	            Common.CallerSetting = new CallerSetting {SettingsFullPath = Path.Combine(projectInfo.ProjectPath, "USX")};
+				UsfmToXhtml(projectInfo, files);
             }
             else if (inFormat == InputFormat.USX)
             {
-                // convert from USX to xhtml
-                UsxToXhtml(projectInfo, files);
+				// convert from USX to xhtml
+				Common.CallerSetting = new CallerSetting { SettingsFullPath = Path.Combine(projectInfo.ProjectPath, "USX") };
+				UsxToXhtml(projectInfo, files);
             }
             else if (inFormat == InputFormat.XHTML)
             {
@@ -374,6 +377,8 @@ namespace SIL.PublishingSolution
                 projectInfo.DefaultRevCssFileWithPath =
                     Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
                 projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.ProjectPath);
+				DataCreator.Creator = DataCreator.CreatorProgram.FieldWorks;
+				Common.CallerSetting = new CallerSetting {SettingsFullPath = projectInfo.ProjectFileWithPath};
             }
             else if (projectInfo.ProjectInputType == "Scripture")
             {
@@ -381,6 +386,8 @@ namespace SIL.PublishingSolution
                 {
                     projectInfo.DefaultXhtmlFileWithPath = Common.PathCombine(projectInfo.ProjectPath, files[0]);
                 }
+				DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+				Common.CallerSetting = new CallerSetting {SettingsFullPath = projectInfo.DefaultXhtmlFileWithPath};
             }
         }
 

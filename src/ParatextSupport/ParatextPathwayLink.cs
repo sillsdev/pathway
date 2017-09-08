@@ -437,7 +437,7 @@ namespace SIL.PublishingSolution
 
             string cssFullPath = Common.PathCombine(MOutputLocationPath, pubName + ".css");
             StyToCss styToCss = new StyToCss();
-            styToCss.ConvertStyToCss(_mProjectName, cssFullPath, string.Empty);
+            styToCss.ConvertStyToCss(_mProjectName, cssFullPath);
             string fileName = Common.PathCombine(MOutputLocationPath, pubName + ".xhtml");
             inProcess.PerformStep();
 

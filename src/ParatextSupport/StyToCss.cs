@@ -41,16 +41,12 @@ namespace SIL.PublishingSolution
         /// </param>
         /// <param name="cssFullPath">The CSS full path.</param>
         /// ------------------------------------------------------------
-        public void ConvertStyToCss(string database, string cssFullPath, string ssfFullPath)
+        public void ConvertStyToCss(string database, string cssFullPath)
         {
             _cssFullPath = cssFullPath;
-			_projectDirectory = ssfFullPath;
-            bool fileExists = FindStyFile(database, ssfFullPath);
-
-	        if (!fileExists)
-	        {
-		        return;
-	        }
+			Common.CallerSetting = Common.CallerSetting ?? new CallerSetting(database);
+			_projectDirectory = Common.CallerSetting.SettingsFullPath;
+	        if (!File.Exists(_projectDirectory)) return;
 
 	        MapClassName();
             ParseFile();
@@ -390,45 +386,16 @@ namespace SIL.PublishingSolution
             cssFile.Close();
         }
 
-        protected static string WriterSettingsFile = null;
         protected static void WriteLanguageFontDirection(TextWriter cssFile)
         {
-            if (WriterSettingsFile == null)
-            {
-                var settingsHelper = new SettingsHelper(Param.DatabaseName);
-                WriterSettingsFile = settingsHelper.GetSettingsFilename();
-            }
-            var languageCodeNode = Common.GetXmlNode(WriterSettingsFile, "//EthnologueCode");
-            var languageCode = "";
-            var languageDirection = "ltr";
-            var textAlign = "left";
-			Common.FindParatextProject();
+			Common.CallerSetting = Common.CallerSetting ?? new CallerSetting(Param.DatabaseName);
+			var languageCode = Common.CallerSetting.GetIsoCode();
+            var languageDirection = Common.CallerSetting.IsRightToLeft()? "rtl": "ltr";
+            var textAlign = Common.CallerSetting.IsRightToLeft()? "right": "left";
 			Common.GetFontFeatures();
-            if (languageCodeNode != null)
-            {
-                languageCode = languageCodeNode.InnerText;
-                languageDirection = Common.GetTextDirection(languageCode);
-                if (languageCode.Contains("-"))
-                {
-                    languageCode = languageCode.Split(new[] { '-' })[0];
-                }
-                if (languageDirection == "rtl")
-                {
-                    textAlign = "right";
-                }
-            }
-            var fontNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFont");
-            var fontFamily = "";
-            if (fontNode != null)
-            {
-                fontFamily = fontNode.InnerText;
-            }
-            var fontSizeNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFontSize");
-            var fontSize = "10";
-            if (fontSizeNode != null)
-            {
-                fontSize = fontSizeNode.InnerText;
-            }
+			var fontFamily = Common.CallerSetting.GetFont();
+            var fontSize = Common.CallerSetting.GetSettingValue("//DefaultFontSize");
+	        fontSize = string.IsNullOrEmpty(fontSize) ? "10" : fontSize;
             if (languageCode != "" && (fontFamily != "" || languageDirection != "ltr"))
             {
                 cssFile.Write("div[lang='{0}']", languageCode);
@@ -460,7 +427,6 @@ namespace SIL.PublishingSolution
                 cssFile.WriteLine("}");
                 cssFile.WriteLine();
             }
-            WriterSettingsFile = null;
         }
 
         /// <summary>
