@@ -444,91 +444,23 @@ namespace SIL.Tool
 				}
 			}
 
-
-			if (Testing) return fromPath; // Linux Test, Registry error
-
-			//For ParaText Path.
+			// Look in calling programs picture folder
 			if (fromPath == string.Empty)
 			{
-				if (!Common.UnixVersionCheck())
+				var pictPath = Common.CallerSetting.PicturePath(src);
+				if (File.Exists(pictPath))
 				{
-					string databaseNamePara = databaseName; // "NKOu1"; // todo substitute for database name
-					string key = @"HKEY_LOCAL_MACHINE\SOFTWARE\ScrChecks\1.0\Settings_Directory";
-					object paraPath1 = Registry.GetValue(key, "", "") ?? string.Empty;
-					string paraPath = paraPath1.ToString();
-					string dataPath = PathCombine(paraPath, databaseNamePara);
-					fileName = Path.GetFileName(src); // para + database + fileName
-					string flexPict = PathCombine(dataPath, fileName);
-					if (File.Exists(flexPict))
-					{
-						fromPath = flexPict;
-					}
-					else
-					{
-						// Note: In ParaText original files are stored in {any Drive\My Paratext Projects\{project name}\local\figures}
-						// Note: The converted jpg files are stored under figures folder.
-
-						// para + database + figures(folder) + fileName
-						// Default preference first check in the local folder figures
-						flexPict = PathCombine(dataPath, "local");
-						flexPict = PathCombine(flexPict, PathCombine("figures", fileName));
-						if (File.Exists(flexPict))
-						{
-							fromPath = flexPict;
-							return fromPath;
-						}
-						flexPict = PathCombine(dataPath, PathCombine("figures", fileName));
-						string flexJPGPath = flexPict;
-						if (Path.GetExtension(flexJPGPath).ToLower() != "jpg") // jpg files need no conversion
-						{
-							flexJPGPath = Path.ChangeExtension(flexPict, "jpg");
-							if (File.Exists(flexJPGPath))
-							{
-								fromPath = flexJPGPath;
-								return fromPath;
-							}
-						}
-					}
+					fromPath = pictPath;
 				}
 				else
 				{
-					string dataPath = Path.GetDirectoryName(src);
-					fileName = Path.GetFileName(src); // para + database + fileName
-					dataPath = Common.PathCombine(dataPath, databaseName);
-					string pictureFileName = PathCombine(dataPath, fileName);
-					if (File.Exists(pictureFileName))
+					pictPath = CallerSetting.PicturePath(Path.GetFileName(src));
+					if (File.Exists(pictPath))
 					{
-						fromPath = pictureFileName;
-					}
-					else
-					{
-						// Note: In ParaText original files are stored in {any Drive\My Paratext Projects\{project name}\local\figures}
-						// Note: The converted jpg files are stored under figures folder.
-
-						// para + database + figures(folder) + fileName
-						// Default preference first check in the local folder figures
-						pictureFileName = PathCombine(dataPath, "local");
-						pictureFileName = PathCombine(pictureFileName, PathCombine("figures", fileName));
-						if (File.Exists(pictureFileName))
-						{
-							fromPath = pictureFileName;
-							return fromPath;
-						}
-						pictureFileName = PathCombine(dataPath, PathCombine("figures", fileName));
-						string flexJPGPath = pictureFileName;
-						if (Path.GetExtension(flexJPGPath).ToLower() != "jpg") // jpg files need no conversion
-						{
-							flexJPGPath = Path.ChangeExtension(pictureFileName, "jpg");
-							if (File.Exists(flexJPGPath))
-							{
-								fromPath = flexJPGPath;
-								return fromPath;
-							}
-						}
+						fromPath = pictPath;
 					}
 				}
 			}
-
 
 			return fromPath;
 		}

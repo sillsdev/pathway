@@ -336,5 +336,19 @@ namespace SIL.Tool
 			return string.Empty;
 		}
 
+		public string PicturePath(string name)
+		{
+			switch (Caller)
+			{
+				case DataCreator.CreatorProgram.Paratext8:
+				case DataCreator.CreatorProgram.Paratext7:
+					var hiRes = Path.Combine(_dataFolder, "local", "figures", name);
+					if (System.IO.File.Exists(hiRes)) return hiRes;
+					return Path.Combine(_dataFolder, "figures", Path.GetFileNameWithoutExtension(name) + ".jpg");
+				case DataCreator.CreatorProgram.FieldWorks:
+					return Path.Combine(_dataFolder, "LinkedFiles", "Pictures", name);
+			}
+			return Path.Combine(_dataFolder, name);
+		}
 	}
 }
