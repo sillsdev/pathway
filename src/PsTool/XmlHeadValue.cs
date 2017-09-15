@@ -43,7 +43,8 @@ namespace SIL.Tool
 	        {
 		        if (!string.IsNullOrEmpty(AttrFilter))
 		        {
-					if (r.GetAttribute(AttrFilter)?.ToLower() != FilterFor) return;
+					var attrVal = r.GetAttribute(AttrFilter);
+					if ((!string.IsNullOrEmpty(attrVal)? attrVal.ToLower(): "") != FilterFor) return;
 		        }
 		        if (!string.IsNullOrEmpty(TargetAttr))
 		        {

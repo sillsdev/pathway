@@ -27,11 +27,9 @@ namespace SIL.PublishingSolution
     {
         public string StyFullPath { get; set; }
         private string _cssFullPath;
-		private string _projectDirectory;
         private Dictionary<string, Dictionary<string, string>> _styleInfo = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _cssProp;
         private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
-        private string _styFolder, _cssFolder;
 
         /// ------------------------------------------------------------
         /// <summary>

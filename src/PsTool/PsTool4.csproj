@@ -209,22 +209,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="icu.net, Version=2.0.1.0, Culture=neutral, PublicKeyToken=416fdd914afa6b66, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\icu.net.dll</HintPath>
-    </Reference>
     <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="L10NSharp">
-      <HintPath>..\..\lib\L10NSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SIL.Core">
-      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="SIL.WritingSystems">
-      <HintPath>..\..\lib\SIL.WritingSystems.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -234,6 +221,15 @@
     <Reference Include="System.Configuration" />
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
       <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="L10NSharp">
+      <HintPath>..\..\lib\L10NSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SIL.Core">
+      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SIL.WritingSystems">
+      <HintPath>..\..\lib\SIL.WritingSystems.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -387,10 +383,9 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  -->
   <Target Name="AfterBuild">
-    <Copy SourceFiles="..\..\lib\icudt54.dll;..\..\lib\icuin54.dll;..\..\lib\icuuc54.dll" DestinationFolder="$(OutputPath)" />
   </Target>
+  -->
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

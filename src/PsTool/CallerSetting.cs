@@ -195,37 +195,37 @@ namespace SIL.Tool
 		{
 			LoadSettings();
 			var node = _xDoc.SelectSingleNode("//ScriptureText/DefaultFont");
-			return node?.InnerText;
+			return node != null? node.InnerText: null;
 		}
 
 		public string GetIsoCode()
 		{
 			LoadSettings();
 			var node = _xDoc.SelectSingleNode("//ScriptureText/LanguageIsoCode");
-			var code = node?.InnerText;
-			var parts = code?.Split(':');
-			return parts?.ElementAt(0);
+			var code = node != null? node.InnerText: null;
+			var parts = code != null? code.Split(':'): null;
+			return parts != null? parts.ElementAt(0): null;
 		}
 
 		public string GetName()
 		{
 			LoadSettings();
 			var node = _xDoc.SelectSingleNode("//ScriptureText/FullName");
-			return node?.InnerText;
+			return node != null? node.InnerText: null;
 		}
 
 		public string GetCopyright()
 		{
 			LoadSettings();
 			var node = _xDoc.SelectSingleNode("//ScriptureText/Copyright");
-			return node?.InnerText;
+			return node != null? node.InnerText: null;
 		}
 
 		public string GetSettingValue(string xpath)
 		{
 			LoadSettings();
 			var node = _xDoc.SelectSingleNode(xpath);
-			return node?.InnerText;
+			return node != null? node.InnerText: null;
 		}
 
 		public void LoadWritingSystem()
@@ -350,7 +350,7 @@ namespace SIL.Tool
 				case DataCreator.CreatorProgram.Paratext7:
 					LoadSettings();
 					var node = _xDoc.SelectSingleNode("//ScriptureText/Language");
-					return node?.InnerText;
+					return node != null? node.InnerText: null;
 				case DataCreator.CreatorProgram.FieldWorks:
 					LoadWritingSystem(iso);
 					return WritingSystem.Language.Name;
@@ -364,13 +364,14 @@ namespace SIL.Tool
 			{
 				case DataCreator.CreatorProgram.Paratext8:
 				case DataCreator.CreatorProgram.Paratext7:
-					var hiRes = Path.Combine(_dataFolder, "local", "figures", name);
+                    var hiRes = !string.IsNullOrEmpty(_dataFolder)? Path.Combine(_dataFolder, "local", "figures", name): Path.Combine("local", "figures", name);
 					if (System.IO.File.Exists(hiRes)) return hiRes;
-					return Path.Combine(_dataFolder, "figures", Path.GetFileNameWithoutExtension(name) + ".jpg");
+                    var loResName = Path.GetFileNameWithoutExtension(name) + ".jpg";
+                    return !string.IsNullOrEmpty(_dataFolder) ? Path.Combine(_dataFolder, "figures", loResName): Path.Combine("figures", loResName);
 				case DataCreator.CreatorProgram.FieldWorks:
-					return Path.Combine(_dataFolder, "LinkedFiles", "Pictures", name);
+					return !string.IsNullOrEmpty(_dataFolder) ? Path.Combine(_dataFolder, "LinkedFiles", "Pictures", name): Path.Combine("Pictures", name);
 			}
-			return Path.Combine(_dataFolder, name);
+			return !string.IsNullOrEmpty(_dataFolder) ? Path.Combine(_dataFolder, name): name;
 		}
 	}
 }
