@@ -48,7 +48,6 @@ src/OpenOfficeConvert_OLD/*
 src/PwLinuxCopy/*
 src/Sprint/*
 src/Test/test-results/*
-src/*/build/*
 src/*/dist/*
 src/XeLaTexConvert/XeLaTexExe
 src/XeLaTexConvert/TexLive
