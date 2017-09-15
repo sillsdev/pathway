@@ -284,7 +284,7 @@ namespace SIL.Tool
 				case DataCreator.CreatorProgram.Paratext8:
 					return WritingSystem.RightToLeftScript;
 				case DataCreator.CreatorProgram.Paratext7:
-					return LanguageData != null && LanguageData["General"]["RTL"].ToUpper() == "T";
+					return LanguageData != null && LanguageData["General"].ContainsKey("RTL") && LanguageData["General"]["RTL"].ToUpper() == "T";
 				case DataCreator.CreatorProgram.FieldWorks:
 					return WritingSystem.RightToLeftScript;
 			}
@@ -309,6 +309,28 @@ namespace SIL.Tool
 					return LanguageData["General"]["font"];
 				case DataCreator.CreatorProgram.FieldWorks:
 					return WritingSystem.DefaultFont.Name;
+			}
+			return string.Empty;
+		}
+
+		public string GetLanguageFontFeatures()
+		{
+			var iso = GetIsoCode();
+			if (iso == null) return string.Empty;
+			return GetLanguageFontFeatures(iso);
+		}
+
+		public string GetLanguageFontFeatures(string iso)
+		{
+			LoadWritingSystem(iso);
+			switch (Caller)
+			{
+				case DataCreator.CreatorProgram.Paratext8:
+					return WritingSystem.DefaultFont.Features;
+				case DataCreator.CreatorProgram.Paratext7:
+					return LanguageData != null && LanguageData["General"].ContainsKey("fontFeatureSettings") ? LanguageData["General"]["fontFeatureSettings"] : "";
+				case DataCreator.CreatorProgram.FieldWorks:
+					return WritingSystem.DefaultFont.Features;
 			}
 			return string.Empty;
 		}

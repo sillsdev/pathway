@@ -57,8 +57,12 @@ namespace Test.PsTool
             projInfo.DefaultXhtmlFileWithPath = output;
             projInfo.ProjectInputType = "Scripture";
             preExportProcess = new PreExportProcess(projInfo);
-            output = preExportProcess.ImagePreprocess(false);
-            XmlAssert.AreEqual(expected, output, "");
+	        using (Common.CallerSetting = new CallerSetting {SettingsFullPath = output})
+	        {
+				output = preExportProcess.ImagePreprocess(false);
+			}
+	        Common.CallerSetting = null;
+			XmlAssert.AreEqual(expected, output, "");
 
         }
 

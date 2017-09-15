@@ -47,7 +47,9 @@ namespace Test.ParatextSupport
 			_inputPath = Common.PathCombine(testPath, "Input");
 			_outputPath = Common.PathCombine(testPath, "output");
 			_expectedPath = Common.PathCombine(testPath, "Expected");
-			Common.CallerSetting = Common.CallerSetting ?? new CallerSetting {SettingsFullPath = FileInput("testDb.ssf")};
+			Common.CallerSetting?.Dispose();
+			DataCreator.Creator = DataCreator.CreatorProgram.Unknown;
+			Common.CallerSetting = new CallerSetting {SettingsFullPath = FileInput("testDb.ssf")};
 			if (!Directory.Exists(_outputPath))
 			{
 				Directory.CreateDirectory(_outputPath);
@@ -69,7 +71,7 @@ namespace Test.ParatextSupport
         {
             const string TestName = "WriteLanguageFontDirectionTest";
 			var cssFile = TestName + ".css";
-			DataCreator.Creator = DataCreator.CreatorProgram.Paratext8;
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
 			using (Common.CallerSetting = new CallerSetting {SettingsFullPath = FileInput(TestName + ".ssf")})
 	        {
 				TextWriter sw = new StreamWriter(FileOutput(cssFile));

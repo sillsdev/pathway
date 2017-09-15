@@ -447,7 +447,8 @@ namespace SIL.Tool
 			// Look in calling programs picture folder
 			if (fromPath == string.Empty)
 			{
-				var pictPath = Common.CallerSetting.PicturePath(src);
+				CallerSetting = CallerSetting ?? new CallerSetting(Param.DatabaseName);
+				var pictPath = CallerSetting.PicturePath(src);
 				if (File.Exists(pictPath))
 				{
 					fromPath = pictPath;

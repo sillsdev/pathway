@@ -5308,7 +5308,7 @@ namespace SIL.Tool
 		{
 			string features;
 			CallerSetting = CallerSetting ?? new CallerSetting(Param.DatabaseName);
-			features = CallerSetting.LanguageData != null? CallerSetting.LanguageData["General"]["fontFeatureSettings"]: "";
+			features = CallerSetting.GetLanguageFontFeatures();
 			StringBuilder fontFeatures = new StringBuilder();
 			string[] fts = features.Split(',');
 			foreach (string s in fts)
