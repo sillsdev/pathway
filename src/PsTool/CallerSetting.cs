@@ -55,7 +55,7 @@ namespace SIL.Tool
 		public CallerSetting()
 		{
 			_xDoc.RemoveAll();
-			if (!Sldr.IsInitialized) Sldr.Initialize(true);
+            if (!Sldr.IsInitialized && !Common.IsUnixOS()) Sldr.Initialize(true);
 			WritingSystem = new WritingSystemDefinition();
 			Caller = DataCreator.Creator;
 			switch (Caller)
@@ -78,7 +78,7 @@ namespace SIL.Tool
 		public CallerSetting(string database)
 		{
 			_xDoc.RemoveAll();
-			if (!Sldr.IsInitialized) Sldr.Initialize(true);
+            if (!Sldr.IsInitialized && !Common.IsUnixOS()) Sldr.Initialize(true);
 			WritingSystem = new WritingSystemDefinition();
 			DatabaseName = database;
 			if (database != "DatabaseName") FindDataFolder();
@@ -246,18 +246,20 @@ namespace SIL.Tool
 				case DataCreator.CreatorProgram.Paratext7:
 					if (LanguageData != null) return;
 					var language = GetLanguage();
-					var languageFullName = Path.Combine(_dataFolder, "..", language + ".lds");
 					LanguageData = null;
-					if (System.IO.File.Exists(languageFullName))
-					{
-						var parser = new FileIniDataParser();
-						LanguageData = parser.ReadFile(languageFullName);
-					}
+                    if (LoadLds(Path.Combine(Path.GetDirectoryName(_dataFolder), language + ".lds"))) break;
 					break;
 				case DataCreator.CreatorProgram.FieldWorks:
 					LoadLdml(_ldmlFolder, iso);
 					break;
 			}
+		}
+
+        private bool LoadLds(string path){
+            if (!System.IO.File.Exists(path)) return false;
+			var parser = new FileIniDataParser();
+			LanguageData = parser.ReadFile(path);
+            return true;
 		}
 
 		private void LoadLdml(string path, string iso)

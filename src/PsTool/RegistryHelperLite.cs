@@ -176,7 +176,7 @@ namespace SIL.Tool
 		{
 			object result;
 			if (CheckSoftwareKey(Registry.CurrentUser, key, value, out result)) return (string)result;
-			if (CheckSoftwareKey(Registry.LocalMachine, key, value, out result)) return (string)result;
+			if (!Common.UnixVersionCheck() && CheckSoftwareKey(Registry.LocalMachine, key, value, out result)) return (string)result;
 			return !Common.UnixVersionCheck() ? null : UnixFallbackStringValue(key, value);
 		}
 

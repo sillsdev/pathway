@@ -35,6 +35,7 @@ namespace SIL.Tool
             Declare(XmlNodeType.Text, CaptureValue);
 			Declare(XmlNodeType.EndElement, CheckEnd);
             Parse();
+            Close();
         }
 
 	    private void FindTag(XmlReader r)

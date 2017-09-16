@@ -790,7 +790,8 @@ namespace SIL.Tool
 			XmlDocument xDoc = Common.DeclareXMLDocument(true);
 			XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xDoc.NameTable);
 			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-			xDoc.Load(xhtmlFileNameWithPath);
+            var xrs = new XmlReaderSettings { DtdProcessing = DtdProcessing.Ignore };
+            using (XmlReader xr = XmlReader.Create(xhtmlFileNameWithPath, xrs)) xDoc.Load(xr);
 			XmlNodeList fontList = xDoc.GetElementsByTagName("meta");
 			for (int i = 0; i < fontList.Count; i++)
 			{
@@ -2443,7 +2444,7 @@ namespace SIL.Tool
 		/// <returns></returns>
 		public static string GetAllUserPath()
 		{
-			string allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string allUserPath = Common.Testing? Path.GetTempPath(): Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 			allUserPath = Path.Combine(allUserPath, "SIL");
 			allUserPath = Path.Combine(allUserPath, "Pathway");
 			return DirectoryPathReplace(allUserPath);
