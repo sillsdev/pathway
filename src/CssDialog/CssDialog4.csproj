@@ -218,7 +218,7 @@
       <HintPath>..\..\packages\Analytics.2.0.3\lib\Analytics.NET.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CssParser, Version=1.15.7.5693, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="CssParser, Version=1.16.2.5884, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\output\Debug\CssParser.dll</HintPath>
     </Reference>

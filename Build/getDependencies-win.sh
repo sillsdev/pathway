@@ -71,22 +71,22 @@ cd -
 # URL: http://build.palaso.org/viewType.html?buildTypeId=bt405
 # VCS: https://github.com/sillsdev/pathway.git [develop]
 # dependencies:
-# [0] build: palaso-win32-master Continuous (Libpalaso_PalasoWin32masterContinuous)
+# [0] build: palaso-win32-libpalaso-3.1 Continuous (bt223)
 #     project: libpalaso
-#     URL: http://build.palaso.org/viewType.html?buildTypeId=Libpalaso_PalasoWin32masterContinuous
+#     URL: http://build.palaso.org/viewType.html?buildTypeId=bt223
 #     clean: false
 #     revision: pathway.tcbuildtag
 #     paths: {"L10NSharp.dll"=>"lib", "L10NSharp.pdb"=>"lib", "SIL.Core.dll"=>"lib", "SIL.Core.pdb"=>"lib", "SIL.WritingSystems.dll"=>"lib", "SIL.WritingSystems.pdb"=>"lib"}
-#     VCS: https://github.com/sillsdev/libpalaso.git [master]
+#     VCS: https://github.com/sillsdev/libpalaso.git [libpalaso-3.1]
 
 # make sure output directories exist
 mkdir -p ../lib
 
 # download artifact dependencies
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/pathway.tcbuildtag/L10NSharp.dll ../lib/L10NSharp.dll
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/pathway.tcbuildtag/L10NSharp.pdb ../lib/L10NSharp.pdb
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/pathway.tcbuildtag/SIL.Core.dll ../lib/SIL.Core.dll
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/pathway.tcbuildtag/SIL.Core.pdb ../lib/SIL.Core.pdb
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/pathway.tcbuildtag/SIL.WritingSystems.dll ../lib/SIL.WritingSystems.dll
-copy_auto http://build.palaso.org/guestAuth/repository/download/Libpalaso_PalasoWin32masterContinuous/pathway.tcbuildtag/SIL.WritingSystems.pdb ../lib/SIL.WritingSystems.pdb
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/L10NSharp.dll ../lib/L10NSharp.dll
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/L10NSharp.pdb ../lib/L10NSharp.pdb
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Core.dll ../lib/SIL.Core.dll
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.Core.pdb ../lib/SIL.Core.pdb
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.WritingSystems.dll ../lib/SIL.WritingSystems.dll
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt223/pathway.tcbuildtag/SIL.WritingSystems.pdb ../lib/SIL.WritingSystems.pdb
 # End of script
