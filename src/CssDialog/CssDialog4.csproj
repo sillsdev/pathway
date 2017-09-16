@@ -218,10 +218,6 @@
       <HintPath>..\..\packages\Analytics.2.0.3\lib\Analytics.NET.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CssParser, Version=1.16.2.5884, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\output\Debug\CssParser.dll</HintPath>
-    </Reference>
     <Reference Include="DesktopAnalytics, Version=1.2.4.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DesktopAnalytics.1.2.4.5\lib\net40\DesktopAnalytics.dll</HintPath>
       <Private>True</Private>
@@ -236,10 +232,6 @@
     <Reference Include="Prince, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PrinceXML.11.0.0\lib\net40\Prince.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="PsTool, Version=1.15.7.5693, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\output\Debug\PsTool.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -463,6 +455,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\2014_sil_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CssParser\CssParser4.csproj">
+      <Project>{eb7eb8fe-6414-4c53-b5e6-54352ee25364}</Project>
+      <Name>CssParser4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PsTool\PsTool4.csproj">
+      <Project>{422c5127-260d-4f16-b476-33aa38dbf919}</Project>
+      <Name>PsTool4</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
