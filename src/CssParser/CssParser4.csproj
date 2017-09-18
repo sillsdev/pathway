@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB7EB8FE-6414-4C53-B5E6-54352EE25364}</ProjectGuid>
+    <ProjectGuid>{B58FD9BA-1783-43F2-86D1-D79E1EACC365}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SIL.PublishingSolution</RootNamespace>
@@ -269,7 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PsTool\PsTool4.csproj">
-      <Project>{422c5127-260d-4f16-b476-33aa38dbf919}</Project>
+      <Project>{448f846f-ce23-462c-bf7e-827875a36f82}</Project>
       <Name>PsTool4</Name>
     </ProjectReference>
   </ItemGroup>

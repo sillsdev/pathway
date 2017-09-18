@@ -4,7 +4,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{749D4FCD-5100-46C8-AE73-50873CB5CEC0}</ProjectGuid>
+    <ProjectGuid>{1A58ECC5-75FE-4FE2-B133-8605B382B7C0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SIL.PublishingSolution</RootNamespace>
@@ -222,7 +222,8 @@
       <HintPath>..\..\packages\DesktopAnalytics.1.2.4.5\lib\net40\DesktopAnalytics.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="L10NSharp">
+    <Reference Include="L10NSharp, Version=2.0.67.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -233,6 +234,10 @@
       <HintPath>..\..\packages\PrinceXML.11.0.0\lib\net40\Prince.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SIL.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=cab3c8c5232dfcf2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -240,9 +245,6 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="SIL.Core">
-      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutPw.cs">
@@ -458,11 +460,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CssParser\CssParser4.csproj">
-      <Project>{eb7eb8fe-6414-4c53-b5e6-54352ee25364}</Project>
+      <Project>{b58fd9ba-1783-43f2-86d1-d79e1eacc365}</Project>
       <Name>CssParser4</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool4.csproj">
-      <Project>{422c5127-260d-4f16-b476-33aa38dbf919}</Project>
+      <Project>{448f846f-ce23-462c-bf7e-827875a36f82}</Project>
       <Name>PsTool4</Name>
     </ProjectReference>
   </ItemGroup>

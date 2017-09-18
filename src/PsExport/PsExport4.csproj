@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D6A2BF1C-774E-4118-830F-23D60DE0A9A9}</ProjectGuid>
+    <ProjectGuid>{DCD48287-7F36-4DBB-94CF-4FF617BF1F78}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SIL.PublishingSolution</RootNamespace>
@@ -207,16 +207,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CssParser, Version=1.13.4.4657, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="L10NSharp, Version=2.0.67.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\output\Debug\CssParser.dll</HintPath>
+      <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="L10NSharp">
-      <HintPath>..\..\lib\L10NSharp.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddHomographAndSenseNumClassNames.cs" />
@@ -247,11 +244,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CssDialog\CssDialog4.csproj">
-      <Project>{749d4fcd-5100-46c8-ae73-50873cb5cec0}</Project>
+      <Project>{1a58ecc5-75fe-4fe2-b133-8605b382b7c0}</Project>
       <Name>CssDialog4</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CssParser\CssParser4.csproj">
+      <Project>{b58fd9ba-1783-43f2-86d1-d79e1eacc365}</Project>
+      <Name>CssParser4</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool4.csproj">
-      <Project>{422c5127-260d-4f16-b476-33aa38dbf919}</Project>
+      <Project>{448f846f-ce23-462c-bf7e-827875a36f82}</Project>
       <Name>PsTool4</Name>
     </ProjectReference>
   </ItemGroup>
