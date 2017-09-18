@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="Param.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
-//
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright>
+// </copyright> 
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed:
-//
+// Last reviewed: 
+// 
 // <remarks>
-//
+// 
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -108,7 +108,7 @@ namespace SIL.Tool
         public const string CopyrightPage = "Copyright Page";
         public const string CopyrightPageFilename = "Copyright Page Filename";
         public const string TableOfContents = "Table of Contents";
-
+       
         // Other constants
         private const string DefaultSettingsFileName = "StyleSettings.xml";
         public static string UserRole = "Output User";
@@ -138,7 +138,7 @@ namespace SIL.Tool
 				}
 			}
 		}
-
+		
 
         public static string SettingOutputPath
         {
@@ -282,7 +282,7 @@ namespace SIL.Tool
                 sr.Close();
 			    return result;
 			}
-			catch (Exception ex)
+			catch (Exception ex) 
 			{
 				var sb = new StringBuilder();
 				sb.Append("Unable to Load file: ");
@@ -347,9 +347,9 @@ namespace SIL.Tool
         /// <param name="args">The argument to be captured</param>
         private static void ValidationCallBack(object sender, ValidationEventArgs args)
         {
-            //Display the validation error. This is only called on error
+            //Display the validation error. This is only called on error 
             _validateXmlSuccess = false;
-            //Validation failed
+            //Validation failed 
             _validateXmlError.Append(args.Message + "\\n");
         }
 
@@ -374,7 +374,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
@@ -413,10 +413,10 @@ namespace SIL.Tool
             }
             return attrib;
         }
-
+ 
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
@@ -428,7 +428,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        /// Remove the XMLNode using xpath
+        /// Remove the XMLNode using xpath 
         /// </summary>
         /// <param name="xmlFileNameWithPath">File Name</param>
         /// <param name="xPath">Xpath for the XML Node</param>
@@ -458,7 +458,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="path"></param>
         /// <param name="attr"></param>
@@ -472,7 +472,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="path"></param>
         /// <param name="attr"></param>
@@ -491,7 +491,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="path"></param>
         /// <param name="name"></param>
@@ -506,7 +506,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="path"></param>
         /// <param name="name"></param>
@@ -523,7 +523,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
@@ -533,7 +533,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="path"></param>
         /// <param name="tv"></param>
@@ -595,7 +595,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="f"></param>
         public static void SetupHelp(Control f)
@@ -614,7 +614,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         public static void Write()
         {
@@ -622,7 +622,7 @@ namespace SIL.Tool
             var folder = Path.GetDirectoryName(SettingOutputPath);
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
-            var writer = new XmlTextWriter(PathwaySettingFilePath, Encoding.UTF8);
+            var writer = new XmlTextWriter(SettingOutputPath, Encoding.UTF8);
             writer.Formatting = Formatting.Indented;
             xmlMap.Save(writer);
             writer.Close();
@@ -637,7 +637,7 @@ namespace SIL.Tool
             try
             {
                 var schema = AttrValue(xmlMap.DocumentElement, "xsi:noNamespaceSchemaLocation");
-                var dstSchemaPath = Common.PathCombine(Path.GetDirectoryName(PathwaySettingFilePath), schema);
+                var dstSchemaPath = Common.PathCombine(Path.GetDirectoryName(SettingOutputPath), schema);
                 if (!File.Exists(dstSchemaPath))
 					File.Copy(Common.FromRegistry(schema), dstSchemaPath);
             }
@@ -673,7 +673,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="id"></param>
         /// <param name="val"></param>
@@ -697,7 +697,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="sheet"></param>
         /// <param name="description"></param>
@@ -732,7 +732,7 @@ namespace SIL.Tool
                     writeCss.Flush();
                     writeCss.Close();
                 }
-                else
+                else 
                 {
                     File.Copy(fileNamewithPath, fn, true);
                 }
@@ -762,7 +762,7 @@ namespace SIL.Tool
                 descNode.InnerText = description;
             }
             AddAttrValue(style, "shown", "Yes");
-            WebInfo(baseNode, style);
+            WebInfo(baseNode, style);        
             Write();
         }
 
@@ -849,7 +849,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="style"></param>
         /// <param name="cat"></param>
@@ -875,7 +875,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="style"></param>
         /// <param name="cat"></param>
@@ -905,7 +905,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="sheet"></param>
         /// <returns></returns>
@@ -915,7 +915,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="sheet"></param>
         /// <param name="fa"></param>
@@ -933,7 +933,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="node"></param>
         /// <param name="name"></param>
@@ -966,7 +966,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="node"></param>
         /// <param name="attr"></param>
@@ -979,7 +979,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
@@ -994,7 +994,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <returns></returns>
         public static string GetRole()
@@ -1008,7 +1008,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="role"></param>
         public static void SetRole(string role)
@@ -1021,7 +1021,7 @@ namespace SIL.Tool
         }
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="task"></param>
         /// <returns></returns>

@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ParamTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
-//
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
+//    
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright>
+// </copyright> 
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed:
-//
+// Last reviewed: 
+// 
 // <remarks>
 // Test methods of FlexDePlugin
 // </remarks>
@@ -54,7 +54,6 @@ namespace Test.CssDialog
             string currentFolder = PathPart.Bin(Environment.CurrentDirectory, "/CssDialog/TestFiles");
             _inputBasePath = Common.PathCombine(currentFolder, "Input");
             _supportPath = PathPart.Bin(Environment.CurrentDirectory, "/../../DistFiles");
-	        Common.Testing = true;
             _publishingSolutionsData = Common.GetAllUserPath();
         }
 
@@ -79,7 +78,7 @@ namespace Test.CssDialog
         {
             Param.LoadValues(Common.PathCombine(_inputBasePath, _StyleSettings));
             string actual;
-            actual = Param.PathwaySettingFilePath;
+            actual = Param.SettingOutputPath;
             var expected = Common.PathCombine(_publishingSolutionsData, _StyleSettings);
             Assert.AreEqual(expected, actual);
             Param.UnLoadValues();
@@ -171,7 +170,7 @@ namespace Test.CssDialog
         [Test]
         public void SetRoleTest()
         {
-            string role = "Admin";
+            string role = "Admin"; 
             Param.SetRole(role);
             string actual = Param.GetRole();
             Assert.AreEqual(role, actual);
@@ -189,11 +188,11 @@ namespace Test.CssDialog
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(xmlFile );
             XmlNode node = xmlDocument.CreateNode(XmlNodeType.Element, newnode, "");
-
+            
             XmlAttribute xmlAttrib = xmlDocument.CreateAttribute("name");
             xmlAttrib.Value = expected;
-            node.Attributes.Append(xmlAttrib);
-
+            node.Attributes.Append(xmlAttrib); 
+            
             string actual;
             actual = Param.Name(node);
             Assert.AreEqual(expected, actual);
@@ -207,11 +206,11 @@ namespace Test.CssDialog
         {
             string newnode = "NewNode";
             string expected = "attribValue";
-
+            
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(xmlFile);
             XmlNode node = xmlDocument.CreateNode(XmlNodeType.Element, newnode, "");
-
+            
             XmlAttribute xmlAttrib = xmlDocument.CreateAttribute("newAttrib");
             xmlAttrib.Value = expected;
             node.Attributes.Append(xmlAttrib);
@@ -230,7 +229,7 @@ namespace Test.CssDialog
             xmlDocument.Load(xmlFile);
 
             string id = "LayoutSelected";
-            string val = "Draft";
+            string val = "Draft"; 
             Param.SetValue(id, val);
             string actual = Param.Value[id];
             Assert.AreEqual(val, actual);
@@ -243,8 +242,8 @@ namespace Test.CssDialog
         public void GetElemByNameTest()
         {
             string path = "//styles/paper/style";
-            string name = "Draft"; //
-            string elem = "description"; //
+            string name = "Draft"; // 
+            string elem = "description"; // 
             string expected = "Single column draft 11pt A4 with drop capital";
             string actual;
             actual = Param.GetElemByName(path, name, elem);
@@ -264,7 +263,7 @@ namespace Test.CssDialog
             expected.Add("Project Coordinator");
             expected.Add("Consultant");
             expected.Add("System Designer");
-
+            
             List<string> actual = Param.GetListofAttr(path, attr);
             Assert.AreEqual(expected, actual);
         }
@@ -320,7 +319,7 @@ namespace Test.CssDialog
             XmlDocument xmlDocument = xmlMap;
             xmlDocument.Load(xmlFile);
             XmlNode node = xmlDocument.CreateNode(XmlNodeType.Element, "newNode", "");
-            string attrTag = "newAttrib";
+            string attrTag = "newAttrib"; 
             string val = "newValue";
             //XmlAttribute xmlAttribute = xmlDocument.CreateAttribute("newAttrib1");
             //node.Attributes.Append(xmlAttribute);
@@ -337,8 +336,8 @@ namespace Test.CssDialog
         public void TaskSheetTest()
         {
             LoadSettingFile();
-            string task = "Village check";
-            string expected = "Draft";
+            string task = "Village check"; 
+            string expected = "Draft"; 
             string actual;
             actual = Param.TaskSheet(task);
             Assert.AreEqual(expected, actual);
@@ -374,7 +373,7 @@ namespace Test.CssDialog
         {
             xmlFile = Common.PathCombine(_inputBasePath, _StyleSettings);
             Param.LoadValues(xmlFile);
-        }
+        } 
         #endregion
 
 #if UNFINISHED
