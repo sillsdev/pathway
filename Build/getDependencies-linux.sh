@@ -77,7 +77,7 @@ cd -
 #     clean: false
 #     revision: pathway.tcbuildtag
 #     paths: {"L10NSharp.dll"=>"lib", "SIL.Core.dll"=>"lib", "SIL.Core.dll.config"=>"lib", "SIL.Core.dll.mdb"=>"lib", "SIL.WritingSystems.dll"=>"lib", "SIL.WritingSystems.dll.mdb"=>"lib", "icu.net.dll"=>"lib", "icudt54.dll"=>"lib", "icuin54.dll"=>"lib", "icuuc54.dll"=>"lib"}
-#     VCS: https://github.com/sillsdev/libpalaso.git [libpalaso-3.1]
+#     VCS:  https://github.com/sillsdev/libpalaso.git [libpalaso-3.1]
 
 # make sure output directories exist
 mkdir -p ../lib
