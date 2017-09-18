@@ -22,7 +22,6 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=BTE</DefineConstants>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
     <OutputPath>..\output\</OutputPath>
@@ -30,7 +29,6 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=SE</DefineConstants>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
     <OutputPath>..\output\</OutputPath>
@@ -38,7 +36,6 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=BTE</DefineConstants>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
     <OutputPath>..\output\</OutputPath>
@@ -47,7 +44,6 @@
     </WixVariables>
     <DefineConstants>Edition=SE</DefineConstants>
     <Edition>SE</Edition>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\output\</OutputPath>
@@ -55,7 +51,6 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=BTE</DefineConstants>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>..\output\</OutputPath>
@@ -68,7 +63,6 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=BTE</DefineConstants>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
     <OutputPath>..\output\</OutputPath>
@@ -77,7 +71,6 @@
     </WixVariables>
     <DefineConstants>Edition=SE</DefineConstants>
     <Edition>SE</Edition>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
     <OutputPath>..\output\</OutputPath>
@@ -85,7 +78,6 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=BTE</DefineConstants>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
     <OutputPath>..\output\</OutputPath>
@@ -93,7 +85,6 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=SE</DefineConstants>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>..\output\</OutputPath>
@@ -101,7 +92,6 @@
     <WixVariables>
     </WixVariables>
     <DefineConstants>Edition=BTE</DefineConstants>
-    <SuppressIces>ICE99</SuppressIces>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Application.wxs" />

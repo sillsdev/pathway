@@ -2444,7 +2444,7 @@ namespace SIL.Tool
 		/// <returns></returns>
 		public static string GetAllUserPath()
 		{
-            string allUserPath = Common.Testing? Path.GetTempPath(): Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string allUserPath = Testing? Path.GetTempPath(): Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 			allUserPath = Path.Combine(allUserPath, "SIL");
 			allUserPath = Path.Combine(allUserPath, "Pathway");
 			return DirectoryPathReplace(allUserPath);
@@ -2456,7 +2456,7 @@ namespace SIL.Tool
 		/// <returns></returns>
 		public static string GetAllUserAppPath()
 		{
-			string allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+			string allUserPath = Testing ? Path.GetTempPath() : Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 			return DirectoryPathReplace(allUserPath);
 		}
 

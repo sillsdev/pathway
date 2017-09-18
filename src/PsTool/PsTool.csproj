@@ -229,6 +229,9 @@
       <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="icu.net">
+      <HintPath>..\..\lib\icu.net.dll</HintPath>
+    </Reference>
     <Reference Include="INIFileParser">
       <HintPath>..\..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
     </Reference>
@@ -238,9 +241,6 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="icu.net">
-      <HintPath>..\..\packages\icu.net.2.1.0\lib\net40\icu.net.dll</HintPath>
-    </Reference>
     <Reference Include="SIL.Core">
       <HintPath>..\..\lib\SIL.Core.dll</HintPath>
     </Reference>
@@ -396,6 +396,17 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="icu4c.readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icudt54.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icuin54.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icuuc54.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

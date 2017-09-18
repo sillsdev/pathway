@@ -76,7 +76,7 @@ cd -
 #     URL: http://build.palaso.org/viewType.html?buildTypeId=bt322
 #     clean: false
 #     revision: pathway.tcbuildtag
-#     paths: {"L10NSharp.dll"=>"lib", "SIL.Core.dll"=>"lib", "SIL.Core.dll.config"=>"lib", "SIL.Core.dll.mdb"=>"lib", "SIL.WritingSystems.dll"=>"lib", "SIL.WritingSystems.dll.mdb"=>"lib"}
+#     paths: {"L10NSharp.dll"=>"lib", "SIL.Core.dll"=>"lib", "SIL.Core.dll.config"=>"lib", "SIL.Core.dll.mdb"=>"lib", "SIL.WritingSystems.dll"=>"lib", "SIL.WritingSystems.dll.mdb"=>"lib", "icu.net.dll"=>"lib", "icudt54.dll"=>"lib", "icuin54.dll"=>"lib", "icuuc54.dll"=>"lib"}
 #     VCS: https://github.com/sillsdev/libpalaso.git [libpalaso-3.1]
 
 # make sure output directories exist
@@ -89,4 +89,8 @@ copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tc
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/SIL.Core.dll.mdb ../lib/SIL.Core.dll.mdb
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/SIL.WritingSystems.dll ../lib/SIL.WritingSystems.dll
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/SIL.WritingSystems.dll.mdb ../lib/SIL.WritingSystems.dll.mdb
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/icu.net.dll ../lib/icu.net.dll
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/icudt54.dll ../lib/icudt54.dll
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/icuin54.dll ../lib/icuin54.dll
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/icuuc54.dll ../lib/icuuc54.dll
 # End of script
