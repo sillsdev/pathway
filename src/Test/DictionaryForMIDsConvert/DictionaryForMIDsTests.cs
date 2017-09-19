@@ -191,7 +191,7 @@ namespace Test.DictionaryForMIDsConvert
 		//This test is environment dependent and fails if Java is not installed.
         //[Test]
         //[Category("LongTest")]
-        //[Category("SkipOnTeamCity")]
+        ////[Category("SkipOnTeamCity")]
         //public void CreateDictionaryForMIDsTest()
         //{
         //    Common.Testing = true;
@@ -221,7 +221,7 @@ namespace Test.DictionaryForMIDsConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void CleanUpTest()
         {
             Common.Testing = true;
@@ -247,7 +247,7 @@ namespace Test.DictionaryForMIDsConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void LaunchTest()
         {
             Common.Testing = true;
@@ -263,7 +263,7 @@ namespace Test.DictionaryForMIDsConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void MoveJarFileTest()
         {
             Common.Testing = true;
@@ -276,7 +276,7 @@ namespace Test.DictionaryForMIDsConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void CreateSubmissionTest()
         {
             Common.Testing = true;

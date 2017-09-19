@@ -36,7 +36,7 @@ namespace Test.Build
         #endregion Setup
 
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void UpdateProductTest()
         {
             var result = UpdateProduct(_tf.Input("Pathway.wxs"), "1.13.4.4658", "BTE");
@@ -47,7 +47,7 @@ namespace Test.Build
         }
 
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void UpdateProduct2Test()
         {
             var result = UpdateProduct(_tf.Input("Pathway2.wxs"), "1.13.4.4658", "SE");
@@ -58,7 +58,7 @@ namespace Test.Build
         }
 
 	    [Test]
-	    [Category("SkipOnTeamCity")]
+	    //[Category("SkipOnTeamCity")]
 	    public void UpdateAssemblyVersionTest()
 	    {
 		    var outFile = _tf.Copy("GlobalAssemblyInfo.cs");

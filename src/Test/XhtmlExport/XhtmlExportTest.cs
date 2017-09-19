@@ -258,7 +258,7 @@ namespace Test.XhtmlExport
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void GondwanaSampleOpenOfficeTest()
 		//{
 		//	PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "OpenOffice/LibreOffice");
@@ -272,7 +272,7 @@ namespace Test.XhtmlExport
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void NkonyaSampleOpenOfficeTest()
 		//{
 		//	PathawyB("Nkonya Sample", "Nkonya Sample", "Scripture", "OpenOffice/LibreOffice");
@@ -285,7 +285,7 @@ namespace Test.XhtmlExport
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void NKOu3OpenOfficeTest()
 		//{
 		//	PathwayB("NKOu3", "NKOu3", "Scripture", "OpenOffice/LibreOffice", "usx");
@@ -299,7 +299,7 @@ namespace Test.XhtmlExport
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void GondwanaSampleInDesignTest()
 		//{
 		//	PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "InDesign");
@@ -313,7 +313,7 @@ namespace Test.XhtmlExport
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void NkonyaSampleInDesignTest()
 		//{
 		//	PathawyB("Nkonya Sample", "Nkonya Sample", "Scripture", "InDesign");
@@ -327,7 +327,7 @@ namespace Test.XhtmlExport
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void NKOu3InDesignTest()
 		//{
 		//	PathwayB("NKOu3", "NKOu3", "Scripture", "InDesign", "usx");
@@ -341,7 +341,7 @@ namespace Test.XhtmlExport
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void GondwanaSampleXeLaTexTest()
 		//{
 		//	PathawyB("Gondwana Sample", "Gondwana Sample", "Dictionary", "XeLaTex");
@@ -355,7 +355,7 @@ namespace Test.XhtmlExport
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void NKOu3XeLaTexTest()
 		//{
 		//	PathwayB("NKOu3", "NKOu3", "Scripture", "XeLaTex", "usx");

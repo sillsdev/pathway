@@ -910,7 +910,7 @@ namespace Test.PsTool
 
         #region LanguageTests
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         // If unit fails, please confirm the below file exist,
         // C:\ProgramData\SIL\WritingSystemStore\ur.ldml
         public void GetTextDirection()
@@ -1262,7 +1262,7 @@ namespace Test.PsTool
         #region SaveInFolderTests
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void GetSaveInFolderTest()
         {
             string template = "$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s";

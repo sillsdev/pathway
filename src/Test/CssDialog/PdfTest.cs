@@ -68,7 +68,7 @@ namespace Test.CssDialog
         ///A test for Create
         ///</summary>
         [Test]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
         public void CreateTest()
         {
             try

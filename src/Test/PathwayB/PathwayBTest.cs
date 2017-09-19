@@ -280,7 +280,7 @@ namespace Test
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void UsageTest()
         {
             // Because we haven't supplied the parameters, we should get the usage string back from PathwayB
@@ -290,7 +290,7 @@ namespace Test
 
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void XhtmlDictionaryMainAndRevTest()
         {
             // clean out old files
@@ -326,7 +326,7 @@ namespace Test
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void XhtmlScriptureTest()
         {
             // clean out old files
@@ -349,7 +349,7 @@ namespace Test
         /// </summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void UsfmTest()
         {
             // clean out old files
@@ -421,7 +421,7 @@ namespace Test
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void UsxTest()
         {
             // clean out old files

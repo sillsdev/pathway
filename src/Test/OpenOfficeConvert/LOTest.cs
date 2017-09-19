@@ -92,7 +92,7 @@ namespace Test.OpenOfficeConvert
         ///</summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void ScriptureExportTest()
         {
             string inputSourceDirectory = FileInput("ExportLO");
@@ -156,7 +156,7 @@ namespace Test.OpenOfficeConvert
         ///</summary>
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void DictionaryExportTest()
         {
             string inputSourceDirectory = FileInput("ExportLO");
@@ -184,7 +184,7 @@ namespace Test.OpenOfficeConvert
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
 		public void ParagraphTest()
 		{
 			string inputSourceDirectory = FileInput("ParagraphTest");
@@ -212,7 +212,7 @@ namespace Test.OpenOfficeConvert
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
 		public void UnderlineColorTest()
 		{
 			string inputSourceDirectory = FileInput("UnderlineColorTest");

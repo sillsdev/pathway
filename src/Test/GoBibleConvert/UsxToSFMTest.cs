@@ -56,7 +56,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void Book()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -75,7 +75,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void chapter()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -94,7 +94,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void figure()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -113,7 +113,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void note()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -132,7 +132,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void note_figure()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -173,7 +173,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void para_char()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -192,7 +192,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void para_empty()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -211,7 +211,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void verse()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -231,7 +231,7 @@ namespace Test.GoBibleConvert
         ///Compare files
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void EmptyTag()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -251,7 +251,7 @@ namespace Test.GoBibleConvert
         /// and cases are "1-2" and "3a", "3b"
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void verse_BridgeCase1()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -271,7 +271,7 @@ namespace Test.GoBibleConvert
         /// and cases are "1-2a", "2b" and "3-4"
         /// </summary>         
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void verse_BridgeCase2()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -290,7 +290,7 @@ namespace Test.GoBibleConvert
         ///FULL file compare
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void rut()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -310,7 +310,7 @@ namespace Test.GoBibleConvert
         ///FULL file compare
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void ACCNT()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();
@@ -329,7 +329,7 @@ namespace Test.GoBibleConvert
         ///FULL file compare
         /// </summary>      
         [Test]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void BM2()
         {
             UsxToSFM _usxToSfm = new UsxToSFM();

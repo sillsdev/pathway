@@ -87,7 +87,7 @@ namespace Test.ParatextSupport
 
 
         [Test]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
         public void StytoCSSnkoNTProjectCSSTest()
         {
             const string TestName = "nkoNT";
@@ -135,7 +135,7 @@ namespace Test.ParatextSupport
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
 		public void StytoCSSPnCSSTest()
 		{
 			const string TestName = "aai";
@@ -152,7 +152,7 @@ namespace Test.ParatextSupport
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
 		public void MergeMainandCustomCssStylesTest()
 		{
 			const string TestName = "uitrans";
@@ -169,7 +169,7 @@ namespace Test.ParatextSupport
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
 		public void uisTrans_Marker_rq_StytoCSSTest()
 		{
 			const string TestName = "uisTrans";

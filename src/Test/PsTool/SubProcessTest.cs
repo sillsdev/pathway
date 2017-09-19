@@ -62,7 +62,7 @@ namespace Test.PsTool
 		/////</summary>
 		//[Test]
 		//[Category("ShortTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void RunTest()
 		//{
 		//    Common.Testing = false; // Testing as true will prevent Java from being called.
@@ -85,7 +85,7 @@ namespace Test.PsTool
 		///</summary>
 		[Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void ExistsOnPathTest()
         {
             string name;

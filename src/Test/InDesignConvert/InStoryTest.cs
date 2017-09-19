@@ -1836,7 +1836,7 @@ namespace Test.InDesignConvert
 		//This test is environment dependent and fails if different fonts are installed.
         //[Test]
         //[Category("LongTest")]
-        //[Category("SkipOnTeamCity")]
+        ////[Category("SkipOnTeamCity")]
         //public void TokPisin()
         //{
         //    //Scripture
@@ -1849,7 +1849,7 @@ namespace Test.InDesignConvert
 		//This test is environment dependent and fails if different fonts are installed.
         //[Test]
         //[Category("ShortTest")]
-        //[Category("SkipOnTeamCity")]
+        ////[Category("SkipOnTeamCity")]
         //public void TeTest()
         //{
         //    //Scripture
@@ -1862,7 +1862,7 @@ namespace Test.InDesignConvert
 		//This test is environment dependent and fails if different fonts are installed.
         //[Test]
         //[Category("ShortTest")]
-        //[Category("SkipOnTeamCity")]
+        ////[Category("SkipOnTeamCity")]
         //public void Bughotugospels()
         //{
         //    //Scripture
@@ -1875,7 +1875,7 @@ namespace Test.InDesignConvert
 		//This test is environment dependent and fails based on installed fonts.
         //[Test]
         //[Category("ShortTest")]
-        //[Category("SkipOnTeamCity")]
+        ////[Category("SkipOnTeamCity")]
         //public void B1pe()
         //{
         //    //Scripture
@@ -1888,7 +1888,7 @@ namespace Test.InDesignConvert
 		//This test is environment dependent and fails if different fonts are installed
 		//[Test]
         //[Category("ShortTest")]
-        //[Category("SkipOnTeamCity")]
+        ////[Category("SkipOnTeamCity")]
         //public void Kabwa()
         //{
         //    //Scripture
@@ -1900,7 +1900,7 @@ namespace Test.InDesignConvert
 
         [Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
+        //[Category("SkipOnTeamCity")]
         public void BuangExportDictionary()
         {
             _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/BuangExport.xhtml");

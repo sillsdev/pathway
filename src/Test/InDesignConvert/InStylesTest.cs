@@ -132,7 +132,7 @@ namespace Test.InDesignConvert
 	//This test is environment dependent and fails if different fonts are installed.
    //     [Test]
    //     [Category("ShortTest")]
-   //     [Category("SkipOnTeamCity")]
+   //     //[Category("SkipOnTeamCity")]
    //     public void FontFamily3()
    //     {
    //         _input = Common.DirectoryPathReplace(_testFolderPath + "/input/FontFamily3.css");

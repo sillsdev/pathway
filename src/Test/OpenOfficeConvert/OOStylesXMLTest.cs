@@ -117,7 +117,7 @@ namespace Test.OpenOfficeConvert
 
 		//Environment dependent test
 		//  [Test]
-		//  [Category("SkipOnTeamCity")]
+		//  //[Category("SkipOnTeamCity")]
 		//  public void ApplySpanFontStyleTest()
 		//  {
 		//const string file = "ApplySpanFontStyleTest";
@@ -1021,7 +1021,7 @@ namespace Test.OpenOfficeConvert
         ///TD-425 Impliment Start and Last References in same page
         /// </summary>
         [Test]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
         public void SinglePageRefTest_Node()
         {
             const string file = "SinglePageRef";
@@ -1196,7 +1196,7 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//[Category("ShortTest")]
-		//[Category("SkipOnTeamCity")]
+		////[Category("SkipOnTeamCity")]
 		//public void CharisSILFont_Node()
 		//{
 		//    const string file = "CharisSILFont";
@@ -1219,7 +1219,7 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//      [Category("ShortTest")]
-		//      [Category("SkipOnTeamCity")]
+		//      //[Category("SkipOnTeamCity")]
 		//      public void DoulosSILFont_Node()
 		//      {
 		//          const string file = "DoulosSILFont";

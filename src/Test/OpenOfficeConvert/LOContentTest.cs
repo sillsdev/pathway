@@ -197,7 +197,7 @@ namespace Test.OpenOfficeConvert
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
 		public void SubscriptForNewFlexTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -272,7 +272,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
 		public void RunningHeaderNoneTest()
 		{
 			_projInfo.ProjectInputType = "Scripture";
@@ -295,7 +295,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
+		//[Category("SkipOnTeamCity")]
 		public void NewGuidewordStyleTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
