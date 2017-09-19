@@ -393,7 +393,7 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <Copy SourceFiles="..\..\lib\icudt54.dll;..\..\lib\icuin54.dll;..\..\lib\icuuc54.dll" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="..\..\lib\icudt54.dll;..\..\lib\icuin54.dll;..\..\lib\icuuc54.dll" DestinationFolder="$(OutputPath)"  Condition=" '$(OS)' == 'Windows_NT' or '$(OS)' == '' "/>
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
