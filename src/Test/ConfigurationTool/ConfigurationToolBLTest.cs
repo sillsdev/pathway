@@ -146,7 +146,7 @@ namespace Test.UIConfigurationToolBLTest
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		[Category("SkipOnTeamCity")]
 		public void NewWithDefaultTest()
 		{
 			SetUp();
@@ -216,7 +216,7 @@ namespace Test.UIConfigurationToolBLTest
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		[Category("SkipOnTeamCity")]
 		public void SaveAsWithDefaultTest()
 		{
 			SetUp();
@@ -285,7 +285,8 @@ namespace Test.UIConfigurationToolBLTest
 
 		[Test]
         [Category("LongTest")]
-        public void DeleteWithDefaultTest()
+		[Category("SkipOnTeamCity")]
+		public void DeleteWithDefaultTest()
         {
             SetUp();
             CopyFile();
