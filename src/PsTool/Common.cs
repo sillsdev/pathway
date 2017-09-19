@@ -4319,7 +4319,8 @@ namespace SIL.Tool
 
 			string fileDir = Path.GetDirectoryName(xhtmlFileNameWithPath);
 			string fileName = "Tmp" + Path.GetFileName(xhtmlFileNameWithPath);
-			string Newfile = Common.PathCombine(fileDir, fileName);
+			string Newfile = PathCombine(fileDir, fileName);
+			if (!Directory.Exists(fileDir)) Directory.CreateDirectory(fileDir);
 			bool continueProcess = false;
 			var fs2 = new FileStream(Newfile, FileMode.Create, FileAccess.Write);
 			var sw2 = new StreamWriter(fs2);

@@ -40,7 +40,7 @@ namespace Test.epubConvert
             var arialFont = new EmbeddedFont("Arial");
             Assert.IsTrue(arialFont.CanRedistribute);
             const string fontFilename = "Arial.ttf";
-            Assert.IsTrue(fontFilename.ToLower().Equals(Path.GetFileName(arialFont.Filename).ToLower()));
+            Assert.IsTrue(fontFilename.ToLower().Equals(Path.GetFileName(arialFont.Filename).ToLower()), "Actual Arial name: " + arialFont.Filename);
         }
 
         /// <summary>

@@ -272,7 +272,7 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		[Category("SkipOnTeamCity")]
 		public void RunningHeaderNoneTest()
 		{
 			_projInfo.ProjectInputType = "Scripture";

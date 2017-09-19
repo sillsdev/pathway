@@ -290,7 +290,7 @@ namespace Test
 
         [Test]
         [Category("LongTest")]
-        //[Category("SkipOnTeamCity")]
+        [Category("SkipOnTeamCity")]
         public void XhtmlDictionaryMainAndRevTest()
         {
             // clean out old files

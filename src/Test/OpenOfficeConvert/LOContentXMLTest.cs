@@ -4142,7 +4142,7 @@ namespace Test.OpenOfficeConvert
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		[Category("SkipOnTeamCity")]
 		public void SpaceAfterClosingBraceTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";

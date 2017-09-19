@@ -770,7 +770,7 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
+		[Category("SkipOnTeamCity")]
 		public void aaiScriptureProjectExportTest()
 		{
 			CleanOutputDirectory();
