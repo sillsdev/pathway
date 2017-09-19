@@ -4318,7 +4318,7 @@ namespace SIL.Tool
 			StreamReader stream = new StreamReader(fs);
 
 			string fileDir = Path.GetDirectoryName(xhtmlFileNameWithPath);
-			string fileName = "Tmp" + Path.GetFileName(xhtmlFileNameWithPath);
+			string fileName = "MyTmp" + Path.GetFileName(xhtmlFileNameWithPath);
 			string Newfile = PathCombine(fileDir, fileName);
 			if (!Directory.Exists(fileDir)) Directory.CreateDirectory(fileDir);
 			bool continueProcess = false;
@@ -4350,7 +4350,7 @@ namespace SIL.Tool
 			fs2.Close();
 
 			File.Copy(xhtmlFileNameWithPath, xhtmlFileNameWithPath.Replace(".xhtml", "File.xhtml"), true);
-			File.Copy(Newfile, Newfile.Replace("Tmp", ""), true);
+			File.Copy(Newfile, Newfile.Replace("MyTmp", ""), true);
 			File.Delete(xhtmlFileNameWithPath.Replace(".xhtml", "File.xhtml"));
 			File.Delete(Newfile);
 			return xhtmlFileNameWithPath;

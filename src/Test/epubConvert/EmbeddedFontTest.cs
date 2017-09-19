@@ -33,12 +33,12 @@ namespace Test.epubConvert
         /// Test a known Free font
         /// </summary>
         [Test]
-        //[Category("SkipOnTeamCity")]
+        [Category("SkipOnTeamCity")]
         public void FreeFontTest()
         {
-            Assert.IsTrue(FontInternals.IsInstalled("Arial"));
+            Assert.IsTrue(FontInternals.IsInstalled("Arial"), "Arial not installed");
             var arialFont = new EmbeddedFont("Arial");
-            Assert.IsTrue(arialFont.CanRedistribute);
+            Assert.IsTrue(arialFont.CanRedistribute, "Can't Redistribute");
             const string fontFilename = "Arial.ttf";
             Assert.IsTrue(fontFilename.ToLower().Equals(Path.GetFileName(arialFont.Filename).ToLower()), "Actual Arial name: " + arialFont.Filename);
         }
