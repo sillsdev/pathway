@@ -41,7 +41,9 @@ namespace SIL.Tool
             }
             else
             {
-                var xdoc=new XmlDocument();
+				var folder = Path.GetDirectoryName(hyphenxmlfile);
+				if (!string.IsNullOrEmpty(folder) && !Directory.Exists(folder)) Directory.CreateDirectory(folder);
+				var xdoc =new XmlDocument();
                 XmlNode xrootNode = xdoc.CreateElement("hyphen");
                 xdoc.AppendChild(xrootNode);
                 WriteProjectNode(xdoc, xrootNode);
