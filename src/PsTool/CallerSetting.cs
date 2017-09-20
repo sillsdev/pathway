@@ -55,7 +55,7 @@ namespace SIL.Tool
 		public CallerSetting()
 		{
 			_xDoc.RemoveAll();
-            if (!Sldr.IsInitialized && !Common.IsUnixOS()) Sldr.Initialize(true);
+            if (!Sldr.IsInitialized) Sldr.Initialize(true);
 			WritingSystem = new WritingSystemDefinition();
 			Caller = DataCreator.Creator;
 			switch (Caller)
@@ -78,7 +78,7 @@ namespace SIL.Tool
 		public CallerSetting(string database)
 		{
 			_xDoc.RemoveAll();
-            if (!Sldr.IsInitialized && !Common.IsUnixOS()) Sldr.Initialize(true);
+            if (!Sldr.IsInitialized) Sldr.Initialize(true);
 			WritingSystem = new WritingSystemDefinition();
 			DatabaseName = database;
 			if (database != "DatabaseName") FindDataFolder();

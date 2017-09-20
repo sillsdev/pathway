@@ -1,8 +1,20 @@
-pathway (1.16.3.5898)  experimental; urgency=high
+pathway (1.16.4.5907)  experimental; urgency=high
 
-  * Common:Update daily build to handle latest libraries and PT8
+  * Common: Outline Bookmarks
+  * Common: Caller Settings logic update
+  * Common: Use LDML
+  * Common: Use global version file
+  * Common: Fix page titles
+  * Common: Fix PathwayB
+  * Common: Update registry reading logic
+  * Common: Fix picture loading
+  * Common: Update dependencies
+  * Linux: Fix Linux build and tests
+  * Paratext:TD-4516 Paragraph styles in Scripture
+  * Paratext: Fix Style Conversion
+  * UX/UI: resize dialog
 
- -- Greg Trihus <greg_trihus@sil.org>  Tue, 08 Aug 2017 12:08:20 -0600
+ -- Greg Trihus <greg_trihus@sil.org>  Tue, 20 Sep 2017 12:14:20 -0600
 
 pathway (1.16.0.5871)  experimental; urgency=high
 
