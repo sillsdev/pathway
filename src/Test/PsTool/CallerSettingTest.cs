@@ -26,7 +26,6 @@ namespace Test.PsTool
 	public class CallerSettingTest
 	{
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void CallerSettingConstructor()
 		{
 			using (var result = new CallerSetting())
@@ -42,7 +41,6 @@ namespace Test.PsTool
 		}
 
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void KbrGetFontTest()
 		{
 			using (var cs = new CallerSetting("KBRosU"))
@@ -50,7 +48,6 @@ namespace Test.PsTool
 		}
 
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void KbrGetIsoCodeTest()
 		{
 			using (var cs = new CallerSetting("KBRosU"))
@@ -58,7 +55,6 @@ namespace Test.PsTool
 		}
 
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void KbrIsRightToLeftTest()
 		{
 			using (var cs = new CallerSetting("KBRosU"))
@@ -66,7 +62,6 @@ namespace Test.PsTool
 		}
 
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void KbrGetLanguageTest()
 		{
 			using (var cs = new CallerSetting("KBRosU"))
@@ -74,7 +69,6 @@ namespace Test.PsTool
 		}
 
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void D33CallerSettingTest()
 		{
 			using (var result = new CallerSetting("D33"))
@@ -90,7 +84,6 @@ namespace Test.PsTool
 		}
 
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void D33GetIsoCodeTest()
 		{
 			using (var cs = new CallerSetting("D33"))
@@ -114,7 +107,6 @@ namespace Test.PsTool
 		}
 
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void D33GetLanguageTest()
 		{
 			using (var cs = new CallerSetting("D33"))
@@ -138,7 +130,6 @@ namespace Test.PsTool
 		}
 
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void GondwanaGetSettingsNameTest()
 		{
 			using (var cs = new CallerSetting("Gondwana Sample"))

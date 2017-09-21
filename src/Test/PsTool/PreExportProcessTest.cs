@@ -260,7 +260,6 @@ namespace Test.PsTool
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void HideVerseNumberOneExport()
 		{
 			const string fileName = "HideVerseNumberOne.xhtml";
@@ -275,7 +274,6 @@ namespace Test.PsTool
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void HandlePictureBeforeSubEntryExport()
 		{
 			const string fileName = "PictureBeforeSubEntry.xhtml";

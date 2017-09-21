@@ -84,7 +84,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void ExportScripturePassTest()
 		{
 			const string XhtmlName = "Scripture Draft.xhtml";
@@ -121,7 +120,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("ShortTest")]
-		//[Category("SkipOnTeamCity")]
 		public void InsertReferenceLinkInTocFileTest()
 		{
 			// clean output directory
@@ -242,7 +240,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void FootnoteVerseNumberTest()
 		{
 			const string XhtmlName = "FootnoteVerseNumber1.xhtml";
@@ -326,7 +323,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void EpubIndentFileComparisonTest()
 		{
 			// clean out old files
@@ -354,7 +350,6 @@ namespace Test.epubConvert
 		}
 
 		[Test]
-		//[Category("SkipOnTeamCity")]
 		public void FootNoteMarker_RQ_Test()
 		{
 			const string FolderName = "FootnoteMarker_RQ";
@@ -420,7 +415,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void ExportDictionaryInsertBeforeAfterFW83Test()
 		{
 			// clean out old files
@@ -452,7 +446,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void ExportDictionaryRemoveEntryGUIDFW83Test()
 		{
 			// clean out old files
@@ -484,7 +477,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void Epub3ExportTest()
 		{
 			CleanOutputDirectory();
@@ -528,7 +520,6 @@ namespace Test.epubConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void CreateNcxTest()
 		{
 			// clean out old files
@@ -572,7 +563,6 @@ namespace Test.epubConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void EPubTOCCreationTest_Level1_FW83()
 		{
 			// clean out old files
@@ -612,7 +602,6 @@ namespace Test.epubConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void EPubTOCCreationTest_Level2_FW83()
 		{
 			// clean out old files
@@ -652,7 +641,6 @@ namespace Test.epubConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void EPubTOCCreationTest_Level3_FW83()
 		{
 			// clean out old files
@@ -688,7 +676,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void CreateNcxReversalTest()
 		{
 			// clean out old files
@@ -728,7 +715,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void ScriptureGlossaryExportTest()
 		{
 			CleanOutputDirectory();
@@ -813,7 +799,6 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		public void XPathwayScriptureSettingTest()
 		{
 			_tf = new TestFiles("epubConvert");

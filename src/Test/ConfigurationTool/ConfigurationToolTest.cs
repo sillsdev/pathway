@@ -358,8 +358,7 @@ namespace Test.UIConfigurationToolTest
         /// <summary>
         ///A test for SaveColumnWidthTest and GridColumnWidth
         ///</summary>
-        [Test]
-        //[Category("SkipOnTeamCity")] // Fails on Linux on Team City
+        [Test] // Fails on Linux on Team City
         public void CopyStyle()
         {
             ArrayList cssNames = new ArrayList();

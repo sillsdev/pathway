@@ -483,7 +483,6 @@ namespace Test.CssParserTest
 
         #region FontFamily
         [Test]
-		//[Category("SkipOnTeamCity")]
 		public void FontFamily1()
         {
             _input.Name = "font-family";
@@ -507,7 +506,6 @@ namespace Test.CssParserTest
         }
 
         [Test]
-		//[Category("SkipOnTeamCity")]
 		public void FontFamily3()
         {
             _input.Name = "font-family";
@@ -519,7 +517,6 @@ namespace Test.CssParserTest
         }
 
         [Test]
-		//[Category("SkipOnTeamCity")]
 		public void FontFamily4()
         {
             _input.Name = "font-family";
@@ -551,7 +548,6 @@ namespace Test.CssParserTest
             Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
         [Test]
-		//[Category("SkipOnTeamCity")]
 		public void FontFamily7()
         {
             _input.Name = "font-family";
@@ -584,7 +580,6 @@ namespace Test.CssParserTest
         }
 
 	    [Test]
-		//[Category("SkipOnTeamCity")]
 	    public void FontFamily10()
 	    {
 			_input.Name = "font-family";
@@ -604,7 +599,6 @@ namespace Test.CssParserTest
         ///</summary>
         /// <example> font: italic small-caps bold 24pt/100% Palatino, serif </example>
         [Test]
-		//[Category("SkipOnTeamCity")]
 		public void Font()
         {
             _input.Name = "font";
