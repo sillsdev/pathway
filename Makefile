@@ -9,6 +9,7 @@ bindst=$(binsrc)/output/Release
 endif
 
 build:
+	make -f Makefile46 buildStep
 	make -f Makefile46 build
 	make -f Makefile40 build
 

@@ -29,6 +29,8 @@ namespace SIL.PublishingSolution
 {
     internal class Program
     {
+        private static bool _exportOutputTypes;
+
         public enum InputFormat
         {
             XHTML,
@@ -65,6 +67,14 @@ namespace SIL.PublishingSolution
                 while (i < args.Length)
                 {
                     i = ProcessExportType(args, i, projectInfo, files, ref inFormat, ref bShowDialog, ref exportType, ref bOutputSpecified);
+                }
+
+                if (_exportOutputTypes)
+                {
+                    Backend.Load(Common.FromRegistry("Export"));
+                    var exportTypes = Backend.GetExportType(projectInfo.ProjectInputType);
+                    SilTools.Utils.SerializeData(files[0], exportTypes);
+                    Environment.Exit(0);
                 }
 
 				Common.Testing = !projectInfo.IsOpenOutput;
@@ -253,6 +263,10 @@ namespace SIL.PublishingSolution
         {
             switch (args[i++])
             {
+                case "--outputType":
+                case "-o":
+                    _exportOutputTypes = true;
+                    break;
                 case "--directory":
                 case "-d":
                     projectInfo.ProjectPath = args[i++];

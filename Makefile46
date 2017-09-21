@@ -34,10 +34,10 @@ endif
 PATH := $(MONO_PREFIX)/bin:$(PATH)
 
 build:
-	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Release\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
+	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Release7BTE\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway46.sln
 
 debug:
-	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway.sln
+	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/ Pathway46.sln
 
 buildStep:
 	xbuild /t:ReBuild /p:BUILD_NUMBER=$(BUILD_NUMBER)\;Configuration=Debug\;Platform='$(Platform)'\;OS=Linux\;SolutionDir=$(binsrc)/\;OutputPath=src/BuildStep/bin/Debug src/BuildStep/BuildStep.csproj
