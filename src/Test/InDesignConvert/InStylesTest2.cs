@@ -63,7 +63,6 @@ namespace Test.InDesignConvert
 
 		#region Visibility
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void Visibility()
 		{
 			string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/Visibility.xhtml");
@@ -85,7 +84,6 @@ namespace Test.InDesignConvert
 
 		#region LineHeight
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void LineHeight1()
 		{
 			string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.xhtml");
@@ -132,7 +130,6 @@ namespace Test.InDesignConvert
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void LineHeight2()
 		{
 			string _inputXHTML = Common.DirectoryPathReplace(_testFolderPath + "/input/LineHeight.xhtml");

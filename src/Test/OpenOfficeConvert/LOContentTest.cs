@@ -89,6 +89,11 @@ namespace Test.OpenOfficeConvert
 				LoadParam("Dictionary", "false");
 		}
 
+		[SetUp]
+		public void TestSetup()
+		{
+			_projInfo.DefaultXhtmlFileWithPath = string.Empty;
+		}
 		#endregion
 
 		#region Private Functions
@@ -192,7 +197,6 @@ namespace Test.OpenOfficeConvert
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
 		public void SubscriptForNewFlexTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -290,7 +294,6 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
 		public void NewGuidewordStyleTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";

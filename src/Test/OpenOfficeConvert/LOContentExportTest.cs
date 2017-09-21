@@ -191,7 +191,6 @@ namespace Test.OpenOfficeConvert
 		/////</summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void DictionaryTabUnicodeTest()
 		//{
 		//	Common.UseAfterBeforeProcess = false;
@@ -221,7 +220,6 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void DictionaryMainStyleExport()
 		//{
 		//	Common.UseAfterBeforeProcess = false;

@@ -64,7 +64,6 @@ namespace Test.PdfConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void ScriptureReplaceBookNametoBookCodeTest()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -84,7 +83,6 @@ namespace Test.PdfConvert
         ///A test for Export
         ///</summary>
         [Test]
-        [Category("SkipOnTeamCity")]
         [Category("LongTest")]
         public void ExportDictionaryTest()
         {
@@ -112,7 +110,6 @@ namespace Test.PdfConvert
         ///A test for Dictionary Guideword
         ///</summary>
         [Test]
-        [Category("SkipOnTeamCity")]
         [Category("LongTest")]
         public void ExportDictionaryGuidewordTest()
         {
@@ -140,7 +137,6 @@ namespace Test.PdfConvert
         ///A test for Export
         ///</summary>
         [Test]
-        [Category("SkipOnTeamCity")]
         [Category("LongTest")]
         public void ExportScriptureTest()
         {
@@ -167,7 +163,6 @@ namespace Test.PdfConvert
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void CSSStyleForHeaderShowInPrincePdfTest()
         {
             _projInfo.ProjectInputType = "Scripture";

@@ -159,7 +159,14 @@ namespace SIL.Tool
             // clean out the results of any previous runs
             LastError = String.Empty;
             ExitCode = 0;
-            var info = new ProcessStartInfo(name)
+		    if (string.IsNullOrEmpty(name)
+		        || Path.IsPathRooted(name) && !File.Exists(name)
+		        || !Path.IsPathRooted(name) && !File.Exists(Path.Combine(instPath, name)))
+		    {
+			    if (Common.Testing) return;
+				throw new InvalidOperationException();
+			}
+			var info = new ProcessStartInfo(name)
                            {
                                CreateNoWindow = true,
                                RedirectStandardOutput = !string.IsNullOrEmpty(RedirectOutput),
@@ -171,7 +178,7 @@ namespace SIL.Tool
             if (arg != null)
                 info.Arguments = arg;
             Debug.Print("Run: Filename: {0}", info.FileName);
-            if (Common.Testing) return;
+            //if (Common.Testing) return;
             using (Process p1 = Process.Start(info))
             {
                 if (wait)

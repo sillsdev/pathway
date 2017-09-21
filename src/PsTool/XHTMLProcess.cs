@@ -802,7 +802,10 @@ namespace SIL.Tool
 			}
 			if (isFootnote)
 			{
-				if (string.IsNullOrEmpty(_characterName)) return false;
+				if (string.IsNullOrEmpty(_characterName))
+				{
+					_characterName = _parentStyleName;
+				}
 				LanguageFontCheck(content, _characterName);
 				AddUsedStyleName(_characterName);
 				StringBuilder footnoteFormat = new StringBuilder();

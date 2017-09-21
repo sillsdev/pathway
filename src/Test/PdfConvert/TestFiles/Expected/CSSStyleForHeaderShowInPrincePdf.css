@@ -23,24 +23,6 @@ content: attr(title);
 content: attr(title);
 }
 .scrBookName { display: block; font-size: 0pt; string-set: bookname content();}
-.pictureRight {
-padding: 10pt;
-}
-.pictureLeft {
-padding: 10pt;
-}
-.pictureCenter {
-padding: 10pt;
-}
-.picturePage {
-padding: 10pt;
-}
-.letData {
-padding: 20pt;
-}
 .letHead {
 page-break-after: avoid;
-}
-.picture {
-height: 1.0in;
 }

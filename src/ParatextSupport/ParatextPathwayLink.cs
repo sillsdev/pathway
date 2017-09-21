@@ -42,12 +42,13 @@ namespace SIL.PublishingSolution
         private readonly XslCompiledTransform _mSeparateIntoBooks = new XslCompiledTransform();
         private readonly XslCompiledTransform _mUsxToXhtml = new XslCompiledTransform();
         private readonly XslCompiledTransform _mEncloseParasInSections = new XslCompiledTransform();
+		private readonly XslCompiledTransform _mMoveLangUp = new XslCompiledTransform();
 
-        #endregion
+		#endregion
 
-        #region public variables
+		#region public variables
 
-        public string MOutputLocationPath
+		public string MOutputLocationPath
         {
             get { return _mOutputLocationPath; }
             set { _mOutputLocationPath = value; }
@@ -362,25 +363,31 @@ namespace SIL.PublishingSolution
             XmlReaderSettings settings = new XmlReaderSettings();
             settings.DtdProcessing = DtdProcessing.Parse;
 
-            // Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles) and
-            //       include the Scripture sections within columns.
-            FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
-            XmlWriter htmlw5 = XmlWriter.Create(xhtmlFile, _mEncloseParasInSections.OutputSettings);
-            XmlReader reader5 = XmlReader.Create(new StringReader(html3.ToString()), settings);
-            _mEncloseParasInSections.Transform(reader5, null, htmlw5, null);
-            xhtmlFile.Close();
-        }
+			// Step 4. Move paragraphs into appropriate section type (as determined by the paragraph styles) and
+			//       include the Scripture sections within columns.
+			StringBuilder html4 = new StringBuilder();
+			XmlWriter htmlw4 = XmlWriter.Create(html4, _mEncloseParasInSections.OutputSettings);
+            XmlReader reader4 = XmlReader.Create(new StringReader(html3.ToString()), settings);
+            _mEncloseParasInSections.Transform(reader4, null, htmlw4, null);
 
-        #endregion
+			// Step 5. Move language code to body. Remove spans with only language tag
+			FileStream xhtmlFile = new FileStream(fileName, FileMode.Create);
+			XmlWriter htmlw5 = XmlWriter.Create(xhtmlFile, _mMoveLangUp.OutputSettings);
+			XmlReader reader5 = XmlReader.Create(new StringReader(html4.ToString()), settings);
+			_mMoveLangUp.Transform(reader5, null, htmlw5, null);
+			xhtmlFile.Close();
+		}
 
-        #region private methods
+		#endregion
 
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Loads the style sheets that are used to transform from Paratext USX to XHTML.
-        /// </summary>
-        /// ------------------------------------------------------------------------------------
-        private void LoadStyleSheets()
+		#region private methods
+
+		/// ------------------------------------------------------------------------------------
+		/// <summary>
+		/// Loads the style sheets that are used to transform from Paratext USX to XHTML.
+		/// </summary>
+		/// ------------------------------------------------------------------------------------
+		private void LoadStyleSheets()
         {
             // Create stylesheets
             _mCleanUsx.Load(XmlReader.Create(
@@ -395,9 +402,12 @@ namespace SIL.PublishingSolution
             _mEncloseParasInSections.Load(XmlReader.Create(
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
                 "ParatextSupport.EncloseParasInSections.xsl")));
-        }
+			_mMoveLangUp.Load(XmlReader.Create(
+				Assembly.GetExecutingAssembly().GetManifestResourceStream(
+				"ParatextSupport.MoveLangUp.xsl")));
+		}
 
-        private void ExportProcess(List<XmlDocument> usxBooksToExport, string publicationName, string format, string outputLocationPath, DialogResult result)
+		private void ExportProcess(List<XmlDocument> usxBooksToExport, string publicationName, string format, string outputLocationPath, DialogResult result)
         {
 #if (TIME_IT)
                 DateTime dt1 = DateTime.Now;    // time this thing
@@ -427,7 +437,7 @@ namespace SIL.PublishingSolution
 
             string cssFullPath = Common.PathCombine(MOutputLocationPath, pubName + ".css");
             StyToCss styToCss = new StyToCss();
-            styToCss.ConvertStyToCss(_mProjectName, cssFullPath, string.Empty);
+            styToCss.ConvertStyToCss(_mDatabaseName, cssFullPath);
             string fileName = Common.PathCombine(MOutputLocationPath, pubName + ".xhtml");
             inProcess.PerformStep();
 

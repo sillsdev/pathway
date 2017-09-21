@@ -895,23 +895,25 @@ namespace Test.PsTool
 		{
 			String fileName = "ncoSibe.ssf";
 			string inputFolder = Common.PathCombine(_inputBasePath, "GetFontFeaturesTest");
-			Common.Ssf = Common.PathCombine(inputFolder, fileName);
-			Common.GetFontFeatures();
-			Common.Ssf = string.Empty;
-			Assert.AreEqual("\"litr\" 0,\"apos\" 1", Common.FontFeaturesString);
-			Assert.AreEqual("\r\n -webkit-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n -moz-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n" +
-										" -ms-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n" +
-										" font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n", Common.FontFeaturesSettingsString);
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+			using (Common.CallerSetting = new CallerSetting {SettingsFullPath = Common.PathCombine(inputFolder, fileName)})
+			{
+				Common.CallerSetting.LoadWritingSystem();
+				Common.GetFontFeatures();
+				Assert.AreEqual("\"litr\" 0,\"apos\" 1", Common.FontFeaturesString);
+				Assert.AreEqual("\r\n -webkit-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n -moz-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n" +
+											" -ms-font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n" +
+											" font-feature-settings: \"litr\" 0,\"apos\" 1; \r\n", Common.FontFeaturesSettingsString);
+			}
+			Common.CallerSetting = null;
 		}
 
         #region LanguageTests
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         // If unit fails, please confirm the below file exist,
         // C:\ProgramData\SIL\WritingSystemStore\ur.ldml
         public void GetTextDirection()
         {
-            Common.TextDirectionLanguageFile = null; // This test depends on this variable not being set in advance
             string expected = "ltr";
             string NkonyaCode = "nko";  //Used in Nkonya dataset
             string SenaCode = "seh";    //Used in Sena dataset
@@ -1259,7 +1261,6 @@ namespace Test.PsTool
         #region SaveInFolderTests
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void GetSaveInFolderTest()
         {
             string template = "$(Documents)s/$(Base)s/$(CurrentProject)s/Dictionary/$(StyleSheet)s_$(DateTime)s";

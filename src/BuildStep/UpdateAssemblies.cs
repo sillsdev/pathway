@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="UpdateAssemblies.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2009, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2009, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -88,22 +88,25 @@ namespace BuildStep
         /// </summary>
         public static void UpdateVersion(string curPath, string version)
         {
-            var aiName = "AssemblyInfo.cs";
+            var aiName = "AssemblyInfo.cs;GlobalAssemblyInfo.cs";
             var di = new DirectoryInfo(curPath);
-            if (di.GetFiles(aiName).Length > 0)
-            {
-                var sub = new Substitution { InputFile = aiName, OutputFile = aiName, TargetPath = curPath };
-                //MessageBox.Show(curPath);
-                try
-                {
-                    sub.UpdateGroup1(@".assembly. AssemblyFileVersion..([0-9.]+)...", version);
-                    sub.UpdateGroup1(@".assembly. AssemblyVersion..([0-9.]+)...", version);
-                }
-                catch (Exception)
-                {
-                }
-            }
-            var fiList = di.GetDirectories();
+	        foreach (var name in aiName.Split(';'))
+	        {
+				if (di.GetFiles(name).Length > 0)
+				{
+					var sub = new Substitution { InputFile = name, OutputFile = name, TargetPath = curPath };
+					//MessageBox.Show(curPath);
+					try
+					{
+						sub.UpdateGroup1(@".assembly. AssemblyFileVersion..([0-9.]+)...", version);
+						sub.UpdateGroup1(@".assembly. AssemblyVersion..([0-9.]+)...", version);
+					}
+					catch (Exception)
+					{
+					}
+				}
+			}
+			var fiList = di.GetDirectories();
             foreach (var fi in fiList)
             {
                 var startsWith = fi.Name.Substring(0, 1);

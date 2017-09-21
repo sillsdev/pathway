@@ -2019,4 +2019,16 @@
   <File Path="Preprocessing\Dictionary\byVer.xml" ComponentGuid="22200FA4-B78D-4E93-B0E8-51EAFD9FC7AC" />
   <File Path="Preprocessing\Dictionary\Video in Html5.xsl" ComponentGuid="68340F19-5BAF-4AC5-A363-E60879B4B1A9" />
   <File Path="PdfSymbols.xsl" ComponentGuid="6738D543-8BC9-442B-8783-B29249C59CA1" />
+  <File Path="Export\icudt54.dll" ComponentGuid="0051A24E-7873-4FB0-B266-87CD9B132C7E" />
+  <File Path="Export\icuin54.dll" ComponentGuid="D227EAB9-C12A-4062-96A0-252190E07D37" />
+  <File Path="Export\icuuc54.dll" ComponentGuid="1CDCB391-1D0E-4AD0-A4AC-05B14DEC4276" />
+  <File Path="Export\INIFileParser.dll" ComponentGuid="16D1BAE1-8F24-48C9-9A50-5F2220C569DB" />
+  <File Path="Export\INIFileParser.xml" ComponentGuid="7BD571CD-57A7-4388-A38A-02BAA75E6448" />
+  <File Path="Export\SIL.WritingSystems.xml" ComponentGuid="3D7F568D-C7AE-4DB1-8B27-9CEC22C4D7EF" />
+  <File Path="icudt54.dll" ComponentGuid="42B5AE48-E5B2-4631-8A03-2CDCCFE75CB9" />
+  <File Path="icuin54.dll" ComponentGuid="6932B1C5-A4F5-4209-81F2-F63B0A2368FD" />
+  <File Path="icuuc54.dll" ComponentGuid="6E3EC75C-2F3E-45F4-A2F7-94A7C94F135D" />
+  <File Path="INIFileParser.dll" ComponentGuid="72913BBF-B033-4A9F-AD2D-972E297A320A" />
+  <File Path="INIFileParser.xml" ComponentGuid="A63C96FF-D5FE-486A-9891-C8BE419C935F" />
+  <File Path="SIL.WritingSystems.xml" ComponentGuid="99ACC792-A97C-4C1D-A60A-9F9151658136" />
 </FileLibrary>

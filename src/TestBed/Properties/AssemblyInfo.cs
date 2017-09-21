@@ -8,11 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TestBed")]
 [assembly: AssemblyDescription("Program for Test pieces")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("sudyk")]
-[assembly: AssemblyProduct("TestBed")]
-[assembly: AssemblyCopyright("Copyright ( c ) 2012 SIL International")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -29,5 +25,3 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.16.0.5871")]
-[assembly: AssemblyFileVersion("1.16.0.5871")]

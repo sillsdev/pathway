@@ -260,6 +260,7 @@
       <DependentUpon>FontWarningDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="EpubManifest.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

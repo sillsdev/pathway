@@ -230,6 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PathwayExport.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

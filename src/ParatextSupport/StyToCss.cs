@@ -27,11 +27,9 @@ namespace SIL.PublishingSolution
     {
         public string StyFullPath { get; set; }
         private string _cssFullPath;
-		private string _projectDirectory;
         private Dictionary<string, Dictionary<string, string>> _styleInfo = new Dictionary<string, Dictionary<string, string>>();
         private Dictionary<string, string> _cssProp;
         private Dictionary<string, string> _mapClassName = new Dictionary<string, string>();
-        private string _styFolder, _cssFolder;
 
         /// ------------------------------------------------------------
         /// <summary>
@@ -41,16 +39,10 @@ namespace SIL.PublishingSolution
         /// </param>
         /// <param name="cssFullPath">The CSS full path.</param>
         /// ------------------------------------------------------------
-        public void ConvertStyToCss(string database, string cssFullPath, string ssfFullPath)
+        public void ConvertStyToCss(string database, string cssFullPath)
         {
             _cssFullPath = cssFullPath;
-			_projectDirectory = ssfFullPath;
-            bool fileExists = FindStyFile(database, ssfFullPath);
-
-	        if (!fileExists)
-	        {
-		        return;
-	        }
+	        if (!FindStyFile(database)) return;
 
 	        MapClassName();
             ParseFile();
@@ -114,11 +106,9 @@ namespace SIL.PublishingSolution
 
         private void SetCustomPath(string database)
         {
-			_styFolder = Path.GetDirectoryName(_projectDirectory);
-            _cssFolder = Path.GetDirectoryName(_cssFullPath);
-            _styFolder = Common.PathCombine(_styFolder, database);
-            StyFullPath = Common.PathCombine(_styFolder, "custom.sty");
-            _cssFullPath = Common.PathCombine(_cssFolder, "custom.css");
+			Common.CallerSetting = Common.CallerSetting ?? new CallerSetting(database);
+			StyFullPath = Common.CallerSetting.File("custom.sty");
+            _cssFullPath = Common.PathCombine(Path.GetDirectoryName(_cssFullPath), "custom.css");
         }
 
         /// <summary>
@@ -143,47 +133,14 @@ namespace SIL.PublishingSolution
         /// <param name="database">The settings for the Paratext database.
         /// </param>
         /// ------------------------------------------------------------
-        private bool FindStyFile(string database, string ssfFullPath)
+        private bool FindStyFile(string database)
         {
-			string ssfFile = string.Empty;
-			if(string.IsNullOrEmpty(ssfFullPath))
-			{
-				ssfFile = SettingsHelper.GetSettingFilePathForParatext(database);
-				_projectDirectory = ssfFile;
-			}
-			else
-			{
-				ssfFile = ssfFullPath;
-				//string ssfFileInputPath = FileInput(TestName);
-				ssfFile = Common.PathCombine(ssfFile, "gather");
-				ssfFile = Common.PathCombine(ssfFile, database + ".ssf");
-			}
-
-            bool isStylesheet = false;
-			if (!File.Exists(ssfFile))
-            {
-                Debug.WriteLine(ssfFile + " does not exist.");
-                return false;
-            }
-
-			string styFile = string.Empty;
-			//ssf files don't have DTD or namespaces so we shouldn't need the null resolver.
-	        var reader = new XmlTextReader(ssfFile); //{ XmlResolver = new NullResolver() };
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.Element && reader.Name == "StyleSheet") // Is class name null
-                {
-                    isStylesheet = true;
-                }
-                else if (reader.NodeType == XmlNodeType.Text && isStylesheet)
-                {
-					styFile = reader.Value;
-                    break;
-                }
-            }
-            reader.Close();
-			StyFullPath = Common.PathCombine(Path.GetDirectoryName(ssfFile), styFile);
-	        return true;
+			Common.CallerSetting = Common.CallerSetting ?? new CallerSetting(database);
+	        var styName = Common.CallerSetting.GetSettingValue("//StyleSheet");
+	        StyFullPath = Common.CallerSetting.File(styName);
+	        if (File.Exists(StyFullPath)) return true;
+	        StyFullPath = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(StyFullPath)), styName);
+	        return File.Exists(StyFullPath);
         }
 
         /// ------------------------------------------------------------------------
@@ -390,45 +347,16 @@ namespace SIL.PublishingSolution
             cssFile.Close();
         }
 
-        protected static string WriterSettingsFile = null;
         protected static void WriteLanguageFontDirection(TextWriter cssFile)
         {
-            if (WriterSettingsFile == null)
-            {
-                var settingsHelper = new SettingsHelper(Param.DatabaseName);
-                WriterSettingsFile = settingsHelper.GetSettingsFilename();
-            }
-            var languageCodeNode = Common.GetXmlNode(WriterSettingsFile, "//EthnologueCode");
-            var languageCode = "";
-            var languageDirection = "ltr";
-            var textAlign = "left";
-			Common.FindParatextProject();
+			Common.CallerSetting = Common.CallerSetting ?? new CallerSetting(Param.DatabaseName);
+			var languageCode = Common.CallerSetting.GetIsoCode();
+            var languageDirection = Common.CallerSetting.IsRightToLeft()? "rtl": "ltr";
+            var textAlign = Common.CallerSetting.IsRightToLeft()? "right": "left";
 			Common.GetFontFeatures();
-            if (languageCodeNode != null)
-            {
-                languageCode = languageCodeNode.InnerText;
-                languageDirection = Common.GetTextDirection(languageCode);
-                if (languageCode.Contains("-"))
-                {
-                    languageCode = languageCode.Split(new[] { '-' })[0];
-                }
-                if (languageDirection == "rtl")
-                {
-                    textAlign = "right";
-                }
-            }
-            var fontNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFont");
-            var fontFamily = "";
-            if (fontNode != null)
-            {
-                fontFamily = fontNode.InnerText;
-            }
-            var fontSizeNode = Common.GetXmlNode(WriterSettingsFile, "//DefaultFontSize");
-            var fontSize = "10";
-            if (fontSizeNode != null)
-            {
-                fontSize = fontSizeNode.InnerText;
-            }
+			var fontFamily = Common.CallerSetting.GetFont();
+            var fontSize = Common.CallerSetting.GetSettingValue("//DefaultFontSize");
+	        fontSize = string.IsNullOrEmpty(fontSize) ? "10" : fontSize;
             if (languageCode != "" && (fontFamily != "" || languageDirection != "ltr"))
             {
                 cssFile.Write("div[lang='{0}']", languageCode);
@@ -460,7 +388,6 @@ namespace SIL.PublishingSolution
                 cssFile.WriteLine("}");
                 cssFile.WriteLine();
             }
-            WriterSettingsFile = null;
         }
 
         /// <summary>

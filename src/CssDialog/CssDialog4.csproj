@@ -218,15 +218,12 @@
       <HintPath>..\..\packages\Analytics.2.0.3\lib\Analytics.NET.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CssParser, Version=1.15.7.5693, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\output\Debug\CssParser.dll</HintPath>
-    </Reference>
     <Reference Include="DesktopAnalytics, Version=1.2.4.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DesktopAnalytics.1.2.4.5\lib\net40\DesktopAnalytics.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="L10NSharp">
+    <Reference Include="L10NSharp, Version=2.0.67.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -237,9 +234,9 @@
       <HintPath>..\..\packages\PrinceXML.11.0.0\lib\net40\Prince.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PsTool, Version=1.15.7.5693, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="SIL.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=cab3c8c5232dfcf2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\output\Debug\PsTool.dll</HintPath>
+      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -248,9 +245,6 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="SIL.Core">
-      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutPw.cs">
@@ -320,6 +314,7 @@
     <Compile Include="PrintVia.Designer.cs">
       <DependentUpon>PrintVia.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
@@ -462,6 +457,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\2014_sil_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CssParser\CssParser4.csproj">
+      <Project>{b58fd9ba-1783-43f2-86d1-d79e1eacc365}</Project>
+      <Name>CssParser4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PsTool\PsTool4.csproj">
+      <Project>{448f846f-ce23-462c-bf7e-827875a36f82}</Project>
+      <Name>PsTool4</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

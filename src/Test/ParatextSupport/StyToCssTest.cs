@@ -23,50 +23,63 @@ using SIL.Tool;
 
 namespace Test.ParatextSupport
 {
-    /// ----------------------------------------------------------------------------------------
-    /// <summary>
-    /// Test functions of StyToCSS Convert
-    /// </summary>
-    /// ----------------------------------------------------------------------------------------
-    [TestFixture]
-    public class StyToCssTest : StyToCss
-    {
-        #region setup
-        private static string _inputPath;
-        private static string _outputPath;
-        private static string _expectedPath;
+	/// ----------------------------------------------------------------------------------------
+	/// <summary>
+	/// Test functions of StyToCSS Convert
+	/// </summary>
+	/// ----------------------------------------------------------------------------------------
+	[TestFixture]
+	public class StyToCssTest : StyToCss
+	{
+		#region setup
 
-        [TestFixtureSetUp]
-        public void Setup()
-        {
-            Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
-            Common.SupportFolder = "";
-            Common.ProgBase = Common.ProgInstall;
-            string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ParatextSupport/TestFiles");
-            _inputPath = Common.PathCombine(testPath, "Input");
-            _outputPath = Common.PathCombine(testPath, "output");
-            _expectedPath = Common.PathCombine(testPath, "Expected");
-            if (!Directory.Exists(_outputPath))
-            {
-                Directory.CreateDirectory(_outputPath);
-                while (!Directory.Exists(_outputPath))
-                    Thread.Sleep(1000);
-            }
-        }
-        #endregion setup
+		private static string _inputPath;
+		private static string _outputPath;
+		private static string _expectedPath;
+
+		[TestFixtureSetUp]
+		public void Setup()
+		{
+			Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
+			Common.SupportFolder = "";
+			Common.ProgBase = Common.ProgInstall;
+			string testPath = PathPart.Bin(Environment.CurrentDirectory, "/ParatextSupport/TestFiles");
+			_inputPath = Common.PathCombine(testPath, "Input");
+			_outputPath = Common.PathCombine(testPath, "output");
+			_expectedPath = Common.PathCombine(testPath, "Expected");
+			Common.CallerSetting?.Dispose();
+			DataCreator.Creator = DataCreator.CreatorProgram.Unknown;
+			Common.CallerSetting = new CallerSetting {SettingsFullPath = FileInput("testDb.ssf")};
+			if (!Directory.Exists(_outputPath))
+			{
+				Directory.CreateDirectory(_outputPath);
+				while (!Directory.Exists(_outputPath))
+					Thread.Sleep(1000);
+			}
+		}
+
+		[TestFixtureTearDown]
+		public void TearDown()
+		{
+			Common.CallerSetting.Dispose();
+			Common.CallerSetting = null;
+		}
+	#endregion setup
 
         [Test]
         public void WriteLanguageFontDirectionTest()
         {
             const string TestName = "WriteLanguageFontDirectionTest";
-            var cssFile = TestName + ".css";
-            TextWriter sw = new StreamWriter(FileOutput(cssFile));
-            WriterSettingsFile = FileInput(TestName + ".ssf");
-            Common.TextDirectionLanguageFile = FileInput("Dhivehi.lds");
-            WriteLanguageFontDirection(sw);
-            sw.Close();
+			var cssFile = TestName + ".css";
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+			using (Common.CallerSetting = new CallerSetting {SettingsFullPath = FileInput(TestName + ".ssf")})
+	        {
+				TextWriter sw = new StreamWriter(FileOutput(cssFile));
+				WriteLanguageFontDirection(sw);
+				sw.Close();
+			}
 
-	        string expectedFile = FileExpected(cssFile);
+			string expectedFile = FileExpected(cssFile);
 	        string outputFile = FileOutput(cssFile);
 
 			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
@@ -74,7 +87,6 @@ namespace Test.ParatextSupport
 
 
         [Test]
-		[Category("SkipOnTeamCity")]
         public void StytoCSSnkoNTProjectCSSTest()
         {
             const string TestName = "nkoNT";
@@ -82,7 +94,7 @@ namespace Test.ParatextSupport
             string cssFileOutput = FileOutput(cssFile);
 
             StyToCss styToCssObj = new StyToCss();
-			styToCssObj.ConvertStyToCss("nkoNT", cssFileOutput, FileInput(TestName));
+			styToCssObj.ConvertStyToCss("nkoNT", cssFileOutput);
 
 			string expectedFile = FileExpected(cssFile);
 			string outputFile = FileOutput(cssFile);
@@ -122,7 +134,6 @@ namespace Test.ParatextSupport
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void StytoCSSPnCSSTest()
 		{
 			const string TestName = "aai";
@@ -130,7 +141,7 @@ namespace Test.ParatextSupport
 			string cssFileOutput = FileOutput(cssFile);
 
 			StyToCss styToCssObj = new StyToCss();
-			styToCssObj.ConvertStyToCss("aai", cssFileOutput, FileInput(TestName));
+			styToCssObj.ConvertStyToCss("aai", cssFileOutput);
 
 			string expectedFile = FileExpected(cssFile);
 			string outputFile = FileOutput(cssFile);
@@ -139,7 +150,6 @@ namespace Test.ParatextSupport
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void MergeMainandCustomCssStylesTest()
 		{
 			const string TestName = "uitrans";
@@ -147,7 +157,7 @@ namespace Test.ParatextSupport
 			string cssFileOutput = FileOutput(cssFile);
 
 			StyToCss styToCssObj = new StyToCss();
-			styToCssObj.ConvertStyToCss("uitrans", cssFileOutput, FileInput(TestName));
+			styToCssObj.ConvertStyToCss("uitrans", cssFileOutput);
 
 			string expectedFile = FileExpected(cssFile);
 			string outputFile = FileOutput(cssFile);
@@ -156,7 +166,6 @@ namespace Test.ParatextSupport
 		}
 
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void uisTrans_Marker_rq_StytoCSSTest()
 		{
 			const string TestName = "uisTrans";
@@ -164,7 +173,7 @@ namespace Test.ParatextSupport
 			string cssFileOutput = FileOutput(cssFile);
 
 			StyToCss styToCssObj = new StyToCss();
-			styToCssObj.ConvertStyToCss("uisTrans", cssFileOutput, FileInput(TestName));
+			styToCssObj.ConvertStyToCss("uisTrans", cssFileOutput);
 
 			string expectedFile = FileExpected(cssFile);
 			string outputFile = FileOutput(cssFile);

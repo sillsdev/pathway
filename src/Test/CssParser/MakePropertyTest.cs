@@ -19,6 +19,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using SIL.PublishingSolution;
 using SIL.Tool;
@@ -482,14 +483,13 @@ namespace Test.CssParserTest
 
         #region FontFamily
         [Test]
-		[Category("SkipOnTeamCity")]
 		public void FontFamily1()
         {
             _input.Name = "font-family";
             _input.StringValue = "\"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Times New Roman");
+            _expected.Add("font-family", "Times New Roman;serif");
             Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
@@ -506,26 +506,24 @@ namespace Test.CssParserTest
         }
 
         [Test]
-		[Category("SkipOnTeamCity")]
 		public void FontFamily3()
         {
             _input.Name = "font-family";
             _input.StringValue = "Georgia, \"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Georgia");
+            _expected.Add("font-family", "Georgia;Times New Roman");
             Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
         [Test]
-		[Category("SkipOnTeamCity")]
 		public void FontFamily4()
         {
             _input.Name = "font-family";
             _input.StringValue = "dummyfont, Georgia,\"Times New Roman\",serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Georgia");
+            _expected.Add("font-family", "Georgia;Times New Roman");
             Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
@@ -550,14 +548,13 @@ namespace Test.CssParserTest
             Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
         [Test]
-		[Category("SkipOnTeamCity")]
 		public void FontFamily7()
         {
             _input.Name = "font-family";
             _input.StringValue = "Arial, sans-serif";
             _output = _makeProperty.CreateProperty(_input);
             _expected.Clear();
-            _expected.Add("font-family", "Arial");
+            _expected.Add("font-family", "Arial;Verdana");
             Assert.IsTrue(CompareDictionary(), CompareMessage());
         }
 
@@ -583,7 +580,6 @@ namespace Test.CssParserTest
         }
 
 	    [Test]
-		[Category("SkipOnTeamCity")]
 	    public void FontFamily10()
 	    {
 			_input.Name = "font-family";
@@ -603,7 +599,6 @@ namespace Test.CssParserTest
         ///</summary>
         /// <example> font: italic small-caps bold 24pt/100% Palatino, serif </example>
         [Test]
-		[Category("SkipOnTeamCity")]
 		public void Font()
         {
             _input.Name = "font";
@@ -612,7 +607,7 @@ namespace Test.CssParserTest
             _makeProperty.Font(_input);
             _expected.Clear();
             _expected.Add("font-size", "24");
-            _expected.Add("font-family", "Times New Roman");
+            _expected.Add("font-family", "Times New Roman;serif");
             _expected.Add("font-style", "italic");
             _expected.Add("font-variant", "small-caps");
             _expected.Add("font-weight", "bold");
@@ -780,13 +775,10 @@ namespace Test.CssParserTest
             bool compare = true;
             foreach (KeyValuePair<string, string> dicData in _expected)
             {
-                if (dicData.Value != _output[dicData.Key])
-                {
-                    _compareExpected = dicData.Value;
-                    _compareActual = _output[dicData.Key];
-                    compare = false;
-                    break;
-                }
+	            if (dicData.Value.Split(';').Contains(_output[dicData.Key])) continue;
+	            _compareExpected = dicData.Value;
+	            _compareActual = _output[dicData.Key];
+	            compare = false;
             }
             return compare;
         }

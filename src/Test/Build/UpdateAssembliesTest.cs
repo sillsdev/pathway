@@ -1,20 +1,22 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="UpdateAssembliesTest.cs" from='2011' to='2015' company='SIL International'>
-//      Copyright ( c ) 2015, SIL International.  
-//    
+//      Copyright ( c ) 2015, SIL International.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using BuildStep;
 using NUnit.Framework;
 
@@ -34,7 +36,6 @@ namespace Test.Build
         #endregion Setup
 
         [Test]
-        [Category("SkipOnTeamCity")]
         public void UpdateProductTest()
         {
             var result = UpdateProduct(_tf.Input("Pathway.wxs"), "1.13.4.4658", "BTE");
@@ -45,7 +46,6 @@ namespace Test.Build
         }
 
         [Test]
-        [Category("SkipOnTeamCity")]
         public void UpdateProduct2Test()
         {
             var result = UpdateProduct(_tf.Input("Pathway2.wxs"), "1.13.4.4658", "SE");
@@ -55,5 +55,12 @@ namespace Test.Build
             XmlAssert.AreEqual(_tf.Expected("Pathway2.wxs"), _tf.Output("Pathway2.wxs"), "Pathway Product File mismatch on change");
         }
 
+	    [Test]
+	    public void UpdateAssemblyVersionTest()
+	    {
+		    var outFile = _tf.Copy("GlobalAssemblyInfo.cs");
+			UpdateVersion(_tf.Output(null), "1.16.2.5900");
+			Assert.True(Regex.Match(FileData.Get(outFile), @"1\.16\.2\.5900").Success);
+	    }
     }
 }

@@ -36,11 +36,11 @@ namespace Test.epubConvert
         [Category("SkipOnTeamCity")]
         public void FreeFontTest()
         {
-            Assert.IsTrue(FontInternals.IsInstalled("Arial"));
+            Assert.IsTrue(FontInternals.IsInstalled("Arial"), "Arial not installed");
             var arialFont = new EmbeddedFont("Arial");
-            Assert.IsTrue(arialFont.CanRedistribute);
+            Assert.IsTrue(arialFont.CanRedistribute, "Can't Redistribute");
             const string fontFilename = "Arial.ttf";
-            Assert.IsTrue(fontFilename.ToLower().Equals(Path.GetFileName(arialFont.Filename).ToLower()));
+            Assert.IsTrue(fontFilename.ToLower().Equals(Path.GetFileName(arialFont.Filename).ToLower()), "Actual Arial name: " + arialFont.Filename);
         }
 
         /// <summary>
@@ -48,7 +48,6 @@ namespace Test.epubConvert
         /// </summary>
         /// This test is environment dependent and fails if the font is not installed.
         //[Test]
-        //[Category("SkipOnTeamCity")]
         //public void AbyssinicaTest()
         //{
         //    Assert.IsTrue(FontInternals.IsInstalled("Abyssinica SIL"));
@@ -62,7 +61,6 @@ namespace Test.epubConvert
         /// </summary>
         /// This test is environment dependent and fails if the Andika font is not installed.
         //[Test]
-        //[Category("SkipOnTeamCity")]
         //public void AndikaTest()
         //{
         //    string fontName = "Andika Basic";
@@ -81,7 +79,6 @@ namespace Test.epubConvert
         /// </summary>
         /// This test is environment dependent and fails if Charis is not installed.
         //[Test]
-        //[Category("SkipOnTeamCity")]
         //public void CharisTest()
         //{
         //    var silFont = new EmbeddedFont("Charis SIL");
@@ -95,7 +92,6 @@ namespace Test.epubConvert
         /// </summary>
         /// This test is environment dependent and fails if Dai Bana is not installed.
         //[Test]
-        //[Category("SkipOnTeamCity")]
         //public void DaiBannaTest()
         //{
         //    string fontName = "Dai Banna SIL Book";
@@ -117,7 +113,6 @@ namespace Test.epubConvert
         /// </summary>
         /// This test is environment dependent and fails is Doulos SIL is not installed.
         //[Test]
-        //[Category("SkipOnTeamCity")]
         //public void DoulosTest()
         //{
         //    var silFont = new EmbeddedFont("Doulos SIL");
@@ -131,7 +126,6 @@ namespace Test.epubConvert
         /// </summary>
         /// This test is environment dependent and fails if Gentium is not installed.
         //[Test]
-        //[Category("SkipOnTeamCity")]
         //public void GentiumTest()
         //{
         //    string fontName = "Gentium";
@@ -154,7 +148,6 @@ namespace Test.epubConvert
         /// here: http://www.linuxlibertine.org/
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
         public void LibertineTest()
         {
             var font = new EmbeddedFont("Linux Libertine");
@@ -170,7 +163,6 @@ namespace Test.epubConvert
         ///// </summary>
         ///// This test is environement dependent and fails if Scherazade is not installed.
   //      [Test]
-		//[Category("SkipOnTeamCity")]
   //      public void ScheharazadeTest()
   //      {
   //          var silFont = new EmbeddedFont("Scheherazade");

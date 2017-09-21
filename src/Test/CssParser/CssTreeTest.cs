@@ -48,7 +48,7 @@ namespace Test.CssParserTest
 		//This test is environment dependent and fails if the right fonts are installed.
 		//[Test]
   //      [Category("ShortTest")]
-  //      [Category("SkipOnTeamCity")]
+  //
   //      public void GetFontList()
   //      {
   //          string cssFile = "GetFontList.css";

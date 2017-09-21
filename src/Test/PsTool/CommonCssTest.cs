@@ -126,7 +126,6 @@ namespace Test.PsTool
         ///</summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void SetDefaultCSSTest()
         {
             string fileName = "DefaultCss.xhtml";

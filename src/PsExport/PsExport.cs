@@ -161,7 +161,6 @@ namespace SIL.PublishingSolution
 
 				if (DataType == "Scripture")
 				{
-					Common.FindParatextProject();
 					Common.GetFontFeatures();
 
 					SeExport(mainXhtml, Path.GetFileName(fluffedCssFullName), outDir);

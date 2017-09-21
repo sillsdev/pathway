@@ -107,6 +107,7 @@ namespace SIL.PublishingSolution
 				SetFileName();
 				projectInfo.ProjectPath = Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath);
 				LoadParameters(projectInfo.ProjectInputType);
+				if (Param.DatabaseName == "DatabaseName") Common.CallerSetting = new CallerSetting {SettingsFullPath = projectInfo.DefaultXhtmlFileWithPath};
 				Common.LoadHyphenationSettings();
 
 				List<IExportProcess> backend = new List<IExportProcess>();

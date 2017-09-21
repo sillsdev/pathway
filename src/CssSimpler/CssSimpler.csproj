@@ -250,6 +250,7 @@
     <Compile Include="MoveInlineStyles.cs" />
     <Compile Include="ProcessPseudo.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

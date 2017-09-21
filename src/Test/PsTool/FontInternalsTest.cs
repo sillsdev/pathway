@@ -16,6 +16,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using SIL.Tool;
 using NUnit.Framework;
 
@@ -54,7 +55,6 @@ namespace Test.PsTool
 		/////A test Arial Postscript font name
 		/////</summary>
 		//[Test]
-		//[Category("SkipOnTeamCity")]
 		//public void CharisEmbeddingTest()
 		//{
 		//	string familyName = "Charis SIL";
@@ -67,15 +67,14 @@ namespace Test.PsTool
 		/// <summary>
 		///A test Arial Postscript font name
 		///</summary>
-		[Test]
-		[Category("SkipOnTeamCity")] // Requires font to be installed
+		[Test] // Requires font to be installed
 		public void ArialTest()
         {
             string fontName = "Arial";
-            var expected = "ArialMT";
+            var expected = "ArialMT;";
             var fontFullName = FontInternals.GetFontFileName(fontName, "normal");
             var actual = FontInternals.GetPostscriptName(fontFullName);
-            Assert.AreEqual(expected, actual);
+            Assert.IsTrue(expected.Split(';').Contains(actual), "Actual value:"+actual);
         }
 
         /// <summary>
@@ -102,7 +101,6 @@ namespace Test.PsTool
 		/////A test Arial Postscript font name
 		/////</summary>
 		//[Test]
-		//[Category("SkipOnTeamCity")]
 		//public void AbyssinicaTest()
 		//{
 		//    var fontFullName = FontInternals.GetFontFileName("Abyssinica SIL", "normal");
@@ -116,7 +114,6 @@ namespace Test.PsTool
 		/////A test Arial Postscript font name
 		/////</summary>
 		//[Test]
-		//[Category("SkipOnTeamCity")]
 		//public void ScheherazadeTest()
 		//{
 		//    var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
@@ -128,7 +125,6 @@ namespace Test.PsTool
 
 		//Environment dependent test
 		//[Test]
-		//[Category("SkipOnTeamCity")]
 		//public void GetFontFileNameTest()
 		//{
 		//    string familyName = "Charis SIL";
@@ -145,7 +141,7 @@ namespace Test.PsTool
 
 		//Environment dependent test
 		//[Test]
-		//      [Category("SkipOnTeamCity")]
+		//
 		//      public void GetFontFileNameTest2()
 		//      {
 		//          string familyName = "Charis SIL";
@@ -162,7 +158,7 @@ namespace Test.PsTool
 
 		//Environment dependent test
 		//[Test]
-		//      [Category("SkipOnTeamCity")]
+		//
 		//      public void GetFontFileNameTest3()
 		//      {
 		//          string familyName = "Doulos SIL";
@@ -177,7 +173,6 @@ namespace Test.PsTool
 
 		//Environment dependent test
 		//[Test]
-		//[Category("SkipOnTeamCity")]
 		//public void CharisBoldTest()
 		//{
 		//    string familyName = "Charis SIL";
@@ -206,7 +201,6 @@ namespace Test.PsTool
 		/////Test whether Charis is a Graphite font (should be true)
 		/////</summary>
 		//[Test]
-		//[Category("SkipOnTeamCity")]
 		//public void CharisGraphiteTest()
 		//{
 		//    string familyName = "Charis SIL";
@@ -220,7 +214,6 @@ namespace Test.PsTool
 		///Test whether Scheherazade is a Graphite font (should be false)
 		///</summary>
 		[Test]
-        [Category("SkipOnTeamCity")]
         public void ScheherazadeGraphiteTest()
         {
             var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");

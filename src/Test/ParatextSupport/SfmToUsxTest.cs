@@ -56,7 +56,6 @@ namespace Test.ParatextSupport
         ///Compare files
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
         public void Book()
         {
             SfmToUsx _sfmToUsx = new SfmToUsx();
@@ -75,7 +74,6 @@ namespace Test.ParatextSupport
 		///Compare files
 		/// </summary>
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void GENKFYBook()
 		{
 			SfmToUsx _sfmToUsx = new SfmToUsx();
@@ -94,7 +92,6 @@ namespace Test.ParatextSupport
         ///Compare files
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
         public void NKOu3Book()
         {
             SfmToUsx _sfmToUsx = new SfmToUsx();

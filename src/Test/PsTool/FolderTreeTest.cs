@@ -24,14 +24,14 @@ namespace Test.PsTool
     public class FolderTreeTest
     {
         #region Private Variables
-        private string sourceFolder;
+	    private TestFiles _tf;
         #endregion
 
         #region Setup
         [TestFixtureSetUp]
         protected void SetUp()
         {
-            sourceFolder = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/InputFiles");
+			_tf = new TestFiles("PsTool", inputFolderName: "InputFiles");
             Common.Testing = true;
         }
         #endregion Setup
@@ -42,8 +42,8 @@ namespace Test.PsTool
         [Test]
         public void CopyTest()
         {
-            string source = Common.PathCombine(sourceFolder, "CopyFolder");
-            string destination = Common.PathCombine(sourceFolder, "DestinationFolder");
+            string source = _tf.Input("CopyFolder");
+            string destination = _tf.Output("DestinationFolder");
 
             if(Directory.Exists(destination))
                 Directory.Delete(destination,true);
@@ -68,7 +68,6 @@ namespace Test.PsTool
 		/////A test for Get
 		/////</summary>
 		//[Test]
-		//[Category("SkipOnTeamCity")]
 		//public void LongShortDirectoryNameTest()
 		//{
 		//	if (Common.UsingMonoVM)

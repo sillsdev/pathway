@@ -251,6 +251,7 @@
   <ItemGroup>
     <Compile Include="ExportTheWord.cs" />
     <Compile Include="MySwordSqlite.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -77,7 +77,6 @@ namespace Test.CssDialog
 
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void LoadAvailFormatsTest()
         {
             LoadAvailFormats();

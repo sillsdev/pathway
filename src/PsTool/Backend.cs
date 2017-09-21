@@ -102,13 +102,28 @@ namespace SIL.Tool
             _exportType.Clear();
             foreach (IExportProcess process in backend)
             {
-                if (process.Handle(inputDataType))
+                try
                 {
-                    // if (process.ExportType.ToLower() == "openoffice/libreoffice")
-                    // {
-                        // _exportType.Add("Pdf (Using OpenOffice/LibreOffice) ");
-                    // }
-                    _exportType.Add(process.ExportType);
+					if (process.Handle(inputDataType))
+					{
+						// if (process.ExportType.ToLower() == "openoffice/libreoffice")
+						// {
+						// _exportType.Add("Pdf (Using OpenOffice/LibreOffice) ");
+						// }
+						_exportType.Add(process.ExportType);
+					}
+				}
+                catch
+                {
+                    // On Linux, .net 4.0 can't determine .net 4.6.1 assembly types so call a process
+                    if (Common.IsUnixOS())
+                    {
+                        var typeFileName = Path.Combine(Common.GetAllUserPath(), "ExportTypes.xml");
+                        var args = string.Format("PathwayB.exe -i {0} -f {1} -o", inputDataType, typeFileName);
+                        SubProcess.RunCommand(Common.FromRegistry("Export"), "mono", args, true);
+                        Exception err;
+                        return (ArrayList)SilTools.Utils.DeserializeData(typeFileName, typeof(ArrayList), out err);
+                    }
                 }
             }
             return _exportType;

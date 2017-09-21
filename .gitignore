@@ -1,3 +1,4 @@
+*.xpr
 *.suo
 *.chw
 *.msi
@@ -10,6 +11,7 @@
 *.userprefs
 *Thumbs.db
 *.VisualState.xml
+.vs/*
 ./pathway_*
 output/*
 Build/*.exe
@@ -22,6 +24,8 @@ packages/*
 releases
 testResults
 Test-*
+DownloadInfoTemplate.exe
+Installer/Application.wxs
 src/Reference
 src/bin
 src/debian/files
@@ -44,7 +48,6 @@ src/OpenOfficeConvert_OLD/*
 src/PwLinuxCopy/*
 src/Sprint/*
 src/Test/test-results/*
-src/*/build/*
 src/*/dist/*
 src/XeLaTexConvert/XeLaTexExe
 src/XeLaTexConvert/TexLive

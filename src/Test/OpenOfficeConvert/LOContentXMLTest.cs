@@ -31,7 +31,6 @@ namespace Test.OpenOfficeConvert
 {
     [TestFixture]
     [Category("BatchTest")]
-    [Category("SkipOnTeamCity")]
     public class LOContentXMLTest
     {
         #region Private Variables
@@ -91,6 +90,13 @@ namespace Test.OpenOfficeConvert
             Param.LoadSettings();
 
         }
+
+	    [SetUp]
+	    public void TestSetup()
+	    {
+		    _index = 0;
+		    _projInfo.DefaultXhtmlFileWithPath = string.Empty;
+	    }
 
         private void EnableConfigurationSettings(string outputDirectory)
         {
@@ -217,7 +223,8 @@ namespace Test.OpenOfficeConvert
 
         //#region Nodes_Test
         [Test]
-        public void NestedDivCase1_Node()
+		[Category("pageTests")]
+		public void NestedDivCase1_Node()
         {
 
             const string file = "NestedDivCase1";
@@ -474,7 +481,6 @@ namespace Test.OpenOfficeConvert
 		/// TD-4531 Definition appears bold and should be regular
 		/// </summary>
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void AncestorChildTest2_Node()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -516,7 +522,6 @@ namespace Test.OpenOfficeConvert
 		/// TD-4529 - Person should be italic
 		/// </summary>
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void ItalicOnFlex83Test_Node()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -555,7 +560,6 @@ namespace Test.OpenOfficeConvert
 		/// TD-4527 Missing slot punctuation
 		/// </summary>
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void PseudoBeforeOnFlex83Test_Node()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -592,7 +596,8 @@ namespace Test.OpenOfficeConvert
         /// TD-429 -  Handling Anchor Tag
         /// </summary>
         [Test]
-        public void AnchorTag_Node()
+		[Category("pageTests")]
+		public void AnchorTag_Node()
         {
             const string file = "AnchorTag";
             _projInfo.ProjectInputType = "Scripture";
@@ -613,7 +618,8 @@ namespace Test.OpenOfficeConvert
         }
 
         [Test]
-        public void CrossReference_Node()
+		[Category("pageTests")]
+		public void CrossReference_Node()
         {
             const string file = "CrossRef";
             _projInfo.ProjectInputType = "Dictionary";
@@ -974,7 +980,8 @@ namespace Test.OpenOfficeConvert
         ///<summary>
         /// </summary>
         [Test]
-        public void GlossaryReferenceNode()
+		[Category("pageTests")]
+		public void GlossaryReferenceNode()
         {
             const string file = "GlossaryReference";
             _projInfo.ProjectInputType = "Scripture";
@@ -1132,7 +1139,8 @@ namespace Test.OpenOfficeConvert
         /// TD-2758
         /// </summary>
         [Test]
-        public void Body()
+		[Category("pageTests")]
+		public void Body()
         {
             const string file = "body";
             _projInfo.ProjectInputType = "Scripture";
@@ -1516,7 +1524,6 @@ namespace Test.OpenOfficeConvert
 		/// TD-1855 Picture / PictureBox error
 		/// </summary>
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void Picture_Mrk_Node()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -1640,7 +1647,8 @@ namespace Test.OpenOfficeConvert
         /// TD-343 Implement lists
         /// </summary>
         [Test]
-        public void ListOlUl_Node()
+		[Category("pageTests")]
+		public void ListOlUl_Node()
         {
             _projInfo.ProjectInputType = "Dictionary";
             const string file = "ListOlUl";
@@ -1809,7 +1817,8 @@ namespace Test.OpenOfficeConvert
 		/// TD-416 chapter number should align with top of text not with bottom
 		/// </summary>
 		[Test]
-        public void DropCap_Node()
+		[Category("pageTests")]
+		public void DropCap_Node()
         {
             const string file = "DropCap";
             _projInfo.ProjectInputType = "Scripture";
@@ -2090,7 +2099,6 @@ namespace Test.OpenOfficeConvert
         /// TD-1239 -  Two column output from TE can conflict with two column stylesheets, not wrap correctly at section breaks.
         /// </summary>
         [Test]
-        [Category("SkipOnTeamCity")]
         public void TableProperty()
         {
             //TODO NEGATIVE TEST FOR SCRSECTION IS NOT CREATED, SHOULD BE DONE
@@ -2258,6 +2266,7 @@ namespace Test.OpenOfficeConvert
         }
 
 		[Test]
+		[Category("pageTests")]
 		public void PageDictionaryTest1()
 	    {
 			// Single Page - Top Center
@@ -2273,6 +2282,7 @@ namespace Test.OpenOfficeConvert
 	    }
 
 		[Test]
+		[Category("pageTests")]
 		public void PageDictionaryTest2()
 		{
 			// Single Page - Bottom Center
@@ -2288,6 +2298,7 @@ namespace Test.OpenOfficeConvert
 		}
 
 		[Test]
+		[Category("pageTests")]
 		public void PageDictionaryTest3()
 		{
 			// Mirrored Page - Top Inside Margin
@@ -2296,9 +2307,13 @@ namespace Test.OpenOfficeConvert
 			_index = 3;
 			string styleOutput = GetStyleOutput(file);
 			string xpath = "//style:master-page[@style:name=\"Left_20_Page\"]";
-			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true };
+			_validate = new ValidateXMLFile(styleOutput) { GetOuterXml = true};
 			string content = "<style:master-page style:name=\"Left_20_Page\" style:display-name=\"Left Page\" style:page-layout-name=\"pm4\" style:next-style-name=\"Right_20_Page\" xmlns:style=\"urn:oasis:names:tc:opendocument:xmlns:style:1.0\"><style:header><text:p text:style-name=\"Header\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"MT1\"><text:variable-get text:name=\"Left_Guideword_L\" /></text:span><text:span text:style-name=\"MT2\"><text:variable-get text:name=\"RLeft_Guideword_L\" /></text:span><text:tab /><text:tab /><text:span text:style-name=\"MT3\"><text:page-number text:select-page=\"current\">4</text:page-number></text:span></text:p></style:header></style:master-page>";
 			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			if (!returnValue1)
+			{
+				MessageBox.Show(content);
+			}
 			Assert.IsTrue(returnValue1, "Mirrored Page with Top Inside Margin - Left Page Test failed");
 
 			xpath = "//style:master-page[@style:name=\"Right_20_Page\"]";
@@ -2309,6 +2324,7 @@ namespace Test.OpenOfficeConvert
 		}
 
 		[Test]
+		[Category("pageTests")]
 		public void PageDictionaryTest4()
 		{
 			// Mirrored Page - Top Center
@@ -2699,7 +2715,6 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void PageTest9()
         {
             const string file = "pagetest9";
@@ -2727,7 +2742,6 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
 		[Category("ShortTest")]
-		[Category("SkipOnTeamCity")]
 		public void PageTestTitle()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -2754,8 +2768,8 @@ namespace Test.OpenOfficeConvert
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
-        public void DictionaryT9Test()
+		[Category("pageTests")]
+		public void DictionaryT9Test()
         {
             const string file = "t9";
             _projInfo.ProjectInputType = "Dictionary";
@@ -2914,7 +2928,8 @@ namespace Test.OpenOfficeConvert
 
         ///TD-1944
         [Test]
-        public void FootnoteVerseNumberNode1()
+		[Category("pageTests")]
+		public void FootnoteVerseNumberNode1()
         {
             const string file = "FootnoteVerseNumber";
             _projInfo.ProjectInputType = "Scripture";
@@ -2994,7 +3009,8 @@ namespace Test.OpenOfficeConvert
 
         ///TD-2666
         [Test]
-        public void NoImageNode()
+		[Category("pageTests")]
+		public void NoImageNode()
         {
             const string file = "NoImage";
             _projInfo.ProjectInputType = "Dictionary";
@@ -3415,7 +3431,6 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void BughotugospelsExport()
 		//{
 		//    _projInfo.ProjectInputType = "Scripture";
@@ -3432,7 +3447,6 @@ namespace Test.OpenOfficeConvert
 		///</summary>
 		[Test]
         [Category("LongTest")]
-        [Category("SkipOnTeamCity")]
         public void TeluguFootnoteMarkerTest()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -3451,7 +3465,7 @@ namespace Test.OpenOfficeConvert
 		//     /// </summary>
 		//     [Test]
 		//     [Category("LongTest")]
-		//     [Category("SkipOnTeamCity")]
+		//
 		//     public void TokPisinExport()
 		//     {
 		//         _projInfo.ProjectInputType = "Scripture";
@@ -3476,7 +3490,6 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void zKabwaExport()
 		//{
 		//    _projInfo.ProjectInputType = "Scripture";
@@ -3495,7 +3508,6 @@ namespace Test.OpenOfficeConvert
 		/////</summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void DictionaryInsertHardSpaceTest()
 		//{
 		//	_projInfo.ProjectInputType = "Dictionary";
@@ -3519,7 +3531,6 @@ namespace Test.OpenOfficeConvert
 		/////</summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void EntryStyleTest()
 		//{
 		//	_projInfo.ProjectInputType = "Dictionary";
@@ -3543,7 +3554,6 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void B1peExport()
 		//{
 		//    _projInfo.ProjectInputType = "Scripture";
@@ -3563,7 +3573,7 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//      [Category("LongTest")]
-		//      [Category("SkipOnTeamCity")]
+		//
 		//public void MainStyleChangesinMexicoExport()
 		//      {
 		//          _projInfo.ProjectInputType = "Dictionary";
@@ -3587,7 +3597,7 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//      [Category("LongTest")]
-		//      [Category("SkipOnTeamCity")]
+		//
 		//public void ReversalStyleChangesinMexicoExport()
 		//      {
 		//          _projInfo.ProjectInputType = "Dictionary";
@@ -3609,7 +3619,7 @@ namespace Test.OpenOfficeConvert
 		/////MexicoStyle Dictionary Slash symbol
 		///// </summary>
 		//[Test]
-		//      [Category("SkipOnTeamCity")]
+		//
 		//public void SlashSymbolExport()
 		//      {
 		//          _projInfo.ProjectInputType = "Dictionary";
@@ -3632,7 +3642,6 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void Table1Test()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -3651,7 +3660,6 @@ namespace Test.OpenOfficeConvert
         ///Table structure Test
         /// </summary>
         [Test]
-		[Category("SkipOnTeamCity")]
         public void Table2Test()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -3708,7 +3716,6 @@ namespace Test.OpenOfficeConvert
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void ImageNoCaptionFileTest()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -3729,7 +3736,6 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void TeTestExport()
 		//{
 		//    _projInfo.ProjectInputType = "Scripture";
@@ -3748,7 +3754,7 @@ namespace Test.OpenOfficeConvert
 		//     /// </summary>
 		//     [Test]
 		//     [Category("LongTest")]
-		//     [Category("SkipOnTeamCity")]
+		//
 		//     public void BuangExport()
 		//     {
 		//         _projInfo.ProjectInputType = "Dictionary";
@@ -3771,7 +3777,6 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void WhiteSpaceTest()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -3789,7 +3794,6 @@ namespace Test.OpenOfficeConvert
         /// </summary>
         [Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void IsBookNameChanged()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -3808,7 +3812,7 @@ namespace Test.OpenOfficeConvert
 		//     /// </summary>
 		//     [Test]
 		//     [Category("ShortTest")]
-		//     [Category("SkipOnTeamCity")]
+		//
 		//     public void SpacesInDictionary()
 		//     {
 		//         _projInfo.ProjectInputType = "Dictionary";
@@ -3832,7 +3836,7 @@ namespace Test.OpenOfficeConvert
 		//      /// </summary>
 		//      [Test]
 		//      [Category("ShortTest")]
-		//      [Category("SkipOnTeamCity")]
+		//
 		//      public void GuidewordLength()
 		//      {
 		//          _projInfo.ProjectInputType = "Dictionary";
@@ -3856,7 +3860,7 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//      [Category("ShortTest")]
-		//      [Category("SkipOnTeamCity")]
+		//
 		//      public void OutlineLevel()
 		//      {
 		//          _projInfo.ProjectInputType = "Dictionary";
@@ -3880,7 +3884,6 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void FrontMatterDirection()
         {
             _projInfo.ProjectInputType = "Dictionary";
@@ -3899,7 +3902,7 @@ namespace Test.OpenOfficeConvert
 		//     /// </summary>
 		//     [Test]
 		//     [Category("ShortTest")]
-		//     [Category("SkipOnTeamCity")]
+		//
 		//     public void RevarsalHeader()
 		//     {
 		//         _projInfo.ProjectInputType = "Dictionary";
@@ -3922,7 +3925,6 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void RightToLeftHeader()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -3942,7 +3944,7 @@ namespace Test.OpenOfficeConvert
 		//     /// </summary>
 		//     [Test]
 		//     [Category("ShortTest")]
-		//     [Category("SkipOnTeamCity")]
+		//
 		//     public void RevarsalEmptyPage()
 		//     {
 		//         _projInfo.ProjectInputType = "Dictionary";
@@ -3966,7 +3968,6 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void MainTitleDisplay()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -3986,7 +3987,6 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//[Category("ShortTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void KeepWithNextTest()
 		//{
 		//    _projInfo.ProjectInputType = "Dictionary";
@@ -4015,7 +4015,6 @@ namespace Test.OpenOfficeConvert
 		/// </summary>
 		[Test]
         [Category("ShortTest")]
-        [Category("SkipOnTeamCity")]
         public void HyphenationWordTest()
         {
             _projInfo.ProjectInputType = "Scripture";
@@ -4037,7 +4036,6 @@ namespace Test.OpenOfficeConvert
 		/// Buang Ws Test
 		/// </summary>
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void FlexGuidewordStyleTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -4054,7 +4052,6 @@ namespace Test.OpenOfficeConvert
 		/////</summary>
 		//[Test]
 		//[Category("LongTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void BuangColorTestFlex83()
 		//{
 		//	_projInfo.ProjectInputType = "Dictionary";
@@ -4077,7 +4074,6 @@ namespace Test.OpenOfficeConvert
 		/// Anchor with space Test
 		/// </summary>
 		[Test]
-		[Category("SkipOnTeamCity")]
 		public void AnchorSpaceFlex83Test()
 		{
 			_projInfo.ProjectInputType = "Dictionary";
@@ -4094,7 +4090,6 @@ namespace Test.OpenOfficeConvert
 		///// </summary>
 		//[Test]
 		//[Category("ShortTest")]
-		//[Category("SkipOnTeamCity")]
 		//public void SelfSpaceTestInDictionary()
 		//{
 		//	_projInfo.ProjectInputType = "Dictionary";
@@ -4133,7 +4128,6 @@ namespace Test.OpenOfficeConvert
 		///</summary>
 		[Test]
 		[Category("LongTest")]
-		[Category("SkipOnTeamCity")]
 		public void ParentPrecedeSpaceTest()
 		{
 			_projInfo.ProjectInputType = "Dictionary";

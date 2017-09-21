@@ -229,14 +229,11 @@
       <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="L10NSharp">
-      <HintPath>..\..\lib\L10NSharp.dll</HintPath>
+    <Reference Include="icu.net">
+      <HintPath>..\..\lib\icu.net.dll</HintPath>
     </Reference>
-    <Reference Include="SIL.Core">
-      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="SIL.WritingSystems">
-      <HintPath>..\..\lib\SIL.WritingSystems.dll</HintPath>
+    <Reference Include="INIFileParser">
+      <HintPath>..\..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -244,12 +241,22 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="SIL.Core">
+      <HintPath>..\..\lib\SIL.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SIL.WritingSystems">
+      <HintPath>..\..\lib\SIL.WritingSystems.dll</HintPath>
+    </Reference>
+    <Reference Include="L10NSharp">
+      <HintPath>..\..\lib\L10NSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfterBeforeProcess.cs" />
     <Compile Include="AfterBeforeProcessEpub.cs" />
     <Compile Include="AfterBeforeXHTMLProcess.cs" />
     <Compile Include="Backend.cs" />
+    <Compile Include="CallerSetting.cs" />
     <Compile Include="CheckUserFileAccessRights.cs" />
     <Compile Include="ClassInfo.cs" />
     <Compile Include="ComboBoxItem.cs">
@@ -260,6 +267,7 @@
     </Compile>
     <Compile Include="CommonXml.cs" />
     <Compile Include="CreatingHyphenationSettings.cs" />
+    <Compile Include="DataCreator.cs" />
     <Compile Include="FileStreamXmlResolver.cs" />
     <Compile Include="FlexScan.cs" />
     <Compile Include="ImageMods.cs" />
@@ -335,12 +343,14 @@
     </Compile>
     <Compile Include="PreExportProcess.cs" />
     <Compile Include="PublicationInformation.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryAccess.cs" />
     <Compile Include="SubProcess.cs" />
     <Compile Include="Substitution.cs" />
     <Compile Include="XHTMLProcess.cs" />
     <Compile Include="XmlCopy.cs" />
+    <Compile Include="XmlHeadValue.cs" />
     <Compile Include="XmlOneToMany.cs" />
     <Compile Include="XmlParser.cs" />
     <Compile Include="ZipFolder.cs" />
@@ -391,9 +401,10 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="..\..\lib\icudt54.dll;..\..\lib\icuin54.dll;..\..\lib\icuuc54.dll" DestinationFolder="$(OutputPath)" Condition=" '$(OS)' == 'Windows_NT' or '$(OS)' == '' "/>
+  </Target>
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

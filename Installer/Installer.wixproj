@@ -108,11 +108,11 @@
       <Name>WixNetFxExtension</Name>
     </WixExtension>
   </ItemGroup>
-	<Target Name="BeforeBuild">
-    <Exec Command="BuildStep.exe -v:1 -a:FileComponents --ApplicationFileName=Application.wxs --BasePath=$(SolutionDir)Installer" WorkingDirectory="$(SolutionDir)"/>
+  <Target Name="BeforeBuild">
+    <Exec Command="BuildStep.exe -v:1 -a:FileComponents --ApplicationFileName=Application.wxs --BasePath=$(SolutionDir)Installer" WorkingDirectory="$(SolutionDir)" />
   </Target>
-	<Target Name="AfterBuild">
-	</Target>
+  <Target Name="AfterBuild">
+  </Target>
   <PropertyGroup>
     <PreBuildEvent />
   </PropertyGroup>

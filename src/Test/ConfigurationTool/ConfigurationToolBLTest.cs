@@ -285,7 +285,8 @@ namespace Test.UIConfigurationToolBLTest
 
 		[Test]
         [Category("LongTest")]
-        public void DeleteWithDefaultTest()
+		[Category("SkipOnTeamCity")]
+		public void DeleteWithDefaultTest()
         {
             SetUp();
             CopyFile();

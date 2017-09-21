@@ -68,7 +68,7 @@ namespace Test.CssDialog
         ///A test for Create
         ///</summary>
         [Test]
-		[Category("SkipOnTeamCity")]
+		[Category("SkipOnTeamCity")] // Failed to find expected file on Linux?
         public void CreateTest()
         {
             try

@@ -26,48 +26,82 @@ using SIL.Tool;
 
 namespace Test.ParatextSupport
 {
-    /// <summary>
-    /// EncloseParasInSectionsTests tests the EncloseParasInSections transform. This transform adds section structure to a Pathway file
-    /// from a Paratext USX file.
-    /// </summary>
-    [TestFixture]
-    public class EncloseParasInSectionsTests
-    {
-        #region Constants
-        private const string divider = "------------------------------------------------------------";
-        private const string htmlOpen = "<?xml version=\"1.0\" encoding=\"utf-16\"?><html xml:lang=\"utf-8\" xmlns=\"http://www.w3.org/1999/xhtml\">";
-        private string _htmlHeader = "<head><title /></head>";
-        private const string bookOpen = "<body class=\"scrBody\"><div class=\"scrBook\"><span class=\"scrBookName\" lang=\"zxx\">Genesis</span>" +
-            "<span class=\"scrBookCode\" lang=\"zxx\">GEN</span>";
-        private const string bookClose = "</div></body></html>";
-        private const string title = "<div class=\"Title_Main\"><span class=\"Title_Secondary\" lang=\"zxx\">OT: The Law</span><span lang=\"zxx\">Genesis</span></div>";
-        private const string introSectionHead = "<h1 class=\"Intro_Section_Head\"><span lang=\"zxx\">intro section</span></h1>";
-        private const string introSectionContent = "<p class=\"Intro_Paragraph\"><span lang=\"zxx\">intro para</span></p>";
-        private const string table = "<table><tr style=\"tr\"><td style=\"tc1\">cell 1</td><td style=\"tc2\">cell 2</td><td style=\"tc3\">cell 3</td></tr>" +
-            "<tr style=\"tr\"><td style=\"tc1\">cell 1</td><td style=\"tc2\">cell 2</td><td style=\"tc3\">cell 3</td></tr></table>";
-        private const string chapterVersePara = "<p class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span><span class=\"Verse_Number\" lang=\"zxx\">1</span></p>";
-        private const string chapterPara = "<p class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span></p>";
-        private const string scrSectionHead = "<h1 class=\"Section_Head\"><span lang=\"zxx\">Section</span></h1>";
-        private const string scrSectionContent = "<p class=\"Paragraph\"><span lang=\"zxx\">para content</span><span lang=\"zxx\">Para</span></p>";
+	/// <summary>
+	/// EncloseParasInSectionsTests tests the EncloseParasInSections transform. This transform adds section structure to a Pathway file
+	/// from a Paratext USX file.
+	/// </summary>
+	[TestFixture]
+	public class EncloseParasInSectionsTests
+	{
+		#region Constants
 
-        private const string expectedIntroSectionHead = "<div class=\"Intro_Section_Head\"><span lang=\"zxx\">intro section</span></div>";
-        private const string expectedIntroSectionContent = "<div class=\"Intro_Paragraph\"><span lang=\"zxx\">intro para</span></div>";
-        private const string expectedChapterVersePara = "<div class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span>" +
-            "<span class=\"Verse_Number\" lang=\"zxx\">1</span></div>";
-        private const string expectedChapterPara = "<div class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span></div>";
-        private const string expectedScrSectionHead = "<div class=\"Section_Head\"><span lang=\"zxx\">Section</span></div>";
-        private const string expectedScrSectionContent = "<div class=\"Paragraph\"><span lang=\"zxx\">para content</span><span lang=\"zxx\">Para</span></div>";
-        #endregion
+		private const string divider = "------------------------------------------------------------";
 
-        #region Member variables
-        private XslCompiledTransform encloseParasInSections;
-        Dictionary<string, object> xslParams;
-        #endregion
+		private const string htmlOpen =
+			"<?xml version=\"1.0\" encoding=\"utf-16\"?><html xml:lang=\"utf-8\" xmlns=\"http://www.w3.org/1999/xhtml\">";
 
-        #region Fixture setup
-        [TestFixtureSetUp]
-        public void FixtureSetup()
-        {
+		private string _htmlHeader = "<head><title /></head>";
+
+		private const string bookOpen =
+			"<body class=\"scrBody\"><div class=\"scrBook\"><span class=\"scrBookName\" lang=\"zxx\">Genesis</span>" +
+			"<span class=\"scrBookCode\" lang=\"zxx\">GEN</span>";
+
+		private const string bookClose = "</div></body></html>";
+
+		private const string title =
+			"<div class=\"Title_Main\"><span class=\"Title_Secondary\" lang=\"zxx\">OT: The Law</span><span lang=\"zxx\">Genesis</span></div>";
+
+		private const string introSectionHead =
+			"<h1 class=\"Intro_Section_Head\"><span lang=\"zxx\">intro section</span></h1>";
+
+		private const string introSectionContent = "<p class=\"Intro_Paragraph\"><span lang=\"zxx\">intro para</span></p>";
+
+		private const string table =
+			"<table><tr style=\"tr\"><td style=\"tc1\">cell 1</td><td style=\"tc2\">cell 2</td><td style=\"tc3\">cell 3</td></tr>" +
+			"<tr style=\"tr\"><td style=\"tc1\">cell 1</td><td style=\"tc2\">cell 2</td><td style=\"tc3\">cell 3</td></tr></table>";
+
+		private const string chapterVersePara =
+			"<p class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span><span class=\"Verse_Number\" lang=\"zxx\">1</span></p>";
+
+		private const string chapterPara = "<p class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span></p>";
+		private const string scrSectionHead = "<h1 class=\"Section_Head\"><span lang=\"zxx\">Section</span></h1>";
+
+		private const string scrSectionContent =
+			"<p class=\"Paragraph\"><span lang=\"zxx\">para content</span><span lang=\"zxx\">Para</span></p>";
+
+		private const string expectedIntroSectionHead =
+			"<div class=\"Intro_Section_Head\"><span lang=\"zxx\">intro section</span></div>";
+
+		private const string expectedIntroSectionContent =
+			"<div class=\"Intro_Paragraph\"><span lang=\"zxx\">intro para</span></div>";
+
+		private const string expectedChapterVersePara =
+			"<div class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span>" +
+			"<span class=\"Verse_Number\" lang=\"zxx\">1</span></div>";
+
+		private const string expectedChapterPara =
+			"<div class=\"Paragraph\"><span class=\"Chapter_Number\" lang=\"zxx\">1</span></div>";
+
+		private const string expectedScrSectionHead = "<div class=\"Section_Head\"><span lang=\"zxx\">Section</span></div>";
+
+		private const string expectedScrSectionContent =
+			"<div class=\"Paragraph\"><span lang=\"zxx\">para content</span><span lang=\"zxx\">Para</span></div>";
+
+		#endregion
+
+		#region Member variables
+
+		private XslCompiledTransform encloseParasInSections;
+		Dictionary<string, object> xslParams;
+		private TestFiles _tf = new TestFiles("ParatextSupport");
+
+		#endregion
+
+		#region Fixture setup
+
+		[TestFixtureSetUp]
+		public void FixtureSetup()
+		{
 			xslParams = new Dictionary<string, object>();
 			DateTime dateTime = new DateTime(2013, 8, 27);
 			xslParams.Add("dateTime", dateTime.Date);
@@ -75,15 +109,29 @@ namespace Test.ParatextSupport
 			xslParams.Add("projName", "TestProj");
 			xslParams.Add("stylesheet", "usfm");
 			xslParams.Add("ws", "en");
-            xslParams.Add("fontName", "Times");
-            xslParams.Add("fontSize", "12");
+			xslParams.Add("fontName", "Times");
+			xslParams.Add("fontSize", "12");
 			Param.LoadSettings();
+			if (Common.CallerSetting != null)
+			{
+				try
+				{
+					Common.CallerSetting.Dispose();
+				}
+				catch (Exception)
+				{
+					// If there is an error disposing the old one, we just create the new one.
+				}
+	        }
+	        Common.CallerSetting = new CallerSetting {SettingsFullPath = _tf.Input("TestDb.ssf")};
             ParatextPathwayLink converter = new ParatextPathwayLink("testDb", xslParams);
             encloseParasInSections = ParatextSupportExtensions.EncloseParasInSectionsXslt(converter);
         }
         [TestFixtureTearDown]
         public void FixtureTearDown(){
             Param.DatabaseName = "DatabaseName";
+			Common.CallerSetting.Dispose();
+	        Common.CallerSetting = null;
         }
         #endregion
 
