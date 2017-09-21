@@ -203,16 +203,16 @@ namespace SIL.Tool
 		private static string UnixFallbackStringValue(string key, string value)
 		{
 			var userName = Environment.UserName;
-			foreach (var program in new List<string> { "paratest", "fieldworks" })
+			foreach (var program in new List<string> { "paratext", "fieldworks" })
 			{
-				var registryPath = "/home/" + userName + "/.config/fieldworks/"+ program +"registry/LocalMachine/software/";
-				var valueFile = Path.Combine(registryPath, key.ToLower(), "value.xml");
+				var registryPath = "/home/" + userName + "/.config/"+ program +"/registry/LocalMachine/software/";
+				var valueFile = Path.Combine(registryPath, key.ToLower(), "values.xml");
 				if (!File.Exists(valueFile)) continue;
 				XDoc.RemoveAll();
 				var xr = XmlReader.Create(valueFile);
 				XDoc.Load(xr);
 				xr.Close();
-				var node = value != null? XDoc.SelectSingleNode("*[@name='" + value + "']"): XDoc.DocumentElement;
+				var node = value != null? XDoc.SelectSingleNode("//*[@name='" + value + "']"): XDoc.DocumentElement;
 				if (node != null) return node.InnerText;
 			}
 			return null;
