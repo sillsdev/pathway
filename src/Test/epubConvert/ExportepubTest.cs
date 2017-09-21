@@ -415,6 +415,7 @@ namespace Test.epubConvert
 
 		[Test]
 		[Category("LongTest")]
+		[Category("SkipOnTeamCity")]
 		public void ExportDictionaryInsertBeforeAfterFW83Test()
 		{
 			// clean out old files
