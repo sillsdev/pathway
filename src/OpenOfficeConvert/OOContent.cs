@@ -3190,6 +3190,7 @@ namespace SIL.PublishingSolution
 			{
 				if (_imageClass.Length > 0 && _closeChildName == _imageClass)
 				{
+					_writer.WriteEndElement(); // for ParagraphStyle}
 					_isPictureDisplayNone = false;
 					_imageClass = string.Empty;
 					_isParagraphClosed = true;
