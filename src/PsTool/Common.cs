@@ -2819,6 +2819,7 @@ namespace SIL.Tool
 					{
 						if (!fstr.Contains("@import"))
 						{
+							// TODO: The code to remove Mozilla properties does not belong in a method for combining nested css
 							// To avoid the Mozilla Property
 							if (!fstr.Contains("-moz"))
 							{
@@ -2826,8 +2827,13 @@ namespace SIL.Tool
 							}
 							else
 							{
-								string splitText = fstr.Substring(0, fstr.IndexOf("-moz") - 1);
-								sw2.WriteLine(splitText);
+								foreach (var prop in fstr.Split(';'))
+								{
+									if (!prop.Contains("-moz") && !string.IsNullOrEmpty(prop.Trim()))
+									{
+										sw2.WriteLine(prop + ";");
+									}
+								}
 							}
 						}
 					}
