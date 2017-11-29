@@ -3190,6 +3190,10 @@ namespace SIL.PublishingSolution
 			{
 				if (_imageClass.Length > 0 && _closeChildName == _imageClass)
 				{
+					if (_projInfo.ProjectInputType == "Scripture") // Scripture inserts an empty paragraph tag which must be closed
+					{
+						_writer.WriteEndElement();
+					}
 					_isPictureDisplayNone = false;
 					_imageClass = string.Empty;
 					_isParagraphClosed = true;

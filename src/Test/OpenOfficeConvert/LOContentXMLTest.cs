@@ -3018,14 +3018,46 @@ namespace Test.OpenOfficeConvert
 
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetInnerText = true;
-            string xpath = "//text:p[@text:style-name='entry_letData_dicBody'][2]";
-            string content = "Applepro A FruitFruity";
-            bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+            string xpath = "(//text:p[@text:style-name='entry_letData_dicBody'])[2]";
+			string content = "Applepro A FruitFruity";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Hard Space after versenumber test failed");
         }
 
-        ///TD-2700
-        [Test]
+	    ///TD-4868
+	    [Test]
+	    public void NoImage2()
+	    {
+			const string file = "NoImage2";
+			_projInfo.ProjectInputType = "Dictionary";
+			GetStyleOutput(file);
+
+			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+			_validate.GetInnerText = true;
+			string xpath = "//office:body/office:text/text:section[6]/text:p[3]";
+			string content = "Caterpiller[k\xe6t \x259\x2ccp\x026al \x259r]npropbrand name of heavy equipment";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Entry with second picture removed doesn't appear correct");
+		}
+
+		///TD-4868
+		[Test]
+		public void NoImageScr()
+		{
+			const string file = "NoImageScr";
+			_projInfo.ProjectInputType = "Scripture";
+			GetStyleOutput(file);
+
+			_validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
+			_validate.GetInnerText = true;
+			string xpath = "//office:text[1]/text:section[1]/text:section[1]/text:p[5]/text:span[1]";
+			string content = "6";
+			bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
+			Assert.IsTrue(returnValue1, "Verse 6 must be present after the picture at the same level");
+		}
+
+		///TD-2700
+		[Test]
         public void HomographSpaceNode()
         {
             const string file = "HomographSpace";
