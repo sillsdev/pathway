@@ -188,7 +188,7 @@ namespace SIL.PublishingSolution
                     Common.SetDefaultCSS(preProcessor.ProcessedXhtml, defaultCSS);
 
                     _processedXhtml = preProcessor.ProcessedXhtml;
-					if (projInfo.IsReversalExist)
+					if (projInfo.IsReversalExist && projInfo.IsLexiconSectionExist)
 					{
 						var reversalFile = Path.GetDirectoryName(_processedXhtml);
 						reversalFile = Common.PathCombine(reversalFile, "FlexRev.xhtml");
@@ -253,7 +253,7 @@ namespace SIL.PublishingSolution
                 Object princePath = regPrinceKey.GetValue("InstallLocation");
                 _fullPrincePath = Common.PathCombine((string) princePath, "Engine/bin/prince.exe");
 				var myPrince = new Prince(_fullPrincePath);
-	            if (projInfo.IsReversalExist)
+	            if (projInfo.IsReversalExist && projInfo.IsLexiconSectionExist)
 	            {
 		            string[] xhtmlFiles = new string[2];
 		            var reversalFile = Path.GetDirectoryName(_processedXhtml);
