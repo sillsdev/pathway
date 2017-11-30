@@ -1123,7 +1123,23 @@ namespace Test.PsTool
 			Assert.AreEqual(theLanguageCode, "bzh:Buang, Mapos;");
 	    }
 
-		/// <summary>
+	    /// <summary>
+	    ///A test for Get LanguageCode For Scripture Test - Empty Venacular return AVT
+	    /// Uses AVT Scripture
+	    /// Checks whether the Language Code returned is as expected
+	    ///</summary>
+	    [Test]
+	    public void GetLanguageCodeForScriptureTest()
+	    {
+		    const string fileName = "EmptyVernacularLanguageCodeTest.xhtml";
+		    var sourceXhtmlFile = GetFileNameWithPath(fileName);
+		    var outputXhtmlFile = Common.PathCombine(_outputBasePath, fileName);
+		    CopyToOutput(sourceXhtmlFile, outputXhtmlFile);
+		    string theLanguageCode = Common.GetLanguageCode(outputXhtmlFile, "Scripture", true);
+		    Assert.AreEqual(theLanguageCode, "avt:avt");
+	    }
+
+	    /// <summary>
 		///A test for GetLanguageCode - (1) With <span class="headword" lang="seh">
 		/// Uses sena3
 		/// Checks whether the Language Code returned is as expected
