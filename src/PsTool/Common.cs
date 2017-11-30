@@ -745,7 +745,7 @@ namespace SIL.Tool
 							{
 								continue;
 							}
-							if (langContent.Length >= vernacularLang.Length &&
+							if (!string.IsNullOrEmpty(vernacularLang) && langContent.Length >= vernacularLang.Length &&
 								langContent.Substring(vernacularLang.Length, 1) != ":")
 							{
 								continue;
