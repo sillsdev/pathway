@@ -672,7 +672,9 @@ namespace epubConvert
 			XmlDocument xdoc = Common.DeclareXMLDocument(false);
 			var namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
 			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-			xdoc.Load(xhtmlFileName);
+			var xr = XmlReader.Create (xhtmlFileName, new XmlReaderSettings{ DtdProcessing = DtdProcessing.Ignore });
+			xdoc.Load(xr);
+			xr.Close ();
 			// now go check to see if we're working on scripture or dictionary data
 			XmlNodeList nodes = xdoc.SelectNodes("//xhtml:span[@class='revsensenumber']", namespaceManager);
 			if (nodes == null || nodes.Count == 0)
