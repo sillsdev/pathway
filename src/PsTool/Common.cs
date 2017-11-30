@@ -3038,8 +3038,10 @@ namespace SIL.Tool
 		public static string GetSaveInFolder(string template, string database, string layout)
 		{
 			Dictionary<string, string> map = new Dictionary<string, string>();
-
-			map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+			if(UsingMonoVM)
+				map["Documents"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			else
+				map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
 			map["Base"] = SaveInFolderBase;
             map["CurrentProject"] = MakeValidFileName(database);
@@ -5143,20 +5145,23 @@ namespace SIL.Tool
 				try
 				{
 					IDictionary<string, string> value = new Dictionary<string, string>();
-					var flexScan = new FlexScan(CallerSetting.SettingsFullPath);
-					foreach (var lang in flexScan.VernWs)
+					if (File.Exists(CallerSetting.SettingsFullPath))
 					{
-						var langname = GetLanguageValues(lang);
-						if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-							value.Add(lang, langname.Replace(',', ' '));
+						var flexScan = new FlexScan(CallerSetting.SettingsFullPath);
+						foreach (var lang in flexScan.VernWs)
+						{
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+						}
+						foreach (var lang in flexScan.AnalWs)
+						{
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+						}
+						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
 					}
-					foreach (var lang in flexScan.AnalWs)
-					{
-						var langname = GetLanguageValues(lang);
-						if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-							value.Add(lang, langname.Replace(',', ' '));
-					}
-					Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
 				}
 				catch (Exception)
 				{
