@@ -666,7 +666,7 @@ namespace epubConvert
 		}
 
 
-		private string GetLanguageForReversalNumber(string xhtmlFileName, string languageCode)
+		protected string GetLanguageForReversalNumber(string xhtmlFileName, string languageCode)
 		{
 			string language = languageCode;
 			XmlDocument xdoc = Common.DeclareXMLDocument(false);
