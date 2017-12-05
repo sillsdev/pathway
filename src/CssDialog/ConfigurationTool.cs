@@ -1063,6 +1063,8 @@ namespace SIL.PublishingSolution
 		private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_cToolBL.tabControl1_SelectedIndexChangedBL();
+			_cToolBL.WriteCss();
+			_cToolBL.SaveControlPropertyValues();
 		}
 
 		private void tsSaveAs_Click(object sender, EventArgs e)
