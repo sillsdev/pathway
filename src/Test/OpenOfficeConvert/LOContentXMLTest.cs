@@ -4186,6 +4186,22 @@ namespace Test.OpenOfficeConvert
 			XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
 		}
 
+	    
+		///<summary>
+		///Picture along paragraph Alignment in Scripture Export Test TD-4870
+		///</summary>
+		[Test]
+	    [Category("LongTest")]
+	    [Category("SkipOnTeamCity")]
+	    public void PicturePageScriptureTest()
+	    {
+		    _projInfo.ProjectInputType = "Scripture";
+		    const string file = "PicturePageScriptureTest";
+		    string styleOutput = GetStyleOutput(file);
+		    string contentExpected = Common.PathCombine(_expectedPath, file + "content.xml");
+		    XmlAssert.Ignore(styleOutput, "//office:font-face-decls", new Dictionary<string, string> { { "office", "urn:oasis:names:tc:opendocument:xmlns:office:1.0" } });
+		    XmlAssert.AreEqual(contentExpected, _projInfo.TempOutputFolder, file + " in content.xml");
+	    }
 
 		#endregion
 		#endregion

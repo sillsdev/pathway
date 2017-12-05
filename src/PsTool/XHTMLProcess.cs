@@ -615,13 +615,10 @@ namespace SIL.Tool
 				{
 					if (isImage)
 					{
-						_isNewParagraph = false;
-						_isParagraphClosed = false;
+						_isNewParagraph = true;
+						_isParagraphClosed = true;
 					}
-					else
-					{
-						_writer.WriteEndElement();
-					}
+					_writer.WriteEndElement();
 				}
 				else
 				{
