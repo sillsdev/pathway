@@ -5153,7 +5153,7 @@ namespace SIL.Tool
 					IDictionary<string, string> value = new Dictionary<string, string>();
 					if (File.Exists(CallerSetting.SettingsFullPath))
 					{
-						var flexScan = new FlexScan(CallerSetting.SettingsFullPath);
+						var flexScan = new FlexScan(CallerSetting.GetSettingsName());
 						foreach (var lang in flexScan.VernWs)
 						{
 							var langname = GetLanguageValues(lang);
