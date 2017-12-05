@@ -447,5 +447,8 @@
 .xsensenumber { }
 
 /* File Name: Merge_KeyFile.css */
-
+*[dir= 'ltr']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+}
 
