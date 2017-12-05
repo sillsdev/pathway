@@ -1040,6 +1040,32 @@ namespace SIL.PublishingSolution
 			_screenMode = ScreenMode.Edit;
 		}
 
+		public void SaveControlPropertyValues()
+		{
+			if (MediaType.ToLower() == "others")
+			{
+				Param.UpdateOthersAtrrib("BaseFontSize", cTool.TxtBaseFontSize.Text, StyleName);
+				Param.UpdateOthersAtrrib("DefaultLineHeight", cTool.TxtDefaultLineHeight.Text, StyleName);
+				Param.UpdateOthersAtrrib("DefaultAlignment",
+					((ComboBoxItem) cTool.DdlDefaultAlignment.SelectedItem).Value, StyleName);
+				Param.UpdateOthersAtrrib("IncludeImage", cTool.ChkIncludeImage.Checked ? "Yes" : "No",
+					StyleName);
+				Param.UpdateOthersAtrrib("MaxImageWidth", cTool.TxtMaxImageWidth.Text, StyleName);
+				Param.UpdateOthersAtrrib("TOCLevel", ((ComboBoxItem) cTool.DdlTocLevel.SelectedItem).Value,
+					StyleName);
+				Param.UpdateOthersAtrrib("PageBreak", cTool.ChkPageBreaks.Checked ? "Yes" : "No", StyleName);
+				Param.UpdateOthersAtrrib("EmbedFonts", cTool.ChkEmbedFonts.Checked ? "Yes" : "No", StyleName);
+				Param.UpdateOthersAtrrib("IncludeFontVariants",
+					cTool.ChkIncludeFontVariants.Checked ? "Yes" : "No", StyleName);
+				Param.UpdateOthersAtrrib("MissingFont",
+					((ComboBoxItem) cTool.DdlMissingFont.SelectedItem).Value, StyleName);
+				Param.UpdateOthersAtrrib("NonSILFont",
+					((ComboBoxItem) cTool.DdlNonSILFont.SelectedItem).Value, StyleName);
+				Param.UpdateOthersAtrrib("DefaultFont",
+					((ComboBoxItem) cTool.DdlDefaultFont.SelectedItem).Value, StyleName);
+			}
+		}
+
 		private void SetAttributesForPaperProperties(StreamWriter writeCss)
 		{
 			var value = new Dictionary<string, string>();
@@ -1233,11 +1259,11 @@ namespace SIL.PublishingSolution
 		{
 			string alignment = string.Empty;
 
-			if (cTool.DdlJustified.SelectedItem != null)
+			if (cTool.DdlDefaultAlignment.SelectedItem != null)
 			{
-				if (cTool.DdlDefaultAlignment.SelectedItem != null)
+				if (((ComboBoxItem) cTool.DdlDefaultAlignment.SelectedItem).Value.Length > 0)
 				{
-					alignment = ((ComboBoxItem)cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture);
+					alignment = ((ComboBoxItem) cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture);
 				}
 			}
 
@@ -3519,12 +3545,12 @@ namespace SIL.PublishingSolution
 			sb.Append("pt Font, ");
 			sb.Append(cTool.TxtDefaultLineHeight.Text);
 			sb.Append("% Line Height");
-			if (cTool.DdlJustified.SelectedItem != null)
+			if (cTool.DdlDefaultAlignment.SelectedItem != null)
 			{
-				if (cTool.DdlDefaultAlignment.SelectedItem != null)
+				if (((ComboBoxItem) cTool.DdlDefaultAlignment.SelectedItem).Value.Length > 0)
 				{
 					sb.Append(", Alignment: ");
-					sb.Append(((ComboBoxItem)cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture));
+					sb.Append(((ComboBoxItem) cTool.DdlDefaultAlignment.SelectedItem).Value.ToString(CultureInfo.InvariantCulture));
 				}
 			}
 
@@ -4822,7 +4848,6 @@ namespace SIL.PublishingSolution
 						_screenMode = ScreenMode.View;
 						ShowInfoValue();
 						cTool.TxtName.Select();
-						ConfigurationTool_LoadBL();
 					}
 					else
 					{

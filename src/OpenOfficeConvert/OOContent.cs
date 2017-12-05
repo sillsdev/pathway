@@ -1925,6 +1925,11 @@ namespace SIL.PublishingSolution
 			EndElementBase(isImageEnd); //Note: base class
 			ColumnClass();
 
+			if (isImageEnd && _isNewParagraph && _isParagraphClosed)
+			{
+				_paragraphName = null;
+			}
+
 			_classNameWithLang = StackPeek(_allStyle);
 			_classNameWithLang = Common.LeftString(_classNameWithLang, "_");
 		}

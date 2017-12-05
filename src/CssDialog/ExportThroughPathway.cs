@@ -386,15 +386,15 @@ namespace SIL.PublishingSolution
 	            }
                 LoadAvailFormats();
                 LoadAvailStylesheets();
-                IsExpanded = false;
+	            LoadProperty();
+				IsExpanded = false;
                 ResizeDialog();
                 SetOkStatus();
-                chkHyphen.Enabled = false;
+				chkHyphen.Enabled = false;
                 chkHyphen.Checked = false;
                 clbHyphenlang.Items.Clear();
                 //Loads Hyphenation related settings
 		        LoadHyphenationSettingsToForm();
-	            LoadProperty();
                 EnableUIElements();
 
                 ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
