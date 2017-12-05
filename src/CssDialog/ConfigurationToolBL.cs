@@ -4848,7 +4848,6 @@ namespace SIL.PublishingSolution
 						_screenMode = ScreenMode.View;
 						ShowInfoValue();
 						cTool.TxtName.Select();
-						ConfigurationTool_LoadBL();
 					}
 					else
 					{
