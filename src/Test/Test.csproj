@@ -275,6 +275,7 @@
     <Compile Include="epubConvert\EpubManifestTest.cs" />
     <Compile Include="epubConvert\EpubXsltTransformationTest.cs" />
     <Compile Include="epubConvert\ExportHtml5Test.cs" />
+    <Compile Include="epubFont\epubFontTest.cs" />
     <Compile Include="GoBibleConvert\ExportGoBibleTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,7 +352,6 @@
     <Compile Include="epubConvert\EmbeddedFontTest.cs" />
     <Compile Include="epubConvert\ExportepubTest.cs" />
     <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
-    <Compile Include="epubConvert\epubFontTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplyPDFLicenseInfo\ApplyPDFLicenseInfo.csproj">

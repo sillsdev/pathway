@@ -21,26 +21,39 @@ using NUnit.Framework;
 
 namespace Test.PsTool
 {
-    /// <summary>
-    ///This is a test class for SubProcessTest and is intended
-    ///to contain all SubProcessTest Unit Tests
-    ///</summary>
-    [TestFixture]
-    public class SubProcessTest
-    {
-        /// <summary>
-        ///A test for Run when not testing
-        ///</summary>
-        [Test]
-        public void RunEmptyTest()
-        {
-            Common.Testing = false;
-            string instPath = string.Empty;
-            string name = string.Empty;
-            Assert.Throws(typeof (InvalidOperationException), delegate
-                {
-                    SubProcess.Run(instPath, name);
-                });
+	/// <summary>
+	///This is a test class for SubProcessTest and is intended
+	///to contain all SubProcessTest Unit Tests
+	///</summary>
+	[TestFixture]
+	public class SubProcessTest
+	{
+		/// <summary>
+		///A test for Run when not testing
+		///</summary>
+		[Test]
+		public void RunEmptyTest()
+		{
+			Common.Testing = false;
+			string instPath = string.Empty;
+			string name = string.Empty;
+			try
+			{
+				SubProcess.Run(instPath, name);
+				Assert.Fail("Argument or Invalid Operation exception expected");
+			}
+			catch (System.InvalidOperationException)
+			{
+				// ignore this as expected on Team CIty
+			}
+			catch (System.ArgumentException)
+			{
+				// ignore this as expected on Windows 10
+			}
+			catch (Exception e)
+			{
+				Assert.Fail(e.Message);
+			}
         }
 
         /// <summary>

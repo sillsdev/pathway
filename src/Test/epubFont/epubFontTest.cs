@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------
-// <copyright file="EmbeddedFontTest.cs" from='2009' to='2014' company='SIL International'>
+// <copyright file="EpubFontTests.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright ( c ) 2014, SIL International. All Rights Reserved.
 //
 //      Distributable under the terms of either the Common Public License or the
@@ -14,14 +14,12 @@
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
-using System;
 using System.Xml;
 using epubConvert;
 using NUnit.Framework;
 using SIL.PublishingSolution;
-using SIL.Tool;
 
-namespace Test
+namespace Test.epubFont
 {
 	[TestFixture]
 	public class epubFontTest : EpubFont
@@ -30,22 +28,22 @@ namespace Test
 
 		public epubFontTest():base(new Exportepub())
 		{
-			
+			// logic handled by base class
 		}
 
 		[TestFixtureSetUp]
 		public void Setup()
 		{
-			_tf = new TestFiles ("epubConvert");
+			_tf = new TestFiles ("epubFont");
 		}
 
-		[Test]
 		/// <summary>
 		/// GetLanguageForReversalNumberTest tests for sharing violation TD-4885
 		/// </summary>
+		[Test]
 		public void GetLanguageForReversalNumberTest()
 		{
-			var inFile = _tf.SubInput ("EpubFont", "FlexRev.xhtml");
+			var inFile = _tf.Input ("FlexRev.xhtml");
 			var xr = XmlReader.Create (inFile);
 			var result = GetLanguageForReversalNumber (inFile, "zxx");
 			xr.Close ();
