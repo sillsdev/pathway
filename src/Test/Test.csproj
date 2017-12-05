@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="12.0">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
   <UsingTask TaskName="NUnitTeamCity" AssemblyFile="$(agent_home_dir)/plugins/dotnetPlugin/bin/JetBrains.BuildServer.MSBuildLoggers.dll" />
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{222CBAAB-B338-4670-A553-B6154E582FC8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -40,7 +38,6 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -55,7 +52,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -70,7 +66,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -85,7 +80,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -99,7 +93,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -113,7 +106,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\..\output\Debug\Export</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -129,7 +121,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7BTE|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -144,7 +135,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release7SE|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -159,7 +149,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7BTE|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -173,7 +162,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Corporate7SE|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -187,7 +175,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|AnyCPU' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Status>Testing</Status>
@@ -198,7 +185,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'PathwayXeLaTeX|x86' ">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <Status>Testing</Status>
@@ -209,7 +195,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|AnyCPU'">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
@@ -225,9 +210,9 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Corporate7EPUB|x86'">
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <OutputPath>..\..\output\Release\Export</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
@@ -243,16 +228,9 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="L10NSharp">
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
     </Reference>
@@ -269,6 +247,12 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Security" />
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f">
+      <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Build\FileComponentsTest.cs" />
@@ -367,6 +351,7 @@
     <Compile Include="epubConvert\EmbeddedFontTest.cs" />
     <Compile Include="epubConvert\ExportepubTest.cs" />
     <Compile Include="GoBibleConvert\CheckCV_XHTMLTest.cs" />
+    <Compile Include="epubConvert\epubFontTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplyPDFLicenseInfo\ApplyPDFLicenseInfo.csproj">
@@ -374,7 +359,7 @@
       <Name>ApplyPDFLicenseInfo</Name>
     </ProjectReference>
     <ProjectReference Include="..\BuildStep\BuildStep.csproj">
-      <Project>{b3c7bd82-538f-421d-89db-991a4f0f65e1}</Project>
+      <Project>{B3C7BD82-538F-421D-89DB-991A4F0F65E1}</Project>
       <Name>BuildStep</Name>
     </ProjectReference>
     <ProjectReference Include="..\ConfigurationTool\ConfigurationTool.csproj">
@@ -390,7 +375,7 @@
       <Name>CssParser</Name>
     </ProjectReference>
     <ProjectReference Include="..\CssSimpler\CssSimpler.csproj">
-      <Project>{cda4615f-63eb-4dce-9101-3e2b781fc1f8}</Project>
+      <Project>{CDA4615F-63EB-4DCE-9101-3E2B781FC1F8}</Project>
       <Name>CssSimpler</Name>
     </ProjectReference>
     <ProjectReference Include="..\DictionaryForMIDsConvert\DictionaryForMIDsConvert.csproj">
@@ -713,8 +698,6 @@
     <None Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestA.xhtml" />
     <None Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestB.xhtml" />
     <None Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestC.xhtml" />
-    <None Include="OpenOfficeConvert\TestFiles\input\PageTest.xhtml" />
-    <None Include="OpenOfficeConvert\TestFiles\input\PageTest9.xhtml" />
     <None Include="OpenOfficeConvert\TestFiles\input\para.xhtml" />
     <None Include="OpenOfficeConvert\TestFiles\input\ParallerReferenceKeepWith.xhtml" />
     <None Include="OpenOfficeConvert\TestFiles\input\Parent1.xhtml" />
@@ -780,6 +763,8 @@
     <None Include="OpenOfficeConvert\TestFiles\input\WhiteSpaceNextLine.xhtml" />
     <None Include="OpenOfficeConvert\TestFiles\output\ExportLO\ScriptureInput.odt" />
     <None Include="packages.config" />
+    <None Include="OpenOfficeConvert\TestFiles\input\pagetest.xhtml" />
+    <None Include="OpenOfficeConvert\TestFiles\input\pagetest9.xhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OpenOfficeConvert\TestFiles\expected\AncestorChildTestContent.xml" />
@@ -1203,9 +1188,6 @@
     <Content Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestB.css" />
     <Content Include="OpenOfficeConvert\TestFiles\input\PageHeaderFooterTestC.css" />
     <Content Include="OpenOfficeConvert\TestFiles\input\PagePseudoFirstTest.css" />
-    <Content Include="OpenOfficeConvert\TestFiles\input\PageTest.css" />
-    <Content Include="OpenOfficeConvert\TestFiles\input\pageTest1.css" />
-    <Content Include="OpenOfficeConvert\TestFiles\input\PageTest10.css" />
     <Content Include="OpenOfficeConvert\TestFiles\input\pagetest2.css" />
     <Content Include="OpenOfficeConvert\TestFiles\input\pagetest3.css" />
     <Content Include="OpenOfficeConvert\TestFiles\input\pagetest4.css" />
@@ -1320,6 +1302,9 @@
     <Content Include="OpenOfficeConvert\TestFiles\output\ExportLO\Pictures\tapis de selle.jpg" />
     <Content Include="OpenOfficeConvert\TestFiles\testView.py" />
     <Content Include="OpenOfficeConvert\TestFiles\tvf.py" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest1.css" />
+    <Content Include="OpenOfficeConvert\TestFiles\input\pagetest10.css" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
