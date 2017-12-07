@@ -66,8 +66,12 @@ namespace SIL.Tool
 				case DataCreator.CreatorProgram.Paratext7:
 					_dataFolder = RegistryHelperLite.FallbackStringValue("ScrChecks/1.0/Settings_Directory");
 					break;
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
 					_dataFolder = RegistryHelperLite.FallbackStringValue("SIL/FieldWorks/8", "ProjectsDir");
+					SetupLdmlFolder();
+					break;
+				case DataCreator.CreatorProgram.FieldWorks9:
+					_dataFolder = RegistryHelperLite.FallbackStringValue("SIL/FieldWorks/9", "ProjectsDir");
 					SetupLdmlFolder();
 					break;
 			}
@@ -82,7 +86,8 @@ namespace SIL.Tool
 			WritingSystem = new WritingSystemDefinition();
 			DatabaseName = database;
 			if (database != "DatabaseName") FindDataFolder();
-			if (Caller == DataCreator.CreatorProgram.FieldWorks)
+			if (Caller == DataCreator.CreatorProgram.FieldWorks8
+				|| Caller == DataCreator.CreatorProgram.FieldWorks9)
 			{
 				SetupLdmlFolder();
 			}
@@ -122,7 +127,12 @@ namespace SIL.Tool
 			folder = RegistryHelperLite.FallbackStringValue("SIL/FieldWorks/8", "ProjectsDir");
 			if (!string.IsNullOrEmpty(folder))
 			{
-				TestFolder(folder, DataCreator.CreatorProgram.FieldWorks);
+				TestFolder(folder, DataCreator.CreatorProgram.FieldWorks8);
+			}
+			folder = RegistryHelperLite.FallbackStringValue("SIL/FieldWorks/9", "ProjectsDir");
+			if (!string.IsNullOrEmpty(folder))
+			{
+				TestFolder(folder, DataCreator.CreatorProgram.FieldWorks9);
 			}
 		}
 
@@ -154,7 +164,8 @@ namespace SIL.Tool
 				case DataCreator.CreatorProgram.Paratext7:
 					_settingsFullPath = Path.Combine(_dataFolder, "..", DatabaseName + ".ssf");
 					break;
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					_settingsFullPath = Path.Combine(_dataFolder, DatabaseName + ".fwdata");
 					break;
 			}
@@ -249,7 +260,8 @@ namespace SIL.Tool
 					LanguageData = null;
                     if (LoadLds(Path.Combine(Path.GetDirectoryName(_dataFolder), language + ".lds"))) break;
 					break;
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					LoadLdml(_ldmlFolder, iso);
 					break;
 			}
@@ -287,7 +299,8 @@ namespace SIL.Tool
 					return WritingSystem.RightToLeftScript;
 				case DataCreator.CreatorProgram.Paratext7:
 					return LanguageData != null && LanguageData["General"].ContainsKey("RTL") && LanguageData["General"]["RTL"].ToUpper() == "T";
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					return WritingSystem.RightToLeftScript;
 			}
 			return false;
@@ -309,7 +322,8 @@ namespace SIL.Tool
 					return WritingSystem.DefaultFont.Name;
 				case DataCreator.CreatorProgram.Paratext7:
 					return LanguageData["General"]["font"];
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					return WritingSystem.DefaultFont.Name;
 			}
 			return string.Empty;
@@ -331,7 +345,8 @@ namespace SIL.Tool
 					return WritingSystem.DefaultFont.Features;
 				case DataCreator.CreatorProgram.Paratext7:
 					return LanguageData != null && LanguageData["General"].ContainsKey("fontFeatureSettings") ? LanguageData["General"]["fontFeatureSettings"] : "";
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					return WritingSystem.DefaultFont.Features;
 			}
 			return string.Empty;
@@ -353,7 +368,8 @@ namespace SIL.Tool
 					LoadSettings();
 					var node = _xDoc.SelectSingleNode("//ScriptureText/Language");
 					return node != null? node.InnerText: null;
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					LoadWritingSystem(iso);
 					return WritingSystem.Language.Name;
 			}
@@ -370,7 +386,8 @@ namespace SIL.Tool
 					if (System.IO.File.Exists(hiRes)) return hiRes;
                     var loResName = Path.GetFileNameWithoutExtension(name) + ".jpg";
                     return !string.IsNullOrEmpty(_dataFolder) ? Path.Combine(_dataFolder, "figures", loResName): Path.Combine("figures", loResName);
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					return !string.IsNullOrEmpty(_dataFolder) ? Path.Combine(_dataFolder, "LinkedFiles", "Pictures", name): Path.Combine("Pictures", name);
 			}
 			return !string.IsNullOrEmpty(_dataFolder) ? Path.Combine(_dataFolder, name): name;

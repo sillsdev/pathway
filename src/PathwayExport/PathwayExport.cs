@@ -110,9 +110,8 @@ namespace SIL.PublishingSolution
 				if (Param.DatabaseName == "DatabaseName") Common.CallerSetting = new CallerSetting {SettingsFullPath = projectInfo.DefaultXhtmlFileWithPath};
 				Common.LoadHyphenationSettings();
 
-				List<IExportProcess> backend = new List<IExportProcess>();
-				backend = Backend.LoadExportAssembly(Common.AssemblyPath);
-				foreach (IExportProcess lProcess in backend)
+				Backend.Load(Common.AssemblyPath);
+				foreach (IExportProcess lProcess in Backend.backend)
 				{
 					if (exportType == "openoffice/libreoffice" && lProcess.ExportType.ToLower() == "openoffice/libreoffice")
 					{

@@ -716,10 +716,9 @@ namespace SIL.PublishingSolution
         protected void LoadAvailFormats()
         {
             OperatingSystem OS = Environment.OSVersion;
-	        string backendsPath = Common.ProgInstall;
-            Backend.Load(backendsPath);
 			Console.WriteLine( @"InputType from : {0}", InputType);
-            ArrayList exportType = Backend.GetExportType(InputType);
+			string backendsPath = Common.ProgInstall;
+			ArrayList exportType = Backend.GetExportType(backendsPath, InputType);
             exportType.Sort();
             if (exportType.Count > 0)
             {
