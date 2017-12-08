@@ -1002,10 +1002,6 @@ namespace SIL.Tool
 			{
 				value = value.Replace("2019", "$" + Common.ConvertUnicodeToString("\\2019") + "$");
 			}
-			if (value.IndexOf("#") >= 0)
-			{
-				value = value.Replace("#", "$\\sharp$");
-			}
 			if (value.IndexOf("2666") >= 0)
 			{
 				value = value.Replace("2666", Common.ConvertUnicodeToString("\\2666")) + " ";
@@ -1030,6 +1026,39 @@ namespace SIL.Tool
 			{
 				value = value.Replace("}", "\\}");
 			}
+			if (value.Contains("&"))
+			{
+				value = value.Replace("&", "\\&");
+			}
+			if (value.Contains("'"))
+			{
+				value = value.Replace("'", "\\textsc{\\char13}");
+			}
+			if (value.Contains("%"))
+			{
+				value = value.Replace("%", "\\%");
+			}
+			if (value.Contains("$"))
+			{
+				value = value.Replace("$", "\\$");
+			}
+			if (value.Contains("#"))
+			{
+				value = value.Replace("#", "\\#");
+			}
+			if (value.Contains("_"))
+			{
+				value = value.Replace("_", "\\_");
+			}
+			if (value.Contains("^"))
+			{
+				value = value.Replace("^", "\\^{ }");
+			}
+			if (value.Contains("~"))
+			{
+				value = value.Replace("~", "\\textasciitilde{~}");
+			}
+
 			return value;
 		}
 
@@ -1495,10 +1524,13 @@ namespace SIL.Tool
 					}
 					else
 					{
-						// Replace <, > and & character to &lt; &gt; &amp;
-						result = result.Replace("&", "&amp;");
-						result = result.Replace("<", "&lt;");
-						result = result.Replace(">", "&gt;");
+						if (_outputType != OutputType.XELATEX)
+						{
+							// Replace <, > and & character to &lt; &gt; &amp;
+							result = result.Replace("&", "&amp;");
+							result = result.Replace("<", "&lt;");
+							result = result.Replace(">", "&gt;");
+						}
 					}
 				}
 				return result;
