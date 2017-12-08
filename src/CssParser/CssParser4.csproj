@@ -269,7 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PsTool\PsTool4.csproj">
-      <Project>{448f846f-ce23-462c-bf7e-827875a36f82}</Project>
+      <Project>{422c5127-260d-4f16-b476-33aa38dbf919}</Project>
       <Name>PsTool4</Name>
     </ProjectReference>
   </ItemGroup>
