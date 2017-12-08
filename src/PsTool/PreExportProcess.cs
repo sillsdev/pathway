@@ -724,7 +724,7 @@ namespace SIL.Tool
 			rights = rights.Replace("\u00ae", "<span style='position: relative; top: -0.5em; font-size: 80%;'>\u00ae</span>");
 			if (rights.Trim().Length > 0)
 			{
-				sb.Append(Common.UpdateCopyrightYear(rights.Replace("&", "&amp;")));
+				sb.Append(Common.UpdateCopyrightYear(rights));
 				sb.Append("</p> ");
 			}
 			return sb.ToString();
