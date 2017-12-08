@@ -1425,7 +1425,6 @@ namespace SIL.PublishingSolution
 				cTool.TxtDesc.Text = cTool.StylesGrid[ColumnDescription, SelectedRowIndex].Value.ToString();
 				cTool.TxtComment.Text = cTool.StylesGrid[ColumnComment, SelectedRowIndex].Value.ToString();
 				bool check = cTool.StylesGrid[ColumnShown, SelectedRowIndex].Value.ToString().ToLower() == "yes" ? true : false;
-				cTool.ChkAvailable.Checked = check;
 				cTool.TxtApproved.Text = cTool.StylesGrid[ColumnApprovedBy, SelectedRowIndex].Value.ToString();
 				string type = cTool.StylesGrid[ColumnType, SelectedRowIndex].Value.ToString();
 				if (type == TypeStandard)
@@ -1433,10 +1432,12 @@ namespace SIL.PublishingSolution
 					EnableDisablePanel(false);
 					cTool.TxtApproved.Visible = true;
 					cTool.LblApproved.Visible = true;
+					cTool.ChkAvailable.Checked = true;
 				}
 				else
 				{
 					EnableDisablePanel(true);
+					cTool.ChkAvailable.Checked = check;
 					if (cTool.TxtName.Text.ToLower() == "oneweb") { cTool.TsDelete.Enabled = false; }
 					if (cTool.BtnMobile.Text.ToLower() == "dictformids") { EnableDisablePanel(false); }
 					cTool.TxtApproved.Visible = false;
@@ -2144,7 +2145,7 @@ namespace SIL.PublishingSolution
 			cTool.TxtDesc.Enabled = IsEnable;
 			cTool.TxtComment.Enabled = IsEnable;
 			cTool.TxtApproved.Enabled = IsEnable;
-			cTool.ChkAvailable.Enabled = true;
+			cTool.ChkAvailable.Enabled = IsEnable;
 		}
 
 		protected void setDefaultInputType()
