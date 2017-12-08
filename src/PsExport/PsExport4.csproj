@@ -244,15 +244,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CssDialog\CssDialog4.csproj">
-      <Project>{1a58ecc5-75fe-4fe2-b133-8605b382b7c0}</Project>
+      <Project>{749d4fcd-5100-46c8-ae73-50873cb5cec0}</Project>
       <Name>CssDialog4</Name>
     </ProjectReference>
     <ProjectReference Include="..\CssParser\CssParser4.csproj">
-      <Project>{b58fd9ba-1783-43f2-86d1-d79e1eacc365}</Project>
+      <Project>{eb7eb8fe-6414-4c53-b5e6-54352ee25364}</Project>
       <Name>CssParser4</Name>
     </ProjectReference>
     <ProjectReference Include="..\PsTool\PsTool4.csproj">
-      <Project>{448f846f-ce23-462c-bf7e-827875a36f82}</Project>
+      <Project>{422c5127-260d-4f16-b476-33aa38dbf919}</Project>
       <Name>PsTool4</Name>
     </ProjectReference>
   </ItemGroup>

@@ -5064,30 +5064,39 @@ namespace SIL.Tool
 			var pathwayDirectory = Common.AssemblyPath;
 			if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory))
 				return new[] { "SIL.PublishingSolution" };
-			foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$"))
-				)
+			try
 			{
-				var fileInfo = new FileInfo(file);
-				if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
-					(fileInfo.Name.Contains("Writer")) || (fileInfo.Name.Contains("Validator")))
+				foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
 				{
-					using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
+					var fileInfo = new FileInfo(file);
+					if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
+						(fileInfo.Name.Contains("Writer")) || (fileInfo.Name.Contains("Validator")))
 					{
-
-						var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
-
-						foreach (
-							var stype in
-								sAssembly.GetTypes()
-									.Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+						using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
 						{
-							if (!namespacestoLocalize.Contains(stype.Namespace))
-								namespacestoLocalize.Add(stype.Namespace);
+
+							var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
+
+							foreach (
+								var stype in
+									sAssembly.GetTypes()
+										.Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+							{
+								if (!namespacestoLocalize.Contains(stype.Namespace))
+									namespacestoLocalize.Add(stype.Namespace);
+							}
+
 						}
 
 					}
-
 				}
+			}
+			catch (Exception)
+			{
+				// 64 bit FieldWorks can't load 32-bit assemblies so just put in the namespaces we expect should be there
+				Debug.Print("Unable to reflectively load namespaces for localization, falling back to expected namespaces.");
+				namespacestoLocalize = new List<string> { "SIL.PublishingSolution", "epubConvert", "epubValidator",
+					"epubValidator.Properties", "SIL.PublishingSolution.Properties", "JWTools", "SilTools", "SIL.Tool" };
 			}
 			return namespacestoLocalize.Distinct().ToArray();
 		}
@@ -5145,7 +5154,8 @@ namespace SIL.Tool
 					Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
 				}
 			}
-			else if (CallerSetting.Caller == DataCreator.CreatorProgram.FieldWorks
+			else if (CallerSetting.Caller == DataCreator.CreatorProgram.FieldWorks8
+				|| CallerSetting.Caller == DataCreator.CreatorProgram.FieldWorks9
 				|| Param.Value[Param.InputType] == "Dictionary")
 			{
 				try

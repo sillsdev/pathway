@@ -125,7 +125,6 @@ namespace SIL.PublishingSolution
 				if (GetCSSFileName(outFullName, outDir, mainFullName, out cssFullName))
 					return;
 
-				SetPageCenterTitle(cssFullName);
 				_selectedCssFromTemplate = Path.GetFileNameWithoutExtension(cssFullName);
 				string fluffedCssFullName;
 
@@ -352,7 +351,7 @@ namespace SIL.PublishingSolution
 				return; //For PathwayB Test fail
 
 			fileName = "Preserve" + fileName;
-			var fs = new FileStream(cssFullName, FileMode.Open);
+			var fs = new FileStream(cssFullName, FileMode.Open, FileAccess.Read);
 			var stream = new StreamReader(fs);
 			string modifiedFile = Common.PathCombine(fileDir, fileName);
 			var fs2 = new FileStream(modifiedFile, FileMode.Create, FileAccess.Write);
@@ -649,7 +648,10 @@ namespace SIL.PublishingSolution
                 string myCss = Common.PathCombine(outDir, Path.GetFileName(cssFullName));
                 if (cssFullName != myCss)
                     File.Copy(cssFullName, myCss, true);
-                var expCss = Path.GetFileNameWithoutExtension(outputFullName) + ".css";
+
+				SetPageCenterTitle(myCss);
+
+				var expCss = Path.GetFileNameWithoutExtension(outputFullName) + ".css";
                 string expCssLine = "@import \"" + expCss + "\";";
                 Common.FileInsertText(myCss, expCssLine);
                 string outputCSSFileName = "merged" + expCss;

@@ -391,7 +391,7 @@ namespace SIL.PublishingSolution
                 projectInfo.DefaultRevCssFileWithPath =
                     Common.PathCombine(Path.GetDirectoryName(projectInfo.DefaultXhtmlFileWithPath), "FlexRev.css");
                 projectInfo.DictionaryPath = Path.GetDirectoryName(projectInfo.ProjectPath);
-				DataCreator.Creator = DataCreator.CreatorProgram.FieldWorks;
+				DataCreator.Creator = DataCreator.CreatorProgram.FieldWorks8;
 				Common.CallerSetting = new CallerSetting {SettingsFullPath = projectInfo.ProjectFileWithPath};
             }
             else if (projectInfo.ProjectInputType == "Scripture")

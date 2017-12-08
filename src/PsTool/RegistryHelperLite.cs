@@ -175,9 +175,19 @@ namespace SIL.Tool
 		public static string FallbackStringValue(string key, string value)
 		{
 			object result;
-			if (CheckSoftwareKey(Registry.CurrentUser, key, value, out result)) return (string)result;
-			if (!Common.UnixVersionCheck() && CheckSoftwareKey(Registry.LocalMachine, key, value, out result)) return (string)result;
-			return !Common.UnixVersionCheck() ? null : UnixFallbackStringValue(key, value);
+			if (CheckSoftwareKey(Registry.CurrentUser, key, value, out result)) return (string) result;
+			if (Common.UnixVersionCheck()) return UnixFallbackStringValue(key, value);
+			if (CheckSoftwareKey(Registry.LocalMachine, key, value, out result)) return (string) result;
+			// See: https://stackoverflow.com/questions/974038/reading-64bit-registry-from-a-32bit-application
+			using (var hive64 = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64))
+			{
+				if (CheckSoftwareKey(hive64, key, value, out result)) return (string)result;
+			}
+			using (var hive64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+			{
+				if (CheckSoftwareKey(hive64, key, value, out result)) return (string)result;
+			}
+			return null;
 		}
 
 		private static bool CheckSoftwareKey(RegistryKey hive, string key, string value, out object result)
