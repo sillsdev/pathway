@@ -44,7 +44,9 @@ namespace SIL.PublishingSolution
 		private bool _xelatexDocumentOpenClosedRequired = false;
 		private bool _copyrightTexCreated = false;
 		private string _copyrightTexFilename = string.Empty;
-		private string _reversalIndexTexFilename = string.Empty;		private bool _reversalIndexExist = false;		private bool _isMirrored = false;
+		private string _reversalIndexTexFilename = string.Empty;
+		private bool _reversalIndexExist = false;
+		private bool _isMirrored = false;
 		private Dictionary<string, string> _langFontDictionary;
 		private Dictionary<string, Dictionary<string, string>> _tocList;
 		private List<string> _xeLaTexPropertyFontStyleList = new List<string>();
@@ -657,7 +659,7 @@ namespace SIL.PublishingSolution
 					tableOfContent += "\\font\\pFrontMatterdiv=\"" + titleFontName + "/B\":color=000000 at " + titleFontSize + "pt \r\n";
 					tableOfContent += "\\vskip 60pt \r\n";
 					tableOfContent += "\\begin{center} \r\n";
-					tableOfContent += "\\CoverPageTitle{" + Param.GetMetadataValue(Param.Title) + "} \r\n";
+					tableOfContent += "\\CoverPageTitle{" + Common.ReplaceSymbolToXelatexText(Param.GetMetadataValue(Param.Title)) + "} \r\n";
 					tableOfContent += "\\end{center} \r\n";
 				}
 				else
@@ -759,9 +761,9 @@ namespace SIL.PublishingSolution
 				}
 				tableOfContent += "\\begin{titlepage}\r\n";
 				tableOfContent += "\\begin{center}\r\n";
-				tableOfContent += "\\textsc{\\LARGE \\CoverPageTitle{" + Param.GetMetadataValue(Param.Title) + "}}\\\\[1.5cm] \r\n";
+				tableOfContent += "\\textsc{\\LARGE \\CoverPageTitle{" + Common.ReplaceSymbolToXelatexText(Param.GetMetadataValue(Param.Title)) + "}}\\\\[1.5cm] \r\n";
 				tableOfContent += "\\vspace{110 mm} \r\n";
-				tableOfContent += "\\textsc{ \\CoverPageTitle{" + Param.GetMetadataValue(Param.Publisher).Replace("&", @"\&") + "}}\\\\[0.5cm] \r\n";
+				tableOfContent += "\\textsc{ \\CoverPageTitle{" + Common.ReplaceSymbolToXelatexText(Param.GetMetadataValue(Param.Publisher)) + "}}\\\\[0.5cm] \r\n";
 				if (logoFileName.Contains(".png"))
 				{
 					tableOfContent += "\\includegraphics[width=0.15 \\textwidth]{./" + logoFileName + "}\\\\[1cm]    \r\n";

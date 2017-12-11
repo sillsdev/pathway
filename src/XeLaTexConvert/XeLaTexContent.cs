@@ -189,7 +189,6 @@ namespace SIL.PublishingSolution
                             i++;
                             i++;
                             string value = values[i].Replace("\"", "");
-                            value = Common.ReplaceSymbolToText(value);
                             _replaceSymbolToText[key] = Common.UnicodeConversion(value);
                         }
                     }
@@ -424,8 +423,8 @@ namespace SIL.PublishingSolution
                 _isParagraphClosed = false;
                 _xetexNewLine = true;
             }
-
-            if (_previousParagraphName.ToLower().IndexOf("scrbook") == 0)
+			
+            if (_previousParagraphName != null && _previousParagraphName.ToLower().IndexOf("scrbook") == 0)
             {
                 string referenceFormat = _projInfo.HeaderReferenceFormat;
                 if (referenceFormat == "Genesis 1" && _childName.IndexOf("scrBookName") == 0)
@@ -508,7 +507,7 @@ namespace SIL.PublishingSolution
                 }
             }
 
-            if (!_bookPageBreak && (_previousParagraphName.IndexOf("TitleMain") == 0 || _previousParagraphName.IndexOf("TitleSecondary") == 0))
+            if (_previousParagraphName != null && !_bookPageBreak && (_previousParagraphName.IndexOf("TitleMain") == 0 || _previousParagraphName.IndexOf("TitleSecondary") == 0))
             {
                 _bookPageBreak = true;
                 if (_bookCount != 0)
@@ -609,9 +608,12 @@ namespace SIL.PublishingSolution
                 content = whiteSpacePre(content);
                 LanguageFontCheck(content, _childName);
                 _childName = Common.ReplaceSeperators(_childName);
-                content = Common.ReplaceSymbolToXelatexText(content);
-				List<string> value = BeginInlineInnerStyle(characterStyle);
+	            if (!string.IsNullOrEmpty(content))
+	            {
+		            content = Common.ReplaceSymbolToXelatexText(content);
+	            }
 
+	            List<string> value = BeginInlineInnerStyle(characterStyle);
                 if (_childName.IndexOf("scrBookName") == 0 && content != null)
                 {
                     _tocStartingPage = content;
@@ -620,9 +622,7 @@ namespace SIL.PublishingSolution
                     _toc.Add("PageStock_" + DicMainReversal + TocPageStock.ToString(), "\\" + _childName + "{" + _tocStartingPage + "}");
                     _xetexFile.Write("\r\n \\label{PageStock_" + DicMainReversal + TocPageStock.ToString() + "} ");
                 }
-
-                if (content != null) content = content.Replace("~", "\\textasciitilde{~}");
-
+				
                 if (_hideFirstVerseNo)
                 {
                     if (_childName.ToLower().IndexOf("chapter") == 0)
@@ -1000,7 +1000,7 @@ namespace SIL.PublishingSolution
             {
                 string styleName = _childName;
                 styleName = Common.ReplaceSeperators(styleName);
-                _xetexFile.Write("\\footnote {\\" + styleName + "{" + content + "}}");
+                _xetexFile.Write("\\footnote {\\" + styleName + "{" + Common.ReplaceSymbolToXelatexText(content) + "}}");
             }
         }
 

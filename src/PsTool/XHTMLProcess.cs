@@ -505,8 +505,15 @@ namespace SIL.Tool
 					else if (_reader.Name == "lang")
 					{
 						_lang = _reader.Value;
-						_xhtmlAttribute.Add(_lang);
-						AddEntryLanguage();
+						if (_lang == "utf-8")
+						{
+							_lang = string.Empty;
+						}
+						else
+						{
+							_xhtmlAttribute.Add(_lang);
+							AddEntryLanguage();
+						}
 					}
 					else if (!(_reader.Name == "id" || _reader.Name == "xml:space"))
 					{
@@ -818,14 +825,9 @@ namespace SIL.Tool
 						                      Common.ReplaceSymbolToText(content) + "</text:span>");
 					}
 				}
-				else if (outputType == Common.OutputType.XETEX.ToString())
+				else if (outputType == Common.OutputType.XETEX.ToString() || outputType == Common.OutputType.XELATEX.ToString())
 				{
-					footnoteFormat.Append(Common.ReplaceSymbolToText(content));
-				}
-				else if (outputType == Common.OutputType.XELATEX.ToString())
-				{
-					string xelatexContent = Common.ReplaceSymbolToXelatexText(content);
-					footnoteFormat.Append(Common.ReplaceSymbolToText(xelatexContent));
+					footnoteFormat.Append(content);
 				}
 				else
 				{
