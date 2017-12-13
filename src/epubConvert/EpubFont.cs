@@ -171,25 +171,21 @@ namespace epubConvert
 							_embeddedFonts[node.Value] = new EmbeddedFont(node.Value);
 						}
 					}
-					else if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext
+					else
 					{
 						var settingsHelper = new SettingsHelper(Param.DatabaseName);
 						string fileName = settingsHelper.GetSettingsFilename();
-						const string xPath = "//ScriptureText/DefaultFont";
-						XmlNode xmlFont = Common.GetXmlNode(fileName, xPath);
-						if (xmlFont != null)
+						if (File.Exists(fileName))
 						{
-							// get the text direction specified by the .ssf file
-							_langFontDictionary[language] = xmlFont.InnerText; // set the font used by this language
-							_embeddedFonts[xmlFont.InnerText] = new EmbeddedFont(xmlFont.InnerText);
+							const string xPath = "//ScriptureText/DefaultFont";
+							XmlNode xmlFont = Common.GetXmlNode(fileName, xPath);
+							if (xmlFont != null)
+							{
+								// get the text direction specified by the .ssf file
+								_langFontDictionary[language] = xmlFont.InnerText; // set the font used by this language
+								_embeddedFonts[xmlFont.InnerText] = new EmbeddedFont(xmlFont.InnerText);
+							}
 						}
-					}
-					else
-					{
-						// Paratext case (no .ldml file) - fall back on Charis
-						_langFontDictionary[language] = "Charis SIL"; // set the font used by this language
-						_embeddedFonts["Charis SIL"] = new EmbeddedFont("Charis SIL");
-
 					}
 				}
 				catch
