@@ -276,11 +276,18 @@ namespace SIL.Tool
 
 		private void LoadLdml(string path, string iso)
 		{
-			if (WritingSystem.Language == iso) return;
-			var ldmlFilePath = Path.Combine(path, iso + ".ldml");
-			if (!System.IO.File.Exists(ldmlFilePath)) return;
-			var ldmlAdaptor = new LdmlDataMapper(new WritingSystemFactory());
-			ldmlAdaptor.Read(ldmlFilePath, WritingSystem);
+			try
+			{
+				if (WritingSystem.Language == iso) return;
+				var ldmlFilePath = Path.Combine(path, iso + ".ldml");
+				if (!System.IO.File.Exists(ldmlFilePath)) return;
+				var ldmlAdaptor = new LdmlDataMapper(new WritingSystemFactory());
+				ldmlAdaptor.Read(ldmlFilePath, WritingSystem);
+			}
+			catch
+			{
+				//Error causing because of the dependency having the Newtonsoft.Json version 7.0.0.0.
+			}
 		}
 
 		public bool IsRightToLeft()
@@ -342,12 +349,18 @@ namespace SIL.Tool
 			switch (Caller)
 			{
 				case DataCreator.CreatorProgram.Paratext8:
-					return WritingSystem.DefaultFont.Features;
+					if (WritingSystem.DefaultFont !=null)
+						return WritingSystem.DefaultFont.Features;
+					else
+						return string.Empty;
 				case DataCreator.CreatorProgram.Paratext7:
 					return LanguageData != null && LanguageData["General"].ContainsKey("fontFeatureSettings") ? LanguageData["General"]["fontFeatureSettings"] : "";
 				case DataCreator.CreatorProgram.FieldWorks8:
 				case DataCreator.CreatorProgram.FieldWorks9:
-					return WritingSystem.DefaultFont.Features;
+					if (WritingSystem.DefaultFont != null)
+						return WritingSystem.DefaultFont.Features;
+					else
+						return string.Empty;
 			}
 			return string.Empty;
 		}
