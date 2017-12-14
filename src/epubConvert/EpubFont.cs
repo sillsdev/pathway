@@ -150,51 +150,10 @@ namespace epubConvert
 			_langFontDictionary.Keys.CopyTo(langs, 0);
 			foreach (var language in langs)
 			{
-				string[] langCoun = language.Split('-');
-
-				try
-				{
-					// When no hyphen use entire value but when there is a hyphen, look for first part
-					var langTarget = langCoun.Length < 2 ? langCoun[0] : language;
-					string wsPath = Common.PathCombine(Common.GetLDMLPath(), langTarget + ".ldml");
-					if (File.Exists(wsPath))
-					{
-						var ldml = Common.DeclareXMLDocument(false);
-						ldml.Load(wsPath);
-						var nsmgr = new XmlNamespaceManager(ldml.NameTable);
-						nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
-						var node = ldml.SelectSingleNode("//palaso:defaultFontFamily/@value", nsmgr);
-						if (node != null)
-						{
-							// build the font information and return
-							_langFontDictionary[language] = node.Value; // set the font used by this language
-							_embeddedFonts[node.Value] = new EmbeddedFont(node.Value);
-						}
-					}
-					else if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext
-					{
-						var settingsHelper = new SettingsHelper(Param.DatabaseName);
-						string fileName = settingsHelper.GetSettingsFilename();
-						const string xPath = "//ScriptureText/DefaultFont";
-						XmlNode xmlFont = Common.GetXmlNode(fileName, xPath);
-						if (xmlFont != null)
-						{
-							// get the text direction specified by the .ssf file
-							_langFontDictionary[language] = xmlFont.InnerText; // set the font used by this language
-							_embeddedFonts[xmlFont.InnerText] = new EmbeddedFont(xmlFont.InnerText);
-						}
-					}
-					else
-					{
-						// Paratext case (no .ldml file) - fall back on Charis
-						_langFontDictionary[language] = "Charis SIL"; // set the font used by this language
-						_embeddedFonts["Charis SIL"] = new EmbeddedFont("Charis SIL");
-
-					}
-				}
-				catch
-				{
-				}
+				var fontName = Common.CallerSetting.GetLanguageFont(language);
+				if (string.IsNullOrEmpty(fontName)) continue;
+				_langFontDictionary[language] = fontName;
+				_embeddedFonts[fontName] = new EmbeddedFont(fontName);
 			}
 		}
 		#endregion void BuildFontsList()

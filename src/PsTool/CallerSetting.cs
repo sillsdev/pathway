@@ -18,6 +18,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Xml;
 using SIL.WritingSystems;
 using IniParser;
@@ -259,6 +260,9 @@ namespace SIL.Tool
 					var language = GetLanguage();
 					LanguageData = null;
                     if (LoadLds(Path.Combine(Path.GetDirectoryName(_dataFolder), language + ".lds"))) break;
+					LanguageData = new IniData();
+					LanguageData.Sections.AddSection("General");
+					LanguageData["General"].AddKey(new KeyData("font").Value = "Charis SIL");
 					break;
 				case DataCreator.CreatorProgram.FieldWorks8:
 				case DataCreator.CreatorProgram.FieldWorks9:
