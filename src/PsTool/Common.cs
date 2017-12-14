@@ -2705,6 +2705,7 @@ namespace SIL.Tool
 						dirInfo.Attributes = FileAttributes.Normal;
 					}
 					dirInfo.Delete(true);
+					WaitForDirectoryToBecomeEmpty(dirInfo);
 					deleted = true;
 				}
 				catch (Exception ex)
@@ -2718,6 +2719,8 @@ namespace SIL.Tool
 
 		public static void CleanDirectory(DirectoryInfo di)
 		{
+			var parent = Path.GetDirectoryName(di.FullName);
+			if (!Directory.Exists(parent)) Directory.CreateDirectory(parent);
 			try
 			{
 				if (di == null)
@@ -2761,12 +2764,19 @@ namespace SIL.Tool
 
 		private static void WaitForDirectoryToBecomeEmpty(DirectoryInfo di)
 		{
-			for (int i = 0; i < 5; i++)
+			try
 			{
-				if (di.GetFileSystemInfos().Length == 0)
-					return;
-				Console.WriteLine(di.FullName + i);
-				System.Threading.Thread.Sleep(50 * i);
+				for (int i = 0; i < 5; i++)
+				{
+					if (di.GetFileSystemInfos().Length == 0)
+						return;
+					Console.WriteLine(di.FullName + i);
+					System.Threading.Thread.Sleep(50*i);
+				}
+			}
+			catch (Exception)
+			{
+				// Directory doesn't exist
 			}
 		}
 
@@ -3290,6 +3300,9 @@ namespace SIL.Tool
 		/// <param name="copySubFolder"> </param>
 		public static void CopyFolderandSubFolder(string sourceFolder, string destFolder, bool copySubFolder)
 		{
+			var parentFolder = Path.GetDirectoryName(destFolder);
+			Debug.Assert(parentFolder != null);
+			if (!Directory.Exists(parentFolder)) Directory.CreateDirectory(parentFolder);
 			if (Directory.Exists(destFolder))
 			{
 				DirectoryInfo di = new DirectoryInfo(destFolder);

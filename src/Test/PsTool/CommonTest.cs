@@ -58,9 +58,8 @@ namespace Test.PsTool
             _outputBasePath = Common.PathCombine(GetTestPath(), "Output");
             _inputBasePath = Common.PathCombine(GetTestPath(), "InputFiles");
             _expectBasePath = Common.PathCombine(GetTestPath(), "Expected");
-            if (Directory.Exists(_outputBasePath))
-                Directory.Delete(_outputBasePath, true);
-            Directory.CreateDirectory(_outputBasePath);
+			Common.CleanDirectory(new DirectoryInfo(_outputBasePath));
+            if (!Directory.Exists(_outputBasePath)) Directory.CreateDirectory(_outputBasePath);
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.Testing = true;
         }

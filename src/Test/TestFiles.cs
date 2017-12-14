@@ -36,12 +36,8 @@ namespace Test
             _inputPath = Common.PathCombine(testPath, InputFolderName);
             _outputPath = Common.PathCombine(testPath, OutputFolderName);
 		    _expectedPath = Common.PathCombine(testPath, ExpectedFolderName);
-	        if (Directory.Exists(_outputPath))
-            {
-                Directory.Delete(_outputPath, true);
-                Thread.Sleep(1000);
-            }
-            Directory.CreateDirectory(_outputPath);
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
+            if (!Directory.Exists(_outputPath)) Directory.CreateDirectory(_outputPath);
         }
 
         public string Input(string fileName)

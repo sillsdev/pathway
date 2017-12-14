@@ -119,7 +119,7 @@ namespace Test.epubConvert
 
 		private void CleanOutputDirectory()
 		{
-			Common.DeleteDirectory(_outputPath);
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 		}
 
 		/// <summary>

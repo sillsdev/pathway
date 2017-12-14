@@ -84,6 +84,7 @@ namespace Test.PsTool
 		}
 
 		[Test]
+		[Category("SkipOnTeamCity")]
 		public void D33GetIsoCodeTest()
 		{
 			using (var cs = new CallerSetting("D33"))
@@ -107,6 +108,7 @@ namespace Test.PsTool
 		}
 
 		[Test]
+		[Category("SkipOnTeamCity")]
 		public void D33GetLanguageTest()
 		{
 			using (var cs = new CallerSetting("D33"))

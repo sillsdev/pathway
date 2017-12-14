@@ -924,6 +924,7 @@ namespace SIL.Tool
         private static string StylePath(string sheet, FileAccess fa)
         {
             var fn = sheet.Contains(".css") ? sheet : StyleFile.ContainsKey(sheet) ? StyleFile[sheet] :  "";
+	        if (!Value.ContainsKey(UserSheetPath)) return fn;
             var fPath = Common.PathCombine(Value[UserSheetPath], fn);
             if (fa == FileAccess.Write) return fPath;
             if (!File.Exists(fPath))

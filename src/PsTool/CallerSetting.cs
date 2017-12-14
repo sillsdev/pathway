@@ -100,6 +100,8 @@ namespace SIL.Tool
 		{
 			// Since we are only reading the Writing Systems, we make a copy and migrate.
 			_ldmlFolder = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+			var wsFolder = Common.GetLDMLPath();
+			if (!Directory.Exists(wsFolder)) return;
 			FolderTree.Copy(Common.GetLDMLPath(), _ldmlFolder);
 			var migrator = new LdmlInFolderWritingSystemRepositoryMigrator(_ldmlFolder, null);
 			migrator.Migrate();
@@ -262,7 +264,7 @@ namespace SIL.Tool
                     if (LoadLds(Path.Combine(Path.GetDirectoryName(_dataFolder), language + ".lds"))) break;
 					LanguageData = new IniData();
 					LanguageData.Sections.AddSection("General");
-					LanguageData["General"].AddKey(new KeyData("font").Value = "Charis SIL");
+					LanguageData["General"].AddKey(new KeyData("font") {Value = "Charis SIL"});
 					break;
 				case DataCreator.CreatorProgram.FieldWorks8:
 				case DataCreator.CreatorProgram.FieldWorks9:
@@ -282,7 +284,11 @@ namespace SIL.Tool
 		{
 			if (WritingSystem.Language == iso) return;
 			var ldmlFilePath = Path.Combine(path, iso + ".ldml");
-			if (!System.IO.File.Exists(ldmlFilePath)) return;
+			if (!System.IO.File.Exists(ldmlFilePath))
+			{
+				WritingSystem.DefaultFont = new FontDefinition("Charis SIL");
+				return;
+			}
 			var ldmlAdaptor = new LdmlDataMapper(new WritingSystemFactory());
 			ldmlAdaptor.Read(ldmlFilePath, WritingSystem);
 		}
