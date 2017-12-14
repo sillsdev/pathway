@@ -1,7 +1,17 @@
-pathway (1.16.8.5921)  experimental; urgency=high
+pathway (1.16.10.5935)  experimental; urgency=high
 
-  * Common: TD-4868 handle eliminating pictures
   * Common: TD-4857 Reversal content to appear once not twice in PDF
+  * Common: TD-4866 Include Ethnologue code on rights page
+  * Common: TD-4868 handle eliminating pictures
+  * Common: TD-4885 avoid sharing violation
+  * Common: TD-4887 Fix to run with 64-bit Flex on Windows
+  * Epub: TD-4781 Fix crash when Epub custom style sheet used
+  * Epub: TD-4865 Epub output to match font from source
+  * Helps: updated
+  * Paratext: TD-4869 Fix Caption reference appears twice
+  * Paratext: TD-4870 Don't center paragraphs containing pictures
+  * UI: TD-4645 error shown when delete style sheet is used multiple times
+  * XeLaTeX: TD-4198 Handle ampersand and other characters on Title page
 
  -- Greg Trihus <greg_trihus@sil.org>  Wed, 29 Nov 2017 13:56:20 -0600
 
