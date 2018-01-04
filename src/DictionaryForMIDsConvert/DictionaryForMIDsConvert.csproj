@@ -245,7 +245,9 @@
     <Compile Include="DictionaryForMIDsStreamWriter.cs" />
     <Compile Include="DictionaryForMIDsStyle.cs" />
     <Compile Include="ExportDictionaryForMIDs.cs" />
-    <Compile Include="..\..\GlobalAssemblyInfo.cs" />
+    <Compile Include="..\..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
