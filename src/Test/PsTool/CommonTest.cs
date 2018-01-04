@@ -1263,7 +1263,7 @@ namespace Test.PsTool
 			string utcDateTime = DateTimeOffset.UtcNow.ToString("o");
 			Common.UpdateLicenseAttributes(creatorTool, "Dictionary", outputFile, organization, exportTitle, copyrightURL, utcDateTime);
 
-			TextFileAssert.CheckLineAreEqualEx(expectedFile, outputFile, new ArrayList { 6, 19, 45, 50});
+			TextFileAssert.CheckLineAreEqualEx(expectedFile, outputFile, new ArrayList { 6, 19, 50});
 
 			string fileData = FileData.Get(outputFile);
 
