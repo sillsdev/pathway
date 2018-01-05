@@ -1,3 +1,9 @@
+pathway (1.17.0.5939)  experimental; urgency=high
+
+  * Linux: Changes for the 1.17.0 release
+
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 5 Jan 2018 16:46:20 -0600
+
 pathway (1.16.11.5937)  experimental; urgency=high
 
   * Common: Adjust app.config and GlobalAssemblyInfo references
