@@ -26,7 +26,8 @@ namespace SIL.Tool
 		{
 			Paratext7,
 			Paratext8,
-			FieldWorks,
+			FieldWorks8,
+			FieldWorks9,
 			Unknown
 		}
 
@@ -37,9 +38,13 @@ namespace SIL.Tool
 			{
 				return;
 			}
-			if (executablePath.ToLower().Contains("fieldworks"))
+			if (executablePath.ToLower().Contains("fieldworks 8"))
 			{
-				Creator = CreatorProgram.FieldWorks;
+				Creator = CreatorProgram.FieldWorks8;
+			}
+			else if (executablePath.ToLower().Contains("fieldworks"))
+			{
+				Creator = CreatorProgram.FieldWorks9;
 			}
 			else if (executablePath.ToLower().Contains("paratext 7"))
 			{

@@ -265,10 +265,10 @@ namespace Test.PsExport
             Common.PublishingSolutionsEnvironmentReset();
             TestPathSetup(testName);
             var settingsFolder = Common.PathCombine(_inputTestPath, "Pathway");
-            if (Directory.Exists(settingsFolder))
-            {
-                FolderTree.Copy(settingsFolder, Common.GetAllUserPath());
-            }
+	        var workingSettings = Common.GetAllUserPath();
+			Common.CleanDirectory(new DirectoryInfo(workingSettings));
+	        if (!Directory.Exists(workingSettings)) Directory.CreateDirectory(workingSettings);
+			if (Directory.Exists(settingsFolder)) FolderTree.Copy(settingsFolder, workingSettings);
 
             var di = new DirectoryInfo(_outputTestPath);
             //if (di.Exists)

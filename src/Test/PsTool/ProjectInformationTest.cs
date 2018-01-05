@@ -49,9 +49,8 @@ namespace Test.PsTool
             actualDocument = Common.DeclareXMLDocument(false);
             LoadInputDocument("Dictionary1.de");
             var outputPath = Common.PathCombine(GetTestPath(), "Output");
-            if (Directory.Exists(outputPath))
-                Directory.Delete(outputPath, true);
-            Directory.CreateDirectory(outputPath);
+            Common.CleanDirectory(new DirectoryInfo(outputPath));
+            if (!Directory.Exists(outputPath)) Directory.CreateDirectory(outputPath);
             Common.Testing = true;
         }
 

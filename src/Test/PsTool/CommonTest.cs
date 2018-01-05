@@ -58,9 +58,8 @@ namespace Test.PsTool
             _outputBasePath = Common.PathCombine(GetTestPath(), "Output");
             _inputBasePath = Common.PathCombine(GetTestPath(), "InputFiles");
             _expectBasePath = Common.PathCombine(GetTestPath(), "Expected");
-            if (Directory.Exists(_outputBasePath))
-                Directory.Delete(_outputBasePath, true);
-            Directory.CreateDirectory(_outputBasePath);
+			Common.CleanDirectory(new DirectoryInfo(_outputBasePath));
+            if (!Directory.Exists(_outputBasePath)) Directory.CreateDirectory(_outputBasePath);
             Common.ProgInstall = PathPart.Bin(Environment.CurrentDirectory, @"/../../DistFiles");
             Common.Testing = true;
         }
@@ -1123,7 +1122,23 @@ namespace Test.PsTool
 			Assert.AreEqual(theLanguageCode, "bzh:Buang, Mapos;");
 	    }
 
-		/// <summary>
+	    /// <summary>
+	    ///A test for Get LanguageCode For Scripture Test - Empty Venacular return AVT
+	    /// Uses AVT Scripture
+	    /// Checks whether the Language Code returned is as expected
+	    ///</summary>
+	    [Test]
+	    public void GetLanguageCodeForScriptureTest()
+	    {
+		    const string fileName = "EmptyVernacularLanguageCodeTest.xhtml";
+		    var sourceXhtmlFile = GetFileNameWithPath(fileName);
+		    var outputXhtmlFile = Common.PathCombine(_outputBasePath, fileName);
+		    CopyToOutput(sourceXhtmlFile, outputXhtmlFile);
+		    string theLanguageCode = Common.GetLanguageCode(outputXhtmlFile, "Scripture", true);
+		    Assert.AreEqual(theLanguageCode, "avt:avt");
+	    }
+
+	    /// <summary>
 		///A test for GetLanguageCode - (1) With <span class="headword" lang="seh">
 		/// Uses sena3
 		/// Checks whether the Language Code returned is as expected
@@ -1248,7 +1263,7 @@ namespace Test.PsTool
 			string utcDateTime = DateTimeOffset.UtcNow.ToString("o");
 			Common.UpdateLicenseAttributes(creatorTool, "Dictionary", outputFile, organization, exportTitle, copyrightURL, utcDateTime);
 
-			TextFileAssert.CheckLineAreEqualEx(expectedFile, outputFile, new ArrayList { 6, 19, 45, 50});
+			TextFileAssert.CheckLineAreEqualEx(expectedFile, outputFile, new ArrayList { 6, 19, 50});
 
 			string fileData = FileData.Get(outputFile);
 

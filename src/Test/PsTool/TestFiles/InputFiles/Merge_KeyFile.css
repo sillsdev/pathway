@@ -1,4 +1,8 @@
 @import "Merge_Dictionary.css";
 @import "Merge_Columns_1.css";
 @import "Merge_Font_Size_12.css";
-
+*[dir= 'ltr']{
+   unicode-bidi: isolate;
+   unicode-bidi: -ms-isolate;
+   unicode-bidi: -moz-isolate;
+}

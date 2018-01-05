@@ -386,15 +386,15 @@ namespace SIL.PublishingSolution
 	            }
                 LoadAvailFormats();
                 LoadAvailStylesheets();
-                IsExpanded = false;
+	            LoadProperty();
+				IsExpanded = false;
                 ResizeDialog();
                 SetOkStatus();
-                chkHyphen.Enabled = false;
+				chkHyphen.Enabled = false;
                 chkHyphen.Checked = false;
                 clbHyphenlang.Items.Clear();
                 //Loads Hyphenation related settings
 		        LoadHyphenationSettingsToForm();
-	            LoadProperty();
                 EnableUIElements();
 
                 ShowHelp.ShowHelpTopic(this, _helpTopic, _isUnixOS, false);
@@ -716,10 +716,9 @@ namespace SIL.PublishingSolution
         protected void LoadAvailFormats()
         {
             OperatingSystem OS = Environment.OSVersion;
-	        string backendsPath = Common.ProgInstall;
-            Backend.Load(backendsPath);
 			Console.WriteLine( @"InputType from : {0}", InputType);
-            ArrayList exportType = Backend.GetExportType(InputType);
+			string backendsPath = Common.ProgInstall;
+			ArrayList exportType = Backend.GetExportType(backendsPath, InputType);
             exportType.Sort();
             if (exportType.Count > 0)
             {

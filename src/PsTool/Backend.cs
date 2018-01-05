@@ -34,38 +34,6 @@ namespace SIL.Tool
         public static List<IExportProcess> backend = new List<IExportProcess>();
         private static ArrayList _exportType = new ArrayList();
         private static VerboseClass verboseClass;
-		public static List<IExportProcess> LoadExportAssembly(string path)
-        {
-            if (!Directory.Exists(path))
-            {
-                return null;
-            }
-			if (Directory.Exists(path) && !path.Contains("Export"))
-			{
-				path = Common.PathCombine(path, "Export");
-			}
-            backend.Clear();
-            DirectoryInfo directoryInfo = new DirectoryInfo(path);
-            foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
-            {
-                var className = string.Empty;
-                if (fileInfo.Name == "OpenOfficeConvert.dll")
-                    className = "LibreOffice";
-                else if (fileInfo.Name.Contains("Convert"))
-                    className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Convert", "");
-                else if (fileInfo.Name.Contains("Writer"))
-                    className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Writer", "");
-                else
-                    continue;
-                className = "SIL.PublishingSolution.Export" + className;
-                IExportProcess exportProcess = CreateObject(fileInfo.FullName, className) as IExportProcess;
-
-                backend.Add(exportProcess);
-            }
-
-	        return backend;
-        }
-
 		public static void Load(string path)
 		{
 			if (!Directory.Exists(path))
@@ -77,27 +45,40 @@ namespace SIL.Tool
 				path = Common.PathCombine(path, "Export");
 			}
 			backend.Clear();
-			DirectoryInfo directoryInfo = new DirectoryInfo(path);
-			foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
+			try
 			{
-				var className = string.Empty;
-				if (fileInfo.Name == "OpenOfficeConvert.dll")
-					className = "LibreOffice";
-				else if (fileInfo.Name.Contains("Convert"))
-					className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Convert", "");
-				else if (fileInfo.Name.Contains("Writer"))
-					className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Writer", "");
-				else
-					continue;
-				className = "SIL.PublishingSolution.Export" + className;
-				IExportProcess exportProcess = CreateObject(fileInfo.FullName, className) as IExportProcess;
+				DirectoryInfo directoryInfo = new DirectoryInfo(path);
+				foreach (FileInfo fileInfo in directoryInfo.GetFiles("*.dll"))
+				{
+					var className = string.Empty;
+					if (fileInfo.Name == "OpenOfficeConvert.dll")
+						className = "LibreOffice";
+					else if (fileInfo.Name.Contains("Convert"))
+						className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Convert", "");
+					else if (fileInfo.Name.Contains("Writer"))
+						className = Path.GetFileNameWithoutExtension(fileInfo.Name).Replace("Writer", "");
+					else
+						continue;
+					className = "SIL.PublishingSolution.Export" + className;
+					IExportProcess exportProcess = CreateObject(fileInfo.FullName, className) as IExportProcess;
 
-				backend.Add(exportProcess);
+					backend.Add(exportProcess);
+				}
+			}
+			catch (Exception)
+			{
+				// If unable to load, leave backend array empty
+				// From 64 bit flex, can't load x86 assemblies
 			}
 		}
 
+	    public static ArrayList GetExportType(string path, string inputDataType)
+	    {
+			if (backend.Count == 0) Load(path);
+		    return GetExportType(inputDataType);
+	    }
 
-        public static ArrayList GetExportType(string inputDataType)
+	    public static ArrayList GetExportType(string inputDataType)
         {
             _exportType.Clear();
             foreach (IExportProcess process in backend)
@@ -118,18 +99,31 @@ namespace SIL.Tool
                     // On Linux, .net 4.0 can't determine .net 4.6.1 assembly types so call a process
                     if (Common.IsUnixOS())
                     {
-                        var typeFileName = Path.Combine(Common.GetAllUserPath(), "ExportTypes.xml");
-                        var args = string.Format("PathwayB.exe -i {0} -f {1} -o", inputDataType, typeFileName);
-                        SubProcess.RunCommand(Common.FromRegistry("Export"), "mono", args, true);
-                        Exception err;
-                        return (ArrayList)SilTools.Utils.DeserializeData(typeFileName, typeof(ArrayList), out err);
+                        return LoadUsingSubProcess(inputDataType);
                     }
                 }
             }
-            return _exportType;
+            return _exportType.Count != 0? _exportType: LoadUsingSubProcess(inputDataType);
         }
 
-        public static bool Launch(string type, PublicationInformation publicationInformation)
+	    private static ArrayList LoadUsingSubProcess(string inputDataType) // Load silently ignoring error
+	    {
+		    Exception err;
+		    return LoadUsingSubProcess(inputDataType, out err);
+	    }
+
+	    private static ArrayList LoadUsingSubProcess(string inputDataType, out Exception err)
+	    {
+		    var typeFileName = Path.Combine(Common.GetAllUserPath(), "ExportTypes.xml");
+		    const string projProg = "PathwayB.exe";
+		    var osProg = Common.IsUnixOS() ? "mono" : projProg;
+		    var arg1 = Common.IsUnixOS() ? projProg + " " : "";
+		    var args = string.Format("{0}-i {1} -f {2} -o", arg1, inputDataType, typeFileName);
+		    SubProcess.RunCommand(Common.FromRegistry("Export"), osProg, args, true);
+		    return (ArrayList) SilTools.Utils.DeserializeData(typeFileName, typeof(ArrayList), out err);
+	    }
+
+	    public static bool Launch(string type, PublicationInformation publicationInformation)
         {
             string xhtmlFile = publicationInformation.DefaultXhtmlFileWithPath;
             CreateVerbose(publicationInformation);

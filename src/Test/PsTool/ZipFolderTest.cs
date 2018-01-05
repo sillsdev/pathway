@@ -1,14 +1,14 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="ZipFolderTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Test methods of FlexDePlugin
 // </remarks>
@@ -35,9 +35,8 @@ namespace Test.PsTool
         {
             sourceFolder = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/InputFiles");
             TargetFolderWithFileName = PathPart.Bin(Environment.CurrentDirectory, "/PsTool/TestFiles/output");
-            if (Directory.Exists(TargetFolderWithFileName))
-                Directory.Delete(TargetFolderWithFileName, true);
-            Directory.CreateDirectory(TargetFolderWithFileName);
+            Common.CleanDirectory(new DirectoryInfo(TargetFolderWithFileName));
+            if (!Directory.Exists(TargetFolderWithFileName)) Directory.CreateDirectory(TargetFolderWithFileName);
             Common.Testing = true;
         }
         #endregion Setup

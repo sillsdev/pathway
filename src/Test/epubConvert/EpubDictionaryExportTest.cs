@@ -65,7 +65,7 @@ namespace Test.epubConvert
 			projInfo.DefaultRevCssFileWithPath = Common.PathCombine(_inputPath, "FlexRev.css");
 			projInfo.ProjectName = "EBook (epub)_" + DateTime.Now.Date.ToShortDateString() + "_" +
 								   DateTime.Now.Date.ToShortTimeString();
-			DataCreator.Creator = DataCreator.CreatorProgram.FieldWorks;
+			DataCreator.Creator = DataCreator.CreatorProgram.FieldWorks8;
 			using (Common.CallerSetting = new CallerSetting {SettingsFullPath = projInfo.DefaultXhtmlFileWithPath})
 			{
 				var target = new Exportepub();
@@ -119,7 +119,7 @@ namespace Test.epubConvert
 
 		private void CleanOutputDirectory()
 		{
-			Common.DeleteDirectory(_outputPath);
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 		}
 
 		/// <summary>

@@ -2,7 +2,7 @@
 <?define Product="Pathway"?>
 <?define UpgradeCode="74173B43-8B0C-499e-99B0-759A6C8EBDD2"?>
 <?define Edition="BTE"?>
-<?define BUILD_NUMBER="1.16.6"?>
+<?define BUILD_NUMBER="1.17.0"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
   <Product Id="*" Name="$(var.Product) $(var.Edition) $(var.BUILD_NUMBER)" Language="1033" Version="$(var.BUILD_NUMBER)" Manufacturer="SIL International" UpgradeCode="$(var.UpgradeCode)">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />

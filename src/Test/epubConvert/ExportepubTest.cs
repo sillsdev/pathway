@@ -92,6 +92,8 @@ namespace Test.epubConvert
 			projInfo.IsReversalExist = false;
 			projInfo.ProjectName = "Scripture Draft";
 			projInfo.ProjectInputType = "Scripture";
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+			Common.CallerSetting = new CallerSetting { SettingsFullPath = projInfo.DefaultXhtmlFileWithPath };
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
@@ -248,6 +250,8 @@ namespace Test.epubConvert
 			projInfo.IsReversalExist = false;
 			projInfo.ProjectName = "Scripture Draft";
 			projInfo.ProjectInputType = "Scripture";
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+			Common.CallerSetting = new CallerSetting { SettingsFullPath = projInfo.DefaultXhtmlFileWithPath };
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
@@ -325,8 +329,7 @@ namespace Test.epubConvert
 		[Category("LongTest")]
 		public void EpubIndentFileComparisonTest()
 		{
-			// clean out old files
-			CleanOutputDirectory();
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 			if (!Directory.Exists(FileOutput("ExportDictionary")))
 				Directory.CreateDirectory(FileOutput("ExportDictionary"));
 
@@ -337,6 +340,8 @@ namespace Test.epubConvert
 			projInfo.ProjectName = "Scripture Draft";
 			projInfo.ProjectInputType = "Scripture";
 			File.Copy(FileProg(@"Styles\Scripture\epub.css"), FileOutput("epub.css"));
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+			Common.CallerSetting = new CallerSetting { SettingsFullPath = projInfo.DefaultXhtmlFileWithPath };
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
@@ -353,19 +358,15 @@ namespace Test.epubConvert
 		public void FootNoteMarker_RQ_Test()
 		{
 			const string FolderName = "FootnoteMarker_RQ";
-
-			// clean out old files
-			foreach (var file in Directory.GetFiles(_outputPath))
-			{
-				if (File.Exists(file))
-					File.Delete(file);
-			}
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 			FolderTree.Copy(FileInput(FolderName), FileOutput(FolderName));
 			PublicationInformation projInfo = GetProjInfo(FileOutput(FolderName), true);
 			projInfo.ProjectName = "RQMarkerTest";
 			projInfo.ProjectInputType = "Dictionary";
 			projInfo.IsLexiconSectionExist = true;
 			//File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"));
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+			Common.CallerSetting = new CallerSetting { SettingsFullPath = projInfo.DefaultXhtmlFileWithPath };
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
@@ -418,13 +419,7 @@ namespace Test.epubConvert
 		[Category("SkipOnTeamCity")]
 		public void ExportDictionaryInsertBeforeAfterFW83Test()
 		{
-			// clean out old files
-			foreach (var file in Directory.GetFiles(_outputPath))
-			{
-				if (File.Exists(file))
-					File.Delete(file);
-			}
-
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 			const string XhtmlName = "InsertBeforeAfterFW83.xhtml";
 			const string CssName = "InsertBeforeAfterFW83.css";
 			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -433,6 +428,8 @@ namespace Test.epubConvert
 			projInfo.ProjectInputType = "Dictionary";
 			projInfo.IsLexiconSectionExist = true;
 			File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"));
+			DataCreator.Creator = DataCreator.CreatorProgram.FieldWorks8;
+			Common.CallerSetting = new CallerSetting { SettingsFullPath = projInfo.DefaultXhtmlFileWithPath };
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
@@ -449,13 +446,7 @@ namespace Test.epubConvert
 		[Category("LongTest")]
 		public void ExportDictionaryRemoveEntryGUIDFW83Test()
 		{
-			// clean out old files
-			foreach (var file in Directory.GetFiles(_outputPath))
-			{
-				if (File.Exists(file))
-					File.Delete(file);
-			}
-
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 			const string XhtmlName = "entryguid.xhtml";
 			const string CssName = "entryguid.css";
 			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -464,6 +455,8 @@ namespace Test.epubConvert
 			projInfo.ProjectInputType = "Dictionary";
 			projInfo.IsLexiconSectionExist = true;
 			File.Copy(FileProg(@"Styles\Dictionary\epub.css"), FileOutput("epub.css"));
+			DataCreator.Creator = DataCreator.CreatorProgram.FieldWorks8;
+			Common.CallerSetting = new CallerSetting { SettingsFullPath = projInfo.DefaultXhtmlFileWithPath };
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
@@ -566,13 +559,7 @@ namespace Test.epubConvert
 		[Category("LongTest")]
 		public void EPubTOCCreationTest_Level1_FW83()
 		{
-			// clean out old files
-			foreach (var file in Directory.GetFiles(_outputPath))
-			{
-				if (File.Exists(file))
-					File.Delete(file);
-			}
-
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 			const string XhtmlName = "main.xhtml";
 			const string CssName = "main.css";
 			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -605,13 +592,7 @@ namespace Test.epubConvert
 		[Category("LongTest")]
 		public void EPubTOCCreationTest_Level2_FW83()
 		{
-			// clean out old files
-			foreach (var file in Directory.GetFiles(_outputPath))
-			{
-				if (File.Exists(file))
-					File.Delete(file);
-			}
-
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 			const string XhtmlName = "main.xhtml";
 			const string CssName = "main.css";
 			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -644,13 +625,7 @@ namespace Test.epubConvert
 		[Category("LongTest")]
 		public void EPubTOCCreationTest_Level3_FW83()
 		{
-			// clean out old files
-			foreach (var file in Directory.GetFiles(_outputPath))
-			{
-				if (File.Exists(file))
-					File.Delete(file);
-			}
-
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 			const string XhtmlName = "main.xhtml";
 			const string CssName = "main.css";
 			PublicationInformation projInfo = GetProjInfo(XhtmlName, CssName);
@@ -732,6 +707,8 @@ namespace Test.epubConvert
 			projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
 			projInfo.ProjectName = "GlossaryTestCase";
 			Common.Testing = true;
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+			Common.CallerSetting = new CallerSetting { SettingsFullPath = projInfo.DefaultXhtmlFileWithPath };
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
@@ -774,6 +751,8 @@ namespace Test.epubConvert
 			projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
 			projInfo.ProjectName = "aaiScriptureExportTest";
 			Common.Testing = true;
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+			Common.CallerSetting = new CallerSetting { SettingsFullPath = projInfo.DefaultXhtmlFileWithPath };
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
 			Assert.IsTrue(actual);
@@ -825,6 +804,8 @@ namespace Test.epubConvert
 			projInfo.DefaultCssFileWithPath = Common.PathCombine(outputDataFolder, cssName);
 			projInfo.ProjectName = "NkontTestCase";
 			Common.Testing = true;
+			DataCreator.Creator = DataCreator.CreatorProgram.Paratext7;
+			Common.CallerSetting = new CallerSetting { SettingsFullPath = projInfo.DefaultXhtmlFileWithPath };
 			var target = new Exportepub();
 			var actual = target.Export(projInfo);
 
@@ -893,13 +874,14 @@ namespace Test.epubConvert
 			// Common.ProgBase = _outputPath;
 			Param.LoadValues(sFileName);
 			Param.SetLoadType = inputType;
+			File.Copy(sFileName, Param.PathwaySettingFilePath, true);
 			//Param.Value["OutputPath"] = _outputPath;
 			//Param.Value["UserSheetPath"] = _outputPath;
 		}
 
 		private void CleanOutputDirectory()
 		{
-			Common.DeleteDirectory(_outputPath);
+			Common.CleanDirectory(new DirectoryInfo(_outputPath));
 		}
 
 		private void FileCompare(string file1, string file2)

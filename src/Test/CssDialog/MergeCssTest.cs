@@ -1,16 +1,16 @@
 ﻿// --------------------------------------------------------------------------------------------
 // <copyright file="MergeCssTest.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
-// 
+//
 // </remarks>
 // --------------------------------------------------------------------------------------------
 
@@ -21,8 +21,8 @@ using SIL.Tool;
 
 namespace Test.CssDialog
 {
-    
-    
+
+
     /// <summary>
     ///This is a test class for MergeCssTest and is intended
     ///to contain all MergeCssTest Unit Tests
@@ -51,7 +51,7 @@ namespace Test.CssDialog
         }
 
         #region Additional test attributes
-        // 
+        //
         //You can use the following additional attributes as you write your tests:
         //
         //Use ClassInitialize to run code before running the first test in the class
@@ -129,8 +129,7 @@ namespace Test.CssDialog
         {
             MergeCss target = new MergeCss { OutputLocation = "Preprocess" };
             var workDir = Common.PathCombine(Path.GetTempPath(), "Preprocess");
-            if (Directory.Exists(workDir))
-                Directory.Delete(workDir,true);
+			Common.CleanDirectory(new DirectoryInfo(workDir));
             string css = Common.PathCombine(_inputBasePath, "MergeFile4.css"); // TODO: Initialize to an appropriate value
             string actual = target.Make(css, "Temp1.css");
             string expected = Common.PathCombine(_expectBasePath, "MergeFile.css"); // TODO: Initialize to an appropriate value
@@ -145,9 +144,8 @@ namespace Test.CssDialog
         {
             MergeCss target = new MergeCss { OutputLocation = "Preprocess" };
             var workDir = Common.PathCombine(Path.GetTempPath(), "Preprocess");
-            if (Directory.Exists(workDir))
-                Directory.Delete(workDir, true);
-            string css = Common.PathCombine(_inputBasePath, "MergeFile7.css");
+			Common.CleanDirectory(new DirectoryInfo(workDir));
+			string css = Common.PathCombine(_inputBasePath, "MergeFile7.css");
             string actual = target.Make(css, "Temp1.css");
 	        var fileName = "MergeBottomImportFile.css";
 			if (Common.UsingMonoVM)

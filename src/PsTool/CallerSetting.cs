@@ -18,6 +18,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Xml;
 using SIL.WritingSystems;
 using IniParser;
@@ -66,8 +67,12 @@ namespace SIL.Tool
 				case DataCreator.CreatorProgram.Paratext7:
 					_dataFolder = RegistryHelperLite.FallbackStringValue("ScrChecks/1.0/Settings_Directory");
 					break;
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
 					_dataFolder = RegistryHelperLite.FallbackStringValue("SIL/FieldWorks/8", "ProjectsDir");
+					SetupLdmlFolder();
+					break;
+				case DataCreator.CreatorProgram.FieldWorks9:
+					_dataFolder = RegistryHelperLite.FallbackStringValue("SIL/FieldWorks/9", "ProjectsDir");
 					SetupLdmlFolder();
 					break;
 			}
@@ -82,7 +87,8 @@ namespace SIL.Tool
 			WritingSystem = new WritingSystemDefinition();
 			DatabaseName = database;
 			if (database != "DatabaseName") FindDataFolder();
-			if (Caller == DataCreator.CreatorProgram.FieldWorks)
+			if (Caller == DataCreator.CreatorProgram.FieldWorks8
+				|| Caller == DataCreator.CreatorProgram.FieldWorks9)
 			{
 				SetupLdmlFolder();
 			}
@@ -94,6 +100,8 @@ namespace SIL.Tool
 		{
 			// Since we are only reading the Writing Systems, we make a copy and migrate.
 			_ldmlFolder = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Path.GetTempFileName()));
+			var wsFolder = Common.GetLDMLPath();
+			if (!Directory.Exists(wsFolder)) return;
 			FolderTree.Copy(Common.GetLDMLPath(), _ldmlFolder);
 			var migrator = new LdmlInFolderWritingSystemRepositoryMigrator(_ldmlFolder, null);
 			migrator.Migrate();
@@ -122,7 +130,12 @@ namespace SIL.Tool
 			folder = RegistryHelperLite.FallbackStringValue("SIL/FieldWorks/8", "ProjectsDir");
 			if (!string.IsNullOrEmpty(folder))
 			{
-				TestFolder(folder, DataCreator.CreatorProgram.FieldWorks);
+				TestFolder(folder, DataCreator.CreatorProgram.FieldWorks8);
+			}
+			folder = RegistryHelperLite.FallbackStringValue("SIL/FieldWorks/9", "ProjectsDir");
+			if (!string.IsNullOrEmpty(folder))
+			{
+				TestFolder(folder, DataCreator.CreatorProgram.FieldWorks9);
 			}
 		}
 
@@ -154,7 +167,8 @@ namespace SIL.Tool
 				case DataCreator.CreatorProgram.Paratext7:
 					_settingsFullPath = Path.Combine(_dataFolder, "..", DatabaseName + ".ssf");
 					break;
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					_settingsFullPath = Path.Combine(_dataFolder, DatabaseName + ".fwdata");
 					break;
 			}
@@ -248,8 +262,12 @@ namespace SIL.Tool
 					var language = GetLanguage();
 					LanguageData = null;
                     if (LoadLds(Path.Combine(Path.GetDirectoryName(_dataFolder), language + ".lds"))) break;
+					LanguageData = new IniData();
+					LanguageData.Sections.AddSection("General");
+					LanguageData["General"].AddKey(new KeyData("font") {Value = "Charis SIL"});
 					break;
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					LoadLdml(_ldmlFolder, iso);
 					break;
 			}
@@ -266,7 +284,11 @@ namespace SIL.Tool
 		{
 			if (WritingSystem.Language == iso) return;
 			var ldmlFilePath = Path.Combine(path, iso + ".ldml");
-			if (!System.IO.File.Exists(ldmlFilePath)) return;
+			if (!System.IO.File.Exists(ldmlFilePath))
+			{
+				WritingSystem.DefaultFont = new FontDefinition("Charis SIL");
+				return;
+			}
 			var ldmlAdaptor = new LdmlDataMapper(new WritingSystemFactory());
 			ldmlAdaptor.Read(ldmlFilePath, WritingSystem);
 		}
@@ -287,7 +309,8 @@ namespace SIL.Tool
 					return WritingSystem.RightToLeftScript;
 				case DataCreator.CreatorProgram.Paratext7:
 					return LanguageData != null && LanguageData["General"].ContainsKey("RTL") && LanguageData["General"]["RTL"].ToUpper() == "T";
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					return WritingSystem.RightToLeftScript;
 			}
 			return false;
@@ -309,7 +332,8 @@ namespace SIL.Tool
 					return WritingSystem.DefaultFont.Name;
 				case DataCreator.CreatorProgram.Paratext7:
 					return LanguageData["General"]["font"];
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					return WritingSystem.DefaultFont.Name;
 			}
 			return string.Empty;
@@ -331,7 +355,8 @@ namespace SIL.Tool
 					return WritingSystem.DefaultFont.Features;
 				case DataCreator.CreatorProgram.Paratext7:
 					return LanguageData != null && LanguageData["General"].ContainsKey("fontFeatureSettings") ? LanguageData["General"]["fontFeatureSettings"] : "";
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					return WritingSystem.DefaultFont.Features;
 			}
 			return string.Empty;
@@ -353,7 +378,8 @@ namespace SIL.Tool
 					LoadSettings();
 					var node = _xDoc.SelectSingleNode("//ScriptureText/Language");
 					return node != null? node.InnerText: null;
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					LoadWritingSystem(iso);
 					return WritingSystem.Language.Name;
 			}
@@ -370,7 +396,8 @@ namespace SIL.Tool
 					if (System.IO.File.Exists(hiRes)) return hiRes;
                     var loResName = Path.GetFileNameWithoutExtension(name) + ".jpg";
                     return !string.IsNullOrEmpty(_dataFolder) ? Path.Combine(_dataFolder, "figures", loResName): Path.Combine("figures", loResName);
-				case DataCreator.CreatorProgram.FieldWorks:
+				case DataCreator.CreatorProgram.FieldWorks8:
+				case DataCreator.CreatorProgram.FieldWorks9:
 					return !string.IsNullOrEmpty(_dataFolder) ? Path.Combine(_dataFolder, "LinkedFiles", "Pictures", name): Path.Combine("Pictures", name);
 			}
 			return !string.IsNullOrEmpty(_dataFolder) ? Path.Combine(_dataFolder, name): name;

@@ -150,51 +150,10 @@ namespace epubConvert
 			_langFontDictionary.Keys.CopyTo(langs, 0);
 			foreach (var language in langs)
 			{
-				string[] langCoun = language.Split('-');
-
-				try
-				{
-					// When no hyphen use entire value but when there is a hyphen, look for first part
-					var langTarget = langCoun.Length < 2 ? langCoun[0] : language;
-					string wsPath = Common.PathCombine(Common.GetLDMLPath(), langTarget + ".ldml");
-					if (File.Exists(wsPath))
-					{
-						var ldml = Common.DeclareXMLDocument(false);
-						ldml.Load(wsPath);
-						var nsmgr = new XmlNamespaceManager(ldml.NameTable);
-						nsmgr.AddNamespace("palaso", "urn://palaso.org/ldmlExtensions/v1");
-						var node = ldml.SelectSingleNode("//palaso:defaultFontFamily/@value", nsmgr);
-						if (node != null)
-						{
-							// build the font information and return
-							_langFontDictionary[language] = node.Value; // set the font used by this language
-							_embeddedFonts[node.Value] = new EmbeddedFont(node.Value);
-						}
-					}
-					else if (AppDomain.CurrentDomain.FriendlyName.ToLower() == "paratext.exe") // is paratext
-					{
-						var settingsHelper = new SettingsHelper(Param.DatabaseName);
-						string fileName = settingsHelper.GetSettingsFilename();
-						const string xPath = "//ScriptureText/DefaultFont";
-						XmlNode xmlFont = Common.GetXmlNode(fileName, xPath);
-						if (xmlFont != null)
-						{
-							// get the text direction specified by the .ssf file
-							_langFontDictionary[language] = xmlFont.InnerText; // set the font used by this language
-							_embeddedFonts[xmlFont.InnerText] = new EmbeddedFont(xmlFont.InnerText);
-						}
-					}
-					else
-					{
-						// Paratext case (no .ldml file) - fall back on Charis
-						_langFontDictionary[language] = "Charis SIL"; // set the font used by this language
-						_embeddedFonts["Charis SIL"] = new EmbeddedFont("Charis SIL");
-
-					}
-				}
-				catch
-				{
-				}
+				var fontName = Common.CallerSetting.GetLanguageFont(language);
+				if (string.IsNullOrEmpty(fontName)) continue;
+				_langFontDictionary[language] = fontName;
+				_embeddedFonts[fontName] = new EmbeddedFont(fontName);
 			}
 		}
 		#endregion void BuildFontsList()
@@ -666,13 +625,15 @@ namespace epubConvert
 		}
 
 
-		private string GetLanguageForReversalNumber(string xhtmlFileName, string languageCode)
+		protected string GetLanguageForReversalNumber(string xhtmlFileName, string languageCode)
 		{
 			string language = languageCode;
 			XmlDocument xdoc = Common.DeclareXMLDocument(false);
 			var namespaceManager = new XmlNamespaceManager(xdoc.NameTable);
 			namespaceManager.AddNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-			xdoc.Load(xhtmlFileName);
+			var xr = XmlReader.Create (xhtmlFileName, new XmlReaderSettings{ DtdProcessing = DtdProcessing.Ignore });
+			xdoc.Load(xr);
+			xr.Close ();
 			// now go check to see if we're working on scripture or dictionary data
 			XmlNodeList nodes = xdoc.SelectNodes("//xhtml:span[@class='revsensenumber']", namespaceManager);
 			if (nodes == null || nodes.Count == 0)

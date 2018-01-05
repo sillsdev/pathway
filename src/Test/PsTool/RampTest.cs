@@ -44,9 +44,8 @@ namespace Test.PsTool
             _inputPath = Common.PathCombine(testPath, "InputFiles");
             _outputPath = Common.PathCombine(testPath, "output");
             Common.PathCombine(testPath, "Expected");
-            if (Directory.Exists(_outputPath))
-                Directory.Delete(_outputPath, true);
-            Directory.CreateDirectory(_outputPath);
+            Common.CleanDirectory(new DirectoryInfo(_outputPath));
+            if (!Directory.Exists(_outputPath)) Directory.CreateDirectory(_outputPath);
         }
 
         [SetUp]

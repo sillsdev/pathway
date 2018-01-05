@@ -164,7 +164,7 @@ namespace SIL.Tool
 		        || !Path.IsPathRooted(name) && !File.Exists(Path.Combine(instPath, name)))
 		    {
 			    if (Common.Testing) return;
-				throw new InvalidOperationException();
+			    if (!ExistsOnPath(name)) throw new InvalidOperationException();
 			}
 			var info = new ProcessStartInfo(name)
                            {

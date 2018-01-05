@@ -745,7 +745,7 @@ namespace SIL.Tool
 							{
 								continue;
 							}
-							if (langContent.Length >= vernacularLang.Length &&
+							if (!string.IsNullOrEmpty(vernacularLang) && langContent.Length >= vernacularLang.Length &&
 								langContent.Substring(vernacularLang.Length, 1) != ":")
 							{
 								continue;
@@ -1002,10 +1002,6 @@ namespace SIL.Tool
 			{
 				value = value.Replace("2019", "$" + Common.ConvertUnicodeToString("\\2019") + "$");
 			}
-			if (value.IndexOf("#") >= 0)
-			{
-				value = value.Replace("#", "$\\sharp$");
-			}
 			if (value.IndexOf("2666") >= 0)
 			{
 				value = value.Replace("2666", Common.ConvertUnicodeToString("\\2666")) + " ";
@@ -1030,6 +1026,39 @@ namespace SIL.Tool
 			{
 				value = value.Replace("}", "\\}");
 			}
+			if (value.Contains("&"))
+			{
+				value = value.Replace("&", "\\&");
+			}
+			if (value.Contains("'"))
+			{
+				value = value.Replace("'", "\\textsc{\\char13}");
+			}
+			if (value.Contains("%"))
+			{
+				value = value.Replace("%", "\\%");
+			}
+			if (value.Contains("$"))
+			{
+				value = value.Replace("$", "\\$");
+			}
+			if (value.Contains("#"))
+			{
+				value = value.Replace("#", "\\#");
+			}
+			if (value.Contains("_"))
+			{
+				value = value.Replace("_", "\\_");
+			}
+			if (value.Contains("^"))
+			{
+				value = value.Replace("^", "\\^{ }");
+			}
+			if (value.Contains("~"))
+			{
+				value = value.Replace("~", "\\textasciitilde{~}");
+			}
+
 			return value;
 		}
 
@@ -1495,10 +1524,13 @@ namespace SIL.Tool
 					}
 					else
 					{
-						// Replace <, > and & character to &lt; &gt; &amp;
-						result = result.Replace("&", "&amp;");
-						result = result.Replace("<", "&lt;");
-						result = result.Replace(">", "&gt;");
+						if (_outputType != OutputType.XELATEX)
+						{
+							// Replace <, > and & character to &lt; &gt; &amp;
+							result = result.Replace("&", "&amp;");
+							result = result.Replace("<", "&lt;");
+							result = result.Replace(">", "&gt;");
+						}
 					}
 				}
 				return result;
@@ -2673,6 +2705,7 @@ namespace SIL.Tool
 						dirInfo.Attributes = FileAttributes.Normal;
 					}
 					dirInfo.Delete(true);
+					WaitForDirectoryToBecomeEmpty(dirInfo);
 					deleted = true;
 				}
 				catch (Exception ex)
@@ -2686,6 +2719,8 @@ namespace SIL.Tool
 
 		public static void CleanDirectory(DirectoryInfo di)
 		{
+			var parent = Path.GetDirectoryName(di.FullName);
+			if (!Directory.Exists(parent)) Directory.CreateDirectory(parent);
 			try
 			{
 				if (di == null)
@@ -2729,12 +2764,19 @@ namespace SIL.Tool
 
 		private static void WaitForDirectoryToBecomeEmpty(DirectoryInfo di)
 		{
-			for (int i = 0; i < 5; i++)
+			try
 			{
-				if (di.GetFileSystemInfos().Length == 0)
-					return;
-				Console.WriteLine(di.FullName + i);
-				System.Threading.Thread.Sleep(50 * i);
+				for (int i = 0; i < 5; i++)
+				{
+					if (di.GetFileSystemInfos().Length == 0)
+						return;
+					Console.WriteLine(di.FullName + i);
+					System.Threading.Thread.Sleep(50*i);
+				}
+			}
+			catch (Exception)
+			{
+				// Directory doesn't exist
 			}
 		}
 
@@ -2819,6 +2861,7 @@ namespace SIL.Tool
 					{
 						if (!fstr.Contains("@import"))
 						{
+							// TODO: The code to remove Mozilla properties does not belong in a method for combining nested css
 							// To avoid the Mozilla Property
 							if (!fstr.Contains("-moz"))
 							{
@@ -2826,8 +2869,13 @@ namespace SIL.Tool
 							}
 							else
 							{
-								string splitText = fstr.Substring(0, fstr.IndexOf("-moz") - 1);
-								sw2.WriteLine(splitText);
+								foreach (var prop in fstr.Split(';'))
+								{
+									if (!prop.Contains("-moz") && !string.IsNullOrEmpty(prop.Trim()))
+									{
+										sw2.WriteLine(prop + ";");
+									}
+								}
 							}
 						}
 					}
@@ -3038,8 +3086,10 @@ namespace SIL.Tool
 		public static string GetSaveInFolder(string template, string database, string layout)
 		{
 			Dictionary<string, string> map = new Dictionary<string, string>();
-
-			map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+			if(UsingMonoVM)
+				map["Documents"] = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+			else
+				map["Documents"] = ManageDirectory.ShortFileName(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
 			map["Base"] = SaveInFolderBase;
             map["CurrentProject"] = MakeValidFileName(database);
@@ -3250,6 +3300,9 @@ namespace SIL.Tool
 		/// <param name="copySubFolder"> </param>
 		public static void CopyFolderandSubFolder(string sourceFolder, string destFolder, bool copySubFolder)
 		{
+			var parentFolder = Path.GetDirectoryName(destFolder);
+			Debug.Assert(parentFolder != null);
+			if (!Directory.Exists(parentFolder)) Directory.CreateDirectory(parentFolder);
 			if (Directory.Exists(destFolder))
 			{
 				DirectoryInfo di = new DirectoryInfo(destFolder);
@@ -5056,30 +5109,39 @@ namespace SIL.Tool
 			var pathwayDirectory = Common.AssemblyPath;
 			if (pathwayDirectory == null || !Directory.Exists(pathwayDirectory))
 				return new[] { "SIL.PublishingSolution" };
-			foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$"))
-				)
+			try
 			{
-				var fileInfo = new FileInfo(file);
-				if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
-					(fileInfo.Name.Contains("Writer")) || (fileInfo.Name.Contains("Validator")))
+				foreach (var file in Directory.GetFiles(pathwayDirectory, "*.*").Where(f => Regex.IsMatch(f, @"^.+\.(dll|exe)$")))
 				{
-					using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
+					var fileInfo = new FileInfo(file);
+					if ((fileInfo.Name == "PsTool.dll") || (fileInfo.Name.Contains("Convert")) ||
+						(fileInfo.Name.Contains("Writer")) || (fileInfo.Name.Contains("Validator")))
 					{
-
-						var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
-
-						foreach (
-							var stype in
-								sAssembly.GetTypes()
-									.Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+						using (var epubinstalleddirectory = File.OpenRead(Common.FromRegistry(fileInfo.FullName)))
 						{
-							if (!namespacestoLocalize.Contains(stype.Namespace))
-								namespacestoLocalize.Add(stype.Namespace);
+
+							var sAssembly = Assembly.LoadFrom(epubinstalleddirectory.Name);
+
+							foreach (
+								var stype in
+									sAssembly.GetTypes()
+										.Where(type => type.GetConstructors().Any(s => s.GetParameters().Length == 0)))
+							{
+								if (!namespacestoLocalize.Contains(stype.Namespace))
+									namespacestoLocalize.Add(stype.Namespace);
+							}
+
 						}
 
 					}
-
 				}
+			}
+			catch (Exception)
+			{
+				// 64 bit FieldWorks can't load 32-bit assemblies so just put in the namespaces we expect should be there
+				Debug.Print("Unable to reflectively load namespaces for localization, falling back to expected namespaces.");
+				namespacestoLocalize = new List<string> { "SIL.PublishingSolution", "epubConvert", "epubValidator",
+					"epubValidator.Properties", "SIL.PublishingSolution.Properties", "JWTools", "SilTools", "SIL.Tool" };
 			}
 			return namespacestoLocalize.Distinct().ToArray();
 		}
@@ -5137,26 +5199,30 @@ namespace SIL.Tool
 					Param.HyphenationSelectedLanguagelist.AddRange(Param.HyphenLang.Split(','));
 				}
 			}
-			else if (CallerSetting.Caller == DataCreator.CreatorProgram.FieldWorks
+			else if (CallerSetting.Caller == DataCreator.CreatorProgram.FieldWorks8
+				|| CallerSetting.Caller == DataCreator.CreatorProgram.FieldWorks9
 				|| Param.Value[Param.InputType] == "Dictionary")
 			{
 				try
 				{
 					IDictionary<string, string> value = new Dictionary<string, string>();
-					var flexScan = new FlexScan(CallerSetting.SettingsFullPath);
-					foreach (var lang in flexScan.VernWs)
+					if (File.Exists(CallerSetting.SettingsFullPath))
 					{
-						var langname = GetLanguageValues(lang);
-						if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-							value.Add(lang, langname.Replace(',', ' '));
+						var flexScan = new FlexScan(CallerSetting.GetSettingsName());
+						foreach (var lang in flexScan.VernWs)
+						{
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+						}
+						foreach (var lang in flexScan.AnalWs)
+						{
+							var langname = GetLanguageValues(lang);
+							if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
+								value.Add(lang, langname.Replace(',', ' '));
+						}
+						Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
 					}
-					foreach (var lang in flexScan.AnalWs)
-					{
-						var langname = GetLanguageValues(lang);
-						if (!string.IsNullOrEmpty(lang) && (langname != null) && !value.ContainsKey(lang))
-							value.Add(lang, langname.Replace(',', ' '));
-					}
-					Param.HyphenLang = string.Join(",", value.Select(x => x.Key + ":" + x.Value).ToArray());
 				}
 				catch (Exception)
 				{
