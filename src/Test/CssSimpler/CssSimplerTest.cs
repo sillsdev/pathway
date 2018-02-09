@@ -1424,7 +1424,7 @@ namespace Test.CssSimplerTest
 			OutputXml = false;
 			var xmlCssFullName = _testFiles.Output(testName + ".xml");
 			NodeTest(xmlCssFullName, 3, "//RULE[@term='99' and starts-with(@target,'stxfin')]", "inline rules take high priority");
-			NodeTest(xmlCssFullName, 2, "//RULE[starts-with(@lastClass,'mainheadword') and PROPERTY/value='#00F']", "headword color remains blue");
+			NodeTest(xmlCssFullName, 1, "//RULE[starts-with(@lastClass,'mainheadword') and PROPERTY/value='#00F']", "headword color remains blue");
 			NodeTest(xmlCssFullName, 1, "//RULE[starts-with(@lastClass,'stxfinmainheadword') and PROPERTY[name='font-size'][value='58'][unit='%']]", "subscripted homograph number");
 		}
 

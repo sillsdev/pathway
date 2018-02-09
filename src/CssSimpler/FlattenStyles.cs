@@ -343,7 +343,9 @@ namespace CssSimpler
         }
 
         public readonly Dictionary<string, string> RuleStyleMap = new Dictionary<string, string>();
-        private readonly Dictionary<string, int> _usedStyles = new Dictionary<string, int>();
+		public readonly Dictionary<string, string> RuleProps = new Dictionary<string, string>();
+		public readonly Dictionary<string, string> FirstRuleKey = new Dictionary<string, string>();
+		private readonly Dictionary<string, int> _usedStyles = new Dictionary<string, int>();
 
         // ReSharper disable once UnusedMethodReturnValue.Local
         private string GetStyle(XmlReader r)
@@ -351,7 +353,9 @@ namespace CssSimpler
             return GetStyle(r, 0);
         }
 
-        private string GetStyle(XmlReader r, int adjustLevel)
+		private readonly SortedSet<string> _blockTags = new SortedSet<string> {"div", "body"};
+
+		private string GetStyle(XmlReader r, int adjustLevel)
         {
             var myClass = GetClass(r);
             if (myClass == null) return null;
@@ -359,12 +363,13 @@ namespace CssSimpler
             {
                 myClass = myClass.Split(' ')[0];
             }
-            //if (myClass == "letter")
-            //{
-            //    Debug.Print("break;");
-            //}
-            var ruleNums = GetRuleNumbers(r, adjustLevel);
-            var key = myClass + ":" + ruleNums;
+			//if (myClass == "headword")
+			//{
+			//	Debug.Print("break;");
+			//}
+			var ruleNums = GetRuleNumbers(r, adjustLevel);
+	        var block = _blockTags.Contains(r.Name) || HasBlock(ruleNums);
+            var key = myClass + ":" + (block? "B":"S") + ruleNums;
             if (_usedStyles.ContainsKey(myClass))
             {
                 if (RuleStyleMap.ContainsKey(key))
@@ -373,20 +378,46 @@ namespace CssSimpler
                 }
                 else
                 {
-                    _usedStyles[myClass] += 1;
-                    myClass += _usedStyles[myClass];
-                    RuleStyleMap[key] = myClass;
+					if (!RuleProps.ContainsKey(myClass))
+					{
+						var firstRuleNums = FirstRuleKey[myClass];
+						var firstProperties = GetFlatProperties(firstRuleNums, null, block);
+						RuleProps[myClass] = string.Join("", firstProperties);
+					}
+					var properties = string.Join("", GetFlatProperties(ruleNums, null, block));
+		            if (RuleProps[myClass] == properties)
+		            {
+			            RuleStyleMap[key] = myClass;
+			            return myClass;
+		            }
+					for (var n = 2; n <= _usedStyles[myClass]; n += 1)
+					{
+						var testClass = myClass + n;
+						if (RuleProps[testClass] != properties) continue;
+						RuleStyleMap[key] = testClass;
+						return testClass;
+					}
+					_usedStyles[myClass] += 1;
+	                myClass += _usedStyles[myClass];
+	                RuleStyleMap[key] = myClass;
+	                RuleProps[myClass] = properties;
                 }
             }
             else
             {
                 _usedStyles[myClass] = 1;
                 RuleStyleMap[key] = myClass;
+	            FirstRuleKey[myClass] = ruleNums;
             }
             return myClass;
         }
 
-        private readonly List<int> _ruleNums = new List<int>();
+	    private bool HasBlock(string ruleNums)
+	    {
+		    return ruleNums.Split(',').Any(rule => _displayBlockRuleNum.Contains(int.Parse(rule)));
+	    }
+
+	    private readonly List<int> _ruleNums = new List<int>();
         private string GetRuleNumbers(XmlReader r, int adjustLevel)
         {
             _ruleNums.Clear();
@@ -476,43 +507,61 @@ namespace CssSimpler
                 Debug.Assert(_flatCss.DocumentElement != null, "_flatCss.DocumentElement != null");
                 _flatCss.DocumentElement.AppendChild(ruleNode);
                 ruleNode.SetAttribute("pos", pos.ToString());
-                var incProps = new SortedSet<string>();
                 var activeRules = _reverseMap[style];
-                var ruleListText = activeRules.Substring(activeRules.IndexOf(":", StringComparison.Ordinal) + 1);
+	            var ruleIndex = activeRules.IndexOf(":", StringComparison.Ordinal);
+	            var blockRule = activeRules.Substring(ruleIndex + 1, 1) == "B";
+				var ruleListText = activeRules.Substring(ruleIndex + 2);
                 var commentNode = _flatCss.CreateElement("COMMENT");
                 var commentValueNode = _flatCss.CreateElement("value");
                 commentValueNode.InnerText = "Rule List: " + ruleListText;
                 commentNode.AppendChild(commentValueNode);
                 ruleNode.AppendChild(commentNode);
-                var inherited = false;
-                foreach (Match m in Regex.Matches(ruleListText, @"[\d-]+"))
-                {
-                    if (m.Value == "-1")
-                    {
-                        inherited = true;
-                        continue;
-                    }
-                    var pattern = string.Format("//*[@pos='{0}']/PROPERTY", m.Value);
-                    var propNodes = _xmlCss.SelectNodes(pattern);
-                    if (propNodes == null) continue;
-                    foreach (XmlElement node in propNodes)
-                    {
-                        Debug.Assert(node != null, "node != null");
-                        var propValueNode = node.SelectSingleNode(".//value");
-                        if (propValueNode != null && propValueNode.InnerText == "inherit") continue;
-                        var propNameNode = node.SelectSingleNode(".//name");
-                        if (propNameNode == null) continue;
-                        var name = propNameNode.InnerText;
-                        if (incProps.Contains(name)) continue;
-	                    var prefixMatch = Regex.Match(name, @"[a-z]+");
-                        if (inherited && (_notInherted.Contains(prefixMatch.Value) || name.StartsWith("-"))) continue;
-                        incProps.Add(name);
-                        ruleNode.AppendChild(_flatCss.ImportNode(node, true));
-                    }
-                }
+                GetFlatProperties(ruleListText, ruleNode, blockRule);
             }
             return _flatCss;
         }
+
+		private SortedSet<string> GetFlatProperties(string ruleListText, XmlElement ruleNode, bool blockRule)
+	    {
+			var incProps = new SortedSet<string>();
+			var formatProperties = new SortedSet<string>();
+			var inherited = false;
+		    foreach (Match m in Regex.Matches(ruleListText, @"[\d-]+"))
+		    {
+			    if (m.Value == "-1")
+			    {
+				    inherited = true;
+				    continue;
+			    }
+			    var pattern = string.Format("//*[@pos='{0}']/PROPERTY", m.Value);
+			    var propNodes = _xmlCss.SelectNodes(pattern);
+			    if (propNodes == null) continue;
+			    foreach (XmlElement node in propNodes)
+			    {
+				    Debug.Assert(node != null, "node != null");
+				    var propValueNode = node.SelectSingleNode(".//value");
+				    if (propValueNode != null && propValueNode.InnerText == "inherit") continue;
+				    var propNameNode = node.SelectSingleNode(".//name");
+				    if (propNameNode == null) continue;
+				    var name = propNameNode.InnerText;
+				    if (incProps.Contains(name)) continue;
+				    var prefixMatch = Regex.Match(name, @"[a-z]+");
+				    if (inherited && (_notInherted.Contains(prefixMatch.Value) || name.StartsWith("-"))) continue;
+				    if (!blockRule && BlockProperty(name)) continue;
+				    incProps.Add(name);
+				    if (propValueNode != null) formatProperties.Add(string.Format("{0}:{1};", name, propValueNode.InnerText));
+				    ruleNode?.AppendChild(_flatCss.ImportNode(node, true));
+			    }
+		    }
+		    return formatProperties;
+	    }
+
+		private readonly SortedSet<string> _blockProperties = new SortedSet<string> { "text-align", "text-indent", "column", "float", "clear", "width", "margin", "padding", "display", "border", "line" };
+
+		private bool BlockProperty(string name)
+		{
+			return _blockProperties.Any(blockProperty => name.Contains(blockProperty));
+		}
 
 	    private void CopyNonStyleNodes()
 	    {
