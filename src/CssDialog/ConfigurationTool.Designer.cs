@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 
 namespace SIL.PublishingSolution
 {
@@ -150,7 +150,7 @@ namespace SIL.PublishingSolution
 			this.ddlDefaultAlignment = new System.Windows.Forms.ComboBox();
 			this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
 			this.lblBaseFontSize = new System.Windows.Forms.Label();
-			this.txtBaseFontSize = new System.Windows.Forms.TextBox();			
+			this.txtBaseFontSize = new System.Windows.Forms.TextBox();
 			this.lblPt = new System.Windows.Forms.Label();
 			this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
 			this.lblMissingFont = new System.Windows.Forms.Label();
@@ -339,7 +339,7 @@ namespace SIL.PublishingSolution
 			this.stylesGrid.RowHeadersVisible = false;
 			this.stylesGrid.RowTemplate.Height = 24;
 			this.stylesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.stylesGrid.Size = new System.Drawing.Size(415, 731);
+			this.stylesGrid.Size = new System.Drawing.Size(414, 731);
 			this.stylesGrid.TabIndex = 0;
 			this.stylesGrid.TabStop = false;
 			this.stylesGrid.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.stylesGrid_ColumnWidthChanged);
@@ -789,18 +789,19 @@ namespace SIL.PublishingSolution
 			// lnkLblUrl
 			// 
 			this.lnkLblUrl.AutoSize = true;
-			this.lnkLblUrl.LinkArea = new System.Windows.Forms.LinkArea(0, 22);
+			this.lnkLblUrl.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.lnkLblUrl.LinkArea = new System.Windows.Forms.LinkArea(0, 31);
 			this.lnkLblUrl.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lnkLblUrl, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lnkLblUrl, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lnkLblUrl, "ConfigurationTool.ConfigurationTool.lnkLblUrl");
-			this.lnkLblUrl.Location = new System.Drawing.Point(182, 320);
+			this.lnkLblUrl.Location = new System.Drawing.Point(142, 318);
 			this.lnkLblUrl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.lnkLblUrl.Name = "lnkLblUrl";
-			this.lnkLblUrl.Size = new System.Drawing.Size(108, 13);
+			this.lnkLblUrl.Size = new System.Drawing.Size(153, 13);
 			this.lnkLblUrl.TabIndex = 13;
 			this.lnkLblUrl.TabStop = true;
-			this.lnkLblUrl.Text = "http://pathway.sil.org";
+			this.lnkLblUrl.Text = "http://software.sil.org/pathway";
 			this.lnkLblUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLblUrl_LinkClicked);
 			// 
 			// lblProjectUrl
@@ -1114,7 +1115,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizingId(this.chkCenterTitleHeader, "ConfigurationTool.checkBox1");
 			this.chkCenterTitleHeader.Location = new System.Drawing.Point(83, 3);
 			this.chkCenterTitleHeader.Name = "chkCenterTitleHeader";
-			this.chkCenterTitleHeader.Size = new System.Drawing.Size(129, 17);
+			this.chkCenterTitleHeader.Size = new System.Drawing.Size(157, 17);
 			this.chkCenterTitleHeader.TabIndex = 110;
 			this.chkCenterTitleHeader.Text = "Center Book Title in Header";
 			this.toolTip1.SetToolTip(this.chkCenterTitleHeader, "Include and center the Book Title in the Header");
@@ -2095,7 +2096,7 @@ namespace SIL.PublishingSolution
 			// flowLayoutPanel3
 			// 
 			this.flowLayoutPanel3.Controls.Add(this.lblBaseFontSize);
-			this.flowLayoutPanel3.Controls.Add(this.txtBaseFontSize);			
+			this.flowLayoutPanel3.Controls.Add(this.txtBaseFontSize);
 			this.flowLayoutPanel3.Controls.Add(this.lblPt);
 			this.flowLayoutPanel3.Location = new System.Drawing.Point(44, 73);
 			this.flowLayoutPanel3.Name = "flowLayoutPanel3";
@@ -2129,7 +2130,7 @@ namespace SIL.PublishingSolution
 			this.txtBaseFontSize.Enter += new System.EventHandler(this.SetGotFocusValue);
 			this.txtBaseFontSize.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBaseFontSize_KeyUp);
 			this.txtBaseFontSize.Leave += new System.EventHandler(this.txtBaseFontSize_Leave);
-			this.txtBaseFontSize.Validated += new System.EventHandler(this.txtBaseFontSize_Validated);			
+			this.txtBaseFontSize.Validated += new System.EventHandler(this.txtBaseFontSize_Validated);
 			// 
 			// lblPt
 			// 
@@ -2138,7 +2139,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblPt, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblPt, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblPt, "ConfigurationTool.lblPt");
-			this.lblPt.Location = new System.Drawing.Point(133, 6);
+			this.lblPt.Location = new System.Drawing.Point(114, 6);
 			this.lblPt.Name = "lblPt";
 			this.lblPt.Size = new System.Drawing.Size(16, 13);
 			this.lblPt.TabIndex = 9;
@@ -3236,7 +3237,7 @@ namespace SIL.PublishingSolution
 			this.label2.Location = new System.Drawing.Point(94, 1);
 			this.label2.Margin = new System.Windows.Forms.Padding(0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(424, 23);
+			this.label2.Size = new System.Drawing.Size(423, 23);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Stylesheets";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3249,7 +3250,7 @@ namespace SIL.PublishingSolution
 			this.l10NSharpExtender1.SetLocalizableToolTip(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizationComment(this.lblInfoCaption, null);
 			this.l10NSharpExtender1.SetLocalizingId(this.lblInfoCaption, "ConfigurationTool.lblInfoCaption");
-			this.lblInfoCaption.Location = new System.Drawing.Point(519, 1);
+			this.lblInfoCaption.Location = new System.Drawing.Point(518, 1);
 			this.lblInfoCaption.Margin = new System.Windows.Forms.Padding(0);
 			this.lblInfoCaption.Name = "lblInfoCaption";
 			this.lblInfoCaption.Size = new System.Drawing.Size(341, 23);
@@ -3277,7 +3278,7 @@ namespace SIL.PublishingSolution
 			this.TLPanelOuter.ColumnCount = 3;
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
 			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 356F));
+			this.TLPanelOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 357F));
 			this.TLPanelOuter.Controls.Add(this.label2, 1, 0);
 			this.TLPanelOuter.Controls.Add(this.TLPanel1, 0, 1);
 			this.TLPanelOuter.Controls.Add(this.lblInfoCaption, 2, 0);
@@ -3454,8 +3455,8 @@ namespace SIL.PublishingSolution
 			this.TLPanel2.Name = "TLPanel2";
 			this.TLPanel2.RowCount = 1;
 			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 525F));
-			this.TLPanel2.Size = new System.Drawing.Size(418, 731);
+			this.TLPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 731F));
+			this.TLPanel2.Size = new System.Drawing.Size(417, 731);
 			this.TLPanel2.TabIndex = 4;
 			// 
 			// TLPanel3
@@ -3464,7 +3465,7 @@ namespace SIL.PublishingSolution
 			this.TLPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 331F));
 			this.TLPanel3.Controls.Add(this.panel3, 0, 1);
 			this.TLPanel3.Controls.Add(this.txtCss, 0, 0);
-			this.TLPanel3.Location = new System.Drawing.Point(522, 28);
+			this.TLPanel3.Location = new System.Drawing.Point(521, 28);
 			this.TLPanel3.MaximumSize = new System.Drawing.Size(331, 900);
 			this.TLPanel3.MinimumSize = new System.Drawing.Size(331, 0);
 			this.TLPanel3.Name = "TLPanel3";
