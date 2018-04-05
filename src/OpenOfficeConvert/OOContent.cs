@@ -2267,8 +2267,8 @@ namespace SIL.PublishingSolution
 			_writer.WriteAttributeString("style:wrap", "none");
 			_writer.WriteAttributeString("style:vertical-pos", "from-top");
 			_writer.WriteAttributeString("style:vertical-rel", "page");
-			_writer.WriteAttributeString("style:horizontal-pos", "right");
-			_writer.WriteAttributeString("style:horizontal-rel", "paragraph");
+			_writer.WriteAttributeString("style:horizontal-pos", "center");
+			_writer.WriteAttributeString("style:horizontal-rel", "paragraph-content");
 			_writer.WriteAttributeString("fo:padding", "0pt");
 			_writer.WriteAttributeString("fo:border", "none");
 			_writer.WriteAttributeString("style:flow-with-text", "false");
@@ -2290,8 +2290,8 @@ namespace SIL.PublishingSolution
 				_writer.WriteAttributeString("style:wrap", "none");
 				_writer.WriteAttributeString("style:vertical-pos", "bottom");
 				_writer.WriteAttributeString("style:vertical-rel", "paragraph-content");
-				_writer.WriteAttributeString("style:horizontal-pos", "right");
-				_writer.WriteAttributeString("style:horizontal-rel", "paragraph");
+				_writer.WriteAttributeString("style:horizontal-pos", "center");
+				_writer.WriteAttributeString("style:horizontal-rel", "paragraph-content");
 				_writer.WriteAttributeString("fo:padding", "0in");
 				_writer.WriteAttributeString("fo:border", "none");
 				_writer.WriteAttributeString("style:flow-with-text", "true");

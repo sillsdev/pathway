@@ -4,37 +4,37 @@
 
 &apos;Changed On Jun-30-2014 for TD-4004
 
-&apos; needs writer document 
-Dim oProgressBarModel As Object 
+&apos; needs writer document
+Dim oProgressBarModel As Object
 Dim oSubWindow As Object
 Dim oFrame As Object
 Dim oSubFrame As Object
 Dim ProgressValue As Long
 Dim PageCount as Integer
 
-&apos;This is main method, which will be called when document opened. It calls other mothods to perform 
+&apos;This is main method, which will be called when document opened. It calls other mothods to perform
 Sub StartDontForget
 On Error GoTo MyError:
-	TurnOffNonPrintingCharacters() 
-	
+	TurnOffNonPrintingCharacters()
+
 	&apos;If IsCoverImageInserted = &quot;true&quot; And Right(Trim(ThisComponent.Title),4) = &quot;.odm&quot; Then
-		SetImageToCoverPage()
-	&apos;End If	
-	
+       &apos;SetImageToCoverPage()
+	&apos;End If
+
 	UpdateTOC()
-	
+
 	If InStr(ReferenceFormat, &quot;1-2&quot;) &gt; 0 Then
 		If IsMacroRunAlready = &quot;False&quot; Then
 			SetReference()
 		End If
 	End If
-	
+
 	HideODMVariable()
-	
+
 	If Lcase(OutputFormat) &lt;&gt; &quot;odt&quot; And Len(Trim(OutputFormat)) &gt; 0 Then
 		ExportToDOC_PDF
 	End IF
-	
+
 	Exit Sub
 MyError:
 msgbox Err.Description
@@ -62,8 +62,8 @@ Function TotalPages()
 	TotalPages = cont.PageCount
 End Function
 
-&apos;For some documents, some pages will not show the correct guideword, 
-&apos;So this method leaves small space and remove that text in end of the document. 
+&apos;For some documents, some pages will not show the correct guideword,
+&apos;So this method leaves small space and remove that text in end of the document.
 &apos;Because of this change, guideword will be shown correctly in all the pages.
 Sub HideODMVariable
 PageCount = TotalPages
@@ -90,10 +90,10 @@ end sub
 Sub UpdateTOC
 On Error GoTo MyError:
    oDoc = ThisComponent
-   oDoc.refresh() 
-   oIndexes = oDoc.getDocumentIndexes() 
-   oIndex = oIndexes.getByName(&quot;Table of Contents1&quot;) 
-   oIndex.update() 
+   oDoc.refresh()
+   oIndexes = oDoc.getDocumentIndexes()
+   oIndex = oIndexes.getByName(&quot;Table of Contents1&quot;)
+   oIndex.update()
 Exit Sub
 MyError:
 
@@ -104,50 +104,50 @@ End Sub
 Sub TurnOffNonPrintingCharacters
 	dim document   as object
 	dim dispatcher as object
-	
+
 	document   = ThisComponent.CurrentController.Frame
 	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
-	
+
 	dim args1(0) as new com.sun.star.beans.PropertyValue
 	args1(0).Name = &quot;ControlCodes&quot;
 	args1(0).Value = false
-	
+
 	dispatcher.executeDispatch(document, &quot;.uno:ControlCodes&quot;, &quot;&quot;, 0, args1())
 end sub
 
 
 &apos;This method exports Odt file into Word/PDF based on the OutputFormat in given FilePath
 Sub ExportToDOC_PDF
-&apos;stardesktop.terminate 
+&apos;stardesktop.terminate
 On Error GoTo MyError:
 	Dim FilePathWithName,filterType as string
 	Dim oSvc as Object
-	Dim MyArray, FileName	
-   	oDoc = ThisComponent 
-	
+	Dim MyArray, FileName
+   	oDoc = ThisComponent
+
 	FilePathWithName = FilePath &amp; &quot;.&quot; &amp; OutputFormat
    	fileURL = ConvertToURL(FilePathWithName)
-   	
+
 	if Lcase(OutputFormat) = &quot;doc&quot; Then
-		filterType = &quot;MS WinWord 6.0&quot; 
+		filterType = &quot;MS WinWord 6.0&quot;
 	else
 		filterType = &quot;writer_pdf_Export&quot;
-	End If 
-  &apos;===================================================================================	
-  Dim aFilterData (1) as new com.sun.star.beans.PropertyValue 
+	End If
+  &apos;===================================================================================
+  Dim aFilterData (1) as new com.sun.star.beans.PropertyValue
   	aFilterData(1).Name  = &quot;Quality&quot;
    	aFilterData(1).Value = 40
-  Dim aArgs(2) as new com.sun.star.beans.PropertyValue 
+  Dim aArgs(2) as new com.sun.star.beans.PropertyValue
   aArgs(0).Name = &quot;FilterName&quot;
-  aArgs(0).Value = &quot;writer_pdf_Export&quot; 
+  aArgs(0).Value = &quot;writer_pdf_Export&quot;
   aArgs(1).Name = &quot;FilterData&quot;
   aArgs(1).Value = aFilterData
-  &apos;===================================================================================		
-   	&apos;oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType)) 
+  &apos;===================================================================================
+   	&apos;oDoc.storeToURL(fileURL, Array(MakePropertyValue(&quot;FilterName&quot;,filterType))
 	oDoc.storeToURL(fileURL, aArgs)
 
 	If Lcase(IsPreview) = &quot;false&quot; And Len(Trim(FilePath)) &gt; 4  Then
-		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;) 
+		oSvc = createUnoService(&quot;com.sun.star.system.SystemShellExecute&quot;)
 		If(mid(FilePath,1,5) = &quot;/home&quot;) Then
 		  	MyArray = Split(FilePath,&quot;/&quot;)
 		  	FileName =  MyArray(UBound(MyArray))
@@ -160,10 +160,10 @@ On Error GoTo MyError:
 		  	MyArray = Split(FilePath,&quot;\&quot;)
 		  	FileName =  MyArray(UBound(MyArray))
 			FilePathWithName = Replace(FilePathWithName,FileName + &quot;.pdf&quot;,&quot;PdfLicense.exe&quot;)
-			  			 
+
 			oSvc.execute(ConvertToURL(FilePathWithName), &quot;&quot;, 1)
-			
-			&apos;oSvc.execute(FilePathWithName, &quot;&quot;, 0) 
+
+			&apos;oSvc.execute(FilePathWithName, &quot;&quot;, 0)
 		End If
 	End If
 
@@ -172,27 +172,27 @@ On Error GoTo MyError:
 	&apos;CleanUp()
 	oDoc.dispose()
 	&apos;msgbox(&quot;disposeEnd&quot;)
-	&apos;wait 5000 
+	&apos;wait 5000
 Exit Sub
 MyError:
-&apos;	msgbox &quot;Same file has been opened already&quot; , 0 + 64,  &quot;File Error&quot;	
+&apos;	msgbox &quot;Same file has been opened already&quot; , 0 + 64,  &quot;File Error&quot;
 End Sub
 
 
 &apos;This function sets the Property Value as Word or PDF
-Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.sun.star.beans.PropertyValue 
-   Dim oPropertyValue As New com.sun.star.beans.PropertyValue 
-   If Not IsMissing( cName ) Then 
-      oPropertyValue.Name = cName 
-   EndIf 
-   If Not IsMissing( uValue ) Then 
-      oPropertyValue.Value = uValue 
-   EndIf 
-   MakePropertyValue() = oPropertyValue 
-End Function 
+Function MakePropertyValue( Optional cName As String, Optional uValue ) As com.sun.star.beans.PropertyValue
+   Dim oPropertyValue As New com.sun.star.beans.PropertyValue
+   If Not IsMissing( cName ) Then
+      oPropertyValue.Name = cName
+   EndIf
+   If Not IsMissing( uValue ) Then
+      oPropertyValue.Value = uValue
+   EndIf
+   MakePropertyValue() = oPropertyValue
+End Function
 
 
-&apos;============================================= MACRO 
+&apos;============================================= MACRO
 &apos;This method hides the menubar
 Sub HideMenuBar
 	layout = Thiscomponent.CurrentController.Frame.LayoutManager
@@ -216,30 +216,30 @@ Dim PageNo
 mytime = now
 &apos;---------------Progressbar
 Dim isProgressClosed As Boolean
-ShowProcessingDialog() 
-	oDoc = ThisComponent 
-	oContWindow = oDoc.CurrentController.Frame.ContainerWindow 
-	
+ShowProcessingDialog()
+	oDoc = ThisComponent
+	oContWindow = oDoc.CurrentController.Frame.ContainerWindow
+
 	&apos;msgbox &quot;The Open Office window will be hidden while the headers are updated since this cuts the time required for the update in half.&quot;,,&quot;Update References&quot;
-	oContWindow.Visible = false 
-	
+	oContWindow.Visible = false
+
 &apos;=========Progressbar
-&apos;ShowProcessingDialog() 
+&apos;ShowProcessingDialog()
 ProgressValue = 1
 keep = keep &amp; chr(10) &amp; &quot;After ProgressBar &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
 mytime = now
 	oFieldMaster = ThisComponent.TextFieldMasters
 	oField = oFieldMaster.getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Left_Guideword_L&quot;)
 	stDTF = oField.DependentTextFields
-	
-	
+
+
 keep =  keep &amp; chr(10) &amp; &quot;After DTF &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
 mytime = now
 oProgressBarModel.ProgressValueMax = Ubound(stDTF) * 4
 &apos;=========Progressbar
 
-oProgressBarModel.ProgressValue = ProgressValue	
-&apos;---------------Progressbar	
+oProgressBarModel.ProgressValue = ProgressValue
+&apos;---------------Progressbar
 
 
 
@@ -250,9 +250,9 @@ oProgressBarModel.ProgressValue = ProgressValue
 		DiffPageNo = 2
 	End If
 	&apos;msgbox PageNo
-	
+
 keep = keep &amp; chr(10) &amp; &quot;After FirstPageNumber &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-mytime = now	
+mytime = now
 	oFieldMaster = ThisComponent.TextFieldMasters
 	oField = oFieldMaster.getByName(&quot;com.sun.star.text.fieldmaster.SetExpression.Left_Guideword_L&quot;)
 	stDTF = oField.DependentTextFields
@@ -260,18 +260,18 @@ mytime = now
 	If stDTF(0).Hint = &quot;&quot; Then&apos;Fresh
 		For i = 0 to  Ubound(stDTF)
 			stDTF(i).Hint = stDTF(i).Content
-		&apos;=========Progressbar    
+		&apos;=========Progressbar
 			ProgressValue=ProgressValue+1
 			MyProgressBar(ProgressValue)
-		&apos;=========Progressbar 			
+		&apos;=========Progressbar
 		Next
 	Else&apos;Rerun
 		For i = 0 to  Ubound(stDTF)
 			stDTF(i).Content = stDTF(i).Hint
-		&apos;=========Progressbar    
+		&apos;=========Progressbar
 			ProgressValue=ProgressValue+1
 			MyProgressBar(ProgressValue)
-		&apos;=========Progressbar 			
+		&apos;=========Progressbar
 		Next
 	End If
 
@@ -285,17 +285,17 @@ mytime = now
 	For i = Ubound(stDTF) to 1 step -1
 		HiddenParagraph(j) = stDTF(i).Content
 		References(j) = PageNo
-		
-		&apos;=========Progressbar    
+
+		&apos;=========Progressbar
 			ProgressValue=ProgressValue+1
 			MyProgressBar(ProgressValue)
-		&apos;=========Progressbar 
-				
+		&apos;=========Progressbar
+
 		If stDTF(i).GetAnchor.PageStyleName &lt;&gt; stDTF(i-1).GetAnchor.PageStyleName Then
 			PageNo = PageNo + 1
-			
 
-			
+
+
 			If stDTF(i).Content &lt;&gt; stDTF(i-1).Content Then
 				CurrVariablePageNo = GetPageNumber(stDTF(i).GetAnchor)
 				NextVariablePageNo = GetPageNumber(stDTF(i-1).GetAnchor)
@@ -305,62 +305,62 @@ mytime = now
 					References(j) = PageNo
 					&apos;HiddenParagraph(j+1) = HiddenParagraph(j)
 				End If
-			End If			
-			
+			End If
+
 			&apos;if last variable for next Book, we need to set last variable page number is next page number
 			CurrentValue = Split(HiddenParagraph(j),&quot; &quot;)
 			PreviousValue = Split(HiddenParagraph(j-1),&quot; &quot;)
-						
+
 			CurrentBook = GetBookName(CurrentValue)
-			PreviousBook = GetBookName(PreviousValue)	
+			PreviousBook = GetBookName(PreviousValue)
 			If PreviousBook = &quot;&quot; Then
 				PreviousBook = CurrentBook
 			End If
-				
+
 			If 	CurrentBook &lt;&gt; 	PreviousBook Then
 				References(j) = PageNo&apos;Added Page Number
 			End If
-			
-		End If
-		
 
-					
+		End If
+
+
+
 		j = j + 1
 	Next
-	
+
 keep = keep &amp; chr(10) &amp; &quot;After Convert to Hidden &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-mytime = now	
+mytime = now
 	&apos;Write Code to get the Page Number of the Reference Fields
-	
+
 	dim startNo
 	dim endNo
 	dim PreviousPageBook
-	
-for i = 0 to Ubound(References) 
 
-		&apos;=========Progressbar    
+for i = 0 to Ubound(References)
+
+		&apos;=========Progressbar
 			ProgressValue=ProgressValue+1
 			MyProgressBar(ProgressValue)
-		&apos;=========Progressbar 
-		
+		&apos;=========Progressbar
+
 	PageNo = References(i)
 	startNo = i
 				if startNo = 844 Then
 				s=10
 				end if
 	GetLastNumber(References,startNo,endNo)
-	
+
 	if startNo = Ubound(References) Then
 		Exit For
 	End if
-	
+
 	If HiddenParagraph(startNo) &lt;&gt; HiddenParagraph(endNo) Then
 		FirstValue = Split(HiddenParagraph(startNo),&quot; &quot;)
 		LastValue = Split(HiddenParagraph(endNo),&quot; &quot;)
 
 		FirstBook = GetBookName(FirstValue)
 		LastBook = GetBookName(LastValue)
-					
+
 		If FirstBook &lt;&gt; LastBook Then
 			If startNo &gt; 2 Then
 			    &apos;HiddenParagraph(startNo-1) = HiddenParagraph(endNo)
@@ -368,11 +368,11 @@ for i = 0 to Ubound(References)
                 &apos;HiddenParagraph(startNo+1) = HiddenParagraph(endNo)
 			Else
 				HiddenParagraph(startNo) = HiddenParagraph(endNo)
-			End If    
+			End If
 		Else
 			HiddenParagraph(startNo) = LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
 			If startNo &gt; 2 Then
-			    &apos;HiddenParagraph(startNo+1) = HiddenParagraph(startNo)			
+			    &apos;HiddenParagraph(startNo+1) = HiddenParagraph(startNo)
 			    HiddenParagraph(startNo-1) = HiddenParagraph(startNo)&apos; LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
                 HiddenParagraph(startNo) = HiddenParagraph(startNo) &apos; LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
 				if startNo = 183 Then
@@ -382,19 +382,19 @@ for i = 0 to Ubound(References)
                 HiddenParagraph(ChangeNo) = HiddenParagraph(startNo)&apos; LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
 			&apos;Else
 				&apos;HiddenParagraph(startNo) = LastBook + &quot; &quot; + FirstValue(Ubound(FirstValue)) + &quot;-&quot; +  LastValue(Ubound(LastValue))
-			End If 		
+			End If
 
 		End If
 	Else&apos;If Stating and ending Guidewords are same
 		If startNo &gt; 2 Then
-		
+
 		FirstValue = Split(HiddenParagraph(startNo),&quot; &quot;)
 		&apos;LastValue = Split(HiddenParagraph(endNo),&quot; &quot;)
 
 		FirstBook = GetBookName(FirstValue)
 		&apos;LastBook = GetBookName(LastValue)
-		
-			If FirstBook = PreviousPageBook And startNo &lt;&gt; endNo Then	&apos;Same book with more than one verses in a page	
+
+			If FirstBook = PreviousPageBook And startNo &lt;&gt; endNo Then	&apos;Same book with more than one verses in a page
 				HiddenParagraph(startNo - 1) = HiddenParagraph(startNo)
 			End If
 			PreviousPageBook = FirstBook
@@ -404,32 +404,32 @@ for i = 0 to Ubound(References)
 Next
 keep = keep &amp; chr(10) &amp; &quot;After adjust page &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
 mytime = now
-	
+
 	&apos;Submit processed References to Reference Fields
 	j=1
 	stDTF(0).Content = HiddenParagraph(0)
 	for i = Ubound(HiddenParagraph) - 1 to 1 step -1
 		stDTF(j).Content = HiddenParagraph(i)
 		j = j + 1
-		&apos;=========Progressbar    
+		&apos;=========Progressbar
 			ProgressValue=ProgressValue+1
 			MyProgressBar(ProgressValue)
-		&apos;=========Progressbar 		
+		&apos;=========Progressbar
 	Next
 	thisComponent.getTextFields.refresh()
 keep = keep &amp; chr(10) &amp; &quot;After UpdateHeader &quot; &amp; chr(10) &amp; mytime &amp; chr(10) &amp; now
-mytime = now	
+mytime = now
  oProgressBarModel.ProgressValue =  Ubound(stDTF) * 4
 
-	&apos;oDoc.store() 
+	&apos;oDoc.store()
 &apos;===========Progressbar
 	CloseProgressBar
 	isProgressClosed = True
-&apos;===========Progressbar  	
-		
-	oContWindow.Visible = true 
+&apos;===========Progressbar
+
+	oContWindow.Visible = true
 	&apos;msgbox keep
-oDoc.store() 
+oDoc.store()
 Exit Sub
 MyError:
 	If isProgressClosed = False Then
@@ -438,7 +438,7 @@ MyError:
 	If Err &lt;&gt; 1 Then
 		Msgbox &quot;Sorry! Could not update the References.&quot; , 0 + 64,  &quot;Update References&quot;
 	End IF
-	oContWindow.Visible = true 	
+	oContWindow.Visible = true
 End Sub
 
 &apos;This function return True/False wheter macro run already
@@ -461,21 +461,21 @@ Function FindStartPageNumber()
 On Error GoTo MyError:
 
 ThisComponent.currentController.getViewCursor().jumpToPage(1)
-oDoc = ThisComponent 
-oVC = oDoc.CurrentController.getViewCursor 
-oVC.gotoStart(false) 
+oDoc = ThisComponent
+oVC = oDoc.CurrentController.getViewCursor
+oVC.gotoStart(false)
 
 
 Do
-    page = oVC.getPage 
+    page = oVC.getPage
 	FindStartPageNumber = page
 	oVC.jumpToStartOfPage
-	First = oDoc.Text.createTextCursorByRange(oVC)	
+	First = oDoc.Text.createTextCursorByRange(oVC)
 	If page &gt; 4 Then
 		exit Do
 	End If
 
-Loop While oVC.jumpToNextPage 
+Loop While oVC.jumpToNextPage
 Exit Function
 MyError:
 &apos;msgbox Err.Description
@@ -491,95 +491,95 @@ Function GetPageNumber(stDTF)
 End Function
 
 &apos;This method show the progress bar
-Sub ShowProcessingDialog() 
-  oDoc = ThisComponent &apos; needs document 
-  oController = oDoc.getCurrentController() 
-  oFrame = oController.getFrame() 
-  oContainerWindow = oFrame.ContainerWindow 
-  oToolkit = oContainerWindow.Toolkit 
-  
-  &apos; sub window with sub frame 
-  oSubWindow = CreateNewWindow(oToolkit,oContainerWindow, 300,300,500,120) 
+Sub ShowProcessingDialog()
+  oDoc = ThisComponent &apos; needs document
+  oController = oDoc.getCurrentController()
+  oFrame = oController.getFrame()
+  oContainerWindow = oFrame.ContainerWindow
+  oToolkit = oContainerWindow.Toolkit
+
+  &apos; sub window with sub frame
+  oSubWindow = CreateNewWindow(oToolkit,oContainerWindow, 300,300,500,120)
   oSubWindow.Title=&quot;Update References&quot;
-  oSubFrame = CreateUnoService(&quot;com.sun.star.frame.Frame&quot;) 
-  oSubFrame.initialize(oSubWindow) 
-  oFrame.getFrames().append(oSubFrame) 
-  
+  oSubFrame = CreateUnoService(&quot;com.sun.star.frame.Frame&quot;)
+  oSubFrame.initialize(oSubWindow)
+  oFrame.getFrames().append(oSubFrame)
+
   &apos; container of controls (Frame)
-  oContainer = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainer&quot;) 
-  oContainerModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainerModel&quot;) 
-  oContainerModel.BackgroundColor = &quot;&amp;HEEEEEE&quot; &apos;-1 
-  oContainer.setModel(oContainerModel) 
-  oContainer.setPosSize(0,0,500,120,com.sun.star.awt.PosSize.POSSIZE) 
-  oContainer.createPeer(oToolkit,oSubWindow) 
-  
-  &apos; progressbar 
-  oProgressBarModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlProgressBarModel&quot;) 
-  oProgressBar = CreateUnoService( &quot;com.sun.star.awt.UnoControlProgressBar&quot; ) 
-  oProgressBar.setModel(oProgressBarModel) 
-  oProgressBar.setPosSize(50,65,400,30, com.sun.star.awt.PosSize.POSSIZE ) 
-  oContainer.addControl(&quot;progressbar&quot;,oProgressBar) 
-  
+  oContainer = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainer&quot;)
+  oContainerModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlContainerModel&quot;)
+  oContainerModel.BackgroundColor = &quot;&amp;HEEEEEE&quot; &apos;-1
+  oContainer.setModel(oContainerModel)
+  oContainer.setPosSize(0,0,500,120,com.sun.star.awt.PosSize.POSSIZE)
+  oContainer.createPeer(oToolkit,oSubWindow)
+
+  &apos; progressbar
+  oProgressBarModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlProgressBarModel&quot;)
+  oProgressBar = CreateUnoService( &quot;com.sun.star.awt.UnoControlProgressBar&quot; )
+  oProgressBar.setModel(oProgressBarModel)
+  oProgressBar.setPosSize(50,65,400,30, com.sun.star.awt.PosSize.POSSIZE )
+  oContainer.addControl(&quot;progressbar&quot;,oProgressBar)
+
   &apos; label 1
-  oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;) 
-  oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;) 
+  oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;)
+  oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;)
   oLabelModel.Label = &quot;The Open Office window will be hidden while the headers are updated&quot;
-  oLabel.setModel(oLabelModel) 
+  oLabel.setModel(oLabelModel)
   oLabel.Alignment = 1
-  oLabel.setPosSize(5,20,500,30,com.sun.star.awt.PosSize.POSSIZE) 
-  oContainer.addControl(&quot;label&quot;,oLabel) 
+  oLabel.setPosSize(5,20,500,30,com.sun.star.awt.PosSize.POSSIZE)
+  oContainer.addControl(&quot;label&quot;,oLabel)
 
   &apos; label 2
-  oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;) 
-  oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;) 
-  oLabelModel.Label = &quot;because this reduces the time it takes to do the update.&quot; 
-  oLabel.setModel(oLabelModel) 
+  oLabel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedText&quot;)
+  oLabelModel = CreateUnoService(&quot;com.sun.star.awt.UnoControlFixedTextModel&quot;)
+  oLabelModel.Label = &quot;because this reduces the time it takes to do the update.&quot;
+  oLabel.setModel(oLabelModel)
   oLabel.Alignment = 1
-  oLabel.setPosSize(5,37,500,30,com.sun.star.awt.PosSize.POSSIZE) 
-  oContainer.addControl(&quot;label&quot;,oLabel) 
-  
-  &apos; show window 
-  oSubWindow.setEnable(False) 
-  oSubWindow.setVisible(True) 
- &apos; oSubWindow.setVisible(False) 
-End Sub 
+  oLabel.setPosSize(5,37,500,30,com.sun.star.awt.PosSize.POSSIZE)
+  oContainer.addControl(&quot;label&quot;,oLabel)
+
+  &apos; show window
+  oSubWindow.setEnable(False)
+  oSubWindow.setVisible(True)
+ &apos; oSubWindow.setVisible(False)
+End Sub
 
 &apos;Increments progressbar value
 Sub MyProgressBar(ProgressValue)
 	oProgressBarModel.ProgressValue = ProgressValue &apos; * 1
 End Sub
 
-&apos; create new non-modal dialog 
-Function CreateNewWindow(oToolkit,oParent,nX,nY,nWidth,nHeight) As Object 
-  aRect = CreateUnoStruct(&quot;com.sun.star.awt.Rectangle&quot;) 
-  With aRect 
-    .X = nX 
-    .Y = nY 
-    .Width = nWidth 
-    .Height = nHeight 
-  End With 
-  aWinDesc = CreateUnoStruct(&quot;com.sun.star.awt.WindowDescriptor&quot;) 
-  With aWinDesc 
-    .Type = com.sun.star.awt.WindowClass.TOP 
-    .WindowServiceName = &quot;dialog&quot; 
-    .ParentIndex = -1 
-    .Bounds = aRect 
-    .Parent = oParent 
-    .WindowAttributes = com.sun.star.awt.WindowAttribute.MOVEABLE + com.sun.star.awt.WindowAttribute.CLOSEABLE 
-  End With 
-  CreateNewWindow = oToolkit.createWindow(aWinDesc) 
-End Function  
+&apos; create new non-modal dialog
+Function CreateNewWindow(oToolkit,oParent,nX,nY,nWidth,nHeight) As Object
+  aRect = CreateUnoStruct(&quot;com.sun.star.awt.Rectangle&quot;)
+  With aRect
+    .X = nX
+    .Y = nY
+    .Width = nWidth
+    .Height = nHeight
+  End With
+  aWinDesc = CreateUnoStruct(&quot;com.sun.star.awt.WindowDescriptor&quot;)
+  With aWinDesc
+    .Type = com.sun.star.awt.WindowClass.TOP
+    .WindowServiceName = &quot;dialog&quot;
+    .ParentIndex = -1
+    .Bounds = aRect
+    .Parent = oParent
+    .WindowAttributes = com.sun.star.awt.WindowAttribute.MOVEABLE + com.sun.star.awt.WindowAttribute.CLOSEABLE
+  End With
+  CreateNewWindow = oToolkit.createWindow(aWinDesc)
+End Function
 
 &apos;This function returns last reference of the page
 Function GetLastReference(HiddenParagraph,startNo)
 GetLastReference = startNo
-for i = startNo+1 to Ubound(HiddenParagraph) - 1 
+for i = startNo+1 to Ubound(HiddenParagraph) - 1
 	FirstValue = Split(HiddenParagraph(startNo),&quot; &quot;)
 	LastValue = Split(HiddenParagraph(i),&quot; &quot;)
 	FirstChapter = Split(FirstValue(Ubound(FirstValue)),&quot;-&quot;)
 	If FirstChapter(0) &lt;&gt; LastValue(Ubound(LastValue)) Then
 		GetLastReference =  i
-		Exit For		
+		Exit For
 	Else
 		HiddenParagraph(i) = HiddenParagraph(startNo)
 	End if
@@ -595,9 +595,9 @@ End Function
 
 &apos;This procedure dispose the ProgressBar
 Sub CloseProgressBar
-  oSubWindow.setVisible(False) 
-  oFrame.getFrames().remove(oSubFrame) 
-  oSubWindow.dispose() 
+  oSubWindow.setVisible(False)
+  oFrame.getFrames().remove(oSubFrame)
+  oSubWindow.dispose()
 End Sub
 
 

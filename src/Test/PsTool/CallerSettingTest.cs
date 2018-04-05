@@ -13,6 +13,7 @@
 // File: CallerSettingTest.cs
 // Responsibility: Greg Trihus
 // ---------------------------------------------------------------------------------------------
+using System.IO;
 using NUnit.Framework;
 using SIL.Tool;
 
@@ -135,7 +136,8 @@ namespace Test.PsTool
 		public void GondwanaGetSettingsNameTest()
 		{
 			using (var cs = new CallerSetting("Gondwana Sample"))
-				Assert.AreEqual(@"C:\ProgramData\SIL\FieldWorks\Projects\Gondwana Sample\Gondwana Sample.fwdata", cs.GetSettingsName());
+				if (Path.GetDirectoryName(cs.GetSettingsName()) != @"C:\fwrepo\fw\DistFiles\Projects\Gondwana Sample") // FieldWorks Developer setup
+					Assert.AreEqual(@"C:\ProgramData\SIL\FieldWorks\Projects\Gondwana Sample\Gondwana Sample.fwdata", cs.GetSettingsName());
 		}
 	}
 }
