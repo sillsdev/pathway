@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="SettingsValidator.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (C) 2014, SIL International. All Rights Reserved.
 //
@@ -243,16 +243,6 @@ namespace SIL.PublishingSolution
             if (!ValidateDefaultMedia(parentNode)) return false;
             if (!ValidateFeatureName(parentNode)) return false;
             if (!ValidateFeatureOptionName(parentNode)) return false;
-            if (!ValidateFeatureOptionFile(parentNode))
-            {
-                ValidateFeatureOptionFileDefault(parentNode);
-                if (currentValidatingFileName.Length > 0)
-                {
-                    settingsDoc.Save(currentValidatingFileName);
-                    settingsDoc.Load(currentValidatingFileName);
-                }
-            }
-
             if (!ValidateStyleName(parentNode)) return false;
             if (!ValidateStyleFile(parentNode)) return false;
             if (!ValidateTaskName(parentNode)) return false;
@@ -943,55 +933,6 @@ namespace SIL.PublishingSolution
                                     }
                                 }
                             }
-                    }
-            }
-            catch { }
-            return true;
-        }
-
-        /// <summary>
-        /// Adding "Feature" Node as default node in "stylePick/features" Node
-        /// </summary>
-        /// <param name="parentNode">Current Parent Node</param>
-        /// <returns>return boolean value true or false</returns>
-        protected bool ValidateFeatureOptionFileDefault(XmlNode parentNode)
-        {
-            try
-            {
-                const string xPath = "//stylePick/features";
-                XmlNode childNode = parentNode.SelectSingleNode(xPath);
-                if (childNode != null)
-                    foreach (XmlNode node in childNode)
-                    {
-                        node.ParentNode.RemoveChild(node);
-                        XmlDocument tempDoc = new XmlDocument();
-
-                        XmlNode newChild = tempDoc.CreateElement("feature");
-                        XmlAttribute xmlAttribute = tempDoc.CreateAttribute("name");
-                        xmlAttribute.Value = "Justified";
-                        newChild.Attributes.Append(xmlAttribute);
-
-                        XmlNode option1 = tempDoc.CreateElement("option");
-                        XmlAttribute xmlAttribute1 = tempDoc.CreateAttribute("name");
-                        xmlAttribute1.Value = "Yes";
-                        XmlAttribute xmlAttribute2 = tempDoc.CreateAttribute("file");
-                        xmlAttribute2.Value = "Justified_Yes.css";
-                        option1.Attributes.Append(xmlAttribute1);
-                        option1.Attributes.Append(xmlAttribute2);
-
-                        XmlNode option2 = tempDoc.CreateElement("option");
-                        XmlAttribute xmlAttrib1 = tempDoc.CreateAttribute("name");
-                        xmlAttrib1.Value = "No";
-                        XmlAttribute xmlAttrib2 = tempDoc.CreateAttribute("file");
-                        xmlAttrib2.Value = "Justified_No.css";
-                        option2.Attributes.Append(xmlAttrib1);
-                        option2.Attributes.Append(xmlAttrib2);
-
-                        newChild.AppendChild(option1);
-                        newChild.AppendChild(option2);
-                        XmlNode importNode = childNode.OwnerDocument.ImportNode(newChild, true);
-
-                        childNode.AppendChild(importNode);
                     }
             }
             catch { }
