@@ -218,7 +218,7 @@ namespace Test.PsTool
         {
             var fontFullName = FontInternals.GetFontFileName("Scheherazade", "normal");
             var actual = FontInternals.IsGraphite(fontFullName);
-            Assert.IsFalse(actual);
+            Assert.IsTrue(actual);
         }
     }
 }
