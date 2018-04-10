@@ -122,6 +122,7 @@ namespace SIL.PublishingSolution
                 {
                     headerText = Param.GetMetadataValue("Title");
                 }
+				if(headerText.Trim().Length == 0) return;
                 string headerFontSize = "10";
                 string[] pageDir = { "@page:left-top-center", "@page:right-top-center" };
                 if (_cssProperty.ContainsKey("headword") && _cssProperty["headword"].ContainsKey("font-size"))
