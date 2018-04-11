@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -2082,17 +2082,6 @@ namespace SIL.Tool
 				}
 			}
 			xDoc.Save(xhtmlFilePath);
-
-			//Add CSS for to Hide verse number one
-			if (File.Exists(_cssFileNameWithPath))
-			{
-				TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
-				tw.WriteLine(".Verse_Number1 {");
-				tw.WriteLine("font-size: 0.1pt;");
-				tw.WriteLine("visibility: hidden;");
-				tw.WriteLine("}");
-				tw.Close();
-			}
 
 			return xhtmlFilePath;
 		}
