@@ -400,7 +400,7 @@
     <BteTransform Include="*.xslt" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
     <UsfmConvert Include="..\lib\ParatextShared.dll;..\..\lib\NetLoc.dll" />
-    <WritingSystemDependency Include="..\lib\spart.dll" />
+    <WritingSystemDependency Include="..\lib\Spart.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
     <Message Text="User entered BuildNumber: $(BUILD_NUMBER)" Importance="high" />
