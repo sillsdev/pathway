@@ -721,6 +721,13 @@ namespace SIL.Tool
                     fn = Common.PathCombine(Value[UserSheetPath], string.Format("{0}{1}.css", sheet, ++i));
                 } while (File.Exists(fn));
             }
+            else
+            {
+	            if (!Directory.Exists(Path.GetDirectoryName(fn)))
+		            Directory.CreateDirectory(Path.GetDirectoryName(fn));
+
+	            File.Copy(fileNamewithPath, fn, true);
+			}
 
             if (File.Exists(fileNamewithPath))
             {

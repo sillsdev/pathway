@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // <copyright file="ExportThroughPathway.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (C) 2014, 2011 SIL International. All Rights Reserved.
 //
@@ -503,10 +503,14 @@ namespace SIL.PublishingSolution
         /// </summary>
         private void PopulateFromSettings()
         {
-	        using (Common.CallerSetting = new CallerSetting(Param.DatabaseName))
-	        {
-		        Title = Common.CallerSetting.GetName();
+			try
+			{
+				using (Common.CallerSetting = new CallerSetting(Param.DatabaseName))
+				{
+					Title = Common.CallerSetting.GetName();
+				}
 			}
+			catch { }
 			CopyrightHolder = Param.GetMetadataValue(Param.CopyrightHolder, Organization);
 			CopyrightHolder = Common.UpdateCopyrightYear(CopyrightHolder);
         }
