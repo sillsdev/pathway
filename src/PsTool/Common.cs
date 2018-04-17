@@ -2292,7 +2292,7 @@ namespace SIL.Tool
 				}
 				if (IsUnixOS())
 				{
-					return Common.PathCombine("/var/lib/fieldworks", "SIL/WritingSystemStore");
+					return PathCombine("/var/lib/fieldworks", "SIL/WritingSystemStore");
 				}
 				// fall back on the special environment folder (e.g., c:/ProgramData) - this directory depends on OS
 				return Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
@@ -2300,6 +2300,10 @@ namespace SIL.Tool
 			}
 			catch
 			{
+				if (IsUnixOS())
+				{
+					return PathCombine("/var/lib/fieldworks", "SIL/WritingSystemStore");
+				}
 				// fall back on the special environment folder (e.g., c:/ProgramData) - this directory depends on OS
 				return Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
 										  "SIL/WritingSystemStore");
