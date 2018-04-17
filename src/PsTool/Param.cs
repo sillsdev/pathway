@@ -723,11 +723,14 @@ namespace SIL.Tool
             }
             else
             {
-	            if (!Directory.Exists(Path.GetDirectoryName(fn)))
-		            Directory.CreateDirectory(Path.GetDirectoryName(fn));
+	            if (File.Exists(fileNamewithPath))
+	            {
+		            if (!Directory.Exists(Path.GetDirectoryName(fn)))
+			            Directory.CreateDirectory(Path.GetDirectoryName(fn));
 
-	            File.Copy(fileNamewithPath, fn, true);
-			}
+		            File.Copy(fileNamewithPath, fn, true);
+	            }
+            }
 
             if (File.Exists(fileNamewithPath))
             {
