@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="ConfigurationToolBL.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (C) 2009, SIL International. All Rights Reserved.   
 //    
@@ -1253,6 +1253,13 @@ namespace SIL.PublishingSolution
 				}
 			}
 		}
+
+			if (cTool.ChkTurnOffFirstVerse.Checked)
+			{
+				value.Clear();
+				value["display"] = "none";
+				WriteCssClass(writeCss, "Verse_Number1", value);
+			}
 		}
 
 		private void SetAttributesForOtherProperties(StreamWriter writeCss)
