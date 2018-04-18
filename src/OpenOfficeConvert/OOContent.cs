@@ -996,7 +996,11 @@ namespace SIL.PublishingSolution
 				{
 					if (!_significant)
 					{
-						_writer.WriteString(" ");
+						// to exclude for the style: VerseNumber1_Paragraph_scrSection_columns_scrBook_scrBody_.drg
+						if (!_characterName.Trim().StartsWith("VerseNumber1"))
+						{
+							_writer.WriteString(" ");
+						}
 						_significant = true;
 					}
 				}
@@ -1412,7 +1416,7 @@ namespace SIL.PublishingSolution
 				}
 				else
 				{
-					_verseContent.Append(" <text:span text:style-name=\"" + characterStyle + "\">");
+					_verseContent.Append("<text:span text:style-name=\"" + characterStyle + "\">");
 					if (_projInfo.HideSpaceVerseNumber.ToLower() == "false")
 					{
 						content = content.Replace("-", Common.ConvertUnicodeToString("\\2011")) + _hardSpace;
