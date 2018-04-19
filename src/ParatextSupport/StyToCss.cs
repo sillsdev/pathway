@@ -342,6 +342,20 @@ namespace SIL.PublishingSolution
                     }
                     cssFile.WriteLine("}");
                     cssFile.WriteLine();
+
+					// Write the CSS Class Verse_Number1 from Verse_Number
+	                if (cssClass.Key == "Verse_Number")
+	                {
+		                cssFile.WriteLine("." + cssClass.Key + "1");
+		                cssFile.WriteLine("{");
+		                foreach (KeyValuePair<string, string> property in cssClass.Value)
+		                {
+			                cssFile.WriteLine(property.Key + ": " + property.Value + ";");
+		                }
+
+		                cssFile.WriteLine("}");
+		                cssFile.WriteLine();
+	                }
                 }
             }
             cssFile.Close();
