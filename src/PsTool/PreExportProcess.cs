@@ -543,7 +543,8 @@ namespace SIL.Tool
 
 		private string JustLanguageCode()
 		{
-			string languageCode = Common.GetLanguageCode(_xhtmlFileNameWithPath, _projInfo.ProjectInputType, true);
+			bool isVernacularWs = !(!_projInfo.IsODM && _projInfo.IsReversalExist); //Checking exports only Reversal
+			string languageCode = Common.GetLanguageCode(_xhtmlFileNameWithPath, _projInfo.ProjectInputType, isVernacularWs);
 			if (languageCode.Contains(":"))
 			{
 				languageCode = languageCode.Substring(0, languageCode.IndexOf(':'));
