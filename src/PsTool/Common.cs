@@ -680,51 +680,20 @@ namespace SIL.Tool
 								continue;
 							}
 
-							if (vernagular)
+							attribute = xmlReader["class"];
+                            if (vernagular)
 							{
-								attribute = xmlReader["class"];
 								if (attribute == "headword" || attribute == "mainheadword" || attribute == "headref" || attribute == "Paragraph")
 								{
-									attribute = xmlReader["lang"];
-									if (attribute == null)
-									{
-										attribute = xmlReader["xml:lang"];
-										if (attribute == null)
-										{
-											if (xmlReader.Read())
-											{
-												if (xmlReader.IsStartElement())
-												{
-													attribute = xmlReader["lang"];
-													if (attribute != null)
-													{
-														vernacularLang = attribute;
-														break;
-													}
-													else
-													{
-														attribute = xmlReader["xml:lang"];
-														if (attribute != null)
-														{
-															vernacularLang = attribute;
-															break;
-														}
-													}
-												}
-											}
-										}
-										else
-										{
-											vernacularLang = attribute;
-											break;
-										}
-									}
-									else
-									{
-										vernacularLang = attribute;
-										break;
-									}
+									if (GetLangAttrValue(xmlReader, ref vernacularLang)) break;
 								}
+							}
+							else
+							{
+								if (attribute == "headwordr1" || attribute == "reversalformr1")
+								{
+									if (GetLangAttrValue(xmlReader, ref vernacularLang)) break;
+                                }
 							}
 						}
 					}
@@ -738,18 +707,16 @@ namespace SIL.Tool
 
 					if (langName.ToLower() == "dc.language")
 					{
-						if (vernagular)
+
+						if (langContent.Length < vernacularLang.Length ||
+							langContent.Substring(0, vernacularLang.Length) != vernacularLang)
 						{
-							if (langContent.Length < vernacularLang.Length ||
-								langContent.Substring(0, vernacularLang.Length) != vernacularLang)
-							{
-								continue;
-							}
-							if (!string.IsNullOrEmpty(vernacularLang) && langContent.Length >= vernacularLang.Length &&
-								langContent.Substring(vernacularLang.Length, 1) != ":")
-							{
-								continue;
-							}
+							continue;
+						}
+						if (!string.IsNullOrEmpty(vernacularLang) && langContent.Length >= vernacularLang.Length &&
+							langContent.Substring(vernacularLang.Length, 1) != ":")
+						{
+							continue;
 						}
 
 						if (!langCodeList.Contains(langContent))
@@ -770,6 +737,51 @@ namespace SIL.Tool
 				languageCode = "eng";
 			}
 			return languageCode;
+		}
+
+		private static bool GetLangAttrValue(XmlReader xmlReader, ref string vernacularLang)
+		{
+			var attribute = xmlReader["lang"];
+			if (attribute == null)
+			{
+				attribute = xmlReader["xml:lang"];
+				if (attribute == null)
+				{
+					if (xmlReader.Read())
+					{
+						if (xmlReader.IsStartElement())
+						{
+							attribute = xmlReader["lang"];
+							if (attribute != null)
+							{
+								vernacularLang = attribute;
+								return true;
+							}
+							else
+							{
+								attribute = xmlReader["xml:lang"];
+								if (attribute != null)
+								{
+									vernacularLang = attribute;
+									return true;
+								}
+							}
+						}
+					}
+				}
+				else
+				{
+					vernacularLang = attribute;
+					return true;
+				}
+			}
+			else
+			{
+				vernacularLang = attribute;
+				return true;
+			}
+
+			return false;
 		}
 
 		/// <summary>
