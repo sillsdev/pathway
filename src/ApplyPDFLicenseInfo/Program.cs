@@ -67,14 +67,15 @@ namespace ApplyPDFLicenseInfo
                     if (!foundOpenDoc) break;
                     Thread.Sleep(1000);
                 }
-                Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.jar,.xml,.odt,.odm", "layout.css", string.Empty);
+	            Thread.Sleep(1000);
+                Common.CleanupExportFolder(xhtmlFile, ".tmp,.de,.exe,.dll,.jar,.xml,.odt,.odm", "layout.css", string.Empty);
                 LoadParameters(inputType);
                 CreateRAMP(xhtmlFile, inputType);
                 Common.CleanupExportFolder(xhtmlFile, ".xhtml,.xml,.css", "layout.css", string.Empty);
             }
             if (creatorTool.ToLower().Contains("prince"))
             {
-                string cleanExtn = ".tmp,.de,.exe,.jar,.xml";
+                string cleanExtn = ".tmp,.de,.exe,.dll,.jar,.xml";
                 Common.CleanupExportFolder(xhtmlFile, cleanExtn, "layout.css", string.Empty);
                 LoadParameters(inputType);
                 xhtmlFile = xhtmlFile.Replace(".pdf", ".xhtml");
@@ -111,18 +112,19 @@ namespace ApplyPDFLicenseInfo
             }
             else
             {
-                if(pdfFileName != exportTitle)
-                    File.Copy(pdfFileName, exportTitle, true);
-                var fileInfo = new FileInfo(licencePdfFile);
-                while (true)
-                {
-                    var newFileInfo = new FileInfo(exportTitle);
-                    if (newFileInfo.Length == fileInfo.Length) break;
-                    Thread.Sleep(1000);
-                }
+	            if (pdfFileName != exportTitle)
+	            {
+		            File.Copy(pdfFileName, exportTitle, true);
+		            var fileInfo = new FileInfo(pdfFileName);
+		            while (true)
+		            {
+			            var newFileInfo = new FileInfo(exportTitle);
+			            if (!newFileInfo.Exists || newFileInfo.Length == fileInfo.Length) break;
+			            Thread.Sleep(1000);
+		            }
+	            }
 
-
-                if (commonTesting.ToLower().Contains("false"))
+				if (commonTesting.ToLower().Contains("false"))
                 {
                     using (var process = new Process())
                     {

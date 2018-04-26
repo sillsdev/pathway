@@ -1,28 +1,27 @@
-﻿using System;
+﻿using SIL.Tool;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Threading;
 
 namespace PdfLicense
 {
     public class Program
     {
         public static int ExitCode;
-        static List<string> _readLicenseFilesBylines = new List<string>();
+	    private static readonly List<string> ReadLicenseFilesBylines = new List<string>();
 
-        static void Main(string[] args)
+	    private static void Main()
         {
 
-            string allUserPath = GetAllUserPath();
+            var allUserPath = GetAllUserPath();
             ReadPathinLicenseFile(allUserPath);
-            if (_readLicenseFilesBylines.Count <= 0)
+            if (ReadLicenseFilesBylines.Count <= 0)
             {
                 return;
             }
-            string creatorTool = _readLicenseFilesBylines[3];
-            string getPsApplicationPath = GetPSApplicationPath();
+            var creatorTool = ReadLicenseFilesBylines[3];
+            var getPsApplicationPath = GetPsApplicationPath();
 			getPsApplicationPath = Path.Combine(getPsApplicationPath, "Export");
             getPsApplicationPath = Path.Combine(getPsApplicationPath, "ApplyPDFLicenseInfo.exe");
 			if (getPsApplicationPath.StartsWith ("/")) {
@@ -30,26 +29,20 @@ namespace PdfLicense
 			}
             if (File.Exists(getPsApplicationPath))
             {
-                if (creatorTool.ToLower() == "libreoffice")
-                {
-                    RunCommand(getPsApplicationPath, "", 0);
-                }
-                else
-                {
-                    RunCommand(getPsApplicationPath, "", 1);
-                }
+	            //RunCommand(getPsApplicationPath, "", creatorTool.ToLower() == "libreoffice" ? 0 : 1);
+	            RunCommand(getPsApplicationPath, "", 0);
             }
-        }
+		}
 
         #region GetPSApplicationPath()
 
         public static string ProgInstall = string.Empty;
         public static string SupportFolder = string.Empty;
         /// <summary>
-        /// Return the Local setting Path+ "SIL\Dictionary" 
+        /// Return the Local setting Path+ "SIL\Dictionary"
         /// </summary>
         /// <returns>Dictionary Setting Path</returns>
-        public static string GetPSApplicationPath()
+        public static string GetPsApplicationPath()
         {
             if (ProgInstall == string.Empty)
                 ProgInstall = GetApplicationPath();
@@ -59,100 +52,56 @@ namespace PdfLicense
 
         public static string GetApplicationPath()
         {
-            string pathwayDir = GetPathwayDir();
-            if (string.IsNullOrEmpty(pathwayDir))
-                return Directory.GetCurrentDirectory();
-            return pathwayDir;
+            var pathwayDir = GetPathwayDir();
+            return string.IsNullOrEmpty(pathwayDir) ? Directory.GetCurrentDirectory() : pathwayDir;
         }
 
         public static string GetPathwayDir()
         {
-            string pathwayDir = string.Empty;
-            object regObj;
-            try
-            {
-                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyCurrentUser,
-                    "Pathway", "PathwayDir", out regObj))
-                {
-                    return (string)regObj;
-                }
-                if (Path.PathSeparator == '/') //Test for Linux (see: http://www.mono-project.com/FAQ:_Technical)
-                {
-                    const string myPathwayDir = "/usr/lib/pathway";
-                    RegistryAccess.SetStringRegistryValue("PathwayDir", myPathwayDir);
-                    return myPathwayDir;
-                }
-                if (RegistryHelperLite.RegEntryExists(RegistryHelperLite.CompanyKeyLocalMachine,
-                    "Pathway", "PathwayDir", out regObj))
-                {
-                    return (string)regObj;
-                }
-                var fwKey = RegistryHelperLite.CompanyKeyLocalMachine.OpenSubKey("FieldWorks");
-                if (fwKey != null)
-                {
-                    if (!RegistryHelperLite.RegEntryExists(fwKey, "8.0", "RootCodeDir", out regObj))
-                        if (!RegistryHelperLite.RegEntryExists(fwKey, "7.0", "RootCodeDir", out regObj))
-                            if (!RegistryHelperLite.RegEntryExists(fwKey, "", "RootCodeDir", out regObj))
-                                regObj = string.Empty;
-                    pathwayDir = (string)regObj;
-                    // The next line helps those using the developer version of FieldWorks
-                    pathwayDir = pathwayDir.Replace("DistFiles", @"Output\Debug").Replace("distfiles", @"Output\Debug");
-                }
-                if (!File.Exists(PathCombine(pathwayDir, "PsExport.dll")))
-                    pathwayDir = string.Empty;
-                if (pathwayDir == string.Empty)
-                {
-                    pathwayDir = Directory.GetCurrentDirectory();
-                }
-            }
-            catch { }
-            return pathwayDir;
+	        return RegistryHelperLite.FallbackStringValue("SIL/Pathway", "PathwayDir");
         }
 
         public static bool RunCommand(string szCmd, string szArgs, int wait)
         {
             if (szCmd == null) return false;
-            System.Diagnostics.Process myproc = new System.Diagnostics.Process();
-            myproc.EnableRaisingEvents = false;
-            myproc.StartInfo.CreateNoWindow = true;
-            myproc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            myproc.StartInfo.FileName = szCmd;
-            myproc.StartInfo.Arguments = szArgs;
+	        using (var myproc = new Process
+	        {
+		        EnableRaisingEvents = false,
+		        StartInfo =
+		        {
+			        CreateNoWindow = true,
+			        WindowStyle = ProcessWindowStyle.Hidden,
+			        FileName = szCmd,
+			        Arguments = szArgs
+		        }
+	        })
+	        {
+		        if (!myproc.Start()) return false;
+		        //Using WaitForExit( ) allows for the host program
+		        //to wait for the command its executing before it continues
+		        if (wait == 1) myproc.WaitForExit();
+		        else myproc.Close();
 
-            if (myproc.Start())
-            {
-                //Using WaitForExit( ) allows for the host program
-                //to wait for the command its executing before it continues
-                if (wait == 1) myproc.WaitForExit();
-                else myproc.Close();
+		        return true;
+	        }
+		}
 
-                return true;
-            }
-            else return false;
-        }
-
-        private static string ReadPathinLicenseFile(string allUserPath)
+        private static void ReadPathinLicenseFile(string allUserPath)
         {
-            string fileLoc = PathCombine(allUserPath, "License.txt");
-            string executePath = string.Empty;
+            var fileLoc = PathCombine(allUserPath, "License.txt");
 
-            if (File.Exists(fileLoc))
-            {
-                using (StreamReader reader = new StreamReader(fileLoc))
-                {
-                    string line;
+	        if (!File.Exists(fileLoc)) return;
+	        using (var reader = new StreamReader(fileLoc))
+	        {
+		        string line;
 
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        _readLicenseFilesBylines.Add(line);
-                    }
+		        while ((line = reader.ReadLine()) != null)
+		        {
+			        ReadLicenseFilesBylines.Add(line);
+		        }
 
-                    reader.Close();
-
-                    executePath = fileLoc;
-                }
-            }
-            return executePath;
+		        reader.Close();
+	        }
         }
 
         /// <summary>
@@ -180,14 +129,8 @@ namespace PdfLicense
             {
                 return path2;
             }
-            else if (path2 == null)
-            {
-                return path1;
-            }
-            else
-            {
-                return Path.Combine(path1, path2);
-            }
+
+	        return path2 == null ? path1 : Path.Combine(path1, path2);
         }
 
         /// <summary>
@@ -199,7 +142,7 @@ namespace PdfLicense
         {
             if (string.IsNullOrEmpty(path)) return path;
 
-            string returnPath = path.Replace('/', Path.DirectorySeparatorChar);
+            var returnPath = path.Replace('/', Path.DirectorySeparatorChar);
             returnPath = returnPath.Replace('\\', Path.DirectorySeparatorChar);
             return returnPath;
         }
