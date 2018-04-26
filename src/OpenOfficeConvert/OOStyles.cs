@@ -2123,14 +2123,7 @@ namespace SIL.PublishingSolution
 
                 _writer.WriteAttributeString("draw:z-index", "1");
                 _writer.WriteStartElement("draw:text-box");
-                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-                {
-                    _writer.WriteAttributeString("fo:min-height", "19.00pt"); //added for TD-4006 14.14
-                }
-                else
-                {
-                    _writer.WriteAttributeString("fo:min-height", "14.14pt"); //added for TD-2579
-                }
+	            _writer.WriteAttributeString("fo:min-height", "19.00pt");
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "MP1");
 
@@ -2219,14 +2212,18 @@ namespace SIL.PublishingSolution
                     }
                     break;
             }
-            _writer.WriteStartElement("text:span");
-            _writer.WriteAttributeString("text:style-name", "MT1");
-            _writer.WriteStartElement("text:variable-get");
-            _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-            _writer.WriteEndElement(); //text:variable-get
-            _writer.WriteEndElement();
 
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+	        if (!(isMirrored && i == 19))
+            {
+		        _writer.WriteStartElement("text:span");
+		        _writer.WriteAttributeString("text:style-name", "MT1");
+		        _writer.WriteStartElement("text:variable-get");
+		        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+		        _writer.WriteEndElement(); //text:variable-get
+		        _writer.WriteEndElement();
+	        }
+
+	        if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 _writer.WriteStartElement("text:span");
                 _writer.WriteAttributeString("text:style-name", "MT2");
@@ -2310,7 +2307,7 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("fo:min-width", "35pt");
             _writer.WriteAttributeString("draw:z-index", "1");
             _writer.WriteStartElement("draw:text-box");
-            _writer.WriteAttributeString("fo:min-height", "14.14pt");//added for TD-2579
+	        _writer.WriteAttributeString("fo:min-height", "19.00pt");
             _writer.WriteStartElement("text:p");
             _writer.WriteAttributeString("text:style-name", "MP1");
 
