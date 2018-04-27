@@ -219,8 +219,9 @@ namespace SIL.PublishingSolution
                 case "\\firstlineindent":
                     value = PropertyValue(line);
                     value = Common.LeftString(value, "#").Trim();
-                    _cssProp["text-indent"] = value + "pt";
-                    break;
+					// In usfm.sty file, firstlineindent value is in inches, so converted it to pt
+					_cssProp["text-indent"] = Common.UnitConverter(value + "in", "pt") + "pt";
+					break;
                 case "\\fontname":
                     value = PropertyValue(line);
                     _cssProp["font-family"] = value;
