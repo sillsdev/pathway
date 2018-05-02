@@ -1545,15 +1545,12 @@
             <text:page-number text:select-page="current">4</text:page-number>
           </text:span>
           <text:tab />
-          <text:span text:style-name="MT1">
-            <text:variable-get text:name="Left_Guideword_L" />
-          </text:span>
         </text:p>
       </style:header>
       <style:footer>
         <text:p text:style-name="Footer">
           <draw:frame draw:style-name="Mfr1" draw:name="Frame1" text:anchor-type="paragraph" svg:y="31.84842pt" fo:min-width="100pt" draw:z-index="1">
-            <draw:text-box fo:min-height="14.14pt">
+            <draw:text-box fo:min-height="17.6pt">
               <text:p text:style-name="MP1">
                 <text:span text:style-name="MT1">
                   <text:variable-get text:name="Right_Guideword_R" />
