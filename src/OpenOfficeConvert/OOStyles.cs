@@ -2384,7 +2384,7 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("style:name", "CopyRight_20_Page");
                     _writer.WriteAttributeString("style:display-name", "CopyRight Page");
                     _writer.WriteAttributeString("style:next-style-name", "TableofContents_20_Page");
-                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteAttributeString("style:page-layout-name", "pm8");
                     _writer.WriteEndElement(); // Close of Master Page
                 }
                 else
@@ -2449,7 +2449,7 @@ namespace SIL.PublishingSolution
                 nextStyle = "Left_20_Page";
             }
             _writer.WriteAttributeString("style:next-style-name", nextStyle);
-            _writer.WriteAttributeString("style:page-layout-name", "pm3");
+            _writer.WriteAttributeString("style:page-layout-name", "pm7");
             CreateHeaderFooterVariables(0);
             _writer.WriteEndElement(); // Close of Master Page
 
@@ -2825,6 +2825,8 @@ namespace SIL.PublishingSolution
             WritePageLayoutStylePropertyThirteen();
 
             WritePageLayoutStylePropertySeven();
+
+	        WritePageLayoutStylePropertyEight();
         }
 
         private void WritePageLayoutStylePropertySeven()
@@ -2832,6 +2834,7 @@ namespace SIL.PublishingSolution
             /* pm7 starts - Non Footer settings */
             _writer.WriteStartElement("style:page-layout"); // pm7
             _writer.WriteAttributeString("style:name", "pm7"); // First Page
+	        _writer.WriteAttributeString("style:page-usage", "right");
             _writer.WriteStartElement("style:page-layout-properties");
             foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
             {
@@ -2850,6 +2853,31 @@ namespace SIL.PublishingSolution
             _writer.WriteEndElement();
             /* pm7 ends*/
         }
+
+	    private void WritePageLayoutStylePropertyEight()
+	    {
+		    /* pm8 starts - Non Footer settings */
+		    _writer.WriteStartElement("style:page-layout");
+		    _writer.WriteAttributeString("style:name", "pm8");
+		    _writer.WriteAttributeString("style:page-usage", "left");
+            _writer.WriteStartElement("style:page-layout-properties");
+		    foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
+		    {
+			    _writer.WriteAttributeString(para.Key, para.Value);
+		    }
+		    if (_writingMode.ToLower() == "rl-tb")
+		    {
+			    _writer.WriteAttributeString("style:writing-mode", _writingMode);
+		    }
+		    _writer.WriteStartElement("style:background-image");
+		    _writer.WriteEndElement();
+		    // START FootNote Seperator
+		    FootnoteSeperator();
+		    // END FootNote Seperator
+		    _writer.WriteEndElement(); // end of style:page-layout-properties
+		    _writer.WriteEndElement();
+		    /* pm8 ends*/
+	    }
 
         private void WritePageLayoutStylePropertyThirteen()
         {

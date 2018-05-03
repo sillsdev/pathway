@@ -1,0 +1,284 @@
+/* Scripture.css */
+
+.Chapter_Number {
+    font-weight: bolder;
+    vertical-align: top;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-right: 2pt;
+    float: left;
+    string-set: chapter content() ":";
+}
+
+.Paragraph {
+    text-indent: 12pt;
+    margin-left: 0pt;
+	orphans: 2;
+    widows:2;
+}
+.Paragraph_Continuation {
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Paragraph1 {
+    margin-left: 0pt;
+    orphans: 2;
+    widows:2;
+}
+
+.scrBook {
+    column-count: 1;
+    clear: both;
+    -ps-outline-level:2;
+}
+.scrBookCode {
+    display: none;
+}
+.scrBookName {
+    string-set: bookname content();
+    display: none;
+}
+.scrIntroSection {
+    text-align: left;
+}
+.scrSection {
+    text-align: left;
+}
+.Section_Head {
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 0pt;
+    padding-top: 0pt;
+    margin-top: 12pt;
+    margin-bottom:0pt;
+}
+
+.Title_Main {
+    text-align: center;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    padding-bottom: 12pt;
+    padding-top: 36pt;
+    orphans:5;
+}
+.Title_Secondary {
+    display: block;
+	padding-bottom: 10pt;
+	padding-top: 10pt;
+	font-weight : normal;
+}
+.Verse_Number {
+    font-size:6pt;
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+    string-set: verse content();
+}
+.Verse_Number_In_Note {
+    vertical-align: super;
+    text-indent: 0pt;
+    margin-left: 0pt;
+}
+.Front_Matter {
+margin-left : 48pt;
+margin-right: 48pt;
+text-align: justify;
+}
+
+.Parallel_Passage_Reference{
+page-break-after: avoid;
+}
+
+.CoverPageTitle {
+	font-family: "Charis SIL";
+	font-size: 24pt;
+}
+
+.Chapter_Number {
+    string-set: chapter content();
+}
+
+.Section_Head {
+	page-break-after:avoid;
+}
+.Section_Head_Minor {
+	page-break-after:avoid;
+}
+
+.scrBook {
+string-set: chapter '1';
+}
+
+.Intro_Paras {
+    text-indent: 20pt;
+}
+/* End Scripture.css */
+@page {
+    size: 16.2cm 22.9cm;
+    /* marks: crop cross; */
+    counter-increment: page;
+    margin: 1.15cm 1.5cm;
+}
+
+/* The following formats the scripture text into 2 columns */
+
+.columns {
+	column-count: 2; -moz-column-count: 2;
+	column-gap: 12pt; -moz-column-gap: 12pt;
+	column-fill: balance;
+}
+
+/* Running Head Mirrored.css */
+
+
+@page :left {
+    
+
+@top-left {
+           
+content: string(bookname, first) " "  string(chapter, first);
+           
+direction: ltr;
+           
+           
+font-size: 12pt;
+               }
+  
+
+  
+@top-center    { content: ''; }
+    
+
+@top-right  { content: ''; }
+    
+
+
+@bottom-left   { content: ''; }
+    
+@bottom-center { content: ''; }
+    
+@bottom-right  { content: ''; }
+}
+
+
+
+@page :right {
+    
+@top-left   { content: ''; }
+    
+@top-center { content: ''; }
+    
+
+@top-right  {
+           
+content: string(bookname, last) " "  string(chapter, last);
+           
+direction: ltr;
+                      
+font-size: 12pt;
+               }
+    
+
+
+@bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+
+
+
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :left {
+    @top-left {
+        -ps-referenceFormat: "Genesis 1";
+        content: string(bookname, first) " "  string(chapter, first);
+    }
+    @top-center  { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+@page :right {
+    @top-left { content: ''; }
+    @top-center  { content: ''; }
+    @top-right     {
+        -ps-referenceFormat: "Genesis 1";
+        content: string(bookname, last) " "  string(chapter, last);
+    }
+    @bottom-left   { content: ''; }
+    @bottom-center { content: ''; }
+    @bottom-right  { content: ''; }
+}
+/* scripture ruling lines */
+@page {
+    @footnotes {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+    @footnote {
+        border-top: thin solid black;
+        padding: 4pt 0;
+        margin-top: 5pt;
+    }
+}
+.border {
+    border-top: .5pt solid #808080;
+    text-align: center;
+    margin-left: 1in;
+    margin-right: 1in;
+    margin-top: 9pt;
+    margin-bottom: 18pt;
+    content: "\00A0";
+}
+.columns {
+       column-rule: solid 1pt #808080;
+}
+/* Top Center Mirrored.css */
+@page :left {
+    @top-center{
+           content: counter( page);
+    }
+}
+@page :right {
+   @top-center{
+           content: counter( page);
+    }
+}
+
+@page :first {
+	@bottom-center{
+           content: counter( page);
+    }
+}
+/* First Page Bottom Center.css */
+@page :first {
+    @top-left      { content: ''; }
+    @top-center    { content: ''; }
+    @top-right     { content: ''; }
+    @bottom-left   { content: ''; }
+    /* This file used in conjunction with PageNumber_TopCenter and PageNumber_TopCenterMirrored */
+    @bottom-right  { content: ''; }
+}
+
+.cover{margin-top: 112pt; text-align: center; font-size:18pt; font-weight:bold;page-break-after: always;font-family: 'Times New Roman', serif; } .title{margin-top: 112pt; text-align: center; font-family: 'Times New Roman', serif; font-weight:bold;font-size:18pt;} .publisher{text-align: center;font-size:14pt;font-family: 'Times New Roman', serif; } .logo{page-break-after: always; text-align:center; clear:both;float:bottom;}.copyright{text-align: left; font-size:1pt;visibility:hidden;font-family: 'Times New Roman', serif;}.LHeading{font-size:18pt;font-weight:bold;line-height:14pt;margin-bottom:.25in;font-family: 'Times New Roman', serif;}.LText{font-size:12pt;font-style:italic;font-family: 'Times New Roman', serif;}.LText:before{content: "\2028"}.dummyTOC{font-size:1pt; page-break-after: always;} .TableOfContentLO{visibility:hidden;}.dummypage{page-break-after: always;} 
+.Front_Matter {
+margin-left : 12pt;margin-right: 12pt;direction: ltr;text-align: left;
+}
