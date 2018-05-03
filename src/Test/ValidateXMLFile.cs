@@ -704,7 +704,7 @@ namespace Test
                 inner = inner.Trim();
             return inner;
         }
-        private XmlNode GetNode(string xpath)
+        public XmlNode GetNode(string xpath)
         {
             XmlNode node;
             if (ClassName.Length > 0)

@@ -1491,7 +1491,13 @@
     <style:page-layout style:name="pm13">
       <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="32.59842pt" fo:margin-right="42.51968pt" fo:margin-bottom="32.59842pt" fo:margin-left="42.51968pt" />
     </style:page-layout>
-    <style:page-layout style:name="pm7">
+    <style:page-layout style:name="MasterPageOnRight" style:page-usage="right">
+      <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="32.59842pt" fo:margin-right="42.51968pt" fo:margin-bottom="32.59842pt" fo:margin-left="42.51968pt">
+        <style:background-image />
+        <style:footnote-sep style:width="0.0071in" style:line-style="solid" style:distance-before-sep="4pt" style:distance-after-sep="4pt" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
+      </style:page-layout-properties>
+    </style:page-layout>
+    <style:page-layout style:name="MasterPageOnLeft" style:page-usage="left">
       <style:page-layout-properties fo:page-width="459.2126pt" fo:page-height="649.1339pt" fo:margin-top="32.59842pt" fo:margin-right="42.51968pt" fo:margin-bottom="32.59842pt" fo:margin-left="42.51968pt">
         <style:background-image />
         <style:footnote-sep style:width="0.0071in" style:line-style="solid" style:distance-before-sep="4pt" style:distance-after-sep="4pt" style:color="#000000" style:adjustment="centre" style:rel-width="100%" />
@@ -1502,10 +1508,10 @@
     <style:master-page style:name="Standard" style:page-layout-name="pm1" />
     <style:master-page style:name="Cover_20_Page" style:display-name="Cover Page" style:next-style-name="Title_20_Page" style:page-layout-name="pm1" />
     <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="Title_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="CopyRight_20_Page" style:page-layout-name="pm7" />
-    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="TableofContents_20_Page" style:page-layout-name="pm7" />
+    <style:master-page style:name="Title_20_Page" style:display-name="Title Page" style:next-style-name="CopyRight_20_Page" style:page-layout-name="MasterPageOnRight" />
+    <style:master-page style:name="CopyRight_20_Page" style:display-name="CopyRight Page" style:next-style-name="TableofContents_20_Page" style:page-layout-name="MasterPageOnLeft" />
     <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="TableofContents_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="TableofContents_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="pm7">
+    <style:master-page style:name="TableofContents_20_Page" style:display-name="TableofContents Page" style:next-style-name="First_20_Page" style:page-layout-name="MasterPageOnRight">
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />
@@ -1514,7 +1520,7 @@
       </style:footer>
     </style:master-page>
     <style:master-page style:name="Dummy_20_Page" style:display-name="Dummy Page" style:next-style-name="First_20_Page" style:page-layout-name="pm12" />
-    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="pm3">
+    <style:master-page style:name="First_20_Page" style:display-name="First Page" style:next-style-name="Left_20_Page" style:page-layout-name="MasterPageOnRight">
       <style:footer>
         <text:p text:style-name="Footer">
           <text:tab />
