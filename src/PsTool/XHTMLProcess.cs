@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="XHTMLProcess.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright ( c ) 2014, SIL International. All Rights Reserved.
 //
@@ -927,6 +927,7 @@ namespace SIL.Tool
 			}
 			else if (_className.IndexOf("NoteTargetReference") == 0 && outputType == Common.OutputType.ODT.ToString())
 			{
+				footerMarkerClassName = _className + "..footnote-marker";
 				footnoteContent.Append("<text:span text:style-name=\"" + footerMarkerClassName + "\">");
 			}
 		}
