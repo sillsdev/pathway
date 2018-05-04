@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="ContentXMLTest.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (C) 2014, SIL International. All Rights Reserved.
 //
@@ -1130,7 +1130,7 @@ namespace Test.OpenOfficeConvert
             string xpath = "//text:note/text:note-body/text:p[@text:style-name='NoteGeneralParagraph']";
             _validate.ClassName = string.Empty;
             _validate.GetOuterXml = true;
-			string content = "<text:p text:style-name=\"NoteGeneralParagraph\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">21:1 </text:span><text:span text:style-name=\"AlternateReading_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">converted-values </text:span><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">You can use the add spaces button to separate the Unicode characters.</text:span></text:p>";
+			string content = "<text:p text:style-name=\"NoteGeneralParagraph\" xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:span text:style-name=\"NoteTargetReference..footnote-marker\">21:1 </text:span><text:span text:style-name=\"AlternateReading_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">converted-values </text:span><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">You can use the add spaces button to separate the Unicode characters.</text:span></text:p>";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "FootNote - Content Failure");
         }
@@ -2959,7 +2959,7 @@ namespace Test.OpenOfficeConvert
             _validate = new ValidateXMLFile(_projInfo.TempOutputFolder);
             _validate.GetOuterXml = true;
             string xpath = "//text:note[@text:id='ftn1']/text:note-body";
-            string content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteCrossHYPHENReferenceParagraph\"><text:span text:style-name=\"NoteCrossHYPHENReferenceParagraph..footnote-marker\">1.19 </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Dan. 8:16, 9:21</text:span></text:p></text:note-body>";
+            string content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteCrossHYPHENReferenceParagraph\"><text:span text:style-name=\"NoteTargetReference..footnote-marker\">1.19 </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Dan. 8:16, 9:21</text:span></text:p></text:note-body>";
             bool returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Footnote versenumber special case '1.19-1' test failed");
 
@@ -2969,22 +2969,22 @@ namespace Test.OpenOfficeConvert
             Assert.IsTrue(returnValue1, "Footnote versenumber special case '1.19-2' test failed");
 
             xpath = "//text:note[@text:id='ftn3']/text:note-body";
-            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteCrossHYPHENReferenceParagraph\"><text:span text:style-name=\"NoteCrossHYPHENReferenceParagraph..footnote-marker\">1.27 </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Mat. 1:18</text:span></text:p></text:note-body>";
+            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteCrossHYPHENReferenceParagraph\"><text:span text:style-name=\"NoteTargetReference..footnote-marker\">1.27 </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Mat. 1:18</text:span></text:p></text:note-body>";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Footnote versenumber special case '1.27' test failed");
 
             xpath = "//text:note[@text:id='ftn4']/text:note-body";
-            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteCrossHYPHENReferenceParagraph\"><text:span text:style-name=\"NoteCrossHYPHENReferenceParagraph..footnote-marker\">1.32-33 </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">2Sam. 7:12, 13, 16; Yes. 9:6</text:span></text:p></text:note-body>";
+            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteCrossHYPHENReferenceParagraph\"><text:span text:style-name=\"NoteTargetReference..footnote-marker\">1.32-33 </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">2Sam. 7:12, 13, 16; Yes. 9:6</text:span></text:p></text:note-body>";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Footnote versenumber special case '1.32-33' test failed");
 
             xpath = "//text:note[@text:id='ftn5']/text:note-body";
-            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteCrossHYPHENReferenceParagraph\"><text:span text:style-name=\"NoteCrossHYPHENReferenceParagraph..footnote-marker\">2.41 </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Kel. 12:1-27; Ul. 16:1-8</text:span></text:p></text:note-body>";
+            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteCrossHYPHENReferenceParagraph\"><text:span text:style-name=\"NoteTargetReference..footnote-marker\">2.41 </text:span><text:span text:style-name=\"span_.zxx_NoteCrossHYPHENReferenceParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Kel. 12:1-27; Ul. 16:1-8</text:span></text:p></text:note-body>";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Footnote versenumber special case '2.41-1' test failed");
 
             xpath = "//text:note[@text:id='ftn6']/text:note-body";
-            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteGeneralParagraph\"><text:span text:style-name=\"NoteGeneralParagraph..footnote-marker\">2.41 </text:span><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Hari basar Paska Yahudi tu, orang Yahudi inga waktu dong pung tete nene moyang kaluar dari negara Mesir. Dolo dong jadi orang suru-suru di tampa tu, mar Allah kasi kaluar dong la bawa dong ka tana yang Antua su janji par dong.</text:span></text:p></text:note-body>";
+            content = "<text:note-body xmlns:text=\"urn:oasis:names:tc:opendocument:xmlns:text:1.0\"><text:p text:style-name=\"NoteGeneralParagraph\"><text:span text:style-name=\"NoteTargetReference..footnote-marker\">2.41 </text:span><text:span text:style-name=\"span_.zxx_NoteGeneralParagraph_Paragraph_scrSection_columns_scrBook_scrBody\">Hari basar Paska Yahudi tu, orang Yahudi inga waktu dong pung tete nene moyang kaluar dari negara Mesir. Dolo dong jadi orang suru-suru di tampa tu, mar Allah kasi kaluar dong la bawa dong ka tana yang Antua su janji par dong.</text:span></text:p></text:note-body>";
             returnValue1 = _validate.ValidateNodeInnerXml(xpath, content);
             Assert.IsTrue(returnValue1, "Footnote versenumber special case '2.41-2' test failed");
 
