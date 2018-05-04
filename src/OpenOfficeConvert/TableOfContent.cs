@@ -32,10 +32,10 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("text:name", "Table of Contents1");
 
             _writer.WriteStartElement("text:table-of-content-source");
-            _writer.WriteAttributeString("text:outline-level", "10");
-            _writer.WriteAttributeString("text:use-outline-level", "false");
-            _writer.WriteAttributeString("text:use-index-marks", "false");
-            _writer.WriteAttributeString("text:use-index-source-styles", "true");
+            _writer.WriteAttributeString("text:outline-level", "2");
+            _writer.WriteAttributeString("text:use-outline-level", "true");
+            _writer.WriteAttributeString("text:use-index-marks", "true");
+            _writer.WriteAttributeString("text:use-index-source-styles", "false");
 
 
             _writer.WriteStartElement("text:index-title-template");

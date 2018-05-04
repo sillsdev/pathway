@@ -1112,7 +1112,7 @@ namespace Test.OpenOfficeConvert
             _validate.ClassName = "First_20_Page";
 
             _validate.ClassProperty.Add("style:display-name", "First Page");
-            _validate.ClassProperty.Add("style:page-layout-name", "pm3");
+            _validate.ClassProperty.Add("style:page-layout-name", "MasterPageOnRight");
 			_validate.ClassProperty.Add("style:next-style-name", "Left_20_Page");
 
             returnValue = _validate.ValidateNodeAttributesNS(0, xpath);

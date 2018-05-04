@@ -2375,7 +2375,7 @@ namespace SIL.PublishingSolution
                 if (_cssProperty.ContainsKey("copyright"))
                 {
                     _writer.WriteAttributeString("style:next-style-name", "CopyRight_20_Page");
-                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnRight");
                     _writer.WriteEndElement(); // Close of Master Page
                     //TITLE CODE PART ENDS
 
@@ -2384,13 +2384,13 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("style:name", "CopyRight_20_Page");
                     _writer.WriteAttributeString("style:display-name", "CopyRight Page");
                     _writer.WriteAttributeString("style:next-style-name", "TableofContents_20_Page");
-                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnLeft");
                     _writer.WriteEndElement(); // Close of Master Page
                 }
                 else
                 {
                     _writer.WriteAttributeString("style:next-style-name", "TableofContents_20_Page");
-                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnRight");
                     _writer.WriteEndElement(); // Close of Master Page
                     //TITLE CODE PART ENDS
                 }
@@ -2410,7 +2410,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:name", "TableofContents_20_Page");
                 _writer.WriteAttributeString("style:display-name", "TableofContents Page");
                 _writer.WriteAttributeString("style:next-style-name", "First_20_Page");
-                _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnRight");
                 _writer.WriteStartElement("style:footer");
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "Footer");
@@ -2449,7 +2449,7 @@ namespace SIL.PublishingSolution
                 nextStyle = "Left_20_Page";
             }
             _writer.WriteAttributeString("style:next-style-name", nextStyle);
-            _writer.WriteAttributeString("style:page-layout-name", "pm3");
+            _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnRight");
             CreateHeaderFooterVariables(0);
             _writer.WriteEndElement(); // Close of Master Page
 
@@ -2824,14 +2824,17 @@ namespace SIL.PublishingSolution
 
             WritePageLayoutStylePropertyThirteen();
 
-            WritePageLayoutStylePropertySeven();
+            WritePageLayoutStylePropertyOnRight();
+
+	        WritePageLayoutStylePropertyOnLeft();
         }
 
-        private void WritePageLayoutStylePropertySeven()
+        private void WritePageLayoutStylePropertyOnRight()
         {
-            /* pm7 starts - Non Footer settings */
-            _writer.WriteStartElement("style:page-layout"); // pm7
-            _writer.WriteAttributeString("style:name", "pm7"); // First Page
+            /* MasterPageOnRight starts - Non Footer settings */
+            _writer.WriteStartElement("style:page-layout"); 
+            _writer.WriteAttributeString("style:name", "MasterPageOnRight");
+	        _writer.WriteAttributeString("style:page-usage", "right");
             _writer.WriteStartElement("style:page-layout-properties");
             foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
             {
@@ -2848,7 +2851,32 @@ namespace SIL.PublishingSolution
             // END FootNote Seperator
             _writer.WriteEndElement(); // end of style:page-layout-properties
             _writer.WriteEndElement();
-            /* pm7 ends*/
+            /* MasterPageOnRight ends*/
+        }
+
+        private void WritePageLayoutStylePropertyOnLeft()
+	    {
+		    /* MasterPageOnLeft starts - Non Footer settings */
+            _writer.WriteStartElement("style:page-layout");
+		    _writer.WriteAttributeString("style:name", "MasterPageOnLeft");
+		    _writer.WriteAttributeString("style:page-usage", "left");
+            _writer.WriteStartElement("style:page-layout-properties");
+		    foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
+		    {
+			    _writer.WriteAttributeString(para.Key, para.Value);
+		    }
+		    if (_writingMode.ToLower() == "rl-tb")
+		    {
+			    _writer.WriteAttributeString("style:writing-mode", _writingMode);
+		    }
+		    _writer.WriteStartElement("style:background-image");
+		    _writer.WriteEndElement();
+		    // START FootNote Seperator
+		    FootnoteSeperator();
+		    // END FootNote Seperator
+		    _writer.WriteEndElement(); // end of style:page-layout-properties
+		    _writer.WriteEndElement();
+		    /* MasterPageOnLeft ends*/
         }
 
         private void WritePageLayoutStylePropertyThirteen()
