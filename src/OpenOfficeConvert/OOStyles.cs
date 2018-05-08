@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="OOStyles.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (c) 2014, SIL International. All Rights Reserved.
 //
@@ -282,7 +282,10 @@ namespace SIL.PublishingSolution
                     propValue.Add("direction", "rtl");
                 }
                 _LOProperty = mapProperty.IDProperty(propValue, IsFixedLengthEnabled, _defaultFontSize);
-                if (cssClass.Key == "revsensenumber")
+
+	            HandleScriptureLine1AndLine2Issue(className);
+
+				if (cssClass.Key == "revsensenumber")
                 {
                     if (!_LOProperty.ContainsKey("font-family"))
                     {
@@ -365,7 +368,36 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private Dictionary<string, string> PropertyReplace(string className, Dictionary<string, string> OOProperty)
+		/// <summary>
+		/// TD-4891 - Make line2 and line2 poetry indents different
+		/// Paratext gives Line1 and Line2 property of ("margin-left", "text-indent") in point(pt)
+		/// we have dividing value by column-count
+		/// </summary>
+		/// <param name="className">Line1/Line2</param>
+		private void HandleScriptureLine1AndLine2Issue(string className)
+		{
+			if(Common.Testing) return;
+		    if (_projInfo.ProjectInputType.ToLower() == "scripture" &&
+		        (className.ToLower() == "line1" || className.ToLower() == "line2"))
+		    {
+				int columnCount = 2;
+			    if (_cssProperty.ContainsKey("columns") && _cssProperty["columns"].ContainsKey("column-count"))
+			    {
+				    columnCount = int.Parse(_cssProperty["columns"]["column-count"]);
+			    }
+
+				string[] propertyToChange = { "margin-left", "text-indent" };
+
+				foreach (string property in propertyToChange)
+				{
+					string value = _LOProperty[property].Replace("pt", "");
+					var convValue = float.Parse(value) / columnCount;
+					_LOProperty[property] = convValue + "pt";
+				}
+			}
+	    }
+
+	    private Dictionary<string, string> PropertyReplace(string className, Dictionary<string, string> OOProperty)
         {
             ListReplace(className, OOProperty);
             PositionReplace(OOProperty);
