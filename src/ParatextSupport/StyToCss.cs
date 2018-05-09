@@ -210,8 +210,9 @@ namespace SIL.PublishingSolution
                     break;
                 case "\\leftmargin":
                     value = PropertyValue(line);
-                    _cssProp["margin-left"] = value + "pt";
-                    break;
+					// In usfm.sty file, leftmargin value is in inches, so converted it to pt
+					_cssProp["margin-left"] = Common.UnitConverter(value + "in", "pt") + "pt";
+					break;
                 case "\\rightmargin":
                     value = PropertyValue(line);
                     _cssProp["margin-right"] = value + "pt";

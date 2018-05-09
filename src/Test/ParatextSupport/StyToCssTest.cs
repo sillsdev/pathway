@@ -197,6 +197,22 @@ namespace Test.ParatextSupport
 			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
 		}
 
+		[Test]
+		public void Line1AndLine2StytoCSSTest()
+		{
+			const string TestName = "Line1AndLine2Indent";
+			var cssFile = TestName + ".css";
+			string cssFileOutput = FileOutput(cssFile);
+			StyToCss styToCssObj = new StyToCss();
+			styToCssObj.StyFullPath = FileInput(TestName + ".sty");
+			styToCssObj.ConvertStyToCss(cssFileOutput);
+
+			string expectedFile = FileExpected(cssFile);
+			string outputFile = FileOutput(cssFile);
+
+			TextFileAssert.AreEqual(expectedFile, outputFile, FileData.Get(FileOutput(cssFile)));
+		}
+
 		#region Private Functions
 		private static string FileInput(string fileName)
         {

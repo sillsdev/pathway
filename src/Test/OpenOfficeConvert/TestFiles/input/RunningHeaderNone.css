@@ -1567,6 +1567,16 @@ font-family: "Cambria";
     text-indent: 0pt;
     padding-left: 0pt;
 }
+.Line1 {
+    margin-left: 48pt;
+    text-indent: -24pt;
+	padding-left: 0pt;
+}
+.Line2 {
+    margin-left: 48pt;
+    text-indent: -12pt;
+	padding-left: 0pt;
+}
 .Note_CrossHYPHENReference_Paragraph {
     text-indent: 0pt;
     margin-left: 0pt;
