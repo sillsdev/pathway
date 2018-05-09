@@ -464,11 +464,11 @@
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="Line1" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:padding-left="0pt" fo:margin-left="1.25pt" fo:text-indent="-1pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:padding-left="0pt" fo:margin-left="45pt" fo:text-indent="-36pt" fo:text-align="end" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="11pt" />
     </style:style>
     <style:style style:name="Line2" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-align="end" fo:padding-left="0pt" fo:margin-left="1.25pt" fo:text-indent="-.75pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
+      <style:paragraph-properties fo:text-align="end" fo:padding-left="0pt" fo:margin-left="45pt" fo:text-indent="-0.27pt" style:line-height-at-least="13pt" style:writing-mode="rl-tb" />
       <style:text-properties fo:font-size="11pt" />
     </style:style>
     <style:style style:name="q3" style:family="paragraph" style:parent-style-name="none">
@@ -476,7 +476,7 @@
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="q4" style:family="paragraph" style:parent-style-name="none">
-      <style:paragraph-properties fo:text-indent="-.25pt" fo:margin-left="1.250pt" style:writing-mode="rl-tb" fo:text-align="end" />
+      <style:paragraph-properties fo:margin-left="1.250pt" style:writing-mode="rl-tb" fo:text-align="end" />
       <style:text-properties fo:font-size="14pt" />
     </style:style>
     <style:style style:name="qc" style:family="paragraph" style:parent-style-name="none">

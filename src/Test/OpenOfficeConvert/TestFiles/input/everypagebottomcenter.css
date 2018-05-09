@@ -531,29 +531,28 @@ text-indent: -1pt;
 .Line1
 {
 font-size: 12pt;
-margin-left: 1.25pt;
-text-indent: -1pt;
+margin-left: 90pt;
+text-indent: -72pt;
 }
 
 .Line2
 {
 font-size: 12pt;
-margin-left: 1.25pt;
-text-indent: -.75pt;
+margin-left: 90pt;
+text-indent: -.54pt;
 }
 
 .q3
 {
-font-size: 12pt;
+font-size: 14pt;
 margin-left: 1.25pt;
 text-indent: -.5pt;
 }
 
 .q4
 {
-font-size: 12pt;
-margin-left: 1.25pt;
-text-indent: -.25pt;
+font-size: 14pt;
+margin-left: 1.250pt;
 }
 
 .qc
@@ -2727,16 +2726,16 @@ margin-left: 1.250pt;
 
 .Line1
 {
-font-size: 14pt;
-margin-left: 1.25pt;
-text-indent: -1pt;
+font-size: 12pt;
+margin-left: 90pt;
+text-indent: -72pt;
 }
 
 .Line2
 {
-font-size: 14pt;
-margin-left: 1.25pt;
-text-indent: -.75pt;
+font-size: 12pt;
+margin-left: 90pt;
+text-indent: -.54pt;
 }
 
 .q3
