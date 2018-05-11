@@ -207,9 +207,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CssDialog, Version=1.17.5.5972, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\CssDialog.dll</HintPath>
+    </Reference>
+    <Reference Include="CssParser, Version=1.17.5.5972, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\CssParser.dll</HintPath>
+    </Reference>
     <Reference Include="L10NSharp, Version=2.0.67.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\L10NSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PsTool, Version=1.17.5.5972, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\Debug\PsTool.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
@@ -243,20 +255,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CssDialog\CssDialog4.csproj">
-      <Project>{749d4fcd-5100-46c8-ae73-50873cb5cec0}</Project>
-      <Name>CssDialog4</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CssParser\CssParser4.csproj">
-      <Project>{eb7eb8fe-6414-4c53-b5e6-54352ee25364}</Project>
-      <Name>CssParser4</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PsTool\PsTool4.csproj">
-      <Project>{422c5127-260d-4f16-b476-33aa38dbf919}</Project>
-      <Name>PsTool4</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
