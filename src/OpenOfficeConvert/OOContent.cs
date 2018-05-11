@@ -996,7 +996,11 @@ namespace SIL.PublishingSolution
 				{
 					if (!_significant)
 					{
-						_writer.WriteString(" ");
+						// to exclude for the style: VerseNumber1_Paragraph_scrSection_columns_scrBook_scrBody_.drg
+						if (!_characterName.Trim().StartsWith("VerseNumber1"))
+						{
+							_writer.WriteString(" ");
+						}
 						_significant = true;
 					}
 				}
@@ -1412,7 +1416,7 @@ namespace SIL.PublishingSolution
 				}
 				else
 				{
-					_verseContent.Append(" <text:span text:style-name=\"" + characterStyle + "\">");
+					_verseContent.Append("<text:span text:style-name=\"" + characterStyle + "\">");
 					if (_projInfo.HideSpaceVerseNumber.ToLower() == "false")
 					{
 						content = content.Replace("-", Common.ConvertUnicodeToString("\\2011")) + _hardSpace;
@@ -2267,8 +2271,8 @@ namespace SIL.PublishingSolution
 			_writer.WriteAttributeString("style:wrap", "none");
 			_writer.WriteAttributeString("style:vertical-pos", "from-top");
 			_writer.WriteAttributeString("style:vertical-rel", "page");
-			_writer.WriteAttributeString("style:horizontal-pos", "right");
-			_writer.WriteAttributeString("style:horizontal-rel", "paragraph");
+			_writer.WriteAttributeString("style:horizontal-pos", "center");
+			_writer.WriteAttributeString("style:horizontal-rel", "paragraph-content");
 			_writer.WriteAttributeString("fo:padding", "0pt");
 			_writer.WriteAttributeString("fo:border", "none");
 			_writer.WriteAttributeString("style:flow-with-text", "false");
@@ -2290,8 +2294,8 @@ namespace SIL.PublishingSolution
 				_writer.WriteAttributeString("style:wrap", "none");
 				_writer.WriteAttributeString("style:vertical-pos", "bottom");
 				_writer.WriteAttributeString("style:vertical-rel", "paragraph-content");
-				_writer.WriteAttributeString("style:horizontal-pos", "right");
-				_writer.WriteAttributeString("style:horizontal-rel", "paragraph");
+				_writer.WriteAttributeString("style:horizontal-pos", "center");
+				_writer.WriteAttributeString("style:horizontal-rel", "paragraph-content");
 				_writer.WriteAttributeString("fo:padding", "0in");
 				_writer.WriteAttributeString("fo:border", "none");
 				_writer.WriteAttributeString("style:flow-with-text", "true");

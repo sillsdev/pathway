@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="OOStyles.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (c) 2014, SIL International. All Rights Reserved.
 //
@@ -122,6 +122,7 @@ namespace SIL.PublishingSolution
                 {
                     headerText = Param.GetMetadataValue("Title");
                 }
+				if(headerText.Trim().Length == 0) return;
                 string headerFontSize = "10";
                 string[] pageDir = { "@page:left-top-center", "@page:right-top-center" };
                 if (_cssProperty.ContainsKey("headword") && _cssProperty["headword"].ContainsKey("font-size"))
@@ -281,7 +282,10 @@ namespace SIL.PublishingSolution
                     propValue.Add("direction", "rtl");
                 }
                 _LOProperty = mapProperty.IDProperty(propValue, IsFixedLengthEnabled, _defaultFontSize);
-                if (cssClass.Key == "revsensenumber")
+
+	            HandleScriptureLine1AndLine2Issue(className);
+
+				if (cssClass.Key == "revsensenumber")
                 {
                     if (!_LOProperty.ContainsKey("font-family"))
                     {
@@ -364,7 +368,35 @@ namespace SIL.PublishingSolution
             }
         }
 
-        private Dictionary<string, string> PropertyReplace(string className, Dictionary<string, string> OOProperty)
+		/// <summary>
+		/// TD-4891 - Make line2 and line2 poetry indents different
+		/// Paratext gives Line1 and Line2 property of ("margin-left", "text-indent") in point(pt)
+		/// we have dividing value by column-count
+		/// </summary>
+		/// <param name="className">Line1/Line2</param>
+		private void HandleScriptureLine1AndLine2Issue(string className)
+		{
+		    if (_projInfo.ProjectInputType.ToLower() == "scripture" &&
+		        (className.ToLower() == "line1" || className.ToLower() == "line2"))
+		    {
+				int columnCount = 2;
+			    if (_cssProperty.ContainsKey("columns") && _cssProperty["columns"].ContainsKey("column-count"))
+			    {
+				    columnCount = int.Parse(_cssProperty["columns"]["column-count"]);
+			    }
+
+				string[] propertyToChange = { "margin-left", "text-indent" };
+
+				foreach (string property in propertyToChange)
+				{
+					string value = _LOProperty[property].Replace("pt", "");
+					var convValue = float.Parse(value) / columnCount;
+					_LOProperty[property] = convValue + "pt";
+				}
+			}
+	    }
+
+	    private Dictionary<string, string> PropertyReplace(string className, Dictionary<string, string> OOProperty)
         {
             ListReplace(className, OOProperty);
             PositionReplace(OOProperty);
@@ -2122,14 +2154,9 @@ namespace SIL.PublishingSolution
 
                 _writer.WriteAttributeString("draw:z-index", "1");
                 _writer.WriteStartElement("draw:text-box");
-                if (_projInfo.ProjectInputType.ToLower() == "dictionary")
-                {
-                    _writer.WriteAttributeString("fo:min-height", "19.00pt"); //added for TD-4006 14.14
-                }
-                else
-                {
-                    _writer.WriteAttributeString("fo:min-height", "14.14pt"); //added for TD-2579
-                }
+	            GetDefaultFontSize();
+	            var defFontSize = int.Parse(_defaultFontSize.Replace("pt", ""));
+	            _writer.WriteAttributeString("fo:min-height", (defFontSize * 1.6) + "pt");
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "MP1");
 
@@ -2218,14 +2245,20 @@ namespace SIL.PublishingSolution
                     }
                     break;
             }
-            _writer.WriteStartElement("text:span");
-            _writer.WriteAttributeString("text:style-name", "MT1");
-            _writer.WriteStartElement("text:variable-get");
-            _writer.WriteAttributeString("text:name", "Left_Guideword_L");
-            _writer.WriteEndElement(); //text:variable-get
-            _writer.WriteEndElement();
 
-            if (_projInfo.ProjectInputType.ToLower() == "dictionary")
+	        if (!(isMirrored && i == 19))
+            {
+				// "19" - Position of Right page - Top Right
+				// On Mirrored Running Header, We skip the "LeftGuideword" part when "RightGuidword" positioned 
+		        _writer.WriteStartElement("text:span");
+		        _writer.WriteAttributeString("text:style-name", "MT1");
+		        _writer.WriteStartElement("text:variable-get");
+		        _writer.WriteAttributeString("text:name", "Left_Guideword_L");
+		        _writer.WriteEndElement(); //text:variable-get
+		        _writer.WriteEndElement();
+	        }
+
+	        if (_projInfo.ProjectInputType.ToLower() == "dictionary")
             {
                 _writer.WriteStartElement("text:span");
                 _writer.WriteAttributeString("text:style-name", "MT2");
@@ -2309,7 +2342,9 @@ namespace SIL.PublishingSolution
             _writer.WriteAttributeString("fo:min-width", "35pt");
             _writer.WriteAttributeString("draw:z-index", "1");
             _writer.WriteStartElement("draw:text-box");
-            _writer.WriteAttributeString("fo:min-height", "14.14pt");//added for TD-2579
+	        GetDefaultFontSize();
+            var defFontSize = int.Parse(_defaultFontSize.Replace("pt", ""));
+	        _writer.WriteAttributeString("fo:min-height", (defFontSize * 1.6) + "pt");
             _writer.WriteStartElement("text:p");
             _writer.WriteAttributeString("text:style-name", "MP1");
 
@@ -2371,7 +2406,7 @@ namespace SIL.PublishingSolution
                 if (_cssProperty.ContainsKey("copyright"))
                 {
                     _writer.WriteAttributeString("style:next-style-name", "CopyRight_20_Page");
-                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnRight");
                     _writer.WriteEndElement(); // Close of Master Page
                     //TITLE CODE PART ENDS
 
@@ -2380,13 +2415,13 @@ namespace SIL.PublishingSolution
                     _writer.WriteAttributeString("style:name", "CopyRight_20_Page");
                     _writer.WriteAttributeString("style:display-name", "CopyRight Page");
                     _writer.WriteAttributeString("style:next-style-name", "TableofContents_20_Page");
-                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnLeft");
                     _writer.WriteEndElement(); // Close of Master Page
                 }
                 else
                 {
                     _writer.WriteAttributeString("style:next-style-name", "TableofContents_20_Page");
-                    _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                    _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnRight");
                     _writer.WriteEndElement(); // Close of Master Page
                     //TITLE CODE PART ENDS
                 }
@@ -2406,7 +2441,7 @@ namespace SIL.PublishingSolution
                 _writer.WriteAttributeString("style:name", "TableofContents_20_Page");
                 _writer.WriteAttributeString("style:display-name", "TableofContents Page");
                 _writer.WriteAttributeString("style:next-style-name", "First_20_Page");
-                _writer.WriteAttributeString("style:page-layout-name", "pm7");
+                _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnRight");
                 _writer.WriteStartElement("style:footer");
                 _writer.WriteStartElement("text:p");
                 _writer.WriteAttributeString("text:style-name", "Footer");
@@ -2445,7 +2480,7 @@ namespace SIL.PublishingSolution
                 nextStyle = "Left_20_Page";
             }
             _writer.WriteAttributeString("style:next-style-name", nextStyle);
-            _writer.WriteAttributeString("style:page-layout-name", "pm3");
+            _writer.WriteAttributeString("style:page-layout-name", "MasterPageOnRight");
             CreateHeaderFooterVariables(0);
             _writer.WriteEndElement(); // Close of Master Page
 
@@ -2820,14 +2855,17 @@ namespace SIL.PublishingSolution
 
             WritePageLayoutStylePropertyThirteen();
 
-            WritePageLayoutStylePropertySeven();
+            WritePageLayoutStylePropertyOnRight();
+
+	        WritePageLayoutStylePropertyOnLeft();
         }
 
-        private void WritePageLayoutStylePropertySeven()
+        private void WritePageLayoutStylePropertyOnRight()
         {
-            /* pm7 starts - Non Footer settings */
-            _writer.WriteStartElement("style:page-layout"); // pm7
-            _writer.WriteAttributeString("style:name", "pm7"); // First Page
+            /* MasterPageOnRight starts - Non Footer settings */
+            _writer.WriteStartElement("style:page-layout"); 
+            _writer.WriteAttributeString("style:name", "MasterPageOnRight");
+	        _writer.WriteAttributeString("style:page-usage", "right");
             _writer.WriteStartElement("style:page-layout-properties");
             foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
             {
@@ -2844,7 +2882,32 @@ namespace SIL.PublishingSolution
             // END FootNote Seperator
             _writer.WriteEndElement(); // end of style:page-layout-properties
             _writer.WriteEndElement();
-            /* pm7 ends*/
+            /* MasterPageOnRight ends*/
+        }
+
+        private void WritePageLayoutStylePropertyOnLeft()
+	    {
+		    /* MasterPageOnLeft starts - Non Footer settings */
+            _writer.WriteStartElement("style:page-layout");
+		    _writer.WriteAttributeString("style:name", "MasterPageOnLeft");
+		    _writer.WriteAttributeString("style:page-usage", "left");
+            _writer.WriteStartElement("style:page-layout-properties");
+		    foreach (KeyValuePair<string, string> para in _firstPageLayoutProperty)
+		    {
+			    _writer.WriteAttributeString(para.Key, para.Value);
+		    }
+		    if (_writingMode.ToLower() == "rl-tb")
+		    {
+			    _writer.WriteAttributeString("style:writing-mode", _writingMode);
+		    }
+		    _writer.WriteStartElement("style:background-image");
+		    _writer.WriteEndElement();
+		    // START FootNote Seperator
+		    FootnoteSeperator();
+		    // END FootNote Seperator
+		    _writer.WriteEndElement(); // end of style:page-layout-properties
+		    _writer.WriteEndElement();
+		    /* MasterPageOnLeft ends*/
         }
 
         private void WritePageLayoutStylePropertyThirteen()

@@ -198,6 +198,7 @@ namespace CssSimpler
 				MetaData(fs);
 				fs.Parse();
 				File.Copy(tmp3Out, extra[0], true);
+				if (OutputXml) SavedXmlCssFileName = FlatXmlName(styleSheet);
 				OutputFlattenedStylesheet(extra[0], styleSheet, fs);
 			}
 			try
@@ -210,6 +211,13 @@ namespace CssSimpler
 			{
 				// ignored
 			}
+		}
+
+		private static string FlatXmlName(string styleSheet)
+		{
+			var xmlName = Path.GetFileNameWithoutExtension(styleSheet) + "Flat.xml";
+			var folder = Path.GetDirectoryName(styleSheet);
+			return !string.IsNullOrEmpty(folder) ? Path.Combine(folder, xmlName) : xmlName;
 		}
 
 		private static void EntryReportInit()
@@ -336,11 +344,9 @@ namespace CssSimpler
 			xml.LoadXml("<ROOT/>");
 			AddSubTree(xml.DocumentElement, r, parser);
 			ElaborateMultiSelectorRules(xml);
-			if (OutputXml)
-			{
-				VerboseMessage("Writing XML stylesheet");
-				WriteCssXml(styleSheet, xml);
-			}
+			if (!OutputXml) return;
+			VerboseMessage("Writing XML stylesheet");
+			WriteCssXml(styleSheet, xml);
 		}
 
 		protected static void ElaborateMultiSelectorRules(XmlDocument xml)
@@ -673,13 +679,9 @@ namespace CssSimpler
 
         protected static void WriteCssXml(string styleSheet, XmlDocument xml)
         {
-            var folder = Path.GetDirectoryName(styleSheet);
-	        if (string.IsNullOrEmpty(folder))
-	        {
-		        return;
-		        //throw new ArgumentException("stylesheet has no path name");
-	        }
-	        var fullName = Path.Combine(folder, Path.GetFileNameWithoutExtension(styleSheet) + ".xml");
+	        var xmlName = Path.GetFileNameWithoutExtension(styleSheet) + ".xml";
+			var folder = Path.GetDirectoryName(styleSheet);
+			var fullName = !string.IsNullOrEmpty(folder)? Path.Combine(folder, xmlName): xmlName;
             var writerSettings = new XmlWriterSettings {Indent = true};
             var writer = XmlWriter.Create(fullName, writerSettings);
             xml.WriteTo(writer);

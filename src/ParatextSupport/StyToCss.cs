@@ -210,8 +210,9 @@ namespace SIL.PublishingSolution
                     break;
                 case "\\leftmargin":
                     value = PropertyValue(line);
-                    _cssProp["margin-left"] = value + "pt";
-                    break;
+					// In usfm.sty file, leftmargin value is in inches, so converted it to pt
+					_cssProp["margin-left"] = Common.UnitConverter(value + "in", "pt") + "pt";
+					break;
                 case "\\rightmargin":
                     value = PropertyValue(line);
                     _cssProp["margin-right"] = value + "pt";
@@ -219,8 +220,9 @@ namespace SIL.PublishingSolution
                 case "\\firstlineindent":
                     value = PropertyValue(line);
                     value = Common.LeftString(value, "#").Trim();
-                    _cssProp["text-indent"] = value + "pt";
-                    break;
+					// In usfm.sty file, firstlineindent value is in inches, so converted it to pt
+					_cssProp["text-indent"] = Common.UnitConverter(value + "in", "pt") + "pt";
+					break;
                 case "\\fontname":
                     value = PropertyValue(line);
                     _cssProp["font-family"] = value;
@@ -342,6 +344,20 @@ namespace SIL.PublishingSolution
                     }
                     cssFile.WriteLine("}");
                     cssFile.WriteLine();
+
+					// Write the CSS Class Verse_Number1 from Verse_Number
+	                if (cssClass.Key == "Verse_Number")
+	                {
+		                cssFile.WriteLine("." + cssClass.Key + "1");
+		                cssFile.WriteLine("{");
+		                foreach (KeyValuePair<string, string> property in cssClass.Value)
+		                {
+			                cssFile.WriteLine(property.Key + ": " + property.Value + ";");
+		                }
+
+		                cssFile.WriteLine("}");
+		                cssFile.WriteLine();
+	                }
                 }
             }
             cssFile.Close();

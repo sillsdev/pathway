@@ -175,7 +175,7 @@ namespace SIL.PublishingSolution
         private void CleanUp()
         {
             publicationInfo.DefaultXhtmlFileWithPath = _xhtmlCleanUpFullPath;
-            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.jar,.xml", "layout.css", string.Empty);
+            Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".tmp,.de,.exe,.dll,.jar,.xml", "layout.css", string.Empty);
             CreateRAMP();
             Common.CleanupExportFolder(publicationInfo.DefaultXhtmlFileWithPath, ".css,.xhtml,.xml", String.Empty, String.Empty);
         }

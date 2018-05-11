@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="ConfiguraionTool.cs" from='2010' to='2014' company='SIL International'>
 //      Copyright (C) 2010, SIL International. All Rights Reserved.
 //
@@ -1369,7 +1369,7 @@ namespace SIL.PublishingSolution
 
 		private void lnkLblUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			using (Process.Start("http://pathway.sil.org/"))
+			using (Process.Start("http://software.sil.org/pathway/"))
 			{
 			}
 		}

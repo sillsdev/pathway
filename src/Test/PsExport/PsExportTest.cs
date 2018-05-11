@@ -989,7 +989,7 @@ namespace Test.PsExport
                 new ODet(ODet.Chk, "header center tab", "mat21-23.odt", ODet.Styles, "//*[@style:name='Header']//*[@style:type='center']/@style:position", "246pt"),
                 new ODet(ODet.Chk, "header right tab", "mat21-23.odt", ODet.Styles, "//*[@style:name='Header']//*[@style:type='right']/@style:position", "491pt"),
                 new ODet(ODet.Chk, "right header frame", "mat21-23.odt", ODet.Styles, "//*[@style:display-name='Right Page']//style:footer//@svg:y", "42.25pt"),
-                new ODet(ODet.Chk, "right header guide word", "mat21-23.odt", ODet.Styles, "//*[@style:display-name='Right Page']//@text:name", "Left_Guideword_L"),
+                new ODet(ODet.Chk, "right header guide word", "mat21-23.odt", ODet.Styles, "//*[@style:display-name='Right Page']//@text:name", "Right_Guideword_R"),
 
             };
 

@@ -23,10 +23,10 @@
     </tu>
     <tu tuid="AboutPw.AboutPw.lnkProj">
       <tuv xml:lang="en">
-        <seg>http://pathway.sil.org</seg>
+        <seg>http://software.sil.org/pathway</seg>
       </tuv>
       <tuv xml:lang="ta">
-        <seg>http://pathway.sil.org</seg>
+        <seg>http://software.sil.org/pathway</seg>
       </tuv>
     </tu>
     <tu tuid="AboutPw.WindowTitle">

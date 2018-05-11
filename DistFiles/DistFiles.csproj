@@ -318,6 +318,8 @@
     <Copy SourceFiles="@(Readme)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(License)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(Mets)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(WritingSystemDependency)" DestinationFolder="$(OutputPath)" />
+    <Copy SourceFiles="@(WritingSystemDependency)" DestinationFolder="$(OutputPath)\Export" />
     <Copy SourceFiles="@(AllSettings)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(BteSettings)" DestinationFolder="$(OutputPath)" Condition=" '$(Edition)' == 'BTE' or '$(Edition)' == 'EPUB' " />
     <Copy SourceFiles="@(AllPreview)" DestinationFolder="$(OutputPath)" />
@@ -398,6 +400,7 @@
     <BteTransform Include="*.xslt" />
     <XeTexExe Include="..\XeTex\xetexExe\**\*.*" />
     <UsfmConvert Include="..\lib\ParatextShared.dll;..\..\lib\NetLoc.dll" />
+    <WritingSystemDependency Include="..\lib\Spart.dll" />
   </ItemGroup>
   <Target Name="XeLaTexBeforeBuild">
     <Message Text="User entered BuildNumber: $(BUILD_NUMBER)" Importance="high" />

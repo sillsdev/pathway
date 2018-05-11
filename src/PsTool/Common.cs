@@ -680,51 +680,20 @@ namespace SIL.Tool
 								continue;
 							}
 
-							if (vernagular)
+							attribute = xmlReader["class"];
+                            if (vernagular)
 							{
-								attribute = xmlReader["class"];
 								if (attribute == "headword" || attribute == "mainheadword" || attribute == "headref" || attribute == "Paragraph")
 								{
-									attribute = xmlReader["lang"];
-									if (attribute == null)
-									{
-										attribute = xmlReader["xml:lang"];
-										if (attribute == null)
-										{
-											if (xmlReader.Read())
-											{
-												if (xmlReader.IsStartElement())
-												{
-													attribute = xmlReader["lang"];
-													if (attribute != null)
-													{
-														vernacularLang = attribute;
-														break;
-													}
-													else
-													{
-														attribute = xmlReader["xml:lang"];
-														if (attribute != null)
-														{
-															vernacularLang = attribute;
-															break;
-														}
-													}
-												}
-											}
-										}
-										else
-										{
-											vernacularLang = attribute;
-											break;
-										}
-									}
-									else
-									{
-										vernacularLang = attribute;
-										break;
-									}
+									if (GetLangAttrValue(xmlReader, ref vernacularLang)) break;
 								}
+							}
+							else
+							{
+								if (attribute == "headwordr1" || attribute == "reversalformr1")
+								{
+									if (GetLangAttrValue(xmlReader, ref vernacularLang)) break;
+                                }
 							}
 						}
 					}
@@ -738,18 +707,16 @@ namespace SIL.Tool
 
 					if (langName.ToLower() == "dc.language")
 					{
-						if (vernagular)
+
+						if (langContent.Length < vernacularLang.Length ||
+							langContent.Substring(0, vernacularLang.Length) != vernacularLang)
 						{
-							if (langContent.Length < vernacularLang.Length ||
-								langContent.Substring(0, vernacularLang.Length) != vernacularLang)
-							{
-								continue;
-							}
-							if (!string.IsNullOrEmpty(vernacularLang) && langContent.Length >= vernacularLang.Length &&
-								langContent.Substring(vernacularLang.Length, 1) != ":")
-							{
-								continue;
-							}
+							continue;
+						}
+						if (!string.IsNullOrEmpty(vernacularLang) && langContent.Length >= vernacularLang.Length &&
+							langContent.Substring(vernacularLang.Length, 1) != ":")
+						{
+							continue;
 						}
 
 						if (!langCodeList.Contains(langContent))
@@ -770,6 +737,51 @@ namespace SIL.Tool
 				languageCode = "eng";
 			}
 			return languageCode;
+		}
+
+		private static bool GetLangAttrValue(XmlReader xmlReader, ref string vernacularLang)
+		{
+			var attribute = xmlReader["lang"];
+			if (attribute == null)
+			{
+				attribute = xmlReader["xml:lang"];
+				if (attribute == null)
+				{
+					if (xmlReader.Read())
+					{
+						if (xmlReader.IsStartElement())
+						{
+							attribute = xmlReader["lang"];
+							if (attribute != null)
+							{
+								vernacularLang = attribute;
+								return true;
+							}
+							else
+							{
+								attribute = xmlReader["xml:lang"];
+								if (attribute != null)
+								{
+									vernacularLang = attribute;
+									return true;
+								}
+							}
+						}
+					}
+				}
+				else
+				{
+					vernacularLang = attribute;
+					return true;
+				}
+			}
+			else
+			{
+				vernacularLang = attribute;
+				return true;
+			}
+
+			return false;
 		}
 
 		/// <summary>
@@ -2292,7 +2304,7 @@ namespace SIL.Tool
 				}
 				if (IsUnixOS())
 				{
-					return Common.PathCombine("/var/lib/fieldworks", "SIL/WritingSystemStore");
+					return PathCombine("/var/lib/fieldworks", "SIL/WritingSystemStore");
 				}
 				// fall back on the special environment folder (e.g., c:/ProgramData) - this directory depends on OS
 				return Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
@@ -2300,6 +2312,10 @@ namespace SIL.Tool
 			}
 			catch
 			{
+				if (IsUnixOS())
+				{
+					return PathCombine("/var/lib/fieldworks", "SIL/WritingSystemStore");
+				}
 				// fall back on the special environment folder (e.g., c:/ProgramData) - this directory depends on OS
 				return Common.PathCombine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
 										  "SIL/WritingSystemStore");
@@ -3943,42 +3959,13 @@ namespace SIL.Tool
 
 				UpdateLicenseAttributes(creatorTool, Param.Value["InputType"], destLicenseXml, organization, exportTitle, copyrightURL, utcDateTime);
 
-				string sourceJarFile = Common.PathCombine(getPsApplicationPath, "pdflicensemanager-2.3.jar");
-				if (!File.Exists(sourceJarFile))
-				{
-					sourceJarFile = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "pdflicensemanager-2.3.jar");
-				}
+				CopyrightAdderCodeCopy("pdflicensemanager-2.3.jar", xhtmlFileName, getPsApplicationPath);
+				CopyrightAdderCodeCopy("PsTool.dll", xhtmlFileName, getPsApplicationPath);
+				var destExeFile = CopyrightAdderCodeCopy("PdfLicense.exe", xhtmlFileName, getPsApplicationPath);
 
-				string destJarFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "pdflicensemanager-2.3.jar");
-
-				if (!File.Exists(destJarFile))
-				{
-					File.Copy(sourceJarFile, destJarFile, true);
-				}
-
-				string sourceExeFile = Common.PathCombine(getPsApplicationPath, "PdfLicense.exe");
-				if (sourceExeFile.StartsWith("/"))
-				{
-					sourceExeFile = "/usr/bin/PdfLicense";
-				}
-				else if (!File.Exists(sourceExeFile))
-				{
-					sourceExeFile = Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), "PdfLicense.exe");
-				}
-
-				string destExeFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), "PdfLicense.exe");
-				if (destExeFile.StartsWith("/"))
-				{
-					destExeFile = "/usr/bin/PdfLicense";
-				}
-				else if (!File.Exists(destExeFile))
-				{
-					File.Copy(sourceExeFile, destExeFile, true);
-				}
-
-				string destPdfFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), Path.GetFileName(xhtmlFileName));
-				string processFolder = Path.GetDirectoryName(destPdfFile);
-				if (File.Exists(destExeFile) && creatorTool.ToLower().ToString() != "libreoffice")
+				var destPdfFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), Path.GetFileName(xhtmlFileName));
+				var processFolder = Path.GetDirectoryName(destPdfFile);
+				if (File.Exists(destExeFile) && creatorTool.ToLower() != "libreoffice")
 				{
 					SubProcess.RedirectOutput = processFolder;
 					SubProcess.RunCommand(processFolder, destExeFile, "", true);
@@ -3988,6 +3975,32 @@ namespace SIL.Tool
 			// Ends the coding part for Copyright information added in PDF files
 
 			return pdfFileName;
+		}
+
+		private static string CopyrightAdderCodeCopy(string fileName, string xhtmlFileName, string getPsApplicationPath)
+		{
+			string sourceExeFile = Common.PathCombine(getPsApplicationPath, fileName);
+			if (sourceExeFile.StartsWith("/"))
+			{
+				sourceExeFile = "/usr/bin/" + Path.GetFileNameWithoutExtension(fileName);
+			}
+			else if (!File.Exists(sourceExeFile))
+			{
+				sourceExeFile =
+					Common.PathCombine(Path.GetDirectoryName(Common.AssemblyPath), fileName);
+			}
+
+			string destExeFile = Common.PathCombine(Path.GetDirectoryName(xhtmlFileName), fileName);
+			if (destExeFile.StartsWith("/"))
+			{
+				destExeFile = "/usr/bin/" + Path.GetFileNameWithoutExtension(fileName);
+			}
+			else if (!File.Exists(destExeFile))
+			{
+				File.Copy(sourceExeFile, destExeFile, true);
+			}
+
+			return destExeFile;
 		}
 
 		public static void UpdateLicenseAttributes(string creatorTool, string inputType, string destLicenseXml, string organization,
@@ -4580,17 +4593,17 @@ namespace SIL.Tool
 		{
 			bool isCreated = false;
 
-			string allUserPath = GetAllUserPath();
+			string allUserPath = GetStableAllUserPath();
 			string fileLoc = Common.PathCombine(allUserPath, "License.txt");
 
 			if (!File.Exists(fileLoc))
 			{
-				string text = "";
+				var text = "";
 				File.WriteAllText(fileLoc, text);
 			}
 			if (File.Exists(fileLoc))
 			{
-				using (StreamWriter sw = new StreamWriter(fileLoc))
+				using (var sw = new StreamWriter(fileLoc))
 				{
 					sw.WriteLine(tempDirectoryFolder);
 					sw.WriteLine(workingDirectoryXhtmlFileName);
@@ -4607,7 +4620,15 @@ namespace SIL.Tool
 			return isCreated;
 		}
 
-		public static string UpdateCopyrightYear(string textFromXML)
+		private static string GetStableAllUserPath()
+		{
+			string allUserPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+			allUserPath = Path.Combine(allUserPath, "SIL");
+			allUserPath = Path.Combine(allUserPath, "Pathway");
+			return DirectoryPathReplace(allUserPath);
+		}
+
+	public static string UpdateCopyrightYear(string textFromXML)
 		{
 			if (textFromXML.Trim().Length == 0) return string.Empty;
 

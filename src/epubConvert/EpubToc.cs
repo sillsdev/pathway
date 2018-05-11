@@ -1,4 +1,4 @@
-﻿#region // Copyright (C) 2014, SIL International. All Rights Reserved.
+#region // Copyright (C) 2014, SIL International. All Rights Reserved.
 // --------------------------------------------------------------------------------------------
 // <copyright file="EpubManifest.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (C) 2014, SIL International. All Rights Reserved.
@@ -254,7 +254,7 @@ namespace epubConvert
             ncx.WriteStartElement("head");
             ncx.WriteStartElement("meta");
             ncx.WriteAttributeString("name", "dtb:uid");
-            ncx.WriteAttributeString("content", "http://pathway.sil.org/"); //  bookId.ToString()
+            ncx.WriteAttributeString("content", "http://software.sil.org/pathway/"); //  bookId.ToString()
             ncx.WriteEndElement(); // meta
             ncx.WriteStartElement("meta");
             ncx.WriteAttributeString("name", "epub-creator");

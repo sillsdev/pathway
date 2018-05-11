@@ -543,7 +543,8 @@ namespace SIL.Tool
 
 		private string JustLanguageCode()
 		{
-			string languageCode = Common.GetLanguageCode(_xhtmlFileNameWithPath, _projInfo.ProjectInputType, true);
+			bool isVernacularWs = !(!_projInfo.IsODM && _projInfo.IsReversalExist); //Checking exports only Reversal
+			string languageCode = Common.GetLanguageCode(_xhtmlFileNameWithPath, _projInfo.ProjectInputType, isVernacularWs);
 			if (languageCode.Contains(":"))
 			{
 				languageCode = languageCode.Substring(0, languageCode.IndexOf(':'));
@@ -2082,17 +2083,6 @@ namespace SIL.Tool
 				}
 			}
 			xDoc.Save(xhtmlFilePath);
-
-			//Add CSS for to Hide verse number one
-			if (File.Exists(_cssFileNameWithPath))
-			{
-				TextWriter tw = new StreamWriter(_cssFileNameWithPath, true);
-				tw.WriteLine(".Verse_Number1 {");
-				tw.WriteLine("font-size: 0.1pt;");
-				tw.WriteLine("visibility: hidden;");
-				tw.WriteLine("}");
-				tw.Close();
-			}
 
 			return xhtmlFilePath;
 		}

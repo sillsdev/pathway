@@ -89,6 +89,7 @@ copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tc
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/SIL.Core.dll.mdb ../lib/SIL.Core.dll.mdb
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/SIL.WritingSystems.dll ../lib/SIL.WritingSystems.dll
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/SIL.WritingSystems.dll.mdb ../lib/SIL.WritingSystems.dll.mdb
+copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/Spart.dll ../lib/Spart.dll
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/icu.net.dll ../lib/icu.net.dll
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/icudt54.dll ../lib/icudt54.dll
 copy_auto http://build.palaso.org/guestAuth/repository/download/bt322/pathway.tcbuildtag/icuin54.dll ../lib/icuin54.dll

@@ -1,6 +1,3 @@
-div[lang='aai']{ font-family: "Charis SIL"; font-size: 14pt;}
-span[lang='aai']{ font-family: "Charis SIL";}
-
 .id
 {
 font-size: 12pt;
@@ -219,7 +216,7 @@ font-size: 12pt;
 .Intro_Paras
 {
 font-size: 12pt;
-text-indent: .125pt;
+text-indent: 9pt;
 }
 
 .im
@@ -230,7 +227,7 @@ font-size: 12pt;
 .ipi
 {
 font-size: 12pt;
-text-indent: .125pt;
+text-indent: 9pt;
 margin-left: .25pt;
 margin-right: .25pt;
 }
@@ -246,21 +243,21 @@ margin-right: .25pt;
 {
 font-size: 12pt;
 margin-left: .5pt;
-text-indent: -.375pt;
+text-indent: -27pt;
 }
 
 .ili1
 {
 font-size: 12pt;
 margin-left: .5pt;
-text-indent: -.375pt;
+text-indent: -27pt;
 }
 
 .ili2
 {
 font-size: 12pt;
 margin-left: .75pt;
-text-indent: -.375pt;
+text-indent: -27pt;
 }
 
 .ipq
@@ -268,7 +265,7 @@ text-indent: -.375pt;
 font-size: 12pt;
 margin-left: .25pt;
 margin-right: .25pt;
-text-indent: .125pt;
+text-indent: 9pt;
 font-style: italic;
 }
 
@@ -298,7 +295,7 @@ font-size: 10pt;
 {
 font-size: 12pt;
 margin-left: 1pt;
-text-indent: -.75pt;
+text-indent: -54pt;
 font-style: italic;
 }
 
@@ -306,7 +303,7 @@ font-style: italic;
 {
 font-size: 12pt;
 margin-left: 1pt;
-text-indent: -.75pt;
+text-indent: -54pt;
 font-style: italic;
 }
 
@@ -314,7 +311,7 @@ font-style: italic;
 {
 font-size: 12pt;
 margin-left: 1pt;
-text-indent: -.5pt;
+text-indent: -36pt;
 font-style: italic;
 }
 
@@ -322,14 +319,14 @@ font-style: italic;
 {
 font-size: 12pt;
 margin-left: 1pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 font-style: italic;
 }
 
 .iex
 {
 font-size: 12pt;
-text-indent: .125pt;
+text-indent: 9pt;
 padding-top: 4pt;
 padding-bottom: 4pt;
 }
@@ -414,7 +411,7 @@ color: #ff0000;
 .Paragraph
 {
 font-size: 12pt;
-text-indent: .125pt;
+text-indent: 9pt;
 }
 
 .Paragraph_Continuation
@@ -432,7 +429,7 @@ margin-right: .25pt;
 .pm
 {
 font-size: 12pt;
-text-indent: .125pt;
+text-indent: 9pt;
 margin-left: .25pt;
 margin-right: .25pt;
 }
@@ -455,32 +452,32 @@ margin-right: .25pt;
 .pi
 {
 font-size: 12pt;
-text-indent: .125pt;
-margin-left: .25pt;
+text-indent: 9pt;
+margin-left: .5pt;
 margin-right: .25pt;
 }
 
 .pi1
 {
 font-size: 12pt;
-text-indent: .125pt;
-margin-left: .25pt;
+text-indent: 9pt;
+margin-left: .5pt;
 margin-right: .25pt;
 }
 
 .pi2
 {
 font-size: 12pt;
-text-indent: .125pt;
-margin-left: .5pt;
+text-indent: 9pt;
+margin-left: .75pt;
 margin-right: .25pt;
 }
 
 .pi3
 {
 font-size: 12pt;
-text-indent: .125pt;
-margin-left: .75pt;
+text-indent: 9pt;
+margin-left: 1.0pt;
 margin-right: .25pt;
 }
 
@@ -512,35 +509,35 @@ text-align: right;
 {
 font-size: 12pt;
 margin-left: 1.25pt;
-text-indent: -1pt;
+text-indent: -72pt;
 }
 
 .Line1
 {
 font-size: 12pt;
 margin-left: 1.25pt;
-text-indent: -1pt;
+text-indent: -72pt;
 }
 
 .Line2
 {
 font-size: 12pt;
 margin-left: 1.25pt;
-text-indent: -.75pt;
+text-indent: -54pt;
 }
 
 .q3
 {
 font-size: 12pt;
 margin-left: 1.25pt;
-text-indent: -.5pt;
+text-indent: -36pt;
 }
 
 .q4
 {
 font-size: 12pt;
 margin-left: 1.25pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 }
 
 .qc
@@ -577,28 +574,28 @@ font-style: italic;
 {
 font-size: 12pt;
 margin-left: 1pt;
-text-indent: -.75pt;
+text-indent: -54pt;
 }
 
 .qm1
 {
 font-size: 12pt;
 margin-left: 1pt;
-text-indent: -.75pt;
+text-indent: -54pt;
 }
 
 .qm2
 {
 font-size: 12pt;
 margin-left: 1pt;
-text-indent: -.5pt;
+text-indent: -36pt;
 }
 
 .qm3
 {
 font-size: 12pt;
 margin-left: 1pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 }
 
 .b
@@ -802,7 +799,7 @@ padding-bottom: 4pt;
 {
 font-size: 12pt;
 margin-left: .5pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 }
 
 .th1
@@ -994,35 +991,35 @@ text-align: right;
 {
 font-size: 12pt;
 margin-left: .5pt;
-text-indent: -.375pt;
+text-indent: -27pt;
 }
 
 .li1
 {
 font-size: 12pt;
 margin-left: .5pt;
-text-indent: -.375pt;
+text-indent: -27pt;
 }
 
 .li2
 {
 font-size: 12pt;
 margin-left: .75pt;
-text-indent: -.375pt;
+text-indent: -27pt;
 }
 
 .li3
 {
 font-size: 12pt;
 margin-left: 1pt;
-text-indent: -.375pt;
+text-indent: -27pt;
 }
 
 .li4
 {
 font-size: 12pt;
 margin-left: 1.25pt;
-text-indent: -.375pt;
+text-indent: -27pt;
 }
 
 .Note_General_Paragraph
@@ -1313,13 +1310,13 @@ color: #80ff00;
 .p1
 {
 font-size: 12pt;
-text-indent: .125pt;
+text-indent: 9pt;
 }
 
 .p2
 {
 font-size: 12pt;
-text-indent: .125pt;
+text-indent: 9pt;
 margin-left: .125pt;
 }
 
@@ -1356,28 +1353,28 @@ font-size: 12pt;
 .ph
 {
 margin-left: .5pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 font-size: 12pt;
 }
 
 .ph1
 {
 margin-left: .5pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 font-size: 12pt;
 }
 
 .ph2
 {
 margin-left: .75pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 font-size: 12pt;
 }
 
 .ph3
 {
 margin-left: 1pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 font-size: 12pt;
 }
 
@@ -1390,25 +1387,25 @@ margin-left: 1pt;
 {
 font-size: 12pt;
 margin-left: .5pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 }
 
 .tr2
 {
 font-size: 12pt;
 margin-left: .75pt;
-text-indent: -.25pt;
+text-indent: -18pt;
 }
 
 .ps
 {
 font-size: 12pt;
-text-indent: .125pt;
+text-indent: 9pt;
 }
 
 .psi
 {
-text-indent: .125pt;
+text-indent: 9pt;
 margin-left: .25pt;
 margin-right: .25pt;
 font-size: 12pt;

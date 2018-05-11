@@ -1238,21 +1238,28 @@ namespace SIL.PublishingSolution
 			{
 				if (cTool.DdlRunningHead.SelectedItem != null)
 				{
-				if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
-				{
-					SetPageTopCenter(value);
-					WriteCssClass(writeCss, "page :left-top-center", value);
+					if (((ComboBoxItem)cTool.DdlRunningHead.SelectedItem).Value.ToLower() == "mirrored")
+					{
+						SetPageTopCenter(value);
+						WriteCssClass(writeCss, "page :left-top-center", value);
 
-					SetPageTopCenter(value);
-					WriteCssClass(writeCss, "page :right-top-center", value);
-				}
-				else
-				{
-					SetPageTopCenter(value);
-					WriteCssClass(writeCss, "page -top-center", value);
+						SetPageTopCenter(value);
+						WriteCssClass(writeCss, "page :right-top-center", value);
+					}
+					else
+					{
+						SetPageTopCenter(value);
+						WriteCssClass(writeCss, "page -top-center", value);
+					}
 				}
 			}
-		}
+
+			if (cTool.ChkTurnOffFirstVerse.Checked)
+			{
+				value.Clear();
+				value["display"] = "none";
+				WriteCssClass(writeCss, "Verse_Number1", value);
+			}
 		}
 
 		private void SetAttributesForOtherProperties(StreamWriter writeCss)

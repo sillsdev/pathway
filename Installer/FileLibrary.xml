@@ -2031,4 +2031,6 @@
   <File Path="INIFileParser.dll" ComponentGuid="72913BBF-B033-4A9F-AD2D-972E297A320A" />
   <File Path="INIFileParser.xml" ComponentGuid="A63C96FF-D5FE-486A-9891-C8BE419C935F" />
   <File Path="SIL.WritingSystems.xml" ComponentGuid="99ACC792-A97C-4C1D-A60A-9F9151658136" />
+  <File Path="Export\spart.dll" ComponentGuid="3BB4F301-8BF6-49B5-BD00-DF974FD2F302" />
+  <File Path="spart.dll" ComponentGuid="988F12EA-9E63-444C-881B-689F3DAA760D" />
 </FileLibrary>
