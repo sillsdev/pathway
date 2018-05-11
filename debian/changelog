@@ -1,8 +1,32 @@
-pathway (1.17.0.5939)  experimental; urgency=high
+pathway (1.17.5.5974)  experimental; urgency=high
 
-  * Linux: Changes for the 1.17.0 release
+  * Styles:TD-4891 Make line2 and line2 poetry indents different (#40)
+  * Styles:TD-4892 Page number in footer for mirrored pages
+  * Epub:TD-4893 [Linux] no dictionary/reversal data in epub exports
+  * General:TD-4884 Report HTML5 export option on web site.
+  * General:TD-4888 About This Document may not state the correct language (#31)
+  * General:TD-4897 Adjust builds to work with 64-bit version of Fw (#26)
+  * General:TD-4903 Adjust PdfLicense for 64-bit calling program (#32)
+  * Office:TD-4649 Not all characters display well in ODT
+  * Office:TD-4867 Verse 1 is removed even if check box is not checked (#30)
+  * Office:TD-4869 Caption Reference appears twice (#17)
+  * Office:TD-4871 Outline in intro is not indented as it is in Paratext display
+  * Office:TD-4875 Two Scripture guidewords on odd pages (#35)
+  * Office:TD-4894 Picture misplaced (#19)
+  * Office:TD-4895 Page number missing from header (#23)
+  * Office:TD-4898 Complete Epub export on Bionic (#25)
+  * Office:TD-4906 [Linux] - Export P8 via Pathway hangs
+  * Office:TD-4908 Table of Contents leads to Scripture export hanging (#37)
+  * Office:TD-4909 Paragraph indent missing (#34)
+  * Office:TD-4911 Footnote Verse number not bold (#38)
+  * UI:TD-4667 Error message box appeared while exporting dictionary... If no stylesheet.
+  * UI:TD-4864 Info tab lists http://pathway.sil.org (#18)
+  * UI:TD-4889 Export through pathway content disappear after reset the style settings. (#28)
+  * UI:TD-4890 Got an error message while in Configuration tool
+  * UI:TD-4902 New, Save As buttons are not working after I reset
+  * XeLaTeX:TD-4198 Handle ampersand in Title Page
 
- -- Greg Trihus <greg_trihus@sil.org>  Thu, 5 Jan 2018 16:46:20 -0600
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 5 May 2018 14:25:20 -0600
 
 pathway (1.16.11.5937)  experimental; urgency=high
 
