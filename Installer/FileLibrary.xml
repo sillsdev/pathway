@@ -2033,4 +2033,6 @@
   <File Path="SIL.WritingSystems.xml" ComponentGuid="99ACC792-A97C-4C1D-A60A-9F9151658136" />
   <File Path="Export\spart.dll" ComponentGuid="3BB4F301-8BF6-49B5-BD00-DF974FD2F302" />
   <File Path="spart.dll" ComponentGuid="988F12EA-9E63-444C-881B-689F3DAA760D" />
+  <File Path="Export\Spart.dll" ComponentGuid="86D53971-715C-43F7-B4A6-8DFC110D126C" />
+  <File Path="Spart.dll" ComponentGuid="74DB20DF-E3B6-4280-80FB-558524C66B8B" />
 </FileLibrary>

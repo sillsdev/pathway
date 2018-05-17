@@ -66,6 +66,15 @@ Func BteVersion()
 		RegRead("HKLM\SOFTWARE\ScrChecks\1.0\Settings_Directory","")
 	EndIf
 	if @error Then
+		RegRead("HKLM\SOFTWARE\WOW6432Node\Paratext\8","Settings_Directory")
+	EndIf
+	if @error Then
+		RegRead("HKLM64\SOFTWARE\Paratext\8","Settings_Directory")
+	EndIf
+	if @error Then
+		RegRead("HKLM\SOFTWARE\Paratext\8","Settings_Directory")
+	EndIf
+	if @error Then
 		$fwFolder = RegRead("HKLM\SOFTWARE\Wow6432Node\SIL\FieldWorks\7.0", "RootCodeDir")
 		if @error Then
 			$fwFolder = RegRead("HKLM64\SOFTWARE\SIL\FieldWorks\7.0", "RootCodeDir")
