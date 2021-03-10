@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="StyleCategories.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
 //    
@@ -127,7 +127,7 @@ namespace SIL.PublishingSolution
         private void StyleCategories_DoubleClick(object sender, EventArgs e)
         {
 #if DEBUG
-            var dlg = new Localizer(LocDB.DB);
+            var dlg = new JWTools.Localizer(LocDB.DB);
             dlg.ShowDialog();
 #endif
         }

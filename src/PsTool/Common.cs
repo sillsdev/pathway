@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="Common.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (c) 2014, SIL International. All Rights Reserved.
 //
@@ -5021,7 +5021,7 @@ namespace SIL.Tool
 
 				try
 				{
-					L10NMngr = LocalizationManager.Create(desiredUiLangId, productName, productName, productVersion,
+					L10NMngr = LocalizationManager.Create(TranslationMemory.Tmx, desiredUiLangId, productName, productName, productVersion,
 	installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespacebeginnings);
 				}
 				catch (Exception ex)
@@ -5169,7 +5169,7 @@ namespace SIL.Tool
 
 		#region Localization Manager Access methods
 		/// ------------------------------------------------------------------------------------
-		public static LocalizationManager L10NMngr { get; set; }
+		public static ILocalizationManager L10NMngr { get; set; }
 
 		///// ------------------------------------------------------------------------------------
 		//internal static void SaveOnTheFlyLocalizations()

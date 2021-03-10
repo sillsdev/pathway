@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="AboutPw.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (C) 2009, SIL International. All Rights Reserved.
 //
@@ -223,7 +223,7 @@ namespace SIL.PublishingSolution
         private void AboutPw_DoubleClick(object sender, EventArgs e)
         {
 
-            var dlg = new Localizer(LocDB.DB);
+            var dlg = new JWTools.Localizer(LocDB.DB);
             dlg.ShowDialog();
 
         }

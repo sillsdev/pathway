@@ -232,6 +232,9 @@
       <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="L10NSharp">
+      <HintPath>..\..\packages\L10NSharp.4.1.0\lib\net461\L10NSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -263,6 +266,7 @@
     <Compile Include="StyleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="CssParserPostBuild.bat" />
     <None Include="csst3.g" />
     <None Include="packages.config" />

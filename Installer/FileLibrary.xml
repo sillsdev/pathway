@@ -2035,4 +2035,32 @@
   <File Path="spart.dll" ComponentGuid="988F12EA-9E63-444C-881B-689F3DAA760D" />
   <File Path="Export\Spart.dll" ComponentGuid="86D53971-715C-43F7-B4A6-8DFC110D126C" />
   <File Path="Spart.dll" ComponentGuid="74DB20DF-E3B6-4280-80FB-558524C66B8B" />
+  <File Path="Export\lib\win-x64\icudt59.dll" ComponentGuid="E91B2AD4-7C4B-4692-9DD4-9EC34D3B6789" />
+  <File Path="Export\lib\win-x64\icuin59.dll" ComponentGuid="02A9938A-6787-4E12-A063-57D1D4AB27B1" />
+  <File Path="Export\lib\win-x64\icuio59.dll" ComponentGuid="0154D33B-1F9E-4BC0-A93E-AE1A297C9126" />
+  <File Path="Export\lib\win-x64\icutest59.dll" ComponentGuid="FFF59D30-1B06-4712-921F-51EE6BE3F15C" />
+  <File Path="Export\lib\win-x64\icutu59.dll" ComponentGuid="64E38EE6-223A-43CE-BFC0-F44B0714A087" />
+  <File Path="Export\lib\win-x64\icuuc59.dll" ComponentGuid="8960AA64-7F79-438E-875C-8868CC1BA389" />
+  <File Path="Export\lib\win-x86\icudt59.dll" ComponentGuid="65080A87-D16B-4756-8E48-E693C86B5936" />
+  <File Path="Export\lib\win-x86\icuin59.dll" ComponentGuid="9B11642A-6BD1-461F-9A5D-728DF86B8D0D" />
+  <File Path="Export\lib\win-x86\icuio59.dll" ComponentGuid="AE2980C4-9480-4454-85D1-5639B3EB787E" />
+  <File Path="Export\lib\win-x86\icutest59.dll" ComponentGuid="0DD41C54-B37B-4053-9548-056A86E1AF13" />
+  <File Path="Export\lib\win-x86\icutu59.dll" ComponentGuid="82B9E67A-F402-4A83-93A7-345F1CA47490" />
+  <File Path="Export\lib\win-x86\icuuc59.dll" ComponentGuid="F563C121-7042-499D-A27C-AA145A3590B6" />
+  <File Path="Export\CssParser.dll.config" ComponentGuid="F2B9B720-3A4C-4B4E-87BF-2A5B3FCD8380" />
+  <File Path="Export\epubConvert.dll.config" ComponentGuid="99894515-EB51-402D-A3FF-4FD8DC449E9C" />
+  <File Path="Export\Html5Convert.dll.config" ComponentGuid="E34EB665-8F90-4492-8150-3273EC0F58FE" />
+  <File Path="Export\Microsoft.DotNet.PlatformAbstractions.dll" ComponentGuid="F7522A59-9608-4766-8656-16707FC06942" />
+  <File Path="Export\Microsoft.Extensions.DependencyModel.dll" ComponentGuid="BF1ABB3E-77A9-46CC-9451-8299CC536F44" />
+  <File Path="Export\PsTool.dll.config" ComponentGuid="B9D29332-0550-431F-A9E3-64F8CD598D58" />
+  <File Path="Export\SwordConvert.dll.config" ComponentGuid="6EFBE03A-9A6F-4257-A18D-CA26C711274D" />
+  <File Path="Export\System.IO.FileSystem.AccessControl.dll" ComponentGuid="49255A96-C85C-4148-85B8-56AE34BA6627" />
+  <File Path="Export\System.IO.FileSystem.AccessControl.xml" ComponentGuid="F242A6B9-1B78-4A6E-A605-322BB37C4974" />
+  <File Path="Export\System.Security.AccessControl.dll" ComponentGuid="EE73DA3B-A3FF-482E-BC24-55496EF71B05" />
+  <File Path="Export\System.Security.AccessControl.xml" ComponentGuid="3EEE5443-EA06-4CBF-AAEC-C6A8249980E3" />
+  <File Path="Export\System.Security.Principal.Windows.dll" ComponentGuid="C6C45EA6-BF4C-4776-AF36-792E83651900" />
+  <File Path="Export\System.Security.Principal.Windows.xml" ComponentGuid="F52B7888-9F7D-43FC-B911-5BDFCCD86984" />
+  <File Path="System.ValueTuple.dll" ComponentGuid="EC6D912A-2F1F-40DA-9641-F586DE287E14" />
+  <File Path="System.ValueTuple.xml" ComponentGuid="B124D835-063F-4E88-B3D5-B1B043D04716" />
+  <File Path="Export\System.ValueTuple.dll" ComponentGuid="F2F51316-7796-4933-BC0B-7C594AC1EE45" />
 </FileLibrary>
