@@ -24,6 +24,16 @@ git config --global user.email youremailaddress@yourdomain.xyz
 gedit .git/config
 (Open the Build/Add2Config file and include it in the .git/config file)
 
+GET PACKAGES
+------------
+sudo apt install nuget -y
+sudo apt install mono-complete -y
+wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+sudo cp nuget.exe /usr/lib/nuget/NuGet.exe
+nuget add sources -name https://www.nuget.org/api/v3 -value https://www.nuget.org/api/v3
+(from pathway folder)
+nuget restore Pathway.sln
+
 SETTING UP BUILD SYSTEM
 -----------------------
 To set up Linux for building packages, I used:
@@ -63,7 +73,7 @@ nunit-gui
 GUI DEVELOPMENT
 ---------------
 sudo apt-get -y install monodevelop monodevelop-nunit
-Please make sure, before you commit, to revert changes on DistFiles.csproj with 
+Please make sure, before you commit, to revert changes on DistFiles.csproj with
 git checkout DistFiles/DistFiles.csproj
 or by useing the git gui command.
 
@@ -77,7 +87,7 @@ You can also change -etarget=Daily (this updates the build # in all the Assembly
 If you put it in another location, you will need to add
 -ebinsrc=~/git1/pathway
 replacing git1 with the folder you have used.
-For 64-bit build the 
+For 64-bit build the
 -ePlatform=Any\ CPU
 For 32-bit build
 -ePlatform=x86

@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="Backend.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright ( c ) 2014, SIL International. All Rights Reserved.
 //
@@ -118,7 +118,7 @@ namespace SIL.Tool
 		    const string projProg = "PathwayB.exe";
 		    var osProg = Common.IsUnixOS() ? "mono" : projProg;
 		    var arg1 = Common.IsUnixOS() ? projProg + " " : "";
-		    var args = string.Format("{0}-i {1} -f {2} -o", arg1, inputDataType, typeFileName);
+		    var args = string.Format(@"{0}-i {1} -f ""{2}"" -o", arg1, inputDataType, typeFileName);
 		    SubProcess.RunCommand(Common.FromRegistry("Export"), osProg, args, true);
 		    return (ArrayList) SilTools.Utils.DeserializeData(typeFileName, typeof(ArrayList), out err);
 	    }

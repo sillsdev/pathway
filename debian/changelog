@@ -1,3 +1,10 @@
+pathway (1.18.0.5984)  experimental; urgency=high
+
+  * Build using nuget dependencies
+  * TD-4942 Handle space in Windows user name
+
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 8 Apr 2021 15:12:00 -0600
+
 pathway (1.17.5.5974)  experimental; urgency=high
 
   * Styles:TD-4891 Make line2 and line2 poetry indents different (#40)
