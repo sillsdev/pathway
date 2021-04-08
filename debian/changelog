@@ -1,8 +1,9 @@
-pathway (1.18.0.5980)  experimental; urgency=high
+pathway (1.18.0.5984)  experimental; urgency=high
 
   * Build using nuget dependencies
+  * TD-4942 Handle space in Windows user name
 
- -- Greg Trihus <greg_trihus@sil.org>  Thu, 11 Mar 2021 12:50:00 -0600
+ -- Greg Trihus <greg_trihus@sil.org>  Thu, 8 Apr 2021 15:12:00 -0600
 
 pathway (1.17.5.5974)  experimental; urgency=high
 
