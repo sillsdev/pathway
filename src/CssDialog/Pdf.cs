@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="Pdf.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright (C) 2014, SIL International. All Rights Reserved.   
 //    
@@ -19,6 +19,7 @@ using System.Diagnostics;
 using System.IO;
 using Microsoft.Win32;
 using SIL.Tool;
+using PrinceXML.Wrapper;
 
 namespace SIL.PublishingSolution
 {
@@ -96,12 +97,15 @@ namespace SIL.PublishingSolution
             }
             if (regPrinceKey != null)
             {
-                object princePath = regPrinceKey.GetValue("InstallLocation");
-                string princeFullName = Common.PathCombine(princePath as string, "Engine/Bin/Prince.exe");
-                var myPrince = new Prince(princeFullName);
-                var mc = new MergeCss();
+                var princePath = regPrinceKey.GetValue("InstallLocation");
+                var princeFullName = Common.PathCombine(princePath as string, "Engine/Bin/Prince.exe");
+                var myPrince = new PrinceXML.Wrapper.Prince(princeFullName);
                 if (File.Exists(Css))
-                    myPrince.AddStyleSheet(mc.Make(Css, "Temp1.css"));
+                {
+	                var mc = new MergeCss();
+		            myPrince.StyleSheets.Add(mc.Make(Css, "Temp1.css"));
+                }
+
                 myPrince.Convert(Xhtml, outName);
             }
             else

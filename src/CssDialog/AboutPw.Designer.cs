@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 
 namespace SIL.PublishingSolution
@@ -284,7 +284,7 @@ namespace SIL.PublishingSolution
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(222, 16);
 			this.label2.TabIndex = 15;
-			this.label2.Text = "(C) 2008 - 2017 SIL International  ";
+			this.label2.Text = "(C) 2008 - 2023 SIL International  ";
 			// 
 			// AboutPw
 			// 

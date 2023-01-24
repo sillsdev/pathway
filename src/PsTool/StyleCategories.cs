@@ -1,14 +1,14 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="StyleCategories.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright ( c ) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright ( c ) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Styles Category
 // </remarks>
@@ -77,7 +77,7 @@ namespace SIL.PublishingSolution
                 {
                     cell = DgStyleCategories.Rows[r].Cells[c];
                     if(cell.Value == null) continue;
-               
+
                     cell.Value = Param.LoadStyleCategories(Param.Name(styles[r]), Param.Name(cats[c].ParentNode), Param.Name(cats[c]));
                     cell.Style.ForeColor = (string)cell.Value == YES ? Color.Green : Color.Red;
                 }

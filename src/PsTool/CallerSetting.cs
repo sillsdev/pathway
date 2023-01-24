@@ -1,4 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 
 #region // Copyright (c) 2017, SIL International. All Rights Reserved.
 
@@ -61,6 +61,9 @@ namespace SIL.Tool
 			Caller = DataCreator.Creator;
 			switch (Caller)
 			{
+				case DataCreator.CreatorProgram.Paratext9:
+					_dataFolder = RegistryHelperLite.FallbackStringValue("Paratext/8", "Settings_Directory");
+					break;
 				case DataCreator.CreatorProgram.Paratext8:
 					_dataFolder = RegistryHelperLite.FallbackStringValue("Paratext/8", "Settings_Directory");
 					break;
@@ -121,6 +124,7 @@ namespace SIL.Tool
 			if (!string.IsNullOrEmpty(folder))
 			{
 				if (TestFolder(folder, DataCreator.CreatorProgram.Paratext8)) return;
+				if (TestFolder(folder, DataCreator.CreatorProgram.Paratext9)) return;
 			}
 			folder = RegistryHelperLite.FallbackStringValue("ScrChecks/1.0/Settings_Directory");
 			if (!string.IsNullOrEmpty(folder))

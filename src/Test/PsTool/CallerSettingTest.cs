@@ -1,4 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 #region // Copyright (c) 2017, SIL International. All Rights Reserved.
 
 // <copyright from='2017' to='2017' company='SIL International'>
@@ -38,7 +38,7 @@ namespace Test.PsTool
 		public void KbrCallerSettingTest()
 		{
 			using (var result = new CallerSetting("KBRosU"))
-				Assert.AreEqual(DataCreator.CreatorProgram.Paratext8, result.Caller);
+				Assert.AreEqual(DataCreator.CreatorProgram.Paratext7, result.Caller);
 		}
 
 		[Test]

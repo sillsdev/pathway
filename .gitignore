@@ -87,3 +87,5 @@ lib/L10NSharp.*
 lib/SIL.*
 lib/icu*.*
 lib/Palaso.*
+WiXInstaller
+buildBaseInstaller.bat
