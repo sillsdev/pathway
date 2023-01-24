@@ -2064,4 +2064,21 @@
   <File Path="Export\System.Threading.Tasks.Extensions.xml" ComponentGuid="6AADE84F-1541-46F1-8F93-4EC037E7A323" />
   <File Path="Export\System.ValueTuple.dll" ComponentGuid="5CF44379-050A-42A8-BB8A-32389EDB23CA" />
   <File Path="Preprocessing\Dictionary\Use Breaking Spaces after fields.xsl" ComponentGuid="2C157072-B057-45C0-A021-74DFEC3BC0C2" />
+  <File Path="Export\lib\win-x64\icudt59.dll" ComponentGuid="0A98986E-CD1E-4801-A9A5-3164E3720043" />
+  <File Path="Export\lib\win-x64\icuin59.dll" ComponentGuid="B27FE95B-0B66-402D-936F-8AAAB7922CE2" />
+  <File Path="Export\lib\win-x64\icuio59.dll" ComponentGuid="DAEB2D25-572F-453B-9931-1732B92E3F76" />
+  <File Path="Export\lib\win-x64\icutest59.dll" ComponentGuid="C136B053-6DD5-4208-A775-C37DD07CD054" />
+  <File Path="Export\lib\win-x64\icutu59.dll" ComponentGuid="1C633FD0-F11B-4791-8A50-0A74427FBE35" />
+  <File Path="Export\lib\win-x64\icuuc59.dll" ComponentGuid="60CD4C27-0F4E-425E-88AE-F3EE7D47FCED" />
+  <File Path="Export\lib\win-x86\icudt59.dll" ComponentGuid="BA363234-2A2E-49A0-977E-78667C0E77A8" />
+  <File Path="Export\lib\win-x86\icuin59.dll" ComponentGuid="1B25E371-E724-4A7C-A416-A2711FA5AA6E" />
+  <File Path="Export\lib\win-x86\icuio59.dll" ComponentGuid="0ADD8C3D-DF71-4A3A-A759-D3D1F2381EA0" />
+  <File Path="Export\lib\win-x86\icutest59.dll" ComponentGuid="89DF14C0-27B8-444B-B392-E3FD3E3194E4" />
+  <File Path="Export\lib\win-x86\icutu59.dll" ComponentGuid="3FBA0E68-24B9-4B00-BB56-718DC7471970" />
+  <File Path="Export\lib\win-x86\icuuc59.dll" ComponentGuid="EAD49AA1-E3F6-4E30-97CE-8B9A163F3783" />
+  <File Path="Export\PrinceXML.Wrapper.dll" ComponentGuid="B283B225-3ED4-416A-ADA7-2F8010E799B9" />
+  <File Path="Export\PrinceXML.Wrapper.xml" ComponentGuid="EE8E737F-E645-482B-99D1-9EE3861B5514" />
+  <File Path="Export\System.Resources.Extensions.dll" ComponentGuid="AA37267E-1A2F-4FB6-B101-4661E7CE8DC3" />
+  <File Path="Export\System.Resources.Extensions.xml" ComponentGuid="674E6DF2-D4FA-42A5-AE4E-B41D38212C82" />
+  <File Path="Export\SwordConvert.dll.config" ComponentGuid="92106BC2-008D-4E3A-88E3-A0F8A9356D85" />
 </FileLibrary>

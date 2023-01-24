@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="ExportPdf.cs" from='2009' to='2014' company='SIL International'>
 //      Copyright ( c ) 2014, SIL International. All Rights Reserved.
 //
@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Xsl;
 using Microsoft.Win32;
@@ -252,24 +253,22 @@ namespace SIL.PublishingSolution
             {
                 Object princePath = regPrinceKey.GetValue("InstallLocation");
                 _fullPrincePath = Common.PathCombine((string) princePath, "Engine/bin/prince.exe");
-				var myPrince = new Prince(_fullPrincePath);
+				var myPrince = new PrinceXML.Wrapper.Prince(_fullPrincePath);
 	            if (projInfo.IsReversalExist && projInfo.IsLexiconSectionExist)
 	            {
 		            string[] xhtmlFiles = new string[2];
 		            var reversalFile = Path.GetDirectoryName(_processedXhtml);
 		            xhtmlFiles[0] = _processedXhtml;
 		            xhtmlFiles[1] = Common.PathCombine(reversalFile, "FlexRev.xhtml");
-		            myPrince.AddStyleSheet(defaultCSS);
-					myPrince.ConvertMultiple(xhtmlFiles, xhtmlFileName + ".pdf");
-
+		            myPrince.StyleSheets.Add(defaultCSS);
+					myPrince.Convert(xhtmlFiles.ToList(), xhtmlFileName + ".pdf");
 	            }
 	            else
 	            {
 		            if (File.Exists(_fullPrincePath))
 		            {
-			            myPrince.AddStyleSheet(defaultCSS);
+			            myPrince.StyleSheets.Add(defaultCSS);
 			            myPrince.Convert(_processedXhtml, xhtmlFileName + ".pdf");
-
 		            }
 	            }
             }

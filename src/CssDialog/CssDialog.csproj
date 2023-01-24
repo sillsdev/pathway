@@ -264,6 +264,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Prince.dll</HintPath>
     </Reference>
+    <Reference Include="PrinceXML.Wrapper, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PrinceXMLWrapper.1.1.0\lib\netstandard2.0\PrinceXML.Wrapper.dll</HintPath>
+    </Reference>
     <Reference Include="SIL.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\SIL.Core.dll</HintPath>
