@@ -5021,7 +5021,7 @@ namespace SIL.Tool
 
 				try
 				{
-					L10NMngr = LocalizationManager.Create(TranslationMemory.Tmx, desiredUiLangId, productName, productName, productVersion,
+					L10NMngr = LocalizationManager.Create(TranslationMemory.XLiff,desiredUiLangId, productName, productName, productVersion,
 	installedLocalizationsFolder, targetTmxFilePath, null, IssuesEmailAddress, namespacebeginnings);
 				}
 				catch (Exception ex)

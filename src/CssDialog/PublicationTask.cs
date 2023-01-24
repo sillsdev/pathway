@@ -1,14 +1,14 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="PublicationTask.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // </remarks>
 // --------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ namespace SIL.PublishingSolution
         #region private variable
         private string _currentTask = string.Empty;
         private Color _deSelectedColor = Color.LightSteelBlue;
-        private Color _selectedColor = Color.FromArgb(255, 204, 102);  
+        private Color _selectedColor = Color.FromArgb(255, 204, 102);
         private Color _borderColor = Color.Black;
         private Color _mouseOverColor = Color.Khaki;
         #endregion
@@ -170,7 +170,7 @@ namespace SIL.PublishingSolution
         {
             List<string> roles = Param.GetListofAttr("roles/role", "name");
             List<string> roleIcon = Param.GetListofAttr("roles/role", "icon");
-            ImageList imageList = new ImageList { ImageSize = new Size(32, 32) }; 
+            ImageList imageList = new ImageList { ImageSize = new Size(32, 32) };
             try
             {
                 foreach (var iconName in roleIcon)
@@ -181,7 +181,7 @@ namespace SIL.PublishingSolution
             }
             catch
             {
-            } 
+            }
 
             int height = 58;
             int locationY = 36;
@@ -220,7 +220,7 @@ namespace SIL.PublishingSolution
 
         private void TaskAdjustment()
         {
-            //Task 
+            //Task
             List<string> tasks = Param.GetListofAttr("tasks/task", "name");
             List<string> taskIcon = Param.GetListofAttr("tasks/task", "icon");
             ImageList imageListTask = new ImageList { ImageSize = new Size(32, 32) };

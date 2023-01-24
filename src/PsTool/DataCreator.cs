@@ -1,4 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 #region // Copyright (c) 2017, SIL International. All Rights Reserved.
 
 // <copyright from='2017' to='2017' company='SIL International'>
@@ -26,6 +26,7 @@ namespace SIL.Tool
 		{
 			Paratext7,
 			Paratext8,
+			Paratext9,
 			FieldWorks8,
 			FieldWorks9,
 			Unknown
@@ -53,6 +54,10 @@ namespace SIL.Tool
 			else if (executablePath.ToLower().Contains("paratext 8"))
 			{
 				Creator = CreatorProgram.Paratext8;
+			}
+			else if (executablePath.ToLower().Contains("paratext 9"))
+			{
+				Creator = CreatorProgram.Paratext9;
 			}
 			else
 			{

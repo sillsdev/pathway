@@ -1,14 +1,14 @@
 // --------------------------------------------------------------------------------------------
 // <copyright file="ExportDlg.cs" from='2009' to='2014' company='SIL International'>
-//      Copyright (C) 2014, SIL International. All Rights Reserved.   
-//    
+//      Copyright (C) 2014, SIL International. All Rights Reserved.
+//
 //      Distributable under the terms of either the Common Public License or the
 //      GNU Lesser General Public License, as specified in the LICENSING.txt file.
-// </copyright> 
+// </copyright>
 // <author>Greg Trihus</author>
 // <email>greg_trihus@sil.org</email>
-// Last reviewed: 
-// 
+// Last reviewed:
+//
 // <remarks>
 // Export Dialog for Output Types
 // </remarks>
@@ -62,7 +62,7 @@ namespace SIL.PublishingSolution
         {
             ExportType = cmbExportType.SelectedItem.ToString();
             DialogResult = DialogResult.OK;
-            Close(); 
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

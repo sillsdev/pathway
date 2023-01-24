@@ -5,10 +5,10 @@ using System.Reflection;
 // associated with an assembly.
 [assembly: AssemblyCompany("SIL")]
 [assembly: AssemblyProduct("Pathway")]
-[assembly: AssemblyCopyright("Copyright © 2008-2020 SIL International")]
+[assembly: AssemblyCopyright("Copyright © 2008-2023 SIL International")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyFileVersion("1.18.0.5984")]
-[assembly: AssemblyVersion("1.18.0.5984")]
+[assembly: AssemblyFileVersion("1.19.0.5991")]
+[assembly: AssemblyVersion("1.19.0.5991")]
 
