@@ -45,21 +45,23 @@ Issue Tracking
 
 Development
 -----------
-Pathway is currently running under .net 4.6.1.
+Pathway is currently running under .net 4.8
 
 *Before building Pathway*
 
-Before building Pathway, the developer should install the latest dependencies. All dependencies have been moved to nuGet packages.
+Before building Pathway, the developer should install the latest dependencies. All dependencies have been moved to nuGet packages except for the libpalaso packages: `icu.net.dll`, `Spart.dll`, `SIL.Core.dll`, `SIL.Core.Desktop.dll` and `SIL.WritingSystems.dll`. These were installed in the `lib` folder from `libpalaso_palaso-win32-master_Continuous_8.0.0_artifacts` in the net461 folder. The latest icu files: `icudt56.dll`, `icuin56.dll`, and `icuuc56.dll` were also added to that folder.
 
 *Building on Windows*
 
 Wix 3.11.x should be installed to build installer packages. A Developer will also need the Visual Studio Wix extension for the version of Visual Studio being used.
 
-Development is normally don using the ReSharper Visual Studio Extension. This is used to run the unit tests.
+Development is normally done using the ReSharper Visual Studio Extension. This is used to run the unit tests.
 
-On Windows Pathway is built with Visual Studio. The Debug Configuration is used for building while doing development. The Platform should be set to x86. Unit tests and some scenario tests are contained in the Test project. Some tests are marked with SkipOnTeamCity so they won't run on the build server. Also some tests are marked with LongTest since they take more than 3 seconds to complete. The folder structure of the Test project mirrors the folder structure of pathway.
+On Windows Pathway is built with Visual Studio. The Debug Configuration is used for building while doing development. The Platform should be set to x86. Currently the most important Configureation is `Corporate7SE`. This is used for Fieldworks. Other Configurations that were built were `Corporate7BTE`, `Release7SE`, and `Release7BTE`. The two Release Configurations included some export paths that were less well tested.
 
-Other configurations are used to prepare package for the various releases. The BTE packages work with FieldWorks and can be used with Paratext as well. The SE packages work with FieldWorks only. The Corporate release packages are intended for stable releases whereas the Release packages also include back ends that are still in development and testing. The Installer project depends on all the others so that it will build last. In the BeforeBuild target in the .csproj file for the Installer project, copies the outputs of other Visual Studio projects to a single folder so they can be packaged by Wix from there. (The Test project also has a BeforeBuild copy process to set up a folder with everything needed for testing.)
+Unit tests and some scenario tests are contained in the Test project. Some tests are marked with SkipOnTeamCity so they won't run on the build server. Also some tests are marked with LongTest since they take more than 3 seconds to complete. The folder structure of the Test project mirrors the folder structure of pathway.
+
+The Installer project depends on all the others so that it will build last. In the BeforeBuild target in the .csproj file for the Installer project, copies the outputs of other Visual Studio projects to a single folder so they can be packaged by Wix from there. (The Test project also has a BeforeBuild copy process to set up a folder with everything needed for testing.)
 
 Pathway is structured so that additional Back ends can be added for other output formats. The interface for each back end is somewhat simple but allows the Pathway program to get the name of the back end for the drop down and then pass control to the Export method in the back end if the user has selected it.
 
@@ -82,5 +84,3 @@ will build the Debug build and
 will run the unit tests. As you can see Pathway requires mono4-sil to be installed to have access to the latest patched version of mono.
 
 NB: Pathway can also be built with mono-sil and one of the build processes does this for Paratext and FieldWorks versions that are not using the latest mono4-sil yet.
-
-
