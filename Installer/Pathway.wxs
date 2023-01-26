@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?define Product="Pathway"?>
 <?define UpgradeCode="74173B43-8B0C-499e-99B0-759A6C8EBDD2"?>
-<?define Edition="BTE"?>
+<?define Edition="SE"?>
 <?define BUILD_NUMBER="1.18.1"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
   <Product Id="*" Name="$(var.Product) $(var.Edition) $(var.BUILD_NUMBER)" Language="1033" Version="$(var.BUILD_NUMBER)" Manufacturer="SIL International" UpgradeCode="$(var.UpgradeCode)">
@@ -17,7 +17,7 @@
 		are trying to support, you're better off using non-advertised shortcuts. "
 		-->
     <PropertyRef Id="NETFRAMEWORK45" />
-    <Condition Message="Pathway requires .NET Framework 4.6.1 or later.  You need to install Microsoft's free .NET Framework then run this installer again."><![CDATA[Installed OR (NETFRAMEWORK45 >= "#394254")]]></Condition>
+    <Condition Message="Pathway requires .NET Framework 4.8 or later.  You need to install Microsoft's free .NET Framework then run this installer again."><![CDATA[Installed OR (NETFRAMEWORK45 >= "#528040")]]></Condition>
     <Media Id="1" Cabinet="pathway.cab" EmbedCab="yes" CompressionLevel="high" />
     <Property Id="DISABLEADVTSHORTCUTS" Value="1" />
     <Feature Id="ProgramFiles" Level="1" Absent="disallow" Title="Program Files">
