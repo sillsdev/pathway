@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <FileLibrary>
-  <File Path="XeTexWriter.pdb" ComponentGuid="D86ADF8E-5512-474C-9BBD-1D38B6ECFDCC" />
   <File Path="Wordpress\select.png" ComponentGuid="A7A987FD-D412-4D7D-8A52-34A5ACE7754A" />
   <File Path="Wordpress\select-all.png" ComponentGuid="B1C3F61E-346F-4CF4-83F8-11666BB02696" />
   <File Path="Wordpress\select-all.ico" ComponentGuid="559EC9F5-D39E-4561-B8B1-3C033EF1D167" />
@@ -28,8 +27,6 @@
   <File Path="TE_XHTML-to-YouVersion_SQL_offline_unformatted.xslt" ComponentGuid="FD34D160-800A-49E3-A69F-B74E03541B3E" />
   <File Path="TE_XHTML-to-YouVersion_SQL_offline_html.xslt" ComponentGuid="690F4E45-0D86-42D0-81F1-B59D38D6F651" />
   <File Path="result" ComponentGuid="CA37F05E-FB75-42F3-8E8D-B20BBD8A85ED" />
-  <File Path="XeTexWriter.dll.config" ComponentGuid="08CAB66E-56A2-45B1-89C8-7D6C325F047C" />
-  <File Path="XeTexWriter.dll" ComponentGuid="9E68BE65-D800-4A60-BD24-3715F0CD6488" />
   <File Path="xetexExe\share\texmf\web2c\texmf.cnf" ComponentGuid="1BDF38EB-B1D0-4064-A2AC-84271A58B471" />
   <File Path="xetexExe\share\texmf\web2c\fmtutil.cnf" ComponentGuid="56867BDE-436B-43EE-93D6-AF221A607A22" />
   <File Path="xetexExe\share\texmf\web2c\xetex\xetex.fmt" ComponentGuid="C3299BF6-28E1-4F01-9659-803462EB84DC" />
@@ -165,24 +162,11 @@
   <File Path="xetexExe\share\texmf\doc\fontconfig\fc-list.pdf" ComponentGuid="2C9297AF-60E7-40E6-BE5B-B7C57449A54F" />
   <File Path="xetexExe\share\texmf\doc\fontconfig\fc-cat.pdf" ComponentGuid="69355004-4D8B-49FB-884B-F603865FB522" />
   <File Path="xetexExe\share\texmf\doc\fontconfig\fc-cache.pdf" ComponentGuid="0D86AB60-FA68-4F74-844F-E737CFCF36C2" />
-  <File Path="xetexExe\bin\xetex.exe" ComponentGuid="C1CA3C05-886A-4C2B-9CC1-B9F327FF4F5F" />
-  <File Path="xetexExe\bin\xdvipdfmx.exe" ComponentGuid="87A3BA72-549C-4A8E-83A9-8EE365F0AF82" />
   <File Path="xetexExe\bin\teckit_compile.exe" ComponentGuid="E2C95E2A-FD48-462B-8BF3-56D4A32445F6" />
-  <File Path="xetexExe\bin\msvcr71.dll" ComponentGuid="10B5EEB9-2567-4D90-8BAC-E2372BE0CC23" />
-  <File Path="xetexExe\bin\msvcp71.dll" ComponentGuid="ABEE94C5-F237-4948-83CB-02CA8E7F2470" />
-  <File Path="xetexExe\bin\kpathsea35771.dll" ComponentGuid="EF79F1BB-2DDD-4B0B-A92A-03D554589ACC" />
-  <File Path="xetexExe\bin\icudt38.dll" ComponentGuid="CB2170B5-7075-4FFC-AC1E-0D7AD6A5DADC" />
-  <File Path="xetexExe\bin\fc-match.exe" ComponentGuid="4CABB30C-5CA5-4AE3-B138-29A3F1025B75" />
-  <File Path="xetexExe\bin\fc-list.exe" ComponentGuid="78DBE74D-9201-46AA-B396-BB0EE0D3DA39" />
-  <File Path="xetexExe\bin\fc-cat.exe" ComponentGuid="5E85BBD8-58B4-4781-9425-0E88FC3DB2CB" />
-  <File Path="xetexExe\bin\fc-cache.exe" ComponentGuid="9ED1C2E3-4FFD-4CF2-850A-860A8D806BAD" />
   <File Path="TE_XHTML-to-YouVersion_SQL.xslt" ComponentGuid="448582D3-E738-4715-A4E9-BD40164F2F57" />
   <File Path="TE_XHTML-to-YouVersion_OneChapter_SQL.xslt" ComponentGuid="96E469DB-B09C-4A6E-AE89-14833619F574" />
-  <File Path="epubValidator.pdb" ComponentGuid="A489F3F0-9527-4029-AF63-A8E4C6B2F124" />
   <File Path="TE_FixChapters_XHTML.xslt" ComponentGuid="949F04B7-B46E-44CE-AAC2-18C49A4A267B" />
   <File Path="OpenOfficeConvert_OLD.pdb" ComponentGuid="AA5EE136-17AD-4F5B-BB39-BBD444C0C456" />
-  <File Path="YouVersionConvert.pdb" ComponentGuid="6F6BB65E-30BD-4E5C-AC6E-EF7A4DCAC886" />
-  <File Path="YouVersionConvert.dll" ComponentGuid="E4606DF6-FA60-4C06-8D2F-CF050CAEA6E6" />
   <File Path="YouVersion.xpr" ComponentGuid="08A6169E-B74F-476F-9273-CD1CAF677052" />
   <File Path="TE_XHTML-to-YouVersion_OneChapter_HTML.xslt" ComponentGuid="E233D3B1-9975-4030-A0ED-DE56285EFCD9" />
   <File Path="Styles\Dictionary\PageNumber_TopCenterMirrored.css" ComponentGuid="90B10E10-2F12-4935-A05C-6201B33F7311" />
@@ -197,7 +181,6 @@
   <File Path="Styles\Scripture\Running_Head_Paged_Chapter_Abbr.css" ComponentGuid="F9CE5EE8-C98B-4A6F-BF77-E1275D3F937E" />
   <File Path="Styles\Scripture\Running_Head_Mirrored_Verse_Abbr.css" ComponentGuid="750875A7-EEE0-4E55-B642-E7DC35ADB6B1" />
   <File Path="Styles\Scripture\Running_Head_Mirrored_Chapter_Abbr.css" ComponentGuid="285C8A91-F4A1-48E1-B020-EF50CE7D8FA5" />
-  <File Path="epubValidator.exe" ComponentGuid="3F8FAF63-9412-4B14-BA2E-F755DE40D95E" />
   <File Path="epubcheck-1.1\README.txt" ComponentGuid="55170368-EEA5-4986-B9DE-EEB5BF15258D" />
   <File Path="epubcheck-1.1\jing_license.txt" ComponentGuid="084770C6-AB9D-440E-9594-4BFCD46BA767" />
   <File Path="epubcheck-1.1\jigsaw_license.txt" ComponentGuid="5739B5A3-B1F0-45D1-8D98-FCF3CB24F117" />
@@ -221,7 +204,6 @@
   <File Path="Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p2.jpg" ComponentGuid="8A202ADD-79BB-4A14-AA34-6CE2B0A27C7D" />
   <File Path="Styles\Scripture\Preview\GPS - A4 - 1 Col - Charis 11 on 13 p1.jpg" ComponentGuid="86A47557-5FB2-4468-82FE-B57911124459" />
   <File Path="Help\Intellectual_Property.docx" ComponentGuid="1BCE0C03-F784-4FBA-8DCF-4A2B343B5A2F" />
-  <File Path="epubConvert.pdb" ComponentGuid="5021D5B3-5CA3-4949-8A47-B46022C925A6" />
   <File Path="Styles\Scripture\PageNumber_TopOutside.css" ComponentGuid="6F9215C6-D1AF-41F5-B2AD-CC8BD2F9AF4E" />
   <File Path="Styles\Scripture\PageNumber_TopInside.css" ComponentGuid="E7D44637-EF54-4A10-AAA2-58B8C9C9BE5F" />
   <File Path="Styles\Scripture\PageNumber_TopCenter.css" ComponentGuid="7A80AA95-DB91-4AA8-9325-C32AB182BFA5" />
@@ -238,7 +220,6 @@
   <File Path="Styles\Dictionary\PageNumber_BottomInside.css" ComponentGuid="62130D43-231C-4C43-97C0-2FE1EF981F70" />
   <File Path="Styles\Dictionary\PageNumber_BottomCenter.css" ComponentGuid="87010BF9-BA6B-4E2F-B0B6-3752467FC9C1" />
   <File Path="Wordpress\main.xhtml" ComponentGuid="12EE59E8-8B91-42CC-8441-DC631DAEB7B7" />
-  <File Path="epubConvert.dll" ComponentGuid="77A148E5-E35E-4E33-A054-9E0F489D2802" />
   <File Path="TE_XHTML-to-epub_XHTML.xslt" ComponentGuid="D3DF2A98-A092-469B-B844-4840D3B419EC" />
   <File Path="epub\mimetype" ComponentGuid="B28BF6C2-C8F4-4753-8B2A-45F3AC8A1A3A" />
   <File Path="epub\META-INF\container.xml" ComponentGuid="324DFF29-DD9D-4E69-A25E-2479B2BEFF26" />
@@ -247,17 +228,6 @@
   <File Path="Styles\Dictionary\Font_Andika.css" ComponentGuid="D54D26DE-C8FB-4D1D-B0B7-7B8317911A2A" />
   <File Path="Styles\Dictionary\epub.css" ComponentGuid="825BB3B9-C8DF-492C-A894-07456432AF7D" />
   <File Path="Pathway_Student_Manual_SE.doc" ComponentGuid="92521FD3-9949-4780-8FDA-B776F1204D89" />
-  <File Path="WordPressConvert.pdb" ComponentGuid="A7AFCCCE-8692-45CA-8088-E8B1DE1E17C3" />
-  <File Path="PathwayB.pdb" ComponentGuid="EDACE7ED-757B-40F7-97E8-E74E0EE03D68" />
-  <File Path="icuuc40.dll" ComponentGuid="CC7562E0-4000-497D-BDCD-238ABE4EC63A" />
-  <File Path="icuin40.dll" ComponentGuid="A4A3FF95-7807-4579-8CA2-3D1AD93412A6" />
-  <File Path="icudt40.dll" ComponentGuid="F57B8784-2DE6-476C-9CF4-7D9217753FE2" />
-  <File Path="PsExport.pdb" ComponentGuid="DB30065D-DF4A-46F6-B508-3CDAE83062DC" />
-  <File Path="ParatextSupport.pdb" ComponentGuid="8D1FB406-38F4-4D65-B052-DE87A1498660" />
-  <File Path="PreviewDll\gsdll32.dll" ComponentGuid="21DB77BF-D766-479D-B2CD-1C1F5C20E27D" />
-  <File Path="gsdll32.dll" ComponentGuid="CDAA1EF4-1EFB-476C-A59B-16A7F24CB19E" />
-  <File Path="Palaso.dll" ComponentGuid="FDC5701D-0080-4E3F-A5D5-C0F067F9C2C3" />
-  <File Path="icu.net.dll" ComponentGuid="032646B7-57DC-462E-B8B4-E40256D0798E" />
   <File Path="PreviewXhtml.xhtml" ComponentGuid="57A26F96-DA3F-4412-9EC7-500CAD83C65D" />
   <File Path="BookletSettings.xml" ComponentGuid="CE74DB20-21BB-42BA-BD32-8378121440AC" />
   <File Path="DEXCTX\miniRuby\lib\libmsvcrt-ruby191.dll.a" ComponentGuid="14760695-C44B-4166-953B-D816D2D10A1F" />
@@ -268,22 +238,14 @@
   <File Path="DEXCTX\miniRuby\lib\ruby\1.9.1\logger.rb" ComponentGuid="AAD6D87A-E3CB-4BAD-BECA-D9321F372E4A" />
   <File Path="DEXCTX\miniRuby\lib\ruby\1.9.1\fileutils.rb" ComponentGuid="DD551D4D-16DE-43D3-8E6D-3F94842CF6D2" />
   <File Path="DEXCTX\miniRuby\lib\ruby\1.9.1\i386-mingw32\rbconfig.rb" ComponentGuid="451CD341-602C-4064-8EA2-949AEC5CD535" />
-  <File Path="DEXCTX\miniRuby\bin\msvcrt-ruby191.dll" ComponentGuid="444F83E2-729D-4490-858D-E5BB290E9BC5" />
   <File Path="TE_XHTML-to-Libronix_Styles.xslt" ComponentGuid="ED4E8314-F194-4994-B4C7-3DDD1DB4E1C4" />
   <File Path="TE_XHTML-to-Libronix_Popups.xslt" ComponentGuid="EC41830C-0CD8-4F79-BC47-7919D312FC46" />
   <File Path="TE_XHTML-to-Libronix_Metadata.xslt" ComponentGuid="C503689A-D48C-4E67-AB7B-4EB99ADAE328" />
   <File Path="TE_XHTML-to-Libronix_Content.xslt" ComponentGuid="EB82A5E1-8563-4487-9262-283FCBF8A1EC" />
-  <File Path="PdfToImage.dll" ComponentGuid="D47B7459-C89C-4CB1-BCCF-78768F0F929C" />
   <File Path="TE_XHTML-to-Libronix_ResourcesFile.xslt" ComponentGuid="3C18DB62-5297-4FBE-AD64-1D82F24170C8" />
   <File Path="TE_XHTML-to-Libronix_NonScrolling.xslt" ComponentGuid="322D2115-3780-49B3-89CC-04A81EB3EC24" />
   <File Path="TE_XHTML-to-Libronix_MainFile.xslt" ComponentGuid="DC1A3884-08A3-4F1F-8A05-82C740455FC8" />
-  <File Path="LogosConvert.pdb" ComponentGuid="29A47124-503A-4453-A9DD-2D7EC01B15DC" />
   <File Path="PathwayB.vshost.exe.manifest" ComponentGuid="E34E6F7C-6248-446D-A1F7-4C3F4AABC0A7" />
-  <File Path="LogosConvert.dll.config" ComponentGuid="D0946813-E58F-4697-A8BD-6AA3371D0468" />
-  <File Path="LogosConvert.dll" ComponentGuid="A2EAC7BB-DDBC-4D23-A9B9-2A59043F6760" />
-  <File Path="PathwayB.vshost.exe" ComponentGuid="B28C77A7-0944-4FE2-94F7-5D8FB5E44C06" />
-  <File Path="PathwayB.exe" ComponentGuid="FA3A7CAC-8AF2-402D-96C9-AB947CD2D04D" />
-  <File Path="PsExport.dll" ComponentGuid="C3787096-9CCA-4E05-BEBC-BA6DF06E0D75" />
   <File Path="pxhtml2xpw-scr.xsl" ComponentGuid="6C5679A1-5E3D-4B31-80FD-6F10C2BE58FD" />
   <File Path="pxhtml2xpw-dict.xsl" ComponentGuid="840B4E06-A05A-49F1-96E0-BBE9CF391BD8" />
   <File Path="FieldworksVersions.txt" ComponentGuid="34981D8A-EA9C-4CF4-8CB3-D0A3EF3263D6" />
@@ -307,12 +269,10 @@
   <File Path="xetexPathway\cobalt\dictionary\dictionary.tex" ComponentGuid="C1A15BE9-6CD8-4FF0-8AEF-84A2BBF9B41E" />
   <File Path="WordPress\WordPress.bat" ComponentGuid="175514EC-2D74-4F38-BB0B-18429A2E7916" />
   <File Path="WordPress\WordPress site setup.txt" ComponentGuid="893462B1-25B6-40B3-85A2-58B3F5D59868" />
-  <File Path="WordPress\w9xpopen.exe" ComponentGuid="5BE102AB-F805-4FFB-989D-5F38864C50DA" />
   <File Path="WordPress\Translation-tpl.htt" ComponentGuid="6C22C39C-0049-4332-BB19-CE9887705951" />
   <File Path="WordPress\Table-tpl.htt" ComponentGuid="BF276F83-B210-4A99-8F7B-60598265981C" />
   <File Path="WordPress\SubEntry-tpl.htt" ComponentGuid="2E339305-6EBF-416B-84CA-8F44A30DBB2D" />
   <File Path="WordPress\site.css" ComponentGuid="66EC956C-9BC8-46A6-AFF4-57BCEC91C2E9" />
-  <File Path="WordPress\MSVCR71.dll" ComponentGuid="C9E58AF7-C206-41D6-9807-FC6F6FA6C681" />
   <File Path="WordPress\media.htt" ComponentGuid="6667CBEF-4B54-42BA-BF5D-A1B7C9A6A10B" />
   <File Path="WordPress\Media-tpl.htt" ComponentGuid="C1C121FE-F920-4CBB-93AA-035E12C33B81" />
   <File Path="WordPress\index-tpl.htt" ComponentGuid="308AD28A-F978-4975-8355-F25825B559A8" />
@@ -320,7 +280,6 @@
   <File Path="WordPress\Example-tpl.htt" ComponentGuid="CE26B6BC-E55E-424F-AEAF-EA8D39F8D529" />
   <File Path="WordPress\Entry-tpl.htt" ComponentGuid="8A203872-32D4-4F43-A198-CA79C1E5CF6F" />
   <File Path="WordPress\blogExport.py" ComponentGuid="DB38F618-55DB-4687-9A39-42B481EC8DA3" />
-  <File Path="WordPress\BlogExport.exe" ComponentGuid="79E016CB-1EA1-4F90-B439-F6F2B53DC1B7" />
   <File Path="OfficeFiles\Scripture\mimetype" ComponentGuid="0538D6CC-691B-42C6-8B50-7228160125EA" />
   <File Path="OfficeFiles\Scripture\Thumbnails\thumbnail.png" ComponentGuid="5E9E6018-F533-4758-9D70-17221BD23212" />
   <File Path="OfficeFiles\Scripture\Pictures\temp.txt" ComponentGuid="5AD7BD2C-ED3F-4CC7-BE98-CBA8428EC8CD" />
@@ -557,22 +516,13 @@
   <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\digest.so" ComponentGuid="2A07F06A-1F2B-423A-BE2C-F4DB97B7484E" />
   <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\win32\win32.h" ComponentGuid="A43391BA-E3A0-4282-9A6F-001A37AF1573" />
   <File Path="DEXCTX\miniRuby\lib\ruby\1.8\i386-mswin32\digest\md5.so" ComponentGuid="2E3DFEF7-C4A7-4187-BC50-20AD99FB5816" />
-  <File Path="DEXCTX\miniRuby\bin\ruby.exe" ComponentGuid="BC332243-326A-458C-8DD6-B1268299355C" />
-  <File Path="DEXCTX\miniRuby\bin\msvcrt-ruby18.dll" ComponentGuid="B473B2A5-22A7-44E2-A17B-535E31ADB188" />
   <File Path="DEXCTX\miniCTX\setuptex.bat" ComponentGuid="17862C28-0572-42F8-8FDB-EE208F61B4D9" />
   <File Path="DEXCTX\miniCTX\texmf-mswin\ls-R" ComponentGuid="E6B4E697-DB58-4ED2-B3E7-D6316BBC128C" />
   <File Path="DEXCTX\miniCTX\texmf-mswin\web2c\xetex\cont-en.log" ComponentGuid="68887247-3EBF-4EFD-8C27-A09BF5D8469B" />
   <File Path="DEXCTX\miniCTX\texmf-mswin\web2c\xetex\cont-en.fmt" ComponentGuid="273395F7-43F9-4FFD-BE48-1D23FC5B5B76" />
   <File Path="DEXCTX\miniCTX\texmf-mswin\fonts\conf\fonts.conf" ComponentGuid="3892C7F9-AF23-4916-8E51-0AA92758A4BB" />
   <File Path="DEXCTX\miniCTX\texmf-mswin\fonts\cache\fe1dbb5a98cb4443939b32b1858eec08-x86.cache-2" ComponentGuid="67295EF0-1B47-45F8-8CA5-F5FC8C54D898" />
-  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\xetex.exe" ComponentGuid="535FF197-2206-41F5-989C-740D738F3772" />
-  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\xdvipdfmx.exe" ComponentGuid="21003C4D-5E90-4065-9F5E-1C16EFE1F2F8" />
   <File Path="DEXCTX\miniCTX\texmf-mswin\bin\texexec.cmd" ComponentGuid="A6E887FA-A716-451B-8D2B-779AEF6AE13E" />
-  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\msvcr71.dll" ComponentGuid="0F4609D7-B482-4111-B99C-CBCFD6767FD0" />
-  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\msvcp71.dll" ComponentGuid="DCD07620-D099-4C71-961D-0EC6F593546A" />
-  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\kpathsea50071.dll" ComponentGuid="6DE7C14C-F087-469A-9AB4-F9833A7802BB" />
-  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\kpathsea500.dll" ComponentGuid="2AB547BA-011C-4E6F-AFD9-23D27C90FC1F" />
-  <File Path="DEXCTX\miniCTX\texmf-mswin\bin\icudt40.dll" ComponentGuid="60D94E5B-9F6D-4E5D-AF25-5CFF1FBA66C9" />
   <File Path="DEXCTX\miniCTX\texmf-context\ls-R" ComponentGuid="4317AC7E-C737-4E22-A04B-860F488CEA9D" />
   <File Path="DEXCTX\miniCTX\texmf-context\web2c\natural.tcx" ComponentGuid="8F38AC29-C9F3-4A71-9A7A-54AE68483C49" />
   <File Path="DEXCTX\miniCTX\texmf-context\web2c\context.cnf" ComponentGuid="C42B637C-FD24-4793-9253-0C4436E29ECC" />
@@ -720,27 +670,6 @@
   <File Path="DEXCTX\miniCTX\texmf\fonts\map\dvips\lm\lm-rm.map" ComponentGuid="B902F19D-DB14-4B31-B3AE-336B185CAC23" />
   <File Path="DEXCTX\miniCTX\texmf\fonts\map\dvips\lm\lm-math.map" ComponentGuid="5B185C02-8C49-4BFC-9B16-30BCBECBBEFF" />
   <File Path="BackEnds\dicTemplate.tpl" ComponentGuid="F55E4943-1E57-4E63-B43A-505EF85BDB0F" />
-  <File Path="ParatextSupport.dll.config" ComponentGuid="18A042BF-0A51-425F-81CF-3A08F6157627" />
-  <File Path="ParatextSupport.dll" ComponentGuid="3FA85BA4-176B-4884-AA44-927CB81FD6BA" />
-  <File Path="XeTeXConvert.pdb" ComponentGuid="393F5EA5-B5B5-4374-88A1-1A8E0FEEEA9C" />
-  <File Path="XeTeXConvert.dll.config" ComponentGuid="4BDACAF5-B1FA-4592-BE98-76058A781BC6" />
-  <File Path="XeTeXConvert.dll" ComponentGuid="4DF216BC-373C-4B33-902C-1A96BBD08EF0" />
-  <File Path="WordPressConvert.dll" ComponentGuid="10AED192-8024-462A-B107-8779529BFB64" />
-  <File Path="PdfConvert.pdb" ComponentGuid="4A0169D9-8128-4289-9073-7A73D54370EC" />
-  <File Path="PdfConvert.dll.config" ComponentGuid="59943663-C5CA-4FEA-BA86-5418DFAA8E2E" />
-  <File Path="PdfConvert.dll" ComponentGuid="CB593E53-0D93-4D32-BCA2-1AF13F4CA6C0" />
-  <File Path="OpenOfficeConvert.pdb" ComponentGuid="5B14D18D-2E91-41DF-91B9-2298C38486AE" />
-  <File Path="OpenOfficeConvert.dll" ComponentGuid="67017AFA-7312-4400-9DBB-2FCB551A32A0" />
-  <File Path="LiftPrepare.pdb" ComponentGuid="2BC4455C-3ADD-4EB1-9424-D8AEDD28564D" />
-  <File Path="LiftPrepare.dll.config" ComponentGuid="F756E850-D8F7-4C0B-A7C1-4670B7D501FD" />
-  <File Path="LiftPrepare.dll" ComponentGuid="31462A57-2C05-406B-87EF-2EFBE99855E2" />
-  <File Path="InDesignConvert.pdb" ComponentGuid="ED199DED-A084-462C-B0A9-4A46B3C064BD" />
-  <File Path="InDesignConvert.dll.config" ComponentGuid="13FA79DD-5184-4EF8-93C8-1F425C0C4F17" />
-  <File Path="InDesignConvert.dll" ComponentGuid="1E2C760A-599E-45DA-9AC6-54891D05328D" />
-  <File Path="GoBibleConvert.pdb" ComponentGuid="4B570ACD-C9EB-496E-9184-5EA267AB58E0" />
-  <File Path="GoBibleConvert.dll.config" ComponentGuid="4A41AEA9-2CB2-4D70-AF0A-DC981F713ED4" />
-  <File Path="GoBibleConvert.dll" ComponentGuid="AAB61F93-9B0E-473B-BDF8-8975E1F6152B" />
-  <File Path="BackEnds\WordPressConvert.dll" ComponentGuid="C43C67B2-A728-44E7-AC39-FFC7D6C79604" />
   <File Path="Styles\Scripture\GoBible.css" ComponentGuid="40D80A14-6988-49A2-BB1E-F218151E4C88" />
   <File Path="Styles\Dictionary\GoBible.css" ComponentGuid="CB4D435C-07F7-4A40-99BF-754518AE99B3" />
   <File Path="Styles\Scripture\VerticalJustify_Top.css" ComponentGuid="1C26682A-7C4A-4E6E-BEE0-A8EABDB2D66B" />
@@ -749,9 +678,6 @@
   <File Path="Styles\Dictionary\VerticalJustify_Top.css" ComponentGuid="8E47A2B7-7475-4EFF-B2AD-BB237FE1F28B" />
   <File Path="Styles\Dictionary\VerticalJustify_Center.css" ComponentGuid="95D145E7-4BEB-41B2-B87D-FFEB8D4C206F" />
   <File Path="Styles\Dictionary\VerticalJustify_Bottom.css" ComponentGuid="AB8BA100-1EB6-4102-85DF-6F0108613673" />
-  <File Path="BackEnds\GoBibleConvert.pdb" ComponentGuid="9D579CFE-ECAD-4E9A-A182-F86D566D07A3" />
-  <File Path="BackEnds\GoBibleConvert.dll.config" ComponentGuid="6C48278D-5AD8-4D15-8AF9-40B432AFF85B" />
-  <File Path="BackEnds\GoBibleConvert.dll" ComponentGuid="39A4AFB1-81C5-43C5-8610-60EEBE362524" />
   <File Path="Samples\Scripture\Scripture.de" ComponentGuid="8DAD281B-CE4E-4234-9363-D4AD756B1B6B" />
   <File Path="Samples\Scripture\Pictures\lion.tif" ComponentGuid="44EF7B29-CB5E-4BFB-B6DC-717157E0AC78" />
   <File Path="Samples\Dictionary\Dictionary.de" ComponentGuid="21718DFF-7179-4A3B-A90A-A543AAABF6F9" />
@@ -762,9 +688,6 @@
   <File Path="Styles\Dictionary\Preview\FieldworksArabicBased_Layout_13 p1.jpg" ComponentGuid="F71B26E1-1BD2-4893-9EF5-1016D6C9E4E3" />
   <File Path="Styles\Dictionary\Vernacular_ScheherazadeGraphite.css" ComponentGuid="8780AF8E-CAF5-43DB-A30D-F4562E2D7FF1" />
   <File Path="Styles\Dictionary\Layout_13.css" ComponentGuid="F581DEFD-5D9C-4B22-8EC8-1C18DCF96BAD" />
-  <File Path="BackEnds\XeTeXConvert.pdb" ComponentGuid="46E171E2-D466-4ECC-AD76-CE055098DEDF" />
-  <File Path="BackEnds\XeTeXConvert.dll.config" ComponentGuid="96755BFE-3D9C-4799-9C8D-967550318E05" />
-  <File Path="BackEnds\XeTeXConvert.dll" ComponentGuid="523655A4-20B9-439C-8997-140D2AF0E452" />
   <File Path="Styles\Dictionary\Preview\TwoColumn_LayoutTwoCol p2.jpg" ComponentGuid="09DB5716-7EBD-4017-A132-4B60209E50A2" />
   <File Path="Styles\Dictionary\Preview\TwoColumn_LayoutTwoCol p1.jpg" ComponentGuid="E3377443-4B44-4830-9556-44697D1A41D5" />
   <File Path="Styles\Dictionary\Preview\Pacific_Layout_04 p2.jpg" ComponentGuid="25C7D5A8-0A0C-4EEF-BB4B-9A22F9056DA4" />
@@ -778,14 +701,6 @@
   <File Path="Styles\Dictionary\Background_Transparent.css" ComponentGuid="07B23AF4-FFAE-4ABB-B26F-D6A91A93AC51" />
   <File Path="Styles\Dictionary\Background_nc.css" ComponentGuid="B2B4A3EF-D79F-4BF1-86C0-2D33184E5897" />
   <File Path="Help\Pathway_Configuration_Tool_SE.chm" ComponentGuid="6346D451-1AA1-476B-9AA6-6FD8E4B1CA14" />
-  <File Path="saxon9he.dll" ComponentGuid="4CDA936C-268B-4FFF-8F38-2A1C07661202" />
-  <File Path="saxon9he-api.dll" ComponentGuid="12EF8054-D3C4-4D5D-A244-939AC2B650E7" />
-  <File Path="IKVM.Runtime.dll" ComponentGuid="F23B6442-6AF3-4D56-9290-F37FB3BA5D4E" />
-  <File Path="IKVM.OpenJDK.XML.API.dll" ComponentGuid="AB7D798D-812A-438D-BD93-1FCB18F21D9F" />
-  <File Path="IKVM.OpenJDK.Util.dll" ComponentGuid="593BCD4D-8C7D-4B79-993B-EF46D9EAA055" />
-  <File Path="IKVM.OpenJDK.Text.dll" ComponentGuid="C2ED4865-96BD-45C5-9DD7-AE3A7D390635" />
-  <File Path="IKVM.OpenJDK.Core.dll" ComponentGuid="C9DA34FB-42FB-47B4-9DBB-CBA0E47076F9" />
-  <File Path="IKVM.OpenJDK.Charsets.dll" ComponentGuid="2C7F0D88-31BE-4CFD-9720-10B6E8868F7F" />
   <File Path="Styles\Scripture\base_font_sophia.css" ComponentGuid="343DA1D4-75F4-4E06-AC48-946B035F539D" />
   <File Path="Styles\Scripture\base_font_nc.css" ComponentGuid="623CF1EB-2178-4D8A-8859-FFA4DCD696D2" />
   <File Path="Styles\Scripture\base_font_doulos.css" ComponentGuid="7035EAE5-4851-4C0D-B3D4-695BD07DA63D" />
@@ -914,27 +829,13 @@
   <File Path="sectionTypes.xml" ComponentGuid="757C75FE-51D4-455C-A38F-78B79C36B351" />
   <File Path="ScriptureStyleSettings.xml" ComponentGuid="130DC5E5-72F1-4699-A93B-F669051FF255" />
   <File Path="ReadMeBTE.rtf" ComponentGuid="01B9E6C5-821E-4ABF-8D98-FD74D302B235" />
-  <File Path="PsTool.pdb" ComponentGuid="FCA8B89B-405A-494B-B28D-AF50B120B3D0" />
-  <File Path="PsTool.dll" ComponentGuid="0D6BFDFD-E166-44EC-A0BC-FB361525E3AC" />
-  <File Path="Prince.dll" ComponentGuid="C30F680D-259B-4073-A29E-998291D99F87" />
   <File Path="License.rtf" ComponentGuid="2231F3B4-C72B-449E-944A-70BB964EE74E" />
   <File Path="JobList.xml" ComponentGuid="91CA87BF-641F-4BAB-81FC-B730E823CC01" />
-  <File Path="ICSharpCode.SharpZipLib.dll" ComponentGuid="6484C644-8231-4081-94E9-CF513E3610BD" />
   <File Path="GenericFont.xml" ComponentGuid="E1B7740A-D32D-4F07-B79D-3CF4874B03AE" />
-  <File Path="FwUtils.dll" ComponentGuid="AD5DE4E7-835A-4C26-8FFA-E079502C2B4B" />
   <File Path="FLExRev.xsl" ComponentGuid="BEC2DDDD-328E-4A3A-9E54-9800959724FF" />
   <File Path="DictionaryStyleSettings.xml" ComponentGuid="E6A094A7-F09E-4A90-9325-9A62164FED21" />
-  <File Path="CSSParser.pdb" ComponentGuid="ADF7061D-E9A5-4758-A428-EBB09BA2586E" />
-  <File Path="CSSParser.dll" ComponentGuid="528AAE42-B78B-4FF4-B377-E94E451B16DD" />
-  <File Path="CssDialog.pdb" ComponentGuid="F3A7049E-8FAA-4650-8FF2-DE003556950E" />
-  <File Path="CssDialog.dll" ComponentGuid="CAF36038-B3B4-4B85-90AD-59BB10B3A117" />
   <File Path="ConfigurationTool.vshost.exe.config" ComponentGuid="09881EA2-102F-433D-BDC4-4E43F9F31C97" />
-  <File Path="ConfigurationTool.vshost.exe" ComponentGuid="B09855EC-ADB8-4A98-8FFA-3B725AD20294" />
-  <File Path="ConfigurationTool.pdb" ComponentGuid="0D771785-9068-4546-8FAD-D77707B12940" />
   <File Path="ConfigurationTool.exe.config" ComponentGuid="4481307D-F36F-4797-96F0-14BFC6F149D6" />
-  <File Path="ConfigurationTool.exe" ComponentGuid="BFA34EB2-7C0B-490F-89EF-E9CFD94617CC" />
-  <File Path="BasicUtils.dll" ComponentGuid="39655861-1F17-4E47-9A4F-BC91DEEFB9B2" />
-  <File Path="Antlr3.Runtime.dll" ComponentGuid="A5AC90E9-8DF9-4AD9-ACCE-FC95EED04ED9" />
   <File Path="Template\Scripture\Template.xhtml" ComponentGuid="8877F5E5-2ACC-4B46-9C93-4D1337C3DFE0" />
   <File Path="Template\Dictionary\Template.xhtml" ComponentGuid="742F7694-AFB6-4618-BE0F-835BED8310A9" />
   <File Path="styles\Scripture\Scripture.css" ComponentGuid="9DADC154-475E-4881-A204-ED6C88D5CA2D" />
@@ -1142,17 +1043,6 @@
   <File Path="Graphic\advanced.png" ComponentGuid="6D1D40D0-ADAE-4465-AF7D-21AD4A4239DC" />
   <File Path="Graphic\advanced.ico" ComponentGuid="D90A3F42-DE7B-42F7-BF39-107EEAC80C30" />
   <File Path="DEXCTX\miniCTX\texmf-context\tex\context\interface\cont-en.xml" ComponentGuid="12871201-A995-4967-BD6F-1945E24185BA" />
-  <File Path="BackEnds\PdfConvert.pdb" ComponentGuid="50C55C49-E94F-41F8-9579-526A8FD9896B" />
-  <File Path="BackEnds\PdfConvert.dll.config" ComponentGuid="ACB5C7A9-33C5-4CD7-8C04-7991699F8E10" />
-  <File Path="BackEnds\PdfConvert.dll" ComponentGuid="A10F6A56-0447-416C-8CA4-B35F7F7FACE7" />
-  <File Path="BackEnds\OpenOfficeConvert.pdb" ComponentGuid="DE8B83E2-923C-44F5-AB97-2BC5197C024B" />
-  <File Path="BackEnds\OpenOfficeConvert.dll" ComponentGuid="2BFF6F29-AD9D-4B4E-B8B8-E44A4167DB99" />
-  <File Path="BackEnds\LiftPrepare.pdb" ComponentGuid="7DCBD1C1-F5DB-4BBC-BDC5-B077207F3A17" />
-  <File Path="BackEnds\LiftPrepare.dll.config" ComponentGuid="9E755DD5-B62A-4B82-A2BF-C2B25213025B" />
-  <File Path="BackEnds\LiftPrepare.dll" ComponentGuid="386EB0A7-E634-4419-9D23-66303974C669" />
-  <File Path="BackEnds\InDesignConvert.pdb" ComponentGuid="A534A4A7-8306-4DEA-B486-AB2F5ECA1539" />
-  <File Path="BackEnds\InDesignConvert.dll.config" ComponentGuid="F66EA656-95C2-4C57-BE3F-901EB87B4872" />
-  <File Path="BackEnds\InDesignConvert.dll" ComponentGuid="0E167417-2E96-4340-8E6A-A715F64D9CD9" />
   <File Path="Copyrights\by.png" ComponentGuid="D5145460-8939-4B1B-8D05-D1039174CB71" />
   <File Path="Copyrights\CC-by-nc-nd.xhtml" ComponentGuid="75097076-C8A2-4DC0-AB11-BAF62D3BD130" />
   <File Path="Copyrights\CC-by-nc-sa.xhtml" ComponentGuid="9024B776-E673-47AE-8F11-D74ED5D61B49" />
@@ -1364,16 +1254,8 @@
   <File Path="Styles\Scripture\Running_Head_Paged_Chapter.css" ComponentGuid="262C604E-C1D5-4416-8FBA-BA91431CC5E4" />
   <File Path="Styles\Scripture\Running_Head_Paged_Verse.css" ComponentGuid="BD136DF3-97D2-46C5-BB91-C24FEFA99EF3" />
   <File Path="Styles\Scripture\Scripture.css" ComponentGuid="017018A9-B459-4C06-924C-53F1DC4D2078" />
-  <File Path="CssParser.dll" ComponentGuid="6F8ED447-F49D-46B1-9113-A4BEFDEC3581" />
-  <File Path="CssParser.pdb" ComponentGuid="50993DB5-E792-4D59-94BD-0B87EB70AC52" />
-  <File Path="LibreOfficeConvert.dll" ComponentGuid="C9A44815-8F75-4E9E-B911-5CACE70FD823" />
-  <File Path="LibreOfficeConvert.pdb" ComponentGuid="C2772F24-0333-45A8-9728-1B96DC7C3FD6" />
   <File Path="punct_XHTML.xslt" ComponentGuid="829F22F2-2576-404F-8DBC-6BD546F961AD" />
   <File Path="StyleSettings.xsd" ComponentGuid="EA1D5F39-23EB-4308-8A1E-90433161A112" />
-  <File Path="XeLaTexWriter.dll" ComponentGuid="E0E61B4C-3939-4F0B-815F-E0D3859B39A1" />
-  <File Path="XeLaTexWriter.dll.config" ComponentGuid="58F6630C-438F-4B4F-859C-0163B66D8315" />
-  <File Path="XeLaTexWriter.pdb" ComponentGuid="94866210-6D9D-48A1-8595-6C3D2AB48528" />
-  <File Path="icu.net.dll.config" ComponentGuid="11D12BAB-E3DD-4E56-BA45-C7694B6CDD41" />
   <File Path="Styles\Dictionary\Reversal_Reference_Numbers.css" ComponentGuid="F0E29C59-9566-41F4-B645-7858D3D9C43A" />
   <File Path="Styles\Dictionary\PageNumber_BottomCenter_Mirrored.css" ComponentGuid="DCE200F5-0719-4295-9F82-A7DE03EAB341" />
   <File Path="Preprocessing\Remove Empty Divs.xsl" ComponentGuid="98FB82D7-74B0-4382-8113-CA78AE124312" />
@@ -1394,8 +1276,6 @@
   <File Path="Preprocessing\Dictionary\Remove Leter Dividers.xsl" ComponentGuid="F2EEDB95-4234-4590-B04D-244268F8E4BF" />
   <File Path="Preprocessing\Dictionary\Remove Leter Dividers2.xsl" ComponentGuid="42748259-07E8-4857-A22B-6D15E8A38B04" />
   <File Path="Styles\Dictionary\OneWeb.css" ComponentGuid="3174674E-FA11-4D96-936D-3D8D789812C7" />
-  <File Path="MySql.Data.dll" ComponentGuid="DE6E4700-51B5-455B-9B69-9E245E036BAC" />
-  <File Path="MySql.Web.dll" ComponentGuid="72D4AC98-0A74-4F2B-B68C-9F0972ABF879" />
   <File Path="Lame\images\CVS\Entries" ComponentGuid="6005FBE1-6EB5-43FD-A64E-B340EF1F1123" />
   <File Path="Lame\images\CVS\Entries.Extra" ComponentGuid="01F714D6-097B-4C4F-880E-1D88844D387A" />
   <File Path="Lame\images\CVS\Repository" ComponentGuid="13902A6C-C894-45B1-B7F1-90B67D340928" />
@@ -1421,7 +1301,6 @@
   <File Path="Lame\index.html" ComponentGuid="CFD7BBA0-A884-4699-AC00-CA8D92F366D3" />
   <File Path="Lame\introduction.html" ComponentGuid="BC4949BF-813E-4C57-AD59-EBE0402F554A" />
   <File Path="Lame\Lame source.url" ComponentGuid="6619A16C-4755-4C5F-A2FE-07E50231A6B8" />
-  <File Path="Lame\lame.exe" ComponentGuid="6DAC211B-0C83-44FA-9412-C2A043B5C082" />
   <File Path="Lame\lame_enc.dll" ComponentGuid="9FF1D435-FA8B-4063-8678-DD0E0EA7EEAA" />
   <File Path="Lame\links.html" ComponentGuid="F780DA77-170C-4FB4-AC19-BE40DA3ACC61" />
   <File Path="Lame\list.html" ComponentGuid="1C1EC55E-9FD4-4603-AA26-4C8193F0095F" />
@@ -1430,14 +1309,9 @@
   <File Path="Lame\vbr.html" ComponentGuid="D20AD2CF-D733-423A-971D-108FEDE0CF01" />
   <File Path="OfficeFiles\Dictionary\manifest.rdf" ComponentGuid="F12848DF-D06D-4A97-8A32-6603712A22FC" />
   <File Path="OfficeFiles\Scripture\manifest.rdf" ComponentGuid="33FA85FE-1A3A-4B31-B5B6-AB9A7B8AB7E9" />
-  <File Path="HelpImprove.exe" ComponentGuid="249D0407-CC85-4130-AACF-4F7EB009DB15" />
   <File Path="HelpImprove.exe.config" ComponentGuid="8B5BC8D2-792E-4F39-B4A1-E1BC06E03A07" />
-  <File Path="HelpImprove.pdb" ComponentGuid="BF61CBD4-326A-4D6E-A7DE-E561CD97546C" />
   <File Path="Preprocessing\Dictionary\Remove Letter Dividers.xsl" ComponentGuid="95ED446E-393E-42FD-ACF1-643E6143887E" />
   <File Path="Preprocessing\Dictionary\Remove Letter Dividers2.xsl" ComponentGuid="07C2384D-0EE1-41FA-9CDC-B84F537DCBDA" />
-  <File Path="CadreBibleConvert.dll" ComponentGuid="394DCD00-9F2B-49DA-80A5-C15E68A2687B" />
-  <File Path="CadreBibleConvert.dll.config" ComponentGuid="CF678233-3ECA-47FC-BA87-58F3D3E08DDE" />
-  <File Path="CadreBibleConvert.pdb" ComponentGuid="F0D881D3-553B-4331-A23D-9326CB0C1F26" />
   <File Path="Styles\Scripture\Page_size_6inx9in.css" ComponentGuid="0F629B31-B4CD-419F-9F0E-3E92263CB662" />
   <File Path="Styles\Scripture\Page_size_GPS1.css" ComponentGuid="71EFF133-2C33-4D85-B48E-B59612E0C27D" />
   <File Path="Styles\Scripture\Page_size_GPS2.css" ComponentGuid="0ECA7B84-01F3-42DF-A3E2-5260733D219C" />
@@ -1664,25 +1538,14 @@
   <File Path="TheWord\x64\System.Data.SQLite.DLL" ComponentGuid="23878D79-29E6-4F79-99F5-9BF3A791BCCA" />
   <File Path="TheWord\biblebase.sqlite" ComponentGuid="39FACE3B-2229-4649-9864-EB18D4746BA1" />
   <File Path="TheWord\License.txt" ComponentGuid="0688B12F-DF1A-4C0E-8CF8-59D823F348D8" />
-  <File Path="TheWord\log4net.dll" ComponentGuid="B5202C32-8B78-4978-9185-CF4A5BFA7915" />
-  <File Path="TheWord\RTF2MySwordHTML.dll" ComponentGuid="1091257E-8102-4940-A2ED-E075F1137433" />
-  <File Path="TheWord\TheWordBible2MySword.exe" ComponentGuid="FBA92E4E-3876-4F36-B05C-470533CA26C2" />
   <File Path="TheWord\TheWordBible2MySword.exe.config" ComponentGuid="849E084A-4223-435C-A1BF-6DC86DE2CB02" />
   <File Path="Wordpress\icon.ico" ComponentGuid="8CEBCDCC-2769-416C-8362-B4E5EAD84ECC" />
-  <File Path="ApplyPDFLicenseInfo.exe" ComponentGuid="1C07B91B-BC51-4FB8-BE93-687ED68C30B5" />
   <File Path="ApplyPDFLicenseInfo.exe.config" ComponentGuid="3C7160CD-957E-4661-9594-CBE2AC8283F7" />
-  <File Path="ApplyPDFLicenseInfo.pdb" ComponentGuid="BDACB5FE-B9B4-48A2-A4BE-9DD3C41371A2" />
-  <File Path="DictionaryForMIDsConvert.dll" ComponentGuid="213E4DA4-CCB6-44A6-8AFC-324A58E9416E" />
-  <File Path="DictionaryForMIDsConvert.dll.config" ComponentGuid="E1FC91F0-42E3-4499-9873-CC6E730C4F14" />
-  <File Path="DictionaryForMIDsConvert.pdb" ComponentGuid="4B6374E6-2D78-4CD8-BA68-5520EF6367B8" />
   <File Path="FixEpub.xsl" ComponentGuid="F0717AC6-0958-442F-A42A-0A48A15427A6" />
   <File Path="FixEpubToc.xsl" ComponentGuid="93C98672-E00F-430F-B7FA-B1FF21CF66CC" />
   <File Path="mets.xml" ComponentGuid="EF465789-F6E0-4D03-AFE8-828FB2D92AA2" />
   <File Path="pdflicensemanager-2.3.jar" ComponentGuid="05027363-8C53-40BD-A858-01CCE6EFB998" />
   <File Path="RampLangCode.xml" ComponentGuid="5A67FD52-85D2-403E-B5D7-8B8C78EF172D" />
-  <File Path="TheWordConvert.dll" ComponentGuid="A94BEF10-B150-44C1-9CC2-660426C0C3DF" />
-  <File Path="TheWordConvert.dll.config" ComponentGuid="2AF24AD4-919F-407C-9F6E-3FDE10B1456F" />
-  <File Path="TheWordConvert.pdb" ComponentGuid="D9F5F10C-0B65-4DC1-BBBB-62FF0537298D" />
   <File Path="vrs.xml" ComponentGuid="3F6155C2-AC50-496A-8986-62EE4019F9B8" />
   <File Path="Copyrights\2014_sil_logo.png" ComponentGuid="B539F313-09E1-44AA-8E1F-66F072046C8A" />
   <File Path="localizations\Pathway.fr.tmx" ComponentGuid="B765A184-48E7-4586-B7AC-066473833A04" />
@@ -1717,50 +1580,16 @@
   <File Path="Styles\Scripture\Running_Head_Ref_None.css" ComponentGuid="F9C679BB-5C51-4EEE-B9F1-A112C0C3DBCF" />
   <File Path="AddBidi.xsl" ComponentGuid="EC6B7C57-3E7A-413D-8195-926FB81BBB79" />
   <File Path="ConvertUSXtoOSIS.xsl" ComponentGuid="72EA04EA-D5C1-4518-9DEA-EAE86891792F" />
-  <File Path="DesktopAnalytics.dll" ComponentGuid="BD8B9ADE-6ED1-4D78-9987-2BFD8BD4E916" />
   <File Path="DesktopAnalytics.xml" ComponentGuid="A13DBECC-D13C-4D34-BF3B-7A0401A45453" />
-  <File Path="Devart.Data.dll" ComponentGuid="B4F301DC-2858-419E-BAA5-DFD813E79D5A" />
-  <File Path="Devart.Data.SQLite.dll" ComponentGuid="BA3BAA24-3D47-4AA2-9E34-AF6477D81068" />
   <File Path="Devart.Data.SQLite.xml" ComponentGuid="6FE38B36-558D-4286-840C-85EAA4CF6414" />
   <File Path="Devart.Data.xml" ComponentGuid="0FB4B2C1-D07F-4543-8179-2077F1CA3B0A" />
   <File Path="epubValidator.exe.config" ComponentGuid="3A053DC0-CFD0-49DC-8105-AF6A18BDFB1B" />
-  <File Path="L10NSharp.dll" ComponentGuid="536A75FC-7F8B-4E79-83B0-EE69F618ED41" />
   <File Path="PathwayB.exe.config" ComponentGuid="C1C4BC65-4958-489B-A639-DB27CA605533" />
-  <File Path="PdfLicense.exe" ComponentGuid="74C17F92-8997-4387-8156-DC737C398540" />
   <File Path="PdfLicense.exe.config" ComponentGuid="0AECF5B3-D42C-454A-A464-682269350F3D" />
-  <File Path="PdfLicense.pdb" ComponentGuid="E17D67E5-81AA-47FE-AB09-37D600501EA4" />
-  <File Path="sqlite3.dll" ComponentGuid="BF63317E-85A9-4034-A459-DE89041D5774" />
   <File Path="StyleMap.xml" ComponentGuid="8DF2A78A-48B6-4FE2-9541-02EBA45AF6AD" />
   <File Path="Xhtml-Usx.xsl" ComponentGuid="1B1E4E21-C67D-423E-AAAD-0458C796973A" />
   <File Path="Xhtml2BookNames.xsl" ComponentGuid="E1114AB6-365F-49D5-B095-462B14BDDDC6" />
-  <File Path="XslProcess.exe" ComponentGuid="EB409494-9138-461E-A1EC-FC1A0C58332F" />
   <File Path="XslProcess.exe.config" ComponentGuid="8EBB1FB4-CD7B-4B19-9C30-800B0F91406C" />
-  <File Path="XslProcess.pdb" ComponentGuid="E180ED11-B8AE-4DF1-B872-5D4C606B740B" />
-  <File Path="Sword\addgb.exe" ComponentGuid="6C9EDA94-4C11-4E47-9D21-6C19D17A5217" />
-  <File Path="Sword\addld.exe" ComponentGuid="5421E9F9-5FD2-4ECC-AA3D-9198259C971A" />
-  <File Path="Sword\addvs.exe" ComponentGuid="6D7E5A78-5C42-4B43-8523-6FC09FC05DB2" />
-  <File Path="Sword\cipherraw.exe" ComponentGuid="EE03E476-86AC-4CE2-88E0-F6CA8D6A89AB" />
-  <File Path="Sword\diatheke.exe" ComponentGuid="D737E962-8885-4A8C-854E-7C4F85A1F660" />
-  <File Path="Sword\emptyvss.exe" ComponentGuid="B863E7DF-B1C1-4223-A3F2-D28E2C1908A9" />
-  <File Path="Sword\genbookutil.exe" ComponentGuid="09868078-E29B-4F1D-B6DC-0E9492053A37" />
-  <File Path="Sword\icudt52.dll" ComponentGuid="C8ACCC7E-2DCE-411B-AE9C-C98C17151CCB" />
-  <File Path="Sword\icuin52.dll" ComponentGuid="A192DF0E-DD5C-4185-B1A1-E168D007341A" />
-  <File Path="Sword\icuuc52.dll" ComponentGuid="D2299A19-C496-4FC7-8BEF-DF812036AF3E" />
-  <File Path="Sword\installmgr.exe" ComponentGuid="95E64A42-74A7-47F2-8B9A-0D77610C0FB9" />
-  <File Path="Sword\lexdump.exe" ComponentGuid="BCAF2A1E-89B0-4378-81D8-E89B46E46AA4" />
-  <File Path="Sword\libsword.dll" ComponentGuid="B887447B-1815-4BF3-A255-97D0DA16574C" />
-  <File Path="Sword\mkfastmod.exe" ComponentGuid="111C96FB-7BD2-4B50-9224-BC814360BE3D" />
-  <File Path="Sword\modwrite.exe" ComponentGuid="6FB415EE-31F0-4192-8102-BB9372233D66" />
-  <File Path="Sword\osis2mod.exe" ComponentGuid="4EAB8BE0-B507-43BD-AD3C-A63671C37C1B" />
-  <File Path="Sword\stepdump.exe" ComponentGuid="8CAF9B7D-27C8-4571-B444-932114119FAB" />
-  <File Path="Sword\treeidxutil.exe" ComponentGuid="C1D6EBBA-54E7-48A8-8EBB-E5C9AFAA4FF0" />
-  <File Path="Sword\uconv.exe" ComponentGuid="44E3F0B2-3093-474F-A93E-1331E671F139" />
-  <File Path="LibreOfficeConvert.dll.config" ComponentGuid="04F6A830-9783-4524-9BB2-905A88453427" />
-  <File Path="Palaso.Media.dll" ComponentGuid="75E92863-D382-4723-859D-7C2D9EE42C39" />
-  <File Path="PalasoUIWindowsForms.dll" ComponentGuid="250F0FC4-37FB-460D-8AF9-C69EE4B99C3A" />
-  <File Path="SwordConvert.dll" ComponentGuid="B7FC1538-EF2C-4A6B-A68A-1787CA70F5F1" />
-  <File Path="SwordConvert.pdb" ComponentGuid="9FC19366-CC0F-4A1C-BC23-4EAE69E8B1F6" />
-  <File Path="L10NSharp.pdb" ComponentGuid="E0A9A1C7-0871-4183-9603-CF94111F0832" />
   <File Path="L10NSharp.xml" ComponentGuid="208DFF0A-6B79-4F24-A29E-B923D5C01D25" />
   <File Path="Help\Pathway_Configuration_Tool.chm" ComponentGuid="5FCD14C5-A493-449C-8708-601342E69B24" />
   <File Path="Pathway_Student_Manual.pdf\Pathway_Student_Manual_BTE.pdf" ComponentGuid="97B1A4BF-A2DD-40E7-9E67-3805142AA022" />
@@ -1789,91 +1618,18 @@
   <File Path="epubcheck-4.0.1\epubcheck.jar" ComponentGuid="800CD3B3-DE88-451F-AA5A-268CF423404B" />
   <File Path="epubcheck-4.0.1\README.txt" ComponentGuid="F0193DA7-A6B9-4CBA-892F-20E557574C42" />
   <File Path="epubcheck-4.0.1\THIRD-PARTY.txt" ComponentGuid="8BFF05F3-3B99-43B6-826C-8A497463D6E8" />
-  <File Path="Export\Analytics.NET.dll" ComponentGuid="A772DFE4-50B2-49CB-A690-3F9882597B37" />
-  <File Path="Export\Antlr3.Runtime.dll" ComponentGuid="DFA28269-70DA-4F8A-982C-838FB248A4AE" />
-  <File Path="Export\Antlr3.Runtime.pdb" ComponentGuid="4D9F108D-AD39-42E6-874D-6558066EFA24" />
-  <File Path="Export\ApplyPDFLicenseInfo.exe" ComponentGuid="730B6630-D291-40CA-BB3E-F25638F758F1" />
   <File Path="Export\ApplyPDFLicenseInfo.exe.config" ComponentGuid="BDBF6FA0-A8B4-4ED0-91B6-DE0829A4BD23" />
-  <File Path="Export\ApplyPDFLicenseInfo.pdb" ComponentGuid="52000E9A-211A-4ECD-B869-146FFC7C750E" />
-  <File Path="Export\ConfigurationTool.exe" ComponentGuid="297F7CCE-C330-4371-B88E-BACA16E208FC" />
   <File Path="Export\ConfigurationTool.exe.config" ComponentGuid="737BD79A-547D-4A98-AE25-39D30563C476" />
-  <File Path="Export\ConfigurationTool.pdb" ComponentGuid="90FB3A16-39CF-41E8-8EC8-36DE9876F36D" />
-  <File Path="Export\CssDialog.dll" ComponentGuid="B84A3324-3238-4A43-A13F-6A47E6AD5661" />
-  <File Path="Export\CssDialog.dll.config" ComponentGuid="35F0C070-EB43-4180-B758-76BF081EEF81" />
-  <File Path="Export\CssDialog.pdb" ComponentGuid="8EF968B0-00A1-445E-80D0-D0B6BB0B501C" />
-  <File Path="Export\CssParser.dll" ComponentGuid="3884F0D4-87D6-445A-B86D-F76F096EBEAA" />
-  <File Path="Export\CssParser.pdb" ComponentGuid="EDF16790-B5AC-46CC-B6E8-6B9B3EB7AB32" />
-  <File Path="Export\CssSimpler.exe" ComponentGuid="1DB14E98-7AEC-477C-86AB-E083635D1AC9" />
   <File Path="Export\CssSimpler.exe.config" ComponentGuid="7CE9D077-7CD0-416B-96DD-1D212E902D2E" />
-  <File Path="Export\CssSimpler.pdb" ComponentGuid="7FED8A37-3EED-4798-B8DD-C1F41CB81CA8" />
-  <File Path="Export\DesktopAnalytics.dll" ComponentGuid="045104A9-A1FA-4513-AD05-CB284FC786D4" />
   <File Path="Export\DesktopAnalytics.xml" ComponentGuid="31CC4366-7676-4376-916B-4A2C497DC7AD" />
-  <File Path="Export\Devart.Data.dll" ComponentGuid="DFE55035-08D4-4015-8976-FA027062B221" />
-  <File Path="Export\Devart.Data.SQLite.dll" ComponentGuid="EB93553D-DC98-47EB-9194-1C42C18D2280" />
-  <File Path="Export\DictionaryForMIDsConvert.dll" ComponentGuid="84DDDB57-190A-4C8E-939A-FF7D06A162D8" />
-  <File Path="Export\DictionaryForMIDsConvert.dll.config" ComponentGuid="4D0162A0-FF13-44B4-A9B2-870D55A4D699" />
-  <File Path="Export\DictionaryForMIDsConvert.pdb" ComponentGuid="F395E18B-7A52-4C4F-8575-0F85C96C069E" />
-  <File Path="Export\epubConvert.dll" ComponentGuid="2EF413E1-7C8C-41D3-A285-0D67351C4F32" />
-  <File Path="Export\epubConvert.pdb" ComponentGuid="C6B22B69-F80D-4B73-B033-352474A8B53E" />
-  <File Path="Export\epubValidator.exe" ComponentGuid="D06330FA-5298-4183-98D2-1BD520F3F2E1" />
   <File Path="Export\epubValidator.exe.config" ComponentGuid="B3186AC6-6D2D-41F6-9FD4-992067386418" />
-  <File Path="Export\epubValidator.pdb" ComponentGuid="B22B122E-7443-4644-BC00-C8EABDA02737" />
-  <File Path="Export\GoBibleConvert.dll" ComponentGuid="3DE7D49D-B9A9-4208-9F0F-B2AB49495FEB" />
-  <File Path="Export\GoBibleConvert.dll.config" ComponentGuid="03296C7C-263A-4650-996F-69785C423CBD" />
-  <File Path="Export\GoBibleConvert.pdb" ComponentGuid="4F740FEF-F049-4A40-ABC1-95F5AF24B3C0" />
-  <File Path="Export\HelpImprove.exe" ComponentGuid="CE74D8C2-2EFC-4E8B-8780-4788817AB2B7" />
   <File Path="Export\HelpImprove.exe.config" ComponentGuid="0CCD1CDD-0B9A-489D-84CC-F11851D137F2" />
-  <File Path="Export\HelpImprove.pdb" ComponentGuid="A437F644-1902-4558-B143-F1AE92509DB8" />
-  <File Path="Export\ICSharpCode.SharpZipLib.dll" ComponentGuid="2DF7B902-B977-4113-8DEC-F33ED3BA0893" />
-  <File Path="Export\icu.net.dll" ComponentGuid="6BD33BA7-32D6-4DC5-817D-FA7B981CA79F" />
-  <File Path="Export\InDesignConvert.dll" ComponentGuid="68E6C689-80AB-4961-A24B-45A25716262E" />
-  <File Path="Export\InDesignConvert.dll.config" ComponentGuid="DA43EB69-27FF-4939-8DA6-92E64DAF196D" />
-  <File Path="Export\InDesignConvert.pdb" ComponentGuid="3567C2B8-5D21-48BB-80F2-B44ED64BBF62" />
-  <File Path="Export\L10NSharp.dll" ComponentGuid="9712A710-F8C5-4732-A1E1-AC29D29A08EB" />
-  <File Path="Export\L10NSharp.pdb" ComponentGuid="175B8C56-921F-4207-80DA-612B7F3633B8" />
-  <File Path="Export\LibreOfficeConvert.dll" ComponentGuid="BD31C3AE-0728-48E3-9C0F-3DE55CA136BF" />
-  <File Path="Export\LibreOfficeConvert.dll.config" ComponentGuid="BD65AFB0-6680-4279-9FF2-30EC956C2C2C" />
-  <File Path="Export\LibreOfficeConvert.pdb" ComponentGuid="05FE507B-BF76-49B7-B4A1-572FC6AD90E3" />
-  <File Path="Export\Newtonsoft.Json.dll" ComponentGuid="E7D2F862-1F75-4B63-93DC-6438545FD437" />
   <File Path="Export\Newtonsoft.Json.xml" ComponentGuid="B054338C-C4B5-457D-B206-5AD2E5C0341B" />
-  <File Path="Export\ParatextSupport.dll" ComponentGuid="E2E09749-525A-44D3-B254-D05132A6C176" />
-  <File Path="Export\ParatextSupport.dll.config" ComponentGuid="FAB47719-8BB8-4E65-BFDE-DD7C768706AF" />
-  <File Path="Export\ParatextSupport.pdb" ComponentGuid="27CAD149-0F85-4D76-A917-C216D21958B2" />
-  <File Path="Export\PathwayB.exe" ComponentGuid="91AF2CAE-4A34-45F9-B158-54B16AF79541" />
   <File Path="Export\PathwayB.exe.config" ComponentGuid="EE32438F-1D26-4794-BEAE-E4F6CAF89688" />
-  <File Path="Export\PathwayB.pdb" ComponentGuid="3DB8F9EE-D5B2-4C12-81A1-60E5E3C4BD8D" />
-  <File Path="Export\PathwayExport.exe" ComponentGuid="70210A9D-002D-495F-A49B-BED1CFCC29A4" />
   <File Path="Export\PathwayExport.exe.config" ComponentGuid="02E0E9B2-6F45-4C63-A949-6DAAB2B08755" />
-  <File Path="Export\PathwayExport.pdb" ComponentGuid="69F71ABF-3981-4783-9BD5-1F7448B4FBD8" />
-  <File Path="Export\PdfConvert.dll" ComponentGuid="01C710E9-D6B8-43C6-8139-7F02E74655A5" />
-  <File Path="Export\PdfConvert.dll.config" ComponentGuid="066D06D5-C161-42C9-9B6D-148FCE6F9D4D" />
-  <File Path="Export\PdfConvert.pdb" ComponentGuid="4286E716-E82B-40D1-A601-B886E8DC3893" />
-  <File Path="Export\PdfLicense.exe" ComponentGuid="7442BCFC-B7F0-4B11-AEC8-58229C82E45A" />
   <File Path="Export\PdfLicense.exe.config" ComponentGuid="5E8BE672-56CC-440E-9E3A-33D385D284CD" />
-  <File Path="Export\PdfLicense.pdb" ComponentGuid="546D6611-D393-4427-9EF6-C39371A10CD0" />
-  <File Path="Export\Prince.dll" ComponentGuid="72602F92-0B13-4095-A3B9-A1E34A09911F" />
-  <File Path="Export\PsExport.dll" ComponentGuid="05D747D0-CA17-4B06-9AE4-558EE546DE42" />
-  <File Path="Export\PsExport.dll.config" ComponentGuid="2C4DFD94-C11D-49CC-B348-354E8D56C20F" />
-  <File Path="Export\PsExport.pdb" ComponentGuid="EF8D110A-6B2C-4668-9EB3-FC1DC4BFA0D6" />
-  <File Path="Export\PsTool.dll" ComponentGuid="B9865AA6-D8AA-4848-9495-75310DF9B7EA" />
-  <File Path="Export\PsTool.pdb" ComponentGuid="01401911-2890-46F8-AD45-DFA1C3D4F30A" />
-  <File Path="Export\SIL.Core.dll" ComponentGuid="AB7A8965-3A73-4A95-9A77-C8B528E219EB" />
-  <File Path="Export\SIL.Core.pdb" ComponentGuid="8EE94FD4-C51F-4104-9CEF-C380776B591B" />
-  <File Path="Export\SIL.WritingSystems.dll" ComponentGuid="C6C65D0F-303B-425A-A7D3-E19EABD3A5B8" />
-  <File Path="Export\SIL.WritingSystems.pdb" ComponentGuid="D861294B-819B-4605-8045-71B540FDA1F8" />
-  <File Path="Export\sqlite3.dll" ComponentGuid="445473DF-3763-404F-872A-9E1D6BCDBFBE" />
-  <File Path="Export\SwordConvert.dll" ComponentGuid="191BCBC7-EDD8-4804-808D-4BBF74540DB2" />
-  <File Path="Export\SwordConvert.pdb" ComponentGuid="84442E14-8B42-4B07-BE84-076A850D6448" />
-  <File Path="Export\TheWordConvert.dll" ComponentGuid="F13C4A41-F86E-4576-82B5-6D28240C7A77" />
-  <File Path="Export\TheWordConvert.dll.config" ComponentGuid="38EA47FD-742C-4C70-99FF-64DB0884BEF3" />
-  <File Path="Export\TheWordConvert.pdb" ComponentGuid="DCDA9635-C5F8-493B-928A-77CD13A5D437" />
   <File Path="Export\vrs.xml" ComponentGuid="DD42603B-85D3-4020-9F12-F654B7F8FB18" />
-  <File Path="Export\XeLaTexWriter.dll" ComponentGuid="1FE5E7E2-19BA-46EA-9E38-58C6D2C8B461" />
-  <File Path="Export\XeLaTexWriter.dll.config" ComponentGuid="B041C14D-A611-471F-B14B-C8C4EFACF17A" />
-  <File Path="Export\XeLaTexWriter.pdb" ComponentGuid="CB4C1520-D6C8-4C19-A1E2-ADE8959D6FC6" />
-  <File Path="Export\XslProcess.exe" ComponentGuid="C55B73DC-884E-4926-A1E3-687220B9BE8D" />
   <File Path="Export\XslProcess.exe.config" ComponentGuid="90C83119-DF81-4242-97DE-43E946324C02" />
-  <File Path="Export\XslProcess.pdb" ComponentGuid="161E623B-D104-45C9-9BAA-71730AE4C923" />
   <File Path="Preprocessing\Dictionary\Add Columns FW83.xsl" ComponentGuid="AC6E6803-1958-408E-9C92-54EBE7B85350" />
   <File Path="Preprocessing\Dictionary\Add File Prefix to source.xsl" ComponentGuid="0979E3B2-3315-435D-BC53-8F5235ED0908" />
   <File Path="Preprocessing\Dictionary\InflectionFix.xsl" ComponentGuid="AA5EFCB6-B466-4782-9BF3-6A63A0D85914" />
@@ -1906,24 +1662,11 @@
   <File Path="Styles\Scripture\font_size_24_26.css" ComponentGuid="6D8C4170-B543-4BBA-9762-42F86E99D81D" />
   <File Path="Styles\Scripture\font_size_28_30.css" ComponentGuid="664A04C7-9E0F-4B97-B785-911DA8E95D45" />
   <File Path="Styles\Scripture\PageNumber_FirstPage.css" ComponentGuid="C0ECBA94-693D-4E78-A5B7-BB2F86F1EAE8" />
-  <File Path="Analytics.NET.dll" ComponentGuid="9816A2C0-7493-4452-9EB0-F6C7AAC612E7" />
-  <File Path="Antlr3.Runtime.pdb" ComponentGuid="80E02FEE-0324-4AAF-905B-2550A78F8F86" />
-  <File Path="CssDialog.dll.config" ComponentGuid="CEDB81F5-60AA-46C0-8F72-7B40E3F20F24" />
-  <File Path="CssParser.dll.config" ComponentGuid="F2B1E76A-55EE-4AF0-BE15-12A73DBE2A9D" />
-  <File Path="Newtonsoft.Json.dll" ComponentGuid="4D25496B-9367-40CE-9347-7832B87C24A8" />
   <File Path="Newtonsoft.Json.xml" ComponentGuid="0D251859-CD3F-4596-9B9E-130646E28CE2" />
-  <File Path="PsExport.dll.config" ComponentGuid="1EAA072C-1B47-4DB5-8CCC-4BAAE5AC428A" />
-  <File Path="PsTool.dll.config" ComponentGuid="4A28607F-D706-44BE-8C34-A0DBBB608595" />
-  <File Path="SIL.Core.dll" ComponentGuid="A436CA37-B02B-45F6-B28C-1844187C6A52" />
-  <File Path="SIL.Core.pdb" ComponentGuid="549164C8-0B12-4CF6-9A3A-FC4026C4D486" />
-  <File Path="SIL.WritingSystems.dll" ComponentGuid="0559B9AB-D52C-4E72-AFD2-E9E93A42F1CF" />
-  <File Path="SIL.WritingSystems.pdb" ComponentGuid="717D0E14-BFD3-47E4-A921-E494D4836E60" />
   <File Path="Xhtml-Epub.xslt" ComponentGuid="CC4D5EFF-5D94-41DF-AC1E-4462A1D8F09B" />
   <File Path="Preprocessing\Scripture\Adjust Last Quote line for rq.xsl" ComponentGuid="8D27FECB-2676-4582-B271-415F4DEB4202" />
   <File Path="Preprocessing\Scripture\Thin Space Before Footnote.xsl" ComponentGuid="FC2F3C67-AD2C-476B-B088-116CAC875713" />
   <File Path="epubcheck-4.0.1\mylist.txt" ComponentGuid="4475E046-5D21-4148-B068-7A5979A6D192" />
-  <File Path="Export\Html5Convert.dll" ComponentGuid="2574E225-B0C4-45D0-AFC7-517B023081D8" />
-  <File Path="Export\Html5Convert.pdb" ComponentGuid="2C71C8BE-D98A-4F9D-9107-923E7DC06C04" />
   <File Path="Graphic\speaker.png" ComponentGuid="C0F1C321-B8DE-482D-8519-9ACBF897AB88" />
   <File Path="Html5\Dictionary\dist\css\sb-admin-2.css" ComponentGuid="3B0E86E2-877D-4AA5-9A6C-D0D7A4F9EB8C" />
   <File Path="Html5\Dictionary\dist\css\sb-admin-2.min.css" ComponentGuid="5CA5F594-C1A4-4469-B112-C7D825E7BB3C" />
@@ -2006,79 +1749,154 @@
   <File Path="Preprocessing\Dictionary\Remove Invalid Letter Dividers.xsl" ComponentGuid="56CD1810-0836-43A6-ABD7-0E1C85FE7036" />
   <File Path="Preprocessing\Dictionary\Reset Columns using letter headers.xsl" ComponentGuid="54291D4D-064B-48ED-B3F2-D4D540FB2CD9" />
   <File Path="FlexXhtmlToDoc.bat" ComponentGuid="20CD33E1-A15B-47F8-871D-0DE1C13D1C89" />
-  <File Path="Export\BuildStep.exe" ComponentGuid="A9E601B7-9843-4375-A9C0-CB634675F16A" />
-  <File Path="Export\BuildStep.pdb" ComponentGuid="A969E72F-F942-4CAF-ABEC-638F01E9411B" />
-  <File Path="Export\NMock2.dll" ComponentGuid="1F631112-D273-43A8-82D6-BF1D740BFBFD" />
-  <File Path="Export\nunit.framework.dll" ComponentGuid="769F6013-83C3-4A02-89F9-5A573041E51C" />
-  <File Path="Export\Test.dll" ComponentGuid="C4F0CAED-64B1-48D9-A3DA-A843409190AC" />
-  <File Path="Export\Test.dll.config" ComponentGuid="37612F28-6D14-465F-9AE5-527C5A598D3F" />
-  <File Path="Export\Test.pdb" ComponentGuid="DA762EB4-0332-450B-BF3D-DBC50ED4CA17" />
   <File Path="Styles\Dictionary\Layout_17.css" ComponentGuid="1236175A-2F0C-429F-886E-764655EF6578" />
   <File Path="Styles\Dictionary\Page_size_6x8.5onLetter.css" ComponentGuid="F365609D-29F1-4ED0-8162-B49DC0ED3945" />
   <File Path="Html5\Dictionary\pages\indexTemplate.html" ComponentGuid="64F56E17-460A-4A6E-A05A-91477DE8D790" />
   <File Path="Preprocessing\Dictionary\byVer.xml" ComponentGuid="22200FA4-B78D-4E93-B0E8-51EAFD9FC7AC" />
   <File Path="Preprocessing\Dictionary\Video in Html5.xsl" ComponentGuid="68340F19-5BAF-4AC5-A363-E60879B4B1A9" />
   <File Path="PdfSymbols.xsl" ComponentGuid="6738D543-8BC9-442B-8783-B29249C59CA1" />
-  <File Path="Export\icudt54.dll" ComponentGuid="0051A24E-7873-4FB0-B266-87CD9B132C7E" />
-  <File Path="Export\icuin54.dll" ComponentGuid="D227EAB9-C12A-4062-96A0-252190E07D37" />
-  <File Path="Export\icuuc54.dll" ComponentGuid="1CDCB391-1D0E-4AD0-A4AC-05B14DEC4276" />
-  <File Path="Export\INIFileParser.dll" ComponentGuid="16D1BAE1-8F24-48C9-9A50-5F2220C569DB" />
   <File Path="Export\INIFileParser.xml" ComponentGuid="7BD571CD-57A7-4388-A38A-02BAA75E6448" />
   <File Path="Export\SIL.WritingSystems.xml" ComponentGuid="3D7F568D-C7AE-4DB1-8B27-9CEC22C4D7EF" />
-  <File Path="icudt54.dll" ComponentGuid="42B5AE48-E5B2-4631-8A03-2CDCCFE75CB9" />
-  <File Path="icuin54.dll" ComponentGuid="6932B1C5-A4F5-4209-81F2-F63B0A2368FD" />
-  <File Path="icuuc54.dll" ComponentGuid="6E3EC75C-2F3E-45F4-A2F7-94A7C94F135D" />
-  <File Path="INIFileParser.dll" ComponentGuid="72913BBF-B033-4A9F-AD2D-972E297A320A" />
   <File Path="INIFileParser.xml" ComponentGuid="A63C96FF-D5FE-486A-9891-C8BE419C935F" />
   <File Path="SIL.WritingSystems.xml" ComponentGuid="99ACC792-A97C-4C1D-A60A-9F9151658136" />
-  <File Path="Export\spart.dll" ComponentGuid="3BB4F301-8BF6-49B5-BD00-DF974FD2F302" />
-  <File Path="spart.dll" ComponentGuid="988F12EA-9E63-444C-881B-689F3DAA760D" />
-  <File Path="Export\Spart.dll" ComponentGuid="86D53971-715C-43F7-B4A6-8DFC110D126C" />
-  <File Path="Spart.dll" ComponentGuid="74DB20DF-E3B6-4280-80FB-558524C66B8B" />
-  <File Path="Export\Analytics.dll" ComponentGuid="138913BA-297C-4A8E-B10A-717648DD282F" />
   <File Path="Export\BuildStep.exe.config" ComponentGuid="D601941A-4657-49AF-931D-4F81096A8E66" />
-  <File Path="Export\CssParser.dll.config" ComponentGuid="EB81E656-A737-41ED-8357-86BFE60D7E2B" />
-  <File Path="Export\epubConvert.dll.config" ComponentGuid="80D85010-447C-4697-A4F1-859EAE51D384" />
-  <File Path="Export\Html5Convert.dll.config" ComponentGuid="3895D9B3-BE79-41A0-9423-B97576B4DD1D" />
-  <File Path="Export\ICSharpCode.SharpZipLib.pdb" ComponentGuid="D91AC0FD-060A-4BBE-AC18-8C657629576C" />
   <File Path="Export\ICSharpCode.SharpZipLib.xml" ComponentGuid="4D773C37-41FA-4DB3-86AD-5BADC79964E2" />
-  <File Path="Export\icudt56.dll" ComponentGuid="C1CD0C60-0D16-4018-A433-3CE550B05F9B" />
-  <File Path="Export\icuin56.dll" ComponentGuid="DB66C7FE-136E-47E5-BED2-A54F67931D21" />
-  <File Path="Export\icuuc56.dll" ComponentGuid="587F556D-A957-47FE-B7E0-91F4ED5D13CF" />
-  <File Path="Export\Microsoft.Bcl.AsyncInterfaces.dll" ComponentGuid="BCC9376A-1CAA-4640-B908-5D9A3CA462E4" />
   <File Path="Export\Microsoft.Bcl.AsyncInterfaces.xml" ComponentGuid="96228A83-FBD2-401F-9DD9-CC9259CFFF2C" />
-  <File Path="Export\Microsoft.Extensions.DependencyInjection.Abstractions.dll" ComponentGuid="D0A894BF-ABE4-42C3-8FF3-FDC3CEB45B69" />
   <File Path="Export\Microsoft.Extensions.DependencyInjection.Abstractions.xml" ComponentGuid="91E2558F-9C29-4A92-B7BF-064DC6561B7A" />
-  <File Path="Export\PsTool.dll.config" ComponentGuid="C73D77EB-4874-41DE-A3A8-ED57577AEE5F" />
-  <File Path="Export\SIL.Core.Desktop.dll" ComponentGuid="3A99329D-41C5-4359-B47E-B4446857343B" />
-  <File Path="Export\SIL.Core.Desktop.pdb" ComponentGuid="DA4F9CE3-D623-418F-9B1F-22502BFAD1FB" />
-  <File Path="Export\System.Buffers.dll" ComponentGuid="E2B07281-5341-4568-8735-DE31AAD0E807" />
   <File Path="Export\System.Buffers.xml" ComponentGuid="519CF61D-D74B-44CC-B500-706D914696C5" />
-  <File Path="Export\System.Memory.dll" ComponentGuid="AA8FE9DA-EB6D-47E3-94B8-22C598BB14B1" />
   <File Path="Export\System.Memory.xml" ComponentGuid="04C43852-5FBD-4CE7-8D97-3622A78AE3F4" />
-  <File Path="Export\System.Numerics.Vectors.dll" ComponentGuid="0C308883-0FC2-431A-BF5C-334F95803AD6" />
   <File Path="Export\System.Numerics.Vectors.xml" ComponentGuid="024EFBCC-6F87-4E08-A248-6780EAB55C18" />
-  <File Path="Export\System.Runtime.CompilerServices.Unsafe.dll" ComponentGuid="4B60E97D-3F07-4736-86B0-84A18E9C6B3D" />
   <File Path="Export\System.Runtime.CompilerServices.Unsafe.xml" ComponentGuid="568F61C8-30E5-4E0E-8F52-CC164DF65E01" />
-  <File Path="Export\System.Threading.Tasks.Extensions.dll" ComponentGuid="A5062AD9-B481-4309-B647-FE52610C3808" />
   <File Path="Export\System.Threading.Tasks.Extensions.xml" ComponentGuid="6AADE84F-1541-46F1-8F93-4EC037E7A323" />
-  <File Path="Export\System.ValueTuple.dll" ComponentGuid="5CF44379-050A-42A8-BB8A-32389EDB23CA" />
   <File Path="Preprocessing\Dictionary\Use Breaking Spaces after fields.xsl" ComponentGuid="2C157072-B057-45C0-A021-74DFEC3BC0C2" />
-  <File Path="Export\lib\win-x64\icudt59.dll" ComponentGuid="0A98986E-CD1E-4801-A9A5-3164E3720043" />
-  <File Path="Export\lib\win-x64\icuin59.dll" ComponentGuid="B27FE95B-0B66-402D-936F-8AAAB7922CE2" />
-  <File Path="Export\lib\win-x64\icuio59.dll" ComponentGuid="DAEB2D25-572F-453B-9931-1732B92E3F76" />
-  <File Path="Export\lib\win-x64\icutest59.dll" ComponentGuid="C136B053-6DD5-4208-A775-C37DD07CD054" />
-  <File Path="Export\lib\win-x64\icutu59.dll" ComponentGuid="1C633FD0-F11B-4791-8A50-0A74427FBE35" />
-  <File Path="Export\lib\win-x64\icuuc59.dll" ComponentGuid="60CD4C27-0F4E-425E-88AE-F3EE7D47FCED" />
-  <File Path="Export\lib\win-x86\icudt59.dll" ComponentGuid="BA363234-2A2E-49A0-977E-78667C0E77A8" />
-  <File Path="Export\lib\win-x86\icuin59.dll" ComponentGuid="1B25E371-E724-4A7C-A416-A2711FA5AA6E" />
-  <File Path="Export\lib\win-x86\icuio59.dll" ComponentGuid="0ADD8C3D-DF71-4A3A-A759-D3D1F2381EA0" />
-  <File Path="Export\lib\win-x86\icutest59.dll" ComponentGuid="89DF14C0-27B8-444B-B392-E3FD3E3194E4" />
-  <File Path="Export\lib\win-x86\icutu59.dll" ComponentGuid="3FBA0E68-24B9-4B00-BB56-718DC7471970" />
-  <File Path="Export\lib\win-x86\icuuc59.dll" ComponentGuid="EAD49AA1-E3F6-4E30-97CE-8B9A163F3783" />
-  <File Path="Export\PrinceXML.Wrapper.dll" ComponentGuid="B283B225-3ED4-416A-ADA7-2F8010E799B9" />
   <File Path="Export\PrinceXML.Wrapper.xml" ComponentGuid="EE8E737F-E645-482B-99D1-9EE3861B5514" />
-  <File Path="Export\System.Resources.Extensions.dll" ComponentGuid="AA37267E-1A2F-4FB6-B101-4661E7CE8DC3" />
   <File Path="Export\System.Resources.Extensions.xml" ComponentGuid="674E6DF2-D4FA-42A5-AE4E-B41D38212C82" />
-  <File Path="Export\SwordConvert.dll.config" ComponentGuid="92106BC2-008D-4E3A-88E3-A0F8A9356D85" />
+  <File Path="Export\lib\win-x64\icudt59.dll" ComponentGuid="A1D8EB13-9DCE-4770-BB92-85BC48436C39" />
+  <File Path="Export\lib\win-x64\icuin59.dll" ComponentGuid="CA78C386-226C-4FCD-B74B-56A0315E48FC" />
+  <File Path="Export\lib\win-x64\icuio59.dll" ComponentGuid="49214CCF-CEB6-4A34-8566-CD2D7CD738CF" />
+  <File Path="Export\lib\win-x64\icutest59.dll" ComponentGuid="D020BF0F-6A95-4A8E-AE12-DC6C82DF1019" />
+  <File Path="Export\lib\win-x64\icutu59.dll" ComponentGuid="BA0BA191-03DB-4843-B2B4-B8D9E214EADC" />
+  <File Path="Export\lib\win-x64\icuuc59.dll" ComponentGuid="5876FEF1-219B-4A26-B172-AAD9DEC21B9D" />
+  <File Path="Export\lib\win-x86\icudt59.dll" ComponentGuid="A88D0479-7A2F-4E55-86B3-FFB51DA10F46" />
+  <File Path="Export\lib\win-x86\icuin59.dll" ComponentGuid="C3B3E214-6CFC-4742-8EE1-B74836280ECC" />
+  <File Path="Export\lib\win-x86\icuio59.dll" ComponentGuid="E9EBCB32-43CA-477B-B8D8-5539C79E6E5E" />
+  <File Path="Export\lib\win-x86\icutest59.dll" ComponentGuid="C26C4CD1-B49F-4EC6-8C36-B72DA6DFF98F" />
+  <File Path="Export\lib\win-x86\icutu59.dll" ComponentGuid="0625071C-E835-4C38-A1DE-3568FFFF3817" />
+  <File Path="Export\lib\win-x86\icuuc59.dll" ComponentGuid="23E8ED56-9BF8-4757-9451-7FD076344A2F" />
+  <File Path="Export\Analytics.dll" ComponentGuid="791E2EA6-20A5-4146-9B4F-9A426BB65C7C" />
+  <File Path="Export\Antlr3.Runtime.dll" ComponentGuid="C0A74906-0D80-4875-B244-633880C1FFE4" />
+  <File Path="Export\Antlr3.Runtime.pdb" ComponentGuid="15657E5A-2341-4394-91A6-B375643DA1F2" />
+  <File Path="Export\ApplyPDFLicenseInfo.exe" ComponentGuid="CB527DA2-2CF8-4B0E-A05E-CEE799A255F0" />
+  <File Path="Export\ApplyPDFLicenseInfo.pdb" ComponentGuid="7D08060C-2C71-491A-A3CC-C3CA8A658916" />
+  <File Path="Export\ConfigurationTool.exe" ComponentGuid="0A74F2B6-0363-487F-9B20-751AD4BAA26B" />
+  <File Path="Export\ConfigurationTool.pdb" ComponentGuid="9B4C9D5C-7B8F-472E-B338-21A0F3B0AA4A" />
+  <File Path="Export\CssDialog.dll" ComponentGuid="7063BF0C-6471-4B6A-B678-6CC63878EE10" />
+  <File Path="Export\CssDialog.dll.config" ComponentGuid="C15AC791-DC11-4562-AB0B-199D2A0F8D04" />
+  <File Path="Export\CssDialog.pdb" ComponentGuid="EA490C37-59B4-497C-8215-D3C0B1AA7A7F" />
+  <File Path="Export\CssParser.dll" ComponentGuid="66C3E770-413A-42CC-8872-A10C62D019AE" />
+  <File Path="Export\CssParser.dll.config" ComponentGuid="A3F8CC05-89B3-4A63-9083-BAAFFB5C0FEE" />
+  <File Path="Export\CssParser.pdb" ComponentGuid="B82C0341-39B0-4F91-9FEE-C2F304540BA7" />
+  <File Path="Export\CssSimpler.exe" ComponentGuid="75816582-86B6-49BA-9548-787C28C4FD78" />
+  <File Path="Export\CssSimpler.pdb" ComponentGuid="68BE16A5-14B2-4F1A-8116-6A18712D4DDD" />
+  <File Path="Export\DesktopAnalytics.dll" ComponentGuid="FB89F733-7828-430A-8C6C-730874D88B90" />
+  <File Path="Export\Devart.Data.dll" ComponentGuid="74A66B36-F696-4263-B36A-386F3D7C65E3" />
+  <File Path="Export\Devart.Data.SQLite.dll" ComponentGuid="922E7E5E-E253-4400-92A2-A6B389ECA76D" />
+  <File Path="Export\DictionaryForMIDsConvert.dll" ComponentGuid="09F48358-5465-4A9F-8AEE-6B96AC3D89A6" />
+  <File Path="Export\DictionaryForMIDsConvert.dll.config" ComponentGuid="FEAB7B73-3AC4-4368-9A2E-D7412CAA8643" />
+  <File Path="Export\DictionaryForMIDsConvert.pdb" ComponentGuid="01CFB51D-6135-4411-AE22-2F7F579EE0A5" />
+  <File Path="Export\epubConvert.dll" ComponentGuid="CCC412B7-60F4-4677-A206-58D3A026CE00" />
+  <File Path="Export\epubConvert.dll.config" ComponentGuid="889DA540-3037-4699-A628-F4EA0E53C8D0" />
+  <File Path="Export\epubConvert.pdb" ComponentGuid="391DFECD-369E-4764-83B0-68B7AC6D6A12" />
+  <File Path="Export\epubValidator.exe" ComponentGuid="F3018896-6776-4F8A-93BD-208DE0D4F7E5" />
+  <File Path="Export\epubValidator.pdb" ComponentGuid="3B5A80CD-1EFC-41DA-846F-6AD89C116D68" />
+  <File Path="Export\GoBibleConvert.dll" ComponentGuid="0087E9BA-0F96-4C6E-A53D-13EE64EA3523" />
+  <File Path="Export\GoBibleConvert.dll.config" ComponentGuid="A5AD52DA-7EFF-4311-917B-1F268AD4C30F" />
+  <File Path="Export\GoBibleConvert.pdb" ComponentGuid="989452CD-02DA-4BD6-88B8-605C5FB3DFEB" />
+  <File Path="Export\HelpImprove.exe" ComponentGuid="321620F6-FDDF-45E2-99D4-B663E2D9BB31" />
+  <File Path="Export\HelpImprove.pdb" ComponentGuid="29C54EC0-F5E4-4644-9349-B3ABE8324D47" />
+  <File Path="Export\Html5Convert.dll" ComponentGuid="DAEA78A9-42E9-4BFF-9E12-1DC0600134B1" />
+  <File Path="Export\Html5Convert.dll.config" ComponentGuid="EE7B8A92-963E-4845-8782-4A4061B6A3A7" />
+  <File Path="Export\Html5Convert.pdb" ComponentGuid="198EE324-BD5C-4E8B-ABA8-EDCEB8CAC168" />
+  <File Path="Export\ICSharpCode.SharpZipLib.dll" ComponentGuid="C1022BC4-F3CD-4577-9116-552A48EE78C0" />
+  <File Path="Export\ICSharpCode.SharpZipLib.pdb" ComponentGuid="EF02D284-D28B-491F-B768-9841159A28CB" />
+  <File Path="Export\icudt56.dll" ComponentGuid="038BA073-3D1D-4DA3-B258-9ECF937B3A6F" />
+  <File Path="Export\icuin56.dll" ComponentGuid="A5A54CAA-A6E7-4EBA-9A4D-4AF9859322F8" />
+  <File Path="Export\icuuc56.dll" ComponentGuid="91FB444F-4467-4EAE-A5B3-1DDA877E2B9A" />
+  <File Path="Export\InDesignConvert.dll" ComponentGuid="70CFEF62-1FDE-4150-BE07-24837F145D41" />
+  <File Path="Export\InDesignConvert.dll.config" ComponentGuid="926C974D-E212-44D8-BBF2-89E2C9C842AE" />
+  <File Path="Export\InDesignConvert.pdb" ComponentGuid="7D508B51-2A05-45E1-8A4C-7F5DAFD43BEA" />
+  <File Path="Export\INIFileParser.dll" ComponentGuid="CDF3B777-DDA7-4C51-9791-3572EC91D474" />
+  <File Path="Export\L10NSharp.dll" ComponentGuid="311F2C70-A6A9-47D8-9779-D08123DC44CD" />
+  <File Path="Export\LibreOfficeConvert.dll" ComponentGuid="B49E3B88-328E-4112-878D-96B768C41277" />
+  <File Path="Export\LibreOfficeConvert.dll.config" ComponentGuid="EA7B16F1-061D-458A-B0BE-D384E64A09B4" />
+  <File Path="Export\LibreOfficeConvert.pdb" ComponentGuid="C35759C7-5657-44F1-BC30-13AF9B6C24B5" />
+  <File Path="Export\Microsoft.Bcl.AsyncInterfaces.dll" ComponentGuid="00741A87-5D80-4520-9799-B15DF05DB68C" />
+  <File Path="Export\Microsoft.Extensions.DependencyInjection.Abstractions.dll" ComponentGuid="2AF1E844-64F7-4BFD-8AE2-1D620374E91C" />
+  <File Path="Export\Newtonsoft.Json.dll" ComponentGuid="FE7CBBEE-8144-4E15-ADF3-193E4B8B2F6A" />
+  <File Path="Export\ParatextSupport.dll" ComponentGuid="2EF7D254-F871-4907-8FA8-CD7CB0733DB7" />
+  <File Path="Export\ParatextSupport.dll.config" ComponentGuid="BB34FEB1-9B3D-4E73-B766-5D317BA4857A" />
+  <File Path="Export\ParatextSupport.pdb" ComponentGuid="BE320066-022B-4E29-86D0-C1274A113D2E" />
+  <File Path="Export\PathwayB.exe" ComponentGuid="71F54A9C-3711-4E4F-8A9E-1DB0A8347E59" />
+  <File Path="Export\PathwayB.pdb" ComponentGuid="485CD0DF-EF90-4D8A-A553-803351420802" />
+  <File Path="Export\PathwayExport.exe" ComponentGuid="7F70605B-387E-4931-9DF7-20C835524EF6" />
+  <File Path="Export\PathwayExport.pdb" ComponentGuid="E5FEEBF3-587A-4F46-A77A-1560C63B133A" />
+  <File Path="Export\PdfConvert.dll" ComponentGuid="07F137BE-8FBE-49BE-A150-74EAC448295A" />
+  <File Path="Export\PdfConvert.dll.config" ComponentGuid="79A37A75-758C-42BA-AB40-CA98212C6075" />
+  <File Path="Export\PdfConvert.pdb" ComponentGuid="EACD2FAD-4911-4A86-88E1-F5F14766BEEA" />
+  <File Path="Export\PdfLicense.exe" ComponentGuid="C4ADA34A-16FD-4F90-B971-76899C5CC58D" />
+  <File Path="Export\PdfLicense.pdb" ComponentGuid="31D7BF71-2E78-41A5-944F-B51E4DD30A63" />
+  <File Path="Export\Prince.dll" ComponentGuid="BAC20F90-BC89-4455-8540-7B9AA97775A6" />
+  <File Path="Export\PrinceXML.Wrapper.dll" ComponentGuid="EB3407E9-9182-48AB-8B47-C530D5309B11" />
+  <File Path="Export\PsExport.dll" ComponentGuid="A49A4729-714F-452C-BB39-84CD13041299" />
+  <File Path="Export\PsExport.dll.config" ComponentGuid="19D531F2-7C0E-46BB-94C4-1032D4E7AADB" />
+  <File Path="Export\PsExport.pdb" ComponentGuid="166BA29E-D316-4062-A104-4510DA01DF5A" />
+  <File Path="Export\PsTool.dll" ComponentGuid="BF425AAB-D64A-45F4-9BEF-64957702FE41" />
+  <File Path="Export\PsTool.dll.config" ComponentGuid="B5B26A63-9C7F-4CFB-BF75-474383470AE0" />
+  <File Path="Export\PsTool.pdb" ComponentGuid="B60AAAF9-7995-4991-8E7B-ED32FB574162" />
+  <File Path="Export\SIL.Core.Desktop.dll" ComponentGuid="CD18EE9E-D16E-4035-BC43-527FB886104F" />
+  <File Path="Export\SIL.Core.Desktop.pdb" ComponentGuid="FEF5DF8D-432C-411B-811E-F5643B5CA91A" />
+  <File Path="Export\SIL.Core.dll" ComponentGuid="A6C2B4C9-1EAC-426A-AB5A-138240569707" />
+  <File Path="Export\SIL.Core.pdb" ComponentGuid="B27C8D5D-54AD-4A04-929D-A02C05850679" />
+  <File Path="Export\SIL.WritingSystems.dll" ComponentGuid="D3474B0D-8B11-4E7A-A0B5-CDA2EE911F3A" />
+  <File Path="Export\SIL.WritingSystems.pdb" ComponentGuid="C36A994E-0DFD-47FA-A400-DFA414452DF4" />
+  <File Path="Export\Spart.dll" ComponentGuid="654A536F-7DF8-40A8-BFF7-ACBE551A4444" />
+  <File Path="Export\sqlite3.dll" ComponentGuid="C0555B94-B496-41DD-AA41-D9C78C9AA307" />
+  <File Path="Export\SwordConvert.dll" ComponentGuid="C760DC7A-DF7C-4613-90C5-34E00F33C69C" />
+  <File Path="Export\SwordConvert.dll.config" ComponentGuid="C7A4DA51-D949-4811-9868-241A09479644" />
+  <File Path="Export\SwordConvert.pdb" ComponentGuid="38F65C45-4BCE-466B-8A3C-ED9D44F4CE76" />
+  <File Path="Export\System.Buffers.dll" ComponentGuid="A3B97D8A-C0FC-4976-814C-B367B083B780" />
+  <File Path="Export\System.Memory.dll" ComponentGuid="83E87594-7256-4147-97BA-616986F9D67C" />
+  <File Path="Export\System.Numerics.Vectors.dll" ComponentGuid="8217A34D-2C21-4BDE-91F8-44333A1A2603" />
+  <File Path="Export\System.Resources.Extensions.dll" ComponentGuid="F1D3FC10-64E6-4E54-A50B-B395295B12ED" />
+  <File Path="Export\System.Runtime.CompilerServices.Unsafe.dll" ComponentGuid="22527A4A-540F-4C27-84E0-2253440C040B" />
+  <File Path="Export\System.Threading.Tasks.Extensions.dll" ComponentGuid="DEF2C481-7032-4427-B1C1-8C94A0C3A629" />
+  <File Path="Export\System.ValueTuple.dll" ComponentGuid="4CD39891-6D3E-466F-8263-92D926829410" />
+  <File Path="Export\TheWordConvert.dll" ComponentGuid="0AE33F80-3390-4297-B9A6-21A8FA8A1012" />
+  <File Path="Export\TheWordConvert.dll.config" ComponentGuid="62558221-668F-4A9E-A7A6-DCB9F4981AC6" />
+  <File Path="Export\TheWordConvert.pdb" ComponentGuid="DEEAA324-CFC8-4252-9716-982AA41AB2F2" />
+  <File Path="Export\XeLaTexWriter.dll" ComponentGuid="2EF917E2-C988-4E10-B702-0F0F75E3F0D5" />
+  <File Path="Export\XeLaTexWriter.dll.config" ComponentGuid="26B906C1-D573-42A9-87A8-D307EF727EAC" />
+  <File Path="Export\XeLaTexWriter.pdb" ComponentGuid="718BD369-28EC-4733-A818-AC448DDABF29" />
+  <File Path="Export\XslProcess.exe" ComponentGuid="D802224B-F70F-4F0C-82B5-6E36BBB66977" />
+  <File Path="Export\XslProcess.pdb" ComponentGuid="CBD74017-5A68-48EA-AC02-2A05D2B5126E" />
+  <File Path="Sword\addgb.exe" ComponentGuid="D27C9E6D-D674-436F-8482-9A55CCB22C64" />
+  <File Path="Sword\addld.exe" ComponentGuid="2E88610D-EEFD-446A-9A27-45DA9C8758EB" />
+  <File Path="Sword\addvs.exe" ComponentGuid="75A20A18-E546-4D9B-8983-78A0186D04BF" />
+  <File Path="Sword\cipherraw.exe" ComponentGuid="AAE2DBC2-4037-4966-9C07-3777614D8768" />
+  <File Path="Sword\diatheke.exe" ComponentGuid="EB7F4CB6-17E2-4620-BBCC-89288A3433F2" />
+  <File Path="Sword\emptyvss.exe" ComponentGuid="39D6C187-6BEF-4543-AEB2-25336079055C" />
+  <File Path="Sword\genbookutil.exe" ComponentGuid="5F71B242-E397-44EA-A093-E13BCD028043" />
+  <File Path="Sword\icudt52.dll" ComponentGuid="6DB2BE87-D862-450F-A50C-06AB0F55EDB8" />
+  <File Path="Sword\icuin52.dll" ComponentGuid="42F93C00-961D-472D-AE05-10E4190E2B32" />
+  <File Path="Sword\icuuc52.dll" ComponentGuid="E463ECB9-4A34-4903-8CB0-FE91D042D560" />
+  <File Path="Sword\installmgr.exe" ComponentGuid="A74A7965-C636-4B6E-94EC-BBCD7BBFB08E" />
+  <File Path="Sword\lexdump.exe" ComponentGuid="A5841AA0-02CD-4F99-9264-F6A3928B396E" />
+  <File Path="Sword\libsword.dll" ComponentGuid="62FE877C-39D9-4113-8F79-459858C96A13" />
+  <File Path="Sword\mkfastmod.exe" ComponentGuid="EBE9A345-82E6-4ECC-B8AA-593680E8F09C" />
+  <File Path="Sword\modwrite.exe" ComponentGuid="8BC10655-3EF5-4D26-BC53-D2AED927F960" />
+  <File Path="Sword\osis2mod.exe" ComponentGuid="F79B52E8-7969-4C81-8B20-6ED6D2D9F318" />
+  <File Path="Sword\stepdump.exe" ComponentGuid="FE2148BC-9D1B-43DA-9877-5BA21036C787" />
+  <File Path="Sword\treeidxutil.exe" ComponentGuid="52FF3782-1798-440E-A6B6-57B92A95C55F" />
+  <File Path="Sword\uconv.exe" ComponentGuid="A6CB23D4-F8AE-4034-A2BB-16DD46CF6880" />
+  <File Path="Spart.dll" ComponentGuid="5D414A55-DF18-49E6-8F78-9366EB62575C" />
 </FileLibrary>
