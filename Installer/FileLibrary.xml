@@ -1899,4 +1899,5 @@
   <File Path="Sword\treeidxutil.exe" ComponentGuid="52FF3782-1798-440E-A6B6-57B92A95C55F" />
   <File Path="Sword\uconv.exe" ComponentGuid="A6CB23D4-F8AE-4034-A2BB-16DD46CF6880" />
   <File Path="Spart.dll" ComponentGuid="5D414A55-DF18-49E6-8F78-9366EB62575C" />
+  <File Path="Export\icu.net.dll" ComponentGuid="C58B589D-1A98-45E8-BA86-CC1A2D38BC0E" />
 </FileLibrary>
