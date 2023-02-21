@@ -260,12 +260,8 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Prince, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5a53b4f484d34322, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Prince.dll</HintPath>
-    </Reference>
-    <Reference Include="PrinceXML.Wrapper, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PrinceXMLWrapper.1.1.0\lib\netstandard2.0\PrinceXML.Wrapper.dll</HintPath>
+    <Reference Include="PrinceXML.Wrapper, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PrinceXMLWrapper.1.2.0\lib\netstandard2.0\PrinceXML.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="SIL.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

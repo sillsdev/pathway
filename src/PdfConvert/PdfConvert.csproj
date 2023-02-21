@@ -226,12 +226,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Prince, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Prince.dll</HintPath>
-    </Reference>
-    <Reference Include="PrinceXML.Wrapper, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PrinceXMLWrapper.1.1.0\lib\netstandard2.0\PrinceXML.Wrapper.dll</HintPath>
+    <Reference Include="PrinceXML.Wrapper, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PrinceXMLWrapper.1.2.0\lib\netstandard2.0\PrinceXML.Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
