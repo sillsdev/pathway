@@ -1,4 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 #region // Copyright (c) 2016, SIL International. All Rights Reserved.
 // <copyright from='2016' to='2016' company='SIL International'>
 //		Copyright (c) 2016, SIL International. All Rights Reserved.
@@ -34,14 +34,12 @@ namespace CssSimpler
         private readonly ArrayList _savedSibling = new ArrayList(StackSize);
         //private string _lastClass = String.Empty;
         private string _precedingClass = String.Empty;
-        private readonly SortedSet<string> _needHigher;
         private string _headerTag;
 	    private bool _stylesheetPresent;
 
-        public FlattenStyles(string input, string output, XmlDocument xmlCss, SortedSet<string> needHigher, bool noXmlHeader, string decorateStyles)
+        public FlattenStyles(string input, string output, XmlDocument xmlCss, bool noXmlHeader, string decorateStyles)
             : base(input, output, noXmlHeader)
         {
-            _needHigher = needHigher;
 			StyleDecorate = decorateStyles;
             MakeRuleIndex(xmlCss);
             IdentifyDisplayBlockRules(xmlCss);
@@ -732,7 +730,7 @@ namespace CssSimpler
             while (depth > 0)
             {
                 var proposedClass = Classes[depth] as string;
-                if (proposedClass != null && !_needHigher.Contains(proposedClass))
+                if (proposedClass != null)
                     return proposedClass;
                 depth -= 1;
             }

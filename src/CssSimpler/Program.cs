@@ -1,4 +1,4 @@
-﻿// ---------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 
 #region // Copyright (c) 2016, SIL International. All Rights Reserved.
 
@@ -187,12 +187,12 @@ namespace CssSimpler
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmp2Out, extra[0], xml, NeedHigher);
+			var ps = new ProcessPseudo(tmp2Out, extra[0], xml);
 			RemoveCssPseudo(styleSheet, xml);
 			var tmp3Out = Path.GetTempFileName();
 			if (_flatten)
 			{
-				var fs = new FlattenStyles(extra[0], tmp3Out, xml, NeedHigher, _noXmlHeader, _decorateStyles);
+				var fs = new FlattenStyles(extra[0], tmp3Out, xml, _noXmlHeader, _decorateStyles);
 				fs.Structure = _headerStyles;
 				fs.DivBlocks = _divBlocks;
 				MetaData(fs);
@@ -379,10 +379,7 @@ namespace CssSimpler
 					}
 					if (!string.IsNullOrEmpty(lastClass) || node.Name != "CLASS") continue;
 					var poposedClass = node.FirstChild.InnerText;
-					if (!NeedHigher.Contains(poposedClass))
-					{
-						lastClass = poposedClass;
-					}
+					lastClass = poposedClass;
 				}
 				ruleNode.Attributes.Append(xml.CreateAttribute("term"));
 				ruleNode.Attributes.Append(xml.CreateAttribute("pos"));
@@ -692,7 +689,6 @@ namespace CssSimpler
         private static string _target;
         private static bool _noData;
         private static int _term;
-        protected static readonly SortedSet<string> NeedHigher = new SortedSet<string> { "form", "sensenumber", "headword", "name", "writingsystemprefix", "xitem", "configtarget", "configtargets", "abbreviation", "ownertype_abbreviation" };
 
         protected static void AddSubTree(XmlNode n, CommonTree t, CssTreeParser ctp)
         {
@@ -777,14 +773,7 @@ namespace CssSimpler
                             _noData = true;
                         }
                         _target = name;
-                        if (!NeedHigher.Contains(name))
-                        {
-                            _lastClass = name;
-                        }
-                        else
-                        {
-                            VerboseMessage("skipping: {0}", name);
-                        }
+                        _lastClass = name;
                     }
                     if (n.Name == "TAG")
                     {
