@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -488,7 +488,7 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <Copy SourceFiles="..\..\lib\icudt56.dll;..\..\lib\icuin56.dll;..\..\lib\icuuc56.dll" DestinationFolder="$(OutputPath)" Condition=" '$(OS)' == 'Windows_NT' or '$(OS)' == '' " />
+    <Copy SourceFiles="..\..\lib\icudt56.dll;..\..\lib\icuin56.dll;..\..\lib\icuuc56.dll;..\..\lib\icu.net.dll" DestinationFolder="$(OutputPath)" Condition=" '$(OS)' == 'Windows_NT' or '$(OS)' == '' " />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>

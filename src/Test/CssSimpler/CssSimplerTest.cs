@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 // <copyright file="CssSimplerTest.cs" from='2016' to='2016' company='SIL International'>
 //      Copyright (C) 2016, SIL International. All Rights Reserved.
 //
@@ -195,7 +195,7 @@ namespace Test.CssSimplerTest
             Assert.AreEqual("9", termnode3.InnerText, "Third rule should have nine selector terms");
             var lastClass = xml.SelectSingleNode("//RULE[3]/@lastClass");
             Debug.Assert(lastClass != null, "lastClass != null");
-            Assert.AreEqual("pronunciation", lastClass.InnerText, "Last class name on the third rule should be pronunciation");
+            Assert.AreEqual("form", lastClass.InnerText, "Last class name on the third rule should be form");
             var target = xml.SelectSingleNode("//RULE[3]/@target");
             Debug.Assert(target != null, "target != null");
             Assert.AreEqual("span", target.InnerText, "The target css selector for the third rule should be span");
@@ -240,9 +240,9 @@ namespace Test.CssSimplerTest
             LoadCssXml(ctp, cssFullName, xml);
             var tmpOut = Path.GetTempFileName();
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml, NeedHigher);
+            var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher, false, "");
+            var fs = new FlattenStyles(tmpOut, outFullName, xml, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(outFullName, 2, "//*[starts-with(@class,'example')]", "wrong number of example nodes");
@@ -269,9 +269,9 @@ namespace Test.CssSimplerTest
             LoadCssXml(ctp, cssFullName, xml);
             var tmpOut = Path.GetTempFileName();
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml, NeedHigher);
+            var ps = new ProcessPseudo(xhtmlFullName, tmpOut, xml);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmpOut, outFullName, xml, NeedHigher, false, "");
+            var fs = new FlattenStyles(tmpOut, outFullName, xml, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(outFullName, 0, "//*[local-name()='span'][@class='pictures']", "pictures node present when it shouldn't be");
@@ -383,7 +383,7 @@ namespace Test.CssSimplerTest
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+            new ProcessPseudo(tmp2Out, xhtmlFullName, xml);
             RemoveCssPseudo(styleSheet, xml);
             try
             {
@@ -422,7 +422,7 @@ namespace Test.CssSimplerTest
 			xml.RemoveAll();
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
-			new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+			new ProcessPseudo(tmp2Out, xhtmlFullName, xml);
 			RemoveCssPseudo(styleSheet, xml);
 			try
 			{
@@ -460,7 +460,7 @@ namespace Test.CssSimplerTest
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+            new ProcessPseudo(tmp2Out, xhtmlFullName, xml);
             RemoveCssPseudo(styleSheet, xml);
             try
             {
@@ -498,7 +498,7 @@ namespace Test.CssSimplerTest
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+            new ProcessPseudo(tmp2Out, xhtmlFullName, xml);
             RemoveCssPseudo(styleSheet, xml);
             try
             {
@@ -537,7 +537,7 @@ namespace Test.CssSimplerTest
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+            new ProcessPseudo(tmp2Out, xhtmlFullName, xml);
             RemoveCssPseudo(styleSheet, xml);
             try
             {
@@ -575,7 +575,7 @@ namespace Test.CssSimplerTest
             xml.RemoveAll();
             UniqueClasses = null;
             LoadCssXml(parser, styleSheet, xml);
-            new ProcessPseudo(tmp2Out, xhtmlFullName, xml, NeedHigher);
+            new ProcessPseudo(tmp2Out, xhtmlFullName, xml);
             RemoveCssPseudo(styleSheet, xml);
             try
             {
@@ -610,7 +610,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 3023, "//*[@xml:space]", "Nodes with pseudo content changed for Fw 8.2.8");
         }
@@ -636,7 +636,7 @@ namespace Test.CssSimplerTest
 			AddSubTree(xml.DocumentElement, root, ctp);
 			_testFiles.Copy(testName + ".css");
 			WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-			new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+			new ProcessPseudo(xhtmlFullName, outFullName, xml);
 			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
 			NodeTest(outFullName, 2, "//*[@class='headword']//*[local-name()='a']/*", "Expected open and close parenthesis");
 		}
@@ -662,7 +662,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 1, "//*[@class='ownertype_abbreviation']/preceding-sibling::*", "node with ; not inserted between lexical relations");
         }
@@ -688,7 +688,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 2, "//*[@class='sensenumber']/*", "Wrong amount of sense number punctuation.");
         }
@@ -714,7 +714,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 9, "//*[@class='headword']/preceding-sibling::*", "missing commas between lexical relation headwords");
@@ -741,7 +741,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 81, "//*[@xml:space]", "subentry punctuation");
@@ -769,7 +769,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 14, "//*[@class='semanticdomains']/*[@xml:space]", "semantic domain punctuation");
@@ -800,9 +800,9 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var tmp2OutFullName = Path.GetTempFileName();
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(xhtmlFullName, tmp2OutFullName, xml, NeedHigher);
+            var ps = new ProcessPseudo(xhtmlFullName, tmp2OutFullName, xml);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmp2OutFullName, outFullName, xml, NeedHigher, false, "");
+            var fs = new FlattenStyles(tmp2OutFullName, outFullName, xml, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
@@ -831,7 +831,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 7, "//*[@class='semanticdomain']/*[@class='abbreviation']/preceding-sibling::*", "multiple semantic domain punctuation");
@@ -856,7 +856,7 @@ namespace Test.CssSimplerTest
             _testFiles.Copy(testName + ".css");
             LoadCssXml(ctp, cssFullName, xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 131, "//*[@xml:space]", "semantic domain punctuation");
@@ -883,9 +883,9 @@ namespace Test.CssSimplerTest
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             var tmp2Out = Path.GetTempFileName();
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(xhtmlFullName, tmp2Out, xml, NeedHigher);
+            var ps = new ProcessPseudo(xhtmlFullName, tmp2Out, xml);
             RemoveCssPseudo(cssFullName, xml);
-            var fs = new FlattenStyles(tmp2Out, outFullName, xml, NeedHigher, false, "");
+            var fs = new FlattenStyles(tmp2Out, outFullName, xml, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), cssFullName);
@@ -910,7 +910,7 @@ namespace Test.CssSimplerTest
             _testFiles.Copy(testName + ".css");
             LoadCssXml(ctp, cssFullName, xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 1, "//*[@class='sensecontent']/*[@xml:space]", "comma between sense content");
         }
@@ -946,10 +946,10 @@ namespace Test.CssSimplerTest
             var tmp3Out = _testFiles.Output(testName + "T3.xhtml");
 
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml);
             RemoveCssPseudo(cssFullName, xml);
             var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
-            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher, false, "");
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(flatFullName, 1, "//*[starts-with(@class,'picture')]", "picture node missing");
@@ -976,7 +976,7 @@ namespace Test.CssSimplerTest
             LoadCssXml(ctp, cssFullName, xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 1, "//*[@class='sensecontent']/*[@xml:space]", "comma between sense content");
         }
@@ -1012,10 +1012,10 @@ namespace Test.CssSimplerTest
             var tmp3Out = _testFiles.Output(testName + "T3.xhtml");
 
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+            var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml);
             RemoveCssPseudo(cssFullName, xml);
             var flatFullName = _testFiles.Output(testName + "Flat.xhtml");
-            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, NeedHigher, false, "");
+            var fs = new FlattenStyles(tmp3Out, flatFullName, xml, false, "");
             fs.Parse();
             WriteXmlAsCss(cssFullName, fs.MakeFlatCss());
             NodeTest(flatFullName, 4, "//*[starts-with(@class,'stxfinheadword')]", "headword with styles");
@@ -1106,7 +1106,7 @@ namespace Test.CssSimplerTest
             //WriteSimpleCss(_testFiles.Output(testName + ".css"), xml);
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
             // ReSharper disable once UnusedVariable
-            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            var ps = new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 6, "//*[@xml:space]", "semantic domain punctuation");
         }
@@ -1133,7 +1133,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 1, "//*[@class='seh-Zxxx-x-audio']/*[string-length(.)=2]", "audio icon");
         }
@@ -1160,7 +1160,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             NodeTest(outFullName, 1, "//*[contains(@class,'subentry ')]/*[1][.='\x29EB']", "subentry bullet");
         }
@@ -1187,7 +1187,7 @@ namespace Test.CssSimplerTest
             AddSubTree(xml.DocumentElement, root, ctp);
             _testFiles.Copy(testName + ".css");
             WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-            new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+            new ProcessPseudo(xhtmlFullName, outFullName, xml);
             RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
             TextFileAssert.AreEqual(_testFiles.Expected(testName + ".css"), _testFiles.Output(testName + ".css"));
             NodeTest(outFullName, 2, "//*[@class='examplescontent-pb']", "examplebullet");
@@ -1215,7 +1215,7 @@ namespace Test.CssSimplerTest
 			AddSubTree(xml.DocumentElement, root, ctp);
 			_testFiles.Copy(testName + ".css");
 			WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-			new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+			new ProcessPseudo(xhtmlFullName, outFullName, xml);
 			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
 			NodeTest(outFullName, 1, "//*[contains(@class,'subentry')]//*[contains(@class,'subentry')]//*[@class='subentry-pb']", "sub sub bullet");
 		}
@@ -1242,7 +1242,7 @@ namespace Test.CssSimplerTest
 			AddSubTree(xml.DocumentElement, root, ctp);
 			_testFiles.Copy(testName + ".css");
 			WriteCssXml(_testFiles.Output(testName + ".xml"), xml);
-			new ProcessPseudo(xhtmlFullName, outFullName, xml, NeedHigher);
+			new ProcessPseudo(xhtmlFullName, outFullName, xml);
 			RemoveCssPseudo(_testFiles.Output(testName + ".css"), xml);
 			NodeTest(outFullName, 1, "//*[contains(@class,'subentry')]//*[contains(@class,'subentry')]//*[@class='subentry-pb']", "sub sub bullet");
 		}
@@ -1263,7 +1263,7 @@ namespace Test.CssSimplerTest
 			var xml = new XmlDocument();
 			UniqueClasses = null;
 			LoadCssXml(parser, cssFullName, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1297,9 +1297,9 @@ namespace Test.CssSimplerTest
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1334,9 +1334,9 @@ namespace Test.CssSimplerTest
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1370,9 +1370,9 @@ namespace Test.CssSimplerTest
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1411,9 +1411,9 @@ namespace Test.CssSimplerTest
 			LoadCssXml(parser, styleSheet, xml);
 			var tmp3Out = Path.GetTempFileName();
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(tmp3Out, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(tmp3Out, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1455,9 +1455,9 @@ namespace Test.CssSimplerTest
 			LoadCssXml(parser, styleSheet, xml);
 			var tmp3Out = Path.GetTempFileName();
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmp2Out, tmp3Out, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(tmp3Out, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(tmp3Out, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1493,9 +1493,9 @@ namespace Test.CssSimplerTest
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1526,9 +1526,9 @@ namespace Test.CssSimplerTest
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, false, "");
 			fs.SpaceClass = string.Empty; // When class name set to empty string, no spans will be created.
 			fs.Structure = 0;
 			fs.DivBlocks = false;
@@ -1559,9 +1559,9 @@ namespace Test.CssSimplerTest
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1591,9 +1591,9 @@ namespace Test.CssSimplerTest
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
@@ -1627,9 +1627,9 @@ namespace Test.CssSimplerTest
 			UniqueClasses = null;
 			LoadCssXml(parser, styleSheet, xml);
 			// ReSharper disable once UnusedVariable
-			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml, NeedHigher);
+			var ps = new ProcessPseudo(tmpXhtmlFullName, xhtmlFullName, xml);
 			RemoveCssPseudo(styleSheet, xml);
-			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, NeedHigher, false, "");
+			var fs = new FlattenStyles(xhtmlFullName, xhtmlOutFullName, xml, false, "");
 			fs.Structure = 0;
 			fs.DivBlocks = false;
 			MetaData(fs);
