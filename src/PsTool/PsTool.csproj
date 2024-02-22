@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -230,8 +230,8 @@
     <Reference Include="Analytics, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Analytics.3.8.1\lib\net461\Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.1.12, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SharpZipLib.1.4.1\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.2.13, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpZipLib.1.4.2\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="icu.net, Version=2.7.0.0, Culture=neutral, PublicKeyToken=416fdd914afa6b66, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -488,7 +488,7 @@
   </Target>
   -->
   <Target Name="AfterBuild">
-    <Copy SourceFiles="..\..\lib\icudt56.dll;..\..\lib\icuin56.dll;..\..\lib\icuuc56.dll" DestinationFolder="$(OutputPath)" Condition=" '$(OS)' == 'Windows_NT' or '$(OS)' == '' " />
+    <Copy SourceFiles="..\..\lib\icudt56.dll;..\..\lib\icuin56.dll;..\..\lib\icuuc56.dll;..\..\lib\icu.net.dll" DestinationFolder="$(OutputPath)" Condition=" '$(OS)' == 'Windows_NT' or '$(OS)' == '' " />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
